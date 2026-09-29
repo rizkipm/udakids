@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.j1.harga-beberapa-barang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 1,
+  "title": "Soal aplikasi (kontekstual) — Level 1 — Harga beberapa barang",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Harga satu {barang} Rp{h}. {nama} membeli {k} {barang}. Berapa rupiah yang harus dibayar?",
+    "answer": "h * k",
+    "explain": "{k} × Rp{h} = Rp{answer}.",
+    "vars": {
+      "h": {
+        "values": [1500, 2000, 2500, 3000, 3500, 4000]
+      },
+      "k": [2, 5]
+    },
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"],
+      "barang": ["pensil", "buku tulis", "penghapus", "roti"]
+    },
+    "distractors": [
+      {
+        "expr": "h + k",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "h * (k - 1)",
+        "tag": "kurang-satu-kali"
+      },
+      {
+        "expr": "h * k + h",
+        "tag": "lebih-satu-kali"
+      }
+    ]
+  }
+}

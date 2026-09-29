@@ -1,0 +1,19 @@
+# /etc/systemd/system/littlecoder-api.service
+[Unit]
+Description=Little Coder API (NestJS)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=littlecoder
+WorkingDirectory=/srv/littlecoder/apps/api
+Environment=NODE_ENV=production
+# /srv/littlecoder/.env dimuat otomatis oleh aplikasi (DATABASE_URL, JWT_SECRET, ...)
+# Terapkan migrasi baru (idempoten) setiap kali service dijalankan, lalu jalankan API
+ExecStartPre=/usr/bin/node dist/cli/migrate.js
+ExecStart=/usr/bin/node dist/main.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

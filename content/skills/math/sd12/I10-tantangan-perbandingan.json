@@ -1,0 +1,51 @@
+{
+  "id": "math.sd12.i10.tantangan-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "I",
+  "order": 10,
+  "title": "Perbandingan — Level 10 — Tantangan perbandingan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "A"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99],
+            "b": [1, 99]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Tandanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 15],
+            "b": [5, 20]
+          },
+          "constraint": "a < b",
+          "prompt": "Rina punya {a} kelereng, Doni {b}. Berapa selisihnya?",
+          "answer": "b - a",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

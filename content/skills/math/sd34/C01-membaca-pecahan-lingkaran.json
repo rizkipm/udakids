@@ -1,0 +1,56 @@
+{
+  "id": "math.sd34.c1.membaca-pecahan-lingkaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 1,
+  "title": "Pecahan — Level 1 — Membaca pecahan (lingkaran)",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Pecahan untuk bagian yang diarsir adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "n",
+      "den": "d"
+    },
+    "explain": "Lingkaran dibagi {d} bagian sama besar dan {n} bagian diarsir, jadi pecahannya {n}/{d}. Bentuk paling sederhananya {answer}.",
+    "vars": {
+      "d": [2, 8],
+      "n": [1, 7]
+    },
+    "constraint": "n < d",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "circle",
+        "hideNumber": true
+      }
+    ],
+    "distractors": [
+      {
+        "num": "d - n",
+        "den": "d",
+        "tag": "yang-tidak-diarsir"
+      },
+      {
+        "num": "n",
+        "den": "d - n",
+        "tag": "bagian-per-bagian"
+      },
+      {
+        "num": "d",
+        "den": "n",
+        "tag": "terbalik"
+      }
+    ]
+  }
+}

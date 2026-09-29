@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.b3.kpk-dua-bilangan-berfaktor-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 3,
+  "title": "FPB dan KPK — Level 3 — KPK dua bilangan berfaktor sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "KPK dari {a} dan {b} adalah …",
+    "answer": "lcm(a, b)",
+    "explain": "KPK = kelipatan bersama terkecil. {a} × {b} = {=a*b} memang kelipatan bersama, tapi bukan yang terkecil. KPK-nya {answer}.",
+    "vars": {
+      "g": [2, 6],
+      "x": [2, 5],
+      "y": [2, 5]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "distractors": [
+      {
+        "expr": "a * b",
+        "tag": "kali-bukan-kpk"
+      },
+      {
+        "expr": "gcd(a, b)",
+        "tag": "fpb-bukan-kpk"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

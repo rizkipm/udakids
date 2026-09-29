@@ -1,0 +1,38 @@
+{
+  "id": "math.sd12.i9.urutkan-tiga-kuantitas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "I",
+  "order": 9,
+  "title": "Perbandingan — Level 9 — Urutkan tiga kuantitas",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "A"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "b": [1, 20],
+      "c": [1, 20]
+    },
+    "prompt": "Rina {a} buku, Doni {b} buku, Sari {c} buku. Berapa buku milik yang paling banyak?",
+    "answer": "max(a, b, c)",
+    "explain": "Yang terbanyak {answer}.",
+    "constraint": "a != b && b != c && a != c",
+    "distractors": [
+      {
+        "expr": "min(a, b, c)",
+        "tag": "paling-sedikit"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "total"
+      }
+    ],
+    "choices": 3
+  }
+}

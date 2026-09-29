@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.j4.lama-perjalanan-menit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 4,
+  "title": "Soal aplikasi (kontekstual) — Level 4 — Lama perjalanan (menit)",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "{nama} berangkat sekolah pukul {j}.00 dan tiba pukul {j}.{m}. Berapa menit perjalanannya?",
+    "answer": "m",
+    "explain": "Dari pukul {j}.00 sampai {j}.{m} berlalu {answer} menit.",
+    "vars": {
+      "m": [15, 50],
+      "j": [7, 9]
+    },
+    "constraint": "m % 5 == 0",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "60 - m",
+        "tag": "sisa-jam"
+      },
+      {
+        "expr": "m + 60",
+        "tag": "lebih-sejam"
+      },
+      {
+        "expr": "j + m",
+        "tag": "menjumlah-jam"
+      }
+    ]
+  }
+}

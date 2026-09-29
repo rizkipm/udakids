@@ -1,0 +1,48 @@
+{
+  "id": "math.tk.ii5.puluhan-dan-satuan-sampai-20",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "II",
+  "order": 5,
+  "title": "Bilangan belasan — Level 5 — Puluhan dan satuan sampai 20",
+  "tier": "basic",
+  "tags": {
+    "level": "5",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-II"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": [0, 9],
+      "t": [1, 2]
+    },
+    "constraint": "t * 10 + b <= 20",
+    "prompt": "{t} puluhan dan {b} satuan adalah …",
+    "stimulus": [
+      {
+        "kind": "tens",
+        "tens": "=t",
+        "ones": "=b"
+      }
+    ],
+    "answer": "t * 10 + b",
+    "distractors": [
+      {
+        "expr": "t + b",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "b * 10 + t",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "t * 10 + b + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "{t} puluhan = {=t*10}, ditambah {b} = {answer}."
+  }
+}

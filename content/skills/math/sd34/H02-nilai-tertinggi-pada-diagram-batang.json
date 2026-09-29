@@ -1,0 +1,52 @@
+{
+  "id": "math.sd34.h2.nilai-tertinggi-pada-diagram-batang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 2,
+  "title": "Data: tabel dan diagram — Level 2 — Nilai tertinggi pada diagram batang",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa buku yang dibaca pada hari paling banyak membaca?",
+    "answer": "d",
+    "explain": "Batang tertinggi adalah Kamis, tingginya sampai {answer}.",
+    "vars": {
+      "a": [2, 9],
+      "b": [2, 9],
+      "c": [2, 9],
+      "d": [2, 9]
+    },
+    "constraint": "a != b && a != c && a != d && b != c && b != d && c != d && d > a && d > b && d > c",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Buku dibaca",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "unit": "buku"
+      }
+    ],
+    "unit": "buku",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "salah-batang"
+      },
+      {
+        "expr": "b",
+        "tag": "salah-batang"
+      },
+      {
+        "expr": "c",
+        "tag": "salah-batang"
+      }
+    ]
+  }
+}

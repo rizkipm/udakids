@@ -1,0 +1,63 @@
+{
+  "id": "math.tk.bb2.tambah-atau-kurang-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "BB",
+  "order": 2,
+  "title": "Operasi campuran — Level 2 — Tambah atau kurang sampai 10",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-BB"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 10],
+            "b": [0, 10]
+          },
+          "constraint": "a + b <= 10",
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "abs(a - b)",
+              "tag": "operasi-terbalik"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [0, 10]
+          },
+          "constraint": "b <= a",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a + b",
+              "tag": "operasi-terbalik"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

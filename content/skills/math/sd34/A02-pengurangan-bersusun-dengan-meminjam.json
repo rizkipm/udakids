@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.a2.pengurangan-bersusun-dengan-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "A",
+  "order": 2,
+  "title": "Bilangan: operasi hitung bilan — Level 2 — Pengurangan bersusun dengan meminjam",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a} − {b} adalah …",
+    "answer": "a - b",
+    "explain": "Satuan {=a%10} kurang dari {=b%10}, jadi pinjam 1 puluhan. Jangan mengurangkan angka kecil dari angka besar begitu saja. Hasilnya {answer}.",
+    "vars": {
+      "a": [2000, 9800],
+      "b": [1100, 8900]
+    },
+    "constraint": "a > b && a % 10 < b % 10",
+    "distractors": [
+      {
+        "expr": "abs(a%10-b%10)+abs(floor(a/10)%10-floor(b/10)%10)*10+abs(floor(a/100)%10-floor(b/100)%10)*100+abs(floor(a/1000)-floor(b/1000))*1000",
+        "tag": "kecil-dari-besar"
+      },
+      {
+        "expr": "a - b + 10",
+        "tag": "lupa-meminjam"
+      },
+      {
+        "expr": "a - b - 10",
+        "tag": "salah-meminjam"
+      }
+    ]
+  }
+}

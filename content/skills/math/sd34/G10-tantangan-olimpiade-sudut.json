@@ -1,0 +1,69 @@
+{
+  "id": "math.sd34.g10.tantangan-olimpiade-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "G",
+  "order": 10,
+  "title": "Sudut — Level 10 — Tantangan olimpiade sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C (pengayaan)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Dua sudut sebuah segitiga besarnya {a}° dan {b}°. Berapa besar sudut ketiga?",
+          "answer": "180 - a - b",
+          "explain": "Jumlah sudut segitiga 180°. 180° − {a}° − {b}° = {answer}.",
+          "vars": {
+            "a": {
+              "range": [30, 80],
+              "step": 5
+            },
+            "b": {
+              "range": [30, 80],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 170",
+          "mode": "input",
+          "unit": "°"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Pukul {h}.00 tepat. Berapa besar sudut terkecil antara jarum jam dan jarum menit?",
+          "answer": "30 * h",
+          "explain": "Satu putaran 360° dibagi 12 angka, jadi antarangka 30°. Dari angka 12 ke angka {h}: {h} × 30° = {answer}.",
+          "vars": {
+            "h": [1, 6]
+          },
+          "mode": "input",
+          "unit": "°"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Diagonal persegi panjang membentuk sudut {a}° dengan sisi panjang. Berapa derajat sudutnya dengan sisi lebar di pojok yang sama?",
+          "answer": "90 - a",
+          "explain": "Pojok persegi panjang siku-siku (90°). Diagonal membaginya: 90° − {a}° = {answer}.",
+          "vars": {
+            "a": {
+              "values": [20, 30, 40, 50, 60, 70]
+            }
+          },
+          "mode": "input",
+          "unit": "°"
+        }
+      }
+    ]
+  }
+}

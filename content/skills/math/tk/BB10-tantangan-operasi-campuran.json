@@ -1,0 +1,50 @@
+{
+  "id": "math.tk.bb10.tantangan-operasi-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "BB",
+  "order": 10,
+  "title": "Operasi campuran — Level 10 — Tantangan operasi campuran",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-BB"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [1, 5],
+            "c": [1, 5]
+          },
+          "constraint": "a + b <= 10 && c <= a + b",
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "mode": "input",
+          "explain": "{=a+b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a + b <= 10",
+          "prompt": "{a} + {b} = {=a+b}. Maka {=a+b} − {a} = …",
+          "answer": "b",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

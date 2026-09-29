@@ -1,0 +1,120 @@
+import { arith } from './arith.js';
+import type { Family } from './common.js';
+import { compareGroups } from './compare.js';
+import { exprFamily } from './expr.js';
+import { factsFamily } from './facts.js';
+import { clockFamily } from './clock.js';
+import { z } from 'zod';
+import { defineFamily } from './common.js';
+import { manual } from './manual.js';
+import { money } from './money.js';
+import {
+  build,
+  compareNumbers,
+  count,
+  numberLine,
+  numberNext,
+  numberOrder,
+  numeralListen,
+  numeralTapAll,
+  oneMoreLess,
+  ordinal,
+  represent,
+} from './numbers.js';
+import { pattern, sameDifferent, sort } from './pattern.js';
+import { position } from './position.js';
+import {
+  realWorldShape,
+  shapeName,
+  shapeSides,
+  shapeTap,
+  solidDescribe,
+  solidTrace,
+} from './shapes.js';
+import { sizeCompare } from './size.js';
+
+const BASE_FAMILIES = {
+  'numeral-tap-all': numeralTapAll,
+  'numeral-listen': numeralListen,
+  count,
+  build,
+  represent,
+  'number-order': numberOrder,
+  'number-next': numberNext,
+  'number-line': numberLine,
+  ordinal,
+  'one-more-less': oneMoreLess,
+  'compare-numbers': compareNumbers,
+  'compare-groups': compareGroups,
+  pattern,
+  'same-different': sameDifferent,
+  sort,
+  'shape-tap': shapeTap,
+  'shape-name': shapeName,
+  'shape-sides': shapeSides,
+  'solid-describe': solidDescribe,
+  'solid-trace': solidTrace,
+  'real-world-shape': realWorldShape,
+  position,
+  'size-compare': sizeCompare,
+  money,
+  arith,
+  expr: exprFamily,
+  facts: factsFamily,
+  clock: clockFamily,
+  manual,
+} satisfies Record<string, Family>;
+
+type BaseName = keyof typeof BASE_FAMILIES;
+const BASE_NAMES = Object.keys(BASE_FAMILIES) as BaseName[];
+
+/**
+ * Gabungan beberapa bentuk soal dalam satu level (mis. level ulangan/tantangan, atau beberapa skill IXL
+ * digabung menjadi satu level). Setiap soal memilih satu bagian secara acak (berbobot).
+ */
+const mix = defineFamily({
+  description: 'Gabungan beberapa bentuk soal dalam satu level (ulangan / tantangan).',
+  params: z
+    .strictObject({
+      parts: z
+        .array(
+          z.strictObject({
+            family: z.enum(BASE_NAMES as [BaseName, ...BaseName[]]),
+            params: z.record(z.string(), z.unknown()).default({}),
+            weight: z.number().positive().default(1),
+          }),
+        )
+        .min(2)
+        .max(12),
+    })
+    .superRefine((p, ctx) => {
+      p.parts.forEach((part, i) => {
+        const r = BASE_FAMILIES[part.family].params.safeParse(part.params);
+        if (!r.success) {
+          for (const issue of r.error.issues) {
+            ctx.addIssue({
+              code: 'custom',
+              path: ['parts', i, 'params', ...issue.path.map(String)],
+              message: `${part.family}: ${issue.message}`,
+            });
+          }
+        }
+      });
+    }),
+  generate(p, rng, ctx) {
+    const total = p.parts.reduce((a, x) => a + x.weight, 0);
+    let pickAt = rng.next() * total;
+    const part = p.parts.find((x) => (pickAt -= x.weight) < 0) ?? p.parts[p.parts.length - 1]!;
+    const family = BASE_FAMILIES[part.family] as Family;
+    return family.generate(family.params.parse(part.params), rng, ctx);
+  },
+});
+
+export const FAMILIES = { ...BASE_FAMILIES, mix } satisfies Record<string, Family>;
+
+export type FamilyName = keyof typeof FAMILIES;
+export const FAMILY_NAMES = Object.keys(FAMILIES) as FamilyName[];
+
+export { Reject } from './common.js';
+export type { ManualItem } from './manual.js';
+export { formatId } from './expr.js';

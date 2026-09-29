@@ -1,0 +1,41 @@
+{
+  "id": "math.sd34.j5.jam-ke-menit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 5,
+  "title": "Soal aplikasi (kontekstual) — Level 5 — Jam ke menit",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Film berlangsung {j} jam {m} menit. Berapa menit lamanya film itu?",
+    "answer": "j * 60 + m",
+    "explain": "1 jam = 60 menit. {j} × 60 + {m} = {answer} menit.",
+    "vars": {
+      "j": [1, 3],
+      "m": [10, 50]
+    },
+    "constraint": "m % 5 == 0",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "j * 100 + m",
+        "tag": "jam-100-menit"
+      },
+      {
+        "expr": "j + m",
+        "tag": "tanpa-konversi"
+      },
+      {
+        "expr": "j * 60",
+        "tag": "lupa-menit"
+      }
+    ]
+  }
+}

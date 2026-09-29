@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.d6.perkalian-desimal-kilogram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "D",
+  "order": 6,
+  "title": "Desimal — Level 6 — Perkalian desimal (kilogram)",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Sebuah kantong berisi {a} kg gula. Berapa kg gula dalam {k} kantong?",
+    "answer": "a * k",
+    "format": "decimal",
+    "explain": "{k} × {a} = {answer} kg.",
+    "vars": {
+      "a": {
+        "range": [0.2, 0.9],
+        "step": 0.1
+      },
+      "k": [2, 5]
+    },
+    "unit": "kg",
+    "distractors": [
+      {
+        "expr": "a + k",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "a * k * 10",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "a * k / 10",
+        "tag": "salah-nilai-tempat"
+      }
+    ]
+  }
+}

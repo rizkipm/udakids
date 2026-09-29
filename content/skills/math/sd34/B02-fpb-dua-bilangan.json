@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.b2.fpb-dua-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 2,
+  "title": "FPB dan KPK — Level 2 — FPB dua bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "FPB dari {a} dan {b} adalah …",
+    "answer": "gcd(a, b)",
+    "explain": "Faktor {a} dan faktor {b} yang sama, yang terbesar adalah {answer}.",
+    "vars": {
+      "g": [2, 6],
+      "x": [2, 5],
+      "y": [2, 5]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "kpk-bukan-fpb"
+      },
+      {
+        "expr": "b - a",
+        "tag": "selisih"
+      },
+      {
+        "expr": "1",
+        "tag": "faktor-trivial"
+      }
+    ]
+  }
+}

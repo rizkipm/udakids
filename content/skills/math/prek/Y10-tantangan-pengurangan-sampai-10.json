@@ -1,0 +1,55 @@
+{
+  "id": "math.prek.y10.tantangan-pengurangan-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "prek",
+  "category": "Y",
+  "order": 10,
+  "title": "Pengurangan sampai 10 — Level 10 — Tantangan pengurangan (sampai 10)",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "arith",
+        "params": {
+          "op": "-",
+          "vars": {
+            "a": [2, 10],
+            "b": [1, 9]
+          },
+          "constraint": "b < a",
+          "answer": "a - b",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            }
+          ],
+          "presentation": "model-show"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [1, 9]
+          },
+          "constraint": "b < a",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "mode": "input",
+          "explain": "{a} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

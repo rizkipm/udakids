@@ -1,0 +1,75 @@
+{
+  "id": "math.tk.tt10.tantangan-pecahan-bentuk",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "TT",
+  "order": 10,
+  "title": "Pecahan bentuk — Level 10 — Tantangan pecahan bentuk",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-TT"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4]
+            },
+            "n": [1, 3]
+          },
+          "constraint": "n < d",
+          "prompt": "Berapa bagian yang diarsir?",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "yang-tidak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-penyebut"
+            }
+          ],
+          "choices": 3,
+          "explain": "{n}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5]
+          },
+          "prompt": "Setengah dari {=2*a} apel adalah …",
+          "answer": "a",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

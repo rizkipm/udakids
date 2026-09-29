@@ -1,0 +1,67 @@
+{
+  "id": "math.sd34.e10.tantangan-olimpiade-keliling-dan-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "E",
+  "order": 10,
+  "title": "Keliling dan luas — Level 10 — Tantangan olimpiade keliling dan luas",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Keliling sebuah persegi {k} cm. Berapa cm² luasnya?",
+          "answer": "s * s",
+          "explain": "Sisi = {k} : 4 = {s} cm. Luas = {s} × {s} = {answer} cm².",
+          "vars": {
+            "s": [3, 12]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "mode": "input",
+          "unit": "cm²"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Kawat sepanjang {k} cm dibentuk menjadi persegi panjang dengan panjang {p} cm. Berapa cm² luasnya?",
+          "answer": "p * l",
+          "explain": "Setengah keliling = {k} : 2 = {=k/2}, jadi lebar = {=k/2} − {p} = {l} cm. Luas = {p} × {l} = {answer} cm².",
+          "vars": {
+            "p": [5, 12],
+            "l": [2, 8]
+          },
+          "constraint": "p > l",
+          "derived": {
+            "k": "2 * (p + l)"
+          },
+          "mode": "input",
+          "unit": "cm²"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Lantai kamar berukuran {a} m × {b} m akan ditutup ubin persegi bersisi 50 cm. Berapa banyak ubin yang diperlukan?",
+          "answer": "a * 2 * b * 2",
+          "explain": "50 cm = 1/2 m, jadi 1 m memuat 2 ubin. Panjang {=a*2} ubin, lebar {=b*2} ubin, jumlah {=a*2} × {=b*2} = {answer} ubin.",
+          "vars": {
+            "a": [2, 5],
+            "b": [2, 4]
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

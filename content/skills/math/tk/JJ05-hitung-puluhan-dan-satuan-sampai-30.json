@@ -1,0 +1,48 @@
+{
+  "id": "math.tk.jj5.hitung-puluhan-dan-satuan-sampai-30",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "JJ",
+  "order": 5,
+  "title": "Bilangan dan membilang sampai 30 — Level 5 — Hitung puluhan dan satuan sampai 30",
+  "tier": "basic",
+  "tags": {
+    "level": "5",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-JJ"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [1, 2],
+      "b": [0, 9]
+    },
+    "constraint": "t * 10 + b <= 30",
+    "prompt": "Berapa bilangan yang ditunjukkan balok ini?",
+    "stimulus": [
+      {
+        "kind": "tens",
+        "tens": "=t",
+        "ones": "=b"
+      }
+    ],
+    "answer": "t * 10 + b",
+    "distractors": [
+      {
+        "expr": "t + b",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "b * 10 + t",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "t * 10 + b + 10",
+        "tag": "lebih-sepuluh"
+      }
+    ],
+    "explain": "{t} puluhan dan {b} satuan = {answer}."
+  }
+}

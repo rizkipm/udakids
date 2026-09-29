@@ -1,0 +1,52 @@
+{
+  "id": "math.sd34.h3.jumlah-data-pada-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 3,
+  "title": "Data: tabel dan diagram — Level 3 — Jumlah data pada tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa jumlah semua siswa pada tabel?",
+    "answer": "a + b + c",
+    "explain": "{a} + {b} + {c} = {answer} siswa.",
+    "vars": {
+      "a": [3, 12],
+      "b": [3, 12],
+      "c": [3, 12]
+    },
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Ekstrakurikuler",
+        "headers": ["Kegiatan", "Siswa"],
+        "rows": [
+          ["Pramuka", "=a"],
+          ["Menari", "=b"],
+          ["Futsal", "=c"]
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "kurang-satu-baris"
+      },
+      {
+        "expr": "max(a, b, c)",
+        "tag": "terbesar-bukan-total"
+      },
+      {
+        "expr": "a + b + c + 1",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

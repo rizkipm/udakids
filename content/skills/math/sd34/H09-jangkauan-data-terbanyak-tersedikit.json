@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.h9.jangkauan-data-terbanyak-tersedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 9,
+  "title": "Data: tabel dan diagram — Level 9 — Jangkauan data (terbanyak − tersedikit)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa selisih nilai terbanyak dan tersedikit pada tabel?",
+    "answer": "max(a, b, c) - min(a, b, c)",
+    "explain": "Terbanyak {=max(a,b,c)}, tersedikit {=min(a,b,c)}. Selisih {answer}.",
+    "vars": {
+      "a": [4, 12],
+      "b": [4, 12],
+      "c": [4, 12]
+    },
+    "constraint": "a != b && b != c && a != c",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Botol plastik terkumpul",
+        "headers": ["Kelompok", "Botol"],
+        "rows": [
+          ["Merpati", "=a"],
+          ["Elang", "=b"],
+          ["Rajawali", "=c"]
+        ]
+      }
+    ],
+    "mode": "input"
+  }
+}

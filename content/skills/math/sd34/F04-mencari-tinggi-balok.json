@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.f4.mencari-tinggi-balok",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "F",
+  "order": 4,
+  "title": "Volume kubus dan balok — Level 4 — Mencari tinggi balok",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Volume balok {v} cm³, panjang {p} cm, lebar {l} cm. Berapa tingginya?",
+    "answer": "t",
+    "explain": "Tinggi = volume : (p × l) = {v} : {=p*l} = {answer}.",
+    "vars": {
+      "p": [4, 10],
+      "l": [2, 6],
+      "t": [2, 8]
+    },
+    "derived": {
+      "v": "p * l * t"
+    },
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "v - p - l",
+        "tag": "mengurang-bukan-membagi"
+      },
+      {
+        "expr": "v / p",
+        "tag": "baru-dibagi-satu"
+      },
+      {
+        "expr": "t + 1",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

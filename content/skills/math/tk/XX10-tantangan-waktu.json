@@ -1,0 +1,91 @@
+{
+  "id": "math.tk.xx10.tantangan-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "XX",
+  "order": 10,
+  "title": "Waktu — Level 10 — Tantangan waktu",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-XX"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "clock",
+        "params": {
+          "mode": "match",
+          "minutes": [0, 15, 30, 45],
+          "choices": 4
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Senin",
+              "attrs": {
+                "besok": "Selasa",
+                "kemarin": "Minggu"
+              }
+            },
+            {
+              "name": "Selasa",
+              "attrs": {
+                "besok": "Rabu",
+                "kemarin": "Senin"
+              }
+            },
+            {
+              "name": "Rabu",
+              "attrs": {
+                "besok": "Kamis",
+                "kemarin": "Selasa"
+              }
+            },
+            {
+              "name": "Kamis",
+              "attrs": {
+                "besok": "Jumat",
+                "kemarin": "Rabu"
+              }
+            },
+            {
+              "name": "Jumat",
+              "attrs": {
+                "besok": "Sabtu",
+                "kemarin": "Kamis"
+              }
+            },
+            {
+              "name": "Sabtu",
+              "attrs": {
+                "besok": "Minggu",
+                "kemarin": "Jumat"
+              }
+            },
+            {
+              "name": "Minggu",
+              "attrs": {
+                "besok": "Senin",
+                "kemarin": "Sabtu"
+              }
+            }
+          ],
+          "attr": "besok",
+          "ask": "value",
+          "choices": 4,
+          "prompt": "Hari sesudah {name} adalah …",
+          "explain": "Sesudah {name} adalah {value}.",
+          "source": "Nama hari dalam seminggu (KBBI); CP Matematika Fase A: membandingkan durasi waktu"
+        }
+      }
+    ]
+  }
+}

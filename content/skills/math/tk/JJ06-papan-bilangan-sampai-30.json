@@ -1,0 +1,48 @@
+{
+  "id": "math.tk.jj6.papan-bilangan-sampai-30",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "JJ",
+  "order": 6,
+  "title": "Bilangan dan membilang sampai 30 — Level 6 — Papan bilangan sampai 30",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-JJ"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [11, 29]
+    },
+    "prompt": "Angka berapa yang hilang di papan?",
+    "stimulus": [
+      {
+        "kind": "number-chart",
+        "start": "=floor((x - 1) / 10) * 10 + 1",
+        "end": "=floor((x - 1) / 10) * 10 + 10",
+        "columns": 10,
+        "blanks": ["=x"]
+      }
+    ],
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "x + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "x - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "x + 10",
+        "tag": "salah-baris"
+      }
+    ],
+    "explain": "Urutannya {=x-1}, {answer}, {=x+1}."
+  }
+}

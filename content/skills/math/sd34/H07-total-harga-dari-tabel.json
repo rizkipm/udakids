@@ -1,0 +1,41 @@
+{
+  "id": "math.sd34.h7.total-harga-dari-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 7,
+  "title": "Data: tabel dan diagram — Level 7 — Total harga dari tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Tabel menunjukkan kue yang dibeli. Harga setiap kue Rp{h}. Berapa rupiah uang yang dibayarkan seluruhnya?",
+    "answer": "(a + b + c) * h",
+    "explain": "Jumlah kue {a} + {b} + {c} = {=a+b+c}. Dikali Rp{h}: Rp{answer}.",
+    "vars": {
+      "a": [2, 6],
+      "b": [2, 6],
+      "c": [2, 6],
+      "h": {
+        "values": [1000, 2000, 5000]
+      }
+    },
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Nama", "Kue"],
+        "rows": [
+          ["Alya", "=a"],
+          ["Raka", "=b"],
+          ["Sari", "=c"]
+        ]
+      }
+    ],
+    "mode": "input"
+  }
+}

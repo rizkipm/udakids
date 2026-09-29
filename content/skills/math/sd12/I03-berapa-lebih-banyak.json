@@ -1,0 +1,51 @@
+{
+  "id": "math.sd12.i3.berapa-lebih-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "I",
+  "order": 3,
+  "title": "Perbandingan — Level 3 — Berapa lebih banyak?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "A"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 10],
+      "b": [1, 9]
+    },
+    "prompt": "Ada {a} apel dan {b} jeruk. Berapa lebih banyak apel?",
+    "answer": "a - b",
+    "explain": "{a} − {b} = {answer}.",
+    "constraint": "b < a",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "object": "apel",
+        "count": "=a",
+        "layout": "row"
+      },
+      {
+        "kind": "objects",
+        "object": "jeruk",
+        "count": "=b",
+        "layout": "row"
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      }
+    ],
+    "choices": 3
+  }
+}

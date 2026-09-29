@@ -1,0 +1,384 @@
+/* Tambahan tata letak khusus area admin (di atas ui.css). */
+.adm-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.adm-topbar-user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: auto;
+}
+.adm-sidebar-group {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  padding: 14px 12px 4px;
+}
+.adm-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.adm-two {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.adm-fields {
+  display: grid;
+  gap: 0 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+.adm-issues {
+  margin: 0;
+  padding-left: 20px;
+}
+.adm-issues li {
+  margin: 2px 0;
+}
+.adm-preview-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.adm-preview {
+  border: 1px dashed var(--ui-line);
+  border-radius: 12px;
+  padding: 12px;
+  background: #fffdf7;
+  min-width: 0;
+  overflow: hidden;
+}
+.adm-preview-meta {
+  font-size: 12px;
+  color: var(--ui-muted);
+  margin-bottom: 8px;
+}
+.adm-item {
+  border: 1px solid var(--ui-line);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.adm-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.adm-item-head h3 {
+  font-size: 16px;
+  margin: 0;
+}
+.adm-choices {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.adm-choice {
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  padding: 12px;
+  background: #faf9fd;
+}
+.adm-choice.is-answer {
+  border-color: var(--ui-success);
+  box-shadow: 0 0 0 2px #cfeede;
+}
+.adm-picker {
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--ui-surface);
+}
+.adm-picker-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+.adm-picker-preview {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fffdf7;
+  border: 1px solid var(--ui-line);
+  overflow: hidden;
+}
+.adm-picker .ui-field {
+  margin-bottom: 8px;
+}
+.adm-picker .ui-field input,
+.adm-picker .ui-field select {
+  padding: 6px 8px;
+}
+.adm-stimulus {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-bottom: 12px;
+}
+.adm-pin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  gap: 8px;
+}
+.adm-pin-grid button {
+  width: 72px;
+  height: 72px;
+  padding: 4px;
+  border-radius: 12px;
+  border: 2px solid var(--ui-line);
+  background: #fffdf7;
+  cursor: pointer;
+}
+.adm-pin-grid button:focus-visible {
+  outline: 3px solid #f5b400;
+  outline-offset: 2px;
+}
+.adm-pin-chosen {
+  display: flex;
+  gap: 8px;
+  min-height: 56px;
+  align-items: center;
+}
+.adm-pin-slot {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  border: 2px dashed var(--ui-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adm-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.adm-code-small {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.adm-meter {
+  height: 10px;
+  border-radius: 999px;
+  background: #ece9f5;
+  overflow: hidden;
+}
+.adm-meter > span {
+  display: block;
+  height: 100%;
+  background: var(--ui-primary);
+}
+.adm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.adm-group-title {
+  font-size: 15px;
+  margin: 18px 0 6px;
+}
+.adm-kids {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.adm-kids li {
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ui-line);
+}
+.adm-kids li:last-child {
+  border-bottom: 0;
+}
+.adm-inline-form {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.adm-inline-form .ui-field {
+  margin-bottom: 0;
+}
+.adm-summary dt {
+  font-weight: 700;
+  margin-top: 8px;
+}
+.adm-summary dd {
+  margin: 2px 0 0;
+}
+.adm-grid-svg {
+  max-width: 100%;
+  height: auto;
+}
+.adm-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ui-muted);
+  margin-top: 8px;
+}
+.adm-muted-row {
+  opacity: 0.6;
+}
+@media (max-width: 900px) {
+  .adm-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Siswa kelas & kartu masuk (D-025) */
+.adm-students-link {
+  margin-top: 6px;
+}
+.adm-join {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.adm-join-url {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.adm-students {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.adm-students li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--ui-line);
+}
+.adm-student-name {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.login-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.login-card {
+  border: 2px dashed #8a80a8;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  break-inside: avoid;
+  background: #fff;
+}
+.login-card header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.login-card header div {
+  display: flex;
+  flex-direction: column;
+}
+.login-card header strong {
+  font-size: 1.25rem;
+}
+.login-card-code {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: var(--ui-bg);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.login-card-code b {
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  font-family: ui-monospace, monospace;
+}
+.login-card-pin ol {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 6px 0 0;
+}
+.login-card-pin li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--ui-line);
+  border-radius: 10px;
+  padding: 4px;
+}
+.fac-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+@media print {
+  .no-print,
+  .ui-sidebar,
+  .ui-topbar,
+  .ui-notice,
+  .ui-card-head .ui-row {
+    display: none !important;
+  }
+  .ui-shell,
+  .ui-main,
+  .ui-card {
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+  }
+  .login-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.adm-cat-row {
+  border-bottom: 1px solid var(--ui-line);
+  margin-bottom: 10px;
+}
+.adm-cat-intro {
+  margin: 0 0 12px;
+}
+.adm-cat-intro summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ui-primary);
+  margin-bottom: 8px;
+}
+.adm-cat-intro .ui-field textarea {
+  font-family: inherit;
+  font-size: inherit;
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.a6.soal-cerita-perkalian-dan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "A",
+  "order": 6,
+  "title": "Bilangan: operasi hitung bilang — Level 6 — Soal cerita perkalian dan pembagian",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "{nama} punya {k} kotak kue. Setiap kotak berisi {b} kue. Semua kue dibagi rata kepada {d} teman. Setiap teman mendapat berapa kue?",
+    "answer": "k * b / d",
+    "explain": "Jumlah kue {k} × {b} = {=k*b}. Dibagi {d} teman: {=k*b} : {d} = {answer} kue.",
+    "vars": {
+      "k": [4, 9],
+      "b": [6, 12],
+      "d": [2, 6]
+    },
+    "constraint": "(k * b) % d == 0",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "distractors": [
+      {
+        "expr": "k * b",
+        "tag": "lupa-membagi"
+      },
+      {
+        "expr": "k + b + d",
+        "tag": "menjumlah-semua"
+      },
+      {
+        "expr": "k * b - d",
+        "tag": "mengurang-bukan-membagi"
+      }
+    ]
+  }
+}

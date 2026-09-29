@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.j3.kilogram-ke-gram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 3,
+  "title": "Soal aplikasi (kontekstual) — Level 3 — Kilogram ke gram",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "{a} kg {b} g sama dengan berapa gram?",
+    "answer": "a * 1000 + b",
+    "explain": "1 kg = 1.000 g. {a} kg = {=a*1000} g, ditambah {b} g = {answer} g.",
+    "vars": {
+      "a": [1, 5],
+      "b": {
+        "range": [100, 900],
+        "step": 50
+      }
+    },
+    "unit": "gram",
+    "distractors": [
+      {
+        "expr": "a * 100 + b",
+        "tag": "salah-konversi"
+      },
+      {
+        "expr": "a + b",
+        "tag": "tanpa-konversi"
+      },
+      {
+        "expr": "a * 10 + b",
+        "tag": "salah-konversi"
+      }
+    ]
+  }
+}

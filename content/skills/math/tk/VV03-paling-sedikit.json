@@ -1,0 +1,48 @@
+{
+  "id": "math.tk.vv3.paling-sedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "VV",
+  "order": 3,
+  "title": "Data dan grafik — Level 3 — Paling sedikit",
+  "tier": "basic",
+  "tags": {
+    "level": "3",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-VV"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "c": [1, 6]
+    },
+    "prompt": "Berapa jumlah hewan yang paling sedikit?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Hewan peliharaan kelas",
+        "labels": ["Kucing", "Ikan", "Bebek"],
+        "values": ["=a", "=b", "=c"],
+        "pictogram": "kucing"
+      }
+    ],
+    "answer": "min(a, b, c)",
+    "explain": "Yang tersedikit {answer}.",
+    "distractors": [
+      {
+        "expr": "max(a, b, c)",
+        "tag": "paling-banyak"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "total"
+      }
+    ],
+    "choices": 3,
+    "constraint": "a != b && b != c && a != c"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.h5.piktogram-dengan-skala",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 5,
+  "title": "Data: tabel dan diagram — Level 5 — Piktogram dengan skala",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Pada piktogram, 1 gambar mewakili {k} orang. Berapa banyak pengunjung hari Minggu?",
+    "answer": "c * k",
+    "explain": "Minggu ada {c} gambar, setiap gambar = {k} orang: {c} × {k} = {answer}.",
+    "vars": {
+      "k": {
+        "values": [2, 5, 10]
+      },
+      "a": [2, 6],
+      "b": [2, 6],
+      "c": [2, 6]
+    },
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Pengunjung taman (1 gambar = {k} orang)",
+        "labels": ["Jumat", "Sabtu", "Minggu"],
+        "values": ["=a", "=b", "=c"],
+        "pictogram": "kucing"
+      }
+    ],
+    "unit": "orang",
+    "distractors": [
+      {
+        "expr": "c",
+        "tag": "lupa-skala"
+      },
+      {
+        "expr": "c + k",
+        "tag": "menjumlah-skala"
+      },
+      {
+        "expr": "(a + b + c) * k",
+        "tag": "total"
+      }
+    ]
+  }
+}

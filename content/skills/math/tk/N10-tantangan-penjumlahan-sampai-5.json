@@ -1,0 +1,56 @@
+{
+  "id": "math.tk.n10.tantangan-penjumlahan-sampai-5",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "N",
+  "order": 10,
+  "title": "Memahami penjumlahan sampai 5 — Level 10 — Tantangan penjumlahan (sampai 5)",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-N"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "arith",
+        "params": {
+          "op": "+",
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 5",
+          "answer": "a + b",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "presentation": "model-show"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 5",
+          "prompt": "{a} + … = {=a+b}",
+          "answer": "b",
+          "mode": "input",
+          "explain": "{a} + {answer} = {=a+b}."
+        }
+      }
+    ]
+  }
+}

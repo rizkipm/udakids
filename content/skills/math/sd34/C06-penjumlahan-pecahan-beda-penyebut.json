@@ -1,0 +1,52 @@
+{
+  "id": "math.sd34.c6.penjumlahan-pecahan-beda-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 6,
+  "title": "Pecahan — Level 6 — Penjumlahan pecahan beda penyebut",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a}/{d} + {b}/{e} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a * k + b",
+      "den": "e"
+    },
+    "explain": "Samakan penyebut: {a}/{d} = {=a*k}/{e}. Lalu {=a*k}/{e} + {b}/{e} = {=a*k+b}/{e}. Bentuk paling sederhananya {answer}.",
+    "vars": {
+      "a": [1, 3],
+      "b": [1, 3],
+      "k": [2, 3]
+    },
+    "derived": {
+      "d": "2 * 2",
+      "e": "d * k"
+    },
+    "constraint": "a < d",
+    "distractors": [
+      {
+        "num": "a + b",
+        "den": "d + e",
+        "tag": "menjumlah-penyebut"
+      },
+      {
+        "num": "a + b",
+        "den": "e",
+        "tag": "tidak-menyamakan-penyebut"
+      },
+      {
+        "num": "a * b",
+        "den": "d * e",
+        "tag": "mengalikan"
+      }
+    ]
+  }
+}

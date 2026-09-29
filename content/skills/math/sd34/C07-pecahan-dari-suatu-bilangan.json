@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.c7.pecahan-dari-suatu-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 7,
+  "title": "Pecahan — Level 7 — Pecahan dari suatu bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa {n}/{d} dari {t} kelereng?",
+    "answer": "t / d * n",
+    "explain": "{t} dibagi {d} bagian = {=t/d}. Ambil {n} bagian: {n} × {=t/d} = {answer}.",
+    "vars": {
+      "d": [2, 5],
+      "n": [1, 4],
+      "m": [2, 6]
+    },
+    "constraint": "n < d",
+    "derived": {
+      "t": "d * m * 2"
+    },
+    "distractors": [
+      {
+        "expr": "t / d",
+        "tag": "lupa-kali-pembilang"
+      },
+      {
+        "expr": "t / n",
+        "tag": "membagi-pembilang"
+      },
+      {
+        "expr": "t - n",
+        "tag": "mengurang"
+      }
+    ]
+  }
+}

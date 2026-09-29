@@ -1,0 +1,39 @@
+{
+  "id": "math.tk.yy8.bandingkan-dua-kelompok-koin",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "YY",
+  "order": 8,
+  "title": "Uang Rupiah — Level 8 — Bandingkan dua kelompok koin",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-YY"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [1, 2]
+    },
+    "constraint": "a * 100 != b * 500",
+    "prompt": "Rina punya {a} koin Rp100. Doni punya {b} koin Rp500. Uang siapa lebih banyak? Berapa rupiahnya?",
+    "answer": "max(a * 100, b * 500)",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "min(a * 100, b * 500)",
+        "tag": "lebih-sedikit"
+      },
+      {
+        "expr": "max(a, b)",
+        "tag": "banyak-koin-bukan-nilai"
+      }
+    ],
+    "choices": 3,
+    "explain": "Rina Rp{=a*100}, Doni Rp{=b*500}. Yang lebih banyak {answer}."
+  }
+}

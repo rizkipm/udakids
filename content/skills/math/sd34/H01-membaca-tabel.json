@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.h1.membaca-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 1,
+  "title": "Data: tabel dan diagram — Level 1 — Membaca tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa siswa yang menyukai jeruk?",
+    "answer": "b",
+    "explain": "Cari baris Jeruk, lalu lihat kolom Banyak siswa: {answer}.",
+    "vars": {
+      "a": [2, 12],
+      "b": [2, 12],
+      "c": [2, 12]
+    },
+    "constraint": "a != b && b != c && a != c",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Buah kesukaan kelas 3",
+        "headers": ["Buah", "Banyak siswa"],
+        "rows": [
+          ["Apel", "=a"],
+          ["Jeruk", "=b"],
+          ["Pisang", "=c"]
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "salah-baris"
+      },
+      {
+        "expr": "c",
+        "tag": "salah-baris"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "total"
+      }
+    ]
+  }
+}

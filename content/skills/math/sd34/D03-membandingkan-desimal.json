@@ -1,0 +1,38 @@
+{
+  "id": "math.sd34.d3.membandingkan-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "D",
+  "order": 3,
+  "title": "Desimal — Level 3 — Membandingkan desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Mana yang lebih besar: {x} atau {y}?",
+    "answer": "x",
+    "format": "decimal",
+    "explain": "Bandingkan persepuluhan dulu: {x} = {=a*10}/100, sedangkan {y} = {b}/100. Jadi {answer} lebih besar walaupun angkanya lebih pendek.",
+    "vars": {
+      "a": [2, 8],
+      "b": [11, 79]
+    },
+    "constraint": "floor(b / 10) < a",
+    "derived": {
+      "x": "a / 10",
+      "y": "b / 100"
+    },
+    "choices": 2,
+    "distractors": [
+      {
+        "expr": "y",
+        "tag": "lebih-panjang-lebih-besar"
+      }
+    ]
+  }
+}

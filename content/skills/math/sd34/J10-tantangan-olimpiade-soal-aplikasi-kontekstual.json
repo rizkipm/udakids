@@ -1,0 +1,88 @@
+{
+  "id": "math.sd34.j10.tantangan-olimpiade-soal-aplikasi-kontekstual",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 10,
+  "title": "Soal aplikasi (kont — Level 10 — Tantangan olimpiade soal aplikasi (kontekstual)",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Di sebuah kandang ada ayam dan kambing. Jumlah kepala {kepala} dan jumlah kaki {kaki}. Berapa ekor kambing?",
+          "answer": "k",
+          "explain": "Andaikan semua ayam: {kepala} × 2 = {=2*kepala} kaki. Kelebihan {kaki} − {=2*kepala} = {=kaki-2*kepala} kaki berasal dari kambing (2 kaki lebih banyak per ekor): {=kaki-2*kepala} : 2 = {answer} kambing.",
+          "vars": {
+            "k": [3, 10],
+            "a": [2, 8]
+          },
+          "constraint": "k > a",
+          "derived": {
+            "kepala": "k + a",
+            "kaki": "4 * k + 2 * a"
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Umur ayah {r} kali umur {nama}. Jumlah umur mereka {s} tahun. Berapa tahun umur {nama}?",
+          "answer": "b",
+          "explain": "Umur {nama} 1 bagian, ayah {r} bagian, total {=r+1} bagian = {s} tahun. 1 bagian = {s} : {=r+1} = {answer} tahun.",
+          "vars": {
+            "b": [6, 12],
+            "r": [3, 4]
+          },
+          "derived": {
+            "a": "r * b",
+            "s": "a + b"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Harga {n} buah pulpen Rp{t}. Berapa rupiah harga {m} buah pulpen?",
+          "answer": "m * h",
+          "explain": "Harga 1 pulpen = Rp{t} : {n} = Rp{h}. Harga {m} pulpen = {m} × Rp{h} = Rp{answer}.",
+          "vars": {
+            "n": [2, 4],
+            "h": {
+              "values": [1500, 2000, 2500, 3000]
+            },
+            "m": [5, 9]
+          },
+          "derived": {
+            "t": "n * h"
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

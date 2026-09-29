@@ -1,0 +1,56 @@
+{
+  "id": "math.tk.jj10.tantangan-bilangan-sampai-30",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "JJ",
+  "order": 10,
+  "title": "Bilangan dan membilang sampai 30 — Level 10 — Tantangan bilangan sampai 30",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-JJ"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [11, 29]
+          },
+          "prompt": "Angka berapa yang hilang di papan?",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 + 1",
+              "end": "=floor((x - 1) / 10) * 10 + 10",
+              "columns": 10,
+              "blanks": ["=x"]
+            }
+          ],
+          "answer": "x",
+          "mode": "input",
+          "explain": "Jawabannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 2],
+            "b": [0, 9]
+          },
+          "constraint": "t * 10 + b <= 30",
+          "prompt": "{t} puluhan dan {b} satuan adalah …",
+          "answer": "t * 10 + b",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

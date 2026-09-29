@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.b6.soal-cerita-kpk-lampu-menyala",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 6,
+  "title": "FPB dan KPK — Level 6 — Soal cerita KPK: lampu menyala",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Lampu merah menyala setiap {a} detik dan lampu kuning setiap {b} detik. Keduanya baru saja menyala bersama. Berapa detik lagi keduanya menyala bersama?",
+    "answer": "lcm(a, b)",
+    "explain": "Kelipatan {a} dan {b} yang sama dan terkecil adalah {answer}.",
+    "vars": {
+      "a": {
+        "values": [10, 12, 15]
+      },
+      "b": {
+        "values": [15, 20, 25, 30]
+      }
+    },
+    "constraint": "a < b && b % a != 0 && lcm(a, b) <= 60",
+    "unit": "detik",
+    "distractors": [
+      {
+        "expr": "a * b",
+        "tag": "kali-bukan-kpk"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "gcd(a, b)",
+        "tag": "fpb-bukan-kpk"
+      }
+    ]
+  }
+}

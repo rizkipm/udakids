@@ -1,0 +1,38 @@
+{
+  "id": "math.sd12.h6.bandingkan-dua-kelompok-koin",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "H",
+  "order": 6,
+  "title": "Uang — Level 6 — Bandingkan dua kelompok koin",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "pengayaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [1, 2]
+    },
+    "constraint": "a * 100 != b * 500",
+    "prompt": "Rina punya {a} koin Rp100. Doni punya {b} koin Rp500. Uang siapa lebih banyak? Berapa rupiahnya?",
+    "answer": "max(a * 100, b * 500)",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "min(a * 100, b * 500)",
+        "tag": "lebih-sedikit"
+      },
+      {
+        "expr": "max(a, b)",
+        "tag": "banyak-koin-bukan-nilai"
+      }
+    ],
+    "choices": 3,
+    "explain": "Rina Rp{=a*100}, Doni Rp{=b*500}. Yang lebih banyak {answer}."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "math.sd12.j1.soal-cerita-tambah-atau-kurang-bergambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "J",
+  "order": 1,
+  "title": "Pemecahan masalah — Level 1 — Soal cerita tambah atau kurang bergambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "A"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "arith",
+        "params": {
+          "op": "+",
+          "vars": {
+            "a": [1, 5],
+            "b": [1, 5]
+          },
+          "constraint": "a + b <= 20",
+          "answer": "a + b",
+          "presentation": "word-problem",
+          "distractors": [
+            "a + b + 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "arith",
+        "params": {
+          "op": "-",
+          "vars": {
+            "a": [2, 20],
+            "b": [1, 5]
+          },
+          "constraint": "b < a",
+          "answer": "a - b",
+          "presentation": "word-problem",
+          "distractors": [
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

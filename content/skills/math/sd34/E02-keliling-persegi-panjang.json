@@ -1,0 +1,49 @@
+{
+  "id": "math.sd34.e2.keliling-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "E",
+  "order": 2,
+  "title": "Keliling dan luas — Level 2 — Keliling persegi panjang",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa keliling persegi panjang ini?",
+    "answer": "2 * (p + l)",
+    "explain": "Keliling = jumlah semua sisi = {p} + {l} + {p} + {l} = {answer}.",
+    "vars": {
+      "p": [3, 12],
+      "l": [2, 9]
+    },
+    "constraint": "p > l",
+    "stimulus": [
+      {
+        "kind": "rect",
+        "w": "=p",
+        "h": "=l",
+        "unit": "cm"
+      }
+    ],
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "p * l",
+        "tag": "tertukar-keliling-luas"
+      },
+      {
+        "expr": "p + l",
+        "tag": "setengah-keliling"
+      },
+      {
+        "expr": "2 * p + l",
+        "tag": "sisi-kurang"
+      }
+    ]
+  }
+}

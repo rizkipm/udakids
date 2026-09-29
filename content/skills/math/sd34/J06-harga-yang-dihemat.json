@@ -1,0 +1,46 @@
+{
+  "id": "math.sd34.j6.harga-yang-dihemat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 6,
+  "title": "Soal aplikasi (kontekstual) — Level 6 — Harga yang dihemat",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "{nama} membeli {n} buku seharga Rp{h} per buku dan mendapat potongan harga untuk {=n-m} buku sehingga ia hanya membayar {m} buku. Berapa rupiah yang dihemat?",
+    "answer": "(n - m) * h",
+    "explain": "Hemat {=n-m} buku × Rp{h} = Rp{answer}.",
+    "vars": {
+      "n": [3, 6],
+      "h": {
+        "values": [2000, 2500, 3000, 4000]
+      },
+      "m": [2, 4]
+    },
+    "constraint": "m < n",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "distractors": [
+      {
+        "expr": "m * h",
+        "tag": "yang-dibayar"
+      },
+      {
+        "expr": "n * h",
+        "tag": "harga-semua"
+      },
+      {
+        "expr": "(n - m) * h + h",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

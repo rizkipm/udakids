@@ -1,0 +1,32 @@
+{
+  "id": "math.sd34.j9.harga-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 9,
+  "title": "Soal aplikasi (kontekstual) — Level 9 — Harga satuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Harga {n} buah pulpen Rp{t}. Berapa rupiah harga {m} buah pulpen?",
+    "answer": "m * h",
+    "explain": "Harga 1 pulpen = Rp{t} : {n} = Rp{h}. Harga {m} pulpen = {m} × Rp{h} = Rp{answer}.",
+    "vars": {
+      "n": [2, 4],
+      "h": {
+        "values": [1500, 2000, 2500, 3000]
+      },
+      "m": [5, 9]
+    },
+    "derived": {
+      "t": "n * h"
+    },
+    "mode": "input"
+  }
+}

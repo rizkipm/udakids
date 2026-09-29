@@ -1,0 +1,51 @@
+{
+  "id": "math.sd34.h4.selisih-pada-diagram-batang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 4,
+  "title": "Data: tabel dan diagram — Level 4 — Selisih pada diagram batang",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa selisih penjualan hari Senin dan Selasa?",
+    "answer": "a - b",
+    "explain": "Senin {a}, Selasa {b}. Selisih {a} − {b} = {answer}.",
+    "vars": {
+      "a": [5, 20],
+      "b": [5, 20],
+      "c": [5, 20]
+    },
+    "constraint": "a > b",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Roti terjual",
+        "labels": ["Senin", "Selasa", "Rabu"],
+        "values": ["=a", "=b", "=c"],
+        "unit": "roti"
+      }
+    ],
+    "unit": "roti",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah-bukan-selisih"
+      },
+      {
+        "expr": "a",
+        "tag": "satu-batang"
+      },
+      {
+        "expr": "abs(a - c)",
+        "tag": "salah-batang"
+      }
+    ]
+  }
+}

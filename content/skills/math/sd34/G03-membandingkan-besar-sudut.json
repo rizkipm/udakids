@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.g3.membandingkan-besar-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "G",
+  "order": 3,
+  "title": "Sudut — Level 3 — Membandingkan besar sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C (pengayaan)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [20, 170],
+        "step": 10
+      },
+      "b": {
+        "range": [20, 170],
+        "step": 10
+      }
+    },
+    "prompt": "Sudut A {a}° dan sudut B {b}°. Berapa derajat selisihnya?",
+    "answer": "abs(a - b)",
+    "explain": "|{a} − {b}| = {answer}°.",
+    "constraint": "a != b",
+    "unit": "°",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "max(a, b)",
+        "tag": "salah-banding"
+      }
+    ]
+  }
+}

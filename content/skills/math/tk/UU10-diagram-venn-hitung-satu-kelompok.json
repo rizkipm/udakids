@@ -1,0 +1,52 @@
+{
+  "id": "math.tk.uu10.diagram-venn-hitung-satu-kelompok",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "UU",
+  "order": 10,
+  "title": "Mengelompokkan dan menyortir — Level 10 — Diagram Venn: hitung satu kelompok",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-UU"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 3],
+      "b": [1, 3],
+      "c": [1, 3]
+    },
+    "prompt": "Berapa semua benda yang MERAH (termasuk yang di tengah)?",
+    "stimulus": [
+      {
+        "kind": "venn",
+        "a": "Merah",
+        "b": "Bulat",
+        "onlyA": "=a",
+        "onlyB": "=b",
+        "both": "=c",
+        "object": "apel"
+      }
+    ],
+    "answer": "a + c",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "lupa-bagian-tengah"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "semua"
+      },
+      {
+        "expr": "c",
+        "tag": "hanya-tengah"
+      }
+    ],
+    "explain": "Lingkaran Merah berisi {a} di luar dan {c} di tengah: {answer}."
+  }
+}

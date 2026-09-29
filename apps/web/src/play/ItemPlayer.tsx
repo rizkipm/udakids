@@ -1,0 +1,722 @@
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  checkAnswer,
+  type AnswerResult,
+  type AnswerValue,
+  type Choice,
+  type Interaction,
+  type Item,
+  type Visual,
+} from '@little-coder/engine';
+import { speak, stopSpeaking } from '../audio/speech';
+import { VisualView } from '../components/visuals';
+import { t } from '../i18n';
+import './play.css';
+
+export type ItemPlayerProps = {
+  item: Item;
+  /** Dipanggil setelah anak menjawab (sudah diperiksa). */
+  onAnswer?: (result: AnswerResult & { value: AnswerValue }) => void;
+  /** 'preview' = untuk admin: tanpa suara otomatis. */
+  mode?: 'play' | 'preview';
+  /** Kunci jawaban ditandai (preview admin). */
+  showAnswer?: boolean;
+  disabled?: boolean;
+};
+
+/** Pemutar satu soal Pustaka. Semua interaksi cukup diketuk (tanpa drag), target ≥ 64 px. */
+export function ItemPlayer({
+  item,
+  onAnswer,
+  mode = 'play',
+  showAnswer = false,
+  disabled = false,
+}: ItemPlayerProps) {
+  const [locked, setLocked] = useState(false);
+  const [result, setResult] = useState<AnswerResult>();
+  const say = item.say ?? item.prompt;
+
+  useEffect(() => {
+    setLocked(false);
+    setResult(undefined);
+    if (mode === 'play') speak(say);
+    return () => stopSpeaking();
+  }, [item, mode, say]);
+
+  const submit = (value: AnswerValue) => {
+    if (locked || disabled) return;
+    const r = checkAnswer(item, value);
+    setLocked(true);
+    setResult(r);
+    onAnswer?.({ ...r, value });
+  };
+
+  const inactive = locked || disabled;
+  return (
+    <div className="item" data-interaction={item.interaction.type}>
+      <div className="item-prompt">
+        <SpeakButton text={say} />
+        <p>{item.prompt}</p>
+      </div>
+      {item.stimulus.length > 0 && (
+        <div className="item-stimulus">
+          {item.stimulus.map((v, i) => (
+            <VisualView key={i} visual={v} size={stimulusSize(v)} />
+          ))}
+        </div>
+      )}
+      <div className={`interaction${result ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}>
+        <InteractionView
+          interaction={item.interaction}
+          onSubmit={submit}
+          disabled={inactive}
+          showAnswer={showAnswer || (result !== undefined && !result.correct && mode === 'preview')}
+          result={result}
+        />
+      </div>
+    </div>
+  );
+}
+
+/** Kolom grid pilihan agar kartu sama besar dan rata tengah. */
+export const gridColumns = (n: number, textual: boolean) =>
+  n <= 3 ? n : n === 4 ? (textual ? 2 : 4) : 3;
+
+const stimulusSize = (v: Visual) =>
+  v.kind === 'bar-chart' || v.kind === 'table'
+    ? 300
+    : v.kind === 'numeral' || v.kind === 'equation'
+      ? 120
+      : v.kind === 'row' || v.kind === 'text'
+        ? 110
+        : 180;
+
+export function SpeakButton({ text, label }: { text: string; label?: string }) {
+  return (
+    <button
+      type="button"
+      className="speak-btn"
+      aria-label={label ?? t('play.listen')}
+      onClick={() => speak(text)}
+    >
+      <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden>
+        <path d="M8 18h8l10-8v28l-10-8H8z" fill="currentColor" />
+        <path
+          d="M32 16c3 3 3 13 0 16M36 11c6 6 6 20 0 26"
+          stroke="currentColor"
+          strokeWidth="4"
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
+export function CheckButton({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) {
+  return (
+    <button
+      type="button"
+      className="check-btn"
+      aria-label={t('play.check')}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden>
+        <path
+          d="M10 25l9 9 19-20"
+          stroke="currentColor"
+          strokeWidth="6"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
+function ChoiceCard({
+  choice,
+  selected,
+  marked,
+  disabled,
+  onClick,
+  size = 110,
+  badge,
+}: {
+  choice: Choice;
+  selected?: boolean;
+  marked?: 'answer' | 'right' | 'wrong';
+  disabled?: boolean;
+  onClick?: () => void;
+  size?: number;
+  badge?: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      className={`choice${selected ? ' is-selected' : ''}${marked ? ` is-${marked}` : ''}`}
+      disabled={disabled}
+      aria-pressed={selected}
+      onClick={() => {
+        if (choice.say) speak(choice.say);
+        onClick?.();
+      }}
+    >
+      {badge !== undefined && <span className="choice-badge">{badge}</span>}
+      {choice.visual.kind === 'text' || choice.visual.kind === 'word' ? (
+        <span className="choice-text">{choice.visual.text}</span>
+      ) : (
+        <VisualView visual={choice.visual} size={size} />
+      )}
+    </button>
+  );
+}
+
+type ViewProps<I extends Interaction> = {
+  interaction: I;
+  onSubmit: (v: AnswerValue) => void;
+  disabled: boolean;
+  showAnswer: boolean;
+  result?: AnswerResult;
+};
+
+function InteractionView(props: ViewProps<Interaction>) {
+  const it = props.interaction;
+  switch (it.type) {
+    case 'pick-one':
+      return <PickOne {...props} interaction={it} />;
+    case 'tap-all':
+      return <TapAll {...props} interaction={it} />;
+    case 'order':
+      return <Order {...props} interaction={it} />;
+    case 'group':
+      return <Group {...props} interaction={it} />;
+    case 'match':
+      return <Match {...props} interaction={it} />;
+    case 'build':
+      return <Build {...props} interaction={it} />;
+    case 'number-line':
+      return <NumberLine {...props} interaction={it} />;
+    case 'number-input':
+      return <NumberInput {...props} interaction={it} />;
+  }
+}
+
+/** Ubah "1.250" / "0,5" (gaya Indonesia) menjadi angka. */
+export function parseIdNumber(text: string): number | undefined {
+  if (!/^\d+(,\d+)?$/.test(text)) return undefined;
+  return Number(text.replace(',', '.'));
+}
+
+const KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '0', 'hapus'] as const;
+
+function NumberInput({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+  result,
+}: ViewProps<Extract<Interaction, { type: 'number-input' }>>) {
+  const [text, setText] = useState('');
+  useEffect(() => setText(''), [it]);
+  const allowComma = (it.decimals ?? 0) > 0;
+  const shown = text || (showAnswer ? String(it.answer).replace('.', ',') : '');
+  const press = (k: (typeof KEYS)[number]) => {
+    if (k === 'hapus') setText((x) => x.slice(0, -1));
+    else if (k === ',') setText((x) => (allowComma && x && !x.includes(',') ? `${x},` : x));
+    else setText((x) => (x.length >= 9 ? x : x === '0' ? k : x + k));
+  };
+  const value = parseIdNumber(text);
+  return (
+    <>
+      <div
+        className={`numinput-display${result ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}
+        aria-live="polite"
+        aria-label={t('play.answerBox')}
+      >
+        <span className="numinput-value">{shown || ' '}</span>
+        {it.unit && <span className="numinput-unit">{it.unit}</span>}
+      </div>
+      {result && !result.correct && (
+        <p className="numinput-key-answer">
+          {t('play.correctAnswer', {
+            answer: `${String(it.answer).replace('.', ',')}${it.unit ? ` ${it.unit}` : ''}`,
+          })}
+        </p>
+      )}
+      <div className="numinput-keys">
+        {KEYS.map((k) => (
+          <button
+            key={k}
+            type="button"
+            className="numinput-key"
+            disabled={disabled || (k === ',' && !allowComma)}
+            aria-label={k === 'hapus' ? t('play.erase') : k === ',' ? t('play.comma') : k}
+            onClick={() => press(k)}
+          >
+            {k === 'hapus' ? (
+              <svg viewBox="0 0 48 48" width="32" height="32" aria-hidden>
+                <path
+                  d="M18 12h20v24H18L8 24z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M22 19l10 10M32 19L22 29"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              k
+            )}
+          </button>
+        ))}
+      </div>
+      <CheckButton
+        disabled={disabled || value === undefined}
+        onClick={() => value !== undefined && onSubmit(value)}
+      />
+    </>
+  );
+}
+
+function PickOne({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+  result,
+}: ViewProps<Extract<Interaction, { type: 'pick-one' }>>) {
+  const [chosen, setChosen] = useState<string>();
+  useEffect(() => setChosen(undefined), [it]);
+  const textual = it.choices.every((c) => c.visual.kind === 'word' || c.visual.kind === 'text');
+  return (
+    <div
+      className={`choices arrange-${it.arrangement ?? 'grid'}${textual ? ' choices-words' : ''}`}
+      style={{ ['--cols' as string]: gridColumns(it.choices.length, textual) }}
+    >
+      {it.choices.map((c) => (
+        <ChoiceCard
+          key={c.id}
+          choice={c}
+          disabled={disabled}
+          selected={chosen === c.id}
+          marked={
+            chosen === c.id && result
+              ? result.correct
+                ? 'right'
+                : 'wrong'
+              : showAnswer && c.id === it.answer
+                ? 'answer'
+                : undefined
+          }
+          size={it.arrangement === 'row' && it.choices.length > 4 ? 84 : 110}
+          onClick={() => {
+            setChosen(c.id);
+            onSubmit(c.id);
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function TapAll({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+  result,
+}: ViewProps<Extract<Interaction, { type: 'tap-all' }>>) {
+  const [sel, setSel] = useState<string[]>([]);
+  useEffect(() => setSel([]), [it]);
+  const toggle = (id: string) =>
+    setSel((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  return (
+    <>
+      <div
+        className="choices arrange-grid"
+        style={{ ['--cols' as string]: gridColumns(it.choices.length, false) }}
+      >
+        {it.choices.map((c) => (
+          <ChoiceCard
+            key={c.id}
+            choice={c}
+            disabled={disabled}
+            selected={sel.includes(c.id)}
+            marked={
+              result && sel.includes(c.id)
+                ? it.answer.includes(c.id)
+                  ? 'right'
+                  : 'wrong'
+                : (showAnswer || (result && !result.correct)) && it.answer.includes(c.id)
+                  ? 'answer'
+                  : undefined
+            }
+            onClick={() => toggle(c.id)}
+          />
+        ))}
+      </div>
+      <CheckButton disabled={disabled || sel.length === 0} onClick={() => onSubmit(sel)} />
+    </>
+  );
+}
+
+function Order({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'order' }>>) {
+  const [picked, setPicked] = useState<string[]>([]);
+  useEffect(() => setPicked([]), [it]);
+  const byId = useMemo(() => new Map(it.choices.map((c) => [c.id, c])), [it]);
+  const order = showAnswer ? it.answer : picked;
+  return (
+    <>
+      <div className="order-slots" aria-label={t('play.orderSlots')}>
+        {it.choices.map((_, i) => {
+          const id = order[i];
+          const c = id ? byId.get(id) : undefined;
+          return c ? (
+            <ChoiceCard
+              key={i}
+              choice={c}
+              badge={i + 1}
+              disabled={disabled || showAnswer}
+              size={80}
+              onClick={() => setPicked((p) => p.filter((x) => x !== c.id))}
+            />
+          ) : (
+            <div key={i} className="slot-empty" aria-hidden>
+              {i + 1}
+            </div>
+          );
+        })}
+      </div>
+      <div className="choices arrange-row">
+        {it.choices
+          .filter((c) => !order.includes(c.id))
+          .map((c) => (
+            <ChoiceCard
+              key={c.id}
+              choice={c}
+              disabled={disabled}
+              size={90}
+              onClick={() => setPicked((p) => [...p, c.id])}
+            />
+          ))}
+      </div>
+      <CheckButton
+        disabled={disabled || picked.length !== it.choices.length}
+        onClick={() => onSubmit(picked)}
+      />
+    </>
+  );
+}
+
+function Group({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'group' }>>) {
+  const [placed, setPlaced] = useState<Record<string, string>>({});
+  const [active, setActive] = useState<string>();
+  useEffect(() => {
+    setPlaced({});
+    setActive(undefined);
+  }, [it]);
+  const where = showAnswer ? it.answer : placed;
+  const pool = it.items.filter((c) => !where[c.id]);
+  return (
+    <>
+      <div className="group-pool" aria-label={t('play.groupPool')}>
+        {pool.map((c) => (
+          <ChoiceCard
+            key={c.id}
+            choice={c}
+            size={80}
+            disabled={disabled}
+            selected={active === c.id}
+            onClick={() => setActive(active === c.id ? undefined : c.id)}
+          />
+        ))}
+        {pool.length === 0 && <span className="group-done" aria-hidden />}
+      </div>
+      <div className="group-bins">
+        {it.groups.map((g) => (
+          <div key={g.id} className={`group-bin${active ? ' is-target' : ''}`}>
+            <button
+              type="button"
+              className="group-bin-head"
+              disabled={disabled}
+              aria-label={g.say ?? t('play.groupHere')}
+              onClick={() => {
+                if (g.say) speak(g.say);
+                if (active) {
+                  setPlaced((p) => ({ ...p, [active]: g.id }));
+                  setActive(undefined);
+                }
+              }}
+            >
+              <VisualView visual={g.visual} size={72} />
+            </button>
+            <div className="group-bin-items">
+              {it.items
+                .filter((c) => where[c.id] === g.id)
+                .map((c) => (
+                  <ChoiceCard
+                    key={c.id}
+                    choice={c}
+                    size={64}
+                    disabled={disabled || showAnswer}
+                    onClick={() =>
+                      setPlaced((p) => {
+                        const next = { ...p };
+                        delete next[c.id];
+                        return next;
+                      })
+                    }
+                  />
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <CheckButton
+        disabled={disabled || Object.keys(placed).length !== it.items.length}
+        onClick={() => onSubmit(placed)}
+      />
+    </>
+  );
+}
+
+function Match({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'match' }>>) {
+  const [pairs, setPairs] = useState<Record<string, string>>({});
+  const [left, setLeft] = useState<string>();
+  useEffect(() => {
+    setPairs({});
+    setLeft(undefined);
+  }, [it]);
+  const shown = showAnswer ? it.answer : pairs;
+  const number = (leftId: string) => it.left.findIndex((c) => c.id === leftId) + 1;
+  return (
+    <>
+      <div className="match">
+        <div className="match-col">
+          {it.left.map((c) => (
+            <ChoiceCard
+              key={c.id}
+              choice={c}
+              size={80}
+              disabled={disabled}
+              selected={left === c.id}
+              badge={shown[c.id] ? number(c.id) : undefined}
+              onClick={() => setLeft(c.id)}
+            />
+          ))}
+        </div>
+        <div className="match-col">
+          {it.right.map((c) => {
+            const owner = Object.keys(shown).find((k) => shown[k] === c.id);
+            return (
+              <ChoiceCard
+                key={c.id}
+                choice={c}
+                size={80}
+                disabled={disabled || !left}
+                badge={owner ? number(owner) : undefined}
+                onClick={() => {
+                  if (!left) return;
+                  setPairs((p) => {
+                    const next = Object.fromEntries(
+                      Object.entries(p).filter(([, v]) => v !== c.id),
+                    );
+                    return { ...next, [left]: c.id };
+                  });
+                  setLeft(undefined);
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <CheckButton
+        disabled={disabled || Object.keys(pairs).length !== it.left.length}
+        onClick={() => onSubmit(pairs)}
+      />
+    </>
+  );
+}
+
+function Build({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'build' }>>) {
+  const [n, setN] = useState(0);
+  useEffect(() => setN(0), [it]);
+  const count = showAnswer ? it.target : n;
+  const visual: Visual =
+    it.unit === 'cube'
+      ? { kind: 'cubes', counts: [count], colors: ['biru'] }
+      : it.unit === 'frame'
+        ? { kind: 'frame', filled: count, size: it.frameSize ?? 10 }
+        : {
+            kind: 'objects',
+            object: it.unit === 'sticker' ? 'stiker' : (it.object ?? 'bintang'),
+            count,
+            layout: 'row',
+          };
+  const unitVisual: Visual =
+    it.unit === 'cube'
+      ? { kind: 'cubes', counts: [1], colors: ['biru'] }
+      : it.unit === 'frame'
+        ? { kind: 'dots', count: 1, layout: 'row' }
+        : { kind: 'object', object: it.unit === 'sticker' ? 'stiker' : (it.object ?? 'bintang') };
+  return (
+    <>
+      <div className="build-area" aria-live="polite">
+        <VisualView visual={visual} size={150} />
+      </div>
+      <div className="build-controls">
+        <button
+          type="button"
+          className="build-btn"
+          aria-label={t('play.buildRemove')}
+          disabled={disabled || n === 0}
+          onClick={() => setN((x) => x - 1)}
+        >
+          <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden>
+            <path d="M12 24h24" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          className="build-btn build-add"
+          aria-label={t('play.buildAdd')}
+          disabled={disabled || n >= it.max}
+          onClick={() => setN((x) => x + 1)}
+        >
+          <VisualView visual={unitVisual} size={56} />
+          <svg viewBox="0 0 48 48" width="32" height="32" aria-hidden>
+            <path
+              d="M24 12v24M12 24h24"
+              stroke="currentColor"
+              strokeWidth="6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <CheckButton disabled={disabled || n === 0} onClick={() => onSubmit(n)} />
+    </>
+  );
+}
+
+function NumberLine({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'number-line' }>>) {
+  const [sel, setSel] = useState<number>();
+  useEffect(() => setSel(undefined), [it]);
+  const values = Array.from({ length: it.max - it.min + 1 }, (_, i) => it.min + i);
+  const step = 56;
+  const width = values.length * step + 24;
+  const mark = showAnswer ? it.answer : sel;
+  return (
+    <>
+      <div className="number-line-wrap">
+        <svg
+          viewBox={`0 0 ${width} 130`}
+          style={{ width: '100%', minWidth: values.length * 36, height: 'auto' }}
+          role="group"
+          aria-label={t('play.numberLine')}
+        >
+          <line
+            x1={12}
+            y1={70}
+            x2={width - 12}
+            y2={70}
+            stroke="#2b2540"
+            strokeWidth={4}
+            strokeLinecap="round"
+          />
+          {values.map((v, i) => {
+            const x = 12 + step / 2 + i * step;
+            const isStart = v === it.start;
+            const isMark = v === mark;
+            return (
+              <g
+                key={v}
+                role="button"
+                tabIndex={disabled ? -1 : 0}
+                aria-label={String(v)}
+                aria-pressed={isMark}
+                className="nl-tick"
+                onClick={() => !disabled && setSel(v)}
+                onKeyDown={(e) => {
+                  if (!disabled && (e.key === 'Enter' || e.key === ' ')) setSel(v);
+                }}
+              >
+                <rect x={x - step / 2} y={20} width={step} height={104} fill="transparent" />
+                <line x1={x} y1={58} x2={x} y2={82} stroke="#2b2540" strokeWidth={3} />
+                <circle
+                  cx={x}
+                  cy={70}
+                  r={isMark ? 16 : 0}
+                  fill="#f7c948"
+                  stroke="#2b2540"
+                  strokeWidth={3}
+                />
+                <text
+                  x={x}
+                  y={112}
+                  textAnchor="middle"
+                  fontSize={22}
+                  fontWeight={700}
+                  fill="#1d1a2e"
+                >
+                  {v}
+                </text>
+                {isStart && (
+                  <g transform={`translate(${x - 14} 16)`}>
+                    <rect
+                      width={28}
+                      height={30}
+                      rx={9}
+                      fill="#8a6cf0"
+                      stroke="#2b2540"
+                      strokeWidth={3}
+                    />
+                    <circle cx={9} cy={13} r={3} fill="#1d1a2e" />
+                    <circle cx={19} cy={13} r={3} fill="#1d1a2e" />
+                  </g>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+      <CheckButton
+        disabled={disabled || sel === undefined}
+        onClick={() => sel !== undefined && onSubmit(sel)}
+      />
+    </>
+  );
+}

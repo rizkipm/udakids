@@ -1,0 +1,28 @@
+{
+  "id": "math.sd34.b8.bilangan-dengan-sisa-yang-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 8,
+  "title": "FPB dan KPK — Level 8 — Bilangan dengan sisa yang sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Bilangan terkecil yang lebih dari 1, jika dibagi {a} bersisa 1 dan jika dibagi {b} juga bersisa 1, adalah …",
+    "answer": "lcm(a, b) + 1",
+    "explain": "Bilangan itu dikurangi 1 habis dibagi {a} dan {b}, jadi bilangan itu = KPK + 1 = {=lcm(a,b)} + 1 = {answer}.",
+    "vars": {
+      "a": [2, 5],
+      "b": [3, 7],
+      "r": [1, 1]
+    },
+    "constraint": "a < b && gcd(a, b) == 1",
+    "mode": "input"
+  }
+}

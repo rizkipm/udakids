@@ -1,0 +1,62 @@
+{
+  "id": "math.tk.mm9.pola-bertumbuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "MM",
+  "order": 9,
+  "title": "Pola — Level 9 — Pola bertumbuh",
+  "tier": "basic",
+  "tags": {
+    "level": "9",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-MM"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 3],
+      "d": [1, 2]
+    },
+    "prompt": "Banyak titik bertambah sama setiap langkah. Berapa titik berikutnya?",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "dots",
+            "count": "=a",
+            "layout": "row"
+          },
+          {
+            "kind": "dots",
+            "count": "=a+d",
+            "layout": "row"
+          },
+          {
+            "kind": "dots",
+            "count": "=a+2*d",
+            "layout": "row"
+          },
+          {
+            "kind": "blank"
+          }
+        ]
+      }
+    ],
+    "answer": "a + 3 * d",
+    "distractors": [
+      {
+        "expr": "a + 2 * d",
+        "tag": "tidak-bertambah"
+      },
+      {
+        "expr": "a + 3 * d + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 3,
+    "explain": "Setiap langkah bertambah {d}: {a}, {=a+d}, {=a+2*d}, {answer}."
+  }
+}

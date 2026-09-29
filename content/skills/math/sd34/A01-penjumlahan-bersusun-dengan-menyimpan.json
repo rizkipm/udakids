@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.a1.penjumlahan-bersusun-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "A",
+  "order": 1,
+  "title": "Bilangan: operasi hitung bila — Level 1 — Penjumlahan bersusun dengan menyimpan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a} + {b} adalah …",
+    "answer": "a + b",
+    "explain": "Jumlahkan dari satuan. Satuan {=a%10} + {=b%10} lebih dari 9, jadi simpan 1 ke puluhan. Hasilnya {answer}.",
+    "vars": {
+      "a": [125, 875],
+      "b": [115, 899]
+    },
+    "constraint": "a % 10 + b % 10 >= 10",
+    "distractors": [
+      {
+        "expr": "a + b - 10",
+        "tag": "lupa-menyimpan"
+      },
+      {
+        "expr": "a + b + 10",
+        "tag": "salah-menyimpan"
+      },
+      {
+        "expr": "a + b - 100",
+        "tag": "lupa-menyimpan-ratusan"
+      }
+    ]
+  }
+}

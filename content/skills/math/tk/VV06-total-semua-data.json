@@ -1,0 +1,47 @@
+{
+  "id": "math.tk.vv6.total-semua-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "VV",
+  "order": 6,
+  "title": "Data dan grafik — Level 6 — Total semua data",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-VV"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "c": [1, 6]
+    },
+    "prompt": "Berapa semua hewan pada piktogram?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Hewan peliharaan kelas",
+        "labels": ["Kucing", "Ikan", "Bebek"],
+        "values": ["=a", "=b", "=c"],
+        "pictogram": "kucing"
+      }
+    ],
+    "answer": "a + b + c",
+    "explain": "{a} + {b} + {c} = {answer}.",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "kurang-satu-baris"
+      },
+      {
+        "expr": "max(a, b, c)",
+        "tag": "terbanyak"
+      }
+    ],
+    "choices": 3
+  }
+}

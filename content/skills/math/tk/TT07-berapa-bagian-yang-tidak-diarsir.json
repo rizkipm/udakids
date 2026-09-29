@@ -1,0 +1,56 @@
+{
+  "id": "math.tk.tt7.berapa-bagian-yang-tidak-diarsir",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "TT",
+  "order": 7,
+  "title": "Pecahan bentuk — Level 7 — Berapa bagian yang tidak diarsir",
+  "tier": "basic",
+  "tags": {
+    "level": "7",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-TT"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": {
+        "values": [2, 4]
+      },
+      "n": [1, 3]
+    },
+    "constraint": "n < d",
+    "prompt": "Berapa bagian yang TIDAK diarsir?",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "bar",
+        "hideNumber": true
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "d - n",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "n",
+        "den": "d",
+        "tag": "yang-diarsir"
+      },
+      {
+        "num": "d - n",
+        "den": "n",
+        "tag": "bagian-per-bagian"
+      }
+    ],
+    "choices": 3,
+    "explain": "{=d-n} dari {d} bagian tidak diarsir."
+  }
+}

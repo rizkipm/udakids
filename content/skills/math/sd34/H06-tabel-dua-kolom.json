@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.h6.tabel-dua-kolom",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "H",
+  "order": 6,
+  "title": "Data: tabel dan diagram — Level 6 — Tabel dua kolom",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Berapa banyak siswa kelas 3 dan kelas 4 seluruhnya?",
+    "answer": "a + b + c + d",
+    "explain": "Jumlahkan semua sel: {a} + {b} + {c} + {d} = {answer}.",
+    "vars": {
+      "a": [10, 30],
+      "b": [10, 30],
+      "c": [10, 30],
+      "d": [10, 30]
+    },
+    "constraint": "a != b && b != c && c != d && a != c && a != d && b != d",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Siswa yang ikut lomba",
+        "headers": ["Kelas", "Putra", "Putri"],
+        "rows": [
+          ["3", "=a", "=b"],
+          ["4", "=c", "=d"]
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a + c",
+        "tag": "satu-kolom"
+      },
+      {
+        "expr": "a + b",
+        "tag": "satu-baris"
+      },
+      {
+        "expr": "b + d",
+        "tag": "satu-kolom"
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "math.sd12.c1.kelompok-sama-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "C",
+  "order": 1,
+  "title": "Perkalian dan pembagian dasar — Level 1 — Kelompok sama banyak",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (pengayaan)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [2, 3],
+      "k": [2, 3]
+    },
+    "prompt": "Ada {g} kelompok, setiap kelompok {k} apel. Berapa apel semuanya?",
+    "answer": "g * k",
+    "explain": "Penjumlahan berulang: {=g*k} ({g} kali {k}).",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "objects",
+            "object": "apel",
+            "count": "=k",
+            "layout": "row"
+          },
+          {
+            "kind": "objects",
+            "object": "apel",
+            "count": "=k",
+            "layout": "row"
+          }
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "g + k",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "g * k + k",
+        "tag": "lebih-satu-kelompok"
+      }
+    ],
+    "choices": 3
+  }
+}

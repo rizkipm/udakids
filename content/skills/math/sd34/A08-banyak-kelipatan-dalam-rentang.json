@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.a8.banyak-kelipatan-dalam-rentang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "A",
+  "order": 8,
+  "title": "Bilangan: operasi hitung bilangan ca — Level 8 — Banyak kelipatan dalam rentang",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Ada berapa bilangan dari {a} sampai {b} yang habis dibagi {k}?",
+    "answer": "floor(b / k) - floor((a - 1) / k)",
+    "explain": "Kelipatan {k} sampai {b} ada {=floor(b/k)}, sampai {=a-1} ada {=floor((a-1)/k)}. Selisihnya {answer}.",
+    "vars": {
+      "a": [10, 40],
+      "b": [60, 200],
+      "k": [3, 9]
+    },
+    "distractors": [
+      {
+        "expr": "floor((b - a) / k)",
+        "tag": "lupa-ujung"
+      },
+      {
+        "expr": "floor(b / k)",
+        "tag": "mulai-dari-1"
+      },
+      {
+        "expr": "floor(b / k) - floor(a / k)",
+        "tag": "salah-ujung-bawah"
+      }
+    ]
+  }
+}

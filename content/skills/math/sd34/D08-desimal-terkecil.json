@@ -1,0 +1,46 @@
+{
+  "id": "math.sd34.d8.desimal-terkecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "D",
+  "order": 8,
+  "title": "Desimal — Level 8 — Desimal terkecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Urutan dari yang terkecil: {x}; {y}; 0,5. Bilangan yang terkecil adalah …",
+    "answer": "min(x, y, 0.5)",
+    "format": "decimal",
+    "explain": "Samakan jumlah angka desimal: {x} = {a}/100, {y} = {=b*10}/100, 0,5 = 50/100. Yang terkecil {answer}.",
+    "vars": {
+      "a": [11, 99],
+      "b": [2, 9]
+    },
+    "constraint": "a % 10 != 0",
+    "derived": {
+      "x": "a / 100",
+      "y": "b / 10"
+    },
+    "distractors": [
+      {
+        "expr": "max(x, y, 0.5)",
+        "tag": "terbesar-bukan-terkecil"
+      },
+      {
+        "expr": "0.5 + 0 * a",
+        "tag": "lain"
+      },
+      {
+        "expr": "x + y - min(x, y, 0.5) - max(x,y,0.5) + 0.5",
+        "tag": "tengah"
+      }
+    ],
+    "choices": 3
+  }
+}

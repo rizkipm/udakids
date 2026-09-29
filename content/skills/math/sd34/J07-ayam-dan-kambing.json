@@ -1,0 +1,31 @@
+{
+  "id": "math.sd34.j7.ayam-dan-kambing",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 7,
+  "title": "Soal aplikasi (kontekstual) — Level 7 — Ayam dan kambing",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Di sebuah kandang ada ayam dan kambing. Jumlah kepala {kepala} dan jumlah kaki {kaki}. Berapa ekor kambing?",
+    "answer": "k",
+    "explain": "Andaikan semua ayam: {kepala} × 2 = {=2*kepala} kaki. Kelebihan {kaki} − {=2*kepala} = {=kaki-2*kepala} kaki berasal dari kambing (2 kaki lebih banyak per ekor): {=kaki-2*kepala} : 2 = {answer} kambing.",
+    "vars": {
+      "k": [3, 10],
+      "a": [2, 8]
+    },
+    "constraint": "k > a",
+    "derived": {
+      "kepala": "k + a",
+      "kaki": "4 * k + 2 * a"
+    },
+    "mode": "input"
+  }
+}

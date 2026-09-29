@@ -1,0 +1,49 @@
+{
+  "id": "math.tk.p2.pisahkan-kubus-sampai-5",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "P",
+  "order": 2,
+  "title": "Memisahkan bilangan sampai 5 — Level 2 — Pisahkan kubus (sampai 5)",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-P"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [3, 5],
+      "a": [1, 4]
+    },
+    "constraint": "a < n",
+    "prompt": "Kereta {n} kubus dipisah. Satu bagian {a} kubus. Bagian lain berapa kubus?",
+    "stimulus": [
+      {
+        "kind": "cubes",
+        "counts": ["=a", "=n-a"],
+        "colors": ["merah", "biru"],
+        "separated": true
+      }
+    ],
+    "answer": "n - a",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "total"
+      },
+      {
+        "expr": "a",
+        "tag": "bagian-sama"
+      },
+      {
+        "expr": "n - a + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "{a} + {answer} = {n}."
+  }
+}

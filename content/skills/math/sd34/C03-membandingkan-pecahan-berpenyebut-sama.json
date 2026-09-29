@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.c3.membandingkan-pecahan-berpenyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 3,
+  "title": "Pecahan — Level 3 — Membandingkan pecahan berpenyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Pecahan mana yang lebih besar: {a}/{d} atau {b}/{d}?",
+    "format": "fraction",
+    "fraction": {
+      "num": "b",
+      "den": "d",
+      "simplify": false
+    },
+    "explain": "Penyebutnya sama ({d} bagian), jadi yang pembilangnya lebih besar lebih besar: {answer}.",
+    "vars": {
+      "a": [1, 3],
+      "b": [1, 5],
+      "d": [4, 8]
+    },
+    "constraint": "a < b && b < d",
+    "choices": 2,
+    "distractors": [
+      {
+        "num": "a",
+        "den": "d",
+        "tag": "salah-banding"
+      }
+    ]
+  }
+}

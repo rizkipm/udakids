@@ -1,0 +1,39 @@
+{
+  "id": "math.sd34.a3.perkalian-dua-angka-dengan-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "A",
+  "order": 3,
+  "title": "Bilangan: operasi hitung bila — Level 3 — Perkalian dua angka dengan satu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a} × {b} adalah …",
+    "answer": "a * b",
+    "explain": "{a} × {b} = ({=floor(a/10)*10} × {b}) + ({=a%10} × {b}) = {=floor(a/10)*10*b} + {=(a%10)*b} = {answer}.",
+    "vars": {
+      "a": [12, 99],
+      "b": [3, 9]
+    },
+    "distractors": [
+      {
+        "expr": "(floor(a/10)*b)*10 + (a%10)",
+        "tag": "satuan-tidak-dikali"
+      },
+      {
+        "expr": "a * b + b",
+        "tag": "lebih-satu-kali"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

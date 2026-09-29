@@ -1,0 +1,48 @@
+{
+  "id": "math.sd34.c4.penjumlahan-pecahan-berpenyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 4,
+  "title": "Pecahan — Level 4 — Penjumlahan pecahan berpenyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a}/{d} + {b}/{d} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a + b",
+      "den": "d"
+    },
+    "explain": "Penyebut sama: jumlahkan pembilangnya saja, penyebut tetap. {a} + {b} = {=a+b}, jadi {=a+b}/{d}. Bentuk paling sederhananya {answer}.",
+    "vars": {
+      "a": [1, 5],
+      "b": [1, 5],
+      "d": [5, 12]
+    },
+    "constraint": "a + b < d",
+    "distractors": [
+      {
+        "num": "a + b",
+        "den": "d + d",
+        "tag": "menjumlah-penyebut"
+      },
+      {
+        "num": "a * b",
+        "den": "d",
+        "tag": "mengalikan"
+      },
+      {
+        "num": "a + b + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

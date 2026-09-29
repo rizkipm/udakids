@@ -1,0 +1,55 @@
+{
+  "id": "math.sd12.h5.hitung-uang-rp100-dan-rp500",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "H",
+  "order": 5,
+  "title": "Uang — Level 5 — Hitung uang Rp100 dan Rp500",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "pengayaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 2],
+      "b": [1, 4]
+    },
+    "prompt": "Ada {a} koin Rp500 dan {b} koin Rp100. Berapa rupiah semuanya?",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "coin",
+            "value": 500
+          },
+          {
+            "kind": "coin",
+            "value": 100
+          }
+        ]
+      }
+    ],
+    "answer": "a * 500 + b * 100",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "(a + b) * 100",
+        "tag": "semua-dianggap-100"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menghitung-koin-bukan-nilai"
+      },
+      {
+        "expr": "(a + b) * 500",
+        "tag": "semua-dianggap-500"
+      }
+    ],
+    "explain": "{a} × 500 = {=a*500}, {b} × 100 = {=b*100}. Jumlah {answer}."
+  }
+}

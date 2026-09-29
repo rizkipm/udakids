@@ -1,0 +1,67 @@
+{
+  "id": "math.sd34.f10.tantangan-olimpiade-volume-kubus-dan-balok",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "F",
+  "order": 10,
+  "title": "Volume kubus dan balok — Level 10 — Tantangan olimpiade volume kubus dan balok",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Sebuah kotak berukuran {=a*2} cm × {=b*2} cm × {=c*2} cm akan diisi kubus kecil bersisi 2 cm. Paling banyak berapa kubus kecil yang muat?",
+          "answer": "a * b * c",
+          "explain": "Sepanjang tiap rusuk muat {a}, {b}, dan {c} kubus. Jumlah {a} × {b} × {c} = {answer} kubus.",
+          "vars": {
+            "a": [2, 4],
+            "b": [2, 4],
+            "c": [2, 3]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Akuarium panjang {p} cm dan lebar {l} cm. Setelah batu dimasukkan, permukaan air naik {h} cm. Berapa liter volume batu itu?",
+          "answer": "p * l * h / 1000",
+          "explain": "Volume batu = volume air yang naik = {p} × {l} × {h} = {=p*l*h} cm³ = {answer} liter.",
+          "vars": {
+            "p": {
+              "values": [20, 25, 40, 50]
+            },
+            "l": {
+              "values": [20, 40]
+            },
+            "h": {
+              "values": [10, 20, 30]
+            }
+          },
+          "mode": "input",
+          "unit": "liter"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Kubus besar tersusun dari {=n*n*n} kubus kecil ({n} × {n} × {n}). Seluruh permukaan kubus besar dicat. Berapa kubus kecil yang tidak terkena cat sama sekali?",
+          "answer": "(n - 2) * (n - 2) * (n - 2)",
+          "explain": "Kubus yang tidak terkena cat ada di bagian dalam, berukuran ({n} − 2) × ({n} − 2) × ({n} − 2) = {answer}.",
+          "vars": {
+            "n": [3, 5]
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

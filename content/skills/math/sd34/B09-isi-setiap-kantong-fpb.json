@@ -1,0 +1,32 @@
+{
+  "id": "math.sd34.b9.isi-setiap-kantong-fpb",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 9,
+  "title": "FPB dan KPK — Level 9 — Isi setiap kantong (FPB)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Ada {a} pensil dan {b} buku dibagikan ke kantong sebanyak-banyaknya dengan isi yang sama. Berapa buku dalam setiap kantong?",
+    "answer": "b / gcd(a, b)",
+    "explain": "Banyak kantong = FPB({a}, {b}) = {=gcd(a,b)}. Setiap kantong berisi {b} : {=gcd(a,b)} = {answer} buku.",
+    "vars": {
+      "g": [4, 9],
+      "x": [2, 5],
+      "y": [3, 7]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "mode": "input"
+  }
+}

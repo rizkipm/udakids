@@ -1,0 +1,68 @@
+{
+  "id": "math.tk.vv10.tantangan-data-dan-grafik",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "VV",
+  "order": 10,
+  "title": "Data dan grafik — Level 10 — Tantangan data dan grafik",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-VV"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 6],
+            "c": [1, 6]
+          },
+          "prompt": "Berapa semua hewan pada piktogram?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Hewan peliharaan kelas",
+              "labels": ["Kucing", "Ikan", "Bebek"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "kucing"
+            }
+          ],
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 6],
+            "c": [1, 6]
+          },
+          "prompt": "Berapa lebih banyak kucing daripada bebek?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Hewan peliharaan kelas",
+              "labels": ["Kucing", "Ikan", "Bebek"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "kucing"
+            }
+          ],
+          "answer": "a - c",
+          "explain": "{a} − {c} = {answer}.",
+          "mode": "input",
+          "constraint": "a > c"
+        }
+      }
+    ]
+  }
+}

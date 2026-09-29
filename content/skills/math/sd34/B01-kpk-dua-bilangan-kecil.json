@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.b1.kpk-dua-bilangan-kecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 1,
+  "title": "FPB dan KPK — Level 1 — KPK dua bilangan kecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "KPK dari {a} dan {b} adalah …",
+    "answer": "lcm(a, b)",
+    "explain": "Kelipatan {a}: {a}, {=2*a}, {=3*a}, … Kelipatan {b}: {b}, {=2*b}, … Kelipatan bersama terkecil adalah {answer}.",
+    "vars": {
+      "a": [2, 10],
+      "b": [2, 10]
+    },
+    "constraint": "a < b && b % a != 0",
+    "distractors": [
+      {
+        "expr": "gcd(a, b)",
+        "tag": "fpb-bukan-kpk"
+      },
+      {
+        "expr": "a * b + a",
+        "tag": "lain"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.b4.soal-cerita-kpk-jadwal-bersama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "B",
+  "order": 4,
+  "title": "FPB dan KPK — Level 4 — Soal cerita KPK: jadwal bersama",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B (mengenal) / C (masalah KPK-FPB)"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "{nama} berenang setiap {a} hari sekali. Kakaknya berenang setiap {b} hari sekali. Hari ini mereka berenang bersama. Berapa hari lagi mereka berenang bersama lagi?",
+    "answer": "lcm(a, b)",
+    "explain": "Mencari waktu bersama = KPK. KPK dari {a} dan {b} adalah {answer}.",
+    "vars": {
+      "a": [2, 6],
+      "b": [3, 8]
+    },
+    "constraint": "a < b && b % a != 0",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "hari",
+    "distractors": [
+      {
+        "expr": "a * b",
+        "tag": "kali-bukan-kpk"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "gcd(a, b)",
+        "tag": "fpb-bukan-kpk"
+      }
+    ]
+  }
+}

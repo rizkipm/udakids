@@ -1,0 +1,44 @@
+{
+  "id": "math.sd12.j7.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "J",
+  "order": 7,
+  "title": "Pemecahan masalah — Level 7 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "A"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 5],
+      "b": [1, 4],
+      "c": [1, 3]
+    },
+    "constraint": "a + b <= 20 && c <= a + b",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "prompt": "{nama} punya {a} apel, dibelikan {b} lagi, lalu makan {c}. Berapa apel sekarang?",
+    "answer": "a + b - c",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-langkah-2"
+      },
+      {
+        "expr": "a - b + c",
+        "tag": "operasi-terbalik"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "semua-ditambah"
+      }
+    ],
+    "explain": "{a} + {b} = {=a+b}, lalu − {c} = {answer}."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.j2.uang-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "J",
+  "order": 2,
+  "title": "Soal aplikasi (kontekstual) — Level 2 — Uang kembalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Ibu membeli sabun seharga Rp{h} dan membayar dengan uang Rp{u}. Berapa kembaliannya?",
+    "answer": "u - h",
+    "explain": "Kembalian = uang dibayar − harga = Rp{u} − Rp{h} = Rp{answer}.",
+    "vars": {
+      "h": {
+        "values": [3500, 4500, 6500, 7500, 8500]
+      },
+      "u": {
+        "values": [10000, 20000]
+      }
+    },
+    "constraint": "u > h",
+    "distractors": [
+      {
+        "expr": "u + h",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "u - h + 1000",
+        "tag": "salah-meminjam"
+      },
+      {
+        "expr": "u - h - 1000",
+        "tag": "salah-meminjam"
+      }
+    ]
+  }
+}

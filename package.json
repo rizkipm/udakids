@@ -1,0 +1,46 @@
+{
+  "name": "little-coder",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @little-coder/engine build && concurrently -k -n engine,api,web -c blue,magenta,green \"pnpm --filter @little-coder/engine dev\" \"pnpm --filter @little-coder/api dev\" \"pnpm --filter @little-coder/web dev\"",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test && vitest run",
+    "typecheck": "pnpm -r typecheck && tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "validate:content": "tsx --conditions=source scripts/validate-content.ts --allow-incomplete",
+    "validate:content:strict": "tsx --conditions=source scripts/validate-content.ts",
+    "db:generate": "pnpm --filter @little-coder/api db:generate",
+    "db:migrate": "pnpm --filter @little-coder/api db:migrate",
+    "db:seed": "pnpm --filter @little-coder/api db:seed",
+    "db:setup": "pnpm db:migrate && pnpm db:seed",
+    "db:backup": "pnpm --filter @little-coder/api db:backup",
+    "db:restore": "pnpm --filter @little-coder/api db:restore",
+    "content:export": "pnpm --filter @little-coder/api content:export",
+    "start:api": "pnpm --filter @little-coder/api start:prod",
+    "deploy:db": "pnpm --filter @little-coder/api migrate:prod && pnpm --filter @little-coder/api seed:prod",
+    "lan:info": "node scripts/lan-info.mjs",
+    "dev:lan": "node scripts/lan-info.mjs && pnpm dev",
+    "lan": "pnpm build && pnpm deploy:db && node scripts/lan-info.mjs && concurrently -k -n api,web -c magenta,green \"pnpm --filter @little-coder/api start:prod\" \"pnpm --filter @little-coder/web preview\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@little-coder/engine": "workspace:*",
+    "@playwright/test": "~1.55.1",
+    "@types/node": "^22.10.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^3.2.4"
+  }
+}

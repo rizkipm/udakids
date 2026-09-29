@@ -1,0 +1,46 @@
+{
+  "id": "math.sd12.h4.nilai-koin-rp100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "H",
+  "order": 4,
+  "title": "Uang — Level 4 — Nilai koin Rp100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "pengayaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [1, 5]
+    },
+    "prompt": "Ada {n} koin Rp100. Berapa rupiah semuanya?",
+    "stimulus": [
+      {
+        "kind": "coin",
+        "value": 100
+      }
+    ],
+    "answer": "n * 100",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "menghitung-koin-bukan-nilai"
+      },
+      {
+        "expr": "(n + 1) * 100",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(n - 1) * 100",
+        "tag": "kurang-satu"
+      }
+    ],
+    "choices": 3,
+    "explain": "Hitung loncat seratus: {=n*100} rupiah."
+  }
+}

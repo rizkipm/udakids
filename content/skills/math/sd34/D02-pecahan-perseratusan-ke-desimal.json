@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.d2.pecahan-perseratusan-ke-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "D",
+  "order": 2,
+  "title": "Desimal — Level 2 — Pecahan perseratusan ke desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Pecahan {a}/100 jika ditulis dalam bentuk desimal adalah …",
+    "answer": "a / 100",
+    "format": "decimal",
+    "explain": "Per seratus = dua angka di belakang koma. {a}/100 = {answer}.",
+    "vars": {
+      "a": [11, 99]
+    },
+    "constraint": "a % 10 != 0",
+    "distractors": [
+      {
+        "expr": "a / 10",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "a / 1000",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "a",
+        "tag": "mengabaikan-penyebut"
+      }
+    ]
+  }
+}

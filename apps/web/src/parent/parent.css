@@ -1,0 +1,303 @@
+/* Area orang tua. Memakai token warna dari .ui-shell (ui.css). */
+.pa-topbar {
+  padding: 12px 16px;
+  gap: 12px;
+}
+.pa-brand {
+  font-weight: 800;
+  color: var(--ui-ink);
+  text-decoration: none;
+}
+.pa-main {
+  margin: 0 auto;
+  max-width: 960px;
+}
+.pa-gap {
+  margin-bottom: 14px;
+}
+.pa-wide {
+  width: 100%;
+  justify-content: center;
+  min-height: 48px;
+}
+.pa-switch {
+  margin: 16px 0 0;
+}
+.pa-register {
+  max-width: 520px;
+}
+.pa-field-error {
+  margin: -8px 0 14px;
+}
+.pa-back {
+  margin: 0 0 12px;
+}
+.pa-brand:focus-visible,
+.pa-main a:focus-visible,
+.ui-narrow a:focus-visible,
+.pa-color input:focus-visible + .pa-color-swatch,
+.pa-pin-pic:focus-visible {
+  outline: 3px solid #f5b400;
+  outline-offset: 2px;
+}
+
+/* Persetujuan data */
+.pa-consent {
+  background: #f6f4fb;
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.pa-consent h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.pa-consent ul {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+}
+
+/* Dashboard */
+.pa-play {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: var(--ui-primary);
+  color: var(--ui-primary-ink);
+  text-decoration: none;
+  min-height: 64px;
+  justify-content: center;
+}
+.pa-play-title {
+  font-size: 22px;
+  font-weight: 800;
+}
+.pa-play-hint {
+  opacity: 0.9;
+}
+.pa-family-inner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.pa-family-inner > div:first-child {
+  flex: 1 1 260px;
+}
+.pa-family-title {
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+.pa-family-code-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pa-family-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  padding: 10px 18px;
+  border: 2px dashed var(--ui-primary);
+  border-radius: 14px;
+  background: #f1edff;
+  color: var(--ui-ink);
+}
+.pa-welcome {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.pa-children {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.pa-child {
+  border: 1px solid var(--ui-line);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pa-child-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.pa-child-head h3 {
+  margin: 0 0 2px;
+  font-size: 18px;
+}
+.pa-child-swatch {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+.pa-child-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pa-child-actions > * {
+  justify-content: center;
+  text-align: center;
+}
+.pa-confirm {
+  background: #fdeeed;
+  border-radius: 12px;
+  padding: 12px;
+}
+.pa-confirm p {
+  margin: 0 0 10px;
+}
+
+/* Form anak */
+.pa-form {
+  max-width: 620px;
+}
+.pa-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 18px;
+  min-width: 0;
+}
+.pa-form legend {
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 6px;
+}
+.pa-colors .ui-hint {
+  display: block;
+  margin-bottom: 8px;
+}
+.pa-colors-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pa-color {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  min-width: 64px;
+}
+.pa-color.selected {
+  border-color: var(--ui-primary);
+  background: #f1edff;
+}
+.pa-color input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.pa-color-swatch {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+}
+.pa-color-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.pa-form-actions {
+  margin-top: 8px;
+}
+
+/* Sandi gambar */
+.pa-pin-step {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+.pa-pin-seq {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 12px;
+}
+.pa-pin-slot {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  border: 2px dashed var(--ui-line);
+  display: grid;
+  place-items: center;
+  background: var(--ui-surface);
+}
+.pa-pin-slot.filled {
+  border-style: solid;
+  border-color: var(--ui-primary);
+  background: #f1edff;
+}
+.pa-pin-slot-n {
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ui-muted);
+}
+.pa-pin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(64px, 88px));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.pa-pin-pic {
+  min-width: 64px;
+  min-height: 64px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  border: 2px solid var(--ui-line);
+  background: #fffdf7;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 6px;
+}
+.pa-pin-pic:hover:not(:disabled) {
+  border-color: var(--ui-primary);
+}
+.pa-pin-pic:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pa-pin-tip {
+  display: block;
+  margin: 12px 0;
+}
+
+@media (max-width: 480px) {
+  .pa-family-code {
+    font-size: 28px;
+  }
+  .pa-child-actions {
+    grid-template-columns: 1fr;
+  }
+}

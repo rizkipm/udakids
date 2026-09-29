@@ -1,0 +1,48 @@
+{
+  "id": "math.tk.vv2.paling-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "tk",
+  "category": "VV",
+  "order": 2,
+  "title": "Data dan grafik — Level 2 — Paling banyak",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "merdeka": "fondasi",
+    "sg": "NEL-numeracy",
+    "ixlRef": "K-VV"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "c": [1, 6]
+    },
+    "prompt": "Berapa jumlah hewan yang paling banyak?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Hewan peliharaan kelas",
+        "labels": ["Kucing", "Ikan", "Bebek"],
+        "values": ["=a", "=b", "=c"],
+        "pictogram": "kucing"
+      }
+    ],
+    "answer": "max(a, b, c)",
+    "explain": "Yang terbanyak {answer}.",
+    "distractors": [
+      {
+        "expr": "min(a, b, c)",
+        "tag": "paling-sedikit"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "total"
+      }
+    ],
+    "choices": 3,
+    "constraint": "a != b && b != c && a != c"
+  }
+}

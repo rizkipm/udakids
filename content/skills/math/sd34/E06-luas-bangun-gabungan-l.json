@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.e6.luas-bangun-gabungan-l",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "E",
+  "order": 6,
+  "title": "Keliling dan luas — Level 6 — Luas bangun gabungan (L)",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Lantai berbentuk huruf L terdiri dari persegi panjang {a} m × {b} m dan persegi panjang {c} m × {d} m. Berapa luas lantai itu?",
+    "answer": "a * b + c * d",
+    "explain": "Pecah menjadi dua persegi panjang: {a} × {b} = {=a*b} dan {c} × {d} = {=c*d}. Jumlah {answer}.",
+    "vars": {
+      "a": [4, 8],
+      "b": [2, 4],
+      "c": [2, 4],
+      "d": [1, 3]
+    },
+    "constraint": "c < a",
+    "unit": "m²",
+    "distractors": [
+      {
+        "expr": "(a + c) * (b + d)",
+        "tag": "menggabung-sisi"
+      },
+      {
+        "expr": "a * b",
+        "tag": "satu-bagian"
+      },
+      {
+        "expr": "2 * (a + b) + 2 * (c + d)",
+        "tag": "tertukar-keliling-luas"
+      }
+    ]
+  }
+}

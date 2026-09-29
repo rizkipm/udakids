@@ -1,0 +1,48 @@
+{
+  "id": "math.sd34.c5.pengurangan-pecahan-berpenyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "C",
+  "order": 5,
+  "title": "Pecahan — Level 5 — Pengurangan pecahan berpenyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Hasil dari {a}/{d} − {b}/{d} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a - b",
+      "den": "d"
+    },
+    "explain": "Penyebut sama: kurangkan pembilangnya. {a} − {b} = {=a-b}, jadi hasilnya {answer}.",
+    "vars": {
+      "a": [3, 9],
+      "b": [1, 5],
+      "d": [6, 12]
+    },
+    "constraint": "b < a && a < d",
+    "distractors": [
+      {
+        "num": "a - b",
+        "den": "0 + 1",
+        "tag": "mengurang-penyebut"
+      },
+      {
+        "num": "a + b",
+        "den": "d",
+        "tag": "menjumlah"
+      },
+      {
+        "num": "a - b + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

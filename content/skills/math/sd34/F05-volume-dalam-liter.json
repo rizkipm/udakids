@@ -1,0 +1,47 @@
+{
+  "id": "math.sd34.f5.volume-dalam-liter",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "F",
+  "order": 5,
+  "title": "Volume kubus dan balok — Level 5 — Volume dalam liter",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "B (tidak baku) / C"
+  },
+  "family": "expr",
+  "params": {
+    "prompt": "Kotak berukuran {p} cm × {l} cm × {t} cm diisi penuh air. Berapa liter air di dalamnya? (1 liter = 1.000 cm³)",
+    "answer": "p * l * t / 1000",
+    "explain": "Volume {=p*l*t} cm³. Dibagi 1.000: {answer} liter.",
+    "vars": {
+      "p": {
+        "values": [10, 20, 30, 40]
+      },
+      "l": {
+        "values": [10, 20]
+      },
+      "t": {
+        "values": [10, 20, 30]
+      }
+    },
+    "unit": "liter",
+    "distractors": [
+      {
+        "expr": "p * l * t / 100",
+        "tag": "salah-konversi"
+      },
+      {
+        "expr": "p * l * t",
+        "tag": "lupa-konversi"
+      },
+      {
+        "expr": "(p * l * t / 1000) + 1",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}
