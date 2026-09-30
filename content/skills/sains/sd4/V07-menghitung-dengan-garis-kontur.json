@@ -1,0 +1,109 @@
+{
+  "id": "sains.sd4.v7.menghitung-dengan-garis-kontur",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "V",
+  "order": 7,
+  "title": "Bentang alam dan peta — Level 7 — Menghitung dengan garis kontur",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "i": {
+              "values": [10, 20, 25, 50, 100]
+            },
+            "n": [2, 8]
+          },
+          "prompt": "Pada peta, jarak tinggi antargaris kontur {i} m. Titik A ada di garis ke-{n} dari garis 0 m. Berapa tinggi titik A?",
+          "answer": "i * n",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "i + n",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "i * (n - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "i * (n + 1)",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Setiap garis naik {i} m. {n} garis × {i} m = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [100, 900],
+              "step": 50
+            },
+            "b": {
+              "range": [100, 900],
+              "step": 50
+            }
+          },
+          "constraint": "a > b",
+          "prompt": "Di peta topografi, titik P berada di garis kontur {a} m dan titik Q di garis {b} m. Berapa beda tingginya?",
+          "answer": "a - b",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a - b + 50",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b - 50",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} − {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [100, 900],
+              "step": 50
+            },
+            "b": {
+              "range": [100, 900],
+              "step": 50
+            }
+          },
+          "constraint": "a != b",
+          "prompt": "Titik P berada di garis kontur {a} m. Titik Q berada di garis kontur {b} m. Titik mana yang lebih tinggi?",
+          "answer": "(a < b) + 1",
+          "labels": {
+            "1": "Titik P",
+            "2": "Titik Q"
+          },
+          "explain": "Angka kontur yang lebih besar berarti tempat itu lebih tinggi."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

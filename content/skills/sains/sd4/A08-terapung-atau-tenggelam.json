@@ -1,0 +1,306 @@
+{
+  "id": "sains.sd4.a8.terapung-atau-tenggelam",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "A",
+  "order": 8,
+  "title": "Sifat benda — Level 8 — Terapung atau tenggelam?",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": {
+              "range": [0.2, 3],
+              "step": 0.1
+            }
+          },
+          "constraint": "r != 1",
+          "prompt": "Massa jenis air 1 g/cm³. Benda dengan massa jenis {r} g/cm³ dimasukkan ke air. Apa yang terjadi?",
+          "answer": "(r < 1) + 2 * (r > 1)",
+          "labels": {
+            "1": "Terapung",
+            "2": "Tenggelam"
+          },
+          "explain": "Massa jenis lebih kecil dari air → terapung. Lebih besar dari air → tenggelam. {r} dibanding 1."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 9],
+            "v": [2, 10],
+            "s": [2, 9],
+            "w": [2, 10]
+          },
+          "derived": {
+            "m": "r * v",
+            "n": "s * w"
+          },
+          "constraint": "r != s",
+          "prompt": "Benda A: {m} g dan {v} cm³. Benda B: {n} g dan {w} cm³. Massa jenis mana yang lebih besar?",
+          "answer": "(r > s) + 2 * (r < s)",
+          "labels": {
+            "1": "Benda A",
+            "2": "Benda B"
+          },
+          "explain": "A: {m} : {v} = {r} g/cm³. B: {n} : {w} = {s} g/cm³. Bandingkan hasilnya."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Kayu terapung di air, sedangkan batu tenggelam. Artinya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "massa jenis kayu lebih kecil daripada air"
+                  },
+                  "say": "massa jenis kayu lebih kecil daripada air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kayu lebih berat daripada batu"
+                  },
+                  "say": "kayu lebih berat daripada batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "massa jenis batu lebih kecil daripada air"
+                  },
+                  "say": "massa jenis batu lebih kecil daripada air",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air tidak punya massa jenis"
+                  },
+                  "say": "air tidak punya massa jenis",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Benda yang massa jenisnya lebih kecil dari air (1 g/cm³) terapung; yang lebih besar tenggelam.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            },
+            {
+              "prompt": "Satu kilogram kapas dan satu kilogram besi. Mana yang lebih berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama berat"
+                  },
+                  "say": "Sama berat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Besi"
+                  },
+                  "say": "Besi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kapas"
+                  },
+                  "say": "Kapas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak bisa dibandingkan"
+                  },
+                  "say": "Tidak bisa dibandingkan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Keduanya sama-sama 1 kg. Yang berbeda adalah volumenya: kapas butuh tempat jauh lebih besar.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            },
+            {
+              "prompt": "Balok besi dipotong menjadi dua bagian sama besar. Massa jenis tiap potongan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama dengan balok semula"
+                  },
+                  "say": "sama dengan balok semula"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menjadi setengahnya"
+                  },
+                  "say": "menjadi setengahnya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menjadi dua kali lipat"
+                  },
+                  "say": "menjadi dua kali lipat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menjadi nol"
+                  },
+                  "say": "menjadi nol",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Massa dan volume sama-sama menjadi setengah, jadi massa : volume tetap. Massa jenis adalah sifat bahan.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            },
+            {
+              "prompt": "Balon berisi helium naik ke atas karena …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "massa jenis helium lebih kecil daripada udara"
+                  },
+                  "say": "massa jenis helium lebih kecil daripada udara"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "helium lebih berat daripada udara"
+                  },
+                  "say": "helium lebih berat daripada udara",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "balon punya sayap"
+                  },
+                  "say": "balon punya sayap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "udara mendorong balon ke bawah"
+                  },
+                  "say": "udara mendorong balon ke bawah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gas helium lebih ringan (massa jenisnya lebih kecil) daripada udara di sekitarnya, jadi balon naik.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            },
+            {
+              "prompt": "Benda A: 20 g, 10 cm³. Benda B: 20 g, 4 cm³. Mana yang massa jenisnya lebih besar?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benda B"
+                  },
+                  "say": "Benda B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benda A"
+                  },
+                  "say": "Benda A",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama besar"
+                  },
+                  "say": "Sama besar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak bisa dihitung"
+                  },
+                  "say": "Tidak bisa dihitung",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "A: 20 : 10 = 2 g/cm³. B: 20 : 4 = 5 g/cm³. Massa sama, volume B lebih kecil, jadi B lebih rapat.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            },
+            {
+              "prompt": "Minyak dan air dalam satu gelas. Minyak ada di atas karena …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "massa jenis minyak lebih kecil daripada air"
+                  },
+                  "say": "massa jenis minyak lebih kecil daripada air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "minyaknya lebih banyak"
+                  },
+                  "say": "minyaknya lebih banyak",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "minyak lebih panas"
+                  },
+                  "say": "minyak lebih panas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air lebih ringan daripada minyak"
+                  },
+                  "say": "air lebih ringan daripada minyak",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Zat yang massa jenisnya lebih kecil mengapung di atas zat yang massa jenisnya lebih besar.",
+              "source": "Massa jenis = massa : volume (air murni ≈ 1 g/cm³) — NGSS 5-PS1-3 (pengayaan; sifat untuk mengenali bahan)"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

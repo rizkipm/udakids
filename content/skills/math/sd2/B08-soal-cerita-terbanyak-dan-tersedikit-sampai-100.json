@@ -1,0 +1,76 @@
+{
+  "id": "math.sd2.b8.soal-cerita-terbanyak-dan-tersedikit-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "B",
+  "order": 8,
+  "title": "Membandingkan dan m — Level 8 — Soal cerita terbanyak dan tersedikit sampai 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-B",
+    "common-core": "2.NBT.A.4"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "prompt": "Alya punya {a} kelereng, Budi {b}, dan Sari {c}. Siapa yang paling banyak?",
+          "answer": "(a > b && a > c) * 1 + (b > a && b > c) * 2 + (c > a && c > b) * 3",
+          "explain": "Bandingkan {a}, {b}, {c}. Terbanyak: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "labels": {
+            "1": "Alya",
+            "2": "Budi",
+            "3": "Sari"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "prompt": "Dimas mengumpulkan {a} daun, Putri {b}, dan Raka {c}. Siapa yang paling sedikit?",
+          "answer": "(a < b && a < c) * 1 + (b < a && b < c) * 2 + (c < a && c < b) * 3",
+          "explain": "Bandingkan {a}, {b}, {c}. Tersedikit: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "labels": {
+            "1": "Dimas",
+            "2": "Putri",
+            "3": "Raka"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "prompt": "Alya membaca {a} halaman, Budi {b}, dan Sari {c}. Berapa halaman yang paling banyak dibaca?",
+          "answer": "max(a, b, c)",
+          "explain": "Terbanyak: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "distractors": ["a", "b", "c"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

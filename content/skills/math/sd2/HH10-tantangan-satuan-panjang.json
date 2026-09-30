@@ -1,0 +1,164 @@
+{
+  "id": "math.sd2.hh10.tantangan-satuan-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "HH",
+  "order": 10,
+  "title": "Satuan panjang metrik — Level 10 — Tantangan satuan panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: satuan baku",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-HH"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 80],
+            "b": [10, 70]
+          },
+          "prompt": "Tali {a} cm disambung dengan tali {b} cm. Berapa cm sekarang?",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "unit": "cm",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [5, 95]
+          },
+          "prompt": "{m} m {c} cm = … cm",
+          "answer": "m * 100 + c",
+          "explain": "{answer}.",
+          "unit": "cm",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 400],
+              "step": 10
+            },
+            "m": [1, 3]
+          },
+          "prompt": "Tanda yang tepat: {a} cm … {m} m",
+          "answer": "((a) > (m * 100)) * 1 + ((a) < (m * 100)) * 2 + ((a) == (m * 100)) * 3",
+          "explain": "{m} m = {=m*100} cm: {answer}.",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "panjang pensil",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "panjang jari",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "lebar buku tulis",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "panjang sedotan",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "panjang penghapus",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "panjang daun mangga",
+              "attrs": {
+                "u": "cm",
+                "tool": "penggaris"
+              }
+            },
+            {
+              "name": "panjang lapangan",
+              "attrs": {
+                "u": "m",
+                "tool": "meteran gulung"
+              }
+            },
+            {
+              "name": "tinggi gedung sekolah",
+              "attrs": {
+                "u": "m"
+              }
+            },
+            {
+              "name": "panjang jalan di depan rumah",
+              "attrs": {
+                "u": "m",
+                "tool": "meteran gulung"
+              }
+            },
+            {
+              "name": "panjang kolam renang",
+              "attrs": {
+                "u": "m",
+                "tool": "meteran gulung"
+              }
+            },
+            {
+              "name": "panjang ruang kelas",
+              "attrs": {
+                "u": "m",
+                "tool": "meteran gulung"
+              }
+            },
+            {
+              "name": "panjang kereta api",
+              "attrs": {
+                "u": "m"
+              }
+            }
+          ],
+          "attr": "u",
+          "ask": "value",
+          "choices": 2,
+          "prompt": "Satuan yang tepat untuk mengukur {name} adalah …",
+          "explain": "{name} diukur dengan {value}.",
+          "source": "Common Core 2.MD.A.1–4 (mengukur & mengestimasi panjang); CP Matematika Fase A (BSKAP 046/H/KR/2025): satuan tidak baku; CP Matematika Fase B (BSKAP 046/H/KR/2025): satuan baku"
+        }
+      }
+    ]
+  }
+}

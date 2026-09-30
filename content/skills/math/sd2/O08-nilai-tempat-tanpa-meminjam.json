@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.o8.nilai-tempat-tanpa-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "O",
+  "order": 8,
+  "title": "Strategi pengurangan dua angka — Level 8 — Nilai tempat tanpa meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-O",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 99],
+            "b": [11, 49]
+          },
+          "prompt": "{a} − {b}: puluhan {=floor(a/10)} − {=floor(b/10)} = … puluhan",
+          "answer": "floor(a / 10) - floor(b / 10)",
+          "explain": "{answer} puluhan.",
+          "mode": "input",
+          "constraint": "a % 10 >= b % 10 && b < a"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 99],
+            "b": [11, 49]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Puluhan dengan puluhan, satuan dengan satuan: {answer}.",
+          "mode": "input",
+          "constraint": "a % 10 >= b % 10 && b < a"
+        }
+      }
+    ]
+  }
+}

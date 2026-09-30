@@ -75,16 +75,59 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('buku publik untuk landing: dari DB, tanpa login, jumlah level = skill aktif', async () => {
       const res = await http().get('/public/books').expect(200);
       expect(res.body.totalLevels).toBe(SKILL_COUNT);
+      // Urut per mata pelajaran lalu jenjang (GRADES): buku per kelas (D-032) di samping buku gabungan lama.
       expect(res.body.books.map((b: { title: string }) => b.title)).toEqual([
-        'Matematika Pra-TK',
+        'Math Pra-TK',
         'Math Kindergarten (TK)',
-        'Math Grade 1-2',
-        'Math Grade 3-4',
-        'Sains Grade 1-2',
-        'Sains Grade 3-4',
+        'Math Grade 1',
+        'Math Grade 2',
+        'Math Grade 1-2 (OSN)',
+        'Math Grade 3-4 (OSN)',
+        'Sains Kindergarten (TK)',
+        'Sains Grade 1',
+        'Sains Grade 2',
+        'Sains Grade 1-2 (OSN)',
+        'Sains Grade 3',
+        'Sains Grade 4',
+        'Sains Grade 3-4 (OSN)',
       ]);
       expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
+    });
+
+    it('statistik publik: jumlah pengguna & ronde dari DB (angka saja), SSE mengirim event pertama', async () => {
+      const res = await http().get('/public/stats').expect(200);
+      const q = async (sql: string) => Number((await pool.query(sql)).rows[0].n);
+      const users =
+        (await q('select count(*) n from parents where active')) +
+        (await q('select count(*) n from children where active')) +
+        (await q('select count(*) n from staff_users where active'));
+      expect(res.body).toMatchObject({
+        books: 13,
+        totalLevels: SKILL_COUNT,
+        users,
+        rounds: await q("select count(*) n from events where type = 'quiz_result'"),
+      });
+      expect(Object.keys(res.body).sort()).toEqual(
+        ['activeNow', 'books', 'learners', 'rounds', 'totalLevels', 'updatedAt', 'users'].sort(),
+      );
+      const first = await new Promise<string>((resolve, reject) => {
+        const req = http()
+          .get('/public/stats/stream')
+          .buffer(false)
+          .parse((stream, cb) => {
+            let buf = '';
+            stream.on('data', (chunk: Buffer) => {
+              buf += chunk.toString();
+              if (!/data: .*\n/.test(buf)) return; // lewati baris kosong keep-alive
+              resolve(buf.trimStart());
+              (stream as unknown as { destroy: () => void }).destroy();
+              cb(null, null);
+            });
+          });
+        req.end((err) => err && !String(err).includes('aborted') && reject(err));
+      });
+      expect(first).toMatch(/^id: \d+\ndata: \{.*"users":\d+/);
     });
 
     it('dialog Momo disimpan di tabel dialogs dan dipakai validasi level', async () => {
@@ -428,7 +471,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         played: 3,
         rank: { position: 1, of: 1 },
         className: null,
-        highest: { book: 'Matematika Pra-TK', level: 1 },
+        highest: { book: 'Math Pra-TK', level: 1 },
       });
       expect(noClass.body.history).toHaveLength(3);
       expect(noClass.body.history[0]).toMatchObject({
@@ -503,7 +546,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         points: 100,
         passed: 1,
         timeMs: 95_000,
-        highest: { book: 'Matematika Pra-TK', level: 1 },
+        highest: { book: 'Math Pra-TK', level: 1 },
         me: false,
       });
       expect(board.body.me).toMatchObject({ position: 2, nickname: 'Alya', me: true });
@@ -753,11 +796,38 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .send({
           domain: 'math',
           grade: 'prek',
-          title: 'Matematika Pra-TK',
+          title: 'Math Pra-TK',
           categories: [{ code: 'A', title: 'Bilangan sampai 3' }],
         })
         .expect(400);
     });
+
+    it('katalog yang disunting admin tidak ditimpa db:seed (kecuali --force)', async () => {
+      const cur = (await http().get('/admin/catalogs').set(auth(adminToken)).expect(200)).body.find(
+        (c: { domain: string; grade: string }) => c.domain === 'math' && c.grade === 'prek',
+      );
+      await http()
+        .put('/admin/catalogs/math/prek')
+        .set(auth(adminToken))
+        .send({
+          domain: 'math',
+          grade: 'prek',
+          title: 'Math Pra-TK (uji)',
+          categories: cur.categories,
+        })
+        .expect(200);
+      const db = drizzle(pool, { schema });
+      await seed(db, { log: () => {} });
+      const title = async () =>
+        (
+          await pool.query(
+            "select title from skill_catalogs where domain = 'math' and grade = 'prek'",
+          )
+        ).rows[0].title;
+      expect(await title()).toBe('Math Pra-TK (uji)');
+      await seed(db, { force: true, log: () => {} });
+      expect(await title()).toBe('Math Pra-TK');
+    }, 120_000); // seed 2×: ±2.700 skill
   });
 
   describe('admin: level', () => {

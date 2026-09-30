@@ -1,0 +1,80 @@
+{
+  "id": "sains.sd4.u1.membaca-termometer",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "U",
+  "order": 1,
+  "title": "Cuaca dan iklim — Level 1 — Membaca termometer",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 20, 30]
+            },
+            "b": [1, 9]
+          },
+          "prompt": "Termometer bergaris setiap 1 °C. Cairannya berhenti {b} garis di atas angka {a} °C. Berapa suhunya?",
+          "answer": "a + b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a + b + 1",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "angka-berikutnya"
+            }
+          ],
+          "explain": "Mulai dari {a} °C, naik {b} garis: {a} + {b} = {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [20, 30]
+            },
+            "b": [1, 4]
+          },
+          "prompt": "Termometer bergaris setiap 2 °C. Cairannya berhenti {b} garis di atas angka {a} °C. Berapa suhunya?",
+          "answer": "a + 2 * b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "skala-1"
+            },
+            {
+              "expr": "a + 2 * b + 2",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - 2 * b",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "explain": "Setiap garis 2 °C. {b} garis = {=2*b} °C. {a} + {=2*b} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

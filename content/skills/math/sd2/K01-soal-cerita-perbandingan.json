@@ -1,0 +1,104 @@
+{
+  "id": "math.sd2.k1.soal-cerita-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "K",
+  "order": 1,
+  "title": "Soal cerita campuran satu angka — Level 1 — Soal cerita perbandingan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-K",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 18],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} kelereng. {teman} punya {b} kelereng. Berapa lebih banyak kelereng {nama}?",
+          "answer": "a - b",
+          "explain": "Selisih: {a} − {b} = {answer}.",
+          "constraint": "b < a && a - b <= 9",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} stiker. {teman} punya {b} stiker lebih banyak. Berapa stiker {teman}?",
+          "answer": "a + b",
+          "explain": "\"Lebih banyak\" dari {a}: {a} + {b} = {answer}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          },
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 1",
+            {
+              "expr": "b",
+              "tag": "selisih"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 18],
+            "b": [2, 5]
+          },
+          "prompt": "{nama} punya {a} buku. {teman} punya {b} buku lebih sedikit. Berapa buku {teman}?",
+          "answer": "a - b",
+          "explain": "\"Lebih sedikit\" dari {a}: {a} − {b} = {answer}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            {
+              "expr": "b",
+              "tag": "selisih"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

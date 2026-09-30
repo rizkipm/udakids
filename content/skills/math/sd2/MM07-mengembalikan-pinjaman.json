@@ -1,0 +1,102 @@
+{
+  "id": "math.sd2.mm7.mengembalikan-pinjaman",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "MM",
+  "order": 7,
+  "title": "Literasi keuangan — Level 7 — Mengembalikan pinjaman",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-MM"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "range": [10000, 50000],
+              "step": 5000
+            },
+            "k": {
+              "range": [5000, 25000],
+              "step": 5000
+            }
+          },
+          "prompt": "{nama} meminjam Rp{p} dari koperasi dan sudah mengembalikan Rp{k}. Berapa lagi yang harus dikembalikan?",
+          "answer": "p - k",
+          "explain": "Rp{p} − Rp{k} = {answer}.",
+          "constraint": "k < p",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "p + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "k",
+              "tag": "yang-sudah-dibayar"
+            },
+            {
+              "expr": "p - k + 5000",
+              "tag": "lebih"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "values": [1000, 2000, 5000]
+            },
+            "n": [2, 5]
+          },
+          "prompt": "{nama} meminjam Rp{p}. Ia mencicil Rp{c} setiap minggu. Berapa minggu sampai lunas?",
+          "answer": "p / c",
+          "explain": "Rp{c} dijumlahkan {answer} kali = Rp{p}.",
+          "derived": {
+            "p": "c * n"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "distractors": ["n + 1", "n - 1", "n * 2"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

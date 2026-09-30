@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.u1.loncat-mundur-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 1,
+  "title": "Strategi pengurangan tiga angka — Level 1 — Loncat mundur ratusan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [300, 999],
+      "k": [1, 3]
+    },
+    "prompt": "Di garis bilangan, mulai dari {a} lalu mundur {k} kali, setiap loncatan 100. Sampai di angka …",
+    "answer": "a - k * 100",
+    "explain": "Mundur 100 sebanyak {k} kali = mundur {=k*100}. {a} − {=k*100} = {answer}.",
+    "constraint": "a - k * 100 >= 0",
+    "distractors": [
+      {
+        "expr": "a - k * 10",
+        "tag": "loncat-puluhan"
+      },
+      {
+        "expr": "a - k",
+        "tag": "loncat-satuan"
+      },
+      {
+        "expr": "a + k * 100",
+        "tag": "arah-terbalik"
+      }
+    ]
+  }
+}

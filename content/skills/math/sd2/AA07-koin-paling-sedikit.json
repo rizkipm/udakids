@@ -1,0 +1,43 @@
+{
+  "id": "math.sd2.aa7.koin-paling-sedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 7,
+  "title": "Uang sampai Rp10.000 — Level 7 — Koin paling sedikit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "range": [300, 2900],
+        "step": 100
+      }
+    },
+    "prompt": "Paling sedikit berapa koin untuk membayar tepat Rp{v}? (pakai koin Rp1.000, Rp500, Rp200, Rp100)",
+    "answer": "floor(v / 1000) + floor(v % 1000 / 500) + floor(v % 500 / 200) + v % 500 % 200 / 100",
+    "explain": "Pakai koin terbesar dulu sebanyak mungkin, lalu koin berikutnya. Rp{v} paling sedikit {answer} koin.",
+    "distractors": [
+      {
+        "expr": "v / 100",
+        "tag": "semua-koin-100"
+      },
+      {
+        "expr": "floor(v / 1000) + floor(v % 1000 / 500) + floor(v % 500 / 200) + v % 500 % 200 / 100 + 1",
+        "tag": "bukan-paling-sedikit"
+      },
+      {
+        "expr": "floor(v / 1000) + floor(v % 1000 / 500) + floor(v % 500 / 200) + v % 500 % 200 / 100 - 1",
+        "tag": "kurang"
+      }
+    ],
+    "choices": 3
+  }
+}

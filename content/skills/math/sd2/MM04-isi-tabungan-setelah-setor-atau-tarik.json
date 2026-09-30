@@ -1,0 +1,115 @@
+{
+  "id": "math.sd2.mm4.isi-tabungan-setelah-setor-atau-tarik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "MM",
+  "order": 4,
+  "title": "Literasi keuangan — Level 4 — Isi tabungan setelah setor atau tarik",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G2-MM"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [10000, 50000],
+              "step": 5000
+            },
+            "a": {
+              "range": [5000, 20000],
+              "step": 5000
+            }
+          },
+          "prompt": "Tabungan {nama} di bank Rp{s}. Ia menyetor Rp{a}. Berapa isi tabungannya sekarang?",
+          "answer": "s + a",
+          "explain": "Setor = tabungan bertambah: Rp{s} + Rp{a} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "s - a",
+              "tag": "operasi-terbalik"
+            },
+            {
+              "expr": "s + a + 5000",
+              "tag": "lebih"
+            },
+            {
+              "expr": "a",
+              "tag": "setoran-saja"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [20000, 60000],
+              "step": 5000
+            },
+            "a": {
+              "range": [5000, 15000],
+              "step": 5000
+            }
+          },
+          "prompt": "Tabungan {nama} di bank Rp{s}. Ia menarik Rp{a}. Berapa isi tabungannya sekarang?",
+          "answer": "s - a",
+          "explain": "Tarik = tabungan berkurang: Rp{s} − Rp{a} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "s + a",
+              "tag": "operasi-terbalik"
+            },
+            {
+              "expr": "s - a - 5000",
+              "tag": "kurang"
+            },
+            {
+              "expr": "a",
+              "tag": "penarikan-saja"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

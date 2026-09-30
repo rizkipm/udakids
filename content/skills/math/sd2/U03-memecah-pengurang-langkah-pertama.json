@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.u3.memecah-pengurang-langkah-pertama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 3,
+  "title": "Strategi pengurangan tiga angka — Level 3 — Memecah pengurang: langkah pertama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [500, 999],
+      "b": [111, 399]
+    },
+    "prompt": "{a} − {b}: pecah {b} menjadi {=floor(b/100)*100} dan {=b%100}. Setelah dikurangi {=floor(b/100)*100}, hasilnya …",
+    "answer": "a - floor(b / 100) * 100",
+    "explain": "Kurangi ratusannya dulu: {a} − {=floor(b/100)*100} = {answer}.",
+    "constraint": "b % 100 >= 10 && b < a",
+    "distractors": [
+      {
+        "expr": "a - b",
+        "tag": "langsung-akhir"
+      },
+      {
+        "expr": "a - b % 100",
+        "tag": "bagian-lain"
+      },
+      {
+        "expr": "a - floor(b / 100) * 10",
+        "tag": "salah-nilai-tempat"
+      }
+    ]
+  }
+}

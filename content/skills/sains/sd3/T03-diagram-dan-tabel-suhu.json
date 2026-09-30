@@ -1,0 +1,119 @@
+{
+  "id": "sains.sd3.t3.diagram-dan-tabel-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "T",
+  "order": 3,
+  "title": "Cuaca dan iklim — Level 3 — Diagram dan tabel suhu",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 34],
+            "b": [24, 34],
+            "c": [24, 34],
+            "d": [24, 34]
+          },
+          "constraint": "abs(a - b) >= 3 && abs(a - c) >= 3 && abs(a - d) >= 3 && abs(b - c) >= 3 && abs(b - d) >= 3 && abs(c - d) >= 3",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "°C",
+              "caption": "Suhu siang minggu ini"
+            }
+          ],
+          "prompt": "Diagram menunjukkan suhu siang selama 4 hari. Hari apa yang paling panas?",
+          "answer": "1 * (a > b && a > c && a > d) + 2 * (b > a && b > c && b > d) + 3 * (c > a && c > b && c > d) + 4 * (d > a && d > b && d > c)",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Rabu",
+            "4": "Kamis"
+          },
+          "explain": "Batang paling tinggi = suhu paling tinggi: {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 34],
+            "b": [24, 34],
+            "c": [24, 34],
+            "d": [24, 34]
+          },
+          "constraint": "abs(a - b) >= 3 && abs(a - c) >= 3 && abs(a - d) >= 3 && abs(b - c) >= 3 && abs(b - d) >= 3 && abs(c - d) >= 3",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "°C",
+              "caption": "Suhu siang minggu ini"
+            }
+          ],
+          "prompt": "Diagram menunjukkan suhu siang selama 4 hari. Hari apa yang paling sejuk?",
+          "answer": "1 * (a < b && a < c && a < d) + 2 * (b < a && b < c && b < d) + 3 * (c < a && c < b && c < d) + 4 * (d < a && d < b && d < c)",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Rabu",
+            "4": "Kamis"
+          },
+          "explain": "Batang paling rendah = suhu paling rendah: {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [23, 26],
+            "b": [30, 34],
+            "c": [27, 29]
+          },
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Waktu", "Suhu (°C)"],
+              "rows": [
+                ["Pukul 07.00", "=a"],
+                ["Pukul 12.00", "=b"],
+                ["Pukul 17.00", "=c"]
+              ],
+              "caption": "Catatan suhu Raka"
+            }
+          ],
+          "prompt": "Raka mencatat suhu tiga kali sehari. Berapa selisih suhu tertinggi dan terendah?",
+          "answer": "b - a",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "b - c",
+              "tag": "bukan-terendah"
+            },
+            {
+              "expr": "c - a",
+              "tag": "bukan-tertinggi"
+            }
+          ],
+          "explain": "Tertinggi {b} °C (siang), terendah {a} °C (pagi). {b} − {a} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

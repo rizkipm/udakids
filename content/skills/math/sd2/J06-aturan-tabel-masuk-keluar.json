@@ -1,0 +1,86 @@
+{
+  "id": "math.sd2.j6.aturan-tabel-masuk-keluar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "J",
+  "order": 6,
+  "title": "Operasi campuran satu angka — Level 6 — Aturan tabel masuk-keluar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-J",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [6, 9],
+            "d": [2, 9]
+          },
+          "prompt": "Lihat tabel. Aturannya: masuk ditambah berapa?",
+          "answer": "d",
+          "explain": "Keluar − masuk: {=a+d} − {a} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masuk", "Keluar"],
+              "rows": [
+                ["=a", "=a+d"],
+                ["=b", "=b+d"],
+                ["=a+b", "=a+b+d"]
+              ]
+            }
+          ],
+          "distractors": [
+            "d + 1",
+            "d - 1",
+            {
+              "expr": "a + d",
+              "tag": "nilai-keluar"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [6, 9],
+            "d": [2, 9]
+          },
+          "prompt": "Lihat tabel. Aturannya: masuk dikurangi berapa?",
+          "answer": "d",
+          "explain": "Masuk − keluar: {=a+d} − {a} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masuk", "Keluar"],
+              "rows": [
+                ["=a+d", "=a"],
+                ["=b+d", "=b"],
+                ["=a+b+d", "=a+b"]
+              ]
+            }
+          ],
+          "distractors": [
+            "d + 1",
+            "d - 1",
+            {
+              "expr": "a",
+              "tag": "nilai-keluar"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.u6.model-dengan-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 6,
+  "title": "Strategi pengurangan tiga angka — Level 6 — Model dengan meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [310, 999],
+      "b": [101, 299]
+    },
+    "prompt": "{a} − {b}: satuan {=a%10} kurang dari {=b%10}, jadi 1 puluhan ditukar dengan 10 satuan. Satuannya sekarang ada …",
+    "answer": "a % 10 + 10",
+    "explain": "1 puluhan = 10 satuan. {=a%10} + 10 = {answer} satuan, lalu {answer} − {=b%10} = {=a%10+10-b%10}.",
+    "constraint": "a % 10 < b % 10 && floor(a / 10) % 10 >= 1",
+    "distractors": [
+      {
+        "expr": "a % 10",
+        "tag": "tidak-ditukar"
+      },
+      {
+        "expr": "a % 10 + 1",
+        "tag": "tambah-satu"
+      },
+      {
+        "expr": "b % 10 - a % 10",
+        "tag": "dibalik"
+      }
+    ]
+  }
+}

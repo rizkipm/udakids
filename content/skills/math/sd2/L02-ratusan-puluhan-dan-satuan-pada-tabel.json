@@ -1,0 +1,52 @@
+{
+  "id": "math.sd2.l2.ratusan-puluhan-dan-satuan-pada-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 2,
+  "title": "Nilai tempat — Level 2 — Ratusan, puluhan, dan satuan pada tabel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 9],
+      "t": [0, 9],
+      "o": [0, 9]
+    },
+    "prompt": "Bilangan berapa yang ditunjukkan tabel nilai tempat ini?",
+    "answer": "n",
+    "explain": "{h} ratusan = {=h*100}, {t} puluhan = {=t*10}, {o} satuan. Jumlahnya {answer}.",
+    "derived": {
+      "n": "h * 100 + t * 10 + o"
+    },
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Ratusan", "Puluhan", "Satuan"],
+        "rows": [["=h", "=t", "=o"]]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "o * 100 + t * 10 + h",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "h + t + o",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "h * 100 + o * 10 + t",
+        "tag": "puluhan-satuan-tertukar"
+      }
+    ]
+  }
+}

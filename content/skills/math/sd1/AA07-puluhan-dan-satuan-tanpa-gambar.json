@@ -1,0 +1,57 @@
+{
+  "id": "math.sd1.aa7.puluhan-dan-satuan-tanpa-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 7,
+  "title": "Nilai tempat — Level 7 — Puluhan dan satuan tanpa gambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{t} puluhan dan {s} satuan = …",
+          "answer": "t * 10 + s",
+          "explain": "{t} × 10 + {s} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{=t*10+s} = … puluhan + {s} satuan",
+          "answer": "t",
+          "explain": "{=t*10+s} = {answer} puluhan dan {s} satuan.",
+          "distractors": [
+            {
+              "expr": "s",
+              "tag": "angka-satuan"
+            },
+            {
+              "expr": "t * 10",
+              "tag": "nilai-bukan-banyak"
+            },
+            "t + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

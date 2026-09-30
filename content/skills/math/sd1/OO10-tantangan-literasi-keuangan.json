@@ -1,0 +1,1098 @@
+{
+  "id": "math.sd1.oo10.tantangan-literasi-keuangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "OO",
+  "order": 10,
+  "title": "Literasi keuangan — Level 10 — Tantangan literasi keuangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-OO"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "values": [5000, 10000]
+            },
+            "s": {
+              "range": [1000, 5000],
+              "step": 1000
+            },
+            "b": {
+              "values": [500, 1000, 2000]
+            }
+          },
+          "prompt": "{nama} punya Rp{u}. Rp{s} ditabung dan Rp{b} untuk kotak amal. Sisanya untuk jajan. Berapa uang jajannya?",
+          "answer": "u - s - b",
+          "explain": "Rp{u} − Rp{s} − Rp{b} = {answer}.",
+          "constraint": "s + b < u",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ]
+          },
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [3000, 10000],
+              "step": 1000
+            },
+            "u": {
+              "range": [1000, 9000],
+              "step": 500
+            }
+          },
+          "prompt": "Harga {barang} Rp{h}. Tabungan {nama} baru Rp{u}. Berapa rupiah lagi yang harus ditabung?",
+          "answer": "h - u",
+          "explain": "Rp{h} − Rp{u} = {answer}.",
+          "constraint": "u < h",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "barang": ["bola", "buku cerita", "kotak pensil", "celengan ayam"]
+          },
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Sari mendapat uang saku. Mana yang paling bijak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung sebagian, sisanya untuk kebutuhan"
+                  },
+                  "say": "Menabung sebagian, sisanya untuk kebutuhan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menghabiskan semuanya untuk permen"
+                  },
+                  "say": "Menghabiskan semuanya untuk permen",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membuang uangnya"
+                  },
+                  "say": "Membuang uangnya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung sebagian, sisanya untuk kebutuhan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya ingin gim baru, padahal sepatunya sudah rusak. Mana yang lebih penting dibeli?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepatu"
+                  },
+                  "say": "Sepatu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gim baru"
+                  },
+                  "say": "Gim baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Keduanya tidak perlu"
+                  },
+                  "say": "Keduanya tidak perlu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Sepatu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Buku tulis Sari habis dan ia juga ingin stiker baru. Uangnya hanya cukup untuk satu. Mana yang dibeli dulu?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buku tulis"
+                  },
+                  "say": "Buku tulis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Stiker baru"
+                  },
+                  "say": "Stiker baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak membeli apa-apa"
+                  },
+                  "say": "Tidak membeli apa-apa",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Buku tulis.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri ingin membeli mainan, tetapi uangnya belum cukup. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung dulu sampai uangnya cukup"
+                  },
+                  "say": "Menabung dulu sampai uangnya cukup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengambil uang teman"
+                  },
+                  "say": "Mengambil uang teman",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menangis agar dibelikan"
+                  },
+                  "say": "Menangis agar dibelikan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung dulu sampai uangnya cukup.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari ingin membantu teman yang rumahnya kebanjiran. Apa yang bisa dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyumbang sebagian tabungan"
+                  },
+                  "say": "Menyumbang sebagian tabungan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak peduli"
+                  },
+                  "say": "Tidak peduli",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menertawakannya"
+                  },
+                  "say": "Menertawakannya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyumbang sebagian tabungan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya ingin membantu teman yang rumahnya kebanjiran. Apa yang bisa dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyumbang sebagian tabungan"
+                  },
+                  "say": "Menyumbang sebagian tabungan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak peduli"
+                  },
+                  "say": "Tidak peduli",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menertawakannya"
+                  },
+                  "say": "Menertawakannya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyumbang sebagian tabungan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Uang yang kita terima karena bekerja disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Penghasilan"
+                  },
+                  "say": "Penghasilan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hadiah"
+                  },
+                  "say": "Hadiah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Utang"
+                  },
+                  "say": "Utang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Penghasilan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Ibu memberi uang untuk membeli beras. Apa yang sebaiknya dilakukan Sari?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli beras sesuai pesan Ibu"
+                  },
+                  "say": "Membeli beras sesuai pesan Ibu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli mainan"
+                  },
+                  "say": "Membeli mainan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai untuk jajan"
+                  },
+                  "say": "Memakai untuk jajan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Membeli beras sesuai pesan Ibu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Buku tulis Alya habis dan ia juga ingin stiker baru. Uangnya hanya cukup untuk satu. Mana yang dibeli dulu?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buku tulis"
+                  },
+                  "say": "Buku tulis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Stiker baru"
+                  },
+                  "say": "Stiker baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak membeli apa-apa"
+                  },
+                  "say": "Tidak membeli apa-apa",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Buku tulis.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari menabung setiap hari. Apa gunanya menabung?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                  },
+                  "say": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar uangnya hilang"
+                  },
+                  "say": "Agar uangnya hilang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar tidak bisa jajan selamanya"
+                  },
+                  "say": "Agar tidak bisa jajan selamanya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Agar bisa membeli sesuatu yang kita perlukan nanti.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri ingin gim baru, padahal sepatunya sudah rusak. Mana yang lebih penting dibeli?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepatu"
+                  },
+                  "say": "Sepatu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gim baru"
+                  },
+                  "say": "Gim baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Keduanya tidak perlu"
+                  },
+                  "say": "Keduanya tidak perlu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Sepatu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya menemukan dompet berisi uang di sekolah. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyerahkan kepada guru"
+                  },
+                  "say": "Menyerahkan kepada guru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai uangnya untuk jajan"
+                  },
+                  "say": "Memakai uangnya untuk jajan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membagikannya ke teman"
+                  },
+                  "say": "Membagikannya ke teman",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyerahkan kepada guru.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Di mana tempat yang aman untuk menyimpan uang tabungan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Celengan atau tabungan di bank"
+                  },
+                  "say": "Celengan atau tabungan di bank"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saku celana yang dicuci"
+                  },
+                  "say": "Saku celana yang dicuci",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Di bawah batu di jalan"
+                  },
+                  "say": "Di bawah batu di jalan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Celengan atau tabungan di bank.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri menabung setiap hari. Apa gunanya menabung?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                  },
+                  "say": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar uangnya hilang"
+                  },
+                  "say": "Agar uangnya hilang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar tidak bisa jajan selamanya"
+                  },
+                  "say": "Agar tidak bisa jajan selamanya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Agar bisa membeli sesuatu yang kita perlukan nanti.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari mau membeli pensil Rp2.000. Di toko A harganya Rp2.000, di toko B Rp3.000 untuk pensil yang sama. Beli di mana?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko A"
+                  },
+                  "say": "Toko A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko B"
+                  },
+                  "say": "Toko B",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama saja"
+                  },
+                  "say": "Sama saja",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Toko A.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya mendapat uang saku. Mana yang paling bijak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung sebagian, sisanya untuk kebutuhan"
+                  },
+                  "say": "Menabung sebagian, sisanya untuk kebutuhan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menghabiskan semuanya untuk permen"
+                  },
+                  "say": "Menghabiskan semuanya untuk permen",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membuang uangnya"
+                  },
+                  "say": "Membuang uangnya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung sebagian, sisanya untuk kebutuhan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri mendapat uang saku. Mana yang paling bijak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung sebagian, sisanya untuk kebutuhan"
+                  },
+                  "say": "Menabung sebagian, sisanya untuk kebutuhan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menghabiskan semuanya untuk permen"
+                  },
+                  "say": "Menghabiskan semuanya untuk permen",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membuang uangnya"
+                  },
+                  "say": "Membuang uangnya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung sebagian, sisanya untuk kebutuhan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari ingin membeli mainan, tetapi uangnya belum cukup. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung dulu sampai uangnya cukup"
+                  },
+                  "say": "Menabung dulu sampai uangnya cukup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengambil uang teman"
+                  },
+                  "say": "Mengambil uang teman",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menangis agar dibelikan"
+                  },
+                  "say": "Menangis agar dibelikan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung dulu sampai uangnya cukup.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari menemukan dompet berisi uang di sekolah. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyerahkan kepada guru"
+                  },
+                  "say": "Menyerahkan kepada guru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai uangnya untuk jajan"
+                  },
+                  "say": "Memakai uangnya untuk jajan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membagikannya ke teman"
+                  },
+                  "say": "Membagikannya ke teman",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyerahkan kepada guru.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Buku tulis Putri habis dan ia juga ingin stiker baru. Uangnya hanya cukup untuk satu. Mana yang dibeli dulu?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buku tulis"
+                  },
+                  "say": "Buku tulis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Stiker baru"
+                  },
+                  "say": "Stiker baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak membeli apa-apa"
+                  },
+                  "say": "Tidak membeli apa-apa",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Buku tulis.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya ingin membeli mainan, tetapi uangnya belum cukup. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menabung dulu sampai uangnya cukup"
+                  },
+                  "say": "Menabung dulu sampai uangnya cukup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengambil uang teman"
+                  },
+                  "say": "Mengambil uang teman",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menangis agar dibelikan"
+                  },
+                  "say": "Menangis agar dibelikan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menabung dulu sampai uangnya cukup.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya menabung setiap hari. Apa gunanya menabung?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                  },
+                  "say": "Agar bisa membeli sesuatu yang kita perlukan nanti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar uangnya hilang"
+                  },
+                  "say": "Agar uangnya hilang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar tidak bisa jajan selamanya"
+                  },
+                  "say": "Agar tidak bisa jajan selamanya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Agar bisa membeli sesuatu yang kita perlukan nanti.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Alya mau membeli pensil Rp2.000. Di toko A harganya Rp2.000, di toko B Rp3.000 untuk pensil yang sama. Beli di mana?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko A"
+                  },
+                  "say": "Toko A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko B"
+                  },
+                  "say": "Toko B",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama saja"
+                  },
+                  "say": "Sama saja",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Toko A.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Sari ingin gim baru, padahal sepatunya sudah rusak. Mana yang lebih penting dibeli?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepatu"
+                  },
+                  "say": "Sepatu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gim baru"
+                  },
+                  "say": "Gim baru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Keduanya tidak perlu"
+                  },
+                  "say": "Keduanya tidak perlu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Sepatu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri mau membeli pensil Rp2.000. Di toko A harganya Rp2.000, di toko B Rp3.000 untuk pensil yang sama. Beli di mana?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko A"
+                  },
+                  "say": "Toko A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Toko B"
+                  },
+                  "say": "Toko B",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama saja"
+                  },
+                  "say": "Sama saja",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Toko A.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Ibu memberi uang untuk membeli beras. Apa yang sebaiknya dilakukan Putri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli beras sesuai pesan Ibu"
+                  },
+                  "say": "Membeli beras sesuai pesan Ibu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli mainan"
+                  },
+                  "say": "Membeli mainan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai untuk jajan"
+                  },
+                  "say": "Memakai untuk jajan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Membeli beras sesuai pesan Ibu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri ingin membantu teman yang rumahnya kebanjiran. Apa yang bisa dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyumbang sebagian tabungan"
+                  },
+                  "say": "Menyumbang sebagian tabungan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak peduli"
+                  },
+                  "say": "Tidak peduli",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menertawakannya"
+                  },
+                  "say": "Menertawakannya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyumbang sebagian tabungan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Ibu memberi uang untuk membeli beras. Apa yang sebaiknya dilakukan Alya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli beras sesuai pesan Ibu"
+                  },
+                  "say": "Membeli beras sesuai pesan Ibu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeli mainan"
+                  },
+                  "say": "Membeli mainan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai untuk jajan"
+                  },
+                  "say": "Memakai untuk jajan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Membeli beras sesuai pesan Ibu.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Putri menemukan dompet berisi uang di sekolah. Apa yang sebaiknya dilakukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menyerahkan kepada guru"
+                  },
+                  "say": "Menyerahkan kepada guru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Memakai uangnya untuk jajan"
+                  },
+                  "say": "Memakai uangnya untuk jajan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membagikannya ke teman"
+                  },
+                  "say": "Membagikannya ke teman",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Menyerahkan kepada guru.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            },
+            {
+              "prompt": "Mengapa kita berbagi kepada orang lain?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Untuk membantu orang yang membutuhkan"
+                  },
+                  "say": "Untuk membantu orang yang membutuhkan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agar dipuji saja"
+                  },
+                  "say": "Agar dipuji saja",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Karena uangnya tidak berguna"
+                  },
+                  "say": "Karena uangnya tidak berguna",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pilihan yang bijak: Untuk membantu orang yang membutuhkan.",
+              "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+            }
+          ]
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Memasukkan uang ke celengan",
+              "attrs": {
+                "guna": "menabung"
+              }
+            },
+            {
+              "name": "Menyimpan uang di tabungan bank",
+              "attrs": {
+                "guna": "menabung"
+              }
+            },
+            {
+              "name": "Menyisihkan uang saku untuk membeli sepeda nanti",
+              "attrs": {
+                "guna": "menabung"
+              }
+            },
+            {
+              "name": "Memasukkan uang ke kotak amal",
+              "attrs": {
+                "guna": "berbagi"
+              }
+            },
+            {
+              "name": "Menyumbang untuk korban banjir",
+              "attrs": {
+                "guna": "berbagi"
+              }
+            },
+            {
+              "name": "Memberi sedekah kepada yang membutuhkan",
+              "attrs": {
+                "guna": "berbagi"
+              }
+            },
+            {
+              "name": "Membeli pensil di koperasi sekolah",
+              "attrs": {
+                "guna": "berbelanja"
+              }
+            },
+            {
+              "name": "Membeli jajan di kantin",
+              "attrs": {
+                "guna": "berbelanja"
+              }
+            },
+            {
+              "name": "Membeli buku cerita di toko buku",
+              "attrs": {
+                "guna": "berbelanja"
+              }
+            }
+          ],
+          "attr": "guna",
+          "ask": "odd",
+          "choices": 3,
+          "prompt": "Mana yang BUKAN termasuk {value}?",
+          "explain": "{name} bukan {value}.",
+          "source": "Literasi keuangan anak: penghasilan, menabung, berbelanja, berbagi (OJK, Buku Seri Literasi Keuangan Tingkat SD); CP Matematika Fase A (BSKAP 046/H/KR/2025)"
+        }
+      }
+    ]
+  }
+}

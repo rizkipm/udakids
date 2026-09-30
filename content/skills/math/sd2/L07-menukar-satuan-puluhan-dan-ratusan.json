@@ -1,0 +1,74 @@
+{
+  "id": "math.sd2.l7.menukar-satuan-puluhan-dan-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 7,
+  "title": "Nilai tempat — Level 7 — Menukar satuan, puluhan, dan ratusan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "o": [0, 9]
+          },
+          "prompt": "{t} puluhan {o} satuan = … satuan",
+          "answer": "t * 10 + o",
+          "explain": "{t} puluhan = {=t*10} satuan, tambah {o} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "{k} ratusan = … puluhan",
+          "answer": "k * 10",
+          "explain": "1 ratusan = 10 puluhan, jadi {k} ratusan = {answer} puluhan.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 30]
+          },
+          "prompt": "{n} satuan = … puluhan (tanpa sisa)",
+          "answer": "n / 10",
+          "explain": "10 satuan = 1 puluhan. {n} : 10 = {answer}.",
+          "mode": "input",
+          "derived": {
+            "n": "k * 10"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "{k} ratusan = … satuan",
+          "answer": "k * 100",
+          "explain": "{k} × 100 = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "math.sd2.t10.tantangan-penjumlahan-tiga-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "T",
+  "order": 10,
+  "title": "Penjumlahan tiga angka — Level 10 — Tantangan penjumlahan tiga angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-T"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 899],
+            "b": [100, 899]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "Hasilnya {answer}.",
+          "constraint": "a + b <= 999 && (a % 10 + b % 10 >= 10 || floor(a / 10) % 10 + floor(b / 10) % 10 >= 10)",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a / 100)", "=floor(a / 10) % 10", "=a % 10"],
+                ["+", "=floor(b / 100)", "=floor(b / 10) % 10", "=b % 10"]
+              ]
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "b": [100, 399]
+          },
+          "prompt": "Sekolah menanam {a} bibit mangga dan {b} bibit rambutan. Berapa bibit semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 999 && (a % 10 + b % 10 >= 10 || floor(a / 10) % 10 + floor(b / 10) % 10 >= 10)",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [100, 400],
+            "c": [100, 800]
+          },
+          "prompt": "{a} + {b} = {c} + …",
+          "answer": "a + b - c",
+          "explain": "{=a+b} − {c} = {answer}.",
+          "constraint": "c < a + b",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

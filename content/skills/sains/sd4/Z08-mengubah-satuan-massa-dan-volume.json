@@ -1,0 +1,128 @@
+{
+  "id": "sains.sd4.z8.mengubah-satuan-massa-dan-volume",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 8,
+  "title": "Satuan dan pengukuran — Level 8 — Mengubah satuan massa dan volume",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "{a} kg = … g",
+          "answer": "a * 1000",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            }
+          ],
+          "explain": "1 kg = 1.000 g, jadi {a} kg = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "{a} L = … mL",
+          "answer": "a * 1000",
+          "unit": "mL",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            }
+          ],
+          "explain": "1 L = 1.000 mL, jadi {a} L = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": {
+              "range": [100, 900],
+              "step": 100
+            }
+          },
+          "prompt": "Sari membawa {a} kg beras dan {b} g gula. Berapa gram massa semuanya?",
+          "answer": "a * 1000 + b",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "tanpa-ubah-satuan"
+            },
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 1000 - b",
+              "tag": "dikurang"
+            }
+          ],
+          "explain": "{a} kg = {=a*1000} g. {=a*1000} + {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "b": {
+              "range": [100, 900],
+              "step": 100
+            }
+          },
+          "prompt": "Budi punya {a} L air. Ia menuang {b} mL ke gelas. Berapa mL air yang tersisa?",
+          "answer": "a * 1000 - b",
+          "unit": "mL",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "a * 100 - b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "b - a",
+              "tag": "tanpa-ubah-satuan"
+            }
+          ],
+          "explain": "{a} L = {=a*1000} mL. {=a*1000} − {b} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

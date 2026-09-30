@@ -1,0 +1,62 @@
+{
+  "id": "math.sd2.bb7.soal-cerita-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 7,
+  "title": "Tambah dan kurang uang — Level 7 — Soal cerita kembalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "range": [1500, 9500],
+        "step": 500
+      },
+      "u": {
+        "values": [5000, 10000]
+      }
+    },
+    "prompt": "{nama} membeli {x} seharga Rp{b}. Ia membayar dengan uang Rp{u}. Berapa kembaliannya?",
+    "answer": "u - b",
+    "explain": "Rp{u} − Rp{b} = {answer}.",
+    "constraint": "b < u",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"],
+      "x": [
+        "roti",
+        "pisang goreng",
+        "pensil",
+        "buku tulis",
+        "susu kotak",
+        "penghapus",
+        "air mineral",
+        "kue lapis",
+        "penggaris",
+        "jeruk"
+      ]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "u + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "u - b + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "u - b - 500",
+        "tag": "kurang"
+      }
+    ]
+  }
+}

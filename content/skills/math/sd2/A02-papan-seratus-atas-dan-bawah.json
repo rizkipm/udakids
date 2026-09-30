@@ -1,0 +1,92 @@
+{
+  "id": "math.sd2.a2.papan-seratus-atas-dan-bawah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 2,
+  "title": "Membilang — Level 2 — Papan seratus: atas dan bawah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [11, 89]
+          },
+          "prompt": "Angka {x} disorot. Angka yang hilang tepat di bawahnya adalah …",
+          "answer": "x + 10",
+          "explain": "Turun satu baris = tambah 10: {x} + 10 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 20",
+              "columns": 10,
+              "blanks": ["=x+10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "arah-atas"
+            },
+            {
+              "expr": "x + 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [11, 89]
+          },
+          "prompt": "Angka {x} disorot. Angka yang hilang tepat di atasnya adalah …",
+          "answer": "x - 10",
+          "explain": "Naik satu baris = kurang 10: {x} − 10 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 20",
+              "columns": 10,
+              "blanks": ["=x-10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x - 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x + 10",
+              "tag": "arah-bawah"
+            },
+            {
+              "expr": "x - 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

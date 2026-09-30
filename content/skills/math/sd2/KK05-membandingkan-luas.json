@@ -1,0 +1,43 @@
+{
+  "id": "math.sd2.kk5.membandingkan-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "KK",
+  "order": 5,
+  "title": "Luas dan keliling — Level 5 — Membandingkan luas",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: luas & keliling",
+    "kognitif": "applying",
+    "ixlRef": "G2-KK"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [2, 5],
+      "c": [2, 6],
+      "d": [2, 5]
+    },
+    "prompt": "Kebun A {a} × {b} petak, kebun B {c} × {d} petak. Berapa petak selisih luasnya?",
+    "answer": "abs(a * b - c * d)",
+    "explain": "A = {=a*b} petak, B = {=c*d} petak. Selisih {answer} petak.",
+    "constraint": "a * b != c * d",
+    "distractors": [
+      {
+        "expr": "a * b + c * d",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "abs(a + b - c - d)",
+        "tag": "sisi-bukan-luas"
+      },
+      {
+        "expr": "max(a * b, c * d)",
+        "tag": "yang-besar"
+      }
+    ]
+  }
+}

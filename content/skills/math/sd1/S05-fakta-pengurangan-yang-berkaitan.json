@@ -1,0 +1,76 @@
+{
+  "id": "math.sd1.s5.fakta-pengurangan-yang-berkaitan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 5,
+  "title": "Strategi pengurangan sampai 20 — Level 5 — Fakta pengurangan yang berkaitan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − {b} = {c}. Jadi {a} − {c} = …",
+          "answer": "b",
+          "explain": "Keluarga bilangan {b}, {c}, {a}: {a} − {c} = {b}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20 && b != c",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "sama-dengan-soal"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            "b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − {c} = {b}. Jadi {a} − {b} = …",
+          "answer": "c",
+          "explain": "{a} − {b} = {c}, satu keluarga dengan {a} − {c} = {b}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20 && b != c",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "sama-dengan-soal"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            "c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

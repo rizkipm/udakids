@@ -1,0 +1,96 @@
+{
+  "id": "math.sd2.l8.bentuk-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 8,
+  "title": "Nilai tempat — Level 8 — Bentuk panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [1, 9],
+            "o": [1, 9]
+          },
+          "prompt": "{n} = {=h*100} + … + {o}",
+          "answer": "t * 10",
+          "explain": "Nilai angka puluhan {t} adalah {answer}.",
+          "mode": "input",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9]
+          },
+          "prompt": "{=h*100} + {=t*10} + {o} = …",
+          "answer": "n",
+          "explain": "Gabungkan nilai tempat: {answer}.",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          },
+          "distractors": [
+            {
+              "expr": "h + t + o",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "h * 100 + o * 10 + t",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "n + 10",
+              "tag": "lebih-sepuluh"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [1, 9],
+            "o": [1, 9]
+          },
+          "prompt": "Bentuk panjang dari {n} adalah {=h*100} + {=t*10} + … ",
+          "answer": "o",
+          "explain": "Satuannya {o}.",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          },
+          "distractors": [
+            {
+              "expr": "o * 10",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "t",
+              "tag": "angka-lain"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.m9.tambah-atau-kurang-isian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "M",
+  "order": 9,
+  "title": "Tambah dan kurang sampai 10 — Level 9 — Tambah atau kurang: isian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-M",
+    "cc": "1.OA.B.3, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 10],
+            "b": [0, 10]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 10",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [0, 10]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b <= a",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Keluarga bilangan {a}, {b}, {c}. {c} − {a} = …",
+          "answer": "b",
+          "explain": "{a} + {b} = {c}, jadi {c} − {a} = {b}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {c} − {b} = …",
+          "answer": "a",
+          "explain": "Penjumlahan dan pengurangan satu keluarga: {c} − {b} = {a}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "math.sd2.c10.tantangan-teka-teki-loncat-hitung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "C",
+  "order": 10,
+  "title": "Loncat hitung dan pola bilangan — Level 10 — Tantangan teka-teki loncat hitung",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-C",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 200],
+            "d": {
+              "values": [2, 5, 10, 100]
+            },
+            "n": [2, 6]
+          },
+          "prompt": "Mulai dari {a}, loncat {d} sebanyak {n} kali. Sampai di angka berapa?",
+          "answer": "a + n * d",
+          "explain": "{a} + {n} × {d} = {answer}.",
+          "mode": "input",
+          "constraint": "a + n * d <= 1000"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 30],
+            "d": {
+              "values": [5, 10, 100]
+            }
+          },
+          "prompt": "{a}, {=a+d}, …, {=a+3*d}. Bilangan yang hilang?",
+          "answer": "a + 2 * d",
+          "explain": "{answer}.",
+          "mode": "input",
+          "derived": {
+            "a": "k * 5"
+          },
+          "constraint": "a + 3 * d <= 1000"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 100],
+            "d": {
+              "values": [2, 5, 10]
+            },
+            "n": [2, 9]
+          },
+          "prompt": "Berapa kali loncat {d} dari {a} sampai {=a+n*d}?",
+          "answer": "n",
+          "explain": "({=a+n*d} − {a}) dibagi loncatan {d} = {answer} kali.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "math.sd2.w10.tantangan-tambah-dan-kurang-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "W",
+  "order": 10,
+  "title": "Tambah-kurang sampai 1.000 — Level 10 — Tantangan tambah dan kurang sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-W"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [200, 500],
+            "b": [100, 300],
+            "c": [100, 400]
+          },
+          "prompt": "Koperasi punya {a} buku tulis. Datang lagi {b} buku, lalu terjual {c} buku. Berapa buku sekarang?",
+          "answer": "a + b - c",
+          "explain": "{answer}.",
+          "constraint": "c < a + b",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 499],
+            "b": [100, 499],
+            "d": [-30, 30]
+          },
+          "prompt": "Tanda yang tepat: {a} + {b} … {c}",
+          "answer": "((a + b) > (c)) * 1 + ((a + b) < (c)) * 2 + ((a + b) == (c)) * 3",
+          "explain": "{=a+b} dibandingkan {c}: {answer}.",
+          "derived": {
+            "c": "a + b + d"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [1, 3],
+            "a": [120, 499]
+          },
+          "prompt": "{a} + {b} = {=a-c} + {=b+c} = …",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "derived": {
+            "b": "m * 100 - c"
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "math.sd1.w8.soal-cerita-perbandingan-terbalik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "W",
+  "order": 8,
+  "title": "Soal cerita membandingkan — Level 8 — Soal cerita perbandingan terbalik",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-W"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. Itu {b} lebih sedikit daripada punya {teman}. Berapa {benda} {teman}?",
+          "answer": "a + b",
+          "explain": "Punya {nama} lebih sedikit, jadi punya {teman} lebih banyak: {a} + {b} = {answer}.",
+          "constraint": "a + b <= 20",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar"],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "kata-kunci-menyesatkan"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. Itu {b} lebih banyak daripada punya {teman}. Berapa {benda} {teman}?",
+          "answer": "a - b",
+          "explain": "Punya {nama} lebih banyak, jadi punya {teman} lebih sedikit: {a} − {b} = {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar"],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "kata-kunci-menyesatkan"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

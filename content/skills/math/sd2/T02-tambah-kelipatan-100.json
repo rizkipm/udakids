@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.t2.tambah-kelipatan-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "T",
+  "order": 2,
+  "title": "Penjumlahan tiga angka — Level 2 — Tambah kelipatan 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-T"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [100, 899],
+      "k": [1, 8]
+    },
+    "prompt": "{a} + {=k*100} = …",
+    "answer": "a + k * 100",
+    "explain": "Tambahkan ratusannya saja: {=floor(a/100)} ratusan + {k} ratusan. Hasilnya {answer}.",
+    "constraint": "a + k * 100 <= 999",
+    "distractors": [
+      {
+        "expr": "a + k * 10",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "a + k",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "a + k * 100 + 100",
+        "tag": "lebih-seratus"
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "math.sd2.mm5.setor-lalu-tarik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "MM",
+  "order": 5,
+  "title": "Literasi keuangan — Level 5 — Setor lalu tarik",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-MM"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": {
+        "range": [10000, 40000],
+        "step": 5000
+      },
+      "a": {
+        "range": [5000, 20000],
+        "step": 5000
+      },
+      "b": {
+        "range": [5000, 20000],
+        "step": 5000
+      }
+    },
+    "prompt": "Tabungan koperasi {nama} Rp{s}. Ia menyetor Rp{a}, lalu menarik Rp{b}. Berapa tabungannya sekarang?",
+    "answer": "s + a - b",
+    "explain": "Rp{s} + Rp{a} = Rp{=s+a}, lalu − Rp{b} = {answer}.",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "s + a + b",
+        "tag": "semua-ditambah"
+      },
+      {
+        "expr": "s - a + b",
+        "tag": "operasi-terbalik"
+      },
+      {
+        "expr": "s + a",
+        "tag": "lupa-tarik"
+      }
+    ]
+  }
+}

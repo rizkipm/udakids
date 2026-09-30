@@ -1,0 +1,83 @@
+{
+  "id": "math.sd1.g1.fakta-penjumlahan-sampai-5",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "G",
+  "order": 1,
+  "title": "Penjumlahan sampai 10 — Level 1 — Fakta penjumlahan sampai 5",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-G",
+    "ccss": "1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 5],
+            "b": [0, 5]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 5",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "abs(a - b)",
+              "tag": "operasi-terbalik"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "prompt": "Berapa titik semuanya? {a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} titik dan {b} titik: {answer}.",
+          "constraint": "a + b <= 5",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "dots",
+                  "count": "=a",
+                  "layout": "row"
+                },
+                {
+                  "kind": "dots",
+                  "count": "=b",
+                  "layout": "row"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

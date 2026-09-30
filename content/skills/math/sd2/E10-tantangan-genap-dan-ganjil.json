@@ -1,0 +1,77 @@
+{
+  "id": "math.sd2.e10.tantangan-genap-dan-ganjil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "E",
+  "order": 10,
+  "title": "Genap dan ganjil — Level 10 — Tantangan genap dan ganjil",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-E",
+    "common-core": "2.OA.C.3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999]
+          },
+          "prompt": "Bilangan {a} termasuk bilangan …",
+          "answer": "a % 2",
+          "explain": "{a} adalah {answer}.",
+          "labels": {
+            "0": "genap",
+            "1": "ganjil"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 98]
+          },
+          "prompt": "Bilangan genap terdekat SESUDAH {a} adalah …",
+          "answer": "a + 2 - a % 2",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 90]
+          },
+          "prompt": "Ada berapa bilangan ganjil dari {a} sampai {=a+9}?",
+          "answer": "5",
+          "explain": "Dari 10 bilangan berurutan, 5 genap dan 5 ganjil.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 99],
+            "b": [11, 99]
+          },
+          "prompt": "Tanpa menghitung: {a} + {b} hasilnya genap atau ganjil?",
+          "answer": "(a + b) % 2",
+          "explain": "{answer}.",
+          "labels": {
+            "0": "genap",
+            "1": "ganjil"
+          }
+        }
+      }
+    ]
+  }
+}

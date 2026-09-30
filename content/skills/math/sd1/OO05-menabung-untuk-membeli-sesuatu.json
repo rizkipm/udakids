@@ -1,0 +1,46 @@
+{
+  "id": "math.sd1.oo5.menabung-untuk-membeli-sesuatu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "OO",
+  "order": 5,
+  "title": "Literasi keuangan — Level 5 — Menabung untuk membeli sesuatu",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-OO"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [3000, 10000],
+        "step": 1000
+      },
+      "u": {
+        "range": [1000, 9000],
+        "step": 500
+      }
+    },
+    "prompt": "Harga {barang} Rp{h}. Tabungan {nama} baru Rp{u}. Berapa rupiah lagi yang harus ditabung?",
+    "answer": "h - u",
+    "explain": "Rp{h} − Rp{u} = {answer}.",
+    "constraint": "u < h",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Raka", "Dimas", "Budi", "Adit", "Tegar"],
+      "barang": ["bola", "buku cerita", "kotak pensil", "celengan ayam"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "h + u",
+        "tag": "menjumlah"
+      },
+      "h - u + 500",
+      "h - u - 500"
+    ]
+  }
+}

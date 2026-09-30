@@ -1,0 +1,99 @@
+{
+  "id": "math.sd2.aa8.cukup-atau-tidak-berapa-lagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 8,
+  "title": "Uang sampai Rp10.000 — Level 8 — Cukup atau tidak? Berapa lagi?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [0, 5],
+            "h": {
+              "range": [500, 2500],
+              "step": 100
+            }
+          },
+          "prompt": "{nama} punya {a} koin Rp500 dan {b} koin Rp100. Harga es lilin Rp{h}. Cukupkah uangnya?",
+          "answer": "((a * 500 + b * 100) >= (h)) * 1 + ((a * 500 + b * 100) < (h)) * 2",
+          "explain": "Uang {nama} Rp{=a*500+b*100}, harga Rp{h}. Jadi {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "labels": {
+            "1": "Cukup",
+            "2": "Tidak cukup"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1100, 9900],
+              "step": 100
+            }
+          },
+          "prompt": "{nama} punya Rp{a}. Berapa rupiah lagi agar uangnya menjadi Rp{=ceil(a/1000)*1000}?",
+          "answer": "ceil(a / 1000) * 1000 - a",
+          "explain": "Hitung maju dari Rp{a} sampai Rp{=ceil(a/1000)*1000}: {answer}.",
+          "constraint": "a % 1000 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a % 1000",
+              "tag": "ratusan-yang-ada"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000 - a + 100",
+              "tag": "lebih-seratus"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000",
+              "tag": "tujuan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

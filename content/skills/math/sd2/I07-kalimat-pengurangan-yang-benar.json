@@ -1,0 +1,38 @@
+{
+  "id": "math.sd2.i7.kalimat-pengurangan-yang-benar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "I",
+  "order": 7,
+  "title": "Pengurangan satu angka — Level 7 — Kalimat pengurangan yang benar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-I",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 18],
+      "b": [1, 9],
+      "e": {
+        "values": [-2, -1, 0, 0, 0, 1, 2]
+      }
+    },
+    "prompt": "Apakah kalimat ini benar? {a} − {b} = {s}",
+    "answer": "(e == 0) * 1",
+    "explain": "{a} − {b} = {=a-b}. Jadi kalimat itu {answer}.",
+    "derived": {
+      "s": "a - b + e"
+    },
+    "constraint": "b < a && a - b + e >= 0",
+    "labels": {
+      "1": "Benar",
+      "0": "Salah"
+    }
+  }
+}

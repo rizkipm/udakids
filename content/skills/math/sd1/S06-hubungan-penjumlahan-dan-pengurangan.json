@@ -1,0 +1,103 @@
+{
+  "id": "math.sd1.s6.hubungan-penjumlahan-dan-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 6,
+  "title": "Strategi pengurangan sampai 20 — Level 6 — Hubungan penjumlahan dan pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{b} + {c} = {a}. Jadi {a} − {b} = …",
+          "answer": "c",
+          "explain": "Penjumlahan dan pengurangan berkaitan: {a} − {b} = {c}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            "c + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − {b} = {c}. Jadi {c} + {b} = …",
+          "answer": "a",
+          "explain": "Periksa pengurangan dengan penjumlahan: {c} + {b} = {a}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "bagian"
+            },
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            "a + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{c} + {b} = {a}. Jadi {a} − {c} = …",
+          "answer": "b",
+          "explain": "{a} − {c} = {b}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            "b + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

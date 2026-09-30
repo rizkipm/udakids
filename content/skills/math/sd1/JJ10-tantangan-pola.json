@@ -1,0 +1,96 @@
+{
+  "id": "math.sd1.jj10.tantangan-pola",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "JJ",
+  "order": 10,
+  "title": "Pola — Level 10 — Tantangan pola",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-JJ"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 50],
+            "d": {
+              "values": [1, 2, 5, 10]
+            }
+          },
+          "prompt": "{a}, {=a+d}, …, {=a+3*d}, {=a+4*d}. Bilangan yang hilang?",
+          "answer": "a + 2 * d",
+          "explain": "Setiap langkah +{d}: {=a+d} + {d} = {answer}.",
+          "constraint": "a + 4 * d <= 100",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "d": [1, 4]
+          },
+          "prompt": "Menara kubus makin tinggi: {a}, {=a+d}, {=a+2*d} kubus. Berapa kubus menara berikutnya?",
+          "answer": "a + 3 * d",
+          "explain": "Setiap menara bertambah {d} kubus: {answer}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "cubes",
+                  "counts": ["=a"],
+                  "colors": ["biru"]
+                },
+                {
+                  "kind": "cubes",
+                  "counts": ["=a+d"],
+                  "colors": ["biru"]
+                },
+                {
+                  "kind": "cubes",
+                  "counts": ["=a+2*d"],
+                  "colors": ["biru"]
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 40],
+            "d": [1, 2]
+          },
+          "prompt": "{a}, {=a-d}, {=a-2*d}, {=a-3*d}, … Bilangan berikutnya?",
+          "answer": "a - 4 * d",
+          "explain": "Setiap langkah −{d}: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "pattern",
+        "params": {
+          "attribute": "shape",
+          "units": ["ABC", "AABB"],
+          "choices": 4
+        }
+      }
+    ]
+  }
+}

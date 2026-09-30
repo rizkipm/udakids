@@ -1,0 +1,86 @@
+{
+  "id": "sains.sd3.d6.membandingkan-suhu-dan-energi-panas",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "D",
+  "order": 6,
+  "title": "Panas dan suhu — Level 6 — Membandingkan suhu dan energi panas",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 90],
+              "step": 5
+            },
+            "b": {
+              "range": [20, 90],
+              "step": 5
+            }
+          },
+          "prompt": "Dua gelas berisi air sama banyak. Gelas A {a} °C dan gelas B {b} °C. Mana yang menyimpan energi panas lebih banyak?",
+          "answer": "1 + (b > a)",
+          "explain": "Air sama banyak: yang suhunya lebih tinggi menyimpan energi panas lebih banyak. Jawabannya {answer}.",
+          "labels": {
+            "1": "Gelas A",
+            "2": "Gelas B"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 60],
+            "b": [5, 60]
+          },
+          "prompt": "Dua gelas air sama banyak: gelas A {a} °C dan gelas B {b} °C. Mana yang lebih dingin?",
+          "answer": "1 + (b < a)",
+          "explain": "Suhu lebih rendah berarti lebih dingin. Jawabannya {answer}.",
+          "labels": {
+            "1": "Gelas A",
+            "2": "Gelas B"
+          },
+          "constraint": "abs(a - b) >= 3"
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25, 95],
+              "step": 5
+            },
+            "b": {
+              "range": [25, 95],
+              "step": 5
+            }
+          },
+          "prompt": "Air di panci bersuhu {a} °C. Beberapa menit kemudian suhunya {b} °C. Energi panas air …",
+          "answer": "1 + (b < a)",
+          "explain": "Suhu naik berarti energi panas bertambah; suhu turun berarti energi panas berkurang. Jawabannya: {answer}.",
+          "labels": {
+            "1": "bertambah",
+            "2": "berkurang"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

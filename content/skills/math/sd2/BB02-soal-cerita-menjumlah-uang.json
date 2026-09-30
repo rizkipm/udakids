@@ -1,0 +1,52 @@
+{
+  "id": "math.sd2.bb2.soal-cerita-menjumlah-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 2,
+  "title": "Tambah dan kurang uang — Level 2 — Soal cerita menjumlah uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [500, 5000],
+        "step": 500
+      },
+      "b": {
+        "range": [500, 5000],
+        "step": 500
+      }
+    },
+    "prompt": "{nama} membeli {x} seharga Rp{a} dan {y} seharga Rp{b}. Berapa rupiah semuanya?",
+    "answer": "a + b",
+    "explain": "Rp{a} + Rp{b} = {answer}.",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"],
+      "x": ["roti", "pisang goreng", "pensil", "buku tulis", "susu kotak"],
+      "y": ["penghapus", "air mineral", "kue lapis", "penggaris", "jeruk"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a + b + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "a + b - 500",
+        "tag": "kurang"
+      },
+      {
+        "expr": "abs(a - b)",
+        "tag": "operasi-terbalik"
+      }
+    ]
+  }
+}

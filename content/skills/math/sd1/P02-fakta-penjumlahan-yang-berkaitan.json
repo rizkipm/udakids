@@ -1,0 +1,112 @@
+{
+  "id": "math.sd1.p2.fakta-penjumlahan-yang-berkaitan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 2,
+  "title": "Strategi penjumlahan sampai 20 — Level 2 — Fakta penjumlahan yang berkaitan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {b} + {a} = …",
+          "answer": "c",
+          "explain": "Urutan ditukar, hasilnya tetap {c}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 20 && a != b",
+          "distractors": [
+            {
+              "expr": "c + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "c - 1",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 8]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {a} + {=b+1} = …",
+          "answer": "c + 1",
+          "explain": "{b} naik satu, jadi hasilnya juga naik satu: {=c+1}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 19",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "sama"
+            },
+            {
+              "expr": "c - 1",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "c + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {a} + {=b-1} = …",
+          "answer": "c - 1",
+          "explain": "{b} turun satu, jadi hasilnya juga turun satu: {=c-1}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 20",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "sama"
+            },
+            {
+              "expr": "c + 1",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "c - 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

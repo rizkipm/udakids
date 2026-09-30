@@ -1,0 +1,67 @@
+{
+  "id": "math.sd2.w4.bersusun-tambah-atau-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "W",
+  "order": 4,
+  "title": "Tambah-kurang sampai 1.000 — Level 4 — Bersusun: tambah atau kurang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-W"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [100, 299]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "Hasilnya {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a / 100)", "=floor(a / 10) % 10", "=a % 10"],
+                ["+", "=floor(b / 100)", "=floor(b / 10) % 10", "=b % 10"]
+              ]
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 999],
+            "b": [100, 299]
+          },
+          "prompt": "Hitung pengurangan bersusun ini.",
+          "answer": "a - b",
+          "explain": "Hasilnya {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a / 100)", "=floor(a / 10) % 10", "=a % 10"],
+                ["−", "=floor(b / 100)", "=floor(b / 10) % 10", "=b % 10"]
+              ]
+            }
+          ],
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

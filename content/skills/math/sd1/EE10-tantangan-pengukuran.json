@@ -1,0 +1,4728 @@
+{
+  "id": "math.sd1.ee10.tantangan-pengukuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "EE",
+  "order": 10,
+  "title": "Pengukuran — Level 10 — Tantangan pengukuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-EE"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 9]
+          },
+          "prompt": "Pita {nama} panjangnya {a} cm. Pita itu dipotong {b} cm. Berapa cm sisanya?",
+          "answer": "a - b",
+          "explain": "{a} cm − {b} cm = {answer}.",
+          "constraint": "b < a",
+          "unit": "cm",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 9]
+          },
+          "prompt": "Dua tali, masing-masing {a} cm dan {b} cm, disambung. Berapa cm panjangnya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} cm.",
+          "constraint": "a + b <= 20",
+          "unit": "cm",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Alya lebih tinggi daripada Sari. Sari lebih tinggi daripada Putri. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Sari, lalu Putri. Jadi yang paling tinggi adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita ungu, lalu pita hijau. Jadi yang paling panjang adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita kuning. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita ungu, lalu pita kuning. Jadi yang paling panjang adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita merah. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita biru, lalu pita merah. Jadi yang paling panjang adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Sari. Sari lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Sari, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Raka, lalu tas Sari. Jadi yang paling berat adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita biru. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita hijau, lalu pita biru. Jadi yang paling panjang adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Alya lebih tinggi daripada Wulan. Wulan lebih tinggi daripada Tegar. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Wulan, lalu Tegar. Jadi yang paling tinggi adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita hijau. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita kuning, lalu pita hijau. Jadi yang paling pendek adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita hijau. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita biru, lalu pita hijau. Jadi yang paling pendek adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Raka. Raka lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Raka, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Raka. Raka lebih tinggi daripada Putri. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Raka, lalu Putri. Jadi yang paling tinggi adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita ungu. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita merah, lalu pita ungu. Jadi yang paling panjang adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Nina. Nina lebih tinggi daripada Dimas. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Nina, lalu Dimas. Jadi yang paling pendek adalah Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Dimas. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Budi, lalu tas Dimas. Jadi yang paling ringan adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Nina. Nina lebih tinggi daripada Alya. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Nina, lalu Alya. Jadi yang paling tinggi adalah Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Raka, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Budi. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Sari, lalu tas Budi. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita merah. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita ungu, lalu pita merah. Jadi yang paling pendek adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita merah. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita ungu, lalu pita merah. Jadi yang paling panjang adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita merah, lalu pita hijau. Jadi yang paling panjang adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Sari. Sari lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Sari, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita merah, lalu pita hijau. Jadi yang paling panjang adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Sari lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Budi. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Sari, lalu tas Raka, lalu tas Budi. Jadi yang paling berat adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Dimas. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Budi, lalu tas Dimas. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Sari. Sari lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Sari, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Budi, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Budi, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Sari. Sari lebih tinggi daripada Putri. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Sari, lalu Putri. Jadi yang paling pendek adalah Putri.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Dimas, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita kuning. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita merah, lalu pita kuning. Jadi yang paling panjang adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita biru, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Raka. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Dimas, lalu Raka. Jadi yang paling pendek adalah Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita hijau. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita merah, lalu pita hijau. Jadi yang paling pendek adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita biru. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita hijau, lalu pita biru. Jadi yang paling panjang adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Raka. Raka lebih tinggi daripada Wulan. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Raka, lalu Wulan. Jadi yang paling pendek adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Budi lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Adit. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Budi, lalu Dimas, lalu Adit. Jadi yang paling pendek adalah Adit.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita biru, lalu pita hijau. Jadi yang paling panjang adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Sari lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Alya. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Sari, lalu tas Dimas, lalu tas Alya. Jadi yang paling berat adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Alya lebih tinggi daripada Budi. Budi lebih tinggi daripada Nina. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Budi, lalu Nina. Jadi yang paling tinggi adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Budi lebih tinggi daripada Tegar. Tegar lebih tinggi daripada Nina. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Budi, lalu Tegar, lalu Nina. Jadi yang paling tinggi adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Putri. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Dimas, lalu Putri. Jadi yang paling tinggi adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Alya, lalu tas Sari. Jadi yang paling berat adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Budi. Budi lebih tinggi daripada Wulan. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Budi, lalu Wulan. Jadi yang paling pendek adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Budi, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Alya. Alya lebih tinggi daripada Adit. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Alya, lalu Adit. Jadi yang paling tinggi adalah Putri.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Dimas. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Budi, lalu tas Dimas. Jadi yang paling ringan adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita merah, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita biru. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita kuning, lalu pita biru. Jadi yang paling pendek adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Raka, lalu tas Sari. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Budi. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Dimas, lalu tas Budi. Jadi yang paling berat adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita biru. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita kuning, lalu pita biru. Jadi yang paling pendek adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita ungu, lalu pita hijau. Jadi yang paling panjang adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Alya, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tegar lebih tinggi daripada Nina. Nina lebih tinggi daripada Raka. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Tegar, lalu Nina, lalu Raka. Jadi yang paling tinggi adalah Tegar.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Dimas, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Dimas, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Budi. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Raka, lalu tas Budi. Jadi yang paling ringan adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Raka. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Alya, lalu tas Raka. Jadi yang paling ringan adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita ungu. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita kuning, lalu pita ungu. Jadi yang paling panjang adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Alya. Alya lebih tinggi daripada Dimas. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Alya, lalu Dimas. Jadi yang paling tinggi adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita merah, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Sari lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Dimas. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Sari, lalu tas Alya, lalu tas Dimas. Jadi yang paling berat adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita ungu. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita biru, lalu pita ungu. Jadi yang paling pendek adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Alya. Alya lebih tinggi daripada Budi. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Alya, lalu Budi. Jadi yang paling pendek adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tegar lebih tinggi daripada Alya. Alya lebih tinggi daripada Dimas. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Tegar, lalu Alya, lalu Dimas. Jadi yang paling tinggi adalah Tegar.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita hijau, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Putri. Putri lebih tinggi daripada Dimas. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Putri, lalu Dimas. Jadi yang paling tinggi adalah Nina.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita merah. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita hijau, lalu pita merah. Jadi yang paling pendek adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Adit. Adit lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Adit, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Sari, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Nina. Nina lebih tinggi daripada Alya. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Nina, lalu Alya. Jadi yang paling tinggi adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita ungu, lalu pita hijau. Jadi yang paling panjang adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Budi. Budi lebih tinggi daripada Alya. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Budi, lalu Alya. Jadi yang paling tinggi adalah Nina.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Adit. Adit lebih tinggi daripada Wulan. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Adit, lalu Wulan. Jadi yang paling tinggi adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Sari. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Dimas, lalu Sari. Jadi yang paling pendek adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Budi. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Dimas, lalu Budi. Jadi yang paling tinggi adalah Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Raka. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Sari, lalu tas Raka. Jadi yang paling ringan adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Budi, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita biru. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita ungu, lalu pita biru. Jadi yang paling panjang adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita merah. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita hijau, lalu pita merah. Jadi yang paling pendek adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Putri. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Dimas, lalu Putri. Jadi yang paling tinggi adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Dimas, lalu tas Sari. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita merah. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita hijau, lalu pita merah. Jadi yang paling panjang adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Raka. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Dimas, lalu tas Raka. Jadi yang paling ringan adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita kuning. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita hijau, lalu pita kuning. Jadi yang paling panjang adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Alya lebih tinggi daripada Raka. Raka lebih tinggi daripada Wulan. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Raka, lalu Wulan. Jadi yang paling pendek adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Budi. Budi lebih tinggi daripada Adit. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Budi, lalu Adit. Jadi yang paling tinggi adalah Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Nina. Nina lebih tinggi daripada Adit. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Nina, lalu Adit. Jadi yang paling pendek adalah Adit.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Wulan. Wulan lebih tinggi daripada Raka. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Wulan, lalu Raka. Jadi yang paling pendek adalah Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Alya. Alya lebih tinggi daripada Adit. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Alya, lalu Adit. Jadi yang paling pendek adalah Adit.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita biru. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita hijau, lalu pita biru. Jadi yang paling pendek adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Raka. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Budi, lalu tas Raka. Jadi yang paling berat adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Dimas. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Sari, lalu tas Dimas. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Nina. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Dimas, lalu Nina. Jadi yang paling tinggi adalah Wulan.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Budi. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Raka, lalu tas Budi. Jadi yang paling berat adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Adit. Adit lebih tinggi daripada Putri. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Adit, lalu Putri. Jadi yang paling tinggi adalah Nina.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Budi, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Alya lebih tinggi daripada Nina. Nina lebih tinggi daripada Tegar. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Nina, lalu Tegar. Jadi yang paling tinggi adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Wulan. Wulan lebih tinggi daripada Budi. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Wulan, lalu Budi. Jadi yang paling tinggi adalah Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Sari. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Dimas, lalu Sari. Jadi yang paling pendek adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tegar lebih tinggi daripada Dimas. Dimas lebih tinggi daripada Budi. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Tegar, lalu Dimas, lalu Budi. Jadi yang paling tinggi adalah Tegar.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Alya. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Raka, lalu tas Alya. Jadi yang paling ringan adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Adit lebih tinggi daripada Tegar. Tegar lebih tinggi daripada Budi. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Adit, lalu Tegar, lalu Budi. Jadi yang paling pendek adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Adit lebih tinggi daripada Wulan. Wulan lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Adit, lalu Wulan, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tegar lebih tinggi daripada Nina. Nina lebih tinggi daripada Dimas. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Tegar, lalu Nina, lalu Dimas. Jadi yang paling pendek adalah Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita ungu. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita hijau, lalu pita ungu. Jadi yang paling pendek adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita hijau. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita merah, lalu pita hijau. Jadi yang paling pendek adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Budi, lalu tas Sari. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita ungu. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita kuning, lalu pita ungu. Jadi yang paling pendek adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Raka. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Alya, lalu tas Raka. Jadi yang paling berat adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita kuning, lalu pita hijau. Jadi yang paling panjang adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Dimas lebih tinggi daripada Raka. Raka lebih tinggi daripada Budi. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Dimas, lalu Raka, lalu Budi. Jadi yang paling tinggi adalah Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Tegar. Tegar lebih tinggi daripada Budi. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Tegar, lalu Budi. Jadi yang paling pendek adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Sari. Sari lebih tinggi daripada Putri. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Sari, lalu Putri. Jadi yang paling pendek adalah Putri.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Sari. Sari lebih tinggi daripada Raka. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Sari, lalu Raka. Jadi yang paling pendek adalah Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Dimas. Tas Dimas lebih berat daripada tas Raka. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Dimas, lalu tas Raka. Jadi yang paling berat adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Alya. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Budi, lalu tas Alya. Jadi yang paling berat adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Alya lebih tinggi daripada Tegar. Tegar lebih tinggi daripada Budi. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Alya, lalu Tegar, lalu Budi. Jadi yang paling tinggi adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Alya. Alya lebih tinggi daripada Wulan. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Alya, lalu Wulan. Jadi yang paling tinggi adalah Putri.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Raka lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Alya. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Raka, lalu tas Budi, lalu tas Alya. Jadi yang paling berat adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Budi lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Sari. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Budi, lalu tas Raka, lalu tas Sari. Jadi yang paling ringan adalah tas Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita kuning lebih panjang daripada pita merah. Pita merah lebih panjang daripada pita hijau. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita kuning, lalu pita merah, lalu pita hijau. Jadi yang paling pendek adalah pita hijau.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Nina lebih tinggi daripada Putri. Putri lebih tinggi daripada Budi. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Nina, lalu Putri, lalu Budi. Jadi yang paling pendek adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Alya. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Sari, lalu tas Alya. Jadi yang paling berat adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Raka lebih tinggi daripada Sari. Sari lebih tinggi daripada Alya. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Raka, lalu Sari, lalu Alya. Jadi yang paling pendek adalah Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Budi. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Alya, lalu tas Budi. Jadi yang paling ringan adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Budi lebih tinggi daripada Nina. Nina lebih tinggi daripada Adit. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Budi, lalu Nina, lalu Adit. Jadi yang paling tinggi adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Adit lebih tinggi daripada Sari. Sari lebih tinggi daripada Tegar. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Adit, lalu Sari, lalu Tegar. Jadi yang paling pendek adalah Tegar.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita biru, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tegar lebih tinggi daripada Alya. Alya lebih tinggi daripada Adit. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Tegar, lalu Alya, lalu Adit. Jadi yang paling tinggi adalah Tegar.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita biru. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita kuning, lalu pita biru. Jadi yang paling pendek adalah pita biru.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita ungu. Pita ungu lebih panjang daripada pita kuning. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita ungu, lalu pita kuning. Jadi yang paling pendek adalah pita kuning.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Budi lebih tinggi daripada Putri. Putri lebih tinggi daripada Wulan. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Budi, lalu Putri, lalu Wulan. Jadi yang paling tinggi adalah Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Wulan lebih tinggi daripada Raka. Raka lebih tinggi daripada Nina. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Wulan, lalu Raka, lalu Nina. Jadi yang paling pendek adalah Nina.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita ungu. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita kuning, lalu pita ungu. Jadi yang paling panjang adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Raka. Tas Raka lebih berat daripada tas Budi. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Raka, lalu tas Budi. Jadi yang paling berat adalah tas Alya.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Budi. Tas Budi lebih berat daripada tas Raka. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Raka"
+                  },
+                  "say": "tas Raka"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Budi, lalu tas Raka. Jadi yang paling ringan adalah tas Raka.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Budi. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Budi"
+                  },
+                  "say": "tas Budi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Sari, lalu tas Budi. Jadi yang paling ringan adalah tas Budi.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita hijau. Pita hijau lebih panjang daripada pita kuning. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita hijau, lalu pita kuning. Jadi yang paling panjang adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita hijau lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita merah. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita hijau, lalu pita biru, lalu pita merah. Jadi yang paling pendek adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita merah lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita kuning. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita merah, lalu pita biru, lalu pita kuning. Jadi yang paling panjang adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita biru lebih panjang daripada pita kuning. Pita kuning lebih panjang daripada pita merah. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita merah"
+                  },
+                  "say": "pita merah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita kuning"
+                  },
+                  "say": "pita kuning",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita biru, lalu pita kuning, lalu pita merah. Jadi yang paling pendek adalah pita merah.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Alya lebih berat daripada tas Sari. Tas Sari lebih berat daripada tas Dimas. Mana yang paling ringan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Alya, lalu tas Sari, lalu tas Dimas. Jadi yang paling ringan adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Tas Dimas lebih berat daripada tas Alya. Tas Alya lebih berat daripada tas Sari. Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Dimas"
+                  },
+                  "say": "tas Dimas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Alya"
+                  },
+                  "say": "tas Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tas Sari"
+                  },
+                  "say": "tas Sari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: tas Dimas, lalu tas Alya, lalu tas Sari. Jadi yang paling berat adalah tas Dimas.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Pita ungu lebih panjang daripada pita biru. Pita biru lebih panjang daripada pita hijau. Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita ungu"
+                  },
+                  "say": "pita ungu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita biru"
+                  },
+                  "say": "pita biru",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pita hijau"
+                  },
+                  "say": "pita hijau",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: pita ungu, lalu pita biru, lalu pita hijau. Jadi yang paling panjang adalah pita ungu.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Adit lebih tinggi daripada Alya. Alya lebih tinggi daripada Nina. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Alya"
+                  },
+                  "say": "Alya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Adit, lalu Alya, lalu Nina. Jadi yang paling tinggi adalah Adit.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Budi lebih tinggi daripada Nina. Nina lebih tinggi daripada Adit. Mana yang paling pendek?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Adit"
+                  },
+                  "say": "Adit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nina"
+                  },
+                  "say": "Nina",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Budi"
+                  },
+                  "say": "Budi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Budi, lalu Nina, lalu Adit. Jadi yang paling pendek adalah Adit.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Sari lebih tinggi daripada Raka. Raka lebih tinggi daripada Dimas. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sari"
+                  },
+                  "say": "Sari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Raka"
+                  },
+                  "say": "Raka",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dimas"
+                  },
+                  "say": "Dimas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Sari, lalu Raka, lalu Dimas. Jadi yang paling tinggi adalah Sari.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            },
+            {
+              "prompt": "Putri lebih tinggi daripada Wulan. Wulan lebih tinggi daripada Tegar. Mana yang paling tinggi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Putri"
+                  },
+                  "say": "Putri"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wulan"
+                  },
+                  "say": "Wulan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tegar"
+                  },
+                  "say": "Tegar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutannya: Putri, lalu Wulan, lalu Tegar. Jadi yang paling tinggi adalah Putri.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): membandingkan & mengukur panjang dengan satuan tidak baku; Common Core 1.MD.A.1, 1.MD.A.2"
+            }
+          ]
+        }
+      },
+      {
+        "family": "size-compare",
+        "params": {
+          "attribute": "mixed"
+        }
+      }
+    ]
+  }
+}

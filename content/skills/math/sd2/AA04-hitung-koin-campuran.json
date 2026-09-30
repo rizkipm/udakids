@@ -1,0 +1,61 @@
+{
+  "id": "math.sd2.aa4.hitung-koin-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 4,
+  "title": "Uang sampai Rp10.000 — Level 4 — Hitung koin campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [1, 4],
+      "c": [1, 5]
+    },
+    "prompt": "Ada {a} koin Rp500, {b} koin Rp200, dan {c} koin Rp100. Berapa rupiah semuanya?",
+    "answer": "a * 500 + b * 200 + c * 100",
+    "explain": "Rp{=a*500} + Rp{=b*200} + Rp{=c*100} = {answer}.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "coin",
+            "value": 500
+          },
+          {
+            "kind": "coin",
+            "value": 200
+          },
+          {
+            "kind": "coin",
+            "value": 100
+          }
+        ]
+      }
+    ],
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "(a + b + c) * 100",
+        "tag": "semua-dianggap-100"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "banyak-koin-bukan-nilai"
+      },
+      {
+        "expr": "a * 500 + b * 200 + c * 100 + 100",
+        "tag": "lebih-satu"
+      }
+    ]
+  }
+}

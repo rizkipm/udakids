@@ -1,0 +1,63 @@
+{
+  "id": "math.sd1.s8.membilang-maju-untuk-mengurangi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 8,
+  "title": "Strategi pengurangan sampai 20 — Level 8 — Membilang maju untuk mengurangi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [6, 9]
+          },
+          "prompt": "{a} − {b}: mulai dari {b}, hitung maju sampai {a}. Berapa langkah?",
+          "answer": "a - b",
+          "explain": "{b} ke {a} ada {answer} langkah, jadi {a} − {b} = {answer}.",
+          "constraint": "a - b <= 9",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a",
+              "tag": "bilangan-akhir"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b}: dari {b} ke 10 ada {=10-b} langkah, dari 10 ke {a} ada {=a-10} langkah. Jadi {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{=10-b} + {=a-10} = {answer}.",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a - 10",
+              "tag": "hanya-satu-bagian"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

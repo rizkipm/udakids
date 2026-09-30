@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.cc9.kembalian-uang-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 9,
+  "title": "Uang sampai Rp100.000 — Level 9 — Kembalian uang besar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [15000, 95000],
+        "step": 5000
+      },
+      "u": {
+        "values": [50000, 100000]
+      }
+    },
+    "prompt": "Ayah membeli {x} seharga Rp{h}. Ayah membayar dengan Rp{u}. Berapa kembaliannya?",
+    "answer": "u - h",
+    "explain": "Rp{u} − Rp{h} = {answer}.",
+    "constraint": "h < u",
+    "words": {
+      "x": ["kipas angin kecil", "sandal", "payung", "tas sekolah", "buku gambar"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "u + h",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "u - h + 5000",
+        "tag": "lebih"
+      },
+      {
+        "expr": "u - h - 5000",
+        "tag": "kurang"
+      }
+    ]
+  }
+}

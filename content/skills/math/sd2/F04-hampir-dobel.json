@@ -1,0 +1,77 @@
+{
+  "id": "math.sd2.f4.hampir-dobel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "F",
+  "order": 4,
+  "title": "Strategi penjumlahan satu angka — Level 4 — Hampir dobel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-F",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{a} + {=a+1} = {a} + {a} + 1 = …",
+          "answer": "2 * a + 1",
+          "explain": "Dobel {a} = {=2*a}, tambah 1 = {answer}.",
+          "distractors": ["2 * a", "2 * a + 2", "2 * a - 1"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{=a+1} + {a} = …",
+          "answer": "2 * a + 1",
+          "explain": "Hampir dobel: {a} + {a} + 1 = {answer}.",
+          "distractors": ["2 * a", "2 * a + 2", "2 * a + 3"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10]
+          },
+          "prompt": "{a} + {=a-1} = {a} + {a} − 1 = …",
+          "answer": "2 * a - 1",
+          "explain": "Dobel {a} = {=2*a}, kurang 1 = {answer}.",
+          "distractors": ["2 * a", "2 * a - 2", "2 * a + 1"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{a} + {=a+1}. Dobel mana yang membantu?",
+          "answer": "a",
+          "explain": "{a} + {=a+1} = dobel {a} + 1.",
+          "distractors": [
+            "a + 2",
+            {
+              "expr": "2 * a + 1",
+              "tag": "hasil"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "sains.sd3.t2.membandingkan-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "T",
+  "order": 2,
+  "title": "Cuaca dan iklim — Level 2 — Membandingkan suhu",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [14, 34],
+            "b": [14, 34]
+          },
+          "constraint": "abs(a - b) >= 3",
+          "words": {
+            "k1": ["Medan", "Makassar", "Semarang"],
+            "k2": ["Dieng", "Berastagi", "Malino"]
+          },
+          "prompt": "Siang ini kota pertama ({k1}) {a} °C dan kota kedua ({k2}) {b} °C. Kota mana yang lebih dingin?",
+          "answer": "1 + (b < a)",
+          "labels": {
+            "1": "kota pertama",
+            "2": "kota kedua"
+          },
+          "explain": "Suhu yang angkanya lebih kecil berarti lebih dingin: {k1} {a} °C, {k2} {b} °C."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [28, 34],
+            "b": [14, 24]
+          },
+          "words": {
+            "k1": ["Medan", "Makassar", "Semarang"],
+            "k2": ["Dieng", "Berastagi", "Malino"]
+          },
+          "prompt": "Suhu di {k1} {a} °C dan di {k2} {b} °C. Berapa derajat selisihnya?",
+          "answer": "a - b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} − {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [22, 27],
+            "d": [3, 8]
+          },
+          "prompt": "Pagi hari termometer menunjukkan {a} °C. Siang harinya suhu naik {d} derajat. Berapa suhu siang?",
+          "answer": "a + d",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a - d",
+              "tag": "terbalik"
+            },
+            {
+              "expr": "d",
+              "tag": "hanya-kenaikan"
+            }
+          ],
+          "explain": "{a} + {d} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 34],
+            "d": [3, 9]
+          },
+          "prompt": "Siang hari suhu {a} °C. Setelah hujan, suhu turun {d} derajat. Berapa suhunya sekarang?",
+          "answer": "a - d",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "terbalik"
+            },
+            {
+              "expr": "d",
+              "tag": "hanya-penurunan"
+            }
+          ],
+          "explain": "{a} − {d} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

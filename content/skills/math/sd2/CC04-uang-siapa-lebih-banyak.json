@@ -1,0 +1,33 @@
+{
+  "id": "math.sd2.cc4.uang-siapa-lebih-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 4,
+  "title": "Uang sampai Rp100.000 — Level 4 — Uang siapa lebih banyak?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [0, 4],
+      "c": [1, 2],
+      "d": [0, 5]
+    },
+    "prompt": "Alya punya {a} lembar Rp5.000 dan {b} lembar Rp2.000. Raka punya {c} lembar Rp10.000 dan {d} lembar Rp1.000. Uang siapa lebih banyak?",
+    "answer": "((a * 5000 + b * 2000) > (c * 10000 + d * 1000)) * 1 + ((a * 5000 + b * 2000) < (c * 10000 + d * 1000)) * 2 + ((a * 5000 + b * 2000) == (c * 10000 + d * 1000)) * 3",
+    "explain": "Alya Rp{=a*5000+b*2000}, Raka Rp{=c*10000+d*1000}. Jawabannya: {answer}.",
+    "labels": {
+      "1": "Alya",
+      "2": "Raka",
+      "3": "Sama banyak"
+    }
+  }
+}

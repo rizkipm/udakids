@@ -1,0 +1,34 @@
+{
+  "id": "math.sd2.cc8.cukup-atau-tidak-sampai-rp100-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 8,
+  "title": "Uang sampai Rp100.000 — Level 8 — Cukup atau tidak? (sampai Rp100.000)",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [1, 3],
+      "h": {
+        "range": [40000, 95000],
+        "step": 5000
+      }
+    },
+    "prompt": "Ibu punya {a} lembar Rp20.000 dan {b} lembar Rp10.000. Harga sepatu Rp{h}. Cukupkah?",
+    "answer": "((a * 20000 + b * 10000) >= (h)) * 1 + ((a * 20000 + b * 10000) < (h)) * 2",
+    "explain": "Uang Ibu Rp{=a*20000+b*10000}, harga Rp{h}. Jadi {answer}.",
+    "labels": {
+      "1": "Cukup",
+      "2": "Tidak cukup"
+    }
+  }
+}

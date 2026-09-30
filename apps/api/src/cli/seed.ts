@@ -61,6 +61,8 @@ export async function seed(
       .onConflictDoUpdate({
         target: [schema.skillCatalogs.domain, schema.skillCatalogs.grade],
         set: values,
+        // Katalog yang pernah disunting admin tidak ditimpa, kecuali --force.
+        ...(opts.force ? {} : { setWhere: isNull(schema.skillCatalogs.updatedBy) }),
       });
   }
 

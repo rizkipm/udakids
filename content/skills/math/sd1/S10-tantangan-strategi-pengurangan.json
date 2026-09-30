@@ -1,0 +1,127 @@
+{
+  "id": "math.sd1.s10.tantangan-strategi-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 10,
+  "title": "Strategi pengurangan sampai 20 — Level 10 — Tantangan strategi pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "Gunakan 10: {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Turun dulu ke 10 ({a} − {=a-10}), lalu kurangi sisanya {=b-(a-10)}: {answer}.",
+          "constraint": "b > a - 10",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − {b} = ?  Pikirkan: {b} + … = {a}",
+          "answer": "c",
+          "explain": "{b} + {c} = {a}, jadi {a} − {b} = {c}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b}: dari {b} ke 10 ada {=10-b} langkah, dari 10 ke {a} ada {=a-10} langkah. Jadi {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{=10-b} + {=a-10} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{=2*a} − {a} = …",
+          "answer": "a",
+          "explain": "{a} + {a} = {=2*a}, jadi {=2*a} − {a} = {a}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 19]
+          },
+          "prompt": "{a} − {=a-10} = …",
+          "answer": "10",
+          "explain": "{a} = 10 + {=a-10}. Ambil {=a-10}, tinggal 10.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{b} + {c} = {a}. Jadi {a} − {b} = …",
+          "answer": "c",
+          "explain": "Penjumlahan dan pengurangan berkaitan: {a} − {b} = {c}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 20],
+            "b": [2, 9]
+          },
+          "prompt": "Ada {a} titik di bingkai. Ambil {b} titik. Berapa titik yang tersisa?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. Ambil dari bingkai yang tidak penuh dulu.",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 20
+            }
+          ],
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

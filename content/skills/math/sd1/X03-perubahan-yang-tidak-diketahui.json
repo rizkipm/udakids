@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.x3.perubahan-yang-tidak-diketahui",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "X",
+  "order": 3,
+  "title": "Soal cerita tambah dan kurang — Level 3 — Perubahan yang tidak diketahui",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-X"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 14],
+            "c": [8, 20]
+          },
+          "prompt": "{nama} punya {a} {benda}. Setelah diberi Ibu, sekarang ada {c}. Berapa {benda} yang diberikan Ibu?",
+          "answer": "c - a",
+          "explain": "{a} + … = {c}. Hitung maju dari {a} sampai {c}: {answer}.",
+          "constraint": "a < c && c - a <= 10",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "c",
+              "tag": "jumlah-akhir"
+            },
+            "c - a + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "c": [2, 12]
+          },
+          "prompt": "Ada {a} burung di pohon. Beberapa terbang, tinggal {c} burung. Berapa burung yang terbang?",
+          "answer": "a - c",
+          "explain": "{a} − … = {c}. Jadi yang terbang {a} − {c} = {answer}.",
+          "constraint": "c < a",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "c",
+              "tag": "sisa-bukan-yang-pergi"
+            },
+            "a - c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

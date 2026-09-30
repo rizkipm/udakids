@@ -1,0 +1,59 @@
+{
+  "id": "math.sd1.jj6.pola-bertumbuh-menara-kubus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "JJ",
+  "order": 6,
+  "title": "Pola — Level 6 — Pola bertumbuh: menara kubus",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-JJ"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "d": [1, 4]
+    },
+    "prompt": "Menara kubus makin tinggi: {a}, {=a+d}, {=a+2*d} kubus. Berapa kubus menara berikutnya?",
+    "answer": "a + 3 * d",
+    "explain": "Setiap menara bertambah {d} kubus: {answer}.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "cubes",
+            "counts": ["=a"],
+            "colors": ["biru"]
+          },
+          {
+            "kind": "cubes",
+            "counts": ["=a+d"],
+            "colors": ["biru"]
+          },
+          {
+            "kind": "cubes",
+            "counts": ["=a+2*d"],
+            "colors": ["biru"]
+          },
+          {
+            "kind": "blank"
+          }
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a + 2 * d",
+        "tag": "tidak-bertambah"
+      },
+      "a + 3 * d + 1",
+      "a + 4 * d"
+    ]
+  }
+}

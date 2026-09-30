@@ -1,0 +1,76 @@
+{
+  "id": "math.sd2.b9.soal-cerita-terbanyak-dan-tersedikit-sampai-1-00",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "B",
+  "order": 9,
+  "title": "Membandingkan dan — Level 9 — Soal cerita terbanyak dan tersedikit sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-B",
+    "common-core": "2.NBT.A.4"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Desa Suka menanam {a} pohon, Desa Maju {b}, Desa Jaya {c}. Desa mana yang paling banyak?",
+          "answer": "(a > b && a > c) * 1 + (b > a && b > c) * 2 + (c > a && c > b) * 3",
+          "explain": "Bandingkan ratusan dulu. Terbanyak: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "labels": {
+            "1": "Desa Suka",
+            "2": "Desa Maju",
+            "3": "Desa Jaya"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Desa Suka memanen {a} kg padi, Desa Maju {b} kg, Desa Jaya {c} kg. Desa mana yang paling sedikit?",
+          "answer": "(a < b && a < c) * 1 + (b < a && b < c) * 2 + (c < a && c < b) * 3",
+          "explain": "Bandingkan ratusan dulu. Tersedikit: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "labels": {
+            "1": "Desa Suka",
+            "2": "Desa Maju",
+            "3": "Desa Jaya"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Perpustakaan punya {a} buku cerita, {b} buku sains, dan {c} komik. Berapa jenis buku yang paling sedikit?",
+          "answer": "min(a, b, c)",
+          "explain": "Tersedikit: {answer}.",
+          "constraint": "a != b && b != c && a != c",
+          "distractors": ["a", "b", "c"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

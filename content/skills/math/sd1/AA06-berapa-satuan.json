@@ -1,0 +1,37 @@
+{
+  "id": "math.sd1.aa6.berapa-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 6,
+  "title": "Nilai tempat — Level 6 — Berapa satuan?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [21, 99]
+    },
+    "prompt": "Bilangan {n} terdiri atas berapa satuan (selain puluhannya)?",
+    "answer": "n % 10",
+    "explain": "{n} = {=floor(n/10)} puluhan dan {answer} satuan.",
+    "constraint": "n % 10 != floor(n / 10) && n % 10 != 0",
+    "distractors": [
+      {
+        "expr": "floor(n / 10)",
+        "tag": "angka-puluhan"
+      },
+      {
+        "expr": "n",
+        "tag": "bilangan-utuh"
+      },
+      "n % 10 + 1"
+    ]
+  }
+}

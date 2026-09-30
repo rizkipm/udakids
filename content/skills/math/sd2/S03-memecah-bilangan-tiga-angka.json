@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.s3.memecah-bilangan-tiga-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "S",
+  "order": 3,
+  "title": "Strategi penjumlahan tiga angka — Level 3 — Memecah bilangan tiga angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "2-S",
+    "common-core": "2.NBT.B.7"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "b": [110, 399]
+          },
+          "prompt": "{a} + {b} = {a} + {=b-b%100} + {=b%100}. Langkah 1: {a} + {=b-b%100} = …",
+          "answer": "a + b - b % 100",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "b % 100 != 0 && a + b <= 999"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "b": [110, 399]
+          },
+          "prompt": "{a} + {b} = …  (pecah {b} menjadi {=b-b%100} + {=b-b%10-b+b%100} + {=b%10})",
+          "answer": "a + b",
+          "explain": "Tambah ratusan, puluhan, lalu satuan: {answer}.",
+          "mode": "input",
+          "constraint": "b % 100 != 0 && a + b <= 999"
+        }
+      }
+    ]
+  }
+}

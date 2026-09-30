@@ -1,0 +1,78 @@
+{
+  "id": "math.sd1.d5.lebih-banyak-atau-lebih-sedikit-berapa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "D",
+  "order": 5,
+  "title": "Membandingkan sampai 10 — Level 5 — Lebih banyak atau lebih sedikit berapa?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-D",
+    "ccss": "1.OA.D.8 / 1.NBT.B.3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [0, 9]
+          },
+          "prompt": "Ada {a} {x} dan {b} {y}. Berapa lebih banyak {x} daripada {y}?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. Jadi {x} lebih banyak {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "x": ["apel", "jeruk", "pisang", "bebek", "ayam", "ikan", "kelinci", "kucing"],
+            "y": ["bola", "balon", "mobil", "bintang", "kue", "topi", "pensil", "buku"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "a - b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [0, 9]
+          },
+          "prompt": "Ada {a} {x} dan {b} {y}. Berapa lebih sedikit {y} daripada {x}?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. Jadi {y} lebih sedikit {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "x": ["apel", "jeruk", "pisang", "bebek", "ayam", "ikan", "kelinci", "kucing"],
+            "y": ["bola", "balon", "mobil", "bintang", "kue", "topi", "pensil", "buku"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b",
+              "tag": "tidak-dikurangi"
+            },
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

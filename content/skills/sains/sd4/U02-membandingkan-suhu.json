@@ -1,0 +1,91 @@
+{
+  "id": "sains.sd4.u2.membandingkan-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "U",
+  "order": 2,
+  "title": "Cuaca dan iklim — Level 2 — Membandingkan suhu",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 38],
+            "b": [20, 38]
+          },
+          "constraint": "a != b",
+          "prompt": "Termometer A menunjukkan {a} °C. Termometer B menunjukkan {b} °C. Mana yang lebih panas?",
+          "answer": "(a < b) + 1",
+          "labels": {
+            "1": "Termometer A",
+            "2": "Termometer B"
+          },
+          "explain": "Angka suhu yang lebih besar berarti lebih panas."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 38],
+            "b": [15, 38]
+          },
+          "constraint": "a > b",
+          "prompt": "Siang hari termometer menunjukkan {a} °C, malam harinya {b} °C. Berapa derajat suhu turun?",
+          "answer": "a - b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b - 1",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} − {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [18, 30],
+            "b": [2, 8]
+          },
+          "prompt": "Pagi hari suhu {a} °C. Menjelang siang suhu naik {b} °C. Berapa suhunya sekarang?",
+          "answer": "a + b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a + b + 1",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Naik berarti ditambah: {a} + {b} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

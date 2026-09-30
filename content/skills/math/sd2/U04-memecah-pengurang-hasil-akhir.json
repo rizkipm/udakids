@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.u4.memecah-pengurang-hasil-akhir",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 4,
+  "title": "Strategi pengurangan tiga angka — Level 4 — Memecah pengurang: hasil akhir",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [500, 999],
+      "b": [111, 399]
+    },
+    "prompt": "{a} − {b}: kurangi {=floor(b/100)*100} dulu, lalu kurangi {=b%100}. Hasilnya …",
+    "answer": "a - b",
+    "explain": "{a} − {=floor(b/100)*100} = {=a-floor(b/100)*100}, lalu − {=b%100} = {answer}.",
+    "constraint": "b % 100 >= 10 && b < a",
+    "distractors": [
+      {
+        "expr": "a - b + 10",
+        "tag": "lupa-meminjam"
+      },
+      {
+        "expr": "a - b - 10",
+        "tag": "salah-pinjam"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

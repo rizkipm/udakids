@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.a1.papan-seratus-angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 1,
+  "title": "Membilang — Level 1 — Papan seratus: angka yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [12, 99]
+    },
+    "prompt": "Angka berapa yang hilang di papan seratus?",
+    "answer": "x",
+    "explain": "Sebelumnya {=x-1}, sesudahnya {=x+1}. Jadi {answer}.",
+    "constraint": "x % 10 != 1",
+    "stimulus": [
+      {
+        "kind": "number-chart",
+        "start": "=floor((x - 1) / 10) * 10 + 1",
+        "end": "=floor((x - 1) / 10) * 10 + 10",
+        "columns": 10,
+        "blanks": ["=x"]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "x + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "x - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "x + 10",
+        "tag": "salah-baris"
+      }
+    ]
+  }
+}

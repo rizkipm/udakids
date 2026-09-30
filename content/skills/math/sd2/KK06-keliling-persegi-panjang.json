@@ -1,0 +1,51 @@
+{
+  "id": "math.sd2.kk6.keliling-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "KK",
+  "order": 6,
+  "title": "Luas dan keliling — Level 6 — Keliling persegi panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A (pengayaan) / B: luas & keliling",
+    "kognitif": "applying",
+    "ixlRef": "G2-KK"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [2, 9],
+      "h": [1, 6]
+    },
+    "prompt": "Berapa cm keliling persegi panjang ini?",
+    "answer": "2 * (w + h)",
+    "explain": "Keliling = jumlah semua sisi: {w} + {h} + {w} + {h} = {answer} cm.",
+    "constraint": "w != h",
+    "stimulus": [
+      {
+        "kind": "rect",
+        "w": "=w",
+        "h": "=h",
+        "unit": "cm",
+        "grid": false
+      }
+    ],
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "w + h",
+        "tag": "dua-sisi-saja"
+      },
+      {
+        "expr": "w * h",
+        "tag": "luas"
+      },
+      {
+        "expr": "2 * w + h",
+        "tag": "lupa-satu-sisi"
+      }
+    ]
+  }
+}

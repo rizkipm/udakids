@@ -1,0 +1,68 @@
+{
+  "id": "math.sd1.bb8.pilih-yang-lebih-besar-atau-kecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "BB",
+  "order": 8,
+  "title": "Membandingkan sampai 100 — Level 8 — Pilih yang lebih besar atau kecil",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-BB"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 90],
+            "d": [1, 9]
+          },
+          "prompt": "Mana bilangan yang lebih besar dari {a}?",
+          "answer": "a + d",
+          "explain": "{answer} lebih besar dari {a}.",
+          "constraint": "a + d <= 99",
+          "choices": 3,
+          "distractors": [
+            {
+              "expr": "a - d",
+              "tag": "lebih-kecil"
+            },
+            {
+              "expr": "a - 10",
+              "tag": "lebih-kecil"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 90],
+            "d": [1, 9]
+          },
+          "prompt": "Mana bilangan yang lebih kecil dari {a}?",
+          "answer": "a - d",
+          "explain": "{answer} lebih kecil dari {a}.",
+          "choices": 3,
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "lebih-besar"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "lebih-besar"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

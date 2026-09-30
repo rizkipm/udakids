@@ -1,0 +1,94 @@
+{
+  "id": "math.sd2.l3.ribuan-ratusan-dan-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 3,
+  "title": "Nilai tempat — Level 3 — Ribuan, ratusan, dan puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 10]
+          },
+          "prompt": "{k} ratusan = …",
+          "answer": "k * 100",
+          "explain": "{k} × 100 = {answer}.",
+          "distractors": [
+            {
+              "expr": "k * 10",
+              "tag": "salah-nilai-tempat"
+            },
+            {
+              "expr": "k",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "k * 1000",
+              "tag": "ribuan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [10, 60]
+          },
+          "prompt": "{k} puluhan = …",
+          "answer": "k * 10",
+          "explain": "{k} × 10 = {answer}.",
+          "distractors": [
+            {
+              "expr": "k * 100",
+              "tag": "salah-nilai-tempat"
+            },
+            {
+              "expr": "k",
+              "tag": "angka-saja"
+            },
+            "k * 10 + 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 10]
+          },
+          "prompt": "{n} = … ratusan",
+          "answer": "n / 100",
+          "explain": "{n} : 100 = {answer} ratusan.",
+          "derived": {
+            "n": "k * 100"
+          },
+          "distractors": [
+            {
+              "expr": "n / 10",
+              "tag": "puluhan"
+            },
+            "n / 100 + 1",
+            {
+              "expr": "n",
+              "tag": "bilangan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

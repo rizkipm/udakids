@@ -1,0 +1,74 @@
+{
+  "id": "math.sd2.u10.tantangan-strategi-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 10,
+  "title": "Strategi pengurangan tiga angka — Level 10 — Tantangan strategi pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-U"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [1, 3],
+            "a": [620, 999]
+          },
+          "prompt": "Pakai kompensasi: {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "derived": {
+            "b": "m * 100 - c"
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [500, 999],
+            "b": [111, 399]
+          },
+          "prompt": "{a} − {b}: kurangi {=floor(b/100)*100} dulu, lalu {=b%100}. Hasilnya …",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "constraint": "b % 100 >= 10 && b < a",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h1": [3, 9],
+            "h2": [1, 2],
+            "t1": [1, 9],
+            "t2": [0, 9],
+            "s1": [0, 9],
+            "s2": [0, 9]
+          },
+          "prompt": "({=h1*100} + {=t1*10} + {s1}) − ({=h2*100} + {=t2*10} + {s2}) = …",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "derived": {
+            "a": "h1 * 100 + t1 * 10 + s1",
+            "b": "h2 * 100 + t2 * 10 + s2"
+          },
+          "constraint": "s1 < s2 || t1 < t2",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

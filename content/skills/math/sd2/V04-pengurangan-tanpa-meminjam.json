@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.v4.pengurangan-tanpa-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "V",
+  "order": 4,
+  "title": "Pengurangan tiga angka — Level 4 — Pengurangan tanpa meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-V"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h1": [3, 9],
+      "h2": [1, 2],
+      "t1": [0, 9],
+      "t2": [0, 9],
+      "s1": [0, 9],
+      "s2": [0, 9]
+    },
+    "prompt": "{a} − {b} = …",
+    "answer": "a - b",
+    "explain": "Kurangi satuan, puluhan, lalu ratusan: {answer}.",
+    "derived": {
+      "a": "h1 * 100 + t1 * 10 + s1",
+      "b": "h2 * 100 + t2 * 10 + s2"
+    },
+    "constraint": "t1 >= t2 && s1 >= s2",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "a - b + 10",
+        "tag": "salah-puluhan"
+      },
+      {
+        "expr": "a - b - 100",
+        "tag": "salah-ratusan"
+      }
+    ]
+  }
+}

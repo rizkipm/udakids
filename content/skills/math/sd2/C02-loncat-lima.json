@@ -1,0 +1,78 @@
+{
+  "id": "math.sd2.c2.loncat-lima",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "C",
+  "order": 2,
+  "title": "Loncat hitung dan pola bilangan — Level 2 — Loncat lima",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-C",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 17]
+          },
+          "prompt": "{a}, {=a+5}, {=a+10}, … Bilangan berikutnya?",
+          "answer": "a + 15",
+          "explain": "Setiap loncatan tambah 5: {=a+10} + 5 = {answer}.",
+          "derived": {
+            "a": "k * 5"
+          },
+          "distractors": [
+            {
+              "expr": "a + 11",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 20",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a + 16",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 17]
+          },
+          "prompt": "{a}, {=a+5}, …, {=a+15}. Bilangan yang hilang?",
+          "answer": "a + 10",
+          "explain": "Setiap loncatan tambah 5: {=a+5} + 5 = {answer}.",
+          "derived": {
+            "a": "k * 5"
+          },
+          "distractors": [
+            {
+              "expr": "a + 6",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 15",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a + 11",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

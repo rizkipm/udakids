@@ -1,0 +1,233 @@
+{
+  "id": "math.sd1.n6.lebih-banyak-atau-lebih-sedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "N",
+  "order": 6,
+  "title": "Soal cerita perbandingan sampai 10 — Level 6 — Lebih banyak atau lebih sedikit?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-N",
+    "cc": "1.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "prompt": "{nama} punya {a} {benda}. {teman} punya {b} {benda}. Punya {nama} lebih banyak atau lebih sedikit daripada punya {teman}?",
+          "answer": "(a > b) * 1 + (a < b) * 2",
+          "explain": "{nama} punya {a}, {teman} punya {b}. Saat membilang, bilangan yang lebih besar disebut belakangan. Jadi punya {nama} {answer}.",
+          "constraint": "a != b",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "labels": {
+            "1": "lebih banyak",
+            "2": "lebih sedikit"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. {teman} punya {b} {benda}. Berapa lebih banyak {benda} {nama}?",
+          "answer": "d",
+          "explain": "Selisihnya {a} − {b} = {d}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "b",
+              "tag": "kelompok-kecil"
+            },
+            "d + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. {teman} punya {b} {benda}. Berapa lebih sedikit {benda} {teman}?",
+          "answer": "d",
+          "explain": "Selisihnya {a} − {b} = {d}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "b",
+              "tag": "kelompok-kecil"
+            },
+            "d + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{nama} punya {b} {benda}. {teman} punya {a} {benda}. Berapa lebih banyak {benda} {teman} daripada {nama}?",
+          "answer": "d",
+          "explain": "Selisihnya {a} − {b} = {d}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "b",
+              "tag": "kelompok-kecil"
+            },
+            "d + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{nama} punya {b} {benda}. {teman} punya {a} {benda}. Berapa lebih sedikit {benda} {nama} daripada {teman}?",
+          "answer": "d",
+          "explain": "Selisihnya {a} − {b} = {d}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "b",
+              "tag": "kelompok-kecil"
+            },
+            "d + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      }
+    ]
+  }
+}

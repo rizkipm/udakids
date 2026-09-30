@@ -1,0 +1,77 @@
+{
+  "id": "math.sd1.dd9.soal-cerita-penjumlahan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "DD",
+  "order": 9,
+  "title": "Penjumlahan dua angka — Level 9 — Soal cerita penjumlahan dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-DD"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 70],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} membaca {a} halaman kemarin dan {b} halaman hari ini. Berapa halaman semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 99",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "mengurangi"
+            },
+            "a + b + 10",
+            "a + b - 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [11, 39]
+          },
+          "prompt": "Di kebun ada {a} pohon mangga dan {b} pohon rambutan. Berapa pohon semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 99",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 10",
+            "a + b - 10"
+          ]
+        }
+      }
+    ]
+  }
+}

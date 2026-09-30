@@ -1,0 +1,91 @@
+{
+  "id": "math.sd1.s2.mengurangi-dari-10-dan-menuju-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 2,
+  "title": "Strategi pengurangan sampai 20 — Level 2 — Mengurangi dari 10 dan menuju 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "10 − {b} = …",
+          "answer": "10 - b",
+          "explain": "10 − {b} = {answer}, karena {b} + {answer} = 10.",
+          "distractors": [
+            "11 - b",
+            "9 - b",
+            {
+              "expr": "b",
+              "tag": "bilangan-yang-dikurangi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 19]
+          },
+          "prompt": "{a} − {=a-10} = …",
+          "answer": "10",
+          "explain": "{a} = 10 + {=a-10}. Ambil {=a-10}, tinggal 10.",
+          "distractors": [
+            "9",
+            "11",
+            {
+              "expr": "a - 10",
+              "tag": "satuan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 20]
+          },
+          "prompt": "{a} − 10 = …",
+          "answer": "a - 10",
+          "explain": "{a} = 10 + {=a-10}. Ambil 10, tinggal {answer}.",
+          "distractors": [
+            "a - 9",
+            "a - 11",
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 20]
+          },
+          "prompt": "{a} − … = 10",
+          "answer": "a - 10",
+          "explain": "{a} − {answer} = 10.",
+          "distractors": ["10", "a - 9", "a - 11"]
+        }
+      }
+    ]
+  }
+}

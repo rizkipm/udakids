@@ -1,0 +1,63 @@
+{
+  "id": "math.sd2.l10.tantangan-tebak-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 10,
+  "title": "Nilai tempat — Level 10 — Tantangan tebak bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9]
+          },
+          "prompt": "Aku bilangan tiga angka. Ratusanku {h}, puluhanku {t}, satuanku {o}. Aku bilangan …",
+          "answer": "h * 100 + t * 10 + o",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7],
+            "d": [1, 2]
+          },
+          "prompt": "Ratusanku {h}. Puluhanku {d} lebih dari ratusan. Satuanku 0. Aku bilangan …",
+          "answer": "h * 100 + (h + d) * 10",
+          "explain": "Puluhan = {h} + {d} = {=h+d}. Jadi {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7],
+            "t": [10, 15],
+            "o": [10, 15]
+          },
+          "prompt": "{h} ratusan, {t} puluhan, {o} satuan = …",
+          "answer": "h * 100 + t * 10 + o",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

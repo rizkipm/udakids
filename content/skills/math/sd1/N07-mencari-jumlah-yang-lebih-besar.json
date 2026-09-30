@@ -1,0 +1,98 @@
+{
+  "id": "math.sd1.n7.mencari-jumlah-yang-lebih-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "N",
+  "order": 7,
+  "title": "Soal cerita perbandingan sampai 10 — Level 7 — Mencari jumlah yang lebih besar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-N",
+    "cc": "1.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{teman} punya {b} {benda}. {nama} punya {d} {benda} lebih banyak daripada {teman}. Berapa {benda} {nama}?",
+          "answer": "a",
+          "explain": "Punya {teman} ditambah {d}: {b} + {d} = {a}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Dewi", "Rina", "Ayu"],
+            "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar", "Bayu", "Fajar", "Joko"],
+            "benda": [
+              "kelereng",
+              "permen",
+              "stiker",
+              "pensil",
+              "buku",
+              "kartu gambar",
+              "jepit rambut",
+              "kancing"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "abs(b - d)",
+              "tag": "mengurangi-karena-kata-lebih"
+            },
+            {
+              "expr": "b",
+              "tag": "punya-teman"
+            },
+            {
+              "expr": "d",
+              "tag": "selisih"
+            },
+            "a + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "Ada {b} kucing di teras. Banyak ayam {d} lebih banyak daripada kucing. Berapa ayam?",
+          "answer": "a",
+          "explain": "Ayam = kucing + {d}: {b} + {d} = {a}.",
+          "distractors": [
+            {
+              "expr": "abs(b - d)",
+              "tag": "mengurangi-karena-kata-lebih"
+            },
+            {
+              "expr": "b",
+              "tag": "banyak-kucing"
+            },
+            {
+              "expr": "d",
+              "tag": "selisih"
+            },
+            "a + 1"
+          ],
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "b + d <= 10"
+        }
+      }
+    ]
+  }
+}

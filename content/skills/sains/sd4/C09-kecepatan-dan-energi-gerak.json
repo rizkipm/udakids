@@ -1,0 +1,197 @@
+{
+  "id": "sains.sd4.c9.kecepatan-dan-energi-gerak",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "C",
+  "order": 9,
+  "title": "Gaya dan gerak — Level 9 — Kecepatan dan energi gerak",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30]
+          },
+          "constraint": "a != b",
+          "prompt": "Dua bola bermassa sama. Bola A melaju {a} m/detik, bola B {b} m/detik. Mana yang energi geraknya lebih besar?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Bola A",
+            "2": "Bola B"
+          },
+          "explain": "Massa sama, jadi yang lebih cepat punya energi gerak lebih besar. Bandingkan {a} dan {b}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": [2, 12],
+            "t": [5, 20]
+          },
+          "derived": {
+            "d": "v * t"
+          },
+          "words": {
+            "n": ["Dimas", "Alya", "Budi", "Putri"]
+          },
+          "prompt": "{n} bersepeda {d} m dalam {t} detik. Berapa meter yang ditempuh setiap detik?",
+          "answer": "v",
+          "unit": "m/detik",
+          "distractors": [
+            {
+              "expr": "d - t",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "d + t",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "v * 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kecepatan = jarak : waktu = {d} : {t} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Truk dan sepeda melaju sama cepat. Mana yang energi geraknya lebih besar?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Truk"
+                  },
+                  "say": "Truk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepeda"
+                  },
+                  "say": "Sepeda",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama besar"
+                  },
+                  "say": "Sama besar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak punya energi gerak"
+                  },
+                  "say": "Tidak punya energi gerak",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pada kecepatan sama, benda bermassa lebih besar punya energi gerak lebih besar.",
+              "source": "Makin cepat benda bergerak, makin besar energi geraknya; kecepatan = jarak : waktu — NGSS 4-PS3-1, 4-PS3-3"
+            },
+            {
+              "prompt": "Bola yang menggelinding makin cepat akan menabrak kaleng …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih keras, karena energinya lebih besar"
+                  },
+                  "say": "lebih keras, karena energinya lebih besar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih pelan"
+                  },
+                  "say": "lebih pelan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama saja"
+                  },
+                  "say": "sama saja",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanpa suara"
+                  },
+                  "say": "tanpa suara",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Makin cepat benda bergerak, makin besar energi geraknya, sehingga tabrakannya makin kuat.",
+              "source": "Makin cepat benda bergerak, makin besar energi geraknya; kecepatan = jarak : waktu — NGSS 4-PS3-1, 4-PS3-3"
+            },
+            {
+              "prompt": "Mobil mainan meluncur dari papan miring. Papan dibuat lebih tinggi. Apa yang terjadi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mobil melaju lebih cepat di bawah"
+                  },
+                  "say": "Mobil melaju lebih cepat di bawah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mobil melaju lebih pelan"
+                  },
+                  "say": "Mobil melaju lebih pelan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mobil tidak bergerak"
+                  },
+                  "say": "Mobil tidak bergerak",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mobil naik ke atas"
+                  },
+                  "say": "Mobil naik ke atas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Makin tinggi awalnya, makin banyak energi tersimpan yang berubah menjadi energi gerak.",
+              "source": "Makin cepat benda bergerak, makin besar energi geraknya; kecepatan = jarak : waktu — NGSS 4-PS3-1, 4-PS3-3"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

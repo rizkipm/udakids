@@ -1,0 +1,185 @@
+{
+  "id": "sains.sd4.f8.suhu-dan-energi-panas",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "F",
+  "order": 8,
+  "title": "Panas dan energi termal — Level 8 — Suhu dan energi panas",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [1, 10],
+            "t": {
+              "range": [40, 90],
+              "step": 10
+            }
+          },
+          "constraint": "a != b",
+          "prompt": "Panci A berisi {a} liter air dan panci B {b} liter air, sama-sama {t} °C. Mana yang energi panasnya lebih besar?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Panci A",
+            "2": "Panci B"
+          },
+          "explain": "Suhu sama, jadi air yang lebih banyak menyimpan energi panas lebih besar."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95],
+            "b": [20, 95]
+          },
+          "constraint": "abs(a - b) >= 5",
+          "prompt": "Dua gelas berisi air sama banyak: gelas A {a} °C, gelas B {b} °C. Mana yang energi panasnya lebih besar?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Gelas A",
+            "2": "Gelas B"
+          },
+          "explain": "Banyak air sama, jadi yang suhunya lebih tinggi punya energi panas lebih besar."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Suhu adalah ukuran …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panas atau dinginnya benda"
+                  },
+                  "say": "panas atau dinginnya benda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berat benda"
+                  },
+                  "say": "berat benda",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panjang benda"
+                  },
+                  "say": "panjang benda",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "warna benda"
+                  },
+                  "say": "warna benda",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Suhu diukur dengan termometer dalam derajat Celsius (°C).",
+              "source": "Suhu vs energi panas: pada suhu sama, zat yang lebih banyak menyimpan energi panas lebih besar — NGSS 4-PS3-2 (disederhanakan)"
+            },
+            {
+              "prompt": "Dua panci air bersuhu 80 °C: panci A 1 liter, panci B 5 liter. Mana yang menyimpan energi panas lebih banyak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Panci B"
+                  },
+                  "say": "Panci B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Panci A"
+                  },
+                  "say": "Panci A",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama banyak"
+                  },
+                  "say": "Sama banyak",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak menyimpan energi"
+                  },
+                  "say": "Tidak menyimpan energi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Suhunya sama, tetapi air di panci B lebih banyak, jadi energi panasnya lebih besar.",
+              "source": "Suhu vs energi panas: pada suhu sama, zat yang lebih banyak menyimpan energi panas lebih besar — NGSS 4-PS3-2 (disederhanakan)"
+            },
+            {
+              "prompt": "Dua gelas air sama banyak: A 40 °C dan B 90 °C. Mana yang energi panasnya lebih besar?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gelas B"
+                  },
+                  "say": "Gelas B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gelas A"
+                  },
+                  "say": "Gelas A",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sama besar"
+                  },
+                  "say": "Sama besar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak bisa diketahui"
+                  },
+                  "say": "Tidak bisa diketahui",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Banyak airnya sama, jadi air yang suhunya lebih tinggi menyimpan energi panas lebih besar.",
+              "source": "Suhu vs energi panas: pada suhu sama, zat yang lebih banyak menyimpan energi panas lebih besar — NGSS 4-PS3-2 (disederhanakan)"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "math.sd2.z5.puluhan-atau-ratusan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 5,
+  "title": "Estimasi dan pembulatan — Level 5 — Puluhan atau ratusan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 989]
+          },
+          "prompt": "Bulatkan {a} ke puluhan terdekat.",
+          "answer": "round(a / 10) * 10",
+          "explain": "{a} → {answer}.",
+          "constraint": "a % 10 != 0",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 949]
+          },
+          "prompt": "Bulatkan {a} ke ratusan terdekat.",
+          "answer": "round(a / 100) * 100",
+          "explain": "{a} → {answer}.",
+          "constraint": "a % 100 != 0",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

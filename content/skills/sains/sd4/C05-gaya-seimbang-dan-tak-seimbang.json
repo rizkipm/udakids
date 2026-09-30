@@ -1,0 +1,192 @@
+{
+  "id": "sains.sd4.c5.gaya-seimbang-dan-tak-seimbang",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "C",
+  "order": 5,
+  "title": "Gaya dan gerak — Level 5 — Gaya seimbang dan tak seimbang",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 150],
+              "step": 10
+            },
+            "b": {
+              "range": [50, 150],
+              "step": 10
+            }
+          },
+          "prompt": "Tim Raka menarik tali ke kiri {a} N. Tim Sari menarik ke kanan {b} N. Ke mana tali bergerak?",
+          "answer": "(a > b) + 2 * (a < b) + 3 * (a == b)",
+          "labels": {
+            "1": "Ke kiri",
+            "2": "Ke kanan",
+            "3": "Diam (gaya seimbang)"
+          },
+          "explain": "Bandingkan {a} N dan {b} N. Tali bergerak ke arah gaya yang lebih besar; sama besar berarti seimbang."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [10, 100],
+              "step": 10
+            },
+            "b": {
+              "range": [10, 100],
+              "step": 10
+            }
+          },
+          "prompt": "Dua anak mendorong lemari dari arah berlawanan: {a} N dan {b} N. Gayanya seimbang atau tidak?",
+          "answer": "1 + (a != b)",
+          "labels": {
+            "1": "Seimbang",
+            "2": "Tidak seimbang"
+          },
+          "explain": "Seimbang jika sama besar dan berlawanan arah. {a} N dan {b} N."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Dua tim tarik tambang menarik sama kuat. Apa yang terjadi pada tali?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tali tidak bergerak (gaya seimbang)"
+                  },
+                  "say": "Tali tidak bergerak (gaya seimbang)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tali bergerak ke kiri"
+                  },
+                  "say": "Tali bergerak ke kiri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tali bergerak ke kanan"
+                  },
+                  "say": "Tali bergerak ke kanan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tali putus pasti"
+                  },
+                  "say": "Tali putus pasti",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gaya yang sama besar dan berlawanan arah adalah gaya seimbang. Benda tetap diam.",
+              "source": "Gaya seimbang & tak seimbang pada gerak benda — NGSS 3-PS2-1; Buku Siswa IPAS SD Kelas IV Bab 3 (Kemendikbudristek, 2021)"
+            },
+            {
+              "prompt": "Buku diam di atas meja. Gaya-gaya pada buku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "seimbang"
+                  },
+                  "say": "seimbang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak seimbang"
+                  },
+                  "say": "tidak seimbang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak ada gaya sama sekali"
+                  },
+                  "say": "tidak ada gaya sama sekali",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hanya gaya magnet"
+                  },
+                  "say": "hanya gaya magnet",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gravitasi menarik buku ke bawah dan meja menahannya ke atas sama besar, jadi buku diam.",
+              "source": "Gaya seimbang & tak seimbang pada gerak benda — NGSS 3-PS2-1; Buku Siswa IPAS SD Kelas IV Bab 3 (Kemendikbudristek, 2021)"
+            },
+            {
+              "prompt": "Gaya tak seimbang bekerja pada benda. Apa yang dapat terjadi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benda mulai bergerak, berhenti, atau berubah arah"
+                  },
+                  "say": "Benda mulai bergerak, berhenti, atau berubah arah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benda pasti tetap diam"
+                  },
+                  "say": "Benda pasti tetap diam",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benda menghilang"
+                  },
+                  "say": "Benda menghilang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Massa benda berubah"
+                  },
+                  "say": "Massa benda berubah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gaya tak seimbang mengubah gerak benda: kecepatan atau arahnya berubah.",
+              "source": "Gaya seimbang & tak seimbang pada gerak benda — NGSS 3-PS2-1; Buku Siswa IPAS SD Kelas IV Bab 3 (Kemendikbudristek, 2021)"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

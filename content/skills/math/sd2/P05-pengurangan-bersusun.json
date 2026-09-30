@@ -1,0 +1,81 @@
+{
+  "id": "math.sd2.p5.pengurangan-bersusun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "P",
+  "order": 5,
+  "title": "Pengurangan dua angka — Level 5 — Pengurangan bersusun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-P",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 99],
+            "b": [11, 89]
+          },
+          "prompt": "Hitung pengurangan bersusun ini.",
+          "answer": "a - b",
+          "explain": "Mulai dari satuan; bila kurang, pinjam 1 puluhan. Hasil {answer}.",
+          "mode": "input",
+          "constraint": "b < a",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["−", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 99],
+            "b": [11, 89]
+          },
+          "prompt": "Hitung pengurangan bersusun ini.",
+          "answer": "a - b",
+          "explain": "Hasil {answer}.",
+          "constraint": "b < a",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["−", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ],
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjam"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-pinjam"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

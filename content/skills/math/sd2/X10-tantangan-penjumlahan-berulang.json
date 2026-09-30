@@ -1,0 +1,2407 @@
+{
+  "id": "math.sd2.x10.tantangan-penjumlahan-berulang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "X",
+  "order": 10,
+  "title": "Penjumlahan berulang — Level 10 — Tantangan penjumlahan berulang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: perkalian sebagai penjumlahan berulang",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-X"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 6]
+          },
+          "prompt": "Ada {g} mobil. Setiap mobil beroda 4. Berapa roda semuanya?",
+          "answer": "g * 4",
+          "explain": "4 dijumlahkan {g} kali = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 5],
+            "k": [2, 9]
+          },
+          "prompt": "{nama} menyusun kursi {g} baris, setiap baris {k} kursi. Berapa kursi semuanya?",
+          "answer": "g * k",
+          "explain": "{answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan"
+            ]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 4 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 4 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 5 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 keranjang, setiap keranjang berisi 4 mangga."
+                  },
+                  "say": "Ada 6 keranjang, setiap keranjang berisi 4 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 mangga dan 4 mangga lagi."
+                  },
+                  "say": "Ada 5 mangga dan 4 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 + 4 + 4 berarti 5 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 4 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 5 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 4 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bunga dan 4 bunga lagi."
+                  },
+                  "say": "Ada 3 bunga dan 4 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 berarti 3 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 2 pot, setiap pot berisi 6 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pot, setiap pot berisi 7 bibit cabai."
+                  },
+                  "say": "Ada 2 pot, setiap pot berisi 7 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 6 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 bibit cabai dan 6 bibit cabai lagi."
+                  },
+                  "say": "Ada 2 bibit cabai dan 6 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 berarti 2 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 5 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 6 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 5 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bunga dan 5 bunga lagi."
+                  },
+                  "say": "Ada 3 bunga dan 5 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 berarti 3 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 4 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 4 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 5 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 5 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 4 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 4 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kelereng dan 4 kelereng lagi."
+                  },
+                  "say": "Ada 2 kelereng dan 4 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 berarti 2 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 6 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 7 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 7 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 6 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kue dan 6 kue lagi."
+                  },
+                  "say": "Ada 4 kue dan 6 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 berarti 4 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 4 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 5 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 5 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 4 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bibit cabai dan 4 bibit cabai lagi."
+                  },
+                  "say": "Ada 3 bibit cabai dan 4 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 berarti 3 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 2 piring, setiap piring berisi 6 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 piring, setiap piring berisi 7 kue."
+                  },
+                  "say": "Ada 2 piring, setiap piring berisi 7 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 6 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kue dan 6 kue lagi."
+                  },
+                  "say": "Ada 2 kue dan 6 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 berarti 2 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 3 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 4 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 4 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 3 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kelereng dan 3 kelereng lagi."
+                  },
+                  "say": "Ada 2 kelereng dan 3 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 berarti 2 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 6 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kantong, setiap kantong berisi 7 kelereng."
+                  },
+                  "say": "Ada 2 kantong, setiap kantong berisi 7 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 6 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kelereng dan 6 kelereng lagi."
+                  },
+                  "say": "Ada 2 kelereng dan 6 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 berarti 2 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 2 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 3 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 3 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 2 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 bibit cabai dan 2 bibit cabai lagi."
+                  },
+                  "say": "Ada 4 bibit cabai dan 2 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 berarti 4 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kotak, setiap kotak berisi 2 pensil."
+                  },
+                  "say": "Ada 5 kotak, setiap kotak berisi 2 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 5 kotak, setiap kotak berisi 3 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 kotak, setiap kotak berisi 2 pensil."
+                  },
+                  "say": "Ada 6 kotak, setiap kotak berisi 2 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pensil dan 2 pensil lagi."
+                  },
+                  "say": "Ada 5 pensil dan 2 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 4 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 4 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 5 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 5 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 4 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 4 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kue dan 4 kue lagi."
+                  },
+                  "say": "Ada 3 kue dan 4 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 berarti 3 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 3 keranjang, setiap keranjang berisi 2 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 keranjang, setiap keranjang berisi 3 mangga."
+                  },
+                  "say": "Ada 3 keranjang, setiap keranjang berisi 3 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 2 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 mangga dan 2 mangga lagi."
+                  },
+                  "say": "Ada 3 mangga dan 2 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 berarti 3 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 2 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 3 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 2 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kue dan 2 kue lagi."
+                  },
+                  "say": "Ada 4 kue dan 2 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 berarti 4 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 2 pot, setiap pot berisi 4 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pot, setiap pot berisi 5 bibit cabai."
+                  },
+                  "say": "Ada 2 pot, setiap pot berisi 5 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 4 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 bibit cabai dan 4 bibit cabai lagi."
+                  },
+                  "say": "Ada 2 bibit cabai dan 4 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 berarti 2 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 4 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 4 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 5 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 keranjang, setiap keranjang berisi 4 mangga."
+                  },
+                  "say": "Ada 3 keranjang, setiap keranjang berisi 4 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 mangga dan 4 mangga lagi."
+                  },
+                  "say": "Ada 2 mangga dan 4 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 berarti 2 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 6 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 7 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 7 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 6 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kelereng dan 6 kelereng lagi."
+                  },
+                  "say": "Ada 4 kelereng dan 6 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 berarti 4 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 5 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 5 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 6 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 5 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 5 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kelereng dan 5 kelereng lagi."
+                  },
+                  "say": "Ada 3 kelereng dan 5 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 berarti 3 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 2 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 2 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 3 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 3 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 2 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 2 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bunga dan 2 bunga lagi."
+                  },
+                  "say": "Ada 3 bunga dan 2 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 berarti 3 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 6 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 7 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 7 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 6 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kelereng dan 6 kelereng lagi."
+                  },
+                  "say": "Ada 3 kelereng dan 6 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 berarti 3 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 3 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 3 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 4 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 3 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 3 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 bibit cabai dan 3 bibit cabai lagi."
+                  },
+                  "say": "Ada 4 bibit cabai dan 3 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 berarti 4 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 2 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 3 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 2 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kue dan 2 kue lagi."
+                  },
+                  "say": "Ada 3 kue dan 2 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 berarti 3 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 2 vas, setiap vas berisi 5 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 2 vas, setiap vas berisi 6 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 5 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 bunga dan 5 bunga lagi."
+                  },
+                  "say": "Ada 2 bunga dan 5 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 berarti 2 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 5 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 6 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 3 keranjang, setiap keranjang berisi 5 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 mangga dan 5 mangga lagi."
+                  },
+                  "say": "Ada 2 mangga dan 5 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 berarti 2 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 2 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 3 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 3 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 2 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bibit cabai dan 2 bibit cabai lagi."
+                  },
+                  "say": "Ada 3 bibit cabai dan 2 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 berarti 3 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 5 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 5 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 6 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 6 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 5 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 5 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pensil dan 5 pensil lagi."
+                  },
+                  "say": "Ada 2 pensil dan 5 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 berarti 2 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 3 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 4 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 4 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 3 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kelereng dan 3 kelereng lagi."
+                  },
+                  "say": "Ada 4 kelereng dan 3 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 berarti 4 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 6 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 6 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 7 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 7 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 6 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 6 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pensil dan 6 pensil lagi."
+                  },
+                  "say": "Ada 2 pensil dan 6 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 berarti 2 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 6 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 7 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 7 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 6 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bibit cabai dan 6 bibit cabai lagi."
+                  },
+                  "say": "Ada 3 bibit cabai dan 6 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 berarti 3 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 2 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 2 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 3 kantong, setiap kantong berisi 3 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kantong, setiap kantong berisi 2 kelereng."
+                  },
+                  "say": "Ada 4 kantong, setiap kantong berisi 2 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kelereng dan 2 kelereng lagi."
+                  },
+                  "say": "Ada 3 kelereng dan 2 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 berarti 3 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 5 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 5 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 3 pot, setiap pot berisi 6 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 5 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 5 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bibit cabai dan 5 bibit cabai lagi."
+                  },
+                  "say": "Ada 3 bibit cabai dan 5 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 berarti 3 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 2 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 3 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 3 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 2 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 mangga dan 2 mangga lagi."
+                  },
+                  "say": "Ada 4 mangga dan 2 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 berarti 4 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 6 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pot, setiap pot berisi 7 bibit cabai."
+                  },
+                  "say": "Ada 4 pot, setiap pot berisi 7 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 6 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 6 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 bibit cabai dan 6 bibit cabai lagi."
+                  },
+                  "say": "Ada 4 bibit cabai dan 6 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 berarti 4 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 4 kotak, setiap kotak berisi 3 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kotak, setiap kotak berisi 4 pensil."
+                  },
+                  "say": "Ada 4 kotak, setiap kotak berisi 4 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 5 kotak, setiap kotak berisi 3 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 pensil dan 3 pensil lagi."
+                  },
+                  "say": "Ada 4 pensil dan 3 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 berarti 4 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 5 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 5 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 6 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 5 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 5 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kue dan 5 kue lagi."
+                  },
+                  "say": "Ada 4 kue dan 5 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 + 5 berarti 4 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 2 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 3 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 piring, setiap piring berisi 2 kue."
+                  },
+                  "say": "Ada 6 piring, setiap piring berisi 2 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kue dan 2 kue lagi."
+                  },
+                  "say": "Ada 5 kue dan 2 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 5 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 6 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 5 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 bunga dan 5 bunga lagi."
+                  },
+                  "say": "Ada 4 bunga dan 5 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 + 5 berarti 4 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 2 piring, setiap piring berisi 3 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 piring, setiap piring berisi 4 kue."
+                  },
+                  "say": "Ada 2 piring, setiap piring berisi 4 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 3 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kue dan 3 kue lagi."
+                  },
+                  "say": "Ada 2 kue dan 3 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 berarti 2 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 6 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 7 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 7 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 6 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 bunga dan 6 bunga lagi."
+                  },
+                  "say": "Ada 4 bunga dan 6 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 berarti 4 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 6 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 7 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 7 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 6 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kue dan 6 kue lagi."
+                  },
+                  "say": "Ada 3 kue dan 6 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 berarti 3 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 2 vas, setiap vas berisi 4 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 2 vas, setiap vas berisi 5 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 4 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 bunga dan 4 bunga lagi."
+                  },
+                  "say": "Ada 2 bunga dan 4 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 berarti 2 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 3 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 4 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 4 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 3 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pensil dan 3 pensil lagi."
+                  },
+                  "say": "Ada 2 pensil dan 3 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 berarti 2 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 4 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 4 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 kotak, setiap kotak berisi 5 pensil."
+                  },
+                  "say": "Ada 2 kotak, setiap kotak berisi 5 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 4 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 4 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 pensil dan 4 pensil lagi."
+                  },
+                  "say": "Ada 2 pensil dan 4 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 berarti 2 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 4 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 5 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 5 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 vas, setiap vas berisi 4 bunga."
+                  },
+                  "say": "Ada 6 vas, setiap vas berisi 4 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 bunga dan 4 bunga lagi."
+                  },
+                  "say": "Ada 5 bunga dan 4 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 + 4 + 4 berarti 5 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 5 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 6 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 5 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 5 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 mangga dan 5 mangga lagi."
+                  },
+                  "say": "Ada 4 mangga dan 5 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 + 5 berarti 4 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 5 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 5 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 piring, setiap piring berisi 6 kue."
+                  },
+                  "say": "Ada 3 piring, setiap piring berisi 6 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 5 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 5 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kue dan 5 kue lagi."
+                  },
+                  "say": "Ada 3 kue dan 5 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 berarti 3 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 6 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 7 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 7 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 kantong, setiap kantong berisi 6 kelereng."
+                  },
+                  "say": "Ada 6 kantong, setiap kantong berisi 6 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kelereng dan 6 kelereng lagi."
+                  },
+                  "say": "Ada 5 kelereng dan 6 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 + 6 berarti 5 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 6 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 keranjang, setiap keranjang berisi 7 mangga."
+                  },
+                  "say": "Ada 2 keranjang, setiap keranjang berisi 7 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 3 keranjang, setiap keranjang berisi 6 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 2 mangga dan 6 mangga lagi."
+                  },
+                  "say": "Ada 2 mangga dan 6 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 berarti 2 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 2 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 3 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 3 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 pot, setiap pot berisi 2 bibit cabai."
+                  },
+                  "say": "Ada 6 pot, setiap pot berisi 2 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 bibit cabai dan 2 bibit cabai lagi."
+                  },
+                  "say": "Ada 5 bibit cabai dan 2 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 3 kue."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 piring, setiap piring berisi 4 kue."
+                  },
+                  "say": "Ada 4 piring, setiap piring berisi 4 kue.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 piring, setiap piring berisi 3 kue."
+                  },
+                  "say": "Ada 5 piring, setiap piring berisi 3 kue.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kue dan 3 kue lagi."
+                  },
+                  "say": "Ada 4 kue dan 3 kue lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 berarti 4 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 5 + 5 + 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 5 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 5 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 kotak, setiap kotak berisi 6 pensil."
+                  },
+                  "say": "Ada 3 kotak, setiap kotak berisi 6 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 kotak, setiap kotak berisi 5 pensil."
+                  },
+                  "say": "Ada 4 kotak, setiap kotak berisi 5 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 pensil dan 5 pensil lagi."
+                  },
+                  "say": "Ada 3 pensil dan 5 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 + 5 berarti 3 kelompok yang masing-masing berisi 5.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 6 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 vas, setiap vas berisi 7 bunga."
+                  },
+                  "say": "Ada 3 vas, setiap vas berisi 7 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 vas, setiap vas berisi 6 bunga."
+                  },
+                  "say": "Ada 4 vas, setiap vas berisi 6 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 3 bunga dan 6 bunga lagi."
+                  },
+                  "say": "Ada 3 bunga dan 6 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 berarti 3 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 3 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 3 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 4 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 4 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 keranjang, setiap keranjang berisi 3 mangga."
+                  },
+                  "say": "Ada 6 keranjang, setiap keranjang berisi 3 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 mangga dan 3 mangga lagi."
+                  },
+                  "say": "Ada 5 mangga dan 3 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 + 3 berarti 5 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 4 + 4 + 4 + 4 + 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 4 bibit cabai."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pot, setiap pot berisi 5 bibit cabai."
+                  },
+                  "say": "Ada 5 pot, setiap pot berisi 5 bibit cabai.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 pot, setiap pot berisi 4 bibit cabai."
+                  },
+                  "say": "Ada 6 pot, setiap pot berisi 4 bibit cabai.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 bibit cabai dan 4 bibit cabai lagi."
+                  },
+                  "say": "Ada 5 bibit cabai dan 4 bibit cabai lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 + 4 + 4 + 4 berarti 5 kelompok yang masing-masing berisi 4.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 2 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 2 bunga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 vas, setiap vas berisi 3 bunga."
+                  },
+                  "say": "Ada 5 vas, setiap vas berisi 3 bunga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 vas, setiap vas berisi 2 bunga."
+                  },
+                  "say": "Ada 6 vas, setiap vas berisi 2 bunga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 bunga dan 2 bunga lagi."
+                  },
+                  "say": "Ada 5 bunga dan 2 bunga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 6 + 6 + 6 + 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 6 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 keranjang, setiap keranjang berisi 7 mangga."
+                  },
+                  "say": "Ada 4 keranjang, setiap keranjang berisi 7 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 6 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 6 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 4 mangga dan 6 mangga lagi."
+                  },
+                  "say": "Ada 4 mangga dan 6 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 6 + 6 + 6 berarti 4 kelompok yang masing-masing berisi 6.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 2 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 2 kelereng."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kantong, setiap kantong berisi 3 kelereng."
+                  },
+                  "say": "Ada 5 kantong, setiap kantong berisi 3 kelereng.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 kantong, setiap kantong berisi 2 kelereng."
+                  },
+                  "say": "Ada 6 kantong, setiap kantong berisi 2 kelereng.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kelereng dan 2 kelereng lagi."
+                  },
+                  "say": "Ada 5 kelereng dan 2 kelereng lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 2 + 2 + 2 + 2 + 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 2 mangga."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 keranjang, setiap keranjang berisi 3 mangga."
+                  },
+                  "say": "Ada 5 keranjang, setiap keranjang berisi 3 mangga.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 keranjang, setiap keranjang berisi 2 mangga."
+                  },
+                  "say": "Ada 6 keranjang, setiap keranjang berisi 2 mangga.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 mangga dan 2 mangga lagi."
+                  },
+                  "say": "Ada 5 mangga dan 2 mangga lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 + 2 + 2 + 2 berarti 5 kelompok yang masing-masing berisi 2.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            },
+            {
+              "prompt": "Cerita mana yang cocok dengan 3 + 3 + 3 + 3 + 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 5 kotak, setiap kotak berisi 3 pensil."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 kotak, setiap kotak berisi 4 pensil."
+                  },
+                  "say": "Ada 5 kotak, setiap kotak berisi 4 pensil.",
+                  "tag": "isi-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 6 kotak, setiap kotak berisi 3 pensil."
+                  },
+                  "say": "Ada 6 kotak, setiap kotak berisi 3 pensil.",
+                  "tag": "kelompok-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ada 5 pensil dan 3 pensil lagi."
+                  },
+                  "say": "Ada 5 pensil dan 3 pensil lagi.",
+                  "tag": "menjumlah-dua-angka"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 + 3 + 3 + 3 berarti 5 kelompok yang masing-masing berisi 3.",
+              "source": "Common Core 2.OA.C.4 (penjumlahan berulang & susunan/array); CP Matematika Fase B (BSKAP 046/H/KR/2025): perkalian sebagai penjumlahan berulang"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

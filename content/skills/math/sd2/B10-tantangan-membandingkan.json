@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.b10.tantangan-membandingkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "B",
+  "order": 10,
+  "title": "Membandingkan dan mengurutkan — Level 10 — Tantangan membandingkan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-B",
+    "common-core": "2.NBT.A.4"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9],
+            "p": [0, 9]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "{a} {answer} {b}.",
+          "derived": {
+            "a": "h * 100 + t * 10 + o",
+            "b": "h * 100 + o * 10 + p"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Urutkan dari terkecil: {a}, {b}, {c}. Tulis bilangan di tengah.",
+          "answer": "a + b + c - max(a, b, c) - min(a, b, c)",
+          "explain": "Tengahnya {answer}.",
+          "mode": "input",
+          "constraint": "a != b && b != c && a != c"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Bilangan terbesar dari {a}, {b}, {c} adalah …",
+          "answer": "max(a, b, c)",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a != b && b != c && a != c"
+        }
+      }
+    ]
+  }
+}

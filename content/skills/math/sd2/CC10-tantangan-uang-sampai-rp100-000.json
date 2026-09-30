@@ -1,0 +1,89 @@
+{
+  "id": "math.sd2.cc10.tantangan-uang-sampai-rp100-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 10,
+  "title": "Uang sampai Rp100.000 — Level 10 — Tantangan uang sampai Rp100.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 2],
+            "b": [1, 4],
+            "c": [1, 3],
+            "d": [1, 3]
+          },
+          "prompt": "Berapa rupiah semua uang pada tabel?",
+          "answer": "a * 20000 + b * 10000 + c * 5000 + d * 2000",
+          "explain": "{answer}.",
+          "constraint": "a * 20000 + b * 10000 + c * 5000 + d * 2000 <= 100000",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Uang", "Lembar"],
+              "rows": [
+                ["Rp20.000", "=a"],
+                ["Rp10.000", "=b"],
+                ["Rp5.000", "=c"],
+                ["Rp2.000", "=d"]
+              ]
+            }
+          ],
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [15000, 95000],
+              "step": 5000
+            },
+            "u": {
+              "values": [50000, 100000]
+            }
+          },
+          "prompt": "Ayah membayar Rp{u} untuk barang seharga Rp{h}. Berapa kembaliannya?",
+          "answer": "u - h",
+          "explain": "{answer}.",
+          "constraint": "h < u",
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [0, 4],
+            "c": [1, 2],
+            "d": [0, 5]
+          },
+          "prompt": "Alya punya {a} lembar Rp5.000 dan {b} lembar Rp2.000. Raka punya {c} lembar Rp10.000 dan {d} lembar Rp1.000. Uang siapa lebih banyak?",
+          "answer": "((a * 5000 + b * 2000) > (c * 10000 + d * 1000)) * 1 + ((a * 5000 + b * 2000) < (c * 10000 + d * 1000)) * 2 + ((a * 5000 + b * 2000) == (c * 10000 + d * 1000)) * 3",
+          "explain": "Alya Rp{=a*5000+b*2000}, Raka Rp{=c*10000+d*1000}.",
+          "labels": {
+            "1": "Alya",
+            "2": "Raka",
+            "3": "Sama banyak"
+          }
+        }
+      }
+    ]
+  }
+}

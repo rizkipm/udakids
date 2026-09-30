@@ -1,0 +1,105 @@
+{
+  "id": "math.sd1.d10.tantangan-membandingkan-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "D",
+  "order": 10,
+  "title": "Membandingkan sampai 10 — Level 10 — Tantangan membandingkan sampai 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-D",
+    "ccss": "1.OA.D.8 / 1.NBT.B.3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [0, 9]
+          },
+          "prompt": "Ada {a} {x} dan {b} {y}. Berapa lebih banyak {x} daripada {y}?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. Jadi {x} lebih banyak {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "x": ["apel", "jeruk", "pisang", "bebek", "ayam", "ikan", "kelinci", "kucing"],
+            "y": ["bola", "balon", "mobil", "bintang", "kue", "topi", "pensil", "buku"]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 10],
+            "b": [0, 10]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "{a} {answer} {b}. Mulut tanda > dan < terbuka ke bilangan yang lebih besar.",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [1, 9]
+          },
+          "prompt": "{nama} memetik {b} salak. {teman} memetik {a} salak. Berapa lebih sedikit salak yang dipetik {nama}?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. {nama} memetik {answer} lebih sedikit.",
+          "constraint": "b < a",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ],
+            "teman": ["Kak Rudi", "Ayu", "Fajar", "Rani", "Joko", "Mega"]
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 10],
+            "b": [0, 10]
+          },
+          "prompt": "Pilih kata yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "Bandingkan {a} dan {b}: {a} {answer} {b}.",
+          "labels": {
+            "1": "lebih besar dari",
+            "2": "lebih kecil dari",
+            "3": "sama dengan"
+          }
+        }
+      }
+    ]
+  }
+}

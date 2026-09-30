@@ -1,0 +1,50 @@
+{
+  "id": "math.sd1.oo9.membagi-uang-saku",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "OO",
+  "order": 9,
+  "title": "Literasi keuangan — Level 9 — Membagi uang saku",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-OO"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": {
+        "values": [5000, 10000]
+      },
+      "s": {
+        "range": [1000, 5000],
+        "step": 1000
+      },
+      "b": {
+        "values": [500, 1000, 2000]
+      }
+    },
+    "prompt": "{nama} punya Rp{u}. Rp{s} ditabung dan Rp{b} untuk kotak amal. Sisanya untuk jajan. Berapa uang jajannya?",
+    "answer": "u - s - b",
+    "explain": "Rp{u} − Rp{s} − Rp{b} = {answer}.",
+    "constraint": "s + b < u",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Raka", "Dimas", "Budi", "Adit", "Tegar"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "u - s",
+        "tag": "lupa-amal"
+      },
+      {
+        "expr": "s + b",
+        "tag": "menjumlah-bagian"
+      },
+      "u - s - b - 500"
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "math.sd2.i9.soal-cerita-selisih",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "I",
+  "order": 9,
+  "title": "Pengurangan satu angka — Level 9 — Soal cerita: selisih",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-I",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 18],
+            "b": [1, 9]
+          },
+          "prompt": "{nama} punya {a} pensil. {teman} punya {b} pensil. Berapa lebih banyak pensil {nama}?",
+          "answer": "a - b",
+          "explain": "Selisih = {a} − {b} = {answer}.",
+          "constraint": "b < a && a - b <= 9",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "a - b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 20],
+            "b": [2, 9]
+          },
+          "prompt": "Tinggi tanaman cabai {a} cm, tanaman tomat {b} cm. Berapa cm selisihnya?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "a - b <= 9",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

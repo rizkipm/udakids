@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.a9.hitung-maju-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 9,
+  "title": "Membilang — Level 9 — Hitung maju sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 996]
+          },
+          "prompt": "{a}, {=a+1}, {=a+2}, … Bilangan berikutnya?",
+          "answer": "a + 3",
+          "explain": "Tambah 1: {=a+2} + 1 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [10, 99],
+            "c": [1, 3]
+          },
+          "prompt": "{a}, {=a+1}, {=a+2}, … Bilangan berikutnya?",
+          "answer": "a + 3",
+          "explain": "Satuan habis, puluhan (atau ratusan) naik: {answer}.",
+          "mode": "input",
+          "derived": {
+            "a": "h * 10 - c - 2"
+          }
+        }
+      }
+    ]
+  }
+}

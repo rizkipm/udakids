@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.s8.bentuk-panjang-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "S",
+  "order": 8,
+  "title": "Strategi penjumlahan tiga angka — Level 8 — Bentuk panjang dengan menyimpan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-S",
+    "common-core": "2.NBT.B.7"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [100, 299]
+          },
+          "prompt": "{a} + {b}: satuan {=a%10} + {=b%10} = …",
+          "answer": "a % 10 + b % 10",
+          "explain": "{answer}. Lebih dari 9, jadi ada 1 puluhan yang disimpan.",
+          "mode": "input",
+          "constraint": "a % 10 + b % 10 >= 10 && a + b <= 999"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [100, 299]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "({=a-a%100} + {=b-b%100}) + ({=a%100-a%10} + {=b%100-b%10}) + ({=a%10} + {=b%10}) = {answer}.",
+          "constraint": "(a % 10 + b % 10 >= 10 || floor(a / 10) % 10 + floor(b / 10) % 10 >= 10) && a + b <= 999",
+          "distractors": ["a + b + 10", "a + b - 10", "a + b + 100", "a + b - 100"]
+        }
+      }
+    ]
+  }
+}

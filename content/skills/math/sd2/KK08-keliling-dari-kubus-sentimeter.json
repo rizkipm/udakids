@@ -1,0 +1,51 @@
+{
+  "id": "math.sd2.kk8.keliling-dari-kubus-sentimeter",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "KK",
+  "order": 8,
+  "title": "Luas dan keliling — Level 8 — Keliling dari kubus sentimeter",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: luas & keliling",
+    "kognitif": "applying",
+    "ixlRef": "G2-KK"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [3, 9],
+      "h": [2, 5]
+    },
+    "prompt": "Persegi panjang dibuat dari kubus 1 cm, {w} kubus di sisi panjang dan {h} kubus di sisi pendek. Berapa cm kelilingnya?",
+    "answer": "2 * (w + h)",
+    "explain": "{w} + {h} + {w} + {h} = {answer} cm.",
+    "constraint": "w > h",
+    "stimulus": [
+      {
+        "kind": "rect",
+        "w": "=w",
+        "h": "=h",
+        "unit": "cm",
+        "grid": true
+      }
+    ],
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "w * h",
+        "tag": "luas"
+      },
+      {
+        "expr": "w + h",
+        "tag": "dua-sisi-saja"
+      },
+      {
+        "expr": "2 * (w + h) - 4",
+        "tag": "pojok-dihitung-sekali"
+      }
+    ]
+  }
+}

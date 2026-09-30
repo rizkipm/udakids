@@ -1,0 +1,47 @@
+{
+  "id": "math.sd1.aa9.menukar-1-puluhan-dengan-10-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 9,
+  "title": "Nilai tempat — Level 9 — Menukar 1 puluhan dengan 10 satuan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [2, 9],
+      "s": [0, 9]
+    },
+    "prompt": "Berapa bilangan yang ditunjukkan balok ini? ({=t-1} puluhan dan {=s+10} satuan)",
+    "answer": "t * 10 + s",
+    "explain": "10 satuan sama dengan 1 puluhan. {=t-1} puluhan + {=s+10} satuan = {answer}.",
+    "stimulus": [
+      {
+        "kind": "tens",
+        "tens": "=t-1",
+        "ones": "=s+10"
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "(t - 1) * 10 + s",
+        "tag": "lupa-menukar"
+      },
+      {
+        "expr": "t - 1 + s + 10",
+        "tag": "salah-nilai-tempat"
+      },
+      {
+        "expr": "t * 10 + s + 10",
+        "tag": "lebih-sepuluh"
+      }
+    ]
+  }
+}

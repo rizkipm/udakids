@@ -1,9 +1,33 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Sse, type MessageEvent } from '@nestjs/common';
 import { GRADES } from '@little-coder/engine';
-import { count, eq } from 'drizzle-orm';
+import { and, count, eq, gt } from 'drizzle-orm';
+import {
+  distinctUntilChanged,
+  from,
+  interval,
+  map,
+  startWith,
+  switchMap,
+  type Observable,
+} from 'rxjs';
 import { Public } from '../auth/decorators.js';
 import { DB, type Db } from '../db/db.module.js';
-import { skillCatalogs, skills } from '../db/schema.js';
+import { children, events, parents, skillCatalogs, skills, staffUsers } from '../db/schema.js';
+
+/** Anak dianggap "sedang belajar" bila aktif (sinkron/masuk) dalam 10 menit terakhir. */
+export const ACTIVE_WINDOW_MS = 10 * 60_000;
+/** Jeda kirim ulang statistik ke landing (SSE). */
+export const STATS_TICK_MS = 10_000;
+
+export type PublicStats = {
+  books: number;
+  totalLevels: number;
+  users: number;
+  learners: number;
+  activeNow: number;
+  rounds: number;
+  updatedAt: string;
+};
 
 /**
  * Data publik untuk halaman depan (tanpa login, D-030): daftar buku Pustaka dari database — judul,
@@ -12,6 +36,64 @@ import { skillCatalogs, skills } from '../db/schema.js';
 @Controller('public')
 export class PublicController {
   constructor(@Inject(DB) private readonly db: Db) {}
+
+  private cache?: { at: number; value: PublicStats };
+
+  /**
+   * Statistik agregat untuk landing (D-033): jumlah buku, level, pengguna aktif (orang tua + anak + staf),
+   * anak yang sedang belajar (aktif ≤10 menit), dan total ronde. Hanya angka — tanpa data pribadi.
+   * Di-cache 5 detik agar banyak pengunjung tidak membebani database.
+   */
+  async stats(now = Date.now()): Promise<PublicStats> {
+    if (this.cache && now - this.cache.at < 5_000) return this.cache.value;
+    const [{ books, totalLevels }, [p], [c], [s], [a], [r]] = await Promise.all([
+      this.books(),
+      this.db.select({ n: count() }).from(parents).where(eq(parents.active, true)),
+      this.db.select({ n: count() }).from(children).where(eq(children.active, true)),
+      this.db.select({ n: count() }).from(staffUsers).where(eq(staffUsers.active, true)),
+      this.db
+        .select({ n: count() })
+        .from(children)
+        .where(
+          and(
+            eq(children.active, true),
+            gt(children.lastActiveAt, new Date(now - ACTIVE_WINDOW_MS)),
+          ),
+        ),
+      this.db.select({ n: count() }).from(events).where(eq(events.type, 'quiz_result')),
+    ]);
+    const learners = Number(c?.n ?? 0);
+    const value: PublicStats = {
+      books: books.length,
+      totalLevels,
+      users: Number(p?.n ?? 0) + learners + Number(s?.n ?? 0),
+      learners,
+      activeNow: Number(a?.n ?? 0),
+      rounds: Number(r?.n ?? 0),
+      updatedAt: new Date(now).toISOString(),
+    };
+    this.cache = { at: now, value };
+    return value;
+  }
+
+  @Public()
+  @Get('stats')
+  getStats() {
+    return this.stats();
+  }
+
+  /** Statistik realtime (Server-Sent Events): dikirim saat tersambung, lalu tiap ada perubahan (cek 10 dtk). */
+  @Public()
+  @Sse('stats/stream')
+  statsStream(): Observable<MessageEvent> {
+    return interval(STATS_TICK_MS).pipe(
+      startWith(0),
+      switchMap(() => from(this.stats())),
+      map(({ updatedAt: _u, ...rest }) => rest),
+      distinctUntilChanged((x, y) => JSON.stringify(x) === JSON.stringify(y)),
+      map((data) => ({ data: { ...data, updatedAt: new Date().toISOString() } })),
+    );
+  }
 
   @Public()
   @Get('books')

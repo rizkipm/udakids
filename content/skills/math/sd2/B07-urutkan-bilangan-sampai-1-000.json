@@ -1,0 +1,54 @@
+{
+  "id": "math.sd2.b7.urutkan-bilangan-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "B",
+  "order": 7,
+  "title": "Membandingkan dan mengurutkan — Level 7 — Urutkan bilangan sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-B",
+    "common-core": "2.NBT.A.4"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Urutkan dari yang terkecil: {a}, {b}, {c}. Bilangan di tengah adalah …",
+          "answer": "a + b + c - max(a, b, c) - min(a, b, c)",
+          "explain": "Urutannya {=min(a,b,c)}, {answer}, {=max(a,b,c)}.",
+          "constraint": "a != b && b != c && a != c",
+          "distractors": ["a", "b", "c"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Urutkan dari yang terbesar: {a}, {b}, {c}. Bilangan paling akhir adalah …",
+          "answer": "min(a, b, c)",
+          "explain": "Dari terbesar: {=max(a,b,c)}, …, lalu terkecil {answer} di akhir.",
+          "constraint": "a != b && b != c && a != c",
+          "distractors": ["a", "b", "c"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

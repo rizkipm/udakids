@@ -1,0 +1,60 @@
+{
+  "id": "math.sd2.o3.mengurangi-di-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "O",
+  "order": 3,
+  "title": "Strategi pengurangan dua angka — Level 3 — Mengurangi di garis bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-O",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [12, 39]
+          },
+          "prompt": "{a} − {b}: dari {a} mundur {=b-b%10} dulu. Sampai di …",
+          "answer": "a - b + b % 10",
+          "explain": "{a} − {=b-b%10} = {answer}.",
+          "constraint": "b % 10 != 0 && b < a",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "sudah-semua"
+            },
+            {
+              "expr": "a - b % 10",
+              "tag": "satuan-dulu"
+            },
+            "a - b + b % 10 - 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [12, 39]
+          },
+          "prompt": "{a} − {b}: mundur {=b-b%10}, lalu mundur {=b%10}. Sampai di …",
+          "answer": "a - b",
+          "explain": "{=a-b+b%10} − {=b%10} = {answer}.",
+          "constraint": "b % 10 != 0 && b < a",
+          "distractors": ["a - b + b % 10", "a - b + 10", "a - b - 1"]
+        }
+      }
+    ]
+  }
+}

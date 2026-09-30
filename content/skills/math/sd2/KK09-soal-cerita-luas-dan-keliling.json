@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.kk9.soal-cerita-luas-dan-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "KK",
+  "order": 9,
+  "title": "Luas dan keliling — Level 9 — Soal cerita luas dan keliling",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: luas & keliling",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-KK"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [4, 15],
+            "h": [2, 10]
+          },
+          "prompt": "Taman berbentuk persegi panjang {w} m × {h} m akan dipagari keliling. Berapa meter pagar yang dibutuhkan?",
+          "answer": "2 * (w + h)",
+          "explain": "{w} + {h} + {w} + {h} = {answer} m.",
+          "constraint": "w != h",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "dua-sisi-saja"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "lupa-satu-sisi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 9],
+            "h": [2, 6]
+          },
+          "prompt": "Lantai kamar ditutup ubin: {h} baris, setiap baris {w} ubin. Berapa ubin yang dibutuhkan?",
+          "answer": "w * h",
+          "explain": "{w} dijumlahkan {h} kali = {answer} ubin.",
+          "distractors": [
+            {
+              "expr": "w + h",
+              "tag": "menjumlah-sisi"
+            },
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w * h + w",
+              "tag": "lebih-satu-baris"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

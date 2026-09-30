@@ -1,0 +1,82 @@
+{
+  "id": "math.sd2.l5.nilai-angka-pada-puluhan-dan-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 5,
+  "title": "Nilai tempat — Level 5 — Nilai angka pada puluhan dan satuan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "o": [0, 9]
+          },
+          "prompt": "Berapa nilai angka {t} pada bilangan {n}?",
+          "answer": "t * 10",
+          "explain": "{t} ada di tempat puluhan, nilainya {answer}.",
+          "derived": {
+            "n": "t * 10 + o"
+          },
+          "constraint": "t != o",
+          "distractors": [
+            {
+              "expr": "t",
+              "tag": "angka-bukan-nilai"
+            },
+            {
+              "expr": "t * 100",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "n",
+              "tag": "bilangan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "o": [1, 9]
+          },
+          "prompt": "Berapa nilai angka {o} pada bilangan {n}?",
+          "answer": "o",
+          "explain": "{o} ada di tempat satuan, nilainya {answer}.",
+          "derived": {
+            "n": "t * 10 + o"
+          },
+          "constraint": "t != o",
+          "distractors": [
+            {
+              "expr": "o * 10",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "n",
+              "tag": "bilangan"
+            },
+            {
+              "expr": "t",
+              "tag": "angka-lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "math.sd2.bb9.berapa-kurangnya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 9,
+  "title": "Tambah dan kurang uang — Level 9 — Berapa kurangnya?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [1000, 8000],
+        "step": 500
+      },
+      "h": {
+        "range": [5000, 10000],
+        "step": 500
+      }
+    },
+    "prompt": "Tabungan {nama} Rp{a}. Harga tas Rp{h}. Berapa rupiah lagi yang dibutuhkan?",
+    "answer": "h - a",
+    "explain": "Rp{h} − Rp{a} = {answer}.",
+    "constraint": "a < h",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a + h",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "h - a + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "a",
+        "tag": "tabungan"
+      }
+    ]
+  }
+}

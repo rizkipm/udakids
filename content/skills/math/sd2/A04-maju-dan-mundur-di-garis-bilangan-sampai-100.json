@@ -1,0 +1,63 @@
+{
+  "id": "math.sd2.a4.maju-dan-mundur-di-garis-bilangan-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 4,
+  "title": "Membilang — Level 4 — Maju dan mundur di garis bilangan sampai 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 90],
+            "b": [2, 10]
+          },
+          "prompt": "Momo di angka {a} pada garis bilangan. Ia maju {b} langkah. Momo sampai di angka …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}. Maju berarti ke kanan, bilangan makin besar.",
+          "constraint": "a + b <= 100",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "arah-terbalik"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 100],
+            "b": [2, 10]
+          },
+          "prompt": "Momo di angka {a} pada garis bilangan. Ia mundur {b} langkah. Momo sampai di angka …",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}. Mundur berarti ke kiri, bilangan makin kecil.",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "arah-terbalik"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

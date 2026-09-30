@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.l9.mengelompokkan-ulang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 9,
+  "title": "Nilai tempat — Level 9 — Mengelompokkan ulang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7],
+            "t": [10, 19],
+            "o": [0, 9]
+          },
+          "prompt": "{h} ratusan, {t} puluhan, {o} satuan = …",
+          "answer": "h * 100 + t * 10 + o",
+          "explain": "{t} puluhan = {=t*10}. {=h*100} + {=t*10} + {o} = {answer}.",
+          "distractors": [
+            {
+              "expr": "h * 100 + (t - 10) * 10 + o",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "h * 100 + t + o",
+              "tag": "salah-nilai-tempat"
+            },
+            {
+              "expr": "h * 100 + t * 10 + o + 100",
+              "tag": "lebih-seratus"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 8],
+            "o": [10, 19]
+          },
+          "prompt": "{t} puluhan, {o} satuan = …",
+          "answer": "t * 10 + o",
+          "explain": "{o} satuan = {=floor(o/10)} puluhan {=o%10} satuan. Jumlahnya {answer}.",
+          "distractors": [
+            {
+              "expr": "t * 10 + o - 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "t * 100 + o",
+              "tag": "salah-nilai-tempat"
+            },
+            {
+              "expr": "t + o",
+              "tag": "menjumlah-angka"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

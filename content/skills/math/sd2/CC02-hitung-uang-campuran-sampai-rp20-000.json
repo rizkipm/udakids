@@ -1,0 +1,42 @@
+{
+  "id": "math.sd2.cc2.hitung-uang-campuran-sampai-rp20-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 2,
+  "title": "Uang sampai Rp100.000 — Level 2 — Hitung uang campuran sampai Rp20.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 2],
+      "b": [1, 3],
+      "c": [1, 4]
+    },
+    "prompt": "Ada {a} lembar Rp5.000, {b} lembar Rp2.000, dan {c} lembar Rp1.000. Berapa rupiah semuanya?",
+    "answer": "a * 5000 + b * 2000 + c * 1000",
+    "explain": "Rp{=a*5000} + Rp{=b*2000} + Rp{=c*1000} = {answer}.",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "(a + b + c) * 1000",
+        "tag": "semua-dianggap-1000"
+      },
+      {
+        "expr": "a * 5000 + b * 2000",
+        "tag": "lupa-satu"
+      },
+      {
+        "expr": "a * 5000 + b * 2000 + c * 1000 + 1000",
+        "tag": "lebih"
+      }
+    ]
+  }
+}

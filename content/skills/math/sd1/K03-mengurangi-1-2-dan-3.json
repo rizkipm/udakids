@@ -1,0 +1,68 @@
+{
+  "id": "math.sd1.k3.mengurangi-1-2-dan-3",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "K",
+  "order": 3,
+  "title": "Pengurangan sampai 10 — Level 3 — Mengurangi 1, 2, dan 3",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-K",
+    "ccss": "1.OA.C.6 / 1.OA.D.8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": {
+              "values": [1, 2, 3]
+            }
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Hitung mundur {b} dari {a}: {answer}.",
+          "constraint": "b <= a",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": {
+              "values": [1, 2, 3]
+            }
+          },
+          "prompt": "Berapa {b} lebih sedikit dari {a}?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b <= a",
+          "distractors": [
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "lebih-banyak-bukan-lebih-sedikit"
+            },
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

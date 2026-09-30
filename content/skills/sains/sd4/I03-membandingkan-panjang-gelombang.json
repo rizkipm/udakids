@@ -1,0 +1,58 @@
+{
+  "id": "sains.sd4.i3.membandingkan-panjang-gelombang",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "I",
+  "order": 3,
+  "title": "Gelombang dan informasi — Level 3 — Membandingkan panjang gelombang",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "C",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 90],
+            "b": [5, 90]
+          },
+          "constraint": "a != b",
+          "prompt": "Jarak puncak ke puncak: gelombang P {a} cm, gelombang Q {b} cm. Mana yang panjang gelombangnya lebih pendek?",
+          "answer": "(b > a) + 2 * (b < a)",
+          "labels": {
+            "1": "Gelombang P",
+            "2": "Gelombang Q"
+          },
+          "explain": "Panjang gelombang = jarak puncak ke puncak. Yang lebih pendek punya angka lebih kecil."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 90],
+            "b": [5, 90],
+            "h": [3, 20],
+            "k": [3, 20]
+          },
+          "constraint": "a != b && h != k",
+          "prompt": "Gelombang A: amplitudo {h} cm, panjang {a} cm. Gelombang B: amplitudo {k} cm, panjang {b} cm. Mana yang lebih panjang gelombangnya?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Gelombang A",
+            "2": "Gelombang B"
+          },
+          "explain": "Lihat panjang gelombangnya saja: {a} cm dan {b} cm. Amplitudo tidak dipakai."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

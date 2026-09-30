@@ -1,0 +1,51 @@
+{
+  "id": "math.sd2.bb5.menjumlah-tiga-harga",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 5,
+  "title": "Tambah dan kurang uang — Level 5 — Menjumlah tiga harga",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [1000, 3000],
+        "step": 500
+      },
+      "b": {
+        "range": [500, 2000],
+        "step": 500
+      },
+      "c": {
+        "range": [500, 2500],
+        "step": 500
+      }
+    },
+    "prompt": "Harga pensil Rp{a}, penghapus Rp{b}, dan rautan Rp{c}. Berapa rupiah semuanya?",
+    "answer": "a + b + c",
+    "explain": "Rp{a} + Rp{b} + Rp{c} = {answer}.",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-satu"
+      },
+      {
+        "expr": "a + b + c + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "a + b + c - 500",
+        "tag": "kurang"
+      }
+    ]
+  }
+}

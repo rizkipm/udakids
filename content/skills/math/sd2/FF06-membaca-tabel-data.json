@@ -1,0 +1,97 @@
+{
+  "id": "math.sd2.ff6.membaca-tabel-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 6,
+  "title": "Data dan diagram — Level 6 — Membaca tabel data",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 20],
+            "b": [3, 20],
+            "c": [3, 20]
+          },
+          "prompt": "Berapa anak yang ikut lomba lari?",
+          "answer": "b",
+          "explain": "Baris Lari: {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Lomba 17 Agustus", "Peserta"],
+              "rows": [
+                ["Balap karung", "=a"],
+                ["Lari", "=b"],
+                ["Makan kerupuk", "=c"]
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "c",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "total"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 20],
+            "b": [3, 20],
+            "c": [3, 20]
+          },
+          "prompt": "Berapa peserta semua lomba?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Lomba 17 Agustus", "Peserta"],
+              "rows": [
+                ["Balap karung", "=a"],
+                ["Lari", "=b"],
+                ["Makan kerupuk", "=c"]
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "kurang-satu-baris"
+            },
+            {
+              "expr": "max(a, b, c)",
+              "tag": "terbanyak"
+            },
+            {
+              "expr": "a + b + c + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "id": "math.sd1.c4.loncat-sepuluh-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 4,
+  "title": "Membilang loncat — Level 4 — Loncat sepuluh sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 90]
+          },
+          "prompt": "Loncat sepuluh: {a}, {=a+10}, {=a+20}, … Angka berikutnya?",
+          "answer": "a + 30",
+          "explain": "Loncat sepuluh: angka puluhan naik 1, angka satuan tetap. {=a+20} + 10 = {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a + 21",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 40",
+              "tag": "melompat"
+            },
+            {
+              "expr": "a + 31",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [6, 10]
+          },
+          "prompt": "Loncat sepuluh: {=10*k}, {=10*k+10}, …, Angka berikutnya?",
+          "answer": "10 * k + 20",
+          "explain": "Setiap loncatan bertambah 10: {answer}.",
+          "distractors": [
+            {
+              "expr": "10 * k + 11",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "10 * k + 30",
+              "tag": "melompat"
+            },
+            {
+              "expr": "10 * k + 10",
+              "tag": "diam"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 90]
+          },
+          "prompt": "Loncat sepuluh: {a}, …, {=a+20}, {=a+30}. Angka yang hilang?",
+          "answer": "a + 10",
+          "explain": "{a} + 10 = {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 11",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + 15",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

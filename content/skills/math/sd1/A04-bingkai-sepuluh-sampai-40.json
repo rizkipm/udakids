@@ -1,0 +1,65 @@
+{
+  "id": "math.sd1.a4.bingkai-sepuluh-sampai-40",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "A",
+  "order": 4,
+  "title": "Membilang sampai 100 — Level 4 — Bingkai sepuluh sampai 40",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-A",
+    "ccss": "1.NBT.A.1"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [11, 40]
+    },
+    "prompt": "Berapa titik di semua bingkai sepuluh?",
+    "answer": "n",
+    "explain": "Setiap bingkai penuh berisi 10. Hitung loncat sepuluh untuk bingkai penuh, lalu tambah titik sisanya: {answer}.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "frame",
+            "filled": "=min(10, max(0, n - 0))",
+            "size": 10
+          },
+          {
+            "kind": "frame",
+            "filled": "=min(10, max(0, n - 10))",
+            "size": 10
+          },
+          {
+            "kind": "frame",
+            "filled": "=min(10, max(0, n - 20))",
+            "size": 10
+          },
+          {
+            "kind": "frame",
+            "filled": "=min(10, max(0, n - 30))",
+            "size": 10
+          }
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "n + 10",
+        "tag": "lebih-sepuluh"
+      },
+      {
+        "expr": "n - 10",
+        "tag": "kurang-sepuluh"
+      },
+      "n + 1",
+      "n - 1"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.aa3.hitung-koin-yang-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 3,
+  "title": "Uang sampai Rp10.000 — Level 3 — Hitung koin yang sama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 10],
+      "c": {
+        "values": [100, 200, 500, 1000]
+      }
+    },
+    "prompt": "Ada {n} koin seperti ini. Berapa rupiah semuanya?",
+    "answer": "n * c",
+    "explain": "Hitung loncat {c}: {n} × {c} = {answer}.",
+    "stimulus": [
+      {
+        "kind": "coin",
+        "value": "=c"
+      }
+    ],
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "banyak-koin-bukan-nilai"
+      },
+      {
+        "expr": "(n + 1) * c",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(n - 1) * c",
+        "tag": "kurang-satu"
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "math.sd2.aa10.tantangan-uang-sampai-rp10-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 10,
+  "title": "Uang sampai Rp10.000 — Level 10 — Tantangan uang sampai Rp10.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "range": [300, 2900],
+              "step": 100
+            }
+          },
+          "prompt": "Paling sedikit berapa koin untuk membayar tepat Rp{v}? (koin Rp1.000, Rp500, Rp200, Rp100)",
+          "answer": "floor(v / 1000) + floor(v % 1000 / 500) + floor(v % 500 / 200) + v % 500 % 200 / 100",
+          "explain": "{answer} koin.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "b": [1, 3],
+            "c": [1, 4]
+          },
+          "prompt": "Ada {a} lembar Rp2.000, {b} lembar Rp1.000, dan {c} koin Rp500. Berapa rupiah semuanya?",
+          "answer": "a * 2000 + b * 1000 + c * 500",
+          "explain": "{answer}.",
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [1500, 9500],
+              "step": 500
+            },
+            "u": {
+              "values": [5000, 10000]
+            }
+          },
+          "prompt": "Harga susu Rp{h}. Dibayar dengan Rp{u}. Berapa kembaliannya?",
+          "answer": "u - h",
+          "explain": "{answer}.",
+          "constraint": "u > h",
+          "unit": "rupiah",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

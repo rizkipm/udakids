@@ -1,0 +1,34 @@
+{
+  "id": "math.sd2.hh6.bandingkan-cm-dan-m",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "HH",
+  "order": 6,
+  "title": "Satuan panjang metrik — Level 6 — Bandingkan cm dan m",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A (pengayaan) / B: satuan baku",
+    "kognitif": "applying",
+    "ixlRef": "G2-HH"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [50, 400],
+        "step": 10
+      },
+      "m": [1, 3]
+    },
+    "prompt": "Tanda yang tepat: {a} cm … {m} m",
+    "answer": "((a) > (m * 100)) * 1 + ((a) < (m * 100)) * 2 + ((a) == (m * 100)) * 3",
+    "explain": "{m} m = {=m*100} cm. Bandingkan {a} dengan {=m*100}: {answer}.",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    }
+  }
+}

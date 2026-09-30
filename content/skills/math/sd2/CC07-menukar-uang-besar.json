@@ -1,0 +1,73 @@
+{
+  "id": "math.sd2.cc7.menukar-uang-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 7,
+  "title": "Uang sampai Rp100.000 — Level 7 — Menukar uang besar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "values": [20000, 50000, 100000]
+            },
+            "y": {
+              "values": [2000, 5000, 10000, 20000, 50000]
+            }
+          },
+          "prompt": "Selembar uang Rp{x} sama dengan berapa lembar Rp{y}?",
+          "answer": "x / y",
+          "explain": "Rp{x} = {answer} × Rp{y}.",
+          "constraint": "x > y && x % y == 0",
+          "distractors": [
+            {
+              "expr": "x / y + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "x / y - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "x / y * 2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "y": {
+              "values": [5000, 10000, 20000]
+            },
+            "n": [2, 5]
+          },
+          "prompt": "Rp{v} sama dengan berapa lembar Rp{y}?",
+          "answer": "n",
+          "explain": "Rp{v} = {n} × Rp{y}.",
+          "derived": {
+            "v": "y * n"
+          },
+          "constraint": "v <= 100000",
+          "distractors": ["n + 1", "n - 1", "n * 2"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

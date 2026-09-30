@@ -1,0 +1,95 @@
+{
+  "id": "math.sd1.k1.fakta-pengurangan-sampai-5",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "K",
+  "order": 1,
+  "title": "Pengurangan sampai 10 — Level 1 — Fakta pengurangan sampai 5",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-K",
+    "ccss": "1.OA.C.6 / 1.OA.D.8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 5],
+            "b": [0, 5]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b <= a",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [0, 5]
+          },
+          "prompt": "Ada {a} {x}, {b} dicoret. {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Hitung yang tidak dicoret: {answer}.",
+          "constraint": "b <= a",
+          "words": {
+            "x": [
+              "apel",
+              "jeruk",
+              "pisang",
+              "bebek",
+              "ayam",
+              "ikan",
+              "kelinci",
+              "kucing",
+              "bola",
+              "balon",
+              "mobil",
+              "bintang",
+              "kue",
+              "topi",
+              "pensil",
+              "buku"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{x}",
+              "count": "=a",
+              "layout": "row",
+              "crossed": "=b"
+            }
+          ],
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "b",
+              "tag": "yang-dicoret"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

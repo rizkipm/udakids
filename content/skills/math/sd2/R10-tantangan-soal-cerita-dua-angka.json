@@ -1,0 +1,73 @@
+{
+  "id": "math.sd2.r10.tantangan-soal-cerita-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "R",
+  "order": 10,
+  "title": "Soal cerita campuran dua angka — Level 10 — Tantangan soal cerita dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-R",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 50],
+            "b": [11, 40],
+            "c": [11, 40]
+          },
+          "prompt": "{nama} punya {a} manik-manik, membeli {b}, lalu memakai {c}. Berapa sisanya?",
+          "answer": "a + b - c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 100 && c < a + b",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"]
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [11, 30],
+            "c": [40, 99]
+          },
+          "prompt": "Setelah diberi {b} stiker, {nama} punya {c}. Berapa stiker awalnya?",
+          "answer": "c - b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "words": {
+            "nama": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 50],
+            "b": [5, 15]
+          },
+          "prompt": "{nama} punya {a} kartu, {teman} punya {b} kartu lebih sedikit. Berapa kartu mereka berdua?",
+          "answer": "a + a - b",
+          "explain": "Kartu {teman} = {=a-b}. Berdua: {a} + {=a-b} = {answer}.",
+          "mode": "input",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.s9.bentuk-panjang-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "S",
+  "order": 9,
+  "title": "Strategi penjumlahan tiga angka — Level 9 — Bentuk panjang campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-S",
+    "common-core": "2.NBT.B.7"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [100, 299]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Jumlahkan ratusan, puluhan, lalu satuan: {answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 999"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [10, 99]
+          },
+          "prompt": "{=a-a%100} + {=a%100-a%10} + {=a%10} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

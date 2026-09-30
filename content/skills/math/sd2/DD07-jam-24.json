@@ -1,0 +1,108 @@
+{
+  "id": "math.sd2.dd7.jam-24",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "DD",
+  "order": 7,
+  "title": "Waktu dan jam — Level 7 — Jam 24",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: jam per 5 menit",
+    "kognitif": "applying",
+    "ixlRef": "G2-DD"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 14],
+            "m": {
+              "values": [0, 15, 30, 45]
+            }
+          },
+          "prompt": "Pukul {=h-12} siang dalam jam 24 ditulis pukul … lewat {m} menit",
+          "answer": "h",
+          "explain": "Siang hari setelah pukul 12, tambahkan 12: {=h-12} + 12 = {answer}.",
+          "distractors": [
+            {
+              "expr": "h - 12",
+              "tag": "tidak-ditambah-12"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "h - 2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [15, 17],
+            "m": {
+              "values": [5, 10, 20, 25, 35, 40, 50]
+            }
+          },
+          "prompt": "Pukul {=h-12} lewat {m} menit sore dalam jam 24 ditulis pukul … lewat {m} menit",
+          "answer": "h",
+          "explain": "Sore hari tambahkan 12: {=h-12} + 12 = {answer}.",
+          "distractors": [
+            {
+              "expr": "h - 12",
+              "tag": "tidak-ditambah-12"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "h - 10",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [19, 23],
+            "m": {
+              "values": [10, 15, 20, 30, 45]
+            }
+          },
+          "prompt": "Pukul {h}.{m} (jam 24) sama dengan pukul … lewat {m} menit malam",
+          "answer": "h - 12",
+          "explain": "Kurangi 12: {h} − 12 = {answer}. Jadi pukul {answer} malam.",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "tidak-dikurangi-12"
+            },
+            {
+              "expr": "h - 10",
+              "tag": "dikurangi-10"
+            },
+            {
+              "expr": "h - 11",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

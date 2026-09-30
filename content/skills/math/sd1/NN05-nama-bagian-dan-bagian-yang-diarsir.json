@@ -1,0 +1,169 @@
+{
+  "id": "math.sd1.nn5.nama-bagian-dan-bagian-yang-diarsir",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "NN",
+  "order": 5,
+  "title": "Pecahan — Level 5 — Nama bagian dan bagian yang diarsir",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-NN"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4]
+            }
+          },
+          "prompt": "Bagian yang diarsir disebut …",
+          "answer": "d",
+          "explain": "Satu dari {d} bagian sama besar: {answer}.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": 1,
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "labels": {
+            "2": "setengah",
+            "3": "sepertiga",
+            "4": "seperempat"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4]
+            }
+          },
+          "prompt": "Bagian yang diarsir disebut …",
+          "answer": "d",
+          "explain": "Satu dari {d} bagian sama besar: {answer}.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": 1,
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "labels": {
+            "2": "setengah",
+            "3": "sepertiga",
+            "4": "seperempat"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4]
+            },
+            "n": [1, 3]
+          },
+          "prompt": "Berapa bagian yang diarsir?",
+          "explain": "{n} dari {d} bagian sama besar diarsir: {n}/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "yang-tidak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-penyebut"
+            },
+            {
+              "num": "1",
+              "den": "n + d",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4]
+            },
+            "n": [1, 3]
+          },
+          "prompt": "Berapa bagian yang diarsir?",
+          "explain": "{n} dari {d} bagian sama besar diarsir: {n}/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "yang-tidak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-penyebut"
+            },
+            {
+              "num": "1",
+              "den": "n + d",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

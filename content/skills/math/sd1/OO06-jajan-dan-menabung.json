@@ -1,0 +1,47 @@
+{
+  "id": "math.sd1.oo6.jajan-dan-menabung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "OO",
+  "order": 6,
+  "title": "Literasi keuangan — Level 6 — Jajan dan menabung",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-OO"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": {
+        "values": [2000, 3000, 5000, 10000]
+      },
+      "j": {
+        "range": [500, 4000],
+        "step": 500
+      }
+    },
+    "prompt": "Uang saku {nama} Rp{u}. Ia jajan Rp{j}, sisanya ditabung. Berapa rupiah yang ditabung?",
+    "answer": "u - j",
+    "explain": "Rp{u} − Rp{j} = {answer}.",
+    "constraint": "j < u",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Raka", "Dimas", "Budi", "Adit", "Tegar"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "u + j",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "j",
+        "tag": "uang-jajan"
+      },
+      "u - j + 500"
+    ]
+  }
+}

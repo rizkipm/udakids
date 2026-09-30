@@ -1,0 +1,57 @@
+{
+  "id": "math.sd2.h4.memakai-sepuluh-untuk-mengurangi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "H",
+  "order": 4,
+  "title": "Strategi pengurangan satu angka — Level 4 — Memakai sepuluh untuk mengurangi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-H",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b}: kurangi {=a-10} dulu agar menjadi 10. Lalu 10 − … = ?",
+          "answer": "b - a + 10",
+          "explain": "{b} dipecah menjadi {=a-10} dan {=b-a+10}. Jadi kurangi {answer} lagi dari 10.",
+          "mode": "input",
+          "constraint": "b > a - 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {=a-10} = 10, lalu 10 − {=b-a+10} = {answer}.",
+          "constraint": "b > a - 10",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-sepuluh"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "math.sd2.z1.lebih-dekat-ke-puluhan-mana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 1,
+  "title": "Estimasi dan pembulatan — Level 1 — Lebih dekat ke puluhan mana?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [11, 99]
+    },
+    "prompt": "{a} lebih dekat ke {=floor(a/10)*10} atau {=floor(a/10)*10+10}?",
+    "answer": "round(a / 10) * 10",
+    "explain": "Satuan {=a%10}: kurang dari 5 lebih dekat ke bawah, 5 atau lebih ke atas. Jadi {answer}.",
+    "constraint": "a % 10 != 0 && a % 10 != 5",
+    "distractors": ["floor(a / 10) * 10", "floor(a / 10) * 10 + 10"],
+    "choices": 2
+  }
+}

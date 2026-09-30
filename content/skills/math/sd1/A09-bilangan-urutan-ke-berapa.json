@@ -1,0 +1,113 @@
+{
+  "id": "math.sd1.a9.bilangan-urutan-ke-berapa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "A",
+  "order": 9,
+  "title": "Membilang sampai 100 — Level 9 — Bilangan urutan (ke-berapa)",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-A",
+    "ccss": "1.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "ordinal",
+        "params": {
+          "length": 10,
+          "maxOrdinal": 10
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 10]
+          },
+          "prompt": "Ada 10 anak antre membeli bakso. {nama} di urutan ke-{k} dari depan. Berapa anak di depan {nama}?",
+          "answer": "k - 1",
+          "explain": "Urutan ke-{k} berarti ada {answer} anak sebelum {nama}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "urutan-bukan-banyak"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "10 - k",
+              "tag": "di-belakang"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "Anak-anak antre naik ayunan. {nama} di urutan ke-{k}. Anak tepat di belakang {nama} ada di urutan ke- …",
+          "answer": "k + 1",
+          "explain": "Tepat di belakang urutan ke-{k} adalah urutan ke-{answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "sama"
+            },
+            {
+              "expr": "k + 2",
+              "tag": "melompat"
+            },
+            {
+              "expr": "max(0, k - 1)",
+              "tag": "di-depan"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

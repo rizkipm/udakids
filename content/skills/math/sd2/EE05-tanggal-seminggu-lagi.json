@@ -1,0 +1,71 @@
+{
+  "id": "math.sd2.ee5.tanggal-seminggu-lagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "EE",
+  "order": 5,
+  "title": "Kalender — Level 5 — Tanggal seminggu lagi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-EE"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [1, 21]
+          },
+          "prompt": "Hari ini tanggal {d}. Tanggal berapa tepat seminggu lagi?",
+          "answer": "d + 7",
+          "explain": "Seminggu = 7 hari. {d} + 7 = {answer}.",
+          "distractors": [
+            {
+              "expr": "d + 1",
+              "tag": "besok"
+            },
+            {
+              "expr": "d + 5",
+              "tag": "hari-sekolah"
+            },
+            {
+              "expr": "d + 6",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [8, 30]
+          },
+          "prompt": "Hari ini tanggal {d}. Tanggal berapa seminggu yang lalu?",
+          "answer": "d - 7",
+          "explain": "Seminggu = 7 hari. {d} − 7 = {answer}.",
+          "distractors": [
+            {
+              "expr": "d - 1",
+              "tag": "kemarin"
+            },
+            {
+              "expr": "d + 7",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "d - 6",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "math.sd1.q6.membuat-bilangan-dengan-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Q",
+  "order": 6,
+  "title": "Penjumlahan sampai 20 — Level 6 — Membuat bilangan dengan penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-Q",
+    "cc": "1.OA.A.2, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "{c} = {a} + …",
+          "answer": "c - a",
+          "explain": "{a} + {answer} = {c}. Hitung maju dari {a} sampai {c}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b >= 11 && a + b <= 20",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "total"
+            },
+            "b + 1",
+            "b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "… + {b} = {c}",
+          "answer": "a",
+          "explain": "{answer} + {b} = {c}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b >= 11 && a + b <= 20",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "total"
+            },
+            "a + 1",
+            "a - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "math.sd2.g9.menjumlah-tiga-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "G",
+  "order": 9,
+  "title": "Penjumlahan satu angka — Level 9 — Menjumlah tiga bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-G",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "explain": "Cari pasangan yang membuat 10 atau dobel dulu. Hasilnya {answer}.",
+          "constraint": "a + b + c <= 20",
+          "distractors": ["a + b", "a + b + c + 1", "a + b + c - 1"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{nama} memetik {a} jambu, {b} jambu, lalu {c} jambu. Berapa jambu semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "constraint": "a + b + c <= 20",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu"
+            },
+            "a + b + c + 1",
+            "a + b + c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

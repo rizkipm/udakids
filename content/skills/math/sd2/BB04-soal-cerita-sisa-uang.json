@@ -1,0 +1,52 @@
+{
+  "id": "math.sd2.bb4.soal-cerita-sisa-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 4,
+  "title": "Tambah dan kurang uang — Level 4 — Soal cerita sisa uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [2000, 10000],
+        "step": 1000
+      },
+      "b": {
+        "range": [500, 5000],
+        "step": 500
+      }
+    },
+    "prompt": "{nama} punya Rp{a}. Ia membeli {x} seharga Rp{b}. Berapa sisa uangnya?",
+    "answer": "a - b",
+    "explain": "Rp{a} − Rp{b} = {answer}.",
+    "constraint": "b < a",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"],
+      "x": ["roti", "pisang goreng", "pensil", "buku tulis", "susu kotak"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a - b + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "a - b - 500",
+        "tag": "kurang"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

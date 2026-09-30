@@ -1,0 +1,80 @@
+{
+  "id": "math.sd1.c7.urutan-loncat-maju-dan-mundur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 7,
+  "title": "Membilang loncat — Level 7 — Urutan loncat maju dan mundur",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [1, 2, 5, 10]
+            },
+            "k": [0, 20]
+          },
+          "prompt": "{=s*k}, {=s*k+s}, {=s*k+2*s}, … Angka berikutnya?",
+          "answer": "s * k + 3 * s",
+          "explain": "Polanya maju {s}: {answer}.",
+          "constraint": "s * k + 3 * s <= 100",
+          "distractors": [
+            {
+              "expr": "s * k + 4 * s",
+              "tag": "melompat"
+            },
+            {
+              "expr": "s * k + s",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "s * k + 2 * s + 1",
+              "tag": "tambah-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [1, 2, 5, 10]
+            },
+            "k": [3, 25]
+          },
+          "prompt": "{=s*k}, {=s*k-s}, {=s*k-2*s}, … Angka berikutnya?",
+          "answer": "s * k - 3 * s",
+          "explain": "Polanya mundur {s}: {=s*k-2*s} − {s} = {answer}.",
+          "constraint": "s * k <= 100",
+          "distractors": [
+            {
+              "expr": "s * k - 4 * s",
+              "tag": "melompat"
+            },
+            {
+              "expr": "s * k - s",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "s * k - 2 * s - 1",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

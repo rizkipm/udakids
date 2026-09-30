@@ -1,0 +1,80 @@
+{
+  "id": "math.sd2.kk10.tantangan-luas-dan-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "KK",
+  "order": 10,
+  "title": "Luas dan keliling — Level 10 — Tantangan luas dan keliling",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: luas & keliling",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-KK"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 9],
+            "h": [2, 6]
+          },
+          "prompt": "Setiap petak adalah 1 satuan luas. Berapa luas bangun ini?",
+          "answer": "w * h",
+          "explain": "{answer}.",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "petak",
+              "grid": true
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 9],
+            "h": [1, 6]
+          },
+          "prompt": "Berapa cm keliling persegi panjang ini?",
+          "answer": "2 * (w + h)",
+          "explain": "{answer}.",
+          "constraint": "w != h",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": false
+            }
+          ],
+          "unit": "cm",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "prompt": "Sisi persegi {s} cm. Berapa cm kelilingnya?",
+          "answer": "4 * s",
+          "explain": "{answer}.",
+          "unit": "cm",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

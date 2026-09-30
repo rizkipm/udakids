@@ -1,0 +1,95 @@
+{
+  "id": "math.sd1.b3.bilangan-sesudahnya-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "B",
+  "order": 3,
+  "title": "Membilang sampai 120 — Level 3 — Bilangan sesudahnya sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-B",
+    "ccss": "1.NBT.A.1",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [60, 119]
+          },
+          "prompt": "Angka berapa yang tepat sesudah {a}?",
+          "answer": "a + 1",
+          "explain": "Hitung maju satu dari {a}: {answer}.",
+          "distractors": [
+            {
+              "expr": "a - 1",
+              "tag": "sebelum-bukan-sesudah"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "salah-puluhan"
+            },
+            {
+              "expr": "a + 2",
+              "tag": "melompat"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [80, 117]
+          },
+          "prompt": "Angka berapa berikutnya?",
+          "answer": "a + 3",
+          "explain": "Setiap langkah bertambah 1: {a}, {=a+1}, {=a+2}, {answer}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+1"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+2"
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + 2",
+              "tag": "diam"
+            },
+            {
+              "expr": "a + 13",
+              "tag": "salah-puluhan"
+            },
+            {
+              "expr": "a + 4",
+              "tag": "melompat"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

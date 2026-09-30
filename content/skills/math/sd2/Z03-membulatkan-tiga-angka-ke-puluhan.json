@@ -1,0 +1,40 @@
+{
+  "id": "math.sd2.z3.membulatkan-tiga-angka-ke-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 3,
+  "title": "Estimasi dan pembulatan — Level 3 — Membulatkan tiga angka ke puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [101, 989]
+    },
+    "prompt": "Bulatkan {a} ke puluhan terdekat.",
+    "answer": "round(a / 10) * 10",
+    "explain": "Lihat satuan {=a%10}. {a} dibulatkan menjadi {answer}.",
+    "constraint": "a % 10 != 0",
+    "distractors": [
+      {
+        "expr": "floor(a / 10) * 10 + 10 - (round(a / 10) - floor(a / 10)) * 10",
+        "tag": "arah-terbalik"
+      },
+      {
+        "expr": "round(a / 100) * 100",
+        "tag": "ke-ratusan"
+      },
+      {
+        "expr": "a",
+        "tag": "tidak-dibulatkan"
+      }
+    ]
+  }
+}

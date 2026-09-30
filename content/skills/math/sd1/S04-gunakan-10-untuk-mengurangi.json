@@ -1,0 +1,88 @@
+{
+  "id": "math.sd1.s4.gunakan-10-untuk-mengurangi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 4,
+  "title": "Strategi pengurangan sampai 20 — Level 4 — Gunakan 10 untuk mengurangi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b} = {a} − {=a-10} − …",
+          "answer": "b - (a - 10)",
+          "explain": "{b} dipecah jadi {=a-10} dan {answer}. {a} − {=a-10} = 10, lalu 10 − {answer} = {=a-b}.",
+          "constraint": "b > a - 10",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tanpa-memecah"
+            },
+            "b - (a - 10) + 1",
+            {
+              "expr": "a - 10",
+              "tag": "bagian-pertama"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b}: kurangi {=a-10} dulu menjadi 10, lalu kurangi {=b-(a-10)} lagi. Hasilnya?",
+          "answer": "a - b",
+          "explain": "{a} − {=a-10} = 10. 10 − {=b-(a-10)} = {answer}.",
+          "constraint": "b > a - 10",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "10",
+              "tag": "berhenti-di-10"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "Gunakan 10: {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Turun dulu ke 10 ({a} − {=a-10}), lalu kurangi sisanya {=b-(a-10)}: {answer}.",
+          "constraint": "b > a - 10",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-sepuluh"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

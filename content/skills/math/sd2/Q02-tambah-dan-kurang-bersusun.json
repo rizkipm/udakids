@@ -1,0 +1,69 @@
+{
+  "id": "math.sd2.q2.tambah-dan-kurang-bersusun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Q",
+  "order": 2,
+  "title": "Operasi campuran dua angka — Level 2 — Tambah dan kurang bersusun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-Q",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 70],
+            "b": [11, 29]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 100",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["+", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [11, 39]
+          },
+          "prompt": "Hitung pengurangan bersusun ini.",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["−", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

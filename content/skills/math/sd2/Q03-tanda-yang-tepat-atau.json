@@ -1,0 +1,38 @@
+{
+  "id": "math.sd2.q3.tanda-yang-tepat-atau",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Q",
+  "order": 3,
+  "title": "Operasi campuran dua angka — Level 3 — Tanda yang tepat: + atau −",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-Q",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [20, 80],
+      "b": [5, 19],
+      "o": {
+        "values": [1, 2]
+      }
+    },
+    "prompt": "{a} … {b} = {c}. Tanda yang tepat?",
+    "answer": "o",
+    "explain": "Coba: {a} + {b} = {=a+b}, {a} − {b} = {=a-b}. Yang cocok dengan {c} adalah {answer}.",
+    "derived": {
+      "c": "(o == 1) * (a + b) + (o == 2) * (a - b)"
+    },
+    "constraint": "a + b <= 100",
+    "labels": {
+      "1": "+",
+      "2": "−"
+    }
+  }
+}

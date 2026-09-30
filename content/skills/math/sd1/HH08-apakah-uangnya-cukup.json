@@ -1,0 +1,41 @@
+{
+  "id": "math.sd1.hh8.apakah-uangnya-cukup",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "HH",
+  "order": 8,
+  "title": "Uang Rupiah — Level 8 — Apakah uangnya cukup?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-HH"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": {
+        "range": [1000, 10000],
+        "step": 500
+      },
+      "h": {
+        "range": [1000, 10000],
+        "step": 500
+      }
+    },
+    "prompt": "{nama} punya Rp{u}. Harga {barang} Rp{h}. Apakah uangnya cukup?",
+    "answer": "(u >= h) * 1 + (u < h) * 2",
+    "explain": "Bandingkan: punya Rp{u}, harga Rp{h}. Jawabannya: {answer}.",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Raka", "Dimas", "Budi", "Adit", "Tegar"],
+      "barang": ["buku cerita", "bola plastik", "kotak pensil", "jus jeruk", "layang-layang"]
+    },
+    "constraint": "u != h",
+    "labels": {
+      "1": "Cukup",
+      "2": "Tidak cukup"
+    }
+  }
+}

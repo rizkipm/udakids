@@ -1,0 +1,63 @@
+{
+  "id": "math.sd2.e5.genap-dan-ganjil-di-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "E",
+  "order": 5,
+  "title": "Genap dan ganjil — Level 5 — Genap dan ganjil di garis bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-E",
+    "common-core": "2.OA.C.3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 95]
+          },
+          "prompt": "Garis bilangan: {a}, {=a+1}, {=a+2}, {=a+3}, {=a+4}. Ada berapa bilangan genap?",
+          "answer": "3 - a % 2",
+          "explain": "Genap dan ganjil berselang-seling. Hitung yang berakhir 0, 2, 4, 6, 8: ada {answer}.",
+          "distractors": [
+            {
+              "expr": "2 + a % 2",
+              "tag": "menghitung-ganjil"
+            },
+            {
+              "expr": "5",
+              "tag": "semua"
+            },
+            {
+              "expr": "1",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 50]
+          },
+          "prompt": "Momo loncat 2-2 di garis bilangan mulai dari {a}. Ia selalu berhenti di bilangan …",
+          "answer": "a % 2",
+          "explain": "Loncat 2 tidak mengubah genap atau ganjil. {a} adalah {answer}, jadi Momo selalu di bilangan {answer}.",
+          "labels": {
+            "0": "genap",
+            "1": "ganjil"
+          }
+        }
+      }
+    ]
+  }
+}

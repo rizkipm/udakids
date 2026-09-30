@@ -1,0 +1,78 @@
+{
+  "id": "math.sd2.o2.model-dua-angka-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "O",
+  "order": 2,
+  "title": "Strategi pengurangan dua angka — Level 2 — Model: dua angka − satu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-O",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 99],
+            "b": [1, 8]
+          },
+          "prompt": "Model ini menunjukkan {a}. Ambil {b} satuan. Tinggal berapa?",
+          "answer": "a - b",
+          "explain": "Satuan cukup: {=a%10} − {b} = {=a%10-b}. Hasil {answer}.",
+          "constraint": "a % 10 >= b",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=floor(a/10)",
+              "ones": "=a%10"
+            }
+          ],
+          "distractors": [
+            "a - b - 10",
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 99],
+            "b": [2, 9]
+          },
+          "prompt": "Model ini menunjukkan {a}. Ambil {b} satuan. Tinggal berapa?",
+          "answer": "a - b",
+          "explain": "Satuan kurang: tukar 1 puluhan menjadi 10 satuan. {=a%10+10} − {b} = {=a%10+10-b}. Hasil {answer}.",
+          "constraint": "a % 10 < b",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=floor(a/10)",
+              "ones": "=a%10"
+            }
+          ],
+          "distractors": [
+            "a - b + 10",
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

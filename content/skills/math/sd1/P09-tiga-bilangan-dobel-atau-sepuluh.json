@@ -1,0 +1,111 @@
+{
+  "id": "math.sd1.p9.tiga-bilangan-dobel-atau-sepuluh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 9,
+  "title": "Strategi penjumlahan sampai 20 — Level 9 — Tiga bilangan: dobel atau sepuluh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} + {a} = …  Cari dobelnya dulu.",
+          "answer": "a + a + b",
+          "explain": "{a} + {a} = {=2*a}, lalu + {b} = {answer}.",
+          "constraint": "a + a + b <= 20 && a != b",
+          "distractors": [
+            "a + a + b + 1",
+            "a + a + b - 1",
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [1, 9]
+          },
+          "prompt": "{b} + {a} + {a} = …",
+          "answer": "a + a + b",
+          "explain": "Dobel {a} = {=2*a}, tambah {b} = {answer}.",
+          "constraint": "a + a + b <= 20 && a != b",
+          "distractors": [
+            "a + a + b + 1",
+            "a + a + b - 1",
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {c} + {b} = …  Cari pasangan yang menjadi 10.",
+          "answer": "10 + c",
+          "explain": "{a} + {b} = 10, lalu 10 + {c} = {answer}.",
+          "derived": {
+            "b": "10 - a"
+          },
+          "constraint": "a != b",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "lupa-satu-bilangan"
+            },
+            "11 + c",
+            "9 + c"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{c} + {a} + {b} = …",
+          "answer": "10 + c",
+          "explain": "{a} + {b} = 10, jadi 10 + {c} = {answer}.",
+          "derived": {
+            "b": "10 - a"
+          },
+          "distractors": [
+            {
+              "expr": "c + a",
+              "tag": "lupa-satu-bilangan"
+            },
+            "11 + c",
+            "9 + c"
+          ]
+        }
+      }
+    ]
+  }
+}

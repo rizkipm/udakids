@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.aa1.membentuk-bilangan-belasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 1,
+  "title": "Nilai tempat — Level 1 — Membentuk bilangan belasan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [0, 9]
+          },
+          "prompt": "Satu puluhan dan {b} satuan. Bilangan berapa?",
+          "answer": "10 + b",
+          "explain": "10 + {b} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": 1,
+              "ones": "=b"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "lupa-puluhan"
+            },
+            {
+              "expr": "b * 10 + 1",
+              "tag": "terbalik"
+            },
+            "10 + b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "Sepuluh dan {b} menjadi …",
+          "answer": "10 + b",
+          "explain": "10 + {b} = {answer}.",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "lupa-puluhan"
+            },
+            {
+              "expr": "b * 10 + 1",
+              "tag": "terbalik"
+            },
+            "10 + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "10 + {b} = …",
+          "answer": "10 + b",
+          "explain": "1 puluhan dan {b} satuan = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

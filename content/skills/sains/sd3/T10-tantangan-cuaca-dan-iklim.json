@@ -1,0 +1,3043 @@
+{
+  "id": "sains.sd3.t10.tantangan-cuaca-dan-iklim",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "T",
+  "order": 10,
+  "title": "Cuaca dan iklim — Level 10 — Tantangan cuaca dan iklim",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [28, 34],
+            "b": [14, 24]
+          },
+          "words": {
+            "k1": ["Medan", "Makassar", "Semarang"],
+            "k2": ["Dieng", "Berastagi", "Malino"]
+          },
+          "prompt": "Suhu di {k1} {a} °C dan di {k2} {b} °C. Berapa derajat selisihnya?",
+          "answer": "a - b",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} − {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 34],
+            "b": [24, 34],
+            "c": [24, 34],
+            "d": [24, 34]
+          },
+          "constraint": "abs(a - b) >= 3 && abs(a - c) >= 3 && abs(a - d) >= 3 && abs(b - c) >= 3 && abs(b - d) >= 3 && abs(c - d) >= 3",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "°C",
+              "caption": "Suhu siang minggu ini"
+            }
+          ],
+          "prompt": "Diagram menunjukkan suhu siang selama 4 hari. Hari apa yang paling panas?",
+          "answer": "1 * (a > b && a > c && a > d) + 2 * (b > a && b > c && b > d) + 3 * (c > a && c > b && c > d) + 4 * (d > a && d > b && d > c)",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Rabu",
+            "4": "Kamis"
+          },
+          "explain": "Batang paling tinggi = suhu paling tinggi: {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Hari ini hujan deras di Bogor pada sore hari",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Besok pagi diperkirakan berawan",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Siang ini suhu 33 °C dan berangin",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Tadi malam ada angin kencang dan petir",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Pagi ini kabut tebal menutupi jalan",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Minggu lalu Surabaya cerah setiap hari",
+              "attrs": {
+                "jenis": "cuaca (keadaan udara saat itu)"
+              }
+            },
+            {
+              "name": "Indonesia hangat sepanjang tahun",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            },
+            {
+              "name": "Musim hujan di Jawa biasanya November sampai Maret",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            },
+            {
+              "name": "Gurun Sahara kering hampir sepanjang tahun",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            },
+            {
+              "name": "Antarktika dingin dan bersalju sepanjang tahun",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            },
+            {
+              "name": "Setiap tahun Bogor termasuk daerah yang sangat sering hujan",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            },
+            {
+              "name": "Dataran Tinggi Dieng sejuk sepanjang tahun",
+              "attrs": {
+                "jenis": "iklim (pola cuaca selama bertahun-tahun)"
+              }
+            }
+          ],
+          "attr": "jenis",
+          "ask": "name",
+          "prompt": "Kalimat mana yang menjelaskan {value}?",
+          "explain": "\"{name}\" menjelaskan {value}.",
+          "choices": 4,
+          "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+        },
+        "weight": 1
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Jakarta",
+              "attrs": {
+                "iklim": "tropis: hangat dan lembap sepanjang tahun"
+              }
+            },
+            {
+              "name": "Pontianak",
+              "attrs": {
+                "iklim": "tropis: hangat dan lembap sepanjang tahun"
+              }
+            },
+            {
+              "name": "Manado",
+              "attrs": {
+                "iklim": "tropis: hangat dan lembap sepanjang tahun"
+              }
+            },
+            {
+              "name": "Gurun Sahara",
+              "attrs": {
+                "iklim": "gurun: sangat kering, hujan sangat sedikit"
+              }
+            },
+            {
+              "name": "Riyadh (Arab Saudi)",
+              "attrs": {
+                "iklim": "gurun: sangat kering, hujan sangat sedikit"
+              }
+            },
+            {
+              "name": "Gurun Gobi",
+              "attrs": {
+                "iklim": "gurun: sangat kering, hujan sangat sedikit"
+              }
+            },
+            {
+              "name": "Antarktika",
+              "attrs": {
+                "iklim": "kutub: sangat dingin, tertutup es sepanjang tahun"
+              }
+            },
+            {
+              "name": "Greenland",
+              "attrs": {
+                "iklim": "kutub: sangat dingin, tertutup es sepanjang tahun"
+              }
+            },
+            {
+              "name": "Kutub Utara",
+              "attrs": {
+                "iklim": "kutub: sangat dingin, tertutup es sepanjang tahun"
+              }
+            },
+            {
+              "name": "Dataran Tinggi Dieng",
+              "attrs": {
+                "iklim": "pegunungan: sejuk sampai dingin karena letaknya tinggi"
+              }
+            },
+            {
+              "name": "Pegunungan Himalaya",
+              "attrs": {
+                "iklim": "pegunungan: sejuk sampai dingin karena letaknya tinggi"
+              }
+            },
+            {
+              "name": "Puncak Jaya (Papua)",
+              "attrs": {
+                "iklim": "pegunungan: sejuk sampai dingin karena letaknya tinggi"
+              }
+            }
+          ],
+          "attr": "iklim",
+          "ask": "value",
+          "prompt": "Bagaimana iklim di {name}?",
+          "explain": "Iklim {name}: {value}.",
+          "choices": 4,
+          "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling kering?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling sedikit pada Jul (60 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 300],
+                    ["Mar", 250],
+                    ["Mei", 120],
+                    ["Jul", 60],
+                    ["Sep", 80],
+                    ["Nov", 220]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 1)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling basah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Jan (300 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 300],
+                    ["Mar", 250],
+                    ["Mei", 120],
+                    ["Jul", 60],
+                    ["Sep", 80],
+                    ["Nov", 220]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 1)"
+                }
+              ]
+            },
+            {
+              "prompt": "Pak Budi ingin menjemur gabah ketika jarang hujan. Bulan apa yang paling cocok menurut data?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bulan dengan hujan paling sedikit adalah Jul.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 300],
+                    ["Mar", 250],
+                    ["Mei", 120],
+                    ["Jul", 60],
+                    ["Sep", 80],
+                    ["Nov", 220]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 1)"
+                }
+              ]
+            },
+            {
+              "prompt": "Warga ingin membersihkan selokan sebelum bulan paling basah. Bulan paling basah adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Jan; saat itu risiko banjir paling tinggi.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 300],
+                    ["Mar", 250],
+                    ["Mei", 120],
+                    ["Jul", 60],
+                    ["Sep", 80],
+                    ["Nov", 220]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 1)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling kering?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling sedikit pada Jul (50 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 350],
+                    ["Mar", 280],
+                    ["Mei", 140],
+                    ["Jul", 50],
+                    ["Sep", 70],
+                    ["Nov", 260]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 2)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling basah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Jan (350 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 350],
+                    ["Mar", 280],
+                    ["Mei", 140],
+                    ["Jul", 50],
+                    ["Sep", 70],
+                    ["Nov", 260]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 2)"
+                }
+              ]
+            },
+            {
+              "prompt": "Pak Budi ingin menjemur gabah ketika jarang hujan. Bulan apa yang paling cocok menurut data?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bulan dengan hujan paling sedikit adalah Jul.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 350],
+                    ["Mar", 280],
+                    ["Mei", 140],
+                    ["Jul", 50],
+                    ["Sep", 70],
+                    ["Nov", 260]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 2)"
+                }
+              ]
+            },
+            {
+              "prompt": "Warga ingin membersihkan selokan sebelum bulan paling basah. Bulan paling basah adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jan"
+                  },
+                  "say": "Jan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mar"
+                  },
+                  "say": "Mar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jul"
+                  },
+                  "say": "Jul",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Jan; saat itu risiko banjir paling tinggi.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Jan", 350],
+                    ["Mar", 280],
+                    ["Mei", 140],
+                    ["Jul", 50],
+                    ["Sep", 70],
+                    ["Nov", 260]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 2)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling kering?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling sedikit pada Agu (40 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 320],
+                    ["Apr", 200],
+                    ["Jun", 90],
+                    ["Agu", 40],
+                    ["Okt", 110],
+                    ["Des", 290]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 3)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling basah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Feb (320 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 320],
+                    ["Apr", 200],
+                    ["Jun", 90],
+                    ["Agu", 40],
+                    ["Okt", 110],
+                    ["Des", 290]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 3)"
+                }
+              ]
+            },
+            {
+              "prompt": "Pak Budi ingin menjemur gabah ketika jarang hujan. Bulan apa yang paling cocok menurut data?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bulan dengan hujan paling sedikit adalah Agu.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 320],
+                    ["Apr", 200],
+                    ["Jun", 90],
+                    ["Agu", 40],
+                    ["Okt", 110],
+                    ["Des", 290]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 3)"
+                }
+              ]
+            },
+            {
+              "prompt": "Warga ingin membersihkan selokan sebelum bulan paling basah. Bulan paling basah adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Feb; saat itu risiko banjir paling tinggi.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 320],
+                    ["Apr", 200],
+                    ["Jun", 90],
+                    ["Agu", 40],
+                    ["Okt", 110],
+                    ["Des", 290]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 3)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling kering?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling sedikit pada Agu (30 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 280],
+                    ["Apr", 190],
+                    ["Jun", 70],
+                    ["Agu", 30],
+                    ["Okt", 120],
+                    ["Des", 310]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 4)"
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data iklim, bulan apa yang biasanya paling basah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Des"
+                  },
+                  "say": "Des"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Des (310 mm).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 280],
+                    ["Apr", 190],
+                    ["Jun", 70],
+                    ["Agu", 30],
+                    ["Okt", 120],
+                    ["Des", 310]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 4)"
+                }
+              ]
+            },
+            {
+              "prompt": "Pak Budi ingin menjemur gabah ketika jarang hujan. Bulan apa yang paling cocok menurut data?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agu"
+                  },
+                  "say": "Agu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bulan dengan hujan paling sedikit adalah Agu.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 280],
+                    ["Apr", 190],
+                    ["Jun", 70],
+                    ["Agu", 30],
+                    ["Okt", 120],
+                    ["Des", 310]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 4)"
+                }
+              ]
+            },
+            {
+              "prompt": "Warga ingin membersihkan selokan sebelum bulan paling basah. Bulan paling basah adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Des"
+                  },
+                  "say": "Des"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Feb"
+                  },
+                  "say": "Feb",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Apr"
+                  },
+                  "say": "Apr",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jun"
+                  },
+                  "say": "Jun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan paling banyak pada Des; saat itu risiko banjir paling tinggi.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Bulan", "Hujan rata-rata (mm)"],
+                  "rows": [
+                    ["Feb", 280],
+                    ["Apr", 190],
+                    ["Jun", 70],
+                    ["Agu", 30],
+                    ["Okt", 120],
+                    ["Des", 310]
+                  ],
+                  "caption": "Data iklim sebuah kota (contoh 4)"
+                }
+              ]
+            }
+          ]
+        },
+        "weight": 2
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim gurun (sangat kering)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 30 °C, hujan 80 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 26, 2000],
+                    ["Kota Q", -25, 150],
+                    ["Kota R", 30, 80],
+                    ["Kota S", 10, 2000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 27 °C, hujan 3000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 14, 1500],
+                    ["Kota Q", 25, 80],
+                    ["Kota R", 27, 3000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu 14 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 27, 2000],
+                    ["Kota Q", 14, 2000],
+                    ["Kota R", -25, 200]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim gurun (sangat kering)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu 30 °C, hujan 50 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 12, 2000],
+                    ["Kota Q", 30, 50],
+                    ["Kota R", -15, 150],
+                    ["Kota S", 28, 2000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim gurun (sangat kering)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 25 °C, hujan 20 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 10, 1500],
+                    ["Kota Q", -20, 100],
+                    ["Kota R", 25, 20],
+                    ["Kota S", 26, 2000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 27 °C, hujan 2500 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 30, 20],
+                    ["Kota Q", -25, 100],
+                    ["Kota R", 27, 2500],
+                    ["Kota S", 10, 1500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu 12 °C, hujan 1500 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 28, 50],
+                    ["Kota Q", 12, 1500],
+                    ["Kota R", -20, 200],
+                    ["Kota S", 26, 2500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 10 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", -20, 150],
+                    ["Kota Q", 30, 80],
+                    ["Kota R", 10, 2000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu -15 °C, hujan 200 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 27, 2500],
+                    ["Kota Q", 28, 50],
+                    ["Kota R", -15, 200]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu -20 °C, hujan 100 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 10, 2500],
+                    ["Kota Q", 26, 2000],
+                    ["Kota R", -20, 100]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 10 °C, hujan 1500 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 30, 50],
+                    ["Kota Q", 26, 3000],
+                    ["Kota R", 10, 1500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota P: suhu 26 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 26, 2000],
+                    ["Kota Q", -20, 200],
+                    ["Kota R", 28, 80]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim gurun (sangat kering)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 30 °C, hujan 20 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 26, 2500],
+                    ["Kota Q", 10, 1500],
+                    ["Kota R", 30, 20],
+                    ["Kota S", -20, 100]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu -20 °C, hujan 100 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 30, 80],
+                    ["Kota Q", -20, 100],
+                    ["Kota R", 27, 3000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota S: suhu 27 °C, hujan 2500 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", -15, 100],
+                    ["Kota Q", 10, 1500],
+                    ["Kota R", 25, 50],
+                    ["Kota S", 27, 2500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 28 °C, hujan 3000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 12, 2000],
+                    ["Kota Q", -20, 150],
+                    ["Kota R", 28, 3000],
+                    ["Kota S", 28, 20]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 26 °C, hujan 2500 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 28, 20],
+                    ["Kota Q", 10, 2000],
+                    ["Kota R", 26, 2500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu 12 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 28, 3000],
+                    ["Kota Q", 12, 2000],
+                    ["Kota R", -25, 100]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim pegunungan (sejuk dan cukup hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu 12 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 28, 2500],
+                    ["Kota Q", 12, 2000],
+                    ["Kota R", 28, 20]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota P: suhu -20 °C, hujan 100 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", -20, 100],
+                    ["Kota Q", 30, 20],
+                    ["Kota R", 14, 2500],
+                    ["Kota S", 26, 2500]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim tropis (hangat dan banyak hujan)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota S"
+                  },
+                  "say": "Kota S"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota S: suhu 28 °C, hujan 2000 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 30, 20],
+                    ["Kota Q", 14, 2000],
+                    ["Kota R", -15, 150],
+                    ["Kota S", 28, 2000]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota Q: suhu -25 °C, hujan 100 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 10, 1500],
+                    ["Kota Q", -25, 100],
+                    ["Kota R", 30, 80]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim kutub (sangat dingin)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu -20 °C, hujan 150 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 27, 3000],
+                    ["Kota Q", 25, 50],
+                    ["Kota R", -20, 150]
+                  ]
+                }
+              ]
+            },
+            {
+              "prompt": "Menurut data, tempat mana yang paling mungkin beriklim gurun (sangat kering)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota R"
+                  },
+                  "say": "Kota R"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota P"
+                  },
+                  "say": "Kota P",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kota Q"
+                  },
+                  "say": "Kota Q",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kota R: suhu 25 °C, hujan 50 mm per tahun. Tropis = hangat & banyak hujan; gurun = hujan sangat sedikit; kutub = di bawah 0 °C; pegunungan = sejuk.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Tempat", "Suhu rata-rata (°C)", "Hujan per tahun (mm)"],
+                  "rows": [
+                    ["Kota P", 27, 3000],
+                    ["Kota Q", -25, 150],
+                    ["Kota R", 25, 50]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "weight": 2
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Mengapa Indonesia hangat sepanjang tahun?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Karena Indonesia terletak di sekitar garis khatulistiwa"
+                  },
+                  "say": "Karena Indonesia terletak di sekitar garis khatulistiwa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Karena Indonesia dekat kutub"
+                  },
+                  "say": "Karena Indonesia dekat kutub",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Karena Indonesia selalu bersalju"
+                  },
+                  "say": "Karena Indonesia selalu bersalju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Karena Indonesia tidak punya laut"
+                  },
+                  "say": "Karena Indonesia tidak punya laut",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Daerah khatulistiwa mendapat sinar matahari kuat sepanjang tahun.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Indonesia mempunyai dua musim, yaitu …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "musim hujan dan musim kemarau"
+                  },
+                  "say": "musim hujan dan musim kemarau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "musim dingin dan musim semi"
+                  },
+                  "say": "musim dingin dan musim semi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "musim salju dan musim gugur"
+                  },
+                  "say": "musim salju dan musim gugur",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "musim panas dan musim salju"
+                  },
+                  "say": "musim panas dan musim salju",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Iklim tropis Indonesia punya musim hujan dan kemarau.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Angin muson barat (sekitar Desember–Februari) biasanya membawa …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "banyak hujan"
+                  },
+                  "say": "banyak hujan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "salju"
+                  },
+                  "say": "salju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kemarau panjang"
+                  },
+                  "say": "kemarau panjang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "udara sangat kering"
+                  },
+                  "say": "udara sangat kering",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Angin muson barat melewati samudra luas sehingga membawa uap air dan hujan.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Angin muson timur (sekitar Juni–Agustus) di Jawa biasanya membuat udara …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kering, musim kemarau"
+                  },
+                  "say": "kering, musim kemarau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sangat basah"
+                  },
+                  "say": "sangat basah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bersalju"
+                  },
+                  "say": "bersalju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berkabut sepanjang hari"
+                  },
+                  "say": "berkabut sepanjang hari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Angin muson timur bertiup dari Australia yang kering.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Mengapa udara di Dieng lebih dingin daripada di Jakarta?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dieng terletak jauh lebih tinggi dari permukaan laut"
+                  },
+                  "say": "Dieng terletak jauh lebih tinggi dari permukaan laut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dieng lebih dekat ke Matahari"
+                  },
+                  "say": "Dieng lebih dekat ke Matahari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dieng berada di kutub"
+                  },
+                  "say": "Dieng berada di kutub",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dieng tidak pernah siang"
+                  },
+                  "say": "Dieng tidak pernah siang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Makin tinggi tempat, suhu udara makin rendah.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Kota Bogor dijuluki \"kota hujan\" karena …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hujan sangat sering turun di sana setiap tahun"
+                  },
+                  "say": "hujan sangat sering turun di sana setiap tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hanya hujan sekali setahun"
+                  },
+                  "say": "hanya hujan sekali setahun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak pernah hujan"
+                  },
+                  "say": "tidak pernah hujan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hujannya berupa salju"
+                  },
+                  "say": "hujannya berupa salju",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Curah hujan Bogor termasuk yang tinggi di Indonesia.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Puncak Jaya di Papua punya es walaupun dekat khatulistiwa. Mengapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Puncaknya sangat tinggi sehingga sangat dingin"
+                  },
+                  "say": "Puncaknya sangat tinggi sehingga sangat dingin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Papua dekat kutub"
+                  },
+                  "say": "Papua dekat kutub",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Es dibawa dari Antarktika"
+                  },
+                  "say": "Es dibawa dari Antarktika",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Di Papua sedang musim salju"
+                  },
+                  "say": "Di Papua sedang musim salju",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Puncak Jaya lebih dari 4.800 m, cukup dingin untuk menyimpan gletser.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Saat musim kemarau panjang, apa yang perlu diwaspadai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kekeringan dan kebakaran hutan"
+                  },
+                  "say": "Kekeringan dan kebakaran hutan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Salju tebal"
+                  },
+                  "say": "Salju tebal",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Banjir bandang setiap hari"
+                  },
+                  "say": "Banjir bandang setiap hari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Air laut membeku"
+                  },
+                  "say": "Air laut membeku",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kemarau panjang membuat tanah dan hutan kering sehingga mudah terbakar.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Siklon tropis yang lewat dekat Indonesia dapat membawa …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "angin kencang dan hujan lebat"
+                  },
+                  "say": "angin kencang dan hujan lebat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "salju"
+                  },
+                  "say": "salju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "udara sangat dingin"
+                  },
+                  "say": "udara sangat dingin",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gempa bumi"
+                  },
+                  "say": "gempa bumi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Siklon tropis adalah badai besar di atas laut hangat. BMKG memberi peringatan dini bila ada siklon.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Lembaga di Indonesia yang memberi informasi cuaca dan iklim adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "BMKG"
+                  },
+                  "say": "BMKG"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "KPK"
+                  },
+                  "say": "KPK",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "PLN"
+                  },
+                  "say": "PLN",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "BPOM"
+                  },
+                  "say": "BPOM",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "BMKG = Badan Meteorologi, Klimatologi, dan Geofisika.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            }
+          ]
+        },
+        "weight": 2
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Kalimat mana yang menjelaskan IKLIM?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Setiap tahun kota itu hujan hampir setiap sore dari Desember sampai Februari."
+                  },
+                  "say": "Setiap tahun kota itu hujan hampir setiap sore dari Desember sampai Februari."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kemarin sore hujan deras di kota itu."
+                  },
+                  "say": "Kemarin sore hujan deras di kota itu.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pagi ini langit mendung."
+                  },
+                  "say": "Pagi ini langit mendung.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nanti malam mungkin ada petir."
+                  },
+                  "say": "Nanti malam mungkin ada petir.",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Iklim menjelaskan pola cuaca yang berulang selama bertahun-tahun.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Kalimat mana yang menjelaskan CUACA?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Siang ini di Medan panas terik 34 °C."
+                  },
+                  "say": "Siang ini di Medan panas terik 34 °C."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Medan beriklim tropis."
+                  },
+                  "say": "Medan beriklim tropis.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Setiap tahun Medan hangat."
+                  },
+                  "say": "Setiap tahun Medan hangat.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Medan jarang bersuhu dingin selama puluhan tahun."
+                  },
+                  "say": "Medan jarang bersuhu dingin selama puluhan tahun.",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cuaca adalah keadaan udara di satu tempat pada waktu tertentu, misalnya \"siang ini\".",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Bacalah teks. Kalimat mana yang menjelaskan iklim?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Setiap tahun, bulan Agustus di desa itu kering."
+                  },
+                  "say": "Setiap tahun, bulan Agustus di desa itu kering."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hari ini Sari memakai payung."
+                  },
+                  "say": "Hari ini Sari memakai payung.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tadi siang angin bertiup kencang."
+                  },
+                  "say": "Tadi siang angin bertiup kencang.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hari ini Sari pergi ke sekolah."
+                  },
+                  "say": "Hari ini Sari pergi ke sekolah.",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kata \"setiap tahun\" menunjukkan pola jangka panjang, yaitu iklim.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Hari ini Sari memakai payung. Tadi siang angin bertiup kencang. Setiap tahun, bulan Agustus di desa itu kering."
+                }
+              ]
+            },
+            {
+              "prompt": "Bacalah teks. Kalimat mana yang menjelaskan cuaca?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pagi ini puncak Bromo tertutup kabut."
+                  },
+                  "say": "Pagi ini puncak Bromo tertutup kabut."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pegunungan Tengger sejuk sepanjang tahun."
+                  },
+                  "say": "Pegunungan Tengger sejuk sepanjang tahun.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Setiap musim kemarau malamnya sangat dingin."
+                  },
+                  "say": "Setiap musim kemarau malamnya sangat dingin.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Daerah itu jarang panas terik."
+                  },
+                  "say": "Daerah itu jarang panas terik.",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kata \"pagi ini\" menunjukkan keadaan udara saat itu, yaitu cuaca.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Pegunungan Tengger sejuk sepanjang tahun. Setiap musim kemarau malamnya sangat dingin. Pagi ini puncak Bromo tertutup kabut."
+                }
+              ]
+            },
+            {
+              "prompt": "Budi berkata, \"Besok akan hujan di Bandung.\" Budi membicarakan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cuaca"
+                  },
+                  "say": "cuaca"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "iklim"
+                  },
+                  "say": "iklim",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "musim selama 30 tahun"
+                  },
+                  "say": "musim selama 30 tahun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jenis batuan"
+                  },
+                  "say": "jenis batuan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Keadaan udara pada satu hari tertentu adalah cuaca.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Sari berkata, \"Kota kami selalu hangat sepanjang tahun.\" Sari membicarakan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "iklim"
+                  },
+                  "say": "iklim"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cuaca hari ini"
+                  },
+                  "say": "cuaca hari ini",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "suhu tubuh"
+                  },
+                  "say": "suhu tubuh",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arah angin sekarang"
+                  },
+                  "say": "arah angin sekarang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pola yang sama sepanjang tahun adalah iklim.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Mana yang paling tepat untuk mengetahui IKLIM sebuah kota?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Catatan cuaca kota itu selama 30 tahun"
+                  },
+                  "say": "Catatan cuaca kota itu selama 30 tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Melihat langit pagi ini"
+                  },
+                  "say": "Melihat langit pagi ini",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengukur suhu satu jam"
+                  },
+                  "say": "Mengukur suhu satu jam",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bertanya cuaca kemarin"
+                  },
+                  "say": "Bertanya cuaca kemarin",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Iklim dihitung dari rata-rata cuaca bertahun-tahun (BMKG memakai sekitar 30 tahun).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Bacalah teks. Kalimat mana yang menjelaskan iklim?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pulau ini punya musim hujan dan musim kemarau setiap tahun."
+                  },
+                  "say": "Pulau ini punya musim hujan dan musim kemarau setiap tahun."
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hari ini ombak tinggi."
+                  },
+                  "say": "Hari ini ombak tinggi.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nelayan tidak melaut hari ini."
+                  },
+                  "say": "Nelayan tidak melaut hari ini.",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sore ini matahari tertutup awan."
+                  },
+                  "say": "Sore ini matahari tertutup awan.",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pola musim yang terulang setiap tahun adalah iklim.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Hari ini ombak tinggi sehingga nelayan tidak melaut. Pulau ini punya musim hujan dan musim kemarau setiap tahun."
+                }
+              ]
+            },
+            {
+              "prompt": "Prakiraan BMKG: \"Besok siang hujan disertai petir.\" Informasi ini tentang …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cuaca"
+                  },
+                  "say": "cuaca"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "iklim"
+                  },
+                  "say": "iklim",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gempa bumi"
+                  },
+                  "say": "gempa bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batuan"
+                  },
+                  "say": "batuan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Prakiraan untuk besok adalah prakiraan cuaca.",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            },
+            {
+              "prompt": "Mana pernyataan tentang iklim?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kutub Utara dingin sepanjang tahun"
+                  },
+                  "say": "Kutub Utara dingin sepanjang tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hari ini Jakarta berawan"
+                  },
+                  "say": "Hari ini Jakarta berawan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tadi pagi gerimis"
+                  },
+                  "say": "Tadi pagi gerimis",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Nanti malam cerah"
+                  },
+                  "say": "Nanti malam cerah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dingin sepanjang tahun adalah pola jangka panjang (iklim).",
+              "source": "NGSS 3-ESS2-1 (data cuaca) & 3-ESS2-2 (iklim di berbagai wilayah dunia), nextgenscience.org; BMKG (bmkg.go.id): iklim & musim di Indonesia"
+            }
+          ]
+        },
+        "weight": 2
+      }
+    ]
+  }
+}

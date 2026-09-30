@@ -1,0 +1,77 @@
+{
+  "id": "math.sd2.ee8.menghitung-hari",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "EE",
+  "order": 8,
+  "title": "Kalender — Level 8 — Menghitung hari",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-EE"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 15],
+            "b": [5, 30]
+          },
+          "prompt": "Dari tanggal {a} sampai tanggal {b} di bulan yang sama, berapa hari?",
+          "answer": "b - a",
+          "explain": "{b} − {a} = {answer} hari.",
+          "constraint": "b > a + 2",
+          "unit": "hari",
+          "distractors": [
+            {
+              "expr": "b - a + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b",
+              "tag": "tanggal-akhir"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [1, 4]
+          },
+          "prompt": "Libur sekolah {w} minggu. Berapa hari libur itu?",
+          "answer": "w * 7",
+          "explain": "{w} × 7 hari = {answer} hari.",
+          "unit": "hari",
+          "distractors": [
+            {
+              "expr": "w * 5",
+              "tag": "hari-sekolah"
+            },
+            {
+              "expr": "w * 10",
+              "tag": "dikira-10"
+            },
+            {
+              "expr": "w + 7",
+              "tag": "menjumlah"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

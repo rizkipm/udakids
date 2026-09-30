@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.aa3.kelipatan-sepuluh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 3,
+  "title": "Nilai tempat — Level 3 — Kelipatan sepuluh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "Ada {k} batang sepuluh. Berapa semuanya?",
+          "answer": "k * 10",
+          "explain": "{k} puluhan = {answer}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=k",
+              "ones": 0
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "menghitung-batang"
+            },
+            {
+              "expr": "k * 10 + 10",
+              "tag": "lebih-sepuluh"
+            },
+            {
+              "expr": "k + 10",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 10]
+          },
+          "prompt": "{=k*10} terdiri atas berapa puluhan?",
+          "answer": "k",
+          "explain": "{=k*10} = {answer} puluhan.",
+          "distractors": [
+            {
+              "expr": "k * 10",
+              "tag": "nilai-bukan-banyak"
+            },
+            "k + 1",
+            "k - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 10]
+          },
+          "prompt": "{k} puluhan = …",
+          "answer": "k * 10",
+          "explain": "{k} × 10 = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,824 @@
+{
+  "id": "sains.sd4.g8.rangkaian-seri",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "G",
+  "order": 8,
+  "title": "Listrik — Level 8 — Rangkaian seri",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6]
+          },
+          "prompt": "Ada {n} baterai 1,5 volt yang disusun seri. Berapa tegangan totalnya?",
+          "format": "decimal",
+          "answer": "n * 1.5",
+          "unit": "V",
+          "distractors": [
+            {
+              "expr": "1.5",
+              "tag": "satu-baterai"
+            },
+            {
+              "expr": "n + 1.5",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "n",
+              "tag": "banyak-baterai"
+            }
+          ],
+          "explain": "Tegangan baterai seri dijumlahkan: {n} × 1,5 V = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6]
+          },
+          "derived": {
+            "t": "n * 1.5"
+          },
+          "prompt": "Sebuah mainan butuh {t} volt. Berapa baterai 1,5 volt yang harus disusun seri?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "n * 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "max(1, n - 1)",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{t} : 1,5 = {answer} baterai."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Dua lampu dirangkai seri. Satu lampu dilepas. Lampu yang lain …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikut padam"
+                  },
+                  "say": "ikut padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tetap menyala terang"
+                  },
+                  "say": "tetap menyala terang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyala dua kali lebih terang"
+                  },
+                  "say": "menyala dua kali lebih terang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berubah warna"
+                  },
+                  "say": "berubah warna",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pada rangkaian seri hanya ada satu jalur arus. Jika satu lampu dilepas, jalurnya terputus.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4"
+            },
+            {
+              "prompt": "Rangkaian seri: satu baterai dengan 1 lampu, lalu dengan 3 lampu. Lampu pada rangkaian 3 lampu menyala …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih redup"
+                  },
+                  "say": "lebih redup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih terang"
+                  },
+                  "say": "lebih terang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama terang"
+                  },
+                  "say": "sama terang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak menyala sama sekali"
+                  },
+                  "say": "tidak menyala sama sekali",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pada rangkaian seri, makin banyak lampu, makin kecil arus yang mengalir, sehingga nyalanya redup.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4"
+            },
+            {
+              "prompt": "Menambah baterai secara seri pada rangkaian satu lampu membuat lampu …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih terang"
+                  },
+                  "say": "lebih terang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih redup"
+                  },
+                  "say": "lebih redup",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "padam"
+                  },
+                  "say": "padam",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak berubah sama sekali"
+                  },
+                  "say": "tidak berubah sama sekali",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baterai yang disusun seri menambah tegangan sehingga arus lebih besar.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4"
+            }
+          ]
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Rangkaian seri berisi 2 lampu. Lampu ke-1 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lampu"
+                  },
+                  "say": "2 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 2 lampu. Lampu ke-2 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lampu"
+                  },
+                  "say": "2 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 3 lampu. Lampu ke-1 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lampu"
+                  },
+                  "say": "2 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 3 lampu. Lampu ke-2 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lampu"
+                  },
+                  "say": "2 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 3 lampu. Lampu ke-3 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lampu"
+                  },
+                  "say": "2 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 4 lampu. Lampu ke-1 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 4 lampu. Lampu ke-2 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 4 lampu. Lampu ke-3 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 4 lampu. Lampu ke-4 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lampu"
+                  },
+                  "say": "3 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 5 lampu. Lampu ke-1 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 lampu"
+                  },
+                  "say": "5 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → lampu 5 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 5 lampu. Lampu ke-2 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 lampu"
+                  },
+                  "say": "5 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → lampu 5 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 5 lampu. Lampu ke-3 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 lampu"
+                  },
+                  "say": "5 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → lampu 5 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 5 lampu. Lampu ke-4 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 lampu"
+                  },
+                  "say": "5 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → lampu 5 → kembali ke baterai"
+                }
+              ]
+            },
+            {
+              "prompt": "Rangkaian seri berisi 5 lampu. Lampu ke-5 dilepas. Berapa lampu yang masih menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada, semua padam"
+                  },
+                  "say": "Tidak ada, semua padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 lampu"
+                  },
+                  "say": "4 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lampu"
+                  },
+                  "say": "1 lampu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 lampu"
+                  },
+                  "say": "5 lampu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rangkaian seri hanya punya satu jalur arus. Satu lampu dilepas → jalur terputus → semua padam.",
+              "source": "Rangkaian listrik sederhana, konduktor & isolator listrik — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V' (Kemendikbudristek, 2021) Bab 3B; CP IPAS Fase C, Kepka BSKAP 046/H/KR/2025; NGSS 4-PS3-2, 4-PS3-4",
+              "stimulus": [
+                {
+                  "kind": "text",
+                  "text": "Baterai → lampu 1 → lampu 2 → lampu 3 → lampu 4 → lampu 5 → kembali ke baterai"
+                }
+              ]
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

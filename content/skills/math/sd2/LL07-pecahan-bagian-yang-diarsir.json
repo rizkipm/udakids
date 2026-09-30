@@ -1,0 +1,117 @@
+{
+  "id": "math.sd2.ll7.pecahan-bagian-yang-diarsir",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "LL",
+  "order": 7,
+  "title": "Pecahan — Level 7 — Pecahan bagian yang diarsir",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-LL"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 8]
+            },
+            "n": [1, 7]
+          },
+          "prompt": "Berapa bagian yang diarsir?",
+          "answer": "0",
+          "explain": "{n} dari {d} bagian sama besar diarsir: {n}/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "yang-tidak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "bagian-per-bagian"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-penyebut"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 8]
+            },
+            "n": [1, 7]
+          },
+          "prompt": "Berapa bagian yang diarsir?",
+          "answer": "0",
+          "explain": "{n} dari {d} bagian sama besar diarsir: {n}/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "yang-tidak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "bagian-per-bagian"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-penyebut"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "math.sd1.g9.cara-membuat-bilangan-isian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "G",
+  "order": 9,
+  "title": "Penjumlahan sampai 10 — Level 9 — Cara membuat bilangan: isian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-G",
+    "ccss": "1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10],
+            "a": [0, 10]
+          },
+          "prompt": "{n} = … + {a}",
+          "answer": "n - a",
+          "explain": "{answer} + {a} = {n}.",
+          "constraint": "a <= n",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [0, 9]
+          },
+          "prompt": "{a} + {b} = {c} + …",
+          "answer": "a + b - c",
+          "explain": "{a} + {b} = {=a+b}. Jadi {c} + {answer} = {=a+b} juga.",
+          "constraint": "a + b <= 10 && c <= a + b && c != a && c != b",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.q10.tantangan-operasi-campuran-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Q",
+  "order": 10,
+  "title": "Operasi campuran dua angka — Level 10 — Tantangan operasi campuran dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-Q",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [11, 39],
+            "e": {
+              "values": [-3, -1, 0, 1, 3]
+            }
+          },
+          "prompt": "{a} − {b} … {c}",
+          "answer": "(a - b > c) * 1 + (a - b < c) * 2 + (a - b == c) * 3",
+          "explain": "{a} − {b} = {=a-b}: {answer}.",
+          "derived": {
+            "c": "a - b + e"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 60],
+            "b": [20, 39],
+            "c": [10, 60]
+          },
+          "prompt": "{a} + {b} = … + {c}",
+          "answer": "a + b - c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a + b > c"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 50],
+            "b": [11, 40],
+            "c": [11, 40]
+          },
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "explain": "{=a+b} − {c} = {answer}.",
+          "mode": "input",
+          "constraint": "c <= a + b && a + b <= 100"
+        }
+      }
+    ]
+  }
+}

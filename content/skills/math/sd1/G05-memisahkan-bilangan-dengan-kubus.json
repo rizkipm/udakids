@@ -1,0 +1,87 @@
+{
+  "id": "math.sd1.g5.memisahkan-bilangan-dengan-kubus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "G",
+  "order": 5,
+  "title": "Penjumlahan sampai 10 — Level 5 — Memisahkan bilangan dengan kubus",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-G",
+    "ccss": "1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10],
+            "a": [1, 9]
+          },
+          "prompt": "Kereta {n} kubus: {a} merah dan sisanya biru. Berapa kubus biru?",
+          "answer": "n - a",
+          "explain": "{a} + {answer} = {n}.",
+          "constraint": "a < n",
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a", "=n-a"],
+              "colors": ["merah", "biru"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "total"
+            },
+            {
+              "expr": "a",
+              "tag": "bagian-sama"
+            },
+            "n - a + 1"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10],
+            "a": [1, 9]
+          },
+          "prompt": "{n} kubus dipisah menjadi dua kelompok. Satu kelompok {a}. Kelompok lain berapa?",
+          "answer": "n - a",
+          "explain": "{n} = {a} + {answer}.",
+          "constraint": "a < n",
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a", "=n-a"],
+              "colors": ["kuning", "ungu"],
+              "separated": true
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "total"
+            },
+            {
+              "expr": "a",
+              "tag": "bagian-sama"
+            },
+            "n - a - 1"
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

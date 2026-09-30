@@ -1,0 +1,60 @@
+{
+  "id": "math.sd2.n8.penjumlahan-sampai-200",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "N",
+  "order": 8,
+  "title": "Penjumlahan dua angka — Level 8 — Penjumlahan sampai 200",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-N",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [40, 99]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Puluhan {=floor(a/10)} + {=floor(b/10)} = {=floor(a/10)+floor(b/10)} puluhan, lebih dari 10 puluhan = 1 ratusan. Hasil {answer}.",
+          "constraint": "a + b > 100",
+          "distractors": ["a + b + 10", "a + b - 10", "a + b - 100"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [40, 99]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "Hasil {answer}.",
+          "mode": "input",
+          "constraint": "a + b > 100",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["+", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

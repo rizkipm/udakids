@@ -1,0 +1,62 @@
+{
+  "id": "math.sd1.dd5.papan-seratus-maju-satuan-dan-turun-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "DD",
+  "order": 5,
+  "title": "Penjumlahan dua angka — Level 5 — Papan seratus: maju satuan dan turun puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-DD"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 69],
+            "k": [1, 3]
+          },
+          "prompt": "Pada papan 1–100, mulai dari {a} lalu turun {k} baris. Sampai di angka berapa?",
+          "answer": "a + k * 10",
+          "explain": "Setiap turun satu baris tambah 10: {a} + {=k*10} = {answer}.",
+          "distractors": [
+            {
+              "expr": "a + k",
+              "tag": "tambah-satuan"
+            },
+            "a + k * 10 + 1",
+            "a + k * 10 - 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [2, 9]
+          },
+          "prompt": "Pada papan 1–100, mulai dari {a} lalu maju {b} kotak. Sampai di angka berapa?",
+          "answer": "a + b",
+          "explain": "Maju {b} berarti tambah {b}: {answer}.",
+          "constraint": "a + b <= 100",
+          "distractors": [
+            {
+              "expr": "a + b * 10",
+              "tag": "turun-baris"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

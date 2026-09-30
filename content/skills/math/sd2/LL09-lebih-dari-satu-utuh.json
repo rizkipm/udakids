@@ -1,0 +1,123 @@
+{
+  "id": "math.sd2.ll9.lebih-dari-satu-utuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "LL",
+  "order": 9,
+  "title": "Pecahan — Level 9 — Lebih dari satu utuh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-LL"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 8]
+            },
+            "n": [1, 7]
+          },
+          "prompt": "Setiap bangun dibagi {d} bagian sama besar. Berapa bagian 1/{d} yang diarsir semuanya?",
+          "answer": "d + n",
+          "explain": "Satu bangun utuh = {d} bagian, ditambah {n} bagian = {answer} bagian 1/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "fraction",
+                  "num": "=d",
+                  "den": "=d",
+                  "model": "circle",
+                  "hideNumber": true
+                },
+                {
+                  "kind": "fraction",
+                  "num": "=n",
+                  "den": "=d",
+                  "model": "circle",
+                  "hideNumber": true
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "lupa-yang-utuh"
+            },
+            {
+              "expr": "d",
+              "tag": "hanya-yang-utuh"
+            },
+            {
+              "expr": "d + n + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 8]
+            },
+            "n": [1, 7]
+          },
+          "prompt": "Setiap bangun dibagi {d} bagian sama besar. Berapa bagian 1/{d} yang diarsir semuanya?",
+          "answer": "d + n",
+          "explain": "Satu bangun utuh = {d} bagian, ditambah {n} bagian = {answer} bagian 1/{d}.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "fraction",
+                  "num": "=d",
+                  "den": "=d",
+                  "model": "bar",
+                  "hideNumber": true
+                },
+                {
+                  "kind": "fraction",
+                  "num": "=n",
+                  "den": "=d",
+                  "model": "bar",
+                  "hideNumber": true
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "lupa-yang-utuh"
+            },
+            {
+              "expr": "d",
+              "tag": "hanya-yang-utuh"
+            },
+            {
+              "expr": "d + n + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

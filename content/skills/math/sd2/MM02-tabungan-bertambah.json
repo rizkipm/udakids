@@ -1,0 +1,46 @@
+{
+  "id": "math.sd2.mm2.tabungan-bertambah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "MM",
+  "order": 2,
+  "title": "Literasi keuangan — Level 2 — Tabungan bertambah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G2-MM"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [500, 1000, 2000]
+      },
+      "h": [2, 7]
+    },
+    "prompt": "{nama} menabung Rp{a} setiap hari selama {h} hari. Berapa rupiah tabungannya?",
+    "answer": "a * h",
+    "explain": "Rp{a} dijumlahkan {h} kali = {answer}.",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a + h",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "a * (h + 1)",
+        "tag": "lebih-satu-hari"
+      },
+      {
+        "expr": "a * (h - 1)",
+        "tag": "kurang-satu-hari"
+      }
+    ]
+  }
+}

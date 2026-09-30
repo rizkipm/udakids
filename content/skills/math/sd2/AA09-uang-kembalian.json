@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.aa9.uang-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 9,
+  "title": "Uang sampai Rp10.000 — Level 9 — Uang kembalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [500, 9500],
+        "step": 500
+      },
+      "u": {
+        "values": [1000, 2000, 5000, 10000]
+      }
+    },
+    "prompt": "Harga roti Rp{h}. {nama} membayar dengan uang Rp{u}. Berapa kembaliannya?",
+    "answer": "u - h",
+    "explain": "Kembalian = uang yang dibayar − harga = Rp{u} − Rp{h} = {answer}.",
+    "constraint": "u > h && u - h < 5000",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "u + h",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "u - h + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "u - h - 500",
+        "tag": "kurang"
+      }
+    ]
+  }
+}

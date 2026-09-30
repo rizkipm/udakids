@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.v9.tambah-dan-kurang-isian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "V",
+  "order": 9,
+  "title": "Tambah dan kurang sampai 20 — Level 9 — Tambah dan kurang: isian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-V",
+    "cc": "1.OA.C.6, 1.OA.D.8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 18],
+            "b": [0, 10]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "b": [0, 10]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b <= a",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {c} − {a} = …",
+          "answer": "b",
+          "explain": "Keluarga bilangan {a}, {b}, {c}: {c} − {a} = {b}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b >= 11 && a + b <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "Keluarga bilangan {a}, {b}, {c}. {c} − {b} = …",
+          "answer": "a",
+          "explain": "{a} + {b} = {c}, jadi {c} − {b} = {a}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b >= 11 && a + b <= 20",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

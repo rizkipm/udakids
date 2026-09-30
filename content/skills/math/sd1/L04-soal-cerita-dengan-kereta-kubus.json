@@ -1,0 +1,158 @@
+{
+  "id": "math.sd1.l4.soal-cerita-dengan-kereta-kubus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "L",
+  "order": 4,
+  "title": "Soal cerita pengurangan sampai 10 — Level 4 — Soal cerita dengan kereta kubus",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-L",
+    "cc": "1.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{nama} menyusun kereta {a} kubus. {b} kubus dilepas. Berapa kubus yang masih tersambung?",
+          "answer": "c",
+          "explain": "Kereta {a} kubus, {b} dilepas: {a} − {b} = {c}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Dewi",
+              "Rina",
+              "Ayu",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar",
+              "Bayu",
+              "Fajar",
+              "Joko"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a"],
+              "colors": ["merah"],
+              "crossed": "=b"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "c + 1",
+            "c - 1"
+          ],
+          "choices": 4,
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c <= 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Menara {nama} tingginya {a} balok. {b} balok diambil dari atas. Berapa balok yang tersisa?",
+          "answer": "c",
+          "explain": "{a} − {b} = {c}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Dewi",
+              "Rina",
+              "Ayu",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar",
+              "Bayu",
+              "Fajar",
+              "Joko"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a"],
+              "colors": ["biru"],
+              "crossed": "=b"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            },
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "c + 1",
+            "c - 1"
+          ],
+          "choices": 4,
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c <= 10"
+        }
+      },
+      {
+        "family": "arith",
+        "params": {
+          "op": "-",
+          "vars": {
+            "a": [2, 10],
+            "b": [1, 9]
+          },
+          "constraint": "b < a",
+          "answer": "a - b",
+          "presentation": "train-words",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ],
+          "choices": 4
+        }
+      }
+    ]
+  }
+}

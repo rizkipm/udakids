@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.f7.membuat-sepuluh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "F",
+  "order": 7,
+  "title": "Strategi penjumlahan satu angka — Level 7 — Membuat sepuluh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-F",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 9],
+            "b": [3, 9]
+          },
+          "prompt": "{a} + {b} = 10 + …",
+          "answer": "a + b - 10",
+          "explain": "Ambil {=10-a} dari {b} untuk membuat 10. Sisanya {answer}. Jadi 10 + {answer}.",
+          "mode": "input",
+          "constraint": "a + b > 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 9],
+            "b": [3, 9]
+          },
+          "prompt": "{a} + {b}: {a} butuh berapa lagi agar menjadi 10?",
+          "answer": "10 - a",
+          "explain": "{a} + {answer} = 10.",
+          "constraint": "a + b > 10",
+          "distractors": [
+            "10 - a + 1",
+            {
+              "expr": "b",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "sisa"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 9],
+            "b": [3, 9]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Buat 10 dulu: {a} + {=10-a} = 10, lalu + {=a+b-10} = {answer}.",
+          "constraint": "a + b > 10",
+          "distractors": ["a + b + 1", "a + b - 1", "a + b - 10"]
+        }
+      }
+    ]
+  }
+}

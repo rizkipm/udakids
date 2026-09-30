@@ -1,0 +1,40 @@
+{
+  "id": "math.sd1.y5.penjumlahan-sampai-20",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Y",
+  "order": 5,
+  "title": "Benar atau salah — Level 5 — Penjumlahan sampai 20",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-Y"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 19],
+      "b": [2, 19],
+      "t": {
+        "values": [0, 1]
+      },
+      "e": {
+        "values": [-2, -1, 1, 2]
+      }
+    },
+    "prompt": "{a} + {b} = {c}. Benar atau salah?",
+    "answer": "t",
+    "explain": "{a} + {b} = {=a+b}. Jawabannya: {answer}.",
+    "derived": {
+      "c": "a + b + (1 - t) * e"
+    },
+    "constraint": "a + b <= 20 && c >= 0",
+    "labels": {
+      "1": "Benar",
+      "0": "Salah"
+    }
+  }
+}

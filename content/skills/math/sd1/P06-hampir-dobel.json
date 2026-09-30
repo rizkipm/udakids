@@ -1,0 +1,101 @@
+{
+  "id": "math.sd1.p6.hampir-dobel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 6,
+  "title": "Strategi penjumlahan sampai 20 — Level 6 — Hampir dobel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "k": {
+              "values": [1, 2]
+            }
+          },
+          "prompt": "{a} + {=a+k} = {a} + {a} + …",
+          "answer": "k",
+          "explain": "{=a+k} = {a} + {k}. Jadi {a} + {=a+k} = {a} + {a} + {k}.",
+          "constraint": "a + a + k <= 20",
+          "distractors": [
+            "k + 1",
+            "k - 1",
+            {
+              "expr": "a",
+              "tag": "bilangan"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "k": {
+              "values": [1, 2]
+            }
+          },
+          "prompt": "{=a+k} + {a} = {a} + {a} + …",
+          "answer": "k",
+          "explain": "{=a+k} = {a} + {k}, jadi tambah {k} lagi.",
+          "constraint": "a + a + k <= 20",
+          "distractors": [
+            "k + 1",
+            "k - 1",
+            {
+              "expr": "a",
+              "tag": "bilangan"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 9]
+          },
+          "prompt": "Hampir dobel: {a} + {=a+1} = …",
+          "answer": "2 * a + 1",
+          "explain": "{a} + {a} = {=2*a}, tambah 1 = {answer}.",
+          "distractors": [
+            {
+              "expr": "2 * a",
+              "tag": "dobel-saja"
+            },
+            "2 * a + 2",
+            "2 * a - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "Hampir dobel: {=a+1} + {=a-1} = …",
+          "answer": "2 * a",
+          "explain": "Pindahkan 1: {=a+1} + {=a-1} = {a} + {a} = {answer}.",
+          "distractors": ["2 * a + 1", "2 * a - 1", "2 * a + 2"]
+        }
+      }
+    ]
+  }
+}

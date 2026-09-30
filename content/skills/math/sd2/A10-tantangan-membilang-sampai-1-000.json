@@ -1,0 +1,73 @@
+{
+  "id": "math.sd2.a10.tantangan-membilang-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 10,
+  "title": "Membilang — Level 10 — Tantangan membilang sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 30],
+            "d": {
+              "values": [10, 20, 25, 50]
+            }
+          },
+          "prompt": "Angka yang hilang: {a} — {=a+d} — ▢ — {=a+3*d}",
+          "answer": "a + 2 * d",
+          "explain": "{=a+d} + {d} = {answer}.",
+          "mode": "input",
+          "derived": {
+            "a": "k * d"
+          },
+          "constraint": "a + 3 * d <= 1000"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [0, 9],
+            "k": [1, 9]
+          },
+          "prompt": "Garis dari {lo} sampai {=lo+100} dibagi 10 bagian. Tanda ke-{k} menunjuk angka …",
+          "answer": "lo + 10 * k",
+          "explain": "{lo} + {k} × 10 = {answer}.",
+          "mode": "input",
+          "derived": {
+            "lo": "h * 100"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [10, 99],
+            "c": [1, 3]
+          },
+          "prompt": "{a}, {=a+1}, {=a+2}, … Bilangan berikutnya?",
+          "answer": "a + 3",
+          "explain": "{answer}.",
+          "mode": "input",
+          "derived": {
+            "a": "h * 10 - c - 2"
+          }
+        }
+      }
+    ]
+  }
+}

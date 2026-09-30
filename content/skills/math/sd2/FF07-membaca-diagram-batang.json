@@ -1,0 +1,96 @@
+{
+  "id": "math.sd2.ff7.membaca-diagram-batang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 7,
+  "title": "Data dan diagram — Level 7 — Membaca diagram batang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: diagram batang",
+    "kognitif": "applying",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15],
+            "c": [2, 15],
+            "d": [2, 15]
+          },
+          "prompt": "Berapa buku yang dibaca hari Rabu?",
+          "answer": "c",
+          "explain": "Batang Rabu setinggi {answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buku yang dibaca kelas 2",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "buku"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "salah-batang"
+            },
+            {
+              "expr": "d",
+              "tag": "salah-batang"
+            },
+            {
+              "expr": "c + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15],
+            "c": [2, 15],
+            "d": [2, 15]
+          },
+          "prompt": "Berapa buku yang dibaca pada hari yang batangnya paling tinggi?",
+          "answer": "max(a, b, c, d)",
+          "explain": "Batang tertinggi = {answer}.",
+          "constraint": "a != b && a != c && a != d && b != c && b != d && c != d",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buku yang dibaca kelas 2",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "buku"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "min(a, b, c, d)",
+              "tag": "terendah"
+            },
+            {
+              "expr": "a + b + c + d",
+              "tag": "total"
+            },
+            {
+              "expr": "max(a, b, c, d) - 1",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

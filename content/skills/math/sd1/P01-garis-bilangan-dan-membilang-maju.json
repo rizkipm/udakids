@@ -1,0 +1,78 @@
+{
+  "id": "math.sd1.p1.garis-bilangan-dan-membilang-maju",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 1,
+  "title": "Strategi penjumlahan sampai 20 — Level 1 — Garis bilangan dan membilang maju",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "number-line",
+        "params": {
+          "max": 20,
+          "start": [5, 15],
+          "steps": [2, 5]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 17],
+            "b": [1, 3]
+          },
+          "prompt": "{a} + {b} = …  Mulai dari {a}, hitung maju {b} langkah.",
+          "answer": "a + b",
+          "explain": "Mulai dari {a}, maju {b} langkah, sampai di {answer}.",
+          "constraint": "a + b <= 20",
+          "distractors": [
+            {
+              "expr": "a + b - 1",
+              "tag": "menghitung-angka-awal"
+            },
+            "a + b + 1",
+            {
+              "expr": "a - b",
+              "tag": "arah-terbalik"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 17],
+            "b": [1, 4]
+          },
+          "prompt": "Hitung maju dari bilangan yang lebih besar: {b} + {a} = …",
+          "answer": "a + b",
+          "explain": "Mulai dari {a} (yang lebih besar), maju {b}: {answer}.",
+          "constraint": "a + b <= 20",
+          "distractors": [
+            {
+              "expr": "a + b - 1",
+              "tag": "menghitung-angka-awal"
+            },
+            "a + b + 1",
+            {
+              "expr": "a - b",
+              "tag": "arah-terbalik"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

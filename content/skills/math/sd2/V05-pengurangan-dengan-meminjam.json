@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.v5.pengurangan-dengan-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "V",
+  "order": 5,
+  "title": "Pengurangan tiga angka — Level 5 — Pengurangan dengan meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-V"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [200, 999],
+      "b": [100, 899]
+    },
+    "prompt": "{a} − {b} = …",
+    "answer": "a - b",
+    "explain": "Satuan atau puluhan tidak cukup, jadi pinjam 1 dari tempat di kirinya. {a} − {b} = {answer}.",
+    "constraint": "b < a && (a % 10 < b % 10 || floor(a / 10) % 10 < floor(b / 10) % 10)",
+    "distractors": [
+      {
+        "expr": "a - b + 10",
+        "tag": "lupa-meminjam"
+      },
+      {
+        "expr": "a - b - 10",
+        "tag": "salah-pinjam"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

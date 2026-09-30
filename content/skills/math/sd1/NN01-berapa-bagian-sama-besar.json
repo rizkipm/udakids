@@ -1,0 +1,73 @@
+{
+  "id": "math.sd1.nn1.berapa-bagian-sama-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "NN",
+  "order": 1,
+  "title": "Pecahan — Level 1 — Berapa bagian sama besar?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-NN"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4, 6, 8]
+            },
+            "n": [0, 1]
+          },
+          "prompt": "Bangun ini dibagi menjadi berapa bagian sama besar?",
+          "answer": "d",
+          "explain": "Hitung bagiannya: {answer} bagian sama besar.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "choices": 3,
+          "distractors": ["d + 1", "d - 1", "d + 2"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 4, 6, 8]
+            },
+            "n": [0, 1]
+          },
+          "prompt": "Bangun ini dibagi menjadi berapa bagian sama besar?",
+          "answer": "d",
+          "explain": "Hitung bagiannya: {answer} bagian sama besar.",
+          "constraint": "n < d",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "choices": 3,
+          "distractors": ["d + 1", "d - 1", "d + 2"]
+        }
+      }
+    ]
+  }
+}

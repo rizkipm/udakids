@@ -1,0 +1,86 @@
+{
+  "id": "math.sd2.c9.loncat-5-10-dan-100-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "C",
+  "order": 9,
+  "title": "Loncat hitung dan pola bilangan — Level 9 — Loncat 5, 10, dan 100 sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-C",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [20, 90],
+            "d": {
+              "values": [5, 10, 100]
+            }
+          },
+          "prompt": "{a}, {=a+d}, {=a+2*d}, … Bilangan berikutnya?",
+          "answer": "a + 3 * d",
+          "explain": "Loncatannya {d}: {answer}.",
+          "derived": {
+            "a": "k * 10"
+          },
+          "constraint": "a + 3 * d <= 1000",
+          "distractors": [
+            {
+              "expr": "a + 3 * d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + 4 * d",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a + 2 * d + 10",
+              "tag": "salah-loncat"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [40, 100],
+            "d": {
+              "values": [5, 10, 100]
+            }
+          },
+          "prompt": "{a}, {=a-d}, {=a-2*d}, … Bilangan berikutnya?",
+          "answer": "a - 3 * d",
+          "explain": "Mundur {d}: {answer}.",
+          "derived": {
+            "a": "k * 10"
+          },
+          "constraint": "a - 3 * d >= 0",
+          "distractors": [
+            {
+              "expr": "a - 3 * d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "a - 4 * d",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a - d",
+              "tag": "arah-terbalik"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

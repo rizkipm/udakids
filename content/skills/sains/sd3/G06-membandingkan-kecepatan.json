@@ -1,0 +1,290 @@
+{
+  "id": "sains.sd3.g6.membandingkan-kecepatan",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "G",
+  "order": 6,
+  "title": "Gaya dan gerak — Level 6 — Membandingkan kecepatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 70],
+            "b": [30, 70]
+          },
+          "prompt": "Dalam 10 detik, Alya berlari {a} meter dan Raka berlari {b} meter. Siapa yang lebih cepat?",
+          "answer": "1 + (b > a)",
+          "explain": "Waktunya sama, jadi yang berlari lebih jauh lebih cepat: {answer}.",
+          "labels": {
+            "1": "Alya",
+            "2": "Raka"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 16],
+            "b": [8, 16]
+          },
+          "prompt": "Sari dan Budi berlari 50 meter. Sari perlu {a} detik, Budi perlu {b} detik. Siapa yang lebih cepat?",
+          "answer": "1 + (b < a)",
+          "explain": "Jaraknya sama, jadi yang waktunya lebih singkat lebih cepat: {answer}.",
+          "labels": {
+            "1": "Sari",
+            "2": "Budi"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 300],
+              "step": 10
+            },
+            "b": {
+              "range": [50, 300],
+              "step": 10
+            }
+          },
+          "prompt": "Dalam waktu yang sama, mobil mainan A menempuh {a} cm dan mobil B menempuh {b} cm. Mana yang lebih lambat?",
+          "answer": "1 + (b < a)",
+          "explain": "Waktunya sama, jadi yang menempuh jarak lebih pendek lebih lambat: {answer}.",
+          "labels": {
+            "1": "Mobil A",
+            "2": "Mobil B"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Mana yang bergerak paling cepat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pesawat terbang"
+                  },
+                  "say": "Pesawat terbang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepeda"
+                  },
+                  "say": "Sepeda",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Siput"
+                  },
+                  "say": "Siput",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Orang berjalan"
+                  },
+                  "say": "Orang berjalan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pesawat dapat terbang ratusan kilometer dalam satu jam.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            },
+            {
+              "prompt": "Mana yang bergerak paling lambat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Siput"
+                  },
+                  "say": "Siput"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kucing berlari"
+                  },
+                  "say": "Kucing berlari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sepeda motor"
+                  },
+                  "say": "Sepeda motor",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kereta api"
+                  },
+                  "say": "Kereta api",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Siput merayap sangat pelan.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            },
+            {
+              "prompt": "Dua anak berlari sejauh 50 meter. Yang sampai lebih dulu …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih cepat"
+                  },
+                  "say": "lebih cepat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih lambat"
+                  },
+                  "say": "lebih lambat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama cepat"
+                  },
+                  "say": "sama cepat",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jarak sama: yang memerlukan waktu lebih sedikit lebih cepat.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            },
+            {
+              "prompt": "Dua mobil mainan berjalan selama 10 detik. Yang menempuh jarak lebih jauh …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih cepat"
+                  },
+                  "say": "lebih cepat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih lambat"
+                  },
+                  "say": "lebih lambat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama cepat"
+                  },
+                  "say": "sama cepat",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Waktu sama: yang menempuh jarak lebih jauh lebih cepat.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            },
+            {
+              "prompt": "Kereta cepat Jakarta–Bandung dan bus menempuh jalur yang sama. Kereta sampai lebih dulu. Artinya kereta …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih cepat"
+                  },
+                  "say": "lebih cepat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih lambat"
+                  },
+                  "say": "lebih lambat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak bergerak"
+                  },
+                  "say": "tidak bergerak",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menempuh jarak yang sama dalam waktu lebih singkat berarti lebih cepat.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            },
+            {
+              "prompt": "Untuk membandingkan kecepatan dua pelari, kita perlu tahu …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jarak dan waktu tempuhnya"
+                  },
+                  "say": "jarak dan waktu tempuhnya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "warna bajunya"
+                  },
+                  "say": "warna bajunya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tinggi badannya"
+                  },
+                  "say": "tinggi badannya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kecepatan menunjukkan jarak yang ditempuh dalam waktu tertentu.",
+              "source": "NGSS 3-PS2-1 (gaya seimbang & tak seimbang) & 3-PS2-2 (pola gerak); CP IPAS Fase B (BSKAP 046/H/KR/2025): gaya dan pengaruhnya; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 3 Gaya di Sekitar Kita"
+            }
+          ]
+        },
+        "weight": 2
+      }
+    ]
+  }
+}

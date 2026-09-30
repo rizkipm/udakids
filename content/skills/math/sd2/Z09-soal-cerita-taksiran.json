@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.z9.soal-cerita-taksiran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 9,
+  "title": "Estimasi dan pembulatan — Level 9 — Soal cerita taksiran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 490],
+            "b": [110, 490]
+          },
+          "prompt": "Sekolah punya {a} buku cerita dan {b} buku pelajaran. Kira-kira berapa semuanya? (bulatkan ke ratusan)",
+          "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+          "explain": "{=round(a/100)*100} + {=round(b/100)*100} = {answer}.",
+          "constraint": "a % 100 != 0 && b % 100 != 0",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 100) * 100 + floor(b / 100) * 100",
+              "tag": "selalu-ke-bawah"
+            },
+            {
+              "expr": "round(a / 100) * 100 + round(b / 100) * 100 + 100",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [61, 99],
+            "b": [11, 49]
+          },
+          "prompt": "Ada {a} kursi. {b} kursi sudah terisi. Kira-kira berapa kursi yang kosong? (bulatkan ke puluhan)",
+          "answer": "round(a / 10) * 10 - round(b / 10) * 10",
+          "explain": "{=round(a/10)*10} − {=round(b/10)*10} = {answer}.",
+          "constraint": "a % 10 != 0 && b % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 10) * 10 - floor(b / 10) * 10",
+              "tag": "selalu-ke-bawah"
+            },
+            {
+              "expr": "round(a / 10) * 10 + round(b / 10) * 10",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "math.sd2.v7.pengurangan-bersusun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "V",
+  "order": 7,
+  "title": "Pengurangan tiga angka — Level 7 — Pengurangan bersusun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-V"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [200, 999],
+      "b": [100, 899]
+    },
+    "prompt": "Hitung pengurangan bersusun ini.",
+    "answer": "a - b",
+    "explain": "Mulai dari satuan. Pinjam dari kiri bila perlu. Hasilnya {answer}.",
+    "constraint": "b < a",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["", "Ratusan", "Puluhan", "Satuan"],
+        "rows": [
+          ["", "=floor(a / 100)", "=floor(a / 10) % 10", "=a % 10"],
+          ["−", "=floor(b / 100)", "=floor(b / 10) % 10", "=b % 10"]
+        ]
+      }
+    ],
+    "mode": "input"
+  }
+}

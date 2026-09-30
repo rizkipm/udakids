@@ -152,6 +152,8 @@ export const skillCatalogs = pgTable(
     title: text('title').notNull(),
     categories: jsonb('categories').notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+    /** Terisi bila katalog disunting admin → `db:seed` tidak menimpanya (sama seperti skill). */
+    updatedBy: uuid('updated_by').references(() => staffUsers.id, { onDelete: 'set null' }),
   },
   (t) => [primaryKey({ columns: [t.domain, t.grade] })],
 );

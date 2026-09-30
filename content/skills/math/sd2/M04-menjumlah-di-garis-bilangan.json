@@ -1,0 +1,60 @@
+{
+  "id": "math.sd2.m4.menjumlah-di-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "M",
+  "order": 4,
+  "title": "Strategi penjumlahan dua angka — Level 4 — Menjumlah di garis bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-M",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [12, 39]
+          },
+          "prompt": "{a} + {b}: dari {a} loncat {=b-b%10} dulu. Sampai di …",
+          "answer": "a + b - b % 10",
+          "explain": "Loncat puluhan: {a} + {=b-b%10} = {answer}.",
+          "constraint": "a + b <= 99 && b % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "sudah-semua"
+            },
+            {
+              "expr": "a + b % 10",
+              "tag": "satuan-dulu"
+            },
+            "a + b - b % 10 + 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [12, 39]
+          },
+          "prompt": "{a} + {b}: loncat {=b-b%10}, lalu loncat {=b%10}. Sampai di …",
+          "answer": "a + b",
+          "explain": "{a} + {=b-b%10} = {=a+b-b%10}, lalu + {=b%10} = {answer}.",
+          "constraint": "a + b <= 99 && b % 10 != 0",
+          "distractors": ["a + b - b % 10", "a + b + 10", "a + b - 1"]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "math.sd2.p4.dua-angka-dua-angka-dengan-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "P",
+  "order": 4,
+  "title": "Pengurangan dua angka — Level 4 — Dua angka − dua angka dengan meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-P",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [21, 99],
+      "b": [11, 89]
+    },
+    "prompt": "{a} − {b} = …",
+    "answer": "a - b",
+    "explain": "Satuan {=a%10} < {=b%10}: pinjam 1 puluhan, jadi {=a%10+10} − {=b%10}. Hasil {answer}.",
+    "constraint": "a % 10 < b % 10 && b < a",
+    "distractors": [
+      "a - b + 1",
+      "a - b - 1",
+      {
+        "expr": "a - b + 10",
+        "tag": "lupa-pinjam"
+      },
+      {
+        "expr": "a - b - 10",
+        "tag": "salah-pinjam"
+      }
+    ]
+  }
+}

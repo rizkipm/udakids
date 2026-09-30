@@ -1,0 +1,62 @@
+{
+  "id": "math.sd2.h9.pilih-strategi-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "H",
+  "order": 9,
+  "title": "Strategi pengurangan satu angka — Level 9 — Pilih strategi pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-H",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 10]
+          },
+          "prompt": "{=2*a} − {a} = …",
+          "answer": "a",
+          "explain": "Dobel: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Pakai 10: {answer}.",
+          "mode": "input",
+          "constraint": "b > a - 10"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 20],
+            "b": [7, 19]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Hitung maju dari {b}: {answer}.",
+          "mode": "input",
+          "constraint": "a - b >= 1 && a - b <= 3"
+        }
+      }
+    ]
+  }
+}

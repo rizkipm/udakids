@@ -1,0 +1,113 @@
+{
+  "id": "math.sd1.m2.mengurangi-semua-dan-mengurangi-nol",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "M",
+  "order": 2,
+  "title": "Tambah dan kurang sampai 10 — Level 2 — Mengurangi semua dan mengurangi nol",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-M",
+    "cc": "1.OA.B.3, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{a} − {a} = …",
+          "answer": "0",
+          "explain": "Semua diambil, jadi tidak ada yang tersisa: {a} − {a} = 0.",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "1",
+            {
+              "expr": "a + a",
+              "tag": "menjumlah"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{a} − … = 0",
+          "answer": "a",
+          "explain": "Supaya tinggal 0, semua harus diambil: {a} − {a} = 0.",
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "tidak-diambil"
+            },
+            "a - 1",
+            "a + 1"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{a} − … = {a}",
+          "answer": "0",
+          "explain": "Supaya tetap {a}, tidak ada yang diambil: {a} − 0 = {a}.",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "semua-diambil"
+            },
+            "1",
+            "2"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10]
+          },
+          "prompt": "Ada {a} kue. Semua kue dimakan. Berapa kue yang tersisa?",
+          "answer": "0",
+          "explain": "Semua dimakan: {a} − {a} = 0.",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "1"
+          ],
+          "choices": 3,
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "kue",
+              "count": "=a",
+              "layout": "row",
+              "crossed": "=a"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

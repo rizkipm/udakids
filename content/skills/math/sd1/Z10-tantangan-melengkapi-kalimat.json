@@ -1,0 +1,80 @@
+{
+  "id": "math.sd1.z10.tantangan-melengkapi-kalimat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 10,
+  "title": "Lengkapi kalimat matematika — Level 10 — Tantangan melengkapi kalimat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [1, 10],
+            "d": [1, 10]
+          },
+          "prompt": "{a} + {b} = … + {d}",
+          "answer": "a + b - d",
+          "explain": "Sisi kiri bernilai {=a+b}. {answer} + {d} = {=a+b}.",
+          "constraint": "a + b - d >= 1 && d != a && d != b",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{a} − {b} = … − {d}",
+          "answer": "a - b + d",
+          "explain": "Sisi kiri bernilai {=a-b}. {answer} − {d} = {=a-b}.",
+          "constraint": "b < a && d != b && a - b + d <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [10, 20]
+          },
+          "prompt": "{a} + {b} = {c} − …",
+          "answer": "c - a - b",
+          "explain": "Sisi kiri bernilai {=a+b}. {c} − {answer} = {=a+b}.",
+          "constraint": "a + b < c",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 20],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − … = {c}",
+          "answer": "a - c",
+          "explain": "{a} − {answer} = {c}.",
+          "constraint": "c < a",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

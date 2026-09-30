@@ -1,0 +1,58 @@
+{
+  "id": "math.sd2.m7.kompensasi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "M",
+  "order": 7,
+  "title": "Strategi penjumlahan dua angka — Level 7 — Kompensasi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-M",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 60],
+            "k": [2, 5],
+            "c": [1, 2]
+          },
+          "prompt": "{a} + {b} = {=a-c} + …",
+          "answer": "b + c",
+          "explain": "Pindahkan {c} dari {a} ke {b}: {b} + {c} = {answer} (bilangan bulat puluhan).",
+          "mode": "input",
+          "derived": {
+            "b": "k * 10 - c"
+          },
+          "constraint": "a + b <= 100"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 60],
+            "k": [2, 5],
+            "c": [1, 2]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{b} hampir {=b+c}: {a} + {=b+c} − {c} = {answer}.",
+          "mode": "input",
+          "derived": {
+            "b": "k * 10 - c"
+          },
+          "constraint": "a + b <= 100"
+        }
+      }
+    ]
+  }
+}

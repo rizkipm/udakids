@@ -1,0 +1,66 @@
+{
+  "id": "math.sd2.r7.soal-cerita-berapa-awalnya-atau-berapa-tambahann",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "R",
+  "order": 7,
+  "title": "Soal cerita cam — Level 7 — Soal cerita: berapa awalnya atau berapa tambahannya",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-R",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [11, 30],
+            "c": [40, 99]
+          },
+          "prompt": "{nama} punya beberapa kelereng. Setelah diberi {b}, sekarang {c}. Berapa kelereng awalnya?",
+          "answer": "c - b",
+          "explain": "Awal + {b} = {c}, jadi awal = {c} − {b} = {answer}.",
+          "words": {
+            "nama": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          },
+          "distractors": [
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            },
+            "c - b + 10",
+            "c - b - 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 50],
+            "c": [40, 99]
+          },
+          "prompt": "Di bus ada {a} penumpang. Setelah halte, ada {c} penumpang. Berapa yang naik?",
+          "answer": "c - a",
+          "explain": "{a} + ? = {c}: {answer}.",
+          "constraint": "c > a + 5",
+          "distractors": [
+            {
+              "expr": "c + a",
+              "tag": "menjumlah"
+            },
+            "c - a + 10",
+            "c - a - 10"
+          ]
+        }
+      }
+    ]
+  }
+}

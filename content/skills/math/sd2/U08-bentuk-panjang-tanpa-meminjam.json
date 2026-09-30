@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.u8.bentuk-panjang-tanpa-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 8,
+  "title": "Strategi pengurangan tiga angka — Level 8 — Bentuk panjang tanpa meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h1": [3, 9],
+      "h2": [1, 2],
+      "t1": [0, 9],
+      "t2": [0, 9],
+      "s1": [0, 9],
+      "s2": [0, 9]
+    },
+    "prompt": "({=h1*100} + {=t1*10} + {s1}) − ({=h2*100} + {=t2*10} + {s2}) = …",
+    "answer": "a - b",
+    "explain": "Ratusan − ratusan, puluhan − puluhan, satuan − satuan: {=(h1-h2)*100} + {=(t1-t2)*10} + {=s1-s2} = {answer}.",
+    "derived": {
+      "a": "h1 * 100 + t1 * 10 + s1",
+      "b": "h2 * 100 + t2 * 10 + s2"
+    },
+    "constraint": "t1 >= t2 && s1 >= s2",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "a - b + 10",
+        "tag": "salah-puluhan"
+      },
+      {
+        "expr": "a - b + 100",
+        "tag": "salah-ratusan"
+      }
+    ]
+  }
+}

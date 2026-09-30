@@ -1,0 +1,63 @@
+{
+  "id": "math.sd1.z4.pengurangan-sampai-20",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 4,
+  "title": "Lengkapi kalimat matematika — Level 4 — Pengurangan sampai 20",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 20],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − … = {c}",
+          "answer": "a - c",
+          "explain": "{a} − {answer} = {c}.",
+          "constraint": "c < a",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            "a - c + 1",
+            "a - c - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [3, 12]
+          },
+          "prompt": "… − {b} = {c}",
+          "answer": "b + c",
+          "explain": "{answer} − {b} = {c}, karena {c} + {b} = {answer}.",
+          "constraint": "b + c <= 20 && b + c > 10",
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            "b + c + 1",
+            "b + c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

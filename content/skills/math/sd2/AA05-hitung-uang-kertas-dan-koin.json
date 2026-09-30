@@ -1,0 +1,42 @@
+{
+  "id": "math.sd2.aa5.hitung-uang-kertas-dan-koin",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "AA",
+  "order": 5,
+  "title": "Uang sampai Rp10.000 — Level 5 — Hitung uang kertas dan koin",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 3],
+      "b": [1, 3],
+      "c": [1, 4]
+    },
+    "prompt": "Ada {a} lembar Rp2.000, {b} lembar Rp1.000, dan {c} koin Rp500. Berapa rupiah semuanya?",
+    "answer": "a * 2000 + b * 1000 + c * 500",
+    "explain": "Rp{=a*2000} + Rp{=b*1000} + Rp{=c*500} = {answer}.",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "(a + b + c) * 1000",
+        "tag": "semua-dianggap-1000"
+      },
+      {
+        "expr": "a * 2000 + b * 1000 + c * 100",
+        "tag": "salah-nilai-koin"
+      },
+      {
+        "expr": "a * 2000 + b * 1000",
+        "tag": "lupa-koin"
+      }
+    ]
+  }
+}

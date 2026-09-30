@@ -1,0 +1,65 @@
+{
+  "id": "math.sd2.j10.tantangan-operasi-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "J",
+  "order": 10,
+  "title": "Operasi campuran satu angka — Level 10 — Tantangan operasi campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-J",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "c <= a + b"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [10, 20]
+          },
+          "prompt": "{a} + {b} = {c} − …",
+          "answer": "c - a - b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "c > a + b"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": [2, 11],
+            "d": [2, 9]
+          },
+          "prompt": "Aturan: tambah {d}. Masuk {c}, keluar …",
+          "answer": "c + d",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

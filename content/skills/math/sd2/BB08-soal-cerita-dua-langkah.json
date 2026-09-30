@@ -1,0 +1,56 @@
+{
+  "id": "math.sd2.bb8.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 8,
+  "title": "Tambah dan kurang uang — Level 8 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": {
+        "values": [5000, 10000]
+      },
+      "a": {
+        "range": [500, 5000],
+        "step": 500
+      },
+      "b": {
+        "range": [500, 5000],
+        "step": 500
+      }
+    },
+    "prompt": "{nama} punya Rp{u}. Ia membeli {x} Rp{a} dan {y} Rp{b}. Berapa sisa uangnya?",
+    "answer": "u - a - b",
+    "explain": "Belanja Rp{a} + Rp{b} = Rp{=a+b}. Sisa Rp{u} − Rp{=a+b} = {answer}.",
+    "constraint": "a + b < u",
+    "words": {
+      "nama": ["Alya", "Raka", "Dimas", "Sari", "Budi", "Putri", "Nina", "Adit", "Tegar", "Wulan"],
+      "x": ["roti", "pisang goreng", "pensil", "buku tulis", "susu kotak"],
+      "y": ["penghapus", "air mineral", "kue lapis", "penggaris", "jeruk"]
+    },
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "hanya-belanja"
+      },
+      {
+        "expr": "u - a",
+        "tag": "lupa-satu"
+      },
+      {
+        "expr": "u - a - b + 500",
+        "tag": "lebih"
+      }
+    ]
+  }
+}

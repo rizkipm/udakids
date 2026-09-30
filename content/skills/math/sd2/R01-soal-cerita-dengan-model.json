@@ -1,0 +1,76 @@
+{
+  "id": "math.sd2.r1.soal-cerita-dengan-model",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "R",
+  "order": 1,
+  "title": "Soal cerita campuran dua angka — Level 1 — Soal cerita dengan model",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-R",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 69],
+            "b": [11, 29]
+          },
+          "prompt": "Toko punya {a} pensil (lihat model). Datang {b} pensil lagi. Berapa pensil sekarang?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=floor(a/10)",
+              "ones": "=a%10"
+            }
+          ],
+          "distractors": [
+            "a + b + 10",
+            "a + b - 10",
+            {
+              "expr": "a - b",
+              "tag": "operasi-terbalik"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [11, 29]
+          },
+          "prompt": "Ada {a} kelereng (lihat model). {b} kelereng diberikan. Berapa sisanya?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=floor(a/10)",
+              "ones": "=a%10"
+            }
+          ],
+          "distractors": [
+            "a - b + 10",
+            "a - b - 10",
+            {
+              "expr": "a + b",
+              "tag": "operasi-terbalik"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

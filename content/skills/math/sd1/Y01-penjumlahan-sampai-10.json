@@ -1,0 +1,40 @@
+{
+  "id": "math.sd1.y1.penjumlahan-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Y",
+  "order": 1,
+  "title": "Benar atau salah — Level 1 — Penjumlahan sampai 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-Y"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [0, 9],
+      "b": [0, 9],
+      "t": {
+        "values": [0, 1]
+      },
+      "e": {
+        "values": [-2, -1, 1, 2]
+      }
+    },
+    "prompt": "{a} + {b} = {c}. Benar atau salah?",
+    "answer": "t",
+    "explain": "{a} + {b} = {=a+b}. Jawabannya: {answer}.",
+    "derived": {
+      "c": "a + b + (1 - t) * e"
+    },
+    "constraint": "a + b <= 10 && c >= 0",
+    "labels": {
+      "1": "Benar",
+      "0": "Salah"
+    }
+  }
+}

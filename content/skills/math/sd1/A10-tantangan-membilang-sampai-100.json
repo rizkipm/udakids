@@ -1,0 +1,131 @@
+{
+  "id": "math.sd1.a10.tantangan-membilang-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "A",
+  "order": 10,
+  "title": "Membilang sampai 100 — Level 10 — Tantangan membilang sampai 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-A",
+    "ccss": "1.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 9],
+            "b": [0, 9]
+          },
+          "prompt": "Berapa kubus semuanya? Satu batang berisi 10 kubus.",
+          "answer": "t * 10 + b",
+          "explain": "{t} batang = {=t*10}. Ditambah {b} kubus satuan menjadi {answer}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": "=t",
+              "ones": "=b"
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 100]
+          },
+          "prompt": "Hitung mundur: {a}, {=a-1}, {=a-2}, … Angka berikutnya?",
+          "answer": "a - 3",
+          "explain": "Hitung mundur berarti setiap langkah berkurang 1: {a}, {=a-1}, {=a-2}, {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [11, 90]
+          },
+          "prompt": "Pada papan seratus, angka berapa yang tepat di bawah {x}?",
+          "answer": "x + 10",
+          "explain": "Turun satu baris di papan seratus berarti bertambah 10: {x} + 10 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 20",
+              "columns": 10,
+              "blanks": ["=x+10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "arah-atas"
+            },
+            {
+              "expr": "x + 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 10]
+          },
+          "prompt": "Ada 10 anak antre membeli bakso. {nama} di urutan ke-{k} dari depan. Berapa anak di depan {nama}?",
+          "answer": "k - 1",
+          "explain": "Urutan ke-{k} berarti ada {answer} anak sebelum {nama}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "urutan-bukan-banyak"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "10 - k",
+              "tag": "di-belakang"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

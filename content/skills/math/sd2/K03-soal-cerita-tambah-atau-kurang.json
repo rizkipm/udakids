@@ -1,0 +1,86 @@
+{
+  "id": "math.sd2.k3.soal-cerita-tambah-atau-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "K",
+  "order": 3,
+  "title": "Soal cerita campuran satu angka — Level 3 — Soal cerita tambah atau kurang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-K",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "Di kandang ada {a} ayam. {b} ayam lagi masuk. Berapa ayam di kandang sekarang?",
+          "answer": "a + b",
+          "explain": "Masuk = bertambah: {answer}.",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 18],
+            "b": [2, 7]
+          },
+          "prompt": "Di kandang ada {a} bebek. {b} bebek keluar ke sawah. Berapa bebek di kandang sekarang?",
+          "answer": "a - b",
+          "explain": "Keluar = berkurang: {answer}.",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} membuat {a} {kue} dan {b} {kue} lagi. Berapa {kue} semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "kue": ["kue lapis", "onde-onde", "kue putu", "klepon", "risol", "pastel"]
+          },
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

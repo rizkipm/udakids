@@ -1,0 +1,191 @@
+{
+  "id": "math.sd1.a8.garis-bilangan-dan-papan-seratus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "A",
+  "order": 8,
+  "title": "Membilang sampai 100 — Level 8 — Garis bilangan dan papan seratus",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-A",
+    "ccss": "1.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95]
+          },
+          "prompt": "Angka berapa yang hilang di garis bilangan?",
+          "answer": "a + 2",
+          "explain": "Garis bilangan naik satu-satu: {=a+1}, {answer}, {=a+3}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+1"
+                },
+                {
+                  "kind": "blank"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+3"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+4"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+5"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + 12",
+              "tag": "salah-puluhan"
+            },
+            {
+              "expr": "a + 4",
+              "tag": "melompat"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "angka-sebelumnya"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95],
+            "b": [1, 5]
+          },
+          "prompt": "Momo di angka {a} pada garis bilangan. Momo melompat maju {b} langkah. Momo sampai di angka berapa?",
+          "answer": "a + b",
+          "explain": "Mulai dari {a}, hitung maju {b} langkah: sampai di {answer}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a+0"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+1"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+2"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+3"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+4"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+5"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-puluhan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [2, 99]
+          },
+          "prompt": "Angka berapa yang hilang di papan seratus?",
+          "answer": "x",
+          "explain": "Di papan seratus, angka naik satu ke kanan: {=x-1}, {answer}, {=x+1}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 + 1",
+              "end": "=floor((x - 1) / 10) * 10 + 10",
+              "columns": 10,
+              "blanks": ["=x"]
+            }
+          ],
+          "distractors": [
+            "x + 1",
+            "x - 1",
+            {
+              "expr": "x + 10",
+              "tag": "salah-baris"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [11, 90]
+          },
+          "prompt": "Pada papan seratus, angka berapa yang tepat di bawah {x}?",
+          "answer": "x + 10",
+          "explain": "Turun satu baris di papan seratus berarti bertambah 10: {x} + 10 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 20",
+              "columns": 10,
+              "blanks": ["=x+10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "arah-atas"
+            },
+            {
+              "expr": "x + 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

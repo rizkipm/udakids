@@ -41,6 +41,7 @@ export class AdminSkillsController {
 
   @Put('catalogs/:domain/:grade')
   async saveCatalog(
+    @CurrentUser() user: SessionUser,
     @Param('domain') domain: string,
     @Param('grade') grade: string,
     @Body(new ZodPipe(catalogSchema)) body: z.infer<typeof catalogSchema>,
@@ -62,6 +63,7 @@ export class AdminSkillsController {
       title: body.title,
       categories: body.categories,
       updatedAt: new Date(),
+      updatedBy: user.id,
     };
     await this.db
       .insert(skillCatalogs)

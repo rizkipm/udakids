@@ -1,0 +1,89 @@
+{
+  "id": "math.sd1.a2.mengisi-bingkai-sepuluh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "A",
+  "order": 2,
+  "title": "Membilang sampai 100 — Level 2 — Mengisi bingkai sepuluh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-A",
+    "ccss": "1.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Bingkai sepuluh ini berisi {a} titik. Berapa titik lagi agar penuh?",
+          "answer": "10 - a",
+          "explain": "Bingkai sepuluh punya 10 kotak. {a} sudah terisi, jadi {answer} kotak masih kosong: {a} + {answer} = 10.",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 10
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "menghitung-yang-terisi"
+            },
+            {
+              "expr": "10",
+              "tag": "total"
+            },
+            "11 - a"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Ada berapa kotak kosong di bingkai sepuluh ini?",
+          "answer": "10 - a",
+          "explain": "Hitung kotak yang belum berisi titik: {answer}. {a} titik + {answer} kotak kosong = 10.",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 10
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "menghitung-yang-terisi"
+            },
+            {
+              "expr": "10",
+              "tag": "total"
+            },
+            "9 - a"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "build",
+        "params": {
+          "range": [1, 10],
+          "unit": "frame"
+        }
+      }
+    ]
+  }
+}

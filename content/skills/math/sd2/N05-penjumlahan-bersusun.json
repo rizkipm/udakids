@@ -1,0 +1,81 @@
+{
+  "id": "math.sd2.n5.penjumlahan-bersusun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "N",
+  "order": 5,
+  "title": "Penjumlahan dua angka — Level 5 — Penjumlahan bersusun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-N",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "Satuan: {=a%10} + {=b%10}. Puluhan: {=floor(a/10)} + {=floor(b/10)} (+ simpanan). Hasil {answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 100",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["+", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "prompt": "Hitung penjumlahan bersusun ini.",
+          "answer": "a + b",
+          "explain": "Mulai dari satuan, lalu puluhan. Hasil {answer}.",
+          "constraint": "a + b <= 100",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a/10)", "=a%10"],
+                ["+", "=floor(b/10)", "=b%10"]
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

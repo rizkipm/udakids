@@ -1,0 +1,101 @@
+{
+  "id": "math.sd1.j1.hitung-mundur-1-dan-2",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "J",
+  "order": 1,
+  "title": "Strategi pengurangan sampai 10 — Level 1 — Hitung mundur 1 dan 2",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-J",
+    "ccss": "1.OA.B.4 / 1.OA.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": {
+              "values": [1, 2]
+            }
+          },
+          "prompt": "Hitung mundur {b} dari {a}. {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "Mulai dari {a}, hitung mundur {b}: {answer}.",
+          "constraint": "b < a",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "arah-terbalik"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": {
+              "values": [1, 2]
+            }
+          },
+          "prompt": "Ada {a} {x}. {b} diambil. Hitung mundur dari {a}: tinggal berapa?",
+          "answer": "a - b",
+          "explain": "{a}, lalu mundur {b}: {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "x": [
+              "apel",
+              "jeruk",
+              "pisang",
+              "bebek",
+              "ayam",
+              "ikan",
+              "kelinci",
+              "kucing",
+              "bola",
+              "balon",
+              "mobil",
+              "bintang",
+              "kue",
+              "topi",
+              "pensil",
+              "buku"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{x}",
+              "count": "=a",
+              "layout": "row",
+              "crossed": "=b"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "arah-terbalik"
+            },
+            "a - b + 1",
+            {
+              "expr": "b",
+              "tag": "yang-diambil"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

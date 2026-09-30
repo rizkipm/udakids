@@ -1,0 +1,101 @@
+{
+  "id": "sains.sd3.y5.mengubah-satuan-waktu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 5,
+  "title": "Satuan dan pengukuran — Level 5 — Mengubah satuan waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10]
+          },
+          "prompt": "{a} menit = … detik",
+          "answer": "a * 60",
+          "unit": "detik",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a + 60",
+              "tag": "faktor-salah"
+            }
+          ],
+          "explain": "1 menit = 60 detik, jadi {a} menit = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8]
+          },
+          "prompt": "{a} jam = … menit",
+          "answer": "a * 60",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a * 24",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a + 60",
+              "tag": "faktor-salah"
+            }
+          ],
+          "explain": "1 jam = 60 menit, jadi {a} jam = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5]
+          },
+          "prompt": "{a} hari = … jam",
+          "answer": "a * 24",
+          "unit": "jam",
+          "distractors": [
+            {
+              "expr": "a * 60",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a * 12",
+              "tag": "faktor-salah"
+            },
+            {
+              "expr": "a + 24",
+              "tag": "faktor-salah"
+            }
+          ],
+          "explain": "1 hari = 24 jam, jadi {a} hari = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

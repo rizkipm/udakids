@@ -1,0 +1,116 @@
+{
+  "id": "math.sd1.hh6.menukar-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "HH",
+  "order": 6,
+  "title": "Uang Rupiah — Level 6 — Menukar uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-HH"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": {
+              "values": [1000, 2000, 5000]
+            },
+            "c": {
+              "values": [100, 200, 500, 1000]
+            }
+          },
+          "prompt": "Uang {jenis} Rp{b} ditukar dengan koin Rp{c}. Dapat berapa koin?",
+          "answer": "b / c",
+          "explain": "Rp{b} = {answer} × Rp{c}.",
+          "words": {
+            "jenis": ["kertas"]
+          },
+          "constraint": "b > c && b % c == 0 && b / c <= 20",
+          "distractors": [
+            {
+              "expr": "b / c + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b / c - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "c / 100",
+              "tag": "angka-koin"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10],
+            "c": {
+              "values": [100, 200, 500, 1000]
+            }
+          },
+          "prompt": "Berapa rupiah nilai {n} koin Rp{c}?",
+          "answer": "n * c",
+          "explain": "{n} × Rp{c} = {answer}.",
+          "unit": "rupiah",
+          "constraint": "n * c <= 5000",
+          "distractors": [
+            {
+              "expr": "n * c + c",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n * c - c",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n",
+              "tag": "banyak-koin"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": {
+              "values": [500, 1000, 2000]
+            },
+            "c": {
+              "values": [100, 200, 500]
+            }
+          },
+          "prompt": "Koin Rp{c} berapa buah agar sama dengan Rp{b}?",
+          "answer": "b / c",
+          "explain": "Rp{b} = {answer} × Rp{c}.",
+          "constraint": "b > c && b % c == 0",
+          "distractors": [
+            {
+              "expr": "b / c + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b / c - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "b / c + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

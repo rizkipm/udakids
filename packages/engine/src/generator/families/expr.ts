@@ -227,8 +227,17 @@ export const exprFamily = defineFamily({
       ]);
     }
 
-    const fill = (text: string) =>
-      text.replace(TEMPLATE_RE, (_, name: string) => {
+    // `{answer}` sudah memuat satuan; penulis templat sering menambah satuan lagi ("{answer} cm").
+    // Satuan yang tertulis dua kali berturut-turut dirapikan menjadi satu ("20 cm cm" → "20 cm").
+    const unitWord = p.unit?.trim();
+    const dupUnit = unitWord
+      ? new RegExp(
+          `(${unitWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(\\s+\\1)+(?![\\p{L}\\d])`,
+          'gu',
+        )
+      : undefined;
+    const fill = (text: string) => {
+      const out = text.replace(TEMPLATE_RE, (_, name: string) => {
         if (name === 'answer') return answerText;
         if (name.startsWith('=')) return formatId(evalNumber(name.slice(1), vars));
         // {w:a} = bilangan dalam kata ("tujuh"), untuk soal "tulis angka yang kamu dengar".
@@ -236,6 +245,8 @@ export const exprFamily = defineFamily({
         if (name in words) return words[name]!;
         return formatId(vars[name]!);
       });
+      return dupUnit ? out.replace(dupUnit, '$1') : out;
+    };
 
     const resolve = (node: unknown): unknown => {
       if (typeof node === 'string')

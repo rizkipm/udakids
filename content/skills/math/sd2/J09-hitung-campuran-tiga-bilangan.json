@@ -1,0 +1,65 @@
+{
+  "id": "math.sd2.j9.hitung-campuran-tiga-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "J",
+  "order": 9,
+  "title": "Operasi campuran satu angka — Level 9 — Hitung campuran tiga bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-J",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "explain": "Kerjakan dari kiri: {=a+b} − {c} = {answer}.",
+          "constraint": "c <= a + b",
+          "distractors": [
+            "a + b + c",
+            "a + b - c + 1",
+            {
+              "expr": "a - b + c",
+              "tag": "operasi-tertukar"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 18],
+            "b": [2, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "explain": "Dari kiri: {=a-b} + {c} = {answer}.",
+          "distractors": [
+            "a - b - c",
+            "a - b + c + 1",
+            {
+              "expr": "a + b + c",
+              "tag": "semua-ditambah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

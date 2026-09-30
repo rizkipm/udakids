@@ -1,0 +1,78 @@
+{
+  "id": "math.sd2.k9.tebak-dan-periksa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "K",
+  "order": 9,
+  "title": "Soal cerita campuran satu angka — Level 9 — Tebak dan periksa",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-K",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 12],
+            "y": [1, 9]
+          },
+          "prompt": "Dua bilangan jumlahnya {s} dan selisihnya {d}. Bilangan yang lebih besar adalah …",
+          "answer": "x",
+          "explain": "Coba: {x} + {y} = {s} dan {x} − {y} = {d}. Cocok! Jawabannya {x}.",
+          "constraint": "x > y",
+          "derived": {
+            "s": "x + y",
+            "d": "x - y"
+          },
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "bilangan-kecil"
+            },
+            {
+              "expr": "s",
+              "tag": "jumlah"
+            },
+            "x + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 12],
+            "y": [1, 9]
+          },
+          "prompt": "Ada {s} ayam dan bebek. Ayam {d} ekor lebih banyak daripada bebek. Berapa ayam?",
+          "answer": "x",
+          "explain": "Coba {x} ayam dan {y} bebek: jumlah {s}, selisih {d}. Cocok!",
+          "constraint": "x > y",
+          "derived": {
+            "s": "x + y",
+            "d": "x - y"
+          },
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "bebek"
+            },
+            {
+              "expr": "s - d",
+              "tag": "lain"
+            },
+            "x + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "math.sd2.v10.tantangan-pengurangan-tiga-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "V",
+  "order": 10,
+  "title": "Pengurangan tiga angka — Level 10 — Tantangan pengurangan tiga angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-V"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [200, 999],
+            "b": [100, 899]
+          },
+          "prompt": "Hitung pengurangan bersusun ini.",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "constraint": "b < a && (a % 10 < b % 10 || floor(a / 10) % 10 < floor(b / 10) % 10)",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=floor(a / 100)", "=floor(a / 10) % 10", "=a % 10"],
+                ["−", "=floor(b / 100)", "=floor(b / 10) % 10", "=b % 10"]
+              ]
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 9],
+            "s": [0, 8],
+            "b": [101, 899]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{answer}.",
+          "derived": {
+            "a": "h * 100 + s"
+          },
+          "constraint": "b < a && b % 10 > s",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 900],
+            "b": [100, 290]
+          },
+          "prompt": "Toko punya {a} telur. Terjual {b} butir. Berapa butir yang tersisa?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "math.sd2.e8.genap-dan-ganjil-sebelum-dan-sesudah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "E",
+  "order": 8,
+  "title": "Genap dan ganjil — Level 8 — Genap dan ganjil sebelum dan sesudah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-E",
+    "common-core": "2.OA.C.3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 98]
+          },
+          "prompt": "Bilangan genap terdekat SESUDAH {a} adalah …",
+          "answer": "a + 2 - a % 2",
+          "explain": "Setelah {a}, cari yang berakhir 0, 2, 4, 6, 8: {answer}.",
+          "distractors": [
+            "a + 1 + a % 2",
+            "a",
+            {
+              "expr": "a + 3",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 97]
+          },
+          "prompt": "Bilangan ganjil terdekat SESUDAH {a} adalah …",
+          "answer": "a + 1 + a % 2",
+          "explain": "Setelah {a}, cari yang berakhir 1, 3, 5, 7, 9: {answer}.",
+          "distractors": [
+            "a + 2 - a % 2",
+            "a",
+            {
+              "expr": "a + 4",
+              "tag": "lain"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 99]
+          },
+          "prompt": "Bilangan genap terdekat SEBELUM {a} adalah …",
+          "answer": "a - 2 + a % 2",
+          "explain": "Sebelum {a}, yang genap: {answer}.",
+          "distractors": [
+            "a - 1 - a % 2",
+            "a",
+            {
+              "expr": "a + 2 - a % 2",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 99]
+          },
+          "prompt": "Bilangan ganjil terdekat SEBELUM {a} adalah …",
+          "answer": "a - 1 - a % 2",
+          "explain": "Sebelum {a}, yang ganjil: {answer}.",
+          "distractors": [
+            "a - 2 + a % 2",
+            "a",
+            {
+              "expr": "a + 1 + a % 2",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

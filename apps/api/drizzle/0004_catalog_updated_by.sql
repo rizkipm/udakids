@@ -1,0 +1,2 @@
+ALTER TABLE "skill_catalogs" ADD COLUMN "updated_by" uuid;--> statement-breakpoint
+ALTER TABLE "skill_catalogs" ADD CONSTRAINT "skill_catalogs_updated_by_staff_users_id_fk" FOREIGN KEY ("updated_by") REFERENCES "public"."staff_users"("id") ON DELETE set null ON UPDATE no action;

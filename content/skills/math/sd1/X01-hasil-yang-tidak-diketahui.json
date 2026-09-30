@@ -1,0 +1,93 @@
+{
+  "id": "math.sd1.x1.hasil-yang-tidak-diketahui",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "X",
+  "order": 1,
+  "title": "Soal cerita tambah dan kurang — Level 1 — Hasil yang tidak diketahui",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-X"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ia mendapat {b} {benda} lagi. Berapa {benda} {nama} sekarang?",
+          "answer": "a + b",
+          "explain": "Mendapat lagi berarti bertambah: {a} + {b} = {answer}.",
+          "constraint": "a + b <= 20",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ia memberikan {b} {benda} kepada adik. Berapa sisanya?",
+          "answer": "a - b",
+          "explain": "Memberikan berarti berkurang: {a} − {b} = {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

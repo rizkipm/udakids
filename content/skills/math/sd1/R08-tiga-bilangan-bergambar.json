@@ -1,0 +1,106 @@
+{
+  "id": "math.sd1.r8.tiga-bilangan-bergambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "R",
+  "order": 8,
+  "title": "Soal cerita penjumlahan sampai 20 — Level 8 — Tiga bilangan bergambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-R",
+    "cc": "1.OA.A.1, 1.OA.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Ibu membeli {a} apel, {b} jeruk, dan {c} pisang. Berapa buah semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}. Cari pasangan 10 atau dobel dulu.",
+          "constraint": "a + b + c <= 20 && a + b + c >= 8",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "apel",
+              "count": "=a",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "jeruk",
+              "count": "=b",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "pisang",
+              "count": "=c",
+              "layout": "row"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-kelompok"
+            },
+            "a + b + c + 1",
+            "a + b + c - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Di kebun ada {a} ayam, {b} bebek, dan {c} kucing. Berapa hewan semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "constraint": "a + b + c <= 20 && a + b + c >= 8",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "ayam",
+              "count": "=a",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "bebek",
+              "count": "=b",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "kucing",
+              "count": "=c",
+              "layout": "row"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "b + c",
+              "tag": "lupa-satu-kelompok"
+            },
+            "a + b + c + 1",
+            "a + b + c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

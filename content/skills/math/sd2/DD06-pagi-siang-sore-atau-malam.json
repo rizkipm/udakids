@@ -1,0 +1,43 @@
+{
+  "id": "math.sd2.dd6.pagi-siang-sore-atau-malam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "DD",
+  "order": 6,
+  "title": "Waktu dan jam — Level 6 — Pagi, siang, sore, atau malam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A (pengayaan) / B: jam per 5 menit",
+    "kognitif": "applying",
+    "ixlRef": "G2-DD"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "values": [6, 7, 8, 9, 12, 13, 15, 16, 17, 19, 20, 21, 22]
+      },
+      "m": {
+        "values": [0, 15, 30, 45]
+      }
+    },
+    "prompt": "Jam digital ini (jam 24) menunjukkan waktu …",
+    "answer": "(h <= 9) * 1 + (h >= 12 && h <= 13) * 2 + (h >= 15 && h <= 17) * 3 + (h >= 19) * 4",
+    "explain": "Pukul {h} dalam jam 24 termasuk waktu {answer}.",
+    "stimulus": [
+      {
+        "kind": "digital",
+        "hour": "=h",
+        "minute": "=m"
+      }
+    ],
+    "labels": {
+      "1": "pagi",
+      "2": "siang",
+      "3": "sore",
+      "4": "malam"
+    }
+  }
+}

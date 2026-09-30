@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.y6.lengkapi-keluarga-fakta",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Y",
+  "order": 6,
+  "title": "Sifat operasi hitung — Level 6 — Lengkapi keluarga fakta",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-Y"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 11],
+            "b": [2, 9]
+          },
+          "prompt": "Keluarga fakta {a}, {b}, {=a+b}: {=a+b} − … = {a}",
+          "answer": "b",
+          "explain": "{=a+b} − {b} = {a}.",
+          "constraint": "a + b <= 20 && a != b",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 11],
+            "b": [2, 9]
+          },
+          "prompt": "Keluarga fakta {a}, {b}, {=a+b}: … − {a} = {b}",
+          "answer": "a + b",
+          "explain": "Bilangan terbesar dalam keluarga fakta adalah jumlahnya: {answer}.",
+          "constraint": "a + b <= 20 && a != b",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

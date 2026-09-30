@@ -1,0 +1,72 @@
+{
+  "id": "math.sd1.v8.tambah-lalu-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "V",
+  "order": 8,
+  "title": "Tambah dan kurang sampai 20 — Level 8 — Tambah lalu kurang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-V",
+    "cc": "1.OA.C.6, 1.OA.D.8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [1, 8],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "explain": "{a} + {b} = {=a+b}, lalu − {c} = {answer}.",
+          "constraint": "a + b <= 20 && c <= a + b",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "semua-ditambah"
+            },
+            {
+              "expr": "a + b",
+              "tag": "lupa-langkah-kedua"
+            },
+            "a + b - c + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "explain": "{a} − {b} = {=a-b}, lalu + {c} = {answer}.",
+          "constraint": "b <= a && a - b + c <= 20",
+          "distractors": [
+            {
+              "expr": "a - b - c",
+              "tag": "semua-dikurangi"
+            },
+            {
+              "expr": "a - b",
+              "tag": "lupa-langkah-kedua"
+            },
+            "a - b + c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

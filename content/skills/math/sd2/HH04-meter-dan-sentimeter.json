@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.hh4.meter-dan-sentimeter",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "HH",
+  "order": 4,
+  "title": "Satuan panjang metrik — Level 4 — Meter dan sentimeter",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: satuan baku",
+    "kognitif": "knowing",
+    "ixlRef": "G2-HH"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9]
+          },
+          "prompt": "{m} m = … cm",
+          "answer": "m * 100",
+          "explain": "1 m = 100 cm, jadi {m} m = {answer}.",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "m * 10",
+              "tag": "salah-konversi"
+            },
+            {
+              "expr": "m * 1000",
+              "tag": "salah-konversi"
+            },
+            {
+              "expr": "m",
+              "tag": "tidak-diubah"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [5, 95]
+          },
+          "prompt": "{m} m {c} cm = … cm",
+          "answer": "m * 100 + c",
+          "explain": "{m} m = {=m*100} cm, ditambah {c} cm = {answer}.",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "m + c",
+              "tag": "menjumlah-langsung"
+            },
+            {
+              "expr": "m * 10 + c",
+              "tag": "salah-konversi"
+            },
+            {
+              "expr": "m * 100",
+              "tag": "lupa-cm"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

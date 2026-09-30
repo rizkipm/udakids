@@ -1,0 +1,89 @@
+{
+  "id": "math.sd2.f1.dobel-dengan-model",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "F",
+  "order": 1,
+  "title": "Strategi penjumlahan satu angka — Level 1 — Dobel dengan model",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-F",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Dua kereta sama panjang. {a} + {a} = …",
+          "answer": "2 * a",
+          "explain": "Dobel {a} = {a} + {a} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a", "=a"],
+              "colors": ["merah", "biru"]
+            }
+          ],
+          "distractors": [
+            "2 * a + 1",
+            "2 * a - 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Dua kelompok sama banyak. Berapa semuanya?",
+          "answer": "2 * a",
+          "explain": "{a} + {a} = {answer}.",
+          "words": {
+            "benda": ["apel", "bola", "bintang", "bunga", "ikan", "balon", "kue", "pensil"]
+          },
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "objects",
+                  "object": "{benda}",
+                  "count": "=a",
+                  "layout": "row"
+                },
+                {
+                  "kind": "objects",
+                  "object": "{benda}",
+                  "count": "=a",
+                  "layout": "row"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "2 * a + 1",
+            "2 * a - 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

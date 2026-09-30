@@ -1,0 +1,71 @@
+{
+  "id": "sains.sd4.f7.suhu-campuran",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "F",
+  "order": 7,
+  "title": "Panas dan energi termal — Level 7 — Suhu campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 50],
+            "b": [50, 96]
+          },
+          "constraint": "(a + b) % 2 == 0 && b - a >= 10",
+          "prompt": "Segelas air {a} °C dicampur segelas air {b} °C yang sama banyak. Berapa kira-kira suhu campurannya?",
+          "answer": "(a + b) / 2",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "b - a",
+              "tag": "selisih"
+            },
+            {
+              "expr": "b",
+              "tag": "tetap"
+            }
+          ],
+          "explain": "Suhu campuran ada di tengah-tengah: ({a} + {b}) : 2 = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 95],
+            "b": [5, 95]
+          },
+          "constraint": "abs(a - b) >= 10",
+          "words": {
+            "x": ["sendok logam", "kelereng", "batu kecil", "kaleng minuman"],
+            "y": ["air", "sup", "teh", "susu"]
+          },
+          "prompt": "Sebuah {x} bersuhu {a} °C dicelupkan ke {y} bersuhu {b} °C. Suhu {x} itu akan …",
+          "answer": "(b > a) + 2 * (b < a)",
+          "labels": {
+            "1": "naik",
+            "2": "turun"
+          },
+          "explain": "Suhu benda berubah mendekati suhu sekitarnya. {a} °C bertemu {b} °C."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

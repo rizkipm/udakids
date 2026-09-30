@@ -1,0 +1,69 @@
+{
+  "id": "math.sd1.cc5.tambah-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "CC",
+  "order": 5,
+  "title": "Tambah dan kurang puluhan — Level 5 — Tambah puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": [1, 8]
+          },
+          "prompt": "{=a*10} + {=b*10} = …",
+          "answer": "a * 10 + b * 10",
+          "explain": "{a} puluhan + {b} puluhan = {=a+b} puluhan = {answer}.",
+          "constraint": "a + b <= 10",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10 + b * 10 + 10",
+              "tag": "lebih-sepuluh"
+            },
+            {
+              "expr": "a * 10 + b",
+              "tag": "salah-nilai-tempat"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": [1, 8]
+          },
+          "prompt": "{a} puluhan + {b} puluhan = …",
+          "answer": "a * 10 + b * 10",
+          "explain": "{=a+b} puluhan = {answer}.",
+          "constraint": "a + b <= 10",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "banyak-puluhan"
+            },
+            "a * 10 + b * 10 + 10",
+            "a * 10 + b * 10 - 10"
+          ]
+        }
+      }
+    ]
+  }
+}

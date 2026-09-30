@@ -1,0 +1,83 @@
+{
+  "id": "math.sd1.c5.loncat-2-5-dan-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 5,
+  "title": "Membilang loncat — Level 5 — Loncat 2, 5, dan 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [2, 5, 10]
+            },
+            "k": [0, 9]
+          },
+          "prompt": "{=s*k}, {=s*k+s}, {=s*k+2*s}, … Angka berikutnya?",
+          "answer": "s * k + 3 * s",
+          "explain": "Polanya loncat {s}: {=s*k+2*s} + {s} = {answer}.",
+          "distractors": [
+            {
+              "expr": "s * k + 2 * s + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "s * k + 4 * s",
+              "tag": "melompat"
+            },
+            {
+              "expr": "s * k + 2 * s + 2",
+              "tag": "tambah-dua"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [2, 5, 10]
+            },
+            "k": [1, 9]
+          },
+          "prompt": "Pola {=s*k}, {=s*k+s}, {=s*k+2*s}, {=s*k+3*s} bertambah berapa setiap langkah?",
+          "answer": "s",
+          "explain": "Selisih dua angka yang berurutan: {=s*k+s} − {=s*k} = {answer}.",
+          "constraint": "s * k + 3 * s <= 100",
+          "distractors": [
+            {
+              "expr": "1",
+              "tag": "loncat-satu"
+            },
+            {
+              "expr": "2",
+              "tag": "loncat-lain"
+            },
+            {
+              "expr": "5",
+              "tag": "loncat-lain"
+            },
+            {
+              "expr": "10",
+              "tag": "loncat-lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

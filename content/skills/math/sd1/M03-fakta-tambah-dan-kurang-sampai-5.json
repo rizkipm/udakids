@@ -1,0 +1,66 @@
+{
+  "id": "math.sd1.m3.fakta-tambah-dan-kurang-sampai-5",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "M",
+  "order": 3,
+  "title": "Tambah dan kurang sampai 10 — Level 3 — Fakta tambah dan kurang sampai 5",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-M",
+    "cc": "1.OA.B.3, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 5],
+            "b": [0, 5]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 5",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi-bukan-menjumlah"
+            }
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [0, 5]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b <= a",
+          "distractors": [
+            "a - b + 1",
+            "a - b - 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-bukan-mengurangi"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "id": "math.sd1.p3.dobel-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 3,
+  "title": "Strategi penjumlahan sampai 20 — Level 3 — Dobel dengan gambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Ada {a} {benda} dan {a} {benda} lagi. {a} + {a} = …",
+          "answer": "a + a",
+          "explain": "Dobel {a}: {a} + {a} = {answer}.",
+          "words": {
+            "benda": [
+              "apel",
+              "jeruk",
+              "kue",
+              "bola",
+              "bunga",
+              "bebek",
+              "kucing",
+              "bintang",
+              "balon",
+              "pensil"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{benda}",
+              "count": "=a",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "{benda}",
+              "count": "=a",
+              "layout": "row"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            },
+            "a + a + 1",
+            "a + a - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Kereta ini punya {a} kubus merah dan {a} kubus biru. Berapa semuanya?",
+          "answer": "a + a",
+          "explain": "Dobel {a}: {answer}.",
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a", "=a"],
+              "colors": ["merah", "biru"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            },
+            "a + a + 1",
+            "a + a - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Dua bingkai berisi {a} titik dan {a} titik. Berapa titik semuanya?",
+          "answer": "a + a",
+          "explain": "{a} + {a} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "frame",
+                  "filled": "=a",
+                  "size": 10
+                },
+                {
+                  "kind": "frame",
+                  "filled": "=a",
+                  "size": 10
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            },
+            "a + a + 1",
+            "a + a - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

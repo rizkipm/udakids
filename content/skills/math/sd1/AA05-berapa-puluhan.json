@@ -1,0 +1,37 @@
+{
+  "id": "math.sd1.aa5.berapa-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 5,
+  "title": "Nilai tempat — Level 5 — Berapa puluhan?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-AA"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [21, 99]
+    },
+    "prompt": "Bilangan {n} terdiri atas berapa puluhan?",
+    "answer": "floor(n / 10)",
+    "explain": "{n} = {answer} puluhan dan {=n%10} satuan.",
+    "constraint": "n % 10 != floor(n / 10)",
+    "distractors": [
+      {
+        "expr": "n % 10",
+        "tag": "angka-satuan"
+      },
+      {
+        "expr": "floor(n / 10) * 10",
+        "tag": "nilai-bukan-banyak"
+      },
+      "floor(n / 10) + 1"
+    ]
+  }
+}

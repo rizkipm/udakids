@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.z2.membulatkan-ke-puluhan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 2,
+  "title": "Estimasi dan pembulatan — Level 2 — Membulatkan ke puluhan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [11, 99]
+    },
+    "prompt": "Bulatkan {a} ke puluhan terdekat.",
+    "answer": "round(a / 10) * 10",
+    "explain": "Lihat satuan {=a%10}: 0–4 dibulatkan ke bawah, 5–9 ke atas. {a} → {answer}.",
+    "constraint": "a % 10 != 0",
+    "distractors": [
+      {
+        "expr": "floor(a / 10) * 10 + 10 - (round(a / 10) - floor(a / 10)) * 10",
+        "tag": "arah-terbalik"
+      },
+      {
+        "expr": "a",
+        "tag": "tidak-dibulatkan"
+      },
+      {
+        "expr": "round(a / 10) * 10 + 10",
+        "tag": "lain"
+      }
+    ],
+    "choices": 3
+  }
+}

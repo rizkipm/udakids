@@ -1,0 +1,95 @@
+{
+  "id": "math.sd1.c9.puluhan-dan-satuan-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 9,
+  "title": "Membilang loncat — Level 9 — Puluhan dan satuan sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [3, 12],
+            "b": [1, 9]
+          },
+          "prompt": "Hitung loncat sepuluh, lalu satu-satu. Berapa kubus semuanya?",
+          "answer": "t * 10 + b",
+          "explain": "Loncat sepuluh {t} kali = {=t*10}, lalu satu-satu {b} kali = {answer}.",
+          "constraint": "t * 10 + b <= 120",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "tens",
+                  "tens": "=min(t, 10)",
+                  "ones": "=(t <= 10) * b"
+                },
+                {
+                  "kind": "tens",
+                  "tens": "=max(0, t - 10)",
+                  "ones": "=(t > 10) * b"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "t + b",
+              "tag": "semua-dianggap-satu"
+            },
+            {
+              "expr": "t * 10 + b + 10",
+              "tag": "lebih-sepuluh"
+            },
+            {
+              "expr": "b * 10 + t",
+              "tag": "terbalik"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 60],
+            "p": [1, 4],
+            "q": [1, 4]
+          },
+          "prompt": "Mulai dari {a}. Loncat sepuluh {p} kali, lalu maju satu {q} kali. Sampai di angka berapa?",
+          "answer": "a + 10 * p + q",
+          "explain": "{a} + {=10*p} = {=a+10*p}, lalu + {q} = {answer}.",
+          "constraint": "a + 10 * p + q <= 120",
+          "distractors": [
+            {
+              "expr": "a + p + q",
+              "tag": "semua-dianggap-satu"
+            },
+            {
+              "expr": "a + 10 * p",
+              "tag": "lupa-satuan"
+            },
+            {
+              "expr": "a + 10 * p + 10 * q",
+              "tag": "semua-dianggap-sepuluh"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

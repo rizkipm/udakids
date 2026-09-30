@@ -1,0 +1,83 @@
+{
+  "id": "math.sd1.cc9.soal-cerita-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "CC",
+  "order": 9,
+  "title": "Tambah dan kurang puluhan — Level 9 — Soal cerita puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 7],
+            "b": [1, 5]
+          },
+          "prompt": "{nama} punya {=a*10} kelereng. Ia membeli {=b*10} kelereng lagi. Berapa kelereng {nama} sekarang?",
+          "answer": "a * 10 + b * 10",
+          "explain": "{=a*10} + {=b*10} = {answer}.",
+          "constraint": "a + b <= 10",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a * 10 - b * 10",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + b",
+              "tag": "lupa-nol"
+            },
+            "a * 10 + b * 10 + 10"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 9],
+            "b": [1, 6]
+          },
+          "prompt": "Toko punya {=a*10} balon. Terjual {=b*10} balon. Berapa balon yang tersisa?",
+          "answer": "a * 10 - b * 10",
+          "explain": "{=a*10} − {=b*10} = {answer}.",
+          "constraint": "b < a",
+          "distractors": [
+            {
+              "expr": "a * 10 + b * 10",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a - b",
+              "tag": "lupa-nol"
+            },
+            "a * 10 - b * 10 - 10"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "math.sd2.ll8.membuat-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "LL",
+  "order": 8,
+  "title": "Pecahan — Level 8 — Membuat pecahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-LL"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 6, 8, 10, 12]
+            }
+          },
+          "prompt": "Bangun dibagi {d} bagian sama besar. Berapa bagian harus diarsir agar setengahnya diarsir?",
+          "answer": "d / 2",
+          "explain": "Setengah dari {d} bagian = {answer} bagian.",
+          "distractors": ["1", "d", "d / 2 + 1"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 6, 9]
+            }
+          },
+          "prompt": "Bangun dibagi {d} bagian sama besar. Berapa bagian harus diarsir agar sepertiganya diarsir?",
+          "answer": "d / 3",
+          "explain": "Sepertiga dari {d} bagian = {answer} bagian.",
+          "distractors": ["d / 3 + 1", "d", "3"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [4, 8, 12, 16]
+            }
+          },
+          "prompt": "Bangun dibagi {d} bagian sama besar. Berapa bagian harus diarsir agar seperempatnya diarsir?",
+          "answer": "d / 4",
+          "explain": "Seperempat dari {d} bagian = {answer} bagian.",
+          "distractors": ["d / 4 + 1", "d", "4"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 8]
+            },
+            "n": [1, 7]
+          },
+          "prompt": "Bangun dibagi {d} bagian sama besar. Berapa bagian harus diarsir agar {n}/{d} diarsir?",
+          "answer": "n",
+          "explain": "Pembilang {n} berarti {n} bagian diarsir.",
+          "constraint": "n < d",
+          "distractors": ["d", "d - n", "n + 1"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

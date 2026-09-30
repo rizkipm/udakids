@@ -1,0 +1,79 @@
+{
+  "id": "math.sd2.l4.angka-pada-tempat-tertentu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "L",
+  "order": 4,
+  "title": "Nilai tempat — Level 4 — Angka pada tempat tertentu",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "2-L",
+    "common-core": "2.NBT.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9]
+          },
+          "prompt": "Pada bilangan {n}, angka di tempat PULUHAN adalah …",
+          "answer": "t",
+          "explain": "{n}: ratusan {h}, puluhan {t}, satuan {o}.",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          },
+          "constraint": "h != t && t != o && h != o",
+          "distractors": ["h", "o"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9]
+          },
+          "prompt": "Pada bilangan {n}, angka di tempat RATUSAN adalah …",
+          "answer": "h",
+          "explain": "{n}: ratusan {h}, puluhan {t}, satuan {o}.",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          },
+          "constraint": "h != t && t != o && h != o",
+          "distractors": ["t", "o"],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9]
+          },
+          "prompt": "Pada bilangan {n}, angka di tempat SATUAN adalah …",
+          "answer": "o",
+          "explain": "{n}: ratusan {h}, puluhan {t}, satuan {o}.",
+          "derived": {
+            "n": "h * 100 + t * 10 + o"
+          },
+          "constraint": "h != t && t != o && h != o",
+          "distractors": ["h", "t"],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

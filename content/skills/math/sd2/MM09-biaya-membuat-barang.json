@@ -1,0 +1,117 @@
+{
+  "id": "math.sd2.mm9.biaya-membuat-barang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "MM",
+  "order": 9,
+  "title": "Literasi keuangan — Level 9 — Biaya membuat barang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-MM"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1000, 4000],
+              "step": 500
+            },
+            "b": {
+              "range": [500, 1500],
+              "step": 500
+            }
+          },
+          "prompt": "Untuk membuat 1 gelang, Putri butuh manik-manik Rp{a} dan tali Rp{b}. Berapa biaya membuat 1 gelang?",
+          "answer": "a + b",
+          "explain": "Rp{a} + Rp{b} = {answer}.",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a",
+              "tag": "lupa-satu-bahan"
+            },
+            {
+              "expr": "a + b + 500",
+              "tag": "lebih"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "values": [500, 1000, 1500, 2000]
+            },
+            "n": [2, 6]
+          },
+          "prompt": "Biaya membuat 1 kue lapis Rp{c}. Berapa biaya membuat {n} kue lapis?",
+          "answer": "c * n",
+          "explain": "Rp{c} dijumlahkan {n} kali = {answer}.",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "c + n",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "c * (n + 1)",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "c * (n - 1)",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "range": [1000, 4000],
+              "step": 500
+            },
+            "j": {
+              "range": [3000, 6000],
+              "step": 500
+            }
+          },
+          "prompt": "Biaya bahan untuk 1 bungkus keripik Rp{c}. Sebungkus keripik dijual Rp{j}. Berapa selisih harga jual dan biaya?",
+          "answer": "j - c",
+          "explain": "Rp{j} − Rp{c} = {answer}.",
+          "constraint": "j > c",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "j + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "c",
+              "tag": "biaya"
+            },
+            {
+              "expr": "j",
+              "tag": "harga-jual"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

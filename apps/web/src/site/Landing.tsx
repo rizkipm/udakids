@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { Momo } from '../components/Momo';
 import { APP_NAME } from '../config/app';
 import { t, type MessageKey } from '../i18n';
+import { BookSlider } from './BookSlider';
 import { Blocks, Cloud, Icon, ProgramCard, Star, type FeatureIcon } from './Decor';
+import { useLiveStats } from './liveStats';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -81,6 +83,8 @@ export function SiteNav() {
 
 export function Landing() {
   const { data: shelf, failed } = usePublicBooks();
+  const { stats, live } = useLiveStats();
+  const fmt = (n?: number) => (n ?? 0).toLocaleString('id-ID');
   return (
     <div className="site">
       <SiteNav />
@@ -106,14 +110,15 @@ export function Landing() {
                 {t('site.cta.family')}
               </Link>
             </div>
-            <ul className="hero-facts">
-              {shelf && (
+            <ul className="hero-facts" aria-live="polite">
+              {(stats || shelf) && (
                 <>
                   <li>
-                    <strong>{shelf.books.length}</strong> {t('site.fact.books')}
+                    <strong>{fmt(stats?.books ?? shelf!.books.length)}</strong>{' '}
+                    {t('site.fact.books')}
                   </li>
                   <li>
-                    <strong>{shelf.totalLevels.toLocaleString('id-ID')}</strong>{' '}
+                    <strong>{fmt(stats?.totalLevels ?? shelf!.totalLevels)}</strong>{' '}
                     {t('site.fact.levels')}
                   </li>
                 </>
@@ -121,7 +126,24 @@ export function Landing() {
               <li>
                 <strong>10</strong> {t('site.fact.questions')}
               </li>
+              {stats && (
+                <li>
+                  <strong>{fmt(stats.users)}</strong> {t('site.fact.users')}
+                </li>
+              )}
             </ul>
+            {stats && (
+              <p className={`live-chip${live ? ' is-live' : ''}`} aria-live="polite">
+                <span className="live-dot" aria-hidden />
+                <span>
+                  {live ? t('site.live.on') : t('site.live.off')}
+                  {' · '}
+                  <strong>{fmt(stats.activeNow)}</strong> {t('site.live.active')}
+                  {' · '}
+                  <strong>{fmt(stats.rounds)}</strong> {t('site.live.rounds')}
+                </span>
+              </p>
+            )}
           </div>
 
           <div className="hero-art" aria-hidden>
@@ -192,32 +214,37 @@ export function Landing() {
         <section id="buku" className="site-section books">
           <h2>{t('site.books.title')}</h2>
           <p className="section-lead">{t('site.books.lead')}</p>
-          <div className="book-grid">
-            {shelf
-              ? shelf.books.map((b, i) => (
-                  <article
-                    key={`${b.domain}/${b.grade}`}
-                    className={`book-card tone-${TONES[i % TONES.length]}`}
-                  >
-                    <div className="book-spine" aria-hidden />
-                    <Icon name={iconOf(b)} size={48} />
-                    <h3>{b.title}</h3>
-                    <p className="book-age">{t(k(`site.age.${b.grade}`))}</p>
-                    <p>{b.sampleTopics.join(', ')}</p>
-                    <span className="book-levels">
-                      {t('site.books.meta', {
-                        topics: b.topics,
-                        n: b.levels.toLocaleString('id-ID'),
-                      })}
-                    </span>
-                  </article>
-                ))
-              : Array.from({ length: 3 }, (_, i) => (
-                  <article key={i} className="book-card is-skeleton" aria-hidden>
-                    <div className="book-spine" />
-                  </article>
-                ))}
-          </div>
+          {shelf ? (
+            <BookSlider
+              items={shelf.books}
+              render={(b, i) => (
+                <article
+                  key={`${b.domain}/${b.grade}`}
+                  className={`book-card tone-${TONES[i % TONES.length]}`}
+                >
+                  <div className="book-spine" aria-hidden />
+                  <Icon name={iconOf(b)} size={48} />
+                  <h3>{b.title}</h3>
+                  <p className="book-age">{t(k(`site.age.${b.grade}`))}</p>
+                  <p>{b.sampleTopics.join(', ')}</p>
+                  <span className="book-levels">
+                    {t('site.books.meta', {
+                      topics: b.topics,
+                      n: b.levels.toLocaleString('id-ID'),
+                    })}
+                  </span>
+                </article>
+              )}
+            />
+          ) : (
+            <div className="book-grid">
+              {Array.from({ length: 3 }, (_, i) => (
+                <article key={i} className="book-card is-skeleton" aria-hidden>
+                  <div className="book-spine" />
+                </article>
+              ))}
+            </div>
+          )}
           {failed && !shelf && <p className="section-lead">{t('site.books.offline')}</p>}
         </section>
 

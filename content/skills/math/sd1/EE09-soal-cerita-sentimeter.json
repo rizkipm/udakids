@@ -1,0 +1,101 @@
+{
+  "id": "math.sd1.ee9.soal-cerita-sentimeter",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "EE",
+  "order": 9,
+  "title": "Pengukuran — Level 9 — Soal cerita sentimeter",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-EE"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 9]
+          },
+          "prompt": "Pita {nama} panjangnya {a} cm. Pita itu dipotong {b} cm. Berapa cm sisanya?",
+          "answer": "a - b",
+          "explain": "{a} cm − {b} cm = {answer}.",
+          "constraint": "b < a",
+          "unit": "cm",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 18],
+            "b": [3, 9]
+          },
+          "prompt": "Pensil {a} cm dan krayon {b} cm. Berapa cm pensil lebih panjang?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer} cm.",
+          "constraint": "b < a",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 9]
+          },
+          "prompt": "Dua tali, masing-masing {a} cm dan {b} cm, disambung. Berapa cm panjangnya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} cm.",
+          "constraint": "a + b <= 20",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 1",
+            "a + b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

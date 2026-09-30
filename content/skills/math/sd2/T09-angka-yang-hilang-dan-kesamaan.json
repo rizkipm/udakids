@@ -1,0 +1,68 @@
+{
+  "id": "math.sd2.t9.angka-yang-hilang-dan-kesamaan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "T",
+  "order": 9,
+  "title": "Penjumlahan tiga angka — Level 9 — Angka yang hilang dan kesamaan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-T"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6],
+            "p": [0, 9],
+            "s": [0, 9],
+            "b": [100, 299]
+          },
+          "prompt": "Angka berapa yang hilang? {h}□{s} + {b} = {=a+b}",
+          "answer": "p",
+          "explain": "Bilangan pertama {a}, karena {a} + {b} = {=a+b}. Angka yang hilang {answer}.",
+          "derived": {
+            "a": "h * 100 + p * 10 + s"
+          },
+          "constraint": "a + b <= 999",
+          "distractors": ["p + 1", "p - 1", "p + 2"]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [100, 400],
+            "c": [100, 800]
+          },
+          "prompt": "{a} + {b} = {c} + …",
+          "answer": "a + b - c",
+          "explain": "Kedua sisi tanda = harus sama: {a} + {b} = {=a+b}. {=a+b} − {c} = {answer}.",
+          "constraint": "c < a + b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "jumlah-kiri"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "a + b - c + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

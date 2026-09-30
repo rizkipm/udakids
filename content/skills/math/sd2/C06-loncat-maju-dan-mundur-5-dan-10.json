@@ -1,0 +1,86 @@
+{
+  "id": "math.sd2.c6.loncat-maju-dan-mundur-5-dan-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "C",
+  "order": 6,
+  "title": "Loncat hitung dan pola bilangan — Level 6 — Loncat maju dan mundur 5 dan 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-C",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [4, 20],
+            "d": {
+              "values": [5, 10]
+            }
+          },
+          "prompt": "{a}, {=a-d}, {=a-2*d}, … Bilangan berikutnya?",
+          "answer": "a - 3 * d",
+          "explain": "Mundur {d} setiap loncatan: {answer}.",
+          "derived": {
+            "a": "k * d"
+          },
+          "constraint": "a <= 100",
+          "distractors": [
+            {
+              "expr": "a - 2 * d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "a - 4 * d",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a - 2 * d + d",
+              "tag": "arah-terbalik"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 14],
+            "d": {
+              "values": [5, 10]
+            }
+          },
+          "prompt": "{a}, {=a+d}, {=a+2*d}, … Bilangan berikutnya?",
+          "answer": "a + 3 * d",
+          "explain": "Maju {d} setiap loncatan: {answer}.",
+          "derived": {
+            "a": "k * d"
+          },
+          "constraint": "a + 3 * d <= 100",
+          "distractors": [
+            {
+              "expr": "a + 3 * d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + 4 * d",
+              "tag": "loncat-lebih"
+            },
+            {
+              "expr": "a + d",
+              "tag": "arah-terbalik"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

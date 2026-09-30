@@ -1,0 +1,77 @@
+{
+  "id": "math.sd1.z9.lengkapi-kalimat-isian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 9,
+  "title": "Lengkapi kalimat matematika — Level 9 — Lengkapi kalimat: isian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "c": [11, 20]
+          },
+          "prompt": "{a} + … = {c}",
+          "answer": "c - a",
+          "explain": "{a} + {answer} = {c}.",
+          "constraint": "a < c",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [3, 12]
+          },
+          "prompt": "… − {b} = {c}",
+          "answer": "b + c",
+          "explain": "{answer} − {b} = {c}, karena {c} + {b} = {answer}.",
+          "constraint": "b + c <= 20 && b + c > 10",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "c": [5, 20]
+          },
+          "prompt": "{c} = {a} + …",
+          "answer": "c - a",
+          "explain": "{c} = {a} + {answer}. Tanda = boleh di depan.",
+          "constraint": "a < c",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "c": [1, 11]
+          },
+          "prompt": "{c} = … − {b}",
+          "answer": "b + c",
+          "explain": "{c} = {answer} − {b}, karena {c} + {b} = {answer}.",
+          "constraint": "b + c <= 20",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

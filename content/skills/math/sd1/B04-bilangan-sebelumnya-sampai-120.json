@@ -1,0 +1,95 @@
+{
+  "id": "math.sd1.b4.bilangan-sebelumnya-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "B",
+  "order": 4,
+  "title": "Membilang sampai 120 — Level 4 — Bilangan sebelumnya sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-B",
+    "ccss": "1.NBT.A.1",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [61, 120]
+          },
+          "prompt": "Angka berapa yang tepat sebelum {a}?",
+          "answer": "a - 1",
+          "explain": "Hitung mundur satu dari {a}: {answer}.",
+          "distractors": [
+            {
+              "expr": "a + 1",
+              "tag": "sesudah-bukan-sebelum"
+            },
+            {
+              "expr": "a - 10",
+              "tag": "salah-puluhan"
+            },
+            {
+              "expr": "a - 2",
+              "tag": "melompat"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [81, 118]
+          },
+          "prompt": "Angka berapa yang hilang di depan?",
+          "answer": "a - 1",
+          "explain": "Sebelum {a} adalah {answer}: {answer}, {a}, {=a+1}, {=a+2}.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "blank"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+1"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+2"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + 3",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a - 11",
+              "tag": "salah-puluhan"
+            },
+            {
+              "expr": "a - 2",
+              "tag": "melompat"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

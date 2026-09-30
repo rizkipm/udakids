@@ -1,0 +1,96 @@
+{
+  "id": "math.sd2.ff8.diagram-batang-selisih-dan-jumlah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 8,
+  "title": "Data dan diagram — Level 8 — Diagram batang: selisih dan jumlah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: diagram batang",
+    "kognitif": "applying",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15],
+            "c": [2, 15],
+            "d": [2, 15]
+          },
+          "prompt": "Berapa lebih banyak buku hari Senin daripada hari Kamis?",
+          "answer": "a - d",
+          "explain": "{a} − {d} = {answer}.",
+          "constraint": "a > d",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buku yang dibaca kelas 2",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "buku"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "satu-batang"
+            },
+            {
+              "expr": "a - d + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15],
+            "c": [2, 15],
+            "d": [2, 15]
+          },
+          "prompt": "Berapa buku yang dibaca hari Senin dan Selasa?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buku yang dibaca kelas 2",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "buku"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "satu-batang"
+            },
+            {
+              "expr": "a + b + c + d",
+              "tag": "semua"
+            },
+            {
+              "expr": "abs(a - b)",
+              "tag": "selisih"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

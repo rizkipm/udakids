@@ -36,6 +36,9 @@ Keputusan di luar atau yang mengubah PRD. Status: **Disetujui** (oleh pemilik pr
 | D-029 | 2026-09-30 | .env dimuat, backup/restore DB, umpan balik inline   | Disetujui           |
 | D-030 | 2026-09-30 | Semua data runtime dari DB; migrate/seed produksi    | Disetujui           |
 | D-031 | 2026-09-30 | Akses jaringan lokal (iPad) + panduan deploy         | Disetujui           |
+| D-032 | 2026-09-30 | Buku per kelas: Sains 1–4, Math 1–2 (1.560 level)    | Disetujui           |
+| D-033 | 2026-09-30 | Rak buku bergeser (10/halaman) + statistik realtime  | Disetujui           |
+| D-034 | 2026-09-30 | Sains Kindergarten (TK) + rak 9 buku/halaman         | Disetujui           |
 
 ## D-001 — NestJS + PostgreSQL menggantikan Supabase
 
@@ -444,3 +447,88 @@ Tanggal 2026-09-30 · Status **Disetujui**.
   produksi web hanya berisi `/api`.
 - **Deploy:** panduan langkah demi langkah Ubuntu + Nginx + systemd + HTTPS + cadangan cron di
   [docs/deploy.md](deploy.md). Contoh konfigurasi ada di `deploy/`.
+
+## D-032 — Buku per kelas: Sains Grade 1–4 dan Math Grade 1–2 (struktur IXL, adaptasi Indonesia)
+
+Tanggal 2026-09-30 · Status **Disetujui**. Pilihan pemilik produk: buku baru terpisah (buku lama tidak diubah),
+cakupan "Semua Sains + Math 1–2", dan adaptasi Indonesia.
+
+| Buku          | Folder      | Topik (kode IXL) | Level | Fase                                   |
+| ------------- | ----------- | ---------------- | ----- | -------------------------------------- |
+| Math Grade 1  | `math/sd1`  | 41 (A–OO)        | 410   | A (101–120 pengayaan)                  |
+| Math Grade 2  | `math/sd2`  | 39 (A–MM)        | 390   | A; bilangan sampai 1.000 = pengayaan/B |
+| Sains Grade 1 | `sains/sd1` | 16 (A–P)         | 160   | A (pengayaan; IPAS mulai Fase B)       |
+| Sains Grade 2 | `sains/sd2` | 9 (A–I)          | 90    | A (pengayaan)                          |
+| Sains Grade 3 | `sains/sd3` | 25 (A–Y)         | 250   | B                                      |
+| Sains Grade 4 | `sains/sd4` | 26 (A–Z)         | 260   | B; sebagian topik C                    |
+
+- **Jenjang baru** `sd3` dan `sd4`. Urutan rak per mata pelajaran: Pra-TK, TK, Grade 1, Grade 2, Grade 1-2 (lama),
+  Grade 3, Grade 4, Grade 3-4 (lama).
+- **Aturan konten tetap sama** (D-023/D-026/D-028): setiap topik tepat 10 level mudah → sulit, level 10 tantangan, materi
+  (intro + tips) per topik, sumber nyata per tabel/soal, jawaban tunggal, dan ronde ulang memberi soal baru.
+- **Adaptasi Indonesia:**
+  - Satuan metrik saja; uang Rupiah emisi 2016; jam 24 dan pagi/siang/sore/malam.
+  - Musim hujan & kemarau; cuaca ekstrem Indonesia (banjir, puting beliung, siklon tropis).
+  - Hewan, tumbuhan, dan tempat Indonesia (kontras gurun/kutub tetap dipakai).
+  - Topik "engineering" menjadi soal memilih rancangan beserta alasannya.
+- **Interaksi IXL yang belum ada** (seret, gambar, susun diagram, garis bilangan >20, termometer, uang kertas
+  bergambar, kalender 7 kolom) diganti soal pilihan, ketuk-semua, atau isian yang menguji konsep sama; daftar per
+  buku ada di laporan generator. Ini kandidat fitur engine berikutnya.
+- **Mutu:**
+  - Pemeriksa per buku: validasi skema + 200 soal/level, 10 level/topik, dan materi. Hasilnya 0 masalah.
+  - Variasi: 1.557 dari 1.560 level memberi 10 soal baru saat diulang. Tiga level (Sains 3: muatan listrik & kutub magnet)
+    ruang soalnya memang kecil.
+  - Pindai teks 7.800 soal: kata ganda / templat bocor / kurung dan kutip tidak berpasangan = 0. Dua perbaikan engine
+    ditemukan dari pindai ini: satuan ganda di pembahasan `expr` ("cm cm") dan negasi ganda di templat `facts`.
+- **Seed:** katalog kini punya `updated_by` (migrasi `0004`). `db:seed` tidak menimpa katalog yang disunting admin
+  (kecuali `--force`), sama seperti skill. Sebelumnya seed selalu menimpa katalog, sehingga judul "Math Pra-TK"
+  hasil suntingan admin sempat kembali ke bawaan; judulnya sudah dipulihkan.
+- **Belum:** Math Grade 3 (daftar topik di pesan pemilik terpotong) dan tinjauan guru untuk buku baru.
+
+## D-033 — Rak buku landing bergeser (10 per halaman) dan statistik realtime
+
+Tanggal 2026-09-30 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Rak buku:**
+  - Maksimal **10 buku per halaman**. Bila lebih, rak menjadi slide: tombol ‹ ›, titik halaman, keterangan
+    "Buku 1–10 dari 12", dan bisa digeser dengan jari (scroll-snap) di iPad/HP.
+  - Tinggi rak mengikuti halaman aktif. Posisi tetap di halaman yang sama saat layar diputar.
+  - Aksesibilitas: `aria-roledescription="carousel"`, dan halaman yang tidak aktif `aria-hidden`.
+  - ≤10 buku tetap tampil sebagai grid biasa.
+- **Statistik hero** (dari PostgreSQL, `GET /public/stats`):
+  - jumlah buku, jumlah level, 10 soal per level;
+  - **total pengguna** (orang tua + anak + staf yang aktif);
+  - **anak yang sedang belajar** (aktif ≤10 menit);
+  - **ronde dimainkan**.
+    Hanya angka agregat, tanpa nama atau data pribadi; di-cache 5 detik.
+- **Realtime:**
+  - Server-Sent Events `GET /public/stats/stream`. Server mengirim angka saat tersambung, lalu setiap kali
+    angkanya berubah (dicek tiap 10 detik).
+  - Web menampilkan chip "● Langsung". Bila SSE terputus, web beralih ke polling 30 detik ("Diperbarui berkala")
+    sambil EventSource menyambung ulang sendiri.
+  - SSE dipilih (bukan WebSocket) karena alirannya satu arah, lewat HTTP biasa, dan berjalan melalui proxy
+    Vite/Nginx. Nginx diberi blok khusus `proxy_buffering off` di `deploy/nginx.conf.example`.
+- **Diuji:**
+  - Web: halaman 10 + 2, tombol, titik, dan pembaruan dari event SSE.
+  - API e2e: angka cocok dengan tabel, tidak ada field pribadi, dan event pertama SSE terkirim.
+  - Browser: desktop, iPad, dan ponsel lewat IP jaringan lokal, tanpa scroll ke samping.
+
+## D-034 — Buku Sains Kindergarten (TK) dan rak 9 buku per halaman
+
+Tanggal 2026-09-30 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Rak buku landing** berisi 9 buku per halaman (grid 3 × 3); lebih dari 9 buku → halaman berikutnya (D-033).
+- **Sains Kindergarten (TK)** (`sains/tk`, tier `basic`): 15 topik IXL A–O × 10 level = 150 level, dengan aturan yang
+  sama seperti D-023/D-026/D-032. Aturan tambahan untuk anak yang belum lancar membaca (PRD A14):
+  - soal sangat pendek (±8 kata) dan dibacakan; pilihan teks selalu punya suara;
+  - utamakan pilihan bergambar;
+  - maksimal 3 pilihan di level 1–5 dan 4 pilihan di level 6–10;
+  - tanpa negasi di level 1–3;
+  - aturan di atas diperiksa otomatis oleh generator.
+  - Fase: Fondasi (PAUD). Sumber: CP PAUD Fase Fondasi, NGSS Kindergarten, BMKG, BNPB, dan NASA Space Place.
+- **Mutu:**
+  - Pemeriksa 0 masalah; 137/150 level memberi 10 soal baru saat diulang. 13 level lainnya punya bank soal kecil
+    (tetap 10 soal unik per ronde).
+  - Pindai teks tanpa temuan selain spasi pada "...".
+  - Satu level ("Sinar matahari dan tempat teduh") ditemukan memakai tabel panas/dingin makanan yang tidak sesuai topik;
+    tabelnya diganti tabel terik/teduh.

@@ -1,0 +1,56 @@
+{
+  "id": "math.sd2.cc6.hitung-uang-kertas-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 6,
+  "title": "Uang sampai Rp100.000 — Level 6 — Hitung uang kertas campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 2],
+      "b": [1, 4],
+      "c": [1, 3],
+      "d": [1, 3]
+    },
+    "prompt": "Berapa rupiah semua uang pada tabel?",
+    "answer": "a * 20000 + b * 10000 + c * 5000 + d * 2000",
+    "explain": "Rp{=a*20000} + Rp{=b*10000} + Rp{=c*5000} + Rp{=d*2000} = {answer}.",
+    "constraint": "a * 20000 + b * 10000 + c * 5000 + d * 2000 <= 100000",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Uang", "Lembar"],
+        "rows": [
+          ["Rp20.000", "=a"],
+          ["Rp10.000", "=b"],
+          ["Rp5.000", "=c"],
+          ["Rp2.000", "=d"]
+        ]
+      }
+    ],
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "(a + b + c + d) * 10000",
+        "tag": "semua-dianggap-10000"
+      },
+      {
+        "expr": "a * 20000 + b * 10000 + c * 5000",
+        "tag": "lupa-satu"
+      },
+      {
+        "expr": "a * 20000 + b * 10000 + c * 5000 + d * 2000 + 10000",
+        "tag": "lebih"
+      }
+    ]
+  }
+}

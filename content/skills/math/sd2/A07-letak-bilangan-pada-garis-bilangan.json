@@ -1,0 +1,44 @@
+{
+  "id": "math.sd2.a7.letak-bilangan-pada-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 7,
+  "title": "Membilang — Level 7 — Letak bilangan pada garis bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [0, 9],
+      "k": [1, 9]
+    },
+    "prompt": "Garis bilangan dari {lo} sampai {=lo+100} dibagi 10 bagian sama. Tanda ke-{k} dari {lo} menunjuk angka …",
+    "answer": "lo + 10 * k",
+    "explain": "Setiap bagian bernilai 10. {k} bagian = {=10*k}. {lo} + {=10*k} = {answer}.",
+    "derived": {
+      "lo": "h * 100"
+    },
+    "distractors": [
+      {
+        "expr": "lo + k",
+        "tag": "bagian-bernilai-1"
+      },
+      {
+        "expr": "lo + 10 * k + 10",
+        "tag": "lebih-satu-bagian"
+      },
+      {
+        "expr": "lo + 10 * k - 10",
+        "tag": "kurang-satu-bagian"
+      }
+    ]
+  }
+}

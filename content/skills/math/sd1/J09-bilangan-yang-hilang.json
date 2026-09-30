@@ -1,0 +1,50 @@
+{
+  "id": "math.sd1.j9.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "J",
+  "order": 9,
+  "title": "Strategi pengurangan sampai 10 — Level 9 — Bilangan yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-J",
+    "ccss": "1.OA.B.4 / 1.OA.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": [2, 10],
+            "a": [0, 9]
+          },
+          "prompt": "{c} − … = {a}",
+          "answer": "c - a",
+          "explain": "{a} + {answer} = {c}, jadi {c} − {answer} = {a}.",
+          "constraint": "a < c",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 9],
+            "b": [1, 9]
+          },
+          "prompt": "… − {b} = {a}",
+          "answer": "a + b",
+          "explain": "Pakai penjumlahan: {a} + {b} = {answer}. Jadi {answer} − {b} = {a}.",
+          "constraint": "a + b <= 10",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

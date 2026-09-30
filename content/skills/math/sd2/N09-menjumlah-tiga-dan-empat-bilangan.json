@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.n9.menjumlah-tiga-dan-empat-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "N",
+  "order": 9,
+  "title": "Penjumlahan dua angka — Level 9 — Menjumlah tiga dan empat bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-N",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 40],
+            "b": [10, 30],
+            "c": [5, 29]
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "explain": "Jumlahkan dua dulu: {=a+b}, lalu + {c} = {answer}.",
+          "constraint": "a + b + c <= 100",
+          "distractors": [
+            "a + b + c + 10",
+            "a + b + c - 10",
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 30],
+            "b": [5, 25],
+            "c": [5, 20],
+            "d": [1, 20]
+          },
+          "prompt": "{a} + {b} + {c} + {d} = …",
+          "answer": "a + b + c + d",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a + b + c + d <= 100"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 40],
+            "b": [10, 30],
+            "c": [5, 29]
+          },
+          "prompt": "Kelas 2A mengumpulkan {a} botol, 2B {b}, dan 2C {c}. Berapa botol semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "mode": "input",
+          "constraint": "a + b + c <= 100"
+        }
+      }
+    ]
+  }
+}

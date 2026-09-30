@@ -1,0 +1,50 @@
+{
+  "id": "math.sd2.o4.memecah-bilangan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "O",
+  "order": 4,
+  "title": "Strategi pengurangan dua angka — Level 4 — Memecah bilangan dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-O",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [12, 39]
+          },
+          "prompt": "{a} − {b}: langkah 1, {a} − {=b-b%10} = …",
+          "answer": "a - b + b % 10",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "b % 10 != 0 && b < a"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "b": [12, 39]
+          },
+          "prompt": "{a} − {b} = …  (pecah {b} menjadi {=b-b%10} dan {=b%10})",
+          "answer": "a - b",
+          "explain": "{a} − {=b-b%10} = {=a-b+b%10}, − {=b%10} = {answer}.",
+          "mode": "input",
+          "constraint": "b % 10 != 0 && b < a"
+        }
+      }
+    ]
+  }
+}

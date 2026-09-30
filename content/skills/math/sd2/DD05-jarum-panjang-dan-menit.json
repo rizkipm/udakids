@@ -1,0 +1,48 @@
+{
+  "id": "math.sd2.dd5.jarum-panjang-dan-menit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "DD",
+  "order": 5,
+  "title": "Waktu dan jam — Level 5 — Jarum panjang dan menit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: jam per 5 menit",
+    "kognitif": "applying",
+    "ixlRef": "G2-DD"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [1, 11],
+      "h": [1, 12]
+    },
+    "prompt": "Jarum panjang menunjuk angka {n}. Sudah berapa menit lewat dari jam tepat?",
+    "answer": "n * 5",
+    "explain": "Setiap angka di jam bernilai 5 menit. {n} × 5 = {answer} menit.",
+    "stimulus": [
+      {
+        "kind": "clock",
+        "hour": "=h",
+        "minute": "=n*5"
+      }
+    ],
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "angka-bukan-menit"
+      },
+      {
+        "expr": "n * 5 + 5",
+        "tag": "lebih-satu-angka"
+      },
+      {
+        "expr": "n * 10",
+        "tag": "loncat-10"
+      }
+    ]
+  }
+}

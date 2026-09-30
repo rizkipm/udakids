@@ -1,0 +1,100 @@
+{
+  "id": "math.sd1.f3.hitung-maju-dari-bilangan-pertama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "F",
+  "order": 3,
+  "title": "Strategi penjumlahan sampai 10 — Level 3 — Hitung maju dari bilangan pertama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-F",
+    "ccss": "1.OA.B.3 / 1.OA.C.5 / 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [1, 3]
+          },
+          "prompt": "Mulai dari {a}, lalu hitung maju {b}. {a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Sebut {a} di kepala, lalu hitung maju {b} kali: {answer}.",
+          "constraint": "a + b <= 10",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "dots",
+                  "count": "=b",
+                  "layout": "row"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 2",
+              "tag": "menghitung-angka-awal"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [1, 3]
+          },
+          "prompt": "Ada {a} {x} di keranjang dan {b} di luar. Hitung maju dari {a}. Berapa semuanya?",
+          "answer": "a + b",
+          "explain": "{a}, lalu hitung maju {b}: {answer}.",
+          "constraint": "a + b <= 10",
+          "words": {
+            "x": ["apel", "jeruk", "pisang", "bebek", "ayam", "ikan", "kelinci", "kucing"]
+          },
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "objects",
+                  "object": "{x}",
+                  "count": "=b",
+                  "layout": "row"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "b",
+              "tag": "hanya-yang-di-luar"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

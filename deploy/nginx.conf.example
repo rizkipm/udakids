@@ -7,6 +7,17 @@ server {
     root /srv/littlecoder/apps/web/dist;
     index index.html;
 
+    # Statistik realtime landing (Server-Sent Events): jangan di-buffer, koneksi boleh lama
+    location = /api/public/stats/stream {
+        proxy_pass http://127.0.0.1:7177/public/stats/stream;
+        proxy_http_version 1.1;
+        proxy_set_header Connection '';
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 1h;
+        add_header X-Accel-Buffering no;
+    }
+
     # API NestJS (systemd: littlecoder-api) — prefix /api dibuang sebelum diteruskan
     location /api/ {
         proxy_pass http://127.0.0.1:7177/;

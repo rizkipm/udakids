@@ -1,0 +1,42 @@
+{
+  "id": "math.sd2.w9.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "W",
+  "order": 9,
+  "title": "Tambah-kurang sampai 1.000 — Level 9 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-W"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [200, 500],
+      "b": [100, 300],
+      "c": [100, 400]
+    },
+    "prompt": "Koperasi punya {a} buku tulis. Datang lagi {b} buku, lalu terjual {c} buku. Berapa buku sekarang?",
+    "answer": "a + b - c",
+    "explain": "{a} + {b} = {=a+b}, lalu − {c} = {answer}.",
+    "constraint": "c < a + b",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-langkah-2"
+      },
+      {
+        "expr": "a - b + c",
+        "tag": "operasi-terbalik"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "semua-ditambah"
+      }
+    ]
+  }
+}

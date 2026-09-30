@@ -1,0 +1,44 @@
+{
+  "id": "math.sd2.cc5.hitung-uang-sampai-rp100-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 5,
+  "title": "Uang sampai Rp100.000 — Level 5 — Hitung uang sampai Rp100.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "applying",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 10],
+      "c": {
+        "values": [5000, 10000, 20000, 50000]
+      }
+    },
+    "prompt": "Ada {n} lembar uang Rp{c}. Berapa rupiah semuanya?",
+    "answer": "n * c",
+    "explain": "Hitung loncat {c}: {answer}.",
+    "constraint": "n * c <= 100000 && n * c >= 20000",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "banyak-lembar-bukan-nilai"
+      },
+      {
+        "expr": "(n + 1) * c",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(n - 1) * c",
+        "tag": "kurang-satu"
+      }
+    ]
+  }
+}

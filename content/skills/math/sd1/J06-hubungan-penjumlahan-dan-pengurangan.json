@@ -1,0 +1,82 @@
+{
+  "id": "math.sd1.j6.hubungan-penjumlahan-dan-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "J",
+  "order": 6,
+  "title": "Strategi pengurangan sampai 10 — Level 6 — Hubungan penjumlahan dan pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-J",
+    "ccss": "1.OA.B.4 / 1.OA.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Maka {c} − {b} = …",
+          "answer": "a",
+          "explain": "Penjumlahan dan pengurangan berpasangan: {c} − {b} = {answer}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "c <= 10",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "total"
+            },
+            {
+              "expr": "b",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Maka {c} − {a} = …",
+          "answer": "b",
+          "explain": "{c} − {a} = {answer}, karena {a} + {answer} = {c}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "c <= 10",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "total"
+            },
+            {
+              "expr": "a",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "c + a",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

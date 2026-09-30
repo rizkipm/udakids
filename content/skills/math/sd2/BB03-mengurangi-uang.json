@@ -1,0 +1,48 @@
+{
+  "id": "math.sd2.bb3.mengurangi-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "BB",
+  "order": 3,
+  "title": "Tambah dan kurang uang — Level 3 — Mengurangi uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [1000, 10000],
+        "step": 500
+      },
+      "b": {
+        "range": [500, 5000],
+        "step": 500
+      }
+    },
+    "prompt": "Rp{a} − Rp{b} = …",
+    "answer": "a - b",
+    "explain": "Rp{a} − Rp{b} = {answer}.",
+    "constraint": "b < a",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "a - b + 500",
+        "tag": "lebih"
+      },
+      {
+        "expr": "a - b - 500",
+        "tag": "kurang"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

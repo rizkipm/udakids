@@ -1,0 +1,52 @@
+{
+  "id": "math.sd1.bb3.bandingkan-dengan-balok-nilai-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "BB",
+  "order": 3,
+  "title": "Membandingkan sampai 100 — Level 3 — Bandingkan dengan balok nilai tempat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-BB"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [1, 9],
+      "x": [0, 9],
+      "q": [1, 9],
+      "y": [0, 9]
+    },
+    "prompt": "Balok mana yang menunjukkan bilangan lebih besar? Pilih bilangannya.",
+    "answer": "max(a, b)",
+    "explain": "Bilangan dengan puluhan lebih banyak lebih besar. Jawabannya {answer}.",
+    "derived": {
+      "a": "p * 10 + x",
+      "b": "q * 10 + y"
+    },
+    "constraint": "a != b",
+    "choices": 2,
+    "stimulus": [
+      {
+        "kind": "tens",
+        "tens": "=p",
+        "ones": "=x"
+      },
+      {
+        "kind": "tens",
+        "tens": "=q",
+        "ones": "=y"
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "min(a, b)",
+        "tag": "lebih-kecil"
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "sains.sd4.c6.gaya-total",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "C",
+  "order": 6,
+  "title": "Gaya dan gerak — Level 6 — Gaya total",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [20, 200],
+              "step": 10
+            }
+          },
+          "constraint": "a != b",
+          "prompt": "Kotak didorong ke kanan {a} N dan ke kiri {b} N. Berapa besar gaya totalnya?",
+          "answer": "abs(a - b)",
+          "unit": "N",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "satu-gaya"
+            },
+            {
+              "expr": "b",
+              "tag": "satu-gaya"
+            }
+          ],
+          "explain": "Gaya berlawanan arah dikurangkan: selisih {a} dan {b} = {answer}, searah gaya yang lebih besar."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 150],
+              "step": 10
+            },
+            "b": {
+              "range": [50, 150],
+              "step": 10
+            }
+          },
+          "prompt": "Tim Raka menarik tali ke kiri {a} N. Tim Sari menarik ke kanan {b} N. Ke mana tali bergerak?",
+          "answer": "(a > b) + 2 * (a < b) + 3 * (a == b)",
+          "labels": {
+            "1": "Ke kiri",
+            "2": "Ke kanan",
+            "3": "Diam (gaya seimbang)"
+          },
+          "explain": "Bandingkan {a} N dan {b} N. Tali bergerak ke arah gaya yang lebih besar; sama besar berarti seimbang."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

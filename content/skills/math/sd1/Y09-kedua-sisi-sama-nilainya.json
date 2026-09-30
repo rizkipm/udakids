@@ -1,0 +1,75 @@
+{
+  "id": "math.sd1.y9.kedua-sisi-sama-nilainya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Y",
+  "order": 9,
+  "title": "Benar atau salah — Level 9 — Kedua sisi sama nilainya?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-Y"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [1, 10],
+            "c": [1, 10],
+            "t": {
+              "values": [0, 1]
+            },
+            "e": {
+              "values": [-1, 1, 2]
+            }
+          },
+          "prompt": "{a} + {b} = {c} + {d}. Benar atau salah?",
+          "answer": "t",
+          "explain": "{a} + {b} = {=a+b} dan {c} + {d} = {=c+d}. Jawabannya: {answer}.",
+          "derived": {
+            "d": "a + b - c + (1 - t) * e"
+          },
+          "constraint": "d >= 1 && d <= 10 && c != a && c != b",
+          "labels": {
+            "1": "Benar",
+            "0": "Salah"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [1, 9],
+            "c": [5, 20],
+            "t": {
+              "values": [0, 1]
+            },
+            "e": {
+              "values": [-1, 1, 2]
+            }
+          },
+          "prompt": "{a} − {b} = {c} − {d}. Benar atau salah?",
+          "answer": "t",
+          "explain": "{a} − {b} = {=a-b} dan {c} − {d} = {=c-d}. Jawabannya: {answer}.",
+          "derived": {
+            "d": "c - (a - b) + (1 - t) * e"
+          },
+          "constraint": "b < a && d >= 1 && d <= c && c != a",
+          "labels": {
+            "1": "Benar",
+            "0": "Salah"
+          }
+        }
+      }
+    ]
+  }
+}

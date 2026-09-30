@@ -1,0 +1,75 @@
+{
+  "id": "math.sd2.y9.bilangan-hilang-dengan-fakta-berhubungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Y",
+  "order": 9,
+  "title": "Sifat operasi hitung — Level 9 — Bilangan hilang dengan fakta berhubungan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-Y"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "Jika {a} + {b} = {=a+b}, maka … − {b} = {a}",
+          "answer": "a + b",
+          "explain": "Keluarga fakta: {=a+b} − {b} = {a}.",
+          "constraint": "a + b <= 20 && a != b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bagian"
+            },
+            {
+              "expr": "b",
+              "tag": "bagian"
+            },
+            {
+              "expr": "a - b + 20",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 9]
+          },
+          "prompt": "Jika {=a+b} − {a} = {b}, maka {a} + … = {=a+b}",
+          "answer": "b",
+          "explain": "{a} + {b} = {=a+b}.",
+          "constraint": "a + b <= 20 && a != b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "a + b",
+              "tag": "jumlah"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

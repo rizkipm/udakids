@@ -1,0 +1,68 @@
+{
+  "id": "math.sd2.m10.tantangan-strategi-penjumlahan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "M",
+  "order": 10,
+  "title": "Strategi penjumlahan dua a — Level 10 — Tantangan strategi penjumlahan dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-M",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 70],
+            "b": [11, 29]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Pilih strategimu: {answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 100"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 60],
+            "k": [2, 5],
+            "c": [1, 3]
+          },
+          "prompt": "{a} + {b} = {=a-c} + …",
+          "answer": "b + c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "derived": {
+            "b": "k * 10 - c"
+          },
+          "constraint": "a + b <= 100"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [15, 88],
+            "b": [3, 9]
+          },
+          "prompt": "{a} + {b} = {=a+10-a%10} + …",
+          "answer": "b - (10 - a % 10)",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "a % 10 >= 5 && a % 10 + b > 10"
+        }
+      }
+    ]
+  }
+}

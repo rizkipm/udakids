@@ -1,0 +1,127 @@
+{
+  "id": "math.sd1.m5.keluarga-bilangan-lengkapi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "M",
+  "order": 5,
+  "title": "Tambah dan kurang sampai 10 — Level 5 — Keluarga bilangan: lengkapi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-M",
+    "cc": "1.OA.B.3, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Keluarga bilangan {a}, {b}, {c}. {c} − {a} = …",
+          "answer": "b",
+          "explain": "{a} + {b} = {c}, jadi {c} − {a} = {b}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "bilangan-terbesar"
+            },
+            {
+              "expr": "a",
+              "tag": "bagian-lain"
+            },
+            "b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {c} − {b} = …",
+          "answer": "a",
+          "explain": "Penjumlahan dan pengurangan satu keluarga: {c} − {b} = {a}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "bilangan-terbesar"
+            },
+            {
+              "expr": "b",
+              "tag": "bagian-lain"
+            },
+            "a + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = {c}. Jadi {b} + {a} = …",
+          "answer": "c",
+          "explain": "Urutan penjumlahan boleh ditukar, hasilnya tetap {c}.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10 && a != b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bagian"
+            },
+            {
+              "expr": "b",
+              "tag": "bagian"
+            },
+            "c + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{c} − {a} = {b}. Jadi {a} + {b} = …",
+          "answer": "c",
+          "explain": "{a} + {b} = {c}. Pengurangan bisa dicek dengan penjumlahan.",
+          "derived": {
+            "c": "a + b"
+          },
+          "constraint": "a + b <= 10",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "c - 1",
+            "c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

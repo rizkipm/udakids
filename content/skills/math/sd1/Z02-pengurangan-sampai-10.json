@@ -1,0 +1,63 @@
+{
+  "id": "math.sd1.z2.pengurangan-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 2,
+  "title": "Lengkapi kalimat matematika — Level 2 — Pengurangan sampai 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "c": [0, 9]
+          },
+          "prompt": "{a} − … = {c}",
+          "answer": "a - c",
+          "explain": "{a} − {answer} = {c}.",
+          "constraint": "c < a",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            "a - c + 1",
+            "a - c - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "c": [0, 9]
+          },
+          "prompt": "… − {b} = {c}",
+          "answer": "b + c",
+          "explain": "{answer} − {b} = {c}, karena {c} + {b} = {answer}.",
+          "constraint": "b + c <= 10",
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            "b + c + 1",
+            "b + c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

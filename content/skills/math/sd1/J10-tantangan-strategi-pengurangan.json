@@ -1,0 +1,4455 @@
+{
+  "id": "math.sd1.j10.tantangan-strategi-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "J",
+  "order": 10,
+  "title": "Strategi pengurangan sampai 10 — Level 10 — Tantangan strategi pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-J",
+    "ccss": "1.OA.B.4 / 1.OA.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 10],
+            "b": [1, 3]
+          },
+          "prompt": "Hitung mundur: {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a}, mundur {b}: {answer}.",
+          "constraint": "b < a",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "d": [1, 3]
+          },
+          "prompt": "Untuk {a} − {b}, hitung maju dari {b} sampai {a}. Berapa langkah?",
+          "answer": "d",
+          "explain": "{b} ke {a} ada {answer} langkah. Jadi {a} − {b} = {answer}.",
+          "derived": {
+            "a": "b + d"
+          },
+          "constraint": "a <= 10",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 9 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 9,
+                    "result": 10
+                  },
+                  "say": "satu tambah sembilan sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 9,
+                    "result": 19
+                  },
+                  "say": "sepuluh tambah sembilan sama dengan sembilan belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 10,
+                    "result": 11
+                  },
+                  "say": "satu tambah sepuluh sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 9 = 1 berpasangan dengan 1 + 9 = 10: bilangannya sama, 1, 9, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 4 − 1 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 1,
+                    "result": 4
+                  },
+                  "say": "tiga tambah satu sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 1,
+                    "result": 5
+                  },
+                  "say": "empat tambah satu sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tiga tambah dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "dua tambah satu sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 − 1 = 3 berpasangan dengan 3 + 1 = 4: bilangannya sama, 3, 1, dan 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 1 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 1,
+                    "result": 8
+                  },
+                  "say": "tujuh tambah satu sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 1,
+                    "result": 9
+                  },
+                  "say": "delapan tambah satu sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "tujuh tambah dua sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 1,
+                    "result": 7
+                  },
+                  "say": "enam tambah satu sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 1 = 7 berpasangan dengan 7 + 1 = 8: bilangannya sama, 7, 1, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 7 + 1 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 1,
+                    "result": 7
+                  },
+                  "say": "delapan kurang satu sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 1,
+                    "result": 8
+                  },
+                  "say": "sembilan kurang satu sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "delapan kurang dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 + 1 = 8 berpasangan dengan 8 − 1 = 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 3 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 3,
+                    "result": 10
+                  },
+                  "say": "tujuh tambah tiga sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 3,
+                    "result": 13
+                  },
+                  "say": "sepuluh tambah tiga sama dengan tiga belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 4,
+                    "result": 11
+                  },
+                  "say": "tujuh tambah empat sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 3,
+                    "result": 9
+                  },
+                  "say": "enam tambah tiga sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 3 = 7 berpasangan dengan 7 + 3 = 10: bilangannya sama, 7, 3, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 6 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 6,
+                    "result": 2
+                  },
+                  "say": "delapan kurang enam sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 6,
+                    "result": 3
+                  },
+                  "say": "sembilan kurang enam sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 7,
+                    "result": 1
+                  },
+                  "say": "delapan kurang tujuh sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 14,
+                    "op": "-",
+                    "right": 6,
+                    "result": 8
+                  },
+                  "say": "empat belas kurang enam sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 6 = 8 berpasangan dengan 8 − 6 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 3 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "empat tambah tiga sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 3,
+                    "result": 10
+                  },
+                  "say": "tujuh tambah tiga sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 4,
+                    "result": 8
+                  },
+                  "say": "empat tambah empat sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "tiga tambah tiga sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 3 = 4 berpasangan dengan 4 + 3 = 7: bilangannya sama, 4, 3, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 6 − 4 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "dua tambah empat sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 4,
+                    "result": 10
+                  },
+                  "say": "enam tambah empat sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 5,
+                    "result": 7
+                  },
+                  "say": "dua tambah lima sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "satu tambah empat sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 − 4 = 2 berpasangan dengan 2 + 4 = 6: bilangannya sama, 2, 4, dan 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 4 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 4,
+                    "result": 4
+                  },
+                  "say": "delapan kurang empat sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "sembilan kurang empat sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 5,
+                    "result": 3
+                  },
+                  "say": "delapan kurang lima sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 12,
+                    "op": "-",
+                    "right": 4,
+                    "result": 8
+                  },
+                  "say": "dua belas kurang empat sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 4 = 8 berpasangan dengan 8 − 4 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 7 + 2 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "sembilan kurang dua sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "sepuluh kurang dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "sembilan kurang tiga sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "sebelas kurang dua sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 + 2 = 9 berpasangan dengan 9 − 2 = 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 4 − 2 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "dua tambah dua sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "empat tambah dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "dua tambah tiga sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "satu tambah dua sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 − 2 = 2 berpasangan dengan 2 + 2 = 4: bilangannya sama, 2, 2, dan 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 7 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 7,
+                    "result": 8
+                  },
+                  "say": "satu tambah tujuh sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 7,
+                    "result": 15
+                  },
+                  "say": "delapan tambah tujuh sama dengan lima belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 8,
+                    "result": 9
+                  },
+                  "say": "satu tambah delapan sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 7 = 1 berpasangan dengan 1 + 7 = 8: bilangannya sama, 1, 7, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 3 − 1 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "dua tambah satu sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 1,
+                    "result": 4
+                  },
+                  "say": "tiga tambah satu sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "dua tambah dua sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 1,
+                    "result": 2
+                  },
+                  "say": "satu tambah satu sama dengan dua",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 − 1 = 2 berpasangan dengan 2 + 1 = 3: bilangannya sama, 2, 1, dan 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 5 − 1 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 1,
+                    "result": 5
+                  },
+                  "say": "empat tambah satu sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 1,
+                    "result": 6
+                  },
+                  "say": "lima tambah satu sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "empat tambah dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 1,
+                    "result": 4
+                  },
+                  "say": "tiga tambah satu sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 − 1 = 4 berpasangan dengan 4 + 1 = 5: bilangannya sama, 4, 1, dan 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 8 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 8,
+                    "result": 2
+                  },
+                  "say": "sepuluh kurang delapan sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 8,
+                    "result": 3
+                  },
+                  "say": "sebelas kurang delapan sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 9,
+                    "result": 1
+                  },
+                  "say": "sepuluh kurang sembilan sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 18,
+                    "op": "-",
+                    "right": 8,
+                    "result": 10
+                  },
+                  "say": "delapan belas kurang delapan sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 8 = 10 berpasangan dengan 10 − 8 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 6 − 1 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 1,
+                    "result": 6
+                  },
+                  "say": "lima tambah satu sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 1,
+                    "result": 7
+                  },
+                  "say": "enam tambah satu sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "lima tambah dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 1,
+                    "result": 5
+                  },
+                  "say": "empat tambah satu sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 − 1 = 5 berpasangan dengan 5 + 1 = 6: bilangannya sama, 5, 1, dan 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 6 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 6,
+                    "result": 7
+                  },
+                  "say": "satu tambah enam sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 6,
+                    "result": 13
+                  },
+                  "say": "tujuh tambah enam sama dengan tiga belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 7,
+                    "result": 8
+                  },
+                  "say": "satu tambah tujuh sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 6 = 1 berpasangan dengan 1 + 6 = 7: bilangannya sama, 1, 6, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 6 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 6,
+                    "result": 1
+                  },
+                  "say": "tujuh kurang enam sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 6,
+                    "result": 2
+                  },
+                  "say": "delapan kurang enam sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 6,
+                    "result": 3
+                  },
+                  "say": "sembilan kurang enam sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 13,
+                    "op": "-",
+                    "right": 6,
+                    "result": 7
+                  },
+                  "say": "tiga belas kurang enam sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 6 = 7 berpasangan dengan 7 − 6 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 6 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 6,
+                    "result": 10
+                  },
+                  "say": "empat tambah enam sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 6,
+                    "result": 16
+                  },
+                  "say": "sepuluh tambah enam sama dengan enam belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 7,
+                    "result": 11
+                  },
+                  "say": "empat tambah tujuh sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 6,
+                    "result": 9
+                  },
+                  "say": "tiga tambah enam sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 6 = 4 berpasangan dengan 4 + 6 = 10: bilangannya sama, 4, 6, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 7 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 7,
+                    "result": 3
+                  },
+                  "say": "sepuluh kurang tujuh sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 7,
+                    "result": 4
+                  },
+                  "say": "sebelas kurang tujuh sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 8,
+                    "result": 2
+                  },
+                  "say": "sepuluh kurang delapan sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 17,
+                    "op": "-",
+                    "right": 7,
+                    "result": 10
+                  },
+                  "say": "tujuh belas kurang tujuh sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 7 = 10 berpasangan dengan 10 − 7 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 4 − 3 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "satu tambah tiga sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "empat tambah tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "satu tambah empat sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 − 3 = 1 berpasangan dengan 1 + 3 = 4: bilangannya sama, 1, 3, dan 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 6 + 4 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "sepuluh kurang empat sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 4,
+                    "result": 7
+                  },
+                  "say": "sebelas kurang empat sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 5,
+                    "result": 5
+                  },
+                  "say": "sepuluh kurang lima sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 14,
+                    "op": "-",
+                    "right": 4,
+                    "result": 10
+                  },
+                  "say": "empat belas kurang empat sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 4 = 10 berpasangan dengan 10 − 4 = 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 6 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 6,
+                    "result": 8
+                  },
+                  "say": "dua tambah enam sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 6,
+                    "result": 14
+                  },
+                  "say": "delapan tambah enam sama dengan empat belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 7,
+                    "result": 9
+                  },
+                  "say": "dua tambah tujuh sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 6,
+                    "result": 7
+                  },
+                  "say": "satu tambah enam sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 6 = 2 berpasangan dengan 2 + 6 = 8: bilangannya sama, 2, 6, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 7 + 3 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "sepuluh kurang tiga sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "sebelas kurang tiga sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "sepuluh kurang empat sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 13,
+                    "op": "-",
+                    "right": 3,
+                    "result": 10
+                  },
+                  "say": "tiga belas kurang tiga sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 + 3 = 10 berpasangan dengan 10 − 3 = 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 2 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "lima tambah dua sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "tujuh tambah dua sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "lima tambah tiga sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "empat tambah dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 2 = 5 berpasangan dengan 5 + 2 = 7: bilangannya sama, 5, 2, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 6 − 2 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "empat tambah dua sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "enam tambah dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "empat tambah tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tiga tambah dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 − 2 = 4 berpasangan dengan 4 + 2 = 6: bilangannya sama, 4, 2, dan 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 5 − 4 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "satu tambah empat sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 4,
+                    "result": 9
+                  },
+                  "say": "lima tambah empat sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 5,
+                    "result": 6
+                  },
+                  "say": "satu tambah lima sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 − 4 = 1 berpasangan dengan 1 + 4 = 5: bilangannya sama, 1, 4, dan 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 4 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 4,
+                    "result": 3
+                  },
+                  "say": "tujuh kurang empat sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 4,
+                    "result": 4
+                  },
+                  "say": "delapan kurang empat sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 5,
+                    "result": 2
+                  },
+                  "say": "tujuh kurang lima sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 4,
+                    "result": 7
+                  },
+                  "say": "sebelas kurang empat sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 4 = 7 berpasangan dengan 7 − 4 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 3 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 3,
+                    "result": 3
+                  },
+                  "say": "enam kurang tiga sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "tujuh kurang tiga sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 4,
+                    "result": 2
+                  },
+                  "say": "enam kurang empat sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "sembilan kurang tiga sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 3 = 6 berpasangan dengan 6 − 3 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 3 − 2 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "satu tambah dua sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tiga tambah dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "satu tambah tiga sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 − 2 = 1 berpasangan dengan 1 + 2 = 3: bilangannya sama, 1, 2, dan 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 5 + 2 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tujuh kurang dua sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "delapan kurang dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "tujuh kurang tiga sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "sembilan kurang dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 2 = 7 berpasangan dengan 7 − 2 = 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 5 + 3 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "delapan kurang tiga sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "sembilan kurang tiga sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 4,
+                    "result": 4
+                  },
+                  "say": "delapan kurang empat sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "sebelas kurang tiga sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 3 = 8 berpasangan dengan 8 − 3 = 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 5 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 5,
+                    "result": 9
+                  },
+                  "say": "empat tambah lima sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 5,
+                    "result": 14
+                  },
+                  "say": "sembilan tambah lima sama dengan empat belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 6,
+                    "result": 10
+                  },
+                  "say": "empat tambah enam sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 5,
+                    "result": 8
+                  },
+                  "say": "tiga tambah lima sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 5 = 4 berpasangan dengan 4 + 5 = 9: bilangannya sama, 4, 5, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 6 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 6,
+                    "result": 3
+                  },
+                  "say": "sembilan kurang enam sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 6,
+                    "result": 4
+                  },
+                  "say": "sepuluh kurang enam sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 7,
+                    "result": 2
+                  },
+                  "say": "sembilan kurang tujuh sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 15,
+                    "op": "-",
+                    "right": 6,
+                    "result": 9
+                  },
+                  "say": "lima belas kurang enam sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 6 = 9 berpasangan dengan 9 − 6 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 7 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 7,
+                    "result": 1
+                  },
+                  "say": "delapan kurang tujuh sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 7,
+                    "result": 2
+                  },
+                  "say": "sembilan kurang tujuh sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 7,
+                    "result": 3
+                  },
+                  "say": "sepuluh kurang tujuh sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 15,
+                    "op": "-",
+                    "right": 7,
+                    "result": 8
+                  },
+                  "say": "lima belas kurang tujuh sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 7 = 8 berpasangan dengan 8 − 7 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 6 + 1 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 1,
+                    "result": 6
+                  },
+                  "say": "tujuh kurang satu sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 1,
+                    "result": 7
+                  },
+                  "say": "delapan kurang satu sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tujuh kurang dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 1 = 7 berpasangan dengan 7 − 1 = 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 6 + 3 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "sembilan kurang tiga sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "sepuluh kurang tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "sembilan kurang empat sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 12,
+                    "op": "-",
+                    "right": 3,
+                    "result": 9
+                  },
+                  "say": "dua belas kurang tiga sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 3 = 9 berpasangan dengan 9 − 3 = 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 5 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 5,
+                    "result": 10
+                  },
+                  "say": "lima tambah lima sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 5,
+                    "result": 15
+                  },
+                  "say": "sepuluh tambah lima sama dengan lima belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 6,
+                    "result": 11
+                  },
+                  "say": "lima tambah enam sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 5,
+                    "result": 9
+                  },
+                  "say": "empat tambah lima sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 5 = 5 berpasangan dengan 5 + 5 = 10: bilangannya sama, 5, 5, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 2 − 1 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 1,
+                    "result": 2
+                  },
+                  "say": "satu tambah satu sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "dua tambah satu sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "satu tambah dua sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 − 1 = 1 berpasangan dengan 1 + 1 = 2: bilangannya sama, 1, 1, dan 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 8 + 1 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 1,
+                    "result": 8
+                  },
+                  "say": "sembilan kurang satu sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 1,
+                    "result": 9
+                  },
+                  "say": "sepuluh kurang satu sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "sembilan kurang dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 + 1 = 9 berpasangan dengan 9 − 1 = 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 2 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 2,
+                    "result": 10
+                  },
+                  "say": "delapan tambah dua sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 2,
+                    "result": 12
+                  },
+                  "say": "sepuluh tambah dua sama dengan dua belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 3,
+                    "result": 11
+                  },
+                  "say": "delapan tambah tiga sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "tujuh tambah dua sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 2 = 8 berpasangan dengan 8 + 2 = 10: bilangannya sama, 8, 2, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 5 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 5,
+                    "result": 4
+                  },
+                  "say": "sembilan kurang lima sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 5,
+                    "result": 5
+                  },
+                  "say": "sepuluh kurang lima sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 6,
+                    "result": 3
+                  },
+                  "say": "sembilan kurang enam sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 14,
+                    "op": "-",
+                    "right": 5,
+                    "result": 9
+                  },
+                  "say": "empat belas kurang lima sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 5 = 9 berpasangan dengan 9 − 5 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 6 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 6,
+                    "result": 9
+                  },
+                  "say": "tiga tambah enam sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 6,
+                    "result": 15
+                  },
+                  "say": "sembilan tambah enam sama dengan lima belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 7,
+                    "result": 10
+                  },
+                  "say": "tiga tambah tujuh sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 6,
+                    "result": 8
+                  },
+                  "say": "dua tambah enam sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 6 = 3 berpasangan dengan 3 + 6 = 9: bilangannya sama, 3, 6, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 1 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 1,
+                    "result": 9
+                  },
+                  "say": "delapan tambah satu sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 1,
+                    "result": 10
+                  },
+                  "say": "sembilan tambah satu sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 2,
+                    "result": 10
+                  },
+                  "say": "delapan tambah dua sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 1,
+                    "result": 8
+                  },
+                  "say": "tujuh tambah satu sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 1 = 8 berpasangan dengan 8 + 1 = 9: bilangannya sama, 8, 1, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 2 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "tujuh tambah dua sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 2,
+                    "result": 11
+                  },
+                  "say": "sembilan tambah dua sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 3,
+                    "result": 10
+                  },
+                  "say": "tujuh tambah tiga sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "enam tambah dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 2 = 7 berpasangan dengan 7 + 2 = 9: bilangannya sama, 7, 2, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 5 − 2 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tiga tambah dua sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "lima tambah dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "tiga tambah tiga sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "dua tambah dua sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 − 2 = 3 berpasangan dengan 3 + 2 = 5: bilangannya sama, 3, 2, dan 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 3 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 3,
+                    "result": 2
+                  },
+                  "say": "lima kurang tiga sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 3,
+                    "result": 3
+                  },
+                  "say": "enam kurang tiga sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 4,
+                    "result": 1
+                  },
+                  "say": "lima kurang empat sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "delapan kurang tiga sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 3 = 5 berpasangan dengan 5 − 3 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 5 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 5,
+                    "result": 2
+                  },
+                  "say": "tujuh kurang lima sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 5,
+                    "result": 3
+                  },
+                  "say": "delapan kurang lima sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 6,
+                    "result": 1
+                  },
+                  "say": "tujuh kurang enam sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 12,
+                    "op": "-",
+                    "right": 5,
+                    "result": 7
+                  },
+                  "say": "dua belas kurang lima sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 5 = 7 berpasangan dengan 7 − 5 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 1 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "-",
+                    "right": 1,
+                    "result": 1
+                  },
+                  "say": "dua kurang satu sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "-",
+                    "right": 1,
+                    "result": 2
+                  },
+                  "say": "tiga kurang satu sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "empat kurang satu sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 1 = 2 berpasangan dengan 2 − 1 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 2 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 2,
+                    "result": 2
+                  },
+                  "say": "empat kurang dua sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "lima kurang dua sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 3,
+                    "result": 1
+                  },
+                  "say": "empat kurang tiga sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "enam kurang dua sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 2 = 4 berpasangan dengan 4 − 2 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 6 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 6,
+                    "result": 4
+                  },
+                  "say": "sepuluh kurang enam sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 6,
+                    "result": 5
+                  },
+                  "say": "sebelas kurang enam sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 7,
+                    "result": 3
+                  },
+                  "say": "sepuluh kurang tujuh sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 16,
+                    "op": "-",
+                    "right": 6,
+                    "result": 10
+                  },
+                  "say": "enam belas kurang enam sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 6 = 10 berpasangan dengan 10 − 6 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 5 + 1 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 1,
+                    "result": 5
+                  },
+                  "say": "enam kurang satu sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 1,
+                    "result": 6
+                  },
+                  "say": "tujuh kurang satu sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "enam kurang dua sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 1 = 6 berpasangan dengan 6 − 1 = 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 6 + 2 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "delapan kurang dua sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "sembilan kurang dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "delapan kurang tiga sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "sepuluh kurang dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 2 = 8 berpasangan dengan 8 − 2 = 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 5 = 8?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 5,
+                    "result": 3
+                  },
+                  "say": "delapan kurang lima sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 5,
+                    "result": 4
+                  },
+                  "say": "sembilan kurang lima sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 6,
+                    "result": 2
+                  },
+                  "say": "delapan kurang enam sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 13,
+                    "op": "-",
+                    "right": 5,
+                    "result": 8
+                  },
+                  "say": "tiga belas kurang lima sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 5 = 8 berpasangan dengan 8 − 5 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 5 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 5,
+                    "result": 1
+                  },
+                  "say": "enam kurang lima sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 5,
+                    "result": 2
+                  },
+                  "say": "tujuh kurang lima sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 5,
+                    "result": 3
+                  },
+                  "say": "delapan kurang lima sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 5,
+                    "result": 6
+                  },
+                  "say": "sebelas kurang lima sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 5 = 6 berpasangan dengan 6 − 5 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 8 + 2 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "sepuluh kurang dua sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 2,
+                    "result": 9
+                  },
+                  "say": "sebelas kurang dua sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "sepuluh kurang tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 12,
+                    "op": "-",
+                    "right": 2,
+                    "result": 10
+                  },
+                  "say": "dua belas kurang dua sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 + 2 = 10 berpasangan dengan 10 − 2 = 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 3 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 3,
+                    "result": 9
+                  },
+                  "say": "enam tambah tiga sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 3,
+                    "result": 12
+                  },
+                  "say": "sembilan tambah tiga sama dengan dua belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 4,
+                    "result": 10
+                  },
+                  "say": "enam tambah empat sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "lima tambah tiga sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 3 = 6 berpasangan dengan 6 + 3 = 9: bilangannya sama, 6, 3, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 7 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 7,
+                    "result": 9
+                  },
+                  "say": "dua tambah tujuh sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 7,
+                    "result": 16
+                  },
+                  "say": "sembilan tambah tujuh sama dengan enam belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 8,
+                    "result": 10
+                  },
+                  "say": "dua tambah delapan sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 7,
+                    "result": 8
+                  },
+                  "say": "satu tambah tujuh sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 7 = 2 berpasangan dengan 2 + 7 = 9: bilangannya sama, 2, 7, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 4 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 4,
+                    "result": 8
+                  },
+                  "say": "empat tambah empat sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 4,
+                    "result": 12
+                  },
+                  "say": "delapan tambah empat sama dengan dua belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 5,
+                    "result": 9
+                  },
+                  "say": "empat tambah lima sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 4,
+                    "result": 7
+                  },
+                  "say": "tiga tambah empat sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 4 = 4 berpasangan dengan 4 + 4 = 8: bilangannya sama, 4, 4, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 4 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 4,
+                    "result": 10
+                  },
+                  "say": "enam tambah empat sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 4,
+                    "result": 14
+                  },
+                  "say": "sepuluh tambah empat sama dengan empat belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 5,
+                    "result": 11
+                  },
+                  "say": "enam tambah lima sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 4,
+                    "result": 9
+                  },
+                  "say": "lima tambah empat sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 4 = 6 berpasangan dengan 6 + 4 = 10: bilangannya sama, 6, 4, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 3 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 3,
+                    "result": 1
+                  },
+                  "say": "empat kurang tiga sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 3,
+                    "result": 2
+                  },
+                  "say": "lima kurang tiga sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 3,
+                    "result": 3
+                  },
+                  "say": "enam kurang tiga sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "tujuh kurang tiga sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 3 = 4 berpasangan dengan 4 − 3 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 9 + 1 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 1,
+                    "result": 9
+                  },
+                  "say": "sepuluh kurang satu sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 1,
+                    "result": 10
+                  },
+                  "say": "sebelas kurang satu sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "sepuluh kurang dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 + 1 = 10 berpasangan dengan 10 − 1 = 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 5 + 4 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "sembilan kurang empat sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "sepuluh kurang empat sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 5,
+                    "result": 4
+                  },
+                  "say": "sembilan kurang lima sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 13,
+                    "op": "-",
+                    "right": 4,
+                    "result": 9
+                  },
+                  "say": "tiga belas kurang empat sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 4 = 9 berpasangan dengan 9 − 4 = 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 6 − 5 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 5,
+                    "result": 6
+                  },
+                  "say": "satu tambah lima sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 5,
+                    "result": 11
+                  },
+                  "say": "enam tambah lima sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 6,
+                    "result": 7
+                  },
+                  "say": "satu tambah enam sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 − 5 = 1 berpasangan dengan 1 + 5 = 6: bilangannya sama, 1, 5, dan 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 8 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 8,
+                    "result": 1
+                  },
+                  "say": "sembilan kurang delapan sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 8,
+                    "result": 2
+                  },
+                  "say": "sepuluh kurang delapan sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 8,
+                    "result": 3
+                  },
+                  "say": "sebelas kurang delapan sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 17,
+                    "op": "-",
+                    "right": 8,
+                    "result": 9
+                  },
+                  "say": "tujuh belas kurang delapan sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 8 = 9 berpasangan dengan 9 − 8 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 5 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 5,
+                    "result": 8
+                  },
+                  "say": "tiga tambah lima sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 5,
+                    "result": 13
+                  },
+                  "say": "delapan tambah lima sama dengan tiga belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 6,
+                    "result": 9
+                  },
+                  "say": "tiga tambah enam sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 5,
+                    "result": 7
+                  },
+                  "say": "dua tambah lima sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 5 = 3 berpasangan dengan 3 + 5 = 8: bilangannya sama, 3, 5, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 5 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 5,
+                    "result": 7
+                  },
+                  "say": "dua tambah lima sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 5,
+                    "result": 12
+                  },
+                  "say": "tujuh tambah lima sama dengan dua belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 6,
+                    "result": 8
+                  },
+                  "say": "dua tambah enam sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 5,
+                    "result": 6
+                  },
+                  "say": "satu tambah lima sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 5 = 2 berpasangan dengan 2 + 5 = 7: bilangannya sama, 2, 5, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 1 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "-",
+                    "right": 1,
+                    "result": 2
+                  },
+                  "say": "tiga kurang satu sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "empat kurang satu sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "-",
+                    "right": 2,
+                    "result": 1
+                  },
+                  "say": "tiga kurang dua sama dengan satu",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 1 = 3 berpasangan dengan 3 − 1 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 4 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 4,
+                    "result": 2
+                  },
+                  "say": "enam kurang empat sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 4,
+                    "result": 3
+                  },
+                  "say": "tujuh kurang empat sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 5,
+                    "result": 1
+                  },
+                  "say": "enam kurang lima sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "sepuluh kurang empat sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 4 = 6 berpasangan dengan 6 − 4 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 2 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "enam tambah dua sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 2,
+                    "result": 10
+                  },
+                  "say": "delapan tambah dua sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 3,
+                    "result": 9
+                  },
+                  "say": "enam tambah tiga sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 2,
+                    "result": 7
+                  },
+                  "say": "lima tambah dua sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 2 = 6 berpasangan dengan 6 + 2 = 8: bilangannya sama, 6, 2, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 4 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 4,
+                    "result": 1
+                  },
+                  "say": "lima kurang empat sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 4,
+                    "result": 2
+                  },
+                  "say": "enam kurang empat sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 4,
+                    "result": 3
+                  },
+                  "say": "tujuh kurang empat sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 4,
+                    "result": 5
+                  },
+                  "say": "sembilan kurang empat sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 4 = 5 berpasangan dengan 5 − 4 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 1 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 1,
+                    "result": 7
+                  },
+                  "say": "enam tambah satu sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 1,
+                    "result": 8
+                  },
+                  "say": "tujuh tambah satu sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 2,
+                    "result": 8
+                  },
+                  "say": "enam tambah dua sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 1,
+                    "result": 6
+                  },
+                  "say": "lima tambah satu sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 1 = 6 berpasangan dengan 6 + 1 = 7: bilangannya sama, 6, 1, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 9 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 9,
+                    "result": 1
+                  },
+                  "say": "sepuluh kurang sembilan sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 9,
+                    "result": 2
+                  },
+                  "say": "sebelas kurang sembilan sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 12,
+                    "op": "-",
+                    "right": 9,
+                    "result": 3
+                  },
+                  "say": "dua belas kurang sembilan sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 19,
+                    "op": "-",
+                    "right": 9,
+                    "result": 10
+                  },
+                  "say": "sembilan belas kurang sembilan sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 9 = 10 berpasangan dengan 10 − 9 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 2 = 6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "enam kurang dua sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tujuh kurang dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 3,
+                    "result": 3
+                  },
+                  "say": "enam kurang tiga sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 2,
+                    "result": 6
+                  },
+                  "say": "delapan kurang dua sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 2 = 6 berpasangan dengan 6 − 2 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 7 − 4 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 4,
+                    "result": 7
+                  },
+                  "say": "tiga tambah empat sama dengan tujuh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "+",
+                    "right": 4,
+                    "result": 11
+                  },
+                  "say": "tujuh tambah empat sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 5,
+                    "result": 8
+                  },
+                  "say": "tiga tambah lima sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "dua tambah empat sama dengan enam",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 − 4 = 3 berpasangan dengan 3 + 4 = 7: bilangannya sama, 3, 4, dan 7.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 8 − 3 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "lima tambah tiga sama dengan delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 3,
+                    "result": 11
+                  },
+                  "say": "delapan tambah tiga sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 4,
+                    "result": 9
+                  },
+                  "say": "lima tambah empat sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "empat tambah tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 3 = 5 berpasangan dengan 5 + 3 = 8: bilangannya sama, 5, 3, dan 8.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 8 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 8,
+                    "result": 10
+                  },
+                  "say": "dua tambah delapan sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 8,
+                    "result": 18
+                  },
+                  "say": "sepuluh tambah delapan sama dengan delapan belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 9,
+                    "result": 11
+                  },
+                  "say": "dua tambah sembilan sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 8,
+                    "result": 9
+                  },
+                  "say": "satu tambah delapan sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 8 = 2 berpasangan dengan 2 + 8 = 10: bilangannya sama, 2, 8, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 1 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 1,
+                    "result": 10
+                  },
+                  "say": "sembilan tambah satu sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 1,
+                    "result": 11
+                  },
+                  "say": "sepuluh tambah satu sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 2,
+                    "result": 11
+                  },
+                  "say": "sembilan tambah dua sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "+",
+                    "right": 1,
+                    "result": 9
+                  },
+                  "say": "delapan tambah satu sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 1 = 9 berpasangan dengan 9 + 1 = 10: bilangannya sama, 9, 1, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 1 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 1,
+                    "result": 4
+                  },
+                  "say": "lima kurang satu sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 1,
+                    "result": 5
+                  },
+                  "say": "enam kurang satu sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "lima kurang dua sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 1 = 5 berpasangan dengan 5 − 1 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 2 + 7 = 9?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 7,
+                    "result": 2
+                  },
+                  "say": "sembilan kurang tujuh sama dengan dua"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 7,
+                    "result": 3
+                  },
+                  "say": "sepuluh kurang tujuh sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "-",
+                    "right": 8,
+                    "result": 1
+                  },
+                  "say": "sembilan kurang delapan sama dengan satu",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 16,
+                    "op": "-",
+                    "right": 7,
+                    "result": 9
+                  },
+                  "say": "enam belas kurang tujuh sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 + 7 = 9 berpasangan dengan 9 − 7 = 2.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 1 + 2 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "-",
+                    "right": 2,
+                    "result": 1
+                  },
+                  "say": "tiga kurang dua sama dengan satu"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 2,
+                    "result": 2
+                  },
+                  "say": "empat kurang dua sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "lima kurang dua sama dengan tiga",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 + 2 = 3 berpasangan dengan 3 − 2 = 1.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 8 = 1?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 8,
+                    "result": 9
+                  },
+                  "say": "satu tambah delapan sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 8,
+                    "result": 17
+                  },
+                  "say": "sembilan tambah delapan sama dengan tujuh belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 9,
+                    "result": 10
+                  },
+                  "say": "satu tambah sembilan sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 8 = 1 berpasangan dengan 1 + 8 = 9: bilangannya sama, 1, 8, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 1 = 4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 1,
+                    "result": 3
+                  },
+                  "say": "empat kurang satu sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 1,
+                    "result": 4
+                  },
+                  "say": "lima kurang satu sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "-",
+                    "right": 2,
+                    "result": 2
+                  },
+                  "say": "empat kurang dua sama dengan dua",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 1 = 4 berpasangan dengan 4 − 1 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 5 + 5 = 10?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 5,
+                    "result": 5
+                  },
+                  "say": "sepuluh kurang lima sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 11,
+                    "op": "-",
+                    "right": 5,
+                    "result": 6
+                  },
+                  "say": "sebelas kurang lima sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 6,
+                    "result": 4
+                  },
+                  "say": "sepuluh kurang enam sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 15,
+                    "op": "-",
+                    "right": 5,
+                    "result": 10
+                  },
+                  "say": "lima belas kurang lima sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 5 = 10 berpasangan dengan 10 − 5 = 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 5 − 3 = 2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "dua tambah tiga sama dengan lima"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 3,
+                    "result": 8
+                  },
+                  "say": "lima tambah tiga sama dengan delapan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 4,
+                    "result": 6
+                  },
+                  "say": "dua tambah empat sama dengan enam",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 1,
+                    "op": "+",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "satu tambah tiga sama dengan empat",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 − 3 = 2 berpasangan dengan 2 + 3 = 5: bilangannya sama, 2, 3, dan 5.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 3 + 2 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 2,
+                    "result": 3
+                  },
+                  "say": "lima kurang dua sama dengan tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "-",
+                    "right": 2,
+                    "result": 4
+                  },
+                  "say": "enam kurang dua sama dengan empat",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "-",
+                    "right": 3,
+                    "result": 2
+                  },
+                  "say": "lima kurang tiga sama dengan dua",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 2,
+                    "result": 5
+                  },
+                  "say": "tujuh kurang dua sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 + 2 = 5 berpasangan dengan 5 − 2 = 3.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 10 − 7 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 7,
+                    "result": 10
+                  },
+                  "say": "tiga tambah tujuh sama dengan sepuluh"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "+",
+                    "right": 7,
+                    "result": 17
+                  },
+                  "say": "sepuluh tambah tujuh sama dengan tujuh belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 8,
+                    "result": 11
+                  },
+                  "say": "tiga tambah delapan sama dengan sebelas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 7,
+                    "result": 9
+                  },
+                  "say": "dua tambah tujuh sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 − 7 = 3 berpasangan dengan 3 + 7 = 10: bilangannya sama, 3, 7, dan 10.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 6 − 3 = 3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 3,
+                    "result": 6
+                  },
+                  "say": "tiga tambah tiga sama dengan enam"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 6,
+                    "op": "+",
+                    "right": 3,
+                    "result": 9
+                  },
+                  "say": "enam tambah tiga sama dengan sembilan",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 3,
+                    "op": "+",
+                    "right": 4,
+                    "result": 7
+                  },
+                  "say": "tiga tambah empat sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 2,
+                    "op": "+",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "dua tambah tiga sama dengan lima",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 − 3 = 3 berpasangan dengan 3 + 3 = 6: bilangannya sama, 3, 3, dan 6.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat pengurangan mana yang memakai bilangan yang sama dengan 4 + 3 = 7?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 3,
+                    "result": 4
+                  },
+                  "say": "tujuh kurang tiga sama dengan empat"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 8,
+                    "op": "-",
+                    "right": 3,
+                    "result": 5
+                  },
+                  "say": "delapan kurang tiga sama dengan lima",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 7,
+                    "op": "-",
+                    "right": 4,
+                    "result": 3
+                  },
+                  "say": "tujuh kurang empat sama dengan tiga",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 10,
+                    "op": "-",
+                    "right": 3,
+                    "result": 7
+                  },
+                  "say": "sepuluh kurang tiga sama dengan tujuh",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 + 3 = 7 berpasangan dengan 7 − 3 = 4.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            },
+            {
+              "prompt": "Kalimat penjumlahan mana yang memakai bilangan yang sama dengan 9 − 4 = 5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 4,
+                    "result": 9
+                  },
+                  "say": "lima tambah empat sama dengan sembilan"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 9,
+                    "op": "+",
+                    "right": 4,
+                    "result": 13
+                  },
+                  "say": "sembilan tambah empat sama dengan tiga belas",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 5,
+                    "op": "+",
+                    "right": 5,
+                    "result": 10
+                  },
+                  "say": "lima tambah lima sama dengan sepuluh",
+                  "tag": "bilangan-lain"
+                },
+                {
+                  "visual": {
+                    "kind": "equation",
+                    "left": 4,
+                    "op": "+",
+                    "right": 4,
+                    "result": 8
+                  },
+                  "say": "empat tambah empat sama dengan delapan",
+                  "tag": "bilangan-lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 − 4 = 5 berpasangan dengan 5 + 4 = 9: bilangannya sama, 5, 4, dan 9.",
+              "source": "CP Matematika Fase A (BSKAP 046/H/KR/2025): hubungan penjumlahan dan pengurangan; CCSS 1.OA.B.4"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 9],
+            "b": [1, 9]
+          },
+          "prompt": "… − {b} = {a}",
+          "answer": "a + b",
+          "explain": "Pakai penjumlahan: {a} + {b} = {answer}. Jadi {answer} − {b} = {a}.",
+          "constraint": "a + b <= 10",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

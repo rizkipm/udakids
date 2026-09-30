@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.t8.lengkapi-kalimat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "T",
+  "order": 8,
+  "title": "Penjumlahan tiga angka — Level 8 — Lengkapi kalimat penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-T"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 600],
+            "b": [100, 399]
+          },
+          "prompt": "{a} + … = {=a+b}",
+          "answer": "b",
+          "explain": "Hitung maju dari {a} sampai {=a+b}: bilangan yang hilang {answer}.",
+          "constraint": "a + b <= 999",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 600],
+            "b": [100, 399]
+          },
+          "prompt": "… + {b} = {=a+b}",
+          "answer": "a",
+          "explain": "{=a+b} − {b} = {answer}.",
+          "constraint": "a + b <= 999",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

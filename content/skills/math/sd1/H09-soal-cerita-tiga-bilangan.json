@@ -1,0 +1,113 @@
+{
+  "id": "math.sd1.h9.soal-cerita-tiga-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "H",
+  "order": 9,
+  "title": "Soal cerita penjumlahan sampai 10 — Level 9 — Soal cerita tiga bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-H",
+    "ccss": "1.OA.A.1 / 1.OA.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4],
+            "c": [1, 4]
+          },
+          "prompt": "{nama} punya {a} pensil merah, {b} pensil biru, dan {c} pensil hijau. Berapa pensil semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "constraint": "a + b + c <= 10",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            },
+            "a + b + c + 1",
+            {
+              "expr": "b + c",
+              "tag": "lupa-satu-bilangan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4],
+            "c": [1, 4]
+          },
+          "prompt": "Di halaman ada {a} ayam, {b} bebek, dan {c} kucing. Berapa hewan semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "constraint": "a + b + c <= 10",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "objects",
+                  "object": "ayam",
+                  "count": "=a",
+                  "layout": "row"
+                },
+                {
+                  "kind": "objects",
+                  "object": "bebek",
+                  "count": "=b",
+                  "layout": "row"
+                },
+                {
+                  "kind": "objects",
+                  "object": "kucing",
+                  "count": "=c",
+                  "layout": "row"
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            },
+            "a + b + c - 1",
+            {
+              "expr": "a + c",
+              "tag": "lupa-satu-bilangan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

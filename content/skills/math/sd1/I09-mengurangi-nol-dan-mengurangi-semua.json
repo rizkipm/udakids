@@ -1,0 +1,162 @@
+{
+  "id": "math.sd1.i9.mengurangi-nol-dan-mengurangi-semua",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "I",
+  "order": 9,
+  "title": "Memahami pengurangan — Level 9 — Mengurangi nol dan mengurangi semua",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-I",
+    "ccss": "1.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Ada {a} {x}. Tidak ada yang diambil. Tinggal berapa?",
+          "answer": "a",
+          "explain": "Dikurangi 0 tidak berubah: {a} − 0 = {answer}.",
+          "words": {
+            "x": [
+              "apel",
+              "jeruk",
+              "pisang",
+              "bebek",
+              "ayam",
+              "ikan",
+              "kelinci",
+              "kucing",
+              "bola",
+              "balon",
+              "mobil",
+              "bintang",
+              "kue",
+              "topi",
+              "pensil",
+              "buku"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{x}",
+              "count": "=a",
+              "layout": "row"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "nol-menghapus"
+            },
+            "a - 1",
+            "a + 1"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "Ada {a} {x}. Semuanya diambil. Tinggal berapa?",
+          "answer": "0",
+          "explain": "Semua diambil berarti tidak tersisa: {a} − {a} = 0.",
+          "words": {
+            "x": [
+              "apel",
+              "jeruk",
+              "pisang",
+              "bebek",
+              "ayam",
+              "ikan",
+              "kelinci",
+              "kucing",
+              "bola",
+              "balon",
+              "mobil",
+              "bintang",
+              "kue",
+              "topi",
+              "pensil",
+              "buku"
+            ]
+          },
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{x}",
+              "count": "=a",
+              "layout": "row",
+              "crossed": "=a"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "1",
+            "a - 1"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{a} − 0 = …",
+          "answer": "a",
+          "explain": "Mengurangi dengan 0 tidak mengubah bilangan: {answer}.",
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "nol-menghapus"
+            },
+            "a - 1",
+            "a + 1"
+          ],
+          "choices": 3
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10]
+          },
+          "prompt": "{a} − {a} = …",
+          "answer": "0",
+          "explain": "Bilangan dikurangi dirinya sendiri hasilnya 0.",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "1",
+            {
+              "expr": "a + a",
+              "tag": "menjumlah"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

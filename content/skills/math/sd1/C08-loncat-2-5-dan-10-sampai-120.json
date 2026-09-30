@@ -1,0 +1,81 @@
+{
+  "id": "math.sd1.c8.loncat-2-5-dan-10-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 8,
+  "title": "Membilang loncat — Level 8 — Loncat 2, 5, dan 10 sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [2, 5, 10]
+            },
+            "k": [8, 55]
+          },
+          "prompt": "{=s*k}, {=s*k+s}, {=s*k+2*s}, … Angka berikutnya?",
+          "answer": "s * k + 3 * s",
+          "explain": "Polanya loncat {s}: {=s*k+2*s} + {s} = {answer}.",
+          "constraint": "s * k >= 80 && s * k + 3 * s <= 120",
+          "distractors": [
+            {
+              "expr": "s * k + 2 * s + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "s * k + 4 * s",
+              "tag": "melompat"
+            },
+            {
+              "expr": "s * k + 2 * s + 10",
+              "tag": "salah-loncat"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [2, 5, 10]
+            },
+            "k": [8, 55]
+          },
+          "prompt": "{=s*k}, …, {=s*k+2*s}, {=s*k+3*s}. Angka yang hilang?",
+          "answer": "s * k + s",
+          "explain": "{=s*k} + {s} = {answer}.",
+          "constraint": "s * k >= 80 && s * k + 3 * s <= 120",
+          "distractors": [
+            {
+              "expr": "s * k + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "s * k + 2 * s + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "s * k + s + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

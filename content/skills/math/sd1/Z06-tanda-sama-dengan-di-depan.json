@@ -1,0 +1,63 @@
+{
+  "id": "math.sd1.z6.tanda-sama-dengan-di-depan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 6,
+  "title": "Lengkapi kalimat matematika — Level 6 — Tanda sama dengan di depan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "c": [5, 20]
+          },
+          "prompt": "{c} = {a} + …",
+          "answer": "c - a",
+          "explain": "{c} = {a} + {answer}. Tanda = boleh di depan.",
+          "constraint": "a < c",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            "c - a + 1",
+            "c - a - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "c": [1, 11]
+          },
+          "prompt": "{c} = … − {b}",
+          "answer": "b + c",
+          "explain": "{c} = {answer} − {b}, karena {c} + {b} = {answer}.",
+          "constraint": "b + c <= 20",
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            "b + c + 1",
+            "b + c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

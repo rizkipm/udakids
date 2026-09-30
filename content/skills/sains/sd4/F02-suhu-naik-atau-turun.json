@@ -1,0 +1,107 @@
+{
+  "id": "sains.sd4.f2.suhu-naik-atau-turun",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "F",
+  "order": 2,
+  "title": "Panas dan energi termal — Level 2 — Suhu naik atau turun?",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 95],
+            "b": [5, 95]
+          },
+          "constraint": "abs(a - b) >= 10",
+          "words": {
+            "x": ["sendok logam", "kelereng", "batu kecil", "kaleng minuman"],
+            "y": ["air", "sup", "teh", "susu"]
+          },
+          "prompt": "Sebuah {x} bersuhu {a} °C dicelupkan ke {y} bersuhu {b} °C. Suhu {x} itu akan …",
+          "answer": "(b > a) + 2 * (b < a)",
+          "labels": {
+            "1": "naik",
+            "2": "turun"
+          },
+          "explain": "Suhu benda berubah mendekati suhu sekitarnya. {a} °C bertemu {b} °C."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Segelas air panas dibiarkan di meja. Lama-lama suhunya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun sampai sama dengan suhu ruangan"
+                  },
+                  "say": "turun sampai sama dengan suhu ruangan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "naik terus"
+                  },
+                  "say": "naik terus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tetap panas selamanya"
+                  },
+                  "say": "tetap panas selamanya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun sampai membeku"
+                  },
+                  "say": "turun sampai membeku",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air melepas panas ke udara sampai suhunya sama dengan suhu sekitarnya.",
+              "source": "Panas berpindah dari benda bersuhu tinggi ke benda bersuhu rendah sampai suhunya sama — NGSS 4-PS3-2; Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 4"
+            }
+          ]
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 95],
+            "b": [5, 95]
+          },
+          "constraint": "abs(a - b) >= 10",
+          "prompt": "Benda A bersuhu {a} °C disentuhkan ke benda B bersuhu {b} °C. Ke mana panas mengalir?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Dari A ke B",
+            "2": "Dari B ke A"
+          },
+          "explain": "Panas mengalir dari suhu tinggi ke suhu rendah. Bandingkan {a} °C dan {b} °C."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

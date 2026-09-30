@@ -1,0 +1,99 @@
+{
+  "id": "math.sd1.x5.bilangan-awal-yang-tidak-diketahui",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "X",
+  "order": 5,
+  "title": "Soal cerita tambah dan kurang — Level 5 — Bilangan awal yang tidak diketahui",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-X"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [8, 20]
+          },
+          "prompt": "{nama} punya beberapa {benda}. Ia mendapat {b} lagi, sekarang ada {c}. Berapa {benda} {nama} awalnya?",
+          "answer": "c - b",
+          "explain": "… + {b} = {c}. Awalnya {c} − {b} = {answer}.",
+          "constraint": "b < c",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "c",
+              "tag": "jumlah-akhir"
+            },
+            "c - b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 11]
+          },
+          "prompt": "{nama} punya beberapa {benda}. Ia memberi {b} kepada teman, tinggal {c}. Berapa {benda} {nama} awalnya?",
+          "answer": "b + c",
+          "explain": "… − {b} = {c}. Awalnya {c} + {b} = {answer}.",
+          "constraint": "b + c <= 20",
+          "words": {
+            "nama": [
+              "Alya",
+              "Sari",
+              "Putri",
+              "Nina",
+              "Wulan",
+              "Raka",
+              "Dimas",
+              "Budi",
+              "Adit",
+              "Tegar"
+            ],
+            "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+          },
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "c",
+              "tag": "sisa"
+            },
+            "b + c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

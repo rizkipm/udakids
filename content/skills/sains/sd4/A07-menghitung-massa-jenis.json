@@ -1,0 +1,115 @@
+{
+  "id": "sains.sd4.a7.menghitung-massa-jenis",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "A",
+  "order": 7,
+  "title": "Sifat benda — Level 7 — Menghitung massa jenis",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 12],
+            "v": [2, 20]
+          },
+          "derived": {
+            "m": "r * v"
+          },
+          "prompt": "Sebuah balok bermassa {m} g dan bervolume {v} cm³. Berapa massa jenisnya?",
+          "answer": "r",
+          "unit": "g/cm³",
+          "distractors": [
+            {
+              "expr": "m - v",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "m * v",
+              "tag": "dikali"
+            },
+            {
+              "expr": "m + v",
+              "tag": "dijumlah"
+            }
+          ],
+          "explain": "Massa jenis = massa : volume = {m} : {v} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 11],
+            "v": [2, 15]
+          },
+          "prompt": "Massa jenis sebuah benda {r} g/cm³ dan volumenya {v} cm³. Berapa massanya?",
+          "answer": "r * v",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "r + v",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "r * v + v",
+              "tag": "lain"
+            },
+            {
+              "expr": "r * v - r",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Massa = massa jenis × volume = {r} × {v} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": {
+              "values": [0.2, 0.4, 0.5, 0.6, 0.8]
+            },
+            "v": {
+              "values": [10, 20, 30, 40, 50]
+            }
+          },
+          "derived": {
+            "m": "r * v"
+          },
+          "prompt": "Sepotong kayu bermassa {m} g dan bervolume {v} cm³. Berapa massa jenisnya?",
+          "format": "decimal",
+          "answer": "r",
+          "unit": "g/cm³",
+          "distractors": [
+            {
+              "expr": "v / m",
+              "tag": "terbalik"
+            },
+            {
+              "expr": "m * v",
+              "tag": "dikali"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Massa jenis = {m} : {v} = {answer}. Lebih kecil dari 1 g/cm³, jadi kayu itu terapung di air."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

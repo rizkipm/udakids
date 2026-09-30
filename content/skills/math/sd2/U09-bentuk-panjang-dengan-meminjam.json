@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.u9.bentuk-panjang-dengan-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 9,
+  "title": "Strategi pengurangan tiga angka — Level 9 — Bentuk panjang dengan meminjam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-U"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h1": [3, 9],
+      "h2": [1, 2],
+      "t1": [1, 9],
+      "t2": [0, 9],
+      "s1": [0, 9],
+      "s2": [0, 9]
+    },
+    "prompt": "({=h1*100} + {=t1*10} + {s1}) − ({=h2*100} + {=t2*10} + {s2}) = …",
+    "answer": "a - b",
+    "explain": "Satuan atau puluhan tidak cukup, jadi pinjam dari tempat di kirinya. Hasilnya {answer}.",
+    "derived": {
+      "a": "h1 * 100 + t1 * 10 + s1",
+      "b": "h2 * 100 + t2 * 10 + s2"
+    },
+    "constraint": "s1 < s2 || t1 < t2",
+    "distractors": [
+      {
+        "expr": "a - b + 10",
+        "tag": "lupa-meminjam"
+      },
+      {
+        "expr": "a - b - 10",
+        "tag": "salah-pinjam"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

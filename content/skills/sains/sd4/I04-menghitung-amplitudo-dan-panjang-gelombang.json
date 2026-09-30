@@ -1,0 +1,81 @@
+{
+  "id": "sains.sd4.i4.menghitung-amplitudo-dan-panjang-gelombang",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "I",
+  "order": 4,
+  "title": "Gelombang dan informasi — Level 4 — Menghitung amplitudo dan panjang gelombang",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 50]
+          },
+          "derived": {
+            "h": "2 * a"
+          },
+          "prompt": "Jarak dari puncak ke lembah sebuah gelombang {h} cm. Berapa amplitudonya?",
+          "answer": "a",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "puncak-lembah"
+            },
+            {
+              "expr": "h * 2",
+              "tag": "dikali"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Amplitudo dari garis tengah ke puncak = setengah jarak puncak ke lembah: {h} : 2 = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 8],
+            "w": [2, 15]
+          },
+          "derived": {
+            "t": "n * w"
+          },
+          "prompt": "Tali membentuk {n} gelombang penuh sepanjang {t} m. Berapa panjang satu gelombang?",
+          "answer": "w",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "t",
+              "tag": "total"
+            },
+            {
+              "expr": "t + n",
+              "tag": "lain"
+            },
+            {
+              "expr": "t - n",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Panjang gelombang = {t} : {n} = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

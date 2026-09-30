@@ -1,0 +1,85 @@
+{
+  "id": "math.sd1.cc3.papan-seratus-turun-dan-naik-satu-baris",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "CC",
+  "order": 3,
+  "title": "Tambah dan kurang puluhan — Level 3 — Papan seratus: turun dan naik satu baris",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 70]
+          },
+          "prompt": "Pada papan ini, angka tepat di bawah {x} adalah …",
+          "answer": "x + 10",
+          "explain": "Turun satu baris berarti 10 lebih banyak: {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 + 1",
+              "end": "=floor((x - 1) / 10) * 10 + 30",
+              "columns": 10,
+              "highlight": ["=x"],
+              "blanks": ["=x+10"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "arah-atas"
+            },
+            "x + 11"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 70]
+          },
+          "prompt": "Pada papan ini, angka tepat di atas {=x+10} adalah …",
+          "answer": "x",
+          "explain": "Naik satu baris berarti 10 lebih sedikit: {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 + 1",
+              "end": "=floor((x - 1) / 10) * 10 + 30",
+              "columns": 10,
+              "highlight": ["=x+10"],
+              "blanks": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 9",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x + 20",
+              "tag": "arah-bawah"
+            },
+            "x - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

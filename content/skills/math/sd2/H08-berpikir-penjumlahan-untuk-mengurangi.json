@@ -1,0 +1,67 @@
+{
+  "id": "math.sd2.h8.berpikir-penjumlahan-untuk-mengurangi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "H",
+  "order": 8,
+  "title": "Strategi pengurangan satu ang — Level 8 — Berpikir penjumlahan untuk mengurangi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-H",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = {=a+b}. Maka {=a+b} − {a} = …",
+          "answer": "b",
+          "explain": "Penjumlahan dan pengurangan berpasangan: {answer}.",
+          "constraint": "a != b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "a + b",
+              "tag": "total"
+            },
+            "b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": [11, 18],
+            "b": [3, 9]
+          },
+          "prompt": "{c} − {b} = ? Pikirkan: {b} + ? = {c}",
+          "answer": "c - b",
+          "explain": "{b} + {answer} = {c}.",
+          "constraint": "c - b <= 9",
+          "distractors": [
+            "c - b + 1",
+            "c - b - 1",
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

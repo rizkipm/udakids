@@ -1,0 +1,131 @@
+{
+  "id": "sains.sd3.n6.membaca-data-tinggi-tanaman",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "N",
+  "order": 6,
+  "title": "Sifat makhluk hidup — Level 6 — Membaca data tinggi tanaman",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "b": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "c": {
+              "values": [5, 10, 15, 20, 25]
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Pot A", "Pot B", "Pot C"],
+              "values": ["=a", "=b", "=c"],
+              "unit": "cm",
+              "caption": "Tinggi tanaman setelah 3 minggu"
+            }
+          ],
+          "prompt": "Diagram menunjukkan tinggi tanaman kacang di tiga pot. Pot mana yang tanamannya paling tinggi?",
+          "answer": "1 * (a > b && a > c) + 2 * (b > a && b > c) + 3 * (c > a && c > b)",
+          "labels": {
+            "1": "Pot A",
+            "2": "Pot B",
+            "3": "Pot C"
+          },
+          "explain": "Batang tertinggi menunjukkan tanaman paling tinggi: {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "b": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "c": {
+              "values": [5, 10, 15, 20, 25]
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Pot A", "Pot B", "Pot C"],
+              "values": ["=a", "=b", "=c"],
+              "unit": "cm",
+              "caption": "Tinggi tanaman setelah 3 minggu"
+            }
+          ],
+          "prompt": "Diagram menunjukkan tinggi tanaman kacang di tiga pot. Pot mana yang tanamannya paling pendek?",
+          "answer": "1 * (a < b && a < c) + 2 * (b < a && b < c) + 3 * (c < a && c < b)",
+          "labels": {
+            "1": "Pot A",
+            "2": "Pot B",
+            "3": "Pot C"
+          },
+          "explain": "Batang terpendek menunjukkan tanaman paling pendek: {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "b": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "c": {
+              "values": [5, 10, 15, 20, 25]
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Pot A", "Pot B", "Pot C"],
+              "values": ["=a", "=b", "=c"],
+              "unit": "cm",
+              "caption": "Tinggi tanaman setelah 3 minggu"
+            }
+          ],
+          "prompt": "Berapa cm selisih tinggi tanaman di Pot A dan Pot B?",
+          "answer": "abs(a - b)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "max(a, b)",
+              "tag": "bukan-selisih"
+            }
+          ],
+          "explain": "Pot A {a} cm dan Pot B {b} cm. Selisihnya {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

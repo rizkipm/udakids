@@ -1,0 +1,52 @@
+{
+  "id": "math.sd2.j4.seimbangkan-persamaan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "J",
+  "order": 4,
+  "title": "Operasi campuran satu angka — Level 4 — Seimbangkan persamaan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-J",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [10, 20]
+          },
+          "prompt": "{a} + {b} = {c} − …",
+          "answer": "c - a - b",
+          "explain": "Ruas kiri {=a+b}. {c} − {answer} = {=a+b}.",
+          "mode": "input",
+          "constraint": "c > a + b"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 20],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{a} − {b} = {c} + …",
+          "answer": "a - b - c",
+          "explain": "Ruas kiri {=a-b}. {c} + {answer} = {=a-b}.",
+          "mode": "input",
+          "constraint": "a - b >= c"
+        }
+      }
+    ]
+  }
+}

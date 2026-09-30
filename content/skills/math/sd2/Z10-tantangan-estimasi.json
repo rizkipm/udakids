@@ -1,0 +1,62 @@
+{
+  "id": "math.sd2.z10.tantangan-estimasi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 10,
+  "title": "Estimasi dan pembulatan — Level 10 — Tantangan estimasi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 949]
+          },
+          "prompt": "Bulatkan {a} ke ratusan terdekat.",
+          "answer": "round(a / 100) * 100",
+          "explain": "{answer}.",
+          "constraint": "a % 100 != 0",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "prompt": "Taksir {a} + {b} dengan membulatkan ke puluhan terdekat.",
+          "answer": "round(a / 10) * 10 + round(b / 10) * 10",
+          "explain": "{answer}.",
+          "constraint": "a % 10 != 0 && b % 10 != 0",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [510, 990],
+            "b": [110, 490]
+          },
+          "prompt": "Taksir {a} − {b} dengan membulatkan ke ratusan terdekat.",
+          "answer": "round(a / 100) * 100 - round(b / 100) * 100",
+          "explain": "{answer}.",
+          "constraint": "a % 100 != 0 && b % 100 != 0",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

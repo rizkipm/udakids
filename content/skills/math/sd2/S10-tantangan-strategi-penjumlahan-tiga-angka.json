@@ -1,0 +1,70 @@
+{
+  "id": "math.sd2.s10.tantangan-strategi-penjumlahan-tiga-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "S",
+  "order": 10,
+  "title": "Strategi penjumlahan tiga — Level 10 — Tantangan strategi penjumlahan tiga angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "2-S",
+    "common-core": "2.NBT.B.7"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699],
+            "b": [100, 299]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "(a % 10 + b % 10 >= 10 || floor(a / 10) % 10 + floor(b / 10) % 10 >= 10) && a + b <= 999"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "k": [1, 3],
+            "c": [1, 9]
+          },
+          "prompt": "{a} + {b} = {=a-c} + …",
+          "answer": "b + c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "derived": {
+            "b": "k * 100 - c"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "h": [1, 3],
+            "t": [1, 9]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Loncat ratusan lalu puluhan: {answer}.",
+          "mode": "input",
+          "derived": {
+            "b": "h * 100 + t * 10"
+          }
+        }
+      }
+    ]
+  }
+}

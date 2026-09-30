@@ -1,0 +1,94 @@
+{
+  "id": "math.sd2.ff5.membandingkan-pada-piktogram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 5,
+  "title": "Data dan diagram — Level 5 — Membandingkan pada piktogram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Berapa lebih banyak anak yang suka apel daripada pisang?",
+          "answer": "a - c",
+          "explain": "{a} − {c} = {answer}.",
+          "constraint": "a > c",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buah kesukaan (1 gambar = 1 anak)",
+              "labels": ["Apel", "Jeruk", "Pisang"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "bintang"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a",
+              "tag": "satu-baris"
+            },
+            {
+              "expr": "a - c + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Berapa anak yang ditanya seluruhnya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buah kesukaan (1 gambar = 1 anak)",
+              "labels": ["Apel", "Jeruk", "Pisang"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "bintang"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "kurang-satu-baris"
+            },
+            {
+              "expr": "max(a, b, c)",
+              "tag": "terbanyak"
+            },
+            {
+              "expr": "a + b + c + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

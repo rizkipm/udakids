@@ -321,3 +321,31 @@ describe('katalog: materi topik (D-026)', () => {
     expect(cat({ intro: 'x'.repeat(301) }).success).toBe(false);
   });
 });
+
+describe('expr: satuan tidak tertulis dua kali', () => {
+  it('"{answer} cm" dengan unit cm → "… cm", bukan "… cm cm"', async () => {
+    const { skillTemplateSchema: sch, generateItem: gen } = await import('../src/index.js');
+    const t = sch.parse({
+      id: 'math.sd2.hh8.uji-satuan',
+      version: 1,
+      domain: 'math',
+      grade: 'sd2',
+      category: 'H',
+      order: 8,
+      title: 'Uji satuan',
+      tier: 'intermediate',
+      family: 'expr',
+      params: {
+        vars: { a: [10, 40], b: [10, 40] },
+        answer: 'a + b',
+        unit: 'cm',
+        prompt: 'Pita {a} cm disambung pita {b} cm. Berapa panjangnya?',
+        explain: '{a} + {b} = {answer} cm. Juga menit menit tetap bila bukan satuan.',
+      },
+    });
+    const it = gen(t, { seed: 4, band: 1 });
+    expect(it.reteach.say).toMatch(/= \d+ cm\. /);
+    expect(it.reteach.say).not.toMatch(/cm cm/);
+    expect(it.reteach.say).toContain('menit menit'); // hanya satuan jawaban yang dirapikan
+  });
+});

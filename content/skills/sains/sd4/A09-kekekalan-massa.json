@@ -1,0 +1,385 @@
+{
+  "id": "sains.sd4.a9.kekekalan-massa",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "A",
+  "order": 9,
+  "title": "Sifat benda — Level 9 — Kekekalan massa",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 60],
+            "b": [100, 400]
+          },
+          "words": {
+            "n": ["Alya", "Budi", "Putri", "Raka"]
+          },
+          "prompt": "{n} melarutkan {a} g gula ke dalam {b} g air. Berapa massa air gula itu?",
+          "answer": "a + b",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "gula-hilang"
+            },
+            {
+              "expr": "b - a",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "a",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Gula tidak hilang saat larut. Massa = {b} g + {a} g = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 500]
+          },
+          "prompt": "Es batu {a} g di dalam wadah tertutup mencair seluruhnya. Berapa massa airnya?",
+          "answer": "a",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + 10",
+              "tag": "bertambah"
+            },
+            {
+              "expr": "a - 10",
+              "tag": "berkurang"
+            },
+            {
+              "expr": "0",
+              "tag": "hilang"
+            }
+          ],
+          "explain": "Berubah wujud tidak mengubah massa. Airnya tetap {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [20, 150],
+            "c": [50, 120]
+          },
+          "prompt": "Grafik menunjukkan massa bahan kue. Semua bahan diaduk menjadi adonan. Berapa massa adonan?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Tepung", "Gula", "Telur"],
+              "values": ["=a", "=b", "=c"],
+              "unit": "g"
+            }
+          ],
+          "answer": "a + b + c",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "max(a, max(b, c))",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Mencampur tidak menghilangkan zat: {a} + {b} + {c} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [150, 600]
+          },
+          "prompt": "Di botol tertutup, massa cuka + soda kue + botol = {a} g. Setelah bereaksi dan muncul gas, berapa massanya?",
+          "answer": "a",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a - 20",
+              "tag": "berkurang"
+            },
+            {
+              "expr": "a + 20",
+              "tag": "bertambah"
+            },
+            {
+              "expr": "a / 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Gasnya tetap di dalam botol tertutup, jadi massanya tetap {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 300],
+            "b": [5, 50]
+          },
+          "derived": {
+            "t": "a + b"
+          },
+          "prompt": "Massa air {a} g. Setelah garam dilarutkan, massa larutan {t} g. Berapa gram garamnya?",
+          "answer": "b",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "t",
+              "tag": "total"
+            },
+            {
+              "expr": "a",
+              "tag": "air"
+            },
+            {
+              "expr": "t + a",
+              "tag": "dijumlah"
+            }
+          ],
+          "explain": "Massa garam = {t} − {a} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Es batu 50 g di dalam kantong plastik tertutup mencair seluruhnya. Massa airnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50 g"
+                  },
+                  "say": "50 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih dari 50 g"
+                  },
+                  "say": "lebih dari 50 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kurang dari 50 g"
+                  },
+                  "say": "kurang dari 50 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0 g"
+                  },
+                  "say": "0 g",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat berubah wujud, massa tidak bertambah dan tidak berkurang.",
+              "source": "Kekekalan massa: massa total tetap saat berubah wujud, dicampur, atau bereaksi di wadah tertutup — NGSS 5-PS1-2"
+            },
+            {
+              "prompt": "Sari melarutkan 20 g garam ke dalam 200 g air. Garam tidak terlihat lagi. Massa larutan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "220 g"
+                  },
+                  "say": "220 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200 g"
+                  },
+                  "say": "200 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "180 g"
+                  },
+                  "say": "180 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20 g"
+                  },
+                  "say": "20 g",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Garam tidak hilang, hanya larut. Massa larutan = 200 g + 20 g = 220 g.",
+              "source": "Kekekalan massa: massa total tetap saat berubah wujud, dicampur, atau bereaksi di wadah tertutup — NGSS 5-PS1-2"
+            },
+            {
+              "prompt": "Grafik menunjukkan massa botol tertutup sebelum dan sesudah cuka dicampur soda kue. Kesimpulannya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Massa tetap sama"
+                  },
+                  "say": "Massa tetap sama"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Massa bertambah"
+                  },
+                  "say": "Massa bertambah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Massa berkurang"
+                  },
+                  "say": "Massa berkurang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Zatnya musnah"
+                  },
+                  "say": "Zatnya musnah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Di wadah tertutup tidak ada zat yang keluar atau masuk, jadi massa total tetap.",
+              "source": "Kekekalan massa: massa total tetap saat berubah wujud, dicampur, atau bereaksi di wadah tertutup — NGSS 5-PS1-2",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "labels": ["Sebelum", "Sesudah"],
+                  "values": [250, 250],
+                  "unit": "g",
+                  "caption": "Massa botol tertutup"
+                }
+              ]
+            },
+            {
+              "prompt": "Cuka dan soda kue dicampur di botol TERBUKA. Massanya berkurang. Mengapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gas yang terbentuk keluar ke udara"
+                  },
+                  "say": "Gas yang terbentuk keluar ke udara"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Zatnya musnah"
+                  },
+                  "say": "Zatnya musnah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Botol menjadi ringan sendiri"
+                  },
+                  "say": "Botol menjadi ringan sendiri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Cuka berubah menjadi batu"
+                  },
+                  "say": "Cuka berubah menjadi batu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Reaksi menghasilkan gas. Pada botol terbuka gas keluar, jadi yang tertimbang lebih sedikit. Massanya tidak musnah.",
+              "source": "Kekekalan massa: massa total tetap saat berubah wujud, dicampur, atau bereaksi di wadah tertutup — NGSS 5-PS1-2"
+            },
+            {
+              "prompt": "Plastisin 100 g dibentuk ulang dari bola menjadi ular panjang. Massanya sekarang …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100 g"
+                  },
+                  "say": "100 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih dari 100 g"
+                  },
+                  "say": "lebih dari 100 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kurang dari 100 g"
+                  },
+                  "say": "kurang dari 100 g",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tergantung panjangnya"
+                  },
+                  "say": "tergantung panjangnya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mengubah bentuk tidak mengubah banyaknya zat, jadi massanya tetap 100 g.",
+              "source": "Kekekalan massa: massa total tetap saat berubah wujud, dicampur, atau bereaksi di wadah tertutup — NGSS 5-PS1-2"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

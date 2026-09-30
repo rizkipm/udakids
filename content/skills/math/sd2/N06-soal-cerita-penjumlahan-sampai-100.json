@@ -1,0 +1,89 @@
+{
+  "id": "math.sd2.n6.soal-cerita-penjumlahan-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "N",
+  "order": 6,
+  "title": "Penjumlahan dua angka — Level 6 — Soal cerita penjumlahan sampai 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-N",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [11, 39]
+          },
+          "prompt": "Sekolah menanam {a} pohon mangga dan {b} pohon jambu. Berapa pohon semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 100",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [5, 39]
+          },
+          "prompt": "{nama} mengumpulkan {a} tutup botol, lalu {b} lagi. Berapa tutup botol semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "constraint": "a + b <= 100",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"]
+          },
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 60],
+            "b": [11, 39]
+          },
+          "prompt": "Pak tani memanen {a} jagung hari ini dan {b} kemarin. Berapa jagung semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer}.",
+          "mode": "input",
+          "constraint": "a + b <= 100"
+        }
+      }
+    ]
+  }
+}

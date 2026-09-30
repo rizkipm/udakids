@@ -1,0 +1,70 @@
+{
+  "id": "math.sd1.q3.menambah-6-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Q",
+  "order": 3,
+  "title": "Penjumlahan sampai 20 — Level 3 — Menambah 6 sampai 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-Q",
+    "cc": "1.OA.A.2, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 12],
+            "k": {
+              "values": [6, 7, 8, 9, 10]
+            }
+          },
+          "prompt": "{a} + {k} = …",
+          "answer": "a + k",
+          "explain": "Mulai dari {a}, hitung maju {k}: {answer}.",
+          "constraint": "a + k <= 20",
+          "distractors": [
+            "a + k + 1",
+            "a + k - 1",
+            {
+              "expr": "a",
+              "tag": "tidak-ditambah"
+            }
+          ],
+          "choices": 4
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 12],
+            "k": {
+              "values": [6, 7, 8, 9, 10]
+            }
+          },
+          "prompt": "{k} + {a} = …",
+          "answer": "a + k",
+          "explain": "Mulai dari bilangan yang lebih besar, lalu hitung maju: {answer}.",
+          "constraint": "a + k <= 20",
+          "distractors": [
+            "a + k + 1",
+            "a + k - 1",
+            {
+              "expr": "a",
+              "tag": "tidak-ditambah"
+            }
+          ],
+          "choices": 4
+        }
+      }
+    ]
+  }
+}

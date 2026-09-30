@@ -1,0 +1,54 @@
+{
+  "id": "math.sd2.dd8.siapa-lebih-dulu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "DD",
+  "order": 8,
+  "title": "Waktu dan jam — Level 8 — Siapa lebih dulu?",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: jam per 5 menit",
+    "kognitif": "applying",
+    "ixlRef": "G2-DD"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h1": [6, 7],
+      "h2": [6, 7],
+      "m1": {
+        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+      },
+      "m2": {
+        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+      }
+    },
+    "prompt": "Jam kiri: waktu Alya tiba di sekolah. Jam kanan: waktu Raka tiba. Siapa yang tiba lebih dulu?",
+    "answer": "(h1 * 60 + m1 < h2 * 60 + m2) * 1 + (h1 * 60 + m1 > h2 * 60 + m2) * 2",
+    "explain": "Alya pukul {h1} lewat {m1} menit, Raka pukul {h2} lewat {m2} menit. Yang lebih awal: {answer}.",
+    "constraint": "h1 * 60 + m1 != h2 * 60 + m2",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "digital",
+            "hour": "=h1",
+            "minute": "=m1"
+          },
+          {
+            "kind": "digital",
+            "hour": "=h2",
+            "minute": "=m2"
+          }
+        ]
+      }
+    ],
+    "labels": {
+      "1": "Alya",
+      "2": "Raka"
+    }
+  }
+}

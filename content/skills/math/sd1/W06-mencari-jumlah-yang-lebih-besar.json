@@ -1,0 +1,43 @@
+{
+  "id": "math.sd1.w6.mencari-jumlah-yang-lebih-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "W",
+  "order": 6,
+  "title": "Soal cerita membandingkan — Level 6 — Mencari jumlah yang lebih besar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-W"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 15],
+      "b": [2, 9]
+    },
+    "prompt": "{nama} punya {a} {benda}. {teman} punya {b} lebih banyak daripada {nama}. Berapa {benda} {teman}?",
+    "answer": "a + b",
+    "explain": "Lebih banyak berarti ditambah: {a} + {b} = {answer}.",
+    "constraint": "a + b <= 20",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan"],
+      "teman": ["Raka", "Dimas", "Budi", "Adit", "Tegar"],
+      "benda": ["kelereng", "stiker", "buku", "pensil", "kartu", "jeruk", "kue", "balon"]
+    },
+    "distractors": [
+      {
+        "expr": "abs(a - b)",
+        "tag": "kata-lebih-dikurangi"
+      },
+      {
+        "expr": "b",
+        "tag": "hanya-selisih"
+      },
+      "a + b + 1"
+    ]
+  }
+}

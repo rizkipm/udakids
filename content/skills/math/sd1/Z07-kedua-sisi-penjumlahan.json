@@ -1,0 +1,39 @@
+{
+  "id": "math.sd1.z7.kedua-sisi-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 7,
+  "title": "Lengkapi kalimat matematika — Level 7 — Kedua sisi: penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 10],
+      "b": [1, 10],
+      "d": [1, 10]
+    },
+    "prompt": "{a} + {b} = … + {d}",
+    "answer": "a + b - d",
+    "explain": "Sisi kiri bernilai {=a+b}. {answer} + {d} = {=a+b}.",
+    "constraint": "a + b - d >= 1 && d != a && d != b",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "hasil-sisi-kiri"
+      },
+      {
+        "expr": "a + b + d",
+        "tag": "menjumlah-semua"
+      },
+      "a + b - d + 1"
+    ]
+  }
+}

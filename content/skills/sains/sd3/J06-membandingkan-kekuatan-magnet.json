@@ -1,0 +1,126 @@
+{
+  "id": "sains.sd3.j6.membandingkan-kekuatan-magnet",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd3",
+  "category": "J",
+  "order": 6,
+  "title": "Magnet — Level 6 — Membandingkan kekuatan magnet",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 20],
+            "b": [2, 20]
+          },
+          "prompt": "Magnet A dapat mengangkat {a} klip kertas. Magnet B dapat mengangkat {b} klip. Magnet mana yang lebih kuat?",
+          "answer": "1 + (b > a)",
+          "explain": "Makin banyak klip yang terangkat, makin kuat magnetnya: {answer}.",
+          "labels": {
+            "1": "Magnet A",
+            "2": "Magnet B"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 25],
+            "b": [3, 25]
+          },
+          "prompt": "Magnet A mengangkat {a} paku kecil, magnet B mengangkat {b} paku kecil. Magnet mana yang lebih lemah?",
+          "answer": "1 + (b < a)",
+          "explain": "Magnet yang mengangkat paku lebih sedikit lebih lemah: {answer}.",
+          "labels": {
+            "1": "Magnet A",
+            "2": "Magnet B"
+          },
+          "constraint": "a != b"
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Cara terbaik membandingkan kekuatan dua magnet adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menghitung banyak klip yang dapat diangkat masing-masing"
+                  },
+                  "say": "menghitung banyak klip yang dapat diangkat masing-masing"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membandingkan warnanya"
+                  },
+                  "say": "membandingkan warnanya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membandingkan ukurannya saja"
+                  },
+                  "say": "membandingkan ukurannya saja",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Magnet besar belum tentu lebih kuat. Uji dengan menghitung klip yang terangkat.",
+              "source": "NGSS 3-PS2-3 & 3-PS2-4 (interaksi magnet; memecahkan masalah dengan magnet); Buku Siswa IPAS SD Kelas V (Kemendikbudristek, 2021) Bab 3 Magnet, Listrik, dan Teknologi untuk Kehidupan"
+            },
+            {
+              "prompt": "Magnet A mengangkat 12 klip, magnet B mengangkat 5 klip. Kesimpulannya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Magnet A lebih kuat"
+                  },
+                  "say": "Magnet A lebih kuat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Magnet B lebih kuat"
+                  },
+                  "say": "Magnet B lebih kuat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Keduanya sama kuat"
+                  },
+                  "say": "Keduanya sama kuat",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Magnet yang mengangkat klip lebih banyak lebih kuat.",
+              "source": "NGSS 3-PS2-3 & 3-PS2-4 (interaksi magnet; memecahkan masalah dengan magnet); Buku Siswa IPAS SD Kelas V (Kemendikbudristek, 2021) Bab 3 Magnet, Listrik, dan Teknologi untuk Kehidupan"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

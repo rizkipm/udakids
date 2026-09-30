@@ -1,0 +1,104 @@
+{
+  "id": "math.sd1.f6.membuat-sepuluh-dengan-model",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "F",
+  "order": 6,
+  "title": "Strategi penjumlahan sampai 10 — Level 6 — Membuat sepuluh dengan model",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-F",
+    "ccss": "1.OA.B.3 / 1.OA.C.5 / 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Bingkai berisi {a} titik. {a} + … = 10",
+          "answer": "10 - a",
+          "explain": "Hitung kotak kosong: {answer}. {a} + {answer} = 10.",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 10
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "yang-terisi"
+            },
+            "11 - a",
+            "9 - a"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Kereta ini punya {a} kubus. Berapa kubus lagi agar menjadi 10?",
+          "answer": "10 - a",
+          "explain": "{a} + {answer} = 10.",
+          "stimulus": [
+            {
+              "kind": "cubes",
+              "counts": ["=a"],
+              "colors": ["hijau"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "yang-ada"
+            },
+            "11 - a",
+            {
+              "expr": "10",
+              "tag": "total"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Wadah telur punya 10 lubang. Sudah ada {a} telur. Berapa telur lagi agar penuh?",
+          "answer": "10 - a",
+          "explain": "{a} + {answer} = 10.",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 10
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "yang-ada"
+            },
+            "11 - a",
+            "9 - a"
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "math.sd1.z8.kedua-sisi-tambah-dan-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Z",
+  "order": 8,
+  "title": "Lengkapi kalimat matematika — Level 8 — Kedua sisi: tambah dan kurang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-Z"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [1, 9],
+            "d": [1, 9]
+          },
+          "prompt": "{a} − {b} = … − {d}",
+          "answer": "a - b + d",
+          "explain": "Sisi kiri bernilai {=a-b}. {answer} − {d} = {=a-b}.",
+          "constraint": "b < a && d != b && a - b + d <= 20",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-sisi-kiri"
+            },
+            "a - b + d + 1",
+            "a - b + d - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [10, 20]
+          },
+          "prompt": "{a} + {b} = {c} − …",
+          "answer": "c - a - b",
+          "explain": "Sisi kiri bernilai {=a+b}. {c} − {answer} = {=a+b}.",
+          "constraint": "a + b < c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-sisi-kiri"
+            },
+            "c - a - b + 1",
+            "c - a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

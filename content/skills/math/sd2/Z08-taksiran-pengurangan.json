@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.z8.taksiran-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 8,
+  "title": "Estimasi dan pembulatan — Level 8 — Taksiran pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [51, 99],
+      "b": [11, 49]
+    },
+    "prompt": "Taksir {a} − {b} dengan membulatkan ke puluhan terdekat.",
+    "answer": "round(a / 10) * 10 - round(b / 10) * 10",
+    "explain": "{a} → {=round(a/10)*10}, {b} → {=round(b/10)*10}. Taksirannya {answer}.",
+    "constraint": "a % 10 != 0 && b % 10 != 0",
+    "distractors": [
+      {
+        "expr": "a - b",
+        "tag": "hitung-tepat"
+      },
+      {
+        "expr": "floor(a / 10) * 10 - floor(b / 10) * 10",
+        "tag": "selalu-ke-bawah"
+      },
+      {
+        "expr": "round(a / 10) * 10 + round(b / 10) * 10",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

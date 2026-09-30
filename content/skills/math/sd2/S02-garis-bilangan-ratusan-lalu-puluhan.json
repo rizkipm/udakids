@@ -1,0 +1,39 @@
+{
+  "id": "math.sd2.s2.garis-bilangan-ratusan-lalu-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "S",
+  "order": 2,
+  "title": "Strategi penjumlahan tiga angka — Level 2 — Garis bilangan: ratusan lalu puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "2-S",
+    "common-core": "2.NBT.B.7"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [100, 599],
+      "h": [1, 3],
+      "t": [1, 9]
+    },
+    "prompt": "{a} + {b}: loncat {=b-b%100} dulu, lalu {=b%100}. Sampai di …",
+    "answer": "a + b",
+    "explain": "{a} + {=b-b%100} = {=a+b-b%100}, lalu + {=b%100} = {answer}.",
+    "derived": {
+      "b": "h * 100 + t * 10"
+    },
+    "distractors": [
+      {
+        "expr": "a + b - b % 100",
+        "tag": "berhenti-di-tengah"
+      },
+      "a + b + 10",
+      "a + b - 10"
+    ]
+  }
+}

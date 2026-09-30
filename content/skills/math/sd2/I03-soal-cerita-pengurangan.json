@@ -1,0 +1,89 @@
+{
+  "id": "math.sd2.i3.soal-cerita-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "I",
+  "order": 3,
+  "title": "Pengurangan satu angka — Level 3 — Soal cerita pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-I",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 18],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} {buah}. {b} {buah} dimakan. Berapa {buah} yang tersisa?",
+          "answer": "a - b",
+          "explain": "Dimakan = berkurang: {a} − {b} = {answer}.",
+          "constraint": "b < a",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "buah": ["jeruk", "salak", "rambutan", "jambu", "mangga", "manggis"]
+          },
+          "distractors": [
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 18],
+            "b": [2, 9]
+          },
+          "prompt": "Ada {a} burung pipit di pohon. {b} terbang pergi. Berapa burung yang masih di pohon?",
+          "answer": "a - b",
+          "explain": "Terbang pergi = berkurang: {answer}.",
+          "constraint": "b < a",
+          "distractors": [
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 18],
+            "b": [2, 9]
+          },
+          "prompt": "Pak Joko membawa {a} kelapa. {b} kelapa terjual. Berapa kelapa yang tersisa?",
+          "answer": "a - b",
+          "explain": "{a} − {b} = {answer}.",
+          "constraint": "b < a",
+          "distractors": [
+            "a - b + 1",
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

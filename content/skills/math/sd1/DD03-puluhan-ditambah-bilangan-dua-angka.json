@@ -1,0 +1,35 @@
+{
+  "id": "math.sd1.dd3.puluhan-ditambah-bilangan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "DD",
+  "order": 3,
+  "title": "Penjumlahan dua angka — Level 3 — Puluhan ditambah bilangan dua angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-DD"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [1, 7],
+      "b": [11, 89]
+    },
+    "prompt": "{=t*10} + {b} = …",
+    "answer": "t * 10 + b",
+    "explain": "Tambah puluhan dengan puluhan: {=t*10} + {=floor(b/10)*10} = {=t*10+floor(b/10)*10}, satuannya {=b%10}. Hasil {answer}.",
+    "constraint": "t * 10 + b <= 99 && b % 10 != 0",
+    "distractors": [
+      {
+        "expr": "t + b",
+        "tag": "salah-nilai-tempat"
+      },
+      "t * 10 + b + 10",
+      "t * 10 + b - 10"
+    ]
+  }
+}

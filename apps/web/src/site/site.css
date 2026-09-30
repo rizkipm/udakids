@@ -1007,3 +1007,173 @@
     animation: none;
   }
 }
+
+/* ================================================================== D-033: rak buku bergeser + statistik langsung */
+.book-slider {
+  position: relative;
+}
+.book-slider-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.book-slider-count {
+  font-weight: 800;
+  color: var(--s-muted);
+}
+.book-slider-nav {
+  display: flex;
+  gap: 8px;
+}
+.slider-btn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 3px solid var(--s-line);
+  background: #fff;
+  color: var(--s-ink);
+  box-shadow: 0 4px 0 var(--s-line);
+  cursor: pointer;
+}
+.slider-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+}
+.slider-btn:not(:disabled):active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--s-line);
+}
+.slider-btn:focus-visible,
+.book-dot:focus-visible {
+  outline: 4px solid var(--s-sun);
+  outline-offset: 2px;
+}
+.book-pages {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  /* ruang untuk bayangan kartu */
+  padding: 4px 2px 12px;
+}
+.book-pages::-webkit-scrollbar {
+  display: none;
+}
+.book-page {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-width: 0;
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+.book-page .book-grid {
+  align-content: start;
+}
+.book-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.book-dot {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 999px;
+  border: 3px solid var(--s-line);
+  background: #fff;
+  cursor: pointer;
+  transition: width 0.2s;
+}
+.book-dot.is-on {
+  width: 36px;
+  background: var(--s-grape);
+}
+/* target sentuh ≥ 44px untuk titik kecil */
+.book-dot {
+  position: relative;
+}
+.book-dot::after {
+  content: '';
+  position: absolute;
+  inset: -15px -6px;
+}
+.live-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(29, 26, 46, 0.15);
+  font-weight: 700;
+  color: var(--s-muted);
+}
+.live-chip strong {
+  color: var(--s-ink);
+}
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #b9b3c9;
+  flex: none;
+}
+.live-chip.is-live .live-dot {
+  background: #2e9e5b;
+  box-shadow: 0 0 0 0 rgba(46, 158, 91, 0.6);
+  animation: live-pulse 1.8s infinite;
+}
+@keyframes live-pulse {
+  70% {
+    box-shadow: 0 0 0 10px rgba(46, 158, 91, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 158, 91, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-pages {
+    scroll-behavior: auto;
+  }
+  .live-chip.is-live .live-dot {
+    animation: none;
+  }
+  .book-dot {
+    transition: none;
+  }
+}
+@media (max-width: 900px) {
+  .live-chip {
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
+/* Track tanpa padding samping: lebar halaman = lebar track, jadi tidak ada irisan halaman berikutnya. */
+.book-pages {
+  padding: 6px 0 14px;
+  scroll-padding: 0;
+}
+.book-page {
+  padding: 0 6px;
+  overflow: hidden;
+}
+.book-pages {
+  align-items: flex-start;
+  transition: height 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-pages {
+    transition: none;
+  }
+}

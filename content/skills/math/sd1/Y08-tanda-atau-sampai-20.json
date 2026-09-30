@@ -1,0 +1,37 @@
+{
+  "id": "math.sd1.y8.tanda-atau-sampai-20",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "Y",
+  "order": 8,
+  "title": "Benar atau salah — Level 8 — Tanda + atau − (sampai 20)",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-Y"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "b": [1, 19],
+      "o": {
+        "values": [1, 2]
+      }
+    },
+    "prompt": "Tanda apa yang tepat? {a} … {b} = {c}",
+    "answer": "o",
+    "explain": "{a} + {b} = {=a+b} dan {a} − {b} = {=a-b}. Jadi tandanya {answer}.",
+    "derived": {
+      "c": "(o == 1) * (a + b) + (o == 2) * (a - b)"
+    },
+    "constraint": "(o == 1 && a + b <= 20) || (o == 2 && b <= a)",
+    "labels": {
+      "1": "+",
+      "2": "−"
+    }
+  }
+}

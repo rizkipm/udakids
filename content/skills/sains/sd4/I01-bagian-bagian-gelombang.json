@@ -1,0 +1,191 @@
+{
+  "id": "sains.sd4.i1.bagian-bagian-gelombang",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "I",
+  "order": 1,
+  "title": "Gelombang dan informasi — Level 1 — Bagian-bagian gelombang",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "C",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Titik tertinggi pada gelombang disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "puncak"
+                  },
+                  "say": "puncak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lembah"
+                  },
+                  "say": "lembah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "amplitudo"
+                  },
+                  "say": "amplitudo",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garis tengah"
+                  },
+                  "say": "garis tengah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Puncak adalah titik tertinggi, lembah adalah titik terendah gelombang.",
+              "source": "Gelombang: amplitudo (tinggi puncak dari garis tengah) & panjang gelombang (jarak puncak ke puncak) — NGSS 4-PS4-1"
+            },
+            {
+              "prompt": "Amplitudo gelombang adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tinggi puncak diukur dari garis tengah"
+                  },
+                  "say": "tinggi puncak diukur dari garis tengah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jarak dua puncak berdekatan"
+                  },
+                  "say": "jarak dua puncak berdekatan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "banyaknya gelombang"
+                  },
+                  "say": "banyaknya gelombang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kecepatan gelombang"
+                  },
+                  "say": "kecepatan gelombang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Amplitudo = jarak dari garis tengah (keadaan diam) ke puncak.",
+              "source": "Gelombang: amplitudo (tinggi puncak dari garis tengah) & panjang gelombang (jarak puncak ke puncak) — NGSS 4-PS4-1"
+            },
+            {
+              "prompt": "Panjang gelombang adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jarak dari satu puncak ke puncak berikutnya"
+                  },
+                  "say": "jarak dari satu puncak ke puncak berikutnya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tinggi puncak dari garis tengah"
+                  },
+                  "say": "tinggi puncak dari garis tengah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jarak puncak ke lembah"
+                  },
+                  "say": "jarak puncak ke lembah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lamanya gelombang"
+                  },
+                  "say": "lamanya gelombang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panjang gelombang diukur dari puncak ke puncak berikutnya (atau lembah ke lembah).",
+              "source": "Gelombang: amplitudo (tinggi puncak dari garis tengah) & panjang gelombang (jarak puncak ke puncak) — NGSS 4-PS4-1"
+            }
+          ]
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 40],
+            "b": [2, 40]
+          },
+          "constraint": "a != b",
+          "prompt": "Tabel menunjukkan tinggi puncak dua gelombang dari garis tengah. Gelombang mana yang amplitudonya lebih besar?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Gelombang", "Tinggi puncak (cm)"],
+              "rows": [
+                ["A", "=a"],
+                ["B", "=b"]
+              ]
+            }
+          ],
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Gelombang A",
+            "2": "Gelombang B"
+          },
+          "explain": "Amplitudo = tinggi puncak dari garis tengah. Bandingkan {a} cm dan {b} cm."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 90],
+            "b": [5, 90]
+          },
+          "constraint": "a != b",
+          "prompt": "Jarak puncak ke puncak: gelombang P {a} cm, gelombang Q {b} cm. Mana yang panjang gelombangnya lebih pendek?",
+          "answer": "(b > a) + 2 * (b < a)",
+          "labels": {
+            "1": "Gelombang P",
+            "2": "Gelombang Q"
+          },
+          "explain": "Panjang gelombang = jarak puncak ke puncak. Yang lebih pendek punya angka lebih kecil."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

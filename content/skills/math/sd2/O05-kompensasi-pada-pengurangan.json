@@ -1,0 +1,68 @@
+{
+  "id": "math.sd2.o5.kompensasi-pada-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "O",
+  "order": 5,
+  "title": "Strategi pengurangan dua angka — Level 5 — Kompensasi pada pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-O",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 99],
+            "k": [2, 4],
+            "c": [1, 2]
+          },
+          "prompt": "{a} − {b}: {b} dekat {=b+c}. {a} − {=b+c} = {=a-b-c}, lalu tambah {c}. Hasilnya …",
+          "answer": "a - b",
+          "explain": "{=a-b-c} + {c} = {answer}.",
+          "derived": {
+            "b": "k * 10 - c"
+          },
+          "constraint": "b < a - c",
+          "distractors": [
+            {
+              "expr": "a - b - c",
+              "tag": "lupa-tambah"
+            },
+            {
+              "expr": "a - b - 2 * c",
+              "tag": "arah-terbalik"
+            },
+            "a - b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 90],
+            "k": [2, 4],
+            "c": [1, 2]
+          },
+          "prompt": "{a} − {b} = {=a+c} − …",
+          "answer": "b + c",
+          "explain": "Tambah {c} pada kedua bilangan, selisihnya tetap: {b} + {c} = {answer}.",
+          "mode": "input",
+          "derived": {
+            "b": "k * 10 - c"
+          },
+          "constraint": "b < a"
+        }
+      }
+    ]
+  }
+}

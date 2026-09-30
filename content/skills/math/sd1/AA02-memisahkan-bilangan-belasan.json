@@ -1,0 +1,84 @@
+{
+  "id": "math.sd1.aa2.memisahkan-bilangan-belasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "AA",
+  "order": 2,
+  "title": "Nilai tempat — Level 2 — Memisahkan bilangan belasan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-AA"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "{=10+b} = 10 + …",
+          "answer": "b",
+          "explain": "{=10+b} adalah 1 puluhan dan {b} satuan.",
+          "distractors": [
+            {
+              "expr": "10 + b",
+              "tag": "total"
+            },
+            {
+              "expr": "1",
+              "tag": "angka-puluhan"
+            },
+            "b + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "{=10+b} adalah 1 puluhan dan berapa satuan?",
+          "answer": "b",
+          "explain": "{=10+b} = 10 + {b}.",
+          "stimulus": [
+            {
+              "kind": "tens",
+              "tens": 1,
+              "ones": "=b"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "10 + b",
+              "tag": "total"
+            },
+            {
+              "expr": "1",
+              "tag": "angka-puluhan"
+            },
+            "b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9]
+          },
+          "prompt": "{=10+b} − 10 = …",
+          "answer": "b",
+          "explain": "{=10+b} − 10 = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

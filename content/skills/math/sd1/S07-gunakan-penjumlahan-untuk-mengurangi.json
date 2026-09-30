@@ -1,0 +1,78 @@
+{
+  "id": "math.sd1.s7.gunakan-penjumlahan-untuk-mengurangi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "S",
+  "order": 7,
+  "title": "Strategi pengurangan sampai 20 — Level 7 — Gunakan penjumlahan untuk mengurangi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-S",
+    "cc": "1.OA.B.4, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − {b} = ?  Pikirkan: {b} + … = {a}",
+          "answer": "c",
+          "explain": "{b} + {c} = {a}, jadi {a} − {b} = {c}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "c + 1",
+            "c - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "Untuk menghitung {a} − {b}, penjumlahan mana yang membantu? {b} + … = {a}",
+          "answer": "c",
+          "explain": "{b} + {c} = {a}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bilangan-terbesar"
+            },
+            {
+              "expr": "b",
+              "tag": "bilangan-sama"
+            },
+            "c + 1",
+            "c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

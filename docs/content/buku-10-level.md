@@ -12,6 +12,12 @@ Id skill: `{domain}.{grade}.{kode}{n}.{slug}`, judul: `Topik — Level n — Jud
 | Math Grade 3-4         | `math/sd34`  | 10 (A–J)        | 100   | advanced     |
 | Sains Grade 1-2        | `sains/sd12` | 10 (A–J)        | 100   | intermediate |
 | Sains Grade 3-4        | `sains/sd34` | 10 (A–J)        | 100   | advanced     |
+| Math Grade 1           | `math/sd1`   | 41 (A–OO)       | 410   | intermediate |
+| Math Grade 2           | `math/sd2`   | 39 (A–MM)       | 390   | intermediate |
+| Sains Grade 1          | `sains/sd1`  | 16 (A–P)        | 160   | intermediate |
+| Sains Grade 2          | `sains/sd2`  | 9 (A–I)         | 90    | intermediate |
+| Sains Grade 3          | `sains/sd3`  | 25 (A–Y)        | 250   | advanced     |
+| Sains Grade 4          | `sains/sd4`  | 26 (A–Z)        | 260   | advanced     |
 
 ## Pola level
 

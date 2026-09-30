@@ -1,0 +1,112 @@
+{
+  "id": "sains.sd4.z7.mengubah-satuan-panjang-dan-waktu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 7,
+  "title": "Satuan dan pengukuran — Level 7 — Mengubah satuan panjang dan waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15]
+          },
+          "prompt": "{a} m = … cm",
+          "answer": "a * 100",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "kali-1000"
+            }
+          ],
+          "explain": "1 m = 100 cm, jadi {a} m = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "{a} km = … m",
+          "answer": "a * 1000",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            }
+          ],
+          "explain": "1 km = 1.000 m, jadi {a} km = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30]
+          },
+          "prompt": "{a} cm = … mm",
+          "answer": "a * 10",
+          "unit": "mm",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "ditambah"
+            }
+          ],
+          "explain": "1 cm = 10 mm, jadi {a} cm = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8]
+          },
+          "prompt": "{a} jam = … menit",
+          "answer": "a * 60",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 24",
+              "tag": "kali-24"
+            }
+          ],
+          "explain": "1 jam = 60 menit, jadi {a} jam = {answer}."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

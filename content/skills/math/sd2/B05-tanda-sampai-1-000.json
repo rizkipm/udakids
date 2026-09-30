@@ -1,0 +1,85 @@
+{
+  "id": "math.sd2.b5.tanda-sampai-1-000",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "B",
+  "order": 5,
+  "title": "Membandingkan dan mengurutkan — Level 5 — Tanda >, <, = sampai 1.000",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-B",
+    "common-core": "2.NBT.A.4"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9],
+            "p": [0, 9]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "Bandingkan ratusan dulu, lalu puluhan, lalu satuan. {a} {answer} {b}.",
+          "derived": {
+            "a": "h * 100 + t * 10 + o",
+            "b": "h * 100 + p * 10 + o"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9],
+            "p": [0, 9]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "Ratusan sama, puluhan sama: lihat satuan. {a} {answer} {b}.",
+          "derived": {
+            "a": "h * 100 + t * 10 + o",
+            "b": "h * 100 + t * 10 + p"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999]
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "explain": "Ratusan menentukan dulu. {a} {answer} {b}.",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          }
+        }
+      }
+    ]
+  }
+}

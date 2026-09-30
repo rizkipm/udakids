@@ -1,0 +1,106 @@
+{
+  "id": "sains.sd4.f1.panas-mengalir-ke-mana",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "F",
+  "order": 1,
+  "title": "Panas dan energi termal — Level 1 — Panas mengalir ke mana?",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 95],
+            "b": [15, 35]
+          },
+          "constraint": "a - b >= 10",
+          "words": {
+            "x": ["teh", "sup", "kopi", "susu"]
+          },
+          "prompt": "Semangkuk {x} bersuhu {a} °C diletakkan di ruangan bersuhu {b} °C. Ke mana panas mengalir?",
+          "answer": "1",
+          "labels": {
+            "1": "Dari mangkuk ke udara",
+            "2": "Dari udara ke mangkuk"
+          },
+          "explain": "Panas mengalir dari yang lebih panas ({a} °C) ke yang lebih dingin ({b} °C)."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 95],
+            "b": [5, 95]
+          },
+          "constraint": "abs(a - b) >= 10",
+          "prompt": "Benda A bersuhu {a} °C disentuhkan ke benda B bersuhu {b} °C. Ke mana panas mengalir?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Dari A ke B",
+            "2": "Dari B ke A"
+          },
+          "explain": "Panas mengalir dari suhu tinggi ke suhu rendah. Bandingkan {a} °C dan {b} °C."
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Es batu dimasukkan ke dalam teh hangat. Ke mana panas mengalir?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dari teh ke es batu"
+                  },
+                  "say": "Dari teh ke es batu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dari es batu ke teh"
+                  },
+                  "say": "Dari es batu ke teh",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak ada panas yang mengalir"
+                  },
+                  "say": "Tidak ada panas yang mengalir",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dari gelas ke udara saja"
+                  },
+                  "say": "Dari gelas ke udara saja",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panas selalu mengalir dari benda yang lebih panas ke benda yang lebih dingin.",
+              "source": "Panas berpindah dari benda bersuhu tinggi ke benda bersuhu rendah sampai suhunya sama — NGSS 4-PS3-2; Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 4"
+            }
+          ]
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "math.sd1.p7.menjumlah-dengan-bingkai-sepuluh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "P",
+  "order": 7,
+  "title": "Strategi penjumlahan sampai 20 — Level 7 — Menjumlah dengan bingkai sepuluh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-P",
+    "cc": "1.OA.B.3, 1.OA.C.5, 1.OA.C.6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 9],
+            "b": [2, 9]
+          },
+          "prompt": "Bingkai pertama berisi {a}, bingkai kedua {b}. Isi penuh bingkai pertama dulu. {a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{a} perlu {=10-a} lagi untuk 10. Sisanya {=a+b-10}. 10 + {=a+b-10} = {answer}.",
+          "constraint": "a + b > 10",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "frame",
+                  "filled": "=a",
+                  "size": 10
+                },
+                {
+                  "kind": "frame",
+                  "filled": "=b",
+                  "size": 10
+                }
+              ]
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-sepuluh"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 10],
+            "b": [2, 9]
+          },
+          "prompt": "Ada {a} titik di bingkai 20. Tambah {b} titik lagi. Berapa semuanya?",
+          "answer": "a + b",
+          "explain": "Penuhkan 10 dulu, lalu hitung sisanya: {answer}.",
+          "constraint": "a + b > 10 && a + b <= 20",
+          "stimulus": [
+            {
+              "kind": "frame",
+              "filled": "=a",
+              "size": 20
+            }
+          ],
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-sepuluh"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

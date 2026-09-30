@@ -1,0 +1,47 @@
+{
+  "id": "math.sd1.oo4.menabung-setiap-hari",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "OO",
+  "order": 4,
+  "title": "Literasi keuangan — Level 4 — Menabung setiap hari",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-OO"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "c": {
+        "values": [500, 1000, 2000]
+      },
+      "h": [2, 5]
+    },
+    "prompt": "Setiap hari {nama} menabung Rp{c}. Berapa tabungannya setelah {h} hari?",
+    "answer": "c * h",
+    "explain": "{h} × Rp{c} = {answer}.",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Raka", "Dimas", "Budi", "Adit", "Tegar"]
+    },
+    "constraint": "c * h <= 10000",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "c * h + c",
+        "tag": "lebih-satu-hari"
+      },
+      {
+        "expr": "c * h - c",
+        "tag": "kurang-satu-hari"
+      },
+      {
+        "expr": "c + h",
+        "tag": "menjumlah"
+      }
+    ]
+  }
+}

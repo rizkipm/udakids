@@ -1,0 +1,100 @@
+{
+  "id": "sains.sd4.d6.magnet-mana-yang-lebih-kuat",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd4",
+  "category": "D",
+  "order": 6,
+  "title": "Magnet — Level 6 — Magnet mana yang lebih kuat?",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30]
+          },
+          "constraint": "a != b",
+          "prompt": "Pada jarak sama, magnet A menarik {a} klip dan magnet B menarik {b} klip. Magnet mana yang lebih kuat?",
+          "answer": "(a > b) + 2 * (a < b)",
+          "labels": {
+            "1": "Magnet A",
+            "2": "Magnet B"
+          },
+          "explain": "Magnet yang menarik lebih banyak klip pada jarak sama lebih kuat. Bandingkan {a} dan {b}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30],
+            "c": [2, 30]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Tabel menunjukkan banyak paku kecil yang terangkat tiap magnet. Magnet mana yang paling kuat?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Magnet", "Paku terangkat"],
+              "rows": [
+                ["Batang", "=a"],
+                ["Ladam", "=b"],
+                ["Cincin", "=c"]
+              ]
+            }
+          ],
+          "answer": "(a > b && a > c) + 2 * (b > a && b > c) + 3 * (c > a && c > b)",
+          "labels": {
+            "1": "Batang",
+            "2": "Ladam",
+            "3": "Cincin"
+          },
+          "explain": "Paku terangkat: batang {a}, ladam {b}, cincin {c}. Yang terbanyak paling kuat."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30],
+            "c": [2, 30]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Tabel menunjukkan banyak klip yang ditarik tiap magnet. Magnet mana yang paling lemah?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Magnet", "Klip ditarik"],
+              "rows": [
+                ["P", "=a"],
+                ["Q", "=b"],
+                ["R", "=c"]
+              ]
+            }
+          ],
+          "answer": "(a < b && a < c) + 2 * (b < a && b < c) + 3 * (c < a && c < b)",
+          "labels": {
+            "1": "Magnet P",
+            "2": "Magnet Q",
+            "3": "Magnet R"
+          },
+          "explain": "Klip ditarik: P {a}, Q {b}, R {c}. Yang paling sedikit paling lemah."
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

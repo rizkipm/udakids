@@ -1,0 +1,44 @@
+{
+  "id": "math.sd2.cc1.hitung-uang-kertas-yang-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "CC",
+  "order": 1,
+  "title": "Uang sampai Rp100.000 — Level 1 — Hitung uang kertas yang sama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A (pengayaan) / B: uang dalam ribuan",
+    "kognitif": "knowing",
+    "ixlRef": "G2-CC"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 10],
+      "c": {
+        "values": [1000, 2000, 5000, 10000]
+      }
+    },
+    "prompt": "Ada {n} lembar uang Rp{c}. Berapa rupiah semuanya?",
+    "answer": "n * c",
+    "explain": "Hitung loncat {c}: {answer}.",
+    "constraint": "n * c <= 20000",
+    "unit": "rupiah",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "banyak-lembar-bukan-nilai"
+      },
+      {
+        "expr": "(n + 1) * c",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(n - 1) * c",
+        "tag": "kurang-satu"
+      }
+    ]
+  }
+}

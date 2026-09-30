@@ -1,0 +1,30 @@
+{
+  "id": "math.sd1.jj9.bilangan-yang-hilang-dalam-pola",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "JJ",
+  "order": 9,
+  "title": "Pola — Level 9 — Bilangan yang hilang dalam pola",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-JJ"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [0, 50],
+      "d": {
+        "values": [1, 2, 5, 10]
+      }
+    },
+    "prompt": "{a}, {=a+d}, …, {=a+3*d}, {=a+4*d}. Bilangan yang hilang?",
+    "answer": "a + 2 * d",
+    "explain": "Setiap langkah +{d}: {=a+d} + {d} = {answer}.",
+    "constraint": "a + 4 * d <= 100",
+    "distractors": ["a + 2 * d + 1", "a + 2 * d - 1", "a + d + 1"]
+  }
+}

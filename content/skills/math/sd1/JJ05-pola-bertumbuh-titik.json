@@ -1,0 +1,59 @@
+{
+  "id": "math.sd1.jj5.pola-bertumbuh-titik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "JJ",
+  "order": 5,
+  "title": "Pola — Level 5 — Pola bertumbuh: titik",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-JJ"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "d": [1, 4]
+    },
+    "prompt": "Banyak titik bertambah sama setiap langkah. Berapa titik berikutnya?",
+    "answer": "a + 3 * d",
+    "explain": "Setiap langkah bertambah {d}: {a}, {=a+d}, {=a+2*d}, {answer}.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "dots",
+            "count": "=a",
+            "layout": "row"
+          },
+          {
+            "kind": "dots",
+            "count": "=a+d",
+            "layout": "row"
+          },
+          {
+            "kind": "dots",
+            "count": "=a+2*d",
+            "layout": "row"
+          },
+          {
+            "kind": "blank"
+          }
+        ]
+      }
+    ],
+    "distractors": [
+      {
+        "expr": "a + 2 * d",
+        "tag": "tidak-bertambah"
+      },
+      "a + 3 * d + 1",
+      "a + 3 * d - 1"
+    ]
+  }
+}

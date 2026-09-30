@@ -1,0 +1,41 @@
+{
+  "id": "math.sd2.w2.memecah-bilangan-untuk-menjumlah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "W",
+  "order": 2,
+  "title": "Tambah-kurang sampai 1.000 — Level 2 — Memecah bilangan untuk menjumlah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-W"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [100, 599],
+      "b": [111, 399]
+    },
+    "prompt": "{a} + {b} = {a} + {=floor(b/100)*100} + {=b%100} = …",
+    "answer": "a + b",
+    "explain": "{a} + {=floor(b/100)*100} = {=a+floor(b/100)*100}, lalu + {=b%100} = {answer}.",
+    "constraint": "b % 100 >= 10",
+    "distractors": [
+      {
+        "expr": "a + b - 10",
+        "tag": "lupa-menyimpan"
+      },
+      {
+        "expr": "a + b + 10",
+        "tag": "salah-simpan"
+      },
+      {
+        "expr": "a + b - 100",
+        "tag": "lupa-menyimpan-puluhan"
+      }
+    ]
+  }
+}

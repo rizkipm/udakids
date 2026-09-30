@@ -1,0 +1,67 @@
+{
+  "id": "math.sd2.q7.seimbangkan-persamaan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Q",
+  "order": 7,
+  "title": "Operasi campuran dua angka — Level 7 — Seimbangkan persamaan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-Q",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 50],
+            "b": [11, 49],
+            "c": [10, 60]
+          },
+          "prompt": "{a} + {b} = … + {c}",
+          "answer": "a + b - c",
+          "explain": "Ruas kiri {=a+b}. {answer} + {c} = {=a+b}.",
+          "mode": "input",
+          "constraint": "a + b > c && c != a && c != b"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 99],
+            "b": [10, 29],
+            "c": [30, 99]
+          },
+          "prompt": "{a} − {b} = {c} − …",
+          "answer": "c - a + b",
+          "explain": "Ruas kiri {=a-b}. {c} − {answer} = {=a-b}.",
+          "mode": "input",
+          "constraint": "c >= a - b && c != a"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 40],
+            "b": [11, 30],
+            "c": [50, 99]
+          },
+          "prompt": "{a} + {b} = {c} − …",
+          "answer": "c - a - b",
+          "explain": "Ruas kiri {=a+b}. {c} − {answer} = {=a+b}.",
+          "mode": "input",
+          "constraint": "c > a + b"
+        }
+      }
+    ]
+  }
+}

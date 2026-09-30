@@ -1,0 +1,95 @@
+{
+  "id": "math.sd1.c1.loncat-dua",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "C",
+  "order": 1,
+  "title": "Membilang loncat — Level 1 — Loncat dua",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-C",
+    "ccss": "1.NBT.A.1 / 1.NBT.C.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 22]
+          },
+          "prompt": "Loncat dua: {=2*k}, {=2*k+2}, {=2*k+4}, … Angka berikutnya?",
+          "answer": "2 * k + 6",
+          "explain": "Setiap loncatan bertambah 2: {=2*k+4} + 2 = {answer}.",
+          "distractors": [
+            {
+              "expr": "2 * k + 5",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "2 * k + 8",
+              "tag": "melompat"
+            },
+            "2 * k + 7"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 22]
+          },
+          "prompt": "Loncat dua: {=2*k}, …, {=2*k+4}, {=2*k+6}. Angka yang hilang?",
+          "answer": "2 * k + 2",
+          "explain": "{=2*k} + 2 = {answer}, lalu {answer} + 2 = {=2*k+4}.",
+          "distractors": [
+            {
+              "expr": "2 * k + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "2 * k + 3",
+              "tag": "lain"
+            },
+            {
+              "expr": "2 * k + 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 10]
+          },
+          "prompt": "Ada {k} pasang sandal. Satu pasang = 2 sandal. Hitung loncat dua: berapa sandal semuanya?",
+          "answer": "2 * k",
+          "explain": "Hitung loncat dua sebanyak {k} kali: {answer} sandal.",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "menghitung-pasang"
+            },
+            {
+              "expr": "2 * k + 2",
+              "tag": "lebih-satu-loncat"
+            },
+            {
+              "expr": "2 * k - 2",
+              "tag": "kurang-satu-loncat"
+            }
+          ],
+          "choices": 3
+        }
+      }
+    ]
+  }
+}

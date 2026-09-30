@@ -1,0 +1,125 @@
+{
+  "id": "math.sd1.b7.papan-bilangan-sampai-120",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "B",
+  "order": 7,
+  "title": "Membilang sampai 120 — Level 7 — Papan bilangan sampai 120",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-B",
+    "ccss": "1.NBT.A.1",
+    "pengayaan": "bilangan 101-120 (CCSS 1.NBT.A.1), di atas CP Fase A (sampai 100)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [92, 119]
+          },
+          "prompt": "Angka berapa yang hilang di papan bilangan?",
+          "answer": "x",
+          "explain": "Baris ini naik satu-satu: {=x-1}, {answer}, {=x+1}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": 91,
+              "end": 120,
+              "columns": 10,
+              "blanks": ["=x"]
+            }
+          ],
+          "distractors": [
+            "x + 1",
+            "x - 1",
+            {
+              "expr": "x + 10",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "salah-baris"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [81, 110]
+          },
+          "prompt": "Pada papan bilangan, angka berapa yang tepat di bawah {x}?",
+          "answer": "x + 10",
+          "explain": "Turun satu baris berarti bertambah 10: {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 20",
+              "columns": 10,
+              "blanks": ["=x+10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x + 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x - 10",
+              "tag": "arah-atas"
+            },
+            {
+              "expr": "x + 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [101, 110]
+          },
+          "prompt": "Pada papan bilangan, angka berapa yang tepat di atas {x}?",
+          "answer": "x - 10",
+          "explain": "Naik satu baris berarti berkurang 10: {answer}.",
+          "stimulus": [
+            {
+              "kind": "number-chart",
+              "start": "=floor((x - 1) / 10) * 10 - 9",
+              "end": "=floor((x - 1) / 10) * 10 + 10",
+              "columns": 10,
+              "blanks": ["=x-10"],
+              "highlight": ["=x"]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "x - 1",
+              "tag": "arah-samping"
+            },
+            {
+              "expr": "x + 10",
+              "tag": "arah-bawah"
+            },
+            {
+              "expr": "x - 11",
+              "tag": "diagonal"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

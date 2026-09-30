@@ -1,0 +1,87 @@
+{
+  "id": "math.sd2.h7.mengurangi-nol-dan-semuanya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "H",
+  "order": 7,
+  "title": "Strategi pengurangan satu angka — Level 7 — Mengurangi nol dan semuanya",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-H",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20]
+          },
+          "prompt": "{a} − 0 = …",
+          "answer": "a",
+          "explain": "Dikurangi 0 tidak berubah: {answer}.",
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "nol-menghapus"
+            },
+            "a - 1",
+            "a + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20]
+          },
+          "prompt": "{a} − {a} = …",
+          "answer": "0",
+          "explain": "Diambil semuanya, tidak ada yang tersisa: 0.",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            "1",
+            {
+              "expr": "2 * a",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20]
+          },
+          "prompt": "{a} − … = 0",
+          "answer": "a",
+          "explain": "Ambil semuanya: {a} − {a} = 0.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20]
+          },
+          "prompt": "{a} − … = {a}",
+          "answer": "0",
+          "explain": "Supaya tetap {a}, kurangi 0.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

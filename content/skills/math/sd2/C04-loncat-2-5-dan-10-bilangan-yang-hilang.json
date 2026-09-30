@@ -1,0 +1,47 @@
+{
+  "id": "math.sd2.c4.loncat-2-5-dan-10-bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "C",
+  "order": 4,
+  "title": "Loncat hitung dan pola bi — Level 4 — Loncat 2, 5, dan 10: bilangan yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-C",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [0, 15],
+      "d": {
+        "values": [2, 5, 10]
+      }
+    },
+    "prompt": "{a}, {=a+d}, …, {=a+3*d}, {=a+4*d}. Bilangan yang hilang?",
+    "answer": "a + 2 * d",
+    "explain": "Loncatannya {d}: {=a+d} + {d} = {answer}.",
+    "derived": {
+      "a": "k * d"
+    },
+    "constraint": "a + 4 * d <= 100",
+    "distractors": [
+      {
+        "expr": "a + 2 * d + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + d + 1",
+        "tag": "tambah-satu"
+      },
+      {
+        "expr": "a + 3 * d",
+        "tag": "loncat-lebih"
+      }
+    ]
+  }
+}

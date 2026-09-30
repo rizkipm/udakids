@@ -1,0 +1,47 @@
+{
+  "id": "math.sd2.a8.bilangan-tepat-di-tengah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "A",
+  "order": 8,
+  "title": "Membilang — Level 8 — Bilangan tepat di tengah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "2-A",
+    "common-core": "2.NBT.A.2"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [10, 90],
+      "h": {
+        "values": [5, 10, 50]
+      }
+    },
+    "prompt": "Bilangan berapa yang tepat di tengah antara {a} dan {=a+2*h} pada garis bilangan?",
+    "answer": "a + h",
+    "explain": "Jaraknya {=2*h}. Separuhnya {h}. {a} + {h} = {answer}.",
+    "derived": {
+      "a": "k * 10"
+    },
+    "constraint": "a + 2 * h <= 1000",
+    "distractors": [
+      {
+        "expr": "a + 2 * h",
+        "tag": "ujung"
+      },
+      {
+        "expr": "a + h + 10",
+        "tag": "lebih-sepuluh"
+      },
+      {
+        "expr": "a + h - 5",
+        "tag": "lain"
+      }
+    ]
+  }
+}

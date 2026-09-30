@@ -1,0 +1,47 @@
+{
+  "id": "math.sd2.k7.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "K",
+  "order": 7,
+  "title": "Soal cerita campuran satu angka — Level 7 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-K",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "b": [2, 9],
+      "c": [1, 9]
+    },
+    "prompt": "{nama} punya {a} {buah}, dibelikan {b} lagi, lalu {c} dimakan. Berapa {buah} sekarang?",
+    "answer": "a + b - c",
+    "explain": "Langkah 1: {a} + {b} = {=a+b}. Langkah 2: {=a+b} − {c} = {answer}.",
+    "constraint": "c < a + b",
+    "words": {
+      "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+      "buah": ["jeruk", "salak", "rambutan", "jambu", "mangga", "manggis"]
+    },
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-langkah-2"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "semua-ditambah"
+      },
+      {
+        "expr": "a - b + c",
+        "tag": "operasi-tertukar"
+      }
+    ]
+  }
+}

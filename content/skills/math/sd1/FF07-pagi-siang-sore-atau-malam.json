@@ -1,0 +1,117 @@
+{
+  "id": "math.sd1.ff7.pagi-siang-sore-atau-malam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "FF",
+  "order": 7,
+  "title": "Waktu — Level 7 — Pagi, siang, sore, atau malam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Matahari terbit",
+              "attrs": {
+                "waktu": "pagi"
+              }
+            },
+            {
+              "name": "Sarapan sebelum berangkat sekolah",
+              "attrs": {
+                "waktu": "pagi"
+              }
+            },
+            {
+              "name": "Upacara bendera hari Senin",
+              "attrs": {
+                "waktu": "pagi"
+              }
+            },
+            {
+              "name": "Makan siang",
+              "attrs": {
+                "waktu": "siang"
+              }
+            },
+            {
+              "name": "Matahari tepat di atas kepala",
+              "attrs": {
+                "waktu": "siang"
+              }
+            },
+            {
+              "name": "Mandi sore",
+              "attrs": {
+                "waktu": "sore"
+              }
+            },
+            {
+              "name": "Matahari terbenam",
+              "attrs": {
+                "waktu": "sore"
+              }
+            },
+            {
+              "name": "Makan malam bersama keluarga",
+              "attrs": {
+                "waktu": "malam"
+              }
+            },
+            {
+              "name": "Tidur malam, bulan dan bintang tampak",
+              "attrs": {
+                "waktu": "malam"
+              }
+            }
+          ],
+          "attr": "waktu",
+          "ask": "value",
+          "choices": 4,
+          "prompt": "{name} terjadi pada waktu …",
+          "explain": "{name}: {value}.",
+          "source": "KBBI: pagi, siang, sore, malam; CP Matematika Fase A (BSKAP 046/H/KR/2025): membaca waktu; Common Core 1.MD.B.3; cara menyebut jam (KBBI: setengah)"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [6, 7, 8, 9, 12, 13, 16, 17, 19, 20, 21]
+            },
+            "m": {
+              "values": [0, 30]
+            }
+          },
+          "prompt": "Jam ini menunjukkan waktu …",
+          "answer": "(h < 11) * 1 + (h >= 11 && h < 15) * 2 + (h >= 15 && h < 18) * 3 + (h >= 18) * 4",
+          "explain": "Pagi sampai sekitar pukul 11.00, siang sampai 15.00, sore sampai 18.00, sesudahnya malam. Jadi {answer}.",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            }
+          ],
+          "labels": {
+            "1": "pagi",
+            "2": "siang",
+            "3": "sore",
+            "4": "malam"
+          }
+        }
+      }
+    ]
+  }
+}

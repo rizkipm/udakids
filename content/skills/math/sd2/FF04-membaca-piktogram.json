@@ -1,0 +1,93 @@
+{
+  "id": "math.sd2.ff4.membaca-piktogram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 4,
+  "title": "Data dan diagram — Level 4 — Membaca piktogram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Berapa anak yang suka jeruk?",
+          "answer": "b",
+          "explain": "Hitung gambar di baris Jeruk: {answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buah kesukaan (1 gambar = 1 anak)",
+              "labels": ["Apel", "Jeruk", "Pisang"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "bintang"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "c",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Berapa anak yang suka apel dan pisang?",
+          "answer": "a + c",
+          "explain": "{a} + {c} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buah kesukaan (1 gambar = 1 anak)",
+              "labels": ["Apel", "Jeruk", "Pisang"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "bintang"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "satu-baris"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua"
+            },
+            {
+              "expr": "a + c + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

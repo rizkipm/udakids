@@ -1,0 +1,35 @@
+{
+  "id": "math.sd1.dd8.dua-angka-dua-angka-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "DD",
+  "order": 8,
+  "title": "Penjumlahan dua angka — Level 8 — Dua angka + dua angka dengan menyimpan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-DD"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [11, 78],
+      "b": [11, 78]
+    },
+    "prompt": "{a} + {b} = …",
+    "answer": "a + b",
+    "explain": "Satuan {=a%10} + {=b%10} = {=a%10+b%10}: simpan 1 puluhan. Hasil {answer}.",
+    "constraint": "a % 10 + b % 10 >= 10 && a + b <= 100",
+    "distractors": [
+      {
+        "expr": "a + b - 10",
+        "tag": "lupa-menyimpan"
+      },
+      "a + b + 10",
+      "a + b + 1"
+    ]
+  }
+}

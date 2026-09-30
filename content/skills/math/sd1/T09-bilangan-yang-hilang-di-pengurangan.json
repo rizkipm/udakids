@@ -1,0 +1,56 @@
+{
+  "id": "math.sd1.t9.bilangan-yang-hilang-di-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "T",
+  "order": 9,
+  "title": "Pengurangan sampai 20 — Level 9 — Bilangan yang hilang di pengurangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "G1-T",
+    "cc": "1.OA.C.6, 1.OA.D.8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "… − {b} = {c}",
+          "answer": "a",
+          "explain": "Bilangan awal = hasil + yang dikurangi: {c} + {b} = {a}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "c": [2, 12]
+          },
+          "prompt": "{a} − … = {c}",
+          "answer": "b",
+          "explain": "{a} − {b} = {c}.",
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b + c >= 11 && b + c <= 20",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

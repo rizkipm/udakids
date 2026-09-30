@@ -1,0 +1,174 @@
+{
+  "id": "math.sd1.ii6.membaca-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "II",
+  "order": 6,
+  "title": "Data dan diagram — Level 6 — Membaca tabel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-II"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "Tabel buah kesukaan. Berapa anak suka Mangga?",
+          "answer": "a",
+          "explain": "Baris Mangga: {a}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Anak"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Pisang", "=b"],
+                ["Salak", "=c"]
+              ],
+              "caption": "Buah kesukaan kelas 1"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "c",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "total"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "Tabel buah kesukaan. Berapa anak suka Pisang?",
+          "answer": "b",
+          "explain": "Baris Pisang: {b}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Anak"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Pisang", "=b"],
+                ["Salak", "=c"]
+              ],
+              "caption": "Buah kesukaan kelas 1"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "c",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "total"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "Tabel buah kesukaan. Berapa anak suka Salak?",
+          "answer": "c",
+          "explain": "Baris Salak: {c}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Anak"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Pisang", "=b"],
+                ["Salak", "=c"]
+              ],
+              "caption": "Buah kesukaan kelas 1"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "b",
+              "tag": "salah-baris"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "total"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Tabel buah kesukaan. Berapa anak semuanya?",
+          "answer": "a + b + c",
+          "explain": "{a} + {b} + {c} = {answer}.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Anak"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Pisang", "=b"],
+                ["Salak", "=c"]
+              ],
+              "caption": "Buah kesukaan kelas 1"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "kurang-satu-baris"
+            },
+            {
+              "expr": "max(a, max(b, c))",
+              "tag": "terbanyak"
+            },
+            "a + b + c + 1"
+          ]
+        }
+      }
+    ]
+  }
+}

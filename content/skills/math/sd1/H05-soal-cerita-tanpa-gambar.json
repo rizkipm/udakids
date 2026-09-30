@@ -1,0 +1,122 @@
+{
+  "id": "math.sd1.h5.soal-cerita-tanpa-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "H",
+  "order": 5,
+  "title": "Soal cerita penjumlahan sampai 10 — Level 5 — Soal cerita tanpa gambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-H",
+    "ccss": "1.OA.A.1 / 1.OA.A.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Di kolam ada {a} ikan. Ayah menambahkan {b} ikan lagi. Berapa ikan di kolam sekarang?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} ikan.",
+          "constraint": "a + b <= 10",
+          "distractors": [
+            "a + b + 1",
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "{nama} memetik {a} rambutan, lalu memetik {b} lagi. Berapa rambutan yang dipetik {nama}?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} rambutan.",
+          "constraint": "a + b <= 10",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Intan"
+            ]
+          },
+          "distractors": [
+            "a + b + 1",
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Ada {a} anak laki-laki dan {b} anak perempuan bermain gobak sodor. Berapa anak semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} anak.",
+          "constraint": "a + b <= 10",
+          "distractors": [
+            "a + b + 1",
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            },
+            "a + b - 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Di rak ada {a} buku cerita dan {b} buku gambar. Berapa buku semuanya?",
+          "answer": "a + b",
+          "explain": "{a} + {b} = {answer} buku.",
+          "constraint": "a + b <= 10",
+          "distractors": [
+            "a + b + 1",
+            {
+              "expr": "b",
+              "tag": "hanya-satu-kelompok"
+            },
+            "a + b - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

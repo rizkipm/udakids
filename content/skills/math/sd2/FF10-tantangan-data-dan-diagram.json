@@ -1,0 +1,2241 @@
+{
+  "id": "math.sd2.ff10.tantangan-data-dan-diagram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "FF",
+  "order": 10,
+  "title": "Data dan diagram — Level 10 — Tantangan data dan diagram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A (pengayaan) / B: diagram batang",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-FF"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15],
+            "c": [2, 15],
+            "d": [2, 15]
+          },
+          "prompt": "Berapa buku yang dibaca selama empat hari?",
+          "answer": "a + b + c + d",
+          "explain": "{answer}.",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buku yang dibaca kelas 2",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "buku"
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9]
+          },
+          "prompt": "Berapa lebih banyak anak yang suka apel daripada pisang?",
+          "answer": "a - c",
+          "explain": "{answer}.",
+          "constraint": "a > c",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Buah kesukaan (1 gambar = 1 anak)",
+              "labels": ["Apel", "Jeruk", "Pisang"],
+              "values": ["=a", "=b", "=c"],
+              "pictogram": "bintang"
+            }
+          ],
+          "mode": "input"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Berapa pensil yang panjangnya 17 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 17 cm: 0.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["", "X", "", "X", "X"],
+                    ["", "X", "", "X", "X"],
+                    ["", "", "", "X", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19 cm"
+                  },
+                  "say": "19 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17 cm"
+                  },
+                  "say": "17 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 cm"
+                  },
+                  "say": "16 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 19 cm punya X paling banyak (3).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["", "X", "X", "", "X"],
+                    ["", "X", "X", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 17 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 17 cm: 0.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["X", "X", "", "X", "X"],
+                    ["", "X", "", "X", ""],
+                    ["", "X", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 12 cm punya X paling banyak (3).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "", "X", "X", "X"],
+                    ["X", "", "X", "", ""],
+                    ["", "", "X", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 17 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 17 cm: 2.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["", "X", "X", "", "X"],
+                    ["", "X", "", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 cm"
+                  },
+                  "say": "16 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 16 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["12 cm", "13 cm", "14 cm", "15 cm", "16 cm"],
+                  "rows": [
+                    ["X", "", "X", "X", "X"],
+                    ["X", "", "X", "X", "X"],
+                    ["X", "", "", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 14 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 14 cm: 2.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["X", "X", "", "X", "X"],
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 8 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 8 cm: 4.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["8 cm", "9 cm", "10 cm", "11 cm", "12 cm"],
+                  "rows": [
+                    ["X", "X", "", "", ""],
+                    ["X", "X", "", "", ""],
+                    ["X", "", "", "", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11 cm"
+                  },
+                  "say": "11 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 14 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["X", "X", "", "", "X"],
+                    ["X", "", "", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 12 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 12 cm: 4.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["8 cm", "9 cm", "10 cm", "11 cm", "12 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["X", "X", "X", "", "X"],
+                    ["", "X", "X", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18 cm"
+                  },
+                  "say": "18 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 cm"
+                  },
+                  "say": "16 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17 cm"
+                  },
+                  "say": "17 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 18 cm punya X paling banyak (2).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["X", "X", "", "X", ""],
+                    ["", "", "", "X", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 11 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 11 cm: 0.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["8 cm", "9 cm", "10 cm", "11 cm", "12 cm"],
+                  "rows": [
+                    ["X", "X", "", "", "X"],
+                    ["", "X", "", "", "X"],
+                    ["", "X", "", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 cm"
+                  },
+                  "say": "9 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11 cm"
+                  },
+                  "say": "11 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 cm"
+                  },
+                  "say": "8 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 9 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["8 cm", "9 cm", "10 cm", "11 cm", "12 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["", "X", "X", "X", "X"],
+                    ["", "X", "", "", ""],
+                    ["", "X", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 cm"
+                  },
+                  "say": "16 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 12 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["12 cm", "13 cm", "14 cm", "15 cm", "16 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", ""],
+                    ["X", "X", "X", "X", ""],
+                    ["X", "X", "X", "X", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 12 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 12 cm: 4.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["12 cm", "13 cm", "14 cm", "15 cm", "16 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", "X"],
+                    ["X", "", "X", "", "X"],
+                    ["X", "", "", "", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 11 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 11 cm: 1.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["", "X", "X", "X", ""],
+                    ["", "", "X", "X", ""],
+                    ["", "", "X", "", ""],
+                    ["", "", "X", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 12 cm punya X paling banyak (3).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["12 cm", "13 cm", "14 cm", "15 cm", "16 cm"],
+                  "rows": [
+                    ["X", "X", "", "X", "X"],
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 13 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 13 cm: 0.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "X", "", "X"],
+                    ["X", "X", "", "", "X"],
+                    ["X", "X", "", "", "X"],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 cm"
+                  },
+                  "say": "16 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19 cm"
+                  },
+                  "say": "19 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18 cm"
+                  },
+                  "say": "18 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17 cm"
+                  },
+                  "say": "17 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 16 cm punya X paling banyak (3).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["X", "X", "", "X", "X"],
+                    ["", "X", "", "X", ""],
+                    ["", "X", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 18 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 18 cm: 3.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["15 cm", "16 cm", "17 cm", "18 cm", "19 cm"],
+                  "rows": [
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11 cm"
+                  },
+                  "say": "11 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 14 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "", "X", "X"],
+                    ["X", "X", "", "X", "X"],
+                    ["", "X", "", "", "X"],
+                    ["", "", "", "", "X"]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 11 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 11 cm: 2.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["8 cm", "9 cm", "10 cm", "11 cm", "12 cm"],
+                  "rows": [
+                    ["X", "", "X", "X", "X"],
+                    ["X", "", "X", "X", "X"],
+                    ["X", "", "", "", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa pensil yang panjangnya 13 cm?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "salah-kolom"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-kolom"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung X di kolom 13 cm: 3.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "X", "X", ""],
+                    ["X", "X", "", "X", ""],
+                    ["X", "", "", "X", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Panjang berapa yang paling banyak dimiliki pensil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11 cm"
+                  },
+                  "say": "11 cm",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 cm"
+                  },
+                  "say": "14 cm",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kolom 10 cm punya X paling banyak (4).",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["10 cm", "11 cm", "12 cm", "13 cm", "14 cm"],
+                  "rows": [
+                    ["X", "X", "", "", "X"],
+                    ["X", "X", "", "", "X"],
+                    ["X", "X", "", "", ""],
+                    ["X", "", "", "", ""]
+                  ],
+                  "caption": "Panjang pensil kelas 2 (1 X = 1 pensil)"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka pisang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Pisang: ||||/ || = 7 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Pisang", "||||/ ||"],
+                    ["Jeruk", "||||/ ||||/"],
+                    ["Pepaya", "||||/ |||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pepaya"
+                  },
+                  "say": "Pepaya",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Salak"
+                  },
+                  "say": "Salak",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jeruk punya turus paling banyak: 5.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Pepaya", "||||"],
+                    ["Salak", "||"],
+                    ["Jeruk", "||||/"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka pisang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Pisang: |||| = 4 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||||/ ||"],
+                    ["Jeruk", "||||/ ||||/"],
+                    ["Pisang", "||||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pepaya"
+                  },
+                  "say": "Pepaya",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rambutan punya turus paling banyak: 9.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Rambutan", "||||/ ||||"],
+                    ["Jeruk", "||||/"],
+                    ["Pepaya", "||||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka rambutan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Rambutan: ||||/ = 5 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||"],
+                    ["Rambutan", "||||/"],
+                    ["Salak", "||||/ ||||/"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Salak"
+                  },
+                  "say": "Salak",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pisang"
+                  },
+                  "say": "Pisang",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jeruk punya turus paling banyak: 6.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Salak", "||||"],
+                    ["Jeruk", "||||/ |"],
+                    ["Pisang", "|||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka pepaya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Pepaya: ||||/ ||||/ || = 12 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Pepaya", "||||/ ||||/ ||"],
+                    ["Salak", "||||/ |"],
+                    ["Pisang", "||||/ ||||/ |"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mangga"
+                  },
+                  "say": "Mangga",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jeruk punya turus paling banyak: 9.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||||/ |||"],
+                    ["Jeruk", "||||/ ||||"],
+                    ["Rambutan", "||||/ ||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka salak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Salak: |||| = 4 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||||/"],
+                    ["Pisang", "||||/ ||||/ |"],
+                    ["Salak", "||||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Salak"
+                  },
+                  "say": "Salak",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jeruk punya turus paling banyak: 9.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Jeruk", "||||/ ||||"],
+                    ["Rambutan", "|||"],
+                    ["Salak", "||||/"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka mangga?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Mangga: ||||/ ||||/ || = 12 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Rambutan", "||||/ ||||"],
+                    ["Mangga", "||||/ ||||/ ||"],
+                    ["Pepaya", "||||/ ||||/ |"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pisang"
+                  },
+                  "say": "Pisang",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Salak"
+                  },
+                  "say": "Salak",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rambutan punya turus paling banyak: 9.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Pisang", "||||"],
+                    ["Rambutan", "||||/ ||||"],
+                    ["Salak", "||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka jeruk?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Jeruk: |||| = 4 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Jeruk", "||||"],
+                    ["Salak", "||||/ ||||/"],
+                    ["Mangga", "||||/ ||||/ ||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pepaya"
+                  },
+                  "say": "Pepaya",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mangga"
+                  },
+                  "say": "Mangga",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rambutan punya turus paling banyak: 11.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Rambutan", "||||/ ||||/ |"],
+                    ["Pepaya", "||||/ |"],
+                    ["Mangga", "||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka salak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Salak: ||||/ ||||/ | = 11 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||||"],
+                    ["Pepaya", "||||/ |"],
+                    ["Salak", "||||/ ||||/ |"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rambutan"
+                  },
+                  "say": "Rambutan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mangga"
+                  },
+                  "say": "Mangga",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rambutan punya turus paling banyak: 11.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Jeruk", "||||"],
+                    ["Rambutan", "||||/ ||||/ |"],
+                    ["Mangga", "||||/ ||||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka mangga?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Mangga: |||| = 4 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Pepaya", "||||/ ||"],
+                    ["Mangga", "||||"],
+                    ["Salak", "||||/ ||||/ ||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mangga"
+                  },
+                  "say": "Mangga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pisang"
+                  },
+                  "say": "Pisang",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mangga punya turus paling banyak: 8.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Mangga", "||||/ |||"],
+                    ["Pisang", "||||"],
+                    ["Jeruk", "||||/ ||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Berapa anak yang suka salak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10",
+                  "tag": "salah-baris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "salah-baris"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baris Salak: ||||/ |||| = 9 anak.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Salak", "||||/ ||||"],
+                    ["Jeruk", "||||/ |"],
+                    ["Pepaya", "|||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            },
+            {
+              "prompt": "Buah apa yang paling banyak disukai?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jeruk"
+                  },
+                  "say": "Jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pepaya"
+                  },
+                  "say": "Pepaya",
+                  "tag": "bukan-terbanyak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mangga"
+                  },
+                  "say": "Mangga",
+                  "tag": "bukan-terbanyak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jeruk punya turus paling banyak: 9.",
+              "source": "Common Core 2.MD.D.9–10 (diagram titik, piktogram, diagram batang); CP Matematika Fase A (BSKAP 046/H/KR/2025): turus dan piktogram",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Buah kesukaan", "Turus"],
+                  "rows": [
+                    ["Jeruk", "||||/ ||||"],
+                    ["Pepaya", "|||"],
+                    ["Mangga", "||||"]
+                  ],
+                  "caption": "||||/ = 5 anak"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

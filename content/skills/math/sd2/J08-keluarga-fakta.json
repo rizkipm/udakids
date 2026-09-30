@@ -1,0 +1,67 @@
+{
+  "id": "math.sd2.j8.keluarga-fakta",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "J",
+  "order": 8,
+  "title": "Operasi campuran satu angka — Level 8 — Keluarga fakta",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "2-J",
+    "common-core": "2.OA.B.2"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = {=a+b}. Maka {=a+b} − {b} = …",
+          "answer": "a",
+          "explain": "{answer}.",
+          "constraint": "a != b",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "a + b",
+              "tag": "total"
+            },
+            "a + 1"
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "c": [11, 18]
+          },
+          "prompt": "{c} − {a} = {=c-a}. Maka {a} + {=c-a} = …",
+          "answer": "c",
+          "explain": "Keluarga fakta {a}, {=c-a}, {c}: {answer}.",
+          "constraint": "c - a <= 9",
+          "distractors": [
+            "c + 1",
+            {
+              "expr": "a",
+              "tag": "bagian"
+            },
+            "c - 1"
+          ]
+        }
+      }
+    ]
+  }
+}

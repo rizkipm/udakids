@@ -1,0 +1,49 @@
+{
+  "id": "math.sd2.t4.penjumlahan-tanpa-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "T",
+  "order": 4,
+  "title": "Penjumlahan tiga angka — Level 4 — Penjumlahan tanpa menyimpan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-T"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h1": [1, 4],
+      "h2": [1, 4],
+      "t1": [0, 9],
+      "t2": [0, 9],
+      "s1": [0, 9],
+      "s2": [0, 9]
+    },
+    "prompt": "{a} + {b} = …",
+    "answer": "a + b",
+    "explain": "Jumlahkan satuan, puluhan, lalu ratusan: {answer}.",
+    "derived": {
+      "a": "h1 * 100 + t1 * 10 + s1",
+      "b": "h2 * 100 + t2 * 10 + s2"
+    },
+    "constraint": "t1 + t2 <= 9 && s1 + s2 <= 9",
+    "distractors": [
+      {
+        "expr": "a + b + 10",
+        "tag": "salah-puluhan"
+      },
+      {
+        "expr": "a + b + 100",
+        "tag": "salah-ratusan"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      }
+    ]
+  }
+}

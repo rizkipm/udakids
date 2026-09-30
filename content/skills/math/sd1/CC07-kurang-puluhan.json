@@ -1,0 +1,69 @@
+{
+  "id": "math.sd1.cc7.kurang-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "CC",
+  "order": 7,
+  "title": "Tambah dan kurang puluhan — Level 7 — Kurang puluhan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "kognitif": "applying",
+    "ixlRef": "G1-CC"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [1, 8]
+          },
+          "prompt": "{=a*10} − {=b*10} = …",
+          "answer": "a * 10 - b * 10",
+          "explain": "{a} puluhan − {b} puluhan = {=a-b} puluhan = {answer}.",
+          "constraint": "b < a",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10 + b * 10",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * 10 - b * 10 + 10",
+              "tag": "lebih-sepuluh"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [1, 8]
+          },
+          "prompt": "{=a*10} − … = {=b*10}",
+          "answer": "a * 10 - b * 10",
+          "explain": "{=a*10} − {answer} = {=b*10}.",
+          "constraint": "b < a",
+          "distractors": [
+            {
+              "expr": "a * 10 + b * 10",
+              "tag": "menjumlah"
+            },
+            "a * 10 - b * 10 + 10",
+            "a * 10 - b * 10 - 10"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd2.w3.kompensasi-untuk-menjumlah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "W",
+  "order": 3,
+  "title": "Tambah-kurang sampai 1.000 — Level 3 — Kompensasi untuk menjumlah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-W"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [1, 5],
+      "c": [1, 3],
+      "a": [120, 499]
+    },
+    "prompt": "{a} + {b} = {=a-c} + {=b+c} = …",
+    "answer": "a + b",
+    "explain": "Pindahkan {c} dari {a} ke {b} agar menjadi {=b+c}. Lalu {=a-c} + {=b+c} = {answer}.",
+    "derived": {
+      "b": "m * 100 - c"
+    },
+    "distractors": [
+      {
+        "expr": "a + b - c",
+        "tag": "lupa-kompensasi"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "kompensasi-dobel"
+      },
+      {
+        "expr": "a + b + 10",
+        "tag": "lain"
+      }
+    ]
+  }
+}

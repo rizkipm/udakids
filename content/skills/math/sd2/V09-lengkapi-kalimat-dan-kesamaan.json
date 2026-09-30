@@ -1,0 +1,62 @@
+{
+  "id": "math.sd2.v9.lengkapi-kalimat-dan-kesamaan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "V",
+  "order": 9,
+  "title": "Pengurangan tiga angka — Level 9 — Lengkapi kalimat dan kesamaan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "reasoning",
+    "ixlRef": "G2-V"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 999],
+            "b": [100, 299]
+          },
+          "prompt": "{a} − … = {=a-b}",
+          "answer": "b",
+          "explain": "{a} − {=a-b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [400, 999],
+            "b": [100, 300],
+            "c": [500, 999]
+          },
+          "prompt": "{a} − {b} = {c} − …",
+          "answer": "c - a + b",
+          "explain": "Kiri: {a} − {b} = {=a-b}. Jadi {c} − … = {=a-b}, bilangan yang hilang {answer}.",
+          "constraint": "c > a - b",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-kiri"
+            },
+            {
+              "expr": "c - a - b",
+              "tag": "salah-langkah"
+            },
+            {
+              "expr": "c - a + b + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

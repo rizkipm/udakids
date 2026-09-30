@@ -1,0 +1,54 @@
+{
+  "id": "math.sd1.f1.tukar-urutan-dengan-kubus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd1",
+  "category": "F",
+  "order": 1,
+  "title": "Strategi penjumlahan sampai 10 — Level 1 — Tukar urutan dengan kubus",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "G1-F",
+    "ccss": "1.OA.B.3 / 1.OA.C.5 / 1.OA.C.6"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 8],
+      "b": [1, 8]
+    },
+    "prompt": "{a} + {b} = {=a+b}. Berapa {b} + {a}?",
+    "answer": "a + b",
+    "explain": "Urutan ditukar, jumlahnya tetap sama: {b} + {a} = {answer}.",
+    "constraint": "a != b && a + b <= 10",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "cubes",
+            "counts": ["=a", "=b"],
+            "colors": ["merah", "biru"]
+          },
+          {
+            "kind": "cubes",
+            "counts": ["=b", "=a"],
+            "colors": ["biru", "merah"]
+          }
+        ]
+      }
+    ],
+    "distractors": [
+      "a + b + 1",
+      "a + b - 1",
+      {
+        "expr": "abs(a - b)",
+        "tag": "mengurangi"
+      }
+    ],
+    "choices": 3
+  }
+}

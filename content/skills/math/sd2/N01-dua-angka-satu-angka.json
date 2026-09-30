@@ -1,0 +1,72 @@
+{
+  "id": "math.sd2.n1.dua-angka-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "N",
+  "order": 1,
+  "title": "Penjumlahan dua angka — Level 1 — Dua angka + satu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "kognitif": "knowing",
+    "ixlRef": "2-N",
+    "common-core": "2.NBT.B.5"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 89],
+            "b": [1, 9]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Satuan dulu: {=a%10} + {b}. Hasil {answer}.",
+          "constraint": "a % 10 + b < 10",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 89],
+            "b": [2, 9]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "explain": "Satuan {=a%10} + {b} = {=a%10+b}, simpan 1 puluhan. Hasil {answer}.",
+          "constraint": "a % 10 + b >= 10",
+          "distractors": [
+            "a + b + 1",
+            "a + b - 1",
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "math.sd2.z4.membulatkan-ke-ratusan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "Z",
+  "order": 4,
+  "title": "Estimasi dan pembulatan — Level 4 — Membulatkan ke ratusan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "knowing",
+    "ixlRef": "G2-Z"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [101, 949]
+    },
+    "prompt": "Bulatkan {a} ke ratusan terdekat.",
+    "answer": "round(a / 100) * 100",
+    "explain": "Lihat angka puluhan {=floor(a/10)%10}: 0–4 ke bawah, 5–9 ke atas. {a} → {answer}.",
+    "constraint": "a % 100 != 0",
+    "distractors": [
+      {
+        "expr": "floor(a / 100) * 100 + 100 - (round(a / 100) - floor(a / 100)) * 100",
+        "tag": "arah-terbalik"
+      },
+      {
+        "expr": "round(a / 10) * 10",
+        "tag": "ke-puluhan"
+      },
+      {
+        "expr": "a",
+        "tag": "tidak-dibulatkan"
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "math.sd2.u7.strategi-kompensasi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "U",
+  "order": 7,
+  "title": "Strategi pengurangan tiga angka — Level 7 — Strategi kompensasi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A (pengayaan) / B: bilangan sampai 1.000",
+    "kognitif": "applying",
+    "ixlRef": "G2-U"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [1, 3],
+            "a": [620, 999]
+          },
+          "prompt": "{a} − {b} = {a} − {=b+c} + …",
+          "answer": "c",
+          "explain": "{b} dibulatkan ke {=b+c}. Karena mengurangi {c} terlalu banyak, tambahkan kembali {answer}.",
+          "derived": {
+            "b": "m * 100 - c"
+          },
+          "distractors": [
+            {
+              "expr": "c + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "m * 100",
+              "tag": "bilangan-bulat"
+            },
+            {
+              "expr": "c + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 5],
+            "c": [1, 3],
+            "a": [620, 999]
+          },
+          "prompt": "Pakai kompensasi: {a} − {b} = …",
+          "answer": "a - b",
+          "explain": "{a} − {=b+c} = {=a-b-c}, lalu + {c} = {answer}.",
+          "derived": {
+            "b": "m * 100 - c"
+          },
+          "distractors": [
+            {
+              "expr": "a - b - 2 * c",
+              "tag": "kompensasi-terbalik"
+            },
+            {
+              "expr": "a - b - c",
+              "tag": "lupa-kompensasi"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

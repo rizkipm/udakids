@@ -1,0 +1,76 @@
+{
+  "id": "math.sd2.k10.tantangan-soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd2",
+  "category": "K",
+  "order": 10,
+  "title": "Soal cerita campuran satu angka — Level 10 — Tantangan soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "kognitif": "reasoning",
+    "ixlRef": "2-K",
+    "common-core": "2.OA.A.1"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [1, 9]
+          },
+          "prompt": "{nama} punya {a} {buah}, dibelikan {b} lagi, lalu {c} dimakan. Berapa sekarang?",
+          "answer": "a + b - c",
+          "explain": "{answer}.",
+          "mode": "input",
+          "constraint": "c < a + b",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "buah": ["jeruk", "salak", "rambutan", "jambu", "mangga", "manggis"]
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 12],
+            "y": [1, 9]
+          },
+          "prompt": "Dua bilangan jumlahnya {s} dan selisihnya {d}. Bilangan yang lebih kecil?",
+          "answer": "y",
+          "explain": "Coba {x} dan {y}: jumlah {s}, selisih {d}.",
+          "mode": "input",
+          "constraint": "x > y",
+          "derived": {
+            "s": "x + y",
+            "d": "x - y"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{nama} punya {a} buku. {teman} punya {b} buku lebih banyak. Berapa buku {teman}?",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "mode": "input",
+          "words": {
+            "nama": ["Alya", "Sari", "Putri", "Nina", "Wulan", "Ayu", "Citra", "Dewi"],
+            "teman": ["Raka", "Budi", "Dimas", "Adit", "Tegar", "Bayu", "Fajar", "Joko"]
+          }
+        }
+      }
+    ]
+  }
+}
