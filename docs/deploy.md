@@ -96,7 +96,7 @@ pnpm build          # engine → apps/api/dist → apps/web/dist
 ```bash
 pnpm deploy:db
 # Migrasi database selesai.
-# skill: 1170 ditambahkan … dialog: 1 … admin dibuat: admin@sekolah.id
+# skill: 2880 ditambahkan … dialog: 1 … admin dibuat: admin@sekolah.id
 ```
 
 **B. Pindah dari laptop/server lama beserta SEMUA data** (akun, anak, progres):
