@@ -3,6 +3,7 @@ import {
   isReviewDue,
   type Catalog,
   type JagoState,
+  type PlayStatus,
   type SkillTemplate,
 } from '@little-coder/engine';
 import { api } from '../api/client';
@@ -92,7 +93,7 @@ export const bookKey = (c: { domain: string; grade: string }) => `${c.domain}/${
 /** Level terbuka pertama (belum lulus) di rak-rak ini = "lanjutkan belajar". */
 export function firstOpen(
   shelves: Shelf[],
-  statuses: Readonly<Record<string, 'locked' | 'open' | 'passed'>>,
+  statuses: Readonly<Record<string, PlayStatus>>,
 ): { shelf: Shelf; skill: SkillTemplate; level: number } | undefined {
   for (const shelf of shelves) {
     const i = shelf.skills.findIndex((k) => statuses[k.id] === 'open');

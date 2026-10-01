@@ -39,6 +39,13 @@ Keputusan di luar atau yang mengubah PRD. Status: **Disetujui** (oleh pemilik pr
 | D-032 | 2026-09-30 | Buku per kelas: Sains 1–4, Math 1–2 (1.560 level)    | Disetujui           |
 | D-033 | 2026-09-30 | Rak buku bergeser (10/halaman) + statistik realtime  | Disetujui           |
 | D-034 | 2026-09-30 | Sains Kindergarten (TK) + rak 9 buku/halaman         | Disetujui           |
+| D-035 | 2026-10-01 | Suara Momo: perintah & respons, Google Cloud TTS     | Disetujui           |
+| D-036 | 2026-10-01 | Paket berbayar, transfer manual, buku kas, komisi    | Disetujui           |
+| D-037 | 2026-10-01 | Anak daftar sendiri tanpa orang tua (tanpa email)    | Disetujui           |
+| D-038 | 2026-10-01 | Dasbor orang tua beranimasi + insight; landing harga | Disetujui           |
+| D-039 | 2026-10-01 | Sidebar bisa disembunyikan; laporan admin & guru     | Disetujui           |
+| D-040 | 2026-10-01 | Audit keamanan peran, email, rate limit, header      | Disetujui           |
+| D-041 | 2026-10-01 | Premium dari admin; status Free/Premium; direktori   | Disetujui           |
 
 ## D-001 — NestJS + PostgreSQL menggantikan Supabase
 
@@ -532,3 +539,191 @@ Tanggal 2026-09-30 · Status **Disetujui** (permintaan pemilik produk).
   - Pindai teks tanpa temuan selain spasi pada "...".
   - Satu level ("Sinar matahari dan tempat teduh") ditemukan memakai tabel panas/dingin makanan yang tidak sesuai topik;
     tabelnya diganti tabel terik/teduh.
+
+## D-035 — Suara Momo: hanya perintah soal & respons jawaban, dibuat sekali lalu di-cache
+
+Tanggal 2026-10-01 · Status **Disetujui** (pemilik produk: "khas suara Momo yang ceria dan lembut, hanya untuk perintah
+soal dan respons jawaban, bukan membacakan seluruh soal"; soal TK: "suara Momo, dibuat saat diputar").
+
+- **Yang bersuara Momo:**
+  - perintah per jenis soal (8 kalimat `vo_cmd_*`, mis. "Pilih satu jawaban yang paling tepat, ya.");
+  - respons jawaban: 5 `vo_right_*` dan 3 `vo_wrong_*`;
+  - skor ronde (`vo_score_0..100`) dan hasil (`vo_passed`, `vo_passed_last`, `vo_retry`, `vo_locked`, `vo_paid`).
+  - Total 32 kalimat, tersimpan di dialog (database `dialogs`, sumber `content/dialog/momo.id.json`), bisa disunting
+    admin. Validator konten mewajibkan semuanya ada.
+- **Kelas 1+:** hanya perintah yang dibacakan, bukan seluruh soal. **Basic (Pra-TK/TK):** kalimat soal dan pembahasan
+  dibacakan suara Momo yang dibuat saat pertama diputar lalu disimpan, karena anak belum bisa membaca (PRD A14).
+  Server menurunkan teksnya sendiri dari skill + seed + band, jadi browser tidak bisa meminta teks bebas.
+- **Penyedia:** Google Cloud Text-to-Speech, model Gemini-TTS (`gemini-2.5-flash-tts`), id-ID GA.
+  - Suara bawaan **Leda** dengan arahan gaya ceria, lembut, hangat, pelan, dan jelas; kecepatan 0,95. Semuanya bisa
+    diubah di admin.
+  - Kunci `GOOGLE_TTS_API_KEY` hanya ada di server. **Bukan** kunci Google AI Studio, karena syarat Gemini API
+    melarang aplikasi yang ditujukan untuk pengguna di bawah 18 tahun.
+- **Cache:**
+  - klip MP3 disimpan di PostgreSQL (`voice_clips`, kunci = SHA-256 model|suara|gaya|kecepatan|teks), jadi ikut
+    backup/restore dan tidak pernah dibuat ulang;
+  - disajikan dengan `Cache-Control: immutable`;
+  - perangkat menyimpan daftar kalimat untuk offline;
+  - batas `TTS_DAILY_LIMIT` (bawaan 3.000) klip baru per hari, ditambah batas per IP untuk soal Basic.
+- **Cadangan:** tanpa kunci, saat offline, atau bila klip belum mulai dalam 2,5 detik → suara browser seperti
+  sebelumnya.
+- **Pembuatan:** `pnpm voice:generate` (server: `node dist/cli/voice.js`), atau tombol "Buat semua suara" di
+  admin.
+- **Perkiraan biaya:** 32 kalimat < $0,01 sekali; soal Basic sekitar $0,0008 per kalimat baru, lalu gratis selamanya
+  karena di-cache.
+- **Tidak diambil:** suara anak laki-laki/perempuan sesuai gender anak. Menyimpan gender melanggar PRD A17, dan
+  Gemini-TTS tidak mendukung mengubah usia/gender lewat prompt.
+- **Teks umpan balik:** kata "Salah"/"Gagal" di layar diganti "Belum tepat"/"Hampir!" (aturan UX anak).
+
+## D-036 — Paket berbayar, pembayaran transfer manual, buku kas, dan komisi owner
+
+Tanggal 2026-10-01 · Status **Disetujui** (pemilik produk; mengubah PRD A2/A17 yang menaruh pembayaran di luar MVP).
+
+- **Kunci berbayar:** level 1–N setiap topik gratis (N diatur admin, bawaan 2); level berikutnya perlu paket.
+  - Dicek di perangkat (status `paid`) dan di server: sync menolak ronde level berbayar yang belum dibeli.
+  - Anak hanya melihat "Level ini perlu dibuka oleh Ayah atau Bunda", **tanpa harga atau ajakan membeli**.
+  - Pembayaran hanya ada di area orang tua.
+  - Anak di kelas workshop yang masih buka mendapat akses penuh (dapat dimatikan: `classFullAccess`).
+  - Paywall bisa dimatikan total.
+- **Paket diatur admin:**
+  - nama, deskripsi, cakupan (semua buku termasuk buku baru, atau buku tertentu), masa aktif (selamanya / N hari),
+    harga rupiah;
+  - diskon persen (1–90%) atau nominal, dengan periode opsional; harga akhir minimal Rp1.000;
+  - orang tua melihat harga normal (dicoret) dan harga diskon;
+  - hak akses berlaku untuk semua anak di keluarga; membeli ulang paket berbatas waktu memperpanjang dari akhir masa
+    aktif.
+- **Transfer manual:**
+  - admin mengisi rekening bank / e-wallet (nama, nomor, atas nama, petunjuk);
+  - total = harga akhir + **kode unik 1–499 sehingga total selalu ganjil** (mis. 35.000 → 35.111), unik di antara
+    pesanan yang masih terbuka;
+  - pesanan kedaluwarsa setelah N jam (bawaan 24);
+  - orang tua mengunggah bukti (JPG/PNG/WEBP/PDF ≤ 2 MB, jenis dicek dari isi file), lalu admin menyetujui atau
+    menolak dengan alasan; bukti yang ditolak bisa diunggah ulang;
+  - paket & rekening disalin ke pesanan, jadi riwayat tidak berubah; ada riwayat transaksi untuk orang tua dan admin.
+- **Buku kas:**
+  - pemasukan otomatis dari pesanan yang disetujui (tidak bisa diubah manual);
+  - pengeluaran/pemasukan lain diinput admin;
+  - ringkasan per bulan dan per tahun (tanggal WIB).
+- **Komisi owner:**
+  - banyak owner, persen dinamis (basis poin, mis. 12,5%), total owner aktif maksimal 100%;
+  - komisi = persen × laba bersih bulan itu (pemasukan − pengeluaran; rugi → 0);
+  - bulan berjalan = perkiraan; "Tutup bulan" (hanya bulan yang sudah lewat) membekukan angka, dan buku kas bulan itu
+    terkunci;
+  - tiap komisi bisa ditandai sudah dibayar.
+- **Privasi:** bukti transfer adalah data orang tua (bukan anak), tersimpan di PostgreSQL dan ikut backup. Hanya
+  pemiliknya dan admin yang bisa melihat.
+
+## D-037 — Anak daftar sendiri tanpa orang tua
+
+Tanggal 2026-10-01 · Status **Disetujui** (pilihan pemilik produk: "Anak tanpa email").
+
+- Alur `/play/daftar`: nama panggilan → warna Momo → 3 gambar sandi (2×) → anak mendapat **kode keluarga sendiri**
+  (`children.self_code`) untuk masuk lagi.
+  - Kode ditampilkan besar dan dibacakan, serta ada di profil anak.
+  - Sesi baru dipasang setelah anak menekan "Mulai bermain".
+- Yang disimpan hanya nama panggilan, warna Momo, dan hash sandi gambar (PRD A17); tanpa email/kontak. Dibatasi
+  5 pendaftaran per jam per alamat IP.
+- **Tautkan ke orang tua:**
+  - orang tua memasukkan kode anak + sandi gambarnya di dasbor (`POST /parent/children/claim`);
+  - setelah ditautkan, paket keluarga berlaku dan laporan muncul; kode anak tetap bisa dipakai masuk;
+  - anak yang sudah tertaut ke orang tua lain tidak bisa diambil alih.
+- Pembelian paket tetap lewat orang tua. Anak yang daftar sendiri memakai level gratis sampai ditautkan.
+
+## D-038 — Dasbor orang tua yang beranimasi & berwawasan; landing: daftar sendiri + harga
+
+Tanggal 2026-10-01 · Status **Disetujui** (permintaan pemilik produk: "dashboard yang animasi, insightful, mudah
+dimengerti, bisa lihat progress anak dengan menarik"; "landing untuk register sudah disesuaikan?").
+
+- **Dasbor `/orang-tua`** memakai satu panggilan `GET /parent/overview`. Ringkasan dihitung oleh fungsi murni engine
+  `childInsights` (dengan test).
+  - Hero keluarga untuk minggu ini: ronde, ronde lulus, menit belajar, dan anak aktif.
+  - Tab per anak. Isinya:
+    - total skor, level lulus, ronde, dan waktu belajar;
+    - grafik 7 hari (WIB), dengan bagian hijau untuk ronde yang lulus;
+    - tren rata-rata skor dibanding minggu lalu;
+    - progres per buku (cincin + bar) dan 5 ronde terakhir.
+  - Insight berbahasa sehari-hari:
+    - langkah berikutnya (level terbuka pertama di buku terakhir; bila berbayar → tautan ke halaman paket);
+    - topik yang sedang kuat (≥ 2 level lulus);
+    - topik yang perlu ditemani (belum lulus, percobaan terbanyak), dengan saran membaca materi bersama;
+    - kebiasaan belajar (hari aktif minggu ini). Tidak ada streak, peringkat antar anak, atau angka yang
+      membandingkan anak.
+  - Anak yang belum pernah main → 3 langkah mulai bermain.
+  - Animasi CSS (muncul bertahap, angka naik, batang & cincin terisi, Momo bergoyang); mati otomatis bila
+    `prefers-reduced-motion`.
+  - Kartu kelola (kode keluarga, tautkan anak, paket) dipindah ke bawah.
+- **Landing:**
+  - tombol "Anak daftar sendiri" (`/play/daftar`) di hero dan di pintu Anak; "Punya kode kelas?" tetap ada;
+  - teks pintu Keluarga menyebut dasbor progres dan paket;
+  - bagian **Harga** dari `GET /public/pricing`: kartu Gratis (Level 1–N setiap topik) dan paket aktif dengan
+    harga normal dicoret dan harga diskon; pembelian lewat "Daftar keluarga";
+  - teks fitur suara disesuaikan dengan suara Momo (D-035).
+
+## D-039 — Sidebar bisa disembunyikan; laporan admin & guru yang bermakna
+
+Tanggal 2026-10-01 · Status **Disetujui** (permintaan pemilik produk).
+
+- **`AppShell`** (`apps/web/src/ui/AppShell.tsx`) dipakai area orang tua (tema terang), admin, dan guru (tema
+  gelap).
+  - Desktop: sidebar penuh ↔ rel ikon lewat tombol "Sembunyikan/Tampilkan menu"; pilihannya diingat per perangkat.
+  - Tablet/HP: laci dengan tombol menu (Esc, ketuk latar, atau pilih menu untuk menutup).
+  - Badge untuk hal yang perlu tindakan.
+- **Ringkasan admin** dari `GET /admin/insights?days=7|30|90`:
+  - KPI: pendapatan bulan ini vs bulan lalu, total pendapatan & rata-rata per transaksi, transaksi lunas, menunggu
+    verifikasi/bayar, keluarga, anak, anak aktif 7 hari, ronde;
+  - catatan otomatis (verifikasi tertunda, tren pendapatan, % keluarga membeli, pesanan hilang, buku dengan
+    tingkat lulus rendah, % anak aktif);
+  - grafik pendapatan & ronde harian;
+  - status transaksi, paket terlaris, transaksi terbaru;
+  - pengguna per jenis, belajar (tingkat lulus, buku terpopuler), dan keuangan bulan & tahun ini.
+  - Tabel skill tersulit & pengecoh tetap ada.
+- **Ringkasan guru** (`/fasilitator`, `GET /facilitator/insights`, hanya kelas miliknya; admin melihat semua):
+  - KPI kelas, siswa, aktif, ronde, % lulus;
+  - grafik 14 hari;
+  - kartu per kelas;
+  - siswa yang perlu dibantu (≥ 3 percobaan belum lulus);
+  - aktivitas terbaru.
+  - Kelas dipindah ke `/fasilitator/kelas`.
+
+## D-040 — Audit keamanan peran & autentikasi
+
+Tanggal 2026-10-01 · Status **Disetujui** (permintaan pemilik produk: audit authorization, email, dan roles).
+Rincian temuan dan status ada di [docs/security.md](security.md). Ringkasnya:
+
+- Guard memeriksa akun di DB (aktif + peran) dan `JWT_SECRET` wajib diisi.
+- Kunci sandi gambar bertingkat dan rate limit per IP (`trust proxy`).
+- Email ketat & tidak membedakan huruf besar/kecil (indeks `lower(email)`, migrasi 0006).
+- Header keamanan; batas pesanan terbuka; template berbayar tidak terkirim.
+- Akses penuh kelas hanya untuk siswa tanpa orang tua.
+- Sesi orang tua 7 hari.
+- **Belum:** verifikasi kepemilikan email (butuh layanan email/SMTP — keputusan terpisah).
+
+## D-041 — Premium dari admin, status Free/Premium, dan direktori pengguna
+
+Tanggal 2026-10-01 · Status **Disetujui** (permintaan pemilik produk: "admin bisa set user — anak atau yang daftar
+sendiri — jadi premium untuk akses semua kelas, dan ini tidak masuk catatan arus kas").
+
+- **Premium dari admin selalu per anak** (revisi 2026-10-01). Di menu Orang tua & anak, setiap anak punya tombol
+  "Atur Premium":
+  - anak di keluarga: hanya anak itu yang Premium — saudaranya **tidak ikut**;
+  - anak yang daftar sendiri: per orang.
+  - Tidak ada lagi Premium sekeluarga dari admin. Migrasi 0008 memecah Premium keluarga dari admin yang masih
+    berlaku menjadi Premium per anak aktif (masa berlaku, catatan, dan pemberi sama), lalu mengakhiri yang lama.
+  - Paket yang **dibeli** orang tua tetap berlaku untuk semua anak di keluarga (aturan pembelian, D-036).
+  - Masa berlaku: selamanya / 30 / 90 / 180 / 365 hari (diperpanjang dari masa yang masih berjalan), dengan catatan
+    opsional; bisa dicabut.
+  - Disimpan sebagai hak akses `source = admin` dengan `child_id` (migrasi 0007). Tidak membuat pesanan, **tidak
+    masuk buku kas**, dan tidak dihitung sebagai pendapatan atau komisi.
+  - Hak dari pembelian paket tidak bisa dicabut dari sini.
+- **Status** dihitung `planStatus` (engine): **Premium** (semua buku), **Paket buku** (sebagian), atau **Free**,
+  lengkap dengan asal (dibeli / diberikan admin) dan masa berlaku. Untuk anak = hak keluarga + hak anak itu sendiri.
+  Ditampilkan di direktori admin dan di dasbor orang tua (dengan tautan "Lihat paket" bila Free). Tidak ditampilkan
+  di area anak (tanpa unsur komersial bagi anak).
+- **Direktori `/admin/keluarga`:**
+  - ringkasan: keluarga, anak (daftar sendiri / siswa kelas), anak Premium (berapa yang daftar sendiri), Premium
+    dari admin;
+  - tab **Keluarga**: kartu per keluarga berisi "x dari y anak Premium" dan setiap anak dengan status & aksinya
+    sendiri. Tab **Anak**: tabel; di HP menjadi kartu;
+  - cari, filter status / jenis anak / akun aktif, urutan (terbaru, terlama, nama, terakhir aktif);
+  - paging di server (10/20/50 per halaman); filter tersimpan di URL;
+  - aksi lama tetap ada: laporan, ganti sandi gambar, aktif/nonaktif, atur password orang tua.

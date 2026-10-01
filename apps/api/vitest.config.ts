@@ -8,5 +8,7 @@ export default defineConfig({
   ssr: { resolve: { conditions: ['source'] } },
   test: {
     include: ['test/**/*.test.ts'],
+    // Test e2e memanggil login/daftar berkali-kali dari satu IP; batas per IP dilonggarkan.
+    env: { RATE_LIMIT_SCALE: '20' },
   },
 });

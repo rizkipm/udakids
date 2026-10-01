@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import {
   catalogSchema,
   dialogFileSchema,
+  emailSchema,
   levelSchema,
   skillTemplateSchema,
 } from '@little-coder/engine';
@@ -138,18 +139,34 @@ export async function seed(
     const m = /^momo\.([a-z]{2})\.json$/.exec(f);
     if (!m) continue;
     const data = dialogFileSchema.parse(JSON.parse(readFileSync(join(dialogDir, f), 'utf8')));
-    const row = { locale: m[1]!, data: data as object, updatedAt: new Date() };
-    const q = db.insert(schema.dialogs).values(row);
-    const res = await (
-      opts.force
-        ? q.onConflictDoUpdate({ target: schema.dialogs.locale, set: row })
-        : q.onConflictDoNothing()
-    ).returning({ locale: schema.dialogs.locale });
-    dialogsAdded += res.length;
+    const locale = m[1]!;
+    const [cur] = await db.select().from(schema.dialogs).where(eq(schema.dialogs.locale, locale));
+    if (!cur || opts.force) {
+      const row = { locale, data: data as object, updatedAt: new Date() };
+      await db
+        .insert(schema.dialogs)
+        .values(row)
+        .onConflictDoUpdate({ target: schema.dialogs.locale, set: row });
+      dialogsAdded++;
+      continue;
+    }
+    // Sudah ada: tambahkan HANYA kunci baru (mis. kalimat suara Momo D-035); suntingan admin tetap.
+    const existing = dialogFileSchema.parse(cur.data);
+    const missing = Object.entries(data.lines).filter(([k]) => !(k in existing.lines));
+    if (missing.length === 0) continue;
+    await db
+      .update(schema.dialogs)
+      .set({
+        data: { ...existing, lines: { ...existing.lines, ...Object.fromEntries(missing) } },
+        updatedAt: new Date(),
+      })
+      .where(eq(schema.dialogs.locale, locale));
+    dialogsAdded++;
   }
   log(`dialog: ${dialogsAdded} ditambahkan/diperbarui`);
 
-  const email = (process.env.ADMIN_EMAIL ?? 'admin@littlecoder.local').toLowerCase();
+  // Dirapikan & divalidasi sama seperti login (trim + huruf kecil + format), audit L1.
+  const email = emailSchema.parse(process.env.ADMIN_EMAIL ?? 'admin@littlecoder.local');
   const [admin] = await db
     .select()
     .from(schema.staffUsers)

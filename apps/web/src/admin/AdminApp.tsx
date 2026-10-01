@@ -1,12 +1,21 @@
-import { NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { setSession, useSession } from '../auth/session';
+import { useFetch } from '../auth/useApi';
 import { VisualGallery } from '../components/visuals';
 import { t, type MessageKey } from '../i18n';
-import { Button, PageHeader } from '../ui/ui';
+import { AppShell, type ShellIcon } from '../ui/AppShell';
+import { PageHeader } from '../ui/ui';
+import { BillingSettingsPage } from './billing/BillingSettingsPage';
+import { CashPage } from './billing/CashPage';
+import { CommissionPage } from './billing/CommissionPage';
+import { OrdersPage } from './billing/OrdersPage';
+import { PackagesPage } from './billing/PackagesPage';
+import { PaymentMethodsPage } from './billing/PaymentMethodsPage';
+import { ORDERS_CHANGED } from './billing/util';
 import { CatalogPage } from './catalog/CatalogPage';
 import { ClassesPage } from './classes/ClassesPage';
 import { ClassStudentsPage } from './classes/ClassStudentsPage';
-import { Icon } from './common';
 import { LevelEditorRoute } from './levels/LevelEditor';
 import { LevelList } from './levels/LevelList';
 import { OverviewPage } from './OverviewPage';
@@ -16,19 +25,52 @@ import { SkillEditorRoute } from './skills/SkillEditorRoute';
 import { SkillList } from './skills/SkillList';
 import { FamiliesPage } from './users/FamiliesPage';
 import { StaffPage } from './users/StaffPage';
+import { VoicePage } from './voice/VoicePage';
 import './admin.css';
 
-const NAV: { to: string; label: MessageKey; end?: boolean }[] = [
-  { to: '/admin', label: 'admin.nav.overview', end: true },
-  { to: '/admin/skill', label: 'admin.nav.skills' },
-  { to: '/admin/katalog', label: 'admin.nav.catalog' },
-  { to: '/admin/level', label: 'admin.nav.levels' },
-  { to: '/admin/staf', label: 'admin.nav.staff' },
-  { to: '/admin/keluarga', label: 'admin.nav.families' },
-  { to: '/admin/kelas', label: 'admin.nav.classes' },
-  { to: '/admin/laporan', label: 'admin.nav.reports' },
-  { to: '/admin/galeri', label: 'admin.nav.gallery' },
+type NavItem = { to: string; label: MessageKey; icon: ShellIcon; end?: boolean; badge?: 'orders' };
+const NAV: (NavItem | { group: MessageKey })[] = [
+  { to: '/admin', label: 'admin.nav.overview', icon: 'chart', end: true },
+  { group: 'admin.nav.groupContent' },
+  { to: '/admin/skill', label: 'admin.nav.skills', icon: 'book' },
+  { to: '/admin/katalog', label: 'admin.nav.catalog', icon: 'grid' },
+  { to: '/admin/level', label: 'admin.nav.levels', icon: 'map' },
+  { to: '/admin/galeri', label: 'admin.nav.gallery', icon: 'image' },
+  { to: '/admin/suara', label: 'admin.nav.voice', icon: 'speaker' },
+  { group: 'admin.nav.groupPeople' },
+  { to: '/admin/staf', label: 'admin.nav.staff', icon: 'badge' },
+  { to: '/admin/keluarga', label: 'admin.nav.families', icon: 'users' },
+  { to: '/admin/kelas', label: 'admin.nav.classes', icon: 'school' },
+  { to: '/admin/laporan', label: 'admin.nav.reports', icon: 'report' },
+  { group: 'admin.nav.groupBilling' },
+  { to: '/admin/transaksi', label: 'admin.nav.orders', icon: 'receipt', badge: 'orders' },
+  { to: '/admin/paket', label: 'admin.nav.packages', icon: 'tag' },
+  { to: '/admin/rekening', label: 'admin.nav.paymentMethods', icon: 'bank' },
+  { to: '/admin/pengaturan', label: 'admin.nav.billingSettings', icon: 'gear' },
+  { group: 'admin.nav.groupFinance' },
+  { to: '/admin/kas', label: 'admin.nav.cash', icon: 'wallet' },
+  { to: '/admin/komisi', label: 'admin.nav.commission', icon: 'percent' },
 ];
+
+/** Jumlah transfer yang menunggu verifikasi (badge menu Transaksi). */
+function usePendingOrders() {
+  const pending = useFetch<{ count: number }>('staff', '/admin/orders/pending-count');
+  const { pathname } = useLocation();
+  const { reload } = pending;
+  const first = useRef(true);
+  // Muat ulang saat pindah halaman (bukan saat pertama tampil) dan setelah pesanan disetujui/ditolak.
+  useEffect(() => {
+    if (first.current) first.current = false;
+    else reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+  useEffect(() => {
+    window.addEventListener(ORDERS_CHANGED, reload);
+    return () => window.removeEventListener(ORDERS_CHANGED, reload);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return pending.error ? 0 : (pending.data?.count ?? 0);
+}
 
 function GalleryPage() {
   return (
@@ -47,6 +89,7 @@ function NotFound() {
 export function AdminApp() {
   const session = useSession('staff');
   const navigate = useNavigate();
+  const pending = usePendingOrders();
 
   function logout() {
     setSession('staff', null);
@@ -54,51 +97,54 @@ export function AdminApp() {
   }
 
   return (
-    <div className="ui-shell">
-      <div className="ui-layout">
-        <nav className="ui-sidebar" aria-label={t('admin.nav.label')}>
-          <div className="ui-brand">{t('admin.brand')}</div>
-          {NAV.map((n) => (
-            <NavLink key={n.to} to={n.to} end={n.end}>
-              {t(n.label)}
-            </NavLink>
-          ))}
-        </nav>
-        <div className="adm-content">
-          <header className="ui-topbar">
-            <div className="adm-topbar-user">
-              <span>
-                {t('admin.topbar.signedInAs')} <strong>{session?.user.name ?? '—'}</strong>
-              </span>
-              <Button variant="ghost" onClick={logout}>
-                <Icon name="logout" />
-                {t('admin.topbar.logout')}
-              </Button>
-            </div>
-          </header>
-          <main className="ui-main">
-            <Routes>
-              <Route index element={<OverviewPage />} />
-              <Route path="skill" element={<SkillList />} />
-              <Route path="skill/baru" element={<SkillEditorRoute mode="new" />} />
-              <Route path="skill/manual-baru" element={<SkillEditorRoute mode="new-manual" />} />
-              <Route path="skill/:id" element={<SkillEditorRoute mode="edit" />} />
-              <Route path="katalog" element={<CatalogPage />} />
-              <Route path="level" element={<LevelList />} />
-              <Route path="level/baru" element={<LevelEditorRoute />} />
-              <Route path="level/:id" element={<LevelEditorRoute />} />
-              <Route path="staf" element={<StaffPage />} />
-              <Route path="keluarga" element={<FamiliesPage />} />
-              <Route path="kelas" element={<ClassesPage />} />
-              <Route path="kelas/:id" element={<ClassStudentsPage />} />
-              <Route path="laporan" element={<ReportsPage />} />
-              <Route path="laporan/anak/:id" element={<ChildReportPage />} />
-              <Route path="galeri" element={<GalleryPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
-      </div>
-    </div>
+    <AppShell
+      id="admin"
+      theme="dark"
+      brand={<span>{t('admin.brand')}</span>}
+      navLabel={t('admin.nav.label')}
+      nav={NAV.map((n) =>
+        'group' in n
+          ? { group: t(n.group) }
+          : {
+              to: n.to,
+              label: t(n.label),
+              icon: n.icon,
+              end: n.end,
+              ...(n.badge === 'orders' && {
+                badge: pending,
+                badgeLabel: `${t(n.label)}, ${t('admin.nav.pendingOrders', { n: pending })}`,
+              }),
+            },
+      )}
+      user={{ name: session?.user.name ?? '—', caption: t('admin.topbar.signedInAs') }}
+      onLogout={logout}
+    >
+      <Routes>
+        <Route index element={<OverviewPage />} />
+        <Route path="skill" element={<SkillList />} />
+        <Route path="skill/baru" element={<SkillEditorRoute mode="new" />} />
+        <Route path="skill/manual-baru" element={<SkillEditorRoute mode="new-manual" />} />
+        <Route path="skill/:id" element={<SkillEditorRoute mode="edit" />} />
+        <Route path="katalog" element={<CatalogPage />} />
+        <Route path="level" element={<LevelList />} />
+        <Route path="level/baru" element={<LevelEditorRoute />} />
+        <Route path="level/:id" element={<LevelEditorRoute />} />
+        <Route path="staf" element={<StaffPage />} />
+        <Route path="keluarga" element={<FamiliesPage />} />
+        <Route path="kelas" element={<ClassesPage />} />
+        <Route path="kelas/:id" element={<ClassStudentsPage />} />
+        <Route path="laporan" element={<ReportsPage />} />
+        <Route path="laporan/anak/:id" element={<ChildReportPage />} />
+        <Route path="galeri" element={<GalleryPage />} />
+        <Route path="suara" element={<VoicePage />} />
+        <Route path="transaksi" element={<OrdersPage />} />
+        <Route path="paket" element={<PackagesPage />} />
+        <Route path="rekening" element={<PaymentMethodsPage />} />
+        <Route path="pengaturan" element={<BillingSettingsPage />} />
+        <Route path="kas" element={<CashPage />} />
+        <Route path="komisi" element={<CommissionPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AppShell>
   );
 }

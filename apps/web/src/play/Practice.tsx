@@ -3,6 +3,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   answerJago,
   correctNeeded,
+  FREE_ACCESS,
+  RESULT_KEYS,
+  RIGHT_KEYS,
+  scoreKey,
+  WRONG_KEYS,
+  withAccess,
   durationWords,
   formatClock,
   generateRound,
@@ -20,7 +26,7 @@ import {
   type Item,
   type Visual,
 } from '@little-coder/engine';
-import { speak } from '../audio/speech';
+import { prefetchItemVoice, speakItem, speakLine } from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo, type MomoMood } from '../components/Momo';
 import { VisualView } from '../components/visuals';
@@ -68,10 +74,15 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     const shelfIndex = shelves.findIndex((s) => s.category.code === skill.category);
     const shelf = shelves[shelfIndex];
     return {
-      statuses: levelStatuses(
-        shelves.map((s) => s.category.code),
+      // Level berbayar yang belum dibeli → 'paid' (D-036).
+      statuses: withAccess(
+        levelStatuses(
+          shelves.map((s) => s.category.code),
+          shelves.flatMap((s) => s.skills),
+          progress.quizzes,
+        ),
         shelves.flatMap((s) => s.skills),
-        progress.quizzes,
+        data.access ?? FREE_ACCESS,
       ),
       next: shelf?.skills[shelf.skills.findIndex((k) => k.id === skill.id) + 1],
       nextShelf: shelves[shelfIndex + 1],
@@ -97,22 +108,33 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const stableSkill = useMemo(() => skill, [skillKey]);
   // Satu ronde disusun sekaligus (D-028): 10 soal tanpa kembar, menghindari soal ronde-ronde sebelumnya
   // (riwayat di perangkat), band mudah → sulit sesuai level. Coba lagi = ronde baru dengan soal lain.
+  const status = book?.statuses[skillId];
+  const playable = status === 'open' || status === 'passed';
   const round = useMemo(
     () =>
-      stableSkill
+      // Level terkunci/berbayar tidak dibuat soalnya (template berbayar dikirim tanpa isi soal).
+      stableSkill && playable
         ? generateRound(stableSkill, {
             seed: seedBase,
             avoid: loadProgress(childId).recentItems?.[stableSkill.id],
           })
         : undefined,
-    [stableSkill, seedBase, childId],
+    [stableSkill, seedBase, childId, playable],
   );
   const item: Item | undefined = round?.[index];
 
-  const locked = book?.statuses[skillId] === 'locked';
+  const paid = status === 'paid';
+  const locked = status === 'locked' || paid;
+  const basic = skill?.tier === 'basic';
   useEffect(() => {
-    if (locked) speak(t('play.quiz.locked', { pass: PASS_SCORE }));
-  }, [locked]);
+    if (paid) speakLine(RESULT_KEYS.paid, t('play.quiz.paid'));
+    else if (locked) speakLine(RESULT_KEYS.locked, t('play.quiz.locked', { pass: PASS_SCORE }));
+  }, [locked, paid]);
+  // Basic: siapkan suara Momo untuk soal berikutnya agar langsung terdengar.
+  const upcoming = round?.[index + 1];
+  useEffect(() => {
+    if (basic && upcoming && !locked) prefetchItemVoice(upcoming);
+  }, [basic, upcoming, locked]);
   // Catat soal ronde ini begitu ronde dimulai (juga bila anak berhenti di tengah).
   useEffect(() => {
     if (!round || !stableSkill || locked) return;
@@ -134,6 +156,19 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       </main>
     );
   }
+  if (locked && skill) {
+    return (
+      <main className="kid-screen">
+        <Momo color={momoColor} mood="curious" size={140} />
+        <p className="kid-note">
+          {paid ? t('play.quiz.paid') : t('play.quiz.locked', { pass: PASS_SCORE })}
+        </p>
+        <Link className="kid-btn" to={links.topic(skill)}>
+          {t('play.quiz.backTopic')}
+        </Link>
+      </main>
+    );
+  }
   if (!skill || !item || !book) {
     return (
       <main className="kid-screen">
@@ -141,17 +176,6 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
         <p className="kid-note">{t('play.quiz.notFound')}</p>
         <Link className="kid-btn" to="/play">
           {t('play.quiz.back')}
-        </Link>
-      </main>
-    );
-  }
-  if (locked) {
-    return (
-      <main className="kid-screen">
-        <Momo color={momoColor} mood="curious" size={140} />
-        <p className="kid-note">{t('play.quiz.locked', { pass: PASS_SCORE })}</p>
-        <Link className="kid-btn" to={links.topic(skill)}>
-          {t('play.quiz.backTopic')}
         </Link>
       </main>
     );
@@ -187,13 +211,19 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     }));
     void flushPractice(childId);
     const passed = isPassed(score);
-    speak(
-      `${t('play.quiz.score', { score })}. ${t('play.quiz.timeSay', { time: durationWords(timeMs) })}. ${
+    // Suara Momo: skor, lalu hasil (lulus / coba lagi). Waktu tetap terlihat di layar.
+    speakLine(scoreKey(score), t('play.quiz.score', { score }), {
+      onEnd: () =>
         passed
-          ? t(book.next ? 'play.quiz.passed' : 'play.quiz.passedLast')
-          : t('play.quiz.failed', { need: correctNeeded(), pass: PASS_SCORE })
-      }`,
-    );
+          ? speakLine(
+              book.next ? RESULT_KEYS.passed : RESULT_KEYS.passedLast,
+              t(book.next ? 'play.quiz.passed' : 'play.quiz.passedLast'),
+            )
+          : speakLine(
+              RESULT_KEYS.retry,
+              t('play.quiz.failed', { need: correctNeeded(), pass: PASS_SCORE }),
+            ),
+    });
     setPhase({ name: 'done', score, correct, timeMs });
   };
 
@@ -226,7 +256,14 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     const message = r.correct
       ? `${t('play.quiz.right')} ${t(PRAISE[(seedBase + index) % PRAISE.length]!)}`
       : `${t('play.quiz.wrong')} ${item.reteach.say}`;
-    speak(message);
+    // Respons jawaban dengan suara Momo; pembahasan dibacakan hanya di Basic (anak belum membaca).
+    if (r.correct) {
+      speakLine(RIGHT_KEYS[(seedBase + index) % RIGHT_KEYS.length]!, message);
+    } else {
+      speakLine(WRONG_KEYS[(seedBase + index) % WRONG_KEYS.length]!, t('play.quiz.wrong'), {
+        onEnd: basic ? () => speakItem(item, item.reteach.say, 'reteach') : undefined,
+      });
+    }
     setPhase({ name: 'feedback', correct: r.correct, message });
   };
 
@@ -401,6 +438,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       <ItemPlayer
         key={`${seedBase}-${index}`}
         item={item}
+        tier={skill.tier}
         onAnswer={onAnswer}
         disabled={phase.name !== 'question'}
         showAnswer={phase.name === 'feedback' && !phase.correct}

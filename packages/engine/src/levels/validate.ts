@@ -1,4 +1,5 @@
 import { dialogFileSchema } from '../content/dialog.js';
+import { VOICE_LINE_KEYS } from '../content/voice.js';
 import { analyzeGridLevel, LOOP_SKILL } from '../solver/grid.js';
 import {
   countFocus,
@@ -47,8 +48,12 @@ export function validateContent(input: ValidateInput): ValidationReport {
   // audioKey yang dikenal (A7 no. 6).
   const known = new Set(input.extraAudioKeys ?? []);
   const dialog = dialogFileSchema.safeParse(input.dialog.data);
-  if (dialog.success) Object.keys(dialog.data.lines).forEach((k) => known.add(k));
-  else err(input.dialog.path, dialog.error.issues.map((i) => i.message).join('; '));
+  if (dialog.success) {
+    Object.keys(dialog.data.lines).forEach((k) => known.add(k));
+    // Kalimat suara Momo (perintah & respons, D-035) wajib lengkap.
+    for (const k of VOICE_LINE_KEYS)
+      if (!dialog.data.lines[k]) err(input.dialog.path, `kalimat suara Momo "${k}" belum ada`);
+  } else err(input.dialog.path, dialog.error.issues.map((i) => i.message).join('; '));
 
   const seen = new Map<string, string>();
   const byWorld = new Map<string, Level[]>();

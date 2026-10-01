@@ -66,16 +66,17 @@ pnpm db:backup        # cadangkan SELURUH DB (skema + data) → backups/*.dump (
 pnpm db:restore -- <file.dump>  # pulihkan ke DATABASE_URL, lalu db:migrate && db:seed
 pnpm content:export   # tulis suntingan admin dari DB kembali ke content/ (lalu commit)
 pnpm deploy:db        # server: node dist/cli/migrate.js + seed.js (langkah lengkap: docs/deploy.md)
+pnpm voice:generate   # buat klip suara Momo yang belum ada (butuh GOOGLE_TTS_API_KEY, D-035)
 ```
 
 ## Peran & login (D-014..D-016)
 
-| Peran       | Masuk                                                                                          | Area                                                                         |
-| ----------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| admin       | email + password (`/masuk/staf`)                                                               | `/admin` — skill & soal, bank soal, katalog, level, pengguna, kelas, laporan |
-| fasilitator | email + password (`/masuk/staf`)                                                               | `/fasilitator` — hanya kelasnya sendiri                                      |
-| orang tua   | email + password + persetujuan (`/orang-tua`)                                                  | profil anak, sandi gambar, laporan                                           |
-| anak        | kode keluarga/kelas → profil → 3 gambar sandi (`/play`); gabung sendiri `/play/gabung` (D-025) | Pustaka Latihan, Petualangan, profil, papan peringkat                        |
+| Peran       | Masuk                                                                                                                               | Area                                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| admin       | email + password (`/masuk/staf`)                                                                                                    | `/admin` — skill & soal, bank soal, katalog, level, pengguna, kelas, laporan |
+| fasilitator | email + password (`/masuk/staf`)                                                                                                    | `/fasilitator` — hanya kelasnya sendiri                                      |
+| orang tua   | email + password + persetujuan (`/orang-tua`)                                                                                       | profil anak, sandi gambar, laporan                                           |
+| anak        | kode keluarga/kelas → profil → 3 gambar sandi (`/play`); gabung kelas `/play/gabung` (D-025); daftar sendiri `/play/daftar` (D-037) | Pustaka Latihan, Petualangan, profil, papan peringkat                        |
 
 Admin dev bawaan dari seed: `admin@littlecoder.local` / `admin12345` (ganti lewat `ADMIN_PASSWORD`).
 JWT (`JWT_SECRET`, wajib di produksi); guard global NestJS + `@Public()` / `@Roles()`.
@@ -94,6 +95,11 @@ JWT (`JWT_SECRET`, wajib di produksi); guard global NestJS + `@Public()` / `@Rol
   Skill baru cukup JSON selama family generator-nya ada (`packages/engine/src/generator/families`).
 - Level & skill di `content/` tetap divalidasi. Setiap perubahan konten harus lolos validator.
   `optimalSteps: "auto"` ditulis ke `content/.generated/optimal.json`, jangan ubah file sumber.
+- Suara Momo (D-035): hanya perintah soal & respons jawaban (kunci dialog `vo_*`), plus kalimat soal Basic.
+  Klip dibuat server lewat Google Cloud TTS lalu di-cache di PostgreSQL (`voice_clips`). Kunci API hanya di server,
+  bukan kunci Google AI Studio. Cadangan: suara browser.
+- Billing (D-036): uang = rupiah bulat. Kunci level berbayar dicek di perangkat (`paid`) DAN server. Harga, paket, dan
+  komisi tidak pernah tampil di area anak.
 - Semua teks UI lewat `apps/web/src/i18n/id.json` (siap `en.json`). Nama produk/karakter hanya di
   `apps/web/src/config/app.ts` (`APP_NAME`, `CHARACTER_NAME`).
 - Event ditulis ke outbox Dexie dulu, dikirim `SyncAdapter` (`mock` | `http`) dengan backoff. Server
@@ -120,6 +126,8 @@ menyebut usaha/strategi · tanpa emoji (pakai SVG) · kontras tinggi, bisa denga
   nama panggilan + warna Momo yang terlihat oleh anak lain.)
 - Menyalin soal/aset dari IXL, Code.org, ScratchJr, atau platform lain.
 - Menambah obrolan AI/LLM ke area anak.
-- Membangun yang di luar lingkup MVP: kartu kamera, level 31–100, editor level visual, pembayaran,
-  app native, fitur sosial/chat.
+- Membangun yang di luar lingkup MVP: kartu kamera, level 31–100, editor level visual, pembayaran online
+  (gateway), app native, fitur sosial/chat. (Disetujui: paket + transfer manual + buku kas/komisi, D-036.)
+- Menampilkan harga, ajakan membeli, atau formulir pembayaran di area anak (hanya area orang tua).
+- Menyimpan gender/jenis kelamin anak (mis. untuk memilih suara).
 - Mengambil keputusan di luar PRD tanpa bertanya.

@@ -1,0 +1,235 @@
+:root {
+  --pd-grape: #5b3fd6;
+  --pd-grape-bg: #efeaff;
+  --pd-leaf: #0f7b4f;
+  --pd-leaf-bg: #e3f6ec;
+  --pd-sky: #1f5fbf;
+  --pd-sky-bg: #e5efff;
+  --pd-sun: #9a5b00;
+  --pd-sun-bg: #fff3d6;
+  --pd-coral: #b4401f;
+  --pd-coral-bg: #ffe6de;
+}
+.pd-kpi {
+  background: rgba(255, 255, 255, 0.95);
+}
+.pd-kpi-icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+.pd-kpi-value {
+  grid-area: value;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.pd-kpi-label {
+  grid-area: label;
+  color: var(--ui-muted);
+  font-size: 14px;
+}
+.pd-kpi-hint {
+  grid-area: hint;
+  font-size: 12px;
+  color: var(--ui-muted);
+}
+.tone-grape .pd-kpi-icon,
+.pd-insight.tone-grape .pd-insight-icon {
+  color: var(--pd-grape);
+  background: var(--pd-grape-bg);
+}
+.tone-leaf .pd-kpi-icon,
+.pd-insight.tone-leaf .pd-insight-icon {
+  color: var(--pd-leaf);
+  background: var(--pd-leaf-bg);
+}
+.tone-sky .pd-kpi-icon,
+.pd-insight.tone-sky .pd-insight-icon {
+  color: var(--pd-sky);
+  background: var(--pd-sky-bg);
+}
+.tone-sun .pd-kpi-icon,
+.pd-insight.tone-sun .pd-insight-icon {
+  color: var(--pd-sun);
+  background: var(--pd-sun-bg);
+}
+.pd-ring-bg,
+.pd-ring-fg {
+  fill: none;
+  stroke-width: 7;
+}
+.pd-ring-bg {
+  stroke: #efecf6;
+}
+.pd-ring-fg {
+  stroke: #2fa36b;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.pd-ring-text {
+  font-size: 14px;
+  font-weight: 800;
+  fill: var(--ui-ink);
+}
+.pd-meter {
+  display: block;
+  height: 8px;
+  border-radius: 99px;
+  background: #efecf6;
+  overflow: hidden;
+}
+.pd-meter span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #7d5cf0, #2fa36b);
+  animation: pd-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left;
+}
+/* Gerak: muncul bertahap, Momo bergoyang pelan. Mati bila pengguna meminta gerak dikurangi. */
+.pd-rise {
+  animation: pd-rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.pd-bob {
+  animation: pd-bob 3.2s ease-in-out infinite;
+}
+@keyframes pd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pd-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pd-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes pd-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.tone-coral .pd-kpi-icon {
+  color: var(--pd-coral);
+  background: var(--pd-coral-bg);
+}
+.pd-insight.tone-grape .pd-insight-icon {
+  color: var(--pd-grape);
+  background: var(--pd-grape-bg);
+}
+.pd-insight.tone-leaf .pd-insight-icon {
+  color: var(--pd-leaf);
+  background: var(--pd-leaf-bg);
+}
+.pd-insight.tone-sky .pd-insight-icon {
+  color: var(--pd-sky);
+  background: var(--pd-sky-bg);
+}
+.pd-insight.tone-sun .pd-insight-icon {
+  color: var(--pd-sun);
+  background: var(--pd-sun-bg);
+}
+
+/* Batang harian generik */
+.ch-bars {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ch-bar {
+  display: grid;
+  grid-template-rows: 1fr 18px;
+  min-width: 0;
+}
+.ch-bar-track {
+  position: relative;
+  border-radius: 6px;
+  background: #efecf6;
+  overflow: hidden;
+}
+.ch-bar-fill {
+  position: absolute;
+  inset: auto 0 0 0;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #7d5cf0, #5b3fd6);
+  transition: height 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ch-bar-day {
+  font-size: 11px;
+  color: var(--ui-muted, #5d5873);
+  text-align: center;
+  white-space: nowrap;
+  overflow: visible;
+}
+.ch-meter {
+  display: block;
+  height: 8px;
+  border-radius: 99px;
+  background: #efecf6;
+  overflow: hidden;
+}
+.ch-meter span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--pd-grape);
+  animation: pd-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left;
+}
+.ch-meter.tone-leaf span {
+  background: #2fa36b;
+}
+.ch-meter.tone-sun span {
+  background: #e59a16;
+}
+.ch-meter.tone-sky span {
+  background: #3f8fe0;
+}
+.ch-meter.tone-coral span {
+  background: #e0653f;
+}
+.ch-meter.tone-muted span {
+  background: #b9b2d6;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-rise,
+  .pd-bob,
+  .pd-meter span,
+  .ch-meter span {
+    animation: none;
+  }
+  .ch-bar-fill,
+  .pd-ring-fg {
+    transition: none;
+  }
+}

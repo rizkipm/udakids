@@ -82,3 +82,26 @@ describe('focus per dunia', () => {
     ]);
   });
 });
+
+describe('email & sandi gambar (audit keamanan)', () => {
+  it('email dirapikan dan formatnya ketat; maks 254 karakter', async () => {
+    const { emailSchema } = await import('../src/index.js');
+    expect(emailSchema.parse('  Ibu.Sari@Contoh.ID ')).toBe('ibu.sari@contoh.id');
+    for (const bad of [
+      'a@b',
+      'a b@c.id',
+      'tanpa-at.id',
+      '@contoh.id',
+      'a@',
+      `${'a'.repeat(250)}@x.id`,
+    ])
+      expect(emailSchema.safeParse(bad).success, bad).toBe(false);
+    expect(emailSchema.safeParse('nama+tag@sekolah.sch.id').success).toBe(true);
+  });
+
+  it('kunci sandi gambar makin lama: 1, 5, 30, 120 menit', async () => {
+    const { pinLockMs } = await import('../src/index.js');
+    expect([1, 2, 3, 4, 9].map((n) => pinLockMs(n) / 60_000)).toEqual([1, 5, 30, 120, 120]);
+    expect(pinLockMs(0)).toBe(60_000);
+  });
+});

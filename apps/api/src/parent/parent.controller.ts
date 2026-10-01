@@ -11,11 +11,19 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { childProfileSchema, childUpdateSchema, type SessionUser } from '@little-coder/engine';
+import {
+  childClaimSchema,
+  childProfileSchema,
+  childUpdateSchema,
+  type SessionUser,
+} from '@little-coder/engine';
 import { and, eq, inArray, isNull } from 'drizzle-orm';
 import type { z } from 'zod';
 import { CurrentUser, Roles } from '../auth/decorators.js';
 import { hashSecret, pinSecret, randomToken } from '../common/crypto.js';
+import { forgetAccount } from '../auth/auth.guard.js';
+import { AuthService } from '../auth/auth.service.js';
+import { RateLimiter } from '../common/rate-limit.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { children, classes } from '../db/schema.js';
@@ -33,9 +41,13 @@ const publicChild = {
 @Roles('parent')
 @Controller('parent/children')
 export class ParentController {
+  /** 10 percobaan tautkan anak yang gagal per 15 menit per orang tua. */
+  private readonly claimLimiter = new RateLimiter(10, 15 * 60_000);
+
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly reports: ReportsService,
+    private readonly auth: AuthService,
   ) {}
 
   private async own(user: SessionUser, id: string) {
@@ -111,6 +123,42 @@ export class ParentController {
     return (await this.withClass([row!]))[0];
   }
 
+  /**
+   * Tautkan anak yang daftar sendiri (D-037): kode keluarga anak + sandi gambarnya membuktikan anak itu
+   * ada di dekat orang tua. Setelah ditautkan, paket keluarga berlaku dan laporan muncul di dasbor.
+   * Kode milik anak tetap bisa dipakai untuk masuk.
+   */
+  @Post('claim')
+  async claim(
+    @CurrentUser() user: SessionUser,
+    @Body(new ZodPipe(childClaimSchema)) body: z.infer<typeof childClaimSchema>,
+  ) {
+    const key = `claim:${user.id}`;
+    const codeKey = `claim-code:${body.familyCode}`;
+    this.claimLimiter.check(key);
+    this.claimLimiter.check(codeKey);
+    const [row] = await this.db
+      .select()
+      .from(children)
+      .where(and(eq(children.selfCode, body.familyCode), eq(children.active, true)));
+    // Percobaan gagal juga dihitung di kunci sandi gambar anak (bertingkat), bukan hanya per akun.
+    if (!row || !(await this.auth.checkPin(row, body.pin))) {
+      this.claimLimiter.fail(key);
+      this.claimLimiter.fail(codeKey);
+      throw new NotFoundException('Kode atau sandi gambar anak tidak cocok');
+    }
+    if (row.parentId && row.parentId !== user.id)
+      throw new BadRequestException('Anak ini sudah tertaut ke akun orang tua lain');
+    const [child] = await this.db
+      .update(children)
+      .set({ parentId: user.id })
+      .where(eq(children.id, row.id))
+      .returning(publicChild);
+    this.claimLimiter.reset(key);
+    this.claimLimiter.reset(codeKey);
+    return (await this.withClass([child!]))[0];
+  }
+
   @Patch(':id')
   async update(
     @CurrentUser() user: SessionUser,
@@ -141,6 +189,7 @@ export class ParentController {
   async remove(@CurrentUser() user: SessionUser, @Param('id', ParseUUIDPipe) id: string) {
     await this.own(user, id);
     await this.db.delete(children).where(eq(children.id, id));
+    forgetAccount(id);
     return { ok: true };
   }
 

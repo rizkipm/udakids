@@ -7,6 +7,7 @@ import { t, type MessageKey } from '../i18n';
 import { BookSlider } from './BookSlider';
 import { Blocks, Cloud, Icon, ProgramCard, Star, type FeatureIcon } from './Decor';
 import { useLiveStats } from './liveStats';
+import { PricingSection } from './Pricing';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -69,6 +70,7 @@ export function SiteNav() {
         <a href="#buku">{t('site.nav.books')}</a>
         <a href="#cara">{t('site.nav.how')}</a>
         <a href="#pintu">{t('site.nav.doors')}</a>
+        <a href="#harga">{t('site.nav.price')}</a>
         <a href="#aman">{t('site.nav.safe')}</a>
         <Link to="/orang-tua/masuk" className="site-btn ghost">
           {t('site.nav.parent')}
@@ -103,8 +105,8 @@ export function Landing() {
               <Link to="/play" className="site-btn big">
                 {t('site.cta.play')}
               </Link>
-              <Link to="/play/gabung" className="site-btn big alt">
-                {t('site.cta.join')}
+              <Link to="/play/daftar" className="site-btn big alt">
+                {t('site.cta.self')}
               </Link>
               <Link to="/orang-tua/daftar" className="site-btn big ghost">
                 {t('site.cta.family')}
@@ -179,6 +181,9 @@ export function Landing() {
               <div className="door-actions">
                 <Link to="/play" className="site-btn">
                   {t('site.doors.child.login')}
+                </Link>
+                <Link to="/play/daftar" className="site-btn ghost">
+                  {t('site.doors.child.self')}
                 </Link>
                 <Link to="/play/gabung" className="site-btn ghost">
                   {t('site.doors.child.join')}
@@ -291,6 +296,13 @@ export function Landing() {
             </div>
           </div>
         </section>
+
+        <PricingSection
+          bookTitle={(domain, grade) =>
+            shelf?.books.find((b) => b.domain === domain && b.grade === grade)?.title ??
+            `${domain} ${grade}`
+          }
+        />
 
         <section id="aman" className="site-section safe">
           <h2>{t('site.safe.title')}</h2>

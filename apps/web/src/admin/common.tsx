@@ -98,6 +98,7 @@ const ICONS = {
   trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13',
   back: 'M15 18l-6-6 6-6',
   check: 'M5 12l5 5 9-10',
+  play: 'M8 5v14l11-7z',
 } as const;
 
 /** Ikon garis sederhana (tanpa emoji). */

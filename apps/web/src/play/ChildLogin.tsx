@@ -97,6 +97,9 @@ export function ChildLogin() {
         <div className="login-alt">
           <p>{t('play.login.new')}</p>
           <div className="kid-row">
+            <Link className="kid-btn secondary" to="/play/daftar">
+              {t('play.login.selfRegister')}
+            </Link>
             <Link className="kid-btn secondary" to="/play/gabung">
               {t('play.login.joinClass')}
             </Link>

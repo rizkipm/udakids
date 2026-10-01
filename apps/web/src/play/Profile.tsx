@@ -25,6 +25,7 @@ function useProfile() {
   const session = useSession('child')!;
   const progress = useProgress(session.user.id);
   const server = useFetch<ChildProfileStats>('child', '/practice/profile');
+  const me = useFetch<{ selfCode?: string | null }>('child', '/auth/me');
   const history =
     server.data?.history.map((h) => ({ ...h, ts: new Date(h.ts).getTime() })) ??
     progress.quizHistory.map((h) => ({ ...h, durationMs: h.durationMs ?? null }));
@@ -38,6 +39,8 @@ function useProfile() {
     highest: server.data?.highest ?? null,
     className: server.data?.className ?? null,
     online: server.data !== undefined,
+    /** Kode keluarga milik anak yang daftar sendiri (D-037). */
+    selfCode: me.data?.selfCode ?? null,
     history,
   };
 }
@@ -108,6 +111,9 @@ export function ProfilePage({ momoColor }: { momoColor: Color }) {
               ? t('play.profile.classOf', { name: p.className })
               : t('play.profile.noClass')}
           </p>
+          {p.selfCode && (
+            <p className="profile-code">{t('play.profile.selfCode', { code: p.selfCode })}</p>
+          )}
           <div className="profile-actions">
             <SpeakButton text={say} />
             <Link className="kid-btn" to="/play/peringkat">

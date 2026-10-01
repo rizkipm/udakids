@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import type { Color } from '@little-coder/engine';
+import { loadVoice } from '../audio/speech';
 import { useFetch } from '../auth/useApi';
 import { useSession } from '../auth/session';
 import { ChildJoin } from './ChildJoin';
@@ -20,6 +21,11 @@ export function PlayApp() {
   const childId = session?.user.id;
   const me = useFetch<{ momoColor?: Color }>('child', childId ? '/auth/me' : null);
 
+  // Daftar kalimat suara Momo (D-035); salinan terakhir dipakai saat offline.
+  useEffect(() => {
+    void loadVoice();
+  }, []);
+
   useEffect(() => {
     if (!childId) return;
     void pullPractice(childId).then(() => flushPractice(childId));
@@ -30,6 +36,7 @@ export function PlayApp() {
       <div className="kid-app">
         <Routes>
           <Route path="gabung" element={<ChildJoin />} />
+          <Route path="daftar" element={<ChildJoin self />} />
           <Route path="*" element={<ChildLogin />} />
         </Routes>
       </div>

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Body,
   Controller,
   Get,
@@ -162,6 +163,16 @@ export class ClassesController {
     @Param('childId', ParseUUIDPipe) childId: string,
   ) {
     const cls = await this.own(user, id);
+    // Anak milik akun orang tua: sandi gambarnya hanya diatur orang tua (atau admin) — audit L4.
+    const [target] = await this.db
+      .select({ parentId: children.parentId })
+      .from(children)
+      .where(and(eq(children.id, childId), eq(children.classId, id)));
+    if (!target) throw new NotFoundException('Siswa tidak ditemukan');
+    if (target.parentId && user.role !== 'admin')
+      throw new ForbiddenException(
+        'Sandi gambar anak ini diatur orang tuanya. Minta orang tua menggantinya di area Orang Tua.',
+      );
     const pin = randomPin();
     const [row] = await this.db
       .update(children)
@@ -169,6 +180,7 @@ export class ClassesController {
         picturePinHash: await hashSecret(pinSecret(pin)),
         failedPinAttempts: 0,
         pinLockedUntil: null,
+        pinLockCount: 0,
       })
       .where(and(eq(children.id, childId), eq(children.classId, id)))
       .returning({ id: children.id, nickname: children.nickname, momoColor: children.momoColor });

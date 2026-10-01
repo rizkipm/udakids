@@ -1,6 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { levelStatuses, totalPoints, type Color, type LevelStatus } from '@little-coder/engine';
+import {
+  FREE_ACCESS,
+  levelStatuses,
+  totalPoints,
+  withAccess,
+  type Color,
+  type PlayStatus,
+} from '@little-coder/engine';
 import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
@@ -42,12 +49,16 @@ export function Library({ momoColor }: { momoColor: Color }) {
   );
   const statuses = useMemo(
     () =>
-      levelStatuses(
-        shelves.map((s) => s.category.code),
+      withAccess(
+        levelStatuses(
+          shelves.map((s) => s.category.code),
+          shelves.flatMap((s) => s.skills),
+          progress.quizzes,
+        ),
         shelves.flatMap((s) => s.skills),
-        progress.quizzes,
+        data?.access ?? FREE_ACCESS,
       ),
-    [shelves, progress.quizzes],
+    [shelves, progress.quizzes, data?.access],
   );
   const next = firstOpen(shelves, statuses);
   const points = totalPoints(progress.quizzes);
@@ -187,7 +198,7 @@ function TopicCard({
   links: Links;
   shelf: Shelf;
   n: number;
-  statuses: Record<string, LevelStatus>;
+  statuses: Record<string, PlayStatus>;
   isNext: boolean;
 }) {
   const total = shelf.skills.length;

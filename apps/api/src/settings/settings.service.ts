@@ -1,0 +1,47 @@
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  billingSettingsSchema,
+  DEFAULT_BILLING_SETTINGS,
+  DEFAULT_VOICE_SETTINGS,
+  voiceSettingsSchema,
+  type BillingSettings,
+  type VoiceSettings,
+} from '@little-coder/engine';
+import { eq } from 'drizzle-orm';
+import type { z } from 'zod';
+import { DB, type Db } from '../db/db.module.js';
+import { appSettings } from '../db/schema.js';
+
+const DEFS = {
+  billing: { schema: billingSettingsSchema, defaults: DEFAULT_BILLING_SETTINGS },
+  voice: { schema: voiceSettingsSchema, defaults: DEFAULT_VOICE_SETTINGS },
+} as const;
+type Key = keyof typeof DEFS;
+type Value<K extends Key> = K extends 'billing' ? BillingSettings : VoiceSettings;
+
+/** Pengaturan admin di tabel `app_settings` (D-036); nilai yang hilang/rusak → bawaan. */
+@Injectable()
+export class SettingsService {
+  constructor(@Inject(DB) private readonly db: Db) {}
+
+  async get<K extends Key>(key: K): Promise<Value<K>> {
+    const def = DEFS[key];
+    const [row] = await this.db.select().from(appSettings).where(eq(appSettings.key, key));
+    const parsed = (def.schema as z.ZodType).safeParse({
+      ...def.defaults,
+      ...(row?.value as object),
+    });
+    return (parsed.success ? parsed.data : def.defaults) as Value<K>;
+  }
+
+  async set<K extends Key>(key: K, value: Value<K>, userId: string | null): Promise<Value<K>> {
+    await this.db
+      .insert(appSettings)
+      .values({ key, value, updatedBy: userId })
+      .onConflictDoUpdate({
+        target: appSettings.key,
+        set: { value, updatedBy: userId, updatedAt: new Date() },
+      });
+    return value;
+  }
+}

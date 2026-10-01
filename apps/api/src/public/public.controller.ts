@@ -11,7 +11,9 @@ import {
   type Observable,
 } from 'rxjs';
 import { Public } from '../auth/decorators.js';
+import { BillingService } from '../billing/billing.service.js';
 import { DB, type Db } from '../db/db.module.js';
+import { SettingsService } from '../settings/settings.service.js';
 import { children, events, parents, skillCatalogs, skills, staffUsers } from '../db/schema.js';
 
 /** Anak dianggap "sedang belajar" bila aktif (sinkron/masuk) dalam 10 menit terakhir. */
@@ -35,7 +37,35 @@ export type PublicStats = {
  */
 @Controller('public')
 export class PublicController {
-  constructor(@Inject(DB) private readonly db: Db) {}
+  constructor(
+    @Inject(DB) private readonly db: Db,
+    private readonly billing: BillingService,
+    private readonly settings: SettingsService,
+  ) {}
+
+  /** Harga untuk landing (D-036/D-038): level gratis + paket aktif (harga normal & diskon). */
+  @Public()
+  @Get('pricing')
+  async pricing() {
+    const s = await this.settings.get('billing');
+    const packages = s.paywall ? await this.billing.activePackages() : [];
+    return {
+      paywall: s.paywall,
+      freeLevels: s.freeLevels,
+      packages: packages.map(
+        ({ id, name, description, scope, books, durationDays, pricing, discountEndsAt }) => ({
+          id,
+          name,
+          description,
+          scope,
+          books,
+          durationDays,
+          pricing,
+          discountEndsAt,
+        }),
+      ),
+    };
+  }
 
   private cache?: { at: number; value: PublicStats };
 

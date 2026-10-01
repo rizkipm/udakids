@@ -17,8 +17,10 @@ import { VisualView } from '../components/visuals';
 import { t } from '../i18n';
 import { SpeakButton } from './ItemPlayer';
 
-type Step = 'code' | 'name' | 'color' | 'pin' | 'confirm';
-const STEPS: Step[] = ['code', 'name', 'color', 'pin', 'confirm'];
+type Step = 'code' | 'name' | 'color' | 'pin' | 'confirm' | 'done';
+const CLASS_STEPS: Step[] = ['code', 'name', 'color', 'pin', 'confirm'];
+/** Daftar sendiri (D-037): tanpa kode kelas; di akhir anak mendapat kode keluarga sendiri. */
+const SELF_STEPS: Step[] = ['name', 'color', 'pin', 'confirm', 'done'];
 
 const cleanCode = (v: string) =>
   v
@@ -29,11 +31,18 @@ const cleanCode = (v: string) =>
 /**
  * Gabung kelas sendiri (D-025): kode kelas → nama panggilan → warna Momo → 3 gambar sandi (2×).
  * Tanpa email; persetujuan diwakili fasilitator kelas. Setelah selesai langsung masuk Pustaka.
+ *
+ * `self` = daftar sendiri tanpa orang tua (D-037): nama → warna → sandi gambar → kode keluarga baru.
+ * Hanya nama panggilan, warna Momo, dan sandi gambar yang disimpan (PRD A17).
  */
-export function ChildJoin() {
+export function ChildJoin({ self = false }: { self?: boolean }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const [step, setStep] = useState<Step>('code');
+  const STEPS = self ? SELF_STEPS : CLASS_STEPS;
+  const [step, setStep] = useState<Step>(self ? 'name' : 'code');
+  const [newCode, setNewCode] = useState('');
+  // Sesi baru dipasang setelah anak melihat kode keluarganya (PlayApp berpindah saat sesi ada).
+  const [pending, setPending] = useState<Session>();
   const [code, setCode] = useState(() => cleanCode(params.get('kode') ?? ''));
   const [className, setClassName] = useState('');
   const [name, setName] = useState('');
@@ -45,10 +54,11 @@ export function ChildJoin() {
 
   const say: Record<Step, string> = {
     code: t('play.join.code.say'),
-    name: t('play.join.name.say', { className }),
+    name: self ? t('play.register.name.say') : t('play.join.name.say', { className }),
     color: t('play.join.color.say'),
     pin: t('play.join.pin.say'),
     confirm: t('play.join.confirm.say'),
+    done: t('play.register.done', { name, code: newCode.split('').join(' ') }),
   };
   useEffect(() => {
     setNote(undefined);
@@ -87,7 +97,33 @@ export function ChildJoin() {
     setStep('color');
   }
 
+  async function register(full: PinPicture[]) {
+    setBusy(true);
+    try {
+      const res = await api<Session & { familyCode: string }>('/auth/child/register', {
+        body: { nickname: name, momoColor: color, pin: full },
+      });
+      rememberFamilyCode(res.familyCode);
+      setPending({ token: res.token, user: res.user });
+      setNewCode(res.familyCode);
+      setStep('done');
+    } catch (err) {
+      const msg =
+        err instanceof ApiError && err.status === 429
+          ? t('play.register.limit')
+          : t('play.login.offline');
+      setNote(msg);
+      speak(msg);
+      setPin([]);
+      setConfirm([]);
+      setStep('pin');
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function join(full: PinPicture[]) {
+    if (self) return register(full);
     setBusy(true);
     try {
       const res = await api<Session & { classCode: string }>('/auth/class/join', {
@@ -170,7 +206,7 @@ export function ChildJoin() {
 
       {step === 'name' && (
         <form className="code-form" onSubmit={submitName}>
-          <p className="join-class">{className}</p>
+          {className && <p className="join-class">{className}</p>}
           <label htmlFor="nickname">{t('play.join.name.title')}</label>
           <input
             id="nickname"
@@ -247,11 +283,33 @@ export function ChildJoin() {
         </>
       )}
 
+      {step === 'done' && (
+        <div className="code-form self-code">
+          <p className="self-code-label">{t('play.register.codeLabel')}</p>
+          <p className="self-code-value" aria-label={newCode.split('').join(' ')}>
+            {newCode}
+          </p>
+          <small>{t('play.register.codeHint')}</small>
+          <button
+            type="button"
+            className="kid-btn"
+            onClick={() => {
+              if (pending) setSession('child', pending);
+              navigate('/play', { replace: true });
+            }}
+          >
+            {t('play.register.start')}
+          </button>
+        </div>
+      )}
+
       <div className="kid-row">
-        <button type="button" className="kid-link" onClick={back}>
-          {t('play.login.back')}
-        </button>
-        {step === 'code' && (
+        {step !== 'done' && (
+          <button type="button" className="kid-link" onClick={back}>
+            {t('play.login.back')}
+          </button>
+        )}
+        {(step === 'code' || (self && step === 'name')) && (
           <Link className="kid-link" to="/play">
             {t('play.join.haveAccount')}
           </Link>

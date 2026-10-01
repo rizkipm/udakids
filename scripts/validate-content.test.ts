@@ -3,6 +3,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
+import { VOICE_LINE_KEYS } from '@little-coder/engine';
 
 const ROOT = join(import.meta.dirname, '..');
 const dirs: string[] = [];
@@ -17,7 +18,12 @@ function contentDir(level: Record<string, unknown>) {
     join(dir, 'dialog/momo.id.json'),
     JSON.stringify({
       lang: 'id',
-      lines: { vo_intro: { text: 'Halo' }, vo_success: { text: 'Hore' } },
+      lines: {
+        vo_intro: { text: 'Halo' },
+        vo_success: { text: 'Hore' },
+        // Kalimat suara Momo wajib ada (D-035).
+        ...Object.fromEntries(VOICE_LINE_KEYS.map((k) => [k, { text: k }])),
+      },
     }),
   );
   const data = {

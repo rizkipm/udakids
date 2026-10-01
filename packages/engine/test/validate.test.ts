@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { validateContent, type ContentFile } from '../src/index.js';
+import { validateContent, VOICE_LINE_KEYS, type ContentFile } from '../src/index.js';
 
+const voiceLines = Object.fromEntries(VOICE_LINE_KEYS.map((k) => [k, { text: `Kalimat ${k}` }]));
 const dialog: ContentFile = {
   path: 'dialog/momo.id.json',
-  data: { lang: 'id', lines: { vo_intro: { text: 'Halo' }, vo_success: { text: 'Hore' } } },
+  data: {
+    lang: 'id',
+    lines: { vo_intro: { text: 'Halo' }, vo_success: { text: 'Hore' }, ...voiceLines },
+  },
 };
 
 const gridData = (over: Record<string, unknown> = {}) => ({
@@ -37,6 +41,16 @@ const validate = (levels: ContentFile[], allowIncomplete = true) =>
   validateContent({ levels, dialog, allowIncomplete });
 
 describe('validateContent', () => {
+  it('kalimat suara Momo (D-035) wajib lengkap di dialog', () => {
+    const { vo_cmd_pick_one: _, ...rest } = voiceLines;
+    const r = validateContent({
+      levels: [],
+      dialog: { path: 'dialog/momo.id.json', data: { lang: 'id', lines: rest } },
+      allowIncomplete: true,
+    });
+    expect(r.errors.join('\n')).toMatch(/kalimat suara Momo "vo_cmd_pick_one" belum ada/);
+  });
+
   it('level valid → tanpa error, optimalSteps auto ditulis ke optimal', () => {
     const r = validate([file(gridData())]);
     expect(r.errors).toEqual([]);

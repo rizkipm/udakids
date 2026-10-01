@@ -1,3 +1,4 @@
+import { emailSchema } from '@little-coder/engine';
 import { useState, type FormEvent } from 'react';
 import type { StaffUser } from '../../api/types';
 import { useSession } from '../../auth/session';
@@ -32,8 +33,16 @@ function CreateStaff({ onCreated }: { onCreated: (u: StaffUser) => void }) {
     role: 'facilitator' as Role,
     password: '',
   });
+  const [emailError, setEmailError] = useState<string>();
   async function submit(e: FormEvent) {
     e.preventDefault();
+    // Format email dicek sama seperti server (trim + huruf kecil + format), audit D-040.
+    const parsed = emailSchema.safeParse(form.email);
+    if (!parsed.success) {
+      setEmailError(t('common.email.invalid'));
+      return;
+    }
+    setEmailError(undefined);
     const out = await action.run(
       () => call<StaffUser>('/admin/staff', { method: 'POST', body: form }),
       t('admin.staff.created', { name: form.name }),
@@ -59,6 +68,9 @@ function CreateStaff({ onCreated }: { onCreated: (u: StaffUser) => void }) {
             label={t('admin.user.email')}
             type="email"
             required
+            maxLength={254}
+            autoComplete="off"
+            error={emailError}
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />

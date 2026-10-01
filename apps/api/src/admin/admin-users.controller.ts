@@ -23,6 +23,7 @@ import { and, count, eq, ne } from 'drizzle-orm';
 import type { z } from 'zod';
 import { CurrentUser, Roles } from '../auth/decorators.js';
 import { hashSecret, pinSecret } from '../common/crypto.js';
+import { forgetAccount } from '../auth/auth.guard.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { children, parents, staffUsers } from '../db/schema.js';
@@ -52,11 +53,6 @@ export class AdminUsersController {
 
   @Post('staff')
   async createStaff(@Body(new ZodPipe(staffCreateSchema)) body: z.infer<typeof staffCreateSchema>) {
-    const [exists] = await this.db
-      .select({ id: staffUsers.id })
-      .from(staffUsers)
-      .where(eq(staffUsers.email, body.email));
-    if (exists) throw new ConflictException('Email sudah dipakai');
     const [row] = await this.db
       .insert(staffUsers)
       .values({
@@ -65,7 +61,10 @@ export class AdminUsersController {
         role: body.role,
         passwordHash: await hashSecret(body.password),
       })
+      .onConflictDoNothing()
       .returning(staffPublic);
+    // Unik tanpa membedakan huruf besar/kecil (indeks lower(email)); aman dari balapan permintaan.
+    if (!row) throw new ConflictException('Email sudah dipakai');
     return row;
   }
 
@@ -77,6 +76,9 @@ export class AdminUsersController {
   ) {
     const [prev] = await this.db.select().from(staffUsers).where(eq(staffUsers.id, id));
     if (!prev) throw new NotFoundException('Akun tidak ditemukan');
+    // Akun sendiri: hanya nama & password; peran/status diubah oleh admin lain (audit H1).
+    if (id === me.id && (body.role !== undefined || body.active !== undefined))
+      throw new BadRequestException('Peran dan status akun sendiri diubah oleh admin lain');
     const demoting =
       prev.role === 'admin' && ((body.role && body.role !== 'admin') || body.active === false);
     if (demoting) {
@@ -101,6 +103,7 @@ export class AdminUsersController {
       })
       .where(eq(staffUsers.id, id))
       .returning(staffPublic);
+    forgetAccount(id);
     return row;
   }
 
@@ -142,6 +145,7 @@ export class AdminUsersController {
       .where(eq(parents.id, id))
       .returning({ id: parents.id, active: parents.active });
     if (!row) throw new NotFoundException('Orang tua tidak ditemukan');
+    forgetAccount(id);
     return row;
   }
 
@@ -180,6 +184,7 @@ export class AdminUsersController {
       .where(eq(children.id, id))
       .returning({ id: children.id, active: children.active });
     if (!row) throw new NotFoundException('Anak tidak ditemukan');
+    forgetAccount(id);
     return row;
   }
 

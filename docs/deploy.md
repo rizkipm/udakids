@@ -80,6 +80,9 @@ ADMIN_PASSWORD=<password admin pertama yang kuat>
 WEB_ORIGIN=https://app.contoh.id
 VITE_API_URL=/api
 VITE_FEATURE_VOICE=false
+# Suara Momo (opsional, D-035): API key Google Cloud Text-to-Speech (bukan Google AI Studio)
+GOOGLE_TTS_API_KEY=
+TTS_DAILY_LIMIT=3000
 ```
 
 Lalu build:
@@ -113,7 +116,17 @@ pnpm deploy:db          # migrasi yang lebih baru + konten baru, suntingan admin
 rm /tmp/littlecoder-<tanggal>.dump
 ```
 
-Setelah dipulihkan, gunakan `ADMIN_PASSWORD` lama, karena admin dari database lama ikut terbawa.
+Setelah dipulihkan, gunakan `ADMIN_PASSWORD` lama, karena admin dari database lama ikut terbawa. Klip suara Momo,
+paket, pesanan, bukti transfer, dan buku kas ikut terbawa karena semuanya ada di PostgreSQL.
+
+**Suara Momo (sekali, setelah `GOOGLE_TTS_API_KEY` diisi):**
+
+```bash
+pnpm --filter @little-coder/api voice:prod    # node dist/cli/voice.js → "Suara Momo: 32 dibuat …"
+```
+
+Cara membuat key: Google Cloud Console → aktifkan **Cloud Text-to-Speech API** → Credentials → Create API key →
+batasi key hanya untuk API itu. Tanpa key, aplikasi tetap jalan dengan suara browser.
 
 Keluar dari user littlecoder: `exit`.
 

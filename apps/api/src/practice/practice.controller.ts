@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
 import {
+  needsPurchase,
   GRADES,
   jagoStateSchema,
   levelStatuses,
@@ -16,8 +17,9 @@ import {
   type QuizResult,
   type SessionUser,
 } from '@little-coder/engine';
-import { and, count, desc, eq, sql } from 'drizzle-orm';
+import { and, count, desc, eq, inArray, sql } from 'drizzle-orm';
 import { CurrentUser, Roles } from '../auth/decorators.js';
+import { BillingService } from '../billing/billing.service.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import {
@@ -47,7 +49,10 @@ export type LeaderRow = {
 @Roles('child')
 @Controller('practice')
 export class PracticeController {
-  constructor(@Inject(DB) private readonly db: Db) {}
+  constructor(
+    @Inject(DB) private readonly db: Db,
+    private readonly billing: BillingService,
+  ) {}
 
   @Get('state')
   async state(@CurrentUser() user: SessionUser) {
@@ -262,6 +267,7 @@ export class PracticeController {
       ]),
     );
     const results = await this.quizzes(tx, childId);
+    const access = await this.billing.accessForChild(childId);
     const allowed: PracticeSync['quizzes'] = [];
     const rejected: string[] = [];
     for (const q of [...quizzes].sort((a, b) => a.ts - b.ts)) {
@@ -276,7 +282,8 @@ export class PracticeController {
               results,
             )[q.skillId]
           : undefined;
-      if (!status || status === 'locked') {
+      // Level berbayar yang belum dibeli juga ditolak (D-036), sama seperti level terkunci.
+      if (!status || status === 'locked' || needsPurchase(access, node!)) {
         rejected.push(q.id);
         continue;
       }
@@ -351,8 +358,28 @@ export class PracticeController {
         });
       }
 
-      const incoming = new Map(body.states.map((s) => [s.skillId, s.state]));
-      const touched = new Set([...counts.keys(), ...incoming.keys()]);
+      // Hanya skill yang benar-benar ada & aktif (audit L6): id asal tidak membuat baris sampah.
+      const known = new Set(
+        body.states.length || counts.size
+          ? (
+              await tx
+                .select({ id: skills.id })
+                .from(skills)
+                .where(
+                  inArray(skills.id, [
+                    ...new Set([...body.states.map((x) => x.skillId), ...counts.keys()]),
+                  ]),
+                )
+            ).map((r) => r.id)
+          : [],
+      );
+      const incoming = new Map(
+        body.states.filter((s) => known.has(s.skillId)).map((s) => [s.skillId, s.state]),
+      );
+      const touched = new Set([
+        ...[...counts.keys()].filter((k) => known.has(k)),
+        ...incoming.keys(),
+      ]);
       const existing = touched.size
         ? await tx.select().from(skillMastery).where(eq(skillMastery.childId, user.id))
         : [];

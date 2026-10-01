@@ -1,5 +1,8 @@
+import { sql } from 'drizzle-orm';
 import {
   boolean,
+  check,
+  customType,
   index,
   integer,
   jsonb,
@@ -8,6 +11,7 @@ import {
   primaryKey,
   text,
   timestamp,
+  uniqueIndex,
   uuid,
 } from 'drizzle-orm/pg-core';
 
@@ -16,27 +20,36 @@ import {
 export const staffRole = pgEnum('staff_role', ['admin', 'facilitator']);
 
 /** Akun staf (admin & fasilitator) — email + password (D-015). */
-export const staffUsers = pgTable('staff_users', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  email: text('email').notNull().unique(),
-  passwordHash: text('password_hash').notNull(),
-  name: text('name').notNull(),
-  role: staffRole('role').notNull(),
-  active: boolean('active').notNull().default(true),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-});
+export const staffUsers = pgTable(
+  'staff_users',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    email: text('email').notNull().unique(),
+    passwordHash: text('password_hash').notNull(),
+    name: text('name').notNull(),
+    role: staffRole('role').notNull(),
+    active: boolean('active').notNull().default(true),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  // Email unik tanpa membedakan huruf besar/kecil (audit L1).
+  (t) => [uniqueIndex('staff_users_email_lower_uq').on(sql`lower(${t.email})`)],
+);
 
 /** Akun orang tua. `consent_at` wajib (UU PDP). `family_code` dipakai anak untuk masuk (D-016). */
-export const parents = pgTable('parents', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  email: text('email').notNull().unique(),
-  passwordHash: text('password_hash').notNull(),
-  name: text('name').notNull(),
-  familyCode: text('family_code').notNull().unique(),
-  consentAt: timestamp('consent_at', { withTimezone: true }).notNull(),
-  active: boolean('active').notNull().default(true),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-});
+export const parents = pgTable(
+  'parents',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    email: text('email').notNull().unique(),
+    passwordHash: text('password_hash').notNull(),
+    name: text('name').notNull(),
+    familyCode: text('family_code').notNull().unique(),
+    consentAt: timestamp('consent_at', { withTimezone: true }).notNull(),
+    active: boolean('active').notNull().default(true),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('parents_email_lower_uq').on(sql`lower(${t.email})`)],
+);
 
 export const classes = pgTable('classes', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -62,7 +75,11 @@ export const children = pgTable(
     picturePinHash: text('picture_pin_hash'),
     failedPinAttempts: integer('failed_pin_attempts').notNull().default(0),
     pinLockedUntil: timestamp('pin_locked_until', { withTimezone: true }),
+    /** Berapa kali sandi gambar terkunci berturut-turut → kunci makin lama (audit H3). */
+    pinLockCount: integer('pin_lock_count').notNull().default(0),
     reportToken: text('report_token').notNull().unique(),
+    /** Kode keluarga milik anak yang daftar sendiri tanpa orang tua (D-037). Tetap berlaku setelah ditautkan. */
+    selfCode: text('self_code').unique(),
     active: boolean('active').notNull().default(true),
     lastActiveAt: timestamp('last_active_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
@@ -196,3 +213,171 @@ export const dialogs = pgTable('dialogs', {
   data: jsonb('data').notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
+
+const bytea = customType<{ data: Buffer; driverData: Buffer }>({ dataType: () => 'bytea' });
+
+/** Pengaturan aplikasi yang bisa diubah admin (billing, suara Momo, …). */
+export const appSettings = pgTable('app_settings', {
+  key: text('key').primaryKey(),
+  value: jsonb('value').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedBy: uuid('updated_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+});
+
+/** Cache audio suara Momo (D-035). `key` = SHA-256(model|suara|gaya|kecepatan|teks). */
+export const voiceClips = pgTable('voice_clips', {
+  key: text('key').primaryKey(),
+  text: text('text').notNull(),
+  voice: text('voice').notNull(),
+  mime: text('mime').notNull(),
+  data: bytea('data').notNull(),
+  bytes: integer('bytes').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ------------------------------------------------------------------ pembayaran manual (D-036)
+
+/** Paket berbayar; harga & diskon diatur admin. Uang = rupiah bulat. */
+export const packages = pgTable('packages', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  description: text('description').notNull().default(''),
+  scope: text('scope').notNull(),
+  books: jsonb('books').notNull().default([]),
+  durationDays: integer('duration_days'),
+  price: integer('price').notNull(),
+  discountType: text('discount_type').notNull().default('none'),
+  discountValue: integer('discount_value').notNull().default(0),
+  discountStartsAt: timestamp('discount_starts_at', { withTimezone: true }),
+  discountEndsAt: timestamp('discount_ends_at', { withTimezone: true }),
+  active: boolean('active').notNull().default(true),
+  sort: integer('sort').notNull().default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** Rekening bank / e-wallet tujuan transfer. */
+export const paymentMethods = pgTable('payment_methods', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  kind: text('kind').notNull(),
+  provider: text('provider').notNull(),
+  accountNumber: text('account_number').notNull(),
+  accountName: text('account_name').notNull(),
+  instructions: text('instructions').notNull().default(''),
+  active: boolean('active').notNull().default(true),
+  sort: integer('sort').notNull().default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/**
+ * Pesanan orang tua. Harga, paket, dan rekening disalin (snapshot) saat dibuat agar riwayat tidak
+ * berubah bila admin mengubah paket. `amount` = harga akhir + kode unik (selalu ganjil).
+ */
+export const orders = pgTable(
+  'orders',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    number: text('number').notNull().unique(),
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    packageId: uuid('package_id').references(() => packages.id, { onDelete: 'set null' }),
+    packageSnapshot: jsonb('package_snapshot').notNull(),
+    methodSnapshot: jsonb('method_snapshot').notNull(),
+    priceNormal: integer('price_normal').notNull(),
+    discount: integer('discount').notNull(),
+    uniqueCode: integer('unique_code').notNull(),
+    amount: integer('amount').notNull(),
+    status: text('status').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    proof: bytea('proof'),
+    proofMime: text('proof_mime'),
+    proofAt: timestamp('proof_at', { withTimezone: true }),
+    reviewedBy: uuid('reviewed_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    note: text('note'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('orders_parent_idx').on(t.parentId, t.createdAt),
+    index('orders_status_idx').on(t.status),
+  ],
+);
+
+/**
+ * Hak akses (paket). `source` = `purchase` (pesanan lunas, berlaku untuk semua anak di keluarga) atau
+ * `admin` (Premium yang diberikan admin — tanpa pesanan & TIDAK masuk buku kas, D-041). Pemberian admin
+ * bisa untuk satu keluarga (`parent_id`) atau satu anak saja (`child_id`, termasuk anak yang daftar sendiri).
+ */
+export const entitlements = pgTable(
+  'entitlements',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    parentId: uuid('parent_id').references(() => parents.id, { onDelete: 'cascade' }),
+    childId: uuid('child_id').references(() => children.id, { onDelete: 'cascade' }),
+    orderId: uuid('order_id').references(() => orders.id, { onDelete: 'set null' }),
+    packageId: uuid('package_id').references(() => packages.id, { onDelete: 'set null' }),
+    name: text('name').notNull(),
+    scope: text('scope').notNull(),
+    books: jsonb('books').notNull().default([]),
+    source: text('source').notNull().default('purchase'),
+    note: text('note'),
+    grantedBy: uuid('granted_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    startsAt: timestamp('starts_at', { withTimezone: true }).notNull(),
+    endsAt: timestamp('ends_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('entitlements_parent_idx').on(t.parentId),
+    index('entitlements_child_idx').on(t.childId),
+    uniqueIndex('entitlements_order_uq').on(t.orderId),
+    check('entitlements_owner_ck', sql`${t.parentId} is not null or ${t.childId} is not null`),
+  ],
+);
+
+/** Buku kas: pemasukan (otomatis dari pesanan lunas) & pengeluaran (input admin). */
+export const cashEntries = pgTable(
+  'cash_entries',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    date: text('date').notNull(),
+    type: text('type').notNull(),
+    category: text('category').notNull(),
+    amount: integer('amount').notNull(),
+    description: text('description').notNull().default(''),
+    orderId: uuid('order_id').references(() => orders.id, { onDelete: 'set null' }),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('cash_entries_date_idx').on(t.date),
+    uniqueIndex('cash_entries_order_uq').on(t.orderId),
+  ],
+);
+
+/** Owner penerima komisi; persen dalam basis poin (1% = 100). */
+export const owners = pgTable('owners', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  percentBp: integer('percent_bp').notNull(),
+  active: boolean('active').notNull().default(true),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** Komisi bulan yang sudah ditutup (snapshot persen & laba saat ditutup). */
+export const commissionPayouts = pgTable(
+  'commission_payouts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    month: text('month').notNull(),
+    ownerId: uuid('owner_id').references(() => owners.id, { onDelete: 'set null' }),
+    ownerName: text('owner_name').notNull(),
+    percentBp: integer('percent_bp').notNull(),
+    net: integer('net').notNull(),
+    amount: integer('amount').notNull(),
+    paidAt: timestamp('paid_at', { withTimezone: true }),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('commission_month_owner_uq').on(t.month, t.ownerId)],
+);

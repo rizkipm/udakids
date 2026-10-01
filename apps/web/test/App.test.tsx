@@ -18,9 +18,18 @@ describe('App routes', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Ajari Momo');
     for (const link of screen.getAllByRole('link', { name: t('site.cta.play') }))
       expect(link).toHaveAttribute('href', '/play');
-    expect(screen.getAllByRole('link', { name: t('site.cta.join') })[0]).toHaveAttribute(
+    expect(screen.getByRole('link', { name: t('site.doors.child.join') })).toHaveAttribute(
       'href',
       '/play/gabung',
+    );
+    // Anak bisa daftar sendiri tanpa orang tua (D-037).
+    expect(screen.getAllByRole('link', { name: t('site.cta.self') })[0]).toHaveAttribute(
+      'href',
+      '/play/daftar',
+    );
+    expect(screen.getByRole('link', { name: t('site.doors.child.self') })).toHaveAttribute(
+      'href',
+      '/play/daftar',
     );
     expect(screen.getAllByRole('link', { name: t('site.cta.family') })[0]).toHaveAttribute(
       'href',
@@ -49,12 +58,30 @@ describe('App routes', () => {
     rounds: 5678,
     updatedAt: '2026-09-30T10:00:00Z',
   };
+  const pricing = {
+    paywall: true,
+    freeLevels: 2,
+    packages: [
+      {
+        id: 'p1',
+        name: 'Akses Semua',
+        description: '',
+        scope: 'all',
+        books: [],
+        durationDays: null,
+        pricing: { normal: 99_000, discount: 20_000, final: 79_000, discountActive: true },
+        discountEndsAt: null,
+      },
+    ],
+  };
   const mockPublic = (books: ReturnType<typeof book>[]) =>
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
       const url = String(input);
       const body = url.includes('/public/stats')
         ? stats
-        : { totalLevels: books.reduce((a, b) => a + b.levels, 0), books };
+        : url.includes('/public/pricing')
+          ? pricing
+          : { totalLevels: books.reduce((a, b) => a + b.levels, 0), books };
       return new Response(JSON.stringify(body), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -149,6 +176,19 @@ describe('App routes', () => {
 
   it('bisa memakai engine dari workspace', () => {
     expect(ENGINE_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
+  });
+  it('harga di landing dari database: level gratis + paket (normal dicoret & diskon)', async () => {
+    mockPublic([book(1)]);
+    renderAt('/');
+    expect(await screen.findByRole('heading', { name: t('site.price.title') })).toBeInTheDocument();
+    expect(screen.getByText(t('site.price.free1', { free: 2 }))).toBeInTheDocument();
+    expect(screen.getByText('Rp99.000').tagName).toBe('S');
+    expect(screen.getByText('Rp79.000')).toBeInTheDocument();
+    expect(screen.getByText(t('site.price.save', { amount: 'Rp20.000' }))).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: t('site.price.buy') })).toHaveAttribute(
+      'href',
+      '/orang-tua/daftar',
+    );
   });
 });
 

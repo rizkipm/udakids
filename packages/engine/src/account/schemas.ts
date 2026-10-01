@@ -24,12 +24,23 @@ export type PinPicture = (typeof PIN_PICTURES)[number];
 export const PIN_LENGTH = 3;
 export const PIN_MAX_ATTEMPTS = 5;
 export const PIN_LOCK_MS = 60_000;
+/** Kunci sandi gambar makin lama bila terus salah: 1 → 5 → 30 → 120 menit (audit keamanan H3). */
+export const PIN_LOCK_STEPS_MIN = [1, 5, 30, 120] as const;
+export const pinLockMs = (lockCount: number) =>
+  PIN_LOCK_STEPS_MIN[Math.min(Math.max(lockCount, 1), PIN_LOCK_STEPS_MIN.length) - 1]! * 60_000;
 
 export const MOMO_COLORS = COLORS;
 export const FAMILY_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 export const FAMILY_CODE_LENGTH = 6;
 
-const email = z.string().trim().toLowerCase().pipe(z.email('email tidak valid'));
+/** Email: dirapikan (trim + huruf kecil) lalu dicek formatnya; maks 254 karakter (RFC 5321). */
+export const emailSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .max(254, 'email terlalu panjang')
+  .pipe(z.email('format email tidak valid, contoh: nama@domain.com'));
+const email = emailSchema;
 const password = z.string().min(8, 'password minimal 8 karakter').max(128);
 
 export const picturePinSchema = z
@@ -156,3 +167,15 @@ export type PracticeSync = z.infer<typeof practiceSyncSchema>;
 
 export type Role = 'admin' | 'facilitator' | 'parent' | 'child';
 export type SessionUser = { id: string; role: Role; name: string };
+
+/** Anak daftar sendiri tanpa orang tua (D-037): tanpa email — hanya nama panggilan, warna, sandi gambar. */
+export const childRegisterSchema = z.strictObject({
+  nickname: nicknameSchema,
+  momoColor: z.enum(MOMO_COLORS),
+  pin: picturePinSchema,
+});
+/** Orang tua menautkan anak yang daftar sendiri: kode keluarga anak + sandi gambarnya. */
+export const childClaimSchema = z.strictObject({
+  familyCode: familyCodeSchema,
+  pin: picturePinSchema,
+});

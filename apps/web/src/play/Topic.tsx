@@ -2,15 +2,19 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   correctNeeded,
+  FREE_ACCESS,
   generateItem,
   levelStatuses,
+  RESULT_KEYS,
+  withAccess,
   PASS_SCORE,
   QUIZ_LENGTH,
   type AnswerResult,
   type Color,
-  type LevelStatus,
+  type PlayStatus,
   type SkillTemplate,
 } from '@little-coder/engine';
+import { speakLine } from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
@@ -44,10 +48,14 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
       shelves,
       shelf: shelves[index],
       nextShelf: shelves[index + 1],
-      statuses: levelStatuses(
-        shelves.map((s) => s.category.code),
+      statuses: withAccess(
+        levelStatuses(
+          shelves.map((s) => s.category.code),
+          shelves.flatMap((s) => s.skills),
+          progress.quizzes,
+        ),
         shelves.flatMap((s) => s.skills),
-        progress.quizzes,
+        data.access ?? FREE_ACCESS,
       ),
     };
   }, [data, domain, grade, code, progress.quizzes]);
@@ -78,6 +86,8 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   const open = shelf.skills.find((k) => book.statuses[k.id] === 'open');
   const openNo = open ? shelf.skills.indexOf(open) + 1 : 0;
   const done = shelf.skills.every((k) => book.statuses[k.id] === 'passed');
+  // Level berikutnya berbayar (D-036): beri tahu anak dengan lembut, tanpa harga.
+  const paidNext = !open && shelf.skills.some((k) => book.statuses[k.id] === 'paid');
   const intro = category.intro ?? t('play.topic.introFallback', { topic: category.title });
   const tips = category.tips ?? [];
   const readAloud = [intro, ...tips.map((x) => `${t('play.topic.tip')} ${x}`)].join(' ');
@@ -118,6 +128,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           </p>
         </div>
         {locked && <p className="kid-note">{t('play.library.lockedCat')}</p>}
+        {paidNext && <p className="kid-note">{t('play.quiz.paid')}</p>}
         <ol className="level-path">
           {shelf.skills.map((k, i) => (
             <li key={k.id}>
@@ -220,7 +231,7 @@ function LevelCard({
   href: string;
   skill: SkillTemplate;
   n: number;
-  status: LevelStatus;
+  status: PlayStatus;
   best?: number;
   isNext: boolean;
 }) {
@@ -229,7 +240,7 @@ function LevelCard({
       <span className="level-num">{n}</span>
       <span className="level-title">{levelLabel(skill.title)}</span>
       <span className="level-status">
-        {status === 'locked' ? (
+        {status === 'locked' || status === 'paid' ? (
           <LockIcon size={20} />
         ) : status === 'passed' ? (
           <>
@@ -244,6 +255,18 @@ function LevelCard({
     </>
   );
   const label = `${t('play.library.level', { n })}: ${levelLabel(skill.title)}`;
+  if (status === 'paid') {
+    return (
+      <button
+        type="button"
+        className="level-card is-locked is-paid"
+        aria-label={`${label}, ${t('play.library.paid')}`}
+        onClick={() => speakLine(RESULT_KEYS.paid, t('play.quiz.paid'))}
+      >
+        {body}
+      </button>
+    );
+  }
   return status === 'locked' ? (
     <div
       className="level-card is-locked"

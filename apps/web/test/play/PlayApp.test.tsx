@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { skillTemplateSchema } from '@little-coder/engine';
@@ -42,6 +42,8 @@ function mockFetch(routes: Record<string, (body?: unknown) => [number, unknown]>
 /** URL buram (D-027) persis seperti yang dibuat aplikasi. */
 const lvl = async (id: string) => `/play/latihan/${await linkToken(CHILD, 'level', id)}`;
 const top = async (key: string) => `/play/topik/${await linkToken(CHILD, 'topic', key)}`;
+
+const cleanupAll = () => cleanup();
 
 const renderPlay = (path = '/play') =>
   render(
@@ -279,7 +281,7 @@ describe('ronde level (D-021)', () => {
       );
     }
     expect(screen.getByText('Skor 60')).toBeInTheDocument();
-    expect(screen.getByText(/^Gagal\. Butuh minimal 7 jawaban benar/)).toBeInTheDocument();
+    expect(screen.getByText(/^Hampir! Butuh minimal 7 jawaban tepat/)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /Lanjut ke Level/ })).toBeNull();
     expect(screen.getByRole('link', { name: t('play.quiz.readLesson') })).toHaveAttribute(
       'href',
@@ -306,6 +308,26 @@ describe('ronde level (D-021)', () => {
     mockFetch(routes([]));
     renderPlay(await lvl(skill2.id));
     expect(await screen.findByText(/Level ini masih terkunci/)).toBeInTheDocument();
+  });
+
+  it('level berbayar (D-036): kartu terkunci "perlu dibuka Ayah/Bunda", tanpa harga; URL langsung ditolak', async () => {
+    setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
+    const base = routes([]);
+    const access = { paywall: true, freeLevels: 2, all: false, books: [] };
+    mockFetch({
+      ...base,
+      'GET /catalog': () => {
+        const [status, body] = base['GET /catalog']();
+        return [status, { ...(body as object), access }];
+      },
+    });
+    const { container } = renderPlay(await top('math/prek/B'));
+    const card = await screen.findByRole('button', { name: new RegExp(t('play.library.paid')) });
+    expect(card).toHaveClass('is-paid');
+    expect(container.textContent).not.toMatch(/Rp/);
+    cleanupAll();
+    renderPlay(await lvl(skill2.id));
+    expect(await screen.findByText(t('play.quiz.paid'))).toBeInTheDocument();
   });
 });
 
@@ -465,6 +487,49 @@ describe('gabung kelas sendiri (D-025)', () => {
       pin: ['ikan', 'kue', 'bola'],
     });
     expect(rememberedFamilyCode()).toBe('KLS234');
+  });
+
+  it('daftar sendiri tanpa orang tua (D-037): nama → warna → sandi 2× → kode keluarga sendiri', async () => {
+    let body: unknown;
+    mockFetch({
+      'POST /auth/child/register': (b) => {
+        body = b;
+        return [
+          201,
+          {
+            token: token(),
+            user: { id: CHILD, role: 'child', name: 'Raka' },
+            familyCode: 'RKA234',
+          },
+        ];
+      },
+      'GET /auth/me': () => [200, { momoColor: 'biru', selfCode: 'RKA234' }],
+      'GET /catalog': () => [200, { catalogs: [], skills: [] }],
+      'GET /practice/state': () => [200, { states: {}, quizzes: {} }],
+    });
+    renderPlay('/play/daftar');
+    fireEvent.change(await screen.findByLabelText(t('play.join.name.title')), {
+      target: { value: 'Raka' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: t('play.login.code.submit') }));
+    fireEvent.click(await screen.findByRole('radio', { name: /biru/ }));
+    fireEvent.click(screen.getByRole('button', { name: t('play.login.code.submit') }));
+    for (const p of ['bintang', 'ikan', 'bunga'])
+      fireEvent.click(await screen.findByRole('button', { name: p }));
+    await screen.findByText(t('play.join.confirm.say'));
+    for (const p of ['bintang', 'ikan', 'bunga'])
+      fireEvent.click(screen.getByRole('button', { name: p }));
+    expect(await screen.findByText('RKA234')).toBeInTheDocument();
+    expect(body).toEqual({
+      nickname: 'Raka',
+      momoColor: 'biru',
+      pin: ['bintang', 'ikan', 'bunga'],
+    });
+    // Belum masuk sebelum anak melihat & mencatat kodenya.
+    expect(getSession('child')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: t('play.register.start') }));
+    await waitFor(() => expect(getSession('child')?.user.name).toBe('Raka'));
+    expect(rememberedFamilyCode()).toBe('RKA234');
   });
 });
 

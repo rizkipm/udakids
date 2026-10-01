@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { emailSchema } from '@little-coder/engine';
 import { api, errorMessage } from '../api/client';
 import { setSession, type Session } from '../auth/session';
 import { t } from '../i18n';
@@ -14,8 +15,15 @@ export function StaffLogin() {
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
 
+  const [emailError, setEmailError] = useState<string>();
   async function submit(e: FormEvent) {
     e.preventDefault();
+    // Format dicek dulu di perangkat (sama dengan server) agar pesannya jelas.
+    if (!emailSchema.safeParse(email).success) {
+      setEmailError(t('common.email.invalid'));
+      return;
+    }
+    setEmailError(undefined);
     setBusy(true);
     setError(undefined);
     try {
@@ -41,6 +49,8 @@ export function StaffLogin() {
             label={t('staff.login.email')}
             type="email"
             autoComplete="username"
+            maxLength={254}
+            error={emailError}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

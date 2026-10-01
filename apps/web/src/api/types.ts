@@ -1,4 +1,4 @@
-import type { Catalog, JagoState, Level, SkillTemplate } from '@little-coder/engine';
+import type { Access, Catalog, JagoState, Level, SkillTemplate } from '@little-coder/engine';
 
 /** Kontrak respons API NestJS (apps/api). Tanggal = string ISO. */
 
@@ -169,7 +169,8 @@ export type ClassRow = {
   facilitatorName: string | null;
 };
 
-export type CatalogResponse = { catalogs: Catalog[]; skills: SkillTemplate[] };
+/** `access` = kunci level berbayar untuk anak yang login (D-036); tanpa field = semua terbuka. */
+export type CatalogResponse = { catalogs: Catalog[]; skills: SkillTemplate[]; access?: Access };
 export type PracticeState = { states: Record<string, JagoState> };
 
 /** GET /practice/profile (D-022). Peringkat hanya posisi sendiri di kelas workshop. */

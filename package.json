@@ -22,11 +22,12 @@
     "db:backup": "pnpm --filter @little-coder/api db:backup",
     "db:restore": "pnpm --filter @little-coder/api db:restore",
     "content:export": "pnpm --filter @little-coder/api content:export",
+    "voice:generate": "pnpm --filter @little-coder/api voice:generate",
     "start:api": "pnpm --filter @little-coder/api start:prod",
     "deploy:db": "pnpm --filter @little-coder/api migrate:prod && pnpm --filter @little-coder/api seed:prod",
     "lan:info": "node scripts/lan-info.mjs",
     "dev:lan": "node scripts/lan-info.mjs && pnpm dev",
-    "lan": "pnpm build && pnpm deploy:db && node scripts/lan-info.mjs && concurrently -k -n api,web -c magenta,green \"pnpm --filter @little-coder/api start:prod\" \"pnpm --filter @little-coder/web preview\""
+    "lan": "pnpm build && NODE_ENV=production pnpm deploy:db && node scripts/lan-info.mjs && NODE_ENV=production concurrently -k -n api,web -c magenta,green \"pnpm --filter @little-coder/api start:prod\" \"pnpm --filter @little-coder/web preview\""
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

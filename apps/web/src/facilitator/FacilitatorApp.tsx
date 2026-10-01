@@ -3,36 +3,36 @@ import { ClassesPage } from '../admin/classes/ClassesPage';
 import { ClassStudentsPage } from '../admin/classes/ClassStudentsPage';
 import { setSession, useSession } from '../auth/session';
 import { t } from '../i18n';
-import { Button } from '../ui/ui';
+import { AppShell } from '../ui/AppShell';
+import { FacilitatorHome } from './FacilitatorHome';
 import '../admin/admin.css';
 
-/** Area fasilitator: kelas miliknya sendiri + pendaftaran siswa (D-025). Dashboard realtime = M5. */
+/** Area fasilitator/guru: ringkasan kelasnya sendiri + kelas & pendaftaran siswa (D-025, D-039). */
 export function FacilitatorApp() {
   const session = useSession('staff');
   const navigate = useNavigate();
   return (
-    <div className="ui-shell">
-      <header className="ui-topbar fac-topbar">
-        <strong>{t('admin.fac.brand')}</strong>
-        <div className="adm-topbar-user">
-          <span>{session?.user.name}</span>
-          <Button
-            variant="ghost"
-            onClick={() => {
-              setSession('staff', null);
-              navigate('/masuk/staf', { replace: true });
-            }}
-          >
-            {t('admin.topbar.logout')}
-          </Button>
-        </div>
-      </header>
-      <main className="ui-main">
-        <Routes>
-          <Route index element={<ClassesPage base="/fasilitator" canAssign={false} />} />
-          <Route path=":id" element={<ClassStudentsPage base="/fasilitator" />} />
-        </Routes>
-      </main>
-    </div>
+    <AppShell
+      id="facilitator"
+      theme="dark"
+      brand={<span>{t('admin.fac.brand')}</span>}
+      navLabel={t('admin.fac.nav')}
+      nav={[
+        { to: '/fasilitator', label: t('admin.fac.home'), icon: 'chart', end: true },
+        { to: '/fasilitator/kelas', label: t('admin.fac.classes'), icon: 'school' },
+      ]}
+      user={{ name: session?.user.name ?? '—', caption: t('admin.topbar.signedInAs') }}
+      onLogout={() => {
+        setSession('staff', null);
+        navigate('/masuk/staf', { replace: true });
+      }}
+    >
+      <Routes>
+        <Route index element={<FacilitatorHome />} />
+        <Route path="kelas" element={<ClassesPage base="/fasilitator/kelas" canAssign={false} />} />
+        <Route path="kelas/:id" element={<ClassStudentsPage base="/fasilitator/kelas" />} />
+        <Route path=":id" element={<ClassStudentsPage base="/fasilitator/kelas" />} />
+      </Routes>
+    </AppShell>
   );
 }

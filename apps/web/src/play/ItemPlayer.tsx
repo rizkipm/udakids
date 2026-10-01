@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
+  spokenPrompt,
+  type InteractionType,
   type AnswerResult,
   type AnswerValue,
   type Choice,
@@ -8,9 +10,9 @@ import {
   type Item,
   type Visual,
 } from '@little-coder/engine';
-import { speak, stopSpeaking } from '../audio/speech';
+import { speak, speakItem, speakLine, stopSpeaking } from '../audio/speech';
 import { VisualView } from '../components/visuals';
-import { t } from '../i18n';
+import { t, type MessageKey } from '../i18n';
 import './play.css';
 
 export type ItemPlayerProps = {
@@ -22,7 +24,31 @@ export type ItemPlayerProps = {
   /** Kunci jawaban ditandai (preview admin). */
   showAnswer?: boolean;
   disabled?: boolean;
+  /**
+   * Tingkat skill (D-035): Basic → kalimat soal dibacakan suara Momo; kelas 1+ → hanya perintah
+   * ("Pilih satu jawaban…"), bukan seluruh soal. Tanpa tier (mis. contoh di materi) → kalimat soal.
+   */
+  tier?: 'basic' | 'intermediate' | 'advanced';
 };
+
+const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
+  'pick-one': 'play.cmd.pickOne',
+  'tap-all': 'play.cmd.tapAll',
+  order: 'play.cmd.order',
+  group: 'play.cmd.group',
+  match: 'play.cmd.match',
+  build: 'play.cmd.build',
+  'number-line': 'play.cmd.numberLine',
+  'number-input': 'play.cmd.numberInput',
+};
+
+/** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
+export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
+  if (!tier) return speak(item.say ?? item.prompt);
+  const spoken = spokenPrompt(item, tier);
+  if (spoken.kind === 'item') return speakItem(item, spoken.text);
+  speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
+}
 
 /** Pemutar satu soal Pustaka. Semua interaksi cukup diketuk (tanpa drag), target ≥ 64 px. */
 export function ItemPlayer({
@@ -31,6 +57,7 @@ export function ItemPlayer({
   mode = 'play',
   showAnswer = false,
   disabled = false,
+  tier,
 }: ItemPlayerProps) {
   const [locked, setLocked] = useState(false);
   const [result, setResult] = useState<AnswerResult>();
@@ -39,9 +66,9 @@ export function ItemPlayer({
   useEffect(() => {
     setLocked(false);
     setResult(undefined);
-    if (mode === 'play') speak(say);
+    if (mode === 'play') speakPrompt(item, tier);
     return () => stopSpeaking();
-  }, [item, mode, say]);
+  }, [item, mode, tier]);
 
   const submit = (value: AnswerValue) => {
     if (locked || disabled) return;
@@ -55,7 +82,7 @@ export function ItemPlayer({
   return (
     <div className="item" data-interaction={item.interaction.type}>
       <div className="item-prompt">
-        <SpeakButton text={say} />
+        <SpeakButton text={say} onSpeak={() => speakPrompt(item, tier)} />
         <p>{item.prompt}</p>
       </div>
       {item.stimulus.length > 0 && (
@@ -91,13 +118,21 @@ const stimulusSize = (v: Visual) =>
         ? 110
         : 180;
 
-export function SpeakButton({ text, label }: { text: string; label?: string }) {
+export function SpeakButton({
+  text,
+  label,
+  onSpeak,
+}: {
+  text: string;
+  label?: string;
+  onSpeak?: () => void;
+}) {
   return (
     <button
       type="button"
       className="speak-btn"
       aria-label={label ?? t('play.listen')}
-      onClick={() => speak(text)}
+      onClick={() => (onSpeak ? onSpeak() : speak(text))}
     >
       <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden>
         <path d="M8 18h8l10-8v28l-10-8H8z" fill="currentColor" />
