@@ -815,3 +815,41 @@ Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk). Panduan:
   diketahui orang tua; tidak pernah berisi password atau sandi gambar.
 - **Antrean `email_outbox`** dengan percobaan ulang; isi dihapus setelah terkirim. Di dev tanpa SMTP, isi dicetak
   di log.
+
+## D-045 — Nilai peringkat tertimbang, total soal dijawab, Top 10 landing, notifikasi admin, wizard 3 langkah
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk; diuji di lokal sebelum deploy).
+
+- **Peringkat "Rata-rata" diganti nilai peringkat (rata-rata tertimbang / Bayesian average):**
+  - Rumusnya `(jumlah skor + 5 × 70) / (ronde + 5)`: setiap anak dianggap mulai dengan 5 ronde bernilai 70
+    (batas lulus `PASS_SCORE`), lalu ronde aslinya menggeser nilai itu ke rata-rata sebenarnya.
+  - Kalau nilai peringkat sama: rata-rata asli lebih tinggi → waktu lebih cepat → ronde lebih banyak.
+  - **Alasan, dari data produksi 2026-10-03:** dengan rata-rata murni, Yasmine (1 ronde, 100) berada di #2,
+    sedangkan Maryam (82 ronde, 94,63) di #11 dan Aim (111 ronde, 89,46) di #14. Dengan nilai peringkat:
+    Maryam #1, Aim #3, Uwais (17 ronde, 97,06) #2, dan Yasmine turun ke #12. Rata-rata asli tetap
+    ditampilkan di samping nilai peringkat.
+  - **Alternatif yang dibandingkan:**
+    - prior = rata-rata global 90,76: Aim masih di bawah anak 1 ronde;
+    - batas minimal 10 ronde: anak baru tidak muncul sama sekali.
+  - Mode **Total skor** (D-043) tidak berubah.
+- **Total soal dijawab** (jumlah jawaban per skill, `skill_mastery.answered`, satu sumber untuk semua tampilan)
+  tampil di:
+  - laporan anak orang tua dan dasbor orang tua;
+  - laporan admin;
+  - daftar keluarga admin;
+  - daftar siswa kelas (admin & fasilitator);
+  - profil anak;
+  - papan peringkat beserta detailnya;
+  - Top 10 landing.
+- **Top 10 global di landing** (`GET /leaderboard/public`, tanpa login):
+  - diurutkan menurut total skor → level lulus → waktu;
+  - kolom yang tampil: skor, soal dijawab, level lulus, waktu;
+  - disegarkan tiap 15 detik selama tab terlihat (cache server 10 detik);
+  - hanya nama panggilan + warna Momo, tanpa id anak.
+- **Notifikasi admin:**
+  - lonceng di kanan atas berisi pendaftaran (orang tua, anak daftar sendiri, anak gabung kelas) dan transaksi
+    (pesanan baru, bukti transfer) 30 hari terakhir;
+  - status "dibaca" disimpan per admin di perangkat;
+  - Ringkasan admin punya kartu "Pendaftar terbaru".
+- **Wizard keluarga 3 langkah yang nyata:** Isi data → Cek email (kode) → Profil anak. Dasbor menandai semua langkah
+  selesai. Form daftar menjelaskan langkahnya dan memberi tahu untuk mengecek folder Spam/Promosi.

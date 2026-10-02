@@ -34,6 +34,10 @@ function useProfile() {
     total: Math.max(totalPoints(progress.quizzes), server.data?.totalPoints ?? 0),
     passed: Math.max(passedLevels(progress.quizzes), server.data?.passedLevels ?? 0),
     played: Math.max(progress.quizHistory.length, server.data?.played ?? 0),
+    answered: Math.max(
+      progress.quizHistory.reduce((a, h) => a + h.total, 0),
+      server.data?.answered ?? 0,
+    ),
     timeMs: Math.max(totalTimeMs(progress.quizzes), server.data?.totalTimeMs ?? 0),
     rank: server.data?.rank ?? null,
     highest: server.data?.highest ?? null,
@@ -95,7 +99,7 @@ export function PageHead({ title, sub }: { title: string; sub?: string }) {
 
 export function ProfilePage({ momoColor }: { momoColor: Color }) {
   const p = useProfile();
-  const say = `${p.name}. ${t('play.profile.total', { score: p.total })}. ${t('play.profile.passed', { n: p.passed })}. ${t('play.profile.timeSay', { time: durationWords(p.timeMs) })}. ${rankText(p)}.`;
+  const say = `${p.name}. ${t('play.profile.total', { score: p.total })}. ${t('play.profile.passed', { n: p.passed })}. ${t('play.profile.answeredSay', { n: p.answered })}. ${t('play.profile.timeSay', { time: durationWords(p.timeMs) })}. ${rankText(p)}.`;
   return (
     <main className="library profile-page">
       <PageHead title={t('play.profile.title')} />
@@ -133,6 +137,11 @@ export function ProfilePage({ momoColor }: { momoColor: Color }) {
         />
         <Stat kind="time" value={formatClock(p.timeMs)} label={t('play.profile.timeLabel')} />
         <Stat kind="played" value={p.played} label={t('play.profile.playedLabel')} />
+        <Stat
+          kind="answered"
+          value={p.answered.toLocaleString('id-ID')}
+          label={t('play.profile.answeredLabel')}
+        />
         <Stat
           kind="rank"
           value={p.rank && p.online ? `#${p.rank.position}` : '–'}

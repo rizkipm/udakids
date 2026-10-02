@@ -180,6 +180,8 @@ export type ChildProfileStats = {
   totalPoints: number;
   passedLevels: number;
   played: number;
+  /** Total soal dijawab (D-045). */
+  answered?: number;
   totalTimeMs: number;
   /** Peringkat global (D-024). */
   rank: { position: number; of: number } | null;
@@ -210,9 +212,13 @@ export type LeaderboardRow = {
   nickname: string;
   momoColor: string;
   average: number;
+  /** Nilai peringkat = rata-rata tertimbang (D-045). */
+  rating: number;
   /** Total skor = jumlah skor terbaik tiap level (mode `total`, D-043). */
   points: number;
   rounds: number;
+  /** Total soal yang dijawab. */
+  questions: number;
   timeMs: number;
   /** Jumlah waktu skor terbaik (urutan mode `total`). */
   bestTimeMs: number;
@@ -246,8 +252,10 @@ export type LeaderboardDetail = {
   position: number;
   participants: number;
   average: number;
+  rating: number;
   points: number;
   rounds: number;
+  questions: number;
   timeMs: number;
   bestTimeMs: number;
   passedLevels: number;
@@ -257,8 +265,10 @@ export type LeaderboardDetail = {
     domain: string;
     grade: string;
     average: number;
+    rating: number;
     points: number;
     rounds: number;
+    questions: number;
     timeMs: number;
     bestTimeMs: number;
     passedLevels: number;
@@ -276,6 +286,7 @@ export type LeaderboardDetail = {
     average: number;
     points: number;
     rounds: number;
+    questions: number;
     timeMs: number;
     passed: number;
     levels: number;

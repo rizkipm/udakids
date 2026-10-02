@@ -541,8 +541,11 @@ describe('papan peringkat rata-rata (D-042)', () => {
     nickname,
     momoColor: 'biru',
     average: 100 - position * 0.25,
+    // Nilai peringkat (D-045); di fixture sama dengan rata-rata agar mudah dibaca.
+    rating: 100 - position * 0.25,
     points: 5000 - position * 10,
     rounds: 12,
+    questions: 120,
     timeMs: 65_000 * position,
     bestTimeMs: 30_000 * position,
     passedLevels: 3,
@@ -564,7 +567,7 @@ describe('papan peringkat rata-rata (D-042)', () => {
         return r;
       }),
     },
-    me: row(57, 'Alya', { isMe: true, childId: CHILD, average: 87.5 }),
+    me: row(57, 'Alya', { isMe: true, childId: CHILD, average: 87.5, rating: 87.5 }),
   });
 
   it('podium, 25 besar, posisimu, peserta lainnya + muat lagi, ganti papan, detail', async () => {
@@ -618,8 +621,10 @@ describe('papan peringkat rata-rata (D-042)', () => {
             position: 4,
             participants: 60,
             average: 99,
+            rating: 97.5,
             points: 4960,
             rounds: 12,
+            questions: 120,
             timeMs: 260_000,
             bestTimeMs: 120_000,
             passedLevels: 3,
@@ -630,8 +635,10 @@ describe('papan peringkat rata-rata (D-042)', () => {
                 domain: 'math',
                 grade: 'tk',
                 average: 99,
+                rating: 97.5,
                 points: 4960,
                 rounds: 12,
+                questions: 120,
                 timeMs: 260_000,
                 bestTimeMs: 120_000,
                 passedLevels: 3,
@@ -651,6 +658,7 @@ describe('papan peringkat rata-rata (D-042)', () => {
                 average: 99,
                 points: 990,
                 rounds: 12,
+                questions: 120,
                 timeMs: 260_000,
                 passed: 3,
                 levels: 10,
@@ -670,7 +678,11 @@ describe('papan peringkat rata-rata (D-042)', () => {
     expect(container.querySelector('.podium-spot.place-1 .rank-avg')?.textContent).toBe('99,75');
     // Di bawah skor: jumlah ronde & waktu; "Diperbarui" lengkap dengan tanggal dan detik.
     expect(container.querySelector('.podium-spot.place-1 .podium-meta')?.textContent).toBe(
-      '12 ronde01:05',
+      '12 ronde · 120 soal01:05',
+    );
+    // Rata-rata asli tetap terlihat di bawah nilai peringkat (D-045).
+    expect(container.querySelector('.podium-spot.place-1 .podium-raw')?.textContent).toBe(
+      'rata-rata asli 99,75',
     );
     expect(container.querySelector('.rank-announce-head time')?.getAttribute('dateTime')).toBe(
       '2026-10-02T08:00:00.000Z',

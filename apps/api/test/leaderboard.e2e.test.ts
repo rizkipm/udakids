@@ -86,10 +86,13 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     expect(res.body).toMatchObject({ scope: 'global', total: 3, me: { isMe: true } });
     const top = res.body.top as Row[];
     // Global Alya: (100 + 80 + 50) / 3 = 76,67.
-    expect(top.map((r) => [r.position, r.nickname, r.average])).toEqual([
-      [1, 'Citra', 93.33],
-      [2, 'Budi', 90],
-      [3, 'Alya', 76.67],
+    // Nilai peringkat (D-045) = (jumlah skor + 5×70) / (ronde + 5).
+    expect(
+      top.map((r) => [r.position, r.nickname, r.average, (r as Row & { rating: number }).rating]),
+    ).toEqual([
+      [1, 'Citra', 93.33, 78.75],
+      [2, 'Budi', 90, 73.33],
+      [3, 'Alya', 76.67, 72.5],
     ]);
     expect(top[0]).toMatchObject({ rounds: 3, timeMs: 70_000, passedLevels: 1, isMe: false });
     expect(Object.keys(top[0]!).sort()).toEqual(
@@ -103,6 +106,8 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
         'passedLevels',
         'points',
         'position',
+        'questions',
+        'rating',
         'rounds',
         'timeMs',
       ].sort(),
@@ -110,13 +115,13 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     expect(res.body.rest).toMatchObject({ page: 1, total: 0, items: [] });
   });
 
-  it('per buku: Math Pra-TK — rata-rata sama 90, Budi lebih cepat; daftar lingkup', async () => {
+  it('per buku: Math Pra-TK — rata-rata sama 90, tapi Alya 2 ronde di atas Budi 1 ronde (D-045)', async () => {
     const res = await get('/leaderboard?scope=math/prek').expect(200);
     expect(res.body.title).toBe('Math Pra-TK');
-    expect((res.body.top as Row[]).map((r) => [r.nickname, r.average, r.timeMs])).toEqual([
-      ['Citra', 93.33, 70_000],
-      ['Budi', 90, 50_000],
-      ['Alya', 90, 120_000],
+    expect((res.body.top as Row[]).map((r) => [r.nickname, r.average, r.rounds])).toEqual([
+      ['Citra', 93.33, 3],
+      ['Alya', 90, 2],
+      ['Budi', 90, 1],
     ]);
     const sains = await get('/leaderboard?scope=sains/tk').expect(200);
     expect(sains.body.total).toBe(1);
@@ -148,7 +153,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
         b.position,
       ]),
     ).toEqual([
-      ['math/prek', 90, 3],
+      ['math/prek', 90, 2],
       ['sains/tk', 50, 1],
     ]);
     expect(res.body.books[0].totalLevels).toBeGreaterThan(0);
@@ -168,7 +173,8 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
   });
 
   it('lebih dari 25 peserta: 25 besar + daftar berhalaman; detail di luar 25 besar ditolak', async () => {
-    // 30 anak tambahan dengan rata-rata menurun 99, 98, …, 70 (Citra 93,33 terselip di tengah).
+    // 30 anak tambahan, masing-masing 3 ronde dengan rata-rata menurun 99, 98, …, 70 (nilai peringkat
+    // 80,88 … 70); Alya (72,5) jatuh di luar 25 besar.
     const extra: string[] = [];
     for (let i = 0; i < 30; i++) {
       const r = await ctx.pool.query(
@@ -176,7 +182,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
         [`Anak${i + 1}`, randomUUID()],
       );
       extra.push(r.rows[0].id as string);
-      await round(r.rows[0].id as string, mathSkill, 99 - i, 1000);
+      for (let k = 0; k < 3; k++) await round(r.rows[0].id as string, mathSkill, 99 - i, 1000);
     }
     const res = await get('/leaderboard').expect(200);
     expect(res.body.total).toBe(33);
@@ -248,5 +254,37 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       .get('/leaderboard?scope=global&mode=acak')
       .set(ctx.auth(kids.Alya!.token))
       .expect(400);
+  });
+
+  it('Top 10 landing (D-045): tanpa login, tanpa id anak, dengan soal dijawab & level lulus', async () => {
+    await ctx.pool.query(
+      `insert into skill_mastery (child_id, skill_id, state, answered, correct)
+       values ($1, $2, '{}'::jsonb, 30, 27) on conflict do nothing`,
+      [kids.Budi!.id, mathSkill],
+    );
+    const res = await ctx.http().get('/leaderboard/public').expect(200);
+    expect(res.body.top.length).toBeLessThanOrEqual(10);
+    expect(res.body.top.map((r: { position: number }) => r.position)).toEqual(
+      res.body.top.map((_: unknown, i: number) => i + 1),
+    );
+    for (const r of res.body.top) {
+      expect(Object.keys(r).sort()).toEqual(
+        [
+          'momoColor',
+          'nickname',
+          'passedLevels',
+          'points',
+          'position',
+          'questions',
+          'rounds',
+          'timeMs',
+        ].sort(),
+      );
+    }
+    expect(res.body.top[0]).toMatchObject({ nickname: 'Budi', points: 170, questions: 30 });
+    // Papan lengkap tetap butuh login; jumlah soal sama dengan laporan anak.
+    await ctx.http().get('/leaderboard').expect(401);
+    const board = await get('/leaderboard?mode=total').expect(200);
+    expect(board.body.top[0]).toMatchObject({ nickname: 'Budi', questions: 30 });
   });
 });

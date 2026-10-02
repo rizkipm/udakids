@@ -15,6 +15,8 @@ type Student = {
   momoColor: string;
   viaParent: boolean;
   lastActiveAt: string | null;
+  answered: number;
+  rounds: number;
 };
 type LoginCard = { id: string; nickname: string; momoColor: string; pin: PinPicture[] };
 type RosterResult = { code: string; eventName: string; created: LoginCard[]; skipped: string[] };
@@ -190,6 +192,12 @@ export function ClassStudentsPage({ base = '/admin/kelas' }: { base?: string }) 
                         {s.lastActiveAt
                           ? t('admin.roster.active', { date: formatDate(s.lastActiveAt) })
                           : t('admin.roster.never')}
+                      </small>
+                      <small className="ui-muted">
+                        {t('admin.roster.stats', {
+                          answered: s.answered.toLocaleString('id-ID'),
+                          rounds: s.rounds,
+                        })}
                       </small>
                     </span>
                     {!s.viaParent && (

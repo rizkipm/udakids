@@ -18,6 +18,7 @@ import { speak } from '../audio/speech';
 import { useApiCall, useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
+import { formatStamp } from '../ui/ui';
 import { SpeakButton } from './ItemPlayer';
 import { Crown, StatIcon } from './icons';
 import { PageHead } from './Profile';
@@ -33,27 +34,15 @@ function rememberedMode(): LeaderboardMode {
   }
 }
 
-/** "Kamis, 2 Okt 2026 · 13.38.05" — tanggal, jam, menit, detik (waktu perangkat). */
-export function formatUpdated(iso: string) {
-  const d = new Date(iso);
-  const date = d.toLocaleDateString('id-ID', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-  const time = d.toLocaleTimeString('id-ID', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
-  return `${date} · ${time}`;
-}
-
-/** Nilai utama sesuai urutan papan: rata-rata "87,50" atau total skor "1.250". */
-const metric = (r: { average: number; points: number }, mode: LeaderboardMode) =>
-  mode === 'total' ? r.points.toLocaleString('id-ID') : formatAverage(r.average);
+/**
+ * Nilai utama sesuai urutan papan: nilai peringkat (rata-rata tertimbang, D-045) "87,50" atau total skor
+ * "1.250". Rata-rata asli tetap ditampilkan kecil di bawahnya.
+ */
+const metric = (r: { rating: number; points: number }, mode: LeaderboardMode) =>
+  mode === 'total' ? r.points.toLocaleString('id-ID') : formatAverage(r.rating);
+/** "12 ronde · 120 soal". */
+const volume = (r: { rounds: number; questions: number }) =>
+  `${t('rank.rounds', { n: r.rounds })} · ${t('rank.questions', { n: r.questions.toLocaleString('id-ID') })}`;
 /** Waktu sesuai urutan papan: total waktu semua ronde (rata-rata) atau waktu skor terbaik (total skor). */
 const timeOf = (r: { timeMs: number; bestTimeMs: number }, mode: LeaderboardMode) =>
   mode === 'total' ? r.bestTimeMs : r.timeMs;
@@ -71,7 +60,7 @@ const scopeLabel = (s: Pick<LeaderboardScope, 'key' | 'title'>) =>
   s.key === 'global' ? t('rank.scope.global') : s.title;
 
 /**
- * Papan peringkat rata-rata (D-042): global + per buku, gaya "papan pengumuman". 25 besar tampil
+ * Papan peringkat rata-rata tertimbang (D-042, D-045): global + per buku, gaya "papan pengumuman". 25 besar tampil
  * (podium 3 teratas, lalu daftar) dan detailnya bisa dibuka; peserta lainnya berhalaman.
  * Anak lain hanya terlihat nama panggilan + warna Momo. Butuh koneksi (data dari server).
  */
@@ -146,7 +135,7 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
           board: boardName,
           position: data.me.position,
           of: data.total,
-          average: formatAverage(data.me.average),
+          average: formatAverage(data.me.rating),
           points: data.me.points.toLocaleString('id-ID'),
         })
       : t('rank.notYet', { board: boardName });
@@ -214,7 +203,7 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
               </h2>
               <small>
                 <time dateTime={data.updatedAt}>
-                  {t('rank.announceSub', { time: formatUpdated(data.updatedAt) })}
+                  {t('rank.announceSub', { time: formatStamp(data.updatedAt) })}
                 </time>
               </small>
             </header>
@@ -232,8 +221,13 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
                     <Momo color={r.momoColor as Color} mood="proud" size={i === 1 ? 104 : 84} />
                     <strong className="podium-name">{r.nickname}</strong>
                     <span className="podium-points rank-avg">{metric(r, mode)}</span>
+                    {mode === 'average' && (
+                      <span className="podium-raw">
+                        {t('rank.raw', { average: formatAverage(r.average) })}
+                      </span>
+                    )}
                     <span className="podium-meta">
-                      <span>{t('rank.rounds', { n: r.rounds })}</span>
+                      <span>{volume(r)}</span>
                       <span className="rank-time">
                         <StatIcon kind="time" size={16} />
                         {formatClock(timeOf(r, mode))}
@@ -347,9 +341,11 @@ function RankRow({
       aria-label={t(mode === 'total' ? 'rank.rowSayTotal' : 'rank.rowSay', {
         position: row.position,
         name: row.nickname,
-        average: formatAverage(row.average),
+        average: formatAverage(row.rating),
+        raw: formatAverage(row.average),
         points: row.points.toLocaleString('id-ID'),
         rounds: row.rounds,
+        questions: row.questions,
         time: durationWords(timeOf(row, mode)),
       })}
     >
@@ -359,7 +355,8 @@ function RankRow({
         <strong>{row.nickname}</strong>
         {row.isMe && <em className="board-me">{t('rank.me')}</em>}
         <small>
-          {t('rank.rounds', { n: row.rounds })} · {t('rank.passed', { n: row.passedLevels })}
+          {volume(row)} · {t('rank.passed', { n: row.passedLevels })}
+          {mode === 'average' && <> · {t('rank.raw', { average: formatAverage(row.average) })}</>}
         </small>
       </span>
       <span className="rank-avg">{metric(row, mode)}</span>
@@ -411,9 +408,11 @@ function DetailDialog({
         name: d.nickname,
         position: d.position,
         of: d.participants,
-        average: formatAverage(d.average),
+        average: formatAverage(d.rating),
+        raw: formatAverage(d.average),
         points: d.points.toLocaleString('id-ID'),
         rounds: d.rounds,
+        questions: d.questions,
       })
     : '';
   const byBook = new Map<string, LeaderboardDetail['topics']>();
@@ -440,7 +439,7 @@ function DetailDialog({
               <p className="rank-dialog-sum">
                 <span className="rank-pos">{d.position}</span>
                 <span className="rank-avg">{metric(d, mode)}</span>
-                <span>{t('rank.rounds', { n: d.rounds })}</span>
+                <span>{volume(d)}</span>
                 <span className="rank-time">
                   <StatIcon kind="time" size={18} />
                   {formatClock(timeOf(d, mode))}
@@ -475,9 +474,11 @@ function DetailDialog({
                 <thead>
                   <tr>
                     <th scope="col">{t('rank.detail.book')}</th>
+                    <th scope="col">{t('rank.col.rating')}</th>
                     <th scope="col">{t('rank.col.average')}</th>
                     <th scope="col">{t('rank.col.points')}</th>
                     <th scope="col">{t('rank.col.rounds')}</th>
+                    <th scope="col">{t('rank.col.questions')}</th>
                     <th scope="col">{t('rank.detail.levels')}</th>
                     <th scope="col">{t('rank.col.pos')}</th>
                   </tr>
@@ -487,12 +488,14 @@ function DetailDialog({
                     <tr key={b.key} className={b.key === scope ? 'is-on' : undefined}>
                       <th scope="row">{b.title}</th>
                       <td className={mode === 'average' ? 'rank-avg' : undefined}>
-                        {formatAverage(b.average)}
+                        {formatAverage(b.rating)}
                       </td>
+                      <td>{formatAverage(b.average)}</td>
                       <td className={mode === 'total' ? 'rank-avg' : undefined}>
                         {b.points.toLocaleString('id-ID')}
                       </td>
                       <td>{b.rounds}</td>
+                      <td>{b.questions.toLocaleString('id-ID')}</td>
                       <td>
                         {b.passedLevels}/{b.totalLevels}
                       </td>
@@ -519,6 +522,7 @@ function DetailDialog({
                         <th scope="col">{t('rank.col.average')}</th>
                         <th scope="col">{t('rank.col.points')}</th>
                         <th scope="col">{t('rank.col.rounds')}</th>
+                        <th scope="col">{t('rank.col.questions')}</th>
                         <th scope="col">{t('rank.detail.levels')}</th>
                       </tr>
                     </thead>
@@ -526,13 +530,12 @@ function DetailDialog({
                       {topics.map((tp) => (
                         <tr key={tp.category}>
                           <th scope="row">{tp.topic}</th>
-                          <td className={mode === 'average' ? 'rank-avg' : undefined}>
-                            {formatAverage(tp.average)}
-                          </td>
+                          <td>{formatAverage(tp.average)}</td>
                           <td className={mode === 'total' ? 'rank-avg' : undefined}>
                             {tp.points.toLocaleString('id-ID')}
                           </td>
                           <td>{tp.rounds}</td>
+                          <td>{tp.questions.toLocaleString('id-ID')}</td>
                           <td>
                             {tp.passed}/{tp.levels}
                           </td>

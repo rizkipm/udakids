@@ -1191,3 +1191,118 @@
   color: #6b4500;
   background: #fff3d6;
 }
+
+/* Notifikasi admin (D-045) */
+.shell-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+.notif {
+  position: relative;
+}
+.notif-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--ui-line);
+  background: var(--ui-surface, #fff);
+  color: var(--ui-ink, #1d1a2e);
+  cursor: pointer;
+}
+.notif-btn:hover,
+.notif-btn[aria-expanded='true'] {
+  background: #f1eff6;
+}
+.notif-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #d93a2b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 20px;
+  text-align: center;
+}
+.notif-panel {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  z-index: 50;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--ui-line);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgb(20 16 40 / 18%);
+}
+.notif-panel header {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ui-line);
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+.notif-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.notif-panel li a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  padding: 10px 14px;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #f0edf5;
+}
+.notif-panel li a:hover {
+  background: #f7f5fb;
+}
+.notif-panel li.is-new a {
+  background: #f3efff;
+}
+.notif-kind {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5b3fd6;
+}
+.notif-panel li[class*='is-order'] .notif-kind {
+  color: #8a5a00;
+}
+.notif-panel li a small {
+  grid-column: 1;
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+.notif-panel li a time {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  align-self: center;
+  font-size: 12px;
+  color: var(--ui-muted);
+  white-space: nowrap;
+}
+.notif-empty {
+  padding: 16px 14px;
+  margin: 0;
+}
+
+.ins-grid.one {
+  grid-template-columns: minmax(0, 1fr);
+}

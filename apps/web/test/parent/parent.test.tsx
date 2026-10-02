@@ -90,7 +90,7 @@ describe('pendaftaran orang tua', () => {
       await screen.findByRole('heading', { name: t('parent.form.newTitle') }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('list', { name: t('site.steps.label', { n: 2, total: 3 }) }),
+      screen.getByRole('list', { name: t('site.steps.label', { n: 3, total: 3 }) }),
     ).toBeInTheDocument();
     const body = JSON.parse((fetchMock.mock.calls[0]![1] as RequestInit).body as string) as Record<
       string,

@@ -150,6 +150,7 @@ export function ParentRegister() {
     >
       <Card title={t('parent.register.title')}>
         <p className="ui-muted pa-gap">{t('parent.register.subtitle')}</p>
+        <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit} noValidate>
           <RequiredNote />
@@ -211,6 +212,7 @@ export function ParentRegister() {
               {errors.consent}
             </p>
           )}
+          <Notice tone="info">{t('parent.register.emailNote')}</Notice>
           <Button type="submit" disabled={busy} className="pa-wide">
             {busy ? t('parent.saving') : t('parent.register.submit')}
           </Button>
@@ -303,14 +305,16 @@ export function ParentVerify() {
       variant="parent"
       title={t('site.auth.parent.title')}
       text={t('site.auth.parent.text')}
-      steps={{ current: 1, labels: familySteps() }}
+      steps={{ current: 2, labels: familySteps() }}
     >
       <Card title={t('parent.verify.title')}>
         <p className="ui-muted pa-gap">
           {state?.fromLogin ? t('parent.verify.fromLogin') : t('parent.verify.subtitle')}{' '}
           <strong>{email}</strong>
         </p>
-        <p className="ui-muted pa-gap">{t('parent.verify.spam')}</p>
+        <Notice tone="info">
+          <strong>{t('parent.verify.spamTitle')}</strong> {t('parent.verify.spam')}
+        </Notice>
         {error && <Notice tone="error">{error}</Notice>}
         {info && <Notice tone="success">{info}</Notice>}
         <form onSubmit={submit} noValidate>

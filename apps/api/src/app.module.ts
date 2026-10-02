@@ -6,6 +6,7 @@ import { AdminUsersController } from './admin/admin-users.controller.js';
 import { ContentService } from './admin/content.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { AdminMailController } from './mail/admin-mail.controller.js';
+import { AdminNotificationsController } from './admin/admin-notifications.controller.js';
 import { MailModule } from './mail/mail.module.js';
 import { AdminContestController } from './contest/admin-contest.controller.js';
 import { ContestController } from './contest/contest.controller.js';
@@ -54,6 +55,7 @@ import { VoiceService } from './voice/voice.service.js';
     AdminContestController,
     MediaController,
     AdminMailController,
+    AdminNotificationsController,
     AdminVoiceController,
   ],
   providers: [

@@ -216,6 +216,29 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(lastTo('x@contoh.id')).toBeTruthy();
   });
 
+  it('notifikasi admin (D-045): pendaftaran & transaksi terbaru; hanya admin', async () => {
+    const { http, auth, adminToken } = ctx;
+    const res = await http().get('/admin/notifications').set(auth(adminToken)).expect(200);
+    const items = res.body.items as {
+      kind: string;
+      title: string;
+      status: string | null;
+      amount: number | null;
+      at: string;
+    }[];
+    const kinds = new Set(items.map((n) => n.kind));
+    for (const k of ['parent', 'order_created', 'order_proof']) expect(kinds.has(k)).toBe(true);
+    expect(items.find((n) => n.kind === 'order_created')!.amount).toBeGreaterThan(50_000);
+    // Terbaru di atas.
+    const times = items.map((n) => n.at);
+    expect([...times].sort().reverse()).toEqual(times);
+    // Bukan admin → ditolak.
+    const parent = (await http().post('/auth/parent/login').send({ email, password }).expect(200))
+      .body.token as string;
+    await http().get('/admin/notifications').set(auth(parent)).expect(403);
+    await http().get('/admin/notifications').expect(401);
+  });
+
   it('template: escape & footer', () => {
     const ctxMail = { appUrl: 'https://udakids.id', brand: 'Udakids' };
     const v = verifyEmail(ctxMail, { name: '<script>x</script>', code: '123456', minutes: 15 });

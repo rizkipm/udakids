@@ -58,6 +58,7 @@ const child: ChildRow = {
   parent: null,
   class: null,
   passed: 3,
+  answered: 120,
   plan: free,
   grants: [],
   familyGrants: [],

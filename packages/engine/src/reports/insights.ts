@@ -53,7 +53,14 @@ export type TopicRef = {
 };
 
 export type ChildInsights = {
-  totals: { points: number; passed: number; played: number; timeMs: number };
+  totals: {
+    points: number;
+    passed: number;
+    played: number;
+    timeMs: number;
+    /** Total soal yang sudah dijawab (latihan + level, D-045). */
+    answered: number;
+  };
   week: DayActivity[];
   activeDays: number;
   weekRounds: number;
@@ -81,6 +88,8 @@ export function childInsights(input: {
   rounds: readonly InsightRound[];
   /** Total ronde sepanjang waktu (rounds boleh hanya sebagian terbaru). */
   played?: number;
+  /** Total soal yang sudah dijawab sepanjang waktu (D-045). */
+  answered?: number;
   results: Readonly<Record<string, QuizResult | undefined>>;
   skills: readonly InsightSkill[];
   books: readonly InsightBook[];
@@ -219,6 +228,7 @@ export function childInsights(input: {
       passed: passedLevels(results),
       played: Math.max(input.played ?? 0, rounds.length),
       timeMs: totalTimeMs(results),
+      answered: input.answered ?? 0,
     },
     week,
     activeDays: week.filter((d) => d.rounds > 0).length,

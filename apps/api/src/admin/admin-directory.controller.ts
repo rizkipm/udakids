@@ -232,6 +232,7 @@ export class AdminDirectoryController {
         c.parent_id, p.name as parent_name, p.email as parent_email,
         cl.id as class_id, cl.event_name as class_name, cl.code as class_code,
         (select count(*) from quiz_results q where q.child_id = c.id and q.passed) as passed,
+        (select coalesce(sum(m.answered), 0) from skill_mastery m where m.child_id = c.id) as answered,
         count(*) over() as total
       from children c
       left join parents p on p.id = c.parent_id
@@ -276,6 +277,8 @@ export class AdminDirectoryController {
             ? { id: String(r.class_id), name: String(r.class_name), code: String(r.class_code) }
             : null,
           passed: Number(r.passed ?? 0),
+          /** Total soal dijawab (D-045). */
+          answered: Number(r.answered ?? 0),
           plan: planStatus([...fam, ...own].map(toLike), now),
           grants: own.map((e) => entView(e, e.grantedByName)),
           familyGrants: fam

@@ -349,5 +349,23 @@ export function Stat({ label, value, hint }: { label: string; value: ReactNode; 
   );
 }
 
+/** "Kamis, 2 Okt 2026 · 13.38.05" — tanggal, jam, menit, detik (waktu perangkat). */
+export function formatStamp(iso: string) {
+  const d = new Date(iso);
+  const date = d.toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+  const time = d.toLocaleTimeString('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+  return `${date} · ${time}`;
+}
+
 export const formatDate = (v: string | null | undefined) =>
   v ? new Date(v).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }) : '—';

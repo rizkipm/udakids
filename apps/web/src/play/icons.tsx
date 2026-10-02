@@ -15,7 +15,8 @@ export function BackIcon() {
   );
 }
 
-export type StatKind = 'current' | 'points' | 'passed' | 'time' | 'rank' | 'highest' | 'played';
+export type StatKind =
+  'current' | 'points' | 'passed' | 'time' | 'rank' | 'highest' | 'played' | 'answered';
 
 export function StatIcon({ kind, size = 34 }: { kind: StatKind; size?: number }) {
   const common = { viewBox: '0 0 48 48', width: size, height: size, 'aria-hidden': true } as const;
@@ -63,6 +64,20 @@ export function StatIcon({ kind, size = 34 }: { kind: StatKind; size?: number })
         <svg {...common} className="stat-icon">
           <path d="M4 42L18 16l8 12 6-8 12 22z" fill="currentColor" />
           <path d="M18 16l-4 8h8z" fill="#fff" opacity="0.8" />
+        </svg>
+      );
+    case 'answered':
+      return (
+        <svg {...common} className="stat-icon">
+          <rect x="8" y="6" width="32" height="38" rx="8" fill="currentColor" />
+          <path
+            d="M15 18l3 3 6-6M15 31l3 3 6-6M28 19h6M28 32h6"
+            stroke="#fff"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
         </svg>
       );
     case 'played':

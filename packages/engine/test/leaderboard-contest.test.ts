@@ -10,26 +10,56 @@ import {
   generateItem,
   publicItem,
   rankByAverage,
+  rating2,
   rankContest,
   skillTemplateSchema,
   type Item,
 } from '../src/index.js';
 
-describe('peringkat rata-rata (D-042)', () => {
-  it('rata-rata 2 desimal; sama → waktu tercepat; posisi berurutan', () => {
+describe('peringkat rata-rata tertimbang (D-042, D-045)', () => {
+  it('rata-rata & nilai peringkat 2 desimal', () => {
     expect(average2(2979, 30)).toBe(99.3);
     expect(average2(1000, 3)).toBe(333.33);
     expect(formatAverage(87.5)).toBe('87,50');
-    const r = rankByAverage([
-      { id: 'a', rounds: 3, scoreSum: 270, timeMs: 9000 },
-      { id: 'b', rounds: 2, scoreSum: 180, timeMs: 5000 }, // 90.00, lebih cepat
-      { id: 'c', rounds: 1, scoreSum: 100, timeMs: 99_000 },
-      { id: 'd', rounds: 0, scoreSum: 0, timeMs: 0 }, // belum main → tidak masuk
+    // 1 ronde 100 → (100 + 5×70) / 6
+    expect(rating2(100, 1)).toBe(75);
+    expect(rating2(0, 0)).toBe(0);
+    // Makin banyak ronde, makin dekat ke rata-rata asli.
+    expect(rating2(95 * 100, 100)).toBeCloseTo(93.81, 2);
+  });
+
+  it('1 ronde bernilai 100 tidak mengalahkan banyak ronde yang konsisten (data produksi 2026-10-03)', () => {
+    const rows = [
+      { id: 'Yasmine', rounds: 1, scoreSum: 100, timeMs: 174_000 },
+      { id: 'Vincent', rounds: 6, scoreSum: 600, timeMs: 84_000 },
+      { id: 'Kay', rounds: 7, scoreSum: 690, timeMs: 210_000 },
+      { id: 'Uwais', rounds: 17, scoreSum: 1650, timeMs: 684_000 },
+      { id: 'Maryam', rounds: 82, scoreSum: 7760, timeMs: 4_350_000 },
+      { id: 'Aim', rounds: 111, scoreSum: 9930, timeMs: 9_930_000 },
+      { id: 'Alma', rounds: 1, scoreSum: 50, timeMs: 42_000 },
+      { id: 'baru', rounds: 0, scoreSum: 0, timeMs: 0 }, // belum main → tidak masuk
+    ];
+    expect(rankByAverage(rows).map((x) => x.id)).toEqual([
+      'Maryam',
+      'Uwais',
+      'Aim',
+      'Kay',
+      'Vincent',
+      'Yasmine',
+      'Alma',
     ]);
-    expect(r.map((x) => [x.id, x.average, x.position])).toEqual([
-      ['c', 100, 1],
-      ['b', 90, 2],
-      ['a', 90, 3],
+  });
+
+  it('nilai peringkat sama → rata-rata asli → waktu tercepat; posisi berurutan', () => {
+    const r = rankByAverage([
+      { id: 'a', rounds: 2, scoreSum: 180, timeMs: 9000 },
+      { id: 'b', rounds: 2, scoreSum: 180, timeMs: 5000 }, // sama, lebih cepat
+      { id: 'c', rounds: 1, scoreSum: 100, timeMs: 1000 },
+    ]);
+    expect(r.map((x) => [x.id, x.rating, x.average, x.position])).toEqual([
+      ['b', 75.71, 90, 1],
+      ['a', 75.71, 90, 2],
+      ['c', 75, 100, 3],
     ]);
   });
 });

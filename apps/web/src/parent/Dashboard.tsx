@@ -244,7 +244,7 @@ export function Dashboard() {
 
       {state?.welcome && state.saved && (
         <>
-          <Stepper current={3} labels={familySteps()} />
+          <Stepper current={4} labels={familySteps()} />
           <Notice tone="success">{t('parent.dash.ready', { name: state.saved })}</Notice>
         </>
       )}

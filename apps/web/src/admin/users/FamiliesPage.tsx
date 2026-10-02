@@ -621,6 +621,9 @@ export function FamiliesPage() {
                       </span>
                       <span role="cell" data-label={t('admin.dir.cPassed')}>
                         {c.passed}
+                        <small className="ui-muted dir-sub">
+                          {t('admin.dir.answered', { n: c.answered.toLocaleString('id-ID') })}
+                        </small>
                       </span>
                       <span role="cell" data-label={t('admin.dir.cLast')}>
                         {c.lastActiveAt ? formatDate(c.lastActiveAt) : '—'}

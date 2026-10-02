@@ -97,6 +97,11 @@ export class PracticeController {
       .select({ n: count() })
       .from(events)
       .where(and(eq(events.childId, user.id), eq(events.type, 'quiz_result')));
+    // Total soal dijawab (D-045), sama dengan laporan orang tua.
+    const [answered] = await this.db
+      .select({ n: sql<number>`coalesce(sum(${skillMastery.answered}), 0)::int` })
+      .from(skillMastery)
+      .where(eq(skillMastery.childId, user.id));
     const history = await this.db
       .select({
         id: events.id,
@@ -123,6 +128,7 @@ export class PracticeController {
       highest: me?.highest ?? null,
       className,
       played: Number(played?.n ?? 0),
+      answered: Number(answered?.n ?? 0),
       rank,
       history: history.map((h) => {
         const p = h.payload as {

@@ -58,6 +58,8 @@ export type ChildRow = {
   parent: { id: string; name: string; email: string } | null;
   class: { id: string; name: string; code: string } | null;
   passed: number;
+  /** Total soal dijawab (D-045). */
+  answered: number;
   plan: PlanStatus;
   grants: Grant[];
   familyGrants: Grant[];

@@ -30,6 +30,7 @@ import { FamiliesPage } from './users/FamiliesPage';
 import { StaffPage } from './users/StaffPage';
 import { VoicePage } from './voice/VoicePage';
 import { MailPage } from './mail/MailPage';
+import { NotificationBell } from './notifications/NotificationBell';
 import './admin.css';
 
 type NavItem = { to: string; label: MessageKey; icon: ShellIcon; end?: boolean; badge?: 'orders' };
@@ -125,6 +126,7 @@ export function AdminApp() {
               }),
             },
       )}
+      topbar={session && <NotificationBell userId={session.user.id} />}
       user={{ name: session?.user.name ?? '—', caption: t('admin.topbar.signedInAs') }}
       onLogout={logout}
     >

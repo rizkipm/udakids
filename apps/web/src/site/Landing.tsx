@@ -10,6 +10,7 @@ import { useLiveStats } from './liveStats';
 import { PricingSection } from './Pricing';
 import { BannerSlider } from '../components/BannerSlider';
 import { GallerySection, useHasGallery } from './GallerySection';
+import { TopTenSection } from './TopTen';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -302,6 +303,8 @@ export function Landing() {
             </div>
           </div>
         </section>
+
+        <TopTenSection />
 
         <PricingSection
           bookTitle={(domain, grade) =>

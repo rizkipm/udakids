@@ -83,7 +83,7 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
 
   return (
     <div className="pa-form">
-      {welcome && mode === 'new' && <Stepper current={2} labels={familySteps()} />}
+      {welcome && mode === 'new' && <Stepper current={3} labels={familySteps()} />}
       <Card title={title}>
         {withProfile && <Notice tone="info">{t('parent.form.privacy')}</Notice>}
         {error && <Notice tone="error">{error}</Notice>}

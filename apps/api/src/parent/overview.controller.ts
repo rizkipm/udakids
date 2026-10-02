@@ -1,6 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { childInsights, planStatus, type QuizResult, type SessionUser } from '@little-coder/engine';
-import { and, count, desc, eq, gte, inArray, or } from 'drizzle-orm';
+import { and, count, desc, eq, gte, inArray, or, sql } from 'drizzle-orm';
 import { CurrentUser, Roles } from '../auth/decorators.js';
 import { BillingService } from '../billing/billing.service.js';
 import { DB, type Db } from '../db/db.module.js';
@@ -11,6 +11,7 @@ import {
   events,
   quizResults,
   skillCatalogs,
+  skillMastery,
   skills,
 } from '../db/schema.js';
 
@@ -47,7 +48,7 @@ export class ParentOverviewController {
     if (kids.length === 0) return { children: [], access };
     const ids = kids.map((k) => k.id);
 
-    const [catalogs, nodes, results, rounds, played] = await Promise.all([
+    const [catalogs, nodes, results, rounds, played, answered] = await Promise.all([
       this.db.select().from(skillCatalogs),
       this.db
         .select({
@@ -77,6 +78,15 @@ export class ParentOverviewController {
         .from(events)
         .where(and(inArray(events.childId, ids), eq(events.type, 'quiz_result')))
         .groupBy(events.childId),
+      // Total soal dijawab (D-045): sama dengan laporan anak (jumlah jawaban per skill).
+      this.db
+        .select({
+          childId: skillMastery.childId,
+          n: sql<number>`coalesce(sum(${skillMastery.answered}), 0)::int`,
+        })
+        .from(skillMastery)
+        .where(inArray(skillMastery.childId, ids))
+        .groupBy(skillMastery.childId),
     ]);
     // Ronde terakhir bisa lebih lama dari 15 hari: ambil 5 terakhir per anak bila perlu.
     const recentOld = await Promise.all(
@@ -158,6 +168,7 @@ export class ParentOverviewController {
           insights: childInsights({
             rounds: list,
             played: Number(played.find((p) => p.childId === k.id)?.n ?? 0),
+            answered: Number(answered.find((a) => a.childId === k.id)?.n ?? 0),
             results: mine,
             skills: nodes,
             books,

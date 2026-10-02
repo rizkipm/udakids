@@ -70,6 +70,17 @@ export function ChildReport({ report }: { report: Report }) {
           label={t('parent.report.statJago')}
           value={t('parent.report.jagoOf', { jago: totals.jago, total: totals.skills })}
         />
+        <Stat
+          label={t('parent.report.statTotal')}
+          value={totals.answered.toLocaleString('id-ID')}
+          hint={
+            totals.answered > 0
+              ? t('parent.report.statTotalHint', {
+                  correct: totals.correct.toLocaleString('id-ID'),
+                })
+              : undefined
+          }
+        />
         <Stat label={t('parent.report.statWeek')} value={week.answered} />
         <Stat
           label={t('parent.report.statAccuracy')}

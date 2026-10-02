@@ -14,15 +14,18 @@ import {
   average2,
   compareLeaders,
   rankByAverage,
+  rating2,
   type SessionUser,
 } from '@little-coder/engine';
 import { sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { CurrentUser } from '../auth/decorators.js';
+import { CurrentUser, Public } from '../auth/decorators.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 
 const GLOBAL = 'global';
+/** Jumlah peringkat di landing page. */
+const PUBLIC_TOP = 10;
 const scopeSchema = z
   .string()
   .regex(/^(global|[a-z]+\/[a-z0-9]+)$/)
@@ -41,6 +44,8 @@ const uuid = z.uuid();
 
 type Agg = {
   rounds: number;
+  /** Total soal yang dijawab (jumlah `total` tiap ronde). */
+  questions: number;
   scoreSum: number;
   timeMs: number;
   passedLevels: number;
@@ -50,7 +55,7 @@ type Agg = {
   bestTimeMs: number;
 };
 type Entry = Agg & { id: string; nickname: string; momoColor: string };
-type Board = (Entry & { average: number; position: number })[];
+type Board = (Entry & { average: number; rating: number; position: number })[];
 type Book = {
   key: string;
   domain: string;
@@ -74,7 +79,7 @@ const byBook = (a: { domain: string; grade: string }, b: { domain: string; grade
   domainRank(a.domain) - domainRank(b.domain) || gradeRank(a.grade) - gradeRank(b.grade);
 
 /**
- * Peringkat rata-rata (D-042): global + per buku (domain/jenjang). Rata-rata = rata-rata skor semua
+ * Peringkat rata-rata tertimbang (D-042, D-045): global + per buku (domain/jenjang). Rata-rata = rata-rata skor semua
  * ronde `quiz_result` anak di lingkup itu (2 desimal); sama → total waktu tercepat. 25 teratas tampil
  * sebagai "papan pengumuman" (detail bisa dibuka), sisanya daftar berhalaman. Anak lain hanya terlihat
  * nama panggilan + warna Momo; id anak hanya dikirim untuk 25 teratas (perlu untuk detail) dan diri sendiri.
@@ -107,6 +112,31 @@ export class LeaderboardController {
             participants: snap.boards.get(`average:${b.key}`)!.length,
           })),
       ],
+    };
+  }
+
+  /**
+   * Top 10 global untuk landing page (D-045), tanpa login: urut total skor → level lulus → waktu.
+   * Hanya nama panggilan + warna Momo (tanpa id anak), dari snapshot yang sama (cache 10 detik).
+   */
+  @Public()
+  @Get('public')
+  async publicTop() {
+    const snap = await this.snapshot();
+    const board = snap.boards.get(`total:${GLOBAL}`) ?? [];
+    return {
+      updatedAt: snap.at.toISOString(),
+      participants: board.length,
+      top: board.slice(0, PUBLIC_TOP).map((r) => ({
+        position: r.position,
+        nickname: r.nickname,
+        momoColor: r.momoColor,
+        points: r.points,
+        questions: r.questions,
+        passedLevels: r.passedLevels,
+        rounds: r.rounds,
+        timeMs: r.bestTimeMs,
+      })),
     };
   }
 
@@ -165,8 +195,10 @@ export class LeaderboardController {
         domain: b.domain,
         grade: b.grade,
         average: r.average,
+        rating: r.rating,
         points: r.points,
         rounds: r.rounds,
+        questions: r.questions,
         timeMs: r.timeMs,
         bestTimeMs: r.bestTimeMs,
         passedLevels: r.passedLevels,
@@ -185,6 +217,12 @@ export class LeaderboardController {
         join skills s on s.id = e.payload->>'skillId'
         where e.type = 'quiz_result' and e.child_id = ${childId} ${where}
         group by s.domain, s.grade, s.category
+      ), answered as (
+        select s.domain, s.grade, s.category, sum(sm.answered) as questions
+        from skill_mastery sm
+        join skills s on s.id = sm.skill_id
+        where sm.child_id = ${childId} ${where}
+        group by s.domain, s.grade, s.category
       ), passed as (
         select s.domain, s.grade, s.category, count(*) filter (where qr.passed) as passed,
           sum(qr.best) as points
@@ -193,9 +231,11 @@ export class LeaderboardController {
         where qr.child_id = ${childId} ${where}
         group by s.domain, s.grade, s.category
       )
-      select p.*, coalesce(x.passed, 0) as passed, coalesce(x.points, 0) as points
+      select p.*, coalesce(x.passed, 0) as passed, coalesce(x.points, 0) as points,
+        coalesce(a.questions, 0) as questions
       from played p
-      left join passed x using (domain, grade, category)`);
+      left join passed x using (domain, grade, category)
+      left join answered a using (domain, grade, category)`);
     const topics = res.rows
       .map((r) => {
         const domain = String(r.domain);
@@ -213,6 +253,7 @@ export class LeaderboardController {
           order: order < 0 ? 999 : order,
           average: average2(n(r.score_sum), n(r.rounds)),
           rounds: n(r.rounds),
+          questions: n(r.questions),
           timeMs: n(r.time_ms),
           passed: n(r.passed),
           points: n(r.points),
@@ -231,8 +272,10 @@ export class LeaderboardController {
       position: row.position,
       participants: board.length,
       average: row.average,
+      rating: row.rating,
       points: row.points,
       rounds: row.rounds,
+      questions: row.questions,
       timeMs: row.timeMs,
       bestTimeMs: row.bestTimeMs,
       passedLevels: row.passedLevels,
@@ -267,7 +310,7 @@ export class LeaderboardController {
   }
 
   private async build(): Promise<Snapshot> {
-    const [played, passed, catalogs, levels] = await Promise.all([
+    const [played, passed, catalogs, levels, answered] = await Promise.all([
       this.db.execute(sql`
         select c.id, c.nickname, c.momo_color, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
@@ -288,7 +331,22 @@ export class LeaderboardController {
       this.db.execute(sql`
         select domain, grade, category, count(*) as n from skills
         where status = 'active' group by domain, grade, category`),
+      // Total soal dijawab (D-045) — sumber yang sama dengan laporan anak.
+      this.db.execute(sql`
+        select sm.child_id, s.domain, s.grade, sum(sm.answered) as answered
+        from skill_mastery sm
+        join children c on c.id = sm.child_id and c.active
+        left join skills s on s.id = sm.skill_id
+        group by sm.child_id, s.domain, s.grade`),
     ]);
+    const answeredAgg = new Map<string, number>();
+    for (const r of answered.rows) {
+      const id = String(r.child_id);
+      const add = (key: string) =>
+        answeredAgg.set(key, (answeredAgg.get(key) ?? 0) + n(r.answered));
+      add(`${id}|${GLOBAL}`);
+      if (r.domain != null) add(`${id}|${String(r.domain)}/${String(r.grade)}`);
+    }
 
     const books = new Map<string, Book>();
     for (const r of catalogs.rows) {
@@ -334,6 +392,7 @@ export class LeaderboardController {
         nickname: String(r.nickname),
         momoColor: String(r.momo_color),
         rounds: 0,
+        questions: answeredAgg.get(`${id}|${scope}`) ?? 0,
         scoreSum: 0,
         timeMs: 0,
         passedLevels: levelAgg.get(`${id}|${scope}`)?.passed ?? 0,
@@ -357,7 +416,11 @@ export class LeaderboardController {
       boards.set(
         `total:${scope}`,
         rows
-          .map((r) => ({ ...r, average: average2(r.scoreSum, r.rounds) }))
+          .map((r) => ({
+            ...r,
+            average: average2(r.scoreSum, r.rounds),
+            rating: rating2(r.scoreSum, r.rounds),
+          }))
           .sort((a, b) =>
             compareLeaders(
               { points: a.points, passed: a.passedLevels, timeMs: a.bestTimeMs },
@@ -380,8 +443,10 @@ function publicRow(r: Board[number], viewer: string | null, withId: boolean) {
     nickname: r.nickname,
     momoColor: r.momoColor,
     average: r.average,
+    rating: r.rating,
     points: r.points,
     rounds: r.rounds,
+    questions: r.questions,
     timeMs: r.timeMs,
     bestTimeMs: r.bestTimeMs,
     passedLevels: r.passedLevels,

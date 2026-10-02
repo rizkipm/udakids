@@ -101,6 +101,9 @@ export class ClassesController {
         momoColor: children.momoColor,
         viaParent: sql<boolean>`${children.parentId} is not null`,
         lastActiveAt: children.lastActiveAt,
+        /** Total soal dijawab & ronde (D-045). */
+        answered: sql<number>`(select coalesce(sum(m.answered), 0)::int from skill_mastery m where m.child_id = ${children.id})`,
+        rounds: sql<number>`(select count(*)::int from events e where e.child_id = ${children.id} and e.type = 'quiz_result')`,
       })
       .from(children)
       .where(and(eq(children.classId, id), eq(children.active, true)))

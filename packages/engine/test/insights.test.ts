@@ -42,6 +42,12 @@ describe('ringkasan dasbor orang tua (D-038)', () => {
     const r = childInsights({ rounds: [], results: {}, skills, books, now: NOW });
     expect(r.week).toHaveLength(7);
     expect(r.week.at(-1)!.date).toBe('2026-10-08');
+    expect(r.totals.answered).toBe(0);
+    // Total soal dijawab diteruskan apa adanya (D-045).
+    expect(
+      childInsights({ rounds: [], results: {}, skills, books, now: NOW, answered: 340 }).totals
+        .answered,
+    ).toBe(340);
     expect(r).toMatchObject({
       activeDays: 0,
       weekRounds: 0,

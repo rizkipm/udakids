@@ -229,6 +229,13 @@ export function ChildProgress({ child, actions }: { child: OverviewChild; action
             />
             <Kpi
               i={3}
+              tone="grape"
+              icon={<Icon name="target" />}
+              label={t('parent.ov.answered')}
+              value={<CountUp value={ins.totals.answered} />}
+            />
+            <Kpi
+              i={4}
               tone="sun"
               icon={<Icon name="clock" />}
               label={t('parent.ov.time')}

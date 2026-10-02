@@ -95,7 +95,11 @@ export function Stepper({ current, labels }: { current: number; labels: string[]
   return (
     <ol
       className="stepper"
-      aria-label={t('site.steps.label', { n: current, total: labels.length })}
+      aria-label={
+        current > labels.length
+          ? t('site.steps.done')
+          : t('site.steps.label', { n: current, total: labels.length })
+      }
     >
       {labels.map((label, i) => {
         const n = i + 1;
@@ -126,8 +130,12 @@ export function Stepper({ current, labels }: { current: number; labels: string[]
   );
 }
 
+/**
+ * Wizard keluarga = 3 layar yang benar-benar dilalui (D-045): isi data → kode dari email → profil anak.
+ * Setelah profil anak dibuat, dasbor menampilkan semua langkah selesai.
+ */
 export const familySteps = () => [
   t('site.steps.account'),
+  t('site.steps.verify'),
   t('site.steps.child'),
-  t('site.steps.play'),
 ];

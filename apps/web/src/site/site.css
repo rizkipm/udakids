@@ -1245,3 +1245,113 @@
   text-align: center;
   color: var(--s-muted);
 }
+
+/* 10 Besar Global realtime (D-045) */
+.topten-card {
+  background: #fff;
+  border: 4px solid var(--s-line);
+  border-radius: var(--s-radius);
+  padding: clamp(14px, 3vw, 24px);
+  box-shadow: 0 8px 0 var(--s-line);
+}
+.topten-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--s-muted);
+}
+.topten-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: var(--s-leaf);
+}
+.topten-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--s-leaf);
+  box-shadow: 0 0 0 0 rgb(46 158 91 / 50%);
+  animation: topten-pulse 1.8s ease-out infinite;
+}
+@keyframes topten-pulse {
+  to {
+    box-shadow: 0 0 0 10px rgb(46 158 91 / 0%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topten-dot {
+    animation: none;
+  }
+}
+.topten-scroll {
+  overflow-x: auto;
+}
+.topten-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.02rem;
+  font-variant-numeric: tabular-nums;
+}
+.topten-table th,
+.topten-table td {
+  padding: 8px 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+.topten-table thead th {
+  font-size: 0.85rem;
+  color: var(--s-muted);
+  border-bottom: 3px solid var(--s-line);
+}
+.topten-table th:nth-child(1),
+.topten-table td:nth-child(1),
+.topten-table th:nth-child(2),
+.topten-table tbody th {
+  text-align: left;
+}
+.topten-table tbody tr + tr {
+  border-top: 2px dashed #e6e1d6;
+}
+.topten-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+}
+.topten-pos {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--s-line);
+  font-weight: 900;
+  background: var(--s-grape-soft);
+}
+.topten-table tr.is-1 .topten-pos {
+  background: var(--s-sun);
+}
+.topten-table tr.is-2 .topten-pos {
+  background: #dfe3ea;
+}
+.topten-table tr.is-3 .topten-pos {
+  background: #f2c19b;
+}
+.topten-points {
+  font-weight: 900;
+  color: var(--s-grape);
+}
+.topten-empty,
+.topten-note {
+  color: var(--s-muted);
+  text-align: center;
+}
+.topten-note {
+  font-size: 0.9rem;
+  margin: 12px 0 0;
+}

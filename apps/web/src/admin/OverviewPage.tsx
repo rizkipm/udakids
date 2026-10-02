@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatRupiah } from '@little-coder/engine';
 import type { SkillStat } from '../api/types';
 import { useFetch } from '../auth/useApi';
+import type { AdminNotification } from './notifications/NotificationBell';
 import { BannerSlider } from '../components/BannerSlider';
 import { t, type MessageKey } from '../i18n';
 import { ShellIconSvg, type ShellIcon } from '../ui/AppShell';
@@ -158,6 +159,44 @@ function Row({ label, value, hint }: { label: string; value: ReactNode; hint?: s
       <span>{label}</span>
       <strong>{value}</strong>
       {hint && <small>{hint}</small>}
+    </div>
+  );
+}
+
+/** Pendaftar terbaru (D-045): orang tua, anak daftar sendiri, anak gabung kelas — 30 hari terakhir. */
+function RecentSignups() {
+  const res = useFetch<{ items: AdminNotification[] }>('staff', '/admin/notifications');
+  const list = (res.data?.items ?? []).filter((n) => !n.kind.startsWith('order')).slice(0, 8);
+  return (
+    <div className="ins-grid one">
+      <Panel
+        title={t('admin.ins.recentSignups')}
+        action={<Link to="/admin/keluarga">{t('admin.ins.seeAll')}</Link>}
+      >
+        {list.length === 0 ? (
+          <Empty>{t('admin.ins.noSignups')}</Empty>
+        ) : (
+          <ul className="ins-orders">
+            {list.map((n) => (
+              <li key={n.key}>
+                <div>
+                  <strong>{n.title}</strong>
+                  <small>
+                    {n.detail ? `${n.detail} · ` : ''}
+                    {formatDate(n.at)}
+                  </small>
+                </div>
+                <span className="ins-amount">{t(`admin.notif.kind.${n.kind}` as MessageKey)}</span>
+                {n.status === 'unverified' ? (
+                  <Badge tone="warning">{t('admin.family.unverified')}</Badge>
+                ) : (
+                  <Badge tone="success">{t('admin.ins.signupOk')}</Badge>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </Panel>
     </div>
   );
 }
@@ -356,6 +395,8 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
           )}
         </Panel>
       </div>
+
+      <RecentSignups />
 
       <div className="ins-grid three">
         <Panel

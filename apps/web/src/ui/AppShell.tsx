@@ -84,6 +84,7 @@ export function AppShell({
   nav,
   navLabel,
   extra,
+  topbar,
   user,
   onLogout,
   children,
@@ -96,6 +97,8 @@ export function AppShell({
   navLabel: string;
   /** Konten tambahan di bawah menu (mis. tombol "Anak main sekarang"). */
   extra?: ReactNode;
+  /** Aksi di kanan atas konten (mis. lonceng notifikasi admin). */
+  topbar?: ReactNode;
   user: { name: string; caption: string };
   onLogout: () => void;
   children: ReactNode;
@@ -226,7 +229,10 @@ export function AppShell({
         </div>
       </aside>
 
-      <main className="ui-main shell-main">{children}</main>
+      <main className="ui-main shell-main">
+        {topbar && <div className="shell-topbar">{topbar}</div>}
+        {children}
+      </main>
     </div>
   );
 }
