@@ -1,6 +1,6 @@
 # Email: verifikasi pendaftaran & notifikasi transaksi (D-044)
 
-Udakids mengirim email lewat **Gmail SMTP** dari akun pengirim `projectsudacoding@gmail.com`.
+Udakids mengirim email lewat **Gmail SMTP** dari akun pengirim `project.udacoding@gmail.com`.
 
 | Email                                 | Penerima              | Kapan                                         |
 | ------------------------------------- | --------------------- | --------------------------------------------- |
@@ -19,7 +19,7 @@ Direksi = `MAIL_DIRECTOR` (bawaan `udacodingofficial@gmail.com`). Semua email di
 App Password hanya bisa dibuat bila **Verifikasi 2 Langkah** aktif. Google tidak lagi mengizinkan login SMTP
 dengan password biasa.
 
-1. Masuk ke Gmail sebagai **projectsudacoding@gmail.com** (jendela penyamaran lebih aman agar tidak tertukar akun).
+1. Masuk ke Gmail sebagai **project.udacoding@gmail.com** (jendela penyamaran lebih aman agar tidak tertukar akun).
 2. Buka <https://myaccount.google.com/security>.
 3. Di bagian **"Cara Anda login ke Google"**, klik **Verifikasi 2 Langkah**, lalu **Aktifkan**. Ikuti langkahnya
    (nomor HP atau aplikasi Google Authenticator). Simpan juga **kode cadangan** di tempat aman.
@@ -30,9 +30,9 @@ dengan password biasa.
 7. Di server, buka `.env` (bukan `.env.example`, dan jangan pernah di-commit), lalu isi:
 
    ```bash
-   SMTP_USER=projectsudacoding@gmail.com
+   SMTP_USER=project.udacoding@gmail.com
    SMTP_PASS=abcdefghijklmnop        # App Password; spasi boleh, akan dibuang
-   MAIL_FROM="Udakids <projectsudacoding@gmail.com>"
+   MAIL_FROM="Udakids <project.udacoding@gmail.com>"
    MAIL_DIRECTOR=udacodingofficial@gmail.com
    APP_PUBLIC_URL=https://domain-udakids-anda   # untuk logo & tautan di email
    ```

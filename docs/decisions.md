@@ -802,7 +802,7 @@ Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk).
 
 Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk). Panduan: [email.md](email.md).
 
-- **Pengirim:** Gmail SMTP `projectsudacoding@gmail.com` dengan App Password. Rahasia hanya ada di `.env` server,
+- **Pengirim:** Gmail SMTP `project.udacoding@gmail.com` dengan App Password. Rahasia hanya ada di `.env` server,
   tidak di DB dan tidak di UI.
 - **Verifikasi wajib:**
   - orang tua yang baru daftar harus memasukkan kode 6 angka dari email sebelum bisa masuk;

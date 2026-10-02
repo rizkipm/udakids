@@ -84,9 +84,9 @@ VITE_FEATURE_VOICE=false
 GOOGLE_TTS_API_KEY=
 TTS_DAILY_LIMIT=3000
 # Email (D-044): langkah Gmail di docs/email.md
-SMTP_USER=projectsudacoding@gmail.com
+SMTP_USER=project.udacoding@gmail.com
 SMTP_PASS=<App Password 16 huruf>
-MAIL_FROM="Udakids <projectsudacoding@gmail.com>"
+MAIL_FROM="Udakids <project.udacoding@gmail.com>"
 MAIL_DIRECTOR=udacodingofficial@gmail.com
 APP_PUBLIC_URL=https://app.contoh.id
 ```
