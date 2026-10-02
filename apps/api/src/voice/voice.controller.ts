@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   Inject,
@@ -121,7 +122,8 @@ export class AdminVoiceController {
     ]);
     return {
       settings,
-      providerReady: this.voice.ready,
+      providerReady: await this.voice.isReady(),
+      key: await this.voice.keyInfo(),
       ...stats,
       rev: lines.rev,
       lines: lines.lines,
@@ -155,10 +157,45 @@ export class AdminVoiceController {
     return this.voice.lines();
   }
 
+  /** Simpan API key suara (Google Cloud Text-to-Speech, model Gemini-TTS) — terenkripsi, tidak dikirim balik. */
+  @Put('key')
+  @HttpCode(200)
+  async saveKey(
+    @Body(
+      new ZodPipe(
+        z.strictObject({
+          apiKey: z
+            .string()
+            .trim()
+            .min(20, 'API key terlalu pendek')
+            .max(200)
+            .regex(/^[A-Za-z0-9_\-.]+$/, 'API key hanya huruf, angka, _ - .'),
+        }),
+      ),
+    )
+    body: { apiKey: string },
+    @CurrentUser() user: SessionUser,
+  ) {
+    await this.voice.setKey(body.apiKey, user.id);
+    return this.voice.keyInfo();
+  }
+
+  @Delete('key')
+  async deleteKey() {
+    await this.voice.clearKey();
+    return this.voice.keyInfo();
+  }
+
+  @Post('key/test')
+  @HttpCode(200)
+  testKey() {
+    return this.voice.testKey();
+  }
+
   @Post('generate')
   @HttpCode(200)
   async generate() {
-    if (!this.voice.ready)
+    if (!(await this.voice.isReady()))
       throw new ServiceUnavailableException('GOOGLE_TTS_API_KEY belum diisi di .env server');
     return this.voice.generateLines();
   }
@@ -170,7 +207,7 @@ export class AdminVoiceController {
     body: { text: string },
     @Res() res: Response,
   ) {
-    if (!this.voice.ready)
+    if (!(await this.voice.isReady()))
       throw new ServiceUnavailableException('GOOGLE_TTS_API_KEY belum diisi di .env server');
     const key = await this.voice.ensure(body.text);
     const clip = key && (await this.voice.clip(key));

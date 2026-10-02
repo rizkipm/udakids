@@ -9,7 +9,7 @@ import { ChildForm } from './ChildForm';
 import { Dashboard } from './Dashboard';
 import { OrderPage, OrdersPage } from './Orders';
 import { PackagesPage } from './PackagesPage';
-import { ParentLogin, ParentRegister } from './ParentAuth';
+import { ParentLogin, ParentRegister, ParentVerify } from './ParentAuth';
 import { ReportPage } from './ReportPage';
 import './parent.css';
 
@@ -119,6 +119,14 @@ export function ParentApp() {
         element={
           <GuestOnly>
             <ParentRegister />
+          </GuestOnly>
+        }
+      />
+      <Route
+        path="verifikasi"
+        element={
+          <GuestOnly>
+            <ParentVerify />
           </GuestOnly>
         }
       />

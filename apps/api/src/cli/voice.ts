@@ -14,12 +14,13 @@ import { ttsFromEnv } from '../voice/tts.provider.js';
 import { VoiceService } from '../voice/voice.service.js';
 
 export async function generateVoice(url = process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL) {
-  const provider = ttsFromEnv();
-  if (!provider) throw new Error('GOOGLE_TTS_API_KEY belum diisi di .env — suara Momo dilewati.');
   const pool = new Pool({ connectionString: url });
   try {
     const db = drizzle(pool, { schema });
-    const voice = new VoiceService(db, new SettingsService(db), provider);
+    // Kunci dari .env, atau (bila kosong) API key yang diisi admin di Admin → Suara Momo.
+    const voice = new VoiceService(db, new SettingsService(db), ttsFromEnv());
+    if (!(await voice.isReady()))
+      throw new Error('API key suara belum ada (.env GOOGLE_TTS_API_KEY atau Admin → Suara Momo).');
     return await voice.generateLines();
   } finally {
     await pool.end();

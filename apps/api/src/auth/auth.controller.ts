@@ -2,6 +2,8 @@ import { Body, Controller, Get, HttpCode, Param, Post, Req } from '@nestjs/commo
 import {
   childLoginSchema,
   childRegisterSchema,
+  emailResendSchema,
+  emailVerifySchema,
   classJoinSchema,
   familyCodeSchema,
   parentLoginSchema,
@@ -37,6 +39,28 @@ export class AuthController {
     @Req() req: Request,
   ) {
     return this.auth.parentRegister(body, clientIp(req));
+  }
+
+  /** Verifikasi email dengan kode 6 digit → langsung masuk (D-044). */
+  @Public()
+  @Post('parent/verify')
+  @HttpCode(200)
+  parentVerify(
+    @Body(new ZodPipe(emailVerifySchema)) body: z.infer<typeof emailVerifySchema>,
+    @Req() req: Request,
+  ) {
+    return this.auth.verifyCode(body.email, body.code, clientIp(req));
+  }
+
+  /** Kirim ulang kode verifikasi (jawaban selalu sama). */
+  @Public()
+  @Post('parent/resend')
+  @HttpCode(200)
+  parentResend(
+    @Body(new ZodPipe(emailResendSchema)) body: z.infer<typeof emailResendSchema>,
+    @Req() req: Request,
+  ) {
+    return this.auth.resendCode(body.email, clientIp(req));
   }
 
   @Public()

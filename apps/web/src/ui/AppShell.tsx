@@ -17,6 +17,7 @@ const PATHS = {
   report: 'M6 3h9l4 4v14H6zm2 9v6h2v-6zm4-3v9h2V9zm4 5v4h2v-4z',
   image: 'M4 5h16v14H4zm2 2v8l4-4 3 3 2-2 3 3V7zm9 1.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z',
   speaker: 'M4 9h4l5-4v14l-5-4H4zm12 .2a4 4 0 010 5.6l-1.4-1.4a2 2 0 000-2.8z',
+  mail: 'M3 5h18v14H3zm2 2v.6l7 4.6 7-4.6V7zm0 3v7h14v-7l-7 4.6z',
   receipt: 'M6 3h12v18l-3-2-3 2-3-2-3 2zm3 5v2h6V8zm0 4v2h6v-2z',
   tag: 'M3 12V4h8l10 10-8 8zm4-6a1.5 1.5 0 100 3 1.5 1.5 0 000-3z',
   bank: 'M12 3l9 5v2H3V8zM5 11h2v7H5zm4 0h2v7H9zm4 0h2v7h-2zm4 0h2v7h-2zM3 19h18v2H3z',
@@ -25,6 +26,9 @@ const PATHS = {
   percent:
     'M17.6 4.9l1.5 1.5L6.4 19.1l-1.5-1.5zM7 4a3 3 0 110 6 3 3 0 010-6zm10 10a3 3 0 110 6 3 3 0 010-6z',
   plus: 'M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z',
+  flag: 'M5 21V4h11l-2 4 2 4H7v9z',
+  trophy:
+    'M7 3h10v2h3v3a4 4 0 01-4 4h-.4A5 5 0 0113 14.9V17h3v3H8v-3h3v-2.1A5 5 0 018.4 12H8a4 4 0 01-4-4V5h3zm0 4H6v1a2 2 0 001 1.7zm10 0v2.7A2 2 0 0018 8V7z',
   search:
     'M10 3a7 7 0 015.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z',
   play: 'M8 5v14l11-7z',

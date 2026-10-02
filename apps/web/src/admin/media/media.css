@@ -1,0 +1,154 @@
+/* Admin banner & galeri (D-042). */
+.mda-editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.mda-preview {
+  position: sticky;
+  top: 16px;
+}
+.mda-preview h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.mda-preview-box {
+  margin: 0;
+}
+.mda-preview-box .bnr-card {
+  min-height: 200px;
+}
+.mda-preview-box .bnr-text {
+  max-width: 80%;
+}
+
+.mda-thumb {
+  display: block;
+  width: 96px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--ui-line);
+  flex: none;
+}
+.mda-swatch {
+  background: var(--bnr-bg);
+}
+.mda-image-row {
+  margin-bottom: 14px;
+}
+.mda-image-row .mda-thumb {
+  width: 160px;
+  height: 90px;
+}
+.mda-banner-cell {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 240px;
+}
+.mda-clip {
+  max-width: 34ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mda-badges {
+  gap: 4px;
+  min-width: 130px;
+}
+.mda-badges .ui-badge {
+  white-space: nowrap;
+}
+.mda-schedule {
+  display: grid;
+  gap: 2px;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: var(--ui-muted);
+}
+.mda-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.mda-switch input {
+  width: 20px;
+  height: 20px;
+}
+.mda-order {
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.mda-progress {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.mda-progress progress {
+  width: 100%;
+  height: 12px;
+}
+.mda-errors {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.mda-photos {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+.mda-photo {
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ui-surface);
+}
+.mda-photo.is-off img {
+  opacity: 0.5;
+}
+.mda-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--ui-bg);
+}
+.mda-photo-form {
+  padding: 12px 14px 14px;
+}
+.mda-photo-form .ui-field textarea {
+  font-family: inherit;
+  font-size: inherit;
+  min-height: 64px;
+  height: 64px;
+  resize: vertical;
+}
+.mda-upload-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 0 16px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .mda-upload-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .mda-editor {
+    grid-template-columns: 1fr;
+  }
+  .mda-preview {
+    position: static;
+    order: -1;
+  }
+}

@@ -19,6 +19,9 @@ import { ClassStudentsPage } from './classes/ClassStudentsPage';
 import { LevelEditorRoute } from './levels/LevelEditor';
 import { LevelList } from './levels/LevelList';
 import { OverviewPage } from './OverviewPage';
+import { ContestsPage } from './contests/ContestsPage';
+import { BannersPage } from './media/BannersPage';
+import { GalleryAdminPage } from './media/GalleryAdminPage';
 import { ChildReportPage } from './reports/ChildReportPage';
 import { ReportsPage } from './reports/ReportsPage';
 import { SkillEditorRoute } from './skills/SkillEditorRoute';
@@ -26,6 +29,7 @@ import { SkillList } from './skills/SkillList';
 import { FamiliesPage } from './users/FamiliesPage';
 import { StaffPage } from './users/StaffPage';
 import { VoicePage } from './voice/VoicePage';
+import { MailPage } from './mail/MailPage';
 import './admin.css';
 
 type NavItem = { to: string; label: MessageKey; icon: ShellIcon; end?: boolean; badge?: 'orders' };
@@ -42,11 +46,16 @@ const NAV: (NavItem | { group: MessageKey })[] = [
   { to: '/admin/keluarga', label: 'admin.nav.families', icon: 'users' },
   { to: '/admin/kelas', label: 'admin.nav.classes', icon: 'school' },
   { to: '/admin/laporan', label: 'admin.nav.reports', icon: 'report' },
+  { to: '/admin/email', label: 'admin.nav.mail', icon: 'mail' },
   { group: 'admin.nav.groupBilling' },
   { to: '/admin/transaksi', label: 'admin.nav.orders', icon: 'receipt', badge: 'orders' },
   { to: '/admin/paket', label: 'admin.nav.packages', icon: 'tag' },
   { to: '/admin/rekening', label: 'admin.nav.paymentMethods', icon: 'bank' },
   { to: '/admin/pengaturan', label: 'admin.nav.billingSettings', icon: 'gear' },
+  { group: 'admin.nav.groupEvents' },
+  { to: '/admin/lomba', label: 'admin.nav.contests', icon: 'flag' },
+  { to: '/admin/banner', label: 'admin.nav.banners', icon: 'image' },
+  { to: '/admin/dokumentasi', label: 'admin.nav.docs', icon: 'image' },
   { group: 'admin.nav.groupFinance' },
   { to: '/admin/kas', label: 'admin.nav.cash', icon: 'wallet' },
   { to: '/admin/komisi', label: 'admin.nav.commission', icon: 'percent' },
@@ -136,7 +145,11 @@ export function AdminApp() {
         <Route path="laporan" element={<ReportsPage />} />
         <Route path="laporan/anak/:id" element={<ChildReportPage />} />
         <Route path="galeri" element={<GalleryPage />} />
+        <Route path="lomba" element={<ContestsPage />} />
+        <Route path="banner" element={<BannersPage />} />
+        <Route path="dokumentasi" element={<GalleryAdminPage />} />
         <Route path="suara" element={<VoicePage />} />
+        <Route path="email" element={<MailPage />} />
         <Route path="transaksi" element={<OrdersPage />} />
         <Route path="paket" element={<PackagesPage />} />
         <Route path="rekening" element={<PaymentMethodsPage />} />

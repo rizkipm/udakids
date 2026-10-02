@@ -80,6 +80,8 @@ pnpm voice:generate   # buat klip suara Momo yang belum ada (butuh GOOGLE_TTS_AP
 
 Admin dev bawaan dari seed: `admin@littlecoder.local` / `admin12345` (ganti lewat `ADMIN_PASSWORD`).
 JWT (`JWT_SECRET`, wajib di produksi); guard global NestJS + `@Public()` / `@Roles()`.
+Orang tua baru wajib verifikasi email (kode 6 angka) sebelum bisa masuk; email transaksi juga dikirim ke direksi
+(D-044, [docs/email.md](docs/email.md), Gmail App Password di `.env`). Tanpa SMTP di dev, email dicetak di log API.
 
 ## Aturan kode
 
@@ -122,12 +124,13 @@ menyebut usaha/strategi · tanpa emoji (pakai SVG) · kontras tinggi, bisa denga
 - Drag & drop blok kecil sebagai satu-satunya cara input.
 - Memakai belok relatif (`turn`) di tingkat Basic.
 - Menampilkan nyawa, streak, atau **batas waktu** di level utama untuk anak. (Pengecualian yang sudah
-  disetujui: skor ronde merah/hijau D-021, stopwatch tanpa batas + papan peringkat global D-024 — hanya
-  nama panggilan + warna Momo yang terlihat oleh anak lain.)
+  disetujui: skor ronde merah/hijau D-021, stopwatch tanpa batas + papan peringkat global D-024/D-042 — hanya
+  nama panggilan + warna Momo yang terlihat oleh anak lain; hitung mundur HANYA di lomba live D-042.)
 - Menyalin soal/aset dari IXL, Code.org, ScratchJr, atau platform lain.
 - Menambah obrolan AI/LLM ke area anak.
 - Membangun yang di luar lingkup MVP: kartu kamera, level 31–100, editor level visual, pembayaran online
   (gateway), app native, fitur sosial/chat. (Disetujui: paket + transfer manual + buku kas/komisi, D-036.)
-- Menampilkan harga, ajakan membeli, atau formulir pembayaran di area anak (hanya area orang tua).
+- Menampilkan harga, ajakan membeli, formulir pembayaran, atau banner promosi di area anak (hanya area orang tua).
+- Mengirim kunci jawaban ke perangkat saat lomba live (soal lomba dibuat & dinilai di server, `publicItem`).
 - Menyimpan gender/jenis kelamin anak (mis. untuk memilih suara).
 - Mengambil keputusan di luar PRD tanpa bertanya.

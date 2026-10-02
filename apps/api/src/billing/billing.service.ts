@@ -1,6 +1,8 @@
 import { randomInt } from 'node:crypto';
 import {
   BadRequestException,
+  Logger,
+  Optional,
   ConflictException,
   Inject,
   Injectable,
@@ -30,6 +32,15 @@ import {
   paymentMethods,
 } from '../db/schema.js';
 import { SettingsService } from '../settings/settings.service.js';
+import { MailService } from '../mail/mail.service.js';
+import {
+  directorNotice,
+  orderCreated,
+  orderPaid,
+  orderRejected,
+  proofReceived,
+  type OrderMail,
+} from '../mail/templates.js';
 
 type PackageRow = typeof packages.$inferSelect;
 /** Pesanan terbuka (menunggu bayar/verifikasi) maksimal per keluarga. */
@@ -98,7 +109,64 @@ export class BillingService {
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly settings: SettingsService,
+    @Optional() private readonly mail?: MailService,
   ) {}
+
+  /**
+   * Email transaksi (D-044): ke orang tua + salinan ke direksi (MAIL_DIRECTOR). Tidak pernah membatalkan
+   * transaksi — kegagalan email hanya dicatat.
+   */
+  private async notify(ev: 'created' | 'proof' | 'paid' | 'rejected', orderId: string) {
+    if (!this.mail) return;
+    try {
+      const [o] = await this.db
+        .select({ order: orders, parentName: parents.name, parentEmail: parents.email })
+        .from(orders)
+        .innerJoin(parents, eq(parents.id, orders.parentId))
+        .where(eq(orders.id, orderId));
+      if (!o) return;
+      const [ent] =
+        ev === 'paid'
+          ? await this.db
+              .select({ endsAt: entitlements.endsAt })
+              .from(entitlements)
+              .where(eq(entitlements.orderId, orderId))
+          : [];
+      const snap = o.order.packageSnapshot as { name: string };
+      const m = o.order.methodSnapshot as OrderMail['method'];
+      const data: OrderMail = {
+        number: o.order.number,
+        parentName: o.parentName,
+        parentEmail: o.parentEmail,
+        packageName: snap.name,
+        priceNormal: o.order.priceNormal,
+        discount: o.order.discount,
+        uniqueCode: o.order.uniqueCode,
+        amount: o.order.amount,
+        method: m,
+        expiresAt: o.order.expiresAt,
+        orderId: o.order.id,
+        note: o.order.note,
+        endsAt: ent?.endsAt ?? null,
+      };
+      const ctx = this.mail.ctx();
+      const forParent =
+        ev === 'created'
+          ? orderCreated(ctx, data)
+          : ev === 'proof'
+            ? proofReceived(ctx, data)
+            : ev === 'paid'
+              ? orderPaid(ctx, data)
+              : orderRejected(ctx, data);
+      await this.mail.enqueue(o.parentEmail, forParent, { kind: `order_${ev}`, refId: orderId });
+      await this.mail.notifyDirector(directorNotice(ctx, ev, data), {
+        kind: `director_${ev}`,
+        refId: orderId,
+      });
+    } catch (err) {
+      new Logger('Billing').warn(`email transaksi gagal diantrekan: ${(err as Error).message}`);
+    }
+  }
 
   /** Pesanan menunggu bayar yang lewat batas waktu → kedaluwarsa. */
   async expireStale(now = new Date()) {
@@ -200,7 +268,7 @@ export class BillingService {
       throw new ConflictException(
         'Masih ada pesanan yang belum selesai. Selesaikan atau batalkan dulu di Riwayat Transaksi.',
       );
-    return this.db.transaction(async (tx) => {
+    const created = await this.db.transaction(async (tx) => {
       // Satu pembuat pesanan pada satu waktu → kode unik tidak bentrok.
       await tx.execute(sql`select pg_advisory_xact_lock(7177001)`);
       const open = await tx
@@ -244,6 +312,8 @@ export class BillingService {
         .returning(orderColumns);
       return row!;
     });
+    await this.notify('created', created.id);
+    return created;
   }
 
   async ownOrder(parentId: string, id: string) {
@@ -270,6 +340,7 @@ export class BillingService {
       .set({ proof: data, proofMime: mime, proofAt: now, status: 'awaiting_review', note: null })
       .where(eq(orders.id, id))
       .returning(orderColumns);
+    await this.notify('proof', row!.id);
     return row!;
   }
 
@@ -299,7 +370,7 @@ export class BillingService {
    * masih aktif), dan pemasukan dicatat di buku kas. Idempoten terhadap klik ganda.
    */
   async approve(id: string, adminId: string, now = new Date()) {
-    return this.db.transaction(async (tx) => {
+    const paid = await this.db.transaction(async (tx) => {
       const [order] = await tx.select().from(orders).where(eq(orders.id, id)).for('update');
       if (!order) throw new NotFoundException('Pesanan tidak ditemukan');
       if (order.status === 'paid') throw new ConflictException('Pesanan ini sudah disetujui');
@@ -354,6 +425,8 @@ export class BillingService {
         .returning(orderColumns);
       return row!;
     });
+    await this.notify('paid', paid.id);
+    return paid;
   }
 
   async reject(id: string, adminId: string, reason: string, now = new Date()) {
@@ -366,6 +439,7 @@ export class BillingService {
       .set({ status: 'rejected', reviewedBy: adminId, reviewedAt: now, note: reason })
       .where(eq(orders.id, id))
       .returning(orderColumns);
+    await this.notify('rejected', row!.id);
     return row!;
   }
 

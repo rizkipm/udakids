@@ -132,6 +132,13 @@ export type VoiceLine = { text: string; clip: string | null };
 export type VoiceOverview = {
   settings: VoiceSettings;
   providerReady: boolean;
+  /** Asal API key suara (D-043): env server, diisi admin, atau belum ada. Kunci tidak pernah dikirim. */
+  key?: {
+    source: 'env' | 'server' | 'admin' | null;
+    last4: string | null;
+    updatedAt: string | null;
+    unreadable?: boolean;
+  };
   clips: number;
   bytes: number;
   madeToday: number;

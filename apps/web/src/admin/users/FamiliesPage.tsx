@@ -275,6 +275,14 @@ export function FamiliesPage() {
     );
     if (ok) reload();
   }
+  async function verifyEmail(p: FamilyRow) {
+    const ok = await action.run(
+      () => call(`/admin/mail/parents/${p.id}/verify`, { method: 'POST' }).then(() => true),
+      t('admin.family.emailVerified', { name: p.name }),
+    );
+    if (ok) reload();
+  }
+
   async function setPassword(p: FamilyRow, password: string) {
     const ok = await action.run(
       () =>
@@ -519,6 +527,9 @@ export function FamiliesPage() {
                               total: p.children.length,
                             })}
                           </span>
+                          {!p.emailVerifiedAt && (
+                            <span className="dir-unverified">{t('admin.family.unverified')}</span>
+                          )}
                           {!p.active && <ActiveBadge active={false} />}
                         </div>
                       </div>
@@ -561,6 +572,15 @@ export function FamiliesPage() {
                             ? t('admin.user.deactivateFamily')
                             : t('admin.user.activateFamily')}
                         </Button>
+                        {!p.emailVerifiedAt && (
+                          <Button
+                            variant="secondary"
+                            disabled={action.busy}
+                            onClick={() => void verifyEmail(p)}
+                          >
+                            {t('admin.family.verifyEmail')}
+                          </Button>
+                        )}
                         <PasswordSetter busy={action.busy} onSubmit={(pw) => setPassword(p, pw)} />
                       </div>
                     </li>

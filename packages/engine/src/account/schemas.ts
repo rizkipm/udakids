@@ -179,3 +179,13 @@ export const childClaimSchema = z.strictObject({
   familyCode: familyCodeSchema,
   pin: picturePinSchema,
 });
+
+/** Verifikasi email orang tua (D-044): kode 6 digit. */
+export const emailVerifySchema = z.strictObject({
+  email: emailSchema,
+  code: z
+    .string()
+    .trim()
+    .regex(/^\d{6}$/, 'kode verifikasi 6 angka'),
+});
+export const emailResendSchema = z.strictObject({ email: emailSchema });

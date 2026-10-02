@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   COMMAND_KEYS,
+  isListeningItem,
   dialogFileSchema,
   scoreKey,
   spokenPrompt,
@@ -39,6 +40,22 @@ describe('suara Momo (D-035)', () => {
       text: 'Ketuk lingkaran.',
     });
     expect(voiceItemText(item('pick-one'), 'reteach')).toBe('9 − 5 = 4.');
+  });
+
+  it('soal dengar (dikte) dibacakan lengkap di semua jenjang (D-043)', () => {
+    const dikte = {
+      ...item('number-input'),
+      prompt: 'Dengarkan, lalu tulis angkanya.',
+      say: 'Tulis angka dua puluh tiga.',
+    };
+    expect(isListeningItem(dikte)).toBe(true);
+    expect(spokenPrompt(dikte, 'intermediate')).toEqual({
+      kind: 'item',
+      text: 'Tulis angka dua puluh tiga.',
+    });
+    expect(spokenPrompt(dikte, 'advanced').kind).toBe('item');
+    // say sama dengan prompt → bukan soal dengar
+    expect(isListeningItem({ prompt: 'Berapa?', say: 'Berapa?' })).toBe(false);
   });
 
   it('skor dibulatkan ke kunci 0..100', () => {

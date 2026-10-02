@@ -3,6 +3,7 @@ import { Inject, Injectable, Logger, Optional } from '@nestjs/common';
 import {
   dialogFileSchema,
   generateItem,
+  isListeningItem,
   skillTemplateSchema,
   VOICE_LINE_KEYS,
   voiceItemText,
@@ -12,9 +13,13 @@ import {
 } from '@little-coder/engine';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DB, type Db } from '../db/db.module.js';
-import { dialogs, skills, voiceClips } from '../db/schema.js';
+import { appSettings, dialogs, skills, voiceClips } from '../db/schema.js';
+import { open, seal, type Sealed } from '../common/secret-box.js';
 import { SettingsService } from '../settings/settings.service.js';
-import { TTS_PROVIDER, type TtsProvider } from './tts.provider.js';
+import { GoogleCloudTts, TTS_PROVIDER, type TtsProvider } from './tts.provider.js';
+
+/** Baris app_settings untuk API key suara yang diisi admin (terenkripsi). */
+export const VOICE_KEY_SETTING = 'voice_key';
 
 export const VOICE_LOCALE = 'id';
 /** Batas pembuatan klip BARU per hari (melindungi biaya bila endpoint disalahgunakan). */
@@ -38,11 +43,77 @@ export class VoiceService {
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly settings: SettingsService,
-    @Optional() @Inject(TTS_PROVIDER) private readonly provider: TtsProvider | null,
+    @Optional() @Inject(TTS_PROVIDER) private readonly fixed: TtsProvider | null,
   ) {}
 
-  get ready() {
-    return !!this.provider;
+  private adminKey?: { at: number; key: string | null; info: Sealed | null };
+
+  /** API key yang diisi admin (terenkripsi di app_settings `voice_key`), cache 30 detik. */
+  private async loadAdminKey() {
+    if (this.adminKey && Date.now() - this.adminKey.at < 30_000) return this.adminKey;
+    const [row] = await this.db
+      .select()
+      .from(appSettings)
+      .where(eq(appSettings.key, VOICE_KEY_SETTING));
+    const info = (row?.value as Sealed | undefined) ?? null;
+    this.adminKey = { at: Date.now(), key: open(info), info };
+    return this.adminKey;
+  }
+
+  /**
+   * Penyedia suara (D-043): `.env` (GOOGLE_TTS_API_KEY) → API key yang diisi admin → tidak ada (aplikasi
+   * memakai suara browser).
+   */
+  async provider(): Promise<TtsProvider | null> {
+    if (this.fixed) return this.fixed;
+    const { key } = await this.loadAdminKey();
+    return key ? new GoogleCloudTts(key) : null;
+  }
+
+  async isReady() {
+    return !!(await this.provider());
+  }
+
+  /** Info kunci untuk admin — TIDAK PERNAH berisi kunci itu sendiri. */
+  async keyInfo() {
+    if (this.fixed)
+      return {
+        source: process.env.GOOGLE_TTS_API_KEY?.trim() ? 'env' : 'server',
+        last4: null,
+        updatedAt: null,
+      };
+    const { key, info } = await this.loadAdminKey();
+    if (key && info) return { source: 'admin', last4: info.last4, updatedAt: info.updatedAt };
+    return { source: null, last4: null, updatedAt: null, unreadable: !!info && !key };
+  }
+
+  async setKey(apiKey: string, userId: string) {
+    const value = seal(apiKey);
+    await this.db
+      .insert(appSettings)
+      .values({ key: VOICE_KEY_SETTING, value, updatedBy: userId })
+      .onConflictDoUpdate({
+        target: appSettings.key,
+        set: { value, updatedBy: userId, updatedAt: new Date() },
+      });
+    this.adminKey = undefined;
+  }
+
+  async clearKey() {
+    await this.db.delete(appSettings).where(eq(appSettings.key, VOICE_KEY_SETTING));
+    this.adminKey = undefined;
+  }
+
+  /** Uji kunci: buat satu kalimat pendek (tidak disimpan). */
+  async testKey(): Promise<{ ok: boolean; message: string }> {
+    const provider = await this.provider();
+    if (!provider) return { ok: false, message: 'Belum ada API key' };
+    try {
+      const out = await provider.synthesize('Halo, aku Momo.', await this.settings.get('voice'));
+      return { ok: out.data.length > 0, message: `Berhasil (${out.data.length} byte audio)` };
+    } catch (err) {
+      return { ok: false, message: (err as Error).message.slice(0, 200) };
+    }
   }
 
   static keyOf(text: string, s: VoiceSettings) {
@@ -80,7 +151,7 @@ export class VoiceService {
     );
     const have = s.enabled ? await this.existing(entries.map((e) => e[2])) : new Set<string>();
     return {
-      enabled: s.enabled && this.ready,
+      enabled: s.enabled && (await this.isReady()),
       rev: VoiceService.revOf(s),
       lines: Object.fromEntries(
         entries.map(([k, text, key]) => [k, { text, clip: have.has(key) ? key : null }]),
@@ -112,7 +183,7 @@ export class VoiceService {
       .from(voiceClips)
       .where(eq(voiceClips.key, key));
     if (hit) return key;
-    if (!settings.enabled || !this.provider) return null;
+    if (!settings.enabled || !(await this.isReady())) return null;
     const running = this.inflight.get(key);
     if (running) return running;
     const job = this.make(key, text, settings).finally(() => this.inflight.delete(key));
@@ -137,7 +208,9 @@ export class VoiceService {
     }
     this.madeToday++;
     try {
-      const out = await this.provider!.synthesize(text, s);
+      const provider = await this.provider();
+      if (!provider) return null;
+      const out = await provider.synthesize(text, s);
       await this.db
         .insert(voiceClips)
         .values({
@@ -185,8 +258,11 @@ export class VoiceService {
       .where(and(eq(skills.id, skillId), eq(skills.status, 'active')));
     if (!row) return undefined;
     const template = skillTemplateSchema.parse(row.template);
-    if (template.tier !== 'basic') return undefined;
-    return voiceItemText(generateItem(template, { seed, band }), part);
+    const item = generateItem(template, { seed, band });
+    // Basic: kalimat soal & pembahasan. Kelas 1+: hanya kalimat soal "dengar" (dikte) — D-043.
+    if (template.tier !== 'basic' && !(part === 'prompt' && isListeningItem(item)))
+      return undefined;
+    return voiceItemText(item, part);
   }
 
   async stats() {

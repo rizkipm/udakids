@@ -231,6 +231,105 @@ function Lines({ data, onSaved }: { data: VoiceOverview; onSaved: () => void }) 
   );
 }
 
+/**
+ * API key suara (D-043): disimpan terenkripsi di server, tidak pernah ditampilkan lagi (hanya 4 karakter
+ * terakhir). Kosong → aplikasi memakai suara browser.
+ */
+function ApiKeyCard({ info, onChanged }: { info: VoiceOverview['key']; onChanged: () => void }) {
+  const call = useApiCall('staff');
+  const action = useAction();
+  const [apiKey, setApiKey] = useState('');
+  const [show, setShow] = useState(false);
+  const [test, setTest] = useState<{ ok: boolean; message: string }>();
+  const source = info?.source ?? null;
+  const fromServer = source === 'env' || source === 'server';
+
+  async function save(e: FormEvent) {
+    e.preventDefault();
+    const ok = await action.run(
+      () =>
+        call('/admin/voice/key', { method: 'PUT', body: { apiKey: apiKey.trim() } }).then(
+          () => true,
+        ),
+      t('admin.voice.keySaved'),
+    );
+    if (ok) {
+      setApiKey('');
+      setTest(undefined);
+      onChanged();
+    }
+  }
+  async function remove() {
+    const ok = await action.run(
+      () => call('/admin/voice/key', { method: 'DELETE' }).then(() => true),
+      t('admin.voice.keyRemoved'),
+    );
+    if (ok) {
+      setTest(undefined);
+      onChanged();
+    }
+  }
+  async function runTest() {
+    setTest(undefined);
+    const out = await action.run(() =>
+      call<{ ok: boolean; message: string }>('/admin/voice/key/test', { method: 'POST', body: {} }),
+    );
+    if (out) setTest(out);
+  }
+
+  return (
+    <Card title={t('admin.voice.keyTitle')}>
+      <p className="ui-muted">{t('admin.voice.keyHint')}</p>
+      <div className="ui-row" style={{ marginBottom: 10 }}>
+        {source === 'admin' ? (
+          <Badge tone="success">{t('admin.voice.keyAdmin', { last4: info?.last4 ?? '' })}</Badge>
+        ) : fromServer ? (
+          <Badge tone="success">{t('admin.voice.keyEnv')}</Badge>
+        ) : (
+          <Badge tone="warning">{t('admin.voice.keyNone')}</Badge>
+        )}
+        {info?.unreadable && <Badge tone="warning">{t('admin.voice.keyUnreadable')}</Badge>}
+      </div>
+      <ActionNotice error={action.error} done={action.done} />
+      {test && <Notice tone={test.ok ? 'success' : 'warning'}>{test.message}</Notice>}
+      {fromServer ? (
+        <p className="ui-muted">{t('admin.voice.keyEnvHint')}</p>
+      ) : (
+        <form onSubmit={save} className="adm-key-form">
+          <TextField
+            label={t('admin.voice.keyLabel')}
+            type={show ? 'text' : 'password'}
+            autoComplete="off"
+            spellCheck={false}
+            maxLength={200}
+            placeholder={source === 'admin' ? `••••${info?.last4 ?? ''}` : 'AIza…'}
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+          />
+          <div className="ui-row">
+            <Button variant="ghost" onClick={() => setShow((x) => !x)}>
+              {show ? t('admin.voice.keyHide') : t('admin.voice.keyShow')}
+            </Button>
+            <Button type="submit" disabled={action.busy || apiKey.trim().length < 20}>
+              {t('admin.voice.keySave')}
+            </Button>
+            {source === 'admin' && (
+              <Button variant="danger" disabled={action.busy} onClick={() => void remove()}>
+                {t('admin.voice.keyDelete')}
+              </Button>
+            )}
+          </div>
+        </form>
+      )}
+      {source && (
+        <Button variant="secondary" disabled={action.busy} onClick={() => void runTest()}>
+          {t('admin.voice.keyTest')}
+        </Button>
+      )}
+    </Card>
+  );
+}
+
 export function VoicePage() {
   const data = useFetch<VoiceOverview>('staff', '/admin/voice');
   const call = useApiCall('staff');
@@ -258,7 +357,8 @@ export function VoicePage() {
           const withClip = Object.values(d.lines).filter((l) => l.clip).length;
           return (
             <>
-              {!d.providerReady && <Notice tone="warning">{t('admin.voice.noProvider')}</Notice>}
+              {!d.providerReady && <Notice tone="info">{t('admin.voice.noProvider')}</Notice>}
+              <ApiKeyCard info={d.key} onChanged={data.reload} />
               <div className="ui-grid adm-stats">
                 <Stat label={t('admin.voice.statClips')} value={d.clips} />
                 <Stat label={t('admin.voice.statBytes')} value={formatBytes(d.bytes)} />

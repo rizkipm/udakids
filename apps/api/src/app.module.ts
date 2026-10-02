@@ -5,6 +5,12 @@ import { AdminSkillsController } from './admin/admin-skills.controller.js';
 import { AdminUsersController } from './admin/admin-users.controller.js';
 import { ContentService } from './admin/content.service.js';
 import { AuthModule } from './auth/auth.module.js';
+import { AdminMailController } from './mail/admin-mail.controller.js';
+import { MailModule } from './mail/mail.module.js';
+import { AdminContestController } from './contest/admin-contest.controller.js';
+import { ContestController } from './contest/contest.controller.js';
+import { LeaderboardController } from './leaderboard/leaderboard.controller.js';
+import { MediaController } from './media/media.controller.js';
 import { AdminBillingController } from './billing/admin-billing.controller.js';
 import { AdminFinanceController } from './billing/admin-finance.controller.js';
 import { BillingService } from './billing/billing.service.js';
@@ -25,7 +31,7 @@ import { AdminVoiceController, VoiceController } from './voice/voice.controller.
 import { VoiceService } from './voice/voice.service.js';
 
 @Module({
-  imports: [DbModule, AuthModule],
+  imports: [DbModule, MailModule, AuthModule],
   controllers: [
     HealthController,
     PublicController,
@@ -43,6 +49,11 @@ import { VoiceService } from './voice/voice.service.js';
     AdminFinanceController,
     VoiceController,
     InsightsController,
+    LeaderboardController,
+    ContestController,
+    AdminContestController,
+    MediaController,
+    AdminMailController,
     AdminVoiceController,
   ],
   providers: [

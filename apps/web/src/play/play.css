@@ -2463,3 +2463,414 @@ button.level-card.is-paid {
   cursor: pointer;
   text-align: left;
 }
+
+/* ---------- Pustaka per jenjang (D-042) ---------- */
+.grade-chips {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 4px 2px 10px;
+  margin: 14px 0 2px;
+}
+.grade-chip {
+  flex: none;
+  min-height: var(--kid-touch);
+  min-width: var(--kid-touch);
+  padding: 0 20px;
+  border: 4px solid var(--kid-line);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--kid-ink);
+  cursor: pointer;
+}
+.grade-chip.is-osn {
+  border-style: dashed;
+}
+.grade-chip.is-on {
+  background: var(--kid-primary);
+  border-color: var(--kid-primary);
+  border-style: solid;
+  color: #fff;
+  box-shadow: 0 4px 0 var(--kid-line);
+}
+.grade-chip:focus-visible,
+.rank-scope:focus-visible,
+.rank-detail-btn:focus-visible {
+  outline: 5px solid var(--kid-sun);
+  outline-offset: 3px;
+}
+.library-books .book-tab {
+  min-height: var(--kid-touch);
+  padding: 0 26px;
+  font-size: 1.1rem;
+}
+
+/* ---------- Papan peringkat rata-rata (D-042) ---------- */
+.rank-scopes {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 4px 2px 10px;
+  margin: 8px 0;
+}
+.rank-scope {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: var(--kid-touch);
+  padding: 6px 18px;
+  border: 4px solid var(--kid-line);
+  border-radius: 20px;
+  background: #fff;
+  font: inherit;
+  color: var(--kid-ink);
+  cursor: pointer;
+  text-align: left;
+}
+.rank-scope strong {
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.rank-scope small {
+  font-weight: 700;
+  color: #5d5873;
+}
+.rank-scope.is-on {
+  background: var(--kid-sun);
+  box-shadow: 0 4px 0 var(--kid-line);
+}
+.rank-announce {
+  border: 4px solid var(--kid-line);
+  border-radius: 28px;
+  background: linear-gradient(#fffdf6, #fff);
+  padding: 16px 16px 20px;
+  box-shadow: 0 6px 0 rgba(43, 37, 64, 0.15);
+}
+.rank-announce-head {
+  text-align: center;
+  border-bottom: 3px dashed #d8d0ee;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+.rank-announce-head h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+.rank-announce-head small {
+  color: #5d5873;
+  font-weight: 700;
+}
+.rank-avg {
+  font-weight: 900;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--kid-primary);
+}
+.podium-spot .rank-avg {
+  color: #8a6200;
+}
+.rank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rank-row {
+  display: grid;
+  grid-template-columns: 52px 44px minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 3px solid var(--kid-line);
+  border-radius: 20px;
+  padding: 8px 12px;
+  min-height: var(--kid-touch);
+}
+.rank-row:nth-child(even) {
+  background: #faf7ff;
+}
+.rank-row.is-me {
+  background: #efe7ff;
+  border-color: var(--kid-primary);
+  box-shadow: 0 0 0 3px rgba(91, 63, 214, 0.25);
+}
+.rank-pos {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.25rem;
+  font-weight: 900;
+  background: var(--kid-soft);
+  border: 3px solid var(--kid-line);
+}
+.rank-row.place-1 .rank-pos {
+  background: #f7c948;
+}
+.rank-row.place-2 .rank-pos {
+  background: #c9d2e0;
+}
+.rank-row.place-3 .rank-pos {
+  background: #f0a46b;
+}
+.rank-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rank-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.1rem;
+}
+.rank-name small {
+  color: #5d5873;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.rank-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #5d5873;
+}
+.rank-time .stat-icon {
+  color: #e07a2a;
+}
+.rank-detail-btn {
+  min-height: var(--kid-touch);
+  padding: 0 16px;
+  border: 3px solid var(--kid-primary);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--kid-primary);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rank-detail-btn.is-compact {
+  min-height: 48px;
+  min-width: var(--kid-touch);
+  padding: 0 10px;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+.rank-mine,
+.rank-others {
+  margin-top: 20px;
+}
+.rank-mine h2,
+.rank-others h2 {
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+}
+.rank-others-sub {
+  margin: 0 0 8px;
+  color: #5d5873;
+  font-weight: 700;
+}
+.rank-list.is-small .rank-row {
+  grid-template-columns: 52px 44px minmax(0, 1fr) auto auto;
+  border-width: 2px;
+}
+.rank-more {
+  display: block;
+  margin: 14px auto 0;
+  min-height: var(--kid-touch);
+}
+.rank-backdrop {
+  align-items: start;
+  overflow-y: auto;
+}
+.rank-dialog {
+  width: min(100%, 760px);
+  margin: 24px 0;
+  padding: 18px;
+  border: 4px solid var(--kid-line);
+  border-radius: 28px;
+  background: #fff;
+}
+.rank-dialog-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+.rank-dialog-head h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+.rank-dialog-sum {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 0;
+  font-weight: 800;
+}
+.rank-close {
+  min-height: var(--kid-touch);
+}
+.rank-dialog-body h3 {
+  margin: 18px 0 8px;
+  font-size: 1.1rem;
+}
+.rank-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+.rank-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 3px solid var(--kid-line);
+  border-radius: 16px;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+}
+.rank-table caption {
+  text-align: left;
+  font-weight: 900;
+  padding: 4px 2px 6px;
+}
+.rank-table th,
+.rank-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 2px solid #ece6f8;
+}
+.rank-table thead th {
+  background: var(--kid-soft);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.rank-table tbody th small {
+  display: block;
+  color: #5d5873;
+  font-weight: 600;
+}
+.rank-table tbody tr:last-child th,
+.rank-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.rank-table tr.is-on {
+  background: #fff6d6;
+}
+.rank-table .rank-avg {
+  font-size: 1.05rem;
+}
+@media (max-width: 640px) {
+  .rank-row,
+  .rank-list.is-small .rank-row {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'pos name avg'
+      'pos time detail';
+    row-gap: 4px;
+  }
+  .rank-row > .momo {
+    display: none;
+  }
+  .rank-row .rank-pos {
+    grid-area: pos;
+  }
+  .rank-row .rank-name {
+    grid-area: name;
+  }
+  .rank-row .rank-avg {
+    grid-area: avg;
+    justify-self: end;
+  }
+  .rank-row .rank-time {
+    grid-area: time;
+    font-size: 0.9rem;
+  }
+  .rank-row .rank-detail-btn {
+    grid-area: detail;
+    justify-self: end;
+  }
+  .rank-dialog-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .rank-dialog-head > .momo {
+    display: none;
+  }
+}
+.rank-backdrop {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.rank-dialog {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.rank-dialog-head > div,
+.rank-dialog-body {
+  min-width: 0;
+}
+
+/* Pilihan urutan papan peringkat (D-043): Rata-rata / Total skor */
+.rank-modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 4px 0 10px;
+}
+.rank-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 64px;
+  min-width: 64px;
+  padding: 0 20px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.rank-mode.is-on {
+  background: #f7c948;
+}
+.rank-mode:focus-visible {
+  outline: 4px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Podium: ronde & waktu di bawah skor (D-043) */
+.podium-meta {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  margin: 2px 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #5d5873;
+  font-variant-numeric: tabular-nums;
+}
+.podium-meta .rank-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

@@ -4,10 +4,13 @@ import parent from './id/parent.json';
 import play from './id/play.json';
 import site from './id/site.json';
 import staff from './id/staff.json';
+import rank from './id/rank.json';
+import contest from './id/contest.json';
+import media from './id/media.json';
 import { APP_NAME, CHARACTER_NAME } from '../config/app';
 
 // Semua teks UI lewat sini (PRD A14). Satu file per area → kunci "area.kunci". Siap untuk en/.
-const namespaces = { common, staff, admin, parent, play, site };
+const namespaces = { common, staff, admin, parent, play, site, rank, contest, media };
 type Namespaces = typeof namespaces;
 export type MessageKey = {
   [N in keyof Namespaces]: `${N & string}.${keyof Namespaces[N] & string}`;

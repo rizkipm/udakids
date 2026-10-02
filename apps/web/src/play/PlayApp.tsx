@@ -8,6 +8,7 @@ import { ChildJoin } from './ChildJoin';
 import { ChildLogin } from './ChildLogin';
 import { Goodbye } from './Goodbye';
 import { LeaderboardPage } from './Leaderboard';
+import { ContestHome, ContestPlay } from './contest/ContestPages';
 import { Library } from './Library';
 import { PracticeRoute } from './Practice';
 import { ProfilePage } from './Profile';
@@ -50,6 +51,8 @@ export function PlayApp() {
         <Route path="latihan/:token" element={<PracticeRoute momoColor={color} />} />
         <Route path="profil" element={<ProfilePage momoColor={color} />} />
         <Route path="peringkat" element={<LeaderboardPage momoColor={color} />} />
+        <Route path="lomba" element={<ContestHome momoColor={color} />} />
+        <Route path="lomba/:id" element={<ContestPlay momoColor={color} />} />
         <Route path="topik/:token" element={<TopicPage momoColor={color} />} />
         <Route path="selesai" element={<Goodbye momoColor={color} />} />
         <Route path="*" element={<Navigate to="/play" replace />} />

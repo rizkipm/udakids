@@ -29,6 +29,11 @@ export type ItemPlayerProps = {
    * ("Pilih satu jawaban…"), bukan seluruh soal. Tanpa tier (mis. contoh di materi) → kalimat soal.
    */
   tier?: 'basic' | 'intermediate' | 'advanced';
+  /**
+   * Mode "kirim saja" (lomba, D-042): jawaban TIDAK diperiksa di perangkat (kunci tidak ada); nilai mentah
+   * diteruskan ke sini tanpa tanda benar/keliru. Suara memakai suara perangkat (tanpa id soal).
+   */
+  onSubmitValue?: (value: AnswerValue) => void;
 };
 
 const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
@@ -50,6 +55,13 @@ export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
   speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
 }
 
+/** Seperti `speakPrompt`, tetapi tanpa klip suara per soal (soal lomba tidak membawa id/seed). */
+function speakPlain(item: Item, tier: ItemPlayerProps['tier']) {
+  if (!tier || tier === 'basic') return speak(item.say ?? item.prompt);
+  const spoken = spokenPrompt(item, tier);
+  if (spoken.kind === 'line') speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
+}
+
 /** Pemutar satu soal Pustaka. Semua interaksi cukup diketuk (tanpa drag), target ≥ 64 px. */
 export function ItemPlayer({
   item,
@@ -58,20 +70,29 @@ export function ItemPlayer({
   showAnswer = false,
   disabled = false,
   tier,
+  onSubmitValue,
 }: ItemPlayerProps) {
   const [locked, setLocked] = useState(false);
   const [result, setResult] = useState<AnswerResult>();
   const say = item.say ?? item.prompt;
 
+  const submitOnly = onSubmitValue !== undefined;
+  const sayPrompt = () => (submitOnly ? speakPlain(item, tier) : speakPrompt(item, tier));
+
   useEffect(() => {
     setLocked(false);
     setResult(undefined);
-    if (mode === 'play') speakPrompt(item, tier);
+    if (mode === 'play') (submitOnly ? speakPlain : speakPrompt)(item, tier);
     return () => stopSpeaking();
-  }, [item, mode, tier]);
+  }, [item, mode, tier, submitOnly]);
 
   const submit = (value: AnswerValue) => {
     if (locked || disabled) return;
+    if (onSubmitValue) {
+      setLocked(true);
+      onSubmitValue(value);
+      return;
+    }
     const r = checkAnswer(item, value);
     setLocked(true);
     setResult(r);
@@ -82,7 +103,7 @@ export function ItemPlayer({
   return (
     <div className="item" data-interaction={item.interaction.type}>
       <div className="item-prompt">
-        <SpeakButton text={say} onSpeak={() => speakPrompt(item, tier)} />
+        <SpeakButton text={say} onSpeak={sayPrompt} />
         <p>{item.prompt}</p>
       </div>
       {item.stimulus.length > 0 && (

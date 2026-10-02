@@ -533,44 +533,288 @@ describe('gabung kelas sendiri (D-025)', () => {
   });
 });
 
-describe('papan peringkat global (D-024)', () => {
-  it('podium, baris saya, level tertinggi, dan waktu', async () => {
+describe('papan peringkat rata-rata (D-042)', () => {
+  const row = (position: number, nickname: string, extra: Record<string, unknown> = {}) => ({
+    position,
+    childId: `00000000-0000-4000-8000-${String(position).padStart(12, '0')}`,
+    isMe: false,
+    nickname,
+    momoColor: 'biru',
+    average: 100 - position * 0.25,
+    points: 5000 - position * 10,
+    rounds: 12,
+    timeMs: 65_000 * position,
+    bestTimeMs: 30_000 * position,
+    passedLevels: 3,
+    ...extra,
+  });
+  const board = (scope: string, title: string, mode = 'average') => ({
+    scope,
+    mode,
+    title,
+    updatedAt: '2026-10-02T08:00:00.000Z',
+    total: 60,
+    top: Array.from({ length: 25 }, (_, i) => row(i + 1, `Anak${i + 1}`)),
+    rest: {
+      page: 1,
+      pageSize: 50,
+      total: 35,
+      items: Array.from({ length: 30 }, (_, i) => {
+        const { childId: _id, ...r } = row(i + 26, `Lain${i + 26}`);
+        return r;
+      }),
+    },
+    me: row(57, 'Alya', { isMe: true, childId: CHILD, average: 87.5 }),
+  });
+
+  it('podium, 25 besar, posisimu, peserta lainnya + muat lagi, ganti papan, detail', async () => {
     setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
-    const row = (position: number, nickname: string, me = false) => ({
-      position,
-      nickname,
-      momoColor: 'biru',
-      points: 1000 - position * 10,
-      passed: 10 - position,
-      timeMs: 65_000 * position,
-      highest: { book: 'Math Grade 1-2', level: 7 },
-      me,
-    });
     mockFetch({
       'GET /auth/me': () => [200, { momoColor: 'biru' }],
       'GET /catalog': () => [200, { catalogs: [], skills: [] }],
       'GET /practice/state': () => [200, { states: {}, quizzes: {} }],
-      'GET /practice/leaderboard': () => [
+      'GET /leaderboard/scopes': () => [
         200,
         {
-          total: 60,
-          rows: [row(1, 'Raka'), row(2, 'Sari'), row(3, 'Budi'), row(4, 'Nina')],
-          me: row(57, 'Alya', true),
+          updatedAt: '2026-10-02T08:00:00.000Z',
+          scopes: [
+            { key: 'global', title: 'Global', participants: 60 },
+            { key: 'math/tk', domain: 'math', grade: 'tk', title: 'Math TK', participants: 60 },
+          ],
         },
+      ],
+      'GET /leaderboard?scope=global&mode=average&pageSize=50': () => [
+        200,
+        board('global', 'Global'),
+      ],
+      'GET /leaderboard?scope=global&mode=total&pageSize=50': () => [
+        200,
+        board('global', 'Global', 'total'),
+      ],
+      'GET /leaderboard?scope=global&mode=average&page=2&pageSize=50': () => [
+        200,
+        {
+          ...board('global', 'Global'),
+          rest: {
+            page: 2,
+            pageSize: 50,
+            total: 35,
+            items: Array.from({ length: 5 }, (_, i) => row(i + 56, `Akhir${i + 56}`)),
+          },
+        },
+      ],
+      'GET /leaderboard?scope=math/tk&mode=average&pageSize=50': () => [
+        200,
+        board('math/tk', 'Math TK'),
+      ],
+      'GET /leaderboard/detail/00000000-0000-4000-8000-000000000004?scope=global&mode=average':
+        () => [
+          200,
+          {
+            scope: 'global',
+            nickname: 'Anak4',
+            momoColor: 'biru',
+            isMe: false,
+            position: 4,
+            participants: 60,
+            average: 99,
+            points: 4960,
+            rounds: 12,
+            timeMs: 260_000,
+            bestTimeMs: 120_000,
+            passedLevels: 3,
+            books: [
+              {
+                key: 'math/tk',
+                title: 'Math TK',
+                domain: 'math',
+                grade: 'tk',
+                average: 99,
+                points: 4960,
+                rounds: 12,
+                timeMs: 260_000,
+                bestTimeMs: 120_000,
+                passedLevels: 3,
+                totalLevels: 520,
+                position: 2,
+                participants: 40,
+              },
+            ],
+            topics: [
+              {
+                bookKey: 'math/tk',
+                book: 'Math TK',
+                domain: 'math',
+                grade: 'tk',
+                category: 'A',
+                topic: 'Membilang benda',
+                average: 99,
+                points: 990,
+                rounds: 12,
+                timeMs: 260_000,
+                passed: 3,
+                levels: 10,
+              },
+            ],
+          },
+        ],
+    });
+    const { container } = renderPlay('/play/peringkat');
+    expect(
+      await screen.findByText(
+        t('rank.mySay', { board: t('rank.scope.global'), position: 57, of: 60, average: '87,50' }),
+      ),
+    ).toBeInTheDocument();
+    expect(container.querySelectorAll('.podium-spot')).toHaveLength(3);
+    expect(container.querySelector('.podium-spot.place-1 .podium-name')?.textContent).toBe('Anak1');
+    expect(container.querySelector('.podium-spot.place-1 .rank-avg')?.textContent).toBe('99,75');
+    // Di bawah skor: jumlah ronde & waktu; "Diperbarui" lengkap dengan tanggal dan detik.
+    expect(container.querySelector('.podium-spot.place-1 .podium-meta')?.textContent).toBe(
+      '12 ronde01:05',
+    );
+    expect(container.querySelector('.rank-announce-head time')?.getAttribute('dateTime')).toBe(
+      '2026-10-02T08:00:00.000Z',
+    );
+    expect(container.querySelector('.rank-announce-head time')?.textContent).toMatch(
+      /^Diperbarui \S+, 2 Okt 2026 · \d{2}\.\d{2}\.\d{2}$/,
+    );
+    expect(container.querySelectorAll('.rank-announce .rank-list .rank-row')).toHaveLength(22);
+    const mine = container.querySelector('.rank-mine .rank-row.is-me');
+    expect(mine?.textContent).toContain('Alya');
+    expect(mine?.textContent).toContain('87,50');
+    expect(mine?.textContent).toContain('1:01:45');
+    // Peserta lainnya (#26+) tanpa tombol detail; muat lebih banyak.
+    expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(30);
+    expect(container.querySelector('.rank-others .rank-detail-btn')).toBeNull();
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: t('rank.more') })));
+    await waitFor(() =>
+      expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(35),
+    );
+    expect(screen.queryByRole('button', { name: t('rank.more') })).toBeNull();
+
+    // Detail 25 besar: dialog dengan nilai per buku & topik; Esc menutup.
+    fireEvent.click(screen.getByRole('button', { name: t('rank.detailOf', { name: 'Anak4' }) }));
+    const dialog = await screen.findByRole('dialog');
+    expect(await screen.findByText('Membilang benda')).toBeInTheDocument();
+    expect(dialog.textContent).toContain('3/520');
+    expect(dialog.textContent).toContain(t('rank.detail.position', { position: 2, of: 40 }));
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).toBeNull();
+
+    // Ganti papan: per buku.
+    fireEvent.click(screen.getByRole('button', { name: /Math TK/ }));
+    expect(
+      await screen.findByText(
+        t('rank.mySay', { board: 'Math TK', position: 57, of: 60, average: '87,50' }),
+      ),
+    ).toBeInTheDocument();
+    expect(localStorage.getItem('lc.rank.scope')).toBe('math/tk');
+  });
+
+  it('opsi urutan: Rata-rata ↔ Total skor (D-043), pilihan diingat', async () => {
+    setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
+    mockFetch({
+      'GET /auth/me': () => [200, { momoColor: 'biru' }],
+      'GET /catalog': () => [200, { catalogs: [], skills: [] }],
+      'GET /practice/state': () => [200, { states: {}, quizzes: {} }],
+      'GET /leaderboard/scopes': () => [
+        200,
+        {
+          updatedAt: '2026-10-02T08:00:00.000Z',
+          scopes: [{ key: 'global', title: 'Global', participants: 60 }],
+        },
+      ],
+      'GET /leaderboard?scope=global&mode=average&pageSize=50': () => [
+        200,
+        board('global', 'Global'),
+      ],
+      'GET /leaderboard?scope=global&mode=total&pageSize=50': () => [
+        200,
+        board('global', 'Global', 'total'),
       ],
     });
     const { container } = renderPlay('/play/peringkat');
     expect(
-      await screen.findByText(t('play.board.mySay', { position: 57, of: 60, score: 430 })),
+      await screen.findByRole('button', { name: t('rank.mode.average'), pressed: true }),
     ).toBeInTheDocument();
-    expect(container.querySelectorAll('.podium-spot')).toHaveLength(3);
-    expect(container.querySelector('.podium-spot.place-1 .podium-name')?.textContent).toBe('Raka');
-    const mine = container.querySelector('.board-row.is-me');
-    expect(mine?.textContent).toContain('Alya');
-    expect(mine?.textContent).toContain('57');
-    expect(mine?.textContent).toContain('1:01:45');
-    expect(container.querySelectorAll('.board-row:not(.board-header)')).toHaveLength(5);
-    expect(screen.getAllByText('Math Grade 1-2').length).toBeGreaterThan(0);
+    await waitFor(() =>
+      expect(container.querySelector('.podium-spot.place-1 .rank-avg')?.textContent).toBe('99,75'),
+    );
+    fireEvent.click(screen.getByRole('button', { name: t('rank.mode.total') }));
+    await waitFor(() =>
+      expect(container.querySelector('.podium-spot.place-1 .rank-avg')?.textContent).toBe('4.990'),
+    );
+    expect(screen.getByText(t('rank.ruleTotal'))).toBeInTheDocument();
+    expect(localStorage.getItem('lc.rank.mode')).toBe('total');
+  });
+
+  it('offline → pesan ramah', async () => {
+    setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
+    mockFetch({
+      'GET /auth/me': () => [200, { momoColor: 'biru' }],
+      'GET /catalog': () => [200, { catalogs: [], skills: [] }],
+      'GET /practice/state': () => [200, { states: {}, quizzes: {} }],
+    });
+    renderPlay('/play/peringkat');
+    expect(await screen.findByText(t('rank.offline'))).toBeInTheDocument();
+  });
+});
+
+describe('pustaka per jenjang (D-042)', () => {
+  const sk = (domain: string, grade: string, title: string) =>
+    skillTemplateSchema.parse({ ...skill, id: `${domain}.${grade}.b1.uji`, domain, grade, title });
+  const cat = (domain: string, grade: string, title: string, topic: string) => ({
+    domain,
+    grade,
+    title,
+    categories: [{ code: 'B', title: topic }],
+  });
+
+  it('pilih kelas dulu (urut jenjang, termasuk Kelas 1–2 OSN), lalu buku di dalamnya; diingat', async () => {
+    setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
+    mockFetch({
+      'GET /auth/me': () => [200, { momoColor: 'biru' }],
+      'GET /catalog': () => [
+        200,
+        {
+          catalogs: [
+            cat('math', 'sd12', 'Math Grade 1-2 (OSN)', 'Topik OSN'),
+            cat('math', 'tk', 'Math TK', 'Topik Math TK'),
+            cat('sains', 'tk', 'Sains TK', 'Topik Sains TK'),
+            cat('math', 'sd1', 'Math Grade 1', 'Topik Math 1'),
+          ],
+          skills: [
+            sk('math', 'sd12', 'Uji OSN'),
+            sk('math', 'tk', 'Uji TK'),
+            sk('sains', 'tk', 'Uji Sains TK'),
+            sk('math', 'sd1', 'Uji Kelas 1'),
+          ],
+        },
+      ],
+      'GET /practice/state': () => [200, { states: {}, quizzes: {} }],
+    });
+    const { container, unmount } = renderPlay('/play');
+    await screen.findByRole('navigation', { name: t('play.library.grades') });
+    const chips = [...container.querySelectorAll('.grade-chip')].map((c) => c.textContent);
+    expect(chips).toEqual([t('play.grade.tk'), t('play.grade.sd1'), t('play.grade.sd12')]);
+    // TK: dua buku (Matematika, Sains).
+    expect(
+      [...container.querySelectorAll('.library-books .book-tab')].map((b) => b.textContent),
+    ).toEqual([t('play.domain.math'), t('play.domain.sains')]);
+    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik Math TK');
+    fireEvent.click(screen.getByRole('button', { name: 'Sains TK' }));
+    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik Sains TK');
+
+    fireEvent.click(screen.getByRole('button', { name: t('play.grade.sd12') }));
+    expect(container.querySelector('.library-books')).toBeNull();
+    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik OSN');
+    expect(localStorage.getItem('lc.library.grade')).toBe('sd12');
+    unmount();
+
+    renderPlay('/play');
+    await waitFor(() =>
+      expect(document.querySelector('.grade-chip.is-on')?.textContent).toBe(t('play.grade.sd12')),
+    );
   });
 });
 

@@ -202,14 +202,82 @@ export type ChildProfileStats = {
   }[];
 };
 
+/** Peringkat rata-rata (D-042). `childId` hanya ada untuk 25 besar dan baris sendiri. */
 export type LeaderboardRow = {
   position: number;
+  childId?: string;
+  isMe: boolean;
   nickname: string;
   momoColor: string;
+  average: number;
+  /** Total skor = jumlah skor terbaik tiap level (mode `total`, D-043). */
   points: number;
-  passed: number;
+  rounds: number;
   timeMs: number;
-  highest: { book: string; level: number } | null;
-  me: boolean;
+  /** Jumlah waktu skor terbaik (urutan mode `total`). */
+  bestTimeMs: number;
+  passedLevels: number;
 };
-export type Leaderboard = { total: number; rows: LeaderboardRow[]; me: LeaderboardRow | null };
+/** Urutan papan (D-043): rata-rata (D-042) atau total skor (D-024). */
+export type LeaderboardMode = 'average' | 'total';
+export type LeaderboardScope = {
+  key: string;
+  title: string;
+  participants: number;
+  domain?: string;
+  grade?: string;
+};
+export type LeaderboardScopes = { updatedAt: string; scopes: LeaderboardScope[] };
+export type Leaderboard = {
+  scope: string;
+  mode?: LeaderboardMode;
+  title: string;
+  updatedAt: string;
+  total: number;
+  top: LeaderboardRow[];
+  rest: { page: number; pageSize: number; total: number; items: LeaderboardRow[] };
+  me: LeaderboardRow | null;
+};
+export type LeaderboardDetail = {
+  scope: string;
+  nickname: string;
+  momoColor: string;
+  isMe: boolean;
+  position: number;
+  participants: number;
+  average: number;
+  points: number;
+  rounds: number;
+  timeMs: number;
+  bestTimeMs: number;
+  passedLevels: number;
+  books: {
+    key: string;
+    title: string;
+    domain: string;
+    grade: string;
+    average: number;
+    points: number;
+    rounds: number;
+    timeMs: number;
+    bestTimeMs: number;
+    passedLevels: number;
+    totalLevels: number;
+    position: number;
+    participants: number;
+  }[];
+  topics: {
+    bookKey: string;
+    book: string;
+    domain: string;
+    grade: string;
+    category: string;
+    topic: string;
+    average: number;
+    points: number;
+    rounds: number;
+    timeMs: number;
+    passed: number;
+    levels: number;
+  }[];
+};

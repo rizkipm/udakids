@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   answerJago,
   correctNeeded,
+  isListeningItem,
   FREE_ACCESS,
   RESULT_KEYS,
   RIGHT_KEYS,
@@ -133,7 +134,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   // Basic: siapkan suara Momo untuk soal berikutnya agar langsung terdengar.
   const upcoming = round?.[index + 1];
   useEffect(() => {
-    if (basic && upcoming && !locked) prefetchItemVoice(upcoming);
+    if (upcoming && !locked && (basic || isListeningItem(upcoming))) prefetchItemVoice(upcoming);
   }, [basic, upcoming, locked]);
   // Catat soal ronde ini begitu ronde dimulai (juga bila anak berhenti di tengah).
   useEffect(() => {

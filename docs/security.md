@@ -42,3 +42,29 @@ mengakses datanya sendiri.
 - Rahasia hanya di `.env` server: `JWT_SECRET`, `ADMIN_PASSWORD`, `GOOGLE_TTS_API_KEY`.
 - Test e2e "keamanan (audit D-040)" memeriksa header, email, token akun nonaktif, kunci bertingkat, sandi anak
   milik orang tua, katalog berbayar, dan sync.
+
+## Tambahan D-042 (2026-10-02)
+
+- **Lomba live:**
+  - soal dibuat & dinilai di server;
+  - perangkat menerima soal tanpa jawaban, pembahasan, label pengecoh, id skill, maupun seed, dan id pilihan
+    diacak;
+  - waktu dari server; satu peserta satu kali; satu jawaban per soal;
+  - batas laju per anak; hanya peran anak yang bisa ikut;
+  - jawaban terlalu cepat dan keluar halaman ditandai; admin bisa mendiskualifikasi;
+  - hasil hanya setelah lomba selesai.
+- **Unggah gambar (banner/galeri):** hanya admin; JPG/PNG/WEBP ≤ 3 MB dicek dari isi file; badan biner hanya
+  diterima di `/admin/media` dan route bukti transfer.
+- **Tautan banner:** hanya `/…` atau `https://` (menolak `javascript:`, `data:`, `http:`).
+- **Peringkat:** id anak hanya dikirim untuk Top 25 dan diri sendiri; detail di luar Top 25 → 403.
+
+## Tambahan D-044 (2026-10-02): email
+
+- **App Password Gmail** hanya di `.env` server; admin hanya melihat user yang disamarkan.
+- **Kode verifikasi:** `randomInt` 6 digit, hash scrypt, 15 menit, 5 percobaan, kode baru membatalkan yang lama.
+  Batas laju per email dan per IP; jawaban kirim ulang seragam (tidak membocorkan email terdaftar).
+- **Login sebelum verifikasi** → 403 `EMAIL_NOT_VERIFIED`, dicek **setelah** password benar (tidak membocorkan
+  status tanpa password).
+- **Template:** semua input pengguna di-escape. Isi email dihapus dari `email_outbox` setelah terkirim.
+  Email tidak pernah memuat password atau sandi gambar anak.
+- **SMTP** memakai TLS ≥ 1.2 (port 465).

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatRupiah } from '@little-coder/engine';
 import type { SkillStat } from '../api/types';
 import { useFetch } from '../auth/useApi';
+import { BannerSlider } from '../components/BannerSlider';
 import { t, type MessageKey } from '../i18n';
 import { ShellIconSvg, type ShellIcon } from '../ui/AppShell';
 import { CountUp, DayBars, Kpi, Meter, Ring } from '../ui/charts';
@@ -470,6 +471,7 @@ export function OverviewPage() {
   return (
     <>
       <PageHeader title={t('admin.overview.title')} subtitle={t('admin.overview.subtitle')} />
+      <BannerSlider placement="admin" />
       <div className="ins-period" role="group" aria-label={t('admin.ins.period')}>
         {[7, 30, 90].map((n) => (
           <button

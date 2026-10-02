@@ -54,13 +54,26 @@ export const commandKey = (item: Pick<Item, 'interaction'>) => COMMAND_KEYS[item
 export const scoreKey = (score: number) =>
   `vo_score_${Math.max(0, Math.min(100, Math.round(score / 10) * 10))}`;
 
-/** Yang diucapkan saat soal muncul: kalimat soal (Basic) atau perintah (kelas 1+). */
+/**
+ * Soal "dengar" (dikte, mis. "Dengarkan, lalu tulis angkanya" + say "Tulis angka dua puluh tiga"): isi soalnya
+ * hanya ada di kalimat yang diucapkan, jadi harus dibacakan lengkap di SEMUA jenjang (D-043).
+ */
+export const isListeningItem = (item: Pick<Item, 'prompt' | 'say'>) =>
+  !!item.say && item.say.trim() !== item.prompt.trim();
+
+/** Kalimat soal perlu dibacakan lengkap (Basic, atau soal dengar di jenjang mana pun)? */
+export const speaksFullPrompt = (
+  item: Pick<Item, 'prompt' | 'say'>,
+  tier: 'basic' | 'intermediate' | 'advanced',
+) => tier === 'basic' || isListeningItem(item);
+
+/** Yang diucapkan saat soal muncul: kalimat soal (Basic / soal dengar) atau perintah (kelas 1+). */
 export type SpokenPrompt = { kind: 'item'; text: string } | { kind: 'line'; key: string };
 export function spokenPrompt(
   item: Item,
   tier: 'basic' | 'intermediate' | 'advanced',
 ): SpokenPrompt {
-  return tier === 'basic'
+  return speaksFullPrompt(item, tier)
     ? { kind: 'item', text: item.say ?? item.prompt }
     : { kind: 'line', key: commandKey(item) };
 }

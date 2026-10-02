@@ -45,6 +45,8 @@ export const parents = pgTable(
     name: text('name').notNull(),
     familyCode: text('family_code').notNull().unique(),
     consentAt: timestamp('consent_at', { withTimezone: true }).notNull(),
+    /** Email sudah diverifikasi dengan kode (D-044). Null = belum boleh masuk. */
+    emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true }),
     active: boolean('active').notNull().default(true),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
@@ -380,4 +382,157 @@ export const commissionPayouts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [uniqueIndex('commission_month_owner_uq').on(t.month, t.ownerId)],
+);
+
+// ------------------------------------------------------------------ lomba live (D-042)
+
+/** Lomba serentak. Soal dibuat & dinilai di server; hasil diumumkan otomatis setelah selesai. */
+export const contests = pgTable(
+  'contests',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    title: text('title').notNull(),
+    description: text('description').notNull().default(''),
+    domain: text('domain').notNull(),
+    grade: text('grade').notNull(),
+    categories: jsonb('categories').notNull().default([]),
+    questionCount: integer('question_count').notNull(),
+    startsAt: timestamp('starts_at', { withTimezone: true }).notNull(),
+    endsAt: timestamp('ends_at', { withTimezone: true }).notNull(),
+    durationMinutes: integer('duration_minutes').notNull(),
+    winners: integer('winners').notNull().default(10),
+    published: boolean('published').notNull().default(false),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('contests_time_idx').on(t.startsAt, t.endsAt)],
+);
+
+/**
+ * Keikutsertaan anak (satu kali per lomba). `items` = soal lengkap DENGAN kunci jawaban — hanya di server.
+ * `flags` = catatan kejanggalan (mis. keluar dari halaman, jawaban terlalu cepat) untuk ditinjau admin.
+ */
+export const contestEntries = pgTable(
+  'contest_entries',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    contestId: uuid('contest_id')
+      .notNull()
+      .references(() => contests.id, { onDelete: 'cascade' }),
+    childId: uuid('child_id')
+      .notNull()
+      .references(() => children.id, { onDelete: 'cascade' }),
+    items: jsonb('items').notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
+    deadlineAt: timestamp('deadline_at', { withTimezone: true }).notNull(),
+    submittedAt: timestamp('submitted_at', { withTimezone: true }),
+    correct: integer('correct').notNull().default(0),
+    answered: integer('answered').notNull().default(0),
+    lastAnswerAt: timestamp('last_answer_at', { withTimezone: true }),
+    flags: jsonb('flags').notNull().default({}),
+    disqualified: boolean('disqualified').notNull().default(false),
+  },
+  (t) => [uniqueIndex('contest_entries_uq').on(t.contestId, t.childId)],
+);
+
+/** Jawaban per soal (sekali per soal; tidak bisa diubah setelah dikirim). */
+export const contestAnswers = pgTable(
+  'contest_answers',
+  {
+    entryId: uuid('entry_id')
+      .notNull()
+      .references(() => contestEntries.id, { onDelete: 'cascade' }),
+    index: integer('index').notNull(),
+    value: jsonb('value').notNull(),
+    correct: boolean('correct').notNull(),
+    answeredAt: timestamp('answered_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.entryId, t.index] })],
+);
+
+// ------------------------------------------------------------------ banner & galeri (D-042)
+
+/** Gambar yang diunggah admin (banner, galeri). Disimpan di PostgreSQL agar ikut backup. */
+export const media = pgTable('media', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  mime: text('mime').notNull(),
+  data: bytea('data').notNull(),
+  bytes: integer('bytes').notNull(),
+  createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** Banner slideshow (kegiatan, promosi, info) — tampil di landing / dasbor orang tua / admin. */
+export const banners = pgTable('banners', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  subtitle: text('subtitle').notNull().default(''),
+  ctaLabel: text('cta_label').notNull().default(''),
+  ctaUrl: text('cta_url').notNull().default(''),
+  imageId: uuid('image_id').references(() => media.id, { onDelete: 'set null' }),
+  tone: text('tone').notNull().default('grape'),
+  placements: jsonb('placements').notNull().default([]),
+  startsAt: timestamp('starts_at', { withTimezone: true }),
+  endsAt: timestamp('ends_at', { withTimezone: true }),
+  active: boolean('active').notNull().default(true),
+  sort: integer('sort').notNull().default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** Dokumentasi kegiatan di landing (foto + keterangan). */
+export const galleryItems = pgTable('gallery_items', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  caption: text('caption').notNull().default(''),
+  eventDate: text('event_date'),
+  imageId: uuid('image_id')
+    .notNull()
+    .references(() => media.id, { onDelete: 'cascade' }),
+  active: boolean('active').notNull().default(true),
+  sort: integer('sort').notNull().default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ------------------------------------------------------------------ email (D-044)
+
+/** Kode verifikasi email orang tua (6 digit, disimpan sebagai hash; berlaku 15 menit, maks 5 percobaan). */
+export const emailVerifications = pgTable(
+  'email_verifications',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    codeHash: text('code_hash').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    attempts: integer('attempts').notNull().default(0),
+    consumedAt: timestamp('consumed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('email_verifications_parent_idx').on(t.parentId, t.createdAt)],
+);
+
+/**
+ * Antrean email: ditulis dulu, lalu dikirim pekerja dengan percobaan ulang. Isi (html/text) dihapus setelah
+ * terkirim agar kode & data pribadi tidak menumpuk di database.
+ */
+export const emailOutbox = pgTable(
+  'email_outbox',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    toEmail: text('to_email').notNull(),
+    subject: text('subject').notNull(),
+    html: text('html'),
+    text: text('text'),
+    kind: text('kind').notNull(),
+    refId: text('ref_id'),
+    status: text('status').notNull().default('queued'),
+    attempts: integer('attempts').notNull().default(0),
+    lastError: text('last_error'),
+    nextAttemptAt: timestamp('next_attempt_at', { withTimezone: true }).notNull().defaultNow(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+  },
+  (t) => [index('email_outbox_status_idx').on(t.status, t.nextAttemptAt)],
 );

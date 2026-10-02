@@ -3,49 +3,51 @@
 Keputusan di luar atau yang mengubah PRD. Status: **Disetujui** (oleh pemilik produk) atau
 **Usulan** (default sementara dari Claude Code — perlu dikonfirmasi; boleh dibatalkan tanpa biaya besar).
 
-| ID    | Tanggal    | Keputusan                                            | Status              |
-| ----- | ---------- | ---------------------------------------------------- | ------------------- |
-| D-001 | 2026-09-28 | Backend: NestJS + PostgreSQL, menggantikan Supabase  | Disetujui           |
-| D-002 | 2026-09-28 | ORM: Drizzle + drizzle-kit                           | Usulan              |
-| D-003 | 2026-09-28 | Realtime: Socket.IO lewat `@nestjs/websockets`       | Usulan (dipakai M5) |
-| D-004 | 2026-09-28 | Login fasilitator: magic link buatan sendiri + JWT   | Usulan (dipakai M5) |
-| D-005 | 2026-09-28 | Versi dipin ke major stabil; React 18                | Usulan              |
-| D-006 | 2026-09-28 | Engine ESM dengan export condition `source`          | Usulan              |
-| D-007 | 2026-09-28 | Postgres lokal (Postgres.app), tanpa Docker          | Disetujui           |
-| D-008 | 2026-09-29 | Momo berhenti begitu sampai tujuan                   | Usulan              |
-| D-009 | 2026-09-29 | Hitungan kartu: `move n` = n kartu                   | Usulan              |
-| D-010 | 2026-09-29 | Bintang bertingkat (3 mensyaratkan 2)                | Usulan              |
-| D-011 | 2026-09-29 | Batas "4 jenis kartu" berlaku untuk palette/pilihan  | Usulan              |
-| D-012 | 2026-09-29 | Field grid tambahan: `puddles`, `goal.collectAll`    | Usulan              |
-| D-013 | 2026-09-29 | Solver: makro `repeat` berisi datar; `if` menyusul   | Usulan              |
-| D-014 | 2026-09-29 | Peran: admin, fasilitator, orang tua, anak           | Disetujui           |
-| D-015 | 2026-09-29 | Staf & orang tua login email + password              | Disetujui           |
-| D-016 | 2026-09-29 | Anak login: kode keluarga + profil + sandi gambar    | Disetujui           |
-| D-017 | 2026-09-29 | Admin kelola semua: skill, soal, level, user, lapor  | Disetujui           |
-| D-018 | 2026-09-29 | Katalog Pra-TK Matematika penuh, semua bisa dimain   | Disetujui           |
-| D-019 | 2026-09-29 | Generator berbasis "family" + ekspresi A10           | Usulan              |
-| D-020 | 2026-09-29 | Kategori B (kelas 3–4): 3 level, gaya OSN            | Diganti D-023       |
-| D-021 | 2026-09-30 | Ronde level 10 soal, skor ≥ 70 lulus, merah/hijau    | Disetujui           |
-| D-022 | 2026-09-30 | Profil anak + peringkat di kelas (posisi sendiri)    | Diganti D-024       |
-| D-023 | 2026-09-30 | Semua buku 10 level/topik; TK, Grade 1-2 baru        | Disetujui           |
-| D-024 | 2026-09-30 | Stopwatch tanpa batas + papan peringkat global       | Disetujui           |
-| D-025 | 2026-09-30 | Registrasi: wizard keluarga, daftar kelas, gabung    | Disetujui           |
-| D-026 | 2026-09-30 | Tampilan anak ringkas + materi topik + alur selesai  | Disetujui           |
-| D-027 | 2026-09-30 | URL level/topik buram + kunci level dicek server     | Disetujui           |
-| D-028 | 2026-09-30 | Ulang ronde = soal baru (tanpa kembar, sesuai level) | Disetujui           |
-| D-029 | 2026-09-30 | .env dimuat, backup/restore DB, umpan balik inline   | Disetujui           |
-| D-030 | 2026-09-30 | Semua data runtime dari DB; migrate/seed produksi    | Disetujui           |
-| D-031 | 2026-09-30 | Akses jaringan lokal (iPad) + panduan deploy         | Disetujui           |
-| D-032 | 2026-09-30 | Buku per kelas: Sains 1–4, Math 1–2 (1.560 level)    | Disetujui           |
-| D-033 | 2026-09-30 | Rak buku bergeser (10/halaman) + statistik realtime  | Disetujui           |
-| D-034 | 2026-09-30 | Sains Kindergarten (TK) + rak 9 buku/halaman         | Disetujui           |
-| D-035 | 2026-10-01 | Suara Momo: perintah & respons, Google Cloud TTS     | Disetujui           |
-| D-036 | 2026-10-01 | Paket berbayar, transfer manual, buku kas, komisi    | Disetujui           |
-| D-037 | 2026-10-01 | Anak daftar sendiri tanpa orang tua (tanpa email)    | Disetujui           |
-| D-038 | 2026-10-01 | Dasbor orang tua beranimasi + insight; landing harga | Disetujui           |
-| D-039 | 2026-10-01 | Sidebar bisa disembunyikan; laporan admin & guru     | Disetujui           |
-| D-040 | 2026-10-01 | Audit keamanan peran, email, rate limit, header      | Disetujui           |
-| D-041 | 2026-10-01 | Premium dari admin; status Free/Premium; direktori   | Disetujui           |
+| ID    | Tanggal    | Keputusan                                               | Status              |
+| ----- | ---------- | ------------------------------------------------------- | ------------------- |
+| D-001 | 2026-09-28 | Backend: NestJS + PostgreSQL, menggantikan Supabase     | Disetujui           |
+| D-002 | 2026-09-28 | ORM: Drizzle + drizzle-kit                              | Usulan              |
+| D-003 | 2026-09-28 | Realtime: Socket.IO lewat `@nestjs/websockets`          | Usulan (dipakai M5) |
+| D-004 | 2026-09-28 | Login fasilitator: magic link buatan sendiri + JWT      | Usulan (dipakai M5) |
+| D-005 | 2026-09-28 | Versi dipin ke major stabil; React 18                   | Usulan              |
+| D-006 | 2026-09-28 | Engine ESM dengan export condition `source`             | Usulan              |
+| D-007 | 2026-09-28 | Postgres lokal (Postgres.app), tanpa Docker             | Disetujui           |
+| D-008 | 2026-09-29 | Momo berhenti begitu sampai tujuan                      | Usulan              |
+| D-009 | 2026-09-29 | Hitungan kartu: `move n` = n kartu                      | Usulan              |
+| D-010 | 2026-09-29 | Bintang bertingkat (3 mensyaratkan 2)                   | Usulan              |
+| D-011 | 2026-09-29 | Batas "4 jenis kartu" berlaku untuk palette/pilihan     | Usulan              |
+| D-012 | 2026-09-29 | Field grid tambahan: `puddles`, `goal.collectAll`       | Usulan              |
+| D-013 | 2026-09-29 | Solver: makro `repeat` berisi datar; `if` menyusul      | Usulan              |
+| D-014 | 2026-09-29 | Peran: admin, fasilitator, orang tua, anak              | Disetujui           |
+| D-015 | 2026-09-29 | Staf & orang tua login email + password                 | Disetujui           |
+| D-016 | 2026-09-29 | Anak login: kode keluarga + profil + sandi gambar       | Disetujui           |
+| D-017 | 2026-09-29 | Admin kelola semua: skill, soal, level, user, lapor     | Disetujui           |
+| D-018 | 2026-09-29 | Katalog Pra-TK Matematika penuh, semua bisa dimain      | Disetujui           |
+| D-019 | 2026-09-29 | Generator berbasis "family" + ekspresi A10              | Usulan              |
+| D-020 | 2026-09-29 | Kategori B (kelas 3–4): 3 level, gaya OSN               | Diganti D-023       |
+| D-021 | 2026-09-30 | Ronde level 10 soal, skor ≥ 70 lulus, merah/hijau       | Disetujui           |
+| D-022 | 2026-09-30 | Profil anak + peringkat di kelas (posisi sendiri)       | Diganti D-024       |
+| D-023 | 2026-09-30 | Semua buku 10 level/topik; TK, Grade 1-2 baru           | Disetujui           |
+| D-024 | 2026-09-30 | Stopwatch tanpa batas + papan peringkat global          | Disetujui           |
+| D-025 | 2026-09-30 | Registrasi: wizard keluarga, daftar kelas, gabung       | Disetujui           |
+| D-026 | 2026-09-30 | Tampilan anak ringkas + materi topik + alur selesai     | Disetujui           |
+| D-027 | 2026-09-30 | URL level/topik buram + kunci level dicek server        | Disetujui           |
+| D-028 | 2026-09-30 | Ulang ronde = soal baru (tanpa kembar, sesuai level)    | Disetujui           |
+| D-029 | 2026-09-30 | .env dimuat, backup/restore DB, umpan balik inline      | Disetujui           |
+| D-030 | 2026-09-30 | Semua data runtime dari DB; migrate/seed produksi       | Disetujui           |
+| D-031 | 2026-09-30 | Akses jaringan lokal (iPad) + panduan deploy            | Disetujui           |
+| D-032 | 2026-09-30 | Buku per kelas: Sains 1–4, Math 1–2 (1.560 level)       | Disetujui           |
+| D-033 | 2026-09-30 | Rak buku bergeser (10/halaman) + statistik realtime     | Disetujui           |
+| D-034 | 2026-09-30 | Sains Kindergarten (TK) + rak 9 buku/halaman            | Disetujui           |
+| D-035 | 2026-10-01 | Suara Momo: perintah & respons, Google Cloud TTS        | Disetujui           |
+| D-036 | 2026-10-01 | Paket berbayar, transfer manual, buku kas, komisi       | Disetujui           |
+| D-037 | 2026-10-01 | Anak daftar sendiri tanpa orang tua (tanpa email)       | Disetujui           |
+| D-038 | 2026-10-01 | Dasbor orang tua beranimasi + insight; landing harga    | Disetujui           |
+| D-039 | 2026-10-01 | Sidebar bisa disembunyikan; laporan admin & guru        | Disetujui           |
+| D-040 | 2026-10-01 | Audit keamanan peran, email, rate limit, header         | Disetujui           |
+| D-041 | 2026-10-01 | Premium dari admin; status Free/Premium; direktori      | Disetujui           |
+| D-042 | 2026-10-02 | Peringkat rata-rata & per buku; jenjang; lomba; banner  | Disetujui           |
+| D-043 | 2026-10-02 | Mode total skor; masa paket; soal dengar; API key admin | Disetujui           |
 
 ## D-001 — NestJS + PostgreSQL menggantikan Supabase
 
@@ -727,3 +729,89 @@ sendiri — jadi premium untuk akses semua kelas, dan ini tidak masuk catatan ar
   - cari, filter status / jenis anak / akun aktif, urutan (terbaru, terlama, nama, terakhir aktif);
   - paging di server (10/20/50 per halaman); filter tersimpan di URL;
   - aksi lama tetap ada: laporan, ganti sandi gambar, aktif/nonaktif, atur password orang tua.
+
+## D-042 — Peringkat rata-rata & per buku, materi per jenjang, lomba live, banner & galeri
+
+Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk). Aturan rinci yang belum diatur PRD diisi
+default berikut (bisa diubah):
+
+- **Peringkat** (mengganti urutan total skor D-024):
+  - global = rata-rata skor semua ronde yang dikerjakan (0–100, 2 desimal, mis. 87,53 — sama dengan persen benar
+    dari semua soal); rata-rata sama → total waktu lebih cepat; lalu ronde lebih banyak. Posisi berurutan;
+  - peringkat per buku (MTK TK, MTK Grade 1, Sains Grade 3, …);
+  - Top 25 tampil seperti papan pengumuman (UN/OSN); detail Top 25 (rata-rata per buku & per topik) bisa dibuka
+    pengguna yang login. Peserta lainnya tetap tercantum di bawahnya dengan paging;
+  - yang terlihat hanya nama panggilan + warna Momo.
+- **Materi per jenjang** di area anak: pilih jenjang dulu (Pra-TK, TK, Kelas 1, Kelas 2, Kelas 1–2 (OSN), Kelas 3,
+  Kelas 4, Kelas 3–4 (OSN)), lalu buku di jenjang itu. Kelas 1 dan 2 tetap terpisah dari Kelas 1–2.
+- **Lomba live** (`contests`, migrasi 0009):
+  - admin membuat lomba per buku (opsional per topik), jumlah soal, jadwal mulai–selesai serentak, batas waktu per
+    peserta, dan jumlah pemenang;
+  - soal dibuat & dinilai **di server**: perangkat menerima soal tanpa kunci jawaban, pembahasan, atau label pengecoh
+    (`publicItem`);
+  - waktu dari jam server; satu kali ikut per anak; satu jawaban per soal; tidak ada umpan balik benar/salah selama
+    lomba; batas laju; kejanggalan (keluar halaman, menjawab terlalu cepat) dicatat untuk ditinjau admin, yang bisa
+    mendiskualifikasi;
+  - pemenang dihitung otomatis setelah waktu habis: benar terbanyak → waktu tercepat → selesai lebih dulu.
+- **Banner slideshow** (kegiatan, promosi, info) di landing, dasbor orang tua, dan admin — **tidak** di area anak.
+  **Galeri dokumentasi** di landing. Gambar diunggah admin (JPG/PNG/WEBP, dicek dari isi file) dan disimpan di
+  PostgreSQL (`media`), sehingga ikut backup.
+- **Detail penerapan (2026-10-02):**
+  - **Lomba:**
+    - id pilihan jawaban diacak dengan kunci rahasia di server, karena beberapa generator memakai id yang bisa
+      membocorkan jawaban;
+    - hitung mundur hanya di lomba — acara terpisah yang diikuti sukarela. Ini pengecualian dari larangan batas
+      waktu di level utama;
+    - warna tetap tenang (kuning di menit terakhir, tanpa merah) dan tanpa umpan balik benar/salah selama lomba;
+    - lomba terbuka untuk semua anak, tidak dibatasi paket;
+    - admin bisa mengunduh hasil (CSV).
+  - **Banner:** banner untuk orang tua/admin hanya diambil setelah login. Gambar disajikan lewat id acak (UUID).
+    Tautan tombol hanya `/…` (internal) atau `https://`.
+  - **Peringkat:** detail Top 25 bisa dibuka anak, orang tua, dan staf yang login. Anak selalu bisa melihat detail
+    dirinya sendiri.
+
+## D-043 — Papan peringkat 2 mode, masa paket, soal dengar dibacakan, API key suara dari admin
+
+Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Papan peringkat** punya pilihan urutan (tersimpan di perangkat), berlaku untuk papan global maupun per buku,
+  25 besar, dan detail:
+  - **Rata-rata** (D-042, bawaan);
+  - **Total skor** (seperti D-024): jumlah skor terbaik tiap level → level lulus terbanyak → waktu skor terbaik
+    tercepat.
+- **Masa paket berlangganan (30/90/… hari):**
+  - akhir masa aktif dihitung tepat (`entitlementEnd`); beli ulang paket yang sama memperpanjang dari akhir yang
+    masih berjalan;
+  - setelah habis, level di atas level gratis terkunci lagi, di perangkat (`paid`) dan di server (sync menolak);
+    template berbayar tidak dikirim lagi;
+  - **skor, riwayat ronde, level lulus, peringkat, dan laporan tetap tersimpan**; level 1–N tetap bisa dimainkan;
+  - beli lagi → terbuka kembali dengan progres lama;
+  - dasbor orang tua mengingatkan ≤ 7 hari sebelum berakhir dan setelah berakhir (≤ 30 hari).
+  - Diuji di `apps/api/test/subscription.e2e.test.ts`.
+- **Soal "dengar"** (mis. "Dengarkan, lalu tulis angkanya", yang isinya hanya ada di kalimat yang diucapkan):
+  - selalu dibacakan lengkap di semua jenjang (`isListeningItem`), tidak hanya perintahnya (memperbaiki D-035);
+  - suara Momo untuk kalimat itu juga boleh dibuat server.
+- **API key suara dari admin** (Admin → Suara Momo):
+  - disimpan terenkripsi AES-256-GCM (kunci turunan JWT_SECRET) di `app_settings.voice_key`, tidak pernah
+    dikirim balik (hanya 4 karakter terakhir);
+  - bisa diuji dan dihapus;
+  - urutan pemakaian: `.env` GOOGLE_TTS_API_KEY → kunci admin → suara browser.
+  - Memakai Google Cloud Text-to-Speech (model Gemini-TTS), bukan key Google AI Studio.
+
+## D-044 — Email: verifikasi pendaftaran & notifikasi transaksi
+
+Tanggal 2026-10-02 · Status **Disetujui** (permintaan pemilik produk). Panduan: [email.md](email.md).
+
+- **Pengirim:** Gmail SMTP `projectsudacoding@gmail.com` dengan App Password. Rahasia hanya ada di `.env` server,
+  tidak di DB dan tidak di UI.
+- **Verifikasi wajib:**
+  - orang tua yang baru daftar harus memasukkan kode 6 angka dari email sebelum bisa masuk;
+  - kode: TTL 15 menit, 5 percobaan, disimpan sebagai hash; jeda kirim ulang 60 detik;
+  - akun yang sudah ada sebelum fitur ini dianggap terverifikasi;
+  - admin bisa menandai terverifikasi secara manual.
+- **Transaksi:** pesanan dibuat, bukti diterima, dibayar, dan ditolak → email ke orang tua dan salinan ke
+  direksi (`MAIL_DIRECTOR`, bawaan `udacodingofficial@gmail.com`).
+- **Isi email:** hangat, profesional, ramah anak; footer **"Momo From Udakids"**. Tanpa data anak selain yang sudah
+  diketahui orang tua; tidak pernah berisi password atau sandi gambar.
+- **Antrean `email_outbox`** dengan percobaan ulang; isi dihapus setelah terkirim. Di dev tanpa SMTP, isi dicetak
+  di log.

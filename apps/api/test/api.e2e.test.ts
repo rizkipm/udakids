@@ -13,6 +13,7 @@ import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import * as schema from '../src/db/schema.js';
 import { seed } from '../scripts/seed.js';
+import { MAIL_TRANSPORT } from '../src/mail/mail.service.js';
 import { TTS_PROVIDER } from '../src/voice/tts.provider.js';
 import { configureApp } from '../src/common/app-setup.js';
 
@@ -60,7 +61,8 @@ if (!available) console.warn(`[api e2e] dilewati: Postgres test tidak tersedia d
 describe.skipIf(!available)('API end-to-end (Postgres)', () => {
   let app: INestApplication;
   let pool: Pool;
-  const http = () => request(app.getHttpServer());
+  let base = '';
+  const http = () => request(base);
   const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
   let adminToken = '';
 
@@ -86,9 +88,13 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(TTS_PROVIDER)
       .useValue(fakeTts)
+      .overrideProvider(MAIL_TRANSPORT)
+      .useValue(null)
       .compile();
     app = configureApp(moduleRef.createNestApplication<NestExpressApplication>());
-    await app.init();
+    // Port tetap di 127.0.0.1 (lihat e2e-setup.ts): mencegah request nyasar ke server test lain.
+    await app.listen(0, '127.0.0.1');
+    base = (await app.getUrl()).replace('[::1]', '127.0.0.1').replace('localhost', '127.0.0.1');
     const res = await http()
       .post('/auth/staff/login')
       .send({ email: 'admin@littlecoder.local', password: 'admin12345' })

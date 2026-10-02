@@ -9,6 +9,7 @@ import {
 import { api } from '../api/client';
 import type { CatalogResponse } from '../api/types';
 import { getSession } from '../auth/session';
+import { t, type MessageKey } from '../i18n';
 
 const KEY = 'lc.catalog';
 
@@ -101,3 +102,10 @@ export function firstOpen(
   }
   return undefined;
 }
+
+/** Label jenjang untuk anak (Pra-TK, TK, Kelas 1, …, Kelas 1–2 (OSN)). */
+export const gradeLabel = (g: string) => {
+  const key = `play.grade.${g}` as MessageKey;
+  const label = t(key);
+  return label === key ? g : label;
+};

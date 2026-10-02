@@ -83,7 +83,16 @@ VITE_FEATURE_VOICE=false
 # Suara Momo (opsional, D-035): API key Google Cloud Text-to-Speech (bukan Google AI Studio)
 GOOGLE_TTS_API_KEY=
 TTS_DAILY_LIMIT=3000
+# Email (D-044): langkah Gmail di docs/email.md
+SMTP_USER=projectsudacoding@gmail.com
+SMTP_PASS=<App Password 16 huruf>
+MAIL_FROM="Udakids <projectsudacoding@gmail.com>"
+MAIL_DIRECTOR=udacodingofficial@gmail.com
+APP_PUBLIC_URL=https://app.contoh.id
 ```
+
+> Email: tanpa `SMTP_PASS`, pendaftar baru tidak menerima kode verifikasi dan belum bisa masuk (admin bisa
+> menandai terverifikasi manual di Admin → Keluarga). Setelah API jalan, kirim email uji dari **Admin → Email**.
 
 Lalu build:
 

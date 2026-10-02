@@ -7,7 +7,8 @@ import { rememberFamilyCode, rememberedFamilyCode, useSession } from '../auth/se
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
 import { familySteps, Stepper } from '../site/AuthLayout';
-import { Button, Card, Empty, Notice, Spinner } from '../ui/ui';
+import { Button, Card, Empty, formatDate, Notice, Spinner } from '../ui/ui';
+import { BannerSlider } from '../components/BannerSlider';
 import { ClaimChild } from './ClaimChild';
 import { CountUp, Kpi } from '../ui/charts';
 import { ChildProgress, ProgressIcon, type OverviewChild } from './Progress';
@@ -107,6 +108,54 @@ function ChildActions({ child, onDeleted }: { child: OverviewChild; onDeleted: (
   );
 }
 
+type BillingLite = { entitlements: { name: string; endsAt: string | null }[] };
+
+/**
+ * Pengingat masa paket (D-043): berakhir ≤ 7 hari lagi, atau sudah berakhir dalam 30 hari terakhir dan
+ * tidak ada paket lain yang aktif. Progres anak tidak pernah hilang.
+ */
+export function expiryNotice(ents: BillingLite['entitlements'], now = Date.now()) {
+  const live = ents.filter((e) => !e.endsAt || Date.parse(e.endsAt) > now);
+  if (live.some((e) => e.endsAt === null)) return null;
+  const soon = live
+    .map((e) => ({ ...e, ms: Date.parse(e.endsAt!) - now }))
+    .filter((e) => e.ms <= 7 * 86_400_000)
+    .sort((a, b) => a.ms - b.ms)[0];
+  if (soon && live.every((e) => Date.parse(e.endsAt!) - now <= 7 * 86_400_000))
+    return {
+      kind: 'soon' as const,
+      name: soon.name,
+      days: Math.max(1, Math.ceil(soon.ms / 86_400_000)),
+    };
+  if (live.length === 0) {
+    const ended = ents
+      .filter((e) => e.endsAt && now - Date.parse(e.endsAt) < 30 * 86_400_000)
+      .sort((a, b) => Date.parse(b.endsAt!) - Date.parse(a.endsAt!))[0];
+    if (ended) return { kind: 'ended' as const, name: ended.name, date: ended.endsAt! };
+  }
+  return null;
+}
+
+function ExpiryNotice() {
+  const billing = useFetch<BillingLite>('parent', '/parent/billing');
+  const n = billing.data ? expiryNotice(billing.data.entitlements ?? []) : null;
+  if (!n) return null;
+  return (
+    <Notice tone={n.kind === 'soon' ? 'warning' : 'info'}>
+      <div className="pa-welcome">
+        <span>
+          {n.kind === 'soon'
+            ? t('parent.expiry.soon', { name: n.name, days: n.days })
+            : t('parent.expiry.ended', { name: n.name, date: formatDate(n.date) })}
+        </span>
+        <Link className="ui-btn ui-btn-primary" to="/orang-tua/paket">
+          {t('parent.expiry.renew')}
+        </Link>
+      </div>
+    </Notice>
+  );
+}
+
 /** Ringkasan minggu ini untuk seluruh keluarga. */
 function FamilyHero({ name, kids }: { name: string; kids: OverviewChild[] }) {
   const sum = (f: (c: OverviewChild) => number) => kids.reduce((a, c) => a + f(c), 0);
@@ -183,6 +232,9 @@ export function Dashboard() {
   return (
     <div className="pd">
       <FamilyHero name={session?.user.name ?? ''} kids={kids} />
+      {/* Banner setelah data utama dimuat: dasbor tetap jadi permintaan pertama. */}
+      {data && <BannerSlider placement="parent" />}
+      {data && <ExpiryNotice />}
 
       {state?.saved && !deleted && (
         <Notice tone="success">{t('parent.dash.saved', { name: state.saved })}</Notice>

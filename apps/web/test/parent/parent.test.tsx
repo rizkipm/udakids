@@ -106,6 +106,99 @@ describe('pendaftaran orang tua', () => {
   });
 });
 
+describe('verifikasi email (D-044)', () => {
+  const fill = () => {
+    fireEvent.change(screen.getByLabelText(t('parent.register.name')), {
+      target: { value: 'Ibu Sari' },
+    });
+    fireEvent.change(screen.getByLabelText(t('parent.register.email')), {
+      target: { value: 'sari@contoh.id' },
+    });
+    fireEvent.change(screen.getByLabelText(t('parent.register.password')), {
+      target: { value: 'rahasia123' },
+    });
+    fireEvent.change(screen.getByLabelText(t('parent.register.confirm')), {
+      target: { value: 'rahasia123' },
+    });
+    fireEvent.click(screen.getByLabelText(t('parent.consent.label')));
+  };
+
+  it('daftar → langkah kode; kode keliru menampilkan sisa percobaan; kode benar → profil anak', async () => {
+    let tries = 0;
+    fetchMock.mockImplementation((url: string, init: RequestInit) => {
+      if (url.endsWith('/auth/parent/register'))
+        return Promise.resolve(json({ verificationRequired: true, email: 'sari@contoh.id' }, 201));
+      if (url.endsWith('/auth/parent/verify')) {
+        const body = JSON.parse(init.body as string) as { code: string };
+        if (tries++ === 0 || body.code !== '123456')
+          return Promise.resolve(
+            json({ message: 'Kode belum cocok. Periksa lagi email Anda.', attemptsLeft: 4 }, 400),
+          );
+        return Promise.resolve(
+          json({
+            token,
+            user: { id: 'p1', role: 'parent', name: 'Ibu Sari' },
+            familyCode: 'ABC234',
+          }),
+        );
+      }
+      return Promise.resolve(json([]));
+    });
+    renderParent('/orang-tua/daftar');
+    fill();
+    fireEvent.click(screen.getByRole('button', { name: t('parent.register.submit') }));
+    const input = await screen.findByLabelText(t('parent.verify.code'), { exact: false });
+    expect(screen.getByText('sari@contoh.id')).toBeInTheDocument();
+    // Kirim ulang dikunci selama jeda.
+    expect(screen.getByRole('button', { name: /Kirim ulang dalam/ })).toBeDisabled();
+    expect(input).toHaveAttribute('autocomplete', 'one-time-code');
+    fireEvent.change(input, { target: { value: '12a345' } });
+    expect(input).toHaveValue('12345');
+    fireEvent.change(input, { target: { value: '000000' } });
+    fireEvent.click(screen.getByRole('button', { name: t('parent.verify.submit') }));
+    expect(await screen.findByText(/Sisa percobaan: 4/)).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText(t('parent.verify.code'), { exact: false }), {
+      target: { value: '123456' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: t('parent.verify.submit') }));
+    expect(
+      await screen.findByRole('heading', { name: t('parent.form.newTitle') }),
+    ).toBeInTheDocument();
+    expect(rememberedFamilyCode()).toBe('ABC234');
+  });
+
+  it('masuk sebelum verifikasi → diarahkan ke langkah kode', async () => {
+    fetchMock.mockImplementation(() =>
+      Promise.resolve(
+        json(
+          {
+            message: 'Email belum diverifikasi.',
+            code: 'EMAIL_NOT_VERIFIED',
+            email: 'sari@contoh.id',
+          },
+          403,
+        ),
+      ),
+    );
+    renderParent('/orang-tua/masuk');
+    fireEvent.change(screen.getByLabelText(t('parent.login.email'), { exact: false }), {
+      target: { value: 'sari@contoh.id' },
+    });
+    fireEvent.change(
+      screen.getByLabelText(new RegExp(`^${t('parent.login.password')}`), { selector: 'input' }),
+      {
+        target: { value: 'rahasia123' },
+      },
+    );
+    fireEvent.click(screen.getByRole('button', { name: t('parent.login.submit') }));
+    expect(
+      await screen.findByText(t('parent.verify.fromLogin'), { exact: false }),
+    ).toBeInTheDocument();
+    // Datang dari masuk: kode boleh langsung diminta ulang.
+    expect(screen.getByRole('button', { name: t('parent.verify.resend') })).toBeEnabled();
+  });
+});
+
 describe('formulir daftar: tanda wajib & lihat password', () => {
   it('semua isian wajib bertanda * dan required; password bisa ditampilkan/disembunyikan', () => {
     renderParent('/orang-tua/daftar');

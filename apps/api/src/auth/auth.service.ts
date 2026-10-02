@@ -1,5 +1,7 @@
 import {
+  BadRequestException,
   ConflictException,
+  ForbiddenException,
   Inject,
   Injectable,
   NotFoundException,
@@ -9,15 +11,33 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PIN_MAX_ATTEMPTS, pinLockMs, type Role, type SessionUser } from '@little-coder/engine';
-import { and, eq, isNull, sql } from 'drizzle-orm';
+import { randomInt } from 'node:crypto';
+import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import { uniqueEntryCode } from '../common/codes.js';
 import { TOKEN_TTL } from '../common/config.js';
 import { hashSecret, pinSecret, randomToken, verifySecret } from '../common/crypto.js';
 import { RateLimiter } from '../common/rate-limit.js';
 import { DB, type Db } from '../db/db.module.js';
-import { children, classes, parentContacts, parents, staffUsers } from '../db/schema.js';
+import {
+  children,
+  classes,
+  emailVerifications,
+  parentContacts,
+  parents,
+  staffUsers,
+} from '../db/schema.js';
+import { MailService } from '../mail/mail.service.js';
+import { verifyEmail, welcome } from '../mail/templates.js';
 
 export type AuthResult = { token: string; user: SessionUser };
+/** Pendaftaran berhasil tetapi email harus diverifikasi dulu (D-044). */
+export type VerificationPending = { verificationRequired: true; email: string };
+
+/** Verifikasi email wajib (bawaan). `EMAIL_VERIFICATION=off` hanya untuk test/dev. */
+export const verificationRequired = () => process.env.EMAIL_VERIFICATION !== 'off';
+const CODE_TTL_MIN = 15;
+const CODE_MAX_ATTEMPTS = 5;
+const RESEND_COOLDOWN_MS = 60_000;
 
 @Injectable()
 export class AuthService {
@@ -32,6 +52,7 @@ export class AuthService {
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly jwt: JwtService,
+    private readonly mail: MailService,
   ) {}
 
   private sign(user: SessionUser, ttl: string): Promise<string> {
@@ -67,14 +88,20 @@ export class AuthService {
   async parentRegister(
     input: { name: string; email: string; password: string },
     ip = 'unknown',
-  ): Promise<AuthResult & { familyCode: string }> {
+  ): Promise<(AuthResult & { familyCode: string }) | VerificationPending> {
     const ipKey = `signup:${ip}`;
     this.ipSignups.check(ipKey);
     const [exists] = await this.db
-      .select({ id: parents.id })
+      .select({ id: parents.id, name: parents.name, verified: parents.emailVerifiedAt })
       .from(parents)
       .where(sql`lower(${parents.email}) = ${input.email}`);
-    if (exists) throw new ConflictException('Email sudah terdaftar. Silakan masuk.');
+    if (exists && (exists.verified || !verificationRequired()))
+      throw new ConflictException('Email sudah terdaftar. Silakan masuk.');
+    // Sudah daftar tapi belum verifikasi → kirim kode baru (dengan jeda), tanpa membuat akun kedua.
+    if (exists) {
+      await this.sendCode({ id: exists.id, name: exists.name, email: input.email });
+      return { verificationRequired: true, email: input.email };
+    }
     const familyCode = await this.uniqueFamilyCode();
     const [row] = await this.db
       .insert(parents)
@@ -84,11 +111,16 @@ export class AuthService {
         passwordHash: await hashSecret(input.password),
         familyCode,
         consentAt: new Date(),
+        emailVerifiedAt: verificationRequired() ? null : new Date(),
       })
       .onConflictDoNothing()
       .returning();
     if (!row) throw new ConflictException('Email sudah terdaftar. Silakan masuk.');
     this.ipSignups.fail(ipKey);
+    if (verificationRequired()) {
+      await this.sendCode({ id: row.id, name: row.name, email: row.email }, true);
+      return { verificationRequired: true, email: row.email };
+    }
     const res = await this.issue(
       { id: row!.id, role: 'parent', name: row!.name },
       TOKEN_TTL.parent,
@@ -120,6 +152,127 @@ export class AuthService {
       throw new UnauthorizedException('Email atau password salah');
     }
     this.limiter.reset(key);
+    if (!row.emailVerifiedAt && verificationRequired()) {
+      throw new ForbiddenException({
+        message: 'Email belum diverifikasi. Masukkan kode yang kami kirim ke email Anda.',
+        code: 'EMAIL_NOT_VERIFIED',
+        email: row.email,
+      });
+    }
+    const res = await this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
+    return { ...res, familyCode: row.familyCode };
+  }
+
+  // ---------------------------------------------------------------- verifikasi email (D-044)
+
+  /** 10 percobaan kode / kirim ulang per 15 menit per email; per IP lebih longgar. */
+  readonly verifyLimiter = new RateLimiter(10, 15 * 60_000);
+  readonly resendLimiter = new RateLimiter(5, 60 * 60_000);
+
+  /** Buat kode 6 digit baru (kode lama tidak berlaku), simpan hash-nya, kirim lewat email. */
+  private async sendCode(p: { id: string; name: string; email: string }, fresh = false) {
+    const [last] = await this.db
+      .select({ createdAt: emailVerifications.createdAt })
+      .from(emailVerifications)
+      .where(eq(emailVerifications.parentId, p.id))
+      .orderBy(desc(emailVerifications.createdAt))
+      .limit(1);
+    if (!fresh && last && Date.now() - last.createdAt.getTime() < RESEND_COOLDOWN_MS) return false;
+    const code = String(randomInt(0, 1_000_000)).padStart(6, '0');
+    await this.db
+      .update(emailVerifications)
+      .set({ consumedAt: new Date() })
+      .where(and(eq(emailVerifications.parentId, p.id), isNull(emailVerifications.consumedAt)));
+    await this.db.insert(emailVerifications).values({
+      parentId: p.id,
+      codeHash: await hashSecret(`email:${p.id}:${code}`),
+      expiresAt: new Date(Date.now() + CODE_TTL_MIN * 60_000),
+    });
+    await this.mail.enqueue(
+      p.email,
+      verifyEmail(this.mail.ctx(), { name: p.name, code, minutes: CODE_TTL_MIN }),
+      {
+        kind: 'verify',
+        refId: p.id,
+      },
+    );
+    return true;
+  }
+
+  /** Kirim ulang kode. Selalu menjawab sama (tidak membocorkan apakah email terdaftar). */
+  async resendCode(email: string, ip = 'unknown') {
+    this.resendLimiter.check(`resend:${email}`);
+    this.resendLimiter.check(`resend-ip:${ip}`);
+    this.resendLimiter.fail(`resend:${email}`);
+    const [row] = await this.db
+      .select({
+        id: parents.id,
+        name: parents.name,
+        email: parents.email,
+        verified: parents.emailVerifiedAt,
+      })
+      .from(parents)
+      .where(and(sql`lower(${parents.email}) = ${email}`, eq(parents.active, true)));
+    if (row && !row.verified) await this.sendCode(row);
+    else this.resendLimiter.fail(`resend-ip:${ip}`);
+    return { ok: true, cooldownSeconds: RESEND_COOLDOWN_MS / 1000 };
+  }
+
+  /** Cocokkan kode → email terverifikasi → langsung masuk (token + kode keluarga). */
+  async verifyCode(
+    email: string,
+    code: string,
+    ip = 'unknown',
+  ): Promise<AuthResult & { familyCode: string }> {
+    const key = `verify:${email}`;
+    this.verifyLimiter.check(key);
+    this.ipFails.check(`ip:${ip}`);
+    const fail = (message: string, extra: Record<string, unknown> = {}): never => {
+      this.verifyLimiter.fail(key);
+      this.ipFails.fail(`ip:${ip}`);
+      throw new BadRequestException({ message, ...extra });
+    };
+    const [row] = await this.db
+      .select()
+      .from(parents)
+      .where(and(sql`lower(${parents.email}) = ${email}`, eq(parents.active, true)));
+    if (!row) return fail('Kode tidak cocok atau sudah kedaluwarsa.');
+    if (row.emailVerifiedAt)
+      throw new ConflictException('Email sudah terverifikasi. Silakan masuk.');
+    const [v] = await this.db
+      .select()
+      .from(emailVerifications)
+      .where(and(eq(emailVerifications.parentId, row.id), isNull(emailVerifications.consumedAt)))
+      .orderBy(desc(emailVerifications.createdAt))
+      .limit(1);
+    if (!v || v.expiresAt.getTime() < Date.now())
+      return fail('Kode sudah kedaluwarsa. Kirim kode baru, ya.', { expired: true });
+    if (v.attempts >= CODE_MAX_ATTEMPTS)
+      return fail('Terlalu banyak percobaan. Kirim kode baru, ya.', { expired: true });
+    if (!(await verifySecret(`email:${row.id}:${code}`, v.codeHash))) {
+      await this.db
+        .update(emailVerifications)
+        .set({ attempts: v.attempts + 1 })
+        .where(eq(emailVerifications.id, v.id));
+      return fail('Kode belum cocok. Periksa lagi email Anda.', {
+        attemptsLeft: Math.max(0, CODE_MAX_ATTEMPTS - v.attempts - 1),
+      });
+    }
+    const now = new Date();
+    await this.db
+      .update(emailVerifications)
+      .set({ consumedAt: now })
+      .where(eq(emailVerifications.id, v.id));
+    await this.db.update(parents).set({ emailVerifiedAt: now }).where(eq(parents.id, row.id));
+    this.verifyLimiter.reset(key);
+    await this.mail.enqueue(
+      row.email,
+      welcome(this.mail.ctx(), { name: row.name, familyCode: row.familyCode }),
+      {
+        kind: 'welcome',
+        refId: row.id,
+      },
+    );
     const res = await this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
     return { ...res, familyCode: row.familyCode };
   }

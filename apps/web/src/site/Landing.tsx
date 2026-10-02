@@ -8,6 +8,8 @@ import { BookSlider } from './BookSlider';
 import { Blocks, Cloud, Icon, ProgramCard, Star, type FeatureIcon } from './Decor';
 import { useLiveStats } from './liveStats';
 import { PricingSection } from './Pricing';
+import { BannerSlider } from '../components/BannerSlider';
+import { GallerySection, useHasGallery } from './GallerySection';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -39,6 +41,7 @@ const k = (s: string) => s as MessageKey;
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const hasGallery = useHasGallery();
   return (
     <header className="site-nav">
       <Link to="/" className="site-brand" aria-label={APP_NAME}>
@@ -71,6 +74,7 @@ export function SiteNav() {
         <a href="#cara">{t('site.nav.how')}</a>
         <a href="#pintu">{t('site.nav.doors')}</a>
         <a href="#harga">{t('site.nav.price')}</a>
+        {hasGallery && <a href="#galeri">{t('media.nav.gallery')}</a>}
         <a href="#aman">{t('site.nav.safe')}</a>
         <Link to="/orang-tua/masuk" className="site-btn ghost">
           {t('site.nav.parent')}
@@ -169,6 +173,8 @@ export function Landing() {
             </div>
           </div>
         </section>
+
+        <BannerSlider placement="landing" />
 
         <section id="pintu" className="site-section doors">
           <h2>{t('site.doors.title')}</h2>
@@ -303,6 +309,8 @@ export function Landing() {
             `${domain} ${grade}`
           }
         />
+
+        <GallerySection />
 
         <section id="aman" className="site-section safe">
           <h2>{t('site.safe.title')}</h2>

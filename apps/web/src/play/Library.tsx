@@ -1,31 +1,61 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FREE_ACCESS,
+  GRADES,
   levelStatuses,
   totalPoints,
   withAccess,
   type Color,
   type PlayStatus,
 } from '@little-coder/engine';
+import { speak } from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
-import { t } from '../i18n';
-import { bookKey, firstOpen, levelLabel, shelvesOf, useCatalog, type Shelf } from './catalog';
+import { t, type MessageKey } from '../i18n';
+import { ContestEntryCard } from './contest/ContestEntryCard';
+import {
+  bookKey,
+  firstOpen,
+  gradeLabel,
+  levelLabel,
+  shelvesOf,
+  useCatalog,
+  type Shelf,
+} from './catalog';
 import { CheckIcon, DoorIcon, LockIcon, PlayIcon, StatIcon, TrophyIcon } from './icons';
 import { SpeakButton } from './ItemPlayer';
 import { useLinks, type Links } from './links';
 import { useProgress } from './practiceStore';
 
 const BOOK_KEY = 'lc.library.book';
+const GRADE_KEY = 'lc.library.grade';
 
-function rememberedBook() {
+function remembered(key: string) {
   try {
-    return localStorage.getItem(BOOK_KEY) ?? '';
+    return localStorage.getItem(key) ?? '';
   } catch {
     return '';
   }
 }
+function remember(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* abaikan */
+  }
+}
+
+const gradeOrder = (g: string) => {
+  const i = GRADES.indexOf(g as (typeof GRADES)[number]);
+  return i < 0 ? GRADES.length : i;
+};
+/** Nama buku di dalam jenjang: cukup mata pelajarannya (Matematika, Sains), judul lengkap dibacakan. */
+const bookLabel = (b: { domain: string; title: string }) => {
+  const key = `play.domain.${b.domain}` as MessageKey;
+  const label = t(key);
+  return label === key ? b.title : label;
+};
 
 /**
  * Beranda anak (D-026). Satu layar = satu keputusan: tombol besar "Lanjut" ke level berikutnya,
@@ -36,10 +66,26 @@ export function Library({ momoColor }: { momoColor: Color }) {
   const progress = useProgress(session.user.id);
   const { data, failed } = useCatalog();
   const links = useLinks(data);
-  const [book, setBook] = useState(rememberedBook);
+  const [book, setBook] = useState(() => remembered(BOOK_KEY));
+  const [grade, setGrade] = useState(() => remembered(GRADE_KEY));
 
   const books = useMemo(() => data?.catalogs ?? [], [data]);
-  const activeBook = books.find((b) => bookKey(b) === book) ?? books[0];
+  // Jenjang yang punya buku, urut GRADES (Pra-TK, TK, Kelas 1, Kelas 2, Kelas 1–2 OSN, …).
+  const grades = useMemo<string[]>(
+    () => [...new Set(books.map((b) => b.grade))].sort((a, b) => gradeOrder(a) - gradeOrder(b)),
+    [books],
+  );
+  const savedBook = books.find((b) => bookKey(b) === book);
+  const gradeNav = useRef<HTMLElement>(null);
+  const activeGrade = grades.includes(grade) ? grade : (savedBook?.grade ?? grades[0]);
+  const gradeBooks = useMemo(
+    () => books.filter((b) => b.grade === activeGrade),
+    [books, activeGrade],
+  );
+  const activeBook =
+    gradeBooks.find((b) => bookKey(b) === book) ??
+    gradeBooks.find((b) => b.domain === savedBook?.domain) ??
+    gradeBooks[0];
   const shelves = useMemo(
     () =>
       data && activeBook
@@ -61,14 +107,30 @@ export function Library({ momoColor }: { momoColor: Color }) {
     [shelves, progress.quizzes, data?.access],
   );
   const next = firstOpen(shelves, statuses);
+  // Jenjang terpilih selalu terlihat di baris chip yang bisa digeser.
+  useEffect(() => {
+    const nav = gradeNav.current;
+    const on = nav?.querySelector<HTMLElement>('.grade-chip.is-on');
+    if (nav && on)
+      nav.scrollLeft = on.offsetLeft - nav.offsetLeft - (nav.clientWidth - on.clientWidth) / 2;
+  }, [activeGrade, grades.length]);
   const points = totalPoints(progress.quizzes);
 
-  const chooseBook = (key: string) => {
-    setBook(key);
-    try {
-      localStorage.setItem(BOOK_KEY, key);
-    } catch {
-      /* abaikan */
+  const chooseBook = (b: { domain: string; grade: string; title: string }) => {
+    speak(b.title);
+    setBook(bookKey(b));
+    remember(BOOK_KEY, bookKey(b));
+  };
+  const chooseGrade = (g: string) => {
+    speak(gradeLabel(g));
+    setGrade(g);
+    remember(GRADE_KEY, g);
+    // Tetap di mata pelajaran yang sama bila ada di jenjang baru (Math TK → Math Kelas 1).
+    const inGrade = books.filter((b) => b.grade === g);
+    const same = inGrade.find((b) => b.domain === activeBook?.domain) ?? inGrade[0];
+    if (same) {
+      setBook(bookKey(same));
+      remember(BOOK_KEY, bookKey(same));
     }
   };
 
@@ -125,6 +187,7 @@ export function Library({ momoColor }: { momoColor: Color }) {
     <main className="home">
       {top}
 
+      <ContestEntryCard />
       <section className="continue-card">
         <Momo color={momoColor} mood={next ? 'happy' : 'proud'} size={96} />
         <div className="continue-body">
@@ -154,23 +217,43 @@ export function Library({ momoColor }: { momoColor: Color }) {
         )}
       </section>
 
-      {books.length > 1 && (
-        <nav className="book-tabs" aria-label={t('play.library.books')}>
-          {books.map((b) => (
+      {grades.length > 1 && (
+        <nav ref={gradeNav} className="grade-chips" aria-label={t('play.library.grades')}>
+          {grades.map((g) => (
             <button
-              key={bookKey(b)}
+              key={g}
               type="button"
-              aria-pressed={activeBook && bookKey(b) === bookKey(activeBook)}
-              className={`book-tab${activeBook && bookKey(b) === bookKey(activeBook) ? ' is-on' : ''}`}
-              onClick={() => chooseBook(bookKey(b))}
+              aria-pressed={g === activeGrade}
+              className={`grade-chip${g === activeGrade ? ' is-on' : ''}${/^sd\d\d$/.test(g) ? ' is-osn' : ''}`}
+              onClick={() => chooseGrade(g)}
             >
-              {b.title}
+              {gradeLabel(g)}
             </button>
           ))}
         </nav>
       )}
 
-      <h2 className="home-h2">{t('play.home.topics')}</h2>
+      {gradeBooks.length > 1 && (
+        <nav className="book-tabs library-books" aria-label={t('play.library.books')}>
+          {gradeBooks.map((b) => (
+            <button
+              key={bookKey(b)}
+              type="button"
+              aria-pressed={activeBook && bookKey(b) === bookKey(activeBook)}
+              aria-label={b.title}
+              className={`book-tab${activeBook && bookKey(b) === bookKey(activeBook) ? ' is-on' : ''}`}
+              onClick={() => chooseBook(b)}
+            >
+              {bookLabel(b)}
+            </button>
+          ))}
+        </nav>
+      )}
+
+      <h2 className="home-h2">
+        {activeBook && grades.length > 1 ? `${activeBook.title} · ` : ''}
+        {t('play.home.topics')}
+      </h2>
       <ol className="topic-grid">
         {shelves.map((s, i) => (
           <li key={s.category.code}>

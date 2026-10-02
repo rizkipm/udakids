@@ -9,6 +9,7 @@ export default defineConfig({
   test: {
     include: ['test/**/*.test.ts'],
     // Test e2e memanggil login/daftar berkali-kali dari satu IP; batas per IP dilonggarkan.
-    env: { RATE_LIMIT_SCALE: '20' },
+    // Verifikasi email dimatikan untuk test lama; mail.e2e.test.ts menyalakannya sendiri (D-044).
+    env: { RATE_LIMIT_SCALE: '20', EMAIL_VERIFICATION: 'off', MAIL_WORKER: 'off' },
   },
 });

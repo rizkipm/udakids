@@ -1,0 +1,339 @@
+/* Lomba live di area anak (D-042): hangat, kontras tinggi, target ≥ 64 px, tanpa merah. */
+
+.contest-page {
+  max-width: 920px;
+  margin: 0 auto;
+}
+.contest-intro {
+  justify-content: center;
+  text-align: center;
+  margin: 8px 0 14px;
+}
+.contest-empty,
+.contest-rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.contest-rules h2,
+.contest-results-head h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.contest-rule-list {
+  list-style: none;
+  margin: 0;
+  padding: 16px 20px;
+  display: grid;
+  gap: 10px;
+  max-width: 560px;
+  text-align: left;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border: 4px solid var(--kid-line);
+  border-radius: 24px;
+  background: #fff;
+}
+.contest-rule-list li {
+  padding-left: 30px;
+  position: relative;
+}
+.contest-rule-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.35em;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--kid-sun);
+  border: 3px solid var(--kid-line);
+}
+.contest-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.contest-count strong {
+  font-size: 1.8rem;
+  color: var(--kid-primary);
+}
+
+/* daftar */
+.contest-section h2 {
+  font-size: 1.4rem;
+  margin: 18px 0 10px;
+}
+.contest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.contest-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 96px;
+  padding: 14px 18px;
+  border: 4px solid var(--kid-line);
+  border-radius: 24px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 5px 0 var(--kid-line);
+}
+.contest-card.is-live {
+  background: linear-gradient(120deg, #fff3d6, #efe7ff);
+}
+.contest-card:focus-visible {
+  outline: 5px solid var(--kid-sun);
+  outline-offset: 3px;
+}
+.contest-card-icon,
+.contest-entry-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--kid-soft);
+  border: 4px solid var(--kid-line);
+  color: var(--kid-line);
+}
+.contest-card-body,
+.contest-entry-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.contest-card-body strong,
+.contest-entry-body strong {
+  font-size: 1.3rem;
+}
+.contest-card-book,
+.contest-card-when,
+.contest-card-meta {
+  font-weight: 700;
+  color: #4a4560;
+}
+.contest-chip {
+  align-self: flex-start;
+  padding: 2px 12px;
+  border-radius: 999px;
+  border: 3px solid var(--kid-line);
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: #fff;
+}
+.contest-chip.is-live {
+  background: var(--kid-sun);
+}
+.contest-chip.is-ended {
+  background: var(--kid-soft);
+}
+.contest-card-action {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-height: var(--kid-touch);
+  padding: 0 18px;
+  border: 4px solid var(--kid-line);
+  border-radius: 20px;
+  background: var(--kid-primary);
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  max-width: 220px;
+}
+.contest-card.is-upcoming .contest-card-action {
+  background: #fff;
+  color: var(--kid-primary);
+}
+
+/* kartu di beranda */
+.contest-entry {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  border: 4px solid var(--kid-line);
+  border-radius: 28px;
+  background: linear-gradient(120deg, #fff3d6, #ffe7b0);
+  box-shadow: 0 6px 0 var(--kid-line);
+}
+.contest-entry.is-live {
+  background: linear-gradient(120deg, #ffe08a, #ffd1f0);
+}
+.contest-entry-kicker {
+  font-weight: 800;
+  color: var(--kid-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+}
+.contest-entry-status {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+.contest-entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* mengerjakan */
+.contest-run {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.contest-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.contest-bar .quiz-dots {
+  justify-content: flex-start;
+  flex: 1;
+}
+.contest-run .quiz-dot.is-done {
+  background: var(--kid-primary);
+}
+.contest-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 16px;
+  border: 4px solid var(--kid-line);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.contest-clock.is-soon {
+  background: var(--kid-sun);
+}
+.contest-progress {
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.contest-trouble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 4px dashed var(--kid-line);
+  border-radius: 20px;
+  background: #fff3d6;
+  font-weight: 700;
+  text-align: center;
+}
+.contest-actions {
+  margin-top: 10px;
+}
+
+/* hasil */
+.contest-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.contest-results-head {
+  text-align: center;
+}
+.contest-rank {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: min(100%, 620px);
+  display: grid;
+  gap: 8px;
+}
+.contest-rank.is-mine {
+  margin-top: 10px;
+}
+.contest-rank-row {
+  display: grid;
+  grid-template-columns: 48px 48px 1fr auto;
+  grid-template-areas: 'pos momo name score' 'pos momo time time';
+  align-items: center;
+  column-gap: 10px;
+  padding: 8px 14px;
+  border: 3px solid var(--kid-line);
+  border-radius: 18px;
+  background: #fff;
+  font-weight: 700;
+}
+.contest-rank-row > .contest-rank-pos {
+  grid-area: pos;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--kid-soft);
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+.contest-rank-row > svg {
+  grid-area: momo;
+}
+.contest-rank-row > strong {
+  grid-area: name;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contest-rank-row > span:nth-of-type(2) {
+  grid-area: score;
+}
+.contest-rank-row > .contest-rank-time {
+  grid-area: time;
+  color: #4a4560;
+  font-size: 0.95rem;
+}
+.contest-rank-row.is-me {
+  border-color: var(--kid-primary);
+  background: #efe7ff;
+}
+
+@media (max-width: 640px) {
+  .contest-card,
+  .contest-entry {
+    flex-direction: column;
+    text-align: center;
+  }
+  .contest-chip {
+    align-self: center;
+  }
+  .contest-card-action,
+  .contest-entry-actions,
+  .contest-entry-actions .big-play {
+    width: 100%;
+    max-width: none;
+  }
+  .contest-entry-actions {
+    justify-content: center;
+  }
+}

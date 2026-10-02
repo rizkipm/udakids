@@ -27,6 +27,7 @@ const family = (i: number, plan: PlanStatus = free): FamilyRow => ({
   familyCode: 'ABC234',
   active: true,
   consentAt: '2026-09-01T00:00:00Z',
+  emailVerifiedAt: '2026-09-01T00:00:00Z',
   createdAt: '2026-09-01T00:00:00Z',
   lastActiveAt: null,
   plan,

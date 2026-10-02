@@ -25,6 +25,8 @@ export type FamilyRow = {
   familyCode: string;
   active: boolean;
   consentAt: string | null;
+  /** Null = email belum diverifikasi (D-044). */
+  emailVerifiedAt: string | null;
   createdAt: string | null;
   lastActiveAt: string | null;
   /** Paket yang dibeli keluarga (berlaku untuk semua anak). */

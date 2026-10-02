@@ -1,0 +1,273 @@
+/* Slideshow banner (D-042): landing, dasbor orang tua, dasbor admin. Tidak dipakai di /play. */
+.bnr {
+  --bnr-radius: 24px;
+  --bnr-ink: #1d1a2e;
+  position: relative;
+  margin: 16px 0 24px;
+  font-family: inherit;
+}
+.bnr-at-landing {
+  max-width: 1200px;
+  margin: 8px auto 0;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+.bnr-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: var(--bnr-radius);
+  overscroll-behavior-x: contain;
+}
+.bnr-track::-webkit-scrollbar {
+  display: none;
+}
+.bnr-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.bnr-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(200px, 26vw, 300px);
+  height: 100%;
+  padding: clamp(20px, 4vw, 44px);
+  border-radius: var(--bnr-radius);
+  overflow: hidden;
+  color: #fff;
+  background: var(--bnr-bg);
+  isolation: isolate;
+}
+.bnr-at-landing .bnr-card {
+  border: 3px solid var(--bnr-ink);
+}
+.bnr-tone-grape {
+  --bnr-bg: #5b3fd6;
+}
+.bnr-tone-sky {
+  --bnr-bg: #1f6fd1;
+}
+.bnr-tone-coral {
+  --bnr-bg: #c4472b;
+}
+.bnr-tone-leaf {
+  --bnr-bg: #23784a;
+}
+.bnr-tone-teal {
+  --bnr-bg: #0f7666;
+}
+.bnr-tone-sun {
+  --bnr-bg: #f7c948;
+  color: var(--bnr-ink);
+}
+
+.bnr-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+/* Gradasi gelap agar teks di atas foto tetap terbaca (kontras tinggi). */
+.bnr-card.has-image {
+  color: #fff;
+}
+.bnr-card.has-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(16, 12, 32, 0.82) 0%,
+    rgba(16, 12, 32, 0.6) 45%,
+    rgba(16, 12, 32, 0.08) 100%
+  );
+}
+.bnr-card.has-image .bnr-deco {
+  display: none;
+}
+
+.bnr-text {
+  position: relative;
+  max-width: min(620px, 64%);
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.bnr-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.2vw, 2.2rem);
+  line-height: 1.15;
+  font-weight: 900;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+.bnr-sub {
+  margin: 0;
+  font-size: clamp(0.98rem, 1.6vw, 1.15rem);
+  line-height: 1.45;
+  color: inherit;
+  opacity: 0.95;
+  overflow-wrap: anywhere;
+}
+.bnr-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  margin-top: 6px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bnr-ink);
+  font-weight: 800;
+  text-decoration: none;
+  border: 3px solid var(--bnr-ink);
+  box-shadow: 0 4px 0 var(--bnr-ink);
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s;
+}
+.bnr-tone-sun:not(.has-image) .bnr-cta {
+  background: var(--bnr-ink);
+  color: #fff;
+  border-color: var(--bnr-ink);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+.bnr-cta:hover {
+  transform: translateY(-2px);
+}
+.bnr-cta:focus-visible,
+.bnr-btn:focus-visible,
+.bnr-dot:focus-visible {
+  outline: 4px solid #f7c948;
+  outline-offset: 3px;
+}
+.bnr-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.bnr-deco {
+  position: absolute;
+  right: clamp(12px, 5vw, 64px);
+  top: 50%;
+  width: clamp(110px, 20vw, 220px);
+  height: auto;
+  transform: translateY(-50%);
+  fill: currentColor;
+  opacity: 0.16;
+  z-index: -1;
+}
+
+.bnr-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.bnr-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid #1d1a2e;
+  background: #fff;
+  color: #1d1a2e;
+  cursor: pointer;
+}
+.bnr-btn:hover {
+  background: #efe7ff;
+}
+.bnr-dots {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+/* Titik kecil terlihat, area ketuk tetap 32px. */
+.bnr-dot {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.bnr-dot::after {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 2px solid #1d1a2e;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s;
+}
+.bnr-dot.is-on::after {
+  width: 26px;
+  background: #5b3fd6;
+}
+
+/* Dasbor (orang tua/admin): lebih ringkas agar data utama tetap terlihat. */
+.bnr-at-parent .bnr-card,
+.bnr-at-admin .bnr-card {
+  min-height: 176px;
+  padding: clamp(18px, 3vw, 32px);
+}
+.bnr-at-parent .bnr-title,
+.bnr-at-admin .bnr-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+}
+.bnr-at-parent .bnr-sub,
+.bnr-at-admin .bnr-sub {
+  font-size: 1rem;
+}
+.bnr-at-parent .bnr-controls,
+.bnr-at-admin .bnr-controls {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .bnr-card {
+    min-height: 180px;
+    align-items: flex-end;
+  }
+  .bnr-text {
+    max-width: 100%;
+  }
+  .bnr-card.has-image::before {
+    background: linear-gradient(0deg, rgba(16, 12, 32, 0.85) 0%, rgba(16, 12, 32, 0.25) 100%);
+  }
+  .bnr-deco {
+    top: 18px;
+    transform: none;
+    width: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bnr-track {
+    scroll-behavior: auto;
+  }
+  .bnr-cta,
+  .bnr-dot::after {
+    transition: none;
+  }
+}
