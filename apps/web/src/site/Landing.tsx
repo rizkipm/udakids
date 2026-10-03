@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { GRADES } from '@little-coder/engine';
 import { api } from '../api/client';
 import { Link } from 'react-router-dom';
 import { Momo } from '../components/Momo';
@@ -39,6 +40,22 @@ function usePublicBooks() {
 }
 
 const k = (s: string) => s as MessageKey;
+
+/**
+ * "Dari Pra-TK sampai SMP": rentang jenjang dihitung dari buku yang benar-benar ada di database (urut GRADES),
+ * jadi otomatis ikut berubah saat buku baru ditambahkan. Sebelum data termuat: teks bawaan.
+ */
+export function gradeSpan(books: { grade: string }[] | undefined): string {
+  const order = (g: string) => GRADES.indexOf(g as (typeof GRADES)[number]);
+  const known = (books ?? []).map((b) => b.grade).filter((g) => order(g) >= 0);
+  if (known.length === 0) return t('site.hero.kicker');
+  known.sort((a, b) => order(a) - order(b));
+  const from = t(k(`site.span.${known[0]}`));
+  const to = t(k(`site.span.${known[known.length - 1]}`));
+  return from === to
+    ? t('site.hero.kickerOne', { grade: from })
+    : t('site.hero.kickerSpan', { from, to });
+}
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -100,7 +117,7 @@ export function Landing() {
         <section className="hero">
           <div className="hero-text">
             <p className="hero-kicker">
-              <Star size={22} /> {t('site.hero.kicker')}
+              <Star size={22} /> {gradeSpan(shelf?.books)}
             </p>
             <h1>
               {t('site.hero.title1')} <span className="hl">{t('site.hero.title2')}</span>
