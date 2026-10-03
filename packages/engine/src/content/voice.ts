@@ -61,6 +61,14 @@ export const scoreKey = (score: number) =>
 export const isListeningItem = (item: Pick<Item, 'prompt' | 'say'>) =>
   !!item.say && item.say.trim() !== item.prompt.trim();
 
+/**
+ * Soal yang isinya HANYA ada di suara (mis. "Ketuk angka yang kamu dengar." → diucapkan "Ketuk angka dua.").
+ * Layar soal selalu menyediakan petunjuk tertulis untuk dibacakan orang dewasa (D-047), supaya anak tidak
+ * buntu bila suara perangkat tidak keluar.
+ */
+export const isAudioOnlyItem = (item: Pick<Item, 'prompt' | 'say'>) =>
+  isListeningItem(item) && /\bdengar/i.test(item.prompt);
+
 /** Kalimat soal perlu dibacakan lengkap (Basic, atau soal dengar di jenjang mana pun)? */
 export const speaksFullPrompt = (
   item: Pick<Item, 'prompt' | 'say'>,

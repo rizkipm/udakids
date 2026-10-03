@@ -11,29 +11,39 @@ import type { CatalogResponse } from '../api/types';
 import { getSession } from '../auth/session';
 import { t, type MessageKey } from '../i18n';
 
-const KEY = 'lc.catalog';
+/**
+ * Salinan katalog di perangkat PER ANAK (D-047). Katalog membawa hak akses (`access`) dan isi template
+ * level berbayar milik anak itu — kalau dipakai bersama, adik (Free) di perangkat yang sama akan
+ * memakai katalog kakaknya (Premium) dan level berbayar ikut terbuka.
+ */
+const LEGACY_KEY = 'lc.catalog';
+const keyFor = (childId: string) => `lc.catalog.${childId}`;
 
-function cached(): CatalogResponse | undefined {
+function cached(childId: string | undefined): CatalogResponse | undefined {
+  if (!childId) return undefined;
   try {
-    const raw = localStorage.getItem(KEY);
+    // Salinan lama yang dipakai bersama tidak pernah dibaca lagi.
+    localStorage.removeItem(LEGACY_KEY);
+    const raw = localStorage.getItem(keyFor(childId));
     return raw ? (JSON.parse(raw) as CatalogResponse) : undefined;
   } catch {
     return undefined;
   }
 }
 
-/** Katalog Pustaka: tampilkan salinan di perangkat dulu (offline), lalu perbarui dari server. */
+/** Katalog Pustaka: tampilkan salinan anak ini di perangkat dulu (offline), lalu perbarui dari server. */
 export function useCatalog() {
-  const [data, setData] = useState<CatalogResponse | undefined>(cached);
+  const childId = getSession('child')?.user.id;
+  const [data, setData] = useState<CatalogResponse | undefined>(() => cached(childId));
   const [failed, setFailed] = useState(false);
   useEffect(() => {
-    const token = getSession('child')?.token;
-    if (!token) return;
-    api<CatalogResponse>('/catalog', { token })
+    const session = getSession('child');
+    if (!session?.token) return;
+    api<CatalogResponse>('/catalog', { token: session.token })
       .then((res) => {
         setData(res);
         try {
-          localStorage.setItem(KEY, JSON.stringify(res));
+          localStorage.setItem(keyFor(session.user.id), JSON.stringify(res));
         } catch {
           /* abaikan */
         }

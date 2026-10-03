@@ -27,7 +27,15 @@ import {
   type Item,
   type Visual,
 } from '@little-coder/engine';
-import { prefetchItemVoice, speakItem, speakLine } from '../audio/speech';
+import {
+  audioReady,
+  prefetchItemVoice,
+  speak,
+  speakItem,
+  speakLine,
+  speechAvailable,
+  unlockNow,
+} from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo, type MomoMood } from '../components/Momo';
 import { VisualView } from '../components/visuals';
@@ -35,6 +43,8 @@ import { t, type MessageKey } from '../i18n';
 import { levelLabel, shelvesOf, useCatalog } from './catalog';
 import { useLinks } from './links';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
+import { PlayIcon } from './icons';
+import { PremiumNotice, premiumSay } from './PremiumNotice';
 import { loadProgress, newId, stateOf, updateProgress, useProgress } from './practiceStore';
 import { flushPractice } from './sync';
 import { useStopwatch } from './useStopwatch';
@@ -100,7 +110,10 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const navigate = useNavigate();
   const correctSoFar = history.filter(Boolean).length;
   // Stopwatch berjalan hanya saat soal dikerjakan (tanpa batas waktu, D-024).
-  const watch = useStopwatch(phase.name === 'question' && !confirmQuit);
+  // Soal dibuka langsung (URL / muat ulang / aplikasi baru dibuka): browser menolak suara sampai ada ketukan.
+  // Tampilkan tombol "Mulai" dulu agar soal pertama pasti terdengar (D-047).
+  const [gate, setGate] = useState(() => speechAvailable() && !audioReady());
+  const watch = useStopwatch(phase.name === 'question' && !confirmQuit && !gate);
 
   // Katalog dimuat dua kali (cache perangkat lalu server) dengan objek baru: soal hanya dibuat ulang
   // bila id/versi skill berubah, supaya ketukan anak tidak hilang saat katalog diperbarui.
@@ -127,9 +140,11 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const paid = status === 'paid';
   const locked = status === 'locked' || paid;
   const basic = skill?.tier === 'basic';
+  const access = data?.access ?? FREE_ACCESS;
   useEffect(() => {
-    if (paid) speakLine(RESULT_KEYS.paid, t('play.quiz.paid'));
+    if (paid) speak(premiumSay(access));
     else if (locked) speakLine(RESULT_KEYS.locked, t('play.quiz.locked', { pass: PASS_SCORE }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locked, paid]);
   // Basic: siapkan suara Momo untuk soal berikutnya agar langsung terdengar.
   const upcoming = round?.[index + 1];
@@ -161,9 +176,13 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     return (
       <main className="kid-screen">
         <Momo color={momoColor} mood="curious" size={140} />
-        <p className="kid-note">
-          {paid ? t('play.quiz.paid') : t('play.quiz.locked', { pass: PASS_SCORE })}
-        </p>
+        {paid ? (
+          <PremiumNotice access={access} />
+        ) : (
+          <p className="kid-alert is-compact" role="note">
+            {t('play.quiz.locked', { pass: PASS_SCORE })}
+          </p>
+        )}
         <Link className="kid-btn" to={links.topic(skill)}>
           {t('play.quiz.backTopic')}
         </Link>
@@ -436,14 +455,34 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
           </div>
         </div>
       )}
-      <ItemPlayer
-        key={`${seedBase}-${index}`}
-        item={item}
-        tier={skill.tier}
-        onAnswer={onAnswer}
-        disabled={phase.name !== 'question'}
-        showAnswer={phase.name === 'feedback' && !phase.correct}
-      />
+      {gate ? (
+        <section className="start-gate">
+          <Momo color={momoColor} mood="happy" size={130} />
+          <h2>{t('play.start.title')}</h2>
+          <p className="kid-note">{t('play.start.say')}</p>
+          <button
+            type="button"
+            className="kid-btn"
+            autoFocus
+            onClick={() => {
+              unlockNow();
+              setGate(false);
+            }}
+          >
+            <PlayIcon />
+            {t('play.start.button')}
+          </button>
+        </section>
+      ) : (
+        <ItemPlayer
+          key={`${seedBase}-${index}`}
+          item={item}
+          tier={skill.tier}
+          onAnswer={onAnswer}
+          disabled={phase.name !== 'question'}
+          showAnswer={phase.name === 'feedback' && !phase.correct}
+        />
+      )}
       {phase.name === 'feedback' && (
         <Feedback
           correct={phase.correct}

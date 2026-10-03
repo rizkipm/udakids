@@ -144,6 +144,9 @@ describe.skipIf(!hasDb)('paket berlangganan: masa berlaku & kedaluwarsa', () => 
 
     const cat = await http().get('/catalog').set(auth(childToken)).expect(200);
     expect(cat.body.access.all).toBe(false);
+    // Pesan anak "masa paket berakhir" (D-046); anak keluarga → tanpa noParent.
+    expect(cat.body.access.expired).toBe(true);
+    expect(cat.body.access.noParent).toBeUndefined();
     expect(cat.body.skills.find((s: { id: string }) => s.id === ids[4]).stub).toBe(true);
     // Level 5 (berbayar) ditolak; level 1 (gratis) tetap bisa.
     const sync = await http()
@@ -179,6 +182,13 @@ describe.skipIf(!hasDb)('paket berlangganan: masa berlaku & kedaluwarsa', () => 
     expect(cat.body.access.all).toBe(true);
     const state = await ctx.http().get('/practice/state').set(ctx.auth(childToken)).expect(200);
     expect(state.body.quizzes[ids[3]!].passed).toBe(true);
+  });
+
+  it('anak daftar sendiri (tanpa orang tua) → access.noParent untuk pesan "minta orang tua daftar" (D-046)', async () => {
+    const kid = await ctx.newChild('Mandiri');
+    const cat = await ctx.http().get('/catalog').set(ctx.auth(kid.token)).expect(200);
+    expect(cat.body.access).toMatchObject({ paywall: true, all: false, noParent: true });
+    expect(cat.body.access.expired).toBeUndefined();
   });
 
   it('API key suara dari admin (D-043): terenkripsi, tidak pernah dikirim balik, kosong → suara browser', async () => {

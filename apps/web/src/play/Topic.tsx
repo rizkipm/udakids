@@ -5,7 +5,6 @@ import {
   FREE_ACCESS,
   generateItem,
   levelStatuses,
-  RESULT_KEYS,
   withAccess,
   PASS_SCORE,
   QUIZ_LENGTH,
@@ -14,7 +13,7 @@ import {
   type PlayStatus,
   type SkillTemplate,
 } from '@little-coder/engine';
-import { speakLine } from '../audio/speech';
+import { speak } from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
@@ -22,6 +21,7 @@ import { bookKey, levelLabel, shelvesOf, useCatalog } from './catalog';
 import { CheckIcon, LockIcon, PlayIcon, StatIcon } from './icons';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
 import { useLinks } from './links';
+import { PremiumNotice } from './PremiumNotice';
 import { useProgress } from './practiceStore';
 import { PageHead } from './Profile';
 
@@ -127,8 +127,12 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
             })}
           </p>
         </div>
-        {locked && <p className="kid-note">{t('play.library.lockedCat')}</p>}
-        {paidNext && <p className="kid-note">{t('play.quiz.paid')}</p>}
+        {locked && (
+          <p className="kid-alert is-compact" role="note">
+            {t('play.library.lockedCat')}
+          </p>
+        )}
+        {paidNext && <PremiumNotice access={data.access ?? FREE_ACCESS} />}
         <ol className="level-path">
           {shelf.skills.map((k, i) => (
             <li key={k.id}>
@@ -261,7 +265,7 @@ function LevelCard({
         type="button"
         className="level-card is-locked is-paid"
         aria-label={`${label}, ${t('play.library.paid')}`}
-        onClick={() => speakLine(RESULT_KEYS.paid, t('play.quiz.paid'))}
+        onClick={() => speak(t('play.quiz.paid'))}
       >
         {body}
       </button>

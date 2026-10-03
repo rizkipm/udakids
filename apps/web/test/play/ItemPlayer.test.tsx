@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import {
   generateItem,
@@ -6,6 +6,7 @@ import {
   type FamilyName,
   type Item,
 } from '@little-coder/engine';
+import { SPEECH_BLOCKED, SPEECH_TROUBLE } from '../../src/audio/speech';
 import { ItemPlayer } from '../../src/play/ItemPlayer';
 
 const tpl = (family: FamilyName, params: Record<string, unknown> = {}) =>
@@ -179,5 +180,92 @@ describe('isian angka (kelas 3+)', () => {
     ['9', 'Hapus satu angka', '1', 'Koma', '5'].forEach(key);
     fireEvent.click(check());
     expect(onAnswer).toHaveBeenCalledWith(expect.objectContaining({ correct: true, value: 1.5 }));
+  });
+
+  it('suara tidak keluar di perangkat → kotak bantuan dengan kalimat soal untuk dibacakan (D-046)', () => {
+    const base = item('count');
+    // Soal "dengar": isi soal hanya ada di kalimat yang diucapkan.
+    const listening: Item = {
+      ...base,
+      prompt: 'Dengarkan, lalu pilih jawabannya',
+      say: 'Tujuh belas',
+    };
+    // Mesin suara yang berfungsi normal (dipasang langsung di window); kegagalan disimulasikan lewat event.
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        speaking: false,
+        pending: false,
+        paused: false,
+        cancel: () => {},
+        resume: () => {},
+        getVoices: () => [],
+        speak: (u: { onstart?: () => void; onend?: () => void }) => {
+          u.onstart?.();
+          u.onend?.();
+        },
+      },
+    });
+    vi.stubGlobal(
+      'SpeechSynthesisUtterance',
+      class {
+        constructor(readonly text: string) {}
+      },
+    );
+    const { container, rerender } = render(<ItemPlayer item={listening} />);
+    expect(container.querySelector('.speech-help')).toBeNull();
+    act(() => {
+      window.dispatchEvent(new CustomEvent(SPEECH_TROUBLE, { detail: { text: 'Tujuh belas' } }));
+    });
+    const help = container.querySelector('.speech-help')!;
+    expect(help.textContent).toContain('Suara belum terdengar');
+    expect(help.querySelector('q')?.textContent).toBe('Tujuh belas');
+    // Soal berikutnya: bantuan disembunyikan lagi sampai suara gagal lagi.
+    rerender(<ItemPlayer item={{ ...listening, say: 'Delapan' }} />);
+    expect(container.querySelector('.speech-help')).toBeNull();
+    delete (window as unknown as Record<string, unknown>).speechSynthesis;
+    vi.unstubAllGlobals();
+  });
+
+  it('soal hanya lewat suara: tombol "Lihat petunjuk" menampilkan kalimat soal; suara diblokir → minta ketuk speaker (D-047)', () => {
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        speaking: false,
+        pending: false,
+        paused: false,
+        cancel: () => {},
+        resume: () => {},
+        getVoices: () => [],
+        speak: (u: { onstart?: () => void; onend?: () => void }) => {
+          u.onstart?.();
+          u.onend?.();
+        },
+      },
+    });
+    vi.stubGlobal(
+      'SpeechSynthesisUtterance',
+      class {
+        constructor(readonly text: string) {}
+      },
+    );
+    const it = {
+      ...item('count'),
+      prompt: 'Ketuk angka yang kamu dengar.',
+      say: 'Ketuk angka dua.',
+    };
+    const { container } = render(<ItemPlayer item={it} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Tidak terdengar? Lihat petunjuk' }));
+    expect(container.querySelector('.speech-help q')?.textContent).toBe('Ketuk angka dua.');
+    act(() => {
+      window.dispatchEvent(new CustomEvent(SPEECH_BLOCKED, { detail: { text: 'x' } }));
+    });
+    expect(container.querySelector('.item-prompt.is-blocked')).not.toBeNull();
+    expect(screen.getByText(/Ketuk tombol speaker kuning/)).toBeInTheDocument();
+    // Soal biasa (isi terlihat di layar) tidak memakai tombol petunjuk.
+    const { container: c2 } = render(<ItemPlayer item={item('count')} />);
+    expect(c2.querySelector('.speech-reveal')).toBeNull();
+    delete (window as unknown as Record<string, unknown>).speechSynthesis;
+    vi.unstubAllGlobals();
   });
 });

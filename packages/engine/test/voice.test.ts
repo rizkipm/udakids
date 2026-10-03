@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   COMMAND_KEYS,
+  isAudioOnlyItem,
   isListeningItem,
   dialogFileSchema,
   scoreKey,
@@ -56,6 +57,23 @@ describe('suara Momo (D-035)', () => {
     expect(spokenPrompt(dikte, 'advanced').kind).toBe('item');
     // say sama dengan prompt → bukan soal dengar
     expect(isListeningItem({ prompt: 'Berapa?', say: 'Berapa?' })).toBe(false);
+  });
+
+  it('soal yang isinya hanya lewat suara ditandai (D-047)', () => {
+    expect(
+      isAudioOnlyItem({ prompt: 'Ketuk angka yang kamu dengar.', say: 'Ketuk angka dua.' }),
+    ).toBe(true);
+    expect(
+      isAudioOnlyItem({ prompt: 'Dengarkan, lalu tulis angkanya.', say: 'Tulis angka tujuh.' }),
+    ).toBe(true);
+    // Isi soal juga terlihat di layar (gambar/angka) → bukan "hanya suara".
+    expect(
+      isAudioOnlyItem({
+        prompt: 'Ada 5 kucing. 3 pergi. Tinggal berapa?',
+        say: 'Ada lima kucing.',
+      }),
+    ).toBe(false);
+    expect(isAudioOnlyItem({ prompt: 'Ketuk angka yang kamu dengar.' })).toBe(false);
   });
 
   it('skor dibulatkan ke kunci 0..100', () => {

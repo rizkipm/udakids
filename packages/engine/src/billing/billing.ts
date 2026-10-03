@@ -115,6 +115,10 @@ export type Access = {
   all: boolean;
   /** Buku yang sudah dibuka: `domain/grade`. */
   books: readonly string[];
+  /** Pernah punya paket, tetapi semuanya sudah berakhir (D-043/D-046) — untuk pesan yang tepat. */
+  expired?: boolean;
+  /** Anak tanpa akun orang tua (daftar sendiri / kelas) — orang tua perlu daftar & menautkan dulu. */
+  noParent?: boolean;
 };
 
 export const FREE_ACCESS: Access = { paywall: false, freeLevels: 0, all: true, books: [] };
@@ -160,6 +164,7 @@ export function accessFrom(
     freeLevels: base.freeLevels,
     all: live.some((e) => e.scope === 'all'),
     books: [...new Set(live.flatMap((e) => e.books.map(bookKey)))].sort(),
+    ...(entitlements.length > 0 && live.length === 0 && { expired: true }),
   };
 }
 

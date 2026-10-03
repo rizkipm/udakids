@@ -225,7 +225,7 @@ export class BillingService {
           ? or(eq(entitlements.parentId, row.parentId), eq(entitlements.childId, childId))
           : eq(entitlements.childId, childId),
       );
-    return accessFrom(
+    const access = accessFrom(
       s,
       rows.map((e) => ({
         scope: e.scope as 'all' | 'books',
@@ -234,6 +234,8 @@ export class BillingService {
       })),
       now,
     );
+    // Anak tanpa akun orang tua: pesan "buka Premium" mengarahkan orang tua daftar & menautkan dulu.
+    return row && !row.parentId ? { ...access, noParent: true } : access;
   }
 
   async createOrder(parentId: string, packageId: string, methodId: string, now = new Date()) {

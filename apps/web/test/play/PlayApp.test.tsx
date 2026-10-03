@@ -310,7 +310,7 @@ describe('ronde level (D-021)', () => {
     expect(await screen.findByText(/Level ini masih terkunci/)).toBeInTheDocument();
   });
 
-  it('level berbayar (D-036): kartu terkunci "perlu dibuka Ayah/Bunda", tanpa harga; URL langsung ditolak', async () => {
+  it('level berbayar (D-036, D-046): info akun Gratis → Premium + langkah untuk Ayah/Bunda, tanpa harga & tombol beli', async () => {
     setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
     const base = routes([]);
     const access = { paywall: true, freeLevels: 2, all: false, books: [] };
@@ -326,8 +326,45 @@ describe('ronde level (D-021)', () => {
     expect(card).toHaveClass('is-paid');
     expect(container.textContent).not.toMatch(/Rp/);
     cleanupAll();
-    renderPlay(await lvl(skill2.id));
-    expect(await screen.findByText(t('play.quiz.paid'))).toBeInTheDocument();
+    const page = renderPlay(await lvl(skill2.id));
+    expect(await screen.findByText(t('play.premium.title', { n: 3 }))).toBeInTheDocument();
+    const alert = page.container.querySelector('.kid-alert')!;
+    expect(alert.textContent).toContain(t('play.premium.kid', { free: 2 }));
+    expect(alert.textContent).toContain(t('play.premium.parentTitle'));
+    expect(alert.textContent).toContain('/orang-tua/paket');
+    // Tanpa harga, tanpa tautan/tombol beli di area anak (D-036).
+    expect(alert.textContent).not.toMatch(/Rp/);
+    expect(alert.querySelector('a')).toBeNull();
+    expect(alert.querySelectorAll('button')).toHaveLength(1); // hanya tombol dengarkan
+  });
+
+  it('paket berakhir & anak tanpa akun orang tua (D-046): pesan dan langkah yang sesuai', async () => {
+    setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
+    const base = routes([]);
+    const access = {
+      paywall: true,
+      freeLevels: 2,
+      all: false,
+      books: [],
+      expired: true,
+      noParent: true,
+    };
+    mockFetch({
+      ...base,
+      'GET /auth/me': () => [200, { momoColor: 'biru', selfCode: 'AB12CD' }],
+      'GET /catalog': () => {
+        const [status, body] = base['GET /catalog']();
+        return [status, { ...(body as object), access }];
+      },
+    });
+    const page = renderPlay(await lvl(skill2.id));
+    expect(await screen.findByText(t('play.premium.titleExpired'))).toBeInTheDocument();
+    const alert = page.container.querySelector('.kid-alert')!;
+    expect(alert.textContent).toContain(t('play.premium.kidExpired'));
+    expect(alert.textContent).toContain('/orang-tua/daftar');
+    await waitFor(() =>
+      expect(alert.textContent).toContain(t('play.premium.stepClaimCode', { code: 'AB12CD' })),
+    );
   });
 });
 

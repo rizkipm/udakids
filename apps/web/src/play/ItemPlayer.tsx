@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
+  isAudioOnlyItem,
   spokenPrompt,
   type InteractionType,
   type AnswerResult,
@@ -10,7 +11,14 @@ import {
   type Item,
   type Visual,
 } from '@little-coder/engine';
-import { speak, speakItem, speakLine, stopSpeaking } from '../audio/speech';
+import {
+  SPEECH_BLOCKED,
+  SPEECH_TROUBLE,
+  speak,
+  speakItem,
+  speakLine,
+  stopSpeaking,
+} from '../audio/speech';
 import { VisualView } from '../components/visuals';
 import { t, type MessageKey } from '../i18n';
 import './play.css';
@@ -79,6 +87,27 @@ export function ItemPlayer({
   const submitOnly = onSubmitValue !== undefined;
   const sayPrompt = () => (submitOnly ? speakPlain(item, tier) : speakPrompt(item, tier));
 
+  // Suara tidak keluar di perangkat ini (tidak ada mesin suara / gagal walau dicoba ulang): tampilkan bantuan.
+  const [trouble, setTrouble] = useState(false);
+  // Browser menolak suara otomatis (belum ada ketukan): minta anak mengetuk speaker (D-047).
+  const [blocked, setBlocked] = useState(false);
+  // Soal yang isinya hanya lewat suara: petunjuk tertulis untuk dibacakan orang dewasa (D-047).
+  const [reveal, setReveal] = useState(false);
+  useEffect(() => {
+    setTrouble(false);
+    setBlocked(false);
+    setReveal(false);
+    const onTrouble = () => setTrouble(true);
+    const onBlocked = () => setBlocked(true);
+    window.addEventListener(SPEECH_TROUBLE, onTrouble);
+    window.addEventListener(SPEECH_BLOCKED, onBlocked);
+    return () => {
+      window.removeEventListener(SPEECH_TROUBLE, onTrouble);
+      window.removeEventListener(SPEECH_BLOCKED, onBlocked);
+    };
+  }, [item]);
+  const audioOnly = isAudioOnlyItem(item);
+
   useEffect(() => {
     setLocked(false);
     setResult(undefined);
@@ -102,10 +131,41 @@ export function ItemPlayer({
   const inactive = locked || disabled;
   return (
     <div className="item" data-interaction={item.interaction.type}>
-      <div className="item-prompt">
-        <SpeakButton text={say} onSpeak={sayPrompt} />
+      <div className={`item-prompt${blocked ? ' is-blocked' : ''}`}>
+        <SpeakButton
+          text={say}
+          onSpeak={() => {
+            setBlocked(false);
+            sayPrompt();
+          }}
+        />
         <p>{item.prompt}</p>
       </div>
+      {blocked && mode === 'play' && (
+        <p className="speech-help is-tap" role="status">
+          {t('play.speechHelp.tapSpeaker')}
+        </p>
+      )}
+      {audioOnly && mode === 'play' && !trouble && !reveal && (
+        <button type="button" className="speech-reveal" onClick={() => setReveal(true)}>
+          {t('play.speechHelp.reveal')}
+        </button>
+      )}
+      {(trouble || reveal) && mode === 'play' && (
+        <div className="speech-help" role="status">
+          {trouble && (
+            <>
+              <strong>{t('play.speechHelp.title')}</strong>
+              <span>{t('play.speechHelp.tips')}</span>
+            </>
+          )}
+          {say !== item.prompt && (
+            <span>
+              {t('play.speechHelp.readAloud')} <q className="speech-help-text">{say}</q>
+            </span>
+          )}
+        </div>
+      )}
       {item.stimulus.length > 0 && (
         <div className="item-stimulus">
           {item.stimulus.map((v, i) => (

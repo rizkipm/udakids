@@ -853,3 +853,56 @@ Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk; diuji di 
   - Ringkasan admin punya kartu "Pendaftar terbaru".
 - **Wizard keluarga 3 langkah yang nyata:** Isi data → Cek email (kode) → Profil anak. Dasbor menandai semua langkah
   selesai. Form daftar menjelaskan langkahnya dan memberi tahu untuk mengecek folder Spam/Promosi.
+
+## D-046 — Info level Premium untuk anak & suara soal lintas perangkat
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Level berbayar:** pesan lama "perlu dibuka Ayah/Bunda" diganti kotak oranye yang menjelaskan keadaannya.
+  - Akun Gratis: judul "Level {n} ke atas khusus akun Premium"; isinya "Akunmu masih Gratis (Basic): Level 1–{free}
+    bisa dimainkan".
+  - Paket berakhir: judul "Masa paket Premium GRATIS BASIC sudah berakhir"; isinya menegaskan skor dan progres tetap aman.
+  - Bagian "Untuk Ayah/Bunda" berisi langkah ke `/orang-tua/paket`: masuk, buka menu Paket & Pembayaran, pilih
+    paket yang tersedia.
+  - Anak tanpa akun orang tua: langkahnya daftar orang tua → Tautkan anak dengan kode keluarganya → pilih paket.
+- **Tetap patuh D-036** (tanpa harga, tanpa tombol atau tautan beli di area anak):
+  - alamat ditulis sebagai teks untuk orang tua dan dibuka di halaman orang tua yang butuh login;
+  - warna oranye, bukan merah (PRD A14).
+- **Data yang dikirim server** (`access`):
+  - `expired` saat pernah punya paket tapi semuanya berakhir;
+  - `noParent` untuk anak yang daftar sendiri atau anak kelas.
+- **Suara soal** (di produksi semua memakai suara browser karena klip Momo belum aktif):
+  - Ketukan pertama membuka kunci suara. iOS/iPadOS memblokir suara otomatis sebelum ada ketukan.
+  - Jeda singkat setelah `cancel()`, untuk Chrome yang kadang menelan ucapan.
+  - Referensi ucapan disimpan, karena GC di Chrome bisa membuat `onend` tidak terpanggil.
+  - `resume()` dipanggil bila mesin suara berstatus paused.
+  - Kalimat panjang dipecah per kalimat, karena Chrome memotong ucapan setelah ±15 detik.
+  - Kalau suara Indonesia tidak tersedia atau ucapan tidak mulai dalam 1,8 detik, dicoba ulang dengan suara
+    bawaan perangkat.
+  - Kalau tetap gagal, layar soal menampilkan kotak bantuan oranye (naikkan volume, matikan mode senyap) beserta
+    kalimat soal agar dibacakan orang dewasa.
+  - Tidak memakai regex lookbehind, karena merusak aplikasi di iOS < 16.4.
+
+## D-047 — Suara soal pasti terdengar (tombol Mulai) & salinan katalog per anak
+
+Tanggal 2026-10-03 · Status **Disetujui** (laporan uji pemilik produk).
+
+- **Penyebab soal tidak bersuara, terbukti di Chrome:**
+  - Saat halaman soal dibuka langsung (URL, muat ulang, aplikasi baru dibuka), browser menolak suara otomatis
+    (`not-allowed`) sampai ada ketukan di halaman itu.
+  - Logika teks yang diucapkan sudah benar: hasil pindai 475 contoh soal "dengar" menunjukkan semuanya
+    membacakan isinya.
+- **Perbaikan:**
+  - **Tombol "Mulai"** sebelum soal pertama, hanya bila halaman belum pernah diketuk
+    (`navigator.userActivation` / buka kunci). Ketukan ini sekaligus membuka kunci suara; stopwatch belum
+    berjalan.
+  - Kalau suara masih ditolak, speaker berkedip dan muncul petunjuk oranye "Ketuk tombol speaker" (tidak dicoba
+    ulang otomatis).
+  - **Soal yang isinya hanya lewat suara** (`isAudioOnlyItem`, mis. "Ketuk angka yang kamu dengar.") selalu punya
+    tombol "Tidak terdengar? Lihat petunjuk", yang menampilkan kalimat soal untuk dibacakan orang dewasa. Dengan
+    begitu soal tidak 100% bergantung pada audio.
+- **Salinan katalog di perangkat sekarang per anak** (`lc.catalog.<childId>`):
+  - Sebelumnya satu salinan dipakai bersama. Adik (Free) di perangkat yang sama bisa memakai katalog kakak
+    (Premium), sehingga level berbayar terbuka di layar sampai data server tiba (atau selamanya bila offline).
+  - Server sejak awal menolak hasil level berbayar dari anak Free.
+  - Catatan: di DB lokal `freeLevels = 5` (level 1–5 gratis), di produksi `3`.

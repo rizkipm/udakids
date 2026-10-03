@@ -179,6 +179,15 @@ describe('akses level berbayar', () => {
     expect(a).toEqual({ paywall: true, freeLevels: 2, all: false, books: ['sains/tk'] });
   });
 
+  it('accessFrom: semua paket berakhir → expired (pesan "perpanjang"); belum pernah beli → tanpa expired (D-046)', () => {
+    const now = new Date('2026-10-05T00:00:00Z');
+    const base = { paywall: true, freeLevels: 3 };
+    expect(
+      accessFrom(base, [{ scope: 'all', books: [], endsAt: '2026-10-04T00:00:00Z' }], now),
+    ).toEqual({ ...base, all: false, books: [], expired: true });
+    expect(accessFrom(base, [], now)).toEqual({ ...base, all: false, books: [] });
+  });
+
   it('masa aktif: selamanya = null; diperpanjang dari akhir yang masih berjalan', () => {
     const now = new Date('2026-10-01T00:00:00Z');
     expect(entitlementEnd(null, now)).toBeNull();

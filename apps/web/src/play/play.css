@@ -2879,3 +2879,120 @@ button.level-card.is-paid {
   align-items: center;
   gap: 4px;
 }
+
+/* Pemberitahuan penting untuk anak (D-046): oranye agar mudah disadari — bukan merah (PRD A14). */
+.kid-alert {
+  max-width: 640px;
+  margin: 12px auto;
+  padding: 14px 18px;
+  border: 3px solid #e07b00;
+  border-radius: 20px;
+  background: #fff1dc;
+  color: #5a3100;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: left;
+}
+.kid-alert.is-compact {
+  text-align: center;
+}
+.kid-alert p {
+  margin: 8px 0 0;
+}
+.kid-alert-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  color: #a35400;
+}
+.kid-alert-head strong {
+  flex: 1;
+}
+.kid-alert-icon {
+  flex: none;
+  color: #e07b00;
+}
+.kid-alert-head .speak-btn {
+  flex: none;
+}
+.kid-alert-parent {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 2px dashed #e0a35a;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a3a2a;
+}
+.kid-alert-parent ol {
+  margin: 6px 0 0;
+  padding-left: 22px;
+}
+.kid-alert-parent li + li {
+  margin-top: 4px;
+}
+
+/* Bantuan bila suara tidak keluar di perangkat (D-046). */
+.speech-help {
+  display: grid;
+  gap: 4px;
+  margin: 8px auto;
+  max-width: 640px;
+  padding: 10px 14px;
+  border: 3px solid #e07b00;
+  border-radius: 16px;
+  background: #fff1dc;
+  color: #5a3100;
+  font-weight: 700;
+}
+.speech-help-text {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #1d1a2e;
+}
+
+/* Suara diblokir browser: speaker berkedip pelan agar diketuk (D-047). */
+.item-prompt.is-blocked .speak-btn {
+  animation: speak-nudge 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 6px #ffcf8a;
+}
+@keyframes speak-nudge {
+  50% {
+    transform: scale(1.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .item-prompt.is-blocked .speak-btn {
+    animation: none;
+  }
+}
+.speech-help.is-tap {
+  text-align: center;
+}
+.speech-reveal {
+  display: block;
+  margin: 6px auto;
+  min-height: 64px;
+  padding: 0 22px;
+  border: 3px dashed #e07b00;
+  border-radius: 999px;
+  background: #fff8ee;
+  color: #8a4700;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.start-gate {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.start-gate .kid-btn {
+  min-width: 220px;
+  min-height: 72px;
+  font-size: 1.5rem;
+}
