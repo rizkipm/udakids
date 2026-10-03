@@ -1,0 +1,51 @@
+{
+  "id": "math.tkosn.b9.balon-yang-terbang-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "B",
+  "order": 9,
+  "title": "Berhitung ceria — Level 9 — Balon yang terbang (gaya OSN)",
+  "tier": "basic",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "Olimpiade TK (TK A–B, usia 4–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "b": [1, 4]
+    },
+    "constraint": "b < a",
+    "prompt": "Ani punya {a} balon. {b} balon terbang. Tinggal berapa balon Ani?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "balon",
+        "count": "=a",
+        "crossed": "=b"
+      }
+    ],
+    "answer": "a - b",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "expr": "a - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 3,
+    "explain": "Balon yang dicoret sudah terbang. Sisanya {answer} balon."
+  }
+}

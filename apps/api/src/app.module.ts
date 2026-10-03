@@ -6,6 +6,8 @@ import { AdminUsersController } from './admin/admin-users.controller.js';
 import { ContentService } from './admin/content.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { AdminMailController } from './mail/admin-mail.controller.js';
+import { NewsController } from './news/news.controller.js';
+import { NewsService } from './news/news.service.js';
 import { AdminNotificationsController } from './admin/admin-notifications.controller.js';
 import { MailModule } from './mail/mail.module.js';
 import { AdminContestController } from './contest/admin-contest.controller.js';
@@ -55,10 +57,12 @@ import { VoiceService } from './voice/voice.service.js';
     AdminContestController,
     MediaController,
     AdminMailController,
+    NewsController,
     AdminNotificationsController,
     AdminVoiceController,
   ],
   providers: [
+    NewsService,
     ReportsService,
     ContentService,
     SettingsService,

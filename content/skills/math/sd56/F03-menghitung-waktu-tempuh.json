@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.f3.menghitung-waktu-tempuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "F",
+  "order": 3,
+  "title": "Kecepatan, jarak, dan waktu — Level 3 — Menghitung waktu tempuh",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "range": [30, 80],
+        "step": 10
+      },
+      "t": [2, 6]
+    },
+    "derived": {
+      "s": "v * t"
+    },
+    "prompt": "Jarak kota A ke kota B {s} km. Bus melaju {v} km/jam. Berapa jam waktu tempuhnya?",
+    "answer": "t",
+    "unit": "jam",
+    "distractors": [
+      {
+        "expr": "s * v",
+        "tag": "mengalikan"
+      },
+      {
+        "expr": "t + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "s - v",
+        "tag": "mengurang"
+      }
+    ],
+    "explain": "Waktu = jarak : kecepatan = {s} : {v} = {answer} jam."
+  }
+}

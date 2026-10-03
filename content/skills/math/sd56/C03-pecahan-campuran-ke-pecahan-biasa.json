@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.c3.pecahan-campuran-ke-pecahan-biasa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "C",
+  "order": 3,
+  "title": "Pecahan — Level 3 — Pecahan campuran ke pecahan biasa",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [1, 6],
+      "a": [1, 7],
+      "b": [2, 9]
+    },
+    "constraint": "a < b && gcd(a, b) == 1",
+    "prompt": "Pecahan campuran {w} {a}/{b} sama dengan …",
+    "format": "fraction",
+    "fraction": {
+      "num": "w * b + a",
+      "den": "b"
+    },
+    "distractors": [
+      {
+        "num": "w * a + b",
+        "den": "b",
+        "tag": "salah-kali"
+      },
+      {
+        "num": "w + a",
+        "den": "b",
+        "tag": "menjumlah-pembilang"
+      },
+      {
+        "num": "w * b - a",
+        "den": "b",
+        "tag": "mengurang"
+      }
+    ],
+    "explain": "{w} {a}/{b} = ({w} × {b} + {a})/{b} = {answer}."
+  }
+}

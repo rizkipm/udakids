@@ -1,0 +1,43 @@
+{
+  "id": "math.smp79.a4.sisa-pembagian-bilangan-berpangkat-kongruensi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 4,
+  "title": "Teori bilangan — Level 4 — Sisa pembagian bilangan berpangkat (kongruensi)",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [20, 99]
+    },
+    "derived": {
+      "r": "k % 4",
+      "u": "(r == 1) * 2 + (r == 2) * 4 + (r == 3) * 3 + (r == 0) * 1"
+    },
+    "prompt": "Sisa pembagian 2^{k} oleh 5 adalah …",
+    "answer": "u",
+    "distractors": [
+      {
+        "expr": "k % 5",
+        "tag": "sisa-pangkat"
+      },
+      {
+        "expr": "(r == 1) * 4 + (r == 2) * 3 + (r == 3) * 1 + (r == 0) * 2",
+        "tag": "siklus-geser"
+      },
+      {
+        "expr": "0",
+        "tag": "dianggap-habis"
+      }
+    ],
+    "explain": "2^1, 2^2, 2^3, 2^4 bersisa 2, 4, 3, 1 jika dibagi 5, lalu berulang tiap 4. {k} dibagi 4 bersisa {r}, jadi sisanya {answer}."
+  }
+}

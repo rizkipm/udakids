@@ -1,0 +1,83 @@
+{
+  "id": "math.sd56.j10.tantangan-peluang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "J",
+  "order": 10,
+  "title": "Peluang — Level 10 — Tantangan peluang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 8],
+            "b": [1, 8],
+            "h": [1, 8]
+          },
+          "prompt": "Kantong berisi {m} merah, {b} biru, {h} hijau. Peluang terambil merah?",
+          "format": "fraction",
+          "fraction": {
+            "num": "m",
+            "den": "m + b + h"
+          },
+          "distractors": [
+            {
+              "num": "m",
+              "den": "b + h",
+              "tag": "banding-sisanya"
+            },
+            {
+              "num": "1",
+              "den": "3",
+              "tag": "tiga-warna"
+            },
+            {
+              "num": "b",
+              "den": "m + b + h",
+              "tag": "warna-lain"
+            }
+          ],
+          "explain": "{m}/{=m+b+h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [60, 120, 180]
+            }
+          },
+          "prompt": "Dadu dilempar {n} kali. Frekuensi harapan muncul mata genap?",
+          "answer": "n / 2",
+          "mode": "input",
+          "unit": "kali",
+          "explain": "1/2 × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 6],
+            "c": [2, 6]
+          },
+          "prompt": "Ada {b} jenis roti dan {c} jenis minuman. Banyak pasangan roti dan minuman?",
+          "answer": "b * c",
+          "mode": "input",
+          "explain": "{b} × {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

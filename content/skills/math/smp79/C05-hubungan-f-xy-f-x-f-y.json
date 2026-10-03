@@ -1,0 +1,45 @@
+{
+  "id": "math.smp79.c5.hubungan-f-xy-f-x-f-y",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "C",
+  "order": 5,
+  "title": "Persamaan fungsional — Level 5 — Hubungan f(xy) = f(x) + f(y)",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "b": [1, 9],
+      "i": [1, 4],
+      "j": [1, 3]
+    },
+    "derived": {
+      "n": "((i == 1) * 2 + (i == 2) * 2 * 2 + (i == 3) * 2 * 2 * 2 + (i == 4) * 2 * 2 * 2 * 2) * ((j == 1) * 3 + (j == 2) * 3 * 3 + (j == 3) * 3 * 3 * 3)"
+    },
+    "prompt": "Fungsi f memenuhi f(xy) = f(x) + f(y) untuk semua bilangan asli x dan y. Jika f(2) = {a} dan f(3) = {b}, nilai f({n}) adalah …",
+    "answer": "i * a + j * b",
+    "distractors": [
+      {
+        "expr": "a * b",
+        "tag": "dikali"
+      },
+      {
+        "expr": "n * (a + b)",
+        "tag": "dikali-n"
+      },
+      {
+        "expr": "a + b",
+        "tag": "hanya-sekali"
+      }
+    ],
+    "explain": "{n} = 2^{i} × 3^{j}, sehingga f({n}) = {i} × f(2) + {j} × f(3) = {=i*a} + {=j*b} = {answer}."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.d8.diskon-bertingkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 8,
+  "title": "Persentase — Level 8 — Diskon bertingkat",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "values": [100000, 200000, 400000, 500000, 800000]
+      },
+      "p": {
+        "values": [10, 20, 50]
+      },
+      "q": {
+        "values": [10, 20, 25]
+      }
+    },
+    "prompt": "Harga baju Rp{h}. Toko memberi diskon {p}%, lalu diskon lagi {q}% dari harga setelah diskon pertama. Berapa rupiah harga akhirnya?",
+    "answer": "h * (100 - p) / 100 * (100 - q) / 100",
+    "distractors": [
+      {
+        "expr": "h * (100 - p - q) / 100",
+        "tag": "diskon-dijumlah"
+      },
+      {
+        "expr": "h * (100 - p) / 100",
+        "tag": "lupa-diskon-kedua"
+      },
+      {
+        "expr": "h * p / 100 * q / 100",
+        "tag": "hanya-diskon"
+      }
+    ],
+    "explain": "Setelah diskon {p}%: Rp{=h*(100-p)/100}. Setelah {q}% lagi: Rp{answer}. Diskon bertingkat tidak sama dengan {=p+q}%."
+  }
+}

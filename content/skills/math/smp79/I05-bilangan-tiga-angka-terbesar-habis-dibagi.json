@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.i5.bilangan-tiga-angka-terbesar-habis-dibagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "I",
+  "order": 5,
+  "title": "Ekstremal — Level 5 — Bilangan tiga angka terbesar habis dibagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [7, 49]
+    },
+    "prompt": "Bilangan tiga angka terbesar yang habis dibagi {k} adalah …",
+    "answer": "floor(999 / k) * k",
+    "distractors": [
+      {
+        "expr": "999 - k",
+        "tag": "asal-kurang"
+      },
+      {
+        "expr": "floor(999 / k) * k - k",
+        "tag": "kelipatan-sebelumnya"
+      },
+      {
+        "expr": "ceil(100 / k) * k",
+        "tag": "terkecil"
+      }
+    ],
+    "explain": "999 : {k} = {=floor(999/k)} sisa {=999%k}. Terbesar = 999 − {=999%k} = {answer}."
+  }
+}

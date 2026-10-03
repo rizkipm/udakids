@@ -1,0 +1,45 @@
+{
+  "id": "math.smp79.b5.identitas-jumlah-pangkat-tiga",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 5,
+  "title": "Aljabar — Level 5 — Identitas jumlah pangkat tiga",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6]
+    },
+    "constraint": "a < b",
+    "derived": {
+      "s": "a + b",
+      "p": "a * b"
+    },
+    "prompt": "Jika a + b = {s} dan ab = {p}, nilai a³ + b³ adalah …",
+    "answer": "s * s * s - 3 * p * s",
+    "distractors": [
+      {
+        "expr": "s * s * s",
+        "tag": "lupa-3ab"
+      },
+      {
+        "expr": "s * s * s - 3 * p",
+        "tag": "lupa-kali-jumlah"
+      },
+      {
+        "expr": "s * s * s + 3 * p * s",
+        "tag": "tanda-terbalik"
+      }
+    ],
+    "explain": "Ingat: a³ + b³ = (a + b)³ − 3ab(a + b) = {=s*s*s} − {=3*p*s} = {answer}."
+  }
+}

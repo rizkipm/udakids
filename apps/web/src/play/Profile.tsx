@@ -106,7 +106,7 @@ export function ProfilePage({ momoColor }: { momoColor: Color }) {
 
       <section className={`profile-hero momo-${momoColor}`}>
         <div className="profile-avatar">
-          <Momo color={momoColor} mood="proud" size={132} />
+          <Momo own color={momoColor} mood="proud" size={132} />
         </div>
         <div className="profile-id">
           <h1>{p.name}</h1>
@@ -122,6 +122,9 @@ export function ProfilePage({ momoColor }: { momoColor: Color }) {
             <SpeakButton text={say} />
             <Link className="kid-btn" to="/play/peringkat">
               {t('play.board.open')}
+            </Link>
+            <Link className="kid-btn secondary" to="/play/momo">
+              {t('play.momo.open')}
             </Link>
           </div>
         </div>

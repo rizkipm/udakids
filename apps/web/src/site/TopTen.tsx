@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { formatClock, type Color } from '@little-coder/engine';
+import { formatClock, type Color, type MomoLook } from '@little-coder/engine';
 import { api } from '../api/client';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
@@ -13,6 +13,7 @@ export type PublicTop = {
     position: number;
     nickname: string;
     momoColor: string;
+    momoLook?: MomoLook | null;
     points: number;
     questions: number;
     passedLevels: number;
@@ -104,7 +105,12 @@ export function TopTenSection() {
                     </td>
                     <th scope="row">
                       <span className="topten-name">
-                        <Momo color={r.momoColor as Color} mood="happy" size={36} />
+                        <Momo
+                          color={r.momoColor as Color}
+                          look={r.momoLook ?? null}
+                          mood="happy"
+                          size={36}
+                        />
                         {r.nickname}
                       </span>
                     </th>

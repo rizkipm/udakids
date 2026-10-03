@@ -1,0 +1,76 @@
+{
+  "id": "math.sd56.d10.tantangan-persentase",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 10,
+  "title": "Persentase — Level 10 — Tantangan persentase",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [10, 20, 25, 40]
+            },
+            "h": {
+              "range": [50000, 300000],
+              "step": 10000
+            }
+          },
+          "prompt": "Harga Rp{h} didiskon {p}%. Berapa rupiah yang dibayar?",
+          "answer": "h - p * h / 100",
+          "mode": "input",
+          "explain": "Rp{h} − Rp{=p*h/100} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [1000000, 2000000, 3000000]
+            },
+            "r": {
+              "values": [6, 10, 12]
+            },
+            "t": {
+              "values": [6, 12]
+            }
+          },
+          "prompt": "Tabungan Rp{m}, bunga {r}% per tahun. Berapa rupiah bunga setelah {t} bulan?",
+          "answer": "m * r / 100 * t / 12",
+          "mode": "input",
+          "explain": "{r}% × {m} × {t}/12 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": {
+              "values": [40000, 50000, 80000, 100000]
+            },
+            "p": {
+              "values": [10, 20, 25]
+            }
+          },
+          "prompt": "Barang dibeli Rp{b} lalu dijual untung {p}%. Berapa rupiah harga jualnya?",
+          "answer": "b + b * p / 100",
+          "mode": "input",
+          "explain": "Untung Rp{=b*p/100}. Harga jual Rp{answer}."
+        }
+      }
+    ]
+  }
+}

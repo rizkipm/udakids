@@ -393,7 +393,7 @@ describe('itemProblems (aturan kualitas)', () => {
       { ...base, interaction: { type: 'number-line', min: 0, max: 5, answer: 9 } },
       {
         ...base,
-        prompt: 'x'.repeat(200),
+        prompt: 'x'.repeat(501),
         interaction: { type: 'build', target: 1, unit: 'cube', max: 3 },
       },
       {

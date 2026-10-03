@@ -196,6 +196,7 @@ export function ParentRegister() {
               <li>{t('parent.consent.child')}</li>
               <li>{t('parent.consent.none')}</li>
               <li>{t('parent.consent.delete')}</li>
+              <li>{t('parent.consent.news')}</li>
             </ul>
             <p className="ui-muted">{t('parent.consent.law')}</p>
           </section>

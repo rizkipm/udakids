@@ -1,0 +1,36 @@
+{
+  "id": "math.sd56.f9.kecepatan-rata-rata-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "F",
+  "order": 9,
+  "title": "Kecepatan, jarak, dan waktu — Level 9 — Kecepatan rata-rata (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [30, 40, 60]
+      },
+      "b": {
+        "values": [60, 80, 120]
+      },
+      "s": {
+        "values": [120, 240]
+      }
+    },
+    "constraint": "a < b && s % a == 0 && s % b == 0 && (2 * s) % (s / a + s / b) == 0",
+    "prompt": "Doni pergi sejauh {s} km dengan {a} km/jam, lalu pulang lewat jalan sama dengan {b} km/jam. Berapa km/jam kecepatan rata-ratanya?",
+    "answer": "2 * s / (s / a + s / b)",
+    "mode": "input",
+    "unit": "km/jam",
+    "explain": "Waktu pergi {=s/a} jam, pulang {=s/b} jam. Rata-rata = total jarak : total waktu = {=2*s} : {=s/a+s/b} = {answer} km/jam (bukan ({a} + {b}) : 2)."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "math.sd56.c5.pembagian-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "C",
+  "order": 5,
+  "title": "Pecahan — Level 5 — Pembagian pecahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 8],
+      "b": [2, 9],
+      "c": [1, 8],
+      "d": [2, 9]
+    },
+    "constraint": "a < b && c < d && a * d != b * c",
+    "prompt": "Hasil dari {a}/{b} : {c}/{d} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a * d",
+      "den": "b * c"
+    },
+    "distractors": [
+      {
+        "num": "a * c",
+        "den": "b * d",
+        "tag": "mengalikan-langsung"
+      },
+      {
+        "num": "b * c",
+        "den": "a * d",
+        "tag": "terbalik"
+      },
+      {
+        "num": "a + d",
+        "den": "b + c",
+        "tag": "menjumlah"
+      }
+    ],
+    "explain": "Membagi = mengalikan dengan kebalikannya: {a}/{b} × {d}/{c} = {answer}."
+  }
+}

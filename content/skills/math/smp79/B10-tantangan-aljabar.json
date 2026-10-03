@@ -1,0 +1,70 @@
+{
+  "id": "math.smp79.b10.tantangan-aljabar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 10,
+  "title": "Aljabar — Level 10 — Tantangan aljabar",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 9],
+            "y": [1, 9]
+          },
+          "constraint": "x < y",
+          "derived": {
+            "s": "x + y",
+            "p": "x * y"
+          },
+          "prompt": "Jika x + y = {s} dan xy = {p}, nilai x² + y² adalah …",
+          "answer": "s * s - 2 * p",
+          "mode": "input",
+          "explain": "{=s*s} − {=2*p} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 10]
+          },
+          "prompt": "Jika x + 1/x = {k}, nilai x² + 1/x² adalah …",
+          "answer": "k * k - 2",
+          "mode": "input",
+          "explain": "{=k*k} − 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [100, 1000]
+            },
+            "d": [1, 9]
+          },
+          "derived": {
+            "a": "m + d",
+            "b": "m - d"
+          },
+          "prompt": "Hitung {a} × {b} tanpa kalkulator.",
+          "answer": "a * b",
+          "mode": "input",
+          "explain": "({m} + {d})({m} − {d}) = {=m*m} − {=d*d} = {answer}."
+        }
+      }
+    ]
+  }
+}

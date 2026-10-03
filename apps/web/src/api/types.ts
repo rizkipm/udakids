@@ -1,4 +1,11 @@
-import type { Access, Catalog, JagoState, Level, SkillTemplate } from '@little-coder/engine';
+import type {
+  Access,
+  Catalog,
+  JagoState,
+  Level,
+  MomoLook,
+  SkillTemplate,
+} from '@little-coder/engine';
 
 /** Kontrak respons API NestJS (apps/api). Tanggal = string ISO. */
 
@@ -13,6 +20,7 @@ export type StaffUser = {
 
 export type ChildProfile = {
   id: string;
+  momoLook?: MomoLook | null;
   classId?: string | null;
   className?: string | null;
   classCode?: string | null;
@@ -211,6 +219,7 @@ export type LeaderboardRow = {
   isMe: boolean;
   nickname: string;
   momoColor: string;
+  momoLook?: MomoLook | null;
   average: number;
   /** Nilai peringkat = rata-rata tertimbang (D-045). */
   rating: number;
@@ -248,6 +257,7 @@ export type LeaderboardDetail = {
   scope: string;
   nickname: string;
   momoColor: string;
+  momoLook?: MomoLook | null;
   isMe: boolean;
   position: number;
   participants: number;

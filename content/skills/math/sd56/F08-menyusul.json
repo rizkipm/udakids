@@ -1,0 +1,51 @@
+{
+  "id": "math.sd56.f8.menyusul",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "F",
+  "order": 8,
+  "title": "Kecepatan, jarak, dan waktu — Level 8 — Menyusul",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [40, 50, 60]
+      },
+      "d": {
+        "values": [10, 20, 30]
+      },
+      "j": [1, 2]
+    },
+    "derived": {
+      "b": "a + d",
+      "t": "a * j / d"
+    },
+    "constraint": "a * j % d == 0",
+    "prompt": "Ari bersepeda motor {a} km/jam. {j} jam kemudian Budi menyusul dari tempat yang sama dengan {b} km/jam. Setelah berapa jam Budi menyusul Ari?",
+    "answer": "t",
+    "unit": "jam",
+    "distractors": [
+      {
+        "expr": "a * j / b",
+        "tag": "bagi-kecepatan-budi"
+      },
+      {
+        "expr": "t + j",
+        "tag": "dari-awal-ari"
+      },
+      {
+        "expr": "j",
+        "tag": "sama-jeda"
+      }
+    ],
+    "explain": "Saat Budi berangkat, Ari sudah {=a*j} km di depan. Selisih kecepatan {d} km/jam. Waktu = {=a*j} : {d} = {answer} jam."
+  }
+}

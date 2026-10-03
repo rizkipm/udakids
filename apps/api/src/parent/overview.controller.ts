@@ -1,5 +1,11 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { childInsights, planStatus, type QuizResult, type SessionUser } from '@little-coder/engine';
+import {
+  childInsights,
+  planStatus,
+  type QuizResult,
+  type SessionUser,
+  parseMomoLook,
+} from '@little-coder/engine';
 import { and, count, desc, eq, gte, inArray, or, sql } from 'drizzle-orm';
 import { CurrentUser, Roles } from '../auth/decorators.js';
 import { BillingService } from '../billing/billing.service.js';
@@ -37,6 +43,7 @@ export class ParentOverviewController {
         id: children.id,
         nickname: children.nickname,
         momoColor: children.momoColor,
+        momoLook: children.momoLook,
         lastActiveAt: children.lastActiveAt,
         className: classes.eventName,
       })
@@ -152,6 +159,7 @@ export class ParentOverviewController {
           id: k.id,
           nickname: k.nickname,
           momoColor: k.momoColor,
+          momoLook: parseMomoLook(k.momoLook),
           lastActiveAt: k.lastActiveAt,
           className: k.className,
           plan: planStatus(

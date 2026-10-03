@@ -1,0 +1,43 @@
+{
+  "id": "math.smp79.f2.jumlah-n-suku-aritmetika",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "F",
+  "order": 2,
+  "title": "Pola bilangan — Level 2 — Jumlah n suku aritmetika",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 15],
+      "d": [1, 7],
+      "n": {
+        "values": [10, 12, 15, 20, 25, 30, 40]
+      }
+    },
+    "prompt": "Jumlah {n} suku pertama barisan {a}, {=a+d}, {=a+2*d}, … adalah …",
+    "answer": "n * (2 * a + (n - 1) * d) / 2",
+    "distractors": [
+      {
+        "expr": "a + (n - 1) * d",
+        "tag": "suku-terakhir"
+      },
+      {
+        "expr": "n * (2 * a + n * d) / 2",
+        "tag": "salah-beda"
+      },
+      {
+        "expr": "n * a",
+        "tag": "lupa-beda"
+      }
+    ],
+    "explain": "Sn = n/2 × (2a + (n − 1)b) = {n}/2 × ({=2*a} + {=(n-1)*d}) = {answer}."
+  }
+}

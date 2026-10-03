@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.b1.fpb-dua-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 1,
+  "title": "FPB dan KPK — Level 1 — FPB dua bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [2, 12],
+      "x": [2, 7],
+      "y": [2, 7]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "prompt": "FPB dari {a} dan {b} adalah …",
+    "answer": "gcd(a, b)",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "kpk-bukan-fpb"
+      },
+      {
+        "expr": "a * b",
+        "tag": "mengalikan"
+      },
+      {
+        "expr": "gcd(a, b) * 2",
+        "tag": "faktor-bukan-terbesar"
+      }
+    ],
+    "explain": "Faktor persekutuan terbesar dari {a} dan {b} adalah {answer}."
+  }
+}

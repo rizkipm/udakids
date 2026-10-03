@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.i7.nilai-yang-hilang-agar-rata-rata-tercapai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 7,
+  "title": "Statistika — Level 7 — Nilai yang hilang agar rata-rata tercapai",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": [70, 85],
+      "a": [1, 9],
+      "b": [1, 9],
+      "c": [1, 9]
+    },
+    "derived": {
+      "x1": "r + a",
+      "x2": "r - b",
+      "x3": "r + c",
+      "x4": "r - a - c + b"
+    },
+    "prompt": "Nilai Rani pada 3 ulangan: {x1}, {x2}, {x3}. Berapa nilai ulangan ke-4 agar rata-ratanya tepat {r}?",
+    "answer": "x4",
+    "distractors": [
+      {
+        "expr": "r",
+        "tag": "sama-rata-rata"
+      },
+      {
+        "expr": "4 * r",
+        "tag": "jumlah-total"
+      },
+      {
+        "expr": "(x1 + x2 + x3) / 3",
+        "tag": "rata-rata-lama"
+      }
+    ],
+    "explain": "Jumlah yang dibutuhkan 4 × {r} = {=4*r}. Sudah {=x1+x2+x3}. Nilai ke-4 = {=4*r} − {=x1+x2+x3} = {answer}."
+  }
+}

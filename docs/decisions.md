@@ -906,3 +906,164 @@ Tanggal 2026-10-03 · Status **Disetujui** (laporan uji pemilik produk).
     (Premium), sehingga level berbayar terbuka di layar sampai data server tiba (atau selamanya bila offline).
   - Server sejak awal menolak hasil level berbayar dari anak Free.
   - Catatan: di DB lokal `freeLevels = 5` (level 1–5 gratis), di produksi `3`.
+
+## D-048 — Buku Math Grade 5-6 (OSN Kategori C)
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Jenjang baru `sd56`** ("Grade 5-6 (Kategori C)", "Kelas 5–6 (OSN)") di `GRADES`, setelah `sd34`.
+- **Buku `content/skills/math/sd56/`:** 10 materi × 10 level = 100 skill.
+  - Seluruhnya family `expr`/`mix`, tier `advanced`, tag `fase-merdeka: C` dan `timss-kognitif`.
+  - Pola tiap materi: level 1–3 pengetahuan → level 4–8 penerapan & soal cerita → level 9 penalaran gaya OSN
+    (isian) → level 10 tantangan campuran (isian).
+- **Materi** (indikator OSN SD/MI Kategori C):
+
+  | Kode | Materi            | Indikator                                                           |
+  | ---- | ----------------- | ------------------------------------------------------------------- |
+  | A    | Bilangan bulat    | operasi termasuk negatif, suhu, kedalaman, skor benar/salah         |
+  | B    | FPB & KPK         | soal cerita, FPB × KPK = hasil kali                                 |
+  | C    | Pecahan           | biasa, campuran, desimal, persen                                    |
+  | D    | Persentase        | diskon, diskon bertingkat, untung-rugi, bunga sederhana             |
+  | E    | Perbandingan      | rasio, senilai/berbalik nilai, skala                                |
+  | F    | Kecepatan         | jarak, waktu, kecepatan, berpapasan, menyusul, rata-rata            |
+  | G    | Luas bangun datar | termasuk lingkaran π = 22/7, gabungan, daerah diarsir               |
+  | H    | Bangun ruang      | volume & luas permukaan kubus, balok, prisma, tabung                |
+  | I    | Statistika        | mean, median, modus, rata-rata gabungan                             |
+  | J    | Peluang           | dadu, koin, kartu, komplemen, frekuensi harapan, tanpa pengembalian |
+
+- **Pengecoh** berbasis miskonsepsi (mis. KPK ↔ FPB, diskon bertingkat dijumlah, rata-rata kecepatan biasa,
+  dengan/tanpa pengembalian).
+- **Soal orisinal**, tidak disalin dari bank soal OSN/IXL. Lolos `validate:content` (200 soal per skill).
+
+## D-049 — Buku Math SMP Kelas 7-9 (OSN Kategori D) & batas soal 500 karakter
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Jenjang baru `smp79`** ("SMP Kelas 7-9 (Kategori D)", "SMP Kelas 7–9 (OSN)").
+- **Buku `content/skills/math/smp79/`:** 9 materi × 10 level = 90 skill.
+  - Family `expr`/`mix`, tier `advanced`, `fase-merdeka: D`.
+  - Pola tiap materi sama dengan buku OSN lain: level 1–3 konsep → 4–8 penerapan → 9 penalaran gaya OSN (isian)
+    → 10 tantangan campuran (isian).
+- **Materi** (indikator OSN SMP):
+
+  | Kode | Materi               | Indikator                                                                                                        |
+  | ---- | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+  | A    | Teori bilangan       | banyak & jumlah faktor, sisa bagi, angka satuan berpangkat, kongruensi, teorema sisa Cina, inklusi-eksklusi      |
+  | B    | Aljabar              | substitusi, identitas (x+y)², a²−b², a³+b³, x + 1/x, akar kuadrat, sistem linear, teleskopik                     |
+  | C    | Persamaan fungsional | linear, komposisi, f(x+1)=f(x)+c, f(xy)=f(x)+f(y), substitusi f(x)+2f(2−x), rekursif                             |
+  | D    | Geometri olimpiade   | sudut segitiga, sudut luar, segi-n, sudut pusat/keliling, Pythagoras, diagonal, jarum jam, segi empat tali busur |
+  | E    | Kombinatorika        | aturan perkalian, permutasi, kombinasi, melingkar, lintasan kisi, inklusi-eksklusi                               |
+  | F    | Pola bilangan        | aritmetika, geometri, bilangan segitiga, beda bertingkat, pola berulang, Fibonacci                               |
+  | G    | Logika               | ayam-kambing, sarang merpati, kesatria-penipu, angka AB−BA, hari, umur, rata-rata                                |
+  | H    | Invarians            | jumlah tetap, paritas, kelereng merah-biru, akar digital, sisa bagi 3, tanda ±, lampu, memecah tumpukan          |
+  | I    | Ekstremal            | luas maksimum, hasil kali/jumlah ekstrem, minimum kuadrat, kelipatan terbesar/terkecil, sarang merpati           |
+
+- **Batas kalimat soal 160 → 500 karakter** (`MAX_PROMPT_LENGTH`, skema `expr`/`manual`/`facts`, editor soal manual
+  admin), agar soal cerita/olimpiade bisa lengkap. Soal > 160 karakter tampil dengan huruf sedikit lebih kecil
+  (`.item-prompt p.is-long`). Soal Basic tetap pendek sesuai PRD A14.
+- Semua soal orisinal (tidak disalin dari bank soal OSN). Lolos `validate:content` (200 soal per skill).
+
+## D-050 — Buku Math & Sains TK gaya olimpiade (OSN TK)
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Jenjang baru `tkosn`** ("TK (OSN)", "TK A–B · gaya olimpiade"), urut setelah `tk`.
+- **Dua buku**, tier `basic` (dibacakan, jawaban diketuk; gambar bila asetnya ada), `fase-merdeka: Fondasi (PAUD)`:
+  - **Math TK (OSN)**, 5 materi × 10 level: angka & membilang (sampai 20), berhitung ceria (gambar & cerita,
+    mis. "5 apel merah dan 3 apel hijau"), membandingkan (lebih banyak/sedikit/sama, panjang, tinggi, berat,
+    isi), bentuk geometri, pola & logika gambar.
+  - **Sains TK (OSN)**, 5 materi × 10 level: tubuhku & pancaindra (mis. bulu kucing halus dirasakan dengan
+    kulit), dunia hewan (kelinci makan wortel, bertelur/melahirkan, kaki, suara), tumbuhan/buah/sayur
+    (semangka buah, brokoli sayur, kunyit bumbu), panas-dingin & cuaca (api unggun panas, buah dari kulkas
+    dingin, payung saat hujan), lingkungan sekitar (kereta di stasiun, pilot menerbangkan pesawat, profesi,
+    menjaga lingkungan).
+- **Pola per materi:** level 1–8 konsep & penerapan → level 9 teka-teki gaya OSN (bank soal `manual`, ≥ 8 soal)
+  → level 10 tantangan campuran.
+- **Komponen yang dipakai ulang:** family generator yang sudah ada (`count`, `arith`, `compare-groups`, `shape-*`,
+  `pattern`, `facts`, `manual`).
+- **Gambar:** pilihan hanya bergambar bila aset benda tersedia (hewan, buah, benda rumah). Pilihan lain berupa
+  kata yang dibacakan saat diketuk, sama seperti buku Sains TK yang sudah ada.
+- **Bahasa Inggris** belum dibuat (di luar domain yang tersedia; menunggu keputusan).
+- Soal orisinal mengikuti contoh materi lomba yang diberikan; tidak menyalin bank soal lomba.
+
+## D-051 — Sains Grade 5-6 (OSN Kategori C) & Hias Momo (gradasi + aksesori)
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk; bentuk kustom dipilih pemilik produk:
+gradasi dua warna, aksesori bebas untuk semua anak).
+
+**Buku Sains Grade 5-6 (OSN)** (`content/skills/sains/sd56`)
+
+- 10 materi × 10 level = 100 skill, tier `advanced`, `fase-merdeka: C`.
+- **Materi:** sistem organ, fotosintesis, ekosistem (peran, rantai makanan, simbiosis), adaptasi (morfologi,
+  fisiologi, tingkah laku), listrik (komponen, seri/paralel, konduktor/isolator), magnet (sifat, benda magnetis,
+  cara membuat, pemanfaatan), kalor (konduksi/konveksi/radiasi, pemuaian), pesawat sederhana (tuas golongan
+  I–III, katrol, bidang miring, roda berporos), bumi & tata surya (planet, rotasi/revolusi, gerhana, pasang
+  surut), dan metode ilmiah (langkah, variabel).
+- **Pola level sama dengan Sains Grade 3-4 (OSN):** level 1–5 tabel fakta (tanya keterangan / nama / benar-salah
+  / kelompok / bukan anggota), 6–8 soal konsep, penerapan, dan penalaran (+ fakta), 9 ulangan, 10 tantangan.
+- **Soal hitung OSN:** tegangan baterai seri dan gaya kuasa tuas (isian).
+
+**Hias Momo** (gradasi + aksesori)
+
+- **Data:** kolom baru `children.momo_look` (jsonb, migrasi `0011_momo_look`) berisi
+  `{ gradient, accessory, accessoryColor }`. Warna utama tetap `momo_color` (6 warna lama).
+- **Gradasi:** warna utama → salah satu dari 12 warna (`MOMO_TONES`).
+- **Aksesori:** tanpa aksesori, rambut poni, rambut kuncir, rambut keriting, topi, peci, jilbab, pita; warnanya
+  bisa dipilih.
+- **Privasi:** tampilan robot, bukan data pribadi anak. Semua pilihan tersedia untuk semua anak tanpa label
+  laki-laki/perempuan; tidak ada data gender atau agama yang disimpan (PRD A17).
+- **Siapa yang mengubah:**
+  - anak sendiri lewat Profil → "Hias Momo" (`PUT /auth/me/momo`, hanya peran anak);
+  - orang tua lewat formulir profil anak ("Hias Momo", opsional).
+- **Tampil di:** semua layar anak (Momo milik sendiri), layar pilih profil, papan peringkat + detail, Top 10
+  landing, dan dasbor orang tua.
+- **Data lama atau rusak** dibaca sebagai polos (`parseMomoLook`).
+
+## D-052 — Buku Sains SMP Kelas 7-9 (OSN Kategori D)
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Buku `content/skills/sains/smp79`:** 10 materi × 10 level = 100 skill, tier `advanced`, `fase-merdeka: D`,
+  jenjang `smp79` (sama dengan Math SMP, D-049).
+- **Materi:**
+
+  | Materi               | Isi                                                                                    |
+  | -------------------- | -------------------------------------------------------------------------------------- |
+  | Sel                  | organel, sel hewan vs tumbuhan, prokariotik, difusi/osmosis                            |
+  | Organisasi kehidupan | sel → jaringan → organ → sistem organ; jaringan hewan & tumbuhan                       |
+  | Genetika             | istilah, homozigot/heterozigot, persilangan monohibrid 1 : 2 : 1 dan 3 : 1, uji silang |
+  | Ekologi              | peran, interaksi, aliran energi 10%, biomagnifikasi, eutrofikasi, suksesi              |
+  | Klasifikasi          | kingdom, kelas vertebrata, takson, binomial nomenklatur                                |
+  | Zat                  | perubahan fisika/kimia, unsur-senyawa-campuran, pemisahan campuran, massa jenis        |
+  | Gaya & energi        | hukum Newton, tekanan, usaha, energi kinetik/potensial, daya                           |
+  | Gelombang            | getaran, frekuensi/periode, v = λf, bunyi, cahaya, cermin & lensa                      |
+  | Listrik & magnet     | hukum Ohm, seri/paralel, energi & daya listrik, elektromagnet, induksi                 |
+  | Bumi & antariksa     | struktur bumi & atmosfer, lempeng, gempa/tsunami, rotasi/revolusi, selisih waktu bujur |
+
+- **Pola level sama dengan Sains Grade 5-6 (OSN):** level 1–5 fakta, 6–8 konsep, penerapan, dan penalaran, 9 ulangan,
+  10 tantangan.
+- **Soal hitung OSN SMP (isian):** rasio Mendel, energi trofik, massa jenis, usaha, energi kinetik, cepat rambat,
+  frekuensi, hukum Ohm, arus seri, selisih waktu bujur.
+
+## D-053 — Info materi baru otomatis lewat email (broadcast)
+
+Tanggal 2026-10-03 · Status **Disetujui** (pilihan pemilik produk: otomatis setiap ada soal baru; langganan aktif
+dan bisa berhenti).
+
+- **Pemicu:** skill aktif baru (kolom baru `skills.created_at`, migrasi `0012_content_news`).
+  - Batas awal disimpan di `app_settings.news.lastAt` saat migrasi, sehingga skill lama tidak diumumkan.
+  - Agar tidak membanjiri, semua skill baru digabung dalam **satu email**. Email dikirim setelah 30 menit tanpa
+    skill baru, paling sering sekali per 24 jam.
+  - Admin bisa "Kirim sekarang" atau mematikan fitur di Admin → Email.
+- **Penerima:**
+  - orang tua aktif dengan email terverifikasi yang belum berhenti berlangganan (`parents.news_opt_out_at`);
+  - salinan ringkasan ke direksi.
+- **Berhenti berlangganan:**
+  - tautan di setiap email (`/berhenti-langganan`, token HMAC per orang tua, tanpa login);
+  - centang "Kirimi saya email saat ada materi baru" di dasbor orang tua.
+  - Teks persetujuan pendaftaran menyebut email info materi baru (UU PDP).
+  - Email verifikasi dan transaksi tetap dikirim.
+- **Kuota Gmail:** maksimal 400 email info per 24 jam (`NEWS_DAILY_CAP`). Sisanya otomatis dilanjutkan; email
+  verifikasi dan transaksi selalu didahulukan di antrean.
+- **Urutan deploy:** jalankan migrasi **sebelum** seed konten baru (`migrate:prod` lalu `seed:prod`). Dengan
+  begitu, buku yang baru ditambahkan ikut diumumkan.

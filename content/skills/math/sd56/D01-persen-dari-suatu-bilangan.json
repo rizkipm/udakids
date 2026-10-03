@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.d1.persen-dari-suatu-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 1,
+  "title": "Persentase — Level 1 — Persen dari suatu bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "values": [10, 15, 20, 25, 30, 40, 50, 75]
+      },
+      "n": {
+        "range": [40, 400],
+        "step": 20
+      }
+    },
+    "constraint": "p * n % 100 == 0",
+    "prompt": "{p}% dari {n} adalah …",
+    "answer": "p * n / 100",
+    "distractors": [
+      {
+        "expr": "n - p * n / 100",
+        "tag": "sisa-bukan-bagian"
+      },
+      {
+        "expr": "p * n / 10",
+        "tag": "salah-pembagi"
+      },
+      {
+        "expr": "n / p",
+        "tag": "membagi"
+      }
+    ],
+    "explain": "{p}% × {n} = {p}/100 × {n} = {answer}."
+  }
+}

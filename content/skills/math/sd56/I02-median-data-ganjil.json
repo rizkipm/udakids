@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.i2.median-data-ganjil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 2,
+  "title": "Statistika — Level 2 — Median data ganjil",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [50, 70],
+      "d1": [1, 6],
+      "d2": [1, 6],
+      "d3": [1, 6],
+      "d4": [1, 6]
+    },
+    "derived": {
+      "b": "a + d1",
+      "c": "b + d2",
+      "d": "c + d3",
+      "e": "d + d4"
+    },
+    "prompt": "Data tinggi tanaman (cm): {d}, {a}, {e}, {b}, {c}. Berapa mediannya?",
+    "answer": "c",
+    "distractors": [
+      {
+        "expr": "e",
+        "tag": "urutan-asli-tengah"
+      },
+      {
+        "expr": "e - a",
+        "tag": "jangkauan"
+      },
+      {
+        "expr": "b",
+        "tag": "salah-urut"
+      }
+    ],
+    "explain": "Urutkan: {a}, {b}, {c}, {d}, {e}. Nilai tengahnya {answer}."
+  }
+}

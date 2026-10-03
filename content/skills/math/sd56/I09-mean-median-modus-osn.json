@@ -1,0 +1,30 @@
+{
+  "id": "math.sd56.i9.mean-median-modus-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 9,
+  "title": "Statistika — Level 9 — Mean, median, modus (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [5, 7],
+      "c": [8, 9],
+      "e": [10, 13]
+    },
+    "constraint": "(a + 3 * b + c + e) % 6 == 0",
+    "prompt": "Data: {c}, {a}, {b}, {e}, {b}, {b}. Berapa hasil mean + median + modus?",
+    "answer": "(a + 3 * b + c + e) / 6 + b + b",
+    "mode": "input",
+    "explain": "Urutkan: {a}, {b}, {b}, {b}, {c}, {e}. Mean = {=a+3*b+c+e} : 6 = {=(a+3*b+c+e)/6}, median = {b}, modus = {b}. Jumlah = {answer}."
+  }
+}

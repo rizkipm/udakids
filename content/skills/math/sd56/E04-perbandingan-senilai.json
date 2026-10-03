@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.e4.perbandingan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "E",
+  "order": 4,
+  "title": "Perbandingan dan skala — Level 4 — Perbandingan senilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 6],
+      "h": {
+        "range": [2000, 9000],
+        "step": 500
+      },
+      "m": [7, 15]
+    },
+    "prompt": "Harga {n} buku tulis Rp{=n*h}. Berapa rupiah harga {m} buku tulis yang sama?",
+    "answer": "m * h",
+    "distractors": [
+      {
+        "expr": "n * h + m",
+        "tag": "menambah"
+      },
+      {
+        "expr": "m * h * n",
+        "tag": "mengali-dua-kali"
+      },
+      {
+        "expr": "(m - n) * h",
+        "tag": "selisih"
+      }
+    ],
+    "explain": "Satu buku Rp{h}. {m} buku = {m} × {h} = Rp{answer}."
+  }
+}

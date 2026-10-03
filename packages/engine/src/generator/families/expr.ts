@@ -57,8 +57,8 @@ export const exprFamily = defineFamily({
         .record(z.string().regex(/^[a-z][a-z0-9_]*$/), z.array(z.string().min(1).max(40)).min(1))
         .default({}),
       constraint: exprSchema.optional(),
-      prompt: z.string().min(1).max(400),
-      say: z.string().max(400).optional(),
+      prompt: z.string().min(1).max(500),
+      say: z.string().max(500).optional(),
       stimulus: z.array(z.unknown()).max(4).default([]),
       format: z.enum(['number', 'decimal', 'fraction']).default('number'),
       answer: exprSchema.optional(),
@@ -71,7 +71,7 @@ export const exprFamily = defineFamily({
       choices: z.number().int().min(2).max(5).default(4),
       /** Jawaban negatif diizinkan (default tidak). */
       allowNegative: z.boolean().default(false),
-      explain: z.string().min(1).max(400),
+      explain: z.string().min(1).max(500),
       /**
        * Jawaban kategori: nilai `answer` (angka) dipetakan ke teks, mis. {"1": ">", "2": "<", "3": "="}.
        * Semua label menjadi pilihan; pengecoh diabaikan.

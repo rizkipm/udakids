@@ -10,7 +10,14 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PIN_MAX_ATTEMPTS, pinLockMs, type Role, type SessionUser } from '@little-coder/engine';
+import {
+  PIN_MAX_ATTEMPTS,
+  pinLockMs,
+  type Role,
+  type SessionUser,
+  parseMomoLook,
+  type MomoLook,
+} from '@little-coder/engine';
 import { randomInt } from 'node:crypto';
 import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import { uniqueEntryCode } from '../common/codes.js';
@@ -290,10 +297,15 @@ export class AuthService {
     if (!parent) {
       // Kode milik anak yang daftar sendiri (D-037): hanya profil anak itu.
       const [self] = await this.db
-        .select({ id: children.id, nickname: children.nickname, momoColor: children.momoColor })
+        .select({
+          id: children.id,
+          nickname: children.nickname,
+          momoColor: children.momoColor,
+          momoLook: children.momoLook,
+        })
         .from(children)
         .where(and(eq(children.selfCode, familyCode), eq(children.active, true)));
-      if (self) return [self];
+      if (self) return [{ ...self, momoLook: parseMomoLook(self.momoLook) }];
       // Kode kelas workshop juga diterima di layar masuk anak (D-025).
       const cls = await this.openClass(familyCode);
       if (!cls) {
@@ -306,6 +318,7 @@ export class AuthService {
           id: children.id,
           nickname: children.nickname,
           momoColor: children.momoColor,
+          momoLook: children.momoLook,
           picturePinHash: children.picturePinHash,
         })
         .from(children)
@@ -313,13 +326,19 @@ export class AuthService {
         .orderBy(children.nickname);
       return rows
         .filter((r) => r.picturePinHash)
-        .map(({ id, nickname, momoColor }) => ({ id, nickname, momoColor }));
+        .map(({ id, nickname, momoColor, momoLook }) => ({
+          id,
+          nickname,
+          momoColor,
+          momoLook: parseMomoLook(momoLook),
+        }));
     }
     const rows = await this.db
       .select({
         id: children.id,
         nickname: children.nickname,
         momoColor: children.momoColor,
+        momoLook: children.momoLook,
         picturePinHash: children.picturePinHash,
       })
       .from(children)
@@ -327,7 +346,12 @@ export class AuthService {
       .orderBy(children.createdAt);
     return rows
       .filter((r) => r.picturePinHash)
-      .map(({ id, nickname, momoColor }) => ({ id, nickname, momoColor }));
+      .map(({ id, nickname, momoColor, momoLook }) => ({
+        id,
+        nickname,
+        momoColor,
+        momoLook: parseMomoLook(momoLook),
+      }));
   }
 
   async childLogin(
@@ -443,6 +467,7 @@ export class AuthService {
       classCode: string;
       nickname: string;
       momoColor: string;
+      momoLook?: MomoLook | null;
       pin: string[];
     },
     ip = 'unknown',
@@ -479,6 +504,7 @@ export class AuthService {
           classId: cls.id,
           nickname: input.nickname,
           momoColor: input.momoColor,
+          momoLook: input.momoLook ?? null,
           picturePinHash: await hashSecret(pinSecret(input.pin)),
           reportToken: randomToken(),
           lastActiveAt: new Date(),
@@ -505,7 +531,7 @@ export class AuthService {
   readonly registerLimiter = new RateLimiter(5, 60 * 60_000);
 
   async childRegister(
-    input: { nickname: string; momoColor: string; pin: string[] },
+    input: { nickname: string; momoColor: string; momoLook?: MomoLook | null; pin: string[] },
     ip: string,
   ): Promise<AuthResult & { familyCode: string }> {
     const key = `register:${ip}`;
@@ -517,6 +543,7 @@ export class AuthService {
       .values({
         nickname: input.nickname,
         momoColor: input.momoColor,
+        momoLook: input.momoLook ?? null,
         picturePinHash: await hashSecret(pinSecret(input.pin)),
         reportToken: randomToken(),
         selfCode: familyCode,
@@ -528,6 +555,17 @@ export class AuthService {
       TOKEN_TTL.child,
     );
     return { ...res, familyCode };
+  }
+
+  /** Anak mengubah tampilan Momo-nya sendiri (D-051): warna utama, gradasi, aksesori. */
+  async setMomoStyle(childId: string, input: { momoColor: string; momoLook: MomoLook | null }) {
+    const [row] = await this.db
+      .update(children)
+      .set({ momoColor: input.momoColor, momoLook: input.momoLook })
+      .where(eq(children.id, childId))
+      .returning({ momoColor: children.momoColor, momoLook: children.momoLook });
+    if (!row) throw new NotFoundException('Anak tidak ditemukan');
+    return { momoColor: row.momoColor, momoLook: parseMomoLook(row.momoLook) };
   }
 
   async me(user: SessionUser) {
@@ -542,6 +580,7 @@ export class AuthService {
       const [c] = await this.db
         .select({
           momoColor: children.momoColor,
+          momoLook: children.momoLook,
           selfCode: children.selfCode,
           parentId: children.parentId,
         })
@@ -550,6 +589,7 @@ export class AuthService {
       return {
         ...user,
         momoColor: c?.momoColor,
+        momoLook: parseMomoLook(c?.momoLook),
         // Kode keluarga anak yang daftar sendiri — ditampilkan di profil agar bisa dicatat.
         selfCode: c?.selfCode ?? null,
         hasParent: !!c?.parentId,

@@ -106,7 +106,7 @@ export function ContestHome({ momoColor }: { momoColor: Color }) {
       <Say text={t('contest.intro')} className="contest-intro" />
       {!list.data ? (
         <section className="contest-empty">
-          <Momo color={momoColor} mood={list.error ? 'curious' : 'idle'} size={120} />
+          <Momo own color={momoColor} mood={list.error ? 'curious' : 'idle'} size={120} />
           <p className="kid-note">{list.error ? t('contest.offline') : t('contest.loading')}</p>
           {list.error !== undefined && (
             <button type="button" className="kid-btn" onClick={list.reload}>
@@ -116,7 +116,7 @@ export function ContestHome({ momoColor }: { momoColor: Color }) {
         </section>
       ) : list.data.contests.length === 0 ? (
         <section className="contest-empty">
-          <Momo color={momoColor} mood="happy" size={120} />
+          <Momo own color={momoColor} mood="happy" size={120} />
           <p className="kid-note">{t('contest.empty')}</p>
         </section>
       ) : (
@@ -258,14 +258,14 @@ export function ContestPlay({ momoColor }: { momoColor: Color }) {
       <Head title={title} sub={contest?.book ?? undefined} back="/play/lomba" />
       {view.kind === 'loading' || view.kind === 'starting' ? (
         <section className="contest-empty">
-          <Momo color={momoColor} mood="idle" size={120} />
+          <Momo own color={momoColor} mood="idle" size={120} />
           <p className="kid-note">
             {view.kind === 'starting' ? t('contest.starting') : t('contest.loading')}
           </p>
         </section>
       ) : view.kind === 'error' ? (
         <section className="contest-empty">
-          <Momo color={momoColor} mood="curious" size={120} />
+          <Momo own color={momoColor} mood="curious" size={120} />
           <p className="kid-note">{view.notFound ? t('contest.notFound') : t('contest.offline')}</p>
           {!view.notFound && (
             <button type="button" className="kid-btn" onClick={() => void load()}>
@@ -335,7 +335,7 @@ function InfoScreen({
     });
     return (
       <section className="contest-rules">
-        <Momo color={momoColor} mood="happy" size={120} />
+        <Momo own color={momoColor} mood="happy" size={120} />
         <h2>{t('contest.upcoming.title')}</h2>
         <Say text={say} />
         <p className="contest-count" aria-live="off">
@@ -361,7 +361,7 @@ function InfoScreen({
   ];
   return (
     <section className="contest-rules">
-      <Momo color={momoColor} mood="happy" size={120} />
+      <Momo own color={momoColor} mood="happy" size={120} />
       <h2>{t('contest.rules.title')}</h2>
       {c.description && <p className="kid-note">{c.description}</p>}
       <Say text={rules.join(' ')} />
@@ -587,7 +587,7 @@ function ThanksScreen({
   const say = `${t('contest.thanks.title')} ${effort} ${ended ? '' : when}`.trim();
   return (
     <section className="contest-rules contest-thanks" aria-live="polite">
-      <Momo color={momoColor} mood="proud" size={140} />
+      <Momo own color={momoColor} mood="proud" size={140} />
       <h2>{t('contest.thanks.title')}</h2>
       <Say text={say} />
       {ended ? (
@@ -626,7 +626,7 @@ function ResultsBoard({ results, momoColor }: { results: ContestResults; momoCol
       <Say text={say} className="contest-intro" />
       {winners.length === 0 ? (
         <section className="contest-empty">
-          <Momo color={momoColor} mood="happy" size={120} />
+          <Momo own color={momoColor} mood="happy" size={120} />
           <p className="kid-note">{t('contest.results.empty')}</p>
         </section>
       ) : (

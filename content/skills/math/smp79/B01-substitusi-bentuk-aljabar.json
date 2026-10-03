@@ -1,0 +1,42 @@
+{
+  "id": "math.smp79.b1.substitusi-bentuk-aljabar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 1,
+  "title": "Aljabar — Level 1 — Substitusi bentuk aljabar",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [-5, 6],
+      "b": [-5, 6]
+    },
+    "constraint": "a != 0 && b != 0",
+    "prompt": "Jika a = {a} dan b = {b}, nilai 2a² − 3ab + b² adalah …",
+    "answer": "2 * a * a - 3 * a * b + b * b",
+    "allowNegative": true,
+    "distractors": [
+      {
+        "expr": "2 * a * a + 3 * a * b + b * b",
+        "tag": "tanda-tengah"
+      },
+      {
+        "expr": "2 * a - 3 * a * b + b",
+        "tag": "lupa-kuadrat"
+      },
+      {
+        "expr": "4 * a * a - 3 * a * b + b * b",
+        "tag": "kuadrat-dari-2a"
+      }
+    ],
+    "explain": "2 × {=a*a} − 3 × ({a}) × ({b}) + {=b*b} = {=2*a*a} − ({=3*a*b}) + {=b*b} = {answer}."
+  }
+}

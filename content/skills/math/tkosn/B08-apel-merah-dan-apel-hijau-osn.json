@@ -1,0 +1,58 @@
+{
+  "id": "math.tkosn.b8.apel-merah-dan-apel-hijau-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "B",
+  "order": 8,
+  "title": "Berhitung ceria — Level 8 — Apel merah dan apel hijau (gaya OSN)",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "Olimpiade TK (TK A–B, usia 4–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 5]
+    },
+    "constraint": "a + b <= 10",
+    "prompt": "Ada {a} apel merah dan {b} apel hijau. Berapa semua apelnya?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "apel",
+        "count": "=a",
+        "color": "merah"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "apel",
+        "count": "=b",
+        "color": "hijau"
+      }
+    ],
+    "answer": "a + b",
+    "distractors": [
+      {
+        "expr": "a + b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "hanya-merah"
+      }
+    ],
+    "choices": 3,
+    "explain": "{a} apel merah dan {b} apel hijau. Kita hitung semuanya: {answer} apel."
+  }
+}

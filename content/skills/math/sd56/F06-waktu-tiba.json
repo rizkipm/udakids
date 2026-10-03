@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.f6.waktu-tiba",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "F",
+  "order": 6,
+  "title": "Kecepatan, jarak, dan waktu — Level 6 — Waktu tiba",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [6, 9],
+      "v": {
+        "values": [40, 50, 60]
+      },
+      "t": [2, 4]
+    },
+    "derived": {
+      "s": "v * t"
+    },
+    "prompt": "Bus berangkat pukul {h}.00 menempuh {s} km dengan kecepatan {v} km/jam. Pukul berapa bus tiba? (tulis jamnya saja)",
+    "answer": "h + t",
+    "distractors": [
+      {
+        "expr": "h + s / 10",
+        "tag": "salah-waktu"
+      },
+      {
+        "expr": "t",
+        "tag": "durasi-bukan-jam"
+      },
+      {
+        "expr": "h + t + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Waktu tempuh {s} : {v} = {t} jam. {h}.00 + {t} jam = pukul {answer}.00."
+  }
+}

@@ -328,8 +328,12 @@ describe('dashboard', () => {
 
   it('kode keluarga, pilihan anak, dan tautan laporan', async () => {
     login();
-    fetchMock.mockResolvedValue(
-      json(overview([kid('c1', 'Dodi', 'biru'), kid('c2', 'Ara', 'kuning', 4)])),
+    fetchMock.mockImplementation((url: string) =>
+      Promise.resolve(
+        url.endsWith('/parent/news')
+          ? json({ subscribed: true })
+          : json(overview([kid('c1', 'Dodi', 'biru'), kid('c2', 'Ara', 'kuning', 4)])),
+      ),
     );
     renderParent('/orang-tua');
     expect(screen.getByText('XYZ789')).toBeInTheDocument();
@@ -345,15 +349,21 @@ describe('dashboard', () => {
     expect(
       screen.getAllByRole('link', { name: new RegExp(t('parent.dash.play')) })[0],
     ).toHaveAttribute('href', '/play');
-    expect(fetchMock.mock.calls[0]![0]).toMatch(/\/parent\/overview$/);
-    expect((fetchMock.mock.calls[0]![1] as RequestInit).headers).toMatchObject({
+    const ov = fetchMock.mock.calls.find((c) => /\/parent\/overview$/.test(c[0] as string))!;
+    expect((ov[1] as RequestInit).headers).toMatchObject({
       Authorization: `Bearer ${token}`,
     });
   });
 
   it('progres anak: angka, grafik 7 hari, insight, buku, ronde terakhir', async () => {
     login();
-    fetchMock.mockResolvedValue(json(overview([kid('c2', 'Ara', 'kuning', 4)])));
+    fetchMock.mockImplementation((url: string) =>
+      Promise.resolve(
+        url.endsWith('/parent/news')
+          ? json({ subscribed: true })
+          : json(overview([kid('c2', 'Ara', 'kuning', 4)])),
+      ),
+    );
     const { container } = renderParent('/orang-tua');
     expect(await screen.findByRole('heading', { name: 'Ara' })).toBeInTheDocument();
     expect(container.querySelectorAll('.pd-bar')).toHaveLength(7);
@@ -382,7 +392,13 @@ describe('dashboard', () => {
 
   it('hapus anak meminta konfirmasi dulu', async () => {
     login();
-    fetchMock.mockResolvedValue(json(overview([kid('c1', 'Dodi', 'biru')])));
+    fetchMock.mockImplementation((url: string) =>
+      Promise.resolve(
+        url.endsWith('/parent/news')
+          ? json({ subscribed: true })
+          : json(overview([kid('c1', 'Dodi', 'biru')])),
+      ),
+    );
     renderParent('/orang-tua');
     const card = (await screen.findByRole('heading', { name: 'Dodi' })).closest('article')!;
     fireEvent.click(

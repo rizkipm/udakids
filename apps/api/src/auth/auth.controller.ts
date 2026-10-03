@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, Put, Req } from '@nestjs/common';
 import {
   childLoginSchema,
   childRegisterSchema,
@@ -10,13 +10,14 @@ import {
   parentRegisterSchema,
   staffLoginSchema,
   type SessionUser,
+  momoStyleSchema,
 } from '@little-coder/engine';
 import type { Request } from 'express';
 import type { z } from 'zod';
 import { clientIp } from '../common/rate-limit.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { AuthService } from './auth.service.js';
-import { CurrentUser, Public } from './decorators.js';
+import { CurrentUser, Public, Roles } from './decorators.js';
 
 @Controller('auth')
 export class AuthController {
@@ -117,5 +118,15 @@ export class AuthController {
   @Get('me')
   me(@CurrentUser() user: SessionUser) {
     return this.auth.me(user);
+  }
+
+  /** Anak mengatur tampilan Momo-nya sendiri: warna, gradasi, aksesori (D-051). */
+  @Roles('child')
+  @Put('me/momo')
+  setMomo(
+    @CurrentUser() user: SessionUser,
+    @Body(new ZodPipe(momoStyleSchema)) body: z.infer<typeof momoStyleSchema>,
+  ) {
+    return this.auth.setMomoStyle(user.id, body);
   }
 }

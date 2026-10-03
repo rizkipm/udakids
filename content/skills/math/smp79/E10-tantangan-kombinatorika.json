@@ -1,0 +1,61 @@
+{
+  "id": "math.smp79.e10.tantangan-kombinatorika",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 10,
+  "title": "Kombinatorika — Level 10 — Tantangan kombinatorika",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 20]
+          },
+          "prompt": "Ada {n} tim. Setiap dua tim bertanding tepat satu kali. Banyak pertandingan adalah …",
+          "answer": "n * (n - 1) / 2",
+          "mode": "input",
+          "explain": "C({n}, 2) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 10]
+          },
+          "prompt": "Dari {n} siswa dipilih ketua dan wakil ketua. Banyak susunan adalah …",
+          "answer": "n * (n - 1)",
+          "mode": "input",
+          "explain": "{n} × {=n-1} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 3],
+            "b": [2, 4]
+          },
+          "derived": {
+            "w": "(a == 2) * (b + 1) * (b + 2) / 2 + (a == 3) * (b + 1) * (b + 2) * (b + 3) / 6"
+          },
+          "prompt": "Banyak lintasan terpendek pada kisi dari A ke B yang berjarak {a} blok ke kanan dan {b} blok ke atas adalah …",
+          "answer": "w",
+          "mode": "input",
+          "explain": "C({=a+b}, {a}) = {answer}."
+        }
+      }
+    ]
+  }
+}

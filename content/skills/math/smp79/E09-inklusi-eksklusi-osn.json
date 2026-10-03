@@ -1,0 +1,30 @@
+{
+  "id": "math.smp79.e9.inklusi-eksklusi-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 9,
+  "title": "Kombinatorika — Level 9 — Inklusi-eksklusi (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [30, 50],
+      "x": [10, 25],
+      "y": [10, 25],
+      "z": [2, 9]
+    },
+    "constraint": "z < x && z < y && x + y - z < n",
+    "prompt": "Dari {n} siswa, {x} siswa menyukai matematika, {y} siswa menyukai IPA, dan {z} siswa menyukai keduanya. Banyak siswa yang tidak menyukai keduanya adalah …",
+    "answer": "n - (x + y - z)",
+    "mode": "input",
+    "explain": "Yang menyukai minimal satu = {x} + {y} − {z} = {=x+y-z}. Tidak menyukai keduanya = {n} − {=x+y-z} = {answer}."
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "math.sd56.a10.tantangan-bilangan-bulat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "A",
+  "order": 10,
+  "title": "Bilangan bulat — Level 10 — Tantangan bilangan bulat",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [-30, -5],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Hasil dari {a} − {b} × {c} adalah …",
+          "answer": "a - b * c",
+          "allowNegative": true,
+          "mode": "input",
+          "explain": "{b} × {c} = {=b*c}, lalu {a} − {=b*c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [1, 30]
+          },
+          "prompt": "Hasil dari (−{a}) × (−{b}) − {c} adalah …",
+          "answer": "a * b - c",
+          "allowNegative": true,
+          "mode": "input",
+          "explain": "(−{a}) × (−{b}) = {=a*b}, lalu {=a*b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [3, 12],
+            "n": [2, 6]
+          },
+          "derived": {
+            "neg": "-t"
+          },
+          "prompt": "Suhu {neg}°C turun {n}°C setiap jam. Berapa suhu setelah 3 jam?",
+          "answer": "-t - 3 * n",
+          "allowNegative": true,
+          "mode": "input",
+          "unit": "°C",
+          "explain": "Turun 3 × {n} = {=3*n}°C. {neg} − {=3*n} = {answer}."
+        }
+      }
+    ]
+  }
+}

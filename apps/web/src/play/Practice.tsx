@@ -167,7 +167,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   if (!data || !links) {
     return (
       <main className="kid-screen">
-        <Momo color={momoColor} mood="idle" size={140} />
+        <Momo own color={momoColor} mood="idle" size={140} />
         <p className="kid-note">{t('play.library.loading')}</p>
       </main>
     );
@@ -175,7 +175,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   if (locked && skill) {
     return (
       <main className="kid-screen">
-        <Momo color={momoColor} mood="curious" size={140} />
+        <Momo own color={momoColor} mood="curious" size={140} />
         {paid ? (
           <PremiumNotice access={access} />
         ) : (
@@ -192,7 +192,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   if (!skill || !item || !book) {
     return (
       <main className="kid-screen">
-        <Momo color={momoColor} mood="curious" size={140} />
+        <Momo own color={momoColor} mood="curious" size={140} />
         <p className="kid-note">{t('play.quiz.notFound')}</p>
         <Link className="kid-btn" to="/play">
           {t('play.quiz.back')}
@@ -356,7 +356,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       <main className="practice">
         {header}
         <section className={`result-card ${passed ? 'is-passed' : 'is-failed'}`}>
-          <Momo color={momoColor} mood={passed ? 'proud' : 'curious'} size={130} />
+          <Momo own color={momoColor} mood={passed ? 'proud' : 'curious'} size={130} />
           <p className="result-score">{t('play.quiz.score', { score: phase.score })}</p>
           <p className="result-summary">
             {t('play.quiz.summary', { correct: phase.correct, total: QUIZ_LENGTH })}
@@ -429,7 +429,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
             aria-modal="true"
             aria-labelledby="quit-title"
           >
-            <Momo color={momoColor} mood="curious" size={90} />
+            <Momo own color={momoColor} mood="curious" size={90} />
             <div className="kid-say">
               <SpeakButton text={`${t('play.quiz.quitTitle')} ${t('play.quiz.quitText')}`} />
               <p id="quit-title">{t('play.quiz.quitTitle')}</p>
@@ -457,7 +457,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       )}
       {gate ? (
         <section className="start-gate">
-          <Momo color={momoColor} mood="happy" size={130} />
+          <Momo own color={momoColor} mood="happy" size={130} />
           <h2>{t('play.start.title')}</h2>
           <p className="kid-note">{t('play.start.say')}</p>
           <button
@@ -573,7 +573,7 @@ function Feedback({
   }, []);
   return (
     <div ref={ref} className={`feedback ${correct ? 'is-right' : 'is-wrong'}`} role="status">
-      <Momo color={color} mood={mood} size={90} />
+      <Momo own color={color} mood={mood} size={90} />
       <div className="feedback-body">
         <div className="kid-say">
           <SpeakButton text={message} />

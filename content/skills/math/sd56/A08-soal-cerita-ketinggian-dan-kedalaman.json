@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.a8.soal-cerita-ketinggian-dan-kedalaman",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "A",
+  "order": 8,
+  "title": "Bilangan bulat — Level 8 — Soal cerita ketinggian dan kedalaman",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [10, 40],
+      "u": [3, 30],
+      "h": [50, 200]
+    },
+    "constraint": "u < d",
+    "prompt": "Burung terbang {h} m di atas laut. Penyelam di {d} m di bawah laut naik {u} m. Berapa m selisih ketinggian mereka sekarang?",
+    "answer": "h + d - u",
+    "unit": "m",
+    "distractors": [
+      {
+        "expr": "h - d + u",
+        "tag": "tanda-terbalik"
+      },
+      {
+        "expr": "h + d + u",
+        "tag": "arah-naik-salah"
+      },
+      {
+        "expr": "h - (d - u)",
+        "tag": "selisih-bukan-jarak"
+      }
+    ],
+    "explain": "Penyelam kini di −{=d-u} m. Selisih = {h} − (−{=d-u}) = {answer}."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "math.smp79.g5.angka-pada-bilangan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "G",
+  "order": 5,
+  "title": "Logika — Level 5 — Angka pada bilangan dua angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "b": [1, 8]
+    },
+    "constraint": "a > b",
+    "prompt": "Bilangan dua angka AB dikurangi bilangan BA (angkanya dibalik) hasilnya {=9*(a-b)}. Jika A + B = {=a+b}, bilangan AB adalah …",
+    "answer": "10 * a + b",
+    "distractors": [
+      {
+        "expr": "10 * b + a",
+        "tag": "dibalik"
+      },
+      {
+        "expr": "10 * a + b + 9",
+        "tag": "lebih-sembilan"
+      },
+      {
+        "expr": "a * b",
+        "tag": "dikali"
+      }
+    ],
+    "explain": "AB − BA = 9(A − B) = {=9*(a-b)}, jadi A − B = {=a-b}. Dengan A + B = {=a+b}: A = {a}, B = {b}. AB = {answer}."
+  }
+}

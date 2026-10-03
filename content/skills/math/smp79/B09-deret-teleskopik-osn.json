@@ -1,0 +1,46 @@
+{
+  "id": "math.smp79.b9.deret-teleskopik-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 9,
+  "title": "Aljabar — Level 9 — Deret teleskopik (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [5, 49]
+    },
+    "prompt": "Nilai 1/(1×2) + 1/(2×3) + 1/(3×4) + … + 1/({n}×{=n+1}) adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "n",
+      "den": "n + 1"
+    },
+    "distractors": [
+      {
+        "num": "1",
+        "den": "n + 1",
+        "tag": "hanya-sisa"
+      },
+      {
+        "num": "n - 1",
+        "den": "n",
+        "tag": "geser-satu"
+      },
+      {
+        "num": "n",
+        "den": "n + 2",
+        "tag": "salah-suku"
+      }
+    ],
+    "explain": "Setiap suku 1/(k(k + 1)) = 1/k − 1/(k + 1). Suku-suku saling menghapus: 1 − 1/{=n+1} = {answer}."
+  }
+}

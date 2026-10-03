@@ -1,0 +1,32 @@
+{
+  "id": "math.smp79.g8.rata-rata-setelah-satu-data-keluar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "G",
+  "order": 8,
+  "title": "Logika — Level 8 — Rata-rata setelah satu data keluar",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [5, 20],
+      "r": [60, 85],
+      "s": [60, 85]
+    },
+    "derived": {
+      "x": "n * r - (n - 1) * s"
+    },
+    "constraint": "x >= 0 && x <= 100 && r != s",
+    "prompt": "Rata-rata nilai {n} siswa adalah {r}. Setelah satu siswa pindah sekolah, rata-rata nilai siswa yang tersisa menjadi {s}. Nilai siswa yang pindah adalah …",
+    "answer": "x",
+    "mode": "input",
+    "explain": "Jumlah awal {=n*r}, jumlah sisa {=(n-1)*s}. Nilai yang pindah = {=n*r} − {=(n-1)*s} = {answer}."
+  }
+}

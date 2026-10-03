@@ -6,17 +6,33 @@ import { createRng } from './rng.js';
 
 export const DOMAINS = ['math', 'literasi', 'sains', 'logika', 'spasial'] as const;
 // Urutan = urutan tampil buku (per mata pelajaran). Buku per kelas (sd1–sd4, D-032) berdampingan dengan
-// buku gabungan lama (sd12, sd34) yang tetap dipertahankan.
-export const GRADES = ['prek', 'tk', 'sd1', 'sd2', 'sd12', 'sd3', 'sd4', 'sd34'] as const;
+// buku gabungan lama (sd12, sd34) yang tetap dipertahankan; sd56 = OSN Kategori C (D-048); smp79 = OSN SMP Kategori D (D-049);
+// tkosn = olimpiade TK, Math & Sains (D-050).
+export const GRADES = [
+  'prek',
+  'tk',
+  'tkosn',
+  'sd1',
+  'sd2',
+  'sd12',
+  'sd3',
+  'sd4',
+  'sd34',
+  'sd56',
+  'smp79',
+] as const;
 export const GRADE_LABEL: Record<(typeof GRADES)[number], string> = {
   prek: 'Pra-TK',
   tk: 'Kindergarten (TK)',
+  tkosn: 'TK (Olimpiade)',
   sd1: 'Kelas 1',
   sd2: 'Kelas 2',
   sd12: 'Grade 1-2 (Kategori A)',
   sd3: 'Kelas 3',
   sd4: 'Kelas 4',
   sd34: 'Grade 3-4 (Kategori B)',
+  sd56: 'Grade 5-6 (Kategori C)',
+  smp79: 'SMP Kelas 7-9 (Kategori D)',
 };
 
 export const skillIdSchema = z
@@ -80,7 +96,8 @@ export const catalogSchema = z.strictObject({
 export type Catalog = z.infer<typeof catalogSchema>;
 
 export const MAX_ATTEMPTS = 100;
-export const MAX_PROMPT_LENGTH = 160;
+/** Batas panjang kalimat soal (D-049): soal cerita/olimpiade boleh panjang, maksimal 500 karakter. */
+export const MAX_PROMPT_LENGTH = 500;
 
 export class GeneratorError extends Error {}
 

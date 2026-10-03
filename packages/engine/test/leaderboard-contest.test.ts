@@ -118,7 +118,8 @@ describe('lomba live (D-042)', () => {
       expect(json).not.toContain('"tag"');
       expect(pub.prompt).toBe(it.prompt);
     }
-  });
+    // Memindai seluruh content/ (ribuan skill) — butuh waktu lebih dari batas bawaan 5 detik.
+  }, 30_000);
 
   it('pilihan kartu tetap utuh (id sama) sehingga jawaban dinilai server dengan checkAnswer', () => {
     const it: Item = {

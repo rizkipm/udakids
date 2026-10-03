@@ -1,0 +1,37 @@
+{
+  "id": "math.sd56.c9.soal-cerita-pecahan-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "C",
+  "order": 9,
+  "title": "Pecahan — Level 9 — Soal cerita pecahan (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [2, 6],
+      "x": {
+        "values": [2, 3, 4]
+      },
+      "y": {
+        "values": [3, 4, 5]
+      }
+    },
+    "constraint": "x < y",
+    "derived": {
+      "n": "k * x * y"
+    },
+    "prompt": "Ibu punya {n} kue. 1/{x} bagian diberikan ke tetangga, lalu 1/{y} dari sisanya dimakan adik. Berapa kue yang tersisa?",
+    "answer": "n - n / x - (n - n / x) / y",
+    "mode": "input",
+    "unit": "kue",
+    "explain": "Diberikan {=n/x}, sisa {=n-n/x}. Dimakan {=(n-n/x)/y}, sisa {answer}."
+  }
+}

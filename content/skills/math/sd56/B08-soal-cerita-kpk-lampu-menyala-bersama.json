@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.b8.soal-cerita-kpk-lampu-menyala-bersama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 8,
+  "title": "FPB dan KPK — Level 8 — Soal cerita KPK: lampu menyala bersama",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [4, 6, 8, 10]
+      },
+      "b": {
+        "values": [6, 9, 12, 15]
+      },
+      "c": {
+        "values": [10, 12, 15, 20]
+      }
+    },
+    "constraint": "a < b && b < c && lcm(a, b, c) <= 120",
+    "prompt": "Lampu A berkedip tiap {a} detik, B tiap {b} detik, C tiap {c} detik. Setelah berapa detik ketiganya berkedip bersama lagi?",
+    "answer": "lcm(a, b, c)",
+    "unit": "detik",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "lupa-bilangan-ketiga"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "gcd(a, b, c)",
+        "tag": "fpb-bukan-kpk"
+      }
+    ],
+    "explain": "KPK dari {a}, {b}, dan {c} adalah {answer}."
+  }
+}

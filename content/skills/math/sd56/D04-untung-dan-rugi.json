@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.d4.untung-dan-rugi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 4,
+  "title": "Persentase — Level 4 — Untung dan rugi",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "range": [20000, 200000],
+        "step": 5000
+      },
+      "u": {
+        "range": [2000, 40000],
+        "step": 1000
+      },
+      "s": {
+        "values": [1, 2]
+      }
+    },
+    "constraint": "u < b",
+    "derived": {
+      "j": "b + (s == 1) * u - (s == 2) * u"
+    },
+    "prompt": "Pak Budi membeli barang seharga Rp{b} dan menjualnya Rp{j}. Berapa besar untung (positif) atau rugi (negatif) dalam rupiah?",
+    "answer": "j - b",
+    "allowNegative": true,
+    "distractors": [
+      {
+        "expr": "b - j",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "j + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "abs(j - b) * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "explain": "Harga jual − harga beli = Rp{j} − Rp{b} = {answer}."
+  }
+}

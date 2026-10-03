@@ -16,6 +16,8 @@ import {
   rankByAverage,
   rating2,
   type SessionUser,
+  parseMomoLook,
+  type MomoLook,
 } from '@little-coder/engine';
 import { sql } from 'drizzle-orm';
 import { z } from 'zod';
@@ -54,7 +56,7 @@ type Agg = {
   /** Jumlah waktu skor terbaik tiap level (D-024). */
   bestTimeMs: number;
 };
-type Entry = Agg & { id: string; nickname: string; momoColor: string };
+type Entry = Agg & { id: string; nickname: string; momoColor: string; momoLook: MomoLook | null };
 type Board = (Entry & { average: number; rating: number; position: number })[];
 type Book = {
   key: string;
@@ -131,6 +133,7 @@ export class LeaderboardController {
         position: r.position,
         nickname: r.nickname,
         momoColor: r.momoColor,
+        momoLook: r.momoLook,
         points: r.points,
         questions: r.questions,
         passedLevels: r.passedLevels,
@@ -268,6 +271,7 @@ export class LeaderboardController {
       mode: q.mode,
       nickname: row.nickname,
       momoColor: row.momoColor,
+      momoLook: row.momoLook,
       isMe: self,
       position: row.position,
       participants: board.length,
@@ -312,7 +316,7 @@ export class LeaderboardController {
   private async build(): Promise<Snapshot> {
     const [played, passed, catalogs, levels, answered] = await Promise.all([
       this.db.execute(sql`
-        select c.id, c.nickname, c.momo_color, s.domain, s.grade, count(*) as rounds,
+        select c.id, c.nickname, c.momo_color, c.momo_look, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
           sum(coalesce((e.payload->>'durationMs')::numeric, 0)) as time_ms
         from events e
@@ -391,6 +395,7 @@ export class LeaderboardController {
         id,
         nickname: String(r.nickname),
         momoColor: String(r.momo_color),
+        momoLook: parseMomoLook(r.momo_look),
         rounds: 0,
         questions: answeredAgg.get(`${id}|${scope}`) ?? 0,
         scoreSum: 0,
@@ -442,6 +447,7 @@ function publicRow(r: Board[number], viewer: string | null, withId: boolean) {
     isMe,
     nickname: r.nickname,
     momoColor: r.momoColor,
+    momoLook: r.momoLook,
     average: r.average,
     rating: r.rating,
     points: r.points,

@@ -1,0 +1,60 @@
+{
+  "id": "math.smp79.i10.tantangan-ekstremal",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "I",
+  "order": 10,
+  "title": "Ekstremal — Level 10 — Tantangan ekstremal",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 25]
+          },
+          "derived": {
+            "k": "4 * m"
+          },
+          "prompt": "Keliling persegi panjang {k} cm. Luas terbesarnya adalah … cm²",
+          "answer": "m * m",
+          "mode": "input",
+          "explain": "Persegi bersisi {m}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [7, 40]
+          },
+          "prompt": "Bilangan tiga angka terbesar yang habis dibagi {k} adalah …",
+          "answer": "floor(999 / k) * k",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5]
+          },
+          "prompt": "Minimal berapa siswa agar pasti ada {k} siswa yang lahir di bulan yang sama?",
+          "answer": "12 * (k - 1) + 1",
+          "mode": "input",
+          "explain": "12 × {=k-1} + 1 = {answer}."
+        }
+      }
+    ]
+  }
+}

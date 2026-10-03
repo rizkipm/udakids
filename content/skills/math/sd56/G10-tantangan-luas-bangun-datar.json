@@ -1,0 +1,70 @@
+{
+  "id": "math.sd56.g10.tantangan-luas-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "G",
+  "order": 10,
+  "title": "Luas bangun datar — Level 10 — Tantangan luas bangun datar",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [4, 24],
+              "step": 2
+            },
+            "t": [3, 15]
+          },
+          "prompt": "Luas segitiga dengan alas {a} cm dan tinggi {t} cm adalah … cm²",
+          "answer": "a * t / 2",
+          "mode": "input",
+          "unit": "cm²",
+          "explain": "½ × {a} × {t} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 15],
+            "b": [6, 20],
+            "t": [2, 10]
+          },
+          "constraint": "a < b && (a + b) * t % 2 == 0",
+          "prompt": "Luas trapesium dengan sisi sejajar {a} cm dan {b} cm, tinggi {t} cm adalah … cm²",
+          "answer": "(a + b) * t / 2",
+          "mode": "input",
+          "unit": "cm²",
+          "explain": "½ × {=a+b} × {t} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3]
+          },
+          "derived": {
+            "r": "7 * k"
+          },
+          "prompt": "Luas lingkaran berjari-jari {r} cm (π = 22/7) adalah … cm²",
+          "answer": "22 * r * r / 7",
+          "mode": "input",
+          "unit": "cm²",
+          "explain": "22/7 × {r} × {r} = {answer}."
+        }
+      }
+    ]
+  }
+}

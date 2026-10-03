@@ -1,0 +1,46 @@
+{
+  "id": "math.smp79.f3.suku-ke-n-barisan-geometri",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "F",
+  "order": 3,
+  "title": "Pola bilangan — Level 3 — Suku ke-n barisan geometri",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "r": {
+        "values": [2, 3]
+      },
+      "n": [4, 7]
+    },
+    "derived": {
+      "rp": "((n - 1) == 1) * r + ((n - 1) == 2) * r * r + ((n - 1) == 3) * r * r * r + ((n - 1) == 4) * r * r * r * r + ((n - 1) == 5) * r * r * r * r * r + ((n - 1) == 6) * r * r * r * r * r * r"
+    },
+    "prompt": "Barisan {a}, {=a*r}, {=a*r*r}, … Suku ke-{n} adalah …",
+    "answer": "a * rp",
+    "distractors": [
+      {
+        "expr": "a * rp * r",
+        "tag": "lebih-satu-rasio"
+      },
+      {
+        "expr": "a + (n - 1) * r",
+        "tag": "dianggap-aritmetika"
+      },
+      {
+        "expr": "rp",
+        "tag": "lupa-suku-awal"
+      }
+    ],
+    "explain": "Un = a × r^(n − 1) = {a} × {r}^{=n-1} = {answer}."
+  }
+}

@@ -139,7 +139,7 @@ export function ItemPlayer({
             sayPrompt();
           }}
         />
-        <p>{item.prompt}</p>
+        <p className={item.prompt.length > 160 ? 'is-long' : undefined}>{item.prompt}</p>
       </div>
       {blocked && mode === 'play' && (
         <p className="speech-help is-tap" role="status">

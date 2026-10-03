@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.e1.menyederhanakan-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "E",
+  "order": 1,
+  "title": "Perbandingan dan skala — Level 1 — Menyederhanakan perbandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [2, 9],
+      "x": [1, 7],
+      "y": [2, 9]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "prompt": "Perbandingan {a} : {b} disederhanakan menjadi {x} : … . Berapa bilangan yang hilang?",
+    "answer": "y",
+    "distractors": [
+      {
+        "expr": "b - g",
+        "tag": "mengurang-fpb"
+      },
+      {
+        "expr": "y + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "b / 2",
+        "tag": "dibagi-dua"
+      }
+    ],
+    "explain": "Bagi keduanya dengan FPB {g}: {a} : {b} = {x} : {answer}."
+  }
+}

@@ -21,3 +21,4 @@ export * from './reports/insights.js';
 export * from './generator/index.js';
 export * from './account/schemas.js';
 export * from './locale.js';
+export * from './avatar/momo.js';

@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.d6.bunga-tabungan-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 6,
+  "title": "Persentase — Level 6 — Bunga tabungan sederhana",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "values": [1000000, 2000000, 500000, 1500000, 3000000]
+      },
+      "r": {
+        "values": [6, 8, 10, 12]
+      },
+      "t": {
+        "values": [6, 12, 18, 24]
+      }
+    },
+    "constraint": "m * r * t % 1200 == 0",
+    "prompt": "Ani menabung Rp{m} di bank dengan bunga {r}% per tahun. Berapa rupiah bunga yang ia terima setelah {t} bulan?",
+    "answer": "m * r / 100 * t / 12",
+    "distractors": [
+      {
+        "expr": "m * r / 100",
+        "tag": "bunga-satu-tahun"
+      },
+      {
+        "expr": "m * r / 100 * t",
+        "tag": "lupa-bagi-12"
+      },
+      {
+        "expr": "m + m * r / 100 * t / 12",
+        "tag": "saldo-akhir"
+      }
+    ],
+    "explain": "Bunga = {r}% × Rp{m} × {t}/12 = Rp{answer}."
+  }
+}

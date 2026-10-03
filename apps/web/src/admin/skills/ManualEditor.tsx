@@ -174,7 +174,7 @@ function ItemEditor({
         <TextField
           label={t('admin.manual.prompt')}
           value={item.prompt}
-          maxLength={160}
+          maxLength={500}
           required
           onChange={(e) => set({ prompt: e.target.value })}
         />

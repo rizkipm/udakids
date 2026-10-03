@@ -1,3 +1,4 @@
+import { Unsubscribe } from './site/Unsubscribe';
 import { Route, Routes } from 'react-router-dom';
 import { AdminApp } from './admin/AdminApp';
 import { FacilitatorApp } from './facilitator/FacilitatorApp';
@@ -19,6 +20,7 @@ export function App() {
       <Route path="/play/*" element={<PlayApp />} />
       <Route path="/orang-tua/*" element={<ParentApp />} />
       <Route path="/masuk/staf" element={<StaffLogin />} />
+      <Route path="/berhenti-langganan" element={<Unsubscribe />} />
       <Route
         path="/admin/*"
         element={

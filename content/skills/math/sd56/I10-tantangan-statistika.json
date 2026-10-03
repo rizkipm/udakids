@@ -1,0 +1,81 @@
+{
+  "id": "math.sd56.i10.tantangan-statistika",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 10,
+  "title": "Statistika — Level 10 — Tantangan statistika",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [60, 90],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "derived": {
+            "x1": "m - a",
+            "x2": "m + a",
+            "x3": "m - b",
+            "x4": "m + b"
+          },
+          "prompt": "Rata-rata dari {x2}, {x3}, {m}, {x1}, {x4} adalah …",
+          "answer": "m",
+          "mode": "input",
+          "explain": "Jumlah {=5*m} : 5 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 60],
+            "d1": [1, 5],
+            "d2": [1, 5],
+            "d3": [1, 5],
+            "d4": [1, 5]
+          },
+          "derived": {
+            "b": "a + d1",
+            "c": "b + d2",
+            "d": "c + d3",
+            "e": "d + d4"
+          },
+          "prompt": "Median dari {e}, {b}, {d}, {a}, {c} adalah …",
+          "answer": "c",
+          "mode": "input",
+          "explain": "Diurutkan, nilai tengahnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [70, 85],
+            "a": [1, 8],
+            "b": [1, 8]
+          },
+          "derived": {
+            "x1": "r + a",
+            "x2": "r - b"
+          },
+          "prompt": "Nilai Dimas {x1} dan {x2}. Nilai ulangan ketiga berapa agar rata-ratanya {r}?",
+          "answer": "3 * r - x1 - x2",
+          "mode": "input",
+          "explain": "3 × {r} − {x1} − {x2} = {answer}."
+        }
+      }
+    ]
+  }
+}

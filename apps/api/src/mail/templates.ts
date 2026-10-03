@@ -92,7 +92,7 @@ ${note ? `<div style="font-size:13px;color:${C.muted};margin-top:8px">${esc(note
 /** Kerangka email: kepala ungu dengan Momo, isi kartu putih, footer "Momo From Udakids". */
 function layout(
   ctx: MailContext,
-  opts: { title: string; preheader: string; tone?: Tone; body: string },
+  opts: { title: string; preheader: string; tone?: Tone; body: string; unsubscribe?: string },
 ): string {
   const [accent] = toneColor[opts.tone ?? 'grape'];
   const momo = `${ctx.appUrl.replace(/\/$/, '')}/email/momo.png`;
@@ -117,7 +117,11 @@ ${opts.body}
 <tr><td align="center" style="padding:18px 10px 0;font-size:12px;line-height:1.6;color:${C.muted}">
 Email ini dikirim otomatis oleh ${esc(ctx.brand)}. Mohon tidak membalas email ini.<br>
 Kami tidak pernah meminta password atau sandi gambar anak lewat email.<br>
-<a href="${esc(ctx.appUrl)}" style="color:${C.grape};font-weight:700;text-decoration:none">Momo From ${esc(ctx.brand)}</a>
+<a href="${esc(ctx.appUrl)}" style="color:${C.grape};font-weight:700;text-decoration:none">Momo From ${esc(ctx.brand)}</a>${
+    opts.unsubscribe
+      ? `<br><a href="${esc(opts.unsubscribe)}" style="color:${C.muted};text-decoration:underline">Berhenti menerima info materi baru</a>`
+      : ''
+  }
 </td></tr>
 </table></td></tr></table></body></html>`;
 }
@@ -381,4 +385,66 @@ export function testEmail(ctx: MailContext, d: { to: string }): MailContent {
     html,
     text: `Tes email ${ctx.brand} berhasil dikirim ke ${d.to}.${footerText(ctx)}`,
   };
+}
+
+// ------------------------------------------------------------------ info materi baru (D-053)
+
+export type NewsBook = { title: string; topics: string[]; levels: number };
+
+export function newContent(
+  ctx: MailContext,
+  d: { name: string; books: NewsBook[]; total: number; unsubscribeUrl: string },
+): MailContent {
+  const base = ctx.appUrl.replace(/\/$/, '');
+  const subject = `Ada ${d.total} level latihan baru di ${ctx.brand}!`;
+  const list = d.books
+    .map(
+      (b) =>
+        `<tr><td style="padding:10px 14px;border-bottom:1px solid #eee6d6"><strong style="color:${C.ink}">${esc(b.title)}</strong><br><span style="font-size:13px;color:${C.muted}">${esc(b.topics.slice(0, 6).join(', '))}${b.topics.length > 6 ? ', …' : ''}</span></td><td align="right" style="padding:10px 14px;border-bottom:1px solid #eee6d6;font-weight:700;color:${C.grape};white-space:nowrap">${b.levels} level</td></tr>`,
+    )
+    .join('');
+  const html = layout(ctx, {
+    title: 'Materi latihan baru sudah siap!',
+    preheader: `${d.total} level baru: ${d.books.map((b) => b.title).join(', ')}.`,
+    tone: 'sun',
+    unsubscribe: d.unsubscribeUrl,
+    body: [
+      p(
+        `Halo ${d.name}, Momo punya kabar gembira! Ada ${d.total} level latihan baru yang siap dimainkan si kecil.`,
+      ),
+      `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:2px solid ${C.ink};border-radius:16px;border-collapse:separate;overflow:hidden;margin:6px 0 16px">${list}</table>`,
+      p(
+        'Ajak si kecil mencoba satu level hari ini. Belajar sedikit-sedikit setiap hari lebih menyenangkan daripada banyak sekaligus.',
+      ),
+      button(`${base}/play`, 'Main sekarang'),
+      p(
+        `<span style="font-size:13px;color:${C.muted}">Sebagian level mungkin khusus akun Premium. Lihat paket di dasbor orang tua.</span>`,
+      ),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name}, ada ${d.total} level latihan baru di ${ctx.brand}:\n${d.books
+    .map((b) => `- ${b.title}: ${b.levels} level (${b.topics.join(', ')})`)
+    .join(
+      '\n',
+    )}\n\nMain sekarang: ${base}/play${footerText(ctx)}\n\nBerhenti menerima info materi baru: ${d.unsubscribeUrl}`;
+  return { subject, html, text };
+}
+
+export function newsDirectorCopy(
+  ctx: MailContext,
+  d: { books: NewsBook[]; total: number; recipients: number },
+): MailContent {
+  const subject = `[${ctx.brand}] Info materi baru dikirim ke ${d.recipients} orang tua`;
+  const html = layout(ctx, {
+    title: 'Info materi baru terkirim',
+    preheader: `${d.total} level baru, ${d.recipients} penerima.`,
+    body: [
+      p(
+        `Email info materi baru masuk antrean untuk ${d.recipients} orang tua (dikirim bertahap sesuai batas harian).`,
+      ),
+      infoBox(d.books.map((b) => [b.title, `${b.levels} level`] as [string, string])),
+    ].join('\n'),
+  });
+  const text = `Info materi baru (${d.total} level) masuk antrean untuk ${d.recipients} orang tua.\n${d.books.map((b) => `- ${b.title}: ${b.levels} level`).join('\n')}${footerText(ctx)}`;
+  return { subject, html, text };
 }

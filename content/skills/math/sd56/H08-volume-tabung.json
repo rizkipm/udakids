@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.h8.volume-tabung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "H",
+  "order": 8,
+  "title": "Bangun ruang — Level 8 — Volume tabung",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 3],
+      "t": [5, 20]
+    },
+    "derived": {
+      "r": "7 * k"
+    },
+    "prompt": "Tabung berjari-jari {r} cm dan tinggi {t} cm. Berapa cm³ volumenya? (π = 22/7)",
+    "answer": "22 * r * r / 7 * t",
+    "unit": "cm³",
+    "distractors": [
+      {
+        "expr": "22 * r * r / 7",
+        "tag": "luas-alas"
+      },
+      {
+        "expr": "2 * 22 * r / 7 * t",
+        "tag": "selimut"
+      },
+      {
+        "expr": "22 * 2 * r / 7 * t",
+        "tag": "lupa-kuadrat"
+      }
+    ],
+    "explain": "Volume = π × r × r × t = 22/7 × {r} × {r} × {t} = {answer} cm³."
+  }
+}

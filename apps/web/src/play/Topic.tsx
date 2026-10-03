@@ -64,7 +64,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   if (!data || !links) {
     return (
       <main className="kid-screen">
-        <Momo color={momoColor} mood="idle" size={140} />
+        <Momo own color={momoColor} mood="idle" size={140} />
         <p className="kid-note">{t('play.library.loading')}</p>
       </main>
     );
@@ -72,7 +72,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   if (!book || !shelf) {
     return (
       <main className="kid-screen">
-        <Momo color={momoColor} mood="curious" size={140} />
+        <Momo own color={momoColor} mood="curious" size={140} />
         <p className="kid-note">{t('play.quiz.notFound')}</p>
         <Link className="kid-btn" to="/play">
           {t('play.quiz.back')}
@@ -98,7 +98,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
 
       <section className="lesson" aria-labelledby="lesson-title">
         <div className="lesson-head">
-          <Momo color={momoColor} mood="curious" size={72} />
+          <Momo own color={momoColor} mood="curious" size={72} />
           <h2 id="lesson-title">{t('play.topic.lesson')}</h2>
           <SpeakButton text={readAloud} label={t('play.topic.listen')} />
         </div>

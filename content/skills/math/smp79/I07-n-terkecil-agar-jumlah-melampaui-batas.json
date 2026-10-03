@@ -1,0 +1,31 @@
+{
+  "id": "math.smp79.i7.n-terkecil-agar-jumlah-melampaui-batas",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "I",
+  "order": 7,
+  "title": "Ekstremal — Level 7 — n terkecil agar jumlah melampaui batas",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [8, 40],
+      "t": [0, 39]
+    },
+    "constraint": "t < n",
+    "derived": {
+      "m": "n * (n - 1) / 2 + t"
+    },
+    "prompt": "Bilangan asli terkecil n sehingga 1 + 2 + 3 + … + n > {m} adalah …",
+    "answer": "n",
+    "mode": "input",
+    "explain": "1 + … + {=n-1} = {=n*(n-1)/2} ≤ {m}, sedangkan 1 + … + {n} = {=n*(n+1)/2} > {m}. Jadi n = {answer}."
+  }
+}

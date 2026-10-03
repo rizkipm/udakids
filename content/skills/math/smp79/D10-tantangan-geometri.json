@@ -1,0 +1,62 @@
+{
+  "id": "math.smp79.d10.tantangan-geometri",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "D",
+  "order": 10,
+  "title": "Geometri olimpiade — Level 10 — Tantangan geometri",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [5, 6, 8, 9, 10, 12]
+            }
+          },
+          "prompt": "Besar satu sudut dalam segi-{n} beraturan adalah … derajat",
+          "answer": "(n - 2) * 180 / n",
+          "mode": "input",
+          "explain": "({n} − 2) × 180 : {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [6, 15]
+          },
+          "prompt": "Banyak diagonal segi-{n} adalah …",
+          "answer": "n * (n - 3) / 2",
+          "mode": "input",
+          "explain": "{n} × {=n-3} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [25, 80]
+          },
+          "derived": {
+            "c": "2 * k"
+          },
+          "prompt": "Sudut pusat AOB = {c}°. Besar sudut keliling ACB (C di busur besar) adalah … derajat",
+          "answer": "k",
+          "mode": "input",
+          "explain": "{c} : 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

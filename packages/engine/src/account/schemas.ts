@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { COLORS, type ObjectId } from '../generator/assets.js';
 import { jagoStateSchema } from '../scoring/jago.js';
 import { skillIdSchema } from '../generator/template.js';
+import { momoLookSchema } from '../avatar/momo.js';
 
 /**
  * Skema akun & sinkronisasi yang dipakai bersama web dan API (D-014..D-016).
@@ -78,6 +79,8 @@ export const childLoginSchema = z.strictObject({
 export const childProfileSchema = z.strictObject({
   nickname: nicknameSchema,
   momoColor: z.enum(MOMO_COLORS),
+  /** Gradasi & aksesori Momo (D-051), opsional. */
+  momoLook: momoLookSchema.nullable().optional(),
   pin: picturePinSchema,
   classCode: familyCodeSchema.optional(),
 });
@@ -119,6 +122,7 @@ export const classJoinSchema = z.strictObject({
   classCode: familyCodeSchema,
   nickname: nicknameSchema,
   momoColor: z.enum(MOMO_COLORS),
+  momoLook: momoLookSchema.nullable().optional(),
   pin: picturePinSchema,
 });
 /** Fasilitator/admin mendaftarkan banyak siswa sekaligus (D-025). */
@@ -172,6 +176,7 @@ export type SessionUser = { id: string; role: Role; name: string };
 export const childRegisterSchema = z.strictObject({
   nickname: nicknameSchema,
   momoColor: z.enum(MOMO_COLORS),
+  momoLook: momoLookSchema.nullable().optional(),
   pin: picturePinSchema,
 });
 /** Orang tua menautkan anak yang daftar sendiri: kode keluarga anak + sandi gambarnya. */
@@ -189,3 +194,9 @@ export const emailVerifySchema = z.strictObject({
     .regex(/^\d{6}$/, 'kode verifikasi 6 angka'),
 });
 export const emailResendSchema = z.strictObject({ email: emailSchema });
+
+/** Anak mengubah tampilan Momo-nya sendiri (D-051). */
+export const momoStyleSchema = z.strictObject({
+  momoColor: z.enum(MOMO_COLORS),
+  momoLook: momoLookSchema.nullable(),
+});

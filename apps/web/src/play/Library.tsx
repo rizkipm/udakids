@@ -141,7 +141,7 @@ export function Library({ momoColor }: { momoColor: Color }) {
         className="me-chip"
         aria-label={t('play.home.profile', { name: session.user.name })}
       >
-        <Momo color={momoColor} mood="happy" size={44} />
+        <Momo own color={momoColor} mood="happy" size={44} />
         <span className="me-name">{session.user.name}</span>
         <span className="me-points">
           <StatIcon kind="points" size={20} />
@@ -166,7 +166,7 @@ export function Library({ momoColor }: { momoColor: Color }) {
       <main className="home">
         {top}
         <section className="home-empty">
-          <Momo color={momoColor} mood={failed ? 'curious' : 'idle'} size={140} />
+          <Momo own color={momoColor} mood={failed ? 'curious' : 'idle'} size={140} />
           <p className="kid-note">
             {failed ? t('play.library.offline') : t('play.library.loading')}
           </p>
@@ -189,7 +189,7 @@ export function Library({ momoColor }: { momoColor: Color }) {
 
       <ContestEntryCard />
       <section className="continue-card">
-        <Momo color={momoColor} mood={next ? 'happy' : 'proud'} size={96} />
+        <Momo own color={momoColor} mood={next ? 'happy' : 'proud'} size={96} />
         <div className="continue-body">
           <div className="kid-say">
             <SpeakButton text={say} />

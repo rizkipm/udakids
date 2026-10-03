@@ -1,0 +1,39 @@
+{
+  "id": "math.sd56.h9.penalaran-bangun-ruang-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "H",
+  "order": 9,
+  "title": "Bangun ruang — Level 9 — Penalaran bangun ruang (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": {
+        "values": [2, 3, 4, 5]
+      },
+      "p": {
+        "values": [6, 8, 10, 12, 15, 20]
+      },
+      "l": {
+        "values": [4, 6, 8, 10, 12]
+      },
+      "t": {
+        "values": [4, 6, 8, 9, 10, 12]
+      }
+    },
+    "constraint": "p % s == 0 && l % s == 0 && t % s == 0 && p * l * t / (s * s * s) <= 300",
+    "prompt": "Sebuah kotak balok berukuran {p} cm × {l} cm × {t} cm akan diisi penuh kubus kecil berusuk {s} cm. Berapa banyak kubus kecil yang muat?",
+    "answer": "p * l * t / (s * s * s)",
+    "mode": "input",
+    "unit": "kubus",
+    "explain": "Sepanjang panjang {=p/s}, lebar {=l/s}, tinggi {=t/s} kubus. Banyak = {=p/s} × {=l/s} × {=t/s} = {answer}."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.g7.soal-umur",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "G",
+  "order": 7,
+  "title": "Logika — Level 7 — Soal umur",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [4, 15],
+      "k": {
+        "values": [4, 5, 6]
+      },
+      "m": {
+        "values": [2, 3]
+      }
+    },
+    "constraint": "(a * (k - m)) % (m - 1) == 0",
+    "derived": {
+      "t": "a * (k - m) / (m - 1)"
+    },
+    "prompt": "Umur ayah sekarang {k} kali umur anaknya. {t} tahun lagi, umur ayah menjadi {m} kali umur anaknya. Umur anak sekarang adalah …",
+    "answer": "a",
+    "unit": "tahun",
+    "distractors": [
+      {
+        "expr": "a + t",
+        "tag": "umur-nanti"
+      },
+      {
+        "expr": "k * a",
+        "tag": "umur-ayah"
+      },
+      {
+        "expr": "t",
+        "tag": "sama-jeda"
+      }
+    ],
+    "explain": "Misal umur anak x: {k}x + {t} = {m}(x + {t}), sehingga {=k-m}x = {=(m-1)*t}, x = {answer}."
+  }
+}

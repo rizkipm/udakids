@@ -1,0 +1,65 @@
+{
+  "id": "math.sd56.h10.tantangan-bangun-ruang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "H",
+  "order": 10,
+  "title": "Bangun ruang — Level 10 — Tantangan bangun ruang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 12],
+            "l": [2, 10],
+            "t": [2, 10]
+          },
+          "prompt": "Volume balok {p} cm × {l} cm × {t} cm = … cm³",
+          "answer": "p * l * t",
+          "mode": "input",
+          "unit": "cm³",
+          "explain": "{p} × {l} × {t} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "prompt": "Luas permukaan kubus berusuk {s} cm = … cm²",
+          "answer": "6 * s * s",
+          "mode": "input",
+          "unit": "cm²",
+          "explain": "6 × {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 10]
+          },
+          "derived": {
+            "v": "s * s * s"
+          },
+          "prompt": "Volume kubus {v} cm³. Panjang rusuknya … cm",
+          "answer": "s",
+          "mode": "input",
+          "unit": "cm",
+          "explain": "{answer}³ = {v}."
+        }
+      }
+    ]
+  }
+}

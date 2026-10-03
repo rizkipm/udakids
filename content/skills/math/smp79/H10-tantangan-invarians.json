@@ -1,0 +1,57 @@
+{
+  "id": "math.smp79.h10.tantangan-invarians",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "H",
+  "order": 10,
+  "title": "Invarians — Level 10 — Tantangan invarians",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [8, 30]
+          },
+          "prompt": "Bilangan 1 sampai {n} di papan; dua bilangan diganti jumlahnya, berulang sampai tersisa satu. Bilangan terakhir adalah …",
+          "answer": "n * (n + 1) / 2",
+          "mode": "input",
+          "explain": "Jumlah tetap: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "prompt": "Angka-angka {n} dijumlahkan berulang sampai satu angka. Angka terakhirnya adalah …",
+          "answer": "(n - 1) % 9 + 1",
+          "mode": "input",
+          "explain": "Sisa bagi 9 tetap: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 25]
+          },
+          "prompt": "Satu tumpukan {n} batu dipecah berulang (catat hasil kali tiap pecahan) sampai semua berisi 1. Jumlah catatan adalah …",
+          "answer": "n * (n - 1) / 2",
+          "mode": "input",
+          "explain": "C({n}, 2) = {answer}."
+        }
+      }
+    ]
+  }
+}

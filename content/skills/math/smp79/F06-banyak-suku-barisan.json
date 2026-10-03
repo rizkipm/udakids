@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.f6.banyak-suku-barisan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "F",
+  "order": 6,
+  "title": "Pola bilangan — Level 6 — Banyak suku barisan",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "d": [2, 9],
+      "n": [15, 80]
+    },
+    "derived": {
+      "l": "a + (n - 1) * d"
+    },
+    "prompt": "Barisan {a}, {=a+d}, {=a+2*d}, …, {l}. Banyak suku barisan itu adalah …",
+    "answer": "n",
+    "distractors": [
+      {
+        "expr": "n - 1",
+        "tag": "lupa-tambah-satu"
+      },
+      {
+        "expr": "(l - a) / d + 2",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "l / d",
+        "tag": "salah-rumus"
+      }
+    ],
+    "explain": "Banyak suku = (suku terakhir − suku pertama) : beda + 1 = ({l} − {a}) : {d} + 1 = {answer}."
+  }
+}

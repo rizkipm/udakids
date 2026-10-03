@@ -1,0 +1,33 @@
+{
+  "id": "math.sd56.b9.penalaran-fpb-dan-kpk-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 9,
+  "title": "FPB dan KPK — Level 9 — Penalaran FPB dan KPK (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [2, 9],
+      "x": [2, 7],
+      "y": [2, 7]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "prompt": "FPB dua bilangan adalah {g} dan KPK-nya {=g*x*y}. Jika salah satu bilangan {a}, berapa bilangan yang lain?",
+    "answer": "b",
+    "mode": "input",
+    "explain": "Hasil kali dua bilangan = FPB × KPK = {g} × {=g*x*y} = {=g*g*x*y}. Bilangan lain = {=g*g*x*y} : {a} = {answer}."
+  }
+}

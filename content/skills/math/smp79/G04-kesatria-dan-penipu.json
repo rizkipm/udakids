@@ -1,0 +1,42 @@
+{
+  "id": "math.smp79.g4.kesatria-dan-penipu",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "G",
+  "order": 4,
+  "title": "Logika — Level 4 — Kesatria dan penipu",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [3, 12]
+    },
+    "derived": {
+      "n": "2 * m"
+    },
+    "prompt": "Di sebuah pulau, kesatria selalu jujur dan penipu selalu berbohong. {n} penduduk duduk melingkar dan setiap orang berkata: \"Orang di sebelah kananku adalah penipu.\" Banyak kesatria adalah …",
+    "answer": "m",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "semua-kesatria"
+      },
+      {
+        "expr": "0",
+        "tag": "semua-penipu"
+      },
+      {
+        "expr": "m + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Kesatria dan penipu harus berselang-seling (kesatria jujur → kanannya penipu; penipu bohong → kanannya kesatria). Jadi kesatria = {n} : 2 = {answer}."
+  }
+}

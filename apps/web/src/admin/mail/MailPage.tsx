@@ -46,6 +46,88 @@ const when = (v: string) =>
     second: '2-digit',
   });
 
+type NewsOverview = {
+  enabled: boolean;
+  lastSentAt: string | null;
+  lastRecipients: number;
+  lastLevels: number;
+  pending: { total: number; books: { title: string; topics: string[]; levels: number }[] };
+  nextSendAt: string | null;
+  subscribers: number;
+  unsubscribed: number;
+};
+
+/** Info materi baru otomatis (D-053): status, jadwal, nyala/mati, kirim sekarang. */
+function NewsPanel() {
+  const news = useFetch<NewsOverview>('staff', '/admin/news');
+  const call = useApiCall('staff');
+  const action = useAction();
+  const n = news.data;
+  async function toggle() {
+    if (!n) return;
+    const ok = await action.run(
+      () => call('/admin/news', { method: 'PUT', body: { enabled: !n.enabled } }).then(() => true),
+      n.enabled ? t('admin.news.turnedOff') : t('admin.news.turnedOn'),
+    );
+    if (ok) news.reload();
+  }
+  async function sendNow() {
+    const ok = await action.run(
+      () => call('/admin/news/send-now', { method: 'POST' }).then(() => true),
+      t('admin.news.sent'),
+    );
+    if (ok) news.reload();
+  }
+  return (
+    <Card title={t('admin.news.title')}>
+      <p className="ui-muted">{t('admin.news.hint')}</p>
+      <ActionNotice error={action.error} done={action.done} />
+      {n && (
+        <>
+          <dl className="adm-mail-config">
+            <dt>{t('admin.mail.status')}</dt>
+            <dd>
+              {n.enabled ? (
+                <Badge tone="success">{t('admin.news.on')}</Badge>
+              ) : (
+                <Badge tone="warning">{t('admin.news.off')}</Badge>
+              )}
+            </dd>
+            <dt>{t('admin.news.subscribers')}</dt>
+            <dd>{t('admin.news.subscribersValue', { n: n.subscribers, out: n.unsubscribed })}</dd>
+            <dt>{t('admin.news.pending')}</dt>
+            <dd>
+              {n.pending.total === 0
+                ? t('admin.news.none')
+                : n.pending.books.map((b) => `${b.title} (${b.levels})`).join(', ')}
+            </dd>
+            <dt>{t('admin.news.next')}</dt>
+            <dd>{n.nextSendAt ? when(n.nextSendAt) : '-'}</dd>
+            <dt>{t('admin.news.last')}</dt>
+            <dd>
+              {n.lastSentAt
+                ? t('admin.news.lastValue', {
+                    when: when(n.lastSentAt),
+                    n: n.lastRecipients,
+                    levels: n.lastLevels,
+                  })
+                : '-'}
+            </dd>
+          </dl>
+          <div className="ui-row">
+            <Button variant="secondary" disabled={action.busy} onClick={() => void toggle()}>
+              {n.enabled ? t('admin.news.disable') : t('admin.news.enable')}
+            </Button>
+            <Button disabled={action.busy || n.pending.total === 0} onClick={() => void sendNow()}>
+              {t('admin.news.sendNow')}
+            </Button>
+          </div>
+        </>
+      )}
+    </Card>
+  );
+}
+
 /** Admin: status pengiriman email (Gmail SMTP), email uji, dan antrean (D-044). */
 export function MailPage() {
   const data = useFetch<MailOverview>('staff', '/admin/mail');
@@ -134,6 +216,7 @@ export function MailPage() {
                   </div>
                 </form>
               </Card>
+              <NewsPanel />
               <Card title={t('admin.mail.recentTitle')}>
                 {d.recent.length === 0 ? (
                   <p className="ui-muted">{t('admin.mail.empty')}</p>

@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.e5.perbandingan-berbalik-nilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "E",
+  "order": 5,
+  "title": "Perbandingan dan skala — Level 5 — Perbandingan berbalik nilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [4, 6, 8, 10, 12]
+      },
+      "d": {
+        "values": [6, 8, 9, 10, 12, 15, 18]
+      },
+      "b": {
+        "values": [2, 3, 4, 5, 6, 8, 9, 12, 15, 16]
+      }
+    },
+    "constraint": "a * d % b == 0 && b != a",
+    "prompt": "{a} pekerja dapat menyelesaikan rumah dalam {d} hari. Jika dikerjakan {b} pekerja (kecepatan sama), berapa hari selesainya?",
+    "answer": "a * d / b",
+    "unit": "hari",
+    "distractors": [
+      {
+        "expr": "b * d / a",
+        "tag": "senilai-bukan-berbalik"
+      },
+      {
+        "expr": "d + a - b",
+        "tag": "menambah"
+      },
+      {
+        "expr": "d",
+        "tag": "tetap"
+      }
+    ],
+    "explain": "Berbalik nilai: pekerja × hari tetap = {a} × {d} = {=a*d}. Dengan {b} pekerja: {=a*d} : {b} = {answer} hari."
+  }
+}

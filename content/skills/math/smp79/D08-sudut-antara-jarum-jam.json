@@ -1,0 +1,35 @@
+{
+  "id": "math.smp79.d8.sudut-antara-jarum-jam",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "D",
+  "order": 8,
+  "title": "Geometri olimpiade — Level 8 — Sudut antara jarum jam",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 11],
+      "m": {
+        "values": [10, 20, 30, 40, 50]
+      }
+    },
+    "derived": {
+      "x": "abs(30 * h - 11 * m / 2)",
+      "y": "min(x, 360 - x)"
+    },
+    "constraint": "y > 0",
+    "prompt": "Besar sudut terkecil yang dibentuk jarum jam dan jarum menit pada pukul {h} lewat {m} menit adalah …",
+    "answer": "y",
+    "unit": "°",
+    "mode": "input",
+    "explain": "Jarum menit di {=6*m}°, jarum jam di {=30*h+m/2}° (bergeser 0,5° per menit). Selisih {x}°; sudut terkecil {answer}."
+  }
+}

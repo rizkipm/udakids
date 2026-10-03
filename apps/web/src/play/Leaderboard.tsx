@@ -186,12 +186,12 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
 
       {!data ? (
         <section className="board-empty">
-          <Momo color={momoColor} mood={board.error ? 'curious' : 'idle'} size={120} />
+          <Momo own color={momoColor} mood={board.error ? 'curious' : 'idle'} size={120} />
           <p className="kid-note">{board.error ? t('rank.offline') : t('rank.loading')}</p>
         </section>
       ) : data.total === 0 ? (
         <section className="board-empty">
-          <Momo color={momoColor} mood="happy" size={120} />
+          <Momo own color={momoColor} mood="happy" size={120} />
           <p className="kid-note">{t('rank.empty')}</p>
         </section>
       ) : (
@@ -218,7 +218,12 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
                     className={`podium-spot place-${Math.min(r.position, 3)} slot-${i}${r.isMe ? ' is-me' : ''}`}
                   >
                     {r.position === 1 && <Crown size={44} />}
-                    <Momo color={r.momoColor as Color} mood="proud" size={i === 1 ? 104 : 84} />
+                    <Momo
+                      color={r.momoColor as Color}
+                      look={r.momoLook ?? null}
+                      mood="proud"
+                      size={i === 1 ? 104 : 84}
+                    />
                     <strong className="podium-name">{r.nickname}</strong>
                     <span className="podium-points rank-avg">{metric(r, mode)}</span>
                     {mode === 'average' && (
@@ -350,7 +355,7 @@ function RankRow({
       })}
     >
       <span className="rank-pos">{row.position}</span>
-      <Momo color={row.momoColor as Color} mood="happy" size={44} />
+      <Momo color={row.momoColor as Color} look={row.momoLook ?? null} mood="happy" size={44} />
       <span className="rank-name">
         <strong>{row.nickname}</strong>
         {row.isMe && <em className="board-me">{t('rank.me')}</em>}
@@ -432,7 +437,9 @@ function DetailDialog({
         aria-labelledby="rank-detail-title"
       >
         <header className="rank-dialog-head">
-          {d && <Momo color={d.momoColor as Color} mood="proud" size={72} />}
+          {d && (
+            <Momo color={d.momoColor as Color} look={d.momoLook ?? null} mood="proud" size={72} />
+          )}
           <div>
             <h2 id="rank-detail-title">{t('rank.detail.title', { name: d?.nickname ?? name })}</h2>
             {d && (

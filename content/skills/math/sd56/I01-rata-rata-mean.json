@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.i1.rata-rata-mean",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 1,
+  "title": "Statistika — Level 1 — Rata-rata (mean)",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [60, 90],
+      "a": [1, 8],
+      "b": [1, 8]
+    },
+    "derived": {
+      "x1": "m - a",
+      "x2": "m + a",
+      "x3": "m - b",
+      "x4": "m + b",
+      "x5": "m"
+    },
+    "prompt": "Nilai ulangan 5 siswa: {x2}, {x3}, {x5}, {x1}, {x4}. Berapa rata-ratanya?",
+    "answer": "m",
+    "distractors": [
+      {
+        "expr": "m * 5",
+        "tag": "jumlah"
+      },
+      {
+        "expr": "x2",
+        "tag": "nilai-terbesar-awal"
+      },
+      {
+        "expr": "m + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Jumlah = {=5*m}. Rata-rata = {=5*m} : 5 = {answer}."
+  }
+}

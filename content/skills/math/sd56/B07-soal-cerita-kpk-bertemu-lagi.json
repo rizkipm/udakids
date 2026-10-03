@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.b7.soal-cerita-kpk-bertemu-lagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 7,
+  "title": "FPB dan KPK — Level 7 — Soal cerita KPK: bertemu lagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [2, 3, 4, 5, 6]
+      },
+      "b": {
+        "values": [4, 6, 8, 9, 10, 12]
+      }
+    },
+    "constraint": "a < b && gcd(a, b) > 1 && lcm(a, b) < b * a",
+    "prompt": "Dodi berenang tiap {a} hari, Sinta tiap {b} hari. Hari ini berenang bersama. Berapa hari lagi mereka berenang bersama lagi?",
+    "answer": "lcm(a, b)",
+    "unit": "hari",
+    "distractors": [
+      {
+        "expr": "a * b",
+        "tag": "mengalikan-langsung"
+      },
+      {
+        "expr": "gcd(a, b)",
+        "tag": "fpb-bukan-kpk"
+      },
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      }
+    ],
+    "explain": "Waktu bertemu lagi = KPK dari {a} dan {b} = {answer} hari."
+  }
+}

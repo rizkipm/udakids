@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.i8.rata-rata-gabungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 8,
+  "title": "Statistika — Level 8 — Rata-rata gabungan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n1": {
+        "values": [10, 15, 20, 25]
+      },
+      "n2": {
+        "values": [10, 15, 20, 25]
+      },
+      "r1": [70, 85],
+      "r2": [70, 90]
+    },
+    "constraint": "n1 != n2 && r1 != r2 && (n1 * r1 + n2 * r2) % (n1 + n2) == 0",
+    "prompt": "Rata-rata nilai {n1} siswa kelas A adalah {r1} dan rata-rata {n2} siswa kelas B adalah {r2}. Berapa rata-rata nilai seluruh siswa?",
+    "answer": "(n1 * r1 + n2 * r2) / (n1 + n2)",
+    "distractors": [
+      {
+        "expr": "(r1 + r2) / 2",
+        "tag": "rata-rata-biasa"
+      },
+      {
+        "expr": "r1 + r2",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "max(r1, r2)",
+        "tag": "nilai-terbesar"
+      }
+    ],
+    "explain": "Jumlah nilai = {=n1*r1} + {=n2*r2} = {=n1*r1+n2*r2}. Dibagi {=n1+n2} siswa = {answer}."
+  }
+}

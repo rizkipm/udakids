@@ -1,0 +1,46 @@
+{
+  "id": "math.sd56.j1.peluang-pada-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "J",
+  "order": 1,
+  "title": "Peluang — Level 1 — Peluang pada dadu",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [1, 5]
+    },
+    "prompt": "Sebuah dadu dilempar sekali. Berapa peluang muncul mata dadu lebih dari {t}?",
+    "format": "fraction",
+    "fraction": {
+      "num": "6 - t",
+      "den": "6"
+    },
+    "distractors": [
+      {
+        "num": "t",
+        "den": "6",
+        "tag": "kurang-dari"
+      },
+      {
+        "num": "6 - t",
+        "den": "t",
+        "tag": "terbalik"
+      },
+      {
+        "num": "1",
+        "den": "6",
+        "tag": "satu-mata"
+      }
+    ],
+    "explain": "Mata dadu lebih dari {t} ada {=6-t} dari 6 kemungkinan. Peluang = {=6-t}/6 = {answer}."
+  }
+}

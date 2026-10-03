@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.b4.bilangan-prima-di-antara",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 4,
+  "title": "FPB dan KPK — Level 4 — Bilangan prima di antara",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [10, 20, 30, 40, 50, 60, 70, 80]
+      }
+    },
+    "derived": {
+      "c": "(a == 10) * 4 + (a == 20) * 2 + (a == 30) * 2 + (a == 40) * 3 + (a == 50) * 2 + (a == 60) * 2 + (a == 70) * 3 + (a == 80) * 2"
+    },
+    "prompt": "Ada berapa bilangan prima di antara {a} dan {=a+10}?",
+    "answer": "c",
+    "distractors": [
+      {
+        "expr": "c + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "c - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "5",
+        "tag": "bilangan-ganjil"
+      }
+    ],
+    "explain": "Bilangan prima hanya punya dua faktor: 1 dan dirinya sendiri. Di antara {a} dan {=a+10} ada {answer} bilangan prima."
+  }
+}

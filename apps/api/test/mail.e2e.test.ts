@@ -239,6 +239,70 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     await http().get('/admin/notifications').expect(401);
   });
 
+  it('info materi baru (D-053): skill baru → satu email gabungan ke orang tua berlangganan + direksi', async () => {
+    const { http, auth, adminToken, pool } = ctx;
+    const { NewsService, unsubscribeToken } = await import('../src/news/news.service.js');
+    const news = ctx.app.get(NewsService);
+    // Database test baru saja di-seed setelah migrasi: jadikan semua skill yang ada sebagai "sudah diumumkan".
+    await pool.query(
+      "update app_settings set value = jsonb_build_object('enabled', true, 'lastAt', now()) where key = 'news'",
+    );
+    // Tanpa skill baru → tidak ada yang dikirim.
+    expect((await news.maybeSend(new Date(), true)).sent).toBe(false);
+    // Dua skill baru di satu buku (disalin dari skill yang ada).
+    for (const id of ['math.tk.zz-news-1', 'math.tk.zz-news-2'])
+      await pool.query(
+        `insert into skills select (jsonb_populate_record(null::skills, to_jsonb(s) || jsonb_build_object('id', $1::text, 'created_at', now()))).* from skills s where s.domain = 'math' and s.grade = 'tk' limit 1`,
+        [id],
+      );
+    // Masih dalam jeda 30 menit → menunggu.
+    const wait = await news.maybeSend(new Date());
+    expect(wait).toMatchObject({ sent: false, reason: 'menunggu' });
+    const before = outbox.length;
+    const res = await http().post('/admin/news/send-now').set(auth(adminToken)).expect(200);
+    expect(res.body).toMatchObject({ sent: true, levels: 2 });
+    await flushed();
+    const mails = outbox.slice(before);
+    const toParent = mails.find((m) => m.to === email)!;
+    expect(toParent.subject).toMatch(/2 level latihan baru/);
+    expect(toParent.html).toContain('Berhenti menerima info materi baru');
+    expect(toParent.html).toContain('Momo From Udakids');
+    expect(mails.some((m) => m.to === 'udacodingofficial@gmail.com')).toBe(true);
+    // Sudah diumumkan → tidak dikirim lagi.
+    expect((await news.maybeSend(new Date(), true)).sent).toBe(false);
+
+    // Berhenti berlangganan lewat tautan email; tautan palsu ditolak.
+    const [p] = (
+      await pool.query<{ id: string }>('select id from parents where email = $1', [email])
+    ).rows;
+    await http()
+      .post('/public/news/unsubscribe')
+      .send({ p: p!.id, t: 'x'.repeat(32) })
+      .expect(400);
+    await http()
+      .post('/public/news/unsubscribe')
+      .send({ p: p!.id, t: unsubscribeToken(p!.id) })
+      .expect(200);
+    const token = (await http().post('/auth/parent/login').send({ email, password }).expect(200))
+      .body.token as string;
+    expect((await http().get('/parent/news').set(auth(token)).expect(200)).body).toEqual({
+      subscribed: false,
+    });
+    // Skill baru berikutnya tidak dikirim ke orang tua yang berhenti berlangganan.
+    await pool.query(
+      `insert into skills select (jsonb_populate_record(null::skills, to_jsonb(s) || jsonb_build_object('id', 'math.tk.zz-news-3', 'created_at', now()))).* from skills s where s.domain = 'math' and s.grade = 'tk' limit 1`,
+    );
+    const mark = outbox.length;
+    await http().post('/admin/news/send-now').set(auth(adminToken)).expect(200);
+    await flushed();
+    expect(outbox.slice(mark).some((m) => m.to === email)).toBe(false);
+    // Orang tua bisa berlangganan lagi dari dasbor; hanya admin yang melihat status broadcast.
+    await http().put('/parent/news').set(auth(token)).send({ subscribed: true }).expect(200);
+    await http().get('/admin/news').set(auth(token)).expect(403);
+    const ov = await http().get('/admin/news').set(auth(adminToken)).expect(200);
+    expect(ov.body).toMatchObject({ enabled: true, pending: { total: 0 } });
+  });
+
   it('template: escape & footer', () => {
     const ctxMail = { appUrl: 'https://udakids.id', brand: 'Udakids' };
     const v = verifyEmail(ctxMail, { name: '<script>x</script>', code: '123456', minutes: 15 });

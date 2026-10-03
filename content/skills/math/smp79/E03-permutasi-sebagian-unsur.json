@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.e3.permutasi-sebagian-unsur",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 3,
+  "title": "Kombinatorika — Level 3 — Permutasi sebagian unsur",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [5, 15]
+    },
+    "prompt": "Dari {n} siswa akan dipilih ketua, sekretaris, dan bendahara (tidak boleh rangkap). Banyak susunan yang mungkin adalah …",
+    "answer": "n * (n - 1) * (n - 2)",
+    "distractors": [
+      {
+        "expr": "n * (n - 1) * (n - 2) / 6",
+        "tag": "kombinasi-bukan-permutasi"
+      },
+      {
+        "expr": "n * n * n",
+        "tag": "boleh-rangkap"
+      },
+      {
+        "expr": "3 * n",
+        "tag": "asal-kali"
+      }
+    ],
+    "explain": "Urutan jabatan diperhatikan: {n} × {=n-1} × {=n-2} = {answer}."
+  }
+}

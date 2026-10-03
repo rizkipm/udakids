@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.a5.faktor-prima-terbesar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 5,
+  "title": "Teori bilangan — Level 5 — Faktor prima terbesar",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [2, 3, 5]
+      },
+      "b": {
+        "values": [7, 11, 13, 17, 19, 23]
+      },
+      "c": {
+        "values": [2, 3, 4, 5, 6, 8, 9, 10]
+      }
+    },
+    "derived": {
+      "n": "a * b * c"
+    },
+    "prompt": "Faktor prima terbesar dari {n} adalah …",
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "n / 2",
+        "tag": "setengah"
+      },
+      {
+        "expr": "a * c",
+        "tag": "faktor-bukan-prima"
+      },
+      {
+        "expr": "b + 2",
+        "tag": "bilangan-ganjil-lain"
+      }
+    ],
+    "explain": "{n} = {=a*c} × {b}. Faktor prima dari {=a*c} paling besar 5, jadi faktor prima terbesarnya {answer}."
+  }
+}

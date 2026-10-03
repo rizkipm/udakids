@@ -6,7 +6,7 @@ import { defineFamily } from './common.js';
 
 const manualItem = z
   .strictObject({
-    prompt: z.string().min(1).max(160),
+    prompt: z.string().min(1).max(500),
     say: z.string().max(240).optional(),
     stimulus: z.array(visualSchema).max(4).default([]),
     choices: z

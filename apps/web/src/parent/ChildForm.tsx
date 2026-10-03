@@ -6,6 +6,7 @@ import {
   childUpdateSchema,
   type Color,
   type PinPicture,
+  type MomoLook,
 } from '@little-coder/engine';
 import { errorMessage } from '../api/client';
 import type { ChildProfile } from '../api/types';
@@ -14,6 +15,7 @@ import { t } from '../i18n';
 import { familySteps, Stepper } from '../site/AuthLayout';
 import { Button, Card, Notice, RequiredNote, Spinner, TextField } from '../ui/ui';
 import { ColorPicker } from './ColorPicker';
+import { MomoStudio, plainLook } from '../components/MomoStudio';
 import { fieldErrors, serverFieldErrors } from './form';
 import { PinSetter } from './PinSetter';
 
@@ -29,6 +31,7 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
   const [color, setColor] = useState<Color>(
     child && isColor(child.momoColor) ? child.momoColor : MOMO_COLORS[0],
   );
+  const [look, setLook] = useState<MomoLook>(child?.momoLook ?? plainLook());
   const [pin, setPin] = useState<PinPicture[] | null>(null);
   const [classCode, setClassCode] = useState(child?.classCode ?? '');
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -41,7 +44,7 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
     e.preventDefault();
     setError(undefined);
     const input = {
-      ...(withProfile && { nickname, momoColor: color }),
+      ...(withProfile && { nickname, momoColor: color, momoLook: look }),
       ...(withPin && pin && { pin }),
       // Kode kelas (D-022): kosong saat membuat = tanpa kelas; dikosongkan saat mengubah = keluar kelas.
       ...(withProfile &&
@@ -107,6 +110,15 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
                 value={color}
                 onChange={setColor}
               />
+              <details className="pa-momo-extra">
+                <summary>{t('parent.form.momoExtra')}</summary>
+                <p className="ui-muted">{t('parent.form.momoExtraHint')}</p>
+                <MomoStudio
+                  value={{ color, look }}
+                  onChange={(v) => setLook(v.look)}
+                  showPrimary={false}
+                />
+              </details>
               <TextField
                 label={t('parent.form.classCode')}
                 hint={t('parent.form.classCodeHint')}

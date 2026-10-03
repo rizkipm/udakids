@@ -46,6 +46,8 @@ export const parents = pgTable(
     familyCode: text('family_code').notNull().unique(),
     consentAt: timestamp('consent_at', { withTimezone: true }).notNull(),
     /** Email sudah diverifikasi dengan kode (D-044). Null = belum boleh masuk. */
+    /** Berhenti menerima email info materi baru (D-053); null = berlangganan. */
+    newsOptOutAt: timestamp('news_opt_out_at', { withTimezone: true }),
     emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true }),
     active: boolean('active').notNull().default(true),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
@@ -73,6 +75,8 @@ export const children = pgTable(
     classId: uuid('class_id').references(() => classes.id, { onDelete: 'set null' }),
     nickname: text('nickname').notNull(),
     momoColor: text('momo_color').notNull(),
+    /** Gradasi & aksesori Momo (D-051) — tampilan robot, bukan data pribadi. */
+    momoLook: jsonb('momo_look'),
     /** Hash sandi gambar (3 gambar berurutan). Bukan data pribadi. */
     picturePinHash: text('picture_pin_hash'),
     failedPinAttempts: integer('failed_pin_attempts').notNull().default(0),
@@ -190,6 +194,8 @@ export const skills = pgTable(
     title: text('title').notNull(),
     status: text('status').notNull(),
     template: jsonb('template').notNull(),
+    /** Kapan skill pertama kali masuk DB — dasar info materi baru (D-053). */
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
     updatedBy: uuid('updated_by').references(() => staffUsers.id, { onDelete: 'set null' }),
   },

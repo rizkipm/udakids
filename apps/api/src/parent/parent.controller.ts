@@ -16,6 +16,7 @@ import {
   childProfileSchema,
   childUpdateSchema,
   type SessionUser,
+  parseMomoLook,
 } from '@little-coder/engine';
 import { and, eq, inArray, isNull } from 'drizzle-orm';
 import type { z } from 'zod';
@@ -33,6 +34,7 @@ const publicChild = {
   id: children.id,
   nickname: children.nickname,
   momoColor: children.momoColor,
+  momoLook: children.momoLook,
   lastActiveAt: children.lastActiveAt,
   createdAt: children.createdAt,
   classId: children.classId,
@@ -89,6 +91,7 @@ export class ParentController {
     const byId = new Map(list.map((c) => [c.id, c]));
     return rows.map((r) => ({
       ...r,
+      ...('momoLook' in r && { momoLook: parseMomoLook((r as { momoLook: unknown }).momoLook) }),
       className: r.classId ? (byId.get(r.classId)?.eventName ?? null) : null,
       classCode: r.classId ? (byId.get(r.classId)?.code ?? null) : null,
     }));
@@ -115,6 +118,7 @@ export class ParentController {
         parentId: user.id,
         nickname: body.nickname,
         momoColor: body.momoColor,
+        momoLook: body.momoLook ?? null,
         picturePinHash: await hashSecret(pinSecret(body.pin)),
         reportToken: randomToken(),
         classId: (await this.classIdFor(body.classCode)) ?? null,
@@ -173,6 +177,7 @@ export class ParentController {
         ...(classId !== undefined && { classId }),
         ...(body.nickname && { nickname: body.nickname }),
         ...(body.momoColor && { momoColor: body.momoColor }),
+        ...(body.momoLook !== undefined && { momoLook: body.momoLook }),
         ...(body.pin && {
           picturePinHash: await hashSecret(pinSecret(body.pin)),
           failedPinAttempts: 0,

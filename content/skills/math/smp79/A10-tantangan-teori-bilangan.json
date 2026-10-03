@@ -1,0 +1,74 @@
+{
+  "id": "math.smp79.a10.tantangan-teori-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 10,
+  "title": "Teori bilangan — Level 10 — Tantangan teori bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 2],
+            "y": [1, 3]
+          },
+          "prompt": "Bilangan asli terkecil yang jika dibagi 3 bersisa {x} dan jika dibagi 4 bersisa {y} adalah …",
+          "answer": "(4 * x + 9 * y) % 12",
+          "mode": "input",
+          "explain": "Coba {y}, {=y+4}, {=y+8}: yang bersisa {x} jika dibagi 3 adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [20, 99]
+          },
+          "derived": {
+            "r": "k % 3",
+            "u": "(r == 1) * 2 + (r == 2) * 4 + (r == 0) * 1"
+          },
+          "prompt": "Sisa pembagian 2^{k} oleh 7 adalah …",
+          "answer": "u",
+          "mode": "input",
+          "explain": "2^1, 2^2, 2^3 bersisa 2, 4, 1 jika dibagi 7, berulang tiap 3. {k} dibagi 3 bersisa {r}, jadi sisanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [2, 3]
+            },
+            "i": [1, 3],
+            "q": {
+              "values": [5, 7, 11]
+            },
+            "j": [1, 2]
+          },
+          "derived": {
+            "pi": "(i == 1) * p + (i == 2) * p * p + (i == 3) * p * p * p",
+            "qj": "(j == 1) * q + (j == 2) * q * q",
+            "n": "pi * qj"
+          },
+          "prompt": "Banyak faktor positif dari {n} adalah …",
+          "answer": "(i + 1) * (j + 1)",
+          "mode": "input",
+          "explain": "({i} + 1) × ({j} + 1) = {answer}."
+        }
+      }
+    ]
+  }
+}

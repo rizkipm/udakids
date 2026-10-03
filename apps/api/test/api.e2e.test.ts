@@ -115,17 +115,23 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(res.body.books.map((b: { title: string }) => b.title)).toEqual([
         'Math Pra-TK',
         'Math Kindergarten (TK)',
+        'Math TK (OSN)',
         'Math Grade 1',
         'Math Grade 2',
         'Math Grade 1-2 (OSN)',
         'Math Grade 3-4 (OSN)',
+        'Math Grade 5-6 (OSN)',
+        'Math SMP Kelas 7-9 (OSN)',
         'Sains Kindergarten (TK)',
+        'Sains TK (OSN)',
         'Sains Grade 1',
         'Sains Grade 2',
         'Sains Grade 1-2 (OSN)',
         'Sains Grade 3',
         'Sains Grade 4',
         'Sains Grade 3-4 (OSN)',
+        'Sains Grade 5-6 (OSN)',
+        'Sains SMP Kelas 7-9 (OSN)',
       ]);
       expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
@@ -139,7 +145,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         (await q('select count(*) n from children where active')) +
         (await q('select count(*) n from staff_users where active'));
       expect(res.body).toMatchObject({
-        books: 13,
+        books: 19,
         totalLevels: SKILL_COUNT,
         users,
         rounds: await q("select count(*) n from events where type = 'quiz_result'"),
@@ -322,10 +328,14 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'id',
         'lastActiveAt',
         'momoColor',
+        // Tampilan Momo (D-051): gradasi & aksesori robot, bukan data pribadi.
+        'momoLook',
         'nickname',
       ]);
       const fam = await http().get(`/auth/family/${familyCode.toLowerCase()}`).expect(200);
-      expect(fam.body).toEqual([{ id: childId, nickname: 'Alya', momoColor: 'ungu' }]);
+      expect(fam.body).toEqual([
+        { id: childId, nickname: 'Alya', momoColor: 'ungu', momoLook: null },
+      ]);
       await http().get('/auth/family/ZZZZZZ').expect(404);
     });
 
@@ -931,7 +941,9 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       const me = await http().get('/auth/me').set(auth(res.body.token)).expect(200);
       expect(me.body).toMatchObject({ role: 'child', selfCode: code, hasParent: false });
       const fam = await http().get(`/auth/family/${code}`).expect(200);
-      expect(fam.body).toEqual([{ id: childId, nickname: 'Raka', momoColor: 'biru' }]);
+      expect(fam.body).toEqual([
+        { id: childId, nickname: 'Raka', momoColor: 'biru', momoLook: null },
+      ]);
       await http().post('/auth/child/login').send({ familyCode: code, childId, pin }).expect(200);
       const cols = (await pool.query('select * from children where id = $1', [childId])).rows[0];
       expect(cols.parent_id).toBeNull();

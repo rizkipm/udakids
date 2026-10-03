@@ -1,0 +1,30 @@
+{
+  "id": "math.smp79.e8.lintasan-terpendek-pada-kisi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 8,
+  "title": "Kombinatorika — Level 8 — Lintasan terpendek pada kisi",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 4],
+      "b": [2, 5]
+    },
+    "derived": {
+      "w": "(a == 2) * (b + 1) * (b + 2) / 2 + (a == 3) * (b + 1) * (b + 2) * (b + 3) / 6 + (a == 4) * (b + 1) * (b + 2) * (b + 3) * (b + 4) / 24"
+    },
+    "prompt": "Seekor semut berjalan pada jalan berpetak dari titik A ke titik B. B berada {a} blok ke kanan dan {b} blok ke atas dari A. Semut hanya boleh bergerak ke kanan atau ke atas. Banyak lintasan terpendek adalah …",
+    "answer": "w",
+    "mode": "input",
+    "explain": "Lintasan = menyusun {a} langkah kanan dan {b} langkah atas: C({=a+b}, {a}) = {answer}."
+  }
+}

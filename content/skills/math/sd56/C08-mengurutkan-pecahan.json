@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.c8.mengurutkan-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "C",
+  "order": 8,
+  "title": "Pecahan — Level 8 — Mengurutkan pecahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [3, 9],
+      "c": [1, 5],
+      "d": [3, 9],
+      "e": [1, 5],
+      "f": [3, 9]
+    },
+    "constraint": "a < b && c < d && e < f && a * d != c * b && a * f != e * b && c * f != e * d",
+    "prompt": "Manakah pecahan terbesar?",
+    "format": "fraction",
+    "fraction": {
+      "num": "(a * d >= c * b && a * f >= e * b) * a + (c * b > a * d && c * f >= e * d) * c + (e * b > a * f && e * d > c * f) * e",
+      "den": "(a * d >= c * b && a * f >= e * b) * b + (c * b > a * d && c * f >= e * d) * d + (e * b > a * f && e * d > c * f) * f",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "a",
+        "den": "b",
+        "tag": "pecahan-a"
+      },
+      {
+        "num": "c",
+        "den": "d",
+        "tag": "pecahan-c"
+      },
+      {
+        "num": "e",
+        "den": "f",
+        "tag": "pecahan-e"
+      }
+    ],
+    "choices": 3,
+    "explain": "Samakan penyebut atau ubah ke desimal, lalu bandingkan. Yang terbesar adalah {answer}."
+  }
+}

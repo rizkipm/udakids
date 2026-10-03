@@ -1,0 +1,81 @@
+{
+  "id": "math.sd56.b10.tantangan-fpb-dan-kpk",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 10,
+  "title": "FPB dan KPK — Level 10 — Tantangan FPB dan KPK",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 12],
+            "x": [2, 6],
+            "y": [2, 6]
+          },
+          "constraint": "x < y && gcd(x, y) == 1",
+          "derived": {
+            "a": "g * x",
+            "b": "g * y"
+          },
+          "prompt": "FPB dari {a} dan {b} adalah …",
+          "answer": "gcd(a, b)",
+          "mode": "input",
+          "explain": "FPB = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [4, 6, 8, 9, 10, 12]
+            },
+            "b": {
+              "values": [6, 8, 10, 12, 15]
+            }
+          },
+          "constraint": "a < b",
+          "prompt": "Bus A berangkat setiap {a} menit, bus B setiap {b} menit. Pukul 07.00 berangkat bersama. Berapa menit kemudian berangkat bersama lagi?",
+          "answer": "lcm(a, b)",
+          "unit": "menit",
+          "mode": "input",
+          "explain": "KPK({a}, {b}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [4, 10],
+            "x": [2, 5],
+            "y": [3, 7],
+            "z": [4, 9]
+          },
+          "constraint": "x < y && y < z && gcd(x, y, z) == 1",
+          "derived": {
+            "a": "g * x",
+            "b": "g * y",
+            "c": "g * z"
+          },
+          "prompt": "Ada {a} kelereng merah, {b} biru, dan {c} hijau dibagi sama banyak ke kantong sebanyak mungkin. Berapa kantong?",
+          "answer": "gcd(a, b, c)",
+          "unit": "kantong",
+          "mode": "input",
+          "explain": "FPB({a}, {b}, {c}) = {answer}."
+        }
+      }
+    ]
+  }
+}

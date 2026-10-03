@@ -1,0 +1,45 @@
+{
+  "id": "math.smp79.b2.identitas-jumlah-kuadrat",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 2,
+  "title": "Aljabar — Level 2 — Identitas jumlah kuadrat",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [1, 9],
+      "y": [1, 9]
+    },
+    "constraint": "x < y",
+    "derived": {
+      "s": "x + y",
+      "p": "x * y"
+    },
+    "prompt": "Jika x + y = {s} dan xy = {p}, nilai x² + y² adalah …",
+    "answer": "s * s - 2 * p",
+    "distractors": [
+      {
+        "expr": "s * s",
+        "tag": "lupa-2xy"
+      },
+      {
+        "expr": "s * s + 2 * p",
+        "tag": "tanda-terbalik"
+      },
+      {
+        "expr": "s * s - p",
+        "tag": "lupa-kali-dua"
+      }
+    ],
+    "explain": "Ingat: x² + y² = (x + y)² − 2xy = {=s*s} − {=2*p} = {answer}."
+  }
+}

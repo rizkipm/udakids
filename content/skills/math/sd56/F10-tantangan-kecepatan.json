@@ -1,0 +1,76 @@
+{
+  "id": "math.sd56.f10.tantangan-kecepatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "F",
+  "order": 10,
+  "title": "Kecepatan, jarak, dan waktu — Level 10 — Tantangan kecepatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [40, 60, 80]
+            },
+            "m": {
+              "values": [15, 30, 45]
+            }
+          },
+          "prompt": "Kecepatan {v} km/jam selama {m} menit. Berapa km jaraknya?",
+          "answer": "v * m / 60",
+          "mode": "input",
+          "unit": "km",
+          "explain": "{v} × {m}/60 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [40, 50, 60]
+            },
+            "b": {
+              "values": [30, 40, 50]
+            },
+            "t": [2, 3]
+          },
+          "derived": {
+            "s": "(a + b) * t"
+          },
+          "prompt": "Jarak dua kota {s} km. Dua mobil berangkat bersamaan saling menuju dengan {a} km/jam dan {b} km/jam. Setelah berapa jam berpapasan?",
+          "answer": "t",
+          "mode": "input",
+          "unit": "jam",
+          "explain": "{s} : ({a} + {b}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [36, 54, 72]
+            }
+          },
+          "prompt": "{v} km/jam = … m/detik",
+          "answer": "v * 1000 / 3600",
+          "mode": "input",
+          "unit": "m/detik",
+          "explain": "{v} × 1.000 : 3.600 = {answer}."
+        }
+      }
+    ]
+  }
+}

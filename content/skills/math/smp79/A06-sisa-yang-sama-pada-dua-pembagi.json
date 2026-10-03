@@ -1,0 +1,42 @@
+{
+  "id": "math.smp79.a6.sisa-yang-sama-pada-dua-pembagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 6,
+  "title": "Teori bilangan — Level 6 — Sisa yang sama pada dua pembagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "b": [4, 12],
+      "r": [1, 3]
+    },
+    "constraint": "a < b && r < a && lcm(a, b) <= 120",
+    "prompt": "Bilangan asli terkecil yang lebih dari {r}, yang jika dibagi {a} bersisa {r} dan jika dibagi {b} juga bersisa {r}, adalah …",
+    "answer": "lcm(a, b) + r",
+    "distractors": [
+      {
+        "expr": "a * b + r",
+        "tag": "mengalikan-langsung"
+      },
+      {
+        "expr": "lcm(a, b)",
+        "tag": "lupa-sisa"
+      },
+      {
+        "expr": "gcd(a, b) + r",
+        "tag": "fpb-bukan-kpk"
+      }
+    ],
+    "explain": "Bilangan itu dikurangi {r} habis dibagi {a} dan {b}, jadi kelipatan KPK({a}, {b}) = {=lcm(a,b)}. Terkecil: {=lcm(a,b)} + {r} = {answer}."
+  }
+}

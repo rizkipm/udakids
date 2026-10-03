@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.e7.permutasi-melingkar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 7,
+  "title": "Kombinatorika — Level 7 — Permutasi melingkar",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [4, 8]
+    },
+    "prompt": "Banyak cara {n} orang duduk mengelilingi meja bundar (susunan yang hanya diputar dianggap sama) adalah …",
+    "answer": "((n - 1) == 3) * 6 + ((n - 1) == 4) * 24 + ((n - 1) == 5) * 120 + ((n - 1) == 6) * 720 + ((n - 1) == 7) * 5040",
+    "distractors": [
+      {
+        "expr": "(n == 4) * 24 + (n == 5) * 120 + (n == 6) * 720 + (n == 7) * 5040 + (n == 8) * 40320",
+        "tag": "lupa-putar"
+      },
+      {
+        "expr": "n - 1",
+        "tag": "tanpa-faktorial"
+      },
+      {
+        "expr": "n * (n - 1)",
+        "tag": "salah-rumus"
+      }
+    ],
+    "explain": "Permutasi melingkar = ({n} − 1)! = {answer}."
+  }
+}

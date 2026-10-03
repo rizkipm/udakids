@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.c2.komposisi-fungsi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "C",
+  "order": 2,
+  "title": "Persamaan fungsional — Level 2 — Komposisi fungsi",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 5],
+      "b": [1, 6],
+      "c": [2, 4],
+      "d": [1, 5],
+      "k": [1, 6]
+    },
+    "prompt": "Diketahui f(x) = {a}x + {b} dan g(x) = {c}x + {d}. Nilai f(g({k})) adalah …",
+    "answer": "a * (c * k + d) + b",
+    "allowNegative": true,
+    "distractors": [
+      {
+        "expr": "c * (a * k + b) + d",
+        "tag": "g-dari-f"
+      },
+      {
+        "expr": "(a * k + b) * (c * k + d)",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a * k + b + c * k + d",
+        "tag": "dijumlah"
+      }
+    ],
+    "explain": "Hitung dulu g({k}) = {=c*k+d}, lalu f({=c*k+d}) = {a} × {=c*k+d} + {b} = {answer}."
+  }
+}

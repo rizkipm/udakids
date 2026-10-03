@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.i6.bilangan-tiga-angka-terkecil-habis-dibagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "I",
+  "order": 6,
+  "title": "Ekstremal — Level 6 — Bilangan tiga angka terkecil habis dibagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [7, 49]
+    },
+    "prompt": "Bilangan tiga angka terkecil yang habis dibagi {k} adalah …",
+    "answer": "ceil(100 / k) * k",
+    "distractors": [
+      {
+        "expr": "100 + k",
+        "tag": "asal-tambah"
+      },
+      {
+        "expr": "floor(100 / k) * k",
+        "tag": "bukan-tiga-angka"
+      },
+      {
+        "expr": "floor(999 / k) * k",
+        "tag": "terbesar"
+      }
+    ],
+    "explain": "Kelipatan {k} pertama yang ≥ 100 adalah {answer}."
+  }
+}

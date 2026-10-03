@@ -1,0 +1,67 @@
+{
+  "id": "math.smp79.c10.tantangan-persamaan-fungsional",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "C",
+  "order": 10,
+  "title": "Persamaan fungsional — Level 10 — Tantangan persamaan fungsional",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 15],
+            "c": [2, 8],
+            "n": [10, 50]
+          },
+          "prompt": "Fungsi f memenuhi f(1) = {s} dan f(x + 1) = f(x) + {c}. Nilai f({n}) adalah …",
+          "answer": "s + (n - 1) * c",
+          "mode": "input",
+          "explain": "{s} + {=n-1} × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [0, 15]
+          },
+          "constraint": "(a + b) % 3 == 0",
+          "prompt": "Fungsi f memenuhi f(x) + 2f(2 − x) = {a}x + {b} untuk semua x. Nilai f(1) adalah …",
+          "answer": "(a + b) / 3",
+          "mode": "input",
+          "explain": "x = 1: 3f(1) = {=a+b}, f(1) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 6],
+            "i": [1, 3],
+            "j": [1, 2]
+          },
+          "derived": {
+            "n": "((i == 1) * 2 + (i == 2) * 2 * 2 + (i == 3) * 2 * 2 * 2) * ((j == 1) * 3 + (j == 2) * 3 * 3)"
+          },
+          "prompt": "Fungsi f memenuhi f(xy) = f(x) + f(y), f(2) = {a}, f(3) = {b}. Nilai f({n}) adalah …",
+          "answer": "i * a + j * b",
+          "mode": "input",
+          "explain": "{n} = 2^{i} × 3^{j}: {answer}."
+        }
+      }
+    ]
+  }
+}

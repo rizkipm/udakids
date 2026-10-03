@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.h4.akar-digital-sisa-bagi-9",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "H",
+  "order": 4,
+  "title": "Invarians — Level 4 — Akar digital (sisa bagi 9)",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [1000, 99999]
+    },
+    "prompt": "Mulai dari {n}, jumlahkan angka-angkanya, lalu jumlahkan lagi angka-angka hasilnya, sampai tersisa satu angka. Angka terakhir itu adalah …",
+    "answer": "(n - 1) % 9 + 1",
+    "distractors": [
+      {
+        "expr": "n % 10",
+        "tag": "satuan"
+      },
+      {
+        "expr": "n % 9 + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(n - 1) % 9",
+        "tag": "kurang-satu"
+      }
+    ],
+    "explain": "Menjumlahkan angka tidak mengubah sisa pembagian oleh 9. {n} dibagi 9 bersisa {=n%9}, jadi hasilnya {answer} (sisa 0 berarti 9)."
+  }
+}

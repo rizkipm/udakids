@@ -27,7 +27,7 @@ export const factsFamily = defineFamily({
       ask: z.enum(['value', 'name', 'odd', 'true-false']).default('name'),
       /** Hanya baris yang atributnya berisi salah satu nilai ini (mis. hanya hewan darat). */
       only: z.array(z.string()).optional(),
-      prompt: z.string().min(1).max(160),
+      prompt: z.string().min(1).max(500),
       explain: z.string().min(1).max(400),
       choices: z.number().int().min(2).max(4).default(4),
       /** Tampilkan gambar benda (untuk anak yang belum lancar membaca). */

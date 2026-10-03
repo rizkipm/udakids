@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.b8.perbandingan-bentuk-aljabar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "B",
+  "order": 8,
+  "title": "Aljabar — Level 8 — Perbandingan bentuk aljabar",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 9],
+      "q": [1, 8]
+    },
+    "constraint": "q < p && gcd(p, q) == 1 && (p + q) % (p - q) != 0",
+    "prompt": "Jika a : b = {p} : {q} (b ≠ 0), nilai (a + b)/(a − b) adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "p + q",
+      "den": "p - q"
+    },
+    "distractors": [
+      {
+        "num": "p - q",
+        "den": "p + q",
+        "tag": "terbalik"
+      },
+      {
+        "num": "p",
+        "den": "q",
+        "tag": "rasio-awal"
+      },
+      {
+        "num": "p + q",
+        "den": "p",
+        "tag": "salah-penyebut"
+      }
+    ],
+    "explain": "Misalkan a = {p}k dan b = {q}k. (a + b)/(a − b) = {=p+q}k/{=p-q}k = {answer}."
+  }
+}

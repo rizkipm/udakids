@@ -1,0 +1,50 @@
+{
+  "id": "math.sd56.c1.penjumlahan-pecahan-beda-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "C",
+  "order": 1,
+  "title": "Pecahan — Level 1 — Penjumlahan pecahan beda penyebut",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [2, 8],
+      "c": [1, 5],
+      "d": [2, 8]
+    },
+    "constraint": "a < b && c < d && b != d",
+    "prompt": "Hasil dari {a}/{b} + {c}/{d} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a * d + c * b",
+      "den": "b * d"
+    },
+    "distractors": [
+      {
+        "num": "a + c",
+        "den": "b + d",
+        "tag": "jumlah-atas-bawah"
+      },
+      {
+        "num": "a + c",
+        "den": "b * d",
+        "tag": "pembilang-tidak-disamakan"
+      },
+      {
+        "num": "a * d + c * b + d",
+        "den": "b * d",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Samakan penyebut: {a}/{b} + {c}/{d} = {=a*d}/{=b*d} + {=c*b}/{=b*d}. Hasilnya {answer} (disederhanakan)."
+  }
+}

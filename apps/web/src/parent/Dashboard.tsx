@@ -10,6 +10,7 @@ import { familySteps, Stepper } from '../site/AuthLayout';
 import { Button, Card, Empty, formatDate, Notice, Spinner } from '../ui/ui';
 import { BannerSlider } from '../components/BannerSlider';
 import { ClaimChild } from './ClaimChild';
+import { NewsToggle } from './NewsToggle';
 import { CountUp, Kpi } from '../ui/charts';
 import { ChildProgress, ProgressIcon, type OverviewChild } from './Progress';
 
@@ -274,7 +275,12 @@ export function Dashboard() {
                   className={`pd-tab${c.id === current?.id ? ' is-on' : ''}`}
                   onClick={() => setPicked(c.id)}
                 >
-                  <Momo color={c.momoColor as Color} mood="happy" size={32} />
+                  <Momo
+                    color={c.momoColor as Color}
+                    look={c.momoLook ?? null}
+                    mood="happy"
+                    size={32}
+                  />
                   {c.nickname}
                 </button>
               ))}
@@ -343,6 +349,8 @@ export function Dashboard() {
             </div>
           </Card>
         )}
+
+        <NewsToggle />
 
         <Card className="pa-billing-link">
           <div className="pa-family-inner">

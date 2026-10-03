@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.e7.skala-jarak-pada-peta",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "E",
+  "order": 7,
+  "title": "Perbandingan dan skala — Level 7 — Skala: jarak pada peta",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [5, 60],
+      "s": {
+        "values": [100000, 200000, 250000, 500000]
+      }
+    },
+    "constraint": "k * 100000 % s == 0",
+    "prompt": "Jarak sebenarnya dua kota {k} km. Pada peta berskala 1 : {s}, berapa cm jaraknya?",
+    "answer": "k * 100000 / s",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "k * 1000 / s * 100",
+        "tag": "salah-konversi"
+      },
+      {
+        "expr": "k * s / 100000",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "k * 10000 / s",
+        "tag": "kurang-nol"
+      }
+    ],
+    "explain": "{k} km = {=k*100000} cm. Pada peta: {=k*100000} : {s} = {answer} cm."
+  }
+}

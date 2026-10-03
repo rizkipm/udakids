@@ -1,0 +1,60 @@
+{
+  "id": "math.smp79.f10.tantangan-pola-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "F",
+  "order": 10,
+  "title": "Pola bilangan — Level 10 — Tantangan pola bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "d": [2, 8],
+            "n": [20, 80]
+          },
+          "prompt": "Suku ke-{n} barisan {a}, {=a+d}, {=a+2*d}, … adalah …",
+          "answer": "a + (n - 1) * d",
+          "mode": "input",
+          "explain": "{a} + {=n-1} × {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10, 50]
+          },
+          "prompt": "Nilai 1 + 2 + 3 + … + {n} adalah …",
+          "answer": "n * (n + 1) / 2",
+          "mode": "input",
+          "explain": "{n} × {=n+1} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 6]
+          },
+          "prompt": "U1 = {a}, U2 = {b}, dan Un = Un−1 + Un−2. Nilai U6 adalah …",
+          "answer": "3 * a + 5 * b",
+          "mode": "input",
+          "explain": "{=a+b}, {=a+2*b}, {=2*a+3*b}, {answer}."
+        }
+      }
+    ]
+  }
+}

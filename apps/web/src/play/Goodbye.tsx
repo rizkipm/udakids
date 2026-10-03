@@ -29,7 +29,7 @@ export function Goodbye({ momoColor }: { momoColor: Color }) {
 
   return (
     <main className="kid-screen bye-screen">
-      <Momo color={momoColor} mood="proud" size={150} />
+      <Momo own color={momoColor} mood="proud" size={150} />
       <div className="kid-say">
         <SpeakButton text={`${say} ${t('play.bye.question')}`} />
         <p>{say}</p>

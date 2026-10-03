@@ -1,6 +1,12 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { PIN_LENGTH, PIN_PICTURES, type Color, type PinPicture } from '@little-coder/engine';
+import {
+  PIN_LENGTH,
+  PIN_PICTURES,
+  type Color,
+  type MomoLook,
+  type PinPicture,
+} from '@little-coder/engine';
 import { api, ApiError } from '../api/client';
 import { speak } from '../audio/speech';
 import {
@@ -14,7 +20,7 @@ import { VisualView } from '../components/visuals';
 import { t } from '../i18n';
 import { SpeakButton } from './ItemPlayer';
 
-type Profile = { id: string; nickname: string; momoColor: Color };
+type Profile = { id: string; nickname: string; momoColor: Color; momoLook?: MomoLook | null };
 type Step =
   | { name: 'code' }
   | { name: 'who'; profiles: Profile[] }
@@ -130,7 +136,13 @@ export function ChildLogin() {
                 setStep({ name: 'pin', profiles: step.profiles, profile: p });
               }}
             >
-              <Momo color={p.momoColor} mood="happy" size={110} label={`Momo ${p.nickname}`} />
+              <Momo
+                color={p.momoColor}
+                look={p.momoLook ?? null}
+                mood="happy"
+                size={110}
+                label={`Momo ${p.nickname}`}
+              />
               <span>{p.nickname}</span>
             </button>
           ))}
@@ -191,7 +203,12 @@ function PinPad({ profile, code, onBack }: { profile: Profile; code: string; onB
   return (
     <main className="kid-screen">
       <div className="kid-say">
-        <Momo color={profile.momoColor} mood={note ? 'curious' : 'happy'} size={90} />
+        <Momo
+          color={profile.momoColor}
+          look={profile.momoLook ?? null}
+          mood={note ? 'curious' : 'happy'}
+          size={90}
+        />
         <SpeakButton text={t('play.login.pin.say')} />
         <p>{note ?? t('play.login.pin.say')}</p>
       </div>

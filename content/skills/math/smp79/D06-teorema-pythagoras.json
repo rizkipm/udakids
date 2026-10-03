@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.d6.teorema-pythagoras",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "D",
+  "order": 6,
+  "title": "Geometri olimpiade — Level 6 — Teorema Pythagoras",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": {
+        "values": [1, 2, 3]
+      },
+      "k": [1, 5]
+    },
+    "derived": {
+      "a": "k * ((t == 1) * 3 + (t == 2) * 5 + (t == 3) * 8)",
+      "b": "k * ((t == 1) * 4 + (t == 2) * 12 + (t == 3) * 15)",
+      "c": "k * ((t == 1) * 5 + (t == 2) * 13 + (t == 3) * 17)"
+    },
+    "prompt": "Segitiga siku-siku memiliki sisi siku-siku {a} cm dan {b} cm. Panjang sisi miringnya adalah …",
+    "answer": "c",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "b - a + c - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "b + 1",
+        "tag": "dekat-sisi"
+      }
+    ],
+    "explain": "Pythagoras: c² = {a}² + {b}² = {=a*a} + {=b*b} = {=c*c}, jadi c = {answer} cm."
+  }
+}

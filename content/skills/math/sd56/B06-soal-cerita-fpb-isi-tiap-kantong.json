@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.b6.soal-cerita-fpb-isi-tiap-kantong",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "B",
+  "order": 6,
+  "title": "FPB dan KPK — Level 6 — Soal cerita FPB: isi tiap kantong",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [3, 12],
+      "x": [2, 6],
+      "y": [2, 6]
+    },
+    "constraint": "x < y && gcd(x, y) == 1",
+    "derived": {
+      "a": "g * x",
+      "b": "g * y"
+    },
+    "prompt": "Ada {a} kue cokelat dan {b} kue keju dibagi ke kotak sebanyak mungkin dengan isi sama. Berapa kue keju di setiap kotak?",
+    "answer": "y",
+    "unit": "kue",
+    "distractors": [
+      {
+        "expr": "x",
+        "tag": "tertukar"
+      },
+      {
+        "expr": "g",
+        "tag": "jumlah-kotak"
+      },
+      {
+        "expr": "x + y",
+        "tag": "isi-total"
+      }
+    ],
+    "explain": "Banyak kotak = FPB({a}, {b}) = {g}. Kue keju per kotak = {b} : {g} = {answer}."
+  }
+}

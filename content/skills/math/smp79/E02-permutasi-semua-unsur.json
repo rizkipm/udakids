@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.e2.permutasi-semua-unsur",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 2,
+  "title": "Kombinatorika — Level 2 — Permutasi semua unsur",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [3, 7]
+    },
+    "prompt": "Banyak cara {n} siswa duduk berjajar pada {n} kursi adalah …",
+    "answer": "(n == 3) * 6 + (n == 4) * 24 + (n == 5) * 120 + (n == 6) * 720 + (n == 7) * 5040",
+    "distractors": [
+      {
+        "expr": "n * n",
+        "tag": "kuadrat"
+      },
+      {
+        "expr": "n * (n - 1)",
+        "tag": "dua-kursi-saja"
+      },
+      {
+        "expr": "(n == 3) * 6 + (n == 4) * 24 + (n == 5) * 120 + (n == 6) * 720 + (n == 7) * 5040 / 2",
+        "tag": "dibagi-dua"
+      }
+    ],
+    "explain": "{n}! = {answer}."
+  }
+}

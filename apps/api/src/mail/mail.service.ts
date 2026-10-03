@@ -6,7 +6,7 @@ import {
   type OnModuleDestroy,
   type OnModuleInit,
 } from '@nestjs/common';
-import { and, desc, eq, inArray, lte, sql } from 'drizzle-orm';
+import { and, desc, eq, gte, inArray, lte, sql } from 'drizzle-orm';
 import nodemailer from 'nodemailer';
 import { DB, type Db } from '../db/db.module.js';
 import { emailOutbox } from '../db/schema.js';
@@ -75,6 +75,8 @@ const maskCodes = (subject: string) => subject.replace(/\b\d{6}\b/g, '•••�
 /** Jeda percobaan ulang: 1 mnt, 5 mnt, 30 mnt, 2 jam, 12 jam → gagal. */
 const BACKOFF_MS = [60_000, 5 * 60_000, 30 * 60_000, 2 * 3600_000, 12 * 3600_000];
 const TICK_MS = Number(process.env.MAIL_TICK_MS ?? 15_000);
+/** Maksimal email info materi baru per 24 jam (kuota Gmail ±500/hari dibagi dengan email penting). */
+const NEWS_DAILY_CAP = Number(process.env.NEWS_DAILY_CAP ?? 400);
 
 /**
  * Antrean email (D-044): `enqueue` menulis ke `email_outbox`, pekerja mengirim berkala dengan percobaan
@@ -149,26 +151,53 @@ export class MailService implements OnModuleInit, OnModuleDestroy {
 
   /** Kirim email yang jatuh tempo. Panggilan bersamaan diantrekan (satu per satu, tanpa kirim ganda). */
   flush(now?: Date): Promise<number> {
-    const next = this.current.catch(() => 0).then(() => this.flushOnce(now ?? new Date()));
+    const next = this.current.catch(() => 0).then(() => this.flushOnce(now));
     this.current = next;
     return next;
   }
 
-  private async flushOnce(now: Date): Promise<number> {
+  private async flushOnce(at?: Date): Promise<number> {
     let sent = 0;
+    const now = at ?? new Date();
     const due = await this.db
       .select()
       .from(emailOutbox)
       .where(
         and(
           inArray(emailOutbox.status, ['queued', 'retry', 'waiting_smtp']),
-          lte(emailOutbox.nextAttemptAt, now),
+          // Tanpa waktu eksplisit: pakai jam database (sama dengan default `next_attempt_at`), agar email yang
+          // baru masuk tidak tertunda karena selisih milidetik antara jam Node dan jam Postgres.
+          at ? lte(emailOutbox.nextAttemptAt, at) : sql`${emailOutbox.nextAttemptAt} <= now()`,
         ),
       )
-      .orderBy(emailOutbox.createdAt)
+      // Email penting (verifikasi, transaksi) didahulukan; info materi baru (D-053) belakangan.
+      .orderBy(sql`(${emailOutbox.kind} = 'news')`, emailOutbox.createdAt)
       .limit(20);
     const from = mailConfig().from;
+    // Batas harian info materi baru agar tidak melewati kuota Gmail (±500/hari, D-053).
+    const since = new Date(now.getTime() - 24 * 3600_000);
+    const [{ n: newsToday } = { n: 0 }] = await this.db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(emailOutbox)
+      .where(
+        and(
+          eq(emailOutbox.kind, 'news'),
+          inArray(emailOutbox.status, ['sent', 'logged']),
+          gte(emailOutbox.sentAt, since),
+        ),
+      );
+    let newsBudget = NEWS_DAILY_CAP - Number(newsToday);
     for (const m of due) {
+      if (m.kind === 'news' && this.transport) {
+        if (newsBudget <= 0) {
+          await this.db
+            .update(emailOutbox)
+            .set({ nextAttemptAt: new Date(now.getTime() + 3 * 3600_000) })
+            .where(eq(emailOutbox.id, m.id));
+          continue;
+        }
+        newsBudget--;
+      }
       if (!this.transport) {
         if (process.env.NODE_ENV !== 'production' && m.status !== 'logged') {
           this.log.log(`[dev, tanpa SMTP] ke ${m.toEmail}: ${m.subject}\n${m.text ?? ''}`);

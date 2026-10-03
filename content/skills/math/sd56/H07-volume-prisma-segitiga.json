@@ -1,0 +1,45 @@
+{
+  "id": "math.sd56.h7.volume-prisma-segitiga",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "H",
+  "order": 7,
+  "title": "Bangun ruang — Level 7 — Volume prisma segitiga",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [4, 20],
+        "step": 2
+      },
+      "b": [3, 12],
+      "t": [5, 20]
+    },
+    "prompt": "Prisma tegak beralas segitiga siku-siku dengan sisi siku-siku {a} cm dan {b} cm, tinggi prisma {t} cm. Berapa cm³ volumenya?",
+    "answer": "a * b / 2 * t",
+    "unit": "cm³",
+    "distractors": [
+      {
+        "expr": "a * b * t",
+        "tag": "lupa-setengah"
+      },
+      {
+        "expr": "a * b / 2",
+        "tag": "luas-alas"
+      },
+      {
+        "expr": "(a + b) * t",
+        "tag": "menjumlah"
+      }
+    ],
+    "explain": "Luas alas = ½ × {a} × {b} = {=a*b/2}. Volume = {=a*b/2} × {t} = {answer} cm³."
+  }
+}

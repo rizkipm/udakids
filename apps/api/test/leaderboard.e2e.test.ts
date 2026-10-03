@@ -102,6 +102,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
         'childId',
         'isMe',
         'momoColor',
+        'momoLook',
         'nickname',
         'passedLevels',
         'points',
@@ -271,6 +272,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       expect(Object.keys(r).sort()).toEqual(
         [
           'momoColor',
+          'momoLook',
           'nickname',
           'passedLevels',
           'points',
@@ -286,5 +288,45 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     await ctx.http().get('/leaderboard').expect(401);
     const board = await get('/leaderboard?mode=total').expect(200);
     expect(board.body.top[0]).toMatchObject({ nickname: 'Budi', questions: 30 });
+  });
+
+  it('Hias Momo (D-051): anak mengubah gradasi & aksesori; tampil di profil, layar masuk, dan peringkat', async () => {
+    const kid = await ctx.newChild('Hiasan');
+    const look = { gradient: 'toska', accessory: 'jilbab', accessoryColor: 'merahmuda' };
+    const put = await ctx
+      .http()
+      .put('/auth/me/momo')
+      .set(ctx.auth(kid.token))
+      .send({ momoColor: 'ungu', momoLook: look })
+      .expect(200);
+    expect(put.body).toEqual({ momoColor: 'ungu', momoLook: look });
+    const me = await ctx.http().get('/auth/me').set(ctx.auth(kid.token)).expect(200);
+    expect(me.body).toMatchObject({ momoColor: 'ungu', momoLook: look });
+    const fam = await ctx.http().get(`/auth/family/${kid.familyCode}`).expect(200);
+    expect(fam.body[0]).toMatchObject({ nickname: 'Hiasan', momoLook: look });
+    await round(kid.id, mathSkill, 100, 1000);
+    const board = await get('/leaderboard', kid.token).expect(200);
+    const mine = board.body.me ?? board.body.top.find((r: { isMe: boolean }) => r.isMe);
+    expect(mine).toMatchObject({ momoLook: look });
+    // Nilai asing ditolak; hanya anak yang bisa mengubah Momo-nya sendiri.
+    await ctx
+      .http()
+      .put('/auth/me/momo')
+      .set(ctx.auth(kid.token))
+      .send({ momoColor: 'ungu', momoLook: { accessory: 'mahkota' } })
+      .expect(400);
+    await ctx
+      .http()
+      .put('/auth/me/momo')
+      .set(ctx.auth(ctx.adminToken))
+      .send({ momoColor: 'ungu', momoLook: null })
+      .expect(403);
+    // Kembali polos.
+    await ctx
+      .http()
+      .put('/auth/me/momo')
+      .set(ctx.auth(kid.token))
+      .send({ momoColor: 'biru', momoLook: null })
+      .expect(200);
   });
 });

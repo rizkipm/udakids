@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import type { Color } from '@little-coder/engine';
+import type { Color, MomoLook } from '@little-coder/engine';
 import { loadVoice } from '../audio/speech';
 import { useFetch } from '../auth/useApi';
 import { useSession } from '../auth/session';
@@ -13,6 +13,8 @@ import { Library } from './Library';
 import { PracticeRoute } from './Practice';
 import { ProfilePage } from './Profile';
 import { TopicPage } from './Topic';
+import { MomoPage } from './MomoPage';
+import { OwnMomoLook } from '../components/Momo';
 import { flushPractice, pullPractice } from './sync';
 import './play.css';
 
@@ -20,7 +22,10 @@ import './play.css';
 export function PlayApp() {
   const session = useSession('child');
   const childId = session?.user.id;
-  const me = useFetch<{ momoColor?: Color }>('child', childId ? '/auth/me' : null);
+  const me = useFetch<{ momoColor?: Color; momoLook?: MomoLook | null }>(
+    'child',
+    childId ? '/auth/me' : null,
+  );
 
   // Daftar kalimat suara Momo (D-035); salinan terakhir dipakai saat offline.
   useEffect(() => {
@@ -44,19 +49,26 @@ export function PlayApp() {
     );
   }
   const color = me.data?.momoColor ?? 'ungu';
+  const look = me.data?.momoLook ?? null;
   return (
-    <div className="kid-app">
-      <Routes>
-        <Route index element={<Library momoColor={color} />} />
-        <Route path="latihan/:token" element={<PracticeRoute momoColor={color} />} />
-        <Route path="profil" element={<ProfilePage momoColor={color} />} />
-        <Route path="peringkat" element={<LeaderboardPage momoColor={color} />} />
-        <Route path="lomba" element={<ContestHome momoColor={color} />} />
-        <Route path="lomba/:id" element={<ContestPlay momoColor={color} />} />
-        <Route path="topik/:token" element={<TopicPage momoColor={color} />} />
-        <Route path="selesai" element={<Goodbye momoColor={color} />} />
-        <Route path="*" element={<Navigate to="/play" replace />} />
-      </Routes>
-    </div>
+    <OwnMomoLook look={look}>
+      <div className="kid-app">
+        <Routes>
+          <Route
+            path="momo"
+            element={<MomoPage momoColor={color} momoLook={look} onSaved={me.reload} />}
+          />
+          <Route index element={<Library momoColor={color} />} />
+          <Route path="latihan/:token" element={<PracticeRoute momoColor={color} />} />
+          <Route path="profil" element={<ProfilePage momoColor={color} />} />
+          <Route path="peringkat" element={<LeaderboardPage momoColor={color} />} />
+          <Route path="lomba" element={<ContestHome momoColor={color} />} />
+          <Route path="lomba/:id" element={<ContestPlay momoColor={color} />} />
+          <Route path="topik/:token" element={<TopicPage momoColor={color} />} />
+          <Route path="selesai" element={<Goodbye momoColor={color} />} />
+          <Route path="*" element={<Navigate to="/play" replace />} />
+        </Routes>
+      </div>
+    </OwnMomoLook>
   );
 }

@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.a3.angka-satuan-bilangan-berpangkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 3,
+  "title": "Teori bilangan — Level 3 — Angka satuan bilangan berpangkat",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [2, 3, 7, 8, 12, 13, 17, 18, 22, 23]
+      },
+      "k": [10, 99]
+    },
+    "derived": {
+      "d": "a % 10",
+      "r": "(k - 1) % 4 + 1",
+      "e1": "d",
+      "e2": "d * d % 10",
+      "e3": "e2 * d % 10",
+      "e4": "e3 * d % 10",
+      "u": "(r == 1) * e1 + (r == 2) * e2 + (r == 3) * e3 + (r == 4) * e4"
+    },
+    "prompt": "Angka satuan dari {a}^{k} ({a} pangkat {k}) adalah …",
+    "answer": "u",
+    "distractors": [
+      {
+        "expr": "d",
+        "tag": "satuan-basis"
+      },
+      {
+        "expr": "(r == 1) * e2 + (r == 2) * e3 + (r == 3) * e4 + (r == 4) * e1",
+        "tag": "siklus-geser"
+      },
+      {
+        "expr": "k % 10",
+        "tag": "satuan-pangkat"
+      }
+    ],
+    "explain": "Angka satuan {d}^1, {d}^2, {d}^3, {d}^4 berulang: {e1}, {e2}, {e3}, {e4}. Karena {k} = 4 × {=floor((k-1)/4)} + {r}, angka satuannya {answer}."
+  }
+}

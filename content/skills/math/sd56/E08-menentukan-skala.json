@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.e8.menentukan-skala",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "E",
+  "order": 8,
+  "title": "Perbandingan dan skala — Level 8 — Menentukan skala",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 10],
+      "k": {
+        "values": [10, 20, 25, 40, 50, 100]
+      }
+    },
+    "constraint": "k * 100000 % p == 0",
+    "prompt": "Jarak pada peta {p} cm mewakili jarak sebenarnya {k} km. Skala peta itu adalah 1 : …",
+    "answer": "k * 100000 / p",
+    "distractors": [
+      {
+        "expr": "k * 1000 / p",
+        "tag": "salah-konversi-m"
+      },
+      {
+        "expr": "p * 100000 / k",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "k * 100000",
+        "tag": "lupa-bagi"
+      }
+    ],
+    "explain": "{k} km = {=k*100000} cm. Skala = {p} : {=k*100000} = 1 : {answer}."
+  }
+}

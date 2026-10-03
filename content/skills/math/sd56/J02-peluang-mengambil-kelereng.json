@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.j2.peluang-mengambil-kelereng",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "J",
+  "order": 2,
+  "title": "Peluang — Level 2 — Peluang mengambil kelereng",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [1, 9],
+      "b": [1, 9],
+      "h": [1, 9]
+    },
+    "prompt": "Di kantong ada {m} kelereng merah, {b} biru, dan {h} hijau. Diambil satu tanpa melihat. Berapa peluang terambil kelereng biru?",
+    "format": "fraction",
+    "fraction": {
+      "num": "b",
+      "den": "m + b + h"
+    },
+    "distractors": [
+      {
+        "num": "b",
+        "den": "m + h",
+        "tag": "banding-sisanya"
+      },
+      {
+        "num": "1",
+        "den": "3",
+        "tag": "tiga-warna"
+      },
+      {
+        "num": "m",
+        "den": "m + b + h",
+        "tag": "warna-lain"
+      }
+    ],
+    "explain": "Banyak kelereng {=m+b+h}, biru {b}. Peluang = {answer} (disederhanakan bila bisa)."
+  }
+}

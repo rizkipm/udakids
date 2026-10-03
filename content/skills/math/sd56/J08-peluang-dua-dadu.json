@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.j8.peluang-dua-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "J",
+  "order": 8,
+  "title": "Peluang — Level 8 — Peluang dua dadu",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": [2, 12]
+    },
+    "derived": {
+      "n": "min(s - 1, 13 - s)"
+    },
+    "prompt": "Dua dadu dilempar bersamaan. Berapa peluang jumlah kedua mata dadu sama dengan {s}?",
+    "format": "fraction",
+    "fraction": {
+      "num": "n",
+      "den": "36"
+    },
+    "distractors": [
+      {
+        "num": "1",
+        "den": "11",
+        "tag": "jumlah-dianggap-sama"
+      },
+      {
+        "num": "n",
+        "den": "12",
+        "tag": "hanya-12"
+      },
+      {
+        "num": "n + 1",
+        "den": "36",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Ada 36 pasangan hasil. Pasangan berjumlah {s} ada {n}. Peluang = {n}/36 = {answer}."
+  }
+}

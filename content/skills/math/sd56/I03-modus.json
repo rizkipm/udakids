@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.i3.modus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 3,
+  "title": "Statistika — Level 3 — Modus",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [5, 10],
+      "a": [5, 10],
+      "b": [5, 10],
+      "c": [5, 10]
+    },
+    "constraint": "a != m && b != m && c != m && a != b && b != c && a != c",
+    "prompt": "Nilai kuis: {a}, {m}, {b}, {m}, {c}, {m}, {a}. Berapa modusnya?",
+    "answer": "m",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "muncul-dua-kali"
+      },
+      {
+        "expr": "max(a, b, c, m)",
+        "tag": "nilai-terbesar"
+      },
+      {
+        "expr": "3",
+        "tag": "banyak-kemunculan"
+      }
+    ],
+    "explain": "Modus = nilai yang paling sering muncul. {m} muncul 3 kali, jadi modusnya {answer}."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.a4.perkalian-dan-pembagian-bilangan-bulat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "A",
+  "order": 4,
+  "title": "Bilangan bulat — Level 4 — Perkalian dan pembagian bilangan bulat",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 12],
+      "b": [2, 12],
+      "s": {
+        "values": [1, 2, 3]
+      }
+    },
+    "derived": {
+      "x": "(s == 1) * (-a) + (s != 1) * a",
+      "y": "(s == 2) * (-b) + (s != 2) * b"
+    },
+    "constraint": "x < 0 || y < 0 || s == 3",
+    "prompt": "Hasil dari ({x}) × ({y}) adalah …",
+    "answer": "x * y",
+    "allowNegative": true,
+    "distractors": [
+      {
+        "expr": "-(x * y)",
+        "tag": "aturan-tanda"
+      },
+      {
+        "expr": "x + y",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "abs(x * y) + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "Tanda sama → positif, tanda berbeda → negatif. ({x}) × ({y}) = {answer}."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.j9.peluang-tanpa-pengembalian-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "J",
+  "order": 9,
+  "title": "Peluang — Level 9 — Peluang tanpa pengembalian (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [2, 6],
+      "b": [2, 6]
+    },
+    "prompt": "Di kotak ada {m} bola merah dan {b} bola biru. Diambil dua bola satu per satu tanpa dikembalikan. Berapa peluang keduanya merah?",
+    "format": "fraction",
+    "fraction": {
+      "num": "m * (m - 1)",
+      "den": "(m + b) * (m + b - 1)"
+    },
+    "distractors": [
+      {
+        "num": "m * m",
+        "den": "(m + b) * (m + b)",
+        "tag": "dengan-pengembalian"
+      },
+      {
+        "num": "m",
+        "den": "m + b",
+        "tag": "sekali-ambil"
+      },
+      {
+        "num": "m - 1",
+        "den": "m + b - 1",
+        "tag": "hanya-ambilan-kedua"
+      }
+    ],
+    "explain": "Ambilan 1 merah: {m}/{=m+b}. Ambilan 2 merah: {=m-1}/{=m+b-1}. Dikalikan = {answer}."
+  }
+}

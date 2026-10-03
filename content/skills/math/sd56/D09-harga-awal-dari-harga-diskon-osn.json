@@ -1,0 +1,36 @@
+{
+  "id": "math.sd56.d9.harga-awal-dari-harga-diskon-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 9,
+  "title": "Persentase — Level 9 — Harga awal dari harga diskon (gaya OSN)",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "timss-kognitif": "reasoning",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [50000, 400000],
+        "step": 10000
+      },
+      "p": {
+        "values": [10, 20, 25, 40, 50]
+      }
+    },
+    "constraint": "h * (100 - p) % 100 == 0",
+    "derived": {
+      "b": "h * (100 - p) / 100"
+    },
+    "prompt": "Setelah didiskon {p}%, harga sebuah mainan menjadi Rp{b}. Berapa rupiah harga sebelum diskon?",
+    "answer": "h",
+    "mode": "input",
+    "explain": "Rp{b} adalah {=100-p}% dari harga awal. Harga awal = {b} × 100 : {=100-p} = Rp{answer}."
+  }
+}

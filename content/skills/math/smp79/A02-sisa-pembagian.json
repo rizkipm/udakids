@@ -1,0 +1,41 @@
+{
+  "id": "math.smp79.a2.sisa-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "A",
+  "order": 2,
+  "title": "Teori bilangan — Level 2 — Sisa pembagian",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [100, 999],
+      "m": [3, 13]
+    },
+    "constraint": "n % m != 0",
+    "prompt": "Sisa pembagian {n} oleh {m} adalah …",
+    "answer": "n % m",
+    "distractors": [
+      {
+        "expr": "floor(n / m)",
+        "tag": "hasil-bagi"
+      },
+      {
+        "expr": "m - n % m",
+        "tag": "sisa-terbalik"
+      },
+      {
+        "expr": "n % m + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "explain": "{n} = {m} × {=floor(n/m)} + {answer}. Sisanya {answer}."
+  }
+}

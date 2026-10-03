@@ -1,0 +1,42 @@
+{
+  "id": "math.smp79.f1.suku-ke-n-barisan-aritmetika",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "F",
+  "order": 1,
+  "title": "Pola bilangan — Level 1 — Suku ke-n barisan aritmetika",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "timss-kognitif": "knowing",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [-10, 20],
+      "d": [2, 9],
+      "n": [10, 60]
+    },
+    "prompt": "Barisan {a}, {=a+d}, {=a+2*d}, {=a+3*d}, … Suku ke-{n} adalah …",
+    "answer": "a + (n - 1) * d",
+    "allowNegative": true,
+    "distractors": [
+      {
+        "expr": "a + n * d",
+        "tag": "lebih-satu-beda"
+      },
+      {
+        "expr": "n * d",
+        "tag": "lupa-suku-awal"
+      },
+      {
+        "expr": "a * n",
+        "tag": "dikali"
+      }
+    ],
+    "explain": "U{n} = a + ({n} − 1)b = {a} + {=n-1} × {d} = {answer}."
+  }
+}

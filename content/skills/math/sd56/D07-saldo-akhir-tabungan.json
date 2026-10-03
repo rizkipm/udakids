@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.d7.saldo-akhir-tabungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "D",
+  "order": 7,
+  "title": "Persentase — Level 7 — Saldo akhir tabungan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "values": [1000000, 2000000, 2500000, 4000000]
+      },
+      "r": {
+        "values": [5, 6, 8, 10]
+      },
+      "t": {
+        "values": [1, 2, 3]
+      }
+    },
+    "prompt": "Tabungan awal Rp{m} dengan bunga tunggal {r}% per tahun. Berapa rupiah tabungannya setelah {t} tahun?",
+    "answer": "m + m * r / 100 * t",
+    "distractors": [
+      {
+        "expr": "m * r / 100 * t",
+        "tag": "hanya-bunga"
+      },
+      {
+        "expr": "m + m * r / 100",
+        "tag": "lupa-kali-tahun"
+      },
+      {
+        "expr": "m - m * r / 100 * t",
+        "tag": "mengurang"
+      }
+    ],
+    "explain": "Bunga {t} tahun = {r}% × {m} × {t} = {=m*r/100*t}. Saldo = {answer}."
+  }
+}

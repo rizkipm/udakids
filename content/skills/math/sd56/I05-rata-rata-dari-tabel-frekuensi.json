@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.i5.rata-rata-dari-tabel-frekuensi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "I",
+  "order": 5,
+  "title": "Statistika — Level 5 — Rata-rata dari tabel frekuensi",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "C",
+    "osn": "Kategori C (Kelas 5–6)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "f1": [1, 5],
+      "f2": [2, 6],
+      "f3": [1, 5]
+    },
+    "constraint": "(6 * f1 + 7 * f2 + 8 * f3) * 10 % (f1 + f2 + f3) == 0",
+    "prompt": "Nilai 6 diperoleh {f1} siswa, nilai 7 diperoleh {f2} siswa, dan nilai 8 diperoleh {f3} siswa. Berapa rata-rata nilainya?",
+    "answer": "(6 * f1 + 7 * f2 + 8 * f3) / (f1 + f2 + f3)",
+    "distractors": [
+      {
+        "expr": "(6 * f1 + 7 * f2 + 8 * f3) / (f1 + f2 + f3) + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "f1 + f2 + f3",
+        "tag": "banyak-siswa"
+      },
+      {
+        "expr": "(6 * f1 + 7 * f2 + 8 * f3) / (f1 + f2 + f3) - 0.5",
+        "tag": "salah-hitung"
+      }
+    ],
+    "explain": "Jumlah nilai = {=6*f1+7*f2+8*f3}, banyak siswa {=f1+f2+f3}. Rata-rata = {answer}.",
+    "format": "decimal"
+  }
+}

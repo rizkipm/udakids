@@ -1,0 +1,39 @@
+{
+  "id": "math.smp79.e5.kombinasi-memilih-tim",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "E",
+  "order": 5,
+  "title": "Kombinatorika — Level 5 — Kombinasi: memilih tim",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "timss-kognitif": "applying",
+    "fase-merdeka": "D",
+    "osn": "Kategori D (SMP Kelas 7–9)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [5, 12]
+    },
+    "prompt": "Dari {n} pemain akan dipilih 3 orang untuk tim cerdas cermat (tanpa jabatan). Banyak cara memilih adalah …",
+    "answer": "n * (n - 1) * (n - 2) / 6",
+    "distractors": [
+      {
+        "expr": "n * (n - 1) * (n - 2)",
+        "tag": "permutasi-bukan-kombinasi"
+      },
+      {
+        "expr": "n * (n - 1) / 2",
+        "tag": "pilih-dua"
+      },
+      {
+        "expr": "3 * n",
+        "tag": "asal-kali"
+      }
+    ],
+    "explain": "C({n}, 3) = {n} × {=n-1} × {=n-2} : 6 = {answer}."
+  }
+}

@@ -118,7 +118,8 @@ menyebut usaha/strategi · tanpa emoji (pakai SVG) · kontras tinggi, bisa denga
 
 ## Hal yang TIDAK BOLEH dilakukan (PRD A17)
 
-- Menyimpan data pribadi anak selain nama panggilan dan warna Momo (tanpa foto, email, tgl lahir).
+- Menyimpan data pribadi anak selain nama panggilan dan warna Momo (tanpa foto, email, tgl lahir). Tampilan
+  Momo (gradasi + aksesori, D-051) adalah tampilan robot, bukan data pribadi; semua pilihan untuk semua anak.
 - Menyimpan atau mengirim rekaman suara.
 - Memakai `eval` / `new Function` untuk ekspresi konten (ESLint `no-eval`, `no-new-func` aktif).
 - Drag & drop blok kecil sebagai satu-satunya cara input.
