@@ -1,0 +1,352 @@
+{
+  "id": "math.sd3.z10.tantangan-data-dan-diagram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 10,
+  "title": "Data dan diagram — Level 10 — Tantangan data dan diagram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "prompt": "Berapa siswa seluruhnya?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "a + b + c + e",
+          "distractors": ["a + b + c", "a + b + c + e + 1", "a + b + c + e - 2"],
+          "explain": "{a} + {b} + {c} + {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 60],
+            "b": [10, 60],
+            "c": [10, 60],
+            "e": [10, 60],
+            "f": [10, 60]
+          },
+          "prompt": "Berapa buku dipinjam dari Senin sampai Rabu?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "a + b + c",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "k": {
+              "values": [2, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan Kelas B?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas A", "Kelas B", "Kelas C"],
+              "values": ["=a", "=b", "=c"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "b * k",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "jumlah-gambar"
+            },
+            "b * k + k",
+            "a * k"
+          ],
+          "explain": "{b} gambar × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "k": {
+              "values": [2, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan ketiga kelas?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas A", "Kelas B", "Kelas C"],
+              "values": ["=a", "=b", "=c"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "(a + b + c) * k",
+          "explain": "({a} + {b} + {c}) × {k} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 40],
+            "b": [5, 40],
+            "c": [5, 40],
+            "e": [5, 40]
+          },
+          "prompt": "Berapa kg mangga dan salak yang terjual?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "a + c",
+          "distractors": ["a + b", "b + c", "a + c + e"],
+          "explain": "{a} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 40],
+            "b": [20, 40],
+            "c": [5, 40],
+            "e": [5, 19]
+          },
+          "prompt": "Berapa kg lebih banyak jeruk daripada pisang?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "b - e",
+          "explain": "{b} − {e} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [5, 20],
+            "c": [2, 12],
+            "e": [5, 20],
+            "h": {
+              "values": [5000, 8000, 10000, 12000]
+            }
+          },
+          "prompt": "Harga 1 kg salak Rp{h}. Berapa rupiah hasil penjualan salak?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "c * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "c + h",
+              "tag": "menjumlah"
+            },
+            "a * h",
+            "c * h + h"
+          ],
+          "explain": "{c} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "prompt": "Setiap siswa yang suka renang membawa 2 kacamata renang. Berapa kacamata semuanya?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "b * 2",
+          "explain": "{b} × 2 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "constraint": "a >= 5",
+          "prompt": "Jika 5 siswa pindah dari bola ke lari, berapa siswa yang suka lari sekarang?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "e + 5",
+          "distractors": ["e - 5", "a - 5", "e"],
+          "explain": "{e} + 5 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 45],
+            "b": [10, 45],
+            "c": [10, 45],
+            "e": [10, 45],
+            "f": [10, 45]
+          },
+          "constraint": "a + b + c + e + f < 250",
+          "prompt": "Target peminjaman seminggu 250 buku. Berapa buku lagi untuk mencapai target?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "250 - (a + b + c + e + f)",
+          "explain": "250 − {=a+b+c+e+f} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 60],
+            "b": [10, 60],
+            "c": [10, 60],
+            "e": [10, 60],
+            "f": [10, 60]
+          },
+          "constraint": "(a + b + c + e + f) % 5 == 0",
+          "prompt": "Rata-rata berarti total dibagi banyak data. Berapa rata-rata buku dipinjam per hari?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "(a + b + c + e + f) / 5",
+          "mode": "input",
+          "explain": "Total {=a+b+c+e+f} : 5 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "prompt": "Berapa siswa yang tidak suka bola?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "b + c + e",
+          "mode": "input",
+          "explain": "{b} + {c} + {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "math.sd3.bb1.keliling-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 1,
+  "title": "Keliling dan luas — Level 1 — Keliling persegi panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 20],
+            "h": [2, 12]
+          },
+          "constraint": "w != h",
+          "prompt": "Berapa cm keliling persegi panjang ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            "2 * w + h"
+          ],
+          "explain": "{w} + {h} + {w} + {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [5, 30],
+            "h": [3, 20]
+          },
+          "constraint": "w != h",
+          "prompt": "Kebun berbentuk persegi panjang {w} m × {h} m. Berapa meter pagar untuk mengelilinginya?",
+          "answer": "2 * (w + h)",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            "2 * w + h"
+          ],
+          "explain": "2 × ({w} + {h}) = {answer}."
+        }
+      }
+    ]
+  }
+}

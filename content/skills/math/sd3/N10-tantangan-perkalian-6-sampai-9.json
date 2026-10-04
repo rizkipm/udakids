@@ -1,0 +1,229 @@
+{
+  "id": "math.sd3.n10.tantangan-perkalian-6-sampai-9",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "N",
+  "order": 10,
+  "title": "Perkalian 6 sampai 9 — Level 10 — Tantangan perkalian 6 sampai 9",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 6, 7, 8, 9",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [9, 9],
+            "n": [0, 10]
+          },
+          "prompt": "{m} × {n} = …",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{n} kali loncat {m}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [9, 9],
+            "n": [0, 10]
+          },
+          "prompt": "{n} × {m} = …",
+          "answer": "m * n",
+          "explain": "{n} × {m} = {m} × {n} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [1, 10]
+          },
+          "prompt": "Hasil kali {m} dan {n} adalah …",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{m} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "Berapa {n} kelompok yang masing-masing berisi {m}?",
+          "answer": "m * n",
+          "explain": "{n} × {m} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [1, 10],
+            "k": {
+              "values": [-1, 0, 0, 1]
+            }
+          },
+          "derived": {
+            "r": "m * n + k * m"
+          },
+          "prompt": "{m} × {n} = {r}. Benar atau salah?",
+          "answer": "(m * n == r) * 1",
+          "labels": {
+            "1": "Benar",
+            "0": "Salah"
+          },
+          "explain": "{m} × {n} = {=m*n}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [1, 10],
+            "k": {
+              "values": [-1, 0, 0, 1]
+            }
+          },
+          "derived": {
+            "r": "m * n + k * m"
+          },
+          "prompt": "{m} × {n} = {r}. Benar atau salah?",
+          "answer": "(m * n == r) * 1",
+          "labels": {
+            "1": "Benar",
+            "0": "Salah"
+          },
+          "explain": "{m} × {n} = {=m*n}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10]
+          },
+          "prompt": "9 × {n} = 10 × {n} − … ",
+          "answer": "n",
+          "distractors": ["9", "10", "n + 1"],
+          "explain": "9 kelompok = 10 kelompok kurang 1 kelompok: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10],
+            "m": [9, 9]
+          },
+          "prompt": "Hitung 9 × {n} dengan cara 10 × {n} − {n}.",
+          "answer": "9 * n",
+          "explain": "{=10*n} − {n} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 10]
+          },
+          "prompt": "{n} × {n} = …",
+          "answer": "n * n",
+          "distractors": ["n + n", "n * (n + 1)", "n * (n - 1)"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10]
+          },
+          "prompt": "Bilangan berapa dikali dirinya sendiri hasilnya {=n*n}?",
+          "answer": "n",
+          "explain": "{n} × {n} = {=n*n}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10]
+          },
+          "prompt": "Satu semut punya 6 kaki. Berapa kaki pada {n} semut?",
+          "answer": "6 * n",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10]
+          },
+          "prompt": "Satu minggu ada 7 hari. Berapa hari dalam {n} minggu?",
+          "answer": "7 * n",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "math.sd3.x4.mengubah-satuan-volume",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 4,
+  "title": "Panjang, massa, dan volume — Level 4 — Mengubah satuan volume",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 40]
+          },
+          "prompt": "{a} L = … mL",
+          "answer": "a * 1000",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            "a + 1000"
+          ],
+          "explain": "1 L = 1.000 mL: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [10, 950]
+          },
+          "prompt": "{a} L {b} mL = … mL",
+          "answer": "a * 1000 + b",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 1000 + b * 10"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8]
+          },
+          "prompt": "Berapa gelas 250 mL yang bisa diisi dari botol {a} L?",
+          "answer": "a * 4",
+          "distractors": ["a * 2", "a * 250", "a * 4 + 1"],
+          "explain": "{a} L = {=a*1000} mL; {=a*1000} : 250 = {answer}."
+        }
+      }
+    ]
+  }
+}

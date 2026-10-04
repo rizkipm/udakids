@@ -1,0 +1,126 @@
+{
+  "id": "math.sd3.u6.pecahan-dari-sebuah-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 6,
+  "title": "Memahami pecahan — Level 6 — Pecahan dari sebuah bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "k": [2, 12]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "prompt": "1/{d} dari {t} = …",
+          "answer": "t / d",
+          "distractors": [
+            {
+              "expr": "t * d",
+              "tag": "mengalikan"
+            },
+            {
+              "expr": "t - d",
+              "tag": "mengurangi"
+            },
+            "t / d + 1"
+          ],
+          "explain": "{t} : {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [2, 9],
+            "k": [2, 10]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari {t} = …",
+          "answer": "n * t / d",
+          "distractors": [
+            {
+              "expr": "t / d",
+              "tag": "satu-bagian"
+            },
+            {
+              "expr": "t - n",
+              "tag": "mengurangi"
+            },
+            "n * t / d + n"
+          ],
+          "explain": "{t} : {d} = {=t/d}, lalu × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "n": [1, 5],
+            "k": [2, 8]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "n < d",
+          "prompt": "{nama} punya {t} kelereng. {n}/{d} di antaranya diberikan ke adik. Berapa kelereng yang diberikan?",
+          "answer": "n * t / d",
+          "distractors": [
+            {
+              "expr": "t / d",
+              "tag": "satu-bagian"
+            },
+            "t - n * t / d",
+            "n + t"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

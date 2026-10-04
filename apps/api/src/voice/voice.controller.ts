@@ -18,6 +18,7 @@ import {
   dialogFileSchema,
   VOICE_ITEM_PARTS,
   VOICE_LINE_KEYS,
+  voiceProfileOf,
   voiceLinesUpdateSchema,
   voiceSettingsSchema,
   skillIdSchema,
@@ -42,6 +43,11 @@ const itemQuery = z.strictObject({
     .max(2 ** 31),
   band: z.coerce.number().int().min(0).max(2),
   part: z.enum(VOICE_ITEM_PARTS).default('prompt'),
+  /** Id kartu untuk `part=choice`. */
+  c: z
+    .string()
+    .regex(/^[a-zA-Z0-9_-]{1,40}$/)
+    .optional(),
   v: z.string().max(20).optional(),
 });
 
@@ -90,13 +96,14 @@ export class VoiceController {
     const ipKey = `voice:${clientIp(req)}`;
     this.limiter.check(ipKey);
     this.limiter.fail(ipKey);
-    const text = await this.voice.itemText(skillId, q.seed, q.band, q.part);
+    const text = await this.voice.itemText(skillId, q.seed, q.band, q.part, q.c);
     if (!text) throw new NotFoundException('Soal ini tidak memakai suara Momo');
-    if (!(await this.voice.hasClip(text))) {
+    const profile = voiceProfileOf(skillId, q.part);
+    if (!(await this.voice.hasClip(text, profile))) {
       this.newClips.check(ipKey);
       this.newClips.fail(ipKey);
     }
-    const key = await this.voice.ensure(text);
+    const key = await this.voice.ensure(text, undefined, profile);
     const clip = key && (await this.voice.clip(key));
     if (!clip) throw new NotFoundException('Suara belum tersedia');
     sendClip(res, clip);

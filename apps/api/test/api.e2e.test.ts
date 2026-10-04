@@ -4,7 +4,12 @@ import { join } from 'node:path';
 import { Test } from '@nestjs/testing';
 import type { INestApplication } from '@nestjs/common';
 import type { NestExpressApplication } from '@nestjs/platform-express';
-import { initialJago, type JagoState } from '@little-coder/engine';
+import {
+  generateItem,
+  initialJago,
+  skillTemplateSchema,
+  type JagoState,
+} from '@little-coder/engine';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { Pool } from 'pg';
@@ -42,10 +47,14 @@ async function dbAvailable() {
 
 /** Penyedia TTS palsu: tidak memanggil Google; mencatat teks yang dibuatkan suara. */
 const ttsCalls: string[] = [];
+const ttsLangs: string[] = [];
+const ttsStyles: string[] = [];
 const fakeTts = {
   name: 'fake',
-  synthesize: async (text: string) => {
+  synthesize: async (text: string, s: { style: string }, lang = 'id-ID') => {
     ttsCalls.push(text);
+    ttsLangs.push(lang);
+    ttsStyles.push(s.style);
     return { mime: 'audio/mpeg', data: Buffer.from(`ID3-fake-${text}`) };
   },
 };
@@ -119,6 +128,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'Math Grade 1',
         'Math Grade 2',
         'Math Grade 1-2 (OSN)',
+        'Math Grade 3',
         'Math Grade 3-4 (OSN)',
         'Math Grade 5-6 (OSN)',
         'Math SMP Kelas 7-9 (OSN)',
@@ -132,9 +142,19 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'Sains Grade 3-4 (OSN)',
         'Sains Grade 5-6 (OSN)',
         'Sains SMP Kelas 7-9 (OSN)',
+        'English Pra-TK',
       ]);
       expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
+      // Rujukan kurikulum dari tag skill (D-059); rujukan internal (ixlRef) tidak pernah tampil.
+      const std = (title: string) =>
+        res.body.books.find((b: { title: string }) => b.title === title).standards;
+      expect(std('Math Pra-TK')).toEqual(['merdeka', 'singapore']);
+      expect(std('Math Kindergarten (TK)')).toEqual(['merdeka', 'singapore']);
+      expect(std('Sains SMP Kelas 7-9 (OSN)')).toEqual(['merdeka', 'timss', 'osn']);
+      expect(std('English Pra-TK')).toEqual(['singapore', 'cambridge']);
+      expect(std('Math Grade 3')).toEqual(['merdeka', 'singapore', 'cambridge', 'osn']);
+      expect(JSON.stringify(res.body)).not.toMatch(/ixl/i);
     });
 
     it('statistik publik: jumlah pengguna & ronde dari DB (angka saja), SSE mengirim event pertama', async () => {
@@ -145,13 +165,26 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         (await q('select count(*) n from children where active')) +
         (await q('select count(*) n from staff_users where active'));
       expect(res.body).toMatchObject({
-        books: 19,
+        books: 21,
         totalLevels: SKILL_COUNT,
         users,
         rounds: await q("select count(*) n from events where type = 'quiz_result'"),
+        // Total soal latihan (level × 10) & soal dijawab (D-054).
+        totalQuestions: SKILL_COUNT * 10,
+        answered: await q('select coalesce(sum(answered), 0) n from skill_mastery'),
       });
       expect(Object.keys(res.body).sort()).toEqual(
-        ['activeNow', 'books', 'learners', 'rounds', 'totalLevels', 'updatedAt', 'users'].sort(),
+        [
+          'activeNow',
+          'answered',
+          'books',
+          'learners',
+          'rounds',
+          'totalLevels',
+          'totalQuestions',
+          'updatedAt',
+          'users',
+        ].sort(),
       );
       const first = await new Promise<string>((resolve, reject) => {
         const req = http()
@@ -369,7 +402,9 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       const cat = await http().get('/catalog').set(auth(childToken)).expect(200);
       expect(cat.body.skills).toHaveLength(SKILL_COUNT);
       expect(
-        cat.body.catalogs.find((c: { grade: string }) => c.grade === 'prek').categories,
+        cat.body.catalogs.find(
+          (c: { grade: string; domain: string }) => c.grade === 'prek' && c.domain === 'math',
+        ).categories,
       ).toHaveLength(25);
       expect(
         cat.body.catalogs.find(
@@ -611,11 +646,15 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(rep.body.totals).toMatchObject({ answered: 2, correct: 1, skills: SKILL_COUNT });
       expect(rep.body.week.answered).toBe(2);
       expect(
-        rep.body.areas.find((a: { grade: string }) => a.grade === 'prek').categories,
+        rep.body.areas.find(
+          (a: { grade: string; domain: string }) => a.grade === 'prek' && a.domain === 'math',
+        ).categories,
       ).toHaveLength(25);
       expect(rep.body.recommendations).toHaveLength(3);
       expect(rep.body.recommendations[0].id).toBe('math.prek.b3.hitung-gambar-sampai-3');
-      const prek = rep.body.areas.find((a: { grade: string }) => a.grade === 'prek');
+      const prek = rep.body.areas.find(
+        (a: { grade: string; domain: string }) => a.grade === 'prek' && a.domain === 'math',
+      );
       expect(
         prek.categories[0].skills.find(
           (k: { id: string }) => k.id === 'math.prek.a1.kenali-angka-1-sampai-2',
@@ -1325,6 +1364,42 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(ttsCalls.length).toBe(n);
       const [g1] = (await pool.query("select id from skills where grade = 'sd1' limit 1")).rows;
       await http().get(`/voice/item/${g1.id}?seed=5&band=0`).expect(404);
+    });
+
+    it('English Pra-TK: narasi Bahasa Indonesia, kartu kata dengan suara English (D-062)', async () => {
+      const [en] = (
+        await pool.query(
+          "select id, template from skills where domain = 'english' and grade = 'prek' order by id limit 1",
+        )
+      ).rows;
+      // Narasi soal: Indonesia (id-ID) dengan arahan melafalkan kata Inggris dengan jelas.
+      let n = ttsCalls.length;
+      await http().get(`/voice/item/${en.id}?seed=7&band=0`).expect(200);
+      expect(ttsCalls.length).toBe(n + 1);
+      expect(ttsLangs.at(-1)).toBe('id-ID');
+      expect(ttsStyles.at(-1)).toMatch(/British English/);
+      // Kartu pilihan: kata English (en-GB) dari teks kartu di soal itu, dipilih dengan id kartu.
+      const template = skillTemplateSchema.parse(en.template);
+      const cardOf = (seed: number) =>
+        (
+          generateItem(template, { seed, band: 0 }).interaction as {
+            choices?: { id: string; say?: string }[];
+          }
+        ).choices?.find((c) => c.say);
+      const seed = Array.from({ length: 200 }, (_, k) => k).find((k) => cardOf(k))!;
+      const card = cardOf(seed)!;
+      n = ttsCalls.length;
+      await http()
+        .get(`/voice/item/${en.id}?seed=${seed}&band=0&part=choice&c=${card.id}`)
+        .expect(200);
+      expect(ttsCalls.at(-1)).toBe(card.say);
+      expect(ttsLangs.at(-1)).toBe('en-GB');
+      expect(ttsStyles.at(-1)).toMatch(/female/);
+      // Kartu tanpa teks / id tidak ada → 404; kartu buku lain tidak dibuatkan suara.
+      await http().get(`/voice/item/${en.id}?seed=7&band=0&part=choice&c=zz`).expect(404);
+      await http()
+        .get('/voice/item/math.prek.a1.kenali-angka-1-sampai-2?seed=5&band=0&part=choice&c=c0')
+        .expect(404);
     });
 
     it('admin: ubah kalimat & pengaturan suara; bukan admin ditolak', async () => {

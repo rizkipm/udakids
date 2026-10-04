@@ -1,6 +1,6 @@
 {
   "id": "sains.sd1.o4.bulan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd1",
   "category": "O",
@@ -207,202 +207,110 @@
         "params": {
           "table": [
             {
-              "name": "Matahari",
+              "name": "Bulan memantulkan cahaya Matahari",
               "attrs": {
-                "w": ["siang hari"]
+                "b": "benar"
               }
             },
             {
-              "name": "Pelangi",
+              "name": "Bulan mengelilingi Bumi",
               "attrs": {
-                "w": ["siang hari"]
+                "b": "benar"
               }
             },
             {
-              "name": "Bulan",
+              "name": "Bulan purnama tampak bulat penuh",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "b": "benar"
               }
             },
             {
-              "name": "Awan",
+              "name": "Bulan sabit tampak melengkung tipis",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "b": "benar"
               }
             },
             {
-              "name": "Banyak bintang berkelip",
+              "name": "Permukaan Bulan berbatu dan berkawah",
               "attrs": {
-                "w": ["malam hari"]
+                "b": "benar"
               }
             },
             {
-              "name": "Bintang jatuh (meteor)",
+              "name": "Bulan kadang terlihat pada siang hari",
               "attrs": {
-                "w": ["malam hari"]
+                "b": "benar"
+              }
+            },
+            {
+              "name": "Bulan lebih kecil daripada Bumi",
+              "attrs": {
+                "b": "benar"
+              }
+            },
+            {
+              "name": "Manusia pernah mendarat di Bulan",
+              "attrs": {
+                "b": "benar"
+              }
+            },
+            {
+              "name": "Bulan tampak besar karena dekat dengan Bumi",
+              "attrs": {
+                "b": "benar"
+              }
+            },
+            {
+              "name": "Bulan membuat cahayanya sendiri",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Bulan benar-benar berubah bentuk menjadi sabit",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Bulan lebih besar daripada Matahari",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Di Bulan banyak pohon dan sungai",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Bulan hanya ada saat purnama",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Bulan terbuat dari keju",
+              "attrs": {
+                "b": "tidak benar"
+              }
+            },
+            {
+              "name": "Bulan adalah sebuah bintang",
+              "attrs": {
+                "b": "tidak benar"
               }
             }
           ],
-          "attr": "w",
-          "ask": "name",
-          "prompt": "Mana yang bisa terlihat di langit pada {value}?",
-          "explain": "{name} bisa terlihat pada {value}.",
-          "choices": 3,
-          "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)",
-          "only": ["siang hari"]
-        },
-        "weight": 0.3333
-      },
-      {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Matahari",
-              "attrs": {
-                "w": ["siang hari"]
-              }
-            },
-            {
-              "name": "Pelangi",
-              "attrs": {
-                "w": ["siang hari"]
-              }
-            },
-            {
-              "name": "Bulan",
-              "attrs": {
-                "w": ["siang hari", "malam hari"]
-              }
-            },
-            {
-              "name": "Awan",
-              "attrs": {
-                "w": ["siang hari", "malam hari"]
-              }
-            },
-            {
-              "name": "Banyak bintang berkelip",
-              "attrs": {
-                "w": ["malam hari"]
-              }
-            },
-            {
-              "name": "Bintang jatuh (meteor)",
-              "attrs": {
-                "w": ["malam hari"]
-              }
-            }
-          ],
-          "attr": "w",
-          "ask": "true-false",
-          "prompt": "Benar atau salah: {name} bisa terlihat di langit pada {value}.",
-          "explain": "{name} bisa terlihat pada {value}.",
-          "choices": 4,
+          "attr": "b",
+          "ask": "value",
+          "prompt": "Budi membaca kalimat: \"{name}.\" Kalimat itu ...",
+          "explain": "\"{name}\" adalah kalimat yang {value}.",
+          "choices": 2,
           "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
         },
-        "weight": 0.3333
-      },
-      {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Matahari adalah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bintang yang paling dekat dengan Bumi"
-                  },
-                  "say": "bintang yang paling dekat dengan Bumi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sebuah planet"
-                  },
-                  "say": "sebuah planet",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sebuah bulan"
-                  },
-                  "say": "sebuah bulan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Matahari adalah bintang. Ia bintang yang paling dekat dengan Bumi.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Matahari tampak terbit di sebelah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "timur"
-                  },
-                  "say": "timur"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "barat"
-                  },
-                  "say": "barat",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "utara"
-                  },
-                  "say": "utara",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Setiap pagi Matahari tampak terbit di timur.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Matahari tampak terbenam di sebelah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "barat"
-                  },
-                  "say": "barat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "timur"
-                  },
-                  "say": "timur",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "selatan"
-                  },
-                  "say": "selatan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sore hari Matahari tampak terbenam di barat.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            }
-          ]
-        },
-        "weight": 0.3333
+        "weight": 2
       }
     ]
   }

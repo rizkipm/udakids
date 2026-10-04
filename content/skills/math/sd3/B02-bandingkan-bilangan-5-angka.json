@@ -1,0 +1,83 @@
+{
+  "id": "math.sd3.b2.bandingkan-bilangan-5-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 2,
+  "title": "Membandingkan dan mengurutkan — Level 2 — Bandingkan bilangan 5 angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 99999],
+            "k": [-900, 900]
+          },
+          "derived": {
+            "b": "a + k"
+          },
+          "constraint": "b >= 10000 && b <= 99999",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Bandingkan dari puluh ribuan: {a} {answer} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 99999],
+            "b": [1000, 99999]
+          },
+          "constraint": "(a < 10000) != (b < 10000)",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Bilangan 5 angka lebih besar dari bilangan 4 angka: {a} {answer} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9000],
+            "k": [10, 900],
+            "j": [-50, 50]
+          },
+          "derived": {
+            "b": "a + k + j"
+          },
+          "prompt": "{a} + {k} … {b}",
+          "answer": "(a + k > b) * 1 + (a + k < b) * 2 + (a + k == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Hitung dulu: {a} + {k} = {=a+k}. Jadi {=a+k} {answer} {b}."
+        }
+      }
+    ]
+  }
+}

@@ -2694,10 +2694,78 @@ button.level-card.is-paid {
   grid-template-columns: 52px 44px minmax(0, 1fr) auto auto;
   border-width: 2px;
 }
-.rank-more {
-  display: block;
-  margin: 14px auto 0;
+.rank-played {
+  margin: -4px 0 12px;
+  text-align: center;
+  color: #5d5873;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.rank-row.is-idle {
+  background: #fbfaff;
+  border-style: dashed;
+}
+.rank-idle {
+  color: #5d5873;
+  font-size: 0.9rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.rank-list.is-loading {
+  opacity: 0.55;
+}
+/* Paging peringkat: tombol ≥ 64 px; di layar kecil hanya Sebelumnya · Halaman x dari y · Berikutnya. */
+.rank-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.rank-page-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rank-page-btn {
+  min-width: var(--kid-touch);
   min-height: var(--kid-touch);
+  padding: 0 14px;
+  border: 3px solid var(--kid-line);
+  border-radius: 18px;
+  background: #fff;
+  font: inherit;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.rank-page-btn.is-on {
+  background: var(--kid-primary);
+  border-color: var(--kid-primary);
+  color: #fff;
+}
+.rank-page-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.rank-page-btn.is-on:disabled {
+  opacity: 1;
+}
+.rank-page-gap {
+  align-self: center;
+  padding: 0 4px;
+  font-weight: 900;
+  color: #5d5873;
+}
+.rank-page-status {
+  display: none;
+  text-align: center;
+  font-weight: 800;
+  color: #5d5873;
 }
 .rank-backdrop {
   align-items: start;
@@ -2713,7 +2781,7 @@ button.level-card.is-paid {
 }
 .rank-dialog-head {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   gap: 12px;
   align-items: center;
 }
@@ -2781,6 +2849,46 @@ button.level-card.is-paid {
 .rank-table .rank-avg {
   font-size: 1.05rem;
 }
+.rank-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 4px;
+}
+.rank-stat {
+  min-width: 0;
+  margin: 0;
+  padding: 10px 12px;
+  border: 2px solid #ece6f8;
+  border-radius: 14px;
+  background: #faf7ff;
+}
+.rank-stat dt {
+  color: #5d5873;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.rank-stat dd {
+  margin: 2px 0 0;
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.rank-stat dd small {
+  color: #5d5873;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.rank-stat.is-strong {
+  border-color: var(--kid-primary);
+  background: #efe7ff;
+}
+.rank-stat.is-strong dd {
+  color: var(--kid-primary);
+}
 @media (max-width: 640px) {
   .rank-row,
   .rank-list.is-small .rank-row {
@@ -2811,11 +2919,73 @@ button.level-card.is-paid {
     grid-area: detail;
     justify-self: end;
   }
+  .rank-dialog {
+    margin: 12px 0;
+    padding: 14px;
+    border-radius: 22px;
+  }
   .rank-dialog-head {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
   }
   .rank-dialog-head > .momo {
     display: none;
+  }
+  .rank-dialog-head h2 {
+    font-size: 1.15rem;
+  }
+  .rank-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rank-pager {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .rank-page-btn.is-step {
+    padding: 0 12px;
+  }
+  .rank-page-list {
+    display: none;
+  }
+  .rank-page-status {
+    display: inline;
+  }
+  /* Tabel detail → kartu bertumpuk: label kolom di kiri, nilai di kanan. */
+  .rank-table.is-stack thead {
+    display: none;
+  }
+  .rank-table.is-stack,
+  .rank-table.is-stack tbody,
+  .rank-table.is-stack tr {
+    display: block;
+  }
+  .rank-table.is-stack caption {
+    display: block;
+  }
+  .rank-table.is-stack tr {
+    padding: 6px 0;
+    border-bottom: 2px solid #ece6f8;
+  }
+  .rank-table.is-stack tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .rank-table.is-stack tbody th[scope='row'] {
+    display: block;
+    padding: 6px 12px 2px;
+    border: 0;
+  }
+  .rank-table.is-stack td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 3px 12px;
+    border: 0;
+    font-size: 0.95rem;
+  }
+  .rank-table.is-stack td::before {
+    content: attr(data-label);
+    color: #5d5873;
+    font-weight: 700;
   }
 }
 .rank-backdrop {

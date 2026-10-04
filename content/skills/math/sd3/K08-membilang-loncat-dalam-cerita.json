@@ -1,0 +1,93 @@
+{
+  "id": "math.sd3.k8.membilang-loncat-dalam-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 8,
+  "title": "Membilang loncat — Level 8 — Membilang loncat dalam cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [12, 25],
+            "n": [3, 9]
+          },
+          "prompt": "Kelinci melompat {k} cm setiap lompatan. Berapa cm setelah {n} lompatan?",
+          "answer": "k * n",
+          "unit": "cm",
+          "distractors": ["k * (n - 1)", "k + n", "k * (n + 1)"],
+          "explain": "Loncat {k} sebanyak {n} kali: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [500, 1000, 1500, 2000, 2500]
+            },
+            "n": [3, 9]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} menabung Rp{k} setiap hari. Berapa rupiah tabungannya setelah {n} hari?",
+          "answer": "k * n",
+          "unit": "rupiah",
+          "distractors": ["k * (n - 1)", "k + n", "k * (n + 1)"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [5, 10, 15]
+            },
+            "n": [2, 3]
+          },
+          "constraint": "k * n < 60 && k * n >= 10",
+          "prompt": "Bus berangkat setiap {k} menit, mulai pukul 07.00. Pukul 07.{=k*n} adalah keberangkatan ke berapa?",
+          "answer": "n + 1",
+          "distractors": ["n", "n + 2", "k"],
+          "explain": "Keberangkatan pertama pukul 07.00, lalu loncat {k} menit: ke-{answer}."
+        }
+      }
+    ]
+  }
+}

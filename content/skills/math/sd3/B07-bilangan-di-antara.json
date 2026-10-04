@@ -1,0 +1,57 @@
+{
+  "id": "math.sd3.b7.bilangan-di-antara",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 7,
+  "title": "Membandingkan dan mengurutkan — Level 7 — Bilangan di antara",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9000],
+            "g": [20, 200],
+            "k": [1, 19]
+          },
+          "derived": {
+            "b": "a + g"
+          },
+          "constraint": "k < g",
+          "prompt": "Bilangan mana yang terletak di antara {a} dan {b}?",
+          "answer": "a + k",
+          "distractors": ["a - k", "b + k", "b + g"],
+          "explain": "Bilangan di antara harus lebih dari {a} dan kurang dari {b}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 90000],
+            "k": [1, 9]
+          },
+          "derived": {
+            "b": "a + 100"
+          },
+          "prompt": "Bilangan mana yang lebih dari {a} tetapi kurang dari {b}?",
+          "answer": "a + k * 10",
+          "distractors": ["a - k * 10", "b + k * 10", "a * 10"],
+          "explain": "Cek setiap pilihan: {answer} berada di antaranya."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "id": "math.sd3.j10.tantangan-sifat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 10,
+  "title": "Sifat penjumlahan — Level 10 — Tantangan sifat penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} + {b} = {b} + {a}. Sifat apa ini?",
+          "answer": "1",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Identitas (tambah 0)"
+          },
+          "explain": "Urutan ditukar → sifat pertukaran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "prompt": "({a} + {b}) + {c} = {a} + ({b} + {c}). Sifat apa ini?",
+          "answer": "2",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Identitas (tambah 0)"
+          },
+          "explain": "Pengelompokan berubah → sifat pengelompokan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [100, 400]
+          },
+          "derived": {
+            "c": "100 - a"
+          },
+          "prompt": "{a} + {b} + {c} = … (cari pasangan yang membentuk ratusan)",
+          "answer": "a + b + c",
+          "distractors": ["a + b + c + 10", "a + b + c - 10", "a + b"],
+          "explain": "{a} + {c} = {=a+c}, lalu + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [11, 89]
+          },
+          "derived": {
+            "c": "100 - b"
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "explain": "{b} + {c} = {=b+c} lebih dulu, lalu + {a} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999],
+            "c": [10, 999]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "{a} + {b} + {c} = {c} + {a} + …",
+          "answer": "b",
+          "distractors": ["a", "c", "a + c"],
+          "explain": "Bilangan yang sama, urutan berbeda: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999]
+          },
+          "prompt": "{a} + {b} = {b} + {a} + …",
+          "answer": "0",
+          "explain": "Kedua sisi sudah sama, jadi tambah 0.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [10, 400],
+            "y": [10, 400]
+          },
+          "derived": {
+            "a": "2 * x",
+            "b": "2 * y"
+          },
+          "prompt": "Genap + genap hasilnya … Contoh: {a} + {b}",
+          "answer": "(a + b) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "{a} + {b} = {=a+b}, genap."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [10, 400],
+            "y": [10, 400]
+          },
+          "derived": {
+            "a": "2 * x + 1",
+            "b": "2 * y + 1"
+          },
+          "prompt": "Ganjil + ganjil hasilnya … Contoh: {a} + {b}",
+          "answer": "(a + b) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "{a} + {b} = {=a+b}, genap."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 900],
+            "t": [1, 9],
+            "k": [1, 2]
+          },
+          "derived": {
+            "c": "t * 100",
+            "b": "c - k"
+          },
+          "prompt": "{a} + {b} = {a} + {c} − {k} = …",
+          "answer": "a + b",
+          "distractors": ["a + c", "a + c + k", "a + b - 10"],
+          "explain": "Tambahkan {c} lalu kurangi {k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 8],
+            "k": [1, 4],
+            "b": [120, 800]
+          },
+          "derived": {
+            "a": "t * 100 - k"
+          },
+          "prompt": "{a} + {b} = ({a} + {k}) + ({b} − {k}) = …",
+          "answer": "a + b",
+          "explain": "Pindahkan {k} supaya jadi ratusan: {=a+k} + {=b-k} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "derived": {
+            "c": "100 - a",
+            "e": "100 - b"
+          },
+          "prompt": "Hitung dengan cerdas: {a} + {b} + {c} + {e}",
+          "answer": "a + b + c + e",
+          "mode": "input",
+          "explain": "Pasangan {a}+{c} = 100 dan {b}+{e} = 100. Jumlahnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [10, 12, 14, 16, 18, 20]
+            }
+          },
+          "prompt": "1 + 2 + 3 + … + {n} = …",
+          "answer": "n * (n + 1) / 2",
+          "mode": "input",
+          "explain": "Pasangkan bilangan awal dan akhir: ({n} + 1) × {n} : 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

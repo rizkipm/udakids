@@ -1,0 +1,64 @@
+{
+  "id": "math.sd3.d8.estimasi-untuk-membandingkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 8,
+  "title": "Estimasi jumlah dan selisih — Level 8 — Estimasi untuk membandingkan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890],
+            "k": {
+              "values": [-300, -200, 200, 300]
+            }
+          },
+          "derived": {
+            "t": "round(a / 100) * 100 + round(b / 100) * 100 + k"
+          },
+          "prompt": "Perkirakan dengan membulatkan ke ratusan. Apakah {a} + {b} lebih dari {t}?",
+          "answer": "(round(a / 100) * 100 + round(b / 100) * 100 > t) * 1",
+          "labels": {
+            "1": "Ya, lebih dari",
+            "0": "Tidak"
+          },
+          "explain": "Estimasi {=round(a/100)*100} + {=round(b/100)*100} = {=round(a/100)*100+round(b/100)*100}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890],
+            "e": [110, 890],
+            "f": [110, 890]
+          },
+          "constraint": "abs((round(a / 100) * 100 + round(b / 100) * 100) - (round(e / 100) * 100 + round(f / 100) * 100)) >= 300 && ((a + b > e + f) == (round(a / 100) * 100 + round(b / 100) * 100 > round(e / 100) * 100 + round(f / 100) * 100))",
+          "prompt": "Perkirakan dengan membulatkan ke ratusan. Mana yang lebih besar: {a} + {b} atau {e} + {f}?",
+          "answer": "(round(a / 100) * 100 + round(b / 100) * 100 > round(e / 100) * 100 + round(f / 100) * 100) * 1 + (round(a / 100) * 100 + round(b / 100) * 100 < round(e / 100) * 100 + round(f / 100) * 100) * 2",
+          "labels": {
+            "1": "Pasangan pertama",
+            "2": "Pasangan kedua"
+          },
+          "explain": "Bandingkan estimasinya: {=round(a/100)*100+round(b/100)*100} dan {=round(e/100)*100+round(f/100)*100}."
+        }
+      }
+    ]
+  }
+}

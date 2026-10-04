@@ -1,0 +1,53 @@
+{
+  "id": "math.sd3.k5.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 5,
+  "title": "Membilang loncat — Level 5 — Bilangan yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 900],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 25, 50]
+            }
+          },
+          "prompt": "{a}, {=a+k}, □, {=a+3*k}, {=a+4*k}. Bilangan di kotak?",
+          "answer": "a + 2 * k",
+          "distractors": ["a + 2 * k + 1", "a + k + 1", "a + 3 * k - 1"],
+          "explain": "Loncat {k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 5000],
+            "k": {
+              "values": [5, 10, 50, 100, 250, 500]
+            }
+          },
+          "prompt": "{a}, □, {=a+2*k}, {=a+3*k}. Bilangan di kotak?",
+          "answer": "a + k",
+          "distractors": ["a + k + 10", "a + 2 * k", "a + k - 1"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

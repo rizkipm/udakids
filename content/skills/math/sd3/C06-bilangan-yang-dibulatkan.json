@@ -1,0 +1,55 @@
+{
+  "id": "math.sd3.c6.bilangan-yang-dibulatkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 6,
+  "title": "Pembulatan — Level 6 — Bilangan yang dibulatkan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [10, 99],
+            "k": [0, 9]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan mana yang jika dibulatkan ke puluhan terdekat menjadi {r}?",
+          "answer": "r - 5 + k",
+          "distractors": ["r - 6 - k % 3", "r + 5 + k % 4", "r + 10 + k"],
+          "explain": "Bilangan dari {=r-5} sampai {=r+4} dibulatkan menjadi {r}. Jawabannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 98],
+            "k": [0, 99]
+          },
+          "derived": {
+            "r": "h * 100"
+          },
+          "prompt": "Bilangan mana yang jika dibulatkan ke ratusan terdekat menjadi {r}?",
+          "answer": "r - 50 + k",
+          "distractors": ["r - 51 - k % 20", "r + 50 + k % 30", "r + 100 + k"],
+          "explain": "Dari {=r-50} sampai {=r+49} dibulatkan menjadi {r}. Jawabannya {answer}."
+        }
+      }
+    ]
+  }
+}

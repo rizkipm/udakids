@@ -1,6 +1,6 @@
 {
   "id": "sains.tkosn.b10.tantangan-hewan",
-  "version": 1,
+  "version": 3,
   "domain": "sains",
   "grade": "tkosn",
   "category": "B",
@@ -22,90 +22,80 @@
           "table": [
             {
               "name": "kelinci",
+              "object": "kelinci",
               "attrs": {
-                "makan": "wortel",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu"
-              },
-              "object": "kelinci"
+                "m": ["wortel", "rumput"]
+              }
             },
             {
               "name": "kucing",
+              "object": "kucing",
               "attrs": {
-                "makan": "ikan",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu",
-                "suara": "meong"
-              },
-              "object": "kucing"
+                "m": "ikan"
+              }
             },
             {
               "name": "ayam",
+              "object": "ayam",
               "attrs": {
-                "makan": "biji jagung",
-                "kaki": "dua kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kukuruyuk"
-              },
-              "object": "ayam"
+                "m": ["biji jagung", "cacing"]
+              }
             },
             {
-              "name": "bebek",
+              "name": "sapi",
+              "object": "sapi",
               "attrs": {
-                "makan": "dedak dan cacing",
-                "kaki": "dua kaki",
-                "tempat": ["di darat", "di air"],
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kwek kwek"
-              },
-              "object": "bebek"
+                "m": "rumput"
+              }
             },
             {
-              "name": "ikan",
+              "name": "monyet",
+              "object": "monyet",
               "attrs": {
-                "makan": "pelet ikan",
-                "kaki": "tidak berkaki",
-                "tempat": "di air",
-                "lahir": "bertelur",
-                "tubuh": "bersisik"
-              },
-              "object": "ikan"
+                "m": "pisang"
+              }
             },
             {
-              "name": "gajah",
+              "name": "lebah",
+              "object": "lebah",
               "attrs": {
-                "makan": "daun dan rumput",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "punya belalai"
-              },
-              "object": "gajah"
+                "m": ["sari bunga", "madu"]
+              }
+            },
+            {
+              "name": "beruang",
+              "object": "beruang",
+              "attrs": {
+                "m": ["madu", "ikan", "daging"]
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "m": "daging"
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "m": "daun di pohon tinggi"
+              }
             },
             {
               "name": "semut",
+              "object": "semut",
               "attrs": {
-                "makan": "gula",
-                "kaki": "enam kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "sangat kecil"
-              },
-              "object": "semut"
+                "m": ["gula", "madu"]
+              }
             }
           ],
-          "attr": "makan",
+          "attr": "m",
           "ask": "name",
           "prompt": "Hewan yang suka makan {value} adalah …",
           "explain": "{name} suka makan {value}.",
-          "choices": 4,
+          "choices": 3,
           "pictures": true,
           "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
@@ -115,92 +105,543 @@
         "params": {
           "table": [
             {
-              "name": "kelinci",
+              "name": "buaya",
               "attrs": {
-                "makan": "wortel",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu"
-              },
-              "object": "kelinci"
+                "m": ["daging", "ikan"]
+              }
+            },
+            {
+              "name": "kelelawar buah",
+              "attrs": {
+                "m": "buah-buahan"
+              }
+            },
+            {
+              "name": "tupai",
+              "attrs": {
+                "m": ["buah-buahan", "kacang", "biji-bijian"]
+              }
+            },
+            {
+              "name": "burung pelatuk",
+              "attrs": {
+                "m": "serangga"
+              }
+            },
+            {
+              "name": "domba",
+              "attrs": {
+                "m": "rumput dan daun"
+              }
+            },
+            {
+              "name": "belalang",
+              "attrs": {
+                "m": "rumput dan daun"
+              }
+            },
+            {
+              "name": "burung beo",
+              "attrs": {
+                "m": ["biji-bijian", "buah-buahan"]
+              }
+            },
+            {
+              "name": "rusa",
+              "attrs": {
+                "m": "rumput dan daun"
+              }
+            },
+            {
+              "name": "anjing laut",
+              "attrs": {
+                "m": "ikan"
+              }
+            }
+          ],
+          "attr": "m",
+          "ask": "value",
+          "prompt": "Makanan {name} adalah …",
+          "explain": "{name} makan {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "kelinci",
+              "object": "kelinci",
+              "attrs": {
+                "k": "empat kaki"
+              }
             },
             {
               "name": "kucing",
+              "object": "kucing",
               "attrs": {
-                "makan": "ikan",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu",
-                "suara": "meong"
-              },
-              "object": "kucing"
+                "k": "empat kaki"
+              }
             },
             {
               "name": "ayam",
+              "object": "ayam",
               "attrs": {
-                "makan": "biji jagung",
-                "kaki": "dua kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kukuruyuk"
-              },
-              "object": "ayam"
+                "k": "dua kaki"
+              }
             },
             {
               "name": "bebek",
+              "object": "bebek",
               "attrs": {
-                "makan": "dedak dan cacing",
-                "kaki": "dua kaki",
-                "tempat": ["di darat", "di air"],
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kwek kwek"
-              },
-              "object": "bebek"
+                "k": "dua kaki"
+              }
             },
             {
               "name": "ikan",
+              "object": "ikan",
               "attrs": {
-                "makan": "pelet ikan",
-                "kaki": "tidak berkaki",
-                "tempat": "di air",
-                "lahir": "bertelur",
-                "tubuh": "bersisik"
-              },
-              "object": "ikan"
+                "k": "tidak berkaki"
+              }
             },
             {
               "name": "gajah",
+              "object": "gajah",
               "attrs": {
-                "makan": "daun dan rumput",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "punya belalai"
-              },
-              "object": "gajah"
+                "k": "empat kaki"
+              }
             },
             {
               "name": "semut",
+              "object": "semut",
               "attrs": {
-                "makan": "gula",
-                "kaki": "enam kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "sangat kecil"
-              },
-              "object": "semut"
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "sapi",
+              "object": "sapi",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "kambing",
+              "object": "kambing",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "kuda",
+              "object": "kuda",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "burung",
+              "object": "burung",
+              "attrs": {
+                "k": "dua kaki"
+              }
+            },
+            {
+              "name": "kura-kura",
+              "object": "kura-kura",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "katak",
+              "object": "katak",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "lebah",
+              "object": "lebah",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "siput",
+              "object": "siput",
+              "attrs": {
+                "k": "tidak berkaki"
+              }
+            },
+            {
+              "name": "penguin",
+              "object": "penguin",
+              "attrs": {
+                "k": "dua kaki"
+              }
+            },
+            {
+              "name": "beruang",
+              "object": "beruang",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "kupu-kupu",
+              "object": "kupu-kupu",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "harimau",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "komodo",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "buaya",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "cicak",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "kerbau",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "ikan lele",
+              "attrs": {
+                "k": "tidak berkaki"
+              }
+            },
+            {
+              "name": "belalang",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "nyamuk",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "laba-laba",
+              "attrs": {
+                "k": "delapan kaki"
+              }
+            },
+            {
+              "name": "ular",
+              "attrs": {
+                "k": "tidak berkaki"
+              }
+            },
+            {
+              "name": "lumba-lumba",
+              "attrs": {
+                "k": "tidak berkaki"
+              }
+            },
+            {
+              "name": "anjing",
+              "attrs": {
+                "k": "empat kaki"
+              }
+            },
+            {
+              "name": "kalajengking",
+              "attrs": {
+                "k": "delapan kaki"
+              }
+            },
+            {
+              "name": "cacing",
+              "attrs": {
+                "k": "tidak berkaki"
+              }
+            },
+            {
+              "name": "burung hantu",
+              "attrs": {
+                "k": "dua kaki"
+              }
+            },
+            {
+              "name": "angsa",
+              "attrs": {
+                "k": "dua kaki"
+              }
+            },
+            {
+              "name": "jangkrik",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "capung",
+              "attrs": {
+                "k": "enam kaki"
+              }
+            },
+            {
+              "name": "tokek",
+              "attrs": {
+                "k": "empat kaki"
+              }
             }
           ],
-          "attr": "kaki",
-          "ask": "name",
-          "prompt": "Hewan yang punya {value} adalah …",
+          "attr": "k",
+          "ask": "value",
+          "prompt": "Berapa kaki {name}?",
           "explain": "{name} punya {value}.",
-          "choices": 4,
-          "pictures": true,
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "ikan",
+              "object": "ikan",
+              "attrs": {
+                "t": ["di laut", "di sungai atau kolam"]
+              }
+            },
+            {
+              "name": "penguin",
+              "object": "penguin",
+              "attrs": {
+                "t": ["di kutub yang sangat dingin", "di laut"]
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "t": "di padang rumput Afrika"
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "t": "di padang rumput Afrika"
+              }
+            },
+            {
+              "name": "gajah",
+              "object": "gajah",
+              "attrs": {
+                "t": ["di hutan", "di padang rumput Afrika"]
+              }
+            },
+            {
+              "name": "monyet",
+              "object": "monyet",
+              "attrs": {
+                "t": "di hutan"
+              }
+            },
+            {
+              "name": "sapi",
+              "object": "sapi",
+              "attrs": {
+                "t": "di peternakan"
+              }
+            },
+            {
+              "name": "kambing",
+              "object": "kambing",
+              "attrs": {
+                "t": "di peternakan"
+              }
+            },
+            {
+              "name": "kuda",
+              "object": "kuda",
+              "attrs": {
+                "t": "di peternakan"
+              }
+            },
+            {
+              "name": "ayam",
+              "object": "ayam",
+              "attrs": {
+                "t": "di peternakan"
+              }
+            },
+            {
+              "name": "bebek",
+              "object": "bebek",
+              "attrs": {
+                "t": ["di peternakan", "di sungai atau kolam"]
+              }
+            },
+            {
+              "name": "katak",
+              "object": "katak",
+              "attrs": {
+                "t": ["di sungai atau kolam", "di hutan"]
+              }
+            },
+            {
+              "name": "beruang",
+              "object": "beruang",
+              "attrs": {
+                "t": ["di hutan", "di kutub yang sangat dingin"]
+              }
+            },
+            {
+              "name": "kupu-kupu",
+              "object": "kupu-kupu",
+              "attrs": {
+                "t": ["di kebun bunga", "di hutan"]
+              }
+            },
+            {
+              "name": "lebah",
+              "object": "lebah",
+              "attrs": {
+                "t": ["di kebun bunga", "di hutan"]
+              }
+            },
+            {
+              "name": "harimau",
+              "attrs": {
+                "t": "di hutan"
+              }
+            },
+            {
+              "name": "orangutan",
+              "attrs": {
+                "t": "di hutan"
+              }
+            },
+            {
+              "name": "komodo",
+              "attrs": {
+                "t": "di hutan"
+              }
+            },
+            {
+              "name": "buaya",
+              "attrs": {
+                "t": ["di sungai atau kolam", "di laut"]
+              }
+            },
+            {
+              "name": "lumba-lumba",
+              "attrs": {
+                "t": "di laut"
+              }
+            },
+            {
+              "name": "paus",
+              "attrs": {
+                "t": "di laut"
+              }
+            },
+            {
+              "name": "ikan hiu",
+              "attrs": {
+                "t": "di laut"
+              }
+            },
+            {
+              "name": "bintang laut",
+              "attrs": {
+                "t": "di laut"
+              }
+            },
+            {
+              "name": "ikan lele",
+              "attrs": {
+                "t": "di sungai atau kolam"
+              }
+            },
+            {
+              "name": "unta",
+              "attrs": {
+                "t": "di gurun pasir"
+              }
+            },
+            {
+              "name": "beruang kutub",
+              "attrs": {
+                "t": "di kutub yang sangat dingin"
+              }
+            },
+            {
+              "name": "cacing tanah",
+              "attrs": {
+                "t": "di dalam tanah"
+              }
+            },
+            {
+              "name": "cicak",
+              "attrs": {
+                "t": "di dinding rumah"
+              }
+            },
+            {
+              "name": "rusa",
+              "attrs": {
+                "t": "di hutan"
+              }
+            },
+            {
+              "name": "zebra",
+              "attrs": {
+                "t": "di padang rumput Afrika"
+              }
+            }
+          ],
+          "attr": "t",
+          "ask": "value",
+          "prompt": "Di mana {name} hidup?",
+          "explain": "{name} hidup {value}.",
+          "choices": 3,
+          "pictures": false,
           "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
@@ -210,93 +651,1223 @@
           "table": [
             {
               "name": "kelinci",
+              "object": "kelinci",
               "attrs": {
-                "makan": "wortel",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu"
-              },
-              "object": "kelinci"
+                "l": "melahirkan"
+              }
             },
             {
               "name": "kucing",
+              "object": "kucing",
               "attrs": {
-                "makan": "ikan",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "berbulu",
-                "suara": "meong"
-              },
-              "object": "kucing"
+                "l": "melahirkan"
+              }
             },
             {
               "name": "ayam",
+              "object": "ayam",
               "attrs": {
-                "makan": "biji jagung",
-                "kaki": "dua kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kukuruyuk"
-              },
-              "object": "ayam"
+                "l": "bertelur"
+              }
             },
             {
               "name": "bebek",
+              "object": "bebek",
               "attrs": {
-                "makan": "dedak dan cacing",
-                "kaki": "dua kaki",
-                "tempat": ["di darat", "di air"],
-                "lahir": "bertelur",
-                "tubuh": "berbulu",
-                "suara": "kwek kwek"
-              },
-              "object": "bebek"
+                "l": "bertelur"
+              }
             },
             {
               "name": "ikan",
+              "object": "ikan",
               "attrs": {
-                "makan": "pelet ikan",
-                "kaki": "tidak berkaki",
-                "tempat": "di air",
-                "lahir": "bertelur",
-                "tubuh": "bersisik"
-              },
-              "object": "ikan"
+                "l": "bertelur"
+              }
             },
             {
               "name": "gajah",
+              "object": "gajah",
               "attrs": {
-                "makan": "daun dan rumput",
-                "kaki": "empat kaki",
-                "tempat": "di darat",
-                "lahir": "melahirkan",
-                "tubuh": "punya belalai"
-              },
-              "object": "gajah"
+                "l": "melahirkan"
+              }
             },
             {
               "name": "semut",
+              "object": "semut",
               "attrs": {
-                "makan": "gula",
-                "kaki": "enam kaki",
-                "tempat": "di darat",
-                "lahir": "bertelur",
-                "tubuh": "sangat kecil"
-              },
-              "object": "semut"
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "sapi",
+              "object": "sapi",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "kambing",
+              "object": "kambing",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "kuda",
+              "object": "kuda",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "monyet",
+              "object": "monyet",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "burung",
+              "object": "burung",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "kura-kura",
+              "object": "kura-kura",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "katak",
+              "object": "katak",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "lebah",
+              "object": "lebah",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "siput",
+              "object": "siput",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "penguin",
+              "object": "penguin",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "beruang",
+              "object": "beruang",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "kupu-kupu",
+              "object": "kupu-kupu",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "harimau",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "komodo",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "orangutan",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "buaya",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "cicak",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "kerbau",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "nyamuk",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "lumba-lumba",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "paus",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "kelelawar",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "anjing",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "burung unta",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "tikus",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "belalang",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "domba",
+              "attrs": {
+                "l": "melahirkan"
+              }
+            },
+            {
+              "name": "angsa",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "tokek",
+              "attrs": {
+                "l": "bertelur"
+              }
+            },
+            {
+              "name": "burung merpati",
+              "attrs": {
+                "l": "bertelur"
+              }
             }
           ],
-          "attr": "lahir",
-          "ask": "odd",
-          "prompt": "Mana yang tidak {value}?",
-          "explain": "{name} tidak {value}.",
-          "choices": 4,
-          "pictures": true,
+          "attr": "l",
+          "ask": "value",
+          "prompt": "Bagaimana {name} berkembang biak?",
+          "explain": "{name} {value}.",
+          "choices": 2,
+          "pictures": false,
           "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "kucing",
+              "attrs": {
+                "k": "mengeong"
+              }
+            },
+            {
+              "name": "anjing",
+              "attrs": {
+                "k": "menggonggong"
+              }
+            },
+            {
+              "name": "ayam jantan",
+              "attrs": {
+                "k": "berkokok"
+              }
+            },
+            {
+              "name": "ayam betina",
+              "attrs": {
+                "k": "berkotek"
+              }
+            },
+            {
+              "name": "sapi",
+              "attrs": {
+                "k": "melenguh"
+              }
+            },
+            {
+              "name": "kambing",
+              "attrs": {
+                "k": "mengembik"
+              }
+            },
+            {
+              "name": "kuda",
+              "attrs": {
+                "k": "meringkik"
+              }
+            },
+            {
+              "name": "singa",
+              "attrs": {
+                "k": "mengaum"
+              }
+            },
+            {
+              "name": "harimau",
+              "attrs": {
+                "k": "mengaum"
+              }
+            },
+            {
+              "name": "burung",
+              "attrs": {
+                "k": "berkicau"
+              }
+            },
+            {
+              "name": "lebah",
+              "attrs": {
+                "k": "berdengung"
+              }
+            },
+            {
+              "name": "nyamuk",
+              "attrs": {
+                "k": "berdengung"
+              }
+            },
+            {
+              "name": "ular",
+              "attrs": {
+                "k": "mendesis"
+              }
+            },
+            {
+              "name": "jangkrik",
+              "attrs": {
+                "k": "mengerik"
+              }
+            },
+            {
+              "name": "tikus",
+              "attrs": {
+                "k": "mencicit"
+              }
+            },
+            {
+              "name": "serigala",
+              "attrs": {
+                "k": "melolong"
+              }
+            },
+            {
+              "name": "kerbau",
+              "attrs": {
+                "k": "melenguh"
+              }
+            }
+          ],
+          "attr": "k",
+          "ask": "value",
+          "prompt": "Kata yang tepat untuk suara {name} adalah …",
+          "explain": "Kita bilang {name} sedang {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "harimau",
+              "attrs": {
+                "c": "bulu oranye bergaris hitam"
+              }
+            },
+            {
+              "name": "komodo",
+              "attrs": {
+                "c": ["lidah bercabang", "kulit bersisik keras"]
+              }
+            },
+            {
+              "name": "orangutan",
+              "attrs": {
+                "c": "rambut cokelat kemerahan"
+              }
+            },
+            {
+              "name": "buaya",
+              "attrs": {
+                "c": ["kulit bersisik keras", "moncong panjang bergigi tajam"]
+              }
+            },
+            {
+              "name": "cicak",
+              "attrs": {
+                "c": "bisa memutuskan ekornya"
+              }
+            },
+            {
+              "name": "kerbau",
+              "attrs": {
+                "c": "tanduk besar melengkung"
+              }
+            },
+            {
+              "name": "landak",
+              "attrs": {
+                "c": "tubuh penuh duri"
+              }
+            },
+            {
+              "name": "unta",
+              "attrs": {
+                "c": "punya punuk"
+              }
+            },
+            {
+              "name": "kepiting",
+              "attrs": {
+                "c": "punya capit"
+              }
+            },
+            {
+              "name": "gurita",
+              "attrs": {
+                "c": "delapan lengan"
+              }
+            },
+            {
+              "name": "ular",
+              "attrs": {
+                "c": ["tubuh panjang tanpa kaki", "lidah bercabang", "kulit bersisik keras"]
+              }
+            },
+            {
+              "name": "bunglon",
+              "attrs": {
+                "c": "kulit bisa berubah warna"
+              }
+            },
+            {
+              "name": "burung merak",
+              "attrs": {
+                "c": "ekor indah seperti kipas"
+              }
+            },
+            {
+              "name": "kelelawar",
+              "attrs": {
+                "c": "sayap tipis seperti kulit"
+              }
+            },
+            {
+              "name": "ikan lele",
+              "attrs": {
+                "c": "punya sungut seperti kumis"
+              }
+            },
+            {
+              "name": "burung hantu",
+              "attrs": {
+                "c": "mata besar dan bulat"
+              }
+            },
+            {
+              "name": "badak",
+              "attrs": {
+                "c": "cula di hidung"
+              }
+            },
+            {
+              "name": "nyamuk",
+              "attrs": {
+                "c": "mulut seperti jarum"
+              }
+            }
+          ],
+          "attr": "c",
+          "ask": "value",
+          "prompt": "Ciri tubuh {name} adalah …",
+          "explain": "Ciri {name}: {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "sapi",
+              "object": "sapi",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "kambing",
+              "object": "kambing",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "kuda",
+              "object": "kuda",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "kerbau",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "gajah",
+              "object": "gajah",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "kelinci",
+              "object": "kelinci",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "rusa",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "zebra",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "panda",
+              "attrs": {
+                "e": "pemakan tumbuhan"
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "harimau",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "buaya",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "komodo",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "elang",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "ikan hiu",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "serigala",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            },
+            {
+              "name": "ular",
+              "attrs": {
+                "e": "pemakan daging"
+              }
+            }
+          ],
+          "attr": "e",
+          "ask": "true-false",
+          "prompt": "{name} adalah hewan {value}. Benar atau salah?",
+          "explain": "{name} adalah hewan {value}.",
+          "choices": 2,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Aku punya telinga panjang dan suka makan wortel. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kelinci"
+                  },
+                  "say": "kelinci"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kucing"
+                  },
+                  "say": "kucing"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ayam"
+                  },
+                  "say": "ayam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelinci bertelinga panjang dan suka wortel.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku punya belalai yang panjang. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gajah"
+                  },
+                  "say": "gajah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kelinci"
+                  },
+                  "say": "kelinci"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "semut"
+                  },
+                  "say": "semut"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gajah punya belalai.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku kecil, berkaki enam, dan suka gula. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "semut"
+                  },
+                  "say": "semut"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gajah"
+                  },
+                  "say": "gajah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ayam"
+                  },
+                  "say": "ayam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Semut berkaki enam dan suka yang manis.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Hewan mana yang menghasilkan telur untuk kita makan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ayam"
+                  },
+                  "say": "ayam"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kucing"
+                  },
+                  "say": "kucing"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gajah"
+                  },
+                  "say": "gajah"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ayam bertelur dan telurnya bisa kita makan.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Hewan yang paling besar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gajah"
+                  },
+                  "say": "gajah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kelinci"
+                  },
+                  "say": "kelinci"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "semut"
+                  },
+                  "say": "semut"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gajah adalah hewan darat yang sangat besar.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku punya leher yang sangat panjang untuk makan daun di pohon tinggi. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "jerapah"
+                  },
+                  "say": "jerapah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kuda"
+                  },
+                  "say": "kuda"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "sapi"
+                  },
+                  "say": "sapi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jerapah berleher panjang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku membuat madu yang manis. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "lebah"
+                  },
+                  "say": "lebah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "semut"
+                  },
+                  "say": "semut"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "siput"
+                  },
+                  "say": "siput"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lebah membuat madu dari sari bunga.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku burung yang tidak bisa terbang, tetapi pandai berenang. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "penguin"
+                  },
+                  "say": "penguin"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "burung"
+                  },
+                  "say": "burung"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ayam"
+                  },
+                  "say": "ayam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Penguin tidak bisa terbang, tetapi pandai berenang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Waktu kecil aku berudu yang hidup di air. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "katak"
+                  },
+                  "say": "katak"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ikan"
+                  },
+                  "say": "ikan"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kura-kura"
+                  },
+                  "say": "kura-kura"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Berudu tumbuh menjadi katak.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Tempurungku keras untuk melindungi tubuhku. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kura-kura"
+                  },
+                  "say": "kura-kura"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "siput"
+                  },
+                  "say": "siput"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "beruang"
+                  },
+                  "say": "beruang"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kura-kura bertempurung keras.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku kadal terbesar di dunia dan hanya hidup di Indonesia. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "komodo"
+                  },
+                  "say": "komodo"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cicak"
+                  },
+                  "say": "cicak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "buaya"
+                  },
+                  "say": "buaya"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Komodo adalah kadal terbesar, hidup di Pulau Komodo.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Buluku oranye bergaris hitam. Aku kucing besar dari hutan Sumatra. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "harimau"
+                  },
+                  "say": "harimau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "singa"
+                  },
+                  "say": "singa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kucing"
+                  },
+                  "say": "kucing"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Harimau sumatra berbulu oranye bergaris hitam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku merayap di dinding rumah dan suka makan nyamuk. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cicak"
+                  },
+                  "say": "cicak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semut"
+                  },
+                  "say": "semut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kupu-kupu"
+                  },
+                  "say": "kupu-kupu"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cicak merayap di dinding dan makan nyamuk.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku ikan yang punya sungut seperti kumis dan suka hidup di kolam. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan lele"
+                  },
+                  "say": "ikan lele"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bebek"
+                  },
+                  "say": "bebek"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "katak"
+                  },
+                  "say": "katak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ikan lele punya sungut seperti kumis.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku kecil, berdengung \"ngiing\" di telingamu, dan suka menggigit. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nyamuk"
+                  },
+                  "say": "nyamuk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebah"
+                  },
+                  "say": "lebah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kupu-kupu"
+                  },
+                  "say": "kupu-kupu"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Nyamuk berdengung dan menggigit.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku terbang pada malam hari dan tidur bergantung terbalik. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kelelawar"
+                  },
+                  "say": "kelelawar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "burung"
+                  },
+                  "say": "burung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ayam"
+                  },
+                  "say": "ayam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelelawar tidur terbalik dan aktif malam hari.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku punya punuk dan tahan berjalan jauh di gurun pasir. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "unta"
+                  },
+                  "say": "unta"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kuda"
+                  },
+                  "say": "kuda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sapi"
+                  },
+                  "say": "sapi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Unta punya punuk dan hidup di gurun.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku punya delapan kaki dan membuat jaring untuk menangkap serangga. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "laba-laba"
+                  },
+                  "say": "laba-laba"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semut"
+                  },
+                  "say": "semut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebah"
+                  },
+                  "say": "lebah"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Laba-laba berkaki delapan dan membuat jaring.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku hidup di laut, sangat pintar, dan suka melompat di atas ombak. Aku bukan ikan. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lumba-lumba"
+                  },
+                  "say": "lumba-lumba"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan"
+                  },
+                  "say": "ikan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kura-kura"
+                  },
+                  "say": "kura-kura"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lumba-lumba hidup di laut dan bernapas dengan paru-paru.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku menggonggong \"guk guk\" dan suka menjaga rumah. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "anjing"
+                  },
+                  "say": "anjing"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kucing"
+                  },
+                  "say": "kucing"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kambing"
+                  },
+                  "say": "kambing"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Anjing menggonggong dan menjaga rumah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            }
+          ]
+        },
+        "weight": 2
       }
     ]
   }

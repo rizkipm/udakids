@@ -1,0 +1,75 @@
+{
+  "id": "math.sd3.t2.soal-cerita-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 2,
+  "title": "Soal cerita perkalian dan pembagian — Level 2 — Soal cerita pembagian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [4, 12]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "words": {
+            "buah": ["jeruk", "mangga", "apel", "salak", "rambutan", "manggis", "jambu"]
+          },
+          "prompt": "{t} {buah} dibagi rata ke {g} keranjang. Berapa {buah} setiap keranjang?",
+          "answer": "t / g",
+          "distractors": [
+            {
+              "expr": "t - g",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "t * g",
+              "tag": "mengalikan"
+            },
+            "k + 1"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [2, 8]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "Tali {t} m dipotong menjadi beberapa bagian, masing-masing {k} m. Berapa potong?",
+          "answer": "t / k",
+          "distractors": [
+            {
+              "expr": "t - k",
+              "tag": "mengurangi"
+            },
+            "t / k + 1",
+            "k"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

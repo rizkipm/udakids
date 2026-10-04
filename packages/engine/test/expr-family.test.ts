@@ -222,3 +222,38 @@ describe('family expr', () => {
     expect(itemProblems(item)).toEqual([]);
   });
 });
+
+describe('variabel turunan dievaluasi menurut ketergantungan, bukan urutan kunci', () => {
+  // PostgreSQL jsonb mengurutkan kunci: yang pendek dulu, lalu abjad ("n" sebelum "pi").
+  const jsonbOrder = (o: Record<string, string>) =>
+    Object.fromEntries(
+      Object.entries(o).sort(([a], [b]) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0)),
+    );
+  const params = {
+    vars: { p: { values: [2, 3] }, i: [1, 3], q: { values: [5, 7] }, j: [1, 2] },
+    derived: {
+      pi: '(i == 1) * p + (i == 2) * p * p + (i == 3) * p * p * p',
+      qj: '(j == 1) * q + (j == 2) * q * q',
+      n: 'pi * qj',
+    },
+    prompt: 'Banyak faktor positif dari {n} adalah …',
+    answer: '(i + 1) * (j + 1)',
+    distractors: ['i * j', 'i + j + 2', '(i + 1) * (j + 1) + 1'],
+    explain: 'Faktorkan {n}.',
+  };
+
+  it('urutan kunci ala jsonb ("n" sebelum "pi") menghasilkan soal yang sama', () => {
+    const asFile = tpl(params);
+    const asDb = tpl({ ...params, derived: jsonbOrder(params.derived) });
+    expect(Object.keys(asDb.params.derived as object)[0]).toBe('n');
+    for (let seed = 0; seed < 20; seed++) {
+      expect(generateItem(asDb, { seed, band: 0 }).prompt).toBe(
+        generateItem(asFile, { seed, band: 0 }).prompt,
+      );
+    }
+  });
+
+  it('ketergantungan melingkar ditolak validator', () => {
+    expect(() => tpl({ ...params, derived: { a: 'b + 1', b: 'a + 1' } })).toThrow(/melingkar/);
+  });
+});

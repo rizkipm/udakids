@@ -1,0 +1,72 @@
+{
+  "id": "math.sd3.q9.penalaran-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Q",
+  "order": 9,
+  "title": "Fakta pembagian — Level 9 — Penalaran pembagian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-S/T",
+    "sg": "P3 Division within multiplication tables",
+    "cambridge": "Stage 3 Calculation: division facts (3Nc.05)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 12],
+            "n": [2, 12]
+          },
+          "prompt": "… : {m} = {n}",
+          "answer": "m * n",
+          "mode": "input",
+          "explain": "Terbagi = {m} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 9],
+            "q": [2, 9],
+            "r": [2, 9]
+          },
+          "derived": {
+            "a": "b * q",
+            "c": "q * r"
+          },
+          "constraint": "r != b",
+          "prompt": "{a} : {b} = {c} : …",
+          "answer": "c * b / a",
+          "mode": "input",
+          "explain": "Kiri = {=a/b}. {c} : ? = {=a/b}, jadi ? = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [2, 12],
+            "m": [2, 12]
+          },
+          "derived": {
+            "t": "q * m"
+          },
+          "prompt": "Hasil bagi {t} oleh suatu bilangan adalah {q}. Berapa bilangan pembaginya?",
+          "answer": "t / q",
+          "mode": "input",
+          "explain": "{t} : {q} = {answer}."
+        }
+      }
+    ]
+  }
+}

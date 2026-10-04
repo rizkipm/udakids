@@ -1,0 +1,79 @@
+{
+  "id": "math.sd3.u5.pecahan-pada-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 5,
+  "title": "Memahami pecahan — Level 5 — Pecahan pada garis bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [1, 9]
+          },
+          "constraint": "n < d",
+          "prompt": "Garis dari 0 sampai 1 dibagi menjadi {d} bagian sama panjang. Titik A berada di garis bagi ke-{n} dari 0. Pecahan berapa titik A?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "hitung-garis"
+            },
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "dari-kanan"
+            },
+            {
+              "num": "n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{n} langkah dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Di garis bilangan 0 sampai 1 yang dibagi {d}, berapa langkah dari 0 menuju {n}/{d}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            },
+            "d - n",
+            "n + 1"
+          ],
+          "explain": "{n}/{d} berarti {n} langkah berukuran 1/{d}."
+        }
+      }
+    ]
+  }
+}

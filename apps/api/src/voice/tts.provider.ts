@@ -1,9 +1,13 @@
-import type { VoiceSettings } from '@little-coder/engine';
+import type { VoiceLang, VoiceSettings } from '@little-coder/engine';
 
 /** Penyedia text-to-speech. Kunci API hanya di server — browser anak tidak pernah memanggilnya. */
 export type TtsProvider = {
   readonly name: string;
-  synthesize(text: string, settings: VoiceSettings): Promise<{ mime: string; data: Buffer }>;
+  synthesize(
+    text: string,
+    settings: VoiceSettings,
+    lang?: VoiceLang,
+  ): Promise<{ mime: string; data: Buffer }>;
 };
 
 export const TTS_PROVIDER = Symbol('TTS_PROVIDER');
@@ -19,13 +23,13 @@ export class GoogleCloudTts implements TtsProvider {
     private readonly fetchFn: typeof fetch = fetch,
   ) {}
 
-  async synthesize(text: string, s: VoiceSettings) {
+  async synthesize(text: string, s: VoiceSettings, lang: VoiceLang = 'id-ID') {
     const res = await this.fetchFn('https://texttospeech.googleapis.com/v1/text:synthesize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': this.apiKey },
       body: JSON.stringify({
         input: { text, ...(s.style && { prompt: s.style }) },
-        voice: { languageCode: 'id-ID', name: s.voice, modelName: s.model },
+        voice: { languageCode: lang, name: s.voice, modelName: s.model },
         audioConfig: { audioEncoding: 'MP3', speakingRate: s.rate },
       }),
       signal: AbortSignal.timeout(30_000),

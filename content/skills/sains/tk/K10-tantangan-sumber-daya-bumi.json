@@ -1,6 +1,6 @@
 {
   "id": "sains.tk.k10.tantangan-sumber-daya-bumi",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "tk",
   "category": "K",
@@ -16,100 +16,341 @@
   "params": {
     "parts": [
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Air",
-              "attrs": {
-                "g": "minum dan mandi"
-              }
-            },
-            {
-              "name": "Tanah",
-              "attrs": {
-                "g": "menanam tanaman"
-              }
-            },
-            {
-              "name": "Batu",
-              "attrs": {
-                "g": "membuat jalan"
-              }
-            },
-            {
-              "name": "Kayu",
-              "attrs": {
-                "g": "membuat meja"
-              }
-            },
-            {
-              "name": "Tanah liat",
-              "attrs": {
-                "g": "membuat gerabah"
-              }
-            },
-            {
-              "name": "Kapas",
-              "attrs": {
-                "g": "membuat kain"
-              }
-            }
-          ],
-          "attr": "g",
-          "ask": "value",
-          "prompt": "{name} berguna untuk apa?",
-          "explain": "{name} berguna untuk {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-        },
-        "weight": 1
-      },
-      {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Pasir",
-              "attrs": {
-                "c": "kasar, air cepat meresap"
-              }
-            },
-            {
-              "name": "Tanah liat",
-              "attrs": {
-                "c": "lengket, bisa dibentuk"
-              }
-            },
-            {
-              "name": "Tanah humus",
-              "attrs": {
-                "c": "hitam dan subur"
-              }
-            }
-          ],
-          "attr": "c",
-          "ask": "value",
-          "prompt": "{name} itu seperti apa?",
-          "explain": "{name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-        },
-        "weight": 0.25
-      },
-      {
         "family": "manual",
+        "weight": 72,
         "params": {
           "items": [
             {
-              "prompt": "Tanah untuk membuat gerabah adalah ...",
+              "prompt": "Batu terasa ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "tanah liat"
+                    "text": "keras"
                   },
-                  "say": "tanah liat"
+                  "say": "keras"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lembek"
+                  },
+                  "say": "lembek",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cair"
+                  },
+                  "say": "cair",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Batu keras dan tidak bisa ditekan.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air hujan turun dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "awan"
+                  },
+                  "say": "awan"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "matahari"
+                  },
+                  "say": "matahari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bulan"
+                  },
+                  "say": "bulan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hujan turun dari awan.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air, batu, dan tanah berasal dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "alam"
+                  },
+                  "say": "alam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pabrik mainan"
+                  },
+                  "say": "pabrik mainan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "toko"
+                  },
+                  "say": "toko",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air, batu, dan tanah ada di alam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Tanah terkena banyak hujan menjadi ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lumpur"
+                  },
+                  "say": "lumpur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu"
+                  },
+                  "say": "batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "es"
+                  },
+                  "say": "es",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tanah yang basah menjadi lumpur.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Batu dimasukkan ke ember. Bentuk batu ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ember"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tetap sama"
+                  },
+                  "say": "tetap sama"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengikuti ember"
+                  },
+                  "say": "mengikuti ember",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Batu padat, bentuknya tidak berubah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "batu"
+                  },
+                  "say": "batu"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bulu"
+                  },
+                  "say": "bulu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "balon"
+                  },
+                  "say": "balon",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Batu lebih berat daripada bulu dan balon.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air di piring dijemur di bawah matahari. Lama-lama ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "matahari"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berkurang menguap"
+                  },
+                  "say": "berkurang menguap"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bertambah"
+                  },
+                  "say": "bertambah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jadi tanah"
+                  },
+                  "say": "jadi tanah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panas matahari membuat air menguap.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Gunung tersusun dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu dan tanah"
+                  },
+                  "say": "batu dan tanah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kain"
+                  },
+                  "say": "kain",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "plastik"
+                  },
+                  "say": "plastik",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gunung terbentuk dari batu dan tanah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Ibu menghaluskan sambal dengan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cobek batu"
+                  },
+                  "say": "cobek batu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ember plastik"
+                  },
+                  "say": "ember plastik",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kain"
+                  },
+                  "say": "kain",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cobek dan ulekan dibuat dari batu yang keras.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Tanah menjadi rumah bagi ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cacing dan semut"
+                  },
+                  "say": "cacing dan semut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan paus"
+                  },
+                  "say": "ikan paus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "burung camar"
+                  },
+                  "say": "burung camar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cacing dan semut tinggal di tanah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Ibu memasak nasi dengan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air"
+                  },
+                  "say": "air"
                 },
                 {
                   "visual": {
@@ -122,6 +363,136 @@
                 {
                   "visual": {
                     "kind": "text",
+                    "text": "tanah"
+                  },
+                  "say": "tanah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Beras dimasak dengan air.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Batu disusun di tepi sungai untuk ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menahan tepi sungai"
+                  },
+                  "say": "menahan tepi sungai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membuat air asin"
+                  },
+                  "say": "membuat air asin",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menangkap ikan"
+                  },
+                  "say": "menangkap ikan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Susunan batu menjaga tepi sungai tidak longsor.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Kerikil di dasar akuarium membantu ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanaman air berakar"
+                  },
+                  "say": "tanaman air berakar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan jadi batu"
+                  },
+                  "say": "ikan jadi batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air jadi asin"
+                  },
+                  "say": "air jadi asin",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Akar tanaman air menempel di kerikil.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air sumur ditimba untuk ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mandi dan mencuci"
+                  },
+                  "say": "mandi dan mencuci"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membangun jalan"
+                  },
+                  "say": "membangun jalan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menanam batu"
+                  },
+                  "say": "menanam batu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air sumur dipakai sehari-hari.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Sapi di kandang butuh ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "sapi"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air minum"
+                  },
+                  "say": "air minum"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu"
+                  },
+                  "say": "batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
                     "text": "kerikil"
                   },
                   "say": "kerikil",
@@ -129,584 +500,26 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah liat lengket dan bisa dibentuk menjadi gerabah.",
+              "reteach": "Hewan ternak juga butuh air.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Tanah yang bagus untuk sayur adalah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah humus"
-                  },
-                  "say": "tanah humus"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir pantai"
-                  },
-                  "say": "pasir pantai",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kerikil"
-                  },
-                  "say": "kerikil",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah humus hitam dan subur.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air disiram ke pasir. Airnya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "cepat meresap"
-                  },
-                  "say": "cepat meresap"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "menggenang lama"
-                  },
-                  "say": "menggenang lama",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "jadi es"
-                  },
-                  "say": "jadi es",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pasir berbutir kasar, jadi air cepat meresap.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah liat dikepal. Tanah liat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bisa dibentuk"
-                  },
-                  "say": "bisa dibentuk"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hancur jadi debu"
-                  },
-                  "say": "hancur jadi debu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mengalir"
-                  },
-                  "say": "mengalir",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah liat lengket, jadi bisa dibentuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah humus berwarna ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hitam"
-                  },
-                  "say": "hitam"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "putih"
-                  },
-                  "say": "putih",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "biru"
-                  },
-                  "say": "biru",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah humus berwarna gelap kehitaman.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah humus berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun yang membusuk"
-                  },
-                  "say": "daun yang membusuk"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "plastik"
-                  },
-                  "say": "plastik",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kaca"
-                  },
-                  "say": "kaca",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Daun dan ranting yang membusuk menjadi humus.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana tanah yang paling lengket?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tanah liat"
-                  },
-                  "say": "Tanah liat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Pasir"
-                  },
-                  "say": "Pasir",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Kerikil"
-                  },
-                  "say": "Kerikil",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah liat paling lengket.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Bata dan genteng dibuat dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah liat"
-                  },
-                  "say": "tanah liat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir laut"
-                  },
-                  "say": "pasir laut",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun"
-                  },
-                  "say": "daun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah liat dibentuk lalu dibakar menjadi bata dan genteng.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            }
-          ]
-        },
-        "weight": 0.5
-      },
-      {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Ketuk batu.",
+              "prompt": "Sari menyiram dengan air agar tumbuh. Yang disiram ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "batu"
+                    "object": "bunga"
                   },
-                  "say": "batu"
+                  "say": "bunga"
                 },
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "bola"
+                    "object": "mobil"
                   },
-                  "say": "bola",
+                  "say": "mobil",
                   "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "apel"
-                  },
-                  "say": "apel",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Ini batu. Batu keras.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana yang bisa diminum?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Air bersih"
-                  },
-                  "say": "Air bersih"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Batu"
-                  },
-                  "say": "Batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tanah"
-                  },
-                  "say": "Tanah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air bersih bisa diminum.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanaman ditanam di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah"
-                  },
-                  "say": "tanah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kaca"
-                  },
-                  "say": "kaca",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanaman tumbuh di tanah.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Batu terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras"
-                  },
-                  "say": "keras"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lembek"
-                  },
-                  "say": "lembek",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "cair"
-                  },
-                  "say": "cair",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu keras.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air sungai ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mengalir"
-                  },
-                  "say": "mengalir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "diam seperti batu"
-                  },
-                  "say": "diam seperti batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras"
-                  },
-                  "say": "keras",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air sungai mengalir.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah basah terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lembek"
-                  },
-                  "say": "lembek"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras seperti batu"
-                  },
-                  "say": "keras seperti batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "panas"
-                  },
-                  "say": "panas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah basah lembek dan bisa dibentuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kerikil adalah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu kecil"
-                  },
-                  "say": "batu kecil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun"
-                  },
-                  "say": "daun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kerikil adalah batu-batu kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Pasir pantai berupa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "butiran kecil"
-                  },
-                  "say": "butiran kecil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu besar"
-                  },
-                  "say": "batu besar",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pasir terdiri dari butiran batu yang sangat kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air, batu, dan tanah berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "alam"
-                  },
-                  "say": "alam"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pabrik mainan"
-                  },
-                  "say": "pabrik mainan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "toko kue"
-                  },
-                  "say": "toko kue",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air, batu, dan tanah ada di alam.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Cacing hidup di dalam ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah"
-                  },
-                  "say": "tanah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air laut"
-                  },
-                  "say": "air laut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cacing tanah hidup di dalam tanah yang lembap.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Ikan butuh ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah kering"
-                  },
-                  "say": "tanah kering",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Ikan hidup di air.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Ketuk ember untuk membawa air.",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "ember"
-                  },
-                  "say": "ember"
                 },
                 {
                   "visual": {
@@ -715,663 +528,74 @@
                   },
                   "say": "buku",
                   "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "topi"
-                  },
-                  "say": "topi",
-                  "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Ember bisa dipakai membawa air.",
+              "reteach": "Tanaman butuh air untuk tumbuh.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            }
-          ]
-        },
-        "weight": 0.25
-      },
-      {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Air",
-              "attrs": {
-                "a": "dari alam"
-              }
             },
             {
-              "name": "Kayu",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Batu",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Pasir",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Tanah",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Daun",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Plastik",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Mobil",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kertas",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kaca",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kain",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Botol plastik",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            }
-          ],
-          "attr": "a",
-          "ask": "value",
-          "prompt": "{name}: dari alam atau buatan manusia?",
-          "explain": "{name}: {value}.",
-          "choices": 2,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-        },
-        "weight": 0.5
-      },
-      {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Air",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Kayu",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Batu",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Pasir",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Tanah",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Daun",
-              "attrs": {
-                "a": "dari alam"
-              }
-            },
-            {
-              "name": "Plastik",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Mobil",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kertas",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kaca",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Kain",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            },
-            {
-              "name": "Botol plastik",
-              "attrs": {
-                "a": "buatan manusia"
-              }
-            }
-          ],
-          "attr": "a",
-          "ask": "name",
-          "prompt": "Mana yang {value}?",
-          "explain": "{name}: {value}.",
-          "choices": 4,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-        },
-        "weight": 0.5
-      },
-      {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Ketuk batu.",
+              "prompt": "Mana batu yang paling besar?",
               "choices": [
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "batu"
+                    "object": "batu",
+                    "scaleX": 1.7,
+                    "scaleY": 1.7
                   },
                   "say": "batu"
                 },
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "bola"
-                  },
-                  "say": "bola",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "apel"
-                  },
-                  "say": "apel",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Ini batu. Batu keras.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana yang bisa diminum?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Air bersih"
-                  },
-                  "say": "Air bersih"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Batu"
-                  },
-                  "say": "Batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tanah"
-                  },
-                  "say": "Tanah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air bersih bisa diminum.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanaman ditanam di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah"
-                  },
-                  "say": "tanah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
+                    "object": "batu",
+                    "scaleX": 0.8,
+                    "scaleY": 0.8
                   },
                   "say": "batu",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
-                    "kind": "text",
-                    "text": "kaca"
-                  },
-                  "say": "kaca",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanaman tumbuh di tanah.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Batu terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras"
-                  },
-                  "say": "keras"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lembek"
-                  },
-                  "say": "lembek",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "cair"
-                  },
-                  "say": "cair",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu keras.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air sungai ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mengalir"
-                  },
-                  "say": "mengalir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "diam seperti batu"
-                  },
-                  "say": "diam seperti batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras"
-                  },
-                  "say": "keras",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air sungai mengalir.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah basah terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lembek"
-                  },
-                  "say": "lembek"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "keras seperti batu"
-                  },
-                  "say": "keras seperti batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "panas"
-                  },
-                  "say": "panas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah basah lembek dan bisa dibentuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kerikil adalah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu kecil"
-                  },
-                  "say": "batu kecil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun"
-                  },
-                  "say": "daun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kerikil adalah batu-batu kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Pasir pantai berupa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "butiran kecil"
-                  },
-                  "say": "butiran kecil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu besar"
-                  },
-                  "say": "batu besar",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pasir terdiri dari butiran batu yang sangat kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air, batu, dan tanah berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "alam"
-                  },
-                  "say": "alam"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pabrik mainan"
-                  },
-                  "say": "pabrik mainan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "toko kue"
-                  },
-                  "say": "toko kue",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air, batu, dan tanah ada di alam.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Cacing hidup di dalam ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah"
-                  },
-                  "say": "tanah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air laut"
-                  },
-                  "say": "air laut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cacing tanah hidup di dalam tanah yang lembap.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Ikan butuh ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah kering"
-                  },
-                  "say": "tanah kering",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
+                    "kind": "object",
+                    "object": "batu",
+                    "scaleX": 0.4,
+                    "scaleY": 0.4
                   },
                   "say": "batu",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Ikan hidup di air.",
+              "reteach": "Batu yang paling besar adalah yang ukurannya paling lebar.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Ketuk ember untuk membawa air.",
+              "prompt": "Dua batu sejenis. Mana yang lebih berat?",
               "choices": [
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "ember"
+                    "object": "batu",
+                    "scaleX": 1.6,
+                    "scaleY": 1.6
                   },
-                  "say": "ember"
+                  "say": "batu"
                 },
                 {
                   "visual": {
                     "kind": "object",
-                    "object": "buku"
+                    "object": "batu",
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
                   },
-                  "say": "buku",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "topi"
-                  },
-                  "say": "topi",
+                  "say": "batu",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Ember bisa dipakai membawa air.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana yang paling kecil?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Pasir"
-                  },
-                  "say": "Pasir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Kerikil"
-                  },
-                  "say": "Kerikil",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Batu besar"
-                  },
-                  "say": "Batu besar",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Butiran pasir paling kecil. Kerikil lebih besar.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana yang paling besar?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Batu besar"
-                  },
-                  "say": "Batu besar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Kerikil"
-                  },
-                  "say": "Kerikil",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Pasir"
-                  },
-                  "say": "Pasir",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu besar paling besar.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Batu besar pecah menjadi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kerikil"
-                  },
-                  "say": "kerikil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air"
-                  },
-                  "say": "air",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun"
-                  },
-                  "say": "daun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu besar yang pecah menjadi kerikil.",
+              "reteach": "Batu yang lebih besar biasanya lebih berat.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
@@ -1387,9 +611,9 @@
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "kayu"
+                    "text": "batu besar"
                   },
-                  "say": "kayu",
+                  "say": "batu besar",
                   "tag": "pengecoh"
                 },
                 {
@@ -1402,274 +626,111 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Batu yang hancur sangat kecil menjadi pasir.",
+              "reteach": "Kerikil yang terus terkikis menjadi pasir.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Batu bisa berwarna ...",
+              "prompt": "Urutan dari kecil: pasir, kerikil, lalu ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "macam-macam"
+                    "text": "batu besar"
                   },
-                  "say": "macam-macam"
+                  "say": "batu besar"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "hanya putih"
+                    "text": "debu"
                   },
-                  "say": "hanya putih",
+                  "say": "debu",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "hanya merah"
+                    "text": "butir pasir"
                   },
-                  "say": "hanya merah",
+                  "say": "butir pasir",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Batu punya warna yang bermacam-macam.",
+              "reteach": "Pasir paling kecil, lalu kerikil, lalu batu besar.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Batu di sungai sering terasa ...",
+              "prompt": "Kerikil bisa digenggam. Batu besar ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "halus"
+                    "text": "tidak bisa digenggam"
                   },
-                  "say": "halus"
+                  "say": "tidak bisa digenggam"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "lembut seperti kapas"
+                    "text": "bisa ditiup"
                   },
-                  "say": "lembut seperti kapas",
+                  "say": "bisa ditiup",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "lengket"
+                    "text": "bisa mengapung"
                   },
-                  "say": "lengket",
+                  "say": "bisa mengapung",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Air sungai menggosok batu sampai halus.",
+              "reteach": "Batu besar terlalu besar untuk digenggam.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Garam dapur dibuat dari ...",
+              "prompt": "Batu bisa pecah jika ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "air laut"
+                    "text": "dipukul palu"
                   },
-                  "say": "air laut"
+                  "say": "dipukul palu"
                 },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dilihat"
+                  },
+                  "say": "dilihat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "disiram sedikit air"
+                  },
+                  "say": "disiram sedikit air",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pukulan keras memecah batu.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Mana yang butirannya paling halus?",
+              "choices": [
                 {
                   "visual": {
                     "kind": "text",
                     "text": "pasir"
                   },
-                  "say": "pasir",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kayu"
-                  },
-                  "say": "kayu",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air laut dijemur sampai kering. Yang tertinggal adalah garam.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Batu terasa berat karena ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "padat dan keras"
-                  },
-                  "say": "padat dan keras"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berisi udara"
-                  },
-                  "say": "berisi udara",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lembut"
-                  },
-                  "say": "lembut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu padat dan keras.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mana yang bisa ditumpuk untuk dinding?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Batu bata"
-                  },
-                  "say": "Batu bata"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Pasir kering"
-                  },
-                  "say": "Pasir kering",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Air"
-                  },
-                  "say": "Air",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu bata padat dan bisa ditumpuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Pasir dituang dari gelas. Pasir ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tercurah butir demi butir"
-                  },
-                  "say": "tercurah butir demi butir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mengalir seperti air"
-                  },
-                  "say": "mengalir seperti air",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tetap berbentuk gelas"
-                  },
-                  "say": "tetap berbentuk gelas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pasir padat, tetapi butirannya kecil sehingga bisa dituang.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Emas diambil dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dalam tanah"
-                  },
-                  "say": "dalam tanah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "awan"
-                  },
-                  "say": "awan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pohon"
-                  },
-                  "say": "pohon",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Emas ditambang dari dalam tanah dan batuan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kapur tulis bisa dipakai untuk ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "menulis di papan"
-                  },
-                  "say": "menulis di papan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "minum"
-                  },
-                  "say": "minum",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berenang"
-                  },
-                  "say": "berenang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kapur lunak, jadi bisa dipakai menulis.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah untuk membuat gerabah adalah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah liat"
-                  },
-                  "say": "tanah liat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir"
-                  },
-                  "say": "pasir",
-                  "tag": "pengecoh"
+                  "say": "pasir"
                 },
                 {
                   "visual": {
@@ -1678,41 +739,80 @@
                   },
                   "say": "kerikil",
                   "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu besar"
+                  },
+                  "say": "batu besar",
+                  "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah liat lengket dan bisa dibentuk menjadi gerabah.",
+              "reteach": "Butiran pasir paling kecil dan halus.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Tanah yang bagus untuk sayur adalah ...",
+              "prompt": "Kerikil masuk ke sepatu. Rasanya ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "tanah humus"
+                    "text": "mengganjal"
                   },
-                  "say": "tanah humus"
+                  "say": "mengganjal"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "pasir pantai"
+                    "text": "empuk"
                   },
-                  "say": "pasir pantai",
+                  "say": "empuk",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "kerikil"
+                    "text": "harum"
                   },
-                  "say": "kerikil",
+                  "say": "harum",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah humus hitam dan subur.",
+              "reteach": "Batu kecil yang keras terasa mengganjal.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air hujan menetes di batu bertahun-tahun. Batunya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berlubang sedikit"
+                  },
+                  "say": "berlubang sedikit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "makin tinggi"
+                  },
+                  "say": "makin tinggi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berubah jadi kayu"
+                  },
+                  "say": "berubah jadi kayu",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tetesan air lama-lama bisa melubangi batu.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
@@ -1736,87 +836,56 @@
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "jadi es"
+                    "text": "jadi beku"
                   },
-                  "say": "jadi es",
+                  "say": "jadi beku",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Pasir berbutir kasar, jadi air cepat meresap.",
+              "reteach": "Butiran pasir renggang, air cepat lewat.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Tanah liat dikepal. Tanah liat ...",
+              "prompt": "Pasir terasa ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "bisa dibentuk"
+                    "text": "kasar berbutir"
                   },
-                  "say": "bisa dibentuk"
+                  "say": "kasar berbutir"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "hancur jadi debu"
+                    "text": "lengket licin"
                   },
-                  "say": "hancur jadi debu",
+                  "say": "lengket licin",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "mengalir"
+                    "text": "lembut seperti kapas"
                   },
-                  "say": "mengalir",
+                  "say": "lembut seperti kapas",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah liat lengket, jadi bisa dibentuk.",
+              "reteach": "Pasir terdiri dari butiran kasar.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Tanah humus berwarna ...",
+              "prompt": "Tanah humus banyak berisi ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "hitam"
+                    "text": "daun busuk"
                   },
-                  "say": "hitam"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "putih"
-                  },
-                  "say": "putih",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "biru"
-                  },
-                  "say": "biru",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah humus berwarna gelap kehitaman.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Tanah humus berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun yang membusuk"
-                  },
-                  "say": "daun yang membusuk"
+                  "say": "daun busuk"
                 },
                 {
                   "visual": {
@@ -1836,56 +905,242 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Daun dan ranting yang membusuk menjadi humus.",
+              "reteach": "Daun yang membusuk membentuk humus.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Mana tanah yang paling lengket?",
+              "prompt": "Tanah di gurun kebanyakan ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Tanah liat"
+                    "text": "pasir"
                   },
-                  "say": "Tanah liat"
+                  "say": "pasir"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Pasir"
+                    "text": "lumpur"
                   },
-                  "say": "Pasir",
+                  "say": "lumpur",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Kerikil"
+                    "text": "humus"
                   },
-                  "say": "Kerikil",
+                  "say": "humus",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah liat paling lengket.",
+              "reteach": "Gurun kering dan berpasir.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Bata dan genteng dibuat dari ...",
+              "prompt": "Kaktus bisa tumbuh di tanah ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "tanah liat"
+                    "text": "berpasir kering"
                   },
-                  "say": "tanah liat"
+                  "say": "berpasir kering"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "pasir laut"
+                    "text": "berlumpur basah"
                   },
-                  "say": "pasir laut",
+                  "say": "berlumpur basah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "es"
+                  },
+                  "say": "es",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kaktus tahan hidup di tanah pasir yang kering.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Warna tanah humus biasanya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hitam kecokelatan"
+                  },
+                  "say": "hitam kecokelatan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "putih"
+                  },
+                  "say": "putih",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kuning terang"
+                  },
+                  "say": "kuning terang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Humus berwarna gelap.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Kompos dicampur ke tanah agar tanah ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "subur"
+                  },
+                  "say": "subur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jadi pasir"
+                  },
+                  "say": "jadi pasir",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jadi keras"
+                  },
+                  "say": "jadi keras",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kompos menambah makanan tanaman di tanah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Tanah hutan yang penuh daun gugur biasanya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "subur gembur"
+                  },
+                  "say": "subur gembur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tandus"
+                  },
+                  "say": "tandus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "asin"
+                  },
+                  "say": "asin",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Daun gugur membuat tanah hutan subur.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Emas untuk perhiasan diambil dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dalam bumi"
+                  },
+                  "say": "dalam bumi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pohon"
+                  },
+                  "say": "pohon",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "awan"
+                  },
+                  "say": "awan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Emas digali dari dalam bumi.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Orang menggali batu dan logam dari bumi di ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tambang"
+                  },
+                  "say": "tambang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasar"
+                  },
+                  "say": "pasar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sekolah"
+                  },
+                  "say": "sekolah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tambang adalah tempat menggali bahan dari bumi.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Magnet bisa menarik ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paku besi"
+                  },
+                  "say": "paku besi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kertas"
+                  },
+                  "say": "kertas",
                   "tag": "pengecoh"
                 },
                 {
@@ -1898,11 +1153,556 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Tanah liat dibentuk lalu dibakar menjadi bata dan genteng.",
+              "reteach": "Magnet menarik benda dari besi.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Kertas dibuat dari ...",
+              "prompt": "Dulu orang memutihkan dinding dengan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kapur"
+                  },
+                  "say": "kapur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lumpur"
+                  },
+                  "say": "lumpur",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arang"
+                  },
+                  "say": "arang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kapur berwarna putih.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Panci banyak dibuat dari logam seperti ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "panci"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "aluminium"
+                  },
+                  "say": "aluminium"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kapas"
+                  },
+                  "say": "kapas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "karet"
+                  },
+                  "say": "karet",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Aluminium adalah logam yang ringan.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Intan adalah batu yang sangat ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "keras"
+                  },
+                  "say": "keras"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lembek"
+                  },
+                  "say": "lembek",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ringan seperti kapas"
+                  },
+                  "say": "ringan seperti kapas",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Intan adalah batu yang paling keras.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Logam dipanaskan sangat panas akan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "meleleh"
+                  },
+                  "say": "meleleh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berbunga"
+                  },
+                  "say": "berbunga",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panas yang sangat tinggi melelehkan logam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Garam juga dipakai untuk ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengawetkan ikan asin"
+                  },
+                  "say": "mengawetkan ikan asin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencuci baju"
+                  },
+                  "say": "mencuci baju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyiram bunga"
+                  },
+                  "say": "menyiram bunga",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Garam membuat ikan tahan lama.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Mana yang tumbuh sendiri di alam?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pohon"
+                  },
+                  "say": "pohon"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "mobil"
+                  },
+                  "say": "mobil",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pensil"
+                  },
+                  "say": "pensil",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pohon tumbuh di alam, tidak dibuat manusia.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Sari memetik sesuatu dari alam di kebun. Yang mana?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bunga"
+                  },
+                  "say": "bunga"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "balon"
+                  },
+                  "say": "balon",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kado"
+                  },
+                  "say": "kado",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga tumbuh di alam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Mana buatan manusia yang terbang di langit?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pesawat"
+                  },
+                  "say": "pesawat"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "awan"
+                  },
+                  "say": "awan",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "matahari"
+                  },
+                  "say": "matahari",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pesawat dibuat oleh manusia.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Mana makhluk hidup dari alam?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kucing"
+                  },
+                  "say": "kucing"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "mobil"
+                  },
+                  "say": "mobil",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bus"
+                  },
+                  "say": "bus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kucing adalah hewan, bagian dari alam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Kertas buku dibuat dari ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "buku"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kayu pohon"
+                  },
+                  "say": "kayu pohon"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir"
+                  },
+                  "say": "pasir",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "besi"
+                  },
+                  "say": "besi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kertas dibuat dari serat kayu.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Kaus katun dibuat dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanaman kapas"
+                  },
+                  "say": "tanaman kapas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu"
+                  },
+                  "say": "batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air laut"
+                  },
+                  "say": "air laut",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Serat kapas dipintal menjadi benang katun.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Ban sepeda dibuat dari ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "sepeda"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "getah karet"
+                  },
+                  "say": "getah karet"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kapas"
+                  },
+                  "say": "kapas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir"
+                  },
+                  "say": "pasir",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Getah pohon karet diolah menjadi ban.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Tempe dibuat dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kacang kedelai"
+                  },
+                  "say": "kacang kedelai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "beras"
+                  },
+                  "say": "beras",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerikil"
+                  },
+                  "say": "kerikil",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kedelai difermentasi menjadi tempe.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Wol dibuat dari bulu ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "domba"
+                  },
+                  "say": "domba"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ayam"
+                  },
+                  "say": "ayam",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan"
+                  },
+                  "say": "ikan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bulu domba dicukur lalu dipintal.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Madu berasal dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "lebah"
+                  },
+                  "say": "lebah"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "semut"
+                  },
+                  "say": "semut",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "siput"
+                  },
+                  "say": "siput",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lebah membuat madu dari sari bunga.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Sapu lidi dibuat dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "daun kelapa"
+                  },
+                  "say": "daun kelapa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "plastik"
+                  },
+                  "say": "plastik",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "besi"
+                  },
+                  "say": "besi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lidi diambil dari tulang daun kelapa.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Jus jeruk dibuat dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "jeruk"
+                  },
+                  "say": "jeruk"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "tomat"
+                  },
+                  "say": "tomat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "wortel"
+                  },
+                  "say": "wortel",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jus jeruk diperas dari buah jeruk.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Arang untuk membakar sate dibuat dari ...",
               "choices": [
                 {
                   "visual": {
@@ -1922,99 +1722,6 @@
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "air laut"
-                  },
-                  "say": "air laut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kertas dibuat dari kayu pohon.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Meja kayu berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pohon"
-                  },
-                  "say": "pohon"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "awan"
-                  },
-                  "say": "awan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kayu diambil dari batang pohon.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kaca dibuat dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir"
-                  },
-                  "say": "pasir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kayu"
-                  },
-                  "say": "kayu",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "daun"
-                  },
-                  "say": "daun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kaca dibuat dari pasir yang dipanaskan sangat panas.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Gerabah dibuat dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah liat"
-                  },
-                  "say": "tanah liat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir laut"
-                  },
-                  "say": "pasir laut",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
                     "text": "plastik"
                   },
                   "say": "plastik",
@@ -2022,18 +1729,421 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Gerabah dibuat dari tanah liat.",
+              "reteach": "Kayu dibakar perlahan menjadi arang.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Kaus katun dibuat dari ...",
+              "prompt": "Saat menggosok gigi, keran sebaiknya ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "kapas"
+                    "text": "ditutup dulu"
                   },
-                  "say": "kapas"
+                  "say": "ditutup dulu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibuka terus"
+                  },
+                  "say": "dibuka terus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibiarkan mengalir"
+                  },
+                  "say": "dibiarkan mengalir",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menutup keran membuat air tidak terbuang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air hujan ditampung untuk ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyiram dan mencuci"
+                  },
+                  "say": "menyiram dan mencuci"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibuang"
+                  },
+                  "say": "dibuang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diaduk dengan tanah"
+                  },
+                  "say": "diaduk dengan tanah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air hujan berguna untuk menyiram dan mencuci.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Pasir dan batu sungai diambil terlalu banyak. Sungai ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rusak dan tepinya longsor"
+                  },
+                  "say": "rusak dan tepinya longsor"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "makin indah"
+                  },
+                  "say": "makin indah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "makin bersih"
+                  },
+                  "say": "makin bersih",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mengambil terlalu banyak merusak sungai.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Sisa air minum di botol sebaiknya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diminum atau untuk tanaman"
+                  },
+                  "say": "diminum atau untuk tanaman"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibuang ke lantai"
+                  },
+                  "say": "dibuang ke lantai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ditumpahkan"
+                  },
+                  "say": "ditumpahkan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air jangan dibuang percuma.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Ikan di sungai diambil ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "secukupnya"
+                  },
+                  "say": "secukupnya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dengan racun"
+                  },
+                  "say": "dengan racun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semuanya sekaligus"
+                  },
+                  "say": "semuanya sekaligus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ikan yang tersisa bisa berkembang biak.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Bermain air keran terus-menerus membuat air ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "terbuang percuma"
+                  },
+                  "say": "terbuang percuma"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bertambah banyak"
+                  },
+                  "say": "bertambah banyak",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jadi bersih"
+                  },
+                  "say": "jadi bersih",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air bersih jangan dibuang-buang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Sumur di kampung dijaga dengan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak membuang sampah di dekatnya"
+                  },
+                  "say": "tidak membuang sampah di dekatnya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membuang oli ke dalamnya"
+                  },
+                  "say": "membuang oli ke dalamnya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membiarkannya kotor"
+                  },
+                  "say": "membiarkannya kotor",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sumur yang bersih memberi air sehat.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Air cucian beras bisa dipakai untuk ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyiram tanaman"
+                  },
+                  "say": "menyiram tanaman"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "minum"
+                  },
+                  "say": "minum",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mandi"
+                  },
+                  "say": "mandi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air cucian beras baik untuk tanaman.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Adit mau istana pasir yang kokoh. Adit perlu ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir basah"
+                  },
+                  "say": "pasir basah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir kering"
+                  },
+                  "say": "pasir kering",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batu besar"
+                  },
+                  "say": "batu besar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pasir basah saling menempel.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Kemarau, sumur hampir kering. Warga sebaiknya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menghemat air"
+                  },
+                  "say": "menghemat air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencuci mobil tiap hari"
+                  },
+                  "say": "mencuci mobil tiap hari",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bermain air"
+                  },
+                  "say": "bermain air",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat air sedikit, kita berhemat.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Dasar kolam dilapisi tanah liat karena tanah liat ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sulit dilalui air"
+                  },
+                  "say": "sulit dilalui air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cepat menyerap"
+                  },
+                  "say": "cepat menyerap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berpasir"
+                  },
+                  "say": "berpasir",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tanah liat menahan air kolam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Jika semua pohon ditebang, kita kekurangan ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kayu dan udara segar"
+                  },
+                  "say": "kayu dan udara segar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir"
+                  },
+                  "say": "pasir",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garam"
+                  },
+                  "say": "garam",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pohon memberi kayu dan udara segar.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Garam dibuat di daerah pantai karena perlu ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air laut"
+                  },
+                  "say": "air laut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "salju"
+                  },
+                  "say": "salju",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pasir gunung"
+                  },
+                  "say": "pasir gunung",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Garam berasal dari air laut.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+            },
+            {
+              "prompt": "Lama tidak hujan. Sawah bisa mendapat air dari ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sungai atau sumur"
+                  },
+                  "say": "sungai atau sumur"
                 },
                 {
                   "visual": {
@@ -2053,337 +2163,358 @@
                 }
               ],
               "answer": 0,
-              "reteach": "Kain katun dibuat dari kapas.",
+              "reteach": "Air sungai dan sumur bisa dialirkan ke sawah.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Garam berasal dari ...",
+              "prompt": "Air laut tidak bisa langsung diminum karena ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "air laut"
+                    "text": "terlalu asin"
                   },
-                  "say": "air laut"
+                  "say": "terlalu asin"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "pohon"
+                    "text": "terlalu manis"
                   },
-                  "say": "pohon",
+                  "say": "terlalu manis",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "batu bata"
+                    "text": "berwarna biru"
                   },
-                  "say": "batu bata",
+                  "say": "berwarna biru",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Garam dibuat dari air laut.",
+              "reteach": "Air laut mengandung banyak garam.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Air keran berasal dari ...",
+              "prompt": "Pot pasir dan pot tanah liat disiram. Yang lebih lama basah ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "alam"
+                    "text": "pot tanah liat"
                   },
-                  "say": "alam"
+                  "say": "pot tanah liat"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "pabrik kue"
+                    "text": "pot pasir"
                   },
-                  "say": "pabrik kue",
+                  "say": "pot pasir",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama saja"
+                  },
+                  "say": "sama saja",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Air diambil dari sungai, danau, atau dalam tanah.",
+              "reteach": "Tanah liat menahan air lebih lama.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             },
             {
-              "prompt": "Batu bata dibuat dari ...",
+              "prompt": "Sumur dekat tumpukan sampah. Airnya bisa ...",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "tanah liat"
+                    "text": "tercemar"
                   },
-                  "say": "tanah liat"
+                  "say": "tercemar"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "plastik"
+                    "text": "jadi lebih bersih"
                   },
-                  "say": "plastik",
+                  "say": "jadi lebih bersih",
                   "tag": "pengecoh"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "kertas"
+                    "text": "jadi manis"
                   },
-                  "say": "kertas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Batu bata dari tanah liat yang dibakar.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Menyikat gigi. Keran sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "ditutup"
-                  },
-                  "say": "ditutup"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibiarkan mengalir"
-                  },
-                  "say": "dibiarkan mengalir",
+                  "say": "jadi manis",
                   "tag": "pengecoh"
                 }
               ],
               "answer": 0,
-              "reteach": "Tutup keran agar air tidak terbuang.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Air bekas cuci sayur bisa untuk ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "menyiram tanaman"
-                  },
-                  "say": "menyiram tanaman"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "diminum"
-                  },
-                  "say": "diminum",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuang ke jalan"
-                  },
-                  "say": "dibuang ke jalan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air bekas cuci sayur bisa dipakai menyiram tanaman.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Keran bocor. Sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "diperbaiki"
-                  },
-                  "say": "diperbaiki"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibiarkan"
-                  },
-                  "say": "dibiarkan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuka lebar"
-                  },
-                  "say": "dibuka lebar",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Keran bocor membuang banyak air.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kertas masih kosong di baliknya. Kita ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pakai lagi"
-                  },
-                  "say": "pakai lagi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "buang saja"
-                  },
-                  "say": "buang saja",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bakar"
-                  },
-                  "say": "bakar",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Memakai kedua sisi kertas menghemat pohon.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Supaya tanah tidak rusak, sampah plastik ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuang ke tempat sampah"
-                  },
-                  "say": "dibuang ke tempat sampah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dikubur di kebun"
-                  },
-                  "say": "dikubur di kebun",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuang ke sungai"
-                  },
-                  "say": "dibuang ke sungai",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Plastik tidak mudah hancur di tanah.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Mengambil air minum secukupnya agar ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tidak terbuang"
-                  },
-                  "say": "tidak terbuang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "cepat habis"
-                  },
-                  "say": "cepat habis",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tumpah"
-                  },
-                  "say": "tumpah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air bersih sangat berharga. Jangan dibuang-buang.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Sungai bersih bila kita ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tidak buang sampah"
-                  },
-                  "say": "tidak buang sampah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "buang sampah"
-                  },
-                  "say": "buang sampah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "buang minyak"
-                  },
-                  "say": "buang minyak",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sampah dan minyak membuat air sungai kotor.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
-            },
-            {
-              "prompt": "Kita menanam pohon agar ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "udara jadi segar"
-                  },
-                  "say": "udara jadi segar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah gersang"
-                  },
-                  "say": "tanah gersang",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sungai kering"
-                  },
-                  "say": "sungai kering",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pohon memberi kayu, teduh, dan udara segar.",
+              "reteach": "Kotoran sampah bisa meresap ke air sumur.",
               "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
             }
           ]
-        },
-        "weight": 3
+        }
+      },
+      {
+        "family": "facts",
+        "weight": 8,
+        "params": {
+          "table": [
+            {
+              "name": "Kayu",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Daun kering",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Kerang",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Pasir pantai",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Bulu ayam",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Madu",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Kapas",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Telur",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Air hujan",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Batu kali",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Ranting",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Bambu",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Buah kelapa",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Lumpur",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Rumput",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Biji jagung",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Bunga melati",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Embun",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Pelangi",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Jamur",
+              "attrs": {
+                "asal": "dari alam"
+              }
+            },
+            {
+              "name": "Gelas kaca",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Bola plastik",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Mobil mainan",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Pensil",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Ember plastik",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Sepatu",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Kursi",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Payung",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Kaleng",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Sendok",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Televisi",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Layang-layang",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Kue bolu",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Baju",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Batu bata",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Jam dinding",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Tas sekolah",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Sapu",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Lampu",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            },
+            {
+              "name": "Krayon",
+              "attrs": {
+                "asal": "buatan manusia"
+              }
+            }
+          ],
+          "attr": "asal",
+          "ask": "value",
+          "prompt": "{name}: dari alam atau buatan manusia?",
+          "explain": "{name} itu {value}.",
+          "choices": 2,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS3-1 (makhluk hidup memakai air, tanah, dan batu dari tempat hidupnya), K-ESS3-3 (memakai sumber daya dengan bijak)"
+        }
       }
     ]
   }

@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.t4.sisa-pembagian-dalam-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 4,
+  "title": "Soal cerita perkalian dan pembagian — Level 4 — Sisa pembagian dalam cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 8],
+            "t": [20, 60]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} siswa naik mobil. Setiap mobil memuat {m} siswa. Berapa mobil yang dibutuhkan agar semua siswa terangkut?",
+          "answer": "floor(t / m) + 1",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "abaikan-sisa"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            "floor(t / m) + 2"
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Sisa siswa butuh 1 mobil lagi: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [6, 10],
+            "t": [30, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} telur dimasukkan ke kotak isi {m}. Berapa kotak yang terisi penuh?",
+          "answer": "floor(t / m)",
+          "distractors": [
+            {
+              "expr": "floor(t / m) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            "floor(t / m) - 1"
+          ],
+          "explain": "{t} : {m} = {answer} sisa {=t%m}."
+        }
+      }
+    ]
+  }
+}

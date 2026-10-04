@@ -1,0 +1,348 @@
+{
+  "id": "math.sd3.i10.tantangan-tambah-dan-kurang-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 10,
+  "title": "Tambah dan kurang campuran — Level 10 — Tantangan tambah dan kurang campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 480],
+            "b": [120, 480],
+            "c": [120, 480]
+          },
+          "prompt": "Berapa pengunjung pada Senin dan Selasa?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Pengunjung museum"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": ["a + c", "b + c", "a + b + c"],
+          "explain": "{a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 480],
+            "b": [120, 480],
+            "c": [120, 480]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Berapa lebih banyak pengunjung pada hari terbanyak dibanding hari tersedikit?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Pengunjung museum"
+            }
+          ],
+          "answer": "max(a, b, c) - min(a, b, c)",
+          "explain": "Terbanyak {=max(a,b,c)}, tersedikit {=min(a,b,c)}. Selisih {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [50, 200],
+            "c": [20, 150]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "benda": ["kelereng", "stiker", "kartu", "manik-manik", "perangko", "kancing"]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ia membeli {b} lagi, lalu memberikan {c} kepada adiknya. Berapa {benda} sekarang?",
+          "answer": "a + b - c",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "semua-tambah"
+            },
+            {
+              "expr": "a + b - 2 * c",
+              "tag": "kurang-dua-kali"
+            },
+            "a - b + c"
+          ],
+          "explain": "{a} + {b} = {=a+b}, lalu − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [500, 999],
+            "b": [100, 300],
+            "c": [50, 99]
+          },
+          "prompt": "Perpustakaan punya {a} buku. Dipinjam {b} buku, lalu dikembalikan {c} buku. Berapa buku di perpustakaan sekarang?",
+          "answer": "a - b + c",
+          "explain": "{a} − {b} + {c} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 12],
+            "b": [24, 35],
+            "k": [2, 10]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Umur {nama} {a} tahun. Ayahnya {b} tahun lebih tua. Berapa umur ayah {k} tahun lagi?",
+          "answer": "a + b + k",
+          "unit": "tahun",
+          "distractors": ["a + b", "a + k", "b + k"],
+          "explain": "Ayah sekarang {=a+b} tahun, {k} tahun lagi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [60, 75],
+            "b": [50, 60],
+            "k": [1, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a - b - k > 0",
+          "prompt": "Umur nenek {a} tahun. {nama} {b} tahun lebih muda dari nenek. Berapa umur {nama} {k} tahun yang lalu?",
+          "answer": "a - b - k",
+          "unit": "tahun",
+          "explain": "{nama} sekarang {=a-b} tahun, {k} tahun lalu {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [100, 400],
+            "y": [20, 99]
+          },
+          "derived": {
+            "s": "x + x + y",
+            "d": "y"
+          },
+          "prompt": "Dua bilangan jumlahnya {s} dan selisihnya {d}. Berapa bilangan yang lebih besar?",
+          "answer": "(s + d) / 2",
+          "distractors": ["(s - d) / 2", "s - d", "s / 2"],
+          "explain": "({s} + {d}) : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [100, 400],
+            "y": [20, 99]
+          },
+          "derived": {
+            "s": "x + x + y",
+            "d": "y"
+          },
+          "prompt": "Dua bilangan jumlahnya {s} dan selisihnya {d}. Berapa bilangan yang lebih kecil?",
+          "answer": "(s - d) / 2",
+          "explain": "({s} − {d}) : 2 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "values": [1000, 1500, 2000, 2500]
+            },
+            "a": [200, 450],
+            "b": [200, 450]
+          },
+          "prompt": "Target menanam {t} pohon. Minggu lalu tertanam {a}, minggu ini {b}. Berapa pohon lagi?",
+          "answer": "t - a - b",
+          "distractors": [
+            {
+              "expr": "t - a + b",
+              "tag": "salah-tanda"
+            },
+            {
+              "expr": "a + b",
+              "tag": "jumlah-saja"
+            },
+            "t - a - b + 100"
+          ],
+          "explain": "{t} − {a} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "values": [500, 750, 1000]
+            },
+            "a": [100, 300],
+            "b": [50, 150]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} ingin mengumpulkan {t} poin. Ia sudah punya {a} poin dan mendapat {b} poin lagi. Berapa poin yang masih kurang?",
+          "answer": "t - a - b",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 600],
+            "b": [50, 200],
+            "c": [100, 300],
+            "e": [30, 150]
+          },
+          "prompt": "Di sebuah toko ada {a} pensil. Terjual {b} pensil, lalu datang kiriman {c} pensil, lalu terjual lagi {e}. Berapa pensil sekarang?",
+          "answer": "a - b + c - e",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [300, 800],
+            "b": [100, 250],
+            "c": [50, 200]
+          },
+          "prompt": "Bilangan ditambah {b} lalu dikurangi {c} hasilnya {r}. Berapa bilangan awalnya?",
+          "answer": "r - b + c",
+          "mode": "input",
+          "explain": "Mundur: {r} + {c} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

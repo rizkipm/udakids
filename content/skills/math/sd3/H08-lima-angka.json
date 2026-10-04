@@ -1,0 +1,66 @@
+{
+  "id": "math.sd3.h8.lima-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "H",
+  "order": 8,
+  "title": "Pengurangan empat dan lima angka — Level 8 — Lima angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-J",
+    "sg": "P3 Subtraction within 10 000",
+    "cambridge": "Stage 3 Calculation: subtraction (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 99999],
+            "b": [10000, 19999]
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-pinjam"
+            },
+            "a - b - 10",
+            "a - b + 10"
+          ],
+          "explain": "Kurangi dari satuan sampai puluh ribuan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 9],
+            "b": [1111, 9999]
+          },
+          "derived": {
+            "a": "p * 10000"
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjam"
+            },
+            "a - b - 1000",
+            "a - b + 100"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

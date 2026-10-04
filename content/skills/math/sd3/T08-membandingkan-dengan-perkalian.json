@@ -1,0 +1,102 @@
+{
+  "id": "math.sd3.t8.membandingkan-dengan-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 8,
+  "title": "Soal cerita perkalian dan pembagian — Level 8 — Membandingkan dengan perkalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 15],
+            "b": [3, 7],
+            "n": [3, 7]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "prompt": "{nama} membaca {a} halaman setiap hari selama {n} hari. {nama2} membaca {b} halaman setiap hari selama {n} hari. Berapa halaman lebih banyak yang dibaca {nama}?",
+          "answer": "(a - b) * n",
+          "distractors": [
+            {
+              "expr": "a * n",
+              "tag": "satu-anak"
+            },
+            {
+              "expr": "a - b",
+              "tag": "satu-hari"
+            },
+            "(a + b) * n"
+          ],
+          "explain": "({a} − {b}) × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9],
+            "k": [2, 9],
+            "e": [2, 9],
+            "f": [2, 9]
+          },
+          "constraint": "g * k != e * f",
+          "prompt": "Toko A menjual {g} bungkus isi {k}. Toko B menjual {e} bungkus isi {f}. Toko mana yang lebih banyak isinya?",
+          "answer": "(g * k > e * f) * 1 + (g * k < e * f) * 2",
+          "labels": {
+            "1": "Toko A",
+            "2": "Toko B"
+          },
+          "explain": "A = {=g*k}, B = {=e*f}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "math.sd3.u1.pecahan-dari-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 1,
+  "title": "Memahami pecahan — Level 1 — Pecahan dari gambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "n": [1, 9]
+          },
+          "constraint": "n < d",
+          "prompt": "Pecahan berapa yang diarsir?",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-tak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "salah-hitung"
+            },
+            {
+              "num": "d",
+              "den": "n",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "Ada {d} bagian sama besar, {n} diarsir: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Pecahan berapa yang diarsir?",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-tak-diarsir"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "banding-bagian"
+            },
+            {
+              "num": "n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{n} dari {d} bagian: {answer}."
+        }
+      }
+    ]
+  }
+}

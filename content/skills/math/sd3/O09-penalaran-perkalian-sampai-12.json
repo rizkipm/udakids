@@ -1,0 +1,92 @@
+{
+  "id": "math.sd3.o9.penalaran-perkalian-sampai-12",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "O",
+  "order": 9,
+  "title": "Perkalian sampai 12 — Level 9 — Penalaran perkalian sampai 12",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-Q/R",
+    "sg": "P3 Multiplication within tables (enrichment to 12)",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "derived": {
+            "p": "a * b",
+            "s": "a + b"
+          },
+          "constraint": "a != b",
+          "prompt": "Hasil kali dua bilangan {p}. Jumlahnya {s}. Berapa bilangan yang lebih besar?",
+          "answer": "max(a, b)",
+          "mode": "input",
+          "explain": "{a} × {b} = {p} dan {a} + {b} = {s}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [6, 12],
+            "c": [1, 5]
+          },
+          "prompt": "{a} × {b} − {a} × {c} = {a} × … ",
+          "answer": "b - c",
+          "mode": "input",
+          "explain": "Sifat distributif: {a} × ({b} − {c})."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Satu lusin = 12. {nama} membeli {n} lusin pensil. Berapa pensil?",
+          "answer": "12 * n",
+          "mode": "input",
+          "explain": "12 × {n} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "math.sd3.j4.nama-sifat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 4,
+  "title": "Sifat penjumlahan — Level 4 — Nama sifat penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} + {b} = {b} + {a}. Sifat apa ini?",
+          "answer": "1",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Identitas (tambah 0)"
+          },
+          "explain": "Urutan ditukar → sifat pertukaran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "prompt": "({a} + {b}) + {c} = {a} + ({b} + {c}). Sifat apa ini?",
+          "answer": "2",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Identitas (tambah 0)"
+          },
+          "explain": "Pengelompokan berubah → sifat pengelompokan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 9999]
+          },
+          "prompt": "{a} + 0 = {a}. Sifat apa ini?",
+          "answer": "3",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Identitas (tambah 0)"
+          },
+          "explain": "Menambah 0 → identitas."
+        }
+      }
+    ]
+  }
+}

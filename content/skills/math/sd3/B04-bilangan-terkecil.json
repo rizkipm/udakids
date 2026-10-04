@@ -1,0 +1,105 @@
+{
+  "id": "math.sd3.b4.bilangan-terkecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 4,
+  "title": "Membandingkan dan mengurutkan — Level 4 — Bilangan terkecil",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 99999],
+            "b": [1000, 99999],
+            "c": [1000, 99999],
+            "e": [1000, 99999],
+            "q": [1, 3]
+          },
+          "derived": {
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a != b && b != c && a != c && e != a && e != b && e != c",
+          "prompt": "Mana bilangan terkecil? {x1}, {x2}, {x3}, {e}",
+          "answer": "min(a, b, c, e)",
+          "distractors": ["max(a, b, c, e)", "a", "b", "c", "e"],
+          "explain": "Terkecil: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 4000],
+            "k": [10, 300],
+            "j": [5, 90],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + k",
+            "c": "a + k - j",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "constraint": "a != c",
+          "prompt": "Jarak lari {nama}, {nama2}, dan Tono: {x1} m, {x2} m, {x3} m. Berapa jarak yang paling pendek?",
+          "answer": "min(a, b, c)",
+          "unit": "m",
+          "distractors": ["max(a, b, c)", "a + k", "a + k - j"],
+          "explain": "Bandingkan: yang terkecil {answer}."
+        }
+      }
+    ]
+  }
+}

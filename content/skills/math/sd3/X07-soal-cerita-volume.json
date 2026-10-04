@@ -1,0 +1,92 @@
+{
+  "id": "math.sd3.x7.soal-cerita-volume",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 7,
+  "title": "Panjang, massa, dan volume — Level 7 — Soal cerita volume",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 7]
+          },
+          "prompt": "Ember berisi {a} L air. Dipakai {b} L. Berapa liter sisanya?",
+          "answer": "a - b",
+          "unit": "L",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6],
+            "k": {
+              "values": [100, 150, 200, 250]
+            }
+          },
+          "derived": {
+            "a": "n * k"
+          },
+          "prompt": "Botol berisi {a} mL jus. Dituang ke {n} gelas sama banyak. Berapa mL setiap gelas?",
+          "answer": "a / n",
+          "unit": "mL",
+          "distractors": [
+            {
+              "expr": "a - n",
+              "tag": "mengurangi"
+            },
+            "a / n + 50",
+            "a * n"
+          ],
+          "explain": "{a} : {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 40],
+            "n": [2, 6],
+            "k": [5, 10]
+          },
+          "prompt": "Bak mandi berisi {a} L. Ditambah {n} ember isi {k} L. Berapa liter sekarang?",
+          "answer": "a + n * k",
+          "unit": "L",
+          "distractors": [
+            {
+              "expr": "a + k",
+              "tag": "satu-ember"
+            },
+            "n * k",
+            "a + n + k"
+          ],
+          "explain": "{a} + {n} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

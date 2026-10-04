@@ -1,0 +1,203 @@
+{
+  "id": "math.sd3.s10.tantangan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "S",
+  "order": 10,
+  "title": "Sifat perkalian dan keluarga fakta — Level 10 — Tantangan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-L (lessons: properties)",
+    "sg": "P3 Multiplication: properties and fact families",
+    "cambridge": "Stage 3 Calculation: commutative, associative, distributive (3Nc.06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 9999]
+          },
+          "prompt": "{a} × 1 = … ",
+          "answer": "a",
+          "distractors": ["1", "0", "a + 1"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 9999]
+          },
+          "prompt": "{a} × … = {a}",
+          "answer": "1",
+          "explain": "Hanya dikali 1 yang tetap.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} × {b} = {b} × {a}. Sifat apa ini?",
+          "answer": "1",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Penyebaran (distributif)",
+            "4": "Identitas (kali 1)"
+          },
+          "explain": "Pertukaran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "({a} × {b}) × {c} = {a} × ({b} × {c}). Sifat apa ini?",
+          "answer": "2",
+          "labels": {
+            "1": "Pertukaran (komutatif)",
+            "2": "Pengelompokan (asosiatif)",
+            "3": "Penyebaran (distributif)",
+            "4": "Identitas (kali 1)"
+          },
+          "explain": "Pengelompokan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "derived": {
+            "c": "a * b"
+          },
+          "constraint": "a != b",
+          "prompt": "{a} × {b} = {c}. Fakta mana yang satu keluarga? {c} : {a} = …",
+          "answer": "b",
+          "distractors": ["a", "c", "b + 1"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "derived": {
+            "c": "a * b"
+          },
+          "constraint": "a != b",
+          "prompt": "Keluarga fakta {a}, {b}, {c}: {c} : … = {a}",
+          "answer": "b",
+          "explain": "{c} : {b} = {a}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 99]
+          },
+          "prompt": "{a} × 25 × 4 = …",
+          "answer": "a * 100",
+          "distractors": ["a * 29", "a * 25", "a + 100"],
+          "explain": "25 × 4 = 100, jadi {a} × 100 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 99]
+          },
+          "prompt": "{a} × 9 = {a} × 10 − … ",
+          "answer": "a",
+          "explain": "{a} × 9 = {a} × 10 − {a}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [2, 5],
+            "c": [2, 10]
+          },
+          "prompt": "{a} × {b} × {c} = …",
+          "answer": "a * b * c",
+          "distractors": ["a + b + c", "a * b + c", "a * b * c + a"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 4],
+            "b": [2, 5],
+            "c": [3, 10]
+          },
+          "prompt": "Ada {a} rak, setiap rak {b} kotak, setiap kotak {c} pensil. Berapa pensil?",
+          "answer": "a * b * c",
+          "explain": "{a} × {b} × {c} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 9],
+            "b": [3, 9]
+          },
+          "derived": {
+            "c": "10 - b"
+          },
+          "prompt": "{a} × {b} + {a} × {c} = …",
+          "answer": "a * (b + c)",
+          "mode": "input",
+          "explain": "{a} × ({b} + {c}) = {a} × {=b+c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 25],
+            "b": [11, 20],
+            "c": [1, 9]
+          },
+          "constraint": "b - c == 10",
+          "prompt": "{a} × {b} − {a} × {c} = …",
+          "answer": "a * (b - c)",
+          "mode": "input",
+          "explain": "{a} × ({b} − {c}) = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -18,6 +18,7 @@ import { speak } from '../audio/speech';
 import { useApiCall, useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
+import { pageList } from '../ui/Pager';
 import { formatStamp } from '../ui/ui';
 import { SpeakButton } from './ItemPlayer';
 import { Crown, StatIcon } from './icons';
@@ -47,6 +48,8 @@ const volume = (r: { rounds: number; questions: number }) =>
 const timeOf = (r: { timeMs: number; bestTimeMs: number }, mode: LeaderboardMode) =>
   mode === 'total' ? r.bestTimeMs : r.timeMs;
 const PAGE_SIZE = 50;
+/** Belum punya ronde: tetap tampil di papan global (paling bawah), tanpa nilai. */
+const idle = (r: { rounds: number }) => r.rounds === 0;
 
 function rememberedScope() {
   try {
@@ -76,16 +79,21 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
     `/leaderboard?scope=${active}&mode=${mode}&pageSize=${PAGE_SIZE}`,
   );
   const call = useApiCall('child');
-  const [more, setMore] = useState<{ key: string; page: number; items: LeaderboardRow[] }>();
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [paged, setPaged] = useState<{ key: string; page: number; items: LeaderboardRow[] }>();
+  const [loadingPage, setLoadingPage] = useState(false);
   const [open, setOpen] = useState<LeaderboardRow>();
+  const othersRef = useRef<HTMLElement>(null);
 
   const data =
     board.data?.scope === active && (board.data.mode ?? 'average') === mode
       ? board.data
       : undefined;
-  const extra = more?.key === `${mode}:${active}` ? more : undefined;
-  const restItems = [...(data?.rest.items ?? []), ...(extra?.items ?? [])];
+  const boardKey = `${mode}:${active}`;
+  const current = paged?.key === boardKey ? paged : undefined;
+  const page = current?.page ?? 1;
+  const restItems = current?.items ?? data?.rest.items ?? [];
+  const pages = data ? Math.max(1, Math.ceil(data.rest.total / PAGE_SIZE)) : 1;
+  const from = LEADERBOARD_TOP + (page - 1) * PAGE_SIZE + 1;
   const boardName = data ? scopeLabel({ key: data.scope, title: data.title }) : '';
 
   const choose = (s: LeaderboardScope) => {
@@ -108,29 +116,28 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
     }
   };
 
-  const loadMore = async () => {
-    if (!data) return;
-    const page = (extra?.page ?? 1) + 1;
-    setLoadingMore(true);
+  const goPage = async (n: number) => {
+    if (!data || n === page || n < 1 || n > pages || loadingPage) return;
+    setLoadingPage(true);
     try {
-      const next = await call<Leaderboard>(
-        `/leaderboard?scope=${active}&mode=${mode}&page=${page}&pageSize=${PAGE_SIZE}`,
-      );
-      setMore({
-        key: `${mode}:${active}`,
-        page,
-        items: [...(extra?.items ?? []), ...next.rest.items],
-      });
+      const next =
+        n === 1
+          ? data
+          : await call<Leaderboard>(
+              `/leaderboard?scope=${active}&mode=${mode}&page=${n}&pageSize=${PAGE_SIZE}`,
+            );
+      setPaged({ key: boardKey, page: n, items: next.rest.items });
+      othersRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
     } catch {
-      /* tetap tampilkan yang sudah ada */
+      /* tetap tampilkan halaman yang sudah ada */
     } finally {
-      setLoadingMore(false);
+      setLoadingPage(false);
     }
   };
 
   const say = !data
     ? t('rank.intro')
-    : data.me
+    : data.me && !idle(data.me)
       ? t(mode === 'total' ? 'rank.mySayTotal' : 'rank.mySay', {
           board: boardName,
           position: data.me.position,
@@ -183,6 +190,14 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
         <SpeakButton text={say} />
         <p>{say}</p>
       </div>
+      {data && data.played !== undefined && data.played < data.total && (
+        <p className="rank-played">
+          {t('rank.played', {
+            played: data.played.toLocaleString('id-ID'),
+            total: data.total.toLocaleString('id-ID'),
+          })}
+        </p>
+      )}
 
       {!data ? (
         <section className="board-empty">
@@ -225,19 +240,25 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
                       size={i === 1 ? 104 : 84}
                     />
                     <strong className="podium-name">{r.nickname}</strong>
-                    <span className="podium-points rank-avg">{metric(r, mode)}</span>
-                    {mode === 'average' && (
-                      <span className="podium-raw">
-                        {t('rank.raw', { average: formatAverage(r.average) })}
-                      </span>
+                    {idle(r) ? (
+                      <span className="podium-raw">{t('rank.idle')}</span>
+                    ) : (
+                      <>
+                        <span className="podium-points rank-avg">{metric(r, mode)}</span>
+                        {mode === 'average' && (
+                          <span className="podium-raw">
+                            {t('rank.raw', { average: formatAverage(r.average) })}
+                          </span>
+                        )}
+                        <span className="podium-meta">
+                          <span>{volume(r)}</span>
+                          <span className="rank-time">
+                            <StatIcon kind="time" size={16} />
+                            {formatClock(timeOf(r, mode))}
+                          </span>
+                        </span>
+                      </>
                     )}
-                    <span className="podium-meta">
-                      <span>{volume(r)}</span>
-                      <span className="rank-time">
-                        <StatIcon kind="time" size={16} />
-                        {formatClock(timeOf(r, mode))}
-                      </span>
-                    </span>
                     <DetailButton row={r} onOpen={setOpen} compact />
                     <span className="podium-block">{r.position}</span>
                   </li>
@@ -270,25 +291,24 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
           )}
 
           {data.rest.total > 0 && (
-            <section className="rank-others" aria-labelledby="rank-others-title">
+            <section ref={othersRef} className="rank-others" aria-labelledby="rank-others-title">
               <h2 id="rank-others-title">{t('rank.others')}</h2>
-              <p className="rank-others-sub">
-                {t('rank.othersSub', { last: LEADERBOARD_TOP + data.rest.total })}
+              <p className="rank-others-sub" aria-live="polite">
+                {loadingPage
+                  ? t('rank.loadingMore')
+                  : t('rank.othersSub', {
+                      from: from.toLocaleString('id-ID'),
+                      to: (from + restItems.length - 1).toLocaleString('id-ID'),
+                      total: data.total.toLocaleString('id-ID'),
+                    })}
               </p>
-              <ol className="rank-list is-small">
+              <ol className={`rank-list is-small${loadingPage ? ' is-loading' : ''}`}>
                 {restItems.map((r) => (
                   <RankRow key={`${r.position}-${r.nickname}`} row={r} mode={mode} />
                 ))}
               </ol>
-              {restItems.length < data.rest.total && (
-                <button
-                  type="button"
-                  className="kid-btn secondary rank-more"
-                  disabled={loadingMore}
-                  onClick={() => void loadMore()}
-                >
-                  {loadingMore ? t('rank.loadingMore') : t('rank.more')}
-                </button>
+              {pages > 1 && (
+                <Pager page={page} pages={pages} busy={loadingPage} onGo={(n) => void goPage(n)} />
               )}
             </section>
           )}
@@ -309,6 +329,62 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
   );
 }
 
+function Pager({
+  page,
+  pages,
+  busy,
+  onGo,
+}: {
+  page: number;
+  pages: number;
+  busy: boolean;
+  onGo: (page: number) => void;
+}) {
+  return (
+    <nav className="rank-pager" aria-label={t('rank.page.label')}>
+      <button
+        type="button"
+        className="rank-page-btn is-step"
+        disabled={busy || page <= 1}
+        onClick={() => onGo(page - 1)}
+      >
+        {t('rank.page.prev')}
+      </button>
+      <ol className="rank-page-list">
+        {pageList(page, pages).map((n, i) =>
+          n === '…' ? (
+            <li key={`gap-${i}`} className="rank-page-gap" aria-hidden>
+              …
+            </li>
+          ) : (
+            <li key={n}>
+              <button
+                type="button"
+                className={`rank-page-btn${n === page ? ' is-on' : ''}`}
+                aria-label={t('rank.page.go', { page: n })}
+                aria-current={n === page ? 'page' : undefined}
+                disabled={busy}
+                onClick={() => onGo(n)}
+              >
+                {n}
+              </button>
+            </li>
+          ),
+        )}
+      </ol>
+      <span className="rank-page-status">{t('rank.page.status', { page, pages })}</span>
+      <button
+        type="button"
+        className="rank-page-btn is-step"
+        disabled={busy || page >= pages}
+        onClick={() => onGo(page + 1)}
+      >
+        {t('rank.page.next')}
+      </button>
+    </nav>
+  );
+}
+
 function DetailButton({
   row,
   onOpen,
@@ -318,7 +394,7 @@ function DetailButton({
   onOpen?: (r: LeaderboardRow) => void;
   compact?: boolean;
 }) {
-  if (!onOpen || !row.childId) return null;
+  if (!onOpen || !row.childId || idle(row)) return null;
   return (
     <button
       type="button"
@@ -342,33 +418,45 @@ function RankRow({
 }) {
   return (
     <li
-      className={`rank-row${row.isMe ? ' is-me' : ''}${row.position <= 3 ? ` place-${row.position}` : ''}`}
-      aria-label={t(mode === 'total' ? 'rank.rowSayTotal' : 'rank.rowSay', {
-        position: row.position,
-        name: row.nickname,
-        average: formatAverage(row.rating),
-        raw: formatAverage(row.average),
-        points: row.points.toLocaleString('id-ID'),
-        rounds: row.rounds,
-        questions: row.questions,
-        time: durationWords(timeOf(row, mode)),
-      })}
+      className={`rank-row${row.isMe ? ' is-me' : ''}${row.position <= 3 && !idle(row) ? ` place-${row.position}` : ''}${idle(row) ? ' is-idle' : ''}`}
+      aria-label={
+        idle(row)
+          ? t('rank.idleSay', { position: row.position, name: row.nickname })
+          : t(mode === 'total' ? 'rank.rowSayTotal' : 'rank.rowSay', {
+              position: row.position,
+              name: row.nickname,
+              average: formatAverage(row.rating),
+              raw: formatAverage(row.average),
+              points: row.points.toLocaleString('id-ID'),
+              rounds: row.rounds,
+              questions: row.questions,
+              time: durationWords(timeOf(row, mode)),
+            })
+      }
     >
       <span className="rank-pos">{row.position}</span>
       <Momo color={row.momoColor as Color} look={row.momoLook ?? null} mood="happy" size={44} />
       <span className="rank-name">
         <strong>{row.nickname}</strong>
         {row.isMe && <em className="board-me">{t('rank.me')}</em>}
-        <small>
-          {volume(row)} · {t('rank.passed', { n: row.passedLevels })}
-          {mode === 'average' && <> · {t('rank.raw', { average: formatAverage(row.average) })}</>}
-        </small>
+        {!idle(row) && (
+          <small>
+            {volume(row)} · {t('rank.passed', { n: row.passedLevels })}
+            {mode === 'average' && <> · {t('rank.raw', { average: formatAverage(row.average) })}</>}
+          </small>
+        )}
       </span>
-      <span className="rank-avg">{metric(row, mode)}</span>
-      <span className="rank-time">
-        <StatIcon kind="time" size={18} />
-        {formatClock(timeOf(row, mode))}
-      </span>
+      {idle(row) ? (
+        <span className="rank-idle">{t('rank.idle')}</span>
+      ) : (
+        <>
+          <span className="rank-avg">{metric(row, mode)}</span>
+          <span className="rank-time">
+            <StatIcon kind="time" size={18} />
+            {formatClock(timeOf(row, mode))}
+          </span>
+        </>
+      )}
       <DetailButton row={row} onOpen={onOpen} />
     </li>
   );
@@ -438,22 +526,12 @@ function DetailDialog({
       >
         <header className="rank-dialog-head">
           {d && (
-            <Momo color={d.momoColor as Color} look={d.momoLook ?? null} mood="proud" size={72} />
+            <Momo color={d.momoColor as Color} look={d.momoLook ?? null} mood="proud" size={56} />
           )}
           <div>
             <h2 id="rank-detail-title">{t('rank.detail.title', { name: d?.nickname ?? name })}</h2>
-            {d && (
-              <p className="rank-dialog-sum">
-                <span className="rank-pos">{d.position}</span>
-                <span className="rank-avg">{metric(d, mode)}</span>
-                <span>{volume(d)}</span>
-                <span className="rank-time">
-                  <StatIcon kind="time" size={18} />
-                  {formatClock(timeOf(d, mode))}
-                </span>
-              </p>
-            )}
           </div>
+          {d && <SpeakButton text={say} />}
           <button
             ref={closeRef}
             type="button"
@@ -470,14 +548,42 @@ function DetailDialog({
           </p>
         ) : (
           <div className="rank-dialog-body">
-            <div className="kid-say">
-              <SpeakButton text={say} />
-              <p>{say}</p>
-            </div>
+            <dl className="rank-stats">
+              {[
+                {
+                  label: t('rank.col.pos'),
+                  value: d.position.toLocaleString('id-ID'),
+                  note: t('rank.detail.of', { n: d.participants.toLocaleString('id-ID') }),
+                },
+                {
+                  label: t('rank.col.rating'),
+                  value: formatAverage(d.rating),
+                  strong: mode === 'average',
+                },
+                { label: t('rank.col.average'), value: formatAverage(d.average) },
+                {
+                  label: t('rank.col.points'),
+                  value: d.points.toLocaleString('id-ID'),
+                  strong: mode === 'total',
+                },
+                { label: t('rank.col.rounds'), value: d.rounds.toLocaleString('id-ID') },
+                { label: t('rank.col.questions'), value: d.questions.toLocaleString('id-ID') },
+                { label: t('rank.detail.levels'), value: d.passedLevels.toLocaleString('id-ID') },
+                { label: t('rank.col.time'), value: formatClock(timeOf(d, mode)) },
+              ].map((x) => (
+                <div key={x.label} className={`rank-stat${x.strong ? ' is-strong' : ''}`}>
+                  <dt>{x.label}</dt>
+                  <dd>
+                    {x.value}
+                    {x.note && <small> {x.note}</small>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
             <h3>{t('rank.detail.books')}</h3>
             <div className="rank-table-wrap">
-              <table className="rank-table">
+              <table className="rank-table is-stack">
                 <thead>
                   <tr>
                     <th scope="col">{t('rank.detail.book')}</th>
@@ -494,20 +600,33 @@ function DetailDialog({
                   {d.books.map((b) => (
                     <tr key={b.key} className={b.key === scope ? 'is-on' : undefined}>
                       <th scope="row">{b.title}</th>
-                      <td className={mode === 'average' ? 'rank-avg' : undefined}>
+                      <td
+                        data-label={t('rank.col.rating')}
+                        className={mode === 'average' ? 'rank-avg' : undefined}
+                      >
                         {formatAverage(b.rating)}
                       </td>
-                      <td>{formatAverage(b.average)}</td>
-                      <td className={mode === 'total' ? 'rank-avg' : undefined}>
+                      <td data-label={t('rank.col.average')}>{formatAverage(b.average)}</td>
+                      <td
+                        data-label={t('rank.col.points')}
+                        className={mode === 'total' ? 'rank-avg' : undefined}
+                      >
                         {b.points.toLocaleString('id-ID')}
                       </td>
-                      <td>{b.rounds}</td>
-                      <td>{b.questions.toLocaleString('id-ID')}</td>
-                      <td>
+                      <td data-label={t('rank.col.rounds')}>{b.rounds}</td>
+                      <td data-label={t('rank.col.questions')}>
+                        {b.questions.toLocaleString('id-ID')}
+                      </td>
+                      <td data-label={t('rank.detail.levels')}>
                         {b.passedLevels}/{b.totalLevels}
                       </td>
-                      <td>
-                        {t('rank.detail.position', { position: b.position, of: b.participants })}
+                      <td data-label={t('rank.col.pos')}>
+                        <span>
+                          {b.position.toLocaleString('id-ID')}{' '}
+                          <small>
+                            {t('rank.detail.of', { n: b.participants.toLocaleString('id-ID') })}
+                          </small>
+                        </span>
                       </td>
                     </tr>
                   ))}
@@ -521,7 +640,7 @@ function DetailDialog({
             ) : (
               [...byBook.entries()].map(([key, topics]) => (
                 <div key={key} className="rank-table-wrap">
-                  <table className="rank-table">
+                  <table className="rank-table is-stack">
                     <caption>{topics[0]!.book}</caption>
                     <thead>
                       <tr>
@@ -537,13 +656,18 @@ function DetailDialog({
                       {topics.map((tp) => (
                         <tr key={tp.category}>
                           <th scope="row">{tp.topic}</th>
-                          <td>{formatAverage(tp.average)}</td>
-                          <td className={mode === 'total' ? 'rank-avg' : undefined}>
+                          <td data-label={t('rank.col.average')}>{formatAverage(tp.average)}</td>
+                          <td
+                            data-label={t('rank.col.points')}
+                            className={mode === 'total' ? 'rank-avg' : undefined}
+                          >
                             {tp.points.toLocaleString('id-ID')}
                           </td>
-                          <td>{tp.rounds}</td>
-                          <td>{tp.questions.toLocaleString('id-ID')}</td>
-                          <td>
+                          <td data-label={t('rank.col.rounds')}>{tp.rounds}</td>
+                          <td data-label={t('rank.col.questions')}>
+                            {tp.questions.toLocaleString('id-ID')}
+                          </td>
+                          <td data-label={t('rank.detail.levels')}>
                             {tp.passed}/{tp.levels}
                           </td>
                         </tr>

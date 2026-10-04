@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.j9.penalaran-sifat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 9,
+  "title": "Sifat penjumlahan — Level 9 — Penalaran sifat penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "derived": {
+            "c": "100 - a",
+            "e": "100 - b"
+          },
+          "prompt": "Hitung dengan cerdas: {a} + {b} + {c} + {e}",
+          "answer": "a + b + c + e",
+          "mode": "input",
+          "explain": "Pasangan {a}+{c} = 100 dan {b}+{e} = 100. Jumlahnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [10, 12, 14, 16, 18, 20]
+            }
+          },
+          "prompt": "1 + 2 + 3 + … + {n} = …",
+          "answer": "n * (n + 1) / 2",
+          "mode": "input",
+          "explain": "Pasangkan bilangan awal dan akhir: ({n} + 1) × {n} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [100, 400],
+            "c": [50, 200],
+            "e": [50, 200]
+          },
+          "constraint": "a + b > c + e",
+          "prompt": "{a} + {b} = {c} + {e} + …",
+          "answer": "a + b - c - e",
+          "mode": "input",
+          "explain": "{=a+b} − {=c+e} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "math.sd3.u2.pembilang-dan-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 2,
+  "title": "Memahami pecahan — Level 2 — Pembilang dan penyebut",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Pada pecahan {n}/{d}, berapa penyebutnya?",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "pembilang"
+            },
+            "d + n",
+            "d - n"
+          ],
+          "explain": "Penyebut = bilangan di bawah = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Pada pecahan {n}/{d}, berapa pembilangnya?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            },
+            "d - n",
+            "n + 1"
+          ],
+          "explain": "Pembilang = bilangan di atas = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12]
+          },
+          "prompt": "Sebuah pizza dipotong {d} bagian sama besar. Berapa penyebut pecahan untuk satu potong?",
+          "answer": "d",
+          "distractors": ["1", "d - 1", "d + 1"],
+          "explain": "Satu potong = 1/{d}, penyebutnya {answer}."
+        }
+      }
+    ]
+  }
+}

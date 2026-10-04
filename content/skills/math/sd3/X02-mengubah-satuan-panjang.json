@@ -1,0 +1,103 @@
+{
+  "id": "math.sd3.x2.mengubah-satuan-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 2,
+  "title": "Panjang, massa, dan volume — Level 2 — Mengubah satuan panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 50]
+          },
+          "prompt": "{a} m = … cm",
+          "answer": "a * 100",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "kali-1000"
+            },
+            "a + 100"
+          ],
+          "explain": "1 m = 100 cm, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30]
+          },
+          "prompt": "{a} km = … m",
+          "answer": "a * 1000",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            "a + 1000"
+          ],
+          "explain": "1 km = 1.000 m: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 99]
+          },
+          "prompt": "{a} m {b} cm = … cm",
+          "answer": "a * 100 + b",
+          "distractors": [
+            {
+              "expr": "a * 10 + b",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 1000 + b"
+          ],
+          "explain": "{=a*100} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 980]
+          },
+          "constraint": "a % 100 != 0",
+          "prompt": "{a} cm = … m … cm. Berapa meternya?",
+          "answer": "floor(a / 100)",
+          "distractors": ["floor(a / 10)", "a % 100", "floor(a / 100) + 1"],
+          "explain": "{a} cm = {=floor(a/100)} m {=a%100} cm."
+        }
+      }
+    ]
+  }
+}

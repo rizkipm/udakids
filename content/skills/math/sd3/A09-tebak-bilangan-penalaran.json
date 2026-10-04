@@ -1,0 +1,63 @@
+{
+  "id": "math.sd3.a9.tebak-bilangan-penalaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "A",
+  "order": 9,
+  "title": "Nilai tempat — Level 9 — Tebak bilangan (penalaran)",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-A",
+    "sg": "P3 Numbers to 10 000: place value",
+    "cambridge": "Stage 3 Number: place value (3Np.02)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 7]
+          },
+          "prompt": "Aku bilangan 4 angka. Angka ribuanku {r}. Angka ratusanku 2 lebih dari angka ribuan. Angka puluhanku 0. Angka satuanku sama dengan angka ribuan. Siapa aku?",
+          "answer": "r * 1000 + (r + 2) * 100 + r",
+          "mode": "input",
+          "explain": "Ribuan {r}, ratusan {=r+2}, puluhan 0, satuan {r}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lo": {
+              "values": [100, 200, 300, 400, 500, 600, 700, 800]
+            },
+            "s": [1, 4]
+          },
+          "prompt": "Aku bilangan 3 angka di antara {lo} dan {=lo+100}. Angka satuanku {s} dan angka puluhanku dua kali angka satuan. Siapa aku?",
+          "answer": "lo + 2 * s * 10 + s",
+          "mode": "input",
+          "explain": "Ratusan sama dengan {lo}, puluhan {=2*s}, satuan {s}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [0, 8]
+          },
+          "prompt": "Berapa bilangan terbesar 4 angka yang angka ratusannya {h} dan semua angkanya berbeda?",
+          "answer": "9000 + h * 100 + (h != 8) * 80 + (h == 8) * 70 + (h != 7 && h != 8) * 7 + (h == 7) * 6 + (h == 8) * 6",
+          "mode": "input",
+          "explain": "Ribuan 9, ratusan {h}, lalu angka terbesar yang belum dipakai: {answer}."
+        }
+      }
+    ]
+  }
+}

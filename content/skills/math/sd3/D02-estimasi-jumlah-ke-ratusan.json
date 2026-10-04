@@ -1,0 +1,43 @@
+{
+  "id": "math.sd3.d2.estimasi-jumlah-ke-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 2,
+  "title": "Estimasi jumlah dan selisih — Level 2 — Estimasi jumlah ke ratusan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [110, 4900],
+      "b": [110, 4900]
+    },
+    "constraint": "a % 100 != 0 && b % 100 != 0 && a % 100 != 50 && b % 100 != 50",
+    "prompt": "Perkirakan {a} + {b} dengan membulatkan setiap bilangan ke ratusan terdekat.",
+    "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "hasil-tepat"
+      },
+      {
+        "expr": "round(a / 10) * 10 + round(b / 10) * 10",
+        "tag": "ke-puluhan"
+      },
+      {
+        "expr": "round(a / 100) * 100 + round(b / 100) * 100 + 100",
+        "tag": "lain"
+      }
+    ],
+    "explain": "{a} ≈ {=round(a/100)*100}, {b} ≈ {=round(b/100)*100}. Estimasi {answer}."
+  }
+}

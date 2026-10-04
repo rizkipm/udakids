@@ -1,0 +1,75 @@
+{
+  "id": "math.sd3.w7.harga-beberapa-barang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 7,
+  "title": "Uang Rupiah — Level 7 — Harga beberapa barang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [500, 1000, 1500, 2000, 2500]
+            },
+            "n": [3, 12]
+          },
+          "words": {
+            "benda": ["kelereng", "stiker", "kartu", "manik-manik", "perangko", "kancing"]
+          },
+          "prompt": "Harga 1 {benda} Rp{h}. Berapa rupiah harga {n} {benda}?",
+          "answer": "h * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + n",
+              "tag": "menjumlah"
+            },
+            "h * (n - 1)",
+            "h * n + 500"
+          ],
+          "explain": "{n} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6],
+            "h": {
+              "values": [3000, 4000, 5000, 6000, 7500]
+            }
+          },
+          "derived": {
+            "t": "h * n"
+          },
+          "prompt": "Harga {n} buku Rp{t}. Berapa rupiah harga 1 buku?",
+          "answer": "t / n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "t - n",
+              "tag": "mengurangi"
+            },
+            "h + 1000",
+            "h * 2"
+          ],
+          "explain": "{t} : {n} = {answer}."
+        }
+      }
+    ]
+  }
+}

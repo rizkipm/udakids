@@ -1,0 +1,53 @@
+{
+  "id": "math.sd3.j2.sifat-pengelompokan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 2,
+  "title": "Sifat penjumlahan — Level 2 — Sifat pengelompokan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "({a} + {b}) + {c} = {a} + (… + {c})",
+          "answer": "b",
+          "distractors": ["a", "c", "a + b"],
+          "explain": "Pengelompokan diubah, bilangannya sama: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "constraint": "b != c",
+          "prompt": "{a} + ({b} + {c}) = ({a} + …) + {c}",
+          "answer": "b",
+          "distractors": ["c", "a", "b + c"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

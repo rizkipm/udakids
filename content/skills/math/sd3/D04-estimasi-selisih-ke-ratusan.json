@@ -1,0 +1,43 @@
+{
+  "id": "math.sd3.d4.estimasi-selisih-ke-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 4,
+  "title": "Estimasi jumlah dan selisih — Level 4 — Estimasi selisih ke ratusan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2000, 9900],
+      "b": [110, 1900]
+    },
+    "constraint": "a % 100 != 0 && b % 100 != 0 && a % 100 != 50 && b % 100 != 50",
+    "prompt": "Perkirakan {a} − {b} dengan membulatkan setiap bilangan ke ratusan terdekat.",
+    "answer": "round(a / 100) * 100 - round(b / 100) * 100",
+    "distractors": [
+      {
+        "expr": "a - b",
+        "tag": "hasil-tepat"
+      },
+      {
+        "expr": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+        "tag": "ke-ribuan"
+      },
+      {
+        "expr": "round(a / 100) * 100 + round(b / 100) * 100",
+        "tag": "menjumlah"
+      }
+    ],
+    "explain": "{a} ≈ {=round(a/100)*100}, {b} ≈ {=round(b/100)*100}. Estimasi {answer}."
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "id": "math.sd3.e10.tantangan-penjumlahan-tiga-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "E",
+  "order": 10,
+  "title": "Penjumlahan tiga angka — Level 10 — Tantangan penjumlahan tiga angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-G",
+    "sg": "P3 Addition within 10 000",
+    "cambridge": "Stage 3 Calculation: addition of 3-digit numbers (3Nc.03)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 780],
+            "h": [1, 2],
+            "t": [1, 9],
+            "k": [1, 3]
+          },
+          "derived": {
+            "c": "h * 100 + t * 10",
+            "b": "c - k"
+          },
+          "prompt": "Hitung {a} + {b} dengan cara {a} + {c} − {k}.",
+          "answer": "a + b",
+          "distractors": ["a + c", "a + c + k", "a + b + 10"],
+          "explain": "{a} + {c} = {=a+c}, lalu − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "h": [1, 3],
+            "t": [1, 9],
+            "s": [1, 9]
+          },
+          "prompt": "Di garis bilangan, mulai dari {a}, lompat +{=h*100}, lalu +{=t*10}, lalu +{s}. Sampai di bilangan berapa?",
+          "answer": "a + h * 100 + t * 10 + s",
+          "explain": "{a} + {=h*100} + {=t*10} + {s} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 899],
+            "b": [100, 899]
+          },
+          "constraint": "a + b < 1000",
+          "prompt": "{a} + {b} = ({=floor(a/100)*100} + {=floor(b/100)*100}) + ({=floor(a/10)%10*10} + {=floor(b/10)%10*10}) + ({=a%10} + {=b%10}) = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan-satuan"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "lupa-simpan-puluhan"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "salah-simpan"
+            },
+            "a + b + 1"
+          ],
+          "explain": "Ratusan + puluhan + satuan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 899],
+            "b": [100, 899]
+          },
+          "constraint": "a + b < 1000",
+          "prompt": "{=floor(a/100)*100} + {=floor(b/100)*100} = {=floor(a/100)*100+floor(b/100)*100}; {=a%100} + {=b%100} = {=a%100+b%100}. Jadi {a} + {b} = …",
+          "answer": "a + b",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 600],
+            "b": [100, 399]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "{a} + … = {c}",
+          "answer": "c - a",
+          "distractors": [
+            {
+              "expr": "c + a",
+              "tag": "menjumlah"
+            },
+            "c - a + 10",
+            "c - a - 10"
+          ],
+          "explain": "{c} − {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 600],
+            "b": [100, 399]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "… + {b} = {c}",
+          "answer": "c - b",
+          "explain": "{c} − {b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [100, 400],
+            "c": [100, 600]
+          },
+          "constraint": "a + b > c",
+          "prompt": "{a} + {b} = {c} + …",
+          "answer": "a + b - c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "jumlah-kiri"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "jumlah-semua"
+            },
+            "a + b - c + 10"
+          ],
+          "explain": "Kedua sisi harus sama: {=a+b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "c": [100, 400],
+            "e": [10, 300]
+          },
+          "constraint": "c + e > a",
+          "prompt": "{a} + … = {c} + {e}",
+          "answer": "c + e - a",
+          "explain": "{c} + {e} = {=c+e}, lalu {=c+e} − {a} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ah": [1, 6],
+            "at": [0, 9],
+            "as": [0, 9],
+            "b": [100, 299]
+          },
+          "derived": {
+            "a": "ah * 100 + at * 10 + as"
+          },
+          "prompt": "{ah}□{as} + {b} = {=a+b}. Angka berapa di dalam kotak?",
+          "answer": "at",
+          "distractors": ["(at + 1) % 10", "(at + 9) % 10", "(at + 5) % 10"],
+          "explain": "Kurangkan: {=a+b} − {b} = {a}. Angka puluhannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 599],
+            "bh": [1, 3],
+            "bt": [0, 9],
+            "bs": [0, 9]
+          },
+          "derived": {
+            "b": "bh * 100 + bt * 10 + bs"
+          },
+          "prompt": "{a} + {bh}{bt}□ = {=a+b}. Angka berapa di dalam kotak?",
+          "answer": "bs",
+          "explain": "{=a+b} − {a} = {b}. Angka satuannya {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [100, 300],
+            "c": [10, 299]
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "mode": "input",
+          "explain": "Jumlahkan dua dulu, lalu tambah yang ketiga: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [100, 300],
+            "c": [50, 250]
+          },
+          "prompt": "Perpustakaan menerima {a} buku cerita, {b} buku sains, dan {c} komik. Berapa buku semuanya?",
+          "answer": "a + b + c",
+          "mode": "input",
+          "explain": "{a} + {b} + {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

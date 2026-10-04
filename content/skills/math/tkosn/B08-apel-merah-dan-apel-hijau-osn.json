@@ -1,11 +1,11 @@
 {
   "id": "math.tkosn.b8.apel-merah-dan-apel-hijau-osn",
-  "version": 1,
+  "version": 2,
   "domain": "math",
   "grade": "tkosn",
   "category": "B",
   "order": 8,
-  "title": "Berhitung ceria — Level 8 — Apel merah dan apel hijau (gaya OSN)",
+  "title": "Berhitung ceria — Level 8 — Benda dua warna (gaya OSN)",
   "tier": "basic",
   "tags": {
     "level": "8",
@@ -20,21 +20,37 @@
       "b": [1, 5]
     },
     "constraint": "a + b <= 10",
-    "prompt": "Ada {a} apel merah dan {b} apel hijau. Berapa semua apelnya?",
+    "words": {
+      "benda": [
+        "balon",
+        "bola",
+        "bintang",
+        "topi",
+        "bunga",
+        "mobil",
+        "payung",
+        "ikan",
+        "burung",
+        "kupu-kupu",
+        "pensil",
+        "bus"
+      ]
+    },
+    "prompt": "Ada {a} {benda} merah dan {b} {benda} biru. Berapa semua {benda}nya?",
     "stimulus": [
       {
         "kind": "objects",
         "layout": "row",
-        "object": "apel",
+        "object": "{benda}",
         "count": "=a",
         "color": "merah"
       },
       {
         "kind": "objects",
         "layout": "row",
-        "object": "apel",
+        "object": "{benda}",
         "count": "=b",
-        "color": "hijau"
+        "color": "biru"
       }
     ],
     "answer": "a + b",
@@ -53,6 +69,6 @@
       }
     ],
     "choices": 3,
-    "explain": "{a} apel merah dan {b} apel hijau. Kita hitung semuanya: {answer} apel."
+    "explain": "{a} {benda} merah dan {b} {benda} biru. Kita hitung semuanya: {answer} {benda}."
   }
 }

@@ -1,0 +1,58 @@
+{
+  "id": "math.sd3.h6.cek-dengan-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "H",
+  "order": 6,
+  "title": "Pengurangan empat dan lima angka — Level 6 — Cek dengan penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-J",
+    "sg": "P3 Subtraction within 10 000",
+    "cambridge": "Stage 3 Calculation: subtraction (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3000, 9999],
+            "b": [1000, 2999]
+          },
+          "derived": {
+            "c": "a - b"
+          },
+          "prompt": "{a} − {b} = {c}. Penjumlahan mana yang tepat untuk memeriksa? {c} + … = {a}",
+          "answer": "b",
+          "distractors": ["a", "c", "a + b"],
+          "explain": "{c} + {b} = {a}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3000, 9999],
+            "b": [1000, 2999],
+            "k": {
+              "values": [-1000, -100, -10, 10, 100, 1000]
+            }
+          },
+          "derived": {
+            "w": "a - b + k"
+          },
+          "prompt": "Raka menghitung {a} − {b} = {w}. Hasil yang benar adalah …",
+          "answer": "a - b",
+          "distractors": ["w", "a + b", "a - b - k * 2"],
+          "explain": "Periksa: {w} + {b} = {=w+b}, bukan {a}. Yang benar {answer}."
+        }
+      }
+    ]
+  }
+}

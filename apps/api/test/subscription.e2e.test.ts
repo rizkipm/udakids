@@ -191,6 +191,67 @@ describe.skipIf(!hasDb)('paket berlangganan: masa berlaku & kedaluwarsa', () => 
     expect(cat.body.access.expired).toBeUndefined();
   });
 
+  it('pengingat masa paket via email (D-054): H-5, H-3, H-1 sekali saja; tidak dikirim bila sudah diperpanjang', async () => {
+    const { pool } = ctx;
+    const { ExpiryReminderService } = await import('../src/billing/expiry-reminder.service.js');
+    const svc = ctx.app.get(ExpiryReminderService);
+    const [{ id: parentId }] = (
+      await pool.query<{ id: string }>("select id from parents where email = 'langganan@contoh.id'")
+    ).rows as [{ id: string }];
+    await pool.query('delete from entitlements where parent_id = $1', [parentId]);
+    const ins = await pool.query<{ id: string }>(
+      `insert into entitlements (parent_id, name, scope, books, starts_at, ends_at)
+       values ($1, 'Semua buku 30 hari', 'all', '[]', now() - interval '25 days', now() + interval '4 days 12 hours') returning id`,
+      [parentId],
+    );
+    const entId = ins.rows[0]!.id;
+    const kinds = async () =>
+      (
+        await pool.query<{ kind: string; subject: string; html: string | null }>(
+          "select kind, subject, html from email_outbox where ref_id = $1 and kind like 'expiry_%' order by created_at",
+          [entId],
+        )
+      ).rows;
+    expect(await svc.run()).toBe(1);
+    expect(await svc.run()).toBe(0); // tidak dobel
+    let rows = await kinds();
+    expect(rows.map((r) => r.kind)).toEqual(['expiry_5']);
+    expect(rows[0]!.subject).toBe('Paket Semua buku 30 hari berakhir 5 hari lagi');
+    // H-3 dan H-1.
+    await pool.query(
+      "update entitlements set ends_at = now() + interval '2 days 6 hours' where id = $1",
+      [entId],
+    );
+    expect(await svc.run()).toBe(1);
+    await pool.query(
+      "update entitlements set ends_at = now() + interval '10 hours' where id = $1",
+      [entId],
+    );
+    expect(await svc.run()).toBe(1);
+    rows = await kinds();
+    expect(rows.map((r) => r.kind)).toEqual(['expiry_5', 'expiry_3', 'expiry_1']);
+    expect(rows[2]!.subject).toContain('berakhir besok');
+    // H-4 bukan hari pengingat.
+    await pool.query(
+      "update entitlements set ends_at = now() + interval '3 days 12 hours' where id = $1",
+      [entId],
+    );
+    expect(await svc.run()).toBe(0);
+    // Sudah diperpanjang (paket lain lebih lama) → tidak diingatkan.
+    await pool.query('delete from email_outbox where ref_id = $1', [entId]);
+    await pool.query(
+      "update entitlements set ends_at = now() + interval '4 days 12 hours' where id = $1",
+      [entId],
+    );
+    await pool.query(
+      `insert into entitlements (parent_id, name, scope, books, starts_at, ends_at)
+       values ($1, 'Semua buku 90 hari', 'all', '[]', now(), now() + interval '90 days')`,
+      [parentId],
+    );
+    expect(await svc.run()).toBe(0);
+    await pool.query('delete from entitlements where parent_id = $1', [parentId]);
+  });
+
   it('API key suara dari admin (D-043): terenkripsi, tidak pernah dikirim balik, kosong → suara browser', async () => {
     const { http, auth, adminToken, pool } = ctx;
     const key = 'AIzaSyDUMMYKEY_untuk_test_1234567890abcd';

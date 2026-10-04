@@ -1,0 +1,50 @@
+{
+  "id": "math.sd3.v1.pecahan-senilai-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 1,
+  "title": "Pecahan senilai dan perbandingan — Level 1 — Pecahan senilai dengan gambar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 6],
+      "n": [1, 5],
+      "k": [2, 4]
+    },
+    "constraint": "n < d",
+    "prompt": "{n}/{d} = … /{=d*k}",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "bar",
+        "hideNumber": true
+      }
+    ],
+    "answer": "n * k",
+    "distractors": [
+      {
+        "expr": "n + k",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "n",
+        "tag": "tidak-dikali"
+      },
+      "n * k + 1"
+    ],
+    "explain": "Penyebut dikali {k}, pembilang juga dikali {k}: {answer}."
+  }
+}

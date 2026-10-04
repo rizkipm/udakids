@@ -1,0 +1,74 @@
+{
+  "id": "math.sd3.z9.penalaran-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 9,
+  "title": "Data dan diagram — Level 9 — Penalaran data",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 60],
+            "b": [10, 60],
+            "c": [10, 60],
+            "e": [10, 60],
+            "f": [10, 60]
+          },
+          "constraint": "(a + b + c + e + f) % 5 == 0",
+          "prompt": "Rata-rata berarti total dibagi banyak data. Berapa rata-rata buku dipinjam per hari?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "(a + b + c + e + f) / 5",
+          "mode": "input",
+          "explain": "Total {=a+b+c+e+f} : 5 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "prompt": "Berapa siswa yang tidak suka bola?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "b + c + e",
+          "mode": "input",
+          "explain": "{b} + {c} + {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

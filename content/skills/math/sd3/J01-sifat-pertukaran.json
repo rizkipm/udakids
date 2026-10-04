@@ -1,0 +1,51 @@
+{
+  "id": "math.sd3.j1.sifat-pertukaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 1,
+  "title": "Sifat penjumlahan — Level 1 — Sifat pertukaran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} + {b} = {b} + …",
+          "answer": "a",
+          "distractors": ["b", "a + b", "a + 1"],
+          "explain": "Urutan boleh ditukar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999]
+          },
+          "constraint": "a != b",
+          "prompt": "… + {a} = {a} + {b}",
+          "answer": "b",
+          "distractors": ["a", "a + b", "b + 1"],
+          "explain": "Pertukaran: {answer}."
+        }
+      }
+    ]
+  }
+}

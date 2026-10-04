@@ -1,0 +1,100 @@
+{
+  "id": "math.sd3.j7.genap-dan-ganjil-pada-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 7,
+  "title": "Sifat penjumlahan — Level 7 — Genap dan ganjil pada penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [10, 400],
+            "y": [10, 400]
+          },
+          "derived": {
+            "a": "2 * x",
+            "b": "2 * y"
+          },
+          "prompt": "Genap + genap hasilnya … Contoh: {a} + {b}",
+          "answer": "(a + b) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "{a} + {b} = {=a+b}, genap."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [10, 400],
+            "y": [10, 400]
+          },
+          "derived": {
+            "a": "2 * x + 1",
+            "b": "2 * y + 1"
+          },
+          "prompt": "Ganjil + ganjil hasilnya … Contoh: {a} + {b}",
+          "answer": "(a + b) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "{a} + {b} = {=a+b}, genap."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [10, 400],
+            "y": [10, 400]
+          },
+          "derived": {
+            "a": "2 * x",
+            "b": "2 * y + 1"
+          },
+          "prompt": "Genap + ganjil hasilnya … Contoh: {a} + {b}",
+          "answer": "(a + b) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "{a} + {b} = {=a+b}, ganjil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "prompt": "Tanpa menghitung, {a} + {b} + {c} genap atau ganjil?",
+          "answer": "(a + b + c) % 2",
+          "labels": {
+            "0": "Genap",
+            "1": "Ganjil"
+          },
+          "explain": "Hitung banyak bilangan ganjil: {=(a%2)+(b%2)+(c%2)}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

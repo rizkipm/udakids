@@ -1,0 +1,62 @@
+{
+  "id": "math.sd3.i3.tambah-dan-kurang-dalam-satu-kalimat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 3,
+  "title": "Tambah dan kurang campuran — Level 3 — Tambah dan kurang dalam satu kalimat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 600],
+            "b": [100, 300],
+            "c": [50, 399]
+          },
+          "constraint": "a + b > c",
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "distractors": ["a + b + c", "a - b - c + 2 * b", "a + b - c + 10"],
+          "explain": "Kerjakan dari kiri: {=a+b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [500, 999],
+            "b": [100, 400],
+            "c": [50, 300]
+          },
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - b - c",
+              "tag": "semua-kurang"
+            },
+            {
+              "expr": "a - (b + c)",
+              "tag": "salah-urutan"
+            },
+            "a - b + c + 10"
+          ],
+          "explain": "Kerjakan dari kiri: {=a-b} + {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "math.sd3.bb8.bangun-gabungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 8,
+  "title": "Keliling dan luas — Level 8 — Bangun gabungan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 10],
+            "b": [2, 6],
+            "c": [2, 6],
+            "e": [2, 5]
+          },
+          "prompt": "Bangun berbentuk huruf L terdiri atas persegi panjang {a} cm × {b} cm dan {c} cm × {e} cm. Berapa cm² luasnya?",
+          "answer": "a * b + c * e",
+          "unit": "cm²",
+          "distractors": ["a * b", "(a + c) * (b + e)", "a * b + c + e"],
+          "explain": "{=a*b} + {=c*e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [8, 15],
+            "h": [6, 10],
+            "s": [2, 4]
+          },
+          "prompt": "Sebuah persegi panjang {w} cm × {h} cm dipotong persegi {s} cm × {s} cm di pojoknya. Berapa cm² luas sisanya?",
+          "answer": "w * h - s * s",
+          "unit": "cm²",
+          "distractors": ["w * h", "w * h - 4 * s", "w * h + s * s"],
+          "explain": "{=w*h} − {=s*s} = {answer}."
+        }
+      }
+    ]
+  }
+}

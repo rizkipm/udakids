@@ -1,0 +1,94 @@
+{
+  "id": "math.sd3.d6.soal-cerita-estimasi-jumlah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 6,
+  "title": "Estimasi jumlah dan selisih — Level 6 — Soal cerita estimasi jumlah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1210, 4890],
+            "b": [1210, 4890]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50",
+          "prompt": "Hari Sabtu ada {a} pengunjung kebun binatang, hari Minggu {b} pengunjung. Kira-kira berapa pengunjung semuanya? (bulatkan ke ratusan)",
+          "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "{=round(a/100)*100} + {=round(b/100)*100} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [35100, 89900],
+            "b": [25100, 79900]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 1000 != 0",
+          "prompt": "{nama} membeli tas Rp{a} dan sepatu Rp{b}. Kira-kira berapa rupiah harganya? (bulatkan ke ribuan)",
+          "answer": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 10000) * 10000 + round(b / 10000) * 10000",
+              "tag": "ke-puluh-ribuan"
+            }
+          ],
+          "explain": "{=round(a/1000)*1000} + {=round(b/1000)*1000} = {answer}."
+        }
+      }
+    ]
+  }
+}

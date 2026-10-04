@@ -1,0 +1,100 @@
+{
+  "id": "math.sd3.y3.jam-menit-dan-detik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 3,
+  "title": "Waktu dan kalender — Level 3 — Jam, menit, dan detik",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "{a} jam = … menit",
+          "answer": "a * 60",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            "a + 60"
+          ],
+          "explain": "1 jam = 60 menit: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [5, 55]
+          },
+          "prompt": "{a} jam {b} menit = … menit",
+          "answer": "a * 60 + b",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 60"
+          ],
+          "explain": "{=a*60} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10]
+          },
+          "prompt": "{a} menit = … detik",
+          "answer": "a * 60",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            "a * 10",
+            "a + 60"
+          ],
+          "explain": "1 menit = 60 detik: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [70, 300]
+          },
+          "constraint": "t % 60 != 0",
+          "prompt": "{t} menit = … jam … menit. Berapa jamnya?",
+          "answer": "floor(t / 60)",
+          "distractors": ["floor(t / 100)", "t % 60", "floor(t / 60) + 1"],
+          "explain": "{t} = {=floor(t/60)} × 60 + {=t%60}."
+        }
+      }
+    ]
+  }
+}

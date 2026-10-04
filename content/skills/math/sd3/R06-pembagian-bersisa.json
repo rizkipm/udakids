@@ -1,0 +1,109 @@
+{
+  "id": "math.sd3.r6.pembagian-bersisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 6,
+  "title": "Perkalian dan pembagian bersusun — Level 6 — Pembagian bersisa",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [2, 12],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m",
+          "prompt": "{t} : {m} = {q} sisa …",
+          "answer": "t - m * q",
+          "distractors": [
+            {
+              "expr": "m - r",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q",
+              "tag": "hasil-bagi"
+            }
+          ],
+          "explain": "{q} × {m} = {=q*m}, {t} − {=q*m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [2, 12],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m",
+          "prompt": "{t} : {m} = … sisa {r}",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r",
+              "tag": "sisa"
+            }
+          ],
+          "explain": "{q} × {m} + {r} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 80]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} permen dibagi rata kepada {m} anak. Berapa permen sisanya?",
+          "answer": "t % m",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            },
+            {
+              "expr": "m - t % m",
+              "tag": "sisa-terbalik"
+            },
+            "t % m + 1"
+          ],
+          "explain": "{m} × {=floor(t/m)} = {=m*floor(t/m)}, sisa {answer}."
+        }
+      }
+    ]
+  }
+}

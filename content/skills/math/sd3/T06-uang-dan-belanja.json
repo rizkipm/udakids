@@ -1,0 +1,96 @@
+{
+  "id": "math.sd3.t6.uang-dan-belanja",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 6,
+  "title": "Soal cerita perkalian dan pembagian — Level 6 — Uang dan belanja",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [3000, 3500, 4000, 4500, 5000, 6000]
+            },
+            "n": [2, 9]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Harga 1 buku tulis Rp{h}. {nama} membeli {n} buku. Berapa rupiah yang dibayar?",
+          "answer": "h * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + n",
+              "tag": "menjumlah"
+            },
+            "h * (n - 1)",
+            "h * n + 1000"
+          ],
+          "explain": "{n} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 8],
+            "k": {
+              "values": [2000, 2500, 5000, 10000]
+            }
+          },
+          "derived": {
+            "t": "n * k"
+          },
+          "prompt": "Rp{t} dibagi rata untuk {n} anak. Berapa rupiah setiap anak?",
+          "answer": "t / n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "t - n",
+              "tag": "mengurangi"
+            },
+            "k + 1000",
+            "k * 2"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "id": "math.sd3.p10.tantangan-memahami-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "P",
+  "order": 10,
+  "title": "Memahami pembagian — Level 10 — Tantangan memahami pembagian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-S (division concepts)",
+    "sg": "P3 Division: sharing and grouping",
+    "cambridge": "Stage 3 Calculation: division as grouping and sharing (3Nc.08)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "{t} − {k} − {k} − … sampai 0. Berapa kali {k} dikurangkan?",
+          "answer": "t / k",
+          "distractors": ["t / k + 1", "t / k - 1", "k"],
+          "explain": "{t} : {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [3, 8]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "Dari {t} kelereng, setiap kali diambil {k}. Berapa kali mengambil sampai habis?",
+          "answer": "t / k",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [2, 10]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} × {b} = {=a*b}, maka {=a*b} : {b} = …",
+          "answer": "a",
+          "distractors": ["b", "a * b", "a + 1"],
+          "explain": "Pembagian kebalikan perkalian: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [2, 10]
+          },
+          "constraint": "a != b",
+          "prompt": "{=a*b} : {a} = {b} karena {a} × … = {=a*b}",
+          "answer": "b",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 999]
+          },
+          "prompt": "{a} : 1 = …",
+          "answer": "a",
+          "distractors": ["1", "0", "a - 1"],
+          "explain": "Dibagi 1 tetap: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 999]
+          },
+          "prompt": "{a} : {a} = …",
+          "answer": "1",
+          "explain": "Bilangan dibagi dirinya sendiri = 1.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "{t} roti dimasukkan ke kotak, setiap kotak {k} roti. Kalimat pembagiannya {t} : {k} = …",
+          "answer": "t / k",
+          "distractors": [
+            {
+              "expr": "t - k",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "t * k",
+              "tag": "mengalikan"
+            },
+            "t / k + 1"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [2, 6]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "{t} siswa duduk di {g} bangku panjang sama banyak. Berapa siswa setiap bangku?",
+          "answer": "t / g",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 50]
+          },
+          "derived": {
+            "t": "2 * k"
+          },
+          "prompt": "Setengah dari {t} adalah …",
+          "answer": "t / 2",
+          "distractors": [
+            {
+              "expr": "t * 2",
+              "tag": "dobel"
+            },
+            {
+              "expr": "t - 2",
+              "tag": "mengurangi"
+            },
+            "t / 2 + 1"
+          ],
+          "explain": "{t} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 30]
+          },
+          "derived": {
+            "t": "3 * k"
+          },
+          "prompt": "Sepertiga dari {t} adalah …",
+          "answer": "t / 3",
+          "explain": "{t} : 3 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 6],
+            "k": [5, 12],
+            "e": [1, 4]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "{t} kelereng dibagi rata kepada {g} anak. Lalu setiap anak memberikan {e} kelereng ke adiknya. Berapa kelereng setiap anak sekarang?",
+          "answer": "t / g - e",
+          "mode": "input",
+          "explain": "{t} : {g} = {=t/g}, lalu − {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 12]
+          },
+          "prompt": "Bilangan berapa jika dibagi {a} hasilnya {b}?",
+          "answer": "a * b",
+          "mode": "input",
+          "explain": "{a} × {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

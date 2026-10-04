@@ -1,0 +1,89 @@
+{
+  "id": "math.sd3.x8.membandingkan-ukuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 8,
+  "title": "Panjang, massa, dan volume — Level 8 — Membandingkan ukuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "k": {
+              "values": [-50, -10, 0, 10, 50]
+            }
+          },
+          "derived": {
+            "b": "a * 100 + k"
+          },
+          "prompt": "{a} m … {b} cm",
+          "answer": "(a * 100 > b) * 1 + (a * 100 < b) * 2 + (a * 100 == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{a} m = {=a*100} cm. Bandingkan dengan {b} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "k": {
+              "values": [-500, -100, 0, 100, 500]
+            }
+          },
+          "derived": {
+            "b": "a * 1000 + k"
+          },
+          "prompt": "{a} kg … {b} g",
+          "answer": "(a * 1000 > b) * 1 + (a * 1000 < b) * 2 + (a * 1000 == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{a} kg = {=a*1000} g."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "k": {
+              "values": [-250, -50, 0, 50, 250]
+            }
+          },
+          "derived": {
+            "b": "a * 1000 + k"
+          },
+          "prompt": "{a} L … {b} mL",
+          "answer": "(a * 1000 > b) * 1 + (a * 1000 < b) * 2 + (a * 1000 == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{a} L = {=a*1000} mL."
+        }
+      }
+    ]
+  }
+}

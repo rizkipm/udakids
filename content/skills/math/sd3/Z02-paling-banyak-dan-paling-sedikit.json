@@ -1,0 +1,74 @@
+{
+  "id": "math.sd3.z2.paling-banyak-dan-paling-sedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 2,
+  "title": "Data dan diagram — Level 2 — Paling banyak dan paling sedikit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Berapa siswa pada olahraga yang paling disukai?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "max(a, b, c, e)",
+          "distractors": ["min(a, b, c, e)", "a", "b", "c", "e"],
+          "explain": "Batang tertinggi: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 60],
+            "b": [10, 60],
+            "c": [10, 60],
+            "e": [10, 60],
+            "f": [10, 60]
+          },
+          "constraint": "a != b && c != e && f != a",
+          "prompt": "Berapa buku pada hari paling sedikit peminjam?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "min(a, b, c, e, f)",
+          "distractors": ["max(a, b, c, e, f)", "a", "c", "f"],
+          "explain": "Batang terpendek: {answer}."
+        }
+      }
+    ]
+  }
+}

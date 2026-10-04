@@ -1,0 +1,93 @@
+{
+  "id": "math.sd3.v9.penalaran-pecahan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 9,
+  "title": "Pecahan senilai dan perbandingan — Level 9 — Penalaran pecahan senilai",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 9],
+            "n": [1, 4],
+            "k": [2, 6]
+          },
+          "derived": {
+            "m": "n * k"
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{n}/{d} = {m}/… ",
+          "answer": "d * m / n",
+          "mode": "input",
+          "explain": "Pembilang dikali {=m/n}, penyebut juga: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [6, 12],
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a + b < d",
+          "prompt": "Ibu memotong kue menjadi {d} bagian. {nama} makan {a} bagian dan adiknya {b} bagian. Berapa bagian (pembilang per {d}) yang tersisa?",
+          "answer": "d - a - b",
+          "mode": "input",
+          "explain": "{d} − {a} − {b} = {answer}, jadi sisa {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12]
+          },
+          "prompt": "Berapa pecahan berpenyebut {d} yang lebih besar dari 1/2 tetapi kurang dari 1?",
+          "answer": "d - 1 - floor(d / 2)",
+          "mode": "input",
+          "explain": "Pembilang dari {=floor(d/2)+1} sampai {=d-1}: ada {answer}."
+        }
+      }
+    ]
+  }
+}

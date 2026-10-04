@@ -1,0 +1,128 @@
+{
+  "id": "math.sd3.w8.belanja-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 8,
+  "title": "Uang Rupiah — Level 8 — Belanja dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 5],
+            "h": {
+              "values": [3000, 4500, 6000, 7500]
+            },
+            "b": {
+              "values": [50000, 100000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "b > n * h",
+          "prompt": "{nama} membeli {n} buku Rp{h} per buku dan membayar Rp{b}. Berapa kembaliannya?",
+          "answer": "b - n * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "n * h",
+              "tag": "total-saja"
+            },
+            "b - h",
+            "b - n * h - 1000"
+          ],
+          "explain": "{n} × {h} = {=n*h}; {b} − {=n*h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [10000, 30000],
+              "step": 1000
+            },
+            "k": {
+              "values": [2000, 2500, 5000]
+            },
+            "n": [2, 6]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Tabungan {nama} Rp{a}. Ia menambah Rp{k} setiap minggu selama {n} minggu. Berapa rupiah tabungannya sekarang?",
+          "answer": "a + k * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + k",
+              "tag": "satu-minggu"
+            },
+            {
+              "expr": "k * n",
+              "tag": "tanpa-awal"
+            },
+            "a + k * (n - 1)"
+          ],
+          "explain": "{a} + {n} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

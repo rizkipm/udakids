@@ -1,6 +1,6 @@
 {
   "id": "sains.sd3.w2.urutan-planet",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd3",
   "category": "W",
@@ -12,95 +12,735 @@
     "fase-merdeka": "B",
     "kognitif": "knowing"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Merkurius",
-        "attrs": {
-          "urutan": "planet ke-1 dari Matahari",
-          "ciri": "planet terkecil dan paling dekat dengan Matahari",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "tidak punya bulan"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Merkurius",
+              "attrs": {
+                "urutan": "planet ke-1 dari Matahari",
+                "ciri": "planet terkecil dan paling dekat dengan Matahari",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "tidak punya bulan"
+              }
+            },
+            {
+              "name": "Venus",
+              "attrs": {
+                "urutan": "planet ke-2 dari Matahari",
+                "ciri": "planet terpanas, tertutup awan tebal",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "tidak punya bulan"
+              }
+            },
+            {
+              "name": "Bumi",
+              "attrs": {
+                "urutan": "planet ke-3 dari Matahari",
+                "ciri": "satu-satunya planet yang diketahui memiliki kehidupan",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Mars",
+              "attrs": {
+                "urutan": "planet ke-4 dari Matahari",
+                "ciri": "disebut planet merah karena debunya berkarat",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Yupiter",
+              "attrs": {
+                "urutan": "planet ke-5 dari Matahari",
+                "ciri": "planet terbesar, punya Bintik Merah Raksasa",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Saturnus",
+              "attrs": {
+                "urutan": "planet ke-6 dari Matahari",
+                "ciri": "punya cincin paling besar dan terang",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Uranus",
+              "attrs": {
+                "urutan": "planet ke-7 dari Matahari",
+                "ciri": "berputar dalam posisi sangat miring, hampir rebah",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Neptunus",
+              "attrs": {
+                "urutan": "planet ke-8 dari Matahari",
+                "ciri": "planet terjauh dari Matahari, anginnya paling kencang",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            }
+          ],
+          "attr": "urutan",
+          "ask": "value",
+          "prompt": "{name} adalah …",
+          "explain": "{name} adalah {value}.",
+          "choices": 4,
+          "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+        },
+        "weight": 1
       },
       {
-        "name": "Venus",
-        "attrs": {
-          "urutan": "planet ke-2 dari Matahari",
-          "ciri": "planet terpanas, tertutup awan tebal",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "tidak punya bulan"
-        }
-      },
-      {
-        "name": "Bumi",
-        "attrs": {
-          "urutan": "planet ke-3 dari Matahari",
-          "ciri": "satu-satunya planet yang diketahui memiliki kehidupan",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Mars",
-        "attrs": {
-          "urutan": "planet ke-4 dari Matahari",
-          "ciri": "disebut planet merah karena debunya berkarat",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Yupiter",
-        "attrs": {
-          "urutan": "planet ke-5 dari Matahari",
-          "ciri": "planet terbesar, punya Bintik Merah Raksasa",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Saturnus",
-        "attrs": {
-          "urutan": "planet ke-6 dari Matahari",
-          "ciri": "punya cincin paling besar dan terang",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Uranus",
-        "attrs": {
-          "urutan": "planet ke-7 dari Matahari",
-          "ciri": "berputar dalam posisi sangat miring, hampir rebah",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Neptunus",
-        "attrs": {
-          "urutan": "planet ke-8 dari Matahari",
-          "ciri": "planet terjauh dari Matahari, anginnya paling kencang",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Merkurius berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Merkurius ke-1. Dihitung dari yang terjauh, Merkurius ke-8.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Merkurius?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Merkurius planet paling dekat, jadi tidak ada (0) planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Venus berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Venus ke-2. Dihitung dari yang terjauh, Venus ke-7.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Venus?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Venus adalah planet ke-2, jadi ada 1 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Bumi berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Bumi ke-3. Dihitung dari yang terjauh, Bumi ke-6.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Bumi?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bumi adalah planet ke-3, jadi ada 2 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Mars berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Mars ke-4. Dihitung dari yang terjauh, Mars ke-5.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Mars?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mars adalah planet ke-4, jadi ada 3 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Yupiter berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Yupiter ke-5. Dihitung dari yang terjauh, Yupiter ke-4.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Yupiter?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Yupiter adalah planet ke-5, jadi ada 4 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Saturnus berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Saturnus ke-6. Dihitung dari yang terjauh, Saturnus ke-3.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Saturnus?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saturnus adalah planet ke-6, jadi ada 5 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Uranus berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Uranus ke-7. Dihitung dari yang terjauh, Uranus ke-2.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Uranus?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Uranus adalah planet ke-7, jadi ada 6 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, Neptunus berada di urutan ke berapa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari Matahari, Neptunus ke-8. Dihitung dari yang terjauh, Neptunus ke-1.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Ada berapa planet yang lebih dekat ke Matahari daripada Neptunus?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Neptunus adalah planet ke-8, jadi ada 7 planet yang lebih dekat ke Matahari.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            }
+          ]
+        },
+        "weight": 2
       }
-    ],
-    "attr": "urutan",
-    "ask": "value",
-    "prompt": "{name} adalah …",
-    "explain": "{name} adalah {value}.",
-    "choices": 4,
-    "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+    ]
   }
 }

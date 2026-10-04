@@ -1,0 +1,50 @@
+{
+  "id": "math.sd3.cc7.kelipatan-dan-sisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 7,
+  "title": "Penalaran gaya OSN — Level 7 — Kelipatan dan sisa",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [30, 100],
+            "k": [3, 9]
+          },
+          "prompt": "Berapa bilangan antara 1 dan {n} yang habis dibagi {k}?",
+          "answer": "floor(n / k)",
+          "distractors": ["floor(n / k) + 1", "floor(n / k) - 1", "k"],
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}: ada {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 7]
+          },
+          "constraint": "a < b",
+          "prompt": "Bilangan terkecil yang dibagi {a} bersisa 1 dan dibagi {b} juga bersisa 1 (lebih dari 1) adalah …",
+          "answer": "lcm(a, b) + 1",
+          "distractors": ["a * b", "lcm(a, b)", "a + b + 1"],
+          "explain": "KPK {a} dan {b} = {=lcm(a,b)}, tambah 1: {answer}."
+        }
+      }
+    ]
+  }
+}

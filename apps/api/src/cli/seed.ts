@@ -1,7 +1,7 @@
 /**
  * pnpm db:seed (dev) / node dist/cli/seed.js (server) — isi database dari content/ (katalog, skill Pustaka, level) dan buat admin pertama.
  * Aman dijalankan berulang: skill/level yang sudah ada TIDAK ditimpa (bisa sudah diedit admin),
- * kecuali dengan --force. Admin dibuat dari ADMIN_EMAIL / ADMIN_PASSWORD bila belum ada admin.
+ * kecuali dengan --force. Skill diperbarui bila `version` di content/ lebih tinggi (D-055). Admin dibuat dari ADMIN_EMAIL / ADMIN_PASSWORD bila belum ada admin.
  */
 import '../common/env.js';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -13,7 +13,7 @@ import {
   levelSchema,
   skillTemplateSchema,
 } from '@little-coder/engine';
-import { and, eq, isNull, notInArray } from 'drizzle-orm';
+import { and, eq, isNull, notInArray, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { contentDir, DEFAULT_DATABASE_URL } from '../common/config.js';
@@ -83,10 +83,16 @@ export async function seed(
       updatedAt: new Date(),
     };
     const q = db.insert(schema.skills).values(row);
+    // Skill yang sudah ada hanya diperbarui bila `version` di content/ lebih tinggi (D-055) — suntingan
+    // admin dengan versi sama/lebih tinggi tidak ditimpa. --force menimpa semuanya.
     const res = await (
       opts.force
         ? q.onConflictDoUpdate({ target: schema.skills.id, set: row })
-        : q.onConflictDoNothing()
+        : q.onConflictDoUpdate({
+            target: schema.skills.id,
+            set: row,
+            setWhere: sql`${schema.skills.version} < excluded.version`,
+          })
     ).returning({ id: schema.skills.id });
     added += res.length;
   }

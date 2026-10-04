@@ -1,0 +1,66 @@
+{
+  "id": "math.sd3.c2.ke-ratusan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 2,
+  "title": "Pembulatan — Level 2 — Ke ratusan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [101, 9999]
+          },
+          "constraint": "n % 100 != 0",
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "floor(n / 100) * 100 + 100 * (n % 100 < 50)",
+              "tag": "arah-salah"
+            },
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "Angka puluhan {=floor(n/10)%10}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 9999]
+          },
+          "derived": {
+            "lo": "floor(n / 100) * 100"
+          },
+          "constraint": "n % 100 != 50 && n % 100 != 0",
+          "prompt": "{n} lebih dekat ke {lo} atau {=lo+100}?",
+          "answer": "round(n / 100) * 100",
+          "distractors": ["lo + 100 * (n % 100 < 50)"],
+          "choices": 2,
+          "explain": "Puluhannya {=floor(n/10)%10}, jadi lebih dekat ke {answer}."
+        }
+      }
+    ]
+  }
+}

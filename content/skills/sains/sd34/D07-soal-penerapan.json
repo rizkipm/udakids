@@ -1,6 +1,6 @@
 {
   "id": "sains.sd34.d7.soal-penerapan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd34",
   "category": "D",
@@ -20,14 +20,30 @@
         "params": {
           "items": [
             {
-              "prompt": "Pada perubahan wujud mana benda MELEPAS panas?",
+              "prompt": "Air yang direbus lama-lama berkurang karena …",
               "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menguap menjadi uap air"
+                  },
+                  "say": "Menguap menjadi uap air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Membeku"
+                  },
+                  "say": "Membeku",
+                  "tag": "wujud-tertukar"
+                },
                 {
                   "visual": {
                     "kind": "text",
                     "text": "Mengembun"
                   },
-                  "say": "Mengembun"
+                  "say": "Mengembun",
+                  "tag": "terbalik"
                 },
                 {
                   "visual": {
@@ -35,27 +51,11 @@
                     "text": "Mencair"
                   },
                   "say": "Mencair",
-                  "tag": "terbalik"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Menguap"
-                  },
-                  "say": "Menguap",
-                  "tag": "terbalik"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Menyublim"
-                  },
-                  "say": "Menyublim",
-                  "tag": "terbalik"
+                  "tag": "wujud-tertukar"
                 }
               ],
               "answer": 0,
-              "reteach": "Mengembun dan membeku melepas panas. Mencair, menguap, dan menyublim menyerap panas.",
+              "reteach": "Menguap: cair menjadi gas. Air yang dipanaskan berubah menjadi uap dan pergi ke udara.",
               "source": "Perubahan wujud zat — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
             {
@@ -95,45 +95,6 @@
               ],
               "answer": 0,
               "reteach": "Penguapan lebih cepat jika suhu tinggi, ada angin, dan permukaan terbuka luas.",
-              "source": "Perubahan wujud zat — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-            },
-            {
-              "prompt": "Contoh peristiwa mengkristal (gas langsung menjadi padat) adalah …",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Terbentuknya salju/bunga es dari uap air"
-                  },
-                  "say": "Terbentuknya salju/bunga es dari uap air"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Es krim mencair"
-                  },
-                  "say": "Es krim mencair",
-                  "tag": "wujud-tertukar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Air mendidih"
-                  },
-                  "say": "Air mendidih",
-                  "tag": "wujud-tertukar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Mentega meleleh"
-                  },
-                  "say": "Mentega meleleh",
-                  "tag": "wujud-tertukar"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Mengkristal (deposisi) adalah kebalikan menyublim: gas langsung menjadi padat, misalnya uap air menjadi bunga es.",
               "source": "Perubahan wujud zat — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
             {
@@ -213,101 +174,267 @@
               "answer": 0,
               "reteach": "Mencair butuh panas. Termos menghambat perpindahan panas dari luar sehingga es menerima panas lebih lambat.",
               "source": "Perubahan wujud zat — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            },
+            {
+              "prompt": "Bu Sari ingin cokelat cair cepat mengeras di cetakan. Cara yang paling tepat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "memasukkan cetakan ke dalam kulkas"
+                  },
+                  "say": "memasukkan cetakan ke dalam kulkas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menjemurnya di bawah matahari"
+                  },
+                  "say": "menjemurnya di bawah matahari",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "memanaskannya di kompor"
+                  },
+                  "say": "memanaskannya di kompor",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menutupnya dengan kain hangat"
+                  },
+                  "say": "menutupnya dengan kain hangat",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cokelat membeku jika panasnya dilepas. Kulkas yang dingin mempercepat pembekuan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Mengapa minuman dingin dalam botol yang dikeluarkan dari kulkas lama-lama basah di bagian luarnya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "uap air di udara mengembun di permukaan botol yang dingin"
+                  },
+                  "say": "uap air di udara mengembun di permukaan botol yang dingin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "minuman merembes keluar dari botol"
+                  },
+                  "say": "minuman merembes keluar dari botol",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "botol mencair"
+                  },
+                  "say": "botol mencair",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air dari kulkas menempel"
+                  },
+                  "say": "air dari kulkas menempel",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Uap air di udara mendingin saat menyentuh botol, lalu mengembun menjadi titik air.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Nelayan di pantai menjemur ikan asin di bawah matahari. Air dalam ikan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap sehingga ikan menjadi kering"
+                  },
+                  "say": "menguap sehingga ikan menjadi kering"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku sehingga ikan keras"
+                  },
+                  "say": "membeku sehingga ikan keras",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun di dalam ikan"
+                  },
+                  "say": "mengembun di dalam ikan",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyublim menjadi garam"
+                  },
+                  "say": "menyublim menjadi garam",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panas matahari membuat air dalam ikan menguap, sehingga ikan kering dan awet.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Agar es batu di kotak pendingin tidak cepat mencair, kotaknya sebaiknya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ditutup rapat dan diletakkan di tempat teduh"
+                  },
+                  "say": "ditutup rapat dan diletakkan di tempat teduh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibuka setiap menit"
+                  },
+                  "say": "dibuka setiap menit",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diletakkan di bawah matahari"
+                  },
+                  "say": "diletakkan di bawah matahari",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diisi air panas"
+                  },
+                  "say": "diisi air panas",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menutup rapat dan menaruh di tempat teduh mengurangi panas yang masuk.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Mengapa kapur barus diletakkan di lemari pakaian dan bukan di tempat terbuka?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar uapnya tertahan di lemari untuk mengusir serangga"
+                  },
+                  "say": "agar uapnya tertahan di lemari untuk mengusir serangga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar kapur barus mencair"
+                  },
+                  "say": "agar kapur barus mencair",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar kapur barus membeku"
+                  },
+                  "say": "agar kapur barus membeku",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar lemari menjadi dingin"
+                  },
+                  "say": "agar lemari menjadi dingin",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kapur barus menyublim menjadi gas yang mengusir ngengat. Di lemari tertutup gasnya tertahan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             }
           ]
-        },
-        "weight": 1
+        }
       },
       {
-        "family": "facts",
+        "family": "expr",
         "params": {
-          "table": [
+          "vars": {
+            "a": {
+              "range": [800, 1500],
+              "step": 100
+            },
+            "b": {
+              "range": [300, 700],
+              "step": 50
+            }
+          },
+          "words": {
+            "nama": ["Bu Rina", "Pak Budi", "Kak Sari"]
+          },
+          "prompt": "{nama} merebus {a} mL air. Setelah mendidih cukup lama, air di panci tinggal {b} mL. Berapa mL air yang menguap?",
+          "answer": "a - b",
+          "unit": "mL",
+          "distractors": [
             {
-              "name": "Es batu berubah menjadi air",
-              "attrs": {
-                "perubahan": "mencair",
-                "panas": "menyerap panas"
-              }
+              "expr": "a + b",
+              "tag": "menjumlah"
             },
             {
-              "name": "Mentega dipanaskan di wajan",
-              "attrs": {
-                "perubahan": "mencair",
-                "panas": "menyerap panas"
-              }
+              "expr": "b",
+              "tag": "sisa-bukan-uap"
             },
             {
-              "name": "Cokelat meleleh di tangan",
-              "attrs": {
-                "perubahan": "mencair",
-                "panas": "menyerap panas"
-              }
-            },
-            {
-              "name": "Air di freezer menjadi es",
-              "attrs": {
-                "perubahan": "membeku",
-                "panas": "melepas panas"
-              }
-            },
-            {
-              "name": "Lilin cair mengeras kembali",
-              "attrs": {
-                "perubahan": "membeku",
-                "panas": "melepas panas"
-              }
-            },
-            {
-              "name": "Air yang direbus lama-lama berkurang",
-              "attrs": {
-                "perubahan": "menguap",
-                "panas": "menyerap panas"
-              }
-            },
-            {
-              "name": "Pakaian basah menjadi kering",
-              "attrs": {
-                "perubahan": "menguap",
-                "panas": "menyerap panas"
-              }
-            },
-            {
-              "name": "Titik embun di daun pada pagi hari",
-              "attrs": {
-                "perubahan": "mengembun",
-                "panas": "melepas panas"
-              }
-            },
-            {
-              "name": "Butiran air di luar gelas berisi es",
-              "attrs": {
-                "perubahan": "mengembun",
-                "panas": "melepas panas"
-              }
-            },
-            {
-              "name": "Kapur barus di lemari lama-lama habis",
-              "attrs": {
-                "perubahan": "menyublim",
-                "panas": "menyerap panas"
-              }
-            },
-            {
-              "name": "Bunga es terbentuk di dinding freezer",
-              "attrs": {
-                "perubahan": "mengkristal",
-                "panas": "melepas panas"
-              }
+              "expr": "a - b + 100",
+              "tag": "salah-hitung"
             }
           ],
-          "attr": "panas",
-          "ask": "true-false",
-          "prompt": "Benar atau salah: pada peristiwa \"{name}\", zat {value}.",
-          "explain": "Pada peristiwa \"{name}\", zat {value}.",
-          "choices": 2,
-          "source": "Perubahan wujud zat — CP IPAS Fase B: menyimpulkan proses perubahan wujud zat (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV Kemendikbudristek"
-        },
-        "weight": 1
+          "explain": "Air yang menguap = {a} − {b} = {answer} mL."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [24, 32],
+            "t": [3, 6]
+          },
+          "prompt": "Air dalam gelas bersuhu {s}°C. Setelah es dimasukkan, suhunya turun {t}°C setiap 5 menit. Berapa suhu air setelah 10 menit?",
+          "answer": "s - 2 * t",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "s - t",
+              "tag": "satu-kali"
+            },
+            {
+              "expr": "s + 2 * t",
+              "tag": "naik"
+            },
+            {
+              "expr": "s - 10 * t",
+              "tag": "kali-10"
+            }
+          ],
+          "explain": "10 menit = 2 × 5 menit. Suhu turun 2 × {t} = {=2*t}°C. Jadi {s} − {=2*t} = {answer}."
+        }
       }
     ]
   }

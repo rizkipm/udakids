@@ -1,0 +1,67 @@
+{
+  "id": "math.sd3.bb9.penalaran-keliling-dan-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 9,
+  "title": "Keliling dan luas — Level 9 — Penalaran keliling dan luas",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 8],
+            "h": [2, 6],
+            "k": {
+              "values": [10000, 15000, 20000]
+            }
+          },
+          "prompt": "Lantai {w} m × {h} m ditutup ubin 1 m × 1 m. Harga satu ubin Rp{k}. Berapa rupiah biaya ubinnya?",
+          "answer": "w * h * k",
+          "mode": "input",
+          "explain": "{w} × {h} = {=w*h} ubin; × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Dua persegi bersisi {s} cm diletakkan berdampingan menjadi persegi panjang. Berapa cm kelilingnya?",
+          "answer": "6 * s",
+          "mode": "input",
+          "explain": "Persegi panjang {=2*s} × {s}: 2 × ({=2*s} + {s}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 10]
+          },
+          "derived": {
+            "p": "4 * s"
+          },
+          "prompt": "Persegi panjang dengan keliling {p} cm, panjang dan lebarnya bilangan bulat. Berapa cm² luas terbesar yang mungkin?",
+          "answer": "(p / 4) * (p / 4)",
+          "mode": "input",
+          "explain": "Luas terbesar saat bentuknya persegi bersisi {=p/4} cm: {answer}."
+        }
+      }
+    ]
+  }
+}

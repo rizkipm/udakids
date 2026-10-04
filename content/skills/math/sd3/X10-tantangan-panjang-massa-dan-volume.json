@@ -1,0 +1,267 @@
+{
+  "id": "math.sd3.x10.tantangan-panjang-massa-dan-volume",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 10,
+  "title": "Panjang, massa, dan volume — Level 10 — Tantangan panjang, massa, dan volume",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 40]
+          },
+          "prompt": "{a} L = … mL",
+          "answer": "a * 1000",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            "a + 1000"
+          ],
+          "explain": "1 L = 1.000 mL: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [10, 950]
+          },
+          "prompt": "{a} L {b} mL = … mL",
+          "answer": "a * 1000 + b",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [35, 250],
+            "b": [35, 250]
+          },
+          "prompt": "Pita merah {a} cm dan pita biru {b} cm disambung. Berapa cm panjangnya?",
+          "answer": "a + b",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 10",
+            "a + b - 10"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 900],
+            "b": [200, 700]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} berlari {a} m, lalu berjalan {b} m. Berapa meter lagi sampai 2 km?",
+          "answer": "2000 - a - b",
+          "unit": "m",
+          "explain": "2 km = 2.000 m. 2.000 − {a} − {b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [100, 900]
+          },
+          "prompt": "Ibu membeli {a} kg beras dan {b} g gula. Berapa gram belanjaan ibu?",
+          "answer": "a * 1000 + b",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "tanpa-ubah"
+            },
+            "a * 100 + b",
+            "a * 1000 - b"
+          ],
+          "explain": "{=a*1000} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 60],
+            "b": [5, 19]
+          },
+          "prompt": "Berat sekarung bawang {a} kg. Dijual {b} kg. Berapa kg sisanya?",
+          "answer": "a - b",
+          "unit": "kg",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [2, 7]
+          },
+          "prompt": "Ember berisi {a} L air. Dipakai {b} L. Berapa liter sisanya?",
+          "answer": "a - b",
+          "unit": "L",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6],
+            "k": {
+              "values": [100, 150, 200, 250]
+            }
+          },
+          "derived": {
+            "a": "n * k"
+          },
+          "prompt": "Botol berisi {a} mL jus. Dituang ke {n} gelas sama banyak. Berapa mL setiap gelas?",
+          "answer": "a / n",
+          "unit": "mL",
+          "explain": "{a} : {n} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "k": {
+              "values": [-50, -10, 0, 10, 50]
+            }
+          },
+          "derived": {
+            "b": "a * 100 + k"
+          },
+          "prompt": "{a} m … {b} cm",
+          "answer": "(a * 100 > b) * 1 + (a * 100 < b) * 2 + (a * 100 == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{a} m = {=a*100} cm. Bandingkan dengan {b} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "k": {
+              "values": [-500, -100, 0, 100, 500]
+            }
+          },
+          "derived": {
+            "b": "a * 1000 + k"
+          },
+          "prompt": "{a} kg … {b} g",
+          "answer": "(a * 1000 > b) * 1 + (a * 1000 < b) * 2 + (a * 1000 == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{a} kg = {=a*1000} g."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [2, 4, 5, 10]
+            },
+            "n": [4, 20]
+          },
+          "derived": {
+            "a": "k * n"
+          },
+          "prompt": "Sebuah jalan sepanjang {a} m akan ditanami pohon setiap {k} m, mulai dari ujung awal sampai ujung akhir. Berapa pohon?",
+          "answer": "a / k + 1",
+          "mode": "input",
+          "explain": "{a} : {k} = {=a/k} jarak, pohon = {=a/k} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [80, 200]
+          },
+          "prompt": "Berat 3 apel sama dengan berat 1 jeruk bali. Berat 1 apel {a} g. Berapa gram 2 jeruk bali?",
+          "answer": "6 * a",
+          "mode": "input",
+          "explain": "1 jeruk bali = {=3*a} g; 2 jeruk bali = {answer}."
+        }
+      }
+    ]
+  }
+}

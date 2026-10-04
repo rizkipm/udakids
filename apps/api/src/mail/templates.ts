@@ -1,3 +1,5 @@
+import { MOMO_LOGO_CID } from './logo.js';
+
 /**
  * Template email Udakids (D-044): hangat, profesional, ramah anak. Tata letak tabel + gaya inline agar
  * tampil baik di Gmail/Outlook/HP. Semua teks dari pengguna di-escape. Setiap email punya versi teks biasa.
@@ -55,6 +57,10 @@ const toneColor: Record<Tone, [string, string]> = {
 };
 
 /** Paragraf aman (teks di-escape; **tebal** diubah jadi <strong>). */
+/** Catatan kecil abu-abu (teks di-escape). */
+const note = (text: string) =>
+  `<p style="margin:0 0 14px;font-size:13px;line-height:1.6;color:${C.muted}">${esc(text)}</p>`;
+
 const p = (text: string) =>
   `<p style="margin:0 0 14px;font-size:16px;line-height:1.6;color:${C.ink}">${esc(text).replace(
     /\*\*(.+?)\*\*/g,
@@ -95,7 +101,8 @@ function layout(
   opts: { title: string; preheader: string; tone?: Tone; body: string; unsubscribe?: string },
 ): string {
   const [accent] = toneColor[opts.tone ?? 'grape'];
-  const momo = `${ctx.appUrl.replace(/\/$/, '')}/email/momo.png`;
+  // Logo ditempel di email (CID, lihat logo.ts) — tidak bergantung pada URL/hosting.
+  const momo = `cid:${MOMO_LOGO_CID}`;
   return `<!doctype html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light"><title>${esc(opts.title)}</title></head>
@@ -417,8 +424,8 @@ export function newContent(
         'Ajak si kecil mencoba satu level hari ini. Belajar sedikit-sedikit setiap hari lebih menyenangkan daripada banyak sekaligus.',
       ),
       button(`${base}/play`, 'Main sekarang'),
-      p(
-        `<span style="font-size:13px;color:${C.muted}">Sebagian level mungkin khusus akun Premium. Lihat paket di dasbor orang tua.</span>`,
+      note(
+        'Sebagian level mungkin khusus akun Premium. Satu paket berlaku untuk semua anak di akun Anda; lihat pilihannya di dasbor orang tua.',
       ),
     ].join('\n'),
   });
@@ -446,5 +453,42 @@ export function newsDirectorCopy(
     ].join('\n'),
   });
   const text = `Info materi baru (${d.total} level) masuk antrean untuk ${d.recipients} orang tua.\n${d.books.map((b) => `- ${b.title}: ${b.levels} level`).join('\n')}${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+// ------------------------------------------------------------------ pengingat masa paket (D-054)
+
+export function expiryReminder(
+  ctx: MailContext,
+  d: {
+    name: string;
+    packageName: string;
+    endsAt: Date;
+    daysLeft: number;
+    childName: string | null;
+  },
+): MailContent {
+  const url = `${ctx.appUrl.replace(/\/$/, '')}/orang-tua/paket`;
+  const when = d.daysLeft === 1 ? 'besok' : `${d.daysLeft} hari lagi`;
+  const subject = `Paket ${d.packageName} berakhir ${when}`;
+  const who = d.childName ? `untuk ${d.childName}` : 'untuk semua anak di akun Anda';
+  const html = layout(ctx, {
+    title: `Paket Premium berakhir ${when}`,
+    preheader: `${d.packageName} aktif sampai ${dateTime(d.endsAt)}.`,
+    tone: d.daysLeft === 1 ? 'coral' : 'sun',
+    body: [
+      p(`Halo ${d.name}, terima kasih sudah menemani si kecil belajar bersama Momo.`),
+      p(`Paket **${d.packageName}** ${who} akan berakhir ${when}.`),
+      bigBox('Aktif sampai', dateTime(d.endsAt), d.daysLeft === 1 ? 'coral' : 'sun'),
+      p(
+        'Setelah berakhir, level Premium terkunci lagi. Skor, riwayat, dan progres si kecil tetap tersimpan, dan langsung terbuka kembali begitu paket diperpanjang.',
+      ),
+      button(url, 'Perpanjang paket'),
+      note(
+        'Pembayaran lewat transfer bank atau e-wallet di dasbor orang tua. Abaikan email ini bila Anda sudah memperpanjang.',
+      ),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\nPaket ${d.packageName} ${who} berakhir ${when} (${dateTime(d.endsAt)}).\nSetelah berakhir, level Premium terkunci lagi, tetapi skor dan progres tetap tersimpan.\nPerpanjang: ${url}${footerText(ctx)}`;
   return { subject, html, text };
 }

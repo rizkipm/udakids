@@ -1,6 +1,6 @@
 {
   "id": "sains.sd4.x1.mengenali-fase-bulan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd4",
   "category": "X",
@@ -12,45 +12,175 @@
     "fase-merdeka": "C",
     "kognitif": "knowing"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Bulan baru",
-        "attrs": {
-          "bentuk": "tidak tampak (gelap)"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Bulan baru",
+              "attrs": {
+                "bentuk": "tidak tampak (gelap)"
+              }
+            },
+            {
+              "name": "Bulan sabit",
+              "attrs": {
+                "bentuk": "tampak seperti lengkungan tipis"
+              }
+            },
+            {
+              "name": "Bulan separuh (kuartal pertama)",
+              "attrs": {
+                "bentuk": "tampak setengah lingkaran"
+              }
+            },
+            {
+              "name": "Bulan cembung",
+              "attrs": {
+                "bentuk": "tampak lebih dari setengah lingkaran"
+              }
+            },
+            {
+              "name": "Bulan purnama",
+              "attrs": {
+                "bentuk": "tampak bulat penuh"
+              }
+            }
+          ],
+          "attr": "bentuk",
+          "ask": "value",
+          "prompt": "Seperti apa bentuk {name}?",
+          "explain": "{name}: {value}.",
+          "choices": 4,
+          "source": "NASA Space Place & NASA Science (rotasi, revolusi, fase Bulan, musim, bintang); NGSS 5-ESS1-1 & 5-ESS1-2; CP IPAS Fase C (tata surya, rotasi dan revolusi Bumi)"
+        },
+        "weight": 1
       },
       {
-        "name": "Bulan sabit",
-        "attrs": {
-          "bentuk": "tampak seperti lengkungan tipis"
-        }
-      },
-      {
-        "name": "Bulan separuh (kuartal pertama)",
-        "attrs": {
-          "bentuk": "tampak setengah lingkaran"
-        }
-      },
-      {
-        "name": "Bulan cembung",
-        "attrs": {
-          "bentuk": "tampak lebih dari setengah lingkaran"
-        }
-      },
-      {
-        "name": "Bulan purnama",
-        "attrs": {
-          "bentuk": "tampak bulat penuh"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Bulan sama sekali tidak tampak di langit malam",
+              "attrs": {
+                "f": "Bulan baru"
+              }
+            },
+            {
+              "name": "Sisi Bulan yang terkena cahaya membelakangi Bumi",
+              "attrs": {
+                "f": "Bulan baru"
+              }
+            },
+            {
+              "name": "Bulan berada di antara Bumi dan Matahari",
+              "attrs": {
+                "f": "Bulan baru"
+              }
+            },
+            {
+              "name": "Tampak seperti lengkungan tipis",
+              "attrs": {
+                "f": "Bulan sabit"
+              }
+            },
+            {
+              "name": "Hilal tipis terlihat sesaat setelah Matahari terbenam",
+              "attrs": {
+                "f": "Bulan sabit"
+              }
+            },
+            {
+              "name": "Bagian terangnya kurang dari seperempat",
+              "attrs": {
+                "f": "Bulan sabit"
+              }
+            },
+            {
+              "name": "Terlihat sekitar hari ke-2 sampai ke-4 bulan Hijriah",
+              "attrs": {
+                "f": "Bulan sabit"
+              }
+            },
+            {
+              "name": "Tampak setengah lingkaran",
+              "attrs": {
+                "f": "Bulan separuh (kuartal)"
+              }
+            },
+            {
+              "name": "Terlihat sekitar hari ke-7 bulan Hijriah",
+              "attrs": {
+                "f": "Bulan separuh (kuartal)"
+              }
+            },
+            {
+              "name": "Terlihat sekitar hari ke-22 bulan Hijriah",
+              "attrs": {
+                "f": "Bulan separuh (kuartal)"
+              }
+            },
+            {
+              "name": "Bumi, Bulan, dan Matahari membentuk sudut siku-siku",
+              "attrs": {
+                "f": "Bulan separuh (kuartal)"
+              }
+            },
+            {
+              "name": "Tampak lebih dari setengah tetapi belum bulat",
+              "attrs": {
+                "f": "Bulan cembung"
+              }
+            },
+            {
+              "name": "Terlihat sekitar hari ke-10 sampai ke-13 bulan Hijriah",
+              "attrs": {
+                "f": "Bulan cembung"
+              }
+            },
+            {
+              "name": "Terangnya hampir penuh, sedikit bagian masih gelap",
+              "attrs": {
+                "f": "Bulan cembung"
+              }
+            },
+            {
+              "name": "Tampak bulat penuh dan terang",
+              "attrs": {
+                "f": "Bulan purnama"
+              }
+            },
+            {
+              "name": "Terlihat sekitar tanggal 15 bulan Hijriah",
+              "attrs": {
+                "f": "Bulan purnama"
+              }
+            },
+            {
+              "name": "Bumi berada di antara Matahari dan Bulan",
+              "attrs": {
+                "f": "Bulan purnama"
+              }
+            },
+            {
+              "name": "Terbit saat Matahari terbenam dan tampak semalaman",
+              "attrs": {
+                "f": "Bulan purnama"
+              }
+            }
+          ],
+          "attr": "f",
+          "ask": "value",
+          "prompt": "Fase Bulan apa ini? \"{name}\"",
+          "explain": "\"{name}\": {value}.",
+          "choices": 4,
+          "source": "NASA Space Place & NASA Science (rotasi, revolusi, fase Bulan, musim, bintang); NGSS 5-ESS1-1 & 5-ESS1-2; CP IPAS Fase C (tata surya, rotasi dan revolusi Bumi)"
+        },
+        "weight": 1
       }
-    ],
-    "attr": "bentuk",
-    "ask": "value",
-    "prompt": "Seperti apa bentuk {name}?",
-    "explain": "{name}: {value}.",
-    "choices": 4,
-    "source": "NASA Space Place & NASA Science (rotasi, revolusi, fase Bulan, musim, bintang); NGSS 5-ESS1-1 & 5-ESS1-2; CP IPAS Fase C (tata surya, rotasi dan revolusi Bumi)"
+    ]
   }
 }

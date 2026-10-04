@@ -1,0 +1,51 @@
+{
+  "id": "math.sd3.k2.loncat-3-dan-4",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 2,
+  "title": "Membilang loncat — Level 2 — Loncat 3 dan 4",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 120],
+            "k": [3, 4]
+          },
+          "constraint": "a % k == 0",
+          "prompt": "{a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan berikutnya?",
+          "answer": "a + 4 * k",
+          "distractors": ["a + 3 * k + 1", "a + 5 * k", "a + 4 * k + 2"],
+          "explain": "Loncat {k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [0, 30],
+            "k": [3, 4],
+            "n": [3, 9]
+          },
+          "prompt": "Mulai dari {a}, loncat {k} sebanyak {n} kali. Sampai di bilangan berapa?",
+          "answer": "a + n * k",
+          "distractors": ["a + (n - 1) * k", "a + (n + 1) * k", "n * k"],
+          "explain": "{a} + {n} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

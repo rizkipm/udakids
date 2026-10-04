@@ -1,0 +1,61 @@
+{
+  "id": "math.sd3.b1.bandingkan-bilangan-4-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 1,
+  "title": "Membandingkan dan mengurutkan — Level 1 — Bandingkan bilangan 4 angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999]
+          },
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Bandingkan dari angka paling kiri: {a} {answer} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": [-99, 99]
+          },
+          "derived": {
+            "b": "a + k"
+          },
+          "constraint": "b >= 1000 && b <= 9999",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Ribuannya sama, bandingkan ratusan dan seterusnya: {a} {answer} {b}."
+        }
+      }
+    ]
+  }
+}

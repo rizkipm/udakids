@@ -1,0 +1,145 @@
+{
+  "id": "math.sd3.t7.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 7,
+  "title": "Soal cerita perkalian dan pembagian — Level 7 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 6],
+            "k": [4, 10],
+            "e": [1, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} membeli {g} kotak kue isi {k}. Ia memakan {e} kue. Berapa kue tersisa?",
+          "answer": "g * k - e",
+          "distractors": [
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "g * k + e",
+              "tag": "menjumlah"
+            },
+            "(g - 1) * k"
+          ],
+          "explain": "{g} × {k} = {=g*k}, lalu − {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 6],
+            "k": [4, 8]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "Ada {t} siswa dibagi ke {g} kelompok sama besar. Setiap kelompok mendapat 2 siswa tambahan. Berapa siswa tiap kelompok sekarang?",
+          "answer": "t / g + 2",
+          "distractors": [
+            {
+              "expr": "t / g",
+              "tag": "satu-langkah"
+            },
+            "t / g + 1",
+            "(t + 2) / g"
+          ],
+          "explain": "{=t/g} + 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [2000, 2500, 3000, 3500]
+            },
+            "n": [2, 5],
+            "b": {
+              "values": [20000, 50000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "b > h * n",
+          "prompt": "Harga 1 pulpen Rp{h}. {nama} membeli {n} pulpen dan membayar Rp{b}. Berapa kembaliannya?",
+          "answer": "b - h * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * n",
+              "tag": "satu-langkah"
+            },
+            "b - h",
+            "b - h * (n - 1)"
+          ],
+          "explain": "{n} × {h} = {=h*n}; {b} − {=h*n} = {answer}."
+        }
+      }
+    ]
+  }
+}

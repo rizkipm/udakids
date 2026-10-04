@@ -1,0 +1,87 @@
+{
+  "id": "math.sd3.cc3.mundur-dari-hasil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 3,
+  "title": "Penalaran gaya OSN — Level 3 — Mundur dari hasil",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 25],
+            "m": [2, 6],
+            "t": [3, 30]
+          },
+          "derived": {
+            "r": "n * m + t"
+          },
+          "prompt": "Sebuah bilangan dikali {m}, lalu ditambah {t}, hasilnya {r}. Berapa bilangan itu?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "(r + t) / m",
+              "tag": "salah-arah"
+            },
+            "r - t",
+            "n + 1"
+          ],
+          "explain": "Mundur: ({r} − {t}) : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [5, 30],
+            "t": [2, 10]
+          },
+          "derived": {
+            "r": "h + t"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} memberi setengah kelerengnya kepada adik, lalu membeli {t} lagi. Sekarang ia punya {r}. Berapa kelereng awalnya?",
+          "answer": "2 * (r - t)",
+          "distractors": ["2 * r - t", "r - t", "2 * (r + t)"],
+          "explain": "{r} − {t} = {=r-t}, dikali 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

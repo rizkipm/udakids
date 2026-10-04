@@ -1,0 +1,76 @@
+{
+  "id": "math.sd3.r5.dua-angka-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 5,
+  "title": "Perkalian dan pembagian bersusun — Level 5 — Dua angka : satu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Pecah {t} menjadi bagian yang mudah dibagi {m}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "q": [11, 19]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} siswa dibagi rata ke {m} kelompok. Berapa siswa setiap kelompok?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            "q + 1",
+            "q - 1"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "id": "sains.sd34.c7.soal-penerapan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd34",
   "category": "C",
@@ -19,6 +19,45 @@
         "family": "manual",
         "params": {
           "items": [
+            {
+              "prompt": "Rantai makanan yang benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Padi → tikus → ular → elang"
+                  },
+                  "say": "Padi → tikus → ular → elang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tikus → padi → ular → elang"
+                  },
+                  "say": "Tikus → padi → ular → elang",
+                  "tag": "urutan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Elang → ular → tikus → padi"
+                  },
+                  "say": "Elang → ular → tikus → padi",
+                  "tag": "arah-panah-terbalik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Padi → ular → tikus → elang"
+                  },
+                  "say": "Padi → ular → tikus → elang",
+                  "tag": "urutan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panah berarti 'dimakan oleh': padi dimakan tikus, tikus dimakan ular, ular dimakan elang.",
+              "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C); Driver dkk. 1994 (miskonsepsi arah panah)"
+            },
             {
               "prompt": "Pada rantai 'rumput → belalang → katak → ular', katak berperan sebagai …",
               "choices": [
@@ -59,287 +98,378 @@
               "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C)"
             },
             {
-              "prompt": "Tanpa pengurai, apa yang akan terjadi di hutan?",
+              "prompt": "Di sawah, burung hantu menjadi pengendali hama alami karena …",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Bangkai dan daun mati menumpuk, tanah kurang subur"
+                    "text": "Burung hantu memangsa tikus"
                   },
-                  "say": "Bangkai dan daun mati menumpuk, tanah kurang subur"
+                  "say": "Burung hantu memangsa tikus"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Tumbuhan tumbuh lebih subur"
+                    "text": "Burung hantu memakan padi"
                   },
-                  "say": "Tumbuhan tumbuh lebih subur",
-                  "tag": "terbalik"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hewan pemangsa bertambah"
-                  },
-                  "say": "Hewan pemangsa bertambah",
+                  "say": "Burung hantu memakan padi",
                   "tag": "lain"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Tidak ada perubahan"
+                    "text": "Burung hantu mengusir ular"
                   },
-                  "say": "Tidak ada perubahan",
+                  "say": "Burung hantu mengusir ular",
                   "tag": "lain"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pengurai mengembalikan zat hara ke tanah. Tanpa pengurai, sisa makhluk hidup menumpuk dan tumbuhan kekurangan zat hara.",
-              "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C)"
-            },
-            {
-              "prompt": "Ayam memakan biji-bijian dan cacing. Ayam termasuk …",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Omnivora"
-                  },
-                  "say": "Omnivora"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Herbivora"
+                    "text": "Burung hantu menyuburkan tanah"
                   },
-                  "say": "Herbivora",
-                  "tag": "istilah-tertukar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Karnivora"
-                  },
-                  "say": "Karnivora",
-                  "tag": "istilah-tertukar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Produsen"
-                  },
-                  "say": "Produsen",
+                  "say": "Burung hantu menyuburkan tanah",
                   "tag": "peran-tertukar"
                 }
               ],
               "answer": 0,
-              "reteach": "Biji-bijian berasal dari tumbuhan, cacing adalah hewan. Pemakan keduanya disebut omnivora.",
+              "reteach": "Petani memelihara burung hantu untuk menekan populasi tikus tanpa racun, sehingga rantai makanan tetap seimbang.",
               "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C)"
             },
             {
-              "prompt": "Kumpulan beberapa rantai makanan yang saling berhubungan disebut …",
+              "prompt": "Pada rantai \"padi → belalang → katak → ular → elang\", konsumen tingkat I adalah …",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Jaring-jaring makanan"
+                    "text": "belalang"
                   },
-                  "say": "Jaring-jaring makanan"
+                  "say": "belalang"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Piramida energi"
+                    "text": "padi"
                   },
-                  "say": "Piramida energi",
-                  "tag": "istilah-tertukar"
+                  "say": "padi",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Daur hidup"
+                    "text": "katak"
                   },
-                  "say": "Daur hidup",
-                  "tag": "istilah-tertukar"
+                  "say": "katak",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Rantai tunggal"
+                    "text": "elang"
                   },
-                  "say": "Rantai tunggal",
-                  "tag": "lain"
+                  "say": "elang",
+                  "tag": "miskonsepsi"
                 }
               ],
               "answer": 0,
-              "reteach": "Satu hewan bisa makan dan dimakan beberapa jenis makhluk, sehingga rantai makanan saling terhubung membentuk jaring-jaring.",
-              "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C)"
+              "reteach": "Konsumen tingkat I memakan produsen. Belalang memakan padi.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             },
             {
-              "prompt": "Contoh interaksi antara makhluk hidup dan benda tak hidup adalah …",
+              "prompt": "Pada rantai \"fitoplankton → udang kecil → ikan kecil → ikan tongkol\", produsennya adalah …",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Tumbuhan menyerap air dari tanah"
+                    "text": "fitoplankton"
                   },
-                  "say": "Tumbuhan menyerap air dari tanah"
+                  "say": "fitoplankton"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Kucing memangsa tikus"
+                    "text": "udang kecil"
                   },
-                  "say": "Kucing memangsa tikus",
-                  "tag": "lain"
+                  "say": "udang kecil",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Lebah mengisap nektar bunga"
+                    "text": "ikan kecil"
                   },
-                  "say": "Lebah mengisap nektar bunga",
-                  "tag": "lain"
+                  "say": "ikan kecil",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Burung memakan ulat"
+                    "text": "ikan tongkol"
                   },
-                  "say": "Burung memakan ulat",
-                  "tag": "lain"
+                  "say": "ikan tongkol",
+                  "tag": "miskonsepsi"
                 }
               ],
               "answer": 0,
-              "reteach": "Air dan tanah adalah komponen abiotik. Tiga pilihan lain adalah interaksi antarmakhluk hidup (biotik).",
-              "source": "Ekosistem, produsen–konsumen–pengurai — buku IPAS SD Kelas V Kemendikbudristek (Fase C)"
+              "reteach": "Fitoplankton adalah tumbuhan sangat kecil di laut yang membuat makanan sendiri.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Rantai makanan di kolam yang benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ganggang → ikan kecil → bangau"
+                  },
+                  "say": "ganggang → ikan kecil → bangau"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bangau → ikan kecil → ganggang"
+                  },
+                  "say": "bangau → ikan kecil → ganggang",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan kecil → ganggang → bangau"
+                  },
+                  "say": "ikan kecil → ganggang → bangau",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ganggang → bangau → ikan kecil"
+                  },
+                  "say": "ganggang → bangau → ikan kecil",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rantai dimulai dari produsen (ganggang), lalu pemakannya, sampai pemangsa puncak.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Petani memasang rumah burung hantu di sawah. Hewan yang ingin dikurangi jumlahnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tikus"
+                  },
+                  "say": "tikus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "padi"
+                  },
+                  "say": "padi",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cacing"
+                  },
+                  "say": "cacing",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "katak"
+                  },
+                  "say": "katak",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Burung hantu memangsa tikus, sehingga tikus hama berkurang tanpa racun.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Daun-daun yang gugur di hutan lama-lama hancur dan menyatu dengan tanah. Yang berperan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jamur dan bakteri pengurai"
+                  },
+                  "say": "jamur dan bakteri pengurai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "matahari saja"
+                  },
+                  "say": "matahari saja",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "burung pemakan biji"
+                  },
+                  "say": "burung pemakan biji",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "harimau"
+                  },
+                  "say": "harimau",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pengurai menguraikan sisa makhluk hidup menjadi zat yang menyuburkan tanah.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Jika di rantai \"rumput → kelinci → ular\" ditambahkan elang yang memakan ular, elang menjadi konsumen tingkat …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "III"
+                  },
+                  "say": "III"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "I"
+                  },
+                  "say": "I",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "II"
+                  },
+                  "say": "II",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "IV"
+                  },
+                  "say": "IV",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelinci tingkat I, ular tingkat II, dan elang yang memakan ular tingkat III.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Monyet makan buah dan juga serangga. Dalam rantai makanan, monyet bisa menjadi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "konsumen tingkat I dan konsumen tingkat II"
+                  },
+                  "say": "konsumen tingkat I dan konsumen tingkat II"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "produsen saja"
+                  },
+                  "say": "produsen saja",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pengurai"
+                  },
+                  "say": "pengurai",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "konsumen tingkat I saja"
+                  },
+                  "say": "konsumen tingkat I saja",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat makan buah ia konsumen I; saat makan serangga (pemakan tumbuhan) ia konsumen II.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             }
           ]
-        },
-        "weight": 1
+        }
       },
       {
-        "family": "facts",
+        "family": "expr",
         "params": {
-          "table": [
+          "vars": {
+            "n": [4, 9],
+            "d": {
+              "values": [5, 6, 7, 10]
+            }
+          },
+          "words": {
+            "pemakan": ["Seekor katak", "Seekor kadal", "Seekor cicak besar"]
+          },
+          "prompt": "{pemakan} memakan {n} belalang setiap hari. Berapa belalang yang dimakannya dalam {d} hari?",
+          "answer": "n * d",
+          "unit": "ekor",
+          "distractors": [
             {
-              "name": "Rumput",
-              "attrs": {
-                "peran": "produsen"
-              }
+              "expr": "n + d",
+              "tag": "menjumlah"
             },
             {
-              "name": "Padi",
-              "attrs": {
-                "peran": "produsen"
-              }
+              "expr": "n * (d - 1)",
+              "tag": "kurang-satu"
             },
             {
-              "name": "Pohon mangga",
-              "attrs": {
-                "peran": "produsen"
-              },
-              "object": "pohon"
-            },
-            {
-              "name": "Alga (ganggang)",
-              "attrs": {
-                "peran": "produsen"
-              }
-            },
-            {
-              "name": "Jamur",
-              "attrs": {
-                "peran": "pengurai"
-              }
-            },
-            {
-              "name": "Bakteri",
-              "attrs": {
-                "peran": "pengurai"
-              }
-            },
-            {
-              "name": "Belalang",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "herbivora (pemakan tumbuhan)"
-              }
-            },
-            {
-              "name": "Kambing",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "herbivora (pemakan tumbuhan)"
-              }
-            },
-            {
-              "name": "Kelinci",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "herbivora (pemakan tumbuhan)"
-              },
-              "object": "kelinci"
-            },
-            {
-              "name": "Ulat",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "herbivora (pemakan tumbuhan)"
-              }
-            },
-            {
-              "name": "Harimau",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "karnivora (pemakan daging)"
-              }
-            },
-            {
-              "name": "Elang",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "karnivora (pemakan daging)"
-              }
-            },
-            {
-              "name": "Ular",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "karnivora (pemakan daging)"
-              }
-            },
-            {
-              "name": "Ayam",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "omnivora (pemakan tumbuhan dan hewan)"
-              },
-              "object": "ayam"
-            },
-            {
-              "name": "Tikus",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "omnivora (pemakan tumbuhan dan hewan)"
-              }
-            },
-            {
-              "name": "Manusia",
-              "attrs": {
-                "peran": "konsumen",
-                "makan": "omnivora (pemakan tumbuhan dan hewan)"
-              }
+              "expr": "n * d + n",
+              "tag": "lebih-satu"
             }
           ],
-          "attr": "makan",
-          "ask": "true-false",
-          "prompt": "Benar atau salah: {name} termasuk {value}.",
-          "explain": "{name} termasuk {value}.",
-          "choices": 4,
-          "source": "Ekosistem, produsen–konsumen–pengurai, jenis makanan hewan — buku IPAS SD Kelas V Kemendikbudristek (Fase C, pengayaan)"
-        },
-        "weight": 1
+          "explain": "{n} belalang × {d} hari = {answer} ekor."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 4],
+            "k": [3, 6]
+          },
+          "prompt": "Seekor burung hantu memangsa {t} tikus setiap malam. Di sawah ada {k} burung hantu. Berapa tikus yang dapat dimangsa dalam satu minggu (7 malam)?",
+          "answer": "t * k * 7",
+          "unit": "ekor",
+          "distractors": [
+            {
+              "expr": "t * k",
+              "tag": "lupa-7-malam"
+            },
+            {
+              "expr": "t * 7",
+              "tag": "lupa-jumlah-burung"
+            },
+            {
+              "expr": "t + k + 7",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Satu malam: {t} × {k} = {=t*k} tikus. Seminggu: {=t*k} × 7 = {answer} ekor."
+        }
       }
     ]
   }

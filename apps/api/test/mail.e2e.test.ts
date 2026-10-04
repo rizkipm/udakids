@@ -266,6 +266,9 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const toParent = mails.find((m) => m.to === email)!;
     expect(toParent.subject).toMatch(/2 level latihan baru/);
     expect(toParent.html).toContain('Berhenti menerima info materi baru');
+    // Catatan kecil tidak tampil sebagai tag HTML mentah; logo ditempel (CID).
+    expect(toParent.html).not.toContain('&lt;span');
+    expect(toParent.html).toContain('cid:momo-logo@udakids');
     expect(toParent.html).toContain('Momo From Udakids');
     expect(mails.some((m) => m.to === 'udacodingofficial@gmail.com')).toBe(true);
     // Sudah diumumkan → tidak dikirim lagi.

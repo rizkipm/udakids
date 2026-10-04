@@ -1,0 +1,122 @@
+{
+  "id": "math.sd3.w6.cukup-atau-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 6,
+  "title": "Uang Rupiah — Level 6 — Cukup atau kurang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "range": [10000, 50000],
+              "step": 1000
+            },
+            "h": {
+              "range": [10000, 50000],
+              "step": 500
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "u != h",
+          "prompt": "{nama} punya Rp{u}. Harga mainan Rp{h}. Apakah uangnya cukup?",
+          "answer": "(u >= h) * 1",
+          "labels": {
+            "1": "Cukup",
+            "0": "Tidak cukup"
+          },
+          "explain": "Bandingkan Rp{u} dan Rp{h}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "range": [20000, 60000],
+              "step": 1000
+            },
+            "h": {
+              "range": [40000, 99000],
+              "step": 500
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "h > u",
+          "prompt": "{nama} punya Rp{u}. Ia ingin membeli sepatu Rp{h}. Berapa rupiah kekurangannya?",
+          "answer": "h - u",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + u",
+              "tag": "menjumlah"
+            },
+            "h - u + 1000",
+            "h - u - 500"
+          ],
+          "explain": "{h} − {u} = {answer}."
+        }
+      }
+    ]
+  }
+}

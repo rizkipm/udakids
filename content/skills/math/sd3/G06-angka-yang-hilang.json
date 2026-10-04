@@ -1,0 +1,61 @@
+{
+  "id": "math.sd3.g6.angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "G",
+  "order": 6,
+  "title": "Penjumlahan empat dan lima angka — Level 6 — Angka yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-I",
+    "sg": "P3 Addition within 10 000",
+    "cambridge": "Stage 3 Calculation: addition (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ar": [1, 5],
+            "ah": [0, 9],
+            "at": [0, 9],
+            "as": [0, 9],
+            "b": [1000, 3999]
+          },
+          "derived": {
+            "a": "ar * 1000 + ah * 100 + at * 10 + as"
+          },
+          "prompt": "{ar}{ah}□{as} + {b} = {=a+b}. Angka berapa di dalam kotak?",
+          "answer": "at",
+          "distractors": ["(at + 1) % 10", "(at + 9) % 10", "(at + 3) % 10"],
+          "explain": "{=a+b} − {b} = {a}. Angka puluhannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ar": [1, 5],
+            "ah": [0, 9],
+            "at": [0, 9],
+            "as": [0, 9],
+            "b": [1000, 3999]
+          },
+          "derived": {
+            "a": "ar * 1000 + ah * 100 + at * 10 + as"
+          },
+          "prompt": "{ar}□{at}{as} + {b} = {=a+b}. Angka berapa di dalam kotak?",
+          "answer": "ah",
+          "distractors": ["(ah + 1) % 10", "(ah + 9) % 10", "(ah + 2) % 10"],
+          "explain": "{=a+b} − {b} = {a}. Angka ratusannya {answer}."
+        }
+      }
+    ]
+  }
+}

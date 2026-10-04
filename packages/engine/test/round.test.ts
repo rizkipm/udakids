@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   generateRound,
+  itemCoreKey,
   itemFingerprint,
   itemKey,
   RECENT_PER_SKILL,
@@ -95,6 +96,73 @@ describe('ronde tanpa soal kembar & ulang ronde dengan soal baru (D-028)', () =>
     const again = generateRound(s, { seed: 8, avoid: fps(first) });
     const fresh = fps(again).filter((f) => !fps(first).includes(f));
     expect(fresh.length).toBeGreaterThanOrEqual(7);
+  });
+});
+
+describe('inti soal tidak kembar dalam satu ronde', () => {
+  // 12 soal = 6 pertanyaan × 2 versi pengecoh: jawaban sama, hanya pengecohnya beda.
+  const twins = skillTemplateSchema.parse({
+    id: 'sains.tk.z1.uji-kembar',
+    version: 1,
+    domain: 'sains',
+    grade: 'tk',
+    category: 'Z',
+    order: 1,
+    title: 'Uji kembar',
+    tier: 'basic',
+    family: 'manual',
+    params: {
+      items: Array.from({ length: 12 }, (_, k) => ({
+        prompt: `Pertanyaan ${(k % 6) + 1}`,
+        choices: [
+          { visual: { kind: 'text', text: `benar ${k % 6}` } },
+          { visual: { kind: 'text', text: k < 6 ? 'pengecoh a' : 'pengecoh b' } },
+        ],
+        answer: 0,
+      })),
+    },
+  });
+
+  it('versi pengecoh berbeda tetap dianggap soal yang sama', () => {
+    const round = generateRound(twins, { seed: 3, length: 6 });
+    expect(new Set(round.map(itemCoreKey)).size).toBe(6);
+    expect(new Set(round.map((it) => it.prompt)).size).toBe(6);
+  });
+
+  it('soal dengar: kalimat sama tetapi kata yang diucapkan beda = soal berbeda (D-059)', () => {
+    const listen = skillTemplateSchema.parse({
+      id: 'english.prek.z1.uji-dengar',
+      version: 1,
+      domain: 'english',
+      grade: 'prek',
+      category: 'Z',
+      order: 1,
+      title: 'Uji dengar',
+      tier: 'basic',
+      family: 'manual',
+      params: {
+        items: ['ball', 'bed', 'bus', 'bag', 'box', 'bat'].map((w) => ({
+          prompt: 'Tap the letter you hear.',
+          say: `Listen: ${w}. Which letter does it start with?`,
+          choices: [
+            { visual: { kind: 'word', text: 'b' } },
+            { visual: { kind: 'word', text: 'd' } },
+          ],
+          answer: 0,
+        })),
+      },
+    });
+    const round = generateRound(listen, { seed: 5, length: 6 });
+    expect(new Set(round.map(itemCoreKey)).size).toBe(6);
+    expect(new Set(round.map((it) => it.say)).size).toBe(6);
+  });
+
+  it('bila variasi habis, pengulangan dibagi rata dan tidak berurutan', () => {
+    const round = generateRound(twins, { seed: 4 });
+    const cores = round.map(itemCoreKey);
+    cores.forEach((k, i) => i > 0 && expect(k).not.toBe(cores[i - 1]));
+    const counts = [...new Set(cores)].map((k) => cores.filter((x) => x === k).length);
+    expect(Math.max(...counts)).toBe(2);
   });
 });
 

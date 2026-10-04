@@ -1,0 +1,47 @@
+{
+  "id": "math.sd3.cc6.angka-dan-digit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 6,
+  "title": "Penalaran gaya OSN — Level 6 — Angka dan digit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [12, 99]
+          },
+          "prompt": "Berapa banyak angka yang ditulis untuk menulis bilangan 1 sampai {n}?",
+          "answer": "9 + (n - 9) * 2",
+          "distractors": ["n", "n * 2", "9 + n - 9"],
+          "explain": "1–9: 9 angka, 10–{n}: {=(n-9)*2} angka. Total {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "prompt": "Jumlah angka-angka dari bilangan {n} adalah …",
+          "answer": "floor(n / 1000) + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10",
+          "distractors": ["n % 100", "floor(n / 100)", "floor(n / 1000) + n % 10"],
+          "explain": "Jumlahkan setiap angkanya: {answer}."
+        }
+      }
+    ]
+  }
+}

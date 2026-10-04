@@ -1,0 +1,59 @@
+{
+  "id": "math.sd3.f8.angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "F",
+  "order": 8,
+  "title": "Pengurangan tiga angka — Level 8 — Angka yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-H",
+    "sg": "P3 Subtraction within 10 000",
+    "cambridge": "Stage 3 Calculation: subtraction of 3-digit numbers (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ah": [4, 9],
+            "at": [0, 9],
+            "as": [0, 9],
+            "b": [100, 399]
+          },
+          "derived": {
+            "a": "ah * 100 + at * 10 + as"
+          },
+          "prompt": "{ah}□{as} − {b} = {=a-b}. Angka berapa di dalam kotak?",
+          "answer": "at",
+          "distractors": ["(at + 1) % 10", "(at + 9) % 10", "(at + 4) % 10"],
+          "explain": "{=a-b} + {b} = {a}. Angka puluhannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [600, 999],
+            "bh": [1, 4],
+            "bt": [0, 9],
+            "bs": [0, 9]
+          },
+          "derived": {
+            "b": "bh * 100 + bt * 10 + bs"
+          },
+          "prompt": "{a} − {bh}□{bs} = {=a-b}. Angka berapa di dalam kotak?",
+          "answer": "bt",
+          "distractors": ["(bt + 1) % 10", "(bt + 9) % 10", "(bt + 6) % 10"],
+          "explain": "{a} − {=a-b} = {b}. Angka puluhannya {answer}."
+        }
+      }
+    ]
+  }
+}

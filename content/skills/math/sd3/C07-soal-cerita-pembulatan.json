@@ -1,0 +1,127 @@
+{
+  "id": "math.sd3.c7.soal-cerita-pembulatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 7,
+  "title": "Pembulatan — Level 7 — Soal cerita pembulatan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [102, 989]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "kota": [
+              "Bandung",
+              "Surabaya",
+              "Medan",
+              "Makassar",
+              "Semarang",
+              "Yogyakarta",
+              "Malang",
+              "Padang",
+              "Denpasar",
+              "Palembang"
+            ]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Jarak rumah {nama} ke {kota} {n} km. Kira-kira berapa km jika dibulatkan ke puluhan terdekat?",
+          "answer": "round(n / 10) * 10",
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "floor(n / 10) * 10 + 10 * (n % 10 < 5)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Satuan {=n%10}: kira-kira {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [45100, 189900]
+          },
+          "constraint": "n % 1000 != 0 && n % 1000 != 500",
+          "prompt": "Harga sepatu Rp{n}. Kira-kira berapa rupiah jika dibulatkan ke ribuan terdekat?",
+          "answer": "round(n / 1000) * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "floor(n / 1000) * 1000 + 1000 * (n % 1000 < 500)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Ratusan {=floor(n/100)%10}: kira-kira {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1010, 9990]
+          },
+          "constraint": "n % 100 != 0 && n % 100 != 50",
+          "prompt": "Penonton pertandingan ada {n} orang. Berita menulis jumlahnya dibulatkan ke ratusan. Berapa yang ditulis?",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "ke-puluhan"
+            }
+          ],
+          "explain": "Puluhan {=floor(n/10)%10}: {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "math.sd3.u4.pecahan-dari-kumpulan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 4,
+  "title": "Memahami pecahan — Level 4 — Pecahan dari kumpulan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Ada {d} kelereng, {n} di antaranya biru. Berapa bagian kelereng yang biru?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "bola",
+              "count": "=d",
+              "layout": "row",
+              "color": "biru"
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-lain"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "banding-bagian"
+            },
+            {
+              "num": "d",
+              "den": "n",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "{n} dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "n": [1, 4]
+          },
+          "prompt": "Di kelas ada {d} siswa, {n} siswa memakai kacamata. Berapa bagian siswa yang memakai kacamata?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-lain"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "banding-bagian"
+            },
+            {
+              "num": "1",
+              "den": "n",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{n} dari {d}: {answer}."
+        }
+      }
+    ]
+  }
+}

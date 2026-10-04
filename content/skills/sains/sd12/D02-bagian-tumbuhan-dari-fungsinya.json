@@ -1,6 +1,6 @@
 {
   "id": "sains.sd12.d2.bagian-tumbuhan-dari-fungsinya",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd12",
   "category": "D",
@@ -12,51 +12,333 @@
     "timss-kognitif": "knowing",
     "fase-merdeka": "A (pengayaan: IPAS mulai Fase B)"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Akar",
-        "attrs": {
-          "fungsi": "menyerap air dan menguatkan tumbuhan berdiri"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Akar",
+              "attrs": {
+                "fungsi": [
+                  "menyerap air dari tanah",
+                  "menyerap zat hara dari tanah",
+                  "mencengkeram tanah agar tumbuhan tidak roboh"
+                ]
+              }
+            },
+            {
+              "name": "Batang",
+              "attrs": {
+                "fungsi": [
+                  "mengangkut air dari akar ke daun",
+                  "menopang daun, bunga, dan buah",
+                  "menjadi tempat tumbuhnya cabang",
+                  "mengangkut makanan dari daun ke seluruh bagian tumbuhan"
+                ]
+              }
+            },
+            {
+              "name": "Daun",
+              "attrs": {
+                "fungsi": [
+                  "membuat makanan dengan bantuan cahaya matahari",
+                  "menjadi tempat keluar-masuknya udara",
+                  "menguapkan air yang berlebih"
+                ]
+              }
+            },
+            {
+              "name": "Bunga",
+              "attrs": {
+                "fungsi": [
+                  "menjadi tempat terbentuknya buah dan biji",
+                  "menarik lebah dan kupu-kupu dengan warna dan baunya"
+                ]
+              }
+            },
+            {
+              "name": "Buah",
+              "attrs": {
+                "fungsi": [
+                  "melindungi biji di dalamnya",
+                  "menarik hewan sehingga bijinya tersebar",
+                  "menjadi tempat menyimpan biji"
+                ]
+              }
+            },
+            {
+              "name": "Biji",
+              "attrs": {
+                "fungsi": ["tumbuh menjadi tumbuhan baru", "menyimpan makanan untuk calon tumbuhan"]
+              }
+            },
+            {
+              "name": "Duri pada mawar",
+              "attrs": {
+                "fungsi": ["melindungi tumbuhan dari hewan pemakan tumbuhan"]
+              }
+            },
+            {
+              "name": "Sulur pada tanaman mentimun",
+              "attrs": {
+                "fungsi": ["membantu tumbuhan memanjat"]
+              }
+            }
+          ],
+          "attr": "fungsi",
+          "ask": "name",
+          "prompt": "Bagian tumbuhan mana yang berfungsi {value}?",
+          "explain": "Fungsi {name}: {value}.",
+          "choices": 4,
+          "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+        },
+        "weight": 1
       },
       {
-        "name": "Batang",
-        "attrs": {
-          "fungsi": "mengangkut air dan menopang tumbuhan"
-        }
-      },
-      {
-        "name": "Daun",
-        "attrs": {
-          "fungsi": "membuat makanan dengan bantuan cahaya matahari"
-        }
-      },
-      {
-        "name": "Bunga",
-        "attrs": {
-          "fungsi": "tempat terbentuknya buah dan biji"
-        }
-      },
-      {
-        "name": "Buah",
-        "attrs": {
-          "fungsi": "melindungi biji"
-        }
-      },
-      {
-        "name": "Biji",
-        "attrs": {
-          "fungsi": "tumbuh menjadi tumbuhan baru"
-        }
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Pohon di tepi sungai tidak roboh walau diterpa banjir kecil. Bagian apa yang paling berjasa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Akar"
+                  },
+                  "say": "Akar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunga"
+                  },
+                  "say": "Bunga",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buah"
+                  },
+                  "say": "Buah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Daun"
+                  },
+                  "say": "Daun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Akar mencengkeram tanah sehingga pohon tidak mudah roboh.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Air yang diserap akar bisa sampai ke daun di puncak pohon. Air itu lewat bagian apa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Batang"
+                  },
+                  "say": "Batang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunga"
+                  },
+                  "say": "Bunga",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Biji"
+                  },
+                  "say": "Biji",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buah"
+                  },
+                  "say": "Buah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Batang mengangkut air dari akar ke daun.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Lebah hinggap di bagian tumbuhan yang berwarna cerah dan harum. Bagian apa itu?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunga"
+                  },
+                  "say": "Bunga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Akar"
+                  },
+                  "say": "Akar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Batang"
+                  },
+                  "say": "Batang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Biji"
+                  },
+                  "say": "Biji",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga menarik lebah dengan warna dan baunya.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Bagian tumbuhan mana yang berwarna hijau dan menjadi 'dapur' tempat membuat makanan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Daun"
+                  },
+                  "say": "Daun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Akar"
+                  },
+                  "say": "Akar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Biji"
+                  },
+                  "say": "Biji",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buah"
+                  },
+                  "say": "Buah",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Daun membuat makanan dengan bantuan cahaya matahari.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Biji mangga yang ditanam bisa tumbuh menjadi pohon mangga baru. Ini menunjukkan fungsi bagian apa?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Biji"
+                  },
+                  "say": "Biji"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Daun"
+                  },
+                  "say": "Daun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunga"
+                  },
+                  "say": "Bunga",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Akar"
+                  },
+                  "say": "Akar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Biji dapat tumbuh menjadi tumbuhan baru.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Burung memakan buah jambu, lalu bijinya jatuh jauh dari pohon induk. Bagian apa yang membantu biji tersebar?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Buah"
+                  },
+                  "say": "Buah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Akar"
+                  },
+                  "say": "Akar",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Batang"
+                  },
+                  "say": "Batang",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Daun"
+                  },
+                  "say": "Daun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Buah yang enak dimakan hewan, sehingga bijinya ikut tersebar.",
+              "source": "NGSS 1-LS1-1, 2-LS2-1; Kurikulum Merdeka IPAS Fase A (pengayaan): bagian tumbuhan dan fungsinya; OSN SD Puspresnas"
+            }
+          ]
+        },
+        "weight": 1
       }
-    ],
-    "attr": "fungsi",
-    "ask": "name",
-    "prompt": "Bagian tumbuhan mana yang berfungsi {value}?",
-    "explain": "{name} berfungsi {value}.",
-    "choices": 4,
-    "source": "NGSS 1-LS1-1 & 2-LS2-1 (tumbuhan butuh air dan cahaya); tema 'Merawat Hewan dan Tumbuhan' kelas 2"
+    ]
   }
 }

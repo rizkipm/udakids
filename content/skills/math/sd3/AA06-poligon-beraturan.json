@@ -1,0 +1,75 @@
+{
+  "id": "math.sd3.aa6.poligon-beraturan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "AA",
+  "order": 6,
+  "title": "Bangun datar dan sudut — Level 6 — Poligon beraturan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-AA (geometry)",
+    "sg": "P3 Angles, perpendicular and parallel lines, 2D shapes",
+    "cambridge": "Stage 3 Geometry: 2D shapes, right angles (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [5, 6, 8]
+            },
+            "k": [2, 12]
+          },
+          "prompt": "Segi {w:s} beraturan punya sisi {k} cm. Berapa cm kelilingnya?",
+          "answer": "s * k",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "s + k",
+              "tag": "menjumlah"
+            },
+            "(s - 1) * k",
+            "(s + 1) * k"
+          ],
+          "explain": "{s} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 20]
+          },
+          "prompt": "Segitiga sama sisi bersisi {k} cm. Berapa cm kelilingnya?",
+          "answer": "3 * k",
+          "unit": "cm",
+          "distractors": ["4 * k", "k + 3", "2 * k"],
+          "explain": "3 × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 15]
+          },
+          "derived": {
+            "p": "6 * k"
+          },
+          "prompt": "Keliling segi enam beraturan {p} cm. Berapa cm panjang satu sisi?",
+          "answer": "p / 6",
+          "unit": "cm",
+          "distractors": ["p / 4", "p - 6", "p / 5"],
+          "explain": "{p} : 6 = {answer}."
+        }
+      }
+    ]
+  }
+}

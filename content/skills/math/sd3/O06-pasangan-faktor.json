@@ -1,0 +1,56 @@
+{
+  "id": "math.sd3.o6.pasangan-faktor",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "O",
+  "order": 6,
+  "title": "Perkalian sampai 12 — Level 6 — Pasangan faktor",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Q/R",
+    "sg": "P3 Multiplication within tables (enrichment to 12)",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "Pasangan mana yang hasil kalinya {p}? {p} = {a} × …",
+          "answer": "p / a",
+          "distractors": ["p / a + 1", "p - a", "a"],
+          "explain": "{p} : {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [12, 18, 20, 24, 30, 36, 16, 28]
+            }
+          },
+          "derived": {
+            "q": "(p == 12) * 3 + (p == 18) * 3 + (p == 20) * 3 + (p == 24) * 4 + (p == 30) * 4 + (p == 36) * 5 + (p == 16) * 3 + (p == 28) * 3"
+          },
+          "prompt": "Berapa pasangan bilangan (urutan tidak diperhatikan) yang hasil kalinya {p}?",
+          "answer": "q",
+          "distractors": ["q + 1", "q - 1", "q + 2"],
+          "explain": "Pasangan faktor {p} ada {answer}."
+        }
+      }
+    ]
+  }
+}

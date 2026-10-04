@@ -1,0 +1,73 @@
+{
+  "id": "math.sd3.m9.faktor-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "M",
+  "order": 9,
+  "title": "Perkalian 0 sampai 5 dan 10 — Level 9 — Faktor yang hilang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 2, 3, 4, 5, 10",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 3, 4, 5, 10]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "{m} × … = {=m*n}",
+          "answer": "n",
+          "mode": "input",
+          "explain": "{=m*n} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 3, 4, 5, 10]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "… × {n} = {=m*n}",
+          "answer": "m",
+          "mode": "input",
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 4]
+            },
+            "n": [2, 10],
+            "p": {
+              "values": [2, 4, 5, 10]
+            }
+          },
+          "constraint": "(m * n) % p == 0 && p != m && m * n / p != n",
+          "prompt": "{m} × {n} = {p} × …",
+          "answer": "m * n / p",
+          "mode": "input",
+          "explain": "{=m*n} : {p} = {answer}."
+        }
+      }
+    ]
+  }
+}

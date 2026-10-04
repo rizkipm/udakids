@@ -1,0 +1,282 @@
+{
+  "id": "math.sd3.c10.tantangan-pembulatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 10,
+  "title": "Pembulatan — Level 10 — Tantangan pembulatan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [10, 999]
+          },
+          "derived": {
+            "n": "t * 10 + 5"
+          },
+          "prompt": "Bulatkan {n} ke puluhan terdekat.",
+          "answer": "round(n / 10) * 10",
+          "distractors": [
+            {
+              "expr": "n - 5",
+              "tag": "ke-bawah"
+            },
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            }
+          ],
+          "explain": "Satuan 5 → bulatkan ke atas: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 99],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "h * 100 + 50 + s"
+          },
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "round(n / 100) * 100",
+          "explain": "Puluhan 5 → bulatkan ke atas: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 99999]
+          },
+          "constraint": "n % 100 != 0",
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "floor(n / 100) * 100 + 100 * (n % 100 < 50)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Lihat puluhan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 99999]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Bulatkan {n} ke puluhan terdekat.",
+          "answer": "round(n / 10) * 10",
+          "explain": "Lihat satuan: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [10, 99],
+            "k": [0, 9]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan mana yang jika dibulatkan ke puluhan terdekat menjadi {r}?",
+          "answer": "r - 5 + k",
+          "distractors": ["r - 6 - k % 3", "r + 5 + k % 4", "r + 10 + k"],
+          "explain": "Bilangan dari {=r-5} sampai {=r+4} dibulatkan menjadi {r}. Jawabannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 98],
+            "k": [0, 99]
+          },
+          "derived": {
+            "r": "h * 100"
+          },
+          "prompt": "Bilangan mana yang jika dibulatkan ke ratusan terdekat menjadi {r}?",
+          "answer": "r - 50 + k",
+          "explain": "Dari {=r-50} sampai {=r+49} dibulatkan menjadi {r}. Jawabannya {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [102, 989]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "kota": [
+              "Bandung",
+              "Surabaya",
+              "Medan",
+              "Makassar",
+              "Semarang",
+              "Yogyakarta",
+              "Malang",
+              "Padang",
+              "Denpasar",
+              "Palembang"
+            ]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Jarak rumah {nama} ke {kota} {n} km. Kira-kira berapa km jika dibulatkan ke puluhan terdekat?",
+          "answer": "round(n / 10) * 10",
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "floor(n / 10) * 10 + 10 * (n % 10 < 5)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Satuan {=n%10}: kira-kira {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [45100, 189900]
+          },
+          "constraint": "n % 1000 != 0 && n % 1000 != 500",
+          "prompt": "Harga sepatu Rp{n}. Kira-kira berapa rupiah jika dibulatkan ke ribuan terdekat?",
+          "answer": "round(n / 1000) * 1000",
+          "unit": "rupiah",
+          "explain": "Ratusan {=floor(n/100)%10}: kira-kira {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 999]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan terkecil yang jika dibulatkan ke puluhan terdekat menjadi {r} adalah …",
+          "answer": "r - 5",
+          "distractors": [
+            {
+              "expr": "r - 4",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r - 10",
+              "tag": "puluhan-sebelumnya"
+            },
+            {
+              "expr": "r - 6",
+              "tag": "terlalu-kecil"
+            }
+          ],
+          "explain": "Mulai dari {=r-5} sudah dibulatkan ke {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 999]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan terbesar yang jika dibulatkan ke puluhan terdekat menjadi {r} adalah …",
+          "answer": "r + 4",
+          "explain": "{=r+5} sudah dibulatkan ke {=r+10}, jadi terbesar {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 99],
+            "s": [1, 9]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Sebuah bilangan jika dibulatkan ke puluhan terdekat menjadi {r}. Angka satuannya {s}. Berapa bilangan itu?",
+          "answer": "r - 10 * (s >= 5) + s",
+          "mode": "input",
+          "explain": "Jika satuannya 5 atau lebih, bilangan itu dibulatkan naik, jadi puluhannya satu kurang dari {r}. Bilangannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 99]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Berapa banyak bilangan cacah yang jika dibulatkan ke puluhan terdekat menjadi {r}?",
+          "answer": "10",
+          "mode": "input",
+          "explain": "Dari {=r-5} sampai {=r+4}: ada 10 bilangan."
+        }
+      }
+    ]
+  }
+}

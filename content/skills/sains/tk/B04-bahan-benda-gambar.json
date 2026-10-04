@@ -1,6 +1,6 @@
 {
   "id": "sains.tk.b4.bahan-benda-gambar",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "tk",
   "category": "B",
@@ -12,65 +12,392 @@
     "fase-merdeka": "Fondasi (PAUD)",
     "kognitif": "knowing"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "buku",
-        "attrs": {
-          "b": "kertas"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "buku",
+              "object": "buku",
+              "attrs": {
+                "b": "kertas"
+              }
+            },
+            {
+              "name": "kotak susu",
+              "object": "kotak-susu",
+              "attrs": {
+                "b": "kertas"
+              }
+            },
+            {
+              "name": "kotak kardus",
+              "object": "kotak",
+              "attrs": {
+                "b": "kertas"
+              }
+            },
+            {
+              "name": "layang-layang",
+              "object": "layang-layang",
+              "attrs": {
+                "b": "kertas"
+              }
+            },
+            {
+              "name": "kaleng",
+              "object": "kaleng",
+              "attrs": {
+                "b": "logam"
+              }
+            },
+            {
+              "name": "panci",
+              "object": "panci",
+              "attrs": {
+                "b": "logam"
+              }
+            },
+            {
+              "name": "sendok",
+              "object": "sendok",
+              "attrs": {
+                "b": "logam"
+              }
+            },
+            {
+              "name": "mobil",
+              "object": "mobil",
+              "attrs": {
+                "b": "logam"
+              }
+            },
+            {
+              "name": "sepeda",
+              "object": "sepeda",
+              "attrs": {
+                "b": "logam"
+              }
+            },
+            {
+              "name": "balon",
+              "object": "balon",
+              "attrs": {
+                "b": "karet"
+              }
+            },
+            {
+              "name": "bola karet",
+              "object": "bola",
+              "attrs": {
+                "b": "karet"
+              }
+            },
+            {
+              "name": "pensil",
+              "object": "pensil",
+              "attrs": {
+                "b": "kayu"
+              }
+            },
+            {
+              "name": "meja",
+              "object": "meja",
+              "attrs": {
+                "b": "kayu"
+              }
+            },
+            {
+              "name": "pintu",
+              "object": "pintu",
+              "attrs": {
+                "b": "kayu"
+              }
+            },
+            {
+              "name": "jendela kaca",
+              "object": "jendela",
+              "attrs": {
+                "b": "kaca"
+              }
+            },
+            {
+              "name": "gelas kaca",
+              "object": "gelas",
+              "attrs": {
+                "b": "kaca"
+              }
+            },
+            {
+              "name": "ember",
+              "object": "ember",
+              "attrs": {
+                "b": "plastik"
+              }
+            },
+            {
+              "name": "topi kain",
+              "object": "topi",
+              "attrs": {
+                "b": "kain"
+              }
+            },
+            {
+              "name": "pita kain",
+              "object": "pita",
+              "attrs": {
+                "b": "kain"
+              }
+            }
+          ],
+          "attr": "b",
+          "ask": "name",
+          "prompt": "Ketuk benda dari {value}.",
+          "explain": "{name} terbuat dari {value}.",
+          "choices": 3,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)",
+          "pictures": true
         },
-        "object": "buku"
+        "weight": 2
       },
       {
-        "name": "kotak susu",
-        "attrs": {
-          "b": "kertas"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Ketuk semua benda dari logam.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kaleng"
+                  },
+                  "say": "kaleng"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "panci"
+                  },
+                  "say": "panci"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "sendok"
+                  },
+                  "say": "sendok"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "buku"
+                  },
+                  "say": "buku",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1, 2],
+              "reteach": "Kaleng, panci, dan sendok terbuat dari logam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            },
+            {
+              "prompt": "Ketuk semua benda dari kertas.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "buku"
+                  },
+                  "say": "buku"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kotak"
+                  },
+                  "say": "kotak"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gelas"
+                  },
+                  "say": "gelas",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "sendok"
+                  },
+                  "say": "sendok",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1],
+              "reteach": "Buku dan kotak kardus terbuat dari kertas.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            },
+            {
+              "prompt": "Ketuk semua benda dari kayu.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pensil"
+                  },
+                  "say": "pensil"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "meja"
+                  },
+                  "say": "meja"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "balon"
+                  },
+                  "say": "balon",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kaleng"
+                  },
+                  "say": "kaleng",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1],
+              "reteach": "Pensil dan meja terbuat dari kayu.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            },
+            {
+              "prompt": "Ketuk semua benda dari kaca.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "jendela"
+                  },
+                  "say": "jendela"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "gelas"
+                  },
+                  "say": "gelas"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "ember"
+                  },
+                  "say": "ember",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "buku"
+                  },
+                  "say": "buku",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1],
+              "reteach": "Jendela dan gelas ini terbuat dari kaca yang bening.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            },
+            {
+              "prompt": "Ketuk semua benda dari kain.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "topi"
+                  },
+                  "say": "topi"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pita"
+                  },
+                  "say": "pita"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "panci"
+                  },
+                  "say": "panci",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pensil"
+                  },
+                  "say": "pensil",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1],
+              "reteach": "Topi dan pita ini terbuat dari kain.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            },
+            {
+              "prompt": "Ketuk semua benda dari karet.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "balon"
+                  },
+                  "say": "balon"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bola"
+                  },
+                  "say": "bola"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "meja"
+                  },
+                  "say": "meja",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kaleng"
+                  },
+                  "say": "kaleng",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": [0, 1],
+              "reteach": "Balon dan bola ini terbuat dari karet.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)"
+            }
+          ]
         },
-        "object": "kotak-susu"
-      },
-      {
-        "name": "kaleng",
-        "attrs": {
-          "b": "logam"
-        },
-        "object": "kaleng"
-      },
-      {
-        "name": "panci",
-        "attrs": {
-          "b": "logam"
-        },
-        "object": "panci"
-      },
-      {
-        "name": "balon",
-        "attrs": {
-          "b": "karet"
-        },
-        "object": "balon"
-      },
-      {
-        "name": "pensil",
-        "attrs": {
-          "b": "kayu"
-        },
-        "object": "pensil"
-      },
-      {
-        "name": "jendela kaca",
-        "attrs": {
-          "b": "kaca"
-        },
-        "object": "jendela"
+        "weight": 1
       }
-    ],
-    "attr": "b",
-    "ask": "name",
-    "prompt": "Ketuk benda dari {value}.",
-    "explain": "{name} terbuat dari {value}.",
-    "choices": 3,
-    "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS 2-PS1-1 (sifat bahan, pengayaan)",
-    "pictures": true
+    ]
   }
 }

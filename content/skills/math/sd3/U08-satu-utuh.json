@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.u8.satu-utuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 8,
+  "title": "Memahami pecahan — Level 8 — Satu utuh",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 12]
+          },
+          "prompt": "{d}/{d} = …",
+          "answer": "1",
+          "distractors": ["d", "0", "d * 2"],
+          "explain": "Semua bagian = satu utuh."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 12]
+          },
+          "prompt": "Berapa bagian 1/{d} yang membentuk satu utuh?",
+          "answer": "d",
+          "distractors": ["1", "d - 1", "d + 1"],
+          "explain": "Dibutuhkan {d} bagian."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} + … /{d} = 1. Berapa pembilang yang hilang?",
+          "answer": "d - n",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "sama"
+            },
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            },
+            "d - n + 1"
+          ],
+          "explain": "{d} − {n} = {answer}."
+        }
+      }
+    ]
+  }
+}

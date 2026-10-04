@@ -1,0 +1,86 @@
+{
+  "id": "math.sd3.p1.membagi-sama-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "P",
+  "order": 1,
+  "title": "Memahami pembagian — Level 1 — Membagi sama banyak",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-S (division concepts)",
+    "sg": "P3 Division: sharing and grouping",
+    "cambridge": "Stage 3 Calculation: division as grouping and sharing (3Nc.08)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 5],
+            "k": [2, 6]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "{t} kue dibagi sama banyak kepada {g} anak. Berapa kue untuk setiap anak?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "kue",
+              "count": "=t",
+              "layout": "grid"
+            }
+          ],
+          "answer": "t / g",
+          "distractors": [
+            {
+              "expr": "t - g",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "g",
+              "tag": "banyak-anak"
+            },
+            "t / g + 1"
+          ],
+          "explain": "{t} : {g} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "words": {
+            "buah": ["jeruk", "mangga", "apel", "salak", "rambutan", "manggis", "jambu"]
+          },
+          "prompt": "{t} {buah} dimasukkan sama banyak ke {g} keranjang. Berapa {buah} di setiap keranjang?",
+          "answer": "t / g",
+          "distractors": [
+            {
+              "expr": "t - g",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "t * g",
+              "tag": "mengalikan"
+            },
+            "t / g + 1"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

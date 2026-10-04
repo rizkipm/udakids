@@ -22,11 +22,129 @@ type PublicBook = {
   topics: number;
   levels: number;
   sampleTopics: string[];
+  /** Rujukan kurikulum dari tag skill (server lama: tidak ada). */
+  standards?: string[];
 };
 type PublicBooks = { books: PublicBook[]; totalLevels: number };
 
 const TONES = ['sun', 'coral', 'sky', 'grape', 'leaf', 'teal'] as const;
-const iconOf = (b: PublicBook): FeatureIcon => (b.domain === 'sains' ? 'science' : 'book');
+const DOMAIN_ICON: Record<string, FeatureIcon> = {
+  math: 'math',
+  sains: 'science',
+  english: 'english',
+};
+const iconOf = (b: { domain: string }): FeatureIcon => DOMAIN_ICON[b.domain] ?? 'book';
+/** Label mata pelajaran yang punya teks; domain lain (mis. buku baru) memakai judul bukunya. */
+const SUBJECTS = ['math', 'sains', 'english'] as const;
+const known = (d: string): d is (typeof SUBJECTS)[number] =>
+  (SUBJECTS as readonly string[]).includes(d);
+
+/** "matematika, sains, dan bahasa Inggris" dari buku yang benar-benar ada (urut seperti di server). */
+export function subjectList(books: { domain: string }[] | undefined, type: 'and' | 'or' = 'and') {
+  const domains = [...new Set((books ?? []).map((b) => b.domain))].filter(known);
+  if (domains.length === 0)
+    return t(type === 'and' ? 'site.subjects.default' : 'site.subjects.defaultOr');
+  const words = domains.map((d) => t(k(`site.subjectLower.${d}`)));
+  try {
+    return new Intl.ListFormat('id', {
+      type: type === 'and' ? 'conjunction' : 'disjunction',
+    }).format(words);
+  } catch {
+    return words.join(', ');
+  }
+}
+
+type Subject = {
+  domain: string;
+  title: string;
+  books: PublicBook[];
+  levels: number;
+  standards: string[];
+};
+
+/** Urutan rujukan: kurikulum nasional, standar internasional, gaya olimpiade, lalu pengayaan. */
+const STANDARD_ORDER = ['merdeka', 'singapore', 'cambridge', 'timss', 'osn', 'ngss', 'ccss'];
+const standardRank = (s: string) => {
+  const i = STANDARD_ORDER.indexOf(s);
+  return i < 0 ? STANDARD_ORDER.length : i;
+};
+
+/** Kelompokkan buku per mata pelajaran; rujukan = gabungan rujukan bukunya, urut `STANDARD_ORDER`. */
+export function groupSubjects(books: PublicBook[]): Subject[] {
+  const out = new Map<string, Subject>();
+  for (const b of books) {
+    const cur = out.get(b.domain) ?? {
+      domain: b.domain,
+      title: known(b.domain) ? t(k(`site.subject.${b.domain}`)) : b.title,
+      books: [],
+      levels: 0,
+      standards: [],
+    };
+    cur.books.push(b);
+    cur.levels += b.levels;
+    for (const s of b.standards ?? []) if (!cur.standards.includes(s)) cur.standards.push(s);
+    out.set(b.domain, cur);
+  }
+  const subjects = [...out.values()];
+  for (const s of subjects) s.standards.sort((a, b) => standardRank(a) - standardRank(b));
+  return subjects;
+}
+
+/** Label rujukan: versi khusus mata pelajaran bila ada (mis. Singapore untuk English), lalu label umum. */
+function standardLabel(domain: string, std: string) {
+  const own = `site.std.${domain}.${std}`;
+  const label = t(k(own));
+  return label === own ? t(k(`site.std.${std}`)) : label;
+}
+
+function SubjectsSection({ books }: { books: PublicBook[] }) {
+  const subjects = groupSubjects(books);
+  if (subjects.length === 0) return null;
+  return (
+    <section id="kurikulum" className="site-section subjects" aria-labelledby="subjects-title">
+      <h2 id="subjects-title">{t('site.subjects.title')}</h2>
+      <p className="section-lead">{t('site.subjects.lead')}</p>
+      <div className="subject-grid">
+        {subjects.map((s, i) => (
+          <article key={s.domain} className={`subject-card tone-${TONES[i % TONES.length]}`}>
+            <header className="subject-head">
+              <Icon name={iconOf(s)} size={52} />
+              <div>
+                <h3>{s.title}</h3>
+                <p className="subject-meta">
+                  {t('site.subjects.meta', {
+                    books: s.books.length,
+                    levels: s.levels.toLocaleString('id-ID'),
+                    span: gradeSpan(s.books),
+                  })}
+                </p>
+              </div>
+            </header>
+            <ul className="subject-books">
+              {s.books.map((b) => (
+                <li key={b.grade}>{t(k(`site.age.${b.grade}`))}</li>
+              ))}
+            </ul>
+            {s.standards.length > 0 && (
+              <>
+                <h4 className="subject-refs-title">{t('site.subjects.refs')}</h4>
+                <ul className="subject-refs">
+                  {s.standards.map((std) => (
+                    <li key={std}>{standardLabel(s.domain, std)}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {s.domain === 'english' && (
+              <p className="subject-note">{t('site.subjects.note.english')}</p>
+            )}
+          </article>
+        ))}
+      </div>
+      <p className="subjects-disclaimer">{t('site.subjects.disclaimer')}</p>
+    </section>
+  );
+}
 
 function usePublicBooks() {
   const [data, setData] = useState<PublicBooks>();
@@ -89,6 +207,7 @@ export function SiteNav() {
         onClick={() => setOpen(false)}
       >
         <a href="#buku">{t('site.nav.books')}</a>
+        <a href="#kurikulum">{t('site.nav.subjects')}</a>
         <a href="#cara">{t('site.nav.how')}</a>
         <a href="#pintu">{t('site.nav.doors')}</a>
         <a href="#harga">{t('site.nav.price')}</a>
@@ -122,7 +241,9 @@ export function Landing() {
             <h1>
               {t('site.hero.title1')} <span className="hl">{t('site.hero.title2')}</span>
             </h1>
-            <p className="hero-lead">{t('site.hero.lead')}</p>
+            <p className="hero-lead">
+              {t('site.hero.lead', { subjects: subjectList(shelf?.books) })}
+            </p>
             <div className="hero-cta">
               <Link to="/play" className="site-btn big">
                 {t('site.cta.play')}
@@ -145,6 +266,14 @@ export function Landing() {
                     <strong>{fmt(stats?.totalLevels ?? shelf!.totalLevels)}</strong>{' '}
                     {t('site.fact.levels')}
                   </li>
+                  <li>
+                    <strong>
+                      {fmt(
+                        stats?.totalQuestions ?? (stats?.totalLevels ?? shelf!.totalLevels) * 10,
+                      )}
+                    </strong>{' '}
+                    {t('site.fact.totalQuestions')}
+                  </li>
                 </>
               )}
               <li>
@@ -165,6 +294,12 @@ export function Landing() {
                   <strong>{fmt(stats.activeNow)}</strong> {t('site.live.active')}
                   {' · '}
                   <strong>{fmt(stats.rounds)}</strong> {t('site.live.rounds')}
+                  {stats.answered !== undefined && (
+                    <>
+                      {' · '}
+                      <strong>{fmt(stats.answered)}</strong> {t('site.live.answered')}
+                    </>
+                  )}
                 </span>
               </p>
             )}
@@ -277,6 +412,8 @@ export function Landing() {
           {failed && !shelf && <p className="section-lead">{t('site.books.offline')}</p>}
         </section>
 
+        {shelf && <SubjectsSection books={shelf.books} />}
+
         <section id="cara" className="site-section how">
           <h2>{t('site.how.title')}</h2>
           <ol className="how-steps">
@@ -284,7 +421,7 @@ export function Landing() {
               <li key={n} className={`how-step step-${n}`}>
                 <span className="how-num">{n}</span>
                 <h3>{t(k(`site.how.${n}.title`))}</h3>
-                <p>{t(k(`site.how.${n}.text`))}</p>
+                <p>{t(k(`site.how.${n}.text`), { subjects: subjectList(shelf?.books, 'or') })}</p>
               </li>
             ))}
           </ol>

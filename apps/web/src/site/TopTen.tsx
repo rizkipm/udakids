@@ -8,7 +8,10 @@ import { formatStamp } from '../ui/ui';
 /** Top 10 global (`/leaderboard/public`, D-045): hanya nama panggilan + warna Momo. */
 export type PublicTop = {
   updatedAt: string;
+  /** Semua anak aktif. */
   participants: number;
+  /** Anak yang sudah punya minimal satu ronde (server lama: tidak ada). */
+  played?: number;
   top: {
     position: number;
     nickname: string;
@@ -74,6 +77,9 @@ export function TopTenSection() {
             <small>
               {t('site.top.updated', { time: formatStamp(data.updatedAt) })} ·{' '}
               {t('site.top.participants', { n: num(data.participants) })}
+              {data.played !== undefined && data.played < data.participants && (
+                <> · {t('site.top.played', { n: num(data.played) })}</>
+              )}
             </small>
           )}
         </div>

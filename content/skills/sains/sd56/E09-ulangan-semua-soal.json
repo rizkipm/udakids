@@ -1,6 +1,6 @@
 {
   "id": "sains.sd56.e9.ulangan-semua-soal",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd56",
   "category": "E",
@@ -13,593 +13,478 @@
     "fase-merdeka": "C",
     "osn": "Kategori C (Kelas 5–6)"
   },
-  "family": "manual",
+  "family": "mix",
   "params": {
-    "items": [
+    "parts": [
       {
-        "prompt": "Rangkaian listrik yang semua komponennya tersusun berderet dalam satu jalur disebut …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "rangkaian seri"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "PLTA",
+              "attrs": {
+                "e": "aliran atau terjunan air",
+                "r": "terbarukan"
+              }
             },
-            "say": "rangkaian seri"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "rangkaian paralel"
+            {
+              "name": "PLTS",
+              "attrs": {
+                "e": "cahaya matahari",
+                "r": "terbarukan"
+              }
             },
-            "say": "rangkaian paralel",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "rangkaian campuran"
+            {
+              "name": "PLTB",
+              "attrs": {
+                "e": "tiupan angin",
+                "r": "terbarukan"
+              }
             },
-            "say": "rangkaian campuran",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "rangkaian terbuka"
+            {
+              "name": "PLTP",
+              "attrs": {
+                "e": "panas bumi",
+                "r": "terbarukan"
+              }
             },
-            "say": "rangkaian terbuka",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Seri = satu jalur.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
+            {
+              "name": "PLTU batu bara",
+              "attrs": {
+                "e": "uap dari pembakaran batu bara",
+                "r": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "PLTD",
+              "attrs": {
+                "e": "pembakaran solar (diesel)",
+                "r": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "PLTGL",
+              "attrs": {
+                "e": "gelombang laut",
+                "r": "terbarukan"
+              }
+            },
+            {
+              "name": "PLTBm",
+              "attrs": {
+                "e": "pembakaran biomassa seperti sekam padi",
+                "r": "terbarukan"
+              }
+            },
+            {
+              "name": "PLTMH",
+              "attrs": {
+                "e": "aliran sungai kecil (mikrohidro)",
+                "r": "terbarukan"
+              }
+            },
+            {
+              "name": "PLTG",
+              "attrs": {
+                "e": "pembakaran gas alam",
+                "r": "tidak terbarukan"
+              }
+            }
+          ],
+          "attr": "e",
+          "ask": "true-false",
+          "prompt": "Benar atau salah? {name} membangkitkan listrik dengan memanfaatkan {value}.",
+          "explain": "{name} memanfaatkan {value}.",
+          "choices": 4,
+          "source": "Buku IPAS SD Kelas VI Kurikulum Merdeka (Kemendikbudristek) — listrik dan rangkaian; kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
+        }
       },
       {
-        "prompt": "Rangkaian listrik di rumah umumnya dipasang secara …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "paralel"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Dua lampu dipasang seri. Satu lampu putus. Lampu yang lain akan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "padam"
+                  },
+                  "say": "padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tetap menyala"
+                  },
+                  "say": "tetap menyala",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyala lebih terang"
+                  },
+                  "say": "menyala lebih terang",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berkedip"
+                  },
+                  "say": "berkedip",
+                  "tag": "konsep-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jalur arus terputus.",
+              "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
             },
-            "say": "paralel"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "seri"
+            {
+              "prompt": "Dua lampu dipasang paralel. Satu lampu putus. Lampu yang lain akan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tetap menyala"
+                  },
+                  "say": "tetap menyala"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "padam"
+                  },
+                  "say": "padam",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyala redup lalu mati"
+                  },
+                  "say": "menyala redup lalu mati",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "meledak"
+                  },
+                  "say": "meledak",
+                  "tag": "konsep-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Masih ada jalur lain.",
+              "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
             },
-            "say": "seri",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "terbuka"
+            {
+              "prompt": "Sebuah rangkaian diberi sakelar terbuka. Yang terjadi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arus tidak mengalir dan lampu padam"
+                  },
+                  "say": "arus tidak mengalir dan lampu padam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arus mengalir lebih kuat"
+                  },
+                  "say": "arus mengalir lebih kuat",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lampu menyala terang"
+                  },
+                  "say": "lampu menyala terang",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "baterai bertambah penuh"
+                  },
+                  "say": "baterai bertambah penuh",
+                  "tag": "konsep-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sakelar terbuka memutus rangkaian.",
+              "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
             },
-            "say": "terbuka",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "tertutup sebagian"
+            {
+              "prompt": "Benda mana yang dapat menutup celah rangkaian agar lampu menyala?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paku besi"
+                  },
+                  "say": "paku besi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "penghapus karet"
+                  },
+                  "say": "penghapus karet",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sedotan plastik"
+                  },
+                  "say": "sedotan plastik",
+                  "tag": "konsep-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kertas"
+                  },
+                  "say": "kertas",
+                  "tag": "konsep-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Besi konduktor.",
+              "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
             },
-            "say": "tertutup sebagian",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Agar satu lampu mati, lampu lain tetap menyala.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
+            {
+              "prompt": "Lampu A dan B seri. Lampu C paralel dengan rangkaian A–B. Jika lampu C putus, yang terjadi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "A dan B tetap menyala"
+                  },
+                  "say": "A dan B tetap menyala"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "A dan B padam"
+                  },
+                  "say": "A dan B padam",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hanya A yang padam"
+                  },
+                  "say": "hanya A yang padam",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semua lampu padam"
+                  },
+                  "say": "semua lampu padam",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lampu C ada di cabang sendiri. Putusnya C tidak memutus jalur A–B.",
+              "source": "CP IPAS Fase C (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD Kategori C (Puspresnas); TIMSS 2023 Science Framework"
+            },
+            {
+              "prompt": "Sebuah desa di pegunungan memiliki sungai berarus deras sepanjang tahun, tetapi jauh dari jaringan PLN. Pembangkit listrik yang paling cocok adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pembangkit listrik tenaga mikrohidro"
+                  },
+                  "say": "pembangkit listrik tenaga mikrohidro"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pembangkit listrik tenaga diesel dengan solar kiriman"
+                  },
+                  "say": "pembangkit listrik tenaga diesel dengan solar kiriman",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pembangkit listrik tenaga gelombang laut"
+                  },
+                  "say": "pembangkit listrik tenaga gelombang laut",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pembangkit listrik tenaga uap batu bara"
+                  },
+                  "say": "pembangkit listrik tenaga uap batu bara",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Arus sungai dapat memutar turbin kecil. Energinya terbarukan dan murah dirawat oleh warga.",
+              "source": "CP IPAS Fase C (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD Kategori C (Puspresnas); TIMSS 2023 Science Framework"
+            },
+            {
+              "prompt": "Mengapa korsleting (hubungan pendek) dapat menyebabkan kebakaran?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arus yang sangat besar membuat kabel sangat panas"
+                  },
+                  "say": "arus yang sangat besar membuat kabel sangat panas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "arus listrik berhenti mengalir"
+                  },
+                  "say": "arus listrik berhenti mengalir",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kabel berubah menjadi isolator"
+                  },
+                  "say": "kabel berubah menjadi isolator",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tegangan menjadi nol"
+                  },
+                  "say": "tegangan menjadi nol",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat korsleting hambatan sangat kecil sehingga arus melonjak dan kabel memanas. Sekring atau MCB mencegahnya.",
+              "source": "CP IPAS Fase C (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD Kategori C (Puspresnas); TIMSS 2023 Science Framework"
+            },
+            {
+              "prompt": "Budi menambah jumlah lampu yang disusun seri dari 1 menjadi 3 dengan satu baterai. Hasilnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semua lampu makin redup"
+                  },
+                  "say": "semua lampu makin redup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "semua lampu makin terang"
+                  },
+                  "say": "semua lampu makin terang",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nyala lampu tidak berubah"
+                  },
+                  "say": "nyala lampu tidak berubah",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "baterai lebih cepat habis dan lampu makin terang"
+                  },
+                  "say": "baterai lebih cepat habis dan lampu makin terang",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lampu yang disusun seri berbagi tegangan baterai. Makin banyak lampu, makin redup nyalanya.",
+              "source": "CP IPAS Fase C (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD Kategori C (Puspresnas); TIMSS 2023 Science Framework"
+            },
+            {
+              "prompt": "Mengapa sumber energi seperti matahari dan angin lebih baik untuk masa depan dibandingkan batu bara?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak akan habis dan menghasilkan sedikit polusi"
+                  },
+                  "say": "tidak akan habis dan menghasilkan sedikit polusi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih mudah dibakar"
+                  },
+                  "say": "lebih mudah dibakar",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hanya ada di Indonesia"
+                  },
+                  "say": "hanya ada di Indonesia",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak memerlukan alat apa pun"
+                  },
+                  "say": "tidak memerlukan alat apa pun",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Energi terbarukan selalu tersedia dan tidak menghasilkan asap pembakaran seperti batu bara.",
+              "source": "CP IPAS Fase C (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD Kategori C (Puspresnas); TIMSS 2023 Science Framework"
+            }
+          ]
+        },
+        "weight": 2
       },
       {
-        "prompt": "Lampu menyala jika rangkaian …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "tertutup"
-            },
-            "say": "tertutup"
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 5],
+            "k": [2, 4]
           },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "terbuka"
+          "constraint": "n != k",
+          "prompt": "Sebuah lampu membutuhkan 3 volt agar menyala normal. Rina punya {=n*2} baterai 1,5 volt dan ingin menyalakan sebanyak mungkin lampu, masing-masing dengan 2 baterai seri miliknya sendiri. Berapa lampu yang dapat ia nyalakan?",
+          "answer": "n",
+          "unit": "lampu",
+          "distractors": [
+            {
+              "expr": "n * 2",
+              "tag": "jumlah-baterai"
             },
-            "say": "terbuka",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "terputus"
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
             },
-            "say": "terputus",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "tidak ada baterai"
-            },
-            "say": "tidak ada baterai",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Arus mengalir pada rangkaian tertutup.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Pegangan obeng listrik dibuat dari plastik karena plastik bersifat …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "isolator"
-            },
-            "say": "isolator"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "konduktor"
-            },
-            "say": "konduktor",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "magnetis"
-            },
-            "say": "magnetis",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "mudah meleleh"
-            },
-            "say": "mudah meleleh",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Isolator tidak menghantarkan listrik.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Perubahan energi pada baterai yang menyalakan senter adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "kimia → listrik → cahaya"
-            },
-            "say": "kimia → listrik → cahaya"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "listrik → kimia → cahaya"
-            },
-            "say": "listrik → kimia → cahaya",
-            "tag": "urutan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "cahaya → listrik → kimia"
-            },
-            "say": "cahaya → listrik → kimia",
-            "tag": "urutan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "gerak → kimia → cahaya"
-            },
-            "say": "gerak → kimia → cahaya",
-            "tag": "urutan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Baterai menyimpan energi kimia.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Dua lampu dipasang seri. Satu lampu putus. Lampu yang lain akan …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "padam"
-            },
-            "say": "padam"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "tetap menyala"
-            },
-            "say": "tetap menyala",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "menyala lebih terang"
-            },
-            "say": "menyala lebih terang",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "berkedip"
-            },
-            "say": "berkedip",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Jalur arus terputus.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Dua lampu dipasang paralel. Satu lampu putus. Lampu yang lain akan …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "tetap menyala"
-            },
-            "say": "tetap menyala"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "padam"
-            },
-            "say": "padam",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "menyala redup lalu mati"
-            },
-            "say": "menyala redup lalu mati",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "meledak"
-            },
-            "say": "meledak",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Masih ada jalur lain.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Cara menghemat energi listrik di rumah adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "mematikan lampu yang tidak dipakai"
-            },
-            "say": "mematikan lampu yang tidak dipakai"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "menyalakan TV sepanjang hari"
-            },
-            "say": "menyalakan TV sepanjang hari",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "membuka kulkas terlalu lama"
-            },
-            "say": "membuka kulkas terlalu lama",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "mencabut-pasang steker berulang kali"
-            },
-            "say": "mencabut-pasang steker berulang kali",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Matikan alat yang tidak dipakai.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Tangan basah tidak boleh menyentuh stopkontak karena …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "air dapat menghantarkan listrik"
-            },
-            "say": "air dapat menghantarkan listrik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "air adalah isolator"
-            },
-            "say": "air adalah isolator",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "listrik menjadi padam"
-            },
-            "say": "listrik menjadi padam",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "stopkontak menjadi dingin"
-            },
-            "say": "stopkontak menjadi dingin",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Air (berisi mineral) menghantarkan listrik.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Agar dua lampu menyala paling terang dengan satu baterai, susunan yang tepat adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "paralel"
-            },
-            "say": "paralel"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "seri"
-            },
-            "say": "seri",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "satu lampu dilepas kabelnya"
-            },
-            "say": "satu lampu dilepas kabelnya",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "sakelar dibuka"
-            },
-            "say": "sakelar dibuka",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Pada paralel, setiap lampu mendapat tegangan penuh.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Tiga baterai dipasang seri pada satu lampu. Dibanding satu baterai, nyala lampu …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "lebih terang"
-            },
-            "say": "lebih terang"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "lebih redup"
-            },
-            "say": "lebih redup",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "sama saja"
-            },
-            "say": "sama saja",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "padam"
-            },
-            "say": "padam",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Tegangan baterai seri dijumlahkan.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Mengapa sekring dipasang pada instalasi listrik rumah?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "untuk memutus arus saat terjadi korsleting"
-            },
-            "say": "untuk memutus arus saat terjadi korsleting"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "untuk menambah tegangan"
-            },
-            "say": "untuk menambah tegangan",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "untuk menyimpan listrik"
-            },
-            "say": "untuk menyimpan listrik",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "untuk menyalakan lampu"
-            },
-            "say": "untuk menyalakan lampu",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Sekring adalah pengaman.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Lampu A dan B seri, lalu lampu C dipasang paralel dengan keduanya. Jika lampu A putus, maka …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "B padam, C tetap menyala"
-            },
-            "say": "B padam, C tetap menyala"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "A, B, dan C padam"
-            },
-            "say": "A, B, dan C padam",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "B dan C tetap menyala"
-            },
-            "say": "B dan C tetap menyala",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "hanya C yang padam"
-            },
-            "say": "hanya C yang padam",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "A–B satu jalur; C jalur lain.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Sebuah rangkaian diberi sakelar terbuka. Yang terjadi adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "arus tidak mengalir dan lampu padam"
-            },
-            "say": "arus tidak mengalir dan lampu padam"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "arus mengalir lebih kuat"
-            },
-            "say": "arus mengalir lebih kuat",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "lampu menyala terang"
-            },
-            "say": "lampu menyala terang",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "baterai bertambah penuh"
-            },
-            "say": "baterai bertambah penuh",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Sakelar terbuka memutus rangkaian.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
-      },
-      {
-        "prompt": "Benda mana yang dapat menutup celah rangkaian agar lampu menyala?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "paku besi"
-            },
-            "say": "paku besi"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "penghapus karet"
-            },
-            "say": "penghapus karet",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "sedotan plastik"
-            },
-            "say": "sedotan plastik",
-            "tag": "konsep-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "kertas"
-            },
-            "say": "kertas",
-            "tag": "konsep-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Besi konduktor.",
-        "source": "Buku IPAS SD Kelas V–VI Kurikulum Merdeka (Kemendikbudristek); kisi-kisi OSN IPA SD Kategori C (Puspresnas)"
+            {
+              "expr": "n * 3",
+              "tag": "kali-volt"
+            }
+          ],
+          "explain": "Setiap lampu memerlukan 2 × 1,5 V = 3 V. {=n*2} baterai : 2 = {answer}."
+        }
       }
     ]
   }

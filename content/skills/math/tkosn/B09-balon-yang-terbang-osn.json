@@ -1,11 +1,11 @@
 {
   "id": "math.tkosn.b9.balon-yang-terbang-osn",
-  "version": 1,
+  "version": 2,
   "domain": "math",
   "grade": "tkosn",
   "category": "B",
   "order": 9,
-  "title": "Berhitung ceria — Level 9 — Balon yang terbang (gaya OSN)",
+  "title": "Berhitung ceria — Level 9 — Sisa benda (gaya OSN)",
   "tier": "basic",
   "tags": {
     "level": "9",
@@ -20,12 +20,27 @@
       "b": [1, 4]
     },
     "constraint": "b < a",
-    "prompt": "Ani punya {a} balon. {b} balon terbang. Tinggal berapa balon Ani?",
+    "words": {
+      "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"],
+      "benda": [
+        "balon",
+        "kue",
+        "apel",
+        "jeruk",
+        "pensil",
+        "bola",
+        "stroberi",
+        "buku",
+        "topi",
+        "mangga"
+      ]
+    },
+    "prompt": "{nama} punya {a} {benda}. {b} {benda} diberikan ke teman. Tinggal berapa {benda} {nama}?",
     "stimulus": [
       {
         "kind": "objects",
         "layout": "row",
-        "object": "balon",
+        "object": "{benda}",
         "count": "=a",
         "crossed": "=b"
       }
@@ -46,6 +61,6 @@
       }
     ],
     "choices": 3,
-    "explain": "Balon yang dicoret sudah terbang. Sisanya {answer} balon."
+    "explain": "{benda} yang dicoret sudah diberikan. Sisanya {answer} {benda}."
   }
 }

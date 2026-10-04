@@ -1,6 +1,6 @@
 {
   "id": "sains.tkosn.e10.tantangan-lingkungan-sekitar",
-  "version": 1,
+  "version": 3,
   "domain": "sains",
   "grade": "tkosn",
   "category": "E",
@@ -23,62 +23,98 @@
             {
               "name": "kereta api",
               "attrs": {
-                "tempat": "stasiun",
-                "jalur": "darat"
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "KRL",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "MRT",
+              "attrs": {
+                "tempat": "stasiun"
               }
             },
             {
               "name": "pesawat terbang",
               "attrs": {
-                "tempat": "bandara",
-                "jalur": "udara"
+                "tempat": "bandara"
               }
             },
             {
               "name": "kapal laut",
               "attrs": {
-                "tempat": "pelabuhan",
-                "jalur": "air"
+                "tempat": "pelabuhan"
               }
             },
             {
-              "name": "bus",
+              "name": "kapal feri",
               "attrs": {
-                "tempat": "halte atau terminal",
-                "jalur": "darat"
+                "tempat": "pelabuhan"
               }
             },
             {
-              "name": "mobil",
+              "name": "kapal pesiar",
               "attrs": {
-                "jalur": "darat"
-              },
-              "object": "mobil"
-            },
-            {
-              "name": "sepeda",
-              "attrs": {
-                "jalur": "darat"
-              },
-              "object": "sepeda"
-            },
-            {
-              "name": "helikopter",
-              "attrs": {
-                "jalur": "udara"
+                "tempat": "pelabuhan"
               }
             },
             {
-              "name": "perahu",
+              "name": "bus antarkota",
               "attrs": {
-                "jalur": "air"
+                "tempat": "terminal bus"
+              }
+            },
+            {
+              "name": "ambulans",
+              "attrs": {
+                "tempat": "rumah sakit"
+              }
+            },
+            {
+              "name": "mobil pemadam kebakaran",
+              "attrs": {
+                "tempat": "pos pemadam kebakaran"
+              }
+            },
+            {
+              "name": "mobil polisi",
+              "attrs": {
+                "tempat": "kantor polisi"
+              }
+            },
+            {
+              "name": "traktor",
+              "attrs": {
+                "tempat": "sawah"
+              }
+            },
+            {
+              "name": "truk sampah",
+              "attrs": {
+                "tempat": "tempat pembuangan sampah"
+              }
+            },
+            {
+              "name": "pesawat kargo",
+              "attrs": {
+                "tempat": "bandara"
+              }
+            },
+            {
+              "name": "perahu nelayan",
+              "attrs": {
+                "tempat": ["pelabuhan", "pantai"]
               }
             }
           ],
           "attr": "tempat",
-          "ask": "name",
-          "prompt": "Kendaraan yang ada di {value} adalah …",
-          "explain": "{name} ada di {value}.",
+          "ask": "value",
+          "prompt": "Kita bisa menjumpai {name} di …",
+          "explain": "Kita bisa menjumpai {name} di {value}.",
           "choices": 3,
           "pictures": false,
           "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
@@ -89,15 +125,316 @@
         "params": {
           "table": [
             {
-              "name": "pilot",
+              "name": "sepeda",
               "attrs": {
-                "tugas": "menerbangkan pesawat"
+                "jalur": "darat"
               }
             },
             {
+              "name": "becak",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "bajaj",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "angkot",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "sepeda motor",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "delman",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "kereta api",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "KRL",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "bus",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "truk",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "ambulans",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "taksi",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "traktor",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "mobil pemadam kebakaran",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "perahu",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "kapal feri",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "rakit",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "kapal selam",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "perahu motor",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "sampan",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "perahu layar",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "kapal pesiar",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "pesawat terbang",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "helikopter",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "balon udara",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "pesawat jet",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "pesawat baling-baling",
+              "attrs": {
+                "jalur": "udara"
+              }
+            }
+          ],
+          "attr": "jalur",
+          "ask": "value",
+          "prompt": "{name} adalah kendaraan …",
+          "explain": "{name} adalah kendaraan {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mobil",
+              "object": "mobil",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "sepeda",
+              "object": "sepeda",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "bus",
+              "object": "bus",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "kereta",
+              "object": "kereta",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "kapal",
+              "object": "kapal",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "pesawat",
+              "object": "pesawat",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "meja",
+              "object": "meja",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "pintu",
+              "object": "pintu",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "pohon",
+              "object": "pohon",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "gedung",
+              "object": "gedung",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "jendela",
+              "object": "jendela",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "buku",
+              "object": "buku",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "ember",
+              "object": "ember",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "panci",
+              "object": "panci",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            }
+          ],
+          "attr": "jenis",
+          "ask": "odd",
+          "only": ["kendaraan"],
+          "prompt": "Ketuk yang bukan kendaraan.",
+          "explain": "{name} bukan kendaraan.",
+          "choices": 4,
+          "pictures": true,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
               "name": "dokter",
               "attrs": {
-                "tugas": "mengobati orang sakit"
+                "tugas": "memeriksa dan mengobati orang sakit"
+              }
+            },
+            {
+              "name": "perawat",
+              "attrs": {
+                "tugas": "membantu dokter merawat pasien"
+              }
+            },
+            {
+              "name": "dokter gigi",
+              "attrs": {
+                "tugas": "merawat gigi yang sakit"
+              }
+            },
+            {
+              "name": "dokter hewan",
+              "attrs": {
+                "tugas": "mengobati hewan yang sakit"
               }
             },
             {
@@ -107,9 +444,15 @@
               }
             },
             {
+              "name": "polisi",
+              "attrs": {
+                "tugas": "mengatur lalu lintas di jalan"
+              }
+            },
+            {
               "name": "petani",
               "attrs": {
-                "tugas": "menanam padi dan sayur"
+                "tugas": "menanam padi dan sayur di sawah"
               }
             },
             {
@@ -119,9 +462,33 @@
               }
             },
             {
-              "name": "polisi",
+              "name": "pilot",
               "attrs": {
-                "tugas": "menjaga keamanan dan mengatur lalu lintas"
+                "tugas": "menerbangkan pesawat"
+              }
+            },
+            {
+              "name": "masinis",
+              "attrs": {
+                "tugas": "menjalankan kereta api"
+              }
+            },
+            {
+              "name": "nakhoda",
+              "attrs": {
+                "tugas": "memimpin kapal di laut"
+              }
+            },
+            {
+              "name": "sopir bus",
+              "attrs": {
+                "tugas": "mengemudikan bus"
+              }
+            },
+            {
+              "name": "koki",
+              "attrs": {
+                "tugas": "memasak makanan di restoran"
               }
             },
             {
@@ -131,19 +498,940 @@
               }
             },
             {
-              "name": "koki",
+              "name": "tukang pos",
               "attrs": {
-                "tugas": "memasak makanan"
+                "tugas": "mengantar surat dan paket"
+              }
+            },
+            {
+              "name": "penjahit",
+              "attrs": {
+                "tugas": "menjahit kain menjadi baju"
+              }
+            },
+            {
+              "name": "tukang kayu",
+              "attrs": {
+                "tugas": "membuat meja dan kursi dari kayu"
+              }
+            },
+            {
+              "name": "pustakawan",
+              "attrs": {
+                "tugas": "merapikan buku di perpustakaan"
+              }
+            },
+            {
+              "name": "satpam",
+              "attrs": {
+                "tugas": "menjaga gerbang gedung"
+              }
+            },
+            {
+              "name": "petugas kebersihan",
+              "attrs": {
+                "tugas": "menyapu dan membersihkan jalan"
+              }
+            },
+            {
+              "name": "tukang cukur",
+              "attrs": {
+                "tugas": "memotong rambut"
+              }
+            },
+            {
+              "name": "montir",
+              "attrs": {
+                "tugas": "memperbaiki mobil dan motor yang rusak"
+              }
+            },
+            {
+              "name": "tukang bangunan",
+              "attrs": {
+                "tugas": "memasang batu bata untuk membangun rumah"
+              }
+            },
+            {
+              "name": "wartawan",
+              "attrs": {
+                "tugas": "mencari dan menulis berita"
+              }
+            },
+            {
+              "name": "pelukis",
+              "attrs": {
+                "tugas": "melukis gambar di kanvas"
+              }
+            },
+            {
+              "name": "peternak",
+              "attrs": {
+                "tugas": "memelihara sapi dan kambing"
+              }
+            },
+            {
+              "name": "astronaut",
+              "attrs": {
+                "tugas": "terbang ke luar angkasa"
               }
             }
           ],
           "attr": "tugas",
-          "ask": "name",
-          "prompt": "Orang yang tugasnya {value} adalah …",
-          "explain": "{name} bertugas {value}.",
-          "choices": 4,
+          "ask": "value",
+          "prompt": "Apa tugas seorang {name}?",
+          "explain": "Tugas seorang {name} adalah {value}.",
+          "choices": 3,
           "pictures": false,
           "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "dokter",
+              "attrs": {
+                "tempat": "rumah sakit",
+                "alat": "stetoskop",
+                "pakaian": "jas putih"
+              }
+            },
+            {
+              "name": "perawat",
+              "attrs": {
+                "tempat": "rumah sakit"
+              }
+            },
+            {
+              "name": "dokter gigi",
+              "attrs": {
+                "tempat": "klinik gigi"
+              }
+            },
+            {
+              "name": "dokter hewan",
+              "attrs": {
+                "tempat": "klinik hewan"
+              }
+            },
+            {
+              "name": "guru",
+              "attrs": {
+                "tempat": "sekolah",
+                "alat": "papan tulis"
+              }
+            },
+            {
+              "name": "polisi",
+              "attrs": {
+                "tempat": "kantor polisi",
+                "alat": "peluit",
+                "pakaian": "seragam cokelat"
+              }
+            },
+            {
+              "name": "petani",
+              "attrs": {
+                "tempat": "sawah",
+                "alat": "cangkul",
+                "pakaian": "caping"
+              }
+            },
+            {
+              "name": "nelayan",
+              "attrs": {
+                "tempat": "laut",
+                "alat": "jala"
+              }
+            },
+            {
+              "name": "pilot",
+              "attrs": {
+                "tempat": "kokpit pesawat"
+              }
+            },
+            {
+              "name": "masinis",
+              "attrs": {
+                "tempat": "lokomotif kereta api"
+              }
+            },
+            {
+              "name": "koki",
+              "attrs": {
+                "tempat": "dapur restoran",
+                "alat": "wajan dan spatula",
+                "pakaian": "topi koki yang tinggi"
+              }
+            },
+            {
+              "name": "pemadam kebakaran",
+              "attrs": {
+                "tempat": "pos pemadam kebakaran",
+                "alat": "selang air panjang",
+                "pakaian": "helm dan baju tahan api"
+              }
+            },
+            {
+              "name": "tukang pos",
+              "attrs": {
+                "tempat": "kantor pos"
+              }
+            },
+            {
+              "name": "penjahit",
+              "attrs": {
+                "alat": "mesin jahit"
+              }
+            },
+            {
+              "name": "tukang kayu",
+              "attrs": {
+                "alat": "gergaji dan palu"
+              }
+            },
+            {
+              "name": "pustakawan",
+              "attrs": {
+                "tempat": "perpustakaan"
+              }
+            },
+            {
+              "name": "petugas kebersihan",
+              "attrs": {
+                "alat": "sapu dan pengki"
+              }
+            },
+            {
+              "name": "tukang cukur",
+              "attrs": {
+                "tempat": "tempat pangkas rambut",
+                "alat": "gunting dan sisir"
+              }
+            },
+            {
+              "name": "montir",
+              "attrs": {
+                "tempat": "bengkel",
+                "alat": "kunci pas"
+              }
+            },
+            {
+              "name": "pelukis",
+              "attrs": {
+                "alat": "kuas dan cat"
+              }
+            },
+            {
+              "name": "peternak",
+              "attrs": {
+                "tempat": "kandang sapi"
+              }
+            },
+            {
+              "name": "astronaut",
+              "attrs": {
+                "pakaian": "baju antariksa"
+              }
+            },
+            {
+              "name": "perenang penyelamat",
+              "attrs": {
+                "pakaian": "pelampung"
+              }
+            }
+          ],
+          "attr": "tempat",
+          "ask": "name",
+          "prompt": "Siapa yang bekerja di {value}?",
+          "explain": "{name} bekerja di {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "pensil",
+              "object": "pensil",
+              "attrs": {
+                "guna": "menulis"
+              }
+            },
+            {
+              "name": "sendok",
+              "object": "sendok",
+              "attrs": {
+                "guna": "menyuapkan makanan"
+              }
+            },
+            {
+              "name": "ember",
+              "object": "ember",
+              "attrs": {
+                "guna": "menampung air"
+              }
+            },
+            {
+              "name": "gelas",
+              "object": "gelas",
+              "attrs": {
+                "guna": "minum air"
+              }
+            },
+            {
+              "name": "buku",
+              "object": "buku",
+              "attrs": {
+                "guna": "membaca cerita"
+              }
+            },
+            {
+              "name": "piring",
+              "object": "piring",
+              "attrs": {
+                "guna": "tempat nasi dan lauk"
+              }
+            },
+            {
+              "name": "payung",
+              "object": "payung",
+              "attrs": {
+                "guna": "melindungi dari hujan"
+              }
+            },
+            {
+              "name": "panci",
+              "object": "panci",
+              "attrs": {
+                "guna": "merebus sayur"
+              }
+            },
+            {
+              "name": "jam dinding",
+              "object": "jam-dinding",
+              "attrs": {
+                "guna": "melihat waktu"
+              }
+            },
+            {
+              "name": "pintu",
+              "object": "pintu",
+              "attrs": {
+                "guna": "keluar masuk ruangan"
+              }
+            },
+            {
+              "name": "jendela",
+              "object": "jendela",
+              "attrs": {
+                "guna": "memasukkan cahaya dan udara"
+              }
+            },
+            {
+              "name": "bola",
+              "object": "bola",
+              "attrs": {
+                "guna": "bermain sepak bola"
+              }
+            },
+            {
+              "name": "drum",
+              "object": "drum",
+              "attrs": {
+                "guna": "dipukul agar berbunyi"
+              }
+            },
+            {
+              "name": "meja",
+              "object": "meja",
+              "attrs": {
+                "guna": "tempat menaruh buku saat belajar"
+              }
+            },
+            {
+              "name": "kotak",
+              "object": "kotak",
+              "attrs": {
+                "guna": "menyimpan mainan"
+              }
+            }
+          ],
+          "attr": "guna",
+          "ask": "name",
+          "prompt": "Benda yang dipakai untuk {value} adalah …",
+          "explain": "{name} dipakai untuk {value}.",
+          "choices": 3,
+          "pictures": true,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Sampah sebaiknya dibuang ke …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tempat sampah"
+                  },
+                  "say": "tempat sampah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sungai"
+                  },
+                  "say": "sungai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jalan"
+                  },
+                  "say": "jalan"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sampah dibuang ke tempat sampah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Agar air tidak terbuang, setelah dipakai keran harus …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ditutup"
+                  },
+                  "say": "ditutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibiarkan menyala"
+                  },
+                  "say": "dibiarkan menyala"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dipukul"
+                  },
+                  "say": "dipukul"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Keran ditutup agar air tidak terbuang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Daun kering dan sisa sayur bisa diolah menjadi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pupuk kompos"
+                  },
+                  "say": "pupuk kompos"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "plastik"
+                  },
+                  "say": "plastik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kaca"
+                  },
+                  "say": "kaca"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Daun dan sisa sayur bisa menjadi pupuk kompos.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Saat menggosok gigi, air sebaiknya …",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "gelas"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ditampung di gelas"
+                  },
+                  "say": "ditampung di gelas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dibiarkan mengalir terus"
+                  },
+                  "say": "dibiarkan mengalir terus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "disiramkan ke lantai"
+                  },
+                  "say": "disiramkan ke lantai"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menampung air di gelas membuat air tidak terbuang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Hutan yang ditebang habis bisa menyebabkan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "banjir dan tanah longsor"
+                  },
+                  "say": "banjir dan tanah longsor"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pelangi"
+                  },
+                  "say": "pelangi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "udara segar"
+                  },
+                  "say": "udara segar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Akar pohon menahan tanah dan air. Tanpa pohon, banjir mudah terjadi.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Saat berkunjung ke kebun binatang, kita sebaiknya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak mengganggu hewan"
+                  },
+                  "say": "tidak mengganggu hewan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "melempari hewan"
+                  },
+                  "say": "melempari hewan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "memberi hewan permen"
+                  },
+                  "say": "memberi hewan permen"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hewan perlu dijaga dan tidak diganggu.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Air yang tergenang di kaleng bekas bisa menjadi sarang nyamuk. Kita sebaiknya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membuang air dan menutup kaleng"
+                  },
+                  "say": "membuang air dan menutup kaleng"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menambah air"
+                  },
+                  "say": "menambah air"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membiarkannya"
+                  },
+                  "say": "membiarkannya"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Membuang genangan air mencegah nyamuk bertelur.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Membersihkan lingkungan bersama-sama warga disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerja bakti"
+                  },
+                  "say": "kerja bakti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lomba lari"
+                  },
+                  "say": "lomba lari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidur siang"
+                  },
+                  "say": "tidur siang"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kerja bakti adalah membersihkan lingkungan bersama.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            }
+          ]
+        }
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Pilot",
+              "attrs": {
+                "kemudi": "pesawat terbang"
+              }
+            },
+            {
+              "name": "Masinis",
+              "attrs": {
+                "kemudi": "kereta api"
+              }
+            },
+            {
+              "name": "Nakhoda",
+              "attrs": {
+                "kemudi": "kapal laut"
+              }
+            },
+            {
+              "name": "Sopir bus",
+              "attrs": {
+                "kemudi": "bus"
+              }
+            },
+            {
+              "name": "Kusir",
+              "attrs": {
+                "kemudi": "delman"
+              }
+            },
+            {
+              "name": "Tukang becak",
+              "attrs": {
+                "kemudi": "becak"
+              }
+            },
+            {
+              "name": "Tukang ojek",
+              "attrs": {
+                "kemudi": "sepeda motor"
+              }
+            },
+            {
+              "name": "Sopir truk",
+              "attrs": {
+                "kemudi": "truk"
+              }
+            },
+            {
+              "name": "Sopir ambulans",
+              "attrs": {
+                "kemudi": "ambulans"
+              }
+            },
+            {
+              "name": "Astronaut",
+              "attrs": {
+                "kemudi": "roket"
+              }
+            }
+          ],
+          "attr": "kemudi",
+          "ask": "true-false",
+          "prompt": "{name} mengemudikan {value}. Benar atau salah?",
+          "explain": "{name} mengemudikan {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Aku ditarik oleh kuda dan punya roda besar. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "delman"
+                  },
+                  "say": "delman"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "becak"
+                  },
+                  "say": "becak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bajaj"
+                  },
+                  "say": "bajaj"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Delman ditarik oleh kuda.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Sirineku berbunyi nguing-nguing. Aku membawa orang sakit ke rumah sakit. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ambulans"
+                  },
+                  "say": "ambulans"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "truk sampah"
+                  },
+                  "say": "truk sampah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "taksi"
+                  },
+                  "say": "taksi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ambulans membawa orang sakit dengan cepat.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Baling-baling di atasku berputar dan aku bisa naik lurus ke atas. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "helikopter"
+                  },
+                  "say": "helikopter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kapal"
+                  },
+                  "say": "kapal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kereta api"
+                  },
+                  "say": "kereta api"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Helikopter terbang dengan baling-baling di atasnya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku bisa menyelam jauh di bawah laut. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kapal selam"
+                  },
+                  "say": "kapal selam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rakit"
+                  },
+                  "say": "rakit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "perahu layar"
+                  },
+                  "say": "perahu layar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kapal selam bisa menyelam di bawah laut.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Aku duduk di depan dan menjalankan kereta api. Aku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "masinis"
+                  },
+                  "say": "masinis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nakhoda"
+                  },
+                  "say": "nakhoda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pilot"
+                  },
+                  "say": "pilot"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Masinis menjalankan kereta api.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Kucingmu sakit? Bawa ke aku, ya. Aku adalah …",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kucing"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dokter hewan"
+                  },
+                  "say": "dokter hewan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dokter gigi"
+                  },
+                  "say": "dokter gigi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "guru"
+                  },
+                  "say": "guru"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dokter hewan mengobati hewan yang sakit.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Saat menyeberang jalan, kita sebaiknya lewat …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "zebra cross"
+                  },
+                  "say": "zebra cross"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tengah jalan"
+                  },
+                  "say": "tengah jalan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jalan tol"
+                  },
+                  "say": "jalan tol"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Zebra cross adalah tempat aman untuk menyeberang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Lampu lalu lintas menyala merah. Kendaraan harus …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berhenti"
+                  },
+                  "say": "berhenti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "melaju kencang"
+                  },
+                  "say": "melaju kencang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berbelok"
+                  },
+                  "say": "berbelok"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lampu merah artinya berhenti.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            }
+          ]
         }
       }
     ]

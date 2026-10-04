@@ -1,0 +1,80 @@
+{
+  "id": "math.sd3.y5.waktu-selesai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 5,
+  "title": "Waktu dan kalender — Level 5 — Waktu selesai",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [8, 20],
+            "d": [65, 115]
+          },
+          "constraint": "d % 5 == 0",
+          "prompt": "Film mulai pukul {h}.00 dan berlangsung {d} menit. Selesai pukul {=h+1} lewat berapa menit?",
+          "answer": "d - 60",
+          "distractors": ["d", "d - 40", "100 - d"],
+          "explain": "{d} menit = 1 jam {=d-60} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 19],
+            "m": {
+              "values": [15, 20, 30, 40, 45]
+            },
+            "d": {
+              "values": [30, 35, 40, 45, 50]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "m + d >= 60 && m + d < 120 && m + d != 60",
+          "prompt": "{nama} mulai belajar pukul {h}.{m} dan belajar {d} menit. Selesai pukul berapa lewat … menit? (jamnya {=h+1})",
+          "answer": "m + d - 60",
+          "distractors": ["m + d", "m + d - 40", "d"],
+          "explain": "{m} + {d} = {=m+d} menit = 1 jam {=m+d-60} menit."
+        }
+      }
+    ]
+  }
+}

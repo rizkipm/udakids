@@ -1,0 +1,87 @@
+{
+  "id": "math.sd3.a2.nilai-angka-sampai-puluh-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "A",
+  "order": 2,
+  "title": "Nilai tempat — Level 2 — Nilai angka sampai puluh ribuan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-A",
+    "sg": "P3 Numbers to 10 000: place value",
+    "cambridge": "Stage 3 Number: place value (3Np.02)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 99999],
+            "p": [1, 4]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "d4": "floor(n / 10000) % 10",
+            "pw": "(p == 0) * 1 + (p == 1) * 10 + (p == 2) * 100 + (p == 3) * 1000 + (p == 4) * 10000",
+            "dg": "floor(n / pw) % 10"
+          },
+          "constraint": "(d0 == dg) + (d1 == dg) + (d2 == dg) + (d3 == dg) + (d4 == dg) == 1 && dg > 0",
+          "prompt": "Berapa nilai angka {dg} pada bilangan {n}?",
+          "answer": "dg * pw",
+          "distractors": [
+            {
+              "expr": "dg",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "dg * pw * 10",
+              "tag": "tempat-kiri"
+            },
+            {
+              "expr": "dg * pw / 10",
+              "tag": "tempat-kanan"
+            }
+          ],
+          "explain": "Angka {dg} berada di tempat yang bernilai {pw}, jadi nilainya {dg} × {pw} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [1, 9],
+            "c": [0, 9],
+            "e": [0, 9]
+          },
+          "prompt": "Pada bilangan {a}.{b}{c}{e}, berapa nilai angka {b} yang berada di tempat ratusan?",
+          "answer": "b * 100",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "b * 1000",
+              "tag": "tempat-kiri"
+            },
+            {
+              "expr": "b * 10",
+              "tag": "tempat-kanan"
+            }
+          ],
+          "explain": "Angka {b} di tempat ratusan bernilai {b} × 100 = {answer}."
+        }
+      }
+    ]
+  }
+}

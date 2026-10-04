@@ -1,6 +1,6 @@
 {
   "id": "sains.tkosn.e1.tempat-kendaraan",
-  "version": 1,
+  "version": 3,
   "domain": "sains",
   "grade": "tkosn",
   "category": "E",
@@ -13,70 +13,572 @@
     "kognitif": "knowing",
     "osn": "Olimpiade TK (TK A–B, usia 4–6)"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "kereta api",
-        "attrs": {
-          "tempat": "stasiun",
-          "jalur": "darat"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "kereta api",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "KRL",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "MRT",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "pesawat terbang",
+              "attrs": {
+                "tempat": "bandara"
+              }
+            },
+            {
+              "name": "kapal laut",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "kapal feri",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "kapal pesiar",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "bus antarkota",
+              "attrs": {
+                "tempat": "terminal bus"
+              }
+            },
+            {
+              "name": "ambulans",
+              "attrs": {
+                "tempat": "rumah sakit"
+              }
+            },
+            {
+              "name": "mobil pemadam kebakaran",
+              "attrs": {
+                "tempat": "pos pemadam kebakaran"
+              }
+            },
+            {
+              "name": "mobil polisi",
+              "attrs": {
+                "tempat": "kantor polisi"
+              }
+            },
+            {
+              "name": "traktor",
+              "attrs": {
+                "tempat": "sawah"
+              }
+            },
+            {
+              "name": "truk sampah",
+              "attrs": {
+                "tempat": "tempat pembuangan sampah"
+              }
+            },
+            {
+              "name": "pesawat kargo",
+              "attrs": {
+                "tempat": "bandara"
+              }
+            },
+            {
+              "name": "perahu nelayan",
+              "attrs": {
+                "tempat": ["pelabuhan", "pantai"]
+              }
+            }
+          ],
+          "attr": "tempat",
+          "ask": "value",
+          "prompt": "Kita bisa menjumpai {name} di …",
+          "explain": "Kita bisa menjumpai {name} di {value}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "pesawat terbang",
-        "attrs": {
-          "tempat": "bandara",
-          "jalur": "udara"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "kereta api",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "KRL",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "MRT",
+              "attrs": {
+                "tempat": "stasiun"
+              }
+            },
+            {
+              "name": "pesawat terbang",
+              "attrs": {
+                "tempat": "bandara"
+              }
+            },
+            {
+              "name": "kapal laut",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "kapal feri",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "kapal pesiar",
+              "attrs": {
+                "tempat": "pelabuhan"
+              }
+            },
+            {
+              "name": "bus antarkota",
+              "attrs": {
+                "tempat": "terminal bus"
+              }
+            },
+            {
+              "name": "ambulans",
+              "attrs": {
+                "tempat": "rumah sakit"
+              }
+            },
+            {
+              "name": "mobil pemadam kebakaran",
+              "attrs": {
+                "tempat": "pos pemadam kebakaran"
+              }
+            },
+            {
+              "name": "mobil polisi",
+              "attrs": {
+                "tempat": "kantor polisi"
+              }
+            },
+            {
+              "name": "traktor",
+              "attrs": {
+                "tempat": "sawah"
+              }
+            },
+            {
+              "name": "truk sampah",
+              "attrs": {
+                "tempat": "tempat pembuangan sampah"
+              }
+            },
+            {
+              "name": "pesawat kargo",
+              "attrs": {
+                "tempat": "bandara"
+              }
+            },
+            {
+              "name": "perahu nelayan",
+              "attrs": {
+                "tempat": ["pelabuhan", "pantai"]
+              }
+            }
+          ],
+          "attr": "tempat",
+          "ask": "name",
+          "prompt": "Di {value}, kita bisa melihat …",
+          "explain": "Di {value}, kita bisa melihat {name}.",
+          "choices": 3,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "kapal laut",
-        "attrs": {
-          "tempat": "pelabuhan",
-          "jalur": "air"
-        }
-      },
-      {
-        "name": "bus",
-        "attrs": {
-          "tempat": "halte atau terminal",
-          "jalur": "darat"
-        }
-      },
-      {
-        "name": "mobil",
-        "attrs": {
-          "jalur": "darat"
-        },
-        "object": "mobil"
-      },
-      {
-        "name": "sepeda",
-        "attrs": {
-          "jalur": "darat"
-        },
-        "object": "sepeda"
-      },
-      {
-        "name": "helikopter",
-        "attrs": {
-          "jalur": "udara"
-        }
-      },
-      {
-        "name": "perahu",
-        "attrs": {
-          "jalur": "air"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Tempat ojek menunggu penumpang disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pangkalan ojek"
+                  },
+                  "say": "pangkalan ojek"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pelabuhan"
+                  },
+                  "say": "pelabuhan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "landasan pesawat"
+                  },
+                  "say": "landasan pesawat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ojek menunggu penumpang di pangkalan ojek.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Becak biasanya menunggu penumpang di …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pangkalan becak"
+                  },
+                  "say": "pangkalan becak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bandara"
+                  },
+                  "say": "bandara"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rel kereta"
+                  },
+                  "say": "rel kereta"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Becak menunggu penumpang di pangkalan becak.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Bus kota berhenti untuk menaikkan penumpang di …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "halte"
+                  },
+                  "say": "halte"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dermaga"
+                  },
+                  "say": "dermaga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bandara"
+                  },
+                  "say": "bandara"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bus kota berhenti di halte.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Tempat perahu dan kapal bersandar disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dermaga"
+                  },
+                  "say": "dermaga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garasi"
+                  },
+                  "say": "garasi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "halte"
+                  },
+                  "say": "halte"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Perahu dan kapal bersandar di dermaga.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mobil keluarga disimpan di rumah di dalam …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garasi"
+                  },
+                  "say": "garasi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dapur"
+                  },
+                  "say": "dapur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kamar tidur"
+                  },
+                  "say": "kamar tidur"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mobil disimpan di garasi.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Jalan panjang tempat pesawat berlari sebelum terbang disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "landasan pacu"
+                  },
+                  "say": "landasan pacu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rel"
+                  },
+                  "say": "rel"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dermaga"
+                  },
+                  "say": "dermaga"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pesawat berlari di landasan pacu sebelum terbang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Kereta api berjalan di atas …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rel"
+                  },
+                  "say": "rel"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "aspal"
+                  },
+                  "say": "aspal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air"
+                  },
+                  "say": "air"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Roda kereta api berjalan di atas rel.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Tempat kendaraan mengisi bensin disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pom bensin"
+                  },
+                  "say": "pom bensin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "perpustakaan"
+                  },
+                  "say": "perpustakaan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sekolah"
+                  },
+                  "say": "sekolah"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kendaraan mengisi bensin di pom bensin.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Tempat helikopter mendarat biasanya ditandai huruf …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "H"
+                  },
+                  "say": "H"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "A"
+                  },
+                  "say": "A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "O"
+                  },
+                  "say": "O"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tempat mendarat helikopter ditandai huruf H.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mobil dan motor yang rusak diperbaiki di …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bengkel"
+                  },
+                  "say": "bengkel"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "stasiun"
+                  },
+                  "say": "stasiun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pelabuhan"
+                  },
+                  "say": "pelabuhan"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kendaraan yang rusak diperbaiki di bengkel.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Ketuk kendaraan yang ada di bandara.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pesawat"
+                  },
+                  "say": "pesawat"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kapal"
+                  },
+                  "say": "kapal"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "sepeda"
+                  },
+                  "say": "sepeda"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pesawat berangkat dan mendarat di bandara.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Ketuk kendaraan yang ada di stasiun.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kereta"
+                  },
+                  "say": "kereta"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kapal"
+                  },
+                  "say": "kapal"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pesawat"
+                  },
+                  "say": "pesawat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kereta api berhenti di stasiun.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            }
+          ]
         }
       }
-    ],
-    "attr": "tempat",
-    "ask": "value",
-    "prompt": "Kita bisa menjumpai {name} di …",
-    "explain": "{name} ada di {value}.",
-    "choices": 3,
-    "pictures": false,
-    "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+    ]
   }
 }

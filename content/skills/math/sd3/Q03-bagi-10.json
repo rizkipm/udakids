@@ -1,0 +1,127 @@
+{
+  "id": "math.sd3.q3.bagi-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Q",
+  "order": 3,
+  "title": "Fakta pembagian — Level 3 — Bagi 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-S/T",
+    "sg": "P3 Division within multiplication tables",
+    "cambridge": "Stage 3 Calculation: division facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [10]
+            },
+            "n": [1, 10]
+          },
+          "prompt": "{=m*n} : {m} = …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m * n - m",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "{m} × {n} = {=m*n}, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [10]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "Berapa {=m*n} dibagi {m}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [10]
+            },
+            "n": [2, 10]
+          },
+          "constraint": "m != n",
+          "prompt": "{=m*n} : … = {n}",
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "hasil"
+            },
+            {
+              "expr": "m + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "m - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [11, 99]
+          },
+          "prompt": "{=n*10} : 10 = …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n * 100",
+              "tag": "tambah-nol"
+            },
+            "n + 10",
+            "n - 1"
+          ],
+          "explain": "Hilangkan satu nol: {answer}."
+        }
+      }
+    ]
+  }
+}

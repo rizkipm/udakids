@@ -1,0 +1,63 @@
+{
+  "id": "math.sd3.g9.penalaran-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "G",
+  "order": 9,
+  "title": "Penjumlahan empat dan lima angka — Level 9 — Penalaran penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-I",
+    "sg": "P3 Addition within 10 000",
+    "cambridge": "Stage 3 Calculation: addition (3Nc.03)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {},
+          "prompt": "Jumlah dua bilangan 4 angka terbesar yang berbeda adalah …",
+          "answer": "9999 + 9998",
+          "mode": "input",
+          "explain": "9.999 + 9.998 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1200, 4000],
+            "b": [100, 999]
+          },
+          "prompt": "Bilangan A = {a}. Bilangan B {b} lebih besar dari A. Berapa A + B?",
+          "answer": "a + a + b",
+          "mode": "input",
+          "explain": "B = {=a+b}. A + B = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2000, 5000],
+            "b": [1000, 4000],
+            "c": [1000, 3000],
+            "e": [100, 900]
+          },
+          "constraint": "a + b > c + e",
+          "prompt": "{a} + {b} = {c} + {e} + …",
+          "answer": "a + b - c - e",
+          "mode": "input",
+          "explain": "Kiri {=a+b}, kanan sudah {=c+e}. Kurangnya {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "math.sd3.g8.lima-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "G",
+  "order": 8,
+  "title": "Penjumlahan empat dan lima angka — Level 8 — Lima angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-I",
+    "sg": "P3 Addition within 10 000",
+    "cambridge": "Stage 3 Calculation: addition (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 59999],
+            "b": [10000, 39999]
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan"
+            },
+            "a + b + 10000",
+            "a + b - 10"
+          ],
+          "explain": "Jumlahkan dari satuan sampai puluh ribuan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 89999],
+            "b": [100, 9999]
+          },
+          "constraint": "a + b < 100000",
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b * 10",
+              "tag": "geser-tempat"
+            },
+            "a + b + 1000",
+            "a + b - 100"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

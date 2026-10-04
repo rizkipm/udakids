@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.n7.strategi-kali-9-dan-kali-6",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "N",
+  "order": 7,
+  "title": "Perkalian 6 sampai 9 — Level 7 — Strategi kali 9 dan kali 6",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 6, 7, 8, 9",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10]
+          },
+          "prompt": "9 × {n} = 10 × {n} − … ",
+          "answer": "n",
+          "distractors": ["9", "10", "n + 1"],
+          "explain": "9 kelompok = 10 kelompok kurang 1 kelompok: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10],
+            "m": [9, 9]
+          },
+          "prompt": "Hitung 9 × {n} dengan cara 10 × {n} − {n}.",
+          "answer": "9 * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            "10 * n",
+            "9 + n"
+          ],
+          "explain": "{=10*n} − {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10]
+          },
+          "prompt": "6 × {n} = 5 × {n} + … ",
+          "answer": "n",
+          "distractors": ["6", "5", "n + 1"],
+          "explain": "6 kelompok = 5 kelompok + 1 kelompok: {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "id": "sains.tk.g2.bagian-tubuh-hewan",
-  "version": 1,
+  "version": 3,
   "domain": "sains",
   "grade": "tk",
   "category": "G",
@@ -12,72 +12,978 @@
     "fase-merdeka": "Fondasi (PAUD)",
     "kognitif": "knowing"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "ikan",
-        "attrs": {
-          "p": ["sirip"]
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "ikan",
+              "object": "ikan",
+              "attrs": {
+                "p": ["sirip", "sisik"]
+              }
+            },
+            {
+              "name": "bebek",
+              "object": "bebek",
+              "attrs": {
+                "p": ["paruh", "sayap", "kaki berselaput"]
+              }
+            },
+            {
+              "name": "ayam",
+              "object": "ayam",
+              "attrs": {
+                "p": ["paruh", "sayap", "jengger"]
+              }
+            },
+            {
+              "name": "gajah",
+              "object": "gajah",
+              "attrs": {
+                "p": ["belalai", "gading"]
+              }
+            },
+            {
+              "name": "kupu-kupu",
+              "object": "kupu-kupu",
+              "attrs": {
+                "p": ["sayap", "antena"]
+              }
+            },
+            {
+              "name": "semut",
+              "object": "semut",
+              "attrs": {
+                "p": ["antena"]
+              }
+            },
+            {
+              "name": "kucing",
+              "object": "kucing",
+              "attrs": {
+                "p": ["kumis"]
+              }
+            },
+            {
+              "name": "kelinci",
+              "object": "kelinci",
+              "attrs": {
+                "p": ["kumis", "telinga panjang"]
+              }
+            },
+            {
+              "name": "sapi",
+              "object": "sapi",
+              "attrs": {
+                "p": ["tanduk"]
+              }
+            },
+            {
+              "name": "kambing",
+              "object": "kambing",
+              "attrs": {
+                "p": ["tanduk", "janggut"]
+              }
+            },
+            {
+              "name": "kuda",
+              "object": "kuda",
+              "attrs": {
+                "p": ["surai"]
+              }
+            },
+            {
+              "name": "singa",
+              "object": "singa",
+              "attrs": {
+                "p": ["surai", "kumis"]
+              }
+            },
+            {
+              "name": "jerapah",
+              "object": "jerapah",
+              "attrs": {
+                "p": ["leher panjang"]
+              }
+            },
+            {
+              "name": "burung",
+              "object": "burung",
+              "attrs": {
+                "p": ["paruh", "sayap"]
+              }
+            },
+            {
+              "name": "kura-kura",
+              "object": "kura-kura",
+              "attrs": {
+                "p": ["tempurung"]
+              }
+            },
+            {
+              "name": "katak",
+              "object": "katak",
+              "attrs": {
+                "p": ["kaki berselaput"]
+              }
+            },
+            {
+              "name": "lebah",
+              "object": "lebah",
+              "attrs": {
+                "p": ["sayap", "antena", "sengat"]
+              }
+            },
+            {
+              "name": "siput",
+              "object": "siput",
+              "attrs": {
+                "p": ["cangkang", "antena"]
+              }
+            },
+            {
+              "name": "penguin",
+              "object": "penguin",
+              "attrs": {
+                "p": ["paruh", "sayap", "kaki berselaput"]
+              }
+            }
+          ],
+          "attr": "p",
+          "ask": "name",
+          "prompt": "Ketuk hewan yang punya {value}.",
+          "explain": "Hewan itu {name}. Ia punya {value}.",
+          "pictures": true,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
         },
-        "object": "ikan"
+        "weight": 1
       },
       {
-        "name": "bebek",
-        "attrs": {
-          "p": ["paruh", "sayap", "bulu"]
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Hidung gajah yang panjang disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "gajah"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ekor"
+                  },
+                  "say": "ekor",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sirip"
+                  },
+                  "say": "sirip",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hidung gajah yang panjang disebut belalai.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Rumah keras di punggung kura-kura disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kura-kura"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tempurung"
+                  },
+                  "say": "tempurung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sayap"
+                  },
+                  "say": "sayap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "surai"
+                  },
+                  "say": "surai",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kura-kura punya tempurung yang keras.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Tubuh ikan tertutup ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ikan"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sisik"
+                  },
+                  "say": "sisik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bulu"
+                  },
+                  "say": "bulu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rambut"
+                  },
+                  "say": "rambut",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tubuh ikan tertutup sisik yang licin.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Tubuh burung tertutup ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "burung"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bulu"
+                  },
+                  "say": "bulu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sisik"
+                  },
+                  "say": "sisik",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cangkang"
+                  },
+                  "say": "cangkang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tubuh burung tertutup bulu.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Siput punya ... di punggungnya.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "siput"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cangkang"
+                  },
+                  "say": "cangkang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sayap"
+                  },
+                  "say": "sayap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Siput membawa cangkang di punggungnya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Rambut lebat di leher singa jantan disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "singa"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "surai"
+                  },
+                  "say": "surai"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sirip"
+                  },
+                  "say": "sirip",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Singa jantan punya surai di lehernya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Kambing punya ... di kepalanya.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kambing"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kambing punya tanduk di kepalanya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Mulut ayam yang runcing disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ayam"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sirip"
+                  },
+                  "say": "sirip",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mulut burung dan ayam disebut paruh.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Kupu-kupu punya ... di kepalanya.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kupu-kupu"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "antena"
+                  },
+                  "say": "antena"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "surai"
+                  },
+                  "say": "surai",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kupu-kupu punya dua antena di kepala.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Di antara jari kaki bebek ada ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "bebek"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "selaput"
+                  },
+                  "say": "selaput"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "duri"
+                  },
+                  "say": "duri",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bulu panjang"
+                  },
+                  "say": "bulu panjang",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kaki bebek berselaput, seperti dayung.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Rambut panjang di dekat hidung kucing disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kucing"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kumis"
+                  },
+                  "say": "kumis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kucing punya kumis di dekat hidungnya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Gigi gajah yang panjang dan putih disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "gajah"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gading"
+                  },
+                  "say": "gading"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gigi panjang gajah disebut gading.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Jari beruang punya ... yang tajam.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "beruang"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cakar"
+                  },
+                  "say": "cakar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sirip"
+                  },
+                  "say": "sirip",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Beruang punya cakar yang tajam.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Monyet punya ... panjang di belakang tubuhnya.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "monyet"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ekor"
+                  },
+                  "say": "ekor"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Monyet punya ekor panjang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Telinga kelinci bentuknya ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kelinci"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panjang"
+                  },
+                  "say": "panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bulat kecil"
+                  },
+                  "say": "bulat kecil",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak ada"
+                  },
+                  "say": "tidak ada",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelinci punya telinga yang panjang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Kulit katak terasa ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "katak"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "licin dan basah"
+                  },
+                  "say": "licin dan basah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berbulu tebal"
+                  },
+                  "say": "berbulu tebal",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bersisik keras"
+                  },
+                  "say": "bersisik keras",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kulit katak licin dan selalu basah.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Berapa kaki ayam?",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ayam"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua"
+                  },
+                  "say": "dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "empat"
+                  },
+                  "say": "empat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "enam"
+                  },
+                  "say": "enam",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ayam punya dua kaki.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Berapa kaki kucing?",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "kucing"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "empat"
+                  },
+                  "say": "empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua"
+                  },
+                  "say": "dua",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "delapan"
+                  },
+                  "say": "delapan",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kucing punya empat kaki.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Ikan bernapas dengan ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ikan"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "insang"
+                  },
+                  "say": "insang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belalai"
+                  },
+                  "say": "belalai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ikan punya insang untuk bernapas di air.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Daging merah di kepala ayam jantan disebut ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "ayam"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jengger"
+                  },
+                  "say": "jengger"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "surai"
+                  },
+                  "say": "surai",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanduk"
+                  },
+                  "say": "tanduk",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ayam jantan punya jengger merah di kepalanya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Leher jerapah ...",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "jerapah"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panjang sekali"
+                  },
+                  "say": "panjang sekali"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pendek sekali"
+                  },
+                  "say": "pendek sekali",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak ada"
+                  },
+                  "say": "tidak ada",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jerapah punya leher yang sangat panjang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            },
+            {
+              "prompt": "Lebah punya ... di ujung perutnya.",
+              "stimulus": [
+                {
+                  "kind": "object",
+                  "object": "lebah"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sengat"
+                  },
+                  "say": "sengat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "paruh"
+                  },
+                  "say": "paruh",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "surai"
+                  },
+                  "say": "surai",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lebah punya sengat di ujung perutnya.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)"
+            }
+          ]
         },
-        "object": "bebek"
-      },
-      {
-        "name": "ayam",
-        "attrs": {
-          "p": ["paruh", "sayap", "bulu"]
-        },
-        "object": "ayam"
-      },
-      {
-        "name": "gajah",
-        "attrs": {
-          "p": ["belalai"]
-        },
-        "object": "gajah"
-      },
-      {
-        "name": "kupu-kupu",
-        "attrs": {
-          "p": ["sayap", "antena"]
-        },
-        "object": "kupu-kupu"
-      },
-      {
-        "name": "semut",
-        "attrs": {
-          "p": ["antena"]
-        },
-        "object": "semut"
-      },
-      {
-        "name": "kucing",
-        "attrs": {
-          "p": ["kumis", "bulu"]
-        },
-        "object": "kucing"
-      },
-      {
-        "name": "kelinci",
-        "attrs": {
-          "p": ["kumis", "bulu"]
-        },
-        "object": "kelinci"
+        "weight": 1.5
       }
-    ],
-    "attr": "p",
-    "ask": "name",
-    "prompt": "Ketuk hewan yang punya {value}.",
-    "explain": "Hewan itu {name}. Ia punya {value}.",
-    "choices": 3,
-    "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-LS1-1, K-ESS3-1, 1-LS1-1, 1-LS3-1 (pengayaan)",
-    "pictures": true
+    ]
   }
 }

@@ -1,0 +1,284 @@
+{
+  "id": "math.sd3.d10.tantangan-estimasi-jumlah-dan-selisih",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 10,
+  "title": "Estimasi jumlah dan selisih — Level 10 — Tantangan estimasi jumlah dan selisih",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2000, 9900],
+            "b": [110, 1900]
+          },
+          "constraint": "a % 100 != 0 && b % 100 != 0 && a % 100 != 50 && b % 100 != 50",
+          "prompt": "Perkirakan {a} − {b} dengan membulatkan setiap bilangan ke ratusan terdekat.",
+          "answer": "round(a / 100) * 100 - round(b / 100) * 100",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "round(a / 100) * 100 + round(b / 100) * 100",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "{a} ≈ {=round(a/100)*100}, {b} ≈ {=round(b/100)*100}. Estimasi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ca": {
+              "values": [250, 500, 750, 1250, 1500]
+            },
+            "cb": {
+              "values": [250, 500, 750, 1000]
+            },
+            "i": [-4, 4],
+            "j": [-4, 4]
+          },
+          "derived": {
+            "a": "ca + i",
+            "b": "cb + j"
+          },
+          "constraint": "i != 0 && j != 0",
+          "prompt": "{a} dekat dengan {ca}, dan {b} dekat dengan {cb}. Perkiraan {a} + {b} adalah …",
+          "answer": "ca + cb",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "ca + cb + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "ca + cb - 250",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pakai bilangan mudah: {ca} + {cb} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ca": {
+              "values": [750, 1000, 1250, 1500, 2000]
+            },
+            "cb": {
+              "values": [250, 500]
+            },
+            "i": [-4, 4],
+            "j": [-4, 4]
+          },
+          "derived": {
+            "a": "ca + i",
+            "b": "cb + j"
+          },
+          "constraint": "i != 0 && j != 0",
+          "prompt": "{a} dekat dengan {ca}, dan {b} dekat dengan {cb}. Perkiraan {a} − {b} adalah …",
+          "answer": "ca - cb",
+          "explain": "Pakai bilangan mudah: {ca} − {cb} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1210, 4890],
+            "b": [1210, 4890]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50",
+          "prompt": "Hari Sabtu ada {a} pengunjung kebun binatang, hari Minggu {b} pengunjung. Kira-kira berapa pengunjung semuanya? (bulatkan ke ratusan)",
+          "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "{=round(a/100)*100} + {=round(b/100)*100} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [35100, 89900],
+            "b": [25100, 79900]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 1000 != 0",
+          "prompt": "{nama} membeli tas Rp{a} dan sepatu Rp{b}. Kira-kira berapa rupiah harganya? (bulatkan ke ribuan)",
+          "answer": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+          "unit": "rupiah",
+          "explain": "{=round(a/1000)*1000} + {=round(b/1000)*1000} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {},
+          "prompt": "Tinggi Gunung Rinjani 3.726 m dan Gunung Merapi 2.930 m. Kira-kira berapa meter selisihnya? (bulatkan ke ratusan)",
+          "answer": "3700 - 2900",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "3726 - 2930",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "4000 - 3000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "3700 + 2900",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "3.700 − 2.900 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [310, 990],
+            "b": [110, 290]
+          },
+          "constraint": "a % 10 != 5 && b % 10 != 5 && a % 10 != 0 && b % 10 != 0",
+          "prompt": "Sekolah butuh {a} kursi dan sudah punya {b}. Kira-kira berapa kursi lagi yang dibutuhkan? (bulatkan ke puluhan)",
+          "answer": "round(a / 10) * 10 - round(b / 10) * 10",
+          "explain": "{=round(a/10)*10} − {=round(b/10)*10} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890],
+            "k": {
+              "values": [-300, -200, 200, 300]
+            }
+          },
+          "derived": {
+            "t": "round(a / 100) * 100 + round(b / 100) * 100 + k"
+          },
+          "prompt": "Perkirakan dengan membulatkan ke ratusan. Apakah {a} + {b} lebih dari {t}?",
+          "answer": "(round(a / 100) * 100 + round(b / 100) * 100 > t) * 1",
+          "labels": {
+            "1": "Ya, lebih dari",
+            "0": "Tidak"
+          },
+          "explain": "Estimasi {=round(a/100)*100} + {=round(b/100)*100} = {=round(a/100)*100+round(b/100)*100}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890],
+            "e": [110, 890],
+            "f": [110, 890]
+          },
+          "constraint": "abs((round(a / 100) * 100 + round(b / 100) * 100) - (round(e / 100) * 100 + round(f / 100) * 100)) >= 300 && ((a + b > e + f) == (round(a / 100) * 100 + round(b / 100) * 100 > round(e / 100) * 100 + round(f / 100) * 100))",
+          "prompt": "Perkirakan dengan membulatkan ke ratusan. Mana yang lebih besar: {a} + {b} atau {e} + {f}?",
+          "answer": "(round(a / 100) * 100 + round(b / 100) * 100 > round(e / 100) * 100 + round(f / 100) * 100) * 1 + (round(a / 100) * 100 + round(b / 100) * 100 < round(e / 100) * 100 + round(f / 100) * 100) * 2",
+          "labels": {
+            "1": "Pasangan pertama",
+            "2": "Pasangan kedua"
+          },
+          "explain": "Bandingkan estimasinya: {=round(a/100)*100+round(b/100)*100} dan {=round(e/100)*100+round(f/100)*100}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890]
+          },
+          "constraint": "a + b != round(a / 100) * 100 + round(b / 100) * 100 && a % 100 != 50 && b % 100 != 50",
+          "prompt": "Estimasi {a} + {b} dengan membulatkan ke ratusan adalah {=round(a/100)*100+round(b/100)*100}. Hasil sebenarnya lebih besar atau lebih kecil dari estimasi?",
+          "answer": "(a + b > round(a / 100) * 100 + round(b / 100) * 100) * 1 + (a + b < round(a / 100) * 100 + round(b / 100) * 100) * 2",
+          "labels": {
+            "1": "Lebih besar",
+            "2": "Lebih kecil"
+          },
+          "explain": "Hasil sebenarnya {=a+b}, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50",
+          "prompt": "Berapa selisih antara estimasi (bulatkan ke ratusan) dan hasil sebenarnya dari {a} + {b}?",
+          "answer": "abs(a + b - (round(a / 100) * 100 + round(b / 100) * 100))",
+          "mode": "input",
+          "explain": "Estimasi {=round(a/100)*100+round(b/100)*100}, sebenarnya {=a+b}. Selisih {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "math.sd3.aa9.penalaran-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "AA",
+  "order": 9,
+  "title": "Bangun datar dan sudut — Level 9 — Penalaran bangun datar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-AA (geometry)",
+    "sg": "P3 Angles, perpendicular and parallel lines, 2D shapes",
+    "cambridge": "Stage 3 Geometry: 2D shapes, right angles (3Gg)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {},
+          "prompt": "Sebuah persegi dipotong lurus dari pojok ke pojok seberang. Ada berapa segitiga?",
+          "answer": "2",
+          "mode": "input",
+          "explain": "Diagonal membagi persegi menjadi 2 segitiga."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [1, 5],
+            "c": [1, 5]
+          },
+          "prompt": "Ada {a} segitiga, {b} persegi, dan {c} segi lima. Berapa sisi semuanya?",
+          "answer": "3 * a + 4 * b + 5 * c",
+          "mode": "input",
+          "explain": "{=3*a} + {=4*b} + {=5*c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [7, 30]
+          },
+          "prompt": "{n} batang lidi sama panjang dipakai untuk membuat segitiga-segitiga yang terpisah. Berapa segitiga paling banyak?",
+          "answer": "floor(n / 3)",
+          "mode": "input",
+          "explain": "{n} : 3 = {answer}."
+        }
+      }
+    ]
+  }
+}

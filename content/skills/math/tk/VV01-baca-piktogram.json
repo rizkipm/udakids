@@ -1,6 +1,6 @@
 {
   "id": "math.tk.vv1.baca-piktogram",
-  "version": 1,
+  "version": 2,
   "domain": "math",
   "grade": "tk",
   "category": "VV",
@@ -20,18 +20,18 @@
       "b": [1, 6],
       "c": [1, 6]
     },
-    "prompt": "Berapa banyak kucing?",
+    "prompt": "Berapa banyak {h1}?",
     "stimulus": [
       {
         "kind": "bar-chart",
-        "caption": "Hewan peliharaan kelas",
-        "labels": ["Kucing", "Ikan", "Bebek"],
+        "caption": "Hewan kesukaan anak-anak",
+        "labels": ["{h1}", "{h2}", "{h3}"],
         "values": ["=a", "=b", "=c"],
-        "pictogram": "kucing"
+        "pictogram": "{h1}"
       }
     ],
     "answer": "a",
-    "explain": "Hitung gambar di baris Kucing: {answer}.",
+    "explain": "Hitung gambar di baris {h1}: {answer}.",
     "distractors": [
       {
         "expr": "b",
@@ -42,6 +42,11 @@
         "tag": "salah-baris"
       }
     ],
-    "choices": 3
+    "choices": 3,
+    "words": {
+      "h1": ["kucing", "sapi", "kambing", "ayam"],
+      "h2": ["ikan", "kelinci", "burung", "katak"],
+      "h3": ["bebek", "kuda", "monyet", "lebah"]
+    }
   }
 }

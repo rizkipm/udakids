@@ -1,0 +1,88 @@
+{
+  "id": "math.sd3.x6.soal-cerita-massa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 6,
+  "title": "Panjang, massa, dan volume — Level 6 — Soal cerita massa",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [100, 900]
+          },
+          "prompt": "Ibu membeli {a} kg beras dan {b} g gula. Berapa gram belanjaan ibu?",
+          "answer": "a * 1000 + b",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "tanpa-ubah"
+            },
+            "a * 100 + b",
+            "a * 1000 - b"
+          ],
+          "explain": "{=a*1000} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 60],
+            "b": [5, 19]
+          },
+          "prompt": "Berat sekarung bawang {a} kg. Dijual {b} kg. Berapa kg sisanya?",
+          "answer": "a - b",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a - b + 1",
+            "a - b - 1"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [125, 250, 400, 500, 750]
+            },
+            "n": [2, 8]
+          },
+          "prompt": "Satu kantong gula {a} g. Berapa gram {n} kantong?",
+          "answer": "a * n",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + n",
+              "tag": "menjumlah"
+            },
+            "a * (n - 1)",
+            "a * n + 100"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

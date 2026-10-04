@@ -1,0 +1,68 @@
+{
+  "id": "math.sd3.r9.penalaran-perkalian-dan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 9,
+  "title": "Perkalian dan pembagian bersusun — Level 9 — Penalaran perkalian dan pembagian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9]
+          },
+          "prompt": "Bilangan terbesar 2 angka yang habis dibagi {m} adalah …",
+          "answer": "floor(99 / m) * m",
+          "mode": "input",
+          "explain": "{m} × {=floor(99/m)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [5, 30],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Sebuah bilangan dibagi {m} hasilnya {q} sisa {r}. Berapa bilangan itu?",
+          "answer": "m * q + r",
+          "mode": "input",
+          "explain": "{m} × {q} + {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 48],
+            "m": [2, 6],
+            "b": {
+              "values": [2, 3, 4, 6, 8]
+            }
+          },
+          "constraint": "(a * m) % b == 0 && b != m && b != a",
+          "prompt": "{a} × {m} = {b} × … ",
+          "answer": "a * m / b",
+          "mode": "input",
+          "explain": "{=a*m} : {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

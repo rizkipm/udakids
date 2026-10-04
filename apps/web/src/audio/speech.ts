@@ -1,3 +1,4 @@
+import { voiceLangOf, type Item, type VoiceLang } from '@little-coder/engine';
 import { API_URL } from '../config/app';
 
 /**
@@ -30,11 +31,38 @@ function refreshVoices() {
 refreshVoices();
 synth()?.addEventListener?.('voiceschanged', refreshVoices);
 
-/** Suara Indonesia (lokal dulu), lalu Melayu yang mirip; undefined = suara bawaan perangkat. */
-function pickVoice(): SpeechSynthesisVoice | undefined {
+/**
+ * Suara perempuan dulu (D-062): suara Momo perempuan, dan suara pria bawaan perangkat (mis. "Daniel" en-GB di
+ * iPad/Mac) terlalu berat untuk anak. Nama suara dari Apple, Google, dan Microsoft.
+ */
+const FEMALE_VOICE =
+  /\b(female|woman|samantha|karen|moira|tessa|serena|kate|martha|fiona|victoria|allison|ava|susan|zira|hazel|libby|sonia|maisie|emma|amy|joanna|kimberly|salli|olivia|stephanie|catherine|damayanti|gadis|google bahasa indonesia|google uk english female|google us english)\b/i;
+const MALE_VOICE =
+  /\b(male|man|daniel|arthur|oliver|fred|alex|tom|aaron|rishi|george|ryan|thomas|guy|david|mark|james|brian|matthew|ardi|andika|reed|rocko|eddy|grandpa)\b/i;
+/** 0 = perempuan dikenal, 1 = tidak diketahui, 2 = pria dikenal. */
+const genderRank = (v: SpeechSynthesisVoice) =>
+  FEMALE_VOICE.test(v.name) && !/\bmale\b/i.test(v.name) ? 0 : MALE_VOICE.test(v.name) ? 2 : 1;
+const voiceRank = (v: SpeechSynthesisVoice) => genderRank(v) * 2 + (v.localService ? 0 : 1);
+const isGB = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase() === 'en-gb';
+
+/**
+ * Suara Indonesia, lalu Melayu yang mirip; untuk kata English: perempuan dulu, lalu British (D-059). Di setiap
+ * bahasa dipilih suara perempuan lebih dulu (D-062). undefined = suara bawaan perangkat.
+ */
+function pickVoice(lang: VoiceLang = 'id-ID'): SpeechSynthesisVoice | undefined {
   if (voices.length === 0) refreshVoices();
   const by = (f: (v: SpeechSynthesisVoice) => boolean) =>
-    voices.find((v) => f(v) && v.localService) ?? voices.find(f);
+    voices.filter(f).sort((a, b) => voiceRank(a) - voiceRank(b))[0];
+  if (lang === 'en-GB')
+    // Kata Inggris: suara perempuan lebih penting daripada aksen; di antara yang setara, British lebih dulu.
+    return voices
+      .filter((v) => v.lang.toLowerCase().startsWith('en'))
+      .sort(
+        (a, b) =>
+          genderRank(a) - genderRank(b) ||
+          Number(!isGB(a)) - Number(!isGB(b)) ||
+          Number(!a.localService) - Number(!b.localService),
+      )[0];
   return (
     by((v) => v.lang.replace('_', '-').toLowerCase() === 'id-id') ??
     by((v) => v.lang.toLowerCase().startsWith('id')) ??
@@ -95,7 +123,10 @@ let seq = 0;
 const START_TIMEOUT_MS = 1800;
 
 /** Ucapkan teks; memanggil `onEnd` saat selesai (atau segera bila suara tidak tersedia). */
-export function speak(text: string, opts: { onEnd?: () => void; rate?: number } = {}) {
+export function speak(
+  text: string,
+  opts: { onEnd?: () => void; rate?: number; lang?: VoiceLang } = {},
+) {
   stopAudio();
   const s = synth();
   if (!enabled || !text) {
@@ -125,12 +156,12 @@ export function speak(text: string, opts: { onEnd?: () => void; rate?: number } 
     const mine = ++attemptNo;
     const stale = () => token !== seq || mine !== attemptNo;
     let started = false;
-    const voice = attempt === 0 ? pickVoice() : undefined;
+    const voice = attempt === 0 ? pickVoice(opts.lang) : undefined;
     const list = chunks.map((c, i) => {
       const u = new SpeechSynthesisUtterance(c);
       // Percobaan kedua: tanpa bahasa/suara khusus → suara bawaan perangkat (lebih baik daripada diam).
       if (attempt === 0) {
-        u.lang = voice?.lang.replace('_', '-') ?? 'id-ID';
+        u.lang = voice?.lang.replace('_', '-') ?? opts.lang ?? 'id-ID';
         if (voice) u.voice = voice;
       }
       u.rate = opts.rate ?? 0.9;
@@ -304,6 +335,7 @@ export function loadVoice(base = API_URL): Promise<void> {
 /** Hanya untuk test. */
 export function resetVoice(m?: VoiceManifest) {
   manifest = m;
+  voices = [];
   loading = undefined;
   audio = undefined;
 }
@@ -318,7 +350,7 @@ function stopAudio() {
   audio = undefined;
 }
 
-function playClip(url: string, fallbackText: string, onEnd?: () => void) {
+function playClip(url: string, fallbackText: string, onEnd?: () => void, lang?: VoiceLang) {
   stopSpeaking();
   const a = new Audio(url);
   audio = a;
@@ -328,7 +360,7 @@ function playClip(url: string, fallbackText: string, onEnd?: () => void) {
     if (done || audio !== a) return;
     done = true;
     stopAudio();
-    speak(fallbackText, { onEnd });
+    speak(fallbackText, { onEnd, lang });
   };
   const timer = setTimeout(() => !started && fallback(), CLIP_START_MS);
   a.onplaying = () => {
@@ -365,9 +397,10 @@ export function speakLine(key: string, fallbackText: string, opts: { onEnd?: () 
 /** URL suara Momo untuk kalimat soal Basic (dibuat server dari skill + seed, lalu di-cache). */
 export const itemVoiceUrl = (
   item: { skillId: string; seed: number; band: number },
-  part: 'prompt' | 'reteach' = 'prompt',
+  part: 'prompt' | 'reteach' | 'choice' = 'prompt',
+  choiceId?: string,
 ) =>
-  `${API_URL}/voice/item/${encodeURIComponent(item.skillId)}?seed=${item.seed}&band=${item.band}&part=${part}&v=${manifest?.rev ?? '0'}`;
+  `${API_URL}/voice/item/${encodeURIComponent(item.skillId)}?seed=${item.seed}&band=${item.band}&part=${part}${choiceId ? `&c=${encodeURIComponent(choiceId)}` : ''}&v=${manifest?.rev ?? '0'}`;
 
 /** Ucapkan kalimat soal Basic dengan suara Momo (cadangan: suara browser). */
 export function speakItem(
@@ -376,15 +409,56 @@ export function speakItem(
   part: 'prompt' | 'reteach' = 'prompt',
   opts: { onEnd?: () => void } = {},
 ) {
+  const lang = voiceLangOf(item.skillId, part);
   if (enabled && manifest?.enabled && canPlayAudio()) {
-    playClip(itemVoiceUrl(item, part), text, opts.onEnd);
+    playClip(itemVoiceUrl(item, part), text, opts.onEnd, lang);
     return;
   }
-  speak(text, opts);
+  speak(text, { ...opts, lang });
 }
 
+/** Kartu English diucapkan suara Momo dari server (kata Inggris yang jelas, D-062); lainnya suara perangkat. */
+const usesCardClips = (skillId: string) => skillId.startsWith('english.');
+
+/** Ucapkan kata pada kartu pilihan saat diketuk. */
+export function speakChoice(
+  item: { skillId: string; seed: number; band: number } | undefined,
+  choice: { id: string; say?: string },
+) {
+  if (!choice.say) return;
+  const lang = item ? voiceLangOf(item.skillId, 'choice') : 'id-ID';
+  if (item && usesCardClips(item.skillId) && enabled && manifest?.enabled && canPlayAudio()) {
+    playClip(itemVoiceUrl(item, 'choice', choice.id), choice.say, undefined, lang);
+    return;
+  }
+  // Kata Inggris dari suara perangkat: sedikit lebih pelan supaya ejaannya jelas.
+  speak(choice.say, { lang, ...(lang === 'en-GB' && { rate: 0.8 }) });
+}
+
+/** Kartu bersuara di soal (pilihan, kelompok, pasangan). */
+const voicedCards = (item: Partial<Pick<Item, 'interaction'>>) => {
+  const it = item.interaction;
+  if (!it) return [];
+  const cards =
+    it.type === 'pick-one' || it.type === 'tap-all' || it.type === 'order'
+      ? it.choices
+      : it.type === 'group'
+        ? [...it.groups, ...it.items]
+        : it.type === 'match'
+          ? [...it.left, ...it.right]
+          : [];
+  return cards.filter((c) => c.say);
+};
+
 /** Siapkan suara soal berikutnya di latar (server membuatnya bila belum ada; browser menyimpannya). */
-export function prefetchItemVoice(item: { skillId: string; seed: number; band: number }) {
+export function prefetchItemVoice(
+  item: { skillId: string; seed: number; band: number } & Partial<Pick<Item, 'interaction'>>,
+) {
   if (!manifest?.enabled || typeof fetch === 'undefined') return;
-  void fetch(itemVoiceUrl(item), { priority: 'low' } as RequestInit).catch(() => undefined);
+  const get = (url: string) =>
+    void fetch(url, { priority: 'low' } as RequestInit).catch(() => undefined);
+  get(itemVoiceUrl(item));
+  // Kartu English juga disiapkan, supaya kata langsung terdengar saat diketuk.
+  if (usesCardClips(item.skillId))
+    for (const c of voicedCards(item)) get(itemVoiceUrl(item, 'choice', c.id));
 }

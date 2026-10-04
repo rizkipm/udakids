@@ -1,6 +1,6 @@
 {
   "id": "sains.tkosn.e3.kendaraan-yang-bukan",
-  "version": 1,
+  "version": 3,
   "domain": "sains",
   "grade": "tkosn",
   "category": "E",
@@ -13,70 +13,677 @@
     "kognitif": "applying",
     "osn": "Olimpiade TK (TK A–B, usia 4–6)"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "kereta api",
-        "attrs": {
-          "tempat": "stasiun",
-          "jalur": "darat"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mobil",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "bajaj",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "angkot",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "sepeda motor",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "bus",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "becak",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "kereta api",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "truk",
+              "attrs": {
+                "jalur": "darat"
+              }
+            },
+            {
+              "name": "perahu",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "kapal laut",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "rakit",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "kapal selam",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "sampan",
+              "attrs": {
+                "jalur": "air"
+              }
+            },
+            {
+              "name": "pesawat terbang",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "helikopter",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "balon udara",
+              "attrs": {
+                "jalur": "udara"
+              }
+            },
+            {
+              "name": "pesawat jet",
+              "attrs": {
+                "jalur": "udara"
+              }
+            }
+          ],
+          "attr": "jalur",
+          "ask": "odd",
+          "prompt": "Mana yang bukan kendaraan {value}?",
+          "explain": "{name} bukan kendaraan {value}.",
+          "choices": 4,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "pesawat terbang",
-        "attrs": {
-          "tempat": "bandara",
-          "jalur": "udara"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mobil",
+              "object": "mobil",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "sepeda",
+              "object": "sepeda",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "bus",
+              "object": "bus",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "kereta",
+              "object": "kereta",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "kapal",
+              "object": "kapal",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "pesawat",
+              "object": "pesawat",
+              "attrs": {
+                "jenis": "kendaraan"
+              }
+            },
+            {
+              "name": "meja",
+              "object": "meja",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "pintu",
+              "object": "pintu",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "pohon",
+              "object": "pohon",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "gedung",
+              "object": "gedung",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "jendela",
+              "object": "jendela",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "buku",
+              "object": "buku",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "ember",
+              "object": "ember",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            },
+            {
+              "name": "panci",
+              "object": "panci",
+              "attrs": {
+                "jenis": "bukan kendaraan"
+              }
+            }
+          ],
+          "attr": "jenis",
+          "ask": "odd",
+          "only": ["kendaraan"],
+          "prompt": "Ketuk yang bukan kendaraan.",
+          "explain": "{name} bukan kendaraan.",
+          "choices": 4,
+          "pictures": true,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "kapal laut",
-        "attrs": {
-          "tempat": "pelabuhan",
-          "jalur": "air"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mobil",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "bus",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "sepeda motor",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "kereta api",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "pesawat terbang",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "perahu motor",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "truk",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "bajaj",
+              "attrs": {
+                "tenaga": "mesin"
+              }
+            },
+            {
+              "name": "sepeda",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            },
+            {
+              "name": "becak",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            },
+            {
+              "name": "delman",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            },
+            {
+              "name": "sampan dayung",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            },
+            {
+              "name": "rakit bambu",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            },
+            {
+              "name": "gerobak sapi",
+              "attrs": {
+                "tenaga": "tenaga manusia atau hewan"
+              }
+            }
+          ],
+          "attr": "tenaga",
+          "ask": "odd",
+          "prompt": "Mana yang tidak digerakkan oleh {value}?",
+          "explain": "{name} tidak digerakkan oleh {value}.",
+          "choices": 4,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "bus",
-        "attrs": {
-          "tempat": "halte atau terminal",
-          "jalur": "darat"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "ambulans",
+              "attrs": {
+                "guna": "menolong saat keadaan darurat"
+              }
+            },
+            {
+              "name": "mobil pemadam kebakaran",
+              "attrs": {
+                "guna": "menolong saat keadaan darurat"
+              }
+            },
+            {
+              "name": "mobil polisi",
+              "attrs": {
+                "guna": "menolong saat keadaan darurat"
+              }
+            },
+            {
+              "name": "perahu penyelamat",
+              "attrs": {
+                "guna": "menolong saat keadaan darurat"
+              }
+            },
+            {
+              "name": "bus",
+              "attrs": {
+                "guna": "mengangkut banyak penumpang"
+              }
+            },
+            {
+              "name": "kereta api",
+              "attrs": {
+                "guna": "mengangkut banyak penumpang"
+              }
+            },
+            {
+              "name": "kapal feri",
+              "attrs": {
+                "guna": "mengangkut banyak penumpang"
+              }
+            },
+            {
+              "name": "pesawat penumpang",
+              "attrs": {
+                "guna": "mengangkut banyak penumpang"
+              }
+            },
+            {
+              "name": "truk pengangkut pasir",
+              "attrs": {
+                "guna": "mengangkut barang"
+              }
+            },
+            {
+              "name": "mobil bak terbuka",
+              "attrs": {
+                "guna": "mengangkut barang"
+              }
+            },
+            {
+              "name": "truk tangki",
+              "attrs": {
+                "guna": "mengangkut barang"
+              }
+            }
+          ],
+          "attr": "guna",
+          "ask": "odd",
+          "only": ["menolong saat keadaan darurat", "mengangkut banyak penumpang"],
+          "prompt": "Mana yang bukan kendaraan untuk {value}?",
+          "explain": "{name} bukan kendaraan untuk {value}.",
+          "choices": 4,
+          "pictures": false,
+          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
         }
       },
       {
-        "name": "mobil",
-        "attrs": {
-          "jalur": "darat"
-        },
-        "object": "mobil"
-      },
-      {
-        "name": "sepeda",
-        "attrs": {
-          "jalur": "darat"
-        },
-        "object": "sepeda"
-      },
-      {
-        "name": "helikopter",
-        "attrs": {
-          "jalur": "udara"
-        }
-      },
-      {
-        "name": "perahu",
-        "attrs": {
-          "jalur": "air"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Mana yang tidak punya roda?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "perahu"
+                  },
+                  "say": "perahu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mobil"
+                  },
+                  "say": "mobil"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sepeda"
+                  },
+                  "say": "sepeda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bus"
+                  },
+                  "say": "bus"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Perahu tidak punya roda karena bergerak di air.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mana yang tidak bisa terbang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kereta api"
+                  },
+                  "say": "kereta api"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pesawat terbang"
+                  },
+                  "say": "pesawat terbang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "helikopter"
+                  },
+                  "say": "helikopter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "balon udara"
+                  },
+                  "say": "balon udara"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kereta api berjalan di atas rel, tidak terbang.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mana yang tidak berjalan di atas rel?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bus"
+                  },
+                  "say": "bus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kereta api"
+                  },
+                  "say": "kereta api"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "KRL"
+                  },
+                  "say": "KRL"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "MRT"
+                  },
+                  "say": "MRT"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bus berjalan di jalan raya, bukan di rel.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mana yang bukan kendaraan beroda dua?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mobil"
+                  },
+                  "say": "mobil"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sepeda"
+                  },
+                  "say": "sepeda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sepeda motor"
+                  },
+                  "say": "sepeda motor"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mobil punya empat roda.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mana yang bukan kendaraan beroda tiga?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bus"
+                  },
+                  "say": "bus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "becak"
+                  },
+                  "say": "becak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bajaj"
+                  },
+                  "say": "bajaj"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bus punya lebih dari tiga roda.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Mana yang tidak ditarik oleh kuda?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "becak"
+                  },
+                  "say": "becak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "delman"
+                  },
+                  "say": "delman"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "andong"
+                  },
+                  "say": "andong"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Becak dikayuh, sedangkan delman dan andong ditarik kuda.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Ketuk kendaraan yang tidak berjalan di darat.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kapal"
+                  },
+                  "say": "kapal"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "mobil"
+                  },
+                  "say": "mobil"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "bus"
+                  },
+                  "say": "bus"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "kereta"
+                  },
+                  "say": "kereta"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kapal berlayar di air.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            },
+            {
+              "prompt": "Ketuk kendaraan yang tidak bergerak di udara.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "sepeda"
+                  },
+                  "say": "sepeda"
+                },
+                {
+                  "visual": {
+                    "kind": "object",
+                    "object": "pesawat"
+                  },
+                  "say": "pesawat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sepeda berjalan di darat.",
+              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+            }
+          ]
         }
       }
-    ],
-    "attr": "jalur",
-    "ask": "odd",
-    "prompt": "Mana yang bukan kendaraan {value}?",
-    "explain": "{name} bukan kendaraan {value}.",
-    "choices": 3,
-    "pictures": false,
-    "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025): elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; materi lomba sains & matematika TK (gaya olimpiade)"
+    ]
   }
 }

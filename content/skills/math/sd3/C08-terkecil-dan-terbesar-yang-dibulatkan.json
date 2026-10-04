@@ -1,0 +1,107 @@
+{
+  "id": "math.sd3.c8.terkecil-dan-terbesar-yang-dibulatkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 8,
+  "title": "Pembulatan — Level 8 — Terkecil dan terbesar yang dibulatkan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 999]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan terkecil yang jika dibulatkan ke puluhan terdekat menjadi {r} adalah …",
+          "answer": "r - 5",
+          "distractors": [
+            {
+              "expr": "r - 4",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r - 10",
+              "tag": "puluhan-sebelumnya"
+            },
+            {
+              "expr": "r - 6",
+              "tag": "terlalu-kecil"
+            }
+          ],
+          "explain": "Mulai dari {=r-5} sudah dibulatkan ke {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 999]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Bilangan terbesar yang jika dibulatkan ke puluhan terdekat menjadi {r} adalah …",
+          "answer": "r + 4",
+          "distractors": [
+            {
+              "expr": "r + 5",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + 9",
+              "tag": "puluhan-berikutnya"
+            },
+            {
+              "expr": "r + 10",
+              "tag": "kelipatan-berikutnya"
+            }
+          ],
+          "explain": "{=r+5} sudah dibulatkan ke {=r+10}, jadi terbesar {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 99]
+          },
+          "derived": {
+            "r": "h * 100"
+          },
+          "prompt": "Bilangan terkecil yang jika dibulatkan ke ratusan terdekat menjadi {r} adalah …",
+          "answer": "r - 50",
+          "distractors": [
+            {
+              "expr": "r - 49",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r - 51",
+              "tag": "terlalu-kecil"
+            },
+            {
+              "expr": "r - 100",
+              "tag": "ratusan-sebelumnya"
+            }
+          ],
+          "explain": "Dari {=r-50} sudah dibulatkan ke {r}."
+        }
+      }
+    ]
+  }
+}

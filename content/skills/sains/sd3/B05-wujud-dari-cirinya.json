@@ -1,6 +1,6 @@
 {
   "id": "sains.sd3.b5.wujud-dari-cirinya",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd3",
   "category": "B",
@@ -12,96 +12,752 @@
     "fase-merdeka": "B",
     "kognitif": "applying"
   },
-  "family": "mix",
+  "family": "manual",
   "params": {
-    "parts": [
+    "items": [
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Benda padat",
-              "attrs": {
-                "ciri": [
-                  "bentuknya tetap walau dipindah ke wadah lain",
-                  "volumenya tetap dan bentuknya tetap",
-                  "partikelnya tersusun rapat dan hampir diam"
-                ]
-              }
+        "prompt": "Benda ini dipindah dari gelas ke piring, bentuknya tetap seperti semula. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
             },
-            {
-              "name": "Benda cair",
-              "attrs": {
-                "ciri": [
-                  "bentuknya mengikuti wadah, tetapi volumenya tetap",
-                  "partikelnya agak renggang dan dapat bergerak pelan",
-                  "permukaannya datar saat diam di dalam wadah"
-                ]
-              }
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
             },
-            {
-              "name": "Gas",
-              "attrs": {
-                "ciri": [
-                  "memenuhi seluruh ruang yang ditempatinya",
-                  "bentuk dan volumenya berubah mengikuti ruangnya",
-                  "partikelnya bergerak bebas dan saling berjauhan"
-                ]
-              }
-            }
-          ],
-          "attr": "ciri",
-          "ask": "name",
-          "prompt": "Wujud mana yang {value}?",
-          "explain": "{name}: {value}.",
-          "choices": 3,
-          "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; NGSS 2-PS1-1 & 5-PS1-1"
-        },
-        "weight": 1
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Benda padat memiliki bentuk tetap walau dipindah ke wadah lain.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Benda padat",
-              "attrs": {
-                "ciri": [
-                  "bentuknya tetap walau dipindah ke wadah lain",
-                  "volumenya tetap dan bentuknya tetap",
-                  "partikelnya tersusun rapat dan hampir diam"
-                ]
-              }
+        "prompt": "Benda ini dituang dari botol ke mangkuk, lalu bentuknya mengikuti mangkuk. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
             },
-            {
-              "name": "Benda cair",
-              "attrs": {
-                "ciri": [
-                  "bentuknya mengikuti wadah, tetapi volumenya tetap",
-                  "partikelnya agak renggang dan dapat bergerak pelan",
-                  "permukaannya datar saat diam di dalam wadah"
-                ]
-              }
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
             },
-            {
-              "name": "Gas",
-              "attrs": {
-                "ciri": [
-                  "memenuhi seluruh ruang yang ditempatinya",
-                  "bentuk dan volumenya berubah mengikuti ruangnya",
-                  "partikelnya bergerak bebas dan saling berjauhan"
-                ]
-              }
-            }
-          ],
-          "attr": "ciri",
-          "ask": "value",
-          "prompt": "Apa ciri {name}?",
-          "explain": "{name}: {value}.",
-          "choices": 4,
-          "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; NGSS 2-PS1-1 & 5-PS1-1"
-        },
-        "weight": 1
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Zat cair mengalir dan bentuknya mengikuti wadahnya.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini tidak terlihat, tetapi membuat balon menggembung ke segala arah. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gas memenuhi seluruh ruang yang ditempatinya, jadi balon menggembung ke segala arah.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini bisa dipegang dan dihitung satu per satu, misalnya kelereng. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kelereng berbentuk tetap dan bisa dipegang, jadi wujudnya padat.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini tumpah di meja lalu menyebar dan membasahi taplak. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Zat cair dapat mengalir dan menyebar ke tempat yang lebih rendah.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Botol parfum dibuka di sudut kelas. Sebentar kemudian baunya tercium di seluruh kelas. Zat pembawa bau itu berwujud apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gas menyebar memenuhi ruangan, jadi bau parfum tercium di mana-mana.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Air sebanyak satu gelas dipindah ke mangkuk lebar. Bentuknya berubah, tetapi banyaknya tetap satu gelas. Ini ciri benda apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Zat cair bentuknya berubah mengikuti wadah, tetapi volumenya tetap.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini bisa ditekan masuk ke dalam pompa sepeda sehingga ruangnya menjadi lebih kecil. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gas mudah dimampatkan karena partikelnya saling berjauhan.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini permukaannya selalu datar saat diam di dalam gelas, walau gelasnya dimiringkan. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Permukaan zat cair yang diam selalu datar (mendatar).",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Partikel benda ini tersusun sangat rapat dan hanya bergetar di tempatnya. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Partikel benda padat tersusun rapat dan hampir tidak berpindah, jadi bentuknya tetap.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Partikel benda ini berjauhan dan bergerak sangat bebas ke segala arah. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Partikel gas berjauhan dan bergerak bebas, jadi gas memenuhi ruang.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Partikel benda ini agak renggang dan bisa bergeser melewati satu sama lain. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Partikel zat cair agak renggang dan bisa bergeser, sehingga zat cair bisa mengalir.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini bisa dipotong dengan pisau dan potongannya tetap berbentuk, seperti sepotong tempe. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Tempe bisa dipotong dan potongannya berbentuk tetap, jadi wujudnya padat.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini keluar dari ketel berupa uap tak terlihat lalu bercampur dengan udara. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Uap air adalah air dalam wujud gas yang menyebar ke udara.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini bisa dialirkan lewat selang dari keran ke ember. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Zat cair bisa mengalir melalui selang.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Sari memasukkan sebuah batu ke gelas berisi air. Batu tidak berubah bentuk. Wujud batu adalah …",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Batu tetap berbentuk sama di mana pun ia diletakkan, jadi wujudnya padat.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini mengisi penuh ban sepeda dan membuatnya keras saat dipompa. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Udara yang dipompa berwujud gas dan memenuhi seluruh ruang ban.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini menetes pelan dari sendok ketika sendok dimiringkan, seperti madu. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Madu kental, tetapi tetap mengalir dan menetes, jadi wujudnya cair.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini butirannya kecil-kecil seperti gula pasir. Setiap butirnya punya bentuk tetap. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Setiap butir gula berbentuk tetap. Butiran kecil yang bisa dituang tetap benda padat.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini tidak berwarna, tidak bisa dipegang, dan ada di sekitar kita untuk bernapas. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Udara yang kita hirup berwujud gas.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini ukurannya tetap dan bentuknya tetap walau digoyang-goyang di dalam kotak. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Benda padat memiliki bentuk dan volume yang tetap.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Adit menuang kecap ke piring kecil. Kecap menyebar membentuk genangan. Wujud kecap adalah …",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kecap mengalir dan menyebar mengikuti piring, jadi wujudnya cair.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Gelembung kecil naik dari dasar gelas minuman bersoda. Isi gelembung itu berwujud apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gelembung pada minuman bersoda berisi gas karbon dioksida.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
+      },
+      {
+        "prompt": "Benda ini bisa dibengkokkan tetapi tidak mengalir sendiri, misalnya kawat. Apa wujudnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "padat"
+            },
+            "say": "padat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cair"
+            },
+            "say": "cair",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gas"
+            },
+            "say": "gas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kawat bisa dibengkokkan, tetapi tidak mengalir dan bentuknya tetap setelah dibengkokkan, jadi wujudnya padat.",
+        "source": "CP IPAS Fase B (BSKAP 046/H/KR/2025): wujud zat dan sifatnya; Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat; Buku Siswa IPAS SD Kelas IV (Kemendikbudristek, 2021) Bab 2; NGSS 2-PS1-1"
       }
     ]
   }

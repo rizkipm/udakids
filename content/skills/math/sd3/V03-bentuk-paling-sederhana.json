@@ -1,0 +1,51 @@
+{
+  "id": "math.sd3.v3.bentuk-paling-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 3,
+  "title": "Pecahan senilai dan perbandingan — Level 3 — Bentuk paling sederhana",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 7],
+      "n": [1, 6],
+      "k": [2, 5]
+    },
+    "constraint": "n < d && gcd(n, d) == 1",
+    "prompt": "Bentuk paling sederhana dari {=n*k}/{=d*k} adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "n * k",
+      "den": "d * k"
+    },
+    "distractors": [
+      {
+        "num": "n * k - 1",
+        "den": "d * k - 1",
+        "tag": "kurangi-satu"
+      },
+      {
+        "num": "n",
+        "den": "d * k",
+        "tag": "bawah-saja"
+      },
+      {
+        "num": "n * k",
+        "den": "d",
+        "tag": "atas-saja"
+      }
+    ],
+    "explain": "Bagi atas dan bawah dengan {k}: {answer}."
+  }
+}

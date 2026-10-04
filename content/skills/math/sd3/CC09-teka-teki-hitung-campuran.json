@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.cc9.teka-teki-hitung-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 9,
+  "title": "Penalaran gaya OSN — Level 9 — Teka-teki hitung campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 30],
+            "y": [3, 30]
+          },
+          "derived": {
+            "t": "3 * x",
+            "s": "x + y"
+          },
+          "prompt": "□ + □ + □ = {t} dan □ + △ = {s}. Berapa △?",
+          "answer": "s - t / 3",
+          "mode": "input",
+          "explain": "□ = {=t/3}, jadi △ = {s} − {=t/3} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 12],
+            "k": [2, 12]
+          },
+          "derived": {
+            "h": "m + k",
+            "r": "4 * m + 2 * k"
+          },
+          "prompt": "Ada {h} kendaraan di parkiran: mobil (4 roda) dan motor (2 roda). Jumlah roda {r}. Berapa mobil?",
+          "answer": "m",
+          "mode": "input",
+          "explain": "Jika semua motor, roda = {=2*h}. Kelebihan {=r-2*h} : 2 = {answer} mobil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [40, 99],
+            "d": [1, 9]
+          },
+          "prompt": "Halaman buku diberi nomor 1 sampai {n}. Berapa kali angka {d} ditulis pada satuan?",
+          "answer": "floor((n - d) / 10) + 1",
+          "mode": "input",
+          "explain": "Angka {d} muncul di satuan setiap 10 halaman: {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "id": "math.sd3.v7.menjumlah-penyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 7,
+  "title": "Pecahan senilai dan perbandingan — Level 7 — Menjumlah, penyebut sama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "constraint": "a + b <= d",
+          "prompt": "{a}/{d} + {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a * b",
+              "den": "d",
+              "tag": "dikali"
+            },
+            {
+              "num": "a + b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Penyebut tetap, pembilang dijumlah: {=a+b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 10],
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a + b < d",
+          "prompt": "{nama} makan {a}/{d} roti pagi hari dan {b}/{d} roti siang hari. Berapa bagian roti yang dimakan?",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "d - a - b",
+              "den": "d",
+              "tag": "sisa"
+            },
+            {
+              "num": "a + b",
+              "den": "d - 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{a}/{d} + {b}/{d} = {=a+b}/{d}."
+        }
+      }
+    ]
+  }
+}

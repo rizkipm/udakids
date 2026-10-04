@@ -1,0 +1,358 @@
+{
+  "id": "math.sd3.v10.tantangan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 10,
+  "title": "Pecahan senilai dan perbandingan — Level 10 — Tantangan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11],
+            "b": [1, 11]
+          },
+          "constraint": "a < d && b < d",
+          "prompt": "{a}/{d} … {b}/{d}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Penyebut sama, bandingkan pembilang: {a} dan {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 5],
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "n < a && n < b",
+          "prompt": "{n}/{a} … {n}/{b}",
+          "answer": "(a < b) * 1 + (a > b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "Pembilang sama: penyebut lebih kecil → potongan lebih besar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 11],
+            "b": [1, 11],
+            "c": [1, 11]
+          },
+          "constraint": "a < d && b < d && c < d && a != b && b != c && a != c",
+          "prompt": "Mana yang terbesar: {a}/{d}, {b}/{d}, {c}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "max(a, b, c)",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "min(a, b, c)",
+              "den": "d",
+              "tag": "terkecil"
+            },
+            {
+              "num": "a + b + c - max(a, b, c) - min(a, b, c)",
+              "den": "d",
+              "tag": "tengah"
+            },
+            {
+              "num": "max(a, b, c)",
+              "den": "d + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut sama, pembilang terbesar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Mana yang terkecil: 1/{a}, 1/{b}, 1/{c}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "1",
+            "den": "max(a, b, c)"
+          },
+          "distractors": [
+            {
+              "num": "1",
+              "den": "min(a, b, c)",
+              "tag": "terbalik"
+            },
+            {
+              "num": "1",
+              "den": "a + b + c - max(a, b, c) - min(a, b, c)",
+              "tag": "tengah"
+            },
+            {
+              "num": "max(a, b, c)",
+              "den": "1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut terbesar → potongan terkecil: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "constraint": "a + b <= d",
+          "prompt": "{a}/{d} + {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a * b",
+              "den": "d",
+              "tag": "dikali"
+            },
+            {
+              "num": "a + b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Penyebut tetap, pembilang dijumlah: {=a+b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 10],
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a + b < d",
+          "prompt": "{nama} makan {a}/{d} roti pagi hari dan {b}/{d} roti siang hari. Berapa bagian roti yang dimakan?",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "d - a - b",
+              "den": "d",
+              "tag": "sisa"
+            },
+            {
+              "num": "a + b",
+              "den": "d - 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{a}/{d} + {b}/{d} = {=a+b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "constraint": "a < d && b < a",
+          "prompt": "{a}/{d} − {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a - b",
+              "den": "1",
+              "tag": "penyebut-dikurangi"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "a - b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Penyebut tetap, pembilang dikurangi: {=a-b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11]
+          },
+          "constraint": "a < d",
+          "prompt": "1 − {a}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - a",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tetap"
+            },
+            {
+              "num": "1 - a + d",
+              "den": "d + 1",
+              "tag": "lain"
+            },
+            {
+              "num": "d - a",
+              "den": "a",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "1 = {d}/{d}. {d}/{d} − {a}/{d} = {=d-a}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 9],
+            "n": [1, 4],
+            "k": [2, 6]
+          },
+          "derived": {
+            "m": "n * k"
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{n}/{d} = {m}/… ",
+          "answer": "d * m / n",
+          "mode": "input",
+          "explain": "Pembilang dikali {=m/n}, penyebut juga: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [6, 12],
+            "a": [1, 4],
+            "b": [1, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a + b < d",
+          "prompt": "Ibu memotong kue menjadi {d} bagian. {nama} makan {a} bagian dan adiknya {b} bagian. Berapa bagian (pembilang per {d}) yang tersisa?",
+          "answer": "d - a - b",
+          "mode": "input",
+          "explain": "{d} − {a} − {b} = {answer}, jadi sisa {answer}/{d}."
+        }
+      }
+    ]
+  }
+}

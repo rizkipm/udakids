@@ -1,0 +1,99 @@
+{
+  "id": "math.sd3.i8.berapa-lagi-untuk-mencapai-target",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 8,
+  "title": "Tambah dan kurang campuran — Level 8 — Berapa lagi untuk mencapai target",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "values": [1000, 1500, 2000, 2500]
+            },
+            "a": [200, 450],
+            "b": [200, 450]
+          },
+          "prompt": "Target menanam {t} pohon. Minggu lalu tertanam {a}, minggu ini {b}. Berapa pohon lagi?",
+          "answer": "t - a - b",
+          "distractors": [
+            {
+              "expr": "t - a + b",
+              "tag": "salah-tanda"
+            },
+            {
+              "expr": "a + b",
+              "tag": "jumlah-saja"
+            },
+            "t - a - b + 100"
+          ],
+          "explain": "{t} − {a} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "values": [500, 750, 1000]
+            },
+            "a": [100, 300],
+            "b": [50, 150]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} ingin mengumpulkan {t} poin. Ia sudah punya {a} poin dan mendapat {b} poin lagi. Berapa poin yang masih kurang?",
+          "answer": "t - a - b",
+          "distractors": [
+            {
+              "expr": "t - a",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "a + b",
+              "tag": "jumlah-saja"
+            },
+            "t - a - b + 10"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

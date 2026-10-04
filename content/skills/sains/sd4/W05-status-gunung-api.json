@@ -1,6 +1,6 @@
 {
   "id": "sains.sd4.w5.status-gunung-api",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd4",
   "category": "W",
@@ -12,39 +12,255 @@
     "fase-merdeka": "B",
     "kognitif": "applying"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Normal",
-        "attrs": {
-          "level": "Level I"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Normal",
+              "attrs": {
+                "level": "Level I"
+              }
+            },
+            {
+              "name": "Waspada",
+              "attrs": {
+                "level": "Level II"
+              }
+            },
+            {
+              "name": "Siaga",
+              "attrs": {
+                "level": "Level III"
+              }
+            },
+            {
+              "name": "Awas",
+              "attrs": {
+                "level": "Level IV"
+              }
+            }
+          ],
+          "attr": "level",
+          "ask": "value",
+          "prompt": "Status gunung api \"{name}\" adalah ...",
+          "explain": "Status {name} = {value}.",
+          "choices": 4,
+          "source": "BMKG (gempa bumi & peringatan dini tsunami); PVMBG–Badan Geologi, Kementerian ESDM (status gunung api); BNPB (siaga bencana); USGS Earthquake Hazards; NGSS 4-ESS2-1 & 4-ESS3-2"
+        },
+        "weight": 1
       },
       {
-        "name": "Waspada",
-        "attrs": {
-          "level": "Level II"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Gunung tenang, tidak ada kegiatan yang meningkat",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Pendaki boleh naik sesuai aturan biasa",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung sama seperti biasanya",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung mulai meningkat di atas normal",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Gempa vulkanik mulai lebih sering tercatat",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Warga dilarang mendekati kawah",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Asap kawah lebih tebal dari biasanya",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung meningkat makin nyata",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Letusan mungkin terjadi dalam waktu dekat",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Warga di daerah bahaya bersiap mengungsi",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Kelompok rentan mulai diungsikan lebih dulu",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Letusan sedang terjadi atau segera terjadi",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Semua warga di daerah bahaya wajib mengungsi",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Awan panas dan lava mulai keluar",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Status tertinggi peringatan gunung api",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            }
+          ],
+          "attr": "s",
+          "ask": "value",
+          "prompt": "Keadaan gunung api: \"{name}\". Statusnya …",
+          "explain": "\"{name}\" sesuai status {value}.",
+          "choices": 4,
+          "source": "BMKG (gempa bumi & peringatan dini tsunami); PVMBG–Badan Geologi, Kementerian ESDM (status gunung api); BNPB (siaga bencana); USGS Earthquake Hazards; NGSS 4-ESS2-1 & 4-ESS3-2"
+        },
+        "weight": 1
       },
       {
-        "name": "Siaga",
-        "attrs": {
-          "level": "Level III"
-        }
-      },
-      {
-        "name": "Awas",
-        "attrs": {
-          "level": "Level IV"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Gunung tenang, tidak ada kegiatan yang meningkat",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Pendaki boleh naik sesuai aturan biasa",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung sama seperti biasanya",
+              "attrs": {
+                "s": "Normal (Level I)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung mulai meningkat di atas normal",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Gempa vulkanik mulai lebih sering tercatat",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Warga dilarang mendekati kawah",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Asap kawah lebih tebal dari biasanya",
+              "attrs": {
+                "s": "Waspada (Level II)"
+              }
+            },
+            {
+              "name": "Kegiatan gunung meningkat makin nyata",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Letusan mungkin terjadi dalam waktu dekat",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Warga di daerah bahaya bersiap mengungsi",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Kelompok rentan mulai diungsikan lebih dulu",
+              "attrs": {
+                "s": "Siaga (Level III)"
+              }
+            },
+            {
+              "name": "Letusan sedang terjadi atau segera terjadi",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Semua warga di daerah bahaya wajib mengungsi",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Awan panas dan lava mulai keluar",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            },
+            {
+              "name": "Status tertinggi peringatan gunung api",
+              "attrs": {
+                "s": "Awas (Level IV)"
+              }
+            }
+          ],
+          "attr": "s",
+          "ask": "name",
+          "prompt": "Keadaan mana yang sesuai dengan status gunung api {value}?",
+          "explain": "\"{name}\" sesuai status {value}.",
+          "choices": 4,
+          "source": "BMKG (gempa bumi & peringatan dini tsunami); PVMBG–Badan Geologi, Kementerian ESDM (status gunung api); BNPB (siaga bencana); USGS Earthquake Hazards; NGSS 4-ESS2-1 & 4-ESS3-2"
+        },
+        "weight": 1
       }
-    ],
-    "attr": "level",
-    "ask": "value",
-    "prompt": "Status gunung api \"{name}\" adalah ...",
-    "explain": "Status {name} = {value}.",
-    "choices": 4,
-    "source": "BMKG (gempa bumi & peringatan dini tsunami); PVMBG–Badan Geologi, Kementerian ESDM (status gunung api); BNPB (siaga bencana); USGS Earthquake Hazards; NGSS 4-ESS2-1 & 4-ESS3-2"
+    ]
   }
 }

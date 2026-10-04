@@ -4,7 +4,7 @@ import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/inde
 import { allVisuals, type Choice, type Item, type ItemCore } from './item.js';
 import { createRng } from './rng.js';
 
-export const DOMAINS = ['math', 'literasi', 'sains', 'logika', 'spasial'] as const;
+export const DOMAINS = ['math', 'literasi', 'sains', 'english', 'logika', 'spasial'] as const;
 // Urutan = urutan tampil buku (per mata pelajaran). Buku per kelas (sd1–sd4, D-032) berdampingan dengan
 // buku gabungan lama (sd12, sd34) yang tetap dipertahankan; sd56 = OSN Kategori C (D-048); smp79 = OSN SMP Kategori D (D-049);
 // tkosn = olimpiade TK, Math & Sains (D-050).

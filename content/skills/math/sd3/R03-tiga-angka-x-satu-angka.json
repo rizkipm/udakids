@@ -1,0 +1,64 @@
+{
+  "id": "math.sd3.r3.tiga-angka-x-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 3,
+  "title": "Perkalian dan pembagian bersusun — Level 3 — Tiga angka × satu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 999],
+            "m": [2, 9]
+          },
+          "constraint": "a * m < 10000",
+          "prompt": "{a} × {m} = …",
+          "answer": "a * m",
+          "distractors": [
+            {
+              "expr": "floor(a / 100) * 100 * m + (a % 100) * m - 100",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a * m + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a * (m - 1)",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "{=floor(a/100)*100} × {m} + {=a%100} × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [35, 99],
+            "m": [2, 9]
+          },
+          "prompt": "Harga satu buku Rp{a}00. Berapa rupiah {m} buku?",
+          "answer": "a * 100 * m",
+          "unit": "rupiah",
+          "distractors": ["a * 100 * (m - 1)", "a * 100 + m", "a * 100 * m + 1000"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

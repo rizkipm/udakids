@@ -1,6 +1,6 @@
 {
   "id": "sains.sd34.a9.ulangan-semua-soal",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd34",
   "category": "A",
@@ -12,755 +12,780 @@
     "timss-kognitif": "reasoning",
     "fase-merdeka": "B (pancaindra) / C (organ dalam)"
   },
-  "family": "manual",
+  "family": "mix",
   "params": {
-    "items": [
+    "parts": [
       {
-        "prompt": "Organ apa yang memompa darah ke seluruh tubuh?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "jantung",
+              "attrs": {
+                "fungsi": "memompa darah ke seluruh tubuh",
+                "sistem": "peredaran darah",
+                "letak": "rongga dada",
+                "gangguan": "penyakit jantung koroner"
+              }
             },
-            "say": "Jantung"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru"
+            {
+              "name": "pembuluh darah",
+              "attrs": {
+                "fungsi": "menjadi saluran tempat darah mengalir",
+                "sistem": "peredaran darah",
+                "letak": "seluruh tubuh",
+                "gangguan": "varises"
+              }
             },
-            "say": "Paru-paru",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
+            {
+              "name": "paru-paru",
+              "attrs": {
+                "fungsi": "sebagai tempat pertukaran oksigen dan karbon dioksida",
+                "sistem": "pernapasan",
+                "letak": "rongga dada",
+                "gangguan": "TBC (tuberkulosis)"
+              }
             },
-            "say": "Lambung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ginjal"
+            {
+              "name": "hidung",
+              "attrs": {
+                "fungsi": ["menyaring dan menghangatkan udara yang dihirup", "mengenali bau"],
+                "sistem": ["pernapasan", "indra"],
+                "letak": "kepala",
+                "gangguan": "pilek"
+              }
             },
-            "say": "Ginjal",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Jantung adalah otot yang memompa darah ke seluruh tubuh melalui pembuluh darah.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
+            {
+              "name": "tenggorokan (trakea)",
+              "attrs": {
+                "fungsi": "menyalurkan udara dari hidung ke paru-paru",
+                "sistem": "pernapasan",
+                "letak": "leher",
+                "gangguan": "radang tenggorokan"
+              }
+            },
+            {
+              "name": "diafragma",
+              "attrs": {
+                "fungsi": "membantu paru-paru mengembang dan mengempis",
+                "sistem": "pernapasan",
+                "letak": "antara rongga dada dan perut"
+              }
+            },
+            {
+              "name": "gigi",
+              "attrs": {
+                "fungsi": "memotong dan menghaluskan makanan",
+                "sistem": "pencernaan",
+                "letak": "mulut",
+                "gangguan": "gigi berlubang"
+              }
+            },
+            {
+              "name": "lidah",
+              "attrs": {
+                "fungsi": ["mengecap rasa makanan", "mengaduk makanan dan membantu menelan"],
+                "sistem": ["pencernaan", "indra"],
+                "letak": "mulut",
+                "gangguan": "sariawan"
+              }
+            },
+            {
+              "name": "kelenjar ludah",
+              "attrs": {
+                "fungsi": "menghasilkan air ludah untuk membasahi makanan",
+                "sistem": "pencernaan",
+                "letak": "mulut"
+              }
+            },
+            {
+              "name": "kerongkongan",
+              "attrs": {
+                "fungsi": "menyalurkan makanan dari mulut ke lambung",
+                "sistem": "pencernaan",
+                "letak": "leher dan rongga dada"
+              }
+            },
+            {
+              "name": "lambung",
+              "attrs": {
+                "fungsi": "mencerna makanan dengan bantuan asam lambung",
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "maag"
+              }
+            },
+            {
+              "name": "usus halus",
+              "attrs": {
+                "fungsi": "menyerap sari makanan ke dalam darah",
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "diare"
+              }
+            },
+            {
+              "name": "usus besar",
+              "attrs": {
+                "fungsi": "menyerap air dari sisa makanan",
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "sembelit"
+              }
+            },
+            {
+              "name": "usus buntu",
+              "attrs": {
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "radang usus buntu"
+              }
+            },
+            {
+              "name": "hati",
+              "attrs": {
+                "fungsi": "menghasilkan cairan empedu untuk mencerna lemak",
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "hepatitis"
+              }
+            },
+            {
+              "name": "pankreas",
+              "attrs": {
+                "fungsi": "menghasilkan getah pencernaan yang dialirkan ke usus halus",
+                "sistem": "pencernaan",
+                "letak": "rongga perut",
+                "gangguan": "diabetes"
+              }
+            },
+            {
+              "name": "anus",
+              "attrs": {
+                "fungsi": "sebagai tempat keluarnya sisa makanan (feses)",
+                "sistem": "pencernaan",
+                "letak": "ujung saluran pencernaan",
+                "gangguan": "wasir (ambeien)"
+              }
+            },
+            {
+              "name": "ginjal",
+              "attrs": {
+                "fungsi": "menyaring darah dan menghasilkan urine",
+                "sistem": "ekskresi (pengeluaran)",
+                "letak": "rongga perut bagian belakang",
+                "gangguan": "batu ginjal"
+              }
+            },
+            {
+              "name": "kandung kemih",
+              "attrs": {
+                "fungsi": "menampung urine sementara sebelum dikeluarkan",
+                "sistem": "ekskresi (pengeluaran)",
+                "letak": "rongga panggul",
+                "gangguan": "infeksi saluran kemih"
+              }
+            },
+            {
+              "name": "kulit",
+              "attrs": {
+                "fungsi": ["mengeluarkan keringat", "merasakan sentuhan, panas, dan dingin"],
+                "sistem": ["ekskresi (pengeluaran)", "indra"],
+                "letak": "seluruh permukaan tubuh",
+                "gangguan": "panu"
+              }
+            },
+            {
+              "name": "otak",
+              "attrs": {
+                "fungsi": "mengatur dan mengendalikan kerja seluruh tubuh",
+                "sistem": "saraf",
+                "letak": "kepala",
+                "gangguan": "gegar otak"
+              }
+            },
+            {
+              "name": "sumsum tulang belakang",
+              "attrs": {
+                "fungsi": "menghantarkan pesan antara otak dan bagian tubuh lain",
+                "sistem": "saraf",
+                "letak": "di dalam ruas tulang belakang"
+              }
+            },
+            {
+              "name": "mata",
+              "attrs": {
+                "fungsi": "melihat bentuk dan warna benda",
+                "sistem": "indra",
+                "letak": "kepala",
+                "gangguan": "rabun jauh"
+              }
+            },
+            {
+              "name": "telinga",
+              "attrs": {
+                "fungsi": "mendengar bunyi dan menjaga keseimbangan",
+                "sistem": "indra",
+                "letak": "kepala",
+                "gangguan": "radang telinga (congek)"
+              }
+            },
+            {
+              "name": "tengkorak",
+              "attrs": {
+                "fungsi": "melindungi otak",
+                "sistem": "gerak (rangka dan otot)",
+                "letak": "kepala"
+              }
+            },
+            {
+              "name": "tulang rusuk",
+              "attrs": {
+                "fungsi": "melindungi jantung dan paru-paru",
+                "sistem": "gerak (rangka dan otot)",
+                "letak": "rongga dada"
+              }
+            },
+            {
+              "name": "tulang belakang",
+              "attrs": {
+                "fungsi": "menegakkan tubuh dan melindungi sumsum tulang belakang",
+                "sistem": "gerak (rangka dan otot)",
+                "letak": "punggung",
+                "gangguan": "skoliosis (tulang belakang bengkok)"
+              }
+            },
+            {
+              "name": "tulang paha",
+              "attrs": {
+                "fungsi": "menopang berat tubuh saat berdiri dan berjalan",
+                "sistem": "gerak (rangka dan otot)",
+                "letak": "kaki",
+                "gangguan": "patah tulang"
+              }
+            },
+            {
+              "name": "otot",
+              "attrs": {
+                "fungsi": "menarik tulang sehingga bagian tubuh bergerak",
+                "sistem": "gerak (rangka dan otot)",
+                "letak": "seluruh tubuh",
+                "gangguan": "kram otot"
+              }
+            }
+          ],
+          "attr": "gangguan",
+          "ask": "true-false",
+          "prompt": "Benar atau salah? {value} adalah gangguan pada {name}.",
+          "explain": "{value} adalah gangguan pada {name}.",
+          "choices": 4,
+          "source": "Buku IPAS SD Kelas IV Kurikulum Merdeka (Kemendikbudristek) — tubuh manusia; kisi-kisi OSN IPA SD (Puspresnas)"
+        }
       },
       {
-        "prompt": "Organ tempat pertukaran oksigen dan karbon dioksida adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Saat udara dingin kita menggigil. Apa manfaatnya bagi tubuh?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gerakan otot menghasilkan panas"
+                  },
+                  "say": "Gerakan otot menghasilkan panas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengurangi oksigen"
+                  },
+                  "say": "Mengurangi oksigen",
+                  "tag": "lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mendinginkan tubuh"
+                  },
+                  "say": "Mendinginkan tubuh",
+                  "tag": "terbalik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menghentikan kerja jantung"
+                  },
+                  "say": "Menghentikan kerja jantung",
+                  "tag": "lain"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menggigil adalah gerakan otot yang cepat. Otot yang bergerak menghasilkan panas sehingga suhu tubuh terjaga.",
+              "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
             },
-            "say": "Paru-paru"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung"
+            {
+              "prompt": "Jika jantung berhenti memompa, bagian tubuh yang paling cepat rusak karena kekurangan oksigen adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "otak"
+                  },
+                  "say": "otak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kuku"
+                  },
+                  "say": "kuku",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rambut"
+                  },
+                  "say": "rambut",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tulang paha"
+                  },
+                  "say": "tulang paha",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Otak sangat membutuhkan oksigen. Tanpa aliran darah beberapa menit saja, sel otak mulai rusak.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             },
-            "say": "Jantung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Hati"
+            {
+              "prompt": "Rina makan nasi. Di mulut, nasi lama-lama terasa manis. Hal ini terjadi karena …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air ludah mulai mencerna zat tepung menjadi gula"
+                  },
+                  "say": "air ludah mulai mencerna zat tepung menjadi gula"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nasi berubah menjadi permen"
+                  },
+                  "say": "nasi berubah menjadi permen",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lidah menambahkan gula"
+                  },
+                  "say": "lidah menambahkan gula",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gigi mengeluarkan rasa manis"
+                  },
+                  "say": "gigi mengeluarkan rasa manis",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air ludah mengandung enzim yang mengubah zat tepung menjadi gula, sehingga terasa manis.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             },
-            "say": "Hati",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Usus besar"
+            {
+              "prompt": "Organ manakah yang termasuk dua sistem sekaligus, yaitu pengeluaran dan indra?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kulit"
+                  },
+                  "say": "kulit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jantung"
+                  },
+                  "say": "jantung",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lambung"
+                  },
+                  "say": "lambung",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tulang paha"
+                  },
+                  "say": "tulang paha",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kulit mengeluarkan keringat (pengeluaran) dan merasakan sentuhan (indra peraba).",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             },
-            "say": "Usus besar",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Di paru-paru, oksigen dari udara masuk ke darah dan karbon dioksida dikeluarkan saat kita bernapas.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
+            {
+              "prompt": "Urutan perjalanan urine yang benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ginjal → saluran kemih → kandung kemih → keluar tubuh"
+                  },
+                  "say": "ginjal → saluran kemih → kandung kemih → keluar tubuh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kandung kemih → ginjal → keluar tubuh"
+                  },
+                  "say": "kandung kemih → ginjal → keluar tubuh",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lambung → ginjal → usus"
+                  },
+                  "say": "lambung → ginjal → usus",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ginjal → usus besar → anus"
+                  },
+                  "say": "ginjal → usus besar → anus",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urine dibuat di ginjal, mengalir lewat saluran ke kandung kemih, lalu dikeluarkan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Sebuah kelompok menguji: makanan yang dikunyah 30 kali dan yang dikunyah 5 kali. Mana yang lebih cepat dicerna dan apa alasannya?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "yang dikunyah 30 kali, karena potongannya lebih kecil"
+                  },
+                  "say": "yang dikunyah 30 kali, karena potongannya lebih kecil"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "yang dikunyah 5 kali, karena masih utuh"
+                  },
+                  "say": "yang dikunyah 5 kali, karena masih utuh",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama saja, karena lambung sama"
+                  },
+                  "say": "sama saja, karena lambung sama",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "yang dikunyah 30 kali, karena lebih dingin"
+                  },
+                  "say": "yang dikunyah 30 kali, karena lebih dingin",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Makanan yang halus punya permukaan lebih luas sehingga lebih mudah dicerna.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Saat kita menarik napas, diafragma bergerak …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun dan rongga dada membesar"
+                  },
+                  "say": "turun dan rongga dada membesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "naik dan rongga dada mengecil"
+                  },
+                  "say": "naik dan rongga dada mengecil",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak bergerak sama sekali"
+                  },
+                  "say": "tidak bergerak sama sekali",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "masuk ke dalam lambung"
+                  },
+                  "say": "masuk ke dalam lambung",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Diafragma turun, rongga dada membesar, sehingga udara masuk ke paru-paru.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Mengapa orang yang tinggal di dekat jalan berdebu dianjurkan memakai masker?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar debu tidak masuk dan mengganggu paru-paru"
+                  },
+                  "say": "agar debu tidak masuk dan mengganggu paru-paru"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar wajah tidak hitam"
+                  },
+                  "say": "agar wajah tidak hitam",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar suara lebih keras"
+                  },
+                  "say": "agar suara lebih keras",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "agar tidak lapar"
+                  },
+                  "say": "agar tidak lapar",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Debu dan asap dapat merusak saluran napas dan paru-paru. Masker menyaring debu.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Andi tidak bisa mencium bau masakan dan juga tidak bisa merasakan rasanya dengan jelas. Dua indra yang terganggu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hidung dan lidah"
+                  },
+                  "say": "hidung dan lidah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mata dan telinga"
+                  },
+                  "say": "mata dan telinga",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kulit dan mata"
+                  },
+                  "say": "kulit dan mata",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "telinga dan lidah"
+                  },
+                  "say": "telinga dan lidah",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bau masakan dicium hidung dan rasanya dikecap lidah. Keduanya bekerja sama saat makan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Tulang dan otot bekerja sama. Apa yang terjadi bila otot lengan atas memendek (berkontraksi)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lengan bawah tertarik sehingga siku menekuk"
+                  },
+                  "say": "lengan bawah tertarik sehingga siku menekuk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tulang lengan menjadi lebih panjang"
+                  },
+                  "say": "tulang lengan menjadi lebih panjang",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lengan tidak bergerak"
+                  },
+                  "say": "lengan tidak bergerak",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tulang menjadi lunak"
+                  },
+                  "say": "tulang menjadi lunak",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Otot menarik tulang. Saat otot lengan atas memendek, lengan bawah terangkat dan siku menekuk.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Ginjal Pak Budi rusak sehingga ia harus cuci darah. Mengapa cuci darah diperlukan?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untuk membersihkan zat sisa dari darah menggantikan tugas ginjal"
+                  },
+                  "say": "untuk membersihkan zat sisa dari darah menggantikan tugas ginjal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untuk menambah gula darah"
+                  },
+                  "say": "untuk menambah gula darah",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untuk menguatkan tulang"
+                  },
+                  "say": "untuk menguatkan tulang",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untuk mempercepat napas"
+                  },
+                  "say": "untuk mempercepat napas",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ginjal menyaring zat sisa dari darah. Jika rusak, mesin cuci darah menggantikan tugasnya.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Pada hari panas Sari jarang buang air kecil, sedangkan pada hari dingin lebih sering. Penjelasan yang paling tepat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pada hari panas banyak air keluar lewat keringat"
+                  },
+                  "say": "pada hari panas banyak air keluar lewat keringat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pada hari dingin ginjal berhenti bekerja"
+                  },
+                  "say": "pada hari dingin ginjal berhenti bekerja",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pada hari panas Sari tidak minum sama sekali"
+                  },
+                  "say": "pada hari panas Sari tidak minum sama sekali",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "urine berubah menjadi keringat di kandung kemih"
+                  },
+                  "say": "urine berubah menjadi keringat di kandung kemih",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air dalam tubuh keluar lewat keringat dan urine. Hari panas banyak keringat, jadi urine sedikit.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            }
+          ]
+        },
+        "weight": 2
       },
       {
-        "prompt": "Organ yang mengatur dan mengendalikan kerja seluruh tubuh adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Otak"
-            },
-            "say": "Otak"
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [65, 95],
+            "m": {
+              "values": [2, 3, 4, 5]
+            }
           },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung"
-            },
-            "say": "Jantung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru"
-            },
-            "say": "Paru-paru",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
-            },
-            "say": "Lambung",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Otak adalah pusat pengendali tubuh: berpikir, mengingat, dan mengatur gerak.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Organ yang menyaring darah dan menghasilkan urine adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ginjal"
-            },
-            "say": "Ginjal"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Hati"
-            },
-            "say": "Hati",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
-            },
-            "say": "Lambung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru"
-            },
-            "say": "Paru-paru",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Ginjal menyaring zat sisa dari darah lalu membuangnya bersama air sebagai urine.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Makanan dicerna dengan bantuan asam dan enzim di dalam …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
-            },
-            "say": "Lambung"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kerongkongan"
-            },
-            "say": "Kerongkongan",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ginjal"
-            },
-            "say": "Ginjal",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung"
-            },
-            "say": "Jantung",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Di lambung, makanan diaduk dan dicerna oleh asam lambung dan enzim.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Alat indra yang berfungsi untuk mengecap rasa manis dan asin adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lidah"
-            },
-            "say": "Lidah"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Hidung"
-            },
-            "say": "Hidung",
-            "tag": "indra-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kulit"
-            },
-            "say": "Kulit",
-            "tag": "indra-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Telinga"
-            },
-            "say": "Telinga",
-            "tag": "indra-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Lidah adalah indra pengecap. Hidung untuk mencium bau, kulit untuk meraba.",
-        "source": "CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025 (pancaindra)"
-      },
-      {
-        "prompt": "Sari makanan paling banyak diserap ke dalam darah di …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Usus halus"
-            },
-            "say": "Usus halus"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Usus besar"
-            },
-            "say": "Usus besar",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
-            },
-            "say": "Lambung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mulut"
-            },
-            "say": "Mulut",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Usus halus panjang dan berlipat-lipat sehingga sari makanan terserap ke darah. Usus besar menyerap air.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Setelah berlari, napas dan detak jantung menjadi lebih cepat. Mengapa?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Otot butuh lebih banyak oksigen dan energi"
-            },
-            "say": "Otot butuh lebih banyak oksigen dan energi"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung sedang sakit"
-            },
-            "say": "Jantung sedang sakit",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru mengecil"
-            },
-            "say": "Paru-paru mengecil",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Darah menjadi lebih sedikit"
-            },
-            "say": "Darah menjadi lebih sedikit",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Saat bergerak, otot bekerja keras dan butuh lebih banyak oksigen. Paru-paru dan jantung bekerja lebih cepat untuk mengantarnya.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Urutan jalannya makanan yang benar adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mulut → kerongkongan → lambung → usus halus → usus besar"
-            },
-            "say": "Mulut → kerongkongan → lambung → usus halus → usus besar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mulut → lambung → kerongkongan → usus halus → usus besar"
-            },
-            "say": "Mulut → lambung → kerongkongan → usus halus → usus besar",
-            "tag": "urutan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mulut → kerongkongan → usus besar → usus halus → lambung"
-            },
-            "say": "Mulut → kerongkongan → usus besar → usus halus → lambung",
-            "tag": "urutan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mulut → paru-paru → lambung → usus halus → usus besar"
-            },
-            "say": "Mulut → paru-paru → lambung → usus halus → usus besar",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Makanan dikunyah di mulut, turun lewat kerongkongan, dicerna di lambung, diserap di usus halus, lalu air diserap di usus besar.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Seorang anak jarang minum air sehingga urinenya berwarna kuning pekat. Organ yang paling berkaitan adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ginjal"
-            },
-            "say": "Ginjal"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung"
-            },
-            "say": "Lambung",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru"
-            },
-            "say": "Paru-paru",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Otak"
-            },
-            "say": "Otak",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Ginjal mengatur banyaknya air yang dibuang. Saat tubuh kurang air, urine lebih sedikit dan lebih pekat.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Tulang rusuk melindungi organ …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung dan paru-paru"
-            },
-            "say": "Jantung dan paru-paru"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Otak"
-            },
-            "say": "Otak",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ginjal dan usus"
-            },
-            "say": "Ginjal dan usus",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lambung saja"
-            },
-            "say": "Lambung saja",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Tulang rusuk membentuk rongga dada yang melindungi jantung dan paru-paru. Otak dilindungi tengkorak.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Hidung sedang pilek membuat makanan terasa kurang enak. Ini menunjukkan …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Indra penciuman membantu kita merasakan makanan"
-            },
-            "say": "Indra penciuman membantu kita merasakan makanan"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lidah tidak bekerja saat pilek"
-            },
-            "say": "Lidah tidak bekerja saat pilek",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Makanan berubah rasa"
-            },
-            "say": "Makanan berubah rasa",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Telinga membantu mengecap"
-            },
-            "say": "Telinga membantu mengecap",
-            "tag": "indra-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Rasa makanan yang kita kenali dibentuk bersama oleh lidah dan hidung. Saat hidung tersumbat, aroma tidak tercium.",
-        "source": "CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025 (pancaindra)"
-      },
-      {
-        "prompt": "Mengapa kita perlu mengunyah makanan sampai halus?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Agar lebih mudah dicerna di lambung dan usus"
-            },
-            "say": "Agar lebih mudah dicerna di lambung dan usus"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Agar makanan cepat dingin"
-            },
-            "say": "Agar makanan cepat dingin",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Agar makanan tidak masuk lambung"
-            },
-            "say": "Agar makanan tidak masuk lambung",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Agar gigi menjadi putih"
-            },
-            "say": "Agar gigi menjadi putih",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Mengunyah memperkecil ukuran makanan sehingga permukaannya lebih luas untuk dicerna enzim.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Oksigen yang kita hirup sampai ke otot kaki karena dibawa oleh …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Darah yang dipompa jantung"
-            },
-            "say": "Darah yang dipompa jantung"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Udara di dalam tulang"
-            },
-            "say": "Udara di dalam tulang",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Makanan dari usus"
-            },
-            "say": "Makanan dari usus",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Saraf dari otak"
-            },
-            "say": "Saraf dari otak",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Oksigen masuk ke darah di paru-paru, lalu darah dipompa jantung melalui pembuluh ke seluruh tubuh, termasuk otot kaki.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Dari data berikut, kegiatan mana yang membuat denyut nadi paling tinggi?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lompat tali"
-            },
-            "say": "Lompat tali"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Duduk membaca"
-            },
-            "say": "Duduk membaca",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Berdiri diam"
-            },
-            "say": "Berdiri diam",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Tidur siang"
-            },
-            "say": "Tidur siang",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Makin berat kegiatan, makin banyak oksigen yang dibutuhkan otot, sehingga jantung berdenyut makin cepat.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek",
-        "stimulus": [
-          {
-            "kind": "text",
-            "text": "Denyut nadi per menit — duduk: 80, berdiri: 85, lompat tali: 130, tidur: 70."
-          }
-        ]
-      },
-      {
-        "prompt": "Jika usus halus tidak menyerap sari makanan dengan baik, akibat yang paling mungkin adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Tubuh kekurangan zat gizi walaupun banyak makan"
-            },
-            "say": "Tubuh kekurangan zat gizi walaupun banyak makan"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru sulit bernapas"
-            },
-            "say": "Paru-paru sulit bernapas",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Urine menjadi banyak"
-            },
-            "say": "Urine menjadi banyak",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mata sulit melihat jauh"
-            },
-            "say": "Mata sulit melihat jauh",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Sari makanan masuk ke darah terutama di usus halus. Jika penyerapan terganggu, gizi tidak sampai ke sel tubuh.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Saat udara dingin kita menggigil. Apa manfaatnya bagi tubuh?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gerakan otot menghasilkan panas"
-            },
-            "say": "Gerakan otot menghasilkan panas"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mengurangi oksigen"
-            },
-            "say": "Mengurangi oksigen",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mendinginkan tubuh"
-            },
-            "say": "Mendinginkan tubuh",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Menghentikan kerja jantung"
-            },
-            "say": "Menghentikan kerja jantung",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Menggigil adalah gerakan otot yang cepat. Otot yang bergerak menghasilkan panas sehingga suhu tubuh terjaga.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
-      },
-      {
-        "prompt": "Alya menutup mata lalu memegang benda kasar. Ia tetap tahu benda itu kasar. Indra yang bekerja adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kulit (peraba)"
-            },
-            "say": "Kulit (peraba)"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mata"
-            },
-            "say": "Mata",
-            "tag": "indra-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lidah"
-            },
-            "say": "Lidah",
-            "tag": "indra-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Telinga"
-            },
-            "say": "Telinga",
-            "tag": "indra-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Kulit memiliki reseptor peraba yang mengenali kasar, halus, panas, dan dingin, tanpa bantuan mata.",
-        "source": "CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025 (pancaindra)"
-      },
-      {
-        "prompt": "Pernyataan yang BENAR tentang jantung dan paru-paru adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Keduanya bekerja sama mengantar oksigen ke seluruh tubuh"
-            },
-            "say": "Keduanya bekerja sama mengantar oksigen ke seluruh tubuh"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Paru-paru memompa darah"
-            },
-            "say": "Paru-paru memompa darah",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Jantung menyaring udara"
-            },
-            "say": "Jantung menyaring udara",
-            "tag": "organ-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Keduanya mencerna makanan"
-            },
-            "say": "Keduanya mencerna makanan",
-            "tag": "organ-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Paru-paru memasukkan oksigen ke darah; jantung memompa darah itu ke seluruh tubuh.",
-        "source": "Konsep dasar biologi (anatomi & fisiologi manusia) — buku IPAS SD Kemendikbudristek"
+          "prompt": "Jantung Bu Rina berdetak {n} kali setiap menit saat istirahat. Berapa kali jantungnya berdetak dalam {m} menit?",
+          "answer": "n * m",
+          "unit": "kali",
+          "distractors": [
+            {
+              "expr": "n + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n * (m + 1)",
+              "tag": "lebih-satu-menit"
+            },
+            {
+              "expr": "n * (m - 1)",
+              "tag": "kurang-satu-menit"
+            }
+          ],
+          "explain": "Setiap menit {n} kali, jadi {m} menit = {m} × {n} = {answer} kali."
+        }
       }
     ]
   }

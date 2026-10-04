@@ -1,0 +1,32 @@
+{
+  "id": "math.sd3.k1.loncat-2-5-dan-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 1,
+  "title": "Membilang loncat — Level 1 — Loncat 2, 5, dan 10",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [0, 200],
+      "k": {
+        "values": [2, 5, 10]
+      }
+    },
+    "constraint": "a % k == 0",
+    "prompt": "{a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan berikutnya?",
+    "answer": "a + 4 * k",
+    "distractors": ["a + 3 * k + 1", "a + 5 * k", "a + 4 * k + 10"],
+    "explain": "Loncat {k}: {=a+3*k} + {k} = {answer}."
+  }
+}

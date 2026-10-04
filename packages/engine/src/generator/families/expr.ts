@@ -6,6 +6,29 @@ import { numberWord } from '../words.js';
 import { defineFamily, reject } from './common.js';
 
 /**
+ * Urutan evaluasi variabel turunan menurut ketergantungannya. Urutan kunci objek TIDAK bisa diandalkan: skill
+ * disimpan di PostgreSQL `jsonb`, yang mengurutkan ulang kunci (yang pendek dulu), mis. `n` sebelum `pi`.
+ * Mengembalikan undefined bila ada ketergantungan melingkar.
+ */
+export function derivedOrder(derived: Record<string, string>): string[] | undefined {
+  const names = Object.keys(derived);
+  const deps = new Map(
+    names.map((n) => [n, exprVariables(derived[n]!).filter((v) => v in derived && v !== n)]),
+  );
+  const order: string[] = [];
+  const done = new Set<string>();
+  while (order.length < names.length) {
+    const next = names.filter((n) => !done.has(n) && deps.get(n)!.every((d) => done.has(d)));
+    if (next.length === 0) return undefined;
+    for (const n of next) {
+      done.add(n);
+      order.push(n);
+    }
+  }
+  return order;
+}
+
+/**
  * PRD A10 dalam bentuk umum (kelas 3+): kalimat soal ber-template + variabel acak + constraint +
  * ekspresi jawaban/pengecoh, dievaluasi evaluator aman (tanpa eval). Mendukung bilangan cacah,
  * desimal, dan pecahan, pilihan ganda atau isian singkat (format OSN), serta pembahasan.
@@ -87,6 +110,11 @@ export const exprFamily = defineFamily({
       if (p.format === 'fraction' ? !p.fraction : !p.answer)
         issue(p.format === 'fraction' ? 'format pecahan butuh `fraction`' : 'butuh `answer`');
       const known = new Set([...Object.keys(p.vars), ...Object.keys(p.derived)]);
+      try {
+        if (!derivedOrder(p.derived)) issue('variabel turunan saling bergantung (melingkar)');
+      } catch {
+        /* ekspresi tidak valid dilaporkan di bawah */
+      }
       const exprs = [
         p.constraint,
         p.answer,
@@ -125,7 +153,8 @@ export const exprFamily = defineFamily({
         vars[name] = clean(spec.range[0] + rng.int(0, steps) * spec.step);
       }
     }
-    for (const [name, src] of Object.entries(p.derived)) vars[name] = clean(evalNumber(src, vars));
+    for (const name of derivedOrder(p.derived) ?? Object.keys(p.derived))
+      vars[name] = clean(evalNumber(p.derived[name]!, vars));
     const words = Object.fromEntries(
       Object.entries(p.words).map(([k, list]) => [k, rng.pick(list)]),
     );

@@ -1,0 +1,64 @@
+{
+  "id": "math.sd3.s2.sifat-pengelompokan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "S",
+  "order": 2,
+  "title": "Sifat perkalian dan keluarga fakta — Level 2 — Sifat pengelompokan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-L (lessons: properties)",
+    "sg": "P3 Multiplication: properties and fact families",
+    "cambridge": "Stage 3 Calculation: commutative, associative, distributive (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "({a} × {b}) × {c} = {a} × (… × {c})",
+          "answer": "b",
+          "distractors": ["a", "c", "b * c"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [2, 5],
+            "c": [2, 9]
+          },
+          "prompt": "({a} × {b}) × {c} = …",
+          "answer": "a * b * c",
+          "distractors": ["a * b + c", "a + b + c", "a * b * c + c"],
+          "explain": "{a} × {b} = {=a*b}, lalu × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 99]
+          },
+          "prompt": "{a} × 5 × 2 = …",
+          "answer": "a * 10",
+          "distractors": ["a * 7", "a * 5", "a + 10"],
+          "explain": "5 × 2 = 10 lebih dulu, lalu {a} × 10 = {answer}."
+        }
+      }
+    ]
+  }
+}

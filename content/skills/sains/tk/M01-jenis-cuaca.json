@@ -1,6 +1,6 @@
 {
   "id": "sains.tk.m1.jenis-cuaca",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "tk",
   "category": "M",
@@ -12,96 +12,820 @@
     "fase-merdeka": "Fondasi (PAUD)",
     "kognitif": "knowing"
   },
-  "family": "mix",
+  "family": "manual",
   "params": {
-    "parts": [
+    "items": [
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "cerah",
-              "attrs": {
-                "t": "Matahari bersinar terang"
-              }
+        "prompt": "Matahari bersinar terang, langit biru. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
             },
-            {
-              "name": "hujan",
-              "attrs": {
-                "t": "air turun dari awan"
-              }
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
             },
-            {
-              "name": "berawan",
-              "attrs": {
-                "t": "langit tertutup awan"
-              }
+            "say": "hujan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
             },
-            {
-              "name": "berangin",
-              "attrs": {
-                "t": "daun dan bendera bergoyang"
-              }
-            },
-            {
-              "name": "badai petir",
-              "attrs": {
-                "t": "ada kilat dan guntur"
-              }
-            }
-          ],
-          "attr": "t",
-          "ask": "name",
-          "prompt": "Cuaca apa bila {value}?",
-          "explain": "Cuaca {name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-        },
-        "weight": 1
+            "say": "badai petir",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Matahari terang dan langit biru artinya cuaca cerah.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "matahari"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "cerah",
-              "attrs": {
-                "t": "Matahari bersinar terang"
-              }
+        "prompt": "Air turun dari awan. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
             },
-            {
-              "name": "hujan",
-              "attrs": {
-                "t": "air turun dari awan"
-              }
+            "say": "hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
             },
-            {
-              "name": "berawan",
-              "attrs": {
-                "t": "langit tertutup awan"
-              }
+            "say": "cerah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin"
             },
-            {
-              "name": "berangin",
-              "attrs": {
-                "t": "daun dan bendera bergoyang"
-              }
+            "say": "berangin",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Air yang turun dari awan disebut hujan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Langit penuh awan abu-abu, tapi belum hujan. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung"
             },
-            {
-              "name": "badai petir",
-              "attrs": {
-                "t": "ada kilat dan guntur"
-              }
-            }
-          ],
-          "attr": "t",
-          "ask": "value",
-          "prompt": "Cuaca {name} itu seperti apa?",
-          "explain": "Cuaca {name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-        },
-        "weight": 1
+            "say": "mendung"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
+            },
+            "say": "badai petir",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Langit tertutup awan tebal tanpa hujan disebut mendung.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "awan"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Daun dan bendera bergoyang kencang. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin"
+            },
+            "say": "berangin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah tenang"
+            },
+            "say": "cerah tenang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin membuat daun dan bendera bergoyang.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Ada kilat dan suara guntur. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
+            },
+            "say": "badai petir"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung tenang"
+            },
+            "say": "mendung tenang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kilat dan guntur adalah tanda badai petir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Gambar mana yang menunjukkan cuaca cerah?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "object",
+              "object": "matahari"
+            },
+            "say": "matahari"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "awan"
+            },
+            "say": "awan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "payung"
+            },
+            "say": "payung",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Matahari yang bersinar menandakan cuaca cerah.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Gambar mana yang cocok untuk cuaca berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "object",
+              "object": "awan"
+            },
+            "say": "awan"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "matahari"
+            },
+            "say": "matahari",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "es-krim"
+            },
+            "say": "es krim",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cuaca berawan: banyak awan di langit.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Layang-layang terbang tinggi. Cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin"
+            },
+            "say": "berangin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tanpa angin"
+            },
+            "say": "tanpa angin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan deras"
+            },
+            "say": "hujan deras",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Layang-layang bisa terbang tinggi karena ada angin.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "layang-layang"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Jalan basah dan ada genangan air. Tadi cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah terik"
+            },
+            "say": "cerah terik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin kering"
+            },
+            "say": "berangin kering",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Genangan air muncul setelah hujan turun.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Bayangan kita terlihat jelas di tanah. Cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung tebal"
+            },
+            "say": "mendung tebal",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan deras"
+            },
+            "say": "hujan deras",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Bayangan jelas terlihat saat Matahari bersinar, cuaca cerah.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Langit gelap, angin kencang, kilat menyambar. Ini ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
+            },
+            "say": "badai petir"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Langit gelap dengan kilat dan angin kencang adalah badai petir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Kapan pelangi bisa terlihat?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "saat hujan dan Matahari bersinar"
+            },
+            "say": "saat hujan dan Matahari bersinar"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tengah malam gelap"
+            },
+            "say": "tengah malam gelap",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "saat langit mendung tebal"
+            },
+            "say": "saat langit mendung tebal",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Pelangi muncul saat sinar Matahari mengenai tetes air hujan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Cuaca yang terang dan terasa panas disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung"
+            },
+            "say": "mendung",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cuaca cerah terasa terang dan panas.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Pohon kelapa bergoyang-goyang. Di sana ada ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "angin"
+            },
+            "say": "angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
+            },
+            "say": "pelangi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bintang"
+            },
+            "say": "bintang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin yang bertiup membuat pohon bergoyang.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "pohon"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Mana yang BUKAN nama cuaca?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "senang"
+            },
+            "say": "senang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin"
+            },
+            "say": "berangin",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Senang adalah perasaan, bukan cuaca.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Mana yang termasuk nama cuaca?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berawan"
+            },
+            "say": "berawan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kenyang"
+            },
+            "say": "kenyang",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mengantuk"
+            },
+            "say": "mengantuk",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Berawan adalah salah satu jenis cuaca.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Suara gemuruh keras di langit saat badai disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "guntur"
+            },
+            "say": "guntur"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
+            },
+            "say": "pelangi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Suara gemuruh saat badai disebut guntur.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Cahaya terang sekejap di langit saat badai disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kilat"
+            },
+            "say": "kilat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
+            },
+            "say": "pelangi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bintang"
+            },
+            "say": "bintang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cahaya sekejap saat badai disebut kilat.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Tetes air mengetuk atap rumah. Di luar sedang ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah terik"
+            },
+            "say": "cerah terik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin saja"
+            },
+            "say": "berangin saja",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Bunyi tetes di atap tandanya hujan turun.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Awan hitam tebal datang. Sebentar lagi mungkin ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "makin terik"
+            },
+            "say": "makin terik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "muncul bintang"
+            },
+            "say": "muncul bintang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Awan hitam tebal sering membawa hujan.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "awan"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Kincir mainan berputar sendiri di halaman. Ada ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "angin"
+            },
+            "say": "angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan es"
+            },
+            "say": "hujan es",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
+            },
+            "say": "pelangi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin yang bertiup memutar kincir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Langit biru tanpa awan sama sekali. Cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung"
+            },
+            "say": "mendung",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Langit biru tanpa awan berarti cuaca cerah.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Awan putih sedikit, Matahari tetap bersinar. Cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah berawan"
+            },
+            "say": "cerah berawan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
+            },
+            "say": "badai petir",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan deras"
+            },
+            "say": "hujan deras",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Matahari bersinar dengan sedikit awan disebut cerah berawan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Ketuk semua tanda cuaca hujan.",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "awan gelap"
+            },
+            "say": "awan gelap"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tetes air turun"
+            },
+            "say": "tetes air turun"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bayangan jelas"
+            },
+            "say": "bayangan jelas",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "langit biru bersih"
+            },
+            "say": "langit biru bersih",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": [0, 1],
+        "reteach": "Hujan ditandai awan gelap dan tetes air yang turun.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Rambut kita berkibar ditiup saat main di luar. Cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin"
+            },
+            "say": "berangin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tanpa angin"
+            },
+            "say": "tanpa angin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Rambut berkibar karena angin bertiup.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       }
     ]
   }

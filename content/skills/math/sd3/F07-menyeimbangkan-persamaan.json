@@ -1,0 +1,69 @@
+{
+  "id": "math.sd3.f7.menyeimbangkan-persamaan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "F",
+  "order": 7,
+  "title": "Pengurangan tiga angka — Level 7 — Menyeimbangkan persamaan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-H",
+    "sg": "P3 Subtraction within 10 000",
+    "cambridge": "Stage 3 Calculation: subtraction of 3-digit numbers (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [400, 999],
+            "b": [100, 399],
+            "c": [500, 999]
+          },
+          "constraint": "c > a - b",
+          "prompt": "{a} − {b} = {c} − …",
+          "answer": "c - (a - b)",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-kiri"
+            },
+            {
+              "expr": "c + a - b",
+              "tag": "menjumlah"
+            },
+            "c - (a - b) + 10"
+          ],
+          "explain": "Sisi kiri {=a-b}. {c} − ? = {=a-b}, jadi ? = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [600, 999],
+            "c": [100, 300],
+            "e": [10, 200]
+          },
+          "prompt": "{a} − … = {c} + {e}",
+          "answer": "a - c - e",
+          "distractors": [
+            {
+              "expr": "c + e",
+              "tag": "jumlah-kanan"
+            },
+            "a - c - e + 10",
+            "a - c + e"
+          ],
+          "explain": "Kanan {=c+e}. {a} − {=c+e} = {answer}."
+        }
+      }
+    ]
+  }
+}

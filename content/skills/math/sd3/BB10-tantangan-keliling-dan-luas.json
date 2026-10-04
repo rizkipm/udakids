@@ -1,0 +1,243 @@
+{
+  "id": "math.sd3.bb10.tantangan-keliling-dan-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 10,
+  "title": "Keliling dan luas — Level 10 — Tantangan keliling dan luas",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 9],
+            "h": [2, 6]
+          },
+          "prompt": "Setiap petak 1 cm². Berapa cm² luas bangun ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": true
+            }
+          ],
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            "w * h - w"
+          ],
+          "explain": "{h} baris × {w} petak = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 15],
+            "h": [2, 10]
+          },
+          "constraint": "w != h",
+          "prompt": "Persegi panjang {w} cm × {h} cm. Berapa cm² luasnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            "w * h + w"
+          ],
+          "explain": "{w} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 8],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Lantai kamar {w} m × {h} m. Berapa m² luasnya?",
+          "answer": "w * h",
+          "unit": "m²",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [5, 30]
+          },
+          "prompt": "Taman berbentuk persegi bersisi {s} m. Berapa m² luasnya?",
+          "answer": "s * s",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "keliling"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            "s * s + s"
+          ],
+          "explain": "{s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 20]
+          },
+          "prompt": "Persegi bersisi {s} cm. Berapa cm² luasnya?",
+          "answer": "s * s",
+          "unit": "cm²",
+          "explain": "{s} × {s} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "derived": {
+            "l": "w * h"
+          },
+          "prompt": "Luas persegi panjang {l} cm² dan panjangnya {w} cm. Berapa cm lebarnya?",
+          "answer": "l / w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l - w",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "bagi-2"
+            },
+            "l / w + 1"
+          ],
+          "explain": "{l} : {w} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "l": "s * s"
+          },
+          "prompt": "Luas persegi {l} cm². Berapa cm sisinya?",
+          "answer": "s",
+          "unit": "cm",
+          "explain": "{s} × {s} = {l}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 10],
+            "b": [2, 6],
+            "c": [2, 6],
+            "e": [2, 5]
+          },
+          "prompt": "Bangun berbentuk huruf L terdiri atas persegi panjang {a} cm × {b} cm dan {c} cm × {e} cm. Berapa cm² luasnya?",
+          "answer": "a * b + c * e",
+          "unit": "cm²",
+          "distractors": ["a * b", "(a + c) * (b + e)", "a * b + c + e"],
+          "explain": "{=a*b} + {=c*e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [8, 15],
+            "h": [6, 10],
+            "s": [2, 4]
+          },
+          "prompt": "Sebuah persegi panjang {w} cm × {h} cm dipotong persegi {s} cm × {s} cm di pojoknya. Berapa cm² luas sisanya?",
+          "answer": "w * h - s * s",
+          "unit": "cm²",
+          "explain": "{=w*h} − {=s*s} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 8],
+            "h": [2, 6],
+            "k": {
+              "values": [10000, 15000, 20000]
+            }
+          },
+          "prompt": "Lantai {w} m × {h} m ditutup ubin 1 m × 1 m. Harga satu ubin Rp{k}. Berapa rupiah biaya ubinnya?",
+          "answer": "w * h * k",
+          "mode": "input",
+          "explain": "{w} × {h} = {=w*h} ubin; × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Dua persegi bersisi {s} cm diletakkan berdampingan menjadi persegi panjang. Berapa cm kelilingnya?",
+          "answer": "6 * s",
+          "mode": "input",
+          "explain": "Persegi panjang {=2*s} × {s}: 2 × ({=2*s} + {s}) = {answer}."
+        }
+      }
+    ]
+  }
+}

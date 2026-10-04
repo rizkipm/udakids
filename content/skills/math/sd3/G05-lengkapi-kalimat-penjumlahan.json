@@ -1,0 +1,69 @@
+{
+  "id": "math.sd3.g5.lengkapi-kalimat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "G",
+  "order": 5,
+  "title": "Penjumlahan empat dan lima angka — Level 5 — Lengkapi kalimat penjumlahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-I",
+    "sg": "P3 Addition within 10 000",
+    "cambridge": "Stage 3 Calculation: addition (3Nc.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 5000],
+            "b": [1000, 4000]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "{a} + … = {c}",
+          "answer": "c - a",
+          "distractors": [
+            {
+              "expr": "c + a",
+              "tag": "menjumlah"
+            },
+            "c - a + 100",
+            "c - a - 10"
+          ],
+          "explain": "{c} − {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 5000],
+            "b": [100, 999]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "… + {b} = {c}",
+          "answer": "c - b",
+          "distractors": [
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            },
+            "c - b + 10",
+            "c - b - 100"
+          ],
+          "explain": "{c} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

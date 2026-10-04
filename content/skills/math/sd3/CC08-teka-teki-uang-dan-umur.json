@@ -1,0 +1,90 @@
+{
+  "id": "math.sd3.cc8.teka-teki-uang-dan-umur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 8,
+  "title": "Penalaran gaya OSN — Level 8 — Teka-teki uang dan umur",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [30, 45],
+            "c": [6, 12],
+            "k": [2, 10]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Umur ayah sekarang {f} tahun, umur {nama} {c} tahun. {k} tahun lagi, berapa jumlah umur mereka?",
+          "answer": "f + c + 2 * k",
+          "distractors": [
+            {
+              "expr": "f + c + k",
+              "tag": "satu-orang"
+            },
+            "f + c",
+            "f + c + 3 * k"
+          ],
+          "explain": "({f} + {k}) + ({c} + {k}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "values": [4000, 5000, 6000, 7500]
+            },
+            "y": {
+              "values": [1000, 1500, 2000, 2500]
+            }
+          },
+          "derived": {
+            "a": "2 * x + y",
+            "b": "x + y"
+          },
+          "prompt": "Harga 2 buku dan 1 pensil Rp{a}. Harga 1 buku dan 1 pensil Rp{b}. Berapa rupiah harga 1 buku?",
+          "answer": "a - b",
+          "unit": "rupiah",
+          "distractors": ["b - (a - b)", "a / 2", "a + b"],
+          "explain": "Selisihnya tepat 1 buku: {a} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

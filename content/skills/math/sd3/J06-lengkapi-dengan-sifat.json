@@ -1,0 +1,66 @@
+{
+  "id": "math.sd3.j6.lengkapi-dengan-sifat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "J",
+  "order": 6,
+  "title": "Sifat penjumlahan — Level 6 — Lengkapi dengan sifat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-L",
+    "sg": "P3 Addition: properties (mental strategies)",
+    "cambridge": "Stage 3 Calculation: commutative and associative (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999],
+            "c": [10, 999]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "{a} + {b} + {c} = {c} + {a} + …",
+          "answer": "b",
+          "distractors": ["a", "c", "a + c"],
+          "explain": "Bilangan yang sama, urutan berbeda: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 999],
+            "b": [10, 999]
+          },
+          "prompt": "{a} + {b} = {b} + {a} + …",
+          "answer": "0",
+          "distractors": ["a", "b", "1"],
+          "explain": "Kedua sisi sudah sama, jadi tambah 0."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [10, 99],
+            "c": [10, 99]
+          },
+          "constraint": "a != b && b != c",
+          "prompt": "({a} + …) + {c} = {a} + ({b} + {c})",
+          "answer": "b",
+          "distractors": ["a", "c", "b + c"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

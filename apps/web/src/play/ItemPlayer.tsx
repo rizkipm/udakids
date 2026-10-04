@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
   isAudioOnlyItem,
   spokenPrompt,
+  voiceLangOf,
   type InteractionType,
   type AnswerResult,
   type AnswerValue,
@@ -15,6 +16,7 @@ import {
   SPEECH_BLOCKED,
   SPEECH_TROUBLE,
   speak,
+  speakChoice,
   speakItem,
   speakLine,
   stopSpeaking,
@@ -44,6 +46,9 @@ export type ItemPlayerProps = {
   onSubmitValue?: (value: AnswerValue) => void;
 };
 
+/** Soal yang sedang tampil: kartu pilihan English diucapkan suara Momo dari server (D-059, D-062). */
+const ItemVoice = createContext<Item | undefined>(undefined);
+
 const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   'pick-one': 'play.cmd.pickOne',
   'tap-all': 'play.cmd.tapAll',
@@ -57,7 +62,8 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
 export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
-  if (!tier) return speak(item.say ?? item.prompt);
+  const lang = voiceLangOf(item.skillId);
+  if (!tier) return speak(item.say ?? item.prompt, { lang });
   const spoken = spokenPrompt(item, tier);
   if (spoken.kind === 'item') return speakItem(item, spoken.text);
   speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
@@ -65,7 +71,8 @@ export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
 
 /** Seperti `speakPrompt`, tetapi tanpa klip suara per soal (soal lomba tidak membawa id/seed). */
 function speakPlain(item: Item, tier: ItemPlayerProps['tier']) {
-  if (!tier || tier === 'basic') return speak(item.say ?? item.prompt);
+  if (!tier || tier === 'basic')
+    return speak(item.say ?? item.prompt, { lang: voiceLangOf(item.skillId) });
   const spoken = spokenPrompt(item, tier);
   if (spoken.kind === 'line') speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
 }
@@ -174,13 +181,17 @@ export function ItemPlayer({
         </div>
       )}
       <div className={`interaction${result ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}>
-        <InteractionView
-          interaction={item.interaction}
-          onSubmit={submit}
-          disabled={inactive}
-          showAnswer={showAnswer || (result !== undefined && !result.correct && mode === 'preview')}
-          result={result}
-        />
+        <ItemVoice.Provider value={item}>
+          <InteractionView
+            interaction={item.interaction}
+            onSubmit={submit}
+            disabled={inactive}
+            showAnswer={
+              showAnswer || (result !== undefined && !result.correct && mode === 'preview')
+            }
+            result={result}
+          />
+        </ItemVoice.Provider>
       </div>
     </div>
   );
@@ -269,6 +280,7 @@ function ChoiceCard({
   size?: number;
   badge?: ReactNode;
 }) {
+  const voiceItem = useContext(ItemVoice);
   return (
     <button
       type="button"
@@ -276,7 +288,7 @@ function ChoiceCard({
       disabled={disabled}
       aria-pressed={selected}
       onClick={() => {
-        if (choice.say) speak(choice.say);
+        speakChoice(voiceItem, choice);
         onClick?.();
       }}
     >
@@ -551,6 +563,7 @@ function Group({
   }, [it]);
   const where = showAnswer ? it.answer : placed;
   const pool = it.items.filter((c) => !where[c.id]);
+  const voiceItem = useContext(ItemVoice);
   return (
     <>
       <div className="group-pool" aria-label={t('play.groupPool')}>
@@ -575,7 +588,7 @@ function Group({
               disabled={disabled}
               aria-label={g.say ?? t('play.groupHere')}
               onClick={() => {
-                if (g.say) speak(g.say);
+                speakChoice(voiceItem, g);
                 if (active) {
                   setPlaced((p) => ({ ...p, [active]: g.id }));
                   setActive(undefined);

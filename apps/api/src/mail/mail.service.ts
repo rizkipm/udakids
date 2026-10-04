@@ -11,6 +11,7 @@ import nodemailer from 'nodemailer';
 import { DB, type Db } from '../db/db.module.js';
 import { emailOutbox } from '../db/schema.js';
 import type { MailContent, MailContext } from './templates.js';
+import { MOMO_LOGO_CID, MOMO_LOGO_PNG_BASE64 } from './logo.js';
 
 /** Pengirim email. Di test diganti pengirim palsu lewat token ini. */
 export type MailTransport = {
@@ -64,7 +65,21 @@ export function smtpFromEnv(): MailTransport | null {
   });
   return {
     async send(msg) {
-      await tx.sendMail(msg);
+      await tx.sendMail({
+        ...msg,
+        // Logo Momo ditempel sebagai lampiran inline bila template memakainya.
+        ...(msg.html.includes(`cid:${MOMO_LOGO_CID}`) && {
+          attachments: [
+            {
+              filename: 'momo.png',
+              content: Buffer.from(MOMO_LOGO_PNG_BASE64, 'base64'),
+              contentType: 'image/png',
+              cid: MOMO_LOGO_CID,
+              contentDisposition: 'inline' as const,
+            },
+          ],
+        }),
+      });
     },
   };
 }

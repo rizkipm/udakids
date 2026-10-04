@@ -1,0 +1,103 @@
+{
+  "id": "math.sd3.t9.penalaran-soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 9,
+  "title": "Soal cerita perkalian dan pembagian — Level 9 — Penalaran soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "k": [2, 10]
+          },
+          "derived": {
+            "h": "a + k",
+            "f": "2 * a + 4 * k"
+          },
+          "prompt": "Di peternakan ada ayam dan kambing. Jumlah kepala {h}, jumlah kaki {f}. Berapa ekor kambing?",
+          "answer": "k",
+          "mode": "input",
+          "explain": "Jika semua ayam, kaki = {=h*2}. Kelebihan {=f-h*2} kaki : 2 = {answer} kambing."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 6],
+            "q": [3, 9],
+            "r": [1, 2]
+          },
+          "derived": {
+            "t": "g * q + r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < g",
+          "prompt": "{nama} punya {t} permen. Ia membagi rata ke {g} teman dan sisanya {r} permen untuk dirinya. Berapa permen setiap teman?",
+          "answer": "(t - r) / g",
+          "mode": "input",
+          "explain": "({t} − {r}) : {g} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [20, 35],
+            "h": {
+              "values": [10000, 12000, 15000]
+            },
+            "b": {
+              "values": [200000, 250000, 300000]
+            }
+          },
+          "constraint": "n * h > b",
+          "prompt": "Sebuah kelas memesan {n} kotak nasi. Satu kotak Rp{h}. Uang yang terkumpul Rp{b}. Berapa rupiah kekurangannya?",
+          "answer": "n * h - b",
+          "unit": "rupiah",
+          "mode": "input",
+          "explain": "{n} × {h} = {=n*h}; kurang {answer}."
+        }
+      }
+    ]
+  }
+}

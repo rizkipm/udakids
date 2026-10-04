@@ -1,0 +1,82 @@
+{
+  "id": "math.sd3.aa4.sudut-siku-siku",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "AA",
+  "order": 4,
+  "title": "Bangun datar dan sudut — Level 4 — Sudut siku-siku",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-AA (geometry)",
+    "sg": "P3 Angles, perpendicular and parallel lines, 2D shapes",
+    "cambridge": "Stage 3 Geometry: 2D shapes, right angles (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [30, 45, 60, 90, 90, 120, 135, 150]
+            }
+          },
+          "prompt": "Sudut ini termasuk …",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=d"
+            }
+          ],
+          "answer": "(d == 90) * 1 + (d < 90) * 2 + (d > 90) * 3",
+          "labels": {
+            "1": "Siku-siku",
+            "2": "Lebih kecil dari siku-siku",
+            "3": "Lebih besar dari siku-siku"
+          },
+          "explain": "Bandingkan dengan pojok buku (siku-siku)."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {},
+          "words": {
+            "x": ["buku", "meja", "papan tulis", "jendela", "ubin lantai"]
+          },
+          "prompt": "Pojok {x} membentuk sudut …",
+          "answer": "1",
+          "labels": {
+            "1": "Siku-siku",
+            "2": "Lebih kecil dari siku-siku",
+            "3": "Lebih besar dari siku-siku"
+          },
+          "explain": "Pojok seperti itu siku-siku."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [1, 2, 3, 4, 5, 9, 10, 11]
+            }
+          },
+          "prompt": "Jarum jam pukul {h}.00 membentuk sudut …",
+          "answer": "(h == 3 || h == 9) * 1 + (h < 3 || h > 9) * 2 + (h > 3 && h < 9) * 3",
+          "labels": {
+            "1": "Siku-siku",
+            "2": "Lebih kecil dari siku-siku",
+            "3": "Lebih besar dari siku-siku"
+          },
+          "explain": "Pukul 3 dan 9 siku-siku; dekat angka 12 lebih kecil; lebih jauh lebih besar."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "math.sd3.u3.pecahan-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 3,
+  "title": "Memahami pecahan — Level 3 — Pecahan satuan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "a != b",
+          "prompt": "Mana yang lebih besar: 1/{a} atau 1/{b}?",
+          "answer": "(a < b) * 1 + (a > b) * 2",
+          "labels": {
+            "1": "Pecahan pertama",
+            "2": "Pecahan kedua"
+          },
+          "explain": "Penyebut lebih kecil → potongan lebih besar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 12]
+          },
+          "prompt": "Satu kue dibagi {d} sama besar. Berapa bagian setiap potong?",
+          "format": "fraction",
+          "fraction": {
+            "num": "1",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "d",
+              "den": "1",
+              "tag": "terbalik"
+            },
+            {
+              "num": "1",
+              "den": "d + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "1",
+              "den": "d - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Satu dari {d} bagian: {answer}."
+        }
+      }
+    ]
+  }
+}

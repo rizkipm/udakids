@@ -492,7 +492,7 @@ cakupan "Semua Sains + Math 1–2", dan adaptasi Indonesia.
 - **Seed:** katalog kini punya `updated_by` (migrasi `0004`). `db:seed` tidak menimpa katalog yang disunting admin
   (kecuali `--force`), sama seperti skill. Sebelumnya seed selalu menimpa katalog, sehingga judul "Math Pra-TK"
   hasil suntingan admin sempat kembali ke bawaan; judulnya sudah dipulihkan.
-- **Belum:** Math Grade 3 (daftar topik di pesan pemilik terpotong) dan tinjauan guru untuk buku baru.
+- **Belum:** Math Grade 3 (daftar topik di pesan pemilik terpotong; kini dibuat di D-061) dan tinjauan guru untuk buku baru.
 
 ## D-033 — Rak buku landing bergeser (10 per halaman) dan statistik realtime
 
@@ -1067,3 +1067,214 @@ dan bisa berhenti).
   verifikasi dan transaksi selalu didahulukan di antrean.
 - **Urutan deploy:** jalankan migrasi **sebelum** seed konten baru (`migrate:prod` lalu `seed:prod`). Dengan
   begitu, buku yang baru ditambahkan ikut diumumkan.
+
+## D-054 — Pengingat masa paket Premium via email (H-5, H-3, H-1) & perbaikan email
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Pengingat masa paket** (`ExpiryReminderService`, berjalan tiap jam):
+  - email ke orang tua terverifikasi pada **H-5, H-3, dan H-1** sebelum paket berakhir;
+  - satu kali per hari pengingat per hak akses (dicatat di `email_outbox` kind `expiry_<n>`, refId = id hak akses);
+  - tidak dikirim bila keluarga sudah punya paket lain yang aktif lebih lama;
+  - email layanan, tidak terpengaruh berhenti berlangganan info materi.
+  - Isinya menegaskan bahwa skor dan progres tetap tersimpan, disertai tombol "Perpanjang paket".
+- **Premium:** paket yang dibeli berlaku **per akun orang tua** (semua anak di akun itu); Premium dari admin berlaku per
+  anak. Teks landing dan email diperjelas.
+- **Email:**
+  - logo Momo kini ditempel langsung di email (CID inline, `apps/api/src/mail/logo.ts`), sehingga tidak bergantung
+    pada pemuatan gambar dari URL;
+  - catatan kecil tidak lagi tampil sebagai tag HTML mentah.
+- **Landing:** menampilkan total soal latihan (level × 10) dan total soal dijawab (realtime).
+
+## D-055 — Variasi soal Pra-TK, TK, dan TK OSN
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk: soal terasa berulang).
+
+- **29 ilustrasi baru:**
+  - 13 hewan: sapi, kambing, kuda, monyet, singa, jerapah, burung, kura-kura, katak, lebah, siput, penguin, beruang;
+  - 6 buah dan sayur;
+  - 4 kendaraan;
+  - 6 benda alam.
+  - 22 ilustrasi bisa dihitung, sehingga semua generator membilang, membandingkan, dan berhitung otomatis memakai
+    benda yang lebih beragam.
+- **Tabel fakta diperluas:**
+  - Sains TK: bagian tubuh hewan, anak hewan, makhluk hidup / benda tak hidup, hewan / tumbuhan;
+  - Sains TK OSN: dari 7 menjadi 20 hewan bergambar, ditambah buah dan sayur baru, teka-teki hewan, kendaraan, dan
+    alam bergambar.
+- **Soal cerita** (setengah/seperempat dari benda, piktogram, belanja, benda dua warna, sisa benda) kini memilih benda,
+  nama, dan jajanan secara acak.
+- **Ukuran (30 soal per skill):** rata-rata jenis benda per skill naik 48–140%. Soal dengan rentang angka sempit
+  (mis. "angka sampai 2") tetap terbatas karena disengaja untuk level awal.
+- **Seed:** skill yang sudah ada kini diperbarui bila `version` di content/ lebih tinggi; skill yang isinya diubah
+  dinaikkan versinya. Suntingan admin dengan versi sama atau lebih tinggi tidak ditimpa; `--force` tetap menimpa
+  semuanya.
+- **Id skill dipertahankan** walau judul berubah, supaya progres anak tidak hilang.
+
+## D-056 — Soal tidak berulang dalam satu level; bank soal Sains TK dan TK OSN per level
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk: soal sains TK/TK OSN berulang per topik).
+
+- **Penyusunan ronde (engine `generateRound`):** selain soal identik, kini dihindari juga soal dengan **inti** sama
+  (kalimat + gambar soal + jawaban benar) walau pengecohnya beda, lalu kalimat soal yang sama. Prioritas: soal identik
+  ≫ inti kembar ≫ kalimat kembar > soal yang keluar di ronde sebelumnya. Inti kembar tidak dilarang mutlak karena pada
+  soal perbandingan (3 vs 1, 3 vs 2) pengecohnya bagian dari soal. Riwayat perangkat (`itemKey`) tidak berubah.
+- **Konten Sains TK (15 topik) dan TK OSN (5 topik), 198 skill:**
+  - setiap level 1–9 punya bank soal sendiri, minimal 20 soal unik (umumnya 25–60), tidak lagi menyalin bank atau tabel
+    level lain dalam topik yang sama (tumpang tindih antar level ≤ 20%);
+  - level 10 (Tantangan) tetap ulangan dari level 1–9 topiknya;
+  - tidak ada soal yang sama di dua topik berbeda;
+  - pilihan jawaban dalam satu soal berformat sama (semua gambar atau semua teks), agar jawaban tidak ketahuan dari
+    bentuknya.
+- Versi skill yang diubah dinaikkan, sehingga `seed` memperbarui database (D-055). Id, judul, dan urutan tetap.
+
+## D-057 — Papan peringkat memuat semua anak, berhalaman; detail rapi dan responsif
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Papan global:** memuat semua anak aktif. Anak yang belum punya ronde tampil paling bawah, urut nama, berlabel
+  "Belum bermain" tanpa nilai dan tanpa tombol detail. Papan per buku tetap hanya anak yang memainkan buku itu.
+  Respons memuat `played` (jumlah yang sudah bermain).
+- **Landing:** "N peserta" = semua anak aktif, ditambah "M sudah bermain" bila berbeda.
+- **Paging:** "Peserta lainnya" (peringkat 26 ke bawah) memakai halaman bernomor, 50 per halaman, tombol ≥ 64 px. Di layar
+  kecil tampil Sebelumnya · Halaman x dari y · Berikutnya. Menggantikan tombol "Muat lebih banyak".
+- **Detail anak:** ringkasan berupa kartu statistik (peringkat, nilai peringkat, rata-rata asli, total skor, ronde,
+  soal, level lulus, waktu), bukan kalimat panjang berhuruf besar. Kalimatnya tetap bisa didengar lewat tombol suara.
+  Di HP, tabel per buku dan per topik menjadi kartu bertumpuk.
+- Tetap hanya nama panggilan dan warna/tampilan Momo yang terlihat oleh anak lain (D-024, D-042).
+
+## D-058 — Buku English Pra-TK (domain `english`)
+
+Tanggal 2026-10-03 · Status **Disetujui** (permintaan pemilik produk: English selain Math dan Sains).
+
+- **Domain baru `english`** (di `DOMAINS`, setelah `sains`); buku `english/prek` "English Pra-TK". Daftar buku
+  publik kini diurutkan sesuai `DOMAINS` (Math, Sains, English), bukan abjad.
+- **Cakupan:** 29 kategori × 10 level = 290 skill (family `manual`, 12–30 soal per level, ±8.100 soal). Topik
+  mengikuti Cambridge Pre-A1 Starters dan Singapore NEL (Language & Literacy): huruf A–Z, huruf besar/kecil,
+  mengenal kata, rima, suku kata, menggabung bunyi, bunyi awal/akhir, huruf & bunyi, vokal pendek, sight words
+  (10 set), memahami buku/cerita, kata warna, kata bilangan, singular/plural, kata kerja, kata sifat, kata posisi,
+  lawan kata, dan kelompok benda. Daftar topik IXL hanya dipakai sebagai peta topik; semua soal ditulis sendiri.
+- **Bahasa:** instruksi bahasa Indonesia, kata target bahasa Inggris. Suara Momo tetap id-ID (tanpa ubah TTS). _Diganti D-059 (instruksi English, suara en-GB), lalu D-062: instruksi & narasi kembali Bahasa Indonesia._
+- **Fonik lewat kata contoh** ("ball dimulai dengan huruf apa?"), tidak mengucapkan fonem terpisah. Pengecualian
+  aturan "literasi lewat suku kata, bukan fonik Inggris" hanya untuk buku English ini.
+- **Soal membaca/mendengar tidak membocorkan jawaban:** teks soal yang tampil tidak memuat kata jawaban (kata itu
+  hanya diucapkan), dan kartu kata pada soal membaca tidak bersuara.
+- **30 ilustrasi baru** (`objects-english.tsx`): igloo, selai, kunci, sarang, van, biola, xilofon, yoyo, zebra, anjing,
+  rumah, tikus, ular, rubah, telur, ranjang, babi, 5 wajah perasaan, 8 anak beraktivitas. Semua `countable: false`
+  agar soal matematika yang ada tidak berubah.
+- Buku baru belum masuk paket berbayar mana pun; admin menambahkannya lewat menu paket bila perlu.
+
+## D-059 — Buku English format Singapore & Cambridge, suara British English, rujukan kurikulum di landing
+
+Tanggal 2026-10-04 · Status **Disetujui** (pilihan pemilik produk: "English + bantuan Indonesia", suara "en-GB").
+
+- **Format buku English Pra-TK (290 skill):**
+  - mengacu pada Cambridge English Pre A1 Starters (Young Learners) dan Singapore MOE Nursery–K2 NEL Framework 2022
+    (Language & Literacy). Ejaan British (colour, grey);
+  - perintah soal dan suara dalam English sederhana gaya Cambridge ("Tap the letter you hear."); _diganti D-062:
+    perintah & narasi Bahasa Indonesia, kata/kalimat target tetap English_;
+  - penjelasan saat keliru dua bahasa: kalimat English, lalu bantuan Bahasa Indonesia dalam kurung; _diganti D-062:
+    hanya bantuan Bahasa Indonesia_;
+  - intro dan tips topik untuk orang tua tetap Bahasa Indonesia;
+  - setiap soal punya `source` (rujukan Cambridge dan NEL). Aturan variasi sama dengan D-056;
+  - hasil: 9.337 soal, setiap level minimal 24 soal unik, tanpa tumpang tindih antar level, tanpa pilihan kembar.
+    Aturan D-058 tetap: jawaban soal dengar hanya ada di suara, kartu kata pada soal membaca tidak bersuara;
+  - preposisi mengikuti Cambridge Starters (in, on, under, next to, behind, in front of); "corn" tidak dijamakkan.
+- **Penyusunan ronde:** kalimat yang diucapkan (`say`) ikut menjadi bagian inti soal, sehingga soal dengar dengan
+  perintah sama tetapi kata yang diucapkan berbeda dihitung sebagai soal yang berbeda (melengkapi D-056).
+- **Suara:**
+  - _(diganti D-062 untuk Pra-TK: narasi id-ID, kartu kata en-GB)_ buku English memakai suara British English (`en-GB`, gaya bicara English bawaan; model, suara, dan kecepatan sama
+    dengan pengaturan admin). Buku lain tetap `id-ID`;
+  - bahasa ditentukan dari id skill (`english.*`);
+  - kunci klip memasukkan bahasa hanya bila bukan Indonesia, jadi klip lama tetap berlaku;
+  - suara cadangan browser memilih suara Inggris untuk soal English (D-062: suara perempuan lebih dulu).
+  - Soal dengar English ("hear"/"listen") dikenali seperti "dengar" (petunjuk untuk orang dewasa, D-047).
+- **Landing:**
+  - kalimat pembuka dan langkah "cara" menyebut mata pelajaran yang benar-benar ada (matematika, sains, bahasa
+    Inggris);
+  - bagian baru "Mata pelajaran & rujukan kurikulum" per mata pelajaran: jumlah buku dan level, jenjang, dan rujukan;
+  - rujukan diturunkan dari tag skill (`merdeka`/`fase-merdeka`, `sg`, `cambridge`, `timss-kognitif`, `osn`, `ngss`,
+    `ccss`). Buku Kelas 1–2 dan 3–4 dihitung bergaya OSN. `ixlRef` (internal) tidak pernah tampil;
+  - disertai pernyataan bahwa aplikasi tidak berafiliasi dengan Cambridge, MOE Singapura, IEA (TIMSS), maupun
+    Puspresnas.
+
+## D-060 — Variasi soal Sains SD–SMP; perbaikan urutan variabel turunan; pengaman halaman anak
+
+Tanggal 2026-10-04 · Status **Disetujui** (permintaan pemilik produk: soal sains SD–SMP berulang; error Math SMP).
+
+- **Bug Math SMP "variabel tidak dikenal pi":**
+  - variabel turunan (`derived`) dulu dievaluasi menurut urutan kunci objek. Skill dibaca dari PostgreSQL `jsonb`,
+    yang mengurutkan ulang kunci (yang pendek dulu), sehingga `n = pi * qj` dihitung sebelum `pi`. File JSON lolos
+    validator, tetapi data di database gagal;
+  - kini engine mengurutkan variabel turunan menurut ketergantungannya (urutan topologis). Ketergantungan melingkar
+    ditolak validator;
+  - test baru menjalankan semua skill di `content/` dengan urutan kunci ala `jsonb`. Terdampak sebelumnya: 4 skill
+    Math SMP (A01, A03, A09, A10). Semua 3.660 skill di database lokal kini berhasil dibuat soalnya.
+- **Pengaman halaman anak:** bila satu halaman gagal ditampilkan, anak melihat Momo dan tombol "Kembali ke Pustaka",
+  bukan layar putih. Direset saat pindah halaman.
+- **Sains Kelas 1, 2, 1–2 OSN, 3, 4, 3–4 OSN, 5–6 OSN (tahap 1, 1.060 level):**
+  - aturan variasi D-056 diterapkan: ≥ 20 soal unik per level, tumpang tindih antar level ≤ 20%, tanpa soal sama di
+    dua topik, pilihan seragam formatnya;
+  - sebelum: 354 level di bawah 20 soal unik (terendah 3) dan ±700 pasangan level tumpang tindih. Sesudah: 0 dan 0;
+  - buku OSN mengikuti `timss-kognitif` per level: hitungan (`expr`), membaca tabel/grafik, dan penalaran
+    percobaan (variabel bebas, terikat, kontrol);
+  - 739 skill berubah dan versinya dinaikkan. Id, judul, urutan, dan tag tetap, sehingga progres anak tidak hilang.
+- **Sains SMP 7–9 OSN:** ditunda atas permintaan pemilik produk (tahap 2).
+
+## D-061 — Buku Math Grade 3 (Singapore P3, Cambridge Stage 3, OSN)
+
+Tanggal 2026-10-04 · Status **Disetujui** (permintaan pemilik produk). Melengkapi D-032 ("Belum: Math Grade 3").
+
+- **Buku `content/skills/math/sd3/`** "Math Grade 3": 29 topik × 10 level = 290 skill, tier `intermediate`, Fase B.
+  Family `expr`/`mix`; satu level umumnya 2–7 bentuk soal (kalimat, konteks, dan pengecoh berbeda).
+- **Rujukan:** daftar topik IXL Grade 3 sebagai peta topik saja (semua soal ditulis sendiri), Singapore MOE Primary 3,
+  Cambridge Primary Stage 3, dan indikator OSN SD. Tag `fase-merdeka`, `sg`, `cambridge`, `kognitif`, dan `osn`
+  (level 9–10), sehingga landing menampilkan Merdeka, Singapore, Cambridge, OSN (D-059).
+- **Topik:**
+  - bilangan: nilai tempat sampai puluh ribuan, membandingkan, pembulatan, estimasi;
+  - operasi: tambah/kurang 3–5 angka, campuran, sifat penjumlahan, membilang loncat;
+  - perkalian dan pembagian: konsep, tabel 0–12, fakta pembagian, bersusun (2–3 angka dengan 1 angka, bersisa),
+    sifat perkalian dan keluarga fakta, soal cerita;
+  - pecahan: memahami pecahan, senilai, membandingkan, menjumlah/mengurangi berpenyebut sama;
+  - pengukuran: uang Rupiah, panjang–massa–volume (metrik), waktu (jam 24, lama waktu, kalender), data
+    (diagram batang, piktogram, tabel);
+  - geometri: bangun datar, segi empat, sudut siku-siku, sejajar/tegak lurus, keliling dan luas;
+  - penalaran gaya OSN.
+- **Pola level:** 1–3 pengetahuan → 4–8 penerapan dan soal cerita → 9 penalaran isian (gaya OSN) → 10 tantangan
+  campuran dari level 4–9.
+- **Adaptasi Indonesia:** Rupiah emisi 2016, satuan metrik, jam 24, nama dan tempat Indonesia (gunung, kota).
+- **Mutu:**
+  - validator 0 error;
+  - audit variasi: setiap level ≥ 20 soal inti unik, duplikat per ronde 0, tumpang tindih antar level 1–9 ≤ 20%. Level
+    campuran tabel perkalian/pembagian memakai kalimat soal sendiri, agar tidak menyalin level satu-tabel;
+  - pindai teks 34.800 soal: template bocor / NaN / kata ganda / spasi ganda = 0;
+  - pengecoh berbasis miskonsepsi (lupa menyimpan/meminjam, salah nilai tempat, keliling vs luas, sisa terbalik);
+  - soal yang jawabannya tidak tunggal dibuang (mis. 0 × □ = 0).
+- **Belum:** tinjauan guru. Buku belum masuk paket berbayar; admin menambahkannya lewat menu paket bila perlu.
+
+## D-062 — English Pra-TK: instruksi & narasi Bahasa Indonesia, suara perempuan yang jelas
+
+Tanggal 2026-10-04 · Status **Disetujui** (permintaan pemilik produk: suara pria terlalu berat sehingga ejaan kurang
+terdengar; anak Pra-TK belum paham instruksi English). Mengganti poin bahasa & suara D-059 untuk Pra-TK.
+
+- **Penyebab suara pria:** kata pada kartu pilihan diucapkan suara perangkat `en-GB`, yang di iPad/Mac bawaannya
+  "Daniel" (pria, berat). Narasi soal sudah memakai suara Momo (Leda, perempuan).
+- **Suara:**
+  - narasi soal & penjelasan English Pra-TK: suara Momo **Bahasa Indonesia** (`id-ID`, nama suara dari admin, mis.
+    Leda) dengan arahan gaya: suara perempuan ceria, pelan seperti guru TK, kata/huruf Inggris dilafalkan British
+    English yang jelas;
+  - kata/huruf pada **kartu pilihan** English kini dibuat server (`/voice/item/:id?part=choice&c=<id kartu>`, `en-GB`,
+    suara Momo yang sama, gaya "satu kata, pelan, sangat jelas, suara perempuan"), di-cache per teks seperti klip
+    lain, dan disiapkan di latar bersama soal berikutnya. Hanya untuk buku English (biaya klip terbatas);
+  - suara cadangan perangkat memilih **suara perempuan lebih dulu** (Samantha, Serena, Karen, Google UK English
+    Female, Damayanti, …) dan menghindari suara pria dikenal (Daniel, Arthur, …). Untuk kata Inggris, suara perempuan
+    lebih diutamakan daripada aksen British; kecepatan 0,8 agar ejaan jelas;
+  - buku English jenjang lain (belum ada) tetap seluruhnya `en-GB` seperti D-059.
+- **Konten (290 skill, 9.337 soal, versi 2):**
+  - soal D-059 dipertahankan (variasi, Cambridge/NEL, `source`); hanya kalimat perintah/pertanyaan yang diterjemahkan
+    ke Bahasa Indonesia lewat tabel ±900 pola. Kata, huruf, dan kalimat target Inggris tetap English
+    (mis. "Ketuk gambar yang dimulai dengan B.", "Kata mana yang berima dengan cat?", "Ketuk animal (hewan).");
+  - kalimat bacaan yang tampil di soal (sight words, kalimat posisi, cerita, kalimat rumpang) tetap English;
+  - penjelasan saat keliru: bantuan Bahasa Indonesia (kata Inggris tetap);
+  - id, judul, dan urutan skill sama dengan aslinya; versi dinaikkan ke 2 agar `db:seed` memperbarui database.
+- **Mutu:** validator 0 error; audit variasi 0 level bermasalah, tanpa tumpang tindih antar level; tanpa pilihan kembar;
+  jawaban soal dengar tidak tampil di teks soal; tanpa kata "salah/gagal".

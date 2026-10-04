@@ -2,6 +2,8 @@ import type { JSX } from 'react';
 import type { Color, ObjectId } from '@little-coder/engine';
 import { Blob, Cone, Cuboid, Cylinder, LINE, Sphere, Tube, starPoints } from './draw';
 import { OUTLINE, PALETTE, shade, tint } from './palette';
+import { ENGLISH_OBJECT_ART } from './objects-english';
+import { EXTRA_OBJECT_ART } from './objects-extra';
 
 export type ObjectArtProps = { color?: Color };
 export type ObjectArt = (props: ObjectArtProps) => JSX.Element;
@@ -326,6 +328,8 @@ const centered = (id: StretchId): ObjectArt =>
  * `<svg>`). `color` mewarnai badan utama.
  */
 export const OBJECT_ART: Record<ObjectId, ObjectArt> = {
+  ...EXTRA_OBJECT_ART,
+  ...ENGLISH_OBJECT_ART,
   apel: ({ color }) => (
     <g>
       <path

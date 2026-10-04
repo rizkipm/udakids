@@ -1,0 +1,84 @@
+{
+  "id": "math.sd3.v2.mencari-pecahan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 2,
+  "title": "Pecahan senilai dan perbandingan — Level 2 — Mencari pecahan senilai",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "n": [1, 8],
+            "k": [2, 5]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = {=n*k}/…",
+          "answer": "d * k",
+          "distractors": [
+            {
+              "expr": "d + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "d",
+              "tag": "tidak-dikali"
+            },
+            "d * k + 1"
+          ],
+          "explain": "Pembilang dikali {k}, penyebut juga: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "k": [2, 4]
+          },
+          "constraint": "n < d",
+          "prompt": "Pecahan mana yang senilai dengan {n}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n * k",
+            "den": "d * k",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n + k",
+              "den": "d + k",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "n * k",
+              "den": "d",
+              "tag": "atas-saja"
+            },
+            {
+              "num": "n",
+              "den": "d * k",
+              "tag": "bawah-saja"
+            }
+          ],
+          "explain": "Kalikan atas dan bawah dengan {k}: {answer}."
+        }
+      }
+    ]
+  }
+}

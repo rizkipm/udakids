@@ -1,0 +1,103 @@
+{
+  "id": "math.sd3.a3.bilangan-dari-nilai-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "A",
+  "order": 3,
+  "title": "Nilai tempat — Level 3 — Bilangan dari nilai tempat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-A",
+    "sg": "P3 Numbers to 10 000: place value",
+    "cambridge": "Stage 3 Number: place value (3Np.02)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "constraint": "h != t || t != s",
+          "prompt": "{r} ribuan + {h} ratusan + {t} puluhan + {s} satuan = …",
+          "answer": "r * 1000 + h * 100 + t * 10 + s",
+          "distractors": [
+            {
+              "expr": "r * 1000 + t * 100 + h * 10 + s",
+              "tag": "tempat-tertukar"
+            },
+            {
+              "expr": "r * 100 + h * 10 + t + s",
+              "tag": "geser-tempat"
+            },
+            {
+              "expr": "r * 1000 + h * 100 + s * 10 + t",
+              "tag": "tempat-tertukar"
+            }
+          ],
+          "explain": "Tulis angka sesuai tempatnya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "pr": [1, 9],
+            "r": [0, 9],
+            "t": [1, 9]
+          },
+          "prompt": "{pr} puluh ribuan + {r} ribuan + {t} puluhan = …",
+          "answer": "pr * 10000 + r * 1000 + t * 10",
+          "distractors": [
+            {
+              "expr": "pr * 1000 + r * 100 + t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "pr * 10000 + r * 1000 + t * 100",
+              "tag": "tempat-salah"
+            },
+            {
+              "expr": "pr * 10000 + r * 100 + t * 10",
+              "tag": "tempat-salah"
+            }
+          ],
+          "explain": "Ratusan dan satuan bernilai 0: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 99]
+          },
+          "prompt": "Tuliskan dengan angka: {a} ribu {b} ratus {c}",
+          "answer": "a * 1000 + b * 100 + c",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 10 + c",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 100 + b * 10 + c",
+              "tag": "geser-tempat"
+            },
+            "a * 1000 + b * 100 + c + 10"
+          ],
+          "explain": "{a} ribu = {=a*1000}, {b} ratus = {=b*100}, ditambah {c}: {answer}."
+        }
+      }
+    ]
+  }
+}

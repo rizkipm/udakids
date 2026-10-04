@@ -1,0 +1,43 @@
+{
+  "id": "math.sd3.r1.2-angka-x-1-angka-tanpa-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 1,
+  "title": "Perkalian dan pembagian bersusun — Level 1 — 2 angka × 1 angka tanpa menyimpan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [11, 49],
+      "m": [2, 4]
+    },
+    "constraint": "(a % 10) * m < 10 && a * m < 100",
+    "prompt": "{a} × {m} = …",
+    "answer": "a * m",
+    "distractors": [
+      {
+        "expr": "a * m + 10",
+        "tag": "salah-simpan"
+      },
+      {
+        "expr": "floor(a / 10) * m * 10 + a % 10 + m",
+        "tag": "satuan-ditambah"
+      },
+      {
+        "expr": "a + m",
+        "tag": "menjumlah"
+      }
+    ],
+    "explain": "{=floor(a/10)*10} × {m} + {=a%10} × {m} = {answer}."
+  }
+}

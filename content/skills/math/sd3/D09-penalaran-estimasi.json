@@ -1,0 +1,55 @@
+{
+  "id": "math.sd3.d9.penalaran-estimasi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 9,
+  "title": "Estimasi jumlah dan selisih — Level 9 — Penalaran estimasi",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890]
+          },
+          "constraint": "a + b != round(a / 100) * 100 + round(b / 100) * 100 && a % 100 != 50 && b % 100 != 50",
+          "prompt": "Estimasi {a} + {b} dengan membulatkan ke ratusan adalah {=round(a/100)*100+round(b/100)*100}. Hasil sebenarnya lebih besar atau lebih kecil dari estimasi?",
+          "answer": "(a + b > round(a / 100) * 100 + round(b / 100) * 100) * 1 + (a + b < round(a / 100) * 100 + round(b / 100) * 100) * 2",
+          "labels": {
+            "1": "Lebih besar",
+            "2": "Lebih kecil"
+          },
+          "explain": "Hasil sebenarnya {=a+b}, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [110, 890],
+            "b": [110, 890]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50",
+          "prompt": "Berapa selisih antara estimasi (bulatkan ke ratusan) dan hasil sebenarnya dari {a} + {b}?",
+          "answer": "abs(a + b - (round(a / 100) * 100 + round(b / 100) * 100))",
+          "mode": "input",
+          "explain": "Estimasi {=round(a/100)*100+round(b/100)*100}, sebenarnya {=a+b}. Selisih {answer}."
+        }
+      }
+    ]
+  }
+}

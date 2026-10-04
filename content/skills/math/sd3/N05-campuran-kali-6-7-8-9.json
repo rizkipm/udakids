@@ -1,0 +1,133 @@
+{
+  "id": "math.sd3.n5.campuran-kali-6-7-8-9",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "N",
+  "order": 5,
+  "title": "Perkalian 6 sampai 9 — Level 5 — Campuran kali 6, 7, 8, 9",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 6, 7, 8, 9",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [1, 10]
+          },
+          "prompt": "Hasil kali {m} dan {n} adalah …",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{m} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "Berapa {n} kelompok yang masing-masing berisi {m}?",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{n} × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 10]
+          },
+          "constraint": "m > 0",
+          "prompt": "Bilangan berapa jika dikali {m} hasilnya {=m*n}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m",
+              "tag": "faktor-lain"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 10],
+            "k": [-3, 3]
+          },
+          "derived": {
+            "e": "m * n + k"
+          },
+          "prompt": "{m} × {n} … {e}",
+          "answer": "(m * n > e) * 1 + (m * n < e) * 2 + (m * n == e) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{m} × {n} = {=m*n}: {answer}."
+        }
+      }
+    ]
+  }
+}

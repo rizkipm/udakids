@@ -1,0 +1,257 @@
+{
+  "id": "math.sd3.l10.tantangan-memahami-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "L",
+  "order": 10,
+  "title": "Memahami perkalian — Level 10 — Tantangan memahami perkalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-N",
+    "sg": "P3 Multiplication: concepts",
+    "cambridge": "Stage 3 Calculation: multiplication as repeated addition and arrays (3Nc.07)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 7],
+            "c": [2, 9]
+          },
+          "prompt": "Ada {r} baris, setiap baris {c} petak. Berapa petak semuanya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=c",
+              "h": "=r",
+              "unit": "",
+              "grid": true
+            }
+          ],
+          "answer": "r * c",
+          "distractors": [
+            {
+              "expr": "r + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "r * c + c",
+              "tag": "lebih-satu-baris"
+            },
+            {
+              "expr": "2 * (r + c)",
+              "tag": "keliling"
+            }
+          ],
+          "explain": "{r} × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [3, 9],
+            "c": [3, 9]
+          },
+          "prompt": "Kursi disusun {r} baris dan {c} kolom. Berapa kursi?",
+          "answer": "r * c",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 6],
+            "k": [11, 25]
+          },
+          "prompt": "{g} × {k} sama dengan … ",
+          "answer": "g * k",
+          "distractors": [
+            {
+              "expr": "g + k",
+              "tag": "menjumlah"
+            },
+            "g * k + k",
+            "g * k - g"
+          ],
+          "explain": "{k} dijumlah {g} kali = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [7, 30]
+          },
+          "prompt": "{k} + {k} + {k} + {k} + {k} + {k} = 6 × …",
+          "answer": "k",
+          "explain": "6 kali {k}: 6 × {k}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 12]
+          },
+          "prompt": "Ada {g} piring kosong (0 kue di setiap piring). Berapa kue semuanya?",
+          "answer": "0",
+          "distractors": ["g", "1", "g + 1"],
+          "explain": "{g} × 0 = 0."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 999]
+          },
+          "prompt": "{a} × 1 = …",
+          "answer": "a",
+          "explain": "Dikali 1 tetap: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9],
+            "k": [2, 9]
+          },
+          "prompt": "Di garis bilangan, Momo melompat dari 0 sebanyak {g} kali, setiap lompatan {k}. Momo sampai di bilangan berapa?",
+          "answer": "g * k",
+          "distractors": [
+            {
+              "expr": "g + k",
+              "tag": "menjumlah"
+            },
+            "g * k - k",
+            "g * k + k"
+          ],
+          "explain": "{g} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12]
+          },
+          "prompt": "Lompatan 0 → {k} → {=2*k} → {=3*k} → {=4*k}. Kalimat perkaliannya 4 × {k} = …",
+          "answer": "4 * k",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "g": [2, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "prompt": "{nama} punya {a} stiker. {nama2} punya {g} kali lebih banyak. Berapa stiker {nama2}?",
+          "answer": "g * a",
+          "distractors": [
+            {
+              "expr": "g + a",
+              "tag": "menjumlah"
+            },
+            "g * a + a",
+            "a"
+          ],
+          "explain": "{g} × {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 25],
+            "g": [2, 4]
+          },
+          "prompt": "Pita merah {a} cm. Pita biru {g} kali panjang pita merah. Berapa cm pita biru?",
+          "answer": "g * a",
+          "unit": "cm",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9],
+            "k": [2, 9]
+          },
+          "constraint": "g != k",
+          "prompt": "{g} kelompok berisi {k} sama banyaknya dengan {k} kelompok berisi … ",
+          "answer": "g",
+          "mode": "input",
+          "explain": "{g} × {k} = {k} × {g}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [3, 8],
+            "c": [4, 9]
+          },
+          "prompt": "Di kebun ada {r} baris pohon, setiap baris {c} pohon. Lalu ditanam 1 baris lagi. Berapa pohon sekarang?",
+          "answer": "(r + 1) * c",
+          "mode": "input",
+          "explain": "({r} + 1) × {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "id": "math.sd3.cc10.tantangan-penalaran-gaya-osn",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 10,
+  "title": "Penalaran gaya OSN — Level 10 — Tantangan penalaran gaya OSN",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 20],
+            "q": [3, 20]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Dalam antrean, {nama} di urutan ke-{p} dari depan dan ke-{q} dari belakang. Berapa orang dalam antrean?",
+          "answer": "p + q - 1",
+          "distractors": [
+            {
+              "expr": "p + q",
+              "tag": "dihitung-dua-kali"
+            },
+            "p + q + 1",
+            "p + q - 2"
+          ],
+          "explain": "{p} + {q} − 1 = {answer} (dirinya dihitung dua kali)."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 10],
+            "k": [2, 9]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "prompt": "Di antara {nama} dan {nama2} ada {k} anak. {nama} di urutan ke-{p}. {nama2} di belakangnya. {nama2} di urutan ke berapa?",
+          "answer": "p + k + 1",
+          "explain": "{p} + {k} + 1 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10]
+          },
+          "prompt": "Ada {n} anak. Setiap dua anak berjabat tangan satu kali. Berapa jabat tangan?",
+          "answer": "n * (n - 1) / 2",
+          "distractors": [
+            {
+              "expr": "n * (n - 1)",
+              "tag": "dihitung-dua-kali"
+            },
+            "n * n",
+            "n - 1"
+          ],
+          "explain": "({n} × {=n-1}) : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {a} baju dan {b} celana. Berapa pasangan baju-celana yang berbeda?",
+          "answer": "a * b",
+          "explain": "{a} × {b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [12, 99]
+          },
+          "prompt": "Berapa banyak angka yang ditulis untuk menulis bilangan 1 sampai {n}?",
+          "answer": "9 + (n - 9) * 2",
+          "distractors": ["n", "n * 2", "9 + n - 9"],
+          "explain": "1–9: 9 angka, 10–{n}: {=(n-9)*2} angka. Total {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "prompt": "Jumlah angka-angka dari bilangan {n} adalah …",
+          "answer": "floor(n / 1000) + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10",
+          "explain": "Jumlahkan setiap angkanya: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [30, 100],
+            "k": [3, 9]
+          },
+          "prompt": "Berapa bilangan antara 1 dan {n} yang habis dibagi {k}?",
+          "answer": "floor(n / k)",
+          "distractors": ["floor(n / k) + 1", "floor(n / k) - 1", "k"],
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}: ada {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 7]
+          },
+          "constraint": "a < b",
+          "prompt": "Bilangan terkecil yang dibagi {a} bersisa 1 dan dibagi {b} juga bersisa 1 (lebih dari 1) adalah …",
+          "answer": "lcm(a, b) + 1",
+          "explain": "KPK {a} dan {b} = {=lcm(a,b)}, tambah 1: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [30, 45],
+            "c": [6, 12],
+            "k": [2, 10]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Umur ayah sekarang {f} tahun, umur {nama} {c} tahun. {k} tahun lagi, berapa jumlah umur mereka?",
+          "answer": "f + c + 2 * k",
+          "distractors": [
+            {
+              "expr": "f + c + k",
+              "tag": "satu-orang"
+            },
+            "f + c",
+            "f + c + 3 * k"
+          ],
+          "explain": "({f} + {k}) + ({c} + {k}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "values": [4000, 5000, 6000, 7500]
+            },
+            "y": {
+              "values": [1000, 1500, 2000, 2500]
+            }
+          },
+          "derived": {
+            "a": "2 * x + y",
+            "b": "x + y"
+          },
+          "prompt": "Harga 2 buku dan 1 pensil Rp{a}. Harga 1 buku dan 1 pensil Rp{b}. Berapa rupiah harga 1 buku?",
+          "answer": "a - b",
+          "unit": "rupiah",
+          "explain": "Selisihnya tepat 1 buku: {a} − {b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 30],
+            "y": [3, 30]
+          },
+          "derived": {
+            "t": "3 * x",
+            "s": "x + y"
+          },
+          "prompt": "□ + □ + □ = {t} dan □ + △ = {s}. Berapa △?",
+          "answer": "s - t / 3",
+          "mode": "input",
+          "explain": "□ = {=t/3}, jadi △ = {s} − {=t/3} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 12],
+            "k": [2, 12]
+          },
+          "derived": {
+            "h": "m + k",
+            "r": "4 * m + 2 * k"
+          },
+          "prompt": "Ada {h} kendaraan di parkiran: mobil (4 roda) dan motor (2 roda). Jumlah roda {r}. Berapa mobil?",
+          "answer": "m",
+          "mode": "input",
+          "explain": "Jika semua motor, roda = {=2*h}. Kelebihan {=r-2*h} : 2 = {answer} mobil."
+        }
+      }
+    ]
+  }
+}

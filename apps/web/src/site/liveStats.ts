@@ -6,6 +6,8 @@ import { API_URL } from '../config/app';
 export type PublicStats = {
   books: number;
   totalLevels: number;
+  totalQuestions?: number;
+  answered?: number;
   users: number;
   learners: number;
   activeNow: number;

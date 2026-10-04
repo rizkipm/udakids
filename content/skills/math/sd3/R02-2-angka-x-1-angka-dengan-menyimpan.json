@@ -1,0 +1,70 @@
+{
+  "id": "math.sd3.r2.2-angka-x-1-angka-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 2,
+  "title": "Perkalian dan pembagian bersusun — Level 2 — 2 angka × 1 angka dengan menyimpan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 99],
+            "m": [2, 9]
+          },
+          "constraint": "(a % 10) * m >= 10",
+          "prompt": "{a} × {m} = …",
+          "answer": "a * m",
+          "distractors": [
+            {
+              "expr": "floor(a / 10) * m * 10 + (a % 10) * m % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a * m + 10",
+              "tag": "salah-simpan"
+            },
+            {
+              "expr": "a * (m + 1)",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Pecah: {=floor(a/10)*10} × {m} = {=floor(a/10)*10*m} dan {=a%10} × {m} = {=(a%10)*m}. Jumlahnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 36],
+            "m": [3, 9]
+          },
+          "prompt": "Satu kotak berisi {a} telur. Berapa telur dalam {m} kotak?",
+          "answer": "a * m",
+          "distractors": [
+            {
+              "expr": "a + m",
+              "tag": "menjumlah"
+            },
+            "a * m - a",
+            "a * m + 10"
+          ],
+          "explain": "{a} × {m} = {answer}."
+        }
+      }
+    ]
+  }
+}

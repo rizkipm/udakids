@@ -1,0 +1,108 @@
+{
+  "id": "math.sd3.d7.soal-cerita-estimasi-selisih",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 7,
+  "title": "Estimasi jumlah dan selisih — Level 7 — Soal cerita estimasi selisih",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {},
+          "prompt": "Tinggi Gunung Rinjani 3.726 m dan Gunung Merapi 2.930 m. Kira-kira berapa meter selisihnya? (bulatkan ke ratusan)",
+          "answer": "3700 - 2900",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "3726 - 2930",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "4000 - 3000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "3700 + 2900",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "3.700 − 2.900 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [310, 990],
+            "b": [110, 290]
+          },
+          "constraint": "a % 10 != 5 && b % 10 != 5 && a % 10 != 0 && b % 10 != 0",
+          "prompt": "Sekolah butuh {a} kursi dan sudah punya {b}. Kira-kira berapa kursi lagi yang dibutuhkan? (bulatkan ke puluhan)",
+          "answer": "round(a / 10) * 10 - round(b / 10) * 10",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 100) * 100 - round(b / 100) * 100",
+              "tag": "ke-ratusan"
+            }
+          ],
+          "explain": "{=round(a/10)*10} − {=round(b/10)*10} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5100, 9900],
+            "b": [1100, 4900]
+          },
+          "words": {
+            "kota": [
+              "Bandung",
+              "Surabaya",
+              "Medan",
+              "Makassar",
+              "Semarang",
+              "Yogyakarta",
+              "Malang",
+              "Padang",
+              "Denpasar",
+              "Palembang"
+            ]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50 && a % 100 != 0",
+          "prompt": "Panjang jalan {kota} {a} m. Sudah diaspal {b} m. Kira-kira berapa meter yang belum? (bulatkan ke ratusan)",
+          "answer": "round(a / 100) * 100 - round(b / 100) * 100",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "{=round(a/100)*100} − {=round(b/100)*100} = {answer}."
+        }
+      }
+    ]
+  }
+}

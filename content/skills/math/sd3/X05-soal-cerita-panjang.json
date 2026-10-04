@@ -1,0 +1,111 @@
+{
+  "id": "math.sd3.x5.soal-cerita-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 5,
+  "title": "Panjang, massa, dan volume — Level 5 — Soal cerita panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [35, 250],
+            "b": [35, 250]
+          },
+          "prompt": "Pita merah {a} cm dan pita biru {b} cm disambung. Berapa cm panjangnya?",
+          "answer": "a + b",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            "a + b + 10",
+            "a + b - 10"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 900],
+            "b": [200, 700]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} berlari {a} m, lalu berjalan {b} m. Berapa meter lagi sampai 2 km?",
+          "answer": "2000 - a - b",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "jumlah-saja"
+            },
+            "2000 - a",
+            "2000 - a - b + 100"
+          ],
+          "explain": "2 km = 2.000 m. 2.000 − {a} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [10, 90],
+            "c": [40, 150]
+          },
+          "prompt": "Tali {a} m {b} cm dipotong {c} cm. Berapa cm sisanya?",
+          "answer": "a * 100 + b - c",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a * 10 + b - c",
+              "tag": "kali-10"
+            },
+            "a * 100 + b + c",
+            "a * 100 - c"
+          ],
+          "explain": "{=a*100+b} − {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

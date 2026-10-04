@@ -1,0 +1,98 @@
+{
+  "id": "math.sd3.w4.total-belanja",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 4,
+  "title": "Uang Rupiah — Level 4 — Total belanja",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1500, 4500],
+              "step": 500
+            },
+            "b": {
+              "range": [3500, 12500],
+              "step": 500
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} membeli pensil Rp{a} dan buku Rp{b}. Berapa rupiah harus dibayar?",
+          "answer": "a + b",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b - a",
+              "tag": "mengurangi"
+            },
+            "a + b + 1000",
+            "a + b - 500"
+          ],
+          "explain": "{a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [3000, 9000],
+              "step": 500
+            },
+            "b": {
+              "range": [4000, 8000],
+              "step": 500
+            },
+            "c": {
+              "range": [2000, 6000],
+              "step": 500
+            }
+          },
+          "prompt": "Harga roti Rp{a}, susu Rp{b}, dan pisang Rp{c}. Berapa rupiah totalnya?",
+          "answer": "a + b + c",
+          "unit": "rupiah",
+          "distractors": ["a + b", "a + b + c + 1000", "a + b + c - 500"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "math.sd3.i4.data-dari-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 4,
+  "title": "Tambah dan kurang campuran — Level 4 — Data dari tabel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 480],
+            "b": [120, 480],
+            "c": [120, 480]
+          },
+          "prompt": "Berapa pengunjung pada Senin dan Selasa?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Pengunjung museum"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": ["a + c", "b + c", "a + b + c"],
+          "explain": "{a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 480],
+            "b": [120, 480],
+            "c": [120, 480]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Berapa lebih banyak pengunjung pada hari terbanyak dibanding hari tersedikit?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Pengunjung museum"
+            }
+          ],
+          "answer": "max(a, b, c) - min(a, b, c)",
+          "distractors": ["max(a, b, c) + min(a, b, c)", "a - b + c", "abs(a - b)"],
+          "explain": "Terbanyak {=max(a,b,c)}, tersedikit {=min(a,b,c)}. Selisih {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 480],
+            "b": [120, 480],
+            "c": [120, 480]
+          },
+          "prompt": "Berapa pengunjung selama tiga hari?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Pengunjung museum"
+            }
+          ],
+          "answer": "a + b + c",
+          "distractors": ["a + b", "a + b + c - 100", "a + b + c + 10"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

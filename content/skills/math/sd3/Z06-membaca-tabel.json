@@ -1,0 +1,86 @@
+{
+  "id": "math.sd3.z6.membaca-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 6,
+  "title": "Data dan diagram — Level 6 — Membaca tabel",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 40],
+            "b": [5, 40],
+            "c": [5, 40],
+            "e": [5, 40]
+          },
+          "prompt": "Berapa kg mangga dan salak yang terjual?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "a + c",
+          "distractors": ["a + b", "b + c", "a + c + e"],
+          "explain": "{a} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 40],
+            "b": [20, 40],
+            "c": [5, 40],
+            "e": [5, 19]
+          },
+          "prompt": "Berapa kg lebih banyak jeruk daripada pisang?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "b - e",
+          "distractors": [
+            {
+              "expr": "b + e",
+              "tag": "menjumlah"
+            },
+            "b - e + 1",
+            "a - e"
+          ],
+          "explain": "{b} − {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "id": "math.sd3.d5.estimasi-dengan-bilangan-mudah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "D",
+  "order": 5,
+  "title": "Estimasi jumlah dan selisih — Level 5 — Estimasi dengan bilangan mudah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-D/E/F",
+    "sg": "P3 Addition and subtraction: estimation (enrichment)",
+    "cambridge": "Stage 3 Number: estimate (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ca": {
+              "values": [250, 500, 750, 1250, 1500]
+            },
+            "cb": {
+              "values": [250, 500, 750, 1000]
+            },
+            "i": [-4, 4],
+            "j": [-4, 4]
+          },
+          "derived": {
+            "a": "ca + i",
+            "b": "cb + j"
+          },
+          "constraint": "i != 0 && j != 0",
+          "prompt": "{a} dekat dengan {ca}, dan {b} dekat dengan {cb}. Perkiraan {a} + {b} adalah …",
+          "answer": "ca + cb",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "ca + cb + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "ca + cb - 250",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pakai bilangan mudah: {ca} + {cb} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "ca": {
+              "values": [750, 1000, 1250, 1500, 2000]
+            },
+            "cb": {
+              "values": [250, 500]
+            },
+            "i": [-4, 4],
+            "j": [-4, 4]
+          },
+          "derived": {
+            "a": "ca + i",
+            "b": "cb + j"
+          },
+          "constraint": "i != 0 && j != 0",
+          "prompt": "{a} dekat dengan {ca}, dan {b} dekat dengan {cb}. Perkiraan {a} − {b} adalah …",
+          "answer": "ca - cb",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "ca + cb",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "ca - cb + 250",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pakai bilangan mudah: {ca} − {cb} = {answer}."
+        }
+      }
+    ]
+  }
+}

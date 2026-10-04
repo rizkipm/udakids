@@ -1,0 +1,57 @@
+{
+  "id": "math.sd3.w2.menukar-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 2,
+  "title": "Uang Rupiah — Level 2 — Menukar uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [1000, 2000, 5000, 10000]
+            },
+            "n": [2, 10]
+          },
+          "derived": {
+            "t": "k * n"
+          },
+          "constraint": "t <= 100000",
+          "prompt": "Rp{t} ditukar dengan uang Rp{k}-an. Berapa lembar yang didapat?",
+          "answer": "t / k",
+          "distractors": ["n + 1", "n - 1", "n * 2"],
+          "explain": "{t} : {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 20]
+          },
+          "derived": {
+            "t": "n * 1000"
+          },
+          "prompt": "Berapa koin Rp500 yang nilainya sama dengan Rp{t}?",
+          "answer": "t / 500",
+          "distractors": ["t / 1000", "t / 100", "t / 500 + 1"],
+          "explain": "{t} : 500 = {answer}."
+        }
+      }
+    ]
+  }
+}

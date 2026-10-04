@@ -1,0 +1,67 @@
+{
+  "id": "math.sd3.c3.ke-ribuan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 3,
+  "title": "Pembulatan — Level 3 — Ke ribuan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 99999]
+          },
+          "constraint": "n % 1000 != 0",
+          "prompt": "Bulatkan {n} ke ribuan terdekat.",
+          "answer": "round(n / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "floor(n / 1000) * 1000 + 1000 * (n % 1000 < 500)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Angka ratusan {=floor(n/100)%10}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 99999]
+          },
+          "constraint": "n % 1000 >= 400 && n % 1000 <= 600 && n % 1000 != 500",
+          "prompt": "Bulatkan {n} ke ribuan terdekat.",
+          "answer": "round(n / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "floor(n / 1000) * 1000 + 1000 * (n % 1000 < 500)",
+              "tag": "arah-salah"
+            }
+          ],
+          "explain": "Ratusannya {=floor(n/100)%10}: {answer}."
+        }
+      }
+    ]
+  }
+}

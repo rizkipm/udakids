@@ -1,6 +1,6 @@
 {
   "id": "math.tk.vv5.selisih-dua-baris",
-  "version": 1,
+  "version": 2,
   "domain": "math",
   "grade": "tk",
   "category": "VV",
@@ -20,14 +20,14 @@
       "b": [1, 6],
       "c": [1, 6]
     },
-    "prompt": "Berapa lebih banyak kucing daripada bebek?",
+    "prompt": "Berapa lebih banyak {h1} daripada {h3}?",
     "stimulus": [
       {
         "kind": "bar-chart",
-        "caption": "Hewan peliharaan kelas",
-        "labels": ["Kucing", "Ikan", "Bebek"],
+        "caption": "Hewan kesukaan anak-anak",
+        "labels": ["{h1}", "{h2}", "{h3}"],
         "values": ["=a", "=b", "=c"],
-        "pictogram": "kucing"
+        "pictogram": "{h1}"
       }
     ],
     "answer": "a - c",
@@ -43,6 +43,11 @@
       }
     ],
     "choices": 3,
-    "constraint": "a > c"
+    "constraint": "a > c",
+    "words": {
+      "h1": ["kucing", "sapi", "kambing", "ayam"],
+      "h2": ["ikan", "kelinci", "burung", "katak"],
+      "h3": ["bebek", "kuda", "monyet", "lebah"]
+    }
   }
 }

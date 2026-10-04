@@ -1,6 +1,6 @@
 {
   "id": "sains.sd4.c6.gaya-total",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd4",
   "category": "C",
@@ -55,22 +55,106 @@
         "params": {
           "vars": {
             "a": {
-              "range": [50, 150],
+              "range": [10, 90],
+              "step": 5
+            },
+            "b": {
+              "range": [10, 90],
+              "step": 5
+            }
+          },
+          "prompt": "Sari dan Adit mendorong meja ke arah yang sama, masing-masing {a} N dan {b} N. Berapa gaya totalnya?",
+          "answer": "a + b",
+          "unit": "N",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "a",
+              "tag": "satu-gaya"
+            },
+            {
+              "expr": "b",
+              "tag": "satu-gaya"
+            }
+          ],
+          "explain": "Gaya yang searah dijumlahkan: {a} + {b} = {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 80],
               "step": 10
             },
             "b": {
-              "range": [50, 150],
+              "range": [20, 80],
+              "step": 10
+            },
+            "c": {
+              "range": [30, 150],
               "step": 10
             }
           },
-          "prompt": "Tim Raka menarik tali ke kiri {a} N. Tim Sari menarik ke kanan {b} N. Ke mana tali bergerak?",
-          "answer": "(a > b) + 2 * (a < b) + 3 * (a == b)",
-          "labels": {
-            "1": "Ke kiri",
-            "2": "Ke kanan",
-            "3": "Diam (gaya seimbang)"
+          "constraint": "a + b != c",
+          "prompt": "Gerobak ditarik ke kanan oleh dua anak ({a} N dan {b} N) dan ditahan ke kiri {c} N. Berapa gaya totalnya?",
+          "answer": "abs(a + b - c)",
+          "unit": "N",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "semua-dijumlah"
+            },
+            {
+              "expr": "a + b",
+              "tag": "lupa-lawan"
+            },
+            {
+              "expr": "abs(a - b)",
+              "tag": "salah-pasang"
+            }
+          ],
+          "explain": "Jumlahkan yang searah: {a} + {b} = {=a+b} N. Lalu kurangi gaya lawan {c} N: hasilnya {answer}."
+        },
+        "weight": 1
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "range": [20, 200],
+              "step": 10
+            },
+            "a": {
+              "range": [20, 200],
+              "step": 10
+            }
           },
-          "explain": "Bandingkan {a} N dan {b} N. Tali bergerak ke arah gaya yang lebih besar; sama besar berarti seimbang."
+          "constraint": "t > a",
+          "prompt": "Gaya total pada kotak {t} N ke kanan. Gaya dorong ke kiri {a} N. Berapa besar gaya dorong ke kanan?",
+          "answer": "t + a",
+          "unit": "N",
+          "distractors": [
+            {
+              "expr": "t - a",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "t",
+              "tag": "gaya-total"
+            },
+            {
+              "expr": "a",
+              "tag": "gaya-lawan"
+            }
+          ],
+          "explain": "Gaya ke kanan dikurangi {a} N menghasilkan {t} N, jadi gaya ke kanan = {t} + {a} = {answer}."
         },
         "weight": 1
       }

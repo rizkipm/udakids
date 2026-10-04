@@ -1,0 +1,117 @@
+{
+  "id": "math.sd3.u7.sisa-dalam-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 7,
+  "title": "Memahami pecahan — Level 7 — Sisa dalam pecahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Kue dipotong {d} bagian sama besar. {n} potong dimakan. Berapa bagian kue yang tersisa?",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "yang-dimakan"
+            },
+            {
+              "num": "d - n",
+              "den": "n",
+              "tag": "banding"
+            },
+            {
+              "num": "d - n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Sisa {=d-n} dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "n < d",
+          "prompt": "{nama} sudah mengecat {n}/{d} pagar. Berapa bagian pagar yang belum dicat?",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "yang-sudah"
+            },
+            {
+              "num": "1",
+              "den": "d",
+              "tag": "satu-bagian"
+            },
+            {
+              "num": "d",
+              "den": "d - n",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "1 utuh = {d}/{d}. {d}/{d} − {n}/{d} = {answer}."
+        }
+      }
+    ]
+  }
+}

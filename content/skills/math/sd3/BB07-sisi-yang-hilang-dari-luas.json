@@ -1,0 +1,76 @@
+{
+  "id": "math.sd3.bb7.sisi-yang-hilang-dari-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 7,
+  "title": "Keliling dan luas — Level 7 — Sisi yang hilang dari luas",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "derived": {
+            "l": "w * h"
+          },
+          "prompt": "Luas persegi panjang {l} cm² dan panjangnya {w} cm. Berapa cm lebarnya?",
+          "answer": "l / w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l - w",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "bagi-2"
+            },
+            "l / w + 1"
+          ],
+          "explain": "{l} : {w} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "l": "s * s"
+          },
+          "prompt": "Luas persegi {l} cm². Berapa cm sisinya?",
+          "answer": "s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l / 4",
+              "tag": "bagi-4"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "bagi-2"
+            },
+            "s + 1"
+          ],
+          "explain": "{s} × {s} = {l}."
+        }
+      }
+    ]
+  }
+}

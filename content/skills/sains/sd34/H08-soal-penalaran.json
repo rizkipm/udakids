@@ -1,6 +1,6 @@
 {
   "id": "sains.sd34.h8.soal-penalaran",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd34",
   "category": "H",
@@ -19,6 +19,45 @@
         "family": "manual",
         "params": {
           "items": [
+            {
+              "prompt": "Penggunaan air tanah berlebihan di kota besar dapat menyebabkan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tanah turun dan sumur kering"
+                  },
+                  "say": "Tanah turun dan sumur kering"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Hujan bertambah"
+                  },
+                  "say": "Hujan bertambah",
+                  "tag": "lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Air laut menjadi tawar"
+                  },
+                  "say": "Air laut menjadi tawar",
+                  "tag": "lain"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tanah menjadi lebih subur"
+                  },
+                  "say": "Tanah menjadi lebih subur",
+                  "tag": "terbalik"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air tanah yang diambil lebih cepat daripada terisi kembali membuat sumur kering dan permukaan tanah dapat turun.",
+              "source": "Pelestarian sumber daya alam — CP IPAS Fase B (BSKAP 046/H/KR/2025)"
+            },
             {
               "prompt": "Sebuah desa ingin listrik tanpa merusak lingkungan. Desa itu punya sungai deras. Pilihan terbaik adalah …",
               "choices": [
@@ -176,117 +215,330 @@
               "source": "Pelestarian sumber daya alam — CP IPAS Fase B (BSKAP 046/H/KR/2025)"
             },
             {
-              "prompt": "Kegiatan yang membantu menjaga persediaan air tanah adalah …",
+              "prompt": "Tabel menunjukkan perkiraan lama cadangan beberapa SDA jika dipakai terus seperti sekarang. Kesimpulan yang tepat adalah …",
               "choices": [
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Membuat lubang resapan biopori"
+                    "text": "minyak bumi perlu paling segera dihemat dan diganti energi lain"
                   },
-                  "say": "Membuat lubang resapan biopori"
+                  "say": "minyak bumi perlu paling segera dihemat dan diganti energi lain"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Menutup semua tanah dengan semen"
+                    "text": "batu bara tidak akan pernah habis"
                   },
-                  "say": "Menutup semua tanah dengan semen",
-                  "tag": "terbalik"
+                  "say": "batu bara tidak akan pernah habis",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Menebang pohon di sekitar rumah"
+                    "text": "semua SDA tambang habis bersamaan"
                   },
-                  "say": "Menebang pohon di sekitar rumah",
-                  "tag": "terbalik"
+                  "say": "semua SDA tambang habis bersamaan",
+                  "tag": "miskonsepsi"
                 },
                 {
                   "visual": {
                     "kind": "text",
-                    "text": "Membuang sampah ke selokan"
+                    "text": "gas alam paling cepat habis"
                   },
-                  "say": "Membuang sampah ke selokan",
-                  "tag": "terbalik"
+                  "say": "gas alam paling cepat habis",
+                  "tag": "miskonsepsi"
                 }
               ],
               "answer": 0,
-              "reteach": "Biopori membantu air hujan meresap ke dalam tanah sehingga air tanah terisi kembali.",
-              "source": "Pelestarian sumber daya alam — CP IPAS Fase B (BSKAP 046/H/KR/2025); Upaya pelestarian lingkungan & mitigasi perubahan iklim — CP IPAS Fase B (BSKAP 046/H/KR/2025)"
+              "reteach": "Cadangan minyak bumi paling singkat, sehingga paling mendesak untuk dihemat dan diganti energi terbarukan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["SDA", "Perkiraan habis (tahun)"],
+                  "rows": [
+                    ["Minyak bumi", 10],
+                    ["Gas alam", 20],
+                    ["Batu bara", 60]
+                  ],
+                  "caption": "Contoh data cadangan SDA"
+                }
+              ]
+            },
+            {
+              "prompt": "Grafik menunjukkan jumlah ikan tangkapan nelayan setiap tahun. Penyebab yang paling mungkin adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan ditangkap lebih cepat daripada berkembang biak"
+                  },
+                  "say": "ikan ditangkap lebih cepat daripada berkembang biak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ikan berubah menjadi hewan lain"
+                  },
+                  "say": "ikan berubah menjadi hewan lain",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air laut bertambah banyak"
+                  },
+                  "say": "air laut bertambah banyak",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nelayan memakai jaring berlubang besar"
+                  },
+                  "say": "nelayan memakai jaring berlubang besar",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tangkapan turun terus jika ikan diambil lebih cepat daripada kemampuannya berkembang biak.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "labels": ["2020", "2021", "2022", "2023"],
+                  "values": [900, 750, 600, 400],
+                  "unit": "kg",
+                  "caption": "Hasil tangkapan ikan sebuah desa"
+                }
+              ]
+            },
+            {
+              "prompt": "Hutan di sebuah bukit ditebang habis. Beberapa tahun kemudian mata air di kaki bukit mengering. Penjelasan yang tepat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tanpa akar pohon, air hujan tidak meresap dan tersimpan di tanah"
+                  },
+                  "say": "tanpa akar pohon, air hujan tidak meresap dan tersimpan di tanah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pohon menghabiskan air sungai"
+                  },
+                  "say": "pohon menghabiskan air sungai",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hujan berhenti turun selamanya"
+                  },
+                  "say": "hujan berhenti turun selamanya",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mata air berpindah ke puncak bukit"
+                  },
+                  "say": "mata air berpindah ke puncak bukit",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Akar pohon membantu air hujan meresap dan tersimpan sebagai air tanah yang keluar di mata air.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Desa A memakai kayu bakar dan selalu menanam pohon baru. Desa B memakai minyak tanah. Dalam jangka panjang, bahan bakar desa mana yang lebih mungkin tetap tersedia?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "desa A, karena pohon dapat ditanam kembali"
+                  },
+                  "say": "desa A, karena pohon dapat ditanam kembali"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "desa B, karena minyak tanah selalu ada"
+                  },
+                  "say": "desa B, karena minyak tanah selalu ada",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "keduanya akan habis pada waktu yang sama"
+                  },
+                  "say": "keduanya akan habis pada waktu yang sama",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "desa B, karena minyak dibuat di toko"
+                  },
+                  "say": "desa B, karena minyak dibuat di toko",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kayu dapat diperbarui jika ditanam kembali, sedangkan minyak tanah berasal dari minyak bumi yang terbatas.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Mengapa panel surya cocok dipakai di Indonesia?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Indonesia mendapat sinar matahari sepanjang tahun"
+                  },
+                  "say": "Indonesia mendapat sinar matahari sepanjang tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Indonesia selalu bersalju"
+                  },
+                  "say": "Indonesia selalu bersalju",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "matahari hanya bersinar di Indonesia"
+                  },
+                  "say": "matahari hanya bersinar di Indonesia",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panel surya memakai batu bara"
+                  },
+                  "say": "panel surya memakai batu bara",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Indonesia di daerah tropis sehingga mendapat sinar matahari hampir sepanjang tahun.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Seorang anak berkata: \"Air tidak akan habis, jadi boleh dipakai sesukanya.\" Tanggapan yang tepat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air bersih bisa langka jika tercemar atau dipakai boros"
+                  },
+                  "say": "air bersih bisa langka jika tercemar atau dipakai boros"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "benar, air selalu bersih"
+                  },
+                  "say": "benar, air selalu bersih",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "benar, air laut dapat langsung diminum"
+                  },
+                  "say": "benar, air laut dapat langsung diminum",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air hanya ada di musim hujan"
+                  },
+                  "say": "air hanya ada di musim hujan",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air termasuk SDA terbarukan, tetapi air bersih tetap bisa kurang jika tercemar atau boros.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
             }
           ]
         },
-        "weight": 1
+        "weight": 2
       },
       {
-        "family": "facts",
+        "family": "expr",
         "params": {
-          "table": [
+          "vars": {
+            "a": [80, 120],
+            "t": [15, 30],
+            "n": [5, 10],
+            "y": [2, 4]
+          },
+          "constraint": "a - y * (t - n) > 0",
+          "prompt": "Sebuah hutan memiliki {a} pohon. Setiap tahun ditebang {t} pohon dan ditanam {n} pohon baru. Berapa pohon setelah {y} tahun?",
+          "answer": "a - y * (t - n)",
+          "unit": "pohon",
+          "distractors": [
             {
-              "name": "Hutan",
-              "attrs": {
-                "jenis": "dapat diperbarui",
-                "guna": "penghasil kayu dan oksigen"
-              }
+              "expr": "a - y * t",
+              "tag": "lupa-tanam"
             },
             {
-              "name": "Air",
-              "attrs": {
-                "jenis": "dapat diperbarui",
-                "guna": "minum, mandi, dan mengairi sawah"
-              }
+              "expr": "a - t + n",
+              "tag": "satu-tahun"
             },
             {
-              "name": "Ikan",
-              "attrs": {
-                "jenis": "dapat diperbarui",
-                "guna": "bahan makanan"
-              }
-            },
-            {
-              "name": "Minyak bumi",
-              "attrs": {
-                "jenis": "tidak dapat diperbarui",
-                "guna": "bahan bakar kendaraan"
-              }
-            },
-            {
-              "name": "Batu bara",
-              "attrs": {
-                "jenis": "tidak dapat diperbarui",
-                "guna": "bahan bakar pembangkit listrik"
-              }
-            },
-            {
-              "name": "Emas",
-              "attrs": {
-                "jenis": "tidak dapat diperbarui",
-                "guna": "perhiasan"
-              }
-            },
-            {
-              "name": "Gas alam",
-              "attrs": {
-                "jenis": "tidak dapat diperbarui",
-                "guna": "bahan bakar kompor gas"
-              }
-            },
-            {
-              "name": "Pasir",
-              "attrs": {
-                "jenis": "tidak dapat diperbarui",
-                "guna": "bahan bangunan"
-              }
+              "expr": "a + y * (t - n)",
+              "tag": "tanda-terbalik"
             }
           ],
-          "attr": "jenis",
-          "ask": "odd",
-          "prompt": "Mana yang BUKAN sumber daya alam yang {value}?",
-          "explain": "{name} bukan sumber daya alam yang {value}.",
-          "choices": 4,
-          "source": "Pemanfaatan & pelestarian sumber daya alam — CP IPAS Fase B (BSKAP 046/H/KR/2025)"
-        },
-        "weight": 1
+          "explain": "Setiap tahun berkurang {t} − {n} = {=t-n} pohon. Setelah {y} tahun: {a} − {y} × {=t-n} = {answer} pohon."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [3, 8],
+            "k": [2, 5]
+          },
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Kegiatan", "Air (liter)"],
+              "rows": [
+                ["Mandi pakai gayung", "=b*5"],
+                ["Mandi pakai pancuran", "=b*5+k*10"]
+              ]
+            }
+          ],
+          "prompt": "Tabel menunjukkan air yang dipakai sekali mandi. Jika Dodi mandi 2 kali sehari memakai gayung, berapa liter air yang ia hemat dalam sehari dibandingkan memakai pancuran?",
+          "answer": "2 * k * 10",
+          "unit": "liter",
+          "distractors": [
+            {
+              "expr": "k * 10",
+              "tag": "sekali-mandi"
+            },
+            {
+              "expr": "2 * b * 5",
+              "tag": "total-gayung"
+            },
+            {
+              "expr": "2 * (b * 5 + k * 10)",
+              "tag": "total-pancuran"
+            }
+          ],
+          "explain": "Selisih sekali mandi = {=k*10} liter. Dua kali sehari: 2 × {=k*10} = {answer} liter."
+        }
       }
     ]
   }

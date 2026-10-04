@@ -173,6 +173,26 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     await ctx.http().get('/leaderboard').expect(401);
   });
 
+  it('anak yang belum bermain tetap tampil di papan global (paling bawah), tidak di papan buku', async () => {
+    const idle = await ctx.newChild('Zaki');
+    const res = await get('/leaderboard').expect(200);
+    expect(res.body).toMatchObject({ total: 4, played: 3 });
+    const last = (res.body.top as Row[]).at(-1)!;
+    expect(last).toMatchObject({ position: 4, nickname: 'Zaki', rounds: 0, average: 0 });
+    const total = await get('/leaderboard?mode=total').expect(200);
+    expect((total.body.top as Row[]).at(-1)).toMatchObject({ position: 4, nickname: 'Zaki' });
+    const book = await get('/leaderboard?scope=math/prek').expect(200);
+    expect((book.body.top as Row[]).some((r) => r.nickname === 'Zaki')).toBe(false);
+    const pub = await ctx.http().get('/leaderboard/public').expect(200);
+    expect(pub.body).toMatchObject({ participants: 4, played: 3 });
+    const scopes = await get('/leaderboard/scopes').expect(200);
+    expect(scopes.body.scopes[0]).toMatchObject({ key: 'global', participants: 4 });
+    // Anak itu sendiri melihat posisinya di papan global.
+    const own = await get('/leaderboard', idle.token).expect(200);
+    expect(own.body.me).toMatchObject({ isMe: true, position: 4, rounds: 0 });
+    await ctx.pool.query('update children set active = false where id = $1', [idle.id]);
+  });
+
   it('lebih dari 25 peserta: 25 besar + daftar berhalaman; detail di luar 25 besar ditolak', async () => {
     // 30 anak tambahan, masing-masing 3 ronde dengan rata-rata menurun 99, 98, …, 70 (nilai peringkat
     // 80,88 … 70); Alya (72,5) jatuh di luar 25 besar.

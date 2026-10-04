@@ -1,0 +1,298 @@
+{
+  "id": "math.sd3.y10.tantangan-waktu-dan-kalender",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 10,
+  "title": "Waktu dan kalender — Level 10 — Tantangan waktu dan kalender",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 15],
+            "m": {
+              "values": [0, 10, 15, 20, 30, 40, 45]
+            },
+            "d": {
+              "values": [20, 25, 35, 40, 45, 50, 70, 75, 90]
+            }
+          },
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "prompt": "Kegiatan mulai seperti jam pertama dan selesai seperti jam kedua. Berapa menit lamanya?",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            },
+            {
+              "kind": "digital",
+              "hour": "=h2",
+              "minute": "=m2"
+            }
+          ],
+          "answer": "(h2 * 60 + m2) - (h * 60 + m)",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "d + 40",
+              "tag": "jam-seperti-ratusan"
+            },
+            "d + 10",
+            "d - 5"
+          ],
+          "explain": "Hitung dari mulai sampai selesai: {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m2": {
+              "values": [15, 20, 30, 40, 45]
+            }
+          },
+          "prompt": "Les renang mulai pukul {h}.00 dan selesai pukul {=h+1}.{m2}. Berapa menit lamanya?",
+          "answer": "60 + m2",
+          "unit": "menit",
+          "explain": "1 jam + {m2} menit = {answer} menit.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [8, 20],
+            "d": [65, 115]
+          },
+          "constraint": "d % 5 == 0",
+          "prompt": "Film mulai pukul {h}.00 dan berlangsung {d} menit. Selesai pukul {=h+1} lewat berapa menit?",
+          "answer": "d - 60",
+          "distractors": ["d", "d - 40", "100 - d"],
+          "explain": "{d} menit = 1 jam {=d-60} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 19],
+            "m": {
+              "values": [15, 20, 30, 40, 45]
+            },
+            "d": {
+              "values": [30, 35, 40, 45, 50]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "m + d >= 60 && m + d < 120 && m + d != 60",
+          "prompt": "{nama} mulai belajar pukul {h}.{m} dan belajar {d} menit. Selesai pukul berapa lewat … menit? (jamnya {=h+1})",
+          "answer": "m + d - 60",
+          "explain": "{m} + {d} = {=m+d} menit = 1 jam {=m+d-60} menit.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [8, 20],
+            "d": [65, 115]
+          },
+          "constraint": "d % 5 == 0",
+          "prompt": "Kereta tiba pukul {h}.00 setelah perjalanan {d} menit. Berangkat pukul {=h-1} lewat berapa menit?",
+          "answer": "60 - (d - 60)",
+          "distractors": ["d - 60", "d", "100 - d"],
+          "explain": "Mundur {d} menit dari {h}.00: pukul {=h-1}.{=120-d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [9, 21],
+            "d": {
+              "values": [5, 10, 15, 20, 25]
+            }
+          },
+          "prompt": "Acara selesai pukul {h}.30 dan berlangsung 1 jam {d} menit. Mulai pukul {=h-1} lewat berapa menit?",
+          "answer": "30 - d",
+          "explain": "{h}.30 mundur 1 jam = {=h-1}.30, mundur {d} menit lagi = {=h-1}.{=30-d}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": [1, 6]
+          },
+          "prompt": "{a} minggu {b} hari = … hari",
+          "answer": "a * 7 + b",
+          "distractors": [
+            {
+              "expr": "a * 10 + b",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 7"
+          ],
+          "explain": "{a} × 7 + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 12],
+            "k": [3, 18]
+          },
+          "prompt": "Tanggal {t} adalah hari Senin. Tanggal {=t+k} hari apa?",
+          "answer": "(0 + k) % 7",
+          "labels": {
+            "0": "Senin",
+            "1": "Selasa",
+            "2": "Rabu",
+            "3": "Kamis",
+            "4": "Jumat",
+            "5": "Sabtu",
+            "6": "Minggu"
+          },
+          "explain": "Setiap 7 hari, hari berulang. {k} hari kemudian: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "{a} tahun = … bulan",
+          "answer": "a * 12",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 365",
+              "tag": "hari"
+            },
+            "a + 12"
+          ],
+          "explain": "1 tahun = 12 bulan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 11]
+          },
+          "prompt": "{a} tahun {b} bulan = … bulan",
+          "answer": "a * 12 + b",
+          "explain": "{=a*12} + {b} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 6],
+            "n": [3, 10]
+          },
+          "prompt": "Jam dinding terlambat {k} menit setiap hari. Setelah {n} hari, berapa menit terlambatnya?",
+          "answer": "k * n",
+          "mode": "input",
+          "explain": "{k} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [8, 10],
+            "b": [5, 6]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} tidur pukul {h}.00 malam dan bangun pukul {b}.00 pagi. Berapa jam ia tidur?",
+          "answer": "24 - (h + 12) + b",
+          "mode": "input",
+          "explain": "Dari {=h+12}.00 ke 24.00 = {=12-h} jam, ditambah {b} jam = {answer}."
+        }
+      }
+    ]
+  }
+}

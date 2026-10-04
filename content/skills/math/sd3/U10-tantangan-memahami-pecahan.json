@@ -1,0 +1,344 @@
+{
+  "id": "math.sd3.u10.tantangan-memahami-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 10,
+  "title": "Memahami pecahan — Level 10 — Tantangan memahami pecahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Ada {d} kelereng, {n} di antaranya biru. Berapa bagian kelereng yang biru?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "bola",
+              "count": "=d",
+              "layout": "row",
+              "color": "biru"
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-lain"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "banding-bagian"
+            },
+            {
+              "num": "d",
+              "den": "n",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "{n} dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "n": [1, 4]
+          },
+          "prompt": "Di kelas ada {d} siswa, {n} siswa memakai kacamata. Berapa bagian siswa yang memakai kacamata?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "bagian-lain"
+            },
+            {
+              "num": "n",
+              "den": "d - n",
+              "tag": "banding-bagian"
+            },
+            {
+              "num": "1",
+              "den": "n",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{n} dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [1, 9]
+          },
+          "constraint": "n < d",
+          "prompt": "Garis dari 0 sampai 1 dibagi menjadi {d} bagian sama panjang. Titik A berada di garis bagi ke-{n} dari 0. Pecahan berapa titik A?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d + 1",
+              "tag": "hitung-garis"
+            },
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "dari-kanan"
+            },
+            {
+              "num": "n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{n} langkah dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Di garis bilangan 0 sampai 1 yang dibagi {d}, berapa langkah dari 0 menuju {n}/{d}?",
+          "answer": "n",
+          "explain": "{n}/{d} berarti {n} langkah berukuran 1/{d}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "k": [2, 12]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "prompt": "1/{d} dari {t} = …",
+          "answer": "t / d",
+          "distractors": [
+            {
+              "expr": "t * d",
+              "tag": "mengalikan"
+            },
+            {
+              "expr": "t - d",
+              "tag": "mengurangi"
+            },
+            "t / d + 1"
+          ],
+          "explain": "{t} : {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [2, 9],
+            "k": [2, 10]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari {t} = …",
+          "answer": "n * t / d",
+          "explain": "{t} : {d} = {=t/d}, lalu × {n} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "Kue dipotong {d} bagian sama besar. {n} potong dimakan. Berapa bagian kue yang tersisa?",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "yang-dimakan"
+            },
+            {
+              "num": "d - n",
+              "den": "n",
+              "tag": "banding"
+            },
+            {
+              "num": "d - n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Sisa {=d-n} dari {d}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "n < d",
+          "prompt": "{nama} sudah mengecat {n}/{d} pagar. Berapa bagian pagar yang belum dicat?",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "yang-sudah"
+            },
+            {
+              "num": "1",
+              "den": "d",
+              "tag": "satu-bagian"
+            },
+            {
+              "num": "d",
+              "den": "d - n",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "1 utuh = {d}/{d}. {d}/{d} − {n}/{d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 12]
+          },
+          "prompt": "{d}/{d} = …",
+          "answer": "1",
+          "distractors": ["d", "0", "d * 2"],
+          "explain": "Semua bagian = satu utuh."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 12]
+          },
+          "prompt": "Berapa bagian 1/{d} yang membentuk satu utuh?",
+          "answer": "d",
+          "explain": "Dibutuhkan {d} bagian.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "n": [1, 5],
+            "k": [3, 7]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari siswa kelas suka sepak bola. Ada {t} siswa. Berapa siswa yang tidak suka sepak bola?",
+          "answer": "t - n * t / d",
+          "mode": "input",
+          "explain": "Suka = {=n*t/d}, tidak = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "k": [3, 15]
+          },
+          "prompt": "1/{d} dari sebuah bilangan adalah {k}. Berapa bilangan itu?",
+          "answer": "d * k",
+          "mode": "input",
+          "explain": "{d} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

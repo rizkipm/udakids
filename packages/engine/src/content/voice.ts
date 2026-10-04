@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { InteractionType, Item } from '../generator/item.js';
+import type { Choice, InteractionType, Item } from '../generator/item.js';
 import { QUIZ_LENGTH } from '../scoring/quiz.js';
 
 /**
@@ -67,7 +67,7 @@ export const isListeningItem = (item: Pick<Item, 'prompt' | 'say'>) =>
  * buntu bila suara perangkat tidak keluar.
  */
 export const isAudioOnlyItem = (item: Pick<Item, 'prompt' | 'say'>) =>
-  isListeningItem(item) && /\bdengar/i.test(item.prompt);
+  isListeningItem(item) && /\b(dengar|hear|listen)/i.test(item.prompt);
 
 /** Kalimat soal perlu dibacakan lengkap (Basic, atau soal dengar di jenjang mana pun)? */
 export const speaksFullPrompt = (
@@ -86,11 +86,77 @@ export function spokenPrompt(
     : { kind: 'line', key: commandKey(item) };
 }
 
-/** Bagian soal Basic yang boleh dibuatkan suara on-demand (server memeriksa ulang dari skill+seed). */
-export const VOICE_ITEM_PARTS = ['prompt', 'reteach'] as const;
+/**
+ * Bagian soal Basic yang boleh dibuatkan suara on-demand (server memeriksa ulang dari skill+seed).
+ * `choice` = kata/huruf pada kartu pilihan (buku English, D-062), dipilih dengan id kartu.
+ */
+export const VOICE_ITEM_PARTS = ['prompt', 'reteach', 'choice'] as const;
 export type VoiceItemPart = (typeof VOICE_ITEM_PARTS)[number];
-export const voiceItemText = (item: Item, part: VoiceItemPart) =>
-  part === 'prompt' ? (item.say ?? item.prompt) : item.reteach.say;
+
+/** Kartu pilihan/kelompok di soal, untuk mengambil teks `say` kartu tertentu. */
+const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
+  const it = item.interaction;
+  switch (it.type) {
+    case 'pick-one':
+    case 'tap-all':
+    case 'order':
+      return it.choices;
+    case 'group':
+      return [...it.groups, ...it.items];
+    case 'match':
+      return [...it.left, ...it.right];
+    default:
+      return [];
+  }
+};
+
+export const voiceItemText = (
+  item: Item,
+  part: VoiceItemPart,
+  choiceId?: string,
+): string | undefined => {
+  if (part === 'prompt') return item.say ?? item.prompt;
+  if (part === 'reteach') return item.reteach.say;
+  return itemCards(item).find((c) => c.id === choiceId)?.say;
+};
+
+/** Bahasa suara: Indonesia, atau British English untuk kata Inggris (Cambridge & Singapore). */
+export type VoiceLang = 'id-ID' | 'en-GB';
+/**
+ * Profil suara satu bagian soal (D-062). Suara Momo (nama suara admin, mis. Leda) sama untuk semua; yang
+ * berbeda hanya bahasa dan arahan gaya:
+ * - English Pra-TK: narasi soal & penjelasan dalam Bahasa Indonesia (anak belum paham instruksi English),
+ *   kata/huruf English di dalamnya dilafalkan jelas; kartu pilihan diucapkan dalam British English.
+ * - Buku English jenjang lain (belum ada): seluruhnya British English (D-059).
+ * - Buku lain: Indonesia dengan gaya admin.
+ */
+export type VoiceProfile = { lang: VoiceLang; style?: string };
+
+/** Narasi Indonesia dengan kata English yang dilafalkan jelas (English Pra-TK). */
+export const ID_EN_VOICE_STYLE =
+  'Kamu Momo, robot sahabat anak usia 3–6 tahun. Bicara dalam Bahasa Indonesia dengan suara perempuan yang ceria, lembut, dan hangat, pelan dan jelas seperti guru TK. Kata, huruf, dan kalimat bahasa Inggris di dalamnya ucapkan dengan lafal British English yang jelas dan pelan; huruf Inggris disebut dengan nama hurufnya dalam bahasa Inggris. Jangan pernah terdengar marah atau kecewa.';
+/** Kata/huruf English pada kartu pilihan: satu kata, sangat jelas. */
+export const ENGLISH_WORD_STYLE =
+  'Say this English word or letter once, slowly and very clearly, in a warm, bright and friendly female voice, like a kind kindergarten teacher speaking to a 4-year-old. Use clear British English pronunciation. Do not add any other words.';
+/** Arahan gaya untuk soal yang seluruhnya English (buku English di atas Pra-TK). */
+export const ENGLISH_VOICE_STYLE =
+  'You are Momo, a cheerful and gentle robot friend for children aged 4 to 8. Speak clear, slow British English with careful pronunciation of letters, sounds, and words, in a warm female voice. Sound warm and encouraging, never disappointed. If a sentence is in Indonesian (written in brackets), say that sentence in natural Indonesian.';
+
+export const voiceProfileOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceProfile => {
+  if (!skillId.startsWith('english.')) return { lang: 'id-ID' };
+  if (part === 'choice') return { lang: 'en-GB', style: ENGLISH_WORD_STYLE };
+  if (skillId.startsWith('english.prek.')) return { lang: 'id-ID', style: ID_EN_VOICE_STYLE };
+  return { lang: 'en-GB', style: ENGLISH_VOICE_STYLE };
+};
+export const voiceLangOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceLang =>
+  voiceProfileOf(skillId, part).lang;
+
+/** Pengaturan suara untuk satu profil: model, nama suara, dan kecepatan dari admin; gaya mengikuti profil. */
+export const voiceSettingsFor = (s: VoiceSettings, p: VoiceProfile | VoiceLang): VoiceSettings => {
+  const profile =
+    typeof p === 'string' ? { lang: p, ...(p === 'en-GB' && { style: ENGLISH_VOICE_STYLE }) } : p;
+  return profile.style ? { ...s, style: profile.style } : s;
+};
 
 /** Pengaturan suara Momo (admin). Model & nama suara Gemini-TTS di Google Cloud Text-to-Speech. */
 export const voiceSettingsSchema = z.strictObject({

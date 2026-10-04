@@ -1,0 +1,117 @@
+{
+  "id": "math.sd3.i6.teka-teki-umur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 6,
+  "title": "Tambah dan kurang campuran — Level 6 — Teka-teki umur",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 12],
+            "b": [24, 35],
+            "k": [2, 10]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Umur {nama} {a} tahun. Ayahnya {b} tahun lebih tua. Berapa umur ayah {k} tahun lagi?",
+          "answer": "a + b + k",
+          "unit": "tahun",
+          "distractors": ["a + b", "a + k", "b + k"],
+          "explain": "Ayah sekarang {=a+b} tahun, {k} tahun lagi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [60, 75],
+            "b": [50, 60],
+            "k": [1, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a - b - k > 0",
+          "prompt": "Umur nenek {a} tahun. {nama} {b} tahun lebih muda dari nenek. Berapa umur {nama} {k} tahun yang lalu?",
+          "answer": "a - b - k",
+          "unit": "tahun",
+          "distractors": ["a - b", "a - b + k", "a - k"],
+          "explain": "{nama} sekarang {=a-b} tahun, {k} tahun lalu {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [10, 30],
+            "d": [2, 8]
+          },
+          "constraint": "(s - d) % 2 == 0 && s > d",
+          "prompt": "Jumlah umur kakak dan adik {s} tahun. Kakak {d} tahun lebih tua. Berapa umur adik?",
+          "answer": "(s - d) / 2",
+          "unit": "tahun",
+          "distractors": ["(s + d) / 2", "s - d", "s / 2"],
+          "explain": "({s} − {d}) : 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

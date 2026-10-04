@@ -70,6 +70,40 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+describe('suara perempuan lebih dulu (D-062)', () => {
+  const voice = (name: string, lang: string, localService = true) => ({ name, lang, localService });
+  const useVoices = (list: ReturnType<typeof voice>[]) => {
+    (speechSynthesis as unknown as { getVoices: () => unknown[] }).getVoices = () => list;
+    resetVoice();
+  };
+
+  it('kata English memakai suara perempuan British, bukan "Daniel" yang berat', () => {
+    useVoices([voice('Daniel', 'en-GB'), voice('Serena', 'en-GB'), voice('Samantha', 'en-US')]);
+    speak('cat', { lang: 'en-GB' });
+    expect((spoken[0]!.voice as { name: string }).name).toBe('Serena');
+    expect(spoken[0]!.lang).toBe('en-GB');
+  });
+
+  it('tanpa suara perempuan British: suara perempuan English lain lebih dulu', () => {
+    useVoices([voice('Daniel', 'en-GB'), voice('Arthur', 'en-GB'), voice('Samantha', 'en-US')]);
+    speak('cat', { lang: 'en-GB' });
+    // iPad bawaan: en-GB hanya Daniel/Arthur (pria), en-US punya Samantha (perempuan).
+    expect((spoken[0]!.voice as { name: string }).name).toBe('Samantha');
+    useVoices([
+      voice('Google UK English Male', 'en-GB'),
+      voice('Google UK English Female', 'en-GB'),
+    ]);
+    speak('dog', { lang: 'en-GB' });
+    expect((spoken[1]!.voice as { name: string }).name).toBe('Google UK English Female');
+  });
+
+  it('narasi Indonesia memilih suara perempuan (Damayanti) daripada pria (Ardi)', () => {
+    useVoices([voice('Microsoft Ardi', 'id-ID'), voice('Damayanti', 'id-ID')]);
+    speak('Ketuk kata cat.');
+    expect((spoken[0]!.voice as { name: string }).name).toBe('Damayanti');
+  });
+});
+
 describe('suara soal lintas perangkat (D-046)', () => {
   it('teks panjang dipecah per kalimat (Chrome memotong ucapan > ±15 detik)', () => {
     expect(speechChunks('Halo. Apa kabar?')).toEqual(['Halo.', 'Apa kabar?']);

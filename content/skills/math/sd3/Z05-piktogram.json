@@ -1,0 +1,89 @@
+{
+  "id": "math.sd3.z5.piktogram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 5,
+  "title": "Data dan diagram — Level 5 — Piktogram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "k": {
+              "values": [2, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan Kelas B?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas A", "Kelas B", "Kelas C"],
+              "values": ["=a", "=b", "=c"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "b * k",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "jumlah-gambar"
+            },
+            "b * k + k",
+            "a * k"
+          ],
+          "explain": "{b} gambar × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "k": {
+              "values": [2, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan ketiga kelas?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas A", "Kelas B", "Kelas C"],
+              "values": ["=a", "=b", "=c"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "(a + b + c) * k",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "jumlah-gambar"
+            },
+            "(a + b) * k",
+            "(a + b + c) * k + k"
+          ],
+          "explain": "({a} + {b} + {c}) × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

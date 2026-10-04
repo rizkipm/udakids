@@ -1,0 +1,78 @@
+{
+  "id": "math.sd3.l4.perkalian-dengan-array",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "L",
+  "order": 4,
+  "title": "Memahami perkalian — Level 4 — Perkalian dengan array",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-N",
+    "sg": "P3 Multiplication: concepts",
+    "cambridge": "Stage 3 Calculation: multiplication as repeated addition and arrays (3Nc.07)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 7],
+            "c": [2, 9]
+          },
+          "prompt": "Ada {r} baris, setiap baris {c} petak. Berapa petak semuanya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=c",
+              "h": "=r",
+              "unit": "",
+              "grid": true
+            }
+          ],
+          "answer": "r * c",
+          "distractors": [
+            {
+              "expr": "r + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "r * c + c",
+              "tag": "lebih-satu-baris"
+            },
+            {
+              "expr": "2 * (r + c)",
+              "tag": "keliling"
+            }
+          ],
+          "explain": "{r} × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [3, 9],
+            "c": [3, 9]
+          },
+          "prompt": "Kursi disusun {r} baris dan {c} kolom. Berapa kursi?",
+          "answer": "r * c",
+          "distractors": [
+            {
+              "expr": "r + c",
+              "tag": "menjumlah"
+            },
+            "r * c - r",
+            "r * c + 1"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

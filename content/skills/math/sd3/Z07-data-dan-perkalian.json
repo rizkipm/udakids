@@ -1,0 +1,86 @@
+{
+  "id": "math.sd3.z7.data-dan-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 7,
+  "title": "Data dan diagram — Level 7 — Data dan perkalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [5, 20],
+            "c": [2, 12],
+            "e": [5, 20],
+            "h": {
+              "values": [5000, 8000, 10000, 12000]
+            }
+          },
+          "prompt": "Harga 1 kg salak Rp{h}. Berapa rupiah hasil penjualan salak?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "c * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "c + h",
+              "tag": "menjumlah"
+            },
+            "a * h",
+            "c * h + h"
+          ],
+          "explain": "{c} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "prompt": "Setiap siswa yang suka renang membawa 2 kacamata renang. Berapa kacamata semuanya?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "b * 2",
+          "distractors": ["b", "b + 2", "a * 2"],
+          "explain": "{b} × 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

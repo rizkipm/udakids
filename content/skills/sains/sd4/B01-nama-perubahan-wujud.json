@@ -1,6 +1,6 @@
 {
   "id": "sains.sd4.b1.nama-perubahan-wujud",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd4",
   "category": "B",
@@ -23,49 +23,61 @@
               "name": "mencair",
               "attrs": {
                 "dari": "padat menjadi cair",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "membeku",
+                "contoh": "es batu menjadi air"
               }
             },
             {
               "name": "membeku",
               "attrs": {
                 "dari": "cair menjadi padat",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "mencair",
+                "contoh": "air menjadi es batu"
               }
             },
             {
               "name": "menguap",
               "attrs": {
                 "dari": "cair menjadi gas",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "mengembun",
+                "contoh": "air menjadi uap air"
               }
             },
             {
               "name": "mengembun",
               "attrs": {
                 "dari": "gas menjadi cair",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "menguap",
+                "contoh": "uap air menjadi titik air"
               }
             },
             {
               "name": "menyublim",
               "attrs": {
                 "dari": "padat menjadi gas",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "mengkristal",
+                "contoh": "kapur barus padat menjadi gas"
               }
             },
             {
               "name": "mengkristal",
               "attrs": {
                 "dari": "gas menjadi padat",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "menyublim",
+                "contoh": "uap menjadi kristal padat"
               }
             }
           ],
           "attr": "dari",
           "ask": "value",
           "prompt": "Perubahan wujud \"{name}\" adalah perubahan dari …",
-          "explain": "Peristiwa {name}: {value}.",
+          "explain": "{name} = perubahan dari {value}.",
           "choices": 4,
           "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
         },
@@ -79,53 +91,599 @@
               "name": "mencair",
               "attrs": {
                 "dari": "padat menjadi cair",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "membeku",
+                "contoh": "es batu menjadi air"
               }
             },
             {
               "name": "membeku",
               "attrs": {
                 "dari": "cair menjadi padat",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "mencair",
+                "contoh": "air menjadi es batu"
               }
             },
             {
               "name": "menguap",
               "attrs": {
                 "dari": "cair menjadi gas",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "mengembun",
+                "contoh": "air menjadi uap air"
               }
             },
             {
               "name": "mengembun",
               "attrs": {
                 "dari": "gas menjadi cair",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "menguap",
+                "contoh": "uap air menjadi titik air"
               }
             },
             {
               "name": "menyublim",
               "attrs": {
                 "dari": "padat menjadi gas",
-                "panas": "menyerap panas"
+                "panas": "menyerap panas",
+                "balik": "mengkristal",
+                "contoh": "kapur barus padat menjadi gas"
               }
             },
             {
               "name": "mengkristal",
               "attrs": {
                 "dari": "gas menjadi padat",
-                "panas": "melepas panas"
+                "panas": "melepas panas",
+                "balik": "menyublim",
+                "contoh": "uap menjadi kristal padat"
               }
             }
           ],
           "attr": "dari",
           "ask": "name",
           "prompt": "Perubahan wujud {value} disebut …",
-          "explain": "Perubahan {value} disebut {name}.",
+          "explain": "Perubahan dari {value} disebut {name}.",
           "choices": 4,
           "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
         },
         "weight": 1
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mencair",
+              "attrs": {
+                "dari": "padat menjadi cair",
+                "panas": "menyerap panas",
+                "balik": "membeku",
+                "contoh": "es batu menjadi air"
+              }
+            },
+            {
+              "name": "membeku",
+              "attrs": {
+                "dari": "cair menjadi padat",
+                "panas": "melepas panas",
+                "balik": "mencair",
+                "contoh": "air menjadi es batu"
+              }
+            },
+            {
+              "name": "menguap",
+              "attrs": {
+                "dari": "cair menjadi gas",
+                "panas": "menyerap panas",
+                "balik": "mengembun",
+                "contoh": "air menjadi uap air"
+              }
+            },
+            {
+              "name": "mengembun",
+              "attrs": {
+                "dari": "gas menjadi cair",
+                "panas": "melepas panas",
+                "balik": "menguap",
+                "contoh": "uap air menjadi titik air"
+              }
+            },
+            {
+              "name": "menyublim",
+              "attrs": {
+                "dari": "padat menjadi gas",
+                "panas": "menyerap panas",
+                "balik": "mengkristal",
+                "contoh": "kapur barus padat menjadi gas"
+              }
+            },
+            {
+              "name": "mengkristal",
+              "attrs": {
+                "dari": "gas menjadi padat",
+                "panas": "melepas panas",
+                "balik": "menyublim",
+                "contoh": "uap menjadi kristal padat"
+              }
+            }
+          ],
+          "attr": "balik",
+          "ask": "value",
+          "prompt": "Kebalikan dari peristiwa {name} adalah …",
+          "explain": "Kebalikan dari {name} adalah {value}.",
+          "choices": 4,
+          "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+        },
+        "weight": 1
+      },
+      {
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "mencair",
+              "attrs": {
+                "dari": "padat menjadi cair",
+                "panas": "menyerap panas",
+                "balik": "membeku",
+                "contoh": "es batu menjadi air"
+              }
+            },
+            {
+              "name": "membeku",
+              "attrs": {
+                "dari": "cair menjadi padat",
+                "panas": "melepas panas",
+                "balik": "mencair",
+                "contoh": "air menjadi es batu"
+              }
+            },
+            {
+              "name": "menguap",
+              "attrs": {
+                "dari": "cair menjadi gas",
+                "panas": "menyerap panas",
+                "balik": "mengembun",
+                "contoh": "air menjadi uap air"
+              }
+            },
+            {
+              "name": "mengembun",
+              "attrs": {
+                "dari": "gas menjadi cair",
+                "panas": "melepas panas",
+                "balik": "menguap",
+                "contoh": "uap air menjadi titik air"
+              }
+            },
+            {
+              "name": "menyublim",
+              "attrs": {
+                "dari": "padat menjadi gas",
+                "panas": "menyerap panas",
+                "balik": "mengkristal",
+                "contoh": "kapur barus padat menjadi gas"
+              }
+            },
+            {
+              "name": "mengkristal",
+              "attrs": {
+                "dari": "gas menjadi padat",
+                "panas": "melepas panas",
+                "balik": "menyublim",
+                "contoh": "uap menjadi kristal padat"
+              }
+            }
+          ],
+          "attr": "contoh",
+          "ask": "value",
+          "prompt": "Mana contoh peristiwa {name}?",
+          "explain": "Contoh {name}: {value}.",
+          "choices": 3,
+          "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+        },
+        "weight": 1
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Perubahan wujud dari padat langsung menjadi gas, tanpa menjadi cair dulu, disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyublim"
+                  },
+                  "say": "menyublim"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap"
+                  },
+                  "say": "menguap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Padat → gas tanpa melalui cair disebut menyublim, contohnya kapur barus.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Perubahan wujud dari gas langsung menjadi padat disebut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengkristal"
+                  },
+                  "say": "mengkristal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyublim"
+                  },
+                  "say": "menyublim",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gas → padat disebut mengkristal (deposisi), contohnya bunga es di freezer.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Air menjadi es. Nama perubahan wujudnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengkristal"
+                  },
+                  "say": "mengkristal",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cair → padat disebut membeku.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Uap air menjadi titik-titik air. Nama perubahan wujudnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap"
+                  },
+                  "say": "menguap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyublim"
+                  },
+                  "say": "menyublim",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gas → cair disebut mengembun.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Lilin padat berubah menjadi lilin cair. Nama perubahan wujudnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap"
+                  },
+                  "say": "menguap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengkristal"
+                  },
+                  "say": "mengkristal",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Padat → cair disebut mencair (meleleh).",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Air berubah menjadi uap air. Nama perubahan wujudnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap"
+                  },
+                  "say": "menguap"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyublim"
+                  },
+                  "say": "menyublim",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cair → gas disebut menguap.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Berapa jenis perubahan wujud zat yang kita pelajari (padat, cair, gas saling berubah)?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 6: mencair, membeku, menguap, mengembun, menyublim, dan mengkristal.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Tiga perubahan wujud yang terjadi saat zat MELEPAS panas adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku, mengembun, mengkristal"
+                  },
+                  "say": "membeku, mengembun, mengkristal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair, menguap, menyublim"
+                  },
+                  "say": "mencair, menguap, menyublim",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair, membeku, menguap"
+                  },
+                  "say": "mencair, membeku, menguap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap, mengembun, menyublim"
+                  },
+                  "say": "menguap, mengembun, menyublim",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat didinginkan (melepas panas), zat membeku, mengembun, atau mengkristal.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Tiga perubahan wujud yang terjadi saat zat MENYERAP panas adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair, menguap, menyublim"
+                  },
+                  "say": "mencair, menguap, menyublim"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku, mengembun, mengkristal"
+                  },
+                  "say": "membeku, mengembun, mengkristal",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair, membeku, mengembun"
+                  },
+                  "say": "mencair, membeku, mengembun",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap, membeku, mengkristal"
+                  },
+                  "say": "menguap, membeku, mengkristal",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Saat dipanaskan (menyerap panas), zat mencair, menguap, atau menyublim.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            },
+            {
+              "prompt": "Kata 'meleleh' dalam kehidupan sehari-hari sama artinya dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mencair"
+                  },
+                  "say": "mencair"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menguap"
+                  },
+                  "say": "menguap",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membeku"
+                  },
+                  "say": "membeku",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengembun"
+                  },
+                  "say": "mengembun",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Meleleh = mencair, perubahan dari padat menjadi cair.",
+              "source": "Perubahan wujud zat (mencair, membeku, menguap, mengembun, menyublim, mengkristal) — Buku Siswa 'Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV' (Kemendikbudristek, 2021) Bab 2; CP IPAS Fase B, Kepka BSKAP 046/H/KR/2025"
+            }
+          ]
+        },
+        "weight": 2
       }
     ]
   }

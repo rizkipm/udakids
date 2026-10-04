@@ -1,0 +1,74 @@
+{
+  "id": "math.sd3.z8.soal-cerita-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Z",
+  "order": 8,
+  "title": "Data dan diagram — Level 8 — Soal cerita data",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Z (data)",
+    "sg": "P3 Bar graphs and picture graphs",
+    "cambridge": "Stage 3 Statistics: tables, bar charts, pictograms (3Ss)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15],
+            "e": [3, 15]
+          },
+          "constraint": "a >= 5",
+          "prompt": "Jika 5 siswa pindah dari bola ke lari, berapa siswa yang suka lari sekarang?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Bola", "Renang", "Bulu tangkis", "Lari"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "unit": "siswa",
+              "caption": "Olahraga kesukaan kelas 3"
+            }
+          ],
+          "answer": "e + 5",
+          "distractors": ["e - 5", "a - 5", "e"],
+          "explain": "{e} + 5 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 45],
+            "b": [10, 45],
+            "c": [10, 45],
+            "e": [10, 45],
+            "f": [10, 45]
+          },
+          "constraint": "a + b + c + e + f < 250",
+          "prompt": "Target peminjaman seminggu 250 buku. Berapa buku lagi untuk mencapai target?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "unit": "buku",
+              "caption": "Buku dipinjam di perpustakaan"
+            }
+          ],
+          "answer": "250 - (a + b + c + e + f)",
+          "distractors": ["a + b + c + e + f", "250 - a - b", "250 - (a + b + c + e + f) + 10"],
+          "explain": "250 − {=a+b+c+e+f} = {answer}."
+        }
+      }
+    ]
+  }
+}

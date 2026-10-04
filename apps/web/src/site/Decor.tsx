@@ -147,6 +147,8 @@ export type FeatureIcon =
   | 'class'
   | 'staff'
   | 'book'
+  | 'math'
+  | 'english'
   | 'science'
   | 'timer'
   | 'trophy'
@@ -248,6 +250,53 @@ export function Icon({ name, size = 44 }: { name: FeatureIcon; size?: number }) 
             strokeWidth="3"
             strokeLinecap="round"
           />
+        </svg>
+      );
+    case 'math':
+      return (
+        <svg {...p}>
+          <rect
+            x="5"
+            y="5"
+            width="38"
+            height="38"
+            rx="9"
+            fill="#fff3c4"
+            stroke={ink}
+            strokeWidth="2.5"
+          />
+          <path d="M15 17h8M19 13v8" stroke="#ff7a59" strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M27 17h8" stroke="#4aa8ff" strokeWidth="3.5" strokeLinecap="round" />
+          <path
+            d="M15 31l6 6M21 31l-6 6"
+            stroke="#8a6cf0"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path d="M27 31h8M27 37h8" stroke="#46b97a" strokeWidth="3.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'english':
+      return (
+        <svg {...p}>
+          <path
+            d="M8 8h32a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H22l-9 8v-8H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4z"
+            fill="#dcefff"
+            stroke={ink}
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+          />
+          <text
+            x="24"
+            y="26"
+            textAnchor="middle"
+            fontFamily="inherit"
+            fontSize="13"
+            fontWeight="900"
+            fill={ink}
+          >
+            ABC
+          </text>
         </svg>
       );
     case 'science':

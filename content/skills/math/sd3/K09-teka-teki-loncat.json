@@ -1,0 +1,69 @@
+{
+  "id": "math.sd3.k9.teka-teki-loncat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 9,
+  "title": "Membilang loncat — Level 9 — Teka-teki loncat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "k": [3, 9],
+            "n": [10, 20]
+          },
+          "prompt": "Mulai dari {a}, loncat {k} terus-menerus. Bilangan ke-{n} adalah …",
+          "answer": "a + (n - 1) * k",
+          "mode": "input",
+          "explain": "{a} + {=n-1} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 50],
+            "k": [2, 9],
+            "n": [8, 20]
+          },
+          "prompt": "Berapa banyak bilangan pada pola {a}, {=a+k}, {=a+2*k}, …, {=a+(n-1)*k}?",
+          "answer": "n",
+          "mode": "input",
+          "explain": "({=a+(n-1)*k} − {a}) : {k} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 9],
+            "a": [10, 50],
+            "g": [30, 90]
+          },
+          "derived": {
+            "b": "a + g"
+          },
+          "prompt": "Kelipatan {k} antara {a} dan {b} ada berapa?",
+          "answer": "floor((b - 1) / k) - floor(a / k)",
+          "mode": "input",
+          "explain": "Kelipatan {k} terkecil setelah {a} sampai terbesar sebelum {b}: {answer}."
+        }
+      }
+    ]
+  }
+}

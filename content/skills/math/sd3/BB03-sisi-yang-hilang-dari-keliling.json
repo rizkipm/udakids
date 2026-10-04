@@ -1,0 +1,74 @@
+{
+  "id": "math.sd3.bb3.sisi-yang-hilang-dari-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 3,
+  "title": "Keliling dan luas — Level 3 — Sisi yang hilang dari keliling",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 25]
+          },
+          "derived": {
+            "p": "4 * s"
+          },
+          "prompt": "Keliling persegi {p} cm. Berapa cm panjang sisinya?",
+          "answer": "p / 4",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p / 2",
+              "tag": "bagi-2"
+            },
+            "p - 4",
+            "p / 4 + 1"
+          ],
+          "explain": "{p} : 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [5, 20],
+            "h": [2, 12]
+          },
+          "derived": {
+            "p": "2 * (w + h)"
+          },
+          "constraint": "w != h",
+          "prompt": "Keliling persegi panjang {p} cm dan panjangnya {w} cm. Berapa cm lebarnya?",
+          "answer": "p / 2 - w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p - w",
+              "tag": "tanpa-bagi"
+            },
+            {
+              "expr": "p - 2 * w",
+              "tag": "lupa-bagi"
+            },
+            "p / 2"
+          ],
+          "explain": "{p} : 2 = {=p/2}, lalu − {w} = {answer}."
+        }
+      }
+    ]
+  }
+}

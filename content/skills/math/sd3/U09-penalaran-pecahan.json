@@ -1,0 +1,72 @@
+{
+  "id": "math.sd3.u9.penalaran-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "U",
+  "order": 9,
+  "title": "Memahami pecahan — Level 9 — Penalaran pecahan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-U (fractions)",
+    "sg": "P3 Fractions: fractions of a whole and of a set",
+    "cambridge": "Stage 3 Fractions: understand and find fractions (3Nf.01–03)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "n": [1, 5],
+            "k": [3, 7]
+          },
+          "derived": {
+            "t": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari siswa kelas suka sepak bola. Ada {t} siswa. Berapa siswa yang tidak suka sepak bola?",
+          "answer": "t - n * t / d",
+          "mode": "input",
+          "explain": "Suka = {=n*t/d}, tidak = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "k": [3, 15]
+          },
+          "prompt": "1/{d} dari sebuah bilangan adalah {k}. Berapa bilangan itu?",
+          "answer": "d * k",
+          "mode": "input",
+          "explain": "{d} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 30],
+            "b": [5, 20]
+          },
+          "derived": {
+            "t": "2 * a",
+            "s": "3 * b"
+          },
+          "prompt": "Setengah dari {t} ditambah sepertiga dari {s} = …",
+          "answer": "t / 2 + s / 3",
+          "mode": "input",
+          "explain": "{=t/2} + {=s/3} = {answer}."
+        }
+      }
+    ]
+  }
+}

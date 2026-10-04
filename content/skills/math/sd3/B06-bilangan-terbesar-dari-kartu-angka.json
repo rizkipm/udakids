@@ -1,0 +1,95 @@
+{
+  "id": "math.sd3.b6.bilangan-terbesar-dari-kartu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 6,
+  "title": "Membandingkan dan mengurutkan — Level 6 — Bilangan terbesar dari kartu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "gb": [1, 2],
+            "gc": [1, 2],
+            "ge": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + gb",
+            "c": "a + gb + gc",
+            "e": "a + gb + gc + ge",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Kartu angka: {x1}, {x2}, {x3}, {e}. Susun menjadi bilangan 4 angka terbesar (setiap kartu dipakai sekali).",
+          "answer": "e * 1000 + c * 100 + b * 10 + a",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + c * 10 + e",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "e * 1000 + c * 100 + a * 10 + b",
+              "tag": "satu-tertukar"
+            },
+            {
+              "expr": "c * 1000 + e * 100 + b * 10 + a",
+              "tag": "awal-salah"
+            }
+          ],
+          "explain": "Taruh angka terbesar di tempat paling kiri: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "gb": [1, 2],
+            "gc": [1, 3],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + gb",
+            "c": "a + gb + gc",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Kartu angka: {x1}, {x2}, {x3}, 0. Susun menjadi bilangan 4 angka terkecil (angka 0 tidak boleh di depan).",
+          "answer": "a * 1000 + b * 10 + c",
+          "distractors": [
+            {
+              "expr": "a * 100 + b * 10 + c",
+              "tag": "nol-di-depan"
+            },
+            {
+              "expr": "a * 1000 + b * 100 + c",
+              "tag": "nol-salah-tempat"
+            },
+            {
+              "expr": "c * 1000 + b * 100 + a",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Angka bukan nol terkecil di depan, lalu 0, lalu sisanya: {answer}."
+        }
+      }
+    ]
+  }
+}

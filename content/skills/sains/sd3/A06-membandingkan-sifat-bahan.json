@@ -1,6 +1,6 @@
 {
   "id": "sains.sd3.a6.membandingkan-sifat-bahan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd3",
   "category": "A",
@@ -12,132 +12,983 @@
     "fase-merdeka": "B",
     "kognitif": "applying"
   },
-  "family": "mix",
+  "family": "manual",
   "params": {
-    "parts": [
+    "items": [
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Kaca",
-              "attrs": {
-                "ciri": "tembus pandang dan mudah pecah"
-              }
+        "prompt": "Mana yang lebih mudah pecah bila jatuh ke lantai?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Piring kaca"
             },
-            {
-              "name": "Karet",
-              "attrs": {
-                "ciri": "lentur dan kembali ke bentuk semula setelah ditarik"
-              }
+            "say": "Piring kaca"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Piring plastik"
             },
-            {
-              "name": "Logam",
-              "attrs": {
-                "ciri": "kuat dan menghantarkan panas dengan baik"
-              }
+            "say": "Piring plastik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Piring seng"
             },
-            {
-              "name": "Kain",
-              "attrs": {
-                "ciri": "lembut dan dapat dicuci berkali-kali"
-              }
+            "say": "Piring seng",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Piring kayu"
             },
-            {
-              "name": "Kertas",
-              "attrs": {
-                "ciri": "mudah sobek, apalagi bila basah"
-              }
-            },
-            {
-              "name": "Kayu",
-              "attrs": {
-                "ciri": "keras, berserat, dan diambil langsung dari batang pohon"
-              }
-            },
-            {
-              "name": "Plastik",
-              "attrs": {
-                "ciri": "ringan, tahan air, dan dibuat di pabrik"
-              }
-            },
-            {
-              "name": "Tanah liat",
-              "attrs": {
-                "ciri": "mudah dibentuk saat basah dan mengeras setelah dibakar"
-              }
-            }
-          ],
-          "attr": "ciri",
-          "ask": "value",
-          "prompt": "Sifat mana yang cocok untuk bahan {name}?",
-          "explain": "{name}: {value}.",
-          "choices": 4,
-          "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
-        },
-        "weight": 1
+            "say": "Piring kayu",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kaca keras tetapi rapuh, jadi piring kaca mudah pecah saat jatuh. Plastik, seng, dan kayu tidak mudah pecah.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Kaca",
-              "attrs": {
-                "ciri": "tembus pandang dan mudah pecah"
-              }
+        "prompt": "Mana yang lebih cepat menyerap tumpahan air?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Lap kain katun"
             },
-            {
-              "name": "Karet",
-              "attrs": {
-                "ciri": "lentur dan kembali ke bentuk semula setelah ditarik"
-              }
+            "say": "Lap kain katun"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Taplak plastik"
             },
-            {
-              "name": "Logam",
-              "attrs": {
-                "ciri": "kuat dan menghantarkan panas dengan baik"
-              }
+            "say": "Taplak plastik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Nampan logam"
             },
-            {
-              "name": "Kain",
-              "attrs": {
-                "ciri": "lembut dan dapat dicuci berkali-kali"
-              }
+            "say": "Nampan logam",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Piring kaca"
             },
-            {
-              "name": "Kertas",
-              "attrs": {
-                "ciri": "mudah sobek, apalagi bila basah"
-              }
+            "say": "Piring kaca",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kain katun berserat dan berpori sehingga menyerap air. Plastik, logam, dan kaca tidak menyerap air.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Sendok mana yang paling cepat terasa panas bila dicelup ke teh panas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sendok logam"
             },
-            {
-              "name": "Kayu",
-              "attrs": {
-                "ciri": "keras, berserat, dan diambil langsung dari batang pohon"
-              }
+            "say": "Sendok logam"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sendok kayu"
             },
-            {
-              "name": "Plastik",
-              "attrs": {
-                "ciri": "ringan, tahan air, dan dibuat di pabrik"
-              }
+            "say": "Sendok kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sendok plastik"
             },
-            {
-              "name": "Tanah liat",
-              "attrs": {
-                "ciri": "mudah dibentuk saat basah dan mengeras setelah dibakar"
-              }
-            }
-          ],
-          "attr": "ciri",
-          "ask": "name",
-          "prompt": "Bahan mana yang {value}?",
-          "explain": "{name}: {value}.",
-          "choices": 4,
-          "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
-        },
-        "weight": 1
+            "say": "Sendok plastik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sendok batok kelapa"
+            },
+            "say": "Sendok batok kelapa",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Logam menghantarkan panas dengan baik, jadi sendok logam cepat terasa panas.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih lentur, karet atau kayu?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Karet"
+            },
+            "say": "Karet"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kayu"
+            },
+            "say": "Kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama kaku"
+            },
+            "say": "Keduanya sama kaku",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama lentur"
+            },
+            "say": "Keduanya sama lentur",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Karet bisa ditarik dan kembali ke bentuk semula. Kayu kaku dan bisa patah bila dibengkokkan.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Kertas dan kain sama-sama dicelup ke air lalu ditarik. Mana yang lebih mudah sobek?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas basah"
+            },
+            "say": "Kertas basah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kain basah"
+            },
+            "say": "Kain basah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya tidak bisa sobek"
+            },
+            "say": "Keduanya tidak bisa sobek",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama kuat"
+            },
+            "say": "Keduanya sama kuat",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kertas yang basah menjadi lemah dan mudah sobek, sedangkan kain tetap kuat saat basah.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang tembus pandang sehingga kita bisa melihat benda di baliknya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kaca bening"
+            },
+            "say": "Kaca bening"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Papan kayu"
+            },
+            "say": "Papan kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Lempeng besi"
+            },
+            "say": "Lempeng besi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kardus"
+            },
+            "say": "Kardus",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kaca bening meneruskan cahaya, jadi benda di baliknya terlihat. Kayu, besi, dan kardus tidak tembus pandang.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih ringan bila ukurannya sama?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Bola plastik"
+            },
+            "say": "Bola plastik"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Bola besi"
+            },
+            "say": "Bola besi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Bola batu"
+            },
+            "say": "Bola batu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Bola kaca padat"
+            },
+            "say": "Bola kaca padat",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Plastik jauh lebih ringan daripada besi, batu, atau kaca padat dengan ukuran yang sama.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih keras, batu atau spons?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Batu"
+            },
+            "say": "Batu"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Spons"
+            },
+            "say": "Spons",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama lembut"
+            },
+            "say": "Keduanya sama lembut",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama keras"
+            },
+            "say": "Keduanya sama keras",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Batu keras dan tidak berubah bentuk saat ditekan. Spons lembut dan mudah ditekan.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Tanah liat dan kayu sama-sama ditekan dengan jari. Mana yang mudah dibentuk?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tanah liat basah"
+            },
+            "say": "Tanah liat basah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kayu"
+            },
+            "say": "Kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sulit dibentuk"
+            },
+            "say": "Keduanya sulit dibentuk",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya mudah dibentuk"
+            },
+            "say": "Keduanya mudah dibentuk",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Tanah liat yang basah lunak sehingga mudah dibentuk dengan tangan. Kayu keras dan tidak berubah bentuk.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang tidak berkarat walau lama terkena hujan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Ember plastik"
+            },
+            "say": "Ember plastik"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Ember besi"
+            },
+            "say": "Ember besi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Paku besi"
+            },
+            "say": "Paku besi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kawat besi"
+            },
+            "say": "Kawat besi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Plastik tidak berkarat. Besi bisa berkarat bila sering terkena air dan udara.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Bahan mana yang lebih kedap air, plastik atau kertas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Plastik"
+            },
+            "say": "Plastik"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas"
+            },
+            "say": "Kertas",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya menyerap air"
+            },
+            "say": "Keduanya menyerap air",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama kedap air"
+            },
+            "say": "Keduanya sama kedap air",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Plastik tidak bisa ditembus air. Kertas menyerap air dan menjadi basah.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih kuat menahan tarikan tanpa putus?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tali tambang"
+            },
+            "say": "Tali tambang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Benang jahit"
+            },
+            "say": "Benang jahit",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sedotan kertas"
+            },
+            "say": "Sedotan kertas",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tisu"
+            },
+            "say": "Tisu",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Tali tambang dibuat dari serat yang dipilin tebal, jadi jauh lebih kuat menahan tarikan.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih kasar permukaannya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas amplas"
+            },
+            "say": "Kertas amplas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas HVS"
+            },
+            "say": "Kertas HVS",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kaca cermin"
+            },
+            "say": "Kaca cermin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Ubin keramik licin"
+            },
+            "say": "Ubin keramik licin",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kertas amplas dilapisi butiran pasir kecil sehingga terasa kasar.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih mudah dilipat tanpa patah?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kain"
+            },
+            "say": "Kain"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kaca"
+            },
+            "say": "Kaca",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keramik"
+            },
+            "say": "Keramik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Papan kayu"
+            },
+            "say": "Papan kayu",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kain lentur sehingga mudah dilipat. Kaca, keramik, dan papan kayu bisa patah bila dilipat.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Gelas kaca dan gelas logam diisi es. Lewat gelas mana kita bisa melihat esnya dari samping?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Gelas kaca bening"
+            },
+            "say": "Gelas kaca bening"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Gelas logam"
+            },
+            "say": "Gelas logam",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya"
+            },
+            "say": "Keduanya",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tidak ada"
+            },
+            "say": "Tidak ada",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kaca bening tembus pandang, logam tidak, jadi es hanya terlihat dari samping gelas kaca.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih cepat kering setelah dicuci, kaus tipis atau handuk tebal?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kaus tipis"
+            },
+            "say": "Kaus tipis"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Handuk tebal"
+            },
+            "say": "Handuk tebal",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama cepat"
+            },
+            "say": "Keduanya sama cepat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya tidak bisa kering"
+            },
+            "say": "Keduanya tidak bisa kering",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Handuk tebal menyerap dan menyimpan lebih banyak air, jadi kaus tipis lebih cepat kering.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang menghantarkan panas paling lambat?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sarung tangan kain tebal"
+            },
+            "say": "Sarung tangan kain tebal"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Wajan besi"
+            },
+            "say": "Wajan besi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Panci aluminium"
+            },
+            "say": "Panci aluminium",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sendok logam"
+            },
+            "say": "Sendok logam",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kain tebal menyimpan udara di antara seratnya sehingga panas lambat merambat. Besi dan aluminium cepat menghantarkan panas.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang mengapung di air?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Gabus"
+            },
+            "say": "Gabus"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Paku"
+            },
+            "say": "Paku",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kelereng kaca"
+            },
+            "say": "Kelereng kaca",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Batu kali"
+            },
+            "say": "Batu kali",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gabus sangat ringan untuk ukurannya, jadi mengapung. Paku, kelereng, dan batu tenggelam.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih mudah robek, kantong kresek tipis atau karung goni?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kantong kresek tipis"
+            },
+            "say": "Kantong kresek tipis"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Karung goni"
+            },
+            "say": "Karung goni",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya sama kuat"
+            },
+            "say": "Keduanya sama kuat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Keduanya tidak bisa robek"
+            },
+            "say": "Keduanya tidak bisa robek",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Karung goni dianyam dari serat kuat, sedangkan kresek tipis mudah robek bila terkena benda tajam.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang memantulkan bayangan wajah kita dengan jelas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Cermin kaca"
+            },
+            "say": "Cermin kaca"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kain sarung"
+            },
+            "say": "Kain sarung",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Papan kayu"
+            },
+            "say": "Papan kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas koran"
+            },
+            "say": "Kertas koran",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cermin kaca permukaannya sangat licin dan dilapisi logam, jadi memantulkan bayangan dengan jelas.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih elastis bila ditarik lalu dilepas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Karet gelang"
+            },
+            "say": "Karet gelang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sedotan plastik"
+            },
+            "say": "Sedotan plastik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Lidi"
+            },
+            "say": "Lidi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kawat tembaga"
+            },
+            "say": "Kawat tembaga",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Karet gelang memanjang saat ditarik lalu kembali ke bentuk semula. Lidi patah, kawat dan sedotan tetap bengkok.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Bahan mana yang lebih berat bila ukurannya sama?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Besi"
+            },
+            "say": "Besi"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kayu"
+            },
+            "say": "Kayu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Gabus"
+            },
+            "say": "Gabus",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Plastik"
+            },
+            "say": "Plastik",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Besi paling berat dibanding kayu, gabus, dan plastik dengan ukuran yang sama.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang tetap kering di dalam saat hujan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tas berlapis plastik"
+            },
+            "say": "Tas berlapis plastik"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tas kertas"
+            },
+            "say": "Tas kertas",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tas kain tipis"
+            },
+            "say": "Tas kain tipis",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tas anyaman pandan"
+            },
+            "say": "Tas anyaman pandan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Plastik kedap air, jadi isi tas berlapis plastik tetap kering. Kertas, kain tipis, dan anyaman bisa ditembus air.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih lembut saat disentuh pipi?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kapas"
+            },
+            "say": "Kapas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas amplas"
+            },
+            "say": "Kertas amplas",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Batu bata"
+            },
+            "say": "Batu bata",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sikat kawat"
+            },
+            "say": "Sikat kawat",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kapas berserat halus dan lembut. Amplas, batu bata, dan sikat kawat terasa kasar.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
+      },
+      {
+        "prompt": "Mana yang lebih mudah terbakar?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kertas"
+            },
+            "say": "Kertas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Batu"
+            },
+            "say": "Batu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kaca"
+            },
+            "say": "Kaca",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Besi"
+            },
+            "say": "Besi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kertas dibuat dari serat kayu yang kering sehingga mudah terbakar. Batu, kaca, dan besi tidak mudah terbakar.",
+        "source": "NGSS 2-PS1-1 & 2-PS1-2 (sifat bahan; memilih bahan sesuai kegunaan); CP IPAS Fase B (BSKAP 046/H/KR/2025); Buku Siswa IPAS SD/MI Kelas III Edisi Revisi (Kemendikdasmen, 2025) Bab 8 Rahasia Tiga Wujud Zat"
       }
     ]
   }

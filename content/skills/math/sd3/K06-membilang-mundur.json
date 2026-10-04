@@ -1,0 +1,54 @@
+{
+  "id": "math.sd3.k6.membilang-mundur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 6,
+  "title": "Membilang loncat — Level 6 — Membilang mundur",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [200, 9000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 25, 50, 100]
+            }
+          },
+          "constraint": "a - 4 * k >= 0",
+          "prompt": "{a}, {=a-k}, {=a-2*k}, {=a-3*k}, … Bilangan berikutnya?",
+          "answer": "a - 4 * k",
+          "distractors": ["a - 3 * k - 1", "a - 5 * k", "a - 2 * k"],
+          "explain": "Mundur {k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [500, 9000],
+            "k": {
+              "values": [5, 10, 50, 100, 500]
+            }
+          },
+          "prompt": "{a}, {=a-k}, □, {=a-3*k}. Bilangan di kotak?",
+          "answer": "a - 2 * k",
+          "distractors": ["a - k", "a - 2 * k + 10", "a - 3 * k"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

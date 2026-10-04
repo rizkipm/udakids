@@ -1,6 +1,6 @@
 {
   "id": "sains.tk.m10.tantangan-cuaca",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "tk",
   "category": "M",
@@ -12,3594 +12,1663 @@
     "fase-merdeka": "Fondasi (PAUD)",
     "kognitif": "reasoning"
   },
-  "family": "mix",
+  "family": "manual",
   "params": {
-    "parts": [
+    "items": [
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "cerah",
-              "attrs": {
-                "t": "Matahari bersinar terang"
-              }
+        "prompt": "Matahari bersinar terang, langit biru. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
             },
-            {
-              "name": "hujan",
-              "attrs": {
-                "t": "air turun dari awan"
-              }
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
             },
-            {
-              "name": "berawan",
-              "attrs": {
-                "t": "langit tertutup awan"
-              }
+            "say": "hujan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
             },
-            {
-              "name": "berangin",
-              "attrs": {
-                "t": "daun dan bendera bergoyang"
-              }
-            },
-            {
-              "name": "badai petir",
-              "attrs": {
-                "t": "ada kilat dan guntur"
-              }
-            }
-          ],
-          "attr": "t",
-          "ask": "name",
-          "prompt": "Cuaca apa bila {value}?",
-          "explain": "Cuaca {name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-        },
-        "weight": 0.5
+            "say": "badai petir",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Matahari terang dan langit biru artinya cuaca cerah.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "matahari"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "cerah",
-              "attrs": {
-                "t": "Matahari bersinar terang"
-              }
+        "prompt": "Ada kilat dan suara guntur. Cuaca apa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai petir"
             },
-            {
-              "name": "hujan",
-              "attrs": {
-                "t": "air turun dari awan"
-              }
+            "say": "badai petir"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
             },
-            {
-              "name": "berawan",
-              "attrs": {
-                "t": "langit tertutup awan"
-              }
+            "say": "cerah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung tenang"
             },
-            {
-              "name": "berangin",
-              "attrs": {
-                "t": "daun dan bendera bergoyang"
-              }
-            },
-            {
-              "name": "badai petir",
-              "attrs": {
-                "t": "ada kilat dan guntur"
-              }
-            }
-          ],
-          "attr": "t",
-          "ask": "value",
-          "prompt": "Cuaca {name} itu seperti apa?",
-          "explain": "Cuaca {name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-        },
-        "weight": 0.5
+            "say": "mendung tenang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kilat dan guntur adalah tanda badai petir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Hujan",
-              "attrs": {
-                "b": "air jatuh dari awan"
-              }
+        "prompt": "Jalan basah dan ada genangan air. Tadi cuacanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
             },
-            {
-              "name": "Gerimis",
-              "attrs": {
-                "b": "hujan kecil-kecil"
-              }
+            "say": "hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah terik"
             },
-            {
-              "name": "Hujan lebat",
-              "attrs": {
-                "b": "hujan sangat deras"
-              }
+            "say": "cerah terik",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berangin kering"
             },
-            {
-              "name": "Hujan es",
-              "attrs": {
-                "b": "butiran es jatuh"
-              }
-            },
-            {
-              "name": "Salju",
-              "attrs": {
-                "b": "es putih lembut"
-              }
-            }
-          ],
-          "attr": "b",
-          "ask": "value",
-          "prompt": "{name} itu seperti apa?",
-          "explain": "{name}: {value}.",
-          "choices": 3,
-          "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-        },
-        "weight": 0.3333
+            "say": "berangin kering",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Genangan air muncul setelah hujan turun.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Gerimis itu hujan yang ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kecil-kecil"
-                  },
-                  "say": "kecil-kecil"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sangat deras"
-                  },
-                  "say": "sangat deras",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berupa batu"
-                  },
-                  "say": "berupa batu",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Gerimis adalah hujan dengan tetes kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+        "prompt": "Cuaca yang terang dan terasa panas disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
             },
-            {
-              "prompt": "Hujan es itu ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "butiran es jatuh"
-                  },
-                  "say": "butiran es jatuh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air panas jatuh"
-                  },
-                  "say": "air panas jatuh",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir jatuh"
-                  },
-                  "say": "pasir jatuh",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kadang hujan disertai butiran es. BMKG menyebutnya hujan es.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mendung"
             },
-            {
-              "prompt": "Salju turun di tempat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sangat dingin"
-                  },
-                  "say": "sangat dingin"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sangat panas"
-                  },
-                  "say": "sangat panas",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gurun"
-                  },
-                  "say": "gurun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Salju turun di tempat yang sangat dingin.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "mendung",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
             },
-            {
-              "prompt": "Air hujan berasal dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "awan"
-                  },
-                  "say": "awan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tanah"
-                  },
-                  "say": "tanah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pohon"
-                  },
-                  "say": "pohon",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan turun dari awan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Hujan lebat lama bisa membuat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "genangan air"
-                  },
-                  "say": "genangan air"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pasir"
-                  },
-                  "say": "pasir",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan lebat membuat air menggenang.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Mana yang paling ringan turunnya?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Gerimis"
-                  },
-                  "say": "Gerimis"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan lebat"
-                  },
-                  "say": "Hujan lebat",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan es"
-                  },
-                  "say": "Hujan es",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Gerimis turun pelan dengan tetes kecil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Salju berwarna ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "putih"
-                  },
-                  "say": "putih"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hitam"
-                  },
-                  "say": "hitam",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hijau"
-                  },
-                  "say": "hijau",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Salju putih dan lembut.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Setelah hujan, tanah menjadi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "basah"
-                  },
-                  "say": "basah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kering sekali"
-                  },
-                  "say": "kering sekali",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "panas"
-                  },
-                  "say": "panas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air hujan membasahi tanah.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            }
-          ]
-        },
-        "weight": 0.6667
+            "say": "hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cuaca cerah terasa terang dan panas.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+        "prompt": "Suara gemuruh keras di langit saat badai disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "guntur"
             },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 2 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "guntur"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
             },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "gerimis",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
             },
-            {
-              "prompt": "Berapa hari cerah?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang cerah: ada 0 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 4 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 2 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cerah ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari cerah?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang cerah: ada 0 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari cerah?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang cerah: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 2 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Berawan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 0 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 2 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Berawan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 4 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cerah ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari cerah?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang cerah: ada 3 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 4 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari hujan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "4"
-                  },
-                  "say": "4",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang hujan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "hujan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cerah ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "berawan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 2 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "berawan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Berawan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "berawan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "1"
-                  },
-                  "say": "1"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 1 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "cerah"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari berawan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "3"
-                  },
-                  "say": "3",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang berawan: ada 0 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "cerah"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "cerah"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "cerah"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Berapa hari cerah?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "0"
-                  },
-                  "say": "0"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "5"
-                  },
-                  "say": "5",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "2"
-                  },
-                  "say": "2",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hitung hari yang cerah: ada 0 hari.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "hujan"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "berawan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca apa yang paling sering?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berawan"
-                  },
-                  "say": "Berawan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan ada 3 hari, paling banyak.",
-              "stimulus": [
-                {
-                  "kind": "table",
-                  "headers": ["Hari", "Cuaca"],
-                  "rows": [
-                    ["Senin", "berawan"],
-                    ["Selasa", "hujan"],
-                    ["Rabu", "cerah"],
-                    ["Kamis", "hujan"],
-                    ["Jumat", "hujan"]
-                  ]
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            }
-          ]
-        },
-        "weight": 1
+            "say": "pelangi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Suara gemuruh saat badai disebut guntur.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Hujan turun. Kita pakai ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "payung"
-                  },
-                  "say": "payung"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kacamata hitam"
-                  },
-                  "say": "kacamata hitam",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sandal jepit saja"
-                  },
-                  "say": "sandal jepit saja",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Payung melindungi kita dari hujan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+        "prompt": "Kincir mainan berputar sendiri di halaman. Ada ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "angin"
             },
-            {
-              "prompt": "Panas terik. Kita pakai ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "topi"
-                  },
-                  "say": "topi"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "balon"
-                  },
-                  "say": "balon",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "object",
-                    "object": "buku"
-                  },
-                  "say": "buku",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Topi melindungi kepala dari panas matahari.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan es"
             },
-            {
-              "prompt": "Naik motor saat hujan. Pakai ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "jas hujan"
-                  },
-                  "say": "jas hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "baju tidur"
-                  },
-                  "say": "baju tidur",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "topi ulang tahun"
-                  },
-                  "say": "topi ulang tahun",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Jas hujan menjaga badan tetap kering.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+            "say": "hujan es",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pelangi"
             },
-            {
-              "prompt": "Ada petir. Kita sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "masuk ke rumah"
-                  },
-                  "say": "masuk ke rumah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "main di lapangan"
-                  },
-                  "say": "main di lapangan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berdiri di bawah pohon"
-                  },
-                  "say": "berdiri di bawah pohon",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Saat petir, berlindung di dalam bangunan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca cocok main layang-layang?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berangin"
-                  },
-                  "say": "Berangin"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan petir"
-                  },
-                  "say": "Hujan petir",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tanpa angin"
-                  },
-                  "say": "Tanpa angin",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Layang-layang butuh angin untuk terbang.",
-              "stimulus": [
-                {
-                  "kind": "object",
-                  "object": "layang-layang"
-                }
-              ],
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Cuaca cocok menjemur pakaian?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah"
-                  },
-                  "say": "Cerah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Badai"
-                  },
-                  "say": "Badai",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Saat cerah, pakaian cepat kering.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Panas terik. Kita banyak ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "minum air"
-                  },
-                  "say": "minum air"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "makan permen"
-                  },
-                  "say": "makan permen",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berlari lama"
-                  },
-                  "say": "berlari lama",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Minum air agar tubuh tidak kekurangan cairan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Hujan deras. Main di luar sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "ditunda"
-                  },
-                  "say": "ditunda"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tetap lanjut"
-                  },
-                  "say": "tetap lanjut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tunggu hujan reda agar aman dan tidak sakit.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Langit mendung gelap. Mungkin akan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hujan"
-                  },
-                  "say": "hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pelangi saja"
-                  },
-                  "say": "pelangi saja",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Awan gelap biasanya membawa hujan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Pagi cerah. Apa yang cocok?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bermain di taman"
-                  },
-                  "say": "Bermain di taman"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Memakai jas hujan"
-                  },
-                  "say": "Memakai jas hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Membawa ember air hujan"
-                  },
-                  "say": "Membawa ember air hujan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Cuaca cerah cocok untuk bermain di luar.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Setelah hujan, ada matahari. Mungkin muncul ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pelangi"
-                  },
-                  "say": "pelangi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bintang"
-                  },
-                  "say": "bintang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pelangi muncul saat ada hujan dan sinar matahari.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Angin kencang. Jemuran bisa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "terbang"
-                  },
-                  "say": "terbang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mencair"
-                  },
-                  "say": "mencair",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tumbuh"
-                  },
-                  "say": "tumbuh",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Angin kencang bisa menerbangkan benda ringan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Di mana lebih panas?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Di bawah terik matahari"
-                  },
-                  "say": "Di bawah terik matahari"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Di bawah pohon rindang"
-                  },
-                  "say": "Di bawah pohon rindang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sinar matahari langsung terasa lebih panas.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Di mana lebih sejuk?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Di bawah pohon"
-                  },
-                  "say": "Di bawah pohon"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Di lapangan terik"
-                  },
-                  "say": "Di lapangan terik",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pohon menghalangi sinar matahari, jadi lebih sejuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Pasir pantai siang hari terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "panas"
-                  },
-                  "say": "panas"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dingin"
-                  },
-                  "say": "dingin",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sinar matahari memanaskan pasir.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Es krim di bawah matahari akan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "cepat meleleh"
-                  },
-                  "say": "cepat meleleh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tetap keras"
-                  },
-                  "say": "tetap keras",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "makin besar"
-                  },
-                  "say": "makin besar",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Panas matahari membuat es krim meleleh.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Mobil diparkir di bawah matahari. Kursinya jadi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "panas"
-                  },
-                  "say": "panas"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dingin"
-                  },
-                  "say": "dingin",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "basah"
-                  },
-                  "say": "basah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sinar matahari memanaskan mobil.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Batu di tempat teduh terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lebih dingin"
-                  },
-                  "say": "lebih dingin"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lebih panas"
-                  },
-                  "say": "lebih panas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tempat teduh tidak terkena sinar matahari langsung.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Sinar matahari membuat tanah jadi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hangat"
-                  },
-                  "say": "hangat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "beku"
-                  },
-                  "say": "beku",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "basah"
-                  },
-                  "say": "basah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Matahari memanaskan tanah, air, dan udara.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Pakaian basah dijemur di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tempat terkena matahari"
-                  },
-                  "say": "tempat terkena matahari"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lemari tertutup"
-                  },
-                  "say": "lemari tertutup",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kamar gelap"
-                  },
-                  "say": "kamar gelap",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Panas matahari mengeringkan pakaian.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Supaya tidak kepanasan, bermain di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tempat teduh"
-                  },
-                  "say": "tempat teduh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "aspal terik"
-                  },
-                  "say": "aspal terik",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tempat teduh lebih sejuk.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Air di ember kena matahari seharian. Airnya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hangat"
-                  },
-                  "say": "hangat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membeku"
-                  },
-                  "say": "membeku",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sinar matahari menghangatkan air.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Payung besar di pantai membuat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tempat teduh"
-                  },
-                  "say": "tempat teduh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hujan"
-                  },
-                  "say": "hujan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "angin"
-                  },
-                  "say": "angin",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Payung menghalangi sinar matahari.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Lantai di bawah atap terasa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lebih sejuk"
-                  },
-                  "say": "lebih sejuk"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lebih panas"
-                  },
-                  "say": "lebih panas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Atap menghalangi sinar matahari.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Indonesia punya dua musim, yaitu ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "hujan dan kemarau"
-                  },
-                  "say": "hujan dan kemarau"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju dan panas"
-                  },
-                  "say": "salju dan panas",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gugur dan semi"
-                  },
-                  "say": "gugur dan semi",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Indonesia punya musim hujan dan musim kemarau.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim hujan, hujan turun ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sering"
-                  },
-                  "say": "sering"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tidak pernah"
-                  },
-                  "say": "tidak pernah",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Saat musim hujan, hujan sering turun.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim kemarau, hujan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "jarang"
-                  },
-                  "say": "jarang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "setiap hari"
-                  },
-                  "say": "setiap hari",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Saat musim kemarau, hujan jarang turun.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim kemarau, tanah menjadi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kering"
-                  },
-                  "say": "kering"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "becek"
-                  },
-                  "say": "becek",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bersalju"
-                  },
-                  "say": "bersalju",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Kemarau membuat tanah kering.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim hujan, sebaiknya bawa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "payung"
-                  },
-                  "say": "payung"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kipas"
-                  },
-                  "say": "kipas",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kacamata renang"
-                  },
-                  "say": "kacamata renang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Musim hujan sering hujan, jadi bawa payung.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Petani menanam padi saat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "musim hujan"
-                  },
-                  "say": "musim hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kemarau panjang"
-                  },
-                  "say": "kemarau panjang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Padi butuh banyak air.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim kemarau, sungai bisa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "surut"
-                  },
-                  "say": "surut"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "meluap"
-                  },
-                  "say": "meluap",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membeku"
-                  },
-                  "say": "membeku",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Karena jarang hujan, air sungai berkurang.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Jalan becek dan banyak genangan saat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "musim hujan"
-                  },
-                  "say": "musim hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "musim kemarau"
-                  },
-                  "say": "musim kemarau",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Musim hujan membuat jalan becek.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Musim kemarau, tanaman perlu lebih sering ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "disiram"
-                  },
-                  "say": "disiram"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dijemur"
-                  },
-                  "say": "dijemur",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dipetik"
-                  },
-                  "say": "dipetik",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanaman butuh air saat jarang hujan.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            },
-            {
-              "prompt": "Di Indonesia, salju hanya ada di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "puncak gunung tinggi Papua"
-                  },
-                  "say": "puncak gunung tinggi Papua"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pantai Bali"
-                  },
-                  "say": "pantai Bali",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kota Jakarta"
-                  },
-                  "say": "kota Jakarta",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Indonesia hangat. Salju hanya ada di puncak gunung sangat tinggi di Papua.",
-              "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
-            }
-          ]
-        },
-        "weight": 2
+            "say": "pelangi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin yang bertiup memutar kincir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
       },
       {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Hujan deras berhari-hari bisa menyebabkan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "banjir"
-                  },
-                  "say": "banjir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kemarau"
-                  },
-                  "say": "kemarau",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan deras lama membuat air meluap.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+        "prompt": "Hujan turun. Apa yang kita bawa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "object",
+              "object": "payung"
             },
-            {
-              "prompt": "Saat banjir, kita pergi ke ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tempat tinggi"
-                  },
-                  "say": "tempat tinggi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sungai"
-                  },
-                  "say": "sungai",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "selokan"
-                  },
-                  "say": "selokan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Ikuti orang dewasa ke tempat yang lebih tinggi.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "payung"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "es-krim"
             },
-            {
-              "prompt": "Bermain di air banjir itu ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berbahaya"
-                  },
-                  "say": "berbahaya"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "aman sekali"
-                  },
-                  "say": "aman sekali",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air banjir kotor dan arusnya bisa kuat.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "es krim",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "layang-layang"
             },
-            {
-              "prompt": "Selokan tersumbat sampah bisa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membuat banjir"
-                  },
-                  "say": "membuat banjir"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membuat pelangi"
-                  },
-                  "say": "membuat pelangi",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air tidak bisa lewat, lalu meluap.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "layang-layang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Payung melindungi kita dari air hujan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Ada petir saat main bola di lapangan. Kita ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "masuk ke dalam gedung"
             },
-            {
-              "prompt": "Supaya tidak banjir, sampah ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuang ke tempatnya"
-                  },
-                  "say": "dibuang ke tempatnya"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuang ke sungai"
-                  },
-                  "say": "dibuang ke sungai",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Sungai dan selokan bersih membuat air lancar.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "masuk ke dalam gedung"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "terus bermain bola"
             },
-            {
-              "prompt": "Air banjir masuk rumah. Kita ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "ikuti orang dewasa"
-                  },
-                  "say": "ikuti orang dewasa"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berenang sendiri"
-                  },
-                  "say": "berenang sendiri",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "main perahu kertas"
-                  },
-                  "say": "main perahu kertas",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Dengarkan orang dewasa dan pergi ke tempat aman.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "terus bermain bola",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berteduh di bawah pohon tinggi"
             },
-            {
-              "prompt": "Setelah banjir, cuci tangan dengan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "sabun dan air bersih"
-                  },
-                  "say": "sabun dan air bersih"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "air banjir"
-                  },
-                  "say": "air banjir",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Air banjir kotor. Cuci tangan dengan air bersih.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "berteduh di bawah pohon tinggi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Saat ada petir, masuklah ke dalam bangunan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Mau ke sekolah, langit mendung gelap. Masukkan ke tas ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "payung"
             },
-            {
-              "prompt": "Pohon dan tanah resapan membantu ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "menyerap air hujan"
-                  },
-                  "say": "menyerap air hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membuat banjir"
-                  },
-                  "say": "membuat banjir",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "membuat kering"
-                  },
-                  "say": "membuat kering",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tanah dan akar pohon menyerap air hujan.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "payung"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kacamata hitam"
             },
-            {
-              "prompt": "Siapa yang memberi kabar cuaca di Indonesia?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "BMKG"
-                  },
-                  "say": "BMKG"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tukang roti"
-                  },
-                  "say": "Tukang roti",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Toko mainan"
-                  },
-                  "say": "Toko mainan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "BMKG memberi kabar cuaca dan peringatan dini.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "kacamata hitam",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bola pantai"
             },
-            {
-              "prompt": "Tas siaga bencana berisi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "senter dan air minum"
-                  },
-                  "say": "senter dan air minum"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "mainan saja"
-                  },
-                  "say": "mainan saja",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "batu"
-                  },
-                  "say": "batu",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Senter, air, dan makanan berguna saat darurat.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "bola pantai",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Langit mendung gelap, bawa payung untuk jaga-jaga.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Angin kencang bertiup. Topi di kepala bisa ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "terbang tertiup angin"
             },
-            {
-              "prompt": "Puting beliung adalah angin yang ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berputar sangat kencang"
-                  },
-                  "say": "berputar sangat kencang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pelan dan sejuk"
-                  },
-                  "say": "pelan dan sejuk",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berwarna"
-                  },
-                  "say": "berwarna",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Puting beliung angin berputar sangat kencang.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "terbang tertiup angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "jadi berat"
             },
-            {
-              "prompt": "Angin sangat kencang. Kita berlindung di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dalam bangunan kuat"
-                  },
-                  "say": "dalam bangunan kuat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bawah pohon"
-                  },
-                  "say": "bawah pohon",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "lapangan"
-                  },
-                  "say": "lapangan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Bangunan kuat melindungi kita.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "jadi berat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "mencair"
             },
-            {
-              "prompt": "Saat angin kencang, jauhi ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pohon dan papan reklame"
-                  },
-                  "say": "pohon dan papan reklame"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kamar mandi"
-                  },
-                  "say": "kamar mandi",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "meja makan"
-                  },
-                  "say": "meja makan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Pohon dan papan bisa roboh.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "mencair",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin kencang bisa menerbangkan benda ringan seperti topi.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "topi"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Ada kilat. Berenang di kolam terbuka sebaiknya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berhenti dan keluar dulu"
             },
-            {
-              "prompt": "Puting beliung bisa merobohkan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pohon"
-                  },
-                  "say": "pohon"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gunung"
-                  },
-                  "say": "gunung",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "laut"
-                  },
-                  "say": "laut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Angin kencang bisa merobohkan pohon dan atap.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "berhenti dan keluar dulu"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "terus berenang"
             },
-            {
-              "prompt": "Puting beliung sering terjadi saat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pergantian musim"
-                  },
-                  "say": "pergantian musim"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tengah malam bersalju"
-                  },
-                  "say": "tengah malam bersalju",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "BMKG: puting beliung sering terjadi di masa pancaroba.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "terus berenang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Saat ada kilat, keluar dari air dan masuk ke bangunan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Baju apa yang nyaman saat cuaca panas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kaos tipis"
             },
-            {
-              "prompt": "Sebelum puting beliung, langit biasanya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gelap berawan tebal"
-                  },
-                  "say": "gelap berawan tebal"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "biru cerah"
-                  },
-                  "say": "biru cerah",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berbintang"
-                  },
-                  "say": "berbintang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Awan tebal gelap bisa jadi tanda angin kencang.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "kaos tipis"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "jaket tebal"
             },
-            {
-              "prompt": "Angin kencang datang. Jendela sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "ditutup"
-                  },
-                  "say": "ditutup"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dibuka lebar"
-                  },
-                  "say": "dibuka lebar",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tutup jendela agar benda tidak masuk.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "jaket tebal",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "sweter wol"
             },
-            {
-              "prompt": "Setelah angin reda, kita ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tunggu kabar aman"
-                  },
-                  "say": "tunggu kabar aman"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "langsung panjat pohon"
-                  },
-                  "say": "langsung panjat pohon",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "main kabel jatuh"
-                  },
-                  "say": "main kabel jatuh",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tunggu kabar aman dari orang dewasa.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "sweter wol",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kaos tipis membuat badan tidak gerah.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Di mana tempat paling teduh saat siang terik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "di bawah pohon rindang"
             },
-            {
-              "prompt": "Siklon tropis adalah badai besar dari ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "laut"
-                  },
-                  "say": "laut"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gurun"
-                  },
-                  "say": "gurun",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "gunung salju"
-                  },
-                  "say": "gunung salju",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Siklon tropis terbentuk di atas laut yang hangat.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "di bawah pohon rindang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "di tengah lapangan"
             },
-            {
-              "prompt": "Siklon tropis membawa ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "angin kencang, hujan lebat"
-                  },
-                  "say": "angin kencang, hujan lebat"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "udara sejuk"
-                  },
-                  "say": "udara sejuk",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Siklon tropis membawa angin kencang dan hujan lebat.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "di tengah lapangan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "di atas pasir pantai"
             },
-            {
-              "prompt": "Ada peringatan siklon. Nelayan sebaiknya ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tidak melaut"
-                  },
-                  "say": "tidak melaut"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berlayar jauh"
-                  },
-                  "say": "berlayar jauh",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "berenang"
-                  },
-                  "say": "berenang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Laut sangat berbahaya saat siklon.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "di atas pasir pantai",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Pohon rindang menghalangi sinar Matahari.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "pohon"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Pasir pantai siang hari terasa panas karena ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kena sinar Matahari"
             },
-            {
-              "prompt": "Siapa yang memberi peringatan siklon di Indonesia?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "BMKG"
-                  },
-                  "say": "BMKG"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Tukang sayur"
-                  },
-                  "say": "Tukang sayur",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Pemadam kebakaran"
-                  },
-                  "say": "Pemadam kebakaran",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "BMKG memantau siklon tropis dan memberi peringatan.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "kena sinar Matahari"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ada ikan"
             },
-            {
-              "prompt": "Ada peringatan badai. Kita ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tetap di dalam rumah"
-                  },
-                  "say": "tetap di dalam rumah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "main di pantai"
-                  },
-                  "say": "main di pantai",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "naik perahu"
-                  },
-                  "say": "naik perahu",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Tetap di tempat aman sampai badai berlalu.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "ada ikan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ada ombak"
             },
-            {
-              "prompt": "Siklon tropis bisa menyebabkan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "banjir dan pohon tumbang"
-                  },
-                  "say": "banjir dan pohon tumbang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "salju"
-                  },
-                  "say": "salju",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pelangi saja"
-                  },
-                  "say": "pelangi saja",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Hujan lebat dan angin kencang bisa menyebabkan banjir.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "ada ombak",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Sinar Matahari memanaskan pasir.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Mobil diparkir lama di bawah terik. Dalamnya jadi ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "sangat panas"
             },
-            {
-              "prompt": "Ombak saat badai besar sangat ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tinggi"
-                  },
-                  "say": "tinggi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kecil"
-                  },
-                  "say": "kecil",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "tenang"
-                  },
-                  "say": "tenang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Angin kencang membuat ombak tinggi.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+            "say": "sangat panas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "dingin"
             },
-            {
-              "prompt": "Saat siklon, kita siapkan ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "senter dan air minum"
-                  },
-                  "say": "senter dan air minum"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "layang-layang"
-                  },
-                  "say": "layang-layang",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kolam renang"
-                  },
-                  "say": "kolam renang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Listrik bisa padam. Siapkan senter dan air minum.",
-              "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
-            }
-          ]
-        },
-        "weight": 2
+            "say": "dingin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "basah"
+            },
+            "say": "basah",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Sinar Matahari membuat bagian dalam mobil panas.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "mobil"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Ember berisi air dijemur di bawah Matahari. Airnya jadi ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hangat"
+            },
+            "say": "hangat"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "beku"
+            },
+            "say": "beku",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Sinar Matahari menghangatkan air.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "ember"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Bayangan benda mana cukup besar untuk berteduh?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "object",
+              "object": "gedung"
+            },
+            "say": "gedung"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "pensil"
+            },
+            "say": "pensil",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "object",
+              "object": "sendok"
+            },
+            "say": "sendok",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Gedung membuat bayangan besar untuk berteduh.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Lilin mainan di bawah terik menjadi ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "lembek"
+            },
+            "say": "lembek"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "keras seperti batu"
+            },
+            "say": "keras seperti batu",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "beku"
+            },
+            "say": "beku",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Panas Matahari membuat lilin mainan lembek.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Hujan rintik kecil dan halus disebut ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan es"
+            },
+            "say": "hujan es",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "badai"
+            },
+            "say": "badai",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan kecil yang halus disebut gerimis.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Hujan es sering terjadi saat ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pergantian musim"
+            },
+            "say": "pergantian musim"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tengah kemarau tanpa awan"
+            },
+            "say": "tengah kemarau tanpa awan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan es sering terjadi saat pergantian musim (pancaroba).",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Mana yang lebih cepat membuat genangan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan deras"
+            },
+            "say": "hujan deras"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gerimis"
+            },
+            "say": "gerimis",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan deras membawa banyak air sekaligus.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Butiran hujan es terasa ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "keras dan dingin"
+            },
+            "say": "keras dan dingin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "lembut dan hangat"
+            },
+            "say": "lembut dan hangat",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "lengket"
+            },
+            "say": "lengket",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan es adalah es, jadi keras dan dingin.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Setelah hujan, udara biasanya terasa ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "lebih sejuk"
+            },
+            "say": "lebih sejuk"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "lebih panas sekali"
+            },
+            "say": "lebih panas sekali",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan membuat udara lebih sejuk.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Sebelum hujan deras, langit biasanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "gelap dan berawan tebal"
+            },
+            "say": "gelap dan berawan tebal"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "biru bersih"
+            },
+            "say": "biru bersih",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "penuh bintang"
+            },
+            "say": "penuh bintang",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Awan tebal yang gelap tanda akan hujan.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Indonesia punya berapa musim?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "1"
+            },
+            "say": "1",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Indonesia punya dua musim: hujan dan kemarau.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Air sungai jadi dangkal biasanya saat ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim kemarau"
+            },
+            "say": "musim kemarau"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim hujan"
+            },
+            "say": "musim hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Jarang hujan membuat air sungai berkurang.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Rumput menguning dan kering. Ini musim ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kemarau"
+            },
+            "say": "kemarau"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Rumput kering karena kurang air saat kemarau.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Kebakaran hutan dan lahan lebih mudah terjadi saat ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim kemarau"
+            },
+            "say": "musim kemarau"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim hujan"
+            },
+            "say": "musim hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Daun dan rumput kering mudah terbakar saat kemarau.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "api"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Air sumur bisa berkurang saat ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim kemarau"
+            },
+            "say": "musim kemarau"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "musim hujan"
+            },
+            "say": "musim hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kurang hujan membuat air tanah berkurang.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "ember"
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Nyamuk lebih banyak saat musim hujan karena ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "banyak genangan air"
+            },
+            "say": "banyak genangan air"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "udara kering"
+            },
+            "say": "udara kering",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tanah retak"
+            },
+            "say": "tanah retak",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Nyamuk bertelur di genangan air.",
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Berapa hari hujan minggu ini?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan pada Senin, Rabu, dan Jumat: 3 hari.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Hari", "Cuaca"],
+            "rows": [
+              ["Senin", "hujan"],
+              ["Selasa", "cerah"],
+              ["Rabu", "hujan"],
+              ["Kamis", "berawan"],
+              ["Jumat", "hujan"]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Cuaca apa yang paling jarang muncul?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berawan"
+            },
+            "say": "berawan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cerah hanya 1 hari, paling sedikit.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Hari", "Cuaca"],
+            "rows": [
+              ["Senin", "hujan"],
+              ["Selasa", "berawan"],
+              ["Rabu", "hujan"],
+              ["Kamis", "berawan"],
+              ["Jumat", "cerah"],
+              ["Sabtu", "hujan"]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Hari apa paling cocok menjemur kasur?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Selasa"
+            },
+            "say": "Selasa"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Senin"
+            },
+            "say": "Senin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kamis"
+            },
+            "say": "Kamis",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Selasa satu-satunya hari cerah.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Hari", "Cuaca"],
+            "rows": [
+              ["Senin", "hujan"],
+              ["Selasa", "cerah"],
+              ["Rabu", "hujan"],
+              ["Kamis", "hujan"],
+              ["Jumat", "berawan"]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Kapan udara paling panas?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "siang"
+            },
+            "say": "siang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pagi"
+            },
+            "say": "pagi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "malam"
+            },
+            "say": "malam",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Catatan menunjukkan siang paling panas.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Waktu", "Udara"],
+            "rows": [
+              ["pagi", "sejuk"],
+              ["siang", "panas"],
+              ["sore", "hangat"],
+              ["malam", "sejuk"]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Minggu mana yang lebih banyak hujan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "minggu ke-2"
+            },
+            "say": "minggu ke-2"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "minggu ke-1"
+            },
+            "say": "minggu ke-1",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Minggu ke-2 ada 5 hari hujan.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Minggu", "Hari hujan"],
+            "rows": [
+              ["ke-1", 2],
+              ["ke-2", 5]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Bagaimana cuaca pada hari terakhir di catatan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berawan"
+            },
+            "say": "berawan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "cerah"
+            },
+            "say": "cerah",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hujan"
+            },
+            "say": "hujan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hari terakhir adalah Jumat: berawan.",
+        "stimulus": [
+          {
+            "kind": "table",
+            "headers": ["Hari", "Cuaca"],
+            "rows": [
+              ["Senin", "hujan"],
+              ["Selasa", "cerah"],
+              ["Rabu", "cerah"],
+              ["Kamis", "hujan"],
+              ["Jumat", "berawan"]
+            ]
+          }
+        ],
+        "source": "CP PAUD Fase Fondasi (BSKAP 046/H/KR/2025), elemen Dasar-dasar Literasi, Matematika, Sains, Teknologi, Rekayasa, dan Seni; NGSS K-ESS2-1, K-PS3-1, K-ESS3-2; BMKG (bmkg.go.id): musim hujan dan kemarau, hujan es"
+      },
+      {
+        "prompt": "Banjir terjadi saat air ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "meluap dan menggenangi daratan"
+            },
+            "say": "meluap dan menggenangi daratan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "membeku jadi es"
+            },
+            "say": "membeku jadi es",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "hilang ke langit"
+            },
+            "say": "hilang ke langit",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Banjir: air meluap dan menggenangi daratan.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Air banjir mulai masuk rumah. Kita ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pindah ke tempat tinggi bersama orang dewasa"
+            },
+            "say": "pindah ke tempat tinggi bersama orang dewasa"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bermain di air"
+            },
+            "say": "bermain di air",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tetap tidur"
+            },
+            "say": "tetap tidur",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Segera ke tempat tinggi bersama orang dewasa.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Pohon membantu mencegah banjir karena ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "akarnya membantu air meresap"
+            },
+            "say": "akarnya membantu air meresap"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "daunnya berwarna hijau"
+            },
+            "say": "daunnya berwarna hijau",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "batangnya tinggi"
+            },
+            "say": "batangnya tinggi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Akar pohon membantu air hujan meresap ke tanah.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "pohon"
+          }
+        ],
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Tempat yang aman saat banjir adalah ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tempat yang tinggi"
+            },
+            "say": "tempat yang tinggi"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tepi sungai"
+            },
+            "say": "tepi sungai",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ruang bawah tanah"
+            },
+            "say": "ruang bawah tanah",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Air banjir tidak mencapai tempat yang tinggi.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Air banjir biasanya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "keruh dan kotor"
+            },
+            "say": "keruh dan kotor"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "jernih dan bersih"
+            },
+            "say": "jernih dan bersih",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Air banjir bercampur lumpur dan sampah.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Kucing peliharaan saat banjir sebaiknya ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ikut dibawa ke tempat aman"
+            },
+            "say": "ikut dibawa ke tempat aman"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ditinggal di rumah"
+            },
+            "say": "ditinggal di rumah",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hewan peliharaan juga dibawa ke tempat aman.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "kucing"
+          }
+        ],
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Puting beliung adalah angin yang ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "berputar sangat kencang"
+            },
+            "say": "berputar sangat kencang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "bertiup sepoi-sepoi"
+            },
+            "say": "bertiup sepoi-sepoi",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "terasa hangat"
+            },
+            "say": "terasa hangat",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Puting beliung: angin berputar yang sangat kencang.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Tanda puting beliung akan datang adalah ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "awan gelap dan angin dingin tiba-tiba"
+            },
+            "say": "awan gelap dan angin dingin tiba-tiba"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "langit biru cerah"
+            },
+            "say": "langit biru cerah",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Awan gelap dan angin dingin mendadak adalah tanda bahaya.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Benda ringan di halaman saat angin kencang bisa ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "terbang terbawa angin"
+            },
+            "say": "terbang terbawa angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tenggelam"
+            },
+            "say": "tenggelam",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "membesar"
+            },
+            "say": "membesar",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Angin kencang menerbangkan benda ringan.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Kabel listrik putus jatuh ke tanah. Kita ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "menjauh dan memberi tahu orang dewasa"
+            },
+            "say": "menjauh dan memberi tahu orang dewasa"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "memegangnya"
+            },
+            "say": "memegangnya",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Kabel putus berbahaya, jangan disentuh.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Ruang paling aman di rumah saat angin kencang ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "ruang tengah tanpa jendela"
+            },
+            "say": "ruang tengah tanpa jendela"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "dekat jendela kaca"
+            },
+            "say": "dekat jendela kaca",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "teras luar"
+            },
+            "say": "teras luar",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Ruang tengah jauh dari kaca yang bisa pecah.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Pohon tua yang rapuh saat angin kencang bisa ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tumbang"
+            },
+            "say": "tumbang"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tumbuh lebih cepat"
+            },
+            "say": "tumbuh lebih cepat",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Pohon rapuh mudah tumbang tertiup angin.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "pohon"
+          }
+        ],
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Siklon tropis adalah badai ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "besar yang berputar"
+            },
+            "say": "besar yang berputar"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kecil yang sebentar"
+            },
+            "say": "kecil yang sebentar",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "dari pasir"
+            },
+            "say": "dari pasir",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Siklon tropis adalah badai besar yang berputar.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Saat ada siklon, ombak laut menjadi ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "sangat tinggi"
+            },
+            "say": "sangat tinggi"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "tenang sekali"
+            },
+            "say": "tenang sekali",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Siklon membuat gelombang laut tinggi.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Ada kabar siklon. Kita mengikuti kabar dari ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "BMKG dan petugas"
+            },
+            "say": "BMKG dan petugas"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kabar yang belum jelas"
+            },
+            "say": "kabar yang belum jelas",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Ikuti informasi resmi dari BMKG.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Dilihat dari atas, siklon tropis seperti ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "pusaran awan besar"
+            },
+            "say": "pusaran awan besar"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "garis lurus"
+            },
+            "say": "garis lurus",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Siklon terlihat seperti pusaran awan raksasa.",
+        "stimulus": [
+          {
+            "kind": "object",
+            "object": "awan"
+          }
+        ],
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Hujan lebat berhari-hari karena siklon bisa membuat ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "banjir dan longsor"
+            },
+            "say": "banjir dan longsor"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "kemarau"
+            },
+            "say": "kemarau",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Hujan lebat lama bisa menyebabkan banjir dan longsor.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
+      },
+      {
+        "prompt": "Saat siklon, bolehkah bermain di pantai?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "jangan, ombaknya berbahaya"
+            },
+            "say": "jangan, ombaknya berbahaya"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "boleh, ombaknya seru"
+            },
+            "say": "boleh, ombaknya seru",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Ombak tinggi saat siklon sangat berbahaya.",
+        "source": "BMKG (bmkg.go.id): peringatan dini cuaca ekstrem, puting beliung, siklon tropis; BNPB (bnpb.go.id): kesiapsiagaan banjir; NGSS K-ESS3-2"
       }
     ]
   }

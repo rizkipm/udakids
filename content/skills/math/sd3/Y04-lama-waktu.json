@@ -1,0 +1,89 @@
+{
+  "id": "math.sd3.y4.lama-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 4,
+  "title": "Waktu dan kalender — Level 4 — Lama waktu",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 15],
+            "m": {
+              "values": [0, 10, 15, 20, 30, 40, 45]
+            },
+            "d": {
+              "values": [20, 25, 35, 40, 45, 50, 70, 75, 90]
+            }
+          },
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "prompt": "Kegiatan mulai seperti jam pertama dan selesai seperti jam kedua. Berapa menit lamanya?",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            },
+            {
+              "kind": "digital",
+              "hour": "=h2",
+              "minute": "=m2"
+            }
+          ],
+          "answer": "(h2 * 60 + m2) - (h * 60 + m)",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "d + 40",
+              "tag": "jam-seperti-ratusan"
+            },
+            "d + 10",
+            "d - 5"
+          ],
+          "explain": "Hitung dari mulai sampai selesai: {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m2": {
+              "values": [15, 20, 30, 40, 45]
+            }
+          },
+          "prompt": "Les renang mulai pukul {h}.00 dan selesai pukul {=h+1}.{m2}. Berapa menit lamanya?",
+          "answer": "60 + m2",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "100 + m2",
+              "tag": "jam-seperti-ratusan"
+            },
+            "m2",
+            "60 - m2"
+          ],
+          "explain": "1 jam + {m2} menit = {answer} menit."
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 import { Controller, Get, Inject, Sse, type MessageEvent } from '@nestjs/common';
-import { GRADES } from '@little-coder/engine';
-import { and, count, eq, gt } from 'drizzle-orm';
+import { DOMAINS, GRADES, QUIZ_LENGTH } from '@little-coder/engine';
+import { and, count, eq, gt, sql } from 'drizzle-orm';
 import {
   distinctUntilChanged,
   from,
@@ -14,7 +14,15 @@ import { Public } from '../auth/decorators.js';
 import { BillingService } from '../billing/billing.service.js';
 import { DB, type Db } from '../db/db.module.js';
 import { SettingsService } from '../settings/settings.service.js';
-import { children, events, parents, skillCatalogs, skills, staffUsers } from '../db/schema.js';
+import {
+  children,
+  events,
+  parents,
+  skillCatalogs,
+  skillMastery,
+  skills,
+  staffUsers,
+} from '../db/schema.js';
 
 /** Anak dianggap "sedang belajar" bila aktif (sinkron/masuk) dalam 10 menit terakhir. */
 export const ACTIVE_WINDOW_MS = 10 * 60_000;
@@ -24,6 +32,10 @@ export const STATS_TICK_MS = 10_000;
 export type PublicStats = {
   books: number;
   totalLevels: number;
+  /** Total soal latihan = level × 10 soal per ronde (soal diacak ulang setiap main). */
+  totalQuestions: number;
+  /** Total soal yang sudah dijawab semua anak (D-045). */
+  answered: number;
   users: number;
   learners: number;
   activeNow: number;
@@ -35,6 +47,34 @@ export type PublicStats = {
  * Data publik untuk halaman depan (tanpa login, D-030): daftar buku Pustaka dari database — judul,
  * jumlah topik & level aktif, dan beberapa judul topik. Tidak ada data anak/akun di sini.
  */
+/**
+ * Rujukan kurikulum per buku untuk landing, diturunkan dari kunci tag skill (bukan ditulis manual). `ixlRef` hanya
+ * rujukan internal tim konten, jadi tidak pernah ditampilkan.
+ */
+const STANDARD_OF_TAG: Record<string, string> = {
+  merdeka: 'merdeka',
+  'fase-merdeka': 'merdeka',
+  sg: 'singapore',
+  cambridge: 'cambridge',
+  osn: 'osn',
+  'timss-kognitif': 'timss',
+  ngss: 'ngss',
+  ccss: 'ccss',
+  cc: 'ccss',
+  'common-core': 'ccss',
+};
+/** Buku bergaya olimpiade walau skillnya belum bertag `osn`. */
+const OSN_GRADES = new Set(['tkosn', 'sd12', 'sd34', 'sd56', 'smp79']);
+const STANDARD_ORDER = [
+  'merdeka',
+  'singapore',
+  'cambridge',
+  'timss',
+  'osn',
+  'ngss',
+  'ccss',
+] as const;
+
 @Controller('public')
 export class PublicController {
   constructor(
@@ -76,7 +116,7 @@ export class PublicController {
    */
   async stats(now = Date.now()): Promise<PublicStats> {
     if (this.cache && now - this.cache.at < 5_000) return this.cache.value;
-    const [{ books, totalLevels }, [p], [c], [s], [a], [r]] = await Promise.all([
+    const [{ books, totalLevels }, [p], [c], [s], [a], [r], [ans]] = await Promise.all([
       this.books(),
       this.db.select({ n: count() }).from(parents).where(eq(parents.active, true)),
       this.db.select({ n: count() }).from(children).where(eq(children.active, true)),
@@ -91,11 +131,16 @@ export class PublicController {
           ),
         ),
       this.db.select({ n: count() }).from(events).where(eq(events.type, 'quiz_result')),
+      this.db
+        .select({ n: sql<number>`coalesce(sum(${skillMastery.answered}), 0)::int` })
+        .from(skillMastery),
     ]);
     const learners = Number(c?.n ?? 0);
     const value: PublicStats = {
       books: books.length,
       totalLevels,
+      totalQuestions: totalLevels * QUIZ_LENGTH,
+      answered: Number(ans?.n ?? 0),
       users: Number(p?.n ?? 0) + learners + Number(s?.n ?? 0),
       learners,
       activeNow: Number(a?.n ?? 0),
@@ -135,7 +180,25 @@ export class PublicController {
       .where(eq(skills.status, 'active'))
       .groupBy(skills.domain, skills.grade);
     const levels = new Map(levelCounts.map((r) => [`${r.domain}/${r.grade}`, Number(r.n)]));
+    const tagRows = await this.db.execute(sql`
+      select s.domain, s.grade, array_agg(distinct k.key) as keys
+      from skills s, jsonb_object_keys(coalesce(s.template->'tags', '{}'::jsonb)) as k(key)
+      where s.status = 'active'
+      group by s.domain, s.grade`);
+    const standards = new Map<string, string[]>();
+    for (const r of tagRows.rows) {
+      const found = new Set(
+        (r.keys as string[]).map((key) => STANDARD_OF_TAG[key]).filter((x): x is string => !!x),
+      );
+      if (OSN_GRADES.has(String(r.grade))) found.add('osn');
+      standards.set(
+        `${String(r.domain)}/${String(r.grade)}`,
+        STANDARD_ORDER.filter((x) => found.has(x)),
+      );
+    }
     const rank = (g: string) => GRADES.indexOf(g as (typeof GRADES)[number]);
+    // Urutan mata pelajaran = DOMAINS (math, sains, english, ...), bukan abjad.
+    const domainRank = (d: string) => DOMAINS.indexOf(d as (typeof DOMAINS)[number]);
     const books = catalogs
       .map((c) => {
         const cats = c.categories as { code: string; title: string }[];
@@ -146,10 +209,11 @@ export class PublicController {
           topics: cats.length,
           levels: levels.get(`${c.domain}/${c.grade}`) ?? 0,
           sampleTopics: cats.slice(0, 4).map((x) => x.title),
+          standards: standards.get(`${c.domain}/${c.grade}`) ?? [],
         };
       })
       .filter((b) => b.levels > 0)
-      .sort((a, b) => a.domain.localeCompare(b.domain) || rank(a.grade) - rank(b.grade));
+      .sort((a, b) => domainRank(a.domain) - domainRank(b.domain) || rank(a.grade) - rank(b.grade));
     return { books, totalLevels: books.reduce((a, b) => a + b.levels, 0) };
   }
 }

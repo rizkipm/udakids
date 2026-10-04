@@ -1,0 +1,67 @@
+{
+  "id": "math.sd3.b3.bilangan-terbesar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 3,
+  "title": "Membandingkan dan mengurutkan — Level 3 — Bilangan terbesar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999],
+            "c": [1000, 9999],
+            "e": [1000, 9999],
+            "q": [1, 3]
+          },
+          "derived": {
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a != b && b != c && a != c && e != a && e != b && e != c",
+          "prompt": "Mana bilangan terbesar? {x1}, {x2}, {x3}, {e}",
+          "answer": "max(a, b, c, e)",
+          "distractors": ["min(a, b, c, e)", "a", "b", "c", "e"],
+          "explain": "Bandingkan dari angka paling kiri. Terbesar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 99999],
+            "k": [100, 999],
+            "j": [1, 99],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a - k",
+            "c": "a + j - k * 2",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Mana bilangan terbesar? {x1}, {x2}, {x3}",
+          "answer": "max(a, b, c)",
+          "distractors": ["b", "c", "min(a, b, c) - 1"],
+          "explain": "Angka puluh ribuannya sama? Bandingkan ribuan, dst. Terbesar: {answer}."
+        }
+      }
+    ]
+  }
+}

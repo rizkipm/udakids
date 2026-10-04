@@ -1,0 +1,66 @@
+{
+  "id": "math.sd3.c1.ke-puluhan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 1,
+  "title": "Pembulatan — Level 1 — Ke puluhan terdekat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [11, 999]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Bulatkan {n} ke puluhan terdekat.",
+          "answer": "round(n / 10) * 10",
+          "distractors": [
+            {
+              "expr": "floor(n / 10) * 10 + 10 * (n % 10 < 5)",
+              "tag": "arah-salah"
+            },
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Angka satuan {=n%10}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [101, 999]
+          },
+          "derived": {
+            "lo": "floor(n / 10) * 10"
+          },
+          "constraint": "n % 10 != 0 && n % 10 != 5",
+          "prompt": "{n} lebih dekat ke {lo} atau {=lo+10}?",
+          "answer": "round(n / 10) * 10",
+          "distractors": ["lo + 10 * (n % 10 < 5)"],
+          "choices": 2,
+          "explain": "Satuannya {=n%10}, jadi {n} lebih dekat ke {answer}."
+        }
+      }
+    ]
+  }
+}

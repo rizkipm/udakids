@@ -1,0 +1,391 @@
+{
+  "id": "math.sd3.t10.tantangan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "T",
+  "order": 10,
+  "title": "Soal cerita perkalian dan pembagian — Level 10 — Tantangan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-T (word problems)",
+    "sg": "P3 Multiplication and division word problems (bar model)",
+    "cambridge": "Stage 3 Problem solving with multiplication/division (3Nc)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 8],
+            "t": [20, 60]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} siswa naik mobil. Setiap mobil memuat {m} siswa. Berapa mobil yang dibutuhkan agar semua siswa terangkut?",
+          "answer": "floor(t / m) + 1",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "abaikan-sisa"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            "floor(t / m) + 2"
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Sisa siswa butuh 1 mobil lagi: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [6, 10],
+            "t": [30, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} telur dimasukkan ke kotak isi {m}. Berapa kotak yang terisi penuh?",
+          "answer": "floor(t / m)",
+          "explain": "{t} : {m} = {answer} sisa {=t%m}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [2500, 5000, 7500, 12000, 15000]
+            },
+            "g": [2, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Tabungan {nama} Rp{a}. Tabungan kakaknya {g} kali lipat. Berapa rupiah tabungan kakak?",
+          "answer": "a * g",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + g",
+              "tag": "menjumlah"
+            },
+            "a * (g + 1)",
+            "a * (g - 1)"
+          ],
+          "explain": "{g} × {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "g": [2, 5]
+          },
+          "prompt": "Berat kucing {a} kg. Berat anjing {g} kali berat kucing. Berapa kg berat anjing?",
+          "answer": "a * g",
+          "unit": "kg",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [3000, 3500, 4000, 4500, 5000, 6000]
+            },
+            "n": [2, 9]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Harga 1 buku tulis Rp{h}. {nama} membeli {n} buku. Berapa rupiah yang dibayar?",
+          "answer": "h * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + n",
+              "tag": "menjumlah"
+            },
+            "h * (n - 1)",
+            "h * n + 1000"
+          ],
+          "explain": "{n} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 8],
+            "k": {
+              "values": [2000, 2500, 5000, 10000]
+            }
+          },
+          "derived": {
+            "t": "n * k"
+          },
+          "prompt": "Rp{t} dibagi rata untuk {n} anak. Berapa rupiah setiap anak?",
+          "answer": "t / n",
+          "unit": "rupiah",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 6],
+            "k": [4, 10],
+            "e": [1, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} membeli {g} kotak kue isi {k}. Ia memakan {e} kue. Berapa kue tersisa?",
+          "answer": "g * k - e",
+          "distractors": [
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "g * k + e",
+              "tag": "menjumlah"
+            },
+            "(g - 1) * k"
+          ],
+          "explain": "{g} × {k} = {=g*k}, lalu − {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 6],
+            "k": [4, 8]
+          },
+          "derived": {
+            "t": "g * k"
+          },
+          "prompt": "Ada {t} siswa dibagi ke {g} kelompok sama besar. Setiap kelompok mendapat 2 siswa tambahan. Berapa siswa tiap kelompok sekarang?",
+          "answer": "t / g + 2",
+          "explain": "{=t/g} + 2 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 15],
+            "b": [3, 7],
+            "n": [3, 7]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "prompt": "{nama} membaca {a} halaman setiap hari selama {n} hari. {nama2} membaca {b} halaman setiap hari selama {n} hari. Berapa halaman lebih banyak yang dibaca {nama}?",
+          "answer": "(a - b) * n",
+          "distractors": [
+            {
+              "expr": "a * n",
+              "tag": "satu-anak"
+            },
+            {
+              "expr": "a - b",
+              "tag": "satu-hari"
+            },
+            "(a + b) * n"
+          ],
+          "explain": "({a} − {b}) × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9],
+            "k": [2, 9],
+            "e": [2, 9],
+            "f": [2, 9]
+          },
+          "constraint": "g * k != e * f",
+          "prompt": "Toko A menjual {g} bungkus isi {k}. Toko B menjual {e} bungkus isi {f}. Toko mana yang lebih banyak isinya?",
+          "answer": "(g * k > e * f) * 1 + (g * k < e * f) * 2",
+          "labels": {
+            "1": "Toko A",
+            "2": "Toko B"
+          },
+          "explain": "A = {=g*k}, B = {=e*f}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "k": [2, 10]
+          },
+          "derived": {
+            "h": "a + k",
+            "f": "2 * a + 4 * k"
+          },
+          "prompt": "Di peternakan ada ayam dan kambing. Jumlah kepala {h}, jumlah kaki {f}. Berapa ekor kambing?",
+          "answer": "k",
+          "mode": "input",
+          "explain": "Jika semua ayam, kaki = {=h*2}. Kelebihan {=f-h*2} kaki : 2 = {answer} kambing."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 6],
+            "q": [3, 9],
+            "r": [1, 2]
+          },
+          "derived": {
+            "t": "g * q + r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < g",
+          "prompt": "{nama} punya {t} permen. Ia membagi rata ke {g} teman dan sisanya {r} permen untuk dirinya. Berapa permen setiap teman?",
+          "answer": "(t - r) / g",
+          "mode": "input",
+          "explain": "({t} − {r}) : {g} = {answer}."
+        }
+      }
+    ]
+  }
+}

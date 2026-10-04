@@ -1,0 +1,60 @@
+{
+  "id": "math.sd3.k4.loncat-25-50-dan-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "K",
+  "order": 4,
+  "title": "Membilang loncat — Level 4 — Loncat 25, 50, dan 100",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-M",
+    "sg": "P3 Multiplication tables (skip counting)",
+    "cambridge": "Stage 3 Number: count on and back in steps (3Nc.01)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "j": [0, 40],
+            "k": {
+              "values": [25, 50, 100]
+            }
+          },
+          "derived": {
+            "a": "k * j"
+          },
+          "prompt": "{a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan berikutnya?",
+          "answer": "a + 4 * k",
+          "distractors": ["a + 3 * k + 10", "a + 5 * k", "a + 4 * k + 100"],
+          "explain": "Loncat {k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "j": [0, 10],
+            "k": {
+              "values": [25, 50, 100]
+            },
+            "n": [4, 10]
+          },
+          "derived": {
+            "a": "k * j"
+          },
+          "prompt": "Loncat {k} mulai dari {a}: bilangan ke-{n} adalah …",
+          "answer": "a + (n - 1) * k",
+          "distractors": ["a + n * k", "a + (n - 2) * k", "n * k"],
+          "explain": "Bilangan pertama {a}, lalu {=n-1} loncatan: {answer}."
+        }
+      }
+    ]
+  }
+}

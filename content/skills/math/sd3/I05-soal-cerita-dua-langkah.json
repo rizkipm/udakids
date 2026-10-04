@@ -1,0 +1,96 @@
+{
+  "id": "math.sd3.i5.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "I",
+  "order": 5,
+  "title": "Tambah dan kurang campuran — Level 5 — Soal cerita dua langkah",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-K",
+    "sg": "P3 Addition and subtraction word problems (bar model)",
+    "cambridge": "Stage 3 Calculation: add and subtract (3Nc.04)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 400],
+            "b": [50, 200],
+            "c": [20, 150]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "benda": ["kelereng", "stiker", "kartu", "manik-manik", "perangko", "kancing"]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ia membeli {b} lagi, lalu memberikan {c} kepada adiknya. Berapa {benda} sekarang?",
+          "answer": "a + b - c",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "semua-tambah"
+            },
+            {
+              "expr": "a + b - 2 * c",
+              "tag": "kurang-dua-kali"
+            },
+            "a - b + c"
+          ],
+          "explain": "{a} + {b} = {=a+b}, lalu − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [500, 999],
+            "b": [100, 300],
+            "c": [50, 99]
+          },
+          "prompt": "Perpustakaan punya {a} buku. Dipinjam {b} buku, lalu dikembalikan {c} buku. Berapa buku di perpustakaan sekarang?",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - b - c",
+              "tag": "semua-kurang"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua-tambah"
+            },
+            "a - b"
+          ],
+          "explain": "{a} − {b} + {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

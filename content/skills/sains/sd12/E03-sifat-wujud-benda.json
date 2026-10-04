@@ -1,6 +1,6 @@
 {
   "id": "sains.sd12.e3.sifat-wujud-benda",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd12",
   "category": "E",
@@ -12,33 +12,567 @@
     "timss-kognitif": "knowing",
     "fase-merdeka": "A (pengayaan: IPAS mulai Fase B)"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Benda padat",
-        "attrs": {
-          "sifat": "bentuknya tetap walau dipindah wadah"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "bentuknya tetap walaupun dipindah ke wadah lain",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa dipegang dan digenggam",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "tidak bisa dituang",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "ukurannya tetap kalau tidak dipotong",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa ditumpuk dengan rapi",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "tidak mengalir",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "keras dan tidak berubah bentuk kalau dipindah",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa dipotong menjadi bagian kecil",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bentuknya mengikuti wadah, tetapi banyaknya tetap",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa dituang dari botol ke gelas",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "mengalir dari tempat tinggi ke tempat rendah",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "permukaannya selalu datar saat diam di gelas",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa membasahi kain",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "menetes dari keran",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "tumpah dan menyebar di lantai",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa diukur dengan gelas ukur",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "mengisi seluruh ruang di wadahnya",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "biasanya tidak terlihat oleh mata",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "bisa ditekan masuk ke ban",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "menyebar ke seluruh ruangan",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "membuat balon mengembang",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "baunya bisa tercium dari jauh saat menyebar",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "tidak bisa digenggam",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "naik dan menyebar ke udara",
+              "attrs": {
+                "wujud": "gas"
+              }
+            }
+          ],
+          "attr": "wujud",
+          "ask": "value",
+          "prompt": "Benda yang {name} termasuk wujud apa?",
+          "explain": "Benda yang {name} adalah benda {value}.",
+          "choices": 3,
+          "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+        },
+        "weight": 1
       },
       {
-        "name": "Benda cair",
-        "attrs": {
-          "sifat": "bentuknya mengikuti wadah dan dapat mengalir"
-        }
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Air di gelas dituang ke piring. Apa yang berubah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bentuknya"
+                  },
+                  "say": "Bentuknya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Banyaknya"
+                  },
+                  "say": "Banyaknya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Wujudnya"
+                  },
+                  "say": "Wujudnya",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Warnanya"
+                  },
+                  "say": "Warnanya",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Benda cair mengikuti bentuk wadah, tetapi banyaknya tetap.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Batu dipindah dari kotak ke ember. Apa yang terjadi pada bentuk batu?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tetap sama"
+                  },
+                  "say": "Tetap sama"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengikuti ember"
+                  },
+                  "say": "Mengikuti ember",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Menjadi cair"
+                  },
+                  "say": "Menjadi cair",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mengecil"
+                  },
+                  "say": "Mengecil",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Benda padat bentuknya tetap.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Balon ditiup. Udara di dalamnya ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mengisi seluruh balon"
+                  },
+                  "say": "mengisi seluruh balon"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "hanya di bagian bawah"
+                  },
+                  "say": "hanya di bagian bawah",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menjadi padat"
+                  },
+                  "say": "menjadi padat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menetes keluar"
+                  },
+                  "say": "menetes keluar",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gas mengisi seluruh ruang wadahnya.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Mengapa susu bisa diminum dengan sedotan, tetapi batu tidak?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Susu mengalir, batu tidak"
+                  },
+                  "say": "Susu mengalir, batu tidak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Susu lebih berat"
+                  },
+                  "say": "Susu lebih berat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Batu lebih manis"
+                  },
+                  "say": "Batu lebih manis",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Susu berwarna putih"
+                  },
+                  "say": "Susu berwarna putih",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Benda cair bisa mengalir.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Ibu menyemprot pewangi di sudut kamar. Tidak lama, baunya tercium di seluruh kamar. Ini menunjukkan gas ...",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyebar ke seluruh ruangan"
+                  },
+                  "say": "menyebar ke seluruh ruangan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diam di satu tempat"
+                  },
+                  "say": "diam di satu tempat",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berubah menjadi batu"
+                  },
+                  "say": "berubah menjadi batu",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jatuh ke lantai"
+                  },
+                  "say": "jatuh ke lantai",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gas bergerak bebas dan menyebar.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            },
+            {
+              "prompt": "Mana yang bentuknya SELALU sama walau ditaruh di wadah apa pun?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kelereng"
+                  },
+                  "say": "Kelereng"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Air"
+                  },
+                  "say": "Air",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sirup"
+                  },
+                  "say": "Sirup",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Udara"
+                  },
+                  "say": "Udara",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelereng benda padat, bentuknya tetap.",
+              "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+            }
+          ]
+        },
+        "weight": 1
       },
       {
-        "name": "Benda gas",
-        "attrs": {
-          "sifat": "memenuhi seluruh ruangan dan tidak terlihat bentuknya"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "bentuknya tetap walaupun dipindah ke wadah lain",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa dipegang dan digenggam",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "tidak bisa dituang",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "ukurannya tetap kalau tidak dipotong",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa ditumpuk dengan rapi",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "tidak mengalir",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "keras dan tidak berubah bentuk kalau dipindah",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bisa dipotong menjadi bagian kecil",
+              "attrs": {
+                "wujud": "padat"
+              }
+            },
+            {
+              "name": "bentuknya mengikuti wadah, tetapi banyaknya tetap",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa dituang dari botol ke gelas",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "mengalir dari tempat tinggi ke tempat rendah",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "permukaannya selalu datar saat diam di gelas",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa membasahi kain",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "menetes dari keran",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "tumpah dan menyebar di lantai",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "bisa diukur dengan gelas ukur",
+              "attrs": {
+                "wujud": "cair"
+              }
+            },
+            {
+              "name": "mengisi seluruh ruang di wadahnya",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "biasanya tidak terlihat oleh mata",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "bisa ditekan masuk ke ban",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "menyebar ke seluruh ruangan",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "membuat balon mengembang",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "baunya bisa tercium dari jauh saat menyebar",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "tidak bisa digenggam",
+              "attrs": {
+                "wujud": "gas"
+              }
+            },
+            {
+              "name": "naik dan menyebar ke udara",
+              "attrs": {
+                "wujud": "gas"
+              }
+            }
+          ],
+          "attr": "wujud",
+          "ask": "name",
+          "prompt": "Mana ciri benda {value}?",
+          "explain": "Benda {value}: {name}.",
+          "choices": 3,
+          "source": "NGSS 2-PS1-1, 2-PS1-4; Kurikulum Merdeka IPAS Fase A (pengayaan): wujud benda dan perubahannya; OSN SD Puspresnas"
+        },
+        "weight": 1
       }
-    ],
-    "attr": "sifat",
-    "ask": "name",
-    "prompt": "Benda apa yang {value}?",
-    "explain": "{name} {value}.",
-    "choices": 3,
-    "source": "NGSS 2-PS1-1 & 2-PS1-4 (sifat benda dan perubahannya); tema 'Benda di Sekitarku' kelas 1–2"
+    ]
   }
 }

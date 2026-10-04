@@ -1,0 +1,81 @@
+{
+  "id": "math.sd3.x3.mengubah-satuan-massa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "X",
+  "order": 3,
+  "title": "Panjang, massa, dan volume — Level 3 — Mengubah satuan massa",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-X (measurement)",
+    "sg": "P3 Length, mass, and volume (m, cm, kg, g, L, mL)",
+    "cambridge": "Stage 3 Measure: length, mass, capacity (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 50]
+          },
+          "prompt": "{a} kg = … g",
+          "answer": "a * 1000",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            "a + 1000"
+          ],
+          "explain": "1 kg = 1.000 g: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [5, 950]
+          },
+          "prompt": "{a} kg {b} g = … g",
+          "answer": "a * 1000 + b",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 1000 + b * 10"
+          ],
+          "explain": "{=a*1000} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1200, 9800]
+          },
+          "constraint": "a % 1000 != 0",
+          "prompt": "{a} g = … kg … g. Berapa kilogramnya?",
+          "answer": "floor(a / 1000)",
+          "distractors": ["floor(a / 100)", "a % 1000", "floor(a / 1000) + 1"],
+          "explain": "{a} g = {=floor(a/1000)} kg {=a%1000} g."
+        }
+      }
+    ]
+  }
+}

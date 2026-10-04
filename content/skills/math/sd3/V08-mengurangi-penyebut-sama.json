@@ -1,0 +1,94 @@
+{
+  "id": "math.sd3.v8.mengurangi-penyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 8,
+  "title": "Pecahan senilai dan perbandingan — Level 8 — Mengurangi, penyebut sama",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "constraint": "a < d && b < a",
+          "prompt": "{a}/{d} − {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a - b",
+              "den": "1",
+              "tag": "penyebut-dikurangi"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "a - b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Penyebut tetap, pembilang dikurangi: {=a-b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11]
+          },
+          "constraint": "a < d",
+          "prompt": "1 − {a}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - a",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tetap"
+            },
+            {
+              "num": "1 - a + d",
+              "den": "d + 1",
+              "tag": "lain"
+            },
+            {
+              "num": "d - a",
+              "den": "a",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "1 = {d}/{d}. {d}/{d} − {a}/{d} = {=d-a}/{d}."
+        }
+      }
+    ]
+  }
+}

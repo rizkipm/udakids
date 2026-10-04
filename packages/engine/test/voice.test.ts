@@ -9,6 +9,11 @@ import {
   spokenPrompt,
   VOICE_LINE_KEYS,
   voiceItemText,
+  voiceLangOf,
+  voiceProfileOf,
+  ENGLISH_WORD_STYLE,
+  ID_EN_VOICE_STYLE,
+  voiceSettingsFor,
   voiceSettingsSchema,
   DEFAULT_VOICE_SETTINGS,
   type Item,
@@ -93,6 +98,65 @@ describe('suara Momo (D-035)', () => {
       expect(dialog.lines[k], k).toBeDefined();
       expect(dialog.lines[k]!.text).not.toMatch(/\b(salah|gagal)\b/i);
     }
+  });
+
+  it('soal dengar English juga dikenali (D-059)', () => {
+    expect(isAudioOnlyItem({ prompt: 'Tap the letter you hear.', say: 'Tap the letter b.' })).toBe(
+      true,
+    );
+    expect(isAudioOnlyItem({ prompt: 'Listen. Which word starts with b?', say: 'Ball.' })).toBe(
+      true,
+    );
+  });
+
+  it('English Pra-TK: narasi Indonesia, kartu English; buku lain Indonesia (D-062)', () => {
+    // Narasi soal & penjelasan Pra-TK: Bahasa Indonesia dengan kata Inggris yang dilafalkan jelas.
+    expect(voiceProfileOf('english.prek.a1.huruf-a')).toEqual({
+      lang: 'id-ID',
+      style: ID_EN_VOICE_STYLE,
+    });
+    expect(voiceProfileOf('english.prek.a1.huruf-a', 'reteach').lang).toBe('id-ID');
+    // Kartu pilihan: British English, satu kata, suara perempuan yang jelas.
+    expect(voiceProfileOf('english.prek.a1.huruf-a', 'choice')).toEqual({
+      lang: 'en-GB',
+      style: ENGLISH_WORD_STYLE,
+    });
+    expect(ENGLISH_WORD_STYLE).toMatch(/female/);
+    // Buku English jenjang lain (kelak) tetap seluruhnya British English (D-059).
+    expect(voiceLangOf('english.tk.a1.x')).toBe('en-GB');
+    expect(voiceLangOf('math.prek.a1.kenali-angka-1-sampai-2')).toBe('id-ID');
+    expect(voiceProfileOf('sains.tk.a1.ketuk-bentuknya', 'choice')).toEqual({ lang: 'id-ID' });
+    // Nama suara, model, dan kecepatan tetap dari admin; hanya gaya yang mengikuti profil.
+    const mix = voiceSettingsFor(DEFAULT_VOICE_SETTINGS, voiceProfileOf('english.prek.a1.huruf-a'));
+    expect(mix).toMatchObject({ voice: DEFAULT_VOICE_SETTINGS.voice, style: ID_EN_VOICE_STYLE });
+    expect(voiceSettingsFor(DEFAULT_VOICE_SETTINGS, { lang: 'id-ID' })).toBe(
+      DEFAULT_VOICE_SETTINGS,
+    );
+    const en = voiceSettingsFor(DEFAULT_VOICE_SETTINGS, 'en-GB');
+    expect(en).toMatchObject({
+      voice: DEFAULT_VOICE_SETTINGS.voice,
+      rate: DEFAULT_VOICE_SETTINGS.rate,
+    });
+    expect(en.style).toMatch(/British English/);
+    expect(voiceSettingsFor(DEFAULT_VOICE_SETTINGS, 'id-ID')).toBe(DEFAULT_VOICE_SETTINGS);
+  });
+
+  it('teks kartu pilihan untuk suara (D-062)', () => {
+    const card: Item = {
+      ...item('pick-one'),
+      interaction: {
+        type: 'pick-one',
+        choices: [
+          { id: 'c0', visual: { kind: 'word', text: 'cat' }, say: 'cat' },
+          { id: 'c1', visual: { kind: 'word', text: 'b' } },
+        ],
+        answer: 'c0',
+      },
+    };
+    expect(voiceItemText(card, 'choice', 'c0')).toBe('cat');
+    expect(voiceItemText(card, 'choice', 'c1')).toBeUndefined();
+    expect(voiceItemText(card, 'choice', 'x')).toBeUndefined();
+    expect(voiceItemText(card, 'prompt')).toBe(card.prompt);
   });
 
   it('pengaturan bawaan valid', () => {

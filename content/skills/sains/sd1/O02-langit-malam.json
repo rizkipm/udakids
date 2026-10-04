@@ -1,6 +1,6 @@
 {
   "id": "sains.sd1.o2.langit-malam",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd1",
   "category": "O",
@@ -21,243 +21,108 @@
         "params": {
           "table": [
             {
-              "name": "Matahari",
+              "name": "Titik cahaya kecil yang berkelip-kelip",
               "attrs": {
-                "w": ["siang hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Pelangi",
+              "name": "Jumlahnya sangat banyak di langit desa yang gelap",
               "attrs": {
-                "w": ["siang hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Bulan",
+              "name": "Bola gas panas yang sangat jauh",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Awan",
+              "name": "Bisa membentuk gambar yang disebut rasi",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Banyak bintang berkelip",
+              "name": "Bentuknya bisa bulat penuh atau sabit",
               "attrs": {
-                "w": ["malam hari"]
+                "k": "Bulan"
               }
             },
             {
-              "name": "Bintang jatuh (meteor)",
+              "name": "Benda langit malam paling besar dan terang",
               "attrs": {
-                "w": ["malam hari"]
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Tampak ada bercak-bercak gelap di permukaannya",
+              "attrs": {
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Memantulkan sinar Matahari, bentuknya berubah tiap malam",
+              "attrs": {
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Garis cahaya yang melesat cepat lalu hilang",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Batu angkasa yang terbakar saat masuk udara Bumi",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Muncul sangat sebentar, kurang dari satu detik",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Cahayanya tetap, tidak berkelip seperti bintang",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Venus, yang sering disebut bintang kejora",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Benda langit yang mengelilingi Matahari, seperti Jupiter",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Titik cahaya yang bergerak lurus pelan dan tidak berkelip",
+              "attrs": {
+                "k": "satelit buatan"
+              }
+            },
+            {
+              "name": "Benda buatan manusia yang mengelilingi Bumi",
+              "attrs": {
+                "k": "satelit buatan"
               }
             }
           ],
-          "attr": "w",
-          "ask": "name",
-          "prompt": "Mana yang bisa terlihat di langit pada {value}?",
-          "explain": "{name} bisa terlihat pada {value}.",
+          "attr": "k",
+          "ask": "value",
+          "prompt": "Di langit malam: \"{name}\". Benda langit apa ini?",
+          "explain": "{name}: ini {value}.",
           "choices": 3,
-          "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)",
-          "only": ["malam hari"]
-        },
-        "weight": 1
-      },
-      {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Bintang tampak kecil karena ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "letaknya sangat jauh"
-                  },
-                  "say": "letaknya sangat jauh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "ukurannya sebesar kelereng"
-                  },
-                  "say": "ukurannya sebesar kelereng",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bintang sedang tidur"
-                  },
-                  "say": "bintang sedang tidur",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Bintang sangat besar, tetapi letaknya sangat jauh sehingga tampak kecil.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Mengapa bintang tidak terlihat pada siang hari?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cahaya Matahari terlalu terang"
-                  },
-                  "say": "Cahaya Matahari terlalu terang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bintang tidur"
-                  },
-                  "say": "Bintang tidur",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bintang pindah ke laut"
-                  },
-                  "say": "Bintang pindah ke laut",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Bintang tetap ada, tetapi kalah terang oleh cahaya Matahari.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Bintang lebih mudah dilihat di ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "desa yang gelap tanpa banyak lampu"
-                  },
-                  "say": "desa yang gelap tanpa banyak lampu"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "kota yang penuh lampu terang"
-                  },
-                  "say": "kota yang penuh lampu terang",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "dalam kamar yang terang"
-                  },
-                  "say": "dalam kamar yang terang",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Lampu kota yang terang membuat bintang sulit terlihat.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Sekelompok bintang yang tampak membentuk gambar disebut ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "rasi bintang"
-                  },
-                  "say": "rasi bintang"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "pelangi"
-                  },
-                  "say": "pelangi",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "awan"
-                  },
-                  "say": "awan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Rasi bintang adalah kumpulan bintang yang tampak membentuk pola.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Matahari juga bintang. Mengapa Matahari tampak jauh lebih besar dari bintang lain?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Matahari jauh lebih dekat dengan Bumi"
-                  },
-                  "say": "Matahari jauh lebih dekat dengan Bumi"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bintang lain lebih kecil dari kelereng"
-                  },
-                  "say": "Bintang lain lebih kecil dari kelereng",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Matahari ada di dalam awan"
-                  },
-                  "say": "Matahari ada di dalam awan",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Bintang lain jauh sekali, sedangkan Matahari paling dekat.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            },
-            {
-              "prompt": "Bintang tampak bergerak pelan di langit malam karena ...",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bumi berputar"
-                  },
-                  "say": "Bumi berputar"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bintang ditiup angin"
-                  },
-                  "say": "bintang ditiup angin",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "bintang berlari"
-                  },
-                  "say": "bintang berlari",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Seperti Matahari, bintang tampak bergerak karena Bumi berputar.",
-              "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
-            }
-          ]
+          "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
         },
         "weight": 2
       },
@@ -266,47 +131,107 @@
         "params": {
           "table": [
             {
-              "name": "Matahari",
+              "name": "Titik cahaya kecil yang berkelip-kelip",
               "attrs": {
-                "w": ["siang hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Pelangi",
+              "name": "Jumlahnya sangat banyak di langit desa yang gelap",
               "attrs": {
-                "w": ["siang hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Bulan",
+              "name": "Bola gas panas yang sangat jauh",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Awan",
+              "name": "Bisa membentuk gambar yang disebut rasi",
               "attrs": {
-                "w": ["siang hari", "malam hari"]
+                "k": "bintang"
               }
             },
             {
-              "name": "Banyak bintang berkelip",
+              "name": "Bentuknya bisa bulat penuh atau sabit",
               "attrs": {
-                "w": ["malam hari"]
+                "k": "Bulan"
               }
             },
             {
-              "name": "Bintang jatuh (meteor)",
+              "name": "Benda langit malam paling besar dan terang",
               "attrs": {
-                "w": ["malam hari"]
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Tampak ada bercak-bercak gelap di permukaannya",
+              "attrs": {
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Memantulkan sinar Matahari, bentuknya berubah tiap malam",
+              "attrs": {
+                "k": "Bulan"
+              }
+            },
+            {
+              "name": "Garis cahaya yang melesat cepat lalu hilang",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Batu angkasa yang terbakar saat masuk udara Bumi",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Muncul sangat sebentar, kurang dari satu detik",
+              "attrs": {
+                "k": "meteor (bintang jatuh)"
+              }
+            },
+            {
+              "name": "Cahayanya tetap, tidak berkelip seperti bintang",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Venus, yang sering disebut bintang kejora",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Benda langit yang mengelilingi Matahari, seperti Jupiter",
+              "attrs": {
+                "k": "planet"
+              }
+            },
+            {
+              "name": "Titik cahaya yang bergerak lurus pelan dan tidak berkelip",
+              "attrs": {
+                "k": "satelit buatan"
+              }
+            },
+            {
+              "name": "Benda buatan manusia yang mengelilingi Bumi",
+              "attrs": {
+                "k": "satelit buatan"
               }
             }
           ],
-          "attr": "w",
-          "ask": "true-false",
-          "prompt": "Benar atau salah: {name} bisa terlihat di langit pada {value}.",
-          "explain": "{name} bisa terlihat pada {value}.",
-          "choices": 4,
+          "attr": "k",
+          "ask": "name",
+          "prompt": "Mana ciri {value}?",
+          "explain": "{name}: ciri {value}.",
+          "choices": 3,
           "source": "NGSS 1-ESS1-1 (pola Matahari, Bulan, bintang) & 1-ESS1-2 (lama siang di waktu yang berbeda dalam setahun); NASA Space Place (spaceplace.nasa.gov)"
         },
         "weight": 1

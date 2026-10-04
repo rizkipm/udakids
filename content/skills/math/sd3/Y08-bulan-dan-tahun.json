@@ -1,0 +1,81 @@
+{
+  "id": "math.sd3.y8.bulan-dan-tahun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 8,
+  "title": "Waktu dan kalender — Level 8 — Bulan dan tahun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "{a} tahun = … bulan",
+          "answer": "a * 12",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 365",
+              "tag": "hari"
+            },
+            "a + 12"
+          ],
+          "explain": "1 tahun = 12 bulan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 11]
+          },
+          "prompt": "{a} tahun {b} bulan = … bulan",
+          "answer": "a * 12 + b",
+          "distractors": [
+            {
+              "expr": "a * 10 + b",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * 12"
+          ],
+          "explain": "{=a*12} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [13, 95]
+          },
+          "constraint": "t % 12 != 0",
+          "prompt": "Umur adik {t} bulan. Berapa tahun penuh umurnya?",
+          "answer": "floor(t / 12)",
+          "distractors": ["floor(t / 10)", "t % 12", "floor(t / 12) + 1"],
+          "explain": "{t} : 12 = {=floor(t/12)} sisa {=t%12}."
+        }
+      }
+    ]
+  }
+}

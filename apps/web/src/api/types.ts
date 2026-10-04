@@ -249,6 +249,8 @@ export type Leaderboard = {
   title: string;
   updatedAt: string;
   total: number;
+  /** Anak yang sudah punya ronde (papan global juga memuat anak yang belum bermain). */
+  played?: number;
   top: LeaderboardRow[];
   rest: { page: number; pageSize: number; total: number; items: LeaderboardRow[] };
   me: LeaderboardRow | null;

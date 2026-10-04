@@ -1,0 +1,96 @@
+{
+  "id": "math.sd3.w5.uang-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 5,
+  "title": "Uang Rupiah — Level 5 — Uang kembalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [15000, 45000],
+              "step": 500
+            },
+            "b": {
+              "values": [50000, 100000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} membeli tas Rp{h} dan membayar dengan Rp{b}. Berapa kembaliannya?",
+          "answer": "b - h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b + h",
+              "tag": "menjumlah"
+            },
+            "b - h + 1000",
+            "b - h - 500"
+          ],
+          "explain": "{b} − {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [5500, 19500],
+              "step": 500
+            }
+          },
+          "prompt": "Belanja Rp{h}. Dibayar dengan 1 lembar Rp20.000. Berapa kembaliannya?",
+          "answer": "20000 - h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "20000 + h",
+              "tag": "menjumlah"
+            },
+            "20000 - h + 1000",
+            "20000 - h - 500"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

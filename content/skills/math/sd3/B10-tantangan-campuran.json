@@ -1,0 +1,347 @@
+{
+  "id": "math.sd3.b10.tantangan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "B",
+  "order": 10,
+  "title": "Membandingkan dan mengurutkan — Level 10 — Tantangan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-B",
+    "sg": "P3 Numbers to 10 000: compare and order",
+    "cambridge": "Stage 3 Number: compare and order (3Np.03)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 99999],
+            "b": [1000, 99999],
+            "c": [1000, 99999],
+            "e": [1000, 99999],
+            "q": [1, 3]
+          },
+          "derived": {
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a != b && b != c && a != c && e != a && e != b && e != c",
+          "prompt": "Mana bilangan terkecil? {x1}, {x2}, {x3}, {e}",
+          "answer": "min(a, b, c, e)",
+          "distractors": ["max(a, b, c, e)", "a", "b", "c", "e"],
+          "explain": "Terkecil: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 4000],
+            "k": [10, 300],
+            "j": [5, 90],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + k",
+            "c": "a + k - j",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "constraint": "a != c",
+          "prompt": "Jarak lari {nama}, {nama2}, dan Tono: {x1} m, {x2} m, {x3} m. Berapa jarak yang paling pendek?",
+          "answer": "min(a, b, c)",
+          "unit": "m",
+          "explain": "Bandingkan: yang terkecil {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 99999],
+            "b": [1000, 99999],
+            "c": [1000, 99999],
+            "q": [1, 3]
+          },
+          "derived": {
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Urutkan dari yang terkecil: {x1}, {x2}, {x3}. Bilangan di tengah adalah …",
+          "answer": "a + b + c - max(a, b, c) - min(a, b, c)",
+          "distractors": ["max(a, b, c)", "min(a, b, c)"],
+          "explain": "Urutannya {=min(a,b,c)}, {answer}, {=max(a,b,c)}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5000, 9000],
+            "k": [1, 9],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + k * 10",
+            "c": "a + k * 100",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Urutkan dari yang terbesar: {x1}, {x2}, {x3}. Bilangan pertama adalah …",
+          "answer": "max(a, b, c)",
+          "explain": "Yang terbesar di depan: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "gb": [1, 2],
+            "gc": [1, 2],
+            "ge": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + gb",
+            "c": "a + gb + gc",
+            "e": "a + gb + gc + ge",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Kartu angka: {x1}, {x2}, {x3}, {e}. Susun menjadi bilangan 4 angka terbesar (setiap kartu dipakai sekali).",
+          "answer": "e * 1000 + c * 100 + b * 10 + a",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + c * 10 + e",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "e * 1000 + c * 100 + a * 10 + b",
+              "tag": "satu-tertukar"
+            },
+            {
+              "expr": "c * 1000 + e * 100 + b * 10 + a",
+              "tag": "awal-salah"
+            }
+          ],
+          "explain": "Taruh angka terbesar di tempat paling kiri: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "gb": [1, 2],
+            "gc": [1, 3],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + gb",
+            "c": "a + gb + gc",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Kartu angka: {x1}, {x2}, {x3}, 0. Susun menjadi bilangan 4 angka terkecil (angka 0 tidak boleh di depan).",
+          "answer": "a * 1000 + b * 10 + c",
+          "explain": "Angka bukan nol terkecil di depan, lalu 0, lalu sisanya: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9000],
+            "g": [20, 200],
+            "k": [1, 19]
+          },
+          "derived": {
+            "b": "a + g"
+          },
+          "constraint": "k < g",
+          "prompt": "Bilangan mana yang terletak di antara {a} dan {b}?",
+          "answer": "a + k",
+          "distractors": ["a - k", "b + k", "b + g"],
+          "explain": "Bilangan di antara harus lebih dari {a} dan kurang dari {b}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 90000],
+            "k": [1, 9]
+          },
+          "derived": {
+            "b": "a + 100"
+          },
+          "prompt": "Bilangan mana yang lebih dari {a} tetapi kurang dari {b}?",
+          "answer": "a + k * 10",
+          "explain": "Cek setiap pilihan: {answer} berada di antaranya.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1200, 3000],
+            "k": [100, 500],
+            "j": [50, 400]
+          },
+          "prompt": "Tinggi 3 menara: A = {a} cm, B lebih tinggi {k} cm dari A, C lebih pendek {j} cm dari B. Berapa cm tinggi menara tertinggi?",
+          "answer": "a + k",
+          "unit": "cm",
+          "distractors": ["a", "a + k - j", "a + k + j"],
+          "explain": "B = {=a+k} cm, C = {=a+k-j} cm. Tertinggi B: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 50000],
+            "k": [1000, 9000],
+            "j": [1000, 9000]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "nama2": [
+              "Kiki",
+              "Andi",
+              "Mega",
+              "Rudi",
+              "Tari",
+              "Gilang",
+              "Nisa",
+              "Eko",
+              "Laras",
+              "Bima"
+            ]
+          },
+          "prompt": "Tabungan {nama} Rp{a}. Tabungan {nama2} Rp{k} lebih banyak. Tabungan Tono Rp{j} lebih sedikit dari {nama}. Berapa rupiah tabungan paling sedikit?",
+          "answer": "a - j",
+          "unit": "rupiah",
+          "explain": "{nama2} = Rp{=a+k}, Tono = Rp{=a-j}. Paling sedikit Tono: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9000],
+            "g": [5, 60]
+          },
+          "derived": {
+            "b": "a + g"
+          },
+          "prompt": "Berapa banyak bilangan bulat yang lebih dari {a} dan kurang dari {b}?",
+          "answer": "b - a - 1",
+          "mode": "input",
+          "explain": "Dari {=a+1} sampai {=b-1}: {b} − {a} − 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "gb": [1, 2],
+            "gc": [1, 2],
+            "ge": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "b": "a + gb",
+            "c": "a + gb + gc",
+            "e": "a + gb + gc + ge",
+            "x1": "(q == 1) * a + (q == 2) * b + (q == 3) * c",
+            "x2": "(q == 1) * c + (q == 2) * a + (q == 3) * b",
+            "x3": "(q == 1) * b + (q == 2) * c + (q == 3) * a"
+          },
+          "prompt": "Kartu {x1}, {x2}, {x3}, {e} disusun menjadi bilangan 4 angka terbesar dan terkecil. Berapa selisihnya?",
+          "answer": "(e * 1000 + c * 100 + b * 10 + a) - (a * 1000 + b * 100 + c * 10 + e)",
+          "mode": "input",
+          "explain": "Terbesar {=e*1000+c*100+b*10+a}, terkecil {=a*1000+b*100+c*10+e}, selisih {answer}."
+        }
+      }
+    ]
+  }
+}

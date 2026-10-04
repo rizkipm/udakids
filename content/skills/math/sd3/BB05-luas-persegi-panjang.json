@@ -1,0 +1,81 @@
+{
+  "id": "math.sd3.bb5.luas-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 5,
+  "title": "Keliling dan luas — Level 5 — Luas persegi panjang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 15],
+            "h": [2, 10]
+          },
+          "constraint": "w != h",
+          "prompt": "Persegi panjang {w} cm × {h} cm. Berapa cm² luasnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            "w * h + w"
+          ],
+          "explain": "{w} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 8],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Lantai kamar {w} m × {h} m. Berapa m² luasnya?",
+          "answer": "w * h",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            "w * h - h"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

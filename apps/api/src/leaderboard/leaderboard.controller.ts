@@ -82,7 +82,8 @@ const byBook = (a: { domain: string; grade: string }, b: { domain: string; grade
 
 /**
  * Peringkat rata-rata tertimbang (D-042, D-045): global + per buku (domain/jenjang). Rata-rata = rata-rata skor semua
- * ronde `quiz_result` anak di lingkup itu (2 desimal); sama → total waktu tercepat. 25 teratas tampil
+ * ronde `quiz_result` anak di lingkup itu (2 desimal); sama → total waktu tercepat. Papan global memuat semua anak
+ * aktif (yang belum bermain di urutan terbawah); papan per buku hanya anak yang memainkan buku itu. 25 teratas tampil
  * sebagai "papan pengumuman" (detail bisa dibuka), sisanya daftar berhalaman. Anak lain hanya terlihat
  * nama panggilan + warna Momo; id anak hanya dikirim untuk 25 teratas (perlu untuk detail) dan diri sendiri.
  */
@@ -129,6 +130,7 @@ export class LeaderboardController {
     return {
       updatedAt: snap.at.toISOString(),
       participants: board.length,
+      played: playedCount(board),
       top: board.slice(0, PUBLIC_TOP).map((r) => ({
         position: r.position,
         nickname: r.nickname,
@@ -159,6 +161,7 @@ export class LeaderboardController {
       title,
       updatedAt: snap.at.toISOString(),
       total: board.length,
+      played: playedCount(board),
       top: board.slice(0, LEADERBOARD_TOP).map((r) => publicRow(r, viewer, true)),
       rest: {
         page: q.page,
@@ -314,7 +317,7 @@ export class LeaderboardController {
   }
 
   private async build(): Promise<Snapshot> {
-    const [played, passed, catalogs, levels, answered] = await Promise.all([
+    const [played, passed, catalogs, levels, answered, kids] = await Promise.all([
       this.db.execute(sql`
         select c.id, c.nickname, c.momo_color, c.momo_look, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
@@ -342,6 +345,8 @@ export class LeaderboardController {
         join children c on c.id = sm.child_id and c.active
         left join skills s on s.id = sm.skill_id
         group by sm.child_id, s.domain, s.grade`),
+      // Semua anak aktif: yang belum pernah bermain tetap tampil di papan global (paling bawah).
+      this.db.execute(sql`select id, nickname, momo_color, momo_look from children where active`),
     ]);
     const answeredAgg = new Map<string, number>();
     for (const r of answered.rows) {
@@ -435,9 +440,42 @@ export class LeaderboardController {
           .map((r, i) => ({ ...r, position: i + 1 })),
       );
     }
+    // Papan global memuat SEMUA anak aktif: yang belum punya ronde di bawah (urut nama), posisi berlanjut.
+    for (const mode of ['average', 'total'] as const) {
+      const key = `${mode}:${GLOBAL}`;
+      const board = boards.get(key) ?? [];
+      const seen = new Set(board.map((r) => r.id));
+      const idle = kids.rows
+        .filter((kid) => !seen.has(String(kid.id)))
+        .map((kid) => {
+          const id = String(kid.id);
+          const lv = levelAgg.get(`${id}|${GLOBAL}`);
+          return {
+            id,
+            nickname: String(kid.nickname),
+            momoColor: String(kid.momo_color),
+            momoLook: parseMomoLook(kid.momo_look),
+            rounds: 0,
+            questions: answeredAgg.get(`${id}|${GLOBAL}`) ?? 0,
+            scoreSum: 0,
+            timeMs: 0,
+            passedLevels: lv?.passed ?? 0,
+            points: lv?.points ?? 0,
+            bestTimeMs: lv?.bestTimeMs ?? 0,
+            average: 0,
+            rating: 0,
+          };
+        })
+        .sort((a, b) => a.nickname.localeCompare(b.nickname, 'id'))
+        .map((r, i) => ({ ...r, position: board.length + i + 1 }));
+      boards.set(key, [...board, ...idle]);
+    }
     return { at: new Date(), books, boards, levels: levelCount };
   }
 }
+
+/** Anak yang sudah punya minimal satu ronde (papan global juga memuat anak yang belum bermain). */
+const playedCount = (board: Board) => board.filter((r) => r.rounds > 0).length;
 
 function publicRow(r: Board[number], viewer: string | null, withId: boolean) {
   const isMe = viewer !== null && r.id === viewer;

@@ -1,0 +1,108 @@
+{
+  "id": "math.sd3.w9.penalaran-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 9,
+  "title": "Uang Rupiah — Level 9 — Penalaran uang",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 6],
+            "h": {
+              "values": [2000, 2500, 3000]
+            },
+            "k": {
+              "values": [500, 1000, 1500]
+            }
+          },
+          "derived": {
+            "p": "n * h - k"
+          },
+          "prompt": "Paket A: {n} pensil Rp{p}. Paket B: 1 pensil Rp{h}. Berapa rupiah lebih hemat membeli paket A daripada membeli {n} pensil satuan?",
+          "answer": "n * h - p",
+          "mode": "input",
+          "explain": "Satuan: {=n*h}. Hemat {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "values": [20000, 25000, 30000]
+            },
+            "n": [2, 4],
+            "h": {
+              "values": [2000, 2500, 3000]
+            },
+            "m": {
+              "values": [3000, 4000, 5000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "u > n * h + m",
+          "prompt": "{nama} punya Rp{u}. Ia membeli {n} kue seharga Rp{h} per kue. Sisa uangnya untuk membeli minuman Rp{m}. Berapa rupiah uangnya sekarang?",
+          "answer": "u - n * h - m",
+          "mode": "input",
+          "explain": "{u} − {=n*h} − {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": [1, 8]
+          },
+          "derived": {
+            "n": "a + b",
+            "t": "a * 5000 + b * 2000"
+          },
+          "prompt": "Uang Rp{t} terdiri atas lembaran Rp5.000 dan Rp2.000 sebanyak {n} lembar. Berapa lembar Rp5.000?",
+          "answer": "a",
+          "mode": "input",
+          "explain": "5.000 × {a} + 2.000 × {=n-a} = {t}."
+        }
+      }
+    ]
+  }
+}

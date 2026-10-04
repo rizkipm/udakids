@@ -1,0 +1,95 @@
+{
+  "id": "math.sd3.v6.pecahan-terbesar-dan-terkecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "V",
+  "order": 6,
+  "title": "Pecahan senilai dan perbandingan — Level 6 — Pecahan terbesar dan terkecil",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-V (fractions)",
+    "sg": "P3 Fractions: equivalent fractions, compare, add/subtract like fractions",
+    "cambridge": "Stage 3 Fractions: equivalence and comparison (3Nf.04–06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 11],
+            "b": [1, 11],
+            "c": [1, 11]
+          },
+          "constraint": "a < d && b < d && c < d && a != b && b != c && a != c",
+          "prompt": "Mana yang terbesar: {a}/{d}, {b}/{d}, {c}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "max(a, b, c)",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "min(a, b, c)",
+              "den": "d",
+              "tag": "terkecil"
+            },
+            {
+              "num": "a + b + c - max(a, b, c) - min(a, b, c)",
+              "den": "d",
+              "tag": "tengah"
+            },
+            {
+              "num": "max(a, b, c)",
+              "den": "d + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut sama, pembilang terbesar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Mana yang terkecil: 1/{a}, 1/{b}, 1/{c}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "1",
+            "den": "max(a, b, c)"
+          },
+          "distractors": [
+            {
+              "num": "1",
+              "den": "min(a, b, c)",
+              "tag": "terbalik"
+            },
+            {
+              "num": "1",
+              "den": "a + b + c - max(a, b, c) - min(a, b, c)",
+              "tag": "tengah"
+            },
+            {
+              "num": "max(a, b, c)",
+              "den": "1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut terbesar → potongan terkecil: {answer}."
+        }
+      }
+    ]
+  }
+}

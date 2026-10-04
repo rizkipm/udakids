@@ -593,13 +593,14 @@ describe('papan peringkat rata-rata (D-042)', () => {
     mode,
     title,
     updatedAt: '2026-10-02T08:00:00.000Z',
-    total: 60,
+    total: 80,
+    played: 78,
     top: Array.from({ length: 25 }, (_, i) => row(i + 1, `Anak${i + 1}`)),
     rest: {
       page: 1,
       pageSize: 50,
-      total: 35,
-      items: Array.from({ length: 30 }, (_, i) => {
+      total: 55,
+      items: Array.from({ length: 50 }, (_, i) => {
         const { childId: _id, ...r } = row(i + 26, `Lain${i + 26}`);
         return r;
       }),
@@ -607,7 +608,7 @@ describe('papan peringkat rata-rata (D-042)', () => {
     me: row(57, 'Alya', { isMe: true, childId: CHILD, average: 87.5, rating: 87.5 }),
   });
 
-  it('podium, 25 besar, posisimu, peserta lainnya + muat lagi, ganti papan, detail', async () => {
+  it('podium, 25 besar, posisimu, peserta lainnya berhalaman, ganti papan, detail', async () => {
     setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
     mockFetch({
       'GET /auth/me': () => [200, { momoColor: 'biru' }],
@@ -638,8 +639,11 @@ describe('papan peringkat rata-rata (D-042)', () => {
           rest: {
             page: 2,
             pageSize: 50,
-            total: 35,
-            items: Array.from({ length: 5 }, (_, i) => row(i + 56, `Akhir${i + 56}`)),
+            total: 55,
+            // Dua terakhir belum bermain: tetap tampil di papan global, tanpa nilai.
+            items: Array.from({ length: 5 }, (_, i) =>
+              row(i + 76, `Akhir${i + 76}`, i >= 3 ? { rounds: 0, questions: 0 } : {}),
+            ),
           },
         },
       ],
@@ -707,7 +711,7 @@ describe('papan peringkat rata-rata (D-042)', () => {
     const { container } = renderPlay('/play/peringkat');
     expect(
       await screen.findByText(
-        t('rank.mySay', { board: t('rank.scope.global'), position: 57, of: 60, average: '87,50' }),
+        t('rank.mySay', { board: t('rank.scope.global'), position: 57, of: 80, average: '87,50' }),
       ),
     ).toBeInTheDocument();
     expect(container.querySelectorAll('.podium-spot')).toHaveLength(3);
@@ -732,21 +736,52 @@ describe('papan peringkat rata-rata (D-042)', () => {
     expect(mine?.textContent).toContain('Alya');
     expect(mine?.textContent).toContain('87,50');
     expect(mine?.textContent).toContain('1:01:45');
-    // Peserta lainnya (#26+) tanpa tombol detail; muat lebih banyak.
-    expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(30);
-    expect(container.querySelector('.rank-others .rank-detail-btn')).toBeNull();
-    await act(async () => fireEvent.click(screen.getByRole('button', { name: t('rank.more') })));
-    await waitFor(() =>
-      expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(35),
+    // Semua anak terhitung; yang belum bermain disebut terpisah.
+    expect(container.querySelector('.rank-played')?.textContent).toBe(
+      t('rank.played', { played: '78', total: '80' }),
     );
-    expect(screen.queryByRole('button', { name: t('rank.more') })).toBeNull();
+    // Peserta lainnya (#26+) tanpa tombol detail, berhalaman 50 per halaman.
+    expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(50);
+    expect(container.querySelector('.rank-others .rank-detail-btn')).toBeNull();
+    expect(container.querySelector('.rank-others-sub')?.textContent).toBe(
+      t('rank.othersSub', { from: '26', to: '75', total: '80' }),
+    );
+    const pager = screen.getByRole('navigation', { name: t('rank.page.label') });
+    expect(screen.getByRole('button', { name: t('rank.page.go', { page: 1 }) })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    expect(screen.getByRole('button', { name: t('rank.page.prev') })).toBeDisabled();
+    await act(async () =>
+      fireEvent.click(screen.getByRole('button', { name: t('rank.page.next') })),
+    );
+    await waitFor(() =>
+      expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(5),
+    );
+    expect(container.querySelector('.rank-others-sub')?.textContent).toBe(
+      t('rank.othersSub', { from: '76', to: '80', total: '80' }),
+    );
+    expect(pager.textContent).toContain(t('rank.page.status', { page: 2, pages: 2 }));
+    expect(screen.getByRole('button', { name: t('rank.page.next') })).toBeDisabled();
+    const idleRows = container.querySelectorAll('.rank-others .rank-row.is-idle');
+    expect(idleRows).toHaveLength(2);
+    expect(idleRows[0]?.textContent).toContain(t('rank.idle'));
+    expect(idleRows[0]?.querySelector('.rank-avg')).toBeNull();
+    // Kembali ke halaman 1 tanpa memuat ulang dari server.
+    await act(async () =>
+      fireEvent.click(screen.getByRole('button', { name: t('rank.page.go', { page: 1 }) })),
+    );
+    expect(container.querySelectorAll('.rank-others .rank-row')).toHaveLength(50);
 
     // Detail 25 besar: dialog dengan nilai per buku & topik; Esc menutup.
     fireEvent.click(screen.getByRole('button', { name: t('rank.detailOf', { name: 'Anak4' }) }));
     const dialog = await screen.findByRole('dialog');
     expect(await screen.findByText('Membilang benda')).toBeInTheDocument();
     expect(dialog.textContent).toContain('3/520');
-    expect(dialog.textContent).toContain(t('rank.detail.position', { position: 2, of: 40 }));
+    // Ringkasan berupa kartu statistik, bukan kalimat panjang berhuruf besar.
+    expect(dialog.querySelectorAll('.rank-stat')).toHaveLength(8);
+    expect(dialog.querySelector('.kid-say')).toBeNull();
+    expect(dialog.textContent).toContain(`2 ${t('rank.detail.of', { n: '40' })}`);
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(screen.queryByRole('dialog')).toBeNull();
 
@@ -754,7 +789,7 @@ describe('papan peringkat rata-rata (D-042)', () => {
     fireEvent.click(screen.getByRole('button', { name: /Math TK/ }));
     expect(
       await screen.findByText(
-        t('rank.mySay', { board: 'Math TK', position: 57, of: 60, average: '87,50' }),
+        t('rank.mySay', { board: 'Math TK', position: 57, of: 80, average: '87,50' }),
       ),
     ).toBeInTheDocument();
     expect(localStorage.getItem('lc.rank.scope')).toBe('math/tk');

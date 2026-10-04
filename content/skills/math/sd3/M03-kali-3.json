@@ -1,0 +1,130 @@
+{
+  "id": "math.sd3.m3.kali-3",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "M",
+  "order": 3,
+  "title": "Perkalian 0 sampai 5 dan 10 — Level 3 — Kali 3",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 2, 3, 4, 5, 10",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 3],
+            "n": [0, 10]
+          },
+          "prompt": "{m} × {n} = …",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{n} kali loncat {m}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 3],
+            "n": [0, 10]
+          },
+          "prompt": "{n} × {m} = …",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{n} × {m} = {m} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 3],
+            "n": [1, 10]
+          },
+          "prompt": "{m} × … = {=m*n}",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m * n - m",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 3],
+            "n": [2, 10]
+          },
+          "prompt": "Satu becak punya 3 roda. Berapa roda pada {n} becak?",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m * (n + 1)",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * (n - 1)",
+              "tag": "kurang-satu-kelompok"
+            },
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + 1"
+          ],
+          "explain": "{n} × {m} = {answer}."
+        }
+      }
+    ]
+  }
+}

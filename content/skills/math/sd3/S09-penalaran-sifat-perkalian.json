@@ -1,0 +1,68 @@
+{
+  "id": "math.sd3.s9.penalaran-sifat-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "S",
+  "order": 9,
+  "title": "Sifat perkalian dan keluarga fakta — Level 9 — Penalaran sifat perkalian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-L (lessons: properties)",
+    "sg": "P3 Multiplication: properties and fact families",
+    "cambridge": "Stage 3 Calculation: commutative, associative, distributive (3Nc.06)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 9],
+            "b": [3, 9]
+          },
+          "derived": {
+            "c": "10 - b"
+          },
+          "prompt": "{a} × {b} + {a} × {c} = …",
+          "answer": "a * (b + c)",
+          "mode": "input",
+          "explain": "{a} × ({b} + {c}) = {a} × {=b+c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 25],
+            "b": [11, 20],
+            "c": [1, 9]
+          },
+          "constraint": "b - c == 10",
+          "prompt": "{a} × {b} − {a} × {c} = …",
+          "answer": "a * (b - c)",
+          "mode": "input",
+          "explain": "{a} × ({b} − {c}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{a} × 4 × 25 × {b} = …",
+          "answer": "a * b * 100",
+          "mode": "input",
+          "explain": "4 × 25 = 100; {a} × {b} × 100 = {answer}."
+        }
+      }
+    ]
+  }
+}

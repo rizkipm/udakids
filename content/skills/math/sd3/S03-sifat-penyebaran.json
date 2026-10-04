@@ -1,0 +1,64 @@
+{
+  "id": "math.sd3.s3.sifat-penyebaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "S",
+  "order": 3,
+  "title": "Sifat perkalian dan keluarga fakta — Level 3 — Sifat penyebaran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-L (lessons: properties)",
+    "sg": "P3 Multiplication: properties and fact families",
+    "cambridge": "Stage 3 Calculation: commutative, associative, distributive (3Nc.06)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [11, 19]
+          },
+          "prompt": "{a} × {b} = {a} × 10 + {a} × …",
+          "answer": "b - 10",
+          "distractors": ["b", "10", "a"],
+          "explain": "{b} = 10 + {=b-10}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [11, 19]
+          },
+          "prompt": "{a} × {b} = …",
+          "answer": "a * b",
+          "distractors": ["a * 10 + b - 10", "a * b + a", "a * 10"],
+          "explain": "{a} × 10 + {a} × {=b-10} = {=a*10} + {=a*(b-10)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "c": [2, 9],
+            "e": [2, 9]
+          },
+          "constraint": "c != e",
+          "prompt": "{a} × {c} + {a} × {e} = {a} × …",
+          "answer": "c + e",
+          "distractors": ["c * e", "a + c + e", "c"],
+          "explain": "Faktor {a} sama, jumlahkan yang lain: {answer}."
+        }
+      }
+    ]
+  }
+}

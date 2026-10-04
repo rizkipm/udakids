@@ -1,0 +1,68 @@
+{
+  "id": "math.sd3.n8.bilangan-kuadrat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "N",
+  "order": 8,
+  "title": "Perkalian 6 sampai 9 — Level 8 — Bilangan kuadrat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-O/P",
+    "sg": "P3 Multiplication tables of 6, 7, 8, 9",
+    "cambridge": "Stage 3 Calculation: multiplication facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 10]
+          },
+          "prompt": "{n} × {n} = …",
+          "answer": "n * n",
+          "distractors": ["n + n", "n * (n + 1)", "n * (n - 1)"],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 10]
+          },
+          "prompt": "Bilangan berapa dikali dirinya sendiri hasilnya {=n*n}?",
+          "answer": "n",
+          "distractors": ["n * 2", "n + 1", "n - 1"],
+          "explain": "{n} × {n} = {=n*n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10]
+          },
+          "prompt": "Petak persegi berukuran {n} × {n}. Berapa petak semuanya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=n",
+              "h": "=n",
+              "unit": "",
+              "grid": true
+            }
+          ],
+          "answer": "n * n",
+          "distractors": ["4 * n", "n + n", "n * n + n"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

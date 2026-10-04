@@ -1,0 +1,103 @@
+{
+  "id": "math.sd3.q6.campuran-fakta-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Q",
+  "order": 6,
+  "title": "Fakta pembagian — Level 6 — Campuran fakta pembagian",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-S/T",
+    "sg": "P3 Division within multiplication tables",
+    "cambridge": "Stage 3 Calculation: division facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "Hasil bagi {=m*n} oleh {m} adalah …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{m} × {n} = {=m*n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "n": [2, 10]
+          },
+          "prompt": "{=m*n} dibagi rata ke {m} kotak. Isi setiap kotak?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "m * n - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "n": [2, 10],
+            "k": [-2, 2]
+          },
+          "derived": {
+            "e": "n + k"
+          },
+          "constraint": "e > 0",
+          "prompt": "{=m*n} : {m} … {e}",
+          "answer": "(n > e) * 1 + (n < e) * 2 + (n == e) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "explain": "{=m*n} : {m} = {n}: {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "math.sd3.y6.waktu-mulai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 6,
+  "title": "Waktu dan kalender — Level 6 — Waktu mulai",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [8, 20],
+            "d": [65, 115]
+          },
+          "constraint": "d % 5 == 0",
+          "prompt": "Kereta tiba pukul {h}.00 setelah perjalanan {d} menit. Berangkat pukul {=h-1} lewat berapa menit?",
+          "answer": "60 - (d - 60)",
+          "distractors": ["d - 60", "d", "100 - d"],
+          "explain": "Mundur {d} menit dari {h}.00: pukul {=h-1}.{=120-d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [9, 21],
+            "d": {
+              "values": [5, 10, 15, 20, 25]
+            }
+          },
+          "prompt": "Acara selesai pukul {h}.30 dan berlangsung 1 jam {d} menit. Mulai pukul {=h-1} lewat berapa menit?",
+          "answer": "30 - d",
+          "distractors": ["30 + d", "d", "60 - d"],
+          "explain": "{h}.30 mundur 1 jam = {=h-1}.30, mundur {d} menit lagi = {=h-1}.{=30-d}."
+        }
+      }
+    ]
+  }
+}

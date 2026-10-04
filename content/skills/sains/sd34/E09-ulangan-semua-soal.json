@@ -1,6 +1,6 @@
 {
   "id": "sains.sd34.e9.ulangan-semua-soal",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd34",
   "category": "E",
@@ -12,632 +12,679 @@
     "timss-kognitif": "reasoning",
     "fase-merdeka": "B"
   },
-  "family": "manual",
+  "family": "mix",
   "params": {
-    "items": [
+    "parts": [
       {
-        "prompt": "Sumber energi panas dan cahaya terbesar bagi Bumi adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Matahari"
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "cahaya matahari",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTS (tenaga surya)"
+              }
             },
-            "say": "Matahari"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bulan"
+            {
+              "name": "angin",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTB (tenaga bayu/angin)"
+              }
             },
-            "say": "Bulan",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lampu"
+            {
+              "name": "aliran sungai",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTA (tenaga air)"
+              }
             },
-            "say": "Lampu",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Angin"
+            {
+              "name": "air terjun",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTA (tenaga air)"
+              }
             },
-            "say": "Angin",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Matahari memancarkan energi cahaya dan panas yang dipakai makhluk hidup di Bumi.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            {
+              "name": "air waduk",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTA (tenaga air)"
+              }
+            },
+            {
+              "name": "panas bumi",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTP (tenaga panas bumi)"
+              }
+            },
+            {
+              "name": "gelombang laut",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTGL (gelombang laut)"
+              }
+            },
+            {
+              "name": "pasang surut air laut",
+              "attrs": {
+                "jenis": "terbarukan"
+              }
+            },
+            {
+              "name": "kayu bakar dari hutan tanaman",
+              "attrs": {
+                "jenis": "terbarukan"
+              }
+            },
+            {
+              "name": "biogas kotoran sapi",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTBg (biogas)"
+              }
+            },
+            {
+              "name": "biodiesel dari minyak sawit",
+              "attrs": {
+                "jenis": "terbarukan"
+              }
+            },
+            {
+              "name": "bioetanol dari tebu",
+              "attrs": {
+                "jenis": "terbarukan"
+              }
+            },
+            {
+              "name": "sekam padi",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTBm (biomassa)"
+              }
+            },
+            {
+              "name": "serbuk kayu",
+              "attrs": {
+                "jenis": "terbarukan",
+                "pltx": "PLTBm (biomassa)"
+              }
+            },
+            {
+              "name": "minyak bumi",
+              "attrs": {
+                "jenis": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "batu bara",
+              "attrs": {
+                "jenis": "tidak terbarukan",
+                "pltx": "PLTU (tenaga uap)"
+              }
+            },
+            {
+              "name": "gas alam",
+              "attrs": {
+                "jenis": "tidak terbarukan",
+                "pltx": "PLTG (tenaga gas)"
+              }
+            },
+            {
+              "name": "bensin",
+              "attrs": {
+                "jenis": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "solar",
+              "attrs": {
+                "jenis": "tidak terbarukan",
+                "pltx": "PLTD (tenaga diesel)"
+              }
+            },
+            {
+              "name": "minyak tanah",
+              "attrs": {
+                "jenis": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "elpiji (LPG)",
+              "attrs": {
+                "jenis": "tidak terbarukan"
+              }
+            },
+            {
+              "name": "uranium",
+              "attrs": {
+                "jenis": "tidak terbarukan",
+                "pltx": "PLTN (tenaga nuklir)"
+              }
+            },
+            {
+              "name": "gambut",
+              "attrs": {
+                "jenis": "tidak terbarukan"
+              }
+            }
+          ],
+          "attr": "jenis",
+          "ask": "true-false",
+          "prompt": "Benar atau salah? {name} adalah sumber energi {value}.",
+          "explain": "{name} adalah sumber energi {value}.",
+          "choices": 4,
+          "source": "Buku IPAS SD Kelas IV Kurikulum Merdeka (Kemendikbudristek) — energi dan perubahannya; kisi-kisi OSN IPA SD (Puspresnas)"
+        }
       },
       {
-        "prompt": "Lampu senter mengubah energi listrik menjadi energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya"
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Lampu senter mengubah energi listrik menjadi energi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Cahaya"
+                  },
+                  "say": "Cahaya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gerak"
+                  },
+                  "say": "Gerak",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunyi"
+                  },
+                  "say": "Bunyi",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kimia"
+                  },
+                  "say": "Kimia",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baterai memberi energi listrik; lampu mengubahnya menjadi cahaya (dan sedikit panas).",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
-            "say": "Cahaya"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gerak"
+            {
+              "prompt": "Kipas angin mengubah energi listrik menjadi energi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gerak"
+                  },
+                  "say": "Gerak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Cahaya"
+                  },
+                  "say": "Cahaya",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Panas saja"
+                  },
+                  "say": "Panas saja",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kimia"
+                  },
+                  "say": "Kimia",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Motor listrik di kipas mengubah energi listrik menjadi gerak baling-baling.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
-            "say": "Gerak",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bunyi"
+            {
+              "prompt": "Menggosok kedua telapak tangan membuat tangan terasa hangat. Energi gerak berubah menjadi energi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Panas"
+                  },
+                  "say": "Panas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Cahaya"
+                  },
+                  "say": "Cahaya",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Listrik"
+                  },
+                  "say": "Listrik",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bunyi saja"
+                  },
+                  "say": "Bunyi saja",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Gesekan mengubah energi gerak menjadi energi panas.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
-            "say": "Bunyi",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kimia"
+            {
+              "prompt": "Alat yang mengubah energi listrik menjadi energi bunyi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pengeras suara (speaker)"
+                  },
+                  "say": "Pengeras suara (speaker)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Setrika"
+                  },
+                  "say": "Setrika",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kipas angin"
+                  },
+                  "say": "Kipas angin",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Lampu"
+                  },
+                  "say": "Lampu",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Speaker mengubah listrik menjadi getaran yang kita dengar sebagai bunyi.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
             },
-            "say": "Kimia",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Baterai memberi energi listrik; lampu mengubahnya menjadi cahaya (dan sedikit panas).",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            {
+              "prompt": "Pada setrika listrik, perubahan energi yang terjadi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Listrik → panas"
+                  },
+                  "say": "Listrik → panas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Panas → listrik"
+                  },
+                  "say": "Panas → listrik",
+                  "tag": "terbalik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Listrik → bunyi"
+                  },
+                  "say": "Listrik → bunyi",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gerak → listrik"
+                  },
+                  "say": "Gerak → listrik",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setrika memanaskan pelat logamnya dengan energi listrik.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            },
+            {
+              "prompt": "Panel surya di atap rumah mengubah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Energi cahaya menjadi energi listrik"
+                  },
+                  "say": "Energi cahaya menjadi energi listrik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Energi listrik menjadi cahaya"
+                  },
+                  "say": "Energi listrik menjadi cahaya",
+                  "tag": "terbalik"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Energi angin menjadi panas"
+                  },
+                  "say": "Energi angin menjadi panas",
+                  "tag": "perubahan-tertukar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Energi air menjadi cahaya"
+                  },
+                  "say": "Energi air menjadi cahaya",
+                  "tag": "perubahan-tertukar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panel surya menangkap cahaya matahari dan menghasilkan listrik.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            },
+            {
+              "prompt": "Contoh sumber energi terbarukan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Angin"
+                  },
+                  "say": "Angin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Minyak bumi"
+                  },
+                  "say": "Minyak bumi",
+                  "tag": "tak-terbarukan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Batu bara"
+                  },
+                  "say": "Batu bara",
+                  "tag": "tak-terbarukan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Gas alam"
+                  },
+                  "say": "Gas alam",
+                  "tag": "tak-terbarukan"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Angin, matahari, dan air terus tersedia. Minyak bumi, batu bara, dan gas alam butuh jutaan tahun untuk terbentuk.",
+              "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            },
+            {
+              "prompt": "Pada lampu senter, urutan perubahan energi yang benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kimia (baterai) → listrik → cahaya"
+                  },
+                  "say": "kimia (baterai) → listrik → cahaya"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "cahaya → listrik → kimia"
+                  },
+                  "say": "cahaya → listrik → kimia",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "listrik → kimia → gerak"
+                  },
+                  "say": "listrik → kimia → gerak",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gerak → bunyi → cahaya"
+                  },
+                  "say": "gerak → bunyi → cahaya",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Baterai menyimpan energi kimia, diubah menjadi listrik, lalu menjadi cahaya di lampu.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Sebuah alat menghasilkan cahaya dan juga terasa panas. Hal ini menunjukkan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi listrik berubah menjadi lebih dari satu bentuk energi"
+                  },
+                  "say": "energi listrik berubah menjadi lebih dari satu bentuk energi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi bertambah dua kali"
+                  },
+                  "say": "energi bertambah dua kali",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "alat itu tidak memakai energi"
+                  },
+                  "say": "alat itu tidak memakai energi",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "panas berubah menjadi listrik"
+                  },
+                  "say": "panas berubah menjadi listrik",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Satu bentuk energi bisa berubah menjadi beberapa bentuk sekaligus.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Kegiatan berikut yang menghemat sumber energi tidak terbarukan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bersepeda ke sekolah yang dekat"
+                  },
+                  "say": "bersepeda ke sekolah yang dekat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "diantar mobil walau jaraknya dekat"
+                  },
+                  "say": "diantar mobil walau jaraknya dekat",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menyalakan AC sambil membuka jendela"
+                  },
+                  "say": "menyalakan AC sambil membuka jendela",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "membiarkan lampu menyala siang hari"
+                  },
+                  "say": "membiarkan lampu menyala siang hari",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bersepeda memakai energi dari tubuh, bukan bensin, sehingga menghemat minyak bumi.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Tumbuhan menyimpan energi dari matahari dalam bentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi kimia di dalam makanan (zat tepung)"
+                  },
+                  "say": "energi kimia di dalam makanan (zat tepung)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi bunyi"
+                  },
+                  "say": "energi bunyi",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi listrik"
+                  },
+                  "say": "energi listrik",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi magnet"
+                  },
+                  "say": "energi magnet",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Melalui fotosintesis, energi cahaya diubah menjadi energi kimia yang tersimpan dalam makanan.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            },
+            {
+              "prompt": "Mengapa PLTA biasanya dibangun di dekat bendungan atau air terjun?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air yang jatuh dari tempat tinggi dapat memutar turbin dengan kuat"
+                  },
+                  "say": "air yang jatuh dari tempat tinggi dapat memutar turbin dengan kuat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air di sana lebih bersih untuk diminum"
+                  },
+                  "say": "air di sana lebih bersih untuk diminum",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "di sana tidak ada angin"
+                  },
+                  "say": "di sana tidak ada angin",
+                  "tag": "miskonsepsi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "air terjun menghasilkan cahaya"
+                  },
+                  "say": "air terjun menghasilkan cahaya",
+                  "tag": "miskonsepsi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Air dari tempat tinggi punya energi besar yang berubah menjadi gerak turbin lalu listrik.",
+              "source": "CP IPAS Fase B (Kepka BSKAP 032/H/KR/2024); kisi-kisi OSN IPA SD (Puspresnas); TIMSS 2023 Science Framework Grade 4"
+            }
+          ]
+        },
+        "weight": 2
       },
       {
-        "prompt": "Kipas angin mengubah energi listrik menjadi energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gerak"
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 6],
+            "w": {
+              "values": [10, 15, 20]
             },
-            "say": "Gerak"
+            "j": [4, 6]
           },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya"
+          "prompt": "Di kelas ada {n} lampu, masing-masing memakai {w} watt-jam setiap jam. Lampu menyala {j} jam. Berapa watt-jam energi yang dipakai seluruh lampu?",
+          "answer": "n * w * j",
+          "unit": "watt-jam",
+          "distractors": [
+            {
+              "expr": "n * w",
+              "tag": "lupa-jam"
             },
-            "say": "Cahaya",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Panas saja"
+            {
+              "expr": "w * j",
+              "tag": "lupa-jumlah-lampu"
             },
-            "say": "Panas saja",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kimia"
-            },
-            "say": "Kimia",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Motor listrik di kipas mengubah energi listrik menjadi gerak baling-baling.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Makanan memberi tubuh kita energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kimia"
-            },
-            "say": "Kimia"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik"
-            },
-            "say": "Listrik",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bunyi"
-            },
-            "say": "Bunyi",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya"
-            },
-            "say": "Cahaya",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Makanan menyimpan energi kimia yang diubah tubuh menjadi energi gerak dan panas.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Menggosok kedua telapak tangan membuat tangan terasa hangat. Energi gerak berubah menjadi energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Panas"
-            },
-            "say": "Panas"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya"
-            },
-            "say": "Cahaya",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik"
-            },
-            "say": "Listrik",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bunyi saja"
-            },
-            "say": "Bunyi saja",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Gesekan mengubah energi gerak menjadi energi panas.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Alat yang mengubah energi listrik menjadi energi bunyi adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Pengeras suara (speaker)"
-            },
-            "say": "Pengeras suara (speaker)"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Setrika"
-            },
-            "say": "Setrika",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kipas angin"
-            },
-            "say": "Kipas angin",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lampu"
-            },
-            "say": "Lampu",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Speaker mengubah listrik menjadi getaran yang kita dengar sebagai bunyi.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Pada setrika listrik, perubahan energi yang terjadi adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik → panas"
-            },
-            "say": "Listrik → panas"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Panas → listrik"
-            },
-            "say": "Panas → listrik",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik → bunyi"
-            },
-            "say": "Listrik → bunyi",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gerak → listrik"
-            },
-            "say": "Gerak → listrik",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Setrika memanaskan pelat logamnya dengan energi listrik.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Panel surya di atap rumah mengubah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi cahaya menjadi energi listrik"
-            },
-            "say": "Energi cahaya menjadi energi listrik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi listrik menjadi cahaya"
-            },
-            "say": "Energi listrik menjadi cahaya",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi angin menjadi panas"
-            },
-            "say": "Energi angin menjadi panas",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi air menjadi cahaya"
-            },
-            "say": "Energi air menjadi cahaya",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Panel surya menangkap cahaya matahari dan menghasilkan listrik.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Contoh sumber energi terbarukan adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Angin"
-            },
-            "say": "Angin"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Minyak bumi"
-            },
-            "say": "Minyak bumi",
-            "tag": "tak-terbarukan"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Batu bara"
-            },
-            "say": "Batu bara",
-            "tag": "tak-terbarukan"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gas alam"
-            },
-            "say": "Gas alam",
-            "tag": "tak-terbarukan"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Angin, matahari, dan air terus tersedia. Minyak bumi, batu bara, dan gas alam butuh jutaan tahun untuk terbentuk.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Pada saat bermain ketapel, energi yang tersimpan pada karet yang ditarik adalah energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Potensial (tersimpan) yang berubah menjadi gerak"
-            },
-            "say": "Potensial (tersimpan) yang berubah menjadi gerak"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya yang berubah menjadi bunyi"
-            },
-            "say": "Cahaya yang berubah menjadi bunyi",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik yang berubah menjadi panas"
-            },
-            "say": "Listrik yang berubah menjadi panas",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kimia yang berubah menjadi cahaya"
-            },
-            "say": "Kimia yang berubah menjadi cahaya",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Karet yang ditarik menyimpan energi. Saat dilepas, energi itu berubah menjadi gerak batu/kertas.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Cara menghemat energi listrik di rumah adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mematikan lampu saat tidak dipakai"
-            },
-            "say": "Mematikan lampu saat tidak dipakai"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Menyalakan TV sambil tidur"
-            },
-            "say": "Menyalakan TV sambil tidur",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Membuka kulkas terlalu lama"
-            },
-            "say": "Membuka kulkas terlalu lama",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Mengisi daya ponsel semalaman terus-menerus"
-            },
-            "say": "Mengisi daya ponsel semalaman terus-menerus",
-            "tag": "terbalik"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Alat yang tidak dipakai tetapi menyala tetap memakai energi listrik.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Pada pembangkit listrik tenaga air, urutan perubahan energinya adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi gerak air → gerak turbin → listrik"
-            },
-            "say": "Energi gerak air → gerak turbin → listrik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Listrik → gerak air → turbin"
-            },
-            "say": "Listrik → gerak air → turbin",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya → gerak air → listrik"
-            },
-            "say": "Cahaya → gerak air → listrik",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Panas → cahaya → listrik"
-            },
-            "say": "Panas → cahaya → listrik",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Air yang mengalir menggerakkan turbin, turbin memutar generator yang menghasilkan listrik.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Lampu pijar terasa panas saat menyala. Kesimpulan yang tepat adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Sebagian energi listrik berubah menjadi panas, bukan cahaya"
-            },
-            "say": "Sebagian energi listrik berubah menjadi panas, bukan cahaya"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Lampu pijar tidak memakai listrik"
-            },
-            "say": "Lampu pijar tidak memakai listrik",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Semua energi menjadi cahaya"
-            },
-            "say": "Semua energi menjadi cahaya",
-            "tag": "miskonsepsi-energi-hilang"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Panas berasal dari cahaya bulan"
-            },
-            "say": "Panas berasal dari cahaya bulan",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Satu alat bisa menghasilkan lebih dari satu bentuk energi. Lampu pijar mengubah banyak energi listrik menjadi panas.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Radio bertenaga baterai: baterai → listrik → bunyi. Energi pada baterai adalah energi …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Kimia"
-            },
-            "say": "Kimia"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Cahaya"
-            },
-            "say": "Cahaya",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Gerak"
-            },
-            "say": "Gerak",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bunyi"
-            },
-            "say": "Bunyi",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Baterai menyimpan energi kimia yang diubah menjadi listrik, lalu speaker mengubahnya menjadi bunyi.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Mengapa bola yang dilempar ke atas akhirnya jatuh dan berhenti?",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Ditarik gravitasi dan energinya berubah menjadi panas dan bunyi saat memantul"
-            },
-            "say": "Ditarik gravitasi dan energinya berubah menjadi panas dan bunyi saat memantul"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energinya hilang begitu saja"
-            },
-            "say": "Energinya hilang begitu saja",
-            "tag": "miskonsepsi-energi-hilang"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bola kehabisan udara"
-            },
-            "say": "Bola kehabisan udara",
-            "tag": "lain"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Bola kehabisan cahaya"
-            },
-            "say": "Bola kehabisan cahaya",
-            "tag": "lain"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Energi tidak hilang, tetapi berubah bentuk. Saat memantul, sebagian energi menjadi bunyi dan panas.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
-      },
-      {
-        "prompt": "Kincir angin di sawah dipakai memompa air. Perubahan energi yang terjadi adalah …",
-        "choices": [
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi angin (gerak) → gerak pompa"
-            },
-            "say": "Energi angin (gerak) → gerak pompa"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi listrik → angin"
-            },
-            "say": "Energi listrik → angin",
-            "tag": "terbalik"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi cahaya → bunyi"
-            },
-            "say": "Energi cahaya → bunyi",
-            "tag": "perubahan-tertukar"
-          },
-          {
-            "visual": {
-              "kind": "text",
-              "text": "Energi kimia → cahaya"
-            },
-            "say": "Energi kimia → cahaya",
-            "tag": "perubahan-tertukar"
-          }
-        ],
-        "answer": 0,
-        "reteach": "Angin memutar baling-baling kincir, lalu gerak itu dipakai menggerakkan pompa air.",
-        "source": "Sumber & perubahan bentuk energi — CP IPAS Fase B (BSKAP 046/H/KR/2025); buku IPAS SD Kelas IV"
+            {
+              "expr": "n + w + j",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Satu lampu: {w} × {j} = {=w*j} watt-jam. {n} lampu: {n} × {=w*j} = {answer} watt-jam."
+        }
       }
     ]
   }

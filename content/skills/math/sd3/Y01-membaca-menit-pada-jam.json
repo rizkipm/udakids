@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.y1.membaca-menit-pada-jam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Y",
+  "order": 1,
+  "title": "Waktu dan kalender — Level 1 — Membaca menit pada jam",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-Y (time)",
+    "sg": "P3 Time: hours, minutes, seconds; 24-hour clock",
+    "cambridge": "Stage 3 Measure: time (3Gt)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 12],
+            "k": [1, 11]
+          },
+          "derived": {
+            "m": "k * 5"
+          },
+          "prompt": "Jam menunjukkan pukul {h} lewat berapa menit?",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": "=m"
+            }
+          ],
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "m + 5",
+              "tag": "lebih-satu-angka"
+            },
+            {
+              "expr": "60 - m",
+              "tag": "menit-kurang"
+            }
+          ],
+          "explain": "Jarum panjang di angka {=m/5}: {=m/5} × 5 = {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 11]
+          },
+          "prompt": "Jarum panjang menunjuk angka {k}. Berapa menit?",
+          "answer": "k * 5",
+          "distractors": ["k", "k * 10", "k + 5"],
+          "explain": "{k} × 5 = {answer}."
+        }
+      }
+    ]
+  }
+}

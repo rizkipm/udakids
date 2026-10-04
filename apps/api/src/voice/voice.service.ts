@@ -7,8 +7,11 @@ import {
   skillTemplateSchema,
   VOICE_LINE_KEYS,
   voiceItemText,
+  voiceSettingsFor,
   type DialogFile,
   type VoiceItemPart,
+  type VoiceLang,
+  type VoiceProfile,
   type VoiceSettings,
 } from '@little-coder/engine';
 import { and, eq, inArray, sql } from 'drizzle-orm';
@@ -116,9 +119,12 @@ export class VoiceService {
     }
   }
 
-  static keyOf(text: string, s: VoiceSettings) {
+  /** Kunci klip. Bahasa hanya ikut dihitung bila bukan Indonesia, jadi klip lama tetap berlaku. */
+  static keyOf(text: string, s: VoiceSettings, lang: VoiceLang = 'id-ID') {
     return createHash('sha256')
-      .update(`${s.model}|${s.voice}|${s.style}|${s.rate}|${text}`)
+      .update(
+        `${s.model}|${s.voice}|${s.style}|${s.rate}|${lang === 'id-ID' ? '' : `${lang}|`}${text}`,
+      )
       .digest('hex');
   }
 
@@ -160,12 +166,13 @@ export class VoiceService {
   }
 
   /** Sudah ada klip untuk teks ini (dengan pengaturan suara saat ini)? */
-  async hasClip(text: string) {
-    const s = await this.settings.get('voice');
+  async hasClip(text: string, profile: VoiceProfile = { lang: 'id-ID' }) {
+    const lang = profile.lang;
+    const s = voiceSettingsFor(await this.settings.get('voice'), profile);
     const [hit] = await this.db
       .select({ key: voiceClips.key })
       .from(voiceClips)
-      .where(eq(voiceClips.key, VoiceService.keyOf(text, s)));
+      .where(eq(voiceClips.key, VoiceService.keyOf(text, s, lang)));
     return !!hit;
   }
 
@@ -175,9 +182,14 @@ export class VoiceService {
   }
 
   /** Kunci klip untuk `text`; dibuat bila belum ada (null bila suara mati/penyedia tidak ada). */
-  async ensure(text: string, s?: VoiceSettings): Promise<string | null> {
-    const settings = s ?? (await this.settings.get('voice'));
-    const key = VoiceService.keyOf(text, settings);
+  async ensure(
+    text: string,
+    s?: VoiceSettings,
+    profile: VoiceProfile = { lang: 'id-ID' },
+  ): Promise<string | null> {
+    const lang = profile.lang;
+    const settings = voiceSettingsFor(s ?? (await this.settings.get('voice')), profile);
+    const key = VoiceService.keyOf(text, settings, lang);
     const [hit] = await this.db
       .select({ key: voiceClips.key })
       .from(voiceClips)
@@ -186,12 +198,17 @@ export class VoiceService {
     if (!settings.enabled || !(await this.isReady())) return null;
     const running = this.inflight.get(key);
     if (running) return running;
-    const job = this.make(key, text, settings).finally(() => this.inflight.delete(key));
+    const job = this.make(key, text, settings, lang).finally(() => this.inflight.delete(key));
     this.inflight.set(key, job);
     return job;
   }
 
-  private async make(key: string, text: string, s: VoiceSettings): Promise<string | null> {
+  private async make(
+    key: string,
+    text: string,
+    s: VoiceSettings,
+    lang: VoiceLang,
+  ): Promise<string | null> {
     const today = new Date().toISOString().slice(0, 10);
     if (today !== this.day) {
       // Hitungan harian dari database: tetap berlaku walau server di-restart (audit M5).
@@ -210,7 +227,7 @@ export class VoiceService {
     try {
       const provider = await this.provider();
       if (!provider) return null;
-      const out = await provider.synthesize(text, s);
+      const out = await provider.synthesize(text, s, lang);
       await this.db
         .insert(voiceClips)
         .values({
@@ -251,7 +268,13 @@ export class VoiceService {
   }
 
   /** Kalimat soal Basic (prompt/reteach) yang diturunkan ulang dari skill + seed + band. */
-  async itemText(skillId: string, seed: number, band: number, part: VoiceItemPart) {
+  async itemText(
+    skillId: string,
+    seed: number,
+    band: number,
+    part: VoiceItemPart,
+    choiceId?: string,
+  ) {
     const [row] = await this.db
       .select({ template: skills.template })
       .from(skills)
@@ -262,7 +285,9 @@ export class VoiceService {
     // Basic: kalimat soal & pembahasan. Kelas 1+: hanya kalimat soal "dengar" (dikte) — D-043.
     if (template.tier !== 'basic' && !(part === 'prompt' && isListeningItem(item)))
       return undefined;
-    return voiceItemText(item, part);
+    // Kartu pilihan hanya untuk buku English (kata Inggris diucapkan suara Momo, bukan suara perangkat) — D-062.
+    if (part === 'choice' && template.domain !== 'english') return undefined;
+    return voiceItemText(item, part, choiceId);
   }
 
   async stats() {

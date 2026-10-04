@@ -1,6 +1,6 @@
 {
   "id": "sains.sd12.h6.soal-cerita",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd12",
   "category": "H",
@@ -12,125 +12,857 @@
     "timss-kognitif": "applying",
     "fase-merdeka": "A (pengayaan: IPAS mulai Fase B)"
   },
-  "family": "mix",
+  "family": "manual",
   "params": {
-    "parts": [
+    "items": [
       {
-        "family": "manual",
-        "params": {
-          "items": [
-            {
-              "prompt": "Langit gelap, ada kilat dan petir. Apa yang sebaiknya kita lakukan?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Masuk dan berlindung di dalam rumah"
-                  },
-                  "say": "Masuk dan berlindung di dalam rumah"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Bermain di lapangan"
-                  },
-                  "say": "Bermain di lapangan",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Berteduh di bawah pohon tinggi"
-                  },
-                  "say": "Berteduh di bawah pohon tinggi",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Saat petir, berlindung di dalam bangunan. Pohon tinggi bisa tersambar petir.",
-              "source": "NGSS K-ESS2-1 & K-ESS3-2 (pola cuaca, bersiap menghadapi cuaca buruk); BMKG: waspada petir"
+        "prompt": "Pagi ini langit gelap dan awan tebal. Adit akan berangkat sekolah. Apa yang sebaiknya ia bawa?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Payung atau jas hujan"
             },
-            {
-              "prompt": "Awan hitam tebal muncul di langit. Cuaca apa yang mungkin datang?",
-              "choices": [
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Hujan"
-                  },
-                  "say": "Hujan"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Cerah terik"
-                  },
-                  "say": "Cerah terik",
-                  "tag": "pengecoh"
-                },
-                {
-                  "visual": {
-                    "kind": "text",
-                    "text": "Salju"
-                  },
-                  "say": "Salju",
-                  "tag": "pengecoh"
-                }
-              ],
-              "answer": 0,
-              "reteach": "Awan gelap tebal biasanya menandakan hujan akan turun.",
-              "source": "NGSS K-ESS2-1 & K-ESS3-2 (pola cuaca, bersiap menghadapi cuaca buruk); BMKG: waspada petir"
-            }
-          ]
-        },
-        "weight": 1
+            "say": "Payung atau jas hujan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kacamata hitam"
+            },
+            "say": "Kacamata hitam",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Layang-layang"
+            },
+            "say": "Layang-layang",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Kipas tangan"
+            },
+            "say": "Kipas tangan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Awan gelap tebal tanda hujan akan turun.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
       },
       {
-        "family": "facts",
-        "params": {
-          "table": [
-            {
-              "name": "Cuaca cerah",
-              "attrs": {
-                "tanda": "langit biru dan matahari bersinar terang",
-                "kegiatan": "memakai topi dan minum air yang cukup"
-              }
+        "prompt": "Ibu Sari sedang menjemur pakaian. Tiba-tiba langit mendung dan angin kencang. Apa yang sebaiknya dilakukan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Mengangkat jemuran"
             },
-            {
-              "name": "Cuaca berawan",
-              "attrs": {
-                "tanda": "langit mendung tertutup awan, tetapi belum hujan"
-              }
+            "say": "Mengangkat jemuran"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Menambah jemuran"
             },
-            {
-              "name": "Cuaca hujan",
-              "attrs": {
-                "tanda": "air turun dari awan",
-                "kegiatan": "memakai payung atau jas hujan"
-              }
+            "say": "Menambah jemuran",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Menyiram jemuran"
             },
-            {
-              "name": "Cuaca berangin",
-              "attrs": {
-                "tanda": "daun dan ranting pohon bergoyang",
-                "kegiatan": "bermain layang-layang"
-              }
+            "say": "Menyiram jemuran",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Membiarkannya"
             },
-            {
-              "name": "Badai petir",
-              "attrs": {
-                "kegiatan": "berlindung di dalam rumah"
-              }
-            }
-          ],
-          "attr": "tanda",
-          "ask": "name",
-          "prompt": "Cuaca apa bila {value}?",
-          "explain": "{name} ditandai {value}.",
-          "choices": 4,
-          "source": "NGSS K-ESS2-1 & K-ESS3-2 (pola cuaca, bersiap menghadapi cuaca buruk); BMKG: waspada petir"
-        },
-        "weight": 1
+            "say": "Membiarkannya",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Mendung dan angin kencang tanda hujan akan turun.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Budi bermain bola di lapangan. Tiba-tiba terdengar guntur dan terlihat kilat. Apa yang harus dilakukan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Segera masuk ke dalam bangunan"
+            },
+            "say": "Segera masuk ke dalam bangunan"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Berteduh di bawah pohon besar"
+            },
+            "say": "Berteduh di bawah pohon besar",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Terus bermain"
+            },
+            "say": "Terus bermain",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Berbaring di tengah lapangan"
+            },
+            "say": "Berbaring di tengah lapangan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Saat petir, berlindung di dalam bangunan paling aman.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Siang ini sangat terik. Rina akan upacara di halaman sekolah. Apa yang sebaiknya ia lakukan sebelumnya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Minum air dan memakai topi"
+            },
+            "say": "Minum air dan memakai topi"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Memakai jaket tebal"
+            },
+            "say": "Memakai jaket tebal",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Membawa payung hujan dan sepatu bot"
+            },
+            "say": "Membawa payung hujan dan sepatu bot",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tidak sarapan"
+            },
+            "say": "Tidak sarapan",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Cuaca panas membuat tubuh cepat haus.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dodi ingin bermain layang-layang. Cuaca mana yang paling cocok?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Cerah dan berangin"
+            },
+            "say": "Cerah dan berangin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Hujan deras"
+            },
+            "say": "Hujan deras",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Badai petir"
+            },
+            "say": "Badai petir",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tidak ada angin sama sekali"
+            },
+            "say": "Tidak ada angin sama sekali",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Layang-layang butuh angin dan aman saat tidak hujan.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Nina melihat bendera sekolah tidak bergerak sama sekali. Apa artinya?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Hampir tidak ada angin"
+            },
+            "say": "Hampir tidak ada angin"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Angin sangat kencang"
+            },
+            "say": "Angin sangat kencang",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sedang hujan es"
+            },
+            "say": "Sedang hujan es",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Ada badai petir"
+            },
+            "say": "Ada badai petir",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Bendera berkibar jika ada angin.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari rumput di halaman Tono basah, padahal semalam tidak hujan. Air itu berasal dari ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Embun"
+            },
+            "say": "Embun"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Air sungai"
+            },
+            "say": "Air sungai",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Air laut"
+            },
+            "say": "Air laut",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Siraman tetangga"
+            },
+            "say": "Siraman tetangga",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Uap air di udara mengembun pada rumput saat malam yang dingin.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Petani menunggu hujan turun untuk menanam padi. Ini menunjukkan cuaca penting untuk ...",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Pertanian"
+            },
+            "say": "Pertanian"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Bermain gim"
+            },
+            "say": "Bermain gim",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Membaca buku"
+            },
+            "say": "Membaca buku",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Menonton televisi"
+            },
+            "say": "Menonton televisi",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Petani mengatur waktu tanam sesuai cuaca.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Lala pergi ke pantai saat cuaca cerah. Barang apa yang paling berguna?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Topi lebar dan tabir surya"
+            },
+            "say": "Topi lebar dan tabir surya"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Jas hujan"
+            },
+            "say": "Jas hujan",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Jaket tebal"
+            },
+            "say": "Jaket tebal",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sepatu bot"
+            },
+            "say": "Sepatu bot",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Sinar matahari terik di pantai.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Saat hujan deras, jalan raya menjadi licin. Bagaimana sebaiknya Ayah mengendarai motor?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Pelan-pelan dan hati-hati"
+            },
+            "say": "Pelan-pelan dan hati-hati"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Secepat mungkin"
+            },
+            "say": "Secepat mungkin",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Sambil bermain ponsel"
+            },
+            "say": "Sambil bermain ponsel",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "Tanpa lampu"
+            },
+            "say": "Tanpa lampu",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "Jalan licin mudah membuat tergelincir.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Adit mencatat 3 hari cerah, 1 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 3 − 1 = 3 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Sari mencatat 3 hari cerah, 3 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "1"
+            },
+            "say": "1"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 3 − 3 = 1 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Budi mencatat 5 hari cerah, 1 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "1"
+            },
+            "say": "1"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 5 − 1 = 1 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Rina mencatat 4 hari cerah, 2 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "1"
+            },
+            "say": "1"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "5"
+            },
+            "say": "5",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 4 − 2 = 1 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Dodi mencatat 5 hari cerah, 1 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "1"
+            },
+            "say": "1"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 5 − 1 = 1 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Nina mencatat 2 hari cerah, 3 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "5"
+            },
+            "say": "5",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 2 − 3 = 2 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Dalam seminggu Tono mencatat 2 hari cerah, 2 hari hujan, dan sisanya berawan. Berapa hari berawan?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "5"
+            },
+            "say": "5",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "7 − 2 − 2 = 3 hari.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Rina menunjukkan 25 °C. Siang hari 29 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "54"
+            },
+            "say": "54",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "29"
+            },
+            "say": "29",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "5"
+            },
+            "say": "5",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "29 − 25 = 4 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Dodi menunjukkan 24 °C. Siang hari 30 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "54"
+            },
+            "say": "54",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "30"
+            },
+            "say": "30",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "7"
+            },
+            "say": "7",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "30 − 24 = 6 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Nina menunjukkan 30 °C. Siang hari 33 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "63"
+            },
+            "say": "63",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "33"
+            },
+            "say": "33",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "4"
+            },
+            "say": "4",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "33 − 30 = 3 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Tono menunjukkan 26 °C. Siang hari 28 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "2"
+            },
+            "say": "2"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "54"
+            },
+            "say": "54",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "28"
+            },
+            "say": "28",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "3"
+            },
+            "say": "3",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "28 − 26 = 2 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Lala menunjukkan 24 °C. Siang hari 30 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "54"
+            },
+            "say": "54",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "30"
+            },
+            "say": "30",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "7"
+            },
+            "say": "7",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "30 − 24 = 6 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
+      },
+      {
+        "prompt": "Pagi hari termometer di sekolah Adit menunjukkan 24 °C. Siang hari 30 °C. Berapa derajat suhu naik?",
+        "choices": [
+          {
+            "visual": {
+              "kind": "text",
+              "text": "6"
+            },
+            "say": "6"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "54"
+            },
+            "say": "54",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "30"
+            },
+            "say": "30",
+            "tag": "pengecoh"
+          },
+          {
+            "visual": {
+              "kind": "text",
+              "text": "7"
+            },
+            "say": "7",
+            "tag": "pengecoh"
+          }
+        ],
+        "answer": 0,
+        "reteach": "30 − 24 = 6 derajat.",
+        "source": "NGSS K-ESS2-1, K-ESS3-2; Kurikulum Merdeka IPAS Fase A (pengayaan): cuaca dan pengaruhnya pada kegiatan; OSN SD Puspresnas"
       }
     ]
   }

@@ -1,0 +1,86 @@
+{
+  "id": "math.sd3.cc5.menghitung-jabat-tangan-dan-pasangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 5,
+  "title": "Penalaran gaya OSN — Level 5 — Menghitung jabat tangan dan pasangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 10]
+          },
+          "prompt": "Ada {n} anak. Setiap dua anak berjabat tangan satu kali. Berapa jabat tangan?",
+          "answer": "n * (n - 1) / 2",
+          "distractors": [
+            {
+              "expr": "n * (n - 1)",
+              "tag": "dihitung-dua-kali"
+            },
+            "n * n",
+            "n - 1"
+          ],
+          "explain": "({n} × {=n-1}) : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {a} baju dan {b} celana. Berapa pasangan baju-celana yang berbeda?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "a * b - 1",
+            "a * b + a"
+          ],
+          "explain": "{a} × {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

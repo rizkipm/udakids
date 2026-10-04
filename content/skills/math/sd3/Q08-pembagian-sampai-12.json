@@ -1,0 +1,186 @@
+{
+  "id": "math.sd3.q8.pembagian-sampai-12",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "Q",
+  "order": 8,
+  "title": "Fakta pembagian — Level 8 — Pembagian sampai 12",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-S/T",
+    "sg": "P3 Division within multiplication tables",
+    "cambridge": "Stage 3 Calculation: division facts (3Nc.05)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [11, 12]
+            },
+            "n": [1, 12]
+          },
+          "prompt": "{=m*n} : {m} = …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m * n - m",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "{m} × {n} = {=m*n}, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [11, 12]
+            },
+            "n": [2, 12]
+          },
+          "prompt": "Berapa {=m*n} dibagi {m}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [11, 12]
+            },
+            "n": [2, 12]
+          },
+          "constraint": "m != n",
+          "prompt": "{=m*n} : … = {n}",
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "hasil"
+            },
+            {
+              "expr": "m + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "m - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 12]
+          },
+          "prompt": "Berapa kali {m} masuk ke dalam {=m*n}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{m} × {n} = {=m*n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 12]
+          },
+          "prompt": "{=m*n} anak dibagi menjadi kelompok berisi {m}. Ada berapa kelompok?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "m * n - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "m",
+              "tag": "isi-kelompok"
+            }
+          ],
+          "explain": "{=m*n} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "values": [6, 7, 8, 9]
+            },
+            "n": [2, 12]
+          },
+          "prompt": "□ : {m} = {n}. Berapa □?",
+          "answer": "m * n",
+          "distractors": [
+            {
+              "expr": "m + n",
+              "tag": "menjumlah"
+            },
+            "m * n + m",
+            "m * n - n"
+          ],
+          "explain": "□ = {m} × {n} = {answer}."
+        }
+      }
+    ]
+  }
+}

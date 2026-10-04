@@ -1,0 +1,48 @@
+{
+  "id": "math.sd3.cc1.pola-bilangan-bertingkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "CC",
+  "order": 1,
+  "title": "Penalaran gaya OSN — Level 1 — Pola bilangan bertingkat",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-OSN",
+    "sg": "P3 Problem sums (heuristics)",
+    "cambridge": "Stage 3 Thinking and working mathematically"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "k": [1, 5]
+          },
+          "prompt": "{a}, {=a+k}, {=a+3*k}, {=a+6*k}, {=a+10*k}, … Bilangan berikutnya?",
+          "answer": "a + 15 * k",
+          "distractors": ["a + 14 * k", "a + 16 * k", "a + 12 * k"],
+          "explain": "Loncatannya {k}, {=2*k}, {=3*k}, {=4*k}, lalu {=5*k}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 12]
+          },
+          "prompt": "{a}, {=a*2}, {=a*4}, {=a*8}, … Bilangan berikutnya?",
+          "answer": "a * 16",
+          "distractors": ["a * 12", "a * 10", "a * 8 + a"],
+          "explain": "Setiap bilangan dikali 2: {answer}."
+        }
+      }
+    ]
+  }
+}

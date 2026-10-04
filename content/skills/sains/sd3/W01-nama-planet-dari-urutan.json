@@ -1,6 +1,6 @@
 {
   "id": "sains.sd3.w1.nama-planet-dari-urutan",
-  "version": 1,
+  "version": 2,
   "domain": "sains",
   "grade": "sd3",
   "category": "W",
@@ -12,95 +12,735 @@
     "fase-merdeka": "B",
     "kognitif": "knowing"
   },
-  "family": "facts",
+  "family": "mix",
   "params": {
-    "table": [
+    "parts": [
       {
-        "name": "Merkurius",
-        "attrs": {
-          "urutan": "planet ke-1 dari Matahari",
-          "ciri": "planet terkecil dan paling dekat dengan Matahari",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "tidak punya bulan"
-        }
+        "family": "facts",
+        "params": {
+          "table": [
+            {
+              "name": "Merkurius",
+              "attrs": {
+                "urutan": "planet ke-1 dari Matahari",
+                "ciri": "planet terkecil dan paling dekat dengan Matahari",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "tidak punya bulan"
+              }
+            },
+            {
+              "name": "Venus",
+              "attrs": {
+                "urutan": "planet ke-2 dari Matahari",
+                "ciri": "planet terpanas, tertutup awan tebal",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "tidak punya bulan"
+              }
+            },
+            {
+              "name": "Bumi",
+              "attrs": {
+                "urutan": "planet ke-3 dari Matahari",
+                "ciri": "satu-satunya planet yang diketahui memiliki kehidupan",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Mars",
+              "attrs": {
+                "urutan": "planet ke-4 dari Matahari",
+                "ciri": "disebut planet merah karena debunya berkarat",
+                "gol": "planet dalam (berbatu)",
+                "cincin": "tidak bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Yupiter",
+              "attrs": {
+                "urutan": "planet ke-5 dari Matahari",
+                "ciri": "planet terbesar, punya Bintik Merah Raksasa",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Saturnus",
+              "attrs": {
+                "urutan": "planet ke-6 dari Matahari",
+                "ciri": "punya cincin paling besar dan terang",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Uranus",
+              "attrs": {
+                "urutan": "planet ke-7 dari Matahari",
+                "ciri": "berputar dalam posisi sangat miring, hampir rebah",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            },
+            {
+              "name": "Neptunus",
+              "attrs": {
+                "urutan": "planet ke-8 dari Matahari",
+                "ciri": "planet terjauh dari Matahari, anginnya paling kencang",
+                "gol": "planet luar (raksasa gas dan es)",
+                "cincin": "bercincin",
+                "bulan": "punya bulan"
+              }
+            }
+          ],
+          "attr": "urutan",
+          "ask": "name",
+          "prompt": "Planet mana yang merupakan {value}?",
+          "explain": "{name} adalah {value}.",
+          "choices": 4,
+          "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+        },
+        "weight": 1
       },
       {
-        "name": "Venus",
-        "attrs": {
-          "urutan": "planet ke-2 dari Matahari",
-          "ciri": "planet terpanas, tertutup awan tebal",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "tidak punya bulan"
-        }
-      },
-      {
-        "name": "Bumi",
-        "attrs": {
-          "urutan": "planet ke-3 dari Matahari",
-          "ciri": "satu-satunya planet yang diketahui memiliki kehidupan",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Mars",
-        "attrs": {
-          "urutan": "planet ke-4 dari Matahari",
-          "ciri": "disebut planet merah karena debunya berkarat",
-          "gol": "planet dalam (berbatu)",
-          "cincin": "tidak bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Yupiter",
-        "attrs": {
-          "urutan": "planet ke-5 dari Matahari",
-          "ciri": "planet terbesar, punya Bintik Merah Raksasa",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Saturnus",
-        "attrs": {
-          "urutan": "planet ke-6 dari Matahari",
-          "ciri": "punya cincin paling besar dan terang",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Uranus",
-        "attrs": {
-          "urutan": "planet ke-7 dari Matahari",
-          "ciri": "berputar dalam posisi sangat miring, hampir rebah",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
-      },
-      {
-        "name": "Neptunus",
-        "attrs": {
-          "urutan": "planet ke-8 dari Matahari",
-          "ciri": "planet terjauh dari Matahari, anginnya paling kencang",
-          "gol": "planet luar (raksasa gas dan es)",
-          "cincin": "bercincin",
-          "bulan": "punya bulan"
-        }
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-8 adalah Merkurius.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-7 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-7 adalah Venus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-6 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-6 adalah Bumi.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-5 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-5 adalah Mars.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-4 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-4 adalah Yupiter.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-3 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-3 adalah Saturnus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-2 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-2 adalah Uranus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Jika dihitung dari planet yang paling jauh dari Matahari, planet ke-1 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan dari yang terjauh: Neptunus, Uranus, Saturnus, Yupiter, Mars, Bumi, Venus, Merkurius. Planet ke-1 adalah Neptunus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet dalam, planet ke-1 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet dalam dari Matahari: Merkurius, Venus, Bumi, Mars. Yang ke-1 adalah Merkurius.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet dalam, planet ke-2 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet dalam dari Matahari: Merkurius, Venus, Bumi, Mars. Yang ke-2 adalah Venus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet dalam, planet ke-3 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet dalam dari Matahari: Merkurius, Venus, Bumi, Mars. Yang ke-3 adalah Bumi.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet dalam, planet ke-4 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mars"
+                  },
+                  "say": "Mars"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Merkurius"
+                  },
+                  "say": "Merkurius",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Venus"
+                  },
+                  "say": "Venus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Bumi"
+                  },
+                  "say": "Bumi",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet dalam dari Matahari: Merkurius, Venus, Bumi, Mars. Yang ke-4 adalah Mars.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet luar, planet ke-1 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet luar dari Matahari: Yupiter, Saturnus, Uranus, Neptunus. Yang ke-1 adalah Yupiter.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet luar, planet ke-2 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet luar dari Matahari: Yupiter, Saturnus, Uranus, Neptunus. Yang ke-2 adalah Saturnus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet luar, planet ke-3 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet luar dari Matahari: Yupiter, Saturnus, Uranus, Neptunus. Yang ke-3 adalah Uranus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            },
+            {
+              "prompt": "Di antara planet luar, planet ke-4 dari Matahari adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Neptunus"
+                  },
+                  "say": "Neptunus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Yupiter"
+                  },
+                  "say": "Yupiter",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Saturnus"
+                  },
+                  "say": "Saturnus",
+                  "tag": "pengecoh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Uranus"
+                  },
+                  "say": "Uranus",
+                  "tag": "pengecoh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutan planet luar dari Matahari: Yupiter, Saturnus, Uranus, Neptunus. Yang ke-4 adalah Neptunus.",
+              "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+            }
+          ]
+        },
+        "weight": 2
       }
-    ],
-    "attr": "urutan",
-    "ask": "name",
-    "prompt": "Planet mana yang merupakan {value}?",
-    "explain": "{name} adalah {value}.",
-    "choices": 4,
-    "source": "NASA Science: Solar System (science.nasa.gov/solar-system); IAU Resolusi B5 & B6 (2006)"
+    ]
   }
 }

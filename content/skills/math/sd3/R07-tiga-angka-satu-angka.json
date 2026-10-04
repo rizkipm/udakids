@@ -1,0 +1,77 @@
+{
+  "id": "math.sd3.r7.tiga-angka-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 7,
+  "title": "Perkalian dan pembagian bersusun — Level 7 — Tiga angka : satu angka",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [21, 199]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 100 && t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q * 10",
+              "tag": "nol-lebih"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "q": [25, 120]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "Ada {t} buku dibagi rata ke {m} rak. Berapa buku setiap rak?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            "q + 1",
+            "q - 10"
+          ],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

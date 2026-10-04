@@ -1,0 +1,114 @@
+{
+  "id": "math.sd3.a6.cara-lain-menyusun-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "A",
+  "order": 6,
+  "title": "Nilai tempat — Level 6 — Cara lain menyusun bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying",
+    "ixlRef": "3-A",
+    "sg": "P3 Numbers to 10 000: place value",
+    "cambridge": "Stage 3 Number: place value (3Np.02)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "prompt": "{n} = {=r-1} ribuan + … ratusan + {t} puluhan + {s} satuan",
+          "answer": "h + 10",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "tanpa-tukar"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "tukar-satu"
+            },
+            {
+              "expr": "h + 100",
+              "tag": "tukar-salah"
+            }
+          ],
+          "explain": "Satu ribuan ditukar menjadi 10 ratusan: {h} + 10 = {answer} ratusan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "prompt": "{n} = … puluhan + {s} satuan",
+          "answer": "floor(n / 10)",
+          "distractors": [
+            {
+              "expr": "t",
+              "tag": "puluhan-saja"
+            },
+            {
+              "expr": "h",
+              "tag": "ratusan-saja"
+            },
+            {
+              "expr": "h + t",
+              "tag": "jumlah-angka"
+            }
+          ],
+          "explain": "Semua ratusan dan puluhan ditukar menjadi puluhan: {n} punya {answer} puluhan dan {s} satuan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "prompt": "{n} = {=h-1} ratusan + … puluhan + {s} satuan",
+          "answer": "t + 10",
+          "distractors": [
+            {
+              "expr": "t",
+              "tag": "tanpa-tukar"
+            },
+            {
+              "expr": "t + 1",
+              "tag": "tukar-satu"
+            },
+            {
+              "expr": "t + 100",
+              "tag": "tukar-salah"
+            }
+          ],
+          "explain": "Satu ratusan ditukar menjadi 10 puluhan: {t} + 10 = {answer} puluhan."
+        }
+      }
+    ]
+  }
+}

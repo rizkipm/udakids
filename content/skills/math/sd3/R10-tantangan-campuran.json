@@ -1,0 +1,264 @@
+{
+  "id": "math.sd3.r10.tantangan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "R",
+  "order": 10,
+  "title": "Perkalian dan pembagian bersusun — Level 10 — Tantangan campuran",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-R (multi-digit)",
+    "sg": "P3 Multiplication and division of 2- and 3-digit numbers by 1-digit",
+    "cambridge": "Stage 3 Calculation: multiply/divide 2-digit by 1-digit (3Nc.09)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*10} : {m} = …",
+          "answer": "n * 10",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "n * 100",
+              "tag": "nol-lebih"
+            },
+            "n * 10 + 10"
+          ],
+          "explain": "{=m*n} : {m} = {n}, tambah satu nol: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*100} : {m} = …",
+          "answer": "n * 100",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Pecah {t} menjadi bagian yang mudah dibagi {m}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "q": [11, 19]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} siswa dibagi rata ke {m} kelompok. Berapa siswa setiap kelompok?",
+          "answer": "t / m",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [2, 12],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m",
+          "prompt": "{t} : {m} = {q} sisa …",
+          "answer": "t - m * q",
+          "distractors": [
+            {
+              "expr": "m - r",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q",
+              "tag": "hasil-bagi"
+            }
+          ],
+          "explain": "{q} × {m} = {=q*m}, {t} − {=q*m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [2, 12],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m",
+          "prompt": "{t} : {m} = … sisa {r}",
+          "answer": "q",
+          "explain": "{q} × {m} + {r} = {t}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [21, 199]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 100 && t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q * 10",
+              "tag": "nol-lebih"
+            }
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "q": [25, 120]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "Ada {t} buku dibagi rata ke {m} rak. Berapa buku setiap rak?",
+          "answer": "t / m",
+          "explain": "{answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 98],
+            "m": [3, 9]
+          },
+          "constraint": "a % 10 != 5 && a % 10 != 0",
+          "prompt": "Perkirakan {a} × {m} dengan membulatkan {a} ke puluhan terdekat.",
+          "answer": "round(a / 10) * 10 * m",
+          "distractors": [
+            {
+              "expr": "a * m",
+              "tag": "hasil-tepat"
+            },
+            "round(a / 10) * 10 + m",
+            "(round(a / 10) * 10 + 10) * m"
+          ],
+          "explain": "{=round(a/10)*10} × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 98],
+            "m": [3, 9]
+          },
+          "constraint": "(a * m) % 100 != 50",
+          "prompt": "{a} × {m} kira-kira lebih dekat ke …",
+          "answer": "round(a * m / 100) * 100",
+          "explain": "Hasil sebenarnya {=a*m}, paling dekat {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9]
+          },
+          "prompt": "Bilangan terbesar 2 angka yang habis dibagi {m} adalah …",
+          "answer": "floor(99 / m) * m",
+          "mode": "input",
+          "explain": "{m} × {=floor(99/m)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [5, 30],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Sebuah bilangan dibagi {m} hasilnya {q} sisa {r}. Berapa bilangan itu?",
+          "answer": "m * q + r",
+          "mode": "input",
+          "explain": "{m} × {q} + {r} = {answer}."
+        }
+      }
+    ]
+  }
+}

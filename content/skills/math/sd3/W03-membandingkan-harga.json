@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.w3.membandingkan-harga",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "W",
+  "order": 3,
+  "title": "Uang Rupiah — Level 3 — Membandingkan harga",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-W (money)",
+    "sg": "P3 Money: dollars and cents → Rupiah",
+    "cambridge": "Stage 3 Number: money (3Nc, context)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 40],
+            "b": [8, 40]
+          },
+          "constraint": "a != b",
+          "prompt": "Harga buku A {a} ribu rupiah, buku B {b} ribu rupiah. Berapa ribu rupiah selisih harganya?",
+          "answer": "abs(a - b)",
+          "unit": "ribu rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            "abs(a - b) + 1",
+            "abs(a - b) + 2"
+          ],
+          "explain": "{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1500, 9500],
+              "step": 500
+            },
+            "b": {
+              "range": [1500, 9500],
+              "step": 500
+            }
+          },
+          "words": {
+            "benda": ["kelereng", "stiker", "kartu", "manik-manik", "perangko", "kancing"]
+          },
+          "constraint": "a != b",
+          "prompt": "Harga {benda} di toko A Rp{a}, di toko B Rp{b}. Toko mana yang lebih murah?",
+          "answer": "(a < b) * 1 + (a > b) * 2",
+          "labels": {
+            "1": "Toko A",
+            "2": "Toko B"
+          },
+          "explain": "Bandingkan: Rp{a} dan Rp{b}."
+        }
+      }
+    ]
+  }
+}

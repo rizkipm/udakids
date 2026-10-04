@@ -1,0 +1,62 @@
+{
+  "id": "math.sd3.bb2.keliling-persegi-dan-bangun-lain",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "BB",
+  "order": 2,
+  "title": "Keliling dan luas — Level 2 — Keliling persegi dan bangun lain",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing",
+    "ixlRef": "3-BB (perimeter, area)",
+    "sg": "P3 Area and perimeter (square, rectangle)",
+    "cambridge": "Stage 3 Geometry: perimeter and area (3Gg)"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 25]
+          },
+          "prompt": "Persegi bersisi {s} cm. Berapa cm kelilingnya?",
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "s * s",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            "s + 4"
+          ],
+          "explain": "4 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15]
+          },
+          "constraint": "a + b > c && a + c > b && b + c > a",
+          "prompt": "Segitiga bersisi {a} cm, {b} cm, dan {c} cm. Berapa cm kelilingnya?",
+          "answer": "a + b + c",
+          "unit": "cm",
+          "distractors": ["a + b", "a * b", "a + b + c + 1"],
+          "explain": "{answer}."
+        }
+      }
+    ]
+  }
+}

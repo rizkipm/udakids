@@ -1,0 +1,71 @@
+{
+  "id": "math.sd3.c9.penalaran-pembulatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd3",
+  "category": "C",
+  "order": 9,
+  "title": "Pembulatan — Level 9 — Penalaran pembulatan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning",
+    "ixlRef": "3-C",
+    "sg": "P3 Numbers to 10 000 (rounding enrichment)",
+    "cambridge": "Stage 3 Number: round to nearest 10/100 (3Np.04)",
+    "osn": "penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [11, 99],
+            "s": [1, 9]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Sebuah bilangan jika dibulatkan ke puluhan terdekat menjadi {r}. Angka satuannya {s}. Berapa bilangan itu?",
+          "answer": "r - 10 * (s >= 5) + s",
+          "mode": "input",
+          "explain": "Jika satuannya 5 atau lebih, bilangan itu dibulatkan naik, jadi puluhannya satu kurang dari {r}. Bilangannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 99]
+          },
+          "derived": {
+            "r": "t * 10"
+          },
+          "prompt": "Berapa banyak bilangan cacah yang jika dibulatkan ke puluhan terdekat menjadi {r}?",
+          "answer": "10",
+          "mode": "input",
+          "explain": "Dari {=r-5} sampai {=r+4}: ada 10 bilangan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "r": "h * 100"
+          },
+          "prompt": "Bilangan 3 angka dibulatkan ke ratusan terdekat menjadi {r}. Angka puluhan dan satuannya sama, yaitu {s}. Berapa bilangan itu?",
+          "answer": "r - 100 * (s >= 5) + 11 * s",
+          "mode": "input",
+          "explain": "Bilangannya {answer}; dibulatkan ke ratusan menjadi {r}."
+        }
+      }
+    ]
+  }
+}
