@@ -383,6 +383,18 @@ describe.skipIf(!hasDb)('afiliasi orang tua (D-063)', () => {
     expect(ov.body.upcoming.commission).toMatchObject({ amount: 5000 });
   });
 
+  it('info landing: aturan afiliasi publik mengikuti pengaturan admin + batas anak, tanpa login', async () => {
+    const r = await ctx.http().get('/public/affiliate').expect(200);
+    expect(r.body).toEqual({
+      enabled: true,
+      signupBonus: 3500,
+      commissionBp: 5000, // diubah admin di test sebelumnya (50%)
+      minPayout: 15_000,
+      qualifyRounds: 3,
+      maxChildren: 7,
+    });
+  });
+
   it('batas 7 anak per akun orang tua', async () => {
     const P = await register('Eka Putri', 'eka@contoh.id');
     for (let i = 1; i <= 7; i++)

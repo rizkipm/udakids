@@ -1334,3 +1334,7 @@ teman aktif, komisi 1 tingkat dengan pohon visual, verifikasi rekening manual ol
   (antrean, rekening, tanda kecurigaan, rasio biaya afiliasi terhadap pendapatan anggota referal, konversi), tren 12
   bulan, corong, dan afiliator teratas (`GET /admin/affiliate/analytics`); antrean pencairan & rekening berupa kartu;
   Pengaturan di tab sendiri dengan contoh hitung komisi.
+- **Landing:** bagian "Fitur terbaru" berisi program ajak teman (angka bonus, persen komisi, dan minimal pencairan dari
+  `GET /public/affiliate`, mengikuti pengaturan admin; hilang bila program dimatikan) dan info satu akun untuk hingga
+  7 anak. Teks paket keluarga dan pintu masuk orang tua ikut menyebut batas 7 anak. Hanya untuk orang dewasa (landing),
+  tidak tampil di area anak.

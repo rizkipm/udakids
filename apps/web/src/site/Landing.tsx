@@ -12,6 +12,7 @@ import { PricingSection } from './Pricing';
 import { BannerSlider } from '../components/BannerSlider';
 import { GallerySection, useHasGallery } from './GallerySection';
 import { TopTenSection } from './TopTen';
+import { NewFeaturesSection } from './NewFeatures';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -208,6 +209,7 @@ export function SiteNav() {
       >
         <a href="#buku">{t('site.nav.books')}</a>
         <a href="#kurikulum">{t('site.nav.subjects')}</a>
+        <a href="#fitur-baru">{t('site.nav.news')}</a>
         <a href="#cara">{t('site.nav.how')}</a>
         <a href="#pintu">{t('site.nav.doors')}</a>
         <a href="#harga">{t('site.nav.price')}</a>
@@ -374,6 +376,8 @@ export function Landing() {
             </article>
           </div>
         </section>
+
+        <NewFeaturesSection />
 
         <section id="buku" className="site-section books">
           <h2>{t('site.books.title')}</h2>

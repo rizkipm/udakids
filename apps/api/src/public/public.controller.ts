@@ -1,5 +1,5 @@
 import { Controller, Get, Inject, Sse, type MessageEvent } from '@nestjs/common';
-import { DOMAINS, GRADES, QUIZ_LENGTH } from '@little-coder/engine';
+import { DOMAINS, GRADES, MAX_CHILDREN_PER_PARENT, QUIZ_LENGTH } from '@little-coder/engine';
 import { and, count, eq, gt, sql } from 'drizzle-orm';
 import {
   distinctUntilChanged,
@@ -82,6 +82,23 @@ export class PublicController {
     private readonly billing: BillingService,
     private readonly settings: SettingsService,
   ) {}
+
+  /**
+   * Info afiliasi & batas anak untuk landing (D-063): angka selalu mengikuti pengaturan admin. Tanpa data akun.
+   */
+  @Public()
+  @Get('affiliate')
+  async affiliate() {
+    const s = await this.settings.get('affiliate');
+    return {
+      enabled: s.enabled,
+      signupBonus: s.signupBonus,
+      commissionBp: s.commissionBp,
+      minPayout: s.minPayout,
+      qualifyRounds: s.qualifyRounds,
+      maxChildren: MAX_CHILDREN_PER_PARENT,
+    };
+  }
 
   /** Harga untuk landing (D-036/D-038): level gratis + paket aktif (harga normal & diskon). */
   @Public()
