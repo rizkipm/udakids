@@ -18,6 +18,7 @@ import {
   staffCreateSchema,
   staffUpdateSchema,
   type SessionUser,
+  MAX_CHILDREN_PER_PARENT,
 } from '@little-coder/engine';
 import { and, count, eq, ne } from 'drizzle-orm';
 import type { z } from 'zod';
@@ -27,6 +28,7 @@ import { forgetAccount } from '../auth/auth.guard.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { children, parents, staffUsers } from '../db/schema.js';
+import { AffiliateService } from '../affiliate/affiliate.service.js';
 import { ReportsService } from '../reports/reports.service.js';
 
 const staffPublic = {
@@ -178,6 +180,21 @@ export class AdminUsersController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body(new ZodPipe(activeToggleSchema)) body: z.infer<typeof activeToggleSchema>,
   ) {
+    if (body.active) {
+      // Mengaktifkan kembali tidak boleh menembus batas 7 anak per akun orang tua (D-063).
+      const [child] = await this.db
+        .select({ parentId: children.parentId, active: children.active })
+        .from(children)
+        .where(eq(children.id, id));
+      if (
+        child?.parentId &&
+        !child.active &&
+        (await AffiliateService.activeChildren(this.db, child.parentId)) >= MAX_CHILDREN_PER_PARENT
+      )
+        throw new BadRequestException(
+          `Akun orang tua anak ini sudah punya ${MAX_CHILDREN_PER_PARENT} anak aktif`,
+        );
+    }
     const [row] = await this.db
       .update(children)
       .set({ active: body.active })

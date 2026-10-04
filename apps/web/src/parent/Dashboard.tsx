@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import type { Color } from '@little-coder/engine';
+import { MAX_CHILDREN_PER_PARENT, type Color } from '@little-coder/engine';
 import { errorMessage } from '../api/client';
 import { useApiCall, useFetch } from '../auth/useApi';
 import { rememberFamilyCode, rememberedFamilyCode, useSession } from '../auth/session';
@@ -10,6 +10,7 @@ import { familySteps, Stepper } from '../site/AuthLayout';
 import { Button, Card, Empty, formatDate, Notice, Spinner } from '../ui/ui';
 import { BannerSlider } from '../components/BannerSlider';
 import { ClaimChild } from './ClaimChild';
+import { atChildLimit, ChildCount, ChildLimitDialog } from './ChildLimit';
 import { NewsToggle } from './NewsToggle';
 import { CountUp, Kpi } from '../ui/charts';
 import { ChildProgress, ProgressIcon, type OverviewChild } from './Progress';
@@ -158,7 +159,15 @@ function ExpiryNotice() {
 }
 
 /** Ringkasan minggu ini untuk seluruh keluarga. */
-function FamilyHero({ name, kids }: { name: string; kids: OverviewChild[] }) {
+function FamilyHero({
+  name,
+  kids,
+  onLimit,
+}: {
+  name: string;
+  kids: OverviewChild[];
+  onLimit: () => void;
+}) {
   const sum = (f: (c: OverviewChild) => number) => kids.reduce((a, c) => a + f(c), 0);
   const active = kids.filter((c) => c.insights.weekRounds > 0).length;
   return (
@@ -166,14 +175,27 @@ function FamilyHero({ name, kids }: { name: string; kids: OverviewChild[] }) {
       <div className="pd-hero-text">
         <h1 id="pd-hero-title">{t('parent.dash.title', { name })}</h1>
         <p>{kids.length ? t('parent.ov.heroLead') : t('parent.dash.subtitle')}</p>
+        <ChildCount count={kids.length} />
         <div className="ui-row">
           <Link className="ui-btn ui-btn-primary" to="/play">
             {t('parent.dash.play')}
           </Link>
-          <Link className="ui-btn ui-btn-secondary" to="/orang-tua/anak/baru">
-            {t('parent.dash.addChild')}
-          </Link>
+          {!atChildLimit(kids.length) ? (
+            <Link className="ui-btn ui-btn-secondary" to="/orang-tua/anak/baru">
+              {t('parent.dash.addChild')}
+            </Link>
+          ) : (
+            // Batas 7 anak (D-063): tombol tetap ada, tetapi membuka pop-up "buat akun terpisah".
+            <Button variant="secondary" onClick={onLimit}>
+              {t('parent.dash.addChild')}
+            </Button>
+          )}
         </div>
+        {atChildLimit(kids.length) && (
+          <p className="pd-limit" role="status">
+            {t('parent.dash.childLimit', { n: MAX_CHILDREN_PER_PARENT })}
+          </p>
+        )}
       </div>
       <div className="pd-hero-art pd-bob" aria-hidden>
         <Momo mood="happy" size={120} />
@@ -224,6 +246,7 @@ export function Dashboard() {
   const [deleted, setDeleted] = useState<string>();
   const [claiming, setClaiming] = useState(false);
   const [claimed, setClaimed] = useState<string>();
+  const [limitOpen, setLimitOpen] = useState(false);
   const [picked, setPicked] = useState<string>();
   const kids = data?.children ?? [];
   const current = kids.find((c) => c.id === picked) ?? kids[0];
@@ -232,7 +255,8 @@ export function Dashboard() {
 
   return (
     <div className="pd">
-      <FamilyHero name={session?.user.name ?? ''} kids={kids} />
+      <FamilyHero name={session?.user.name ?? ''} kids={kids} onLimit={() => setLimitOpen(true)} />
+      <ChildLimitDialog open={limitOpen} onClose={() => setLimitOpen(false)} />
       {/* Banner setelah data utama dimuat: dasbor tetap jadi permintaan pertama. */}
       {data && <BannerSlider placement="parent" />}
       {data && <ExpiryNotice />}
@@ -323,6 +347,11 @@ export function Dashboard() {
         {claiming ? (
           <ClaimChild
             onClose={() => setClaiming(false)}
+            onLimit={() => {
+              setClaiming(false);
+              setLimitOpen(true);
+              reload();
+            }}
             onClaimed={(child) => {
               setClaiming(false);
               setDeleted(undefined);
@@ -341,7 +370,8 @@ export function Dashboard() {
                 variant="secondary"
                 onClick={() => {
                   setClaimed(undefined);
-                  setClaiming(true);
+                  if (atChildLimit(kids.length)) setLimitOpen(true);
+                  else setClaiming(true);
                 }}
               >
                 {t('parent.claim.open')}

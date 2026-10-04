@@ -7,6 +7,7 @@ import {
   type Color,
   type PinPicture,
   type MomoLook,
+  MAX_CHILDREN_PER_PARENT,
 } from '@little-coder/engine';
 import { errorMessage } from '../api/client';
 import type { ChildProfile } from '../api/types';
@@ -18,12 +19,22 @@ import { ColorPicker } from './ColorPicker';
 import { MomoStudio, plainLook } from '../components/MomoStudio';
 import { fieldErrors, serverFieldErrors } from './form';
 import { PinSetter } from './PinSetter';
+import { ChildCount, ChildLimitDialog, isChildLimitError } from './ChildLimit';
 
 export type ChildFormMode = 'new' | 'edit' | 'pin';
 
 const isColor = (c: string): c is Color => (MOMO_COLORS as readonly string[]).includes(c);
 
-function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
+function Form({
+  mode,
+  child,
+  count,
+}: {
+  mode: ChildFormMode;
+  child?: ChildProfile;
+  /** Banyak anak di akun (mode new): info "3 dari 7 anak". */
+  count?: number;
+}) {
   const navigate = useNavigate();
   const welcome = (useLocation().state as { welcome?: boolean } | null)?.welcome === true;
   const call = useApiCall('parent');
@@ -37,6 +48,7 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
+  const [limitOpen, setLimitOpen] = useState(false);
   const withPin = mode !== 'edit';
   const withProfile = mode !== 'pin';
 
@@ -71,9 +83,15 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
             });
       navigate('/orang-tua', { state: { saved: saved?.nickname ?? nickname, welcome } });
     } catch (err) {
+      setBusy(false);
+      // Batas 7 anak tercapai (mis. anak ditambahkan dari perangkat lain) → pop-up akun terpisah (D-063).
+      if (isChildLimitError(err)) {
+        setError(t('parent.dash.childLimit', { n: MAX_CHILDREN_PER_PARENT }));
+        setLimitOpen(true);
+        return;
+      }
       setErrors(serverFieldErrors(err));
       setError(errorMessage(err));
-      setBusy(false);
     }
   }
 
@@ -87,7 +105,9 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
   return (
     <div className="pa-form">
       {welcome && mode === 'new' && <Stepper current={3} labels={familySteps()} />}
+      <ChildLimitDialog open={limitOpen} onClose={() => setLimitOpen(false)} />
       <Card title={title}>
+        {mode === 'new' && count !== undefined && <ChildCount count={count} />}
         {withProfile && <Notice tone="info">{t('parent.form.privacy')}</Notice>}
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit} noValidate>
@@ -166,11 +186,34 @@ function Form({ mode, child }: { mode: ChildFormMode; child?: ChildProfile }) {
   );
 }
 
+/** Akun sudah punya 7 anak: tanpa formulir, pop-up "buat akun terpisah" langsung terbuka. */
+function LimitReached() {
+  const [open, setOpen] = useState(true);
+  return (
+    <div className="pa-form">
+      <ChildLimitDialog open={open} onClose={() => setOpen(false)} />
+      <Notice tone="warning">{t('parent.dash.childLimit', { n: MAX_CHILDREN_PER_PARENT })}</Notice>
+      <div className="ui-row">
+        <Button variant="secondary" onClick={() => setOpen(true)}>
+          {t('parent.limit.newAccount')}
+        </Button>
+        <Link to="/orang-tua">{t('parent.back')}</Link>
+      </div>
+    </div>
+  );
+}
+
 /** Tambah anak (mode new), ubah nama/warna (edit), atau ganti sandi gambar (pin). */
 export function ChildForm({ mode }: { mode: ChildFormMode }) {
   const { id } = useParams();
-  const list = useFetch<ChildProfile[]>('parent', mode === 'new' ? null : '/parent/children');
-  if (mode === 'new') return <Form mode="new" />;
+  const list = useFetch<ChildProfile[]>('parent', '/parent/children');
+  if (mode === 'new') {
+    // Batas 7 anak per akun (D-063): tunggu daftar anak, lalu beri tahu sebelum orang tua mengisi formulir.
+    if (list.loading && !list.data) return <Spinner label={t('parent.loading')} />;
+    const count = list.data?.length ?? 0;
+    if (count >= MAX_CHILDREN_PER_PARENT) return <LimitReached />;
+    return <Form mode="new" count={list.data ? count : undefined} />;
+  }
   if (list.loading) return <Spinner label={t('parent.loading')} />;
   const child = list.data?.find((c) => c.id === id);
   if (!child) {

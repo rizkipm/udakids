@@ -97,20 +97,53 @@ function Arrow({ dir }: { dir: 'prev' | 'next' | 'ext' }) {
   );
 }
 
+/**
+ * Banner bergambar: gambar tampil UTUH sesuai rasio aslinya (tanpa dipotong, tanpa lapisan gelap). Teks sudah ada
+ * di gambar, jadi judul tidak ditampilkan di atasnya — tetap dipakai sebagai teks alternatif untuk pembaca layar.
+ * Bila ada tautan, seluruh gambar bisa diketuk.
+ */
+function ImageBanner({ banner }: { banner: Banner }) {
+  const alt = [banner.title, banner.subtitle].filter(Boolean).join('. ');
+  const img = (
+    <img
+      className="bnr-img-full"
+      src={mediaUrl(banner.imageId!)}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+  const label = banner.ctaLabel || banner.title;
+  const link =
+    banner.ctaUrl && isExternal(banner.ctaUrl) ? (
+      <a className="bnr-img-link" href={banner.ctaUrl} target="_blank" rel="noopener noreferrer">
+        {img}
+        <span className="bnr-sr">
+          {label} {t('media.banner.newTab')}
+        </span>
+      </a>
+    ) : banner.ctaUrl?.startsWith('/') ? (
+      <Link className="bnr-img-link" to={banner.ctaUrl}>
+        {img}
+        <span className="bnr-sr">{label}</span>
+      </Link>
+    ) : (
+      img
+    );
+  return (
+    <div className="bnr-card is-image">
+      <h2 className="bnr-sr">{banner.title}</h2>
+      {link}
+    </div>
+  );
+}
+
 /** Satu kartu banner (dipakai slider dan pratinjau di admin). */
 export function BannerCard({ banner }: { banner: Banner }) {
+  if (banner.imageId) return <ImageBanner banner={banner} />;
   const tone = (BANNER_TONES as readonly string[]).includes(banner.tone) ? banner.tone : 'grape';
   return (
-    <div className={`bnr-card bnr-tone-${tone}${banner.imageId ? ' has-image' : ''}`}>
-      {banner.imageId && (
-        <img
-          className="bnr-img"
-          src={mediaUrl(banner.imageId)}
-          alt={banner.title}
-          loading="lazy"
-          decoding="async"
-        />
-      )}
+    <div className={`bnr-card bnr-tone-${tone}`}>
       <div className="bnr-text">
         <h2 className="bnr-title">{banner.title}</h2>
         {banner.subtitle && <p className="bnr-sub">{banner.subtitle}</p>}

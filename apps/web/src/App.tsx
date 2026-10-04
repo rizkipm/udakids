@@ -1,3 +1,4 @@
+import { ReferralLanding } from './site/ReferralLanding';
 import { Unsubscribe } from './site/Unsubscribe';
 import { Route, Routes } from 'react-router-dom';
 import { AdminApp } from './admin/AdminApp';
@@ -21,6 +22,7 @@ export function App() {
       <Route path="/orang-tua/*" element={<ParentApp />} />
       <Route path="/masuk/staf" element={<StaffLogin />} />
       <Route path="/berhenti-langganan" element={<Unsubscribe />} />
+      <Route path="/r/:code" element={<ReferralLanding />} />
       <Route
         path="/admin/*"
         element={

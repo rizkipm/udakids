@@ -400,3 +400,45 @@
     padding-right: 48px;
   }
 }
+
+/* Pop-up modal (Dialog) */
+.ui-dialog {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border: 1px solid var(--ui-line, #dcd6ea);
+  border-radius: 16px;
+  background: var(--ui-surface, #fff);
+  color: var(--ui-ink, #1d1a2e);
+  box-shadow: 0 20px 60px rgb(29 26 46 / 25%);
+}
+.ui-dialog::backdrop {
+  background: rgb(29 26 46 / 45%);
+}
+.ui-dialog-warning {
+  border-top: 6px solid var(--ui-warning, #9a5b00);
+}
+.ui-dialog-box {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+.ui-dialog-box h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.ui-dialog-body p {
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+.ui-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+@media (max-width: 420px) {
+  .ui-dialog-actions > * {
+    flex: 1 1 100%;
+  }
+}

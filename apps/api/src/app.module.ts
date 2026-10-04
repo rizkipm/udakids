@@ -15,6 +15,12 @@ import { AdminContestController } from './contest/admin-contest.controller.js';
 import { ContestController } from './contest/contest.controller.js';
 import { LeaderboardController } from './leaderboard/leaderboard.controller.js';
 import { MediaController } from './media/media.controller.js';
+import {
+  AdminAffiliateController,
+  ParentAffiliateController,
+  PublicReferralController,
+} from './affiliate/affiliate.controller.js';
+import { AffiliateService } from './affiliate/affiliate.service.js';
 import { AdminBillingController } from './billing/admin-billing.controller.js';
 import { AdminFinanceController } from './billing/admin-finance.controller.js';
 import { BillingService } from './billing/billing.service.js';
@@ -61,6 +67,9 @@ import { VoiceService } from './voice/voice.service.js';
     NewsController,
     AdminNotificationsController,
     AdminVoiceController,
+    ParentAffiliateController,
+    PublicReferralController,
+    AdminAffiliateController,
   ],
   providers: [
     NewsService,
@@ -69,6 +78,7 @@ import { VoiceService } from './voice/voice.service.js';
     ContentService,
     SettingsService,
     BillingService,
+    AffiliateService,
     VoiceService,
     { provide: TTS_PROVIDER, useFactory: ttsFromEnv },
   ],

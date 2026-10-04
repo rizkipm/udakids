@@ -17,6 +17,7 @@ import {
   childUpdateSchema,
   type SessionUser,
   parseMomoLook,
+  MAX_CHILDREN_PER_PARENT,
 } from '@little-coder/engine';
 import { and, eq, inArray, isNull } from 'drizzle-orm';
 import type { z } from 'zod';
@@ -27,7 +28,8 @@ import { AuthService } from '../auth/auth.service.js';
 import { RateLimiter } from '../common/rate-limit.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
-import { children, classes } from '../db/schema.js';
+import { children, classes, parents } from '../db/schema.js';
+import { AffiliateService } from '../affiliate/affiliate.service.js';
 import { ReportsService } from '../reports/reports.service.js';
 
 const publicChild = {
@@ -97,6 +99,16 @@ export class ParentController {
     }));
   }
 
+  /** Batas 7 anak aktif per akun (D-063); baris akun dikunci agar dua permintaan bersamaan tidak menembus batas. */
+  private async assertRoom(tx: Parameters<Parameters<Db['transaction']>[0]>[0], parentId: string) {
+    await tx.select({ id: parents.id }).from(parents).where(eq(parents.id, parentId)).for('update');
+    if ((await AffiliateService.activeChildren(tx, parentId)) >= MAX_CHILDREN_PER_PARENT)
+      throw new BadRequestException({
+        message: `Satu akun maksimal ${MAX_CHILDREN_PER_PARENT} anak. Untuk anak berikutnya, buat akun orang tua baru.`,
+        reason: 'child_limit',
+      });
+  }
+
   @Get()
   async list(@CurrentUser() user: SessionUser) {
     const rows = await this.db
@@ -112,19 +124,25 @@ export class ParentController {
     @CurrentUser() user: SessionUser,
     @Body(new ZodPipe(childProfileSchema)) body: z.infer<typeof childProfileSchema>,
   ) {
-    const [row] = await this.db
-      .insert(children)
-      .values({
-        parentId: user.id,
-        nickname: body.nickname,
-        momoColor: body.momoColor,
-        momoLook: body.momoLook ?? null,
-        picturePinHash: await hashSecret(pinSecret(body.pin)),
-        reportToken: randomToken(),
-        classId: (await this.classIdFor(body.classCode)) ?? null,
-      })
-      .returning(publicChild);
-    return (await this.withClass([row!]))[0];
+    const classId = (await this.classIdFor(body.classCode)) ?? null;
+    const pinHash = await hashSecret(pinSecret(body.pin));
+    const row = await this.db.transaction(async (tx) => {
+      await this.assertRoom(tx, user.id);
+      const [created] = await tx
+        .insert(children)
+        .values({
+          parentId: user.id,
+          nickname: body.nickname,
+          momoColor: body.momoColor,
+          momoLook: body.momoLook ?? null,
+          picturePinHash: pinHash,
+          reportToken: randomToken(),
+          classId,
+        })
+        .returning(publicChild);
+      return created!;
+    });
+    return (await this.withClass([row]))[0];
   }
 
   /**
@@ -153,11 +171,15 @@ export class ParentController {
     }
     if (row.parentId && row.parentId !== user.id)
       throw new BadRequestException('Anak ini sudah tertaut ke akun orang tua lain');
-    const [child] = await this.db
-      .update(children)
-      .set({ parentId: user.id })
-      .where(eq(children.id, row.id))
-      .returning(publicChild);
+    const child = await this.db.transaction(async (tx) => {
+      if (row.parentId !== user.id) await this.assertRoom(tx, user.id);
+      const [linked] = await tx
+        .update(children)
+        .set({ parentId: user.id })
+        .where(eq(children.id, row.id))
+        .returning(publicChild);
+      return linked;
+    });
     this.claimLimiter.reset(key);
     this.claimLimiter.reset(codeKey);
     return (await this.withClass([child!]))[0];

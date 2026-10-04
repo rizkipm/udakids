@@ -1,3 +1,4 @@
+import { AffiliatePage } from './AffiliatePage';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { setSession, useSession } from '../auth/session';
@@ -68,6 +69,7 @@ function ParentLayout({ children }: { children: ReactNode }) {
         { to: '/orang-tua', label: t('parent.nav.home'), icon: 'home', end: true },
         { to: '/orang-tua/anak/baru', label: t('parent.dash.addChild'), icon: 'plus' },
         { to: '/orang-tua/paket', label: t('parent.nav.packages'), icon: 'tag' },
+        { to: '/orang-tua/afiliasi', label: t('parent.nav.affiliate'), icon: 'wallet' },
         {
           to: '/orang-tua/transaksi',
           label: t('parent.nav.orders'),
@@ -136,6 +138,7 @@ export function ParentApp() {
       <Route path="anak/:id/ubah" element={guarded(<ChildForm mode="edit" />)} />
       <Route path="anak/:id/sandi" element={guarded(<ChildForm mode="pin" />)} />
       <Route path="paket" element={guarded(<PackagesPage />)} />
+      <Route path="afiliasi" element={guarded(<AffiliatePage />)} />
       <Route path="transaksi" element={guarded(<OrdersPage />)} />
       <Route path="transaksi/:id" element={guarded(<OrderPage />)} />
       <Route path="*" element={<Navigate to="/orang-tua" replace />} />

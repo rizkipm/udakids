@@ -1,4 +1,10 @@
 import {
+  affiliateSettings,
+  attachReferral,
+  findReferrer,
+  fingerprint,
+} from '../affiliate/referral.js';
+import {
   BadRequestException,
   ConflictException,
   ForbiddenException,
@@ -93,7 +99,7 @@ export class AuthService {
   }
 
   async parentRegister(
-    input: { name: string; email: string; password: string },
+    input: { name: string; email: string; password: string; referralCode?: string },
     ip = 'unknown',
   ): Promise<(AuthResult & { familyCode: string }) | VerificationPending> {
     const ipKey = `signup:${ip}`;
@@ -119,11 +125,13 @@ export class AuthService {
         familyCode,
         consentAt: new Date(),
         emailVerifiedAt: verificationRequired() ? null : new Date(),
+        signupIpHash: fingerprint('ip', ip),
       })
       .onConflictDoNothing()
       .returning();
     if (!row) throw new ConflictException('Email sudah terdaftar. Silakan masuk.');
     this.ipSignups.fail(ipKey);
+    await this.attachReferral(row.id, input.email, input.referralCode);
     if (verificationRequired()) {
       await this.sendCode({ id: row.id, name: row.name, email: row.email }, true);
       return { verificationRequired: true, email: row.email };
@@ -133,6 +141,16 @@ export class AuthService {
       TOKEN_TTL.parent,
     );
     return { ...res, familyCode };
+  }
+
+  /** Kode referal (D-063): kode tidak dikenal / milik sendiri diabaikan diam-diam (pendaftaran tetap jalan). */
+  private async attachReferral(refereeId: string, email: string, code?: string) {
+    if (!code) return;
+    const settings = await affiliateSettings(this.db);
+    if (!settings.enabled) return;
+    const referrer = await findReferrer(this.db, code);
+    if (!referrer || referrer.email.toLowerCase() === email.toLowerCase()) return;
+    await attachReferral(this.db, { refereeId, referrerId: referrer.id }, settings);
   }
 
   private uniqueFamilyCode(): Promise<string> {

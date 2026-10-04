@@ -19,6 +19,7 @@ import {
   type OrderStatus,
 } from '@little-coder/engine';
 import { and, desc, eq, inArray, lt, or, sql } from 'drizzle-orm';
+import { jakartaDate } from '../common/dates.js';
 import { randomCode } from '../common/crypto.js';
 import { DB, type Db } from '../db/db.module.js';
 import {
@@ -32,6 +33,7 @@ import {
   paymentMethods,
 } from '../db/schema.js';
 import { SettingsService } from '../settings/settings.service.js';
+import { AffiliateService } from '../affiliate/affiliate.service.js';
 import { MailService } from '../mail/mail.service.js';
 import {
   directorNotice,
@@ -48,8 +50,7 @@ export const MAX_OPEN_ORDERS = 3;
 type Book = { domain: string; grade: string };
 
 /** Tanggal kalender WIB (YYYY-MM-DD) untuk buku kas. */
-export const jakartaDate = (d: Date) =>
-  new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(d);
+export { jakartaDate } from '../common/dates.js';
 
 const iso = (d: Date | null) => (d ? d.toISOString() : null);
 
@@ -110,6 +111,7 @@ export class BillingService {
     @Inject(DB) private readonly db: Db,
     private readonly settings: SettingsService,
     @Optional() private readonly mail?: MailService,
+    @Optional() private readonly affiliate?: AffiliateService,
   ) {}
 
   /**
@@ -372,6 +374,7 @@ export class BillingService {
    * masih aktif), dan pemasukan dicatat di buku kas. Idempoten terhadap klik ganda.
    */
   async approve(id: string, adminId: string, now = new Date()) {
+    const affiliateRules = this.affiliate ? await this.settings.get('affiliate') : null;
     const paid = await this.db.transaction(async (tx) => {
       const [order] = await tx.select().from(orders).where(eq(orders.id, id)).for('update');
       if (!order) throw new NotFoundException('Pesanan tidak ditemukan');
@@ -420,6 +423,9 @@ export class BillingService {
           createdBy: adminId,
         })
         .onConflictDoNothing();
+      // Komisi afiliasi 1 tingkat (D-063) tercatat di transaksi yang sama dengan status "dibayar".
+      if (this.affiliate && affiliateRules)
+        await this.affiliate.recordCommission(tx, order, affiliateRules, now);
       const [row] = await tx
         .update(orders)
         .set({ status: 'paid', reviewedBy: adminId, reviewedAt: now, note: null })

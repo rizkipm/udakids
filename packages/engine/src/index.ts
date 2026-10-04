@@ -17,6 +17,7 @@ export * from './adaptive/assist.js';
 export * from './content/dialog.js';
 export * from './content/voice.js';
 export * from './billing/billing.js';
+export * from './affiliate/affiliate.js';
 export * from './reports/insights.js';
 export * from './generator/index.js';
 export * from './account/schemas.js';

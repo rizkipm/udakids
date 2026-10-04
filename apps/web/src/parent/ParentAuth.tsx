@@ -2,14 +2,18 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   emailVerifySchema,
+  isReferralCode,
+  normalizeReferralCode,
   parentLoginSchema,
   parentRegisterSchema,
   type SessionUser,
+  MAX_CHILDREN_PER_PARENT,
 } from '@little-coder/engine';
 import { ApiError, api, errorMessage } from '../api/client';
 import { rememberFamilyCode, setSession } from '../auth/session';
 import { t } from '../i18n';
 import { AuthLayout, familySteps } from '../site/AuthLayout';
+import { forgetReferral, readReferral, rememberReferral } from '../site/referral';
 import { Button, Card, Checkbox, Notice, PasswordField, RequiredNote, TextField } from '../ui/ui';
 import { fieldErrors, serverFieldErrors } from './form';
 
@@ -68,6 +72,7 @@ export function ParentLogin() {
     >
       <Card title={t('parent.login.title')}>
         <p className="ui-muted pa-gap">{t('parent.login.subtitle')}</p>
+        <p className="ui-muted">{t('parent.login.childLimit', { n: MAX_CHILDREN_PER_PARENT })}</p>
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit} noValidate>
           <RequiredNote />
@@ -101,8 +106,26 @@ export function ParentLogin() {
   );
 }
 
+/** Cek kode referal (D-063): nama pengajak tersamar, atau kode tidak dikenal. */
+function useReferralPreview(raw: string) {
+  const [state, setState] = useState<{ code: string; name?: string; valid: boolean }>();
+  const code = normalizeReferralCode(raw);
+  useEffect(() => {
+    if (!isReferralCode(code)) return setState(undefined);
+    const ctl = new AbortController();
+    api<{ valid: boolean; name?: string }>(`/referral/${code}`, { signal: ctl.signal })
+      .then((r) => setState({ code, valid: r.valid, name: r.name }))
+      .catch(() => undefined);
+    return () => ctl.abort();
+  }, [code]);
+  return state?.code === code ? state : undefined;
+}
+
 export function ParentRegister() {
   const navigate = useNavigate();
+  const [search] = useSearchParams();
+  const [referral, setReferral] = useState(() => search.get('ref') ?? readReferral());
+  const preview = useReferralPreview(referral);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -115,9 +138,18 @@ export function ParentRegister() {
   async function submit(e: FormEvent) {
     e.preventDefault();
     setError(undefined);
-    const parsed = parentRegisterSchema.safeParse({ name, email, password, consent });
+    const referralCode = normalizeReferralCode(referral);
+    const parsed = parentRegisterSchema.safeParse({
+      name,
+      email,
+      password,
+      consent,
+      ...(referralCode && { referralCode }),
+    });
     const next = parsed.success ? {} : fieldErrors(parsed.error.issues);
     if (consent !== true) next.consent = t('parent.consent.required');
+    if (referralCode && (!isReferralCode(referralCode) || preview?.valid === false))
+      next.referralCode = t('parent.register.referralInvalid');
     if (confirm !== password && !next.password) next.confirm = t('parent.register.confirmMismatch');
     setErrors(next);
     if (!parsed.success || Object.keys(next).length > 0) return;
@@ -126,6 +158,7 @@ export function ParentRegister() {
       const res = await api<AuthResponse | PendingResponse>('/auth/parent/register', {
         body: parsed.data,
       });
+      forgetReferral();
       if ('verificationRequired' in res) {
         navigate(verifyPath(res.email), { replace: true, state: { sent: true } });
         return;
@@ -149,7 +182,12 @@ export function ParentRegister() {
       steps={{ current: 1, labels: familySteps() }}
     >
       <Card title={t('parent.register.title')}>
-        <p className="ui-muted pa-gap">{t('parent.register.subtitle')}</p>
+        <p className="ui-muted pa-gap">
+          {t('parent.register.subtitle', { n: MAX_CHILDREN_PER_PARENT })}
+        </p>
+        <Notice tone="info">
+          {t('parent.register.childLimit', { n: MAX_CHILDREN_PER_PARENT })}
+        </Notice>
         <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit} noValidate>
@@ -188,6 +226,27 @@ export function ParentRegister() {
             value={confirm}
             error={errors.confirm}
             onChange={(e) => setConfirm(e.target.value)}
+          />
+          <TextField
+            label={t('parent.register.referral')}
+            hint={
+              preview?.valid
+                ? t('parent.register.referralBy', { name: preview.name ?? '' })
+                : t('parent.register.referralHint')
+            }
+            autoComplete="off"
+            autoCapitalize="characters"
+            spellCheck={false}
+            maxLength={12}
+            value={referral}
+            error={
+              errors.referralCode ??
+              (preview?.valid === false ? t('parent.register.referralInvalid') : undefined)
+            }
+            onChange={(e) => {
+              setReferral(e.target.value);
+              if (isReferralCode(e.target.value)) rememberReferral(e.target.value);
+            }}
           />
           <section className="pa-consent" aria-labelledby="pa-consent-title">
             <h3 id="pa-consent-title">{t('parent.consent.title')}</h3>

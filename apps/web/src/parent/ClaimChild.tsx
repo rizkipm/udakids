@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { childClaimSchema, type PinPicture } from '@little-coder/engine';
 import { errorMessage } from '../api/client';
+import { isChildLimitError } from './ChildLimit';
 import type { ChildProfile } from '../api/types';
 import { useApiCall } from '../auth/useApi';
 import { t } from '../i18n';
@@ -11,9 +12,12 @@ import { PinEntry } from './PinSetter';
 export function ClaimChild({
   onClaimed,
   onClose,
+  onLimit,
 }: {
   onClaimed: (child: ChildProfile) => void;
   onClose: () => void;
+  /** Server menolak: akun sudah punya 7 anak (D-063) → pop-up "buat akun terpisah". */
+  onLimit?: () => void;
 }) {
   const call = useApiCall('parent');
   const [code, setCode] = useState('');
@@ -43,6 +47,10 @@ export function ClaimChild({
       const child = await call<ChildProfile>('/parent/children/claim', { body: parsed.data });
       onClaimed(child);
     } catch (err) {
+      if (isChildLimitError(err) && onLimit) {
+        onLimit();
+        return;
+      }
       setError(errorMessage(err));
       setPin(null);
       setPinKey((k) => k + 1);

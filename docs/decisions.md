@@ -1278,3 +1278,59 @@ terdengar; anak Pra-TK belum paham instruksi English). Mengganti poin bahasa & s
   - id, judul, dan urutan skill sama dengan aslinya; versi dinaikkan ke 2 agar `db:seed` memperbarui database.
 - **Mutu:** validator 0 error; audit variasi 0 level bermasalah, tanpa tumpang tindih antar level; tanpa pilihan kembar;
   jawaban soal dengar tidak tampil di teks soal; tanpa kata "salah/gagal".
+
+## D-063 — Afiliasi orang tua (kode referal, saldo, pencairan) & batas 7 anak per akun
+
+Tanggal 2026-10-04 · Status **Disetujui** (pilihan pemilik produk: afiliasi lewat akun dewasa, bonus tertahan sampai
+teman aktif, komisi 1 tingkat dengan pohon visual, verifikasi rekening manual oleh admin).
+
+- **Peserta:** hanya akun dewasa (akun orang tua, boleh tanpa anak, email terverifikasi). Tidak ada kode, saldo, link,
+  atau rekening di area anak. Anak yang daftar sendiri ikut dikelola akun orang tua yang menautkannya.
+- **Kode & link:**
+  - kode 6 karakter tanpa huruf yang mudah tertukar, dibuat saat menu Afiliasi pertama dibuka;
+  - link `/r/KODE` menyimpan kode di perangkat 30 hari, menghitung klik (angka harian saja), lalu membuka daftar
+    orang tua dengan kode terisi;
+  - kode juga bisa diketik manual; pratinjau hanya menampilkan nama pengajak tersamar ("Ri*** Sy***");
+  - kode dikunci saat daftar (satu perekrut, tidak bisa diri sendiri; kode tak dikenal diabaikan).
+- **Bonus ajak teman** (bawaan Rp3.500): tercatat tertahan; cair bila teman sudah verifikasi email dan anaknya main
+  ≥ 3 ronde dalam 30 hari, gugur bila tidak. Batas 20 bonus per bulan per akun. Semua angka diatur admin.
+- **Komisi langganan 1 tingkat** (bawaan 33%):
+  - dari harga paket tanpa kode unik transfer (D-036), dibulatkan ke bawah;
+  - dicatat di transaksi yang sama dengan persetujuan pesanan; tertahan 7 hari, admin bisa menggugurkan yang masih
+    tertahan;
+  - persen & dasar disimpan per catatan, jadi perubahan pengaturan tidak mengubah komisi lama;
+  - tidak bertingkat (aman dari larangan skema piramida, UU 7/2014 Pasal 9). Pohon hanya visual: anggota langsung +
+    jumlah anggota mereka.
+- **Saldo = buku besar** (`affiliate_ledger`): setiap gerakan baris baru, jumlah tidak pernah diubah; indeks unik
+  menjamin satu bonus per teman, satu komisi per pesanan, satu catatan per jenis per pencairan.
+- **Rekening pencairan:**
+  - bank/e-wallet dari daftar admin; nomor terenkripsi (AES-GCM) + hash HMAC untuk deteksi rekening kembar, selalu
+    tampil tersamar;
+  - menyimpan/mengubah wajib kode 6 angka dari email; nama pemilik harus cocok dengan nama akun → langsung
+    terverifikasi, berbeda atau nomor dipakai akun lain → menunggu verifikasi admin;
+  - pencairan ditahan 3 hari setelah rekening diubah; rekening terkunci selama ada pengajuan.
+- **Pencairan:** minimal Rp15.000, satu pengajuan terbuka per akun (dijaga database), saldo dikunci saat diajukan
+  (baris akun dikunci di transaksi). Admin melihat nomor utuh, mentransfer manual, lalu menandai "sudah ditransfer" →
+  pengeluaran "Komisi afiliasi" otomatis di buku kas (komisi owner ikut benar). Ditolak/dibatalkan → saldo kembali.
+  Email ke orang tua (dibayar/ditolak/rekening ditinjau) dan ke direksi (pengajuan baru).
+- **Anti-kecurangan (tanda untuk admin, tidak menghukum otomatis):** rekening dipakai akun lain, nama rekening
+  berbeda, anggota daftar dari jaringan yang sama (hash IP saat daftar, HMAC, tidak bisa dibalik), ≥ 3 anggota dari
+  jaringan yang sama. Admin bisa koreksi saldo (baris baru + alasan) dan menggugurkan catatan tertahan.
+- **Privasi (UU PDP):** anggota tampil dengan nama tersamar, tanpa email dan tanpa data anak.
+- **Pajak:** komisi ke orang pribadi bisa dikenai PPh 21 bukan pegawai (PMK 168/2023); nominal tercatat bruto,
+  pemotongan pajak dikonsultasikan dulu dengan konsultan pajak.
+- **Batas 7 anak aktif per akun orang tua:** dicek di server (tambah anak, tautkan anak daftar sendiri, admin
+  mengaktifkan kembali) dengan baris akun dikunci; layar orang tua menampilkan peringatan dan saran membuat akun baru.
+  - Info batas selalu terlihat: halaman daftar & masuk ("maksimal 7 anak, lebih dari itu buat akun orang tua kedua
+    dengan email lain"), dasbor "3 dari 7 anak terdaftar", dan formulir tambah anak.
+  - Saat sudah 7 anak: tombol "Tambah profil anak" dan "Tautkan anak" membuka pop-up (`<dialog>` modal) yang
+    menjelaskan anak ke-8 tidak bisa ditambahkan dan menawarkan "Keluar & buat akun orang tua baru" (sesi orang tua
+    saja yang keluar; sesi anak & kode keluarga di perangkat tetap). Formulir tambah anak tidak ditampilkan dan pop-up
+    langsung terbuka; penolakan server `child_limit` (mis. anak ditambah dari perangkat lain) juga membuka pop-up.
+- Migrasi `0013_affiliate` hanya menambah tabel/kolom (aman untuk data yang ada).
+- **Tampilan (pembaruan):** halaman Afiliasi orang tua memakai hero saldo (progres menuju minimal pencairan + tombol
+  cairkan), KPI, insight personal (komisi berikutnya cair kapan, bonus menunggu teman aktif, teman belum verifikasi),
+  corong konversi, dan daftar kartu yang responsif. Admin mendapat tab Ringkasan berisi insight yang bisa diklik
+  (antrean, rekening, tanda kecurigaan, rasio biaya afiliasi terhadap pendapatan anggota referal, konversi), tren 12
+  bulan, corong, dan afiliator teratas (`GET /admin/affiliate/analytics`); antrean pencairan & rekening berupa kartu;
+  Pengaturan di tab sendiri dengan contoh hitung komisi.

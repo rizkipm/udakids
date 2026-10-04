@@ -5,7 +5,7 @@ import type {
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
 } from 'react';
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { t } from '../i18n';
 import './ui.css';
 
@@ -268,6 +268,63 @@ export function Notice({
     <div className={`ui-notice ui-notice-${tone}`} role={tone === 'error' ? 'alert' : 'status'}>
       {children}
     </div>
+  );
+}
+
+/**
+ * Pop-up modal (elemen `<dialog>` bawaan: fokus terkunci di dalam, Esc menutup, latar diredupkan).
+ * Peramban tanpa `showModal` tetap menampilkannya sebagai kotak biasa.
+ */
+export function Dialog({
+  open,
+  title,
+  children,
+  actions,
+  onClose,
+  tone = 'info',
+}: {
+  open: boolean;
+  title: ReactNode;
+  children: ReactNode;
+  actions?: ReactNode;
+  onClose: () => void;
+  tone?: 'info' | 'warning';
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  useEffect(() => {
+    const d = ref.current;
+    if (!d) return;
+    if (open && !d.open) {
+      if (typeof d.showModal === 'function') d.showModal();
+      else d.setAttribute('open', '');
+    } else if (!open && d.open) {
+      if (typeof d.close === 'function') d.close();
+      else d.removeAttribute('open');
+    }
+  }, [open]);
+  return (
+    <dialog
+      ref={ref}
+      className={`ui-dialog ui-dialog-${tone}`}
+      aria-labelledby={titleId}
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
+      onClick={(e) => {
+        // Ketuk di luar kotak (latar) menutup pop-up.
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      {open && (
+        <div className="ui-dialog-box">
+          <h2 id={titleId}>{title}</h2>
+          <div className="ui-dialog-body">{children}</div>
+          <div className="ui-dialog-actions">{actions}</div>
+        </div>
+      )}
+    </dialog>
   );
 }
 

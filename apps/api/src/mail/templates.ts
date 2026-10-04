@@ -492,3 +492,137 @@ export function expiryReminder(
   const text = `Halo ${d.name},\nPaket ${d.packageName} ${who} berakhir ${when} (${dateTime(d.endsAt)}).\nSetelah berakhir, level Premium terkunci lagi, tetapi skor dan progres tetap tersimpan.\nPerpanjang: ${url}${footerText(ctx)}`;
   return { subject, html, text };
 }
+
+// ------------------------------------------------------------------ afiliasi (D-063)
+
+const affiliateUrl = (ctx: MailContext) => `${ctx.appUrl.replace(/\/$/, '')}/orang-tua/afiliasi`;
+const adminAffiliateUrl = (ctx: MailContext) => `${ctx.appUrl.replace(/\/$/, '')}/admin/afiliasi`;
+
+/** Kode untuk mengubah rekening pencairan (aksi sensitif). */
+export function affiliateActionCode(
+  ctx: MailContext,
+  d: { name: string; code: string; minutes: number },
+): MailContent {
+  const subject = `${d.code} adalah kode untuk mengubah rekening pencairan ${ctx.brand}`;
+  const html = layout(ctx, {
+    title: `Halo, ${d.name}`,
+    preheader: `Kode Anda: ${d.code}. Berlaku ${d.minutes} menit.`,
+    body: [
+      p('Seseorang (semoga Anda) ingin menyimpan atau mengubah rekening pencairan afiliasi.'),
+      bigBox('Kode verifikasi', d.code, 'grape', `Berlaku ${d.minutes} menit`),
+      note(
+        'Kalau bukan Anda, abaikan email ini dan segera ganti kata sandi akun. Rekening tidak berubah tanpa kode ini.',
+      ),
+    ].join('\n'),
+  });
+  const text = `Halo, ${d.name}\n\nKode untuk mengubah rekening pencairan: ${d.code} (berlaku ${d.minutes} menit).\nKalau bukan Anda, abaikan email ini dan ganti kata sandi akun.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+type PayoutMail = {
+  number: string;
+  name: string;
+  amount: number;
+  provider: string;
+  last4: string;
+  holderName: string;
+};
+
+export function affiliatePayoutRequested(ctx: MailContext, d: PayoutMail): MailContent {
+  const subject = `[Afiliasi] Pengajuan pencairan ${d.number} · ${rupiah(d.amount)}`;
+  const html = layout(ctx, {
+    title: 'Pengajuan pencairan afiliasi baru',
+    preheader: `${d.name} mengajukan ${rupiah(d.amount)}.`,
+    body: [
+      infoBox([
+        ['Nomor', d.number],
+        ['Akun', d.name],
+        ['Jumlah', rupiah(d.amount)],
+        ['Tujuan', `${d.provider} •••• ${d.last4} a.n. ${d.holderName}`],
+      ]),
+      button(adminAffiliateUrl(ctx), 'Buka antrean pencairan'),
+    ].join('\n'),
+  });
+  const text = `Pengajuan pencairan afiliasi ${d.number}\nAkun: ${d.name}\nJumlah: ${rupiah(d.amount)}\nTujuan: ${d.provider} •••• ${d.last4} a.n. ${d.holderName}\n${adminAffiliateUrl(ctx)}${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+export function affiliatePayoutPaid(
+  ctx: MailContext,
+  d: PayoutMail & { transferRef: string | null },
+): MailContent {
+  const subject = `Pencairan ${rupiah(d.amount)} sudah ditransfer`;
+  const html = layout(ctx, {
+    title: `Terima kasih, ${d.name}!`,
+    preheader: `Pencairan ${d.number} sudah ditransfer.`,
+    tone: 'leaf',
+    body: [
+      p('Pencairan saldo afiliasi Anda sudah kami transfer.'),
+      infoBox(
+        [
+          ['Nomor', d.number],
+          ['Jumlah', rupiah(d.amount)],
+          ['Tujuan', `${d.provider} •••• ${d.last4} a.n. ${d.holderName}`],
+          ...(d.transferRef ? ([['Referensi transfer', d.transferRef]] as [string, string][]) : []),
+        ],
+        'leaf',
+      ),
+      button(affiliateUrl(ctx), 'Lihat riwayat afiliasi'),
+    ].join('\n'),
+  });
+  const text = `Pencairan ${d.number} sebesar ${rupiah(d.amount)} sudah ditransfer ke ${d.provider} •••• ${d.last4} a.n. ${d.holderName}.${d.transferRef ? `\nReferensi: ${d.transferRef}` : ''}\n${affiliateUrl(ctx)}${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+export function affiliatePayoutRejected(
+  ctx: MailContext,
+  d: PayoutMail & { reason: string },
+): MailContent {
+  const subject = `Pencairan ${d.number} belum bisa diproses`;
+  const html = layout(ctx, {
+    title: `Halo, ${d.name}`,
+    preheader: 'Saldo sudah dikembalikan ke akun Anda.',
+    tone: 'coral',
+    body: [
+      p(
+        'Pengajuan pencairan berikut belum bisa kami proses. Saldonya sudah dikembalikan ke akun Anda.',
+      ),
+      infoBox(
+        [
+          ['Nomor', d.number],
+          ['Jumlah', rupiah(d.amount)],
+          ['Alasan', d.reason],
+        ],
+        'coral',
+      ),
+      button(affiliateUrl(ctx), 'Buka menu Afiliasi'),
+    ].join('\n'),
+  });
+  const text = `Pencairan ${d.number} (${rupiah(d.amount)}) belum bisa diproses: ${d.reason}\nSaldo sudah dikembalikan.\n${affiliateUrl(ctx)}${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+export function affiliateAccountReviewed(
+  ctx: MailContext,
+  d: { name: string; provider: string; last4: string; approved: boolean; reason?: string | null },
+): MailContent {
+  const subject = d.approved
+    ? 'Rekening pencairan Anda sudah terverifikasi'
+    : 'Rekening pencairan Anda perlu diperbaiki';
+  const html = layout(ctx, {
+    title: `Halo, ${d.name}`,
+    preheader: subject,
+    tone: d.approved ? 'leaf' : 'coral',
+    body: [
+      p(
+        d.approved
+          ? `Rekening ${d.provider} •••• ${d.last4} sudah kami verifikasi dan bisa dipakai untuk pencairan.`
+          : `Rekening ${d.provider} •••• ${d.last4} belum bisa kami verifikasi.`,
+      ),
+      ...(d.reason ? [note(`Catatan admin: ${d.reason}`)] : []),
+      button(affiliateUrl(ctx), 'Buka menu Afiliasi'),
+    ].join('\n'),
+  });
+  const text = `${subject}.\nRekening: ${d.provider} •••• ${d.last4}${d.reason ? `\nCatatan admin: ${d.reason}` : ''}\n${affiliateUrl(ctx)}${footerText(ctx)}`;
+  return { subject, html, text };
+}

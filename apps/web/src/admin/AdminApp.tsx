@@ -6,6 +6,7 @@ import { VisualGallery } from '../components/visuals';
 import { t, type MessageKey } from '../i18n';
 import { AppShell, type ShellIcon } from '../ui/AppShell';
 import { PageHeader } from '../ui/ui';
+import { AffiliateAdminPage } from './affiliate/AffiliateAdminPage';
 import { BillingSettingsPage } from './billing/BillingSettingsPage';
 import { CashPage } from './billing/CashPage';
 import { CommissionPage } from './billing/CommissionPage';
@@ -60,6 +61,7 @@ const NAV: (NavItem | { group: MessageKey })[] = [
   { group: 'admin.nav.groupFinance' },
   { to: '/admin/kas', label: 'admin.nav.cash', icon: 'wallet' },
   { to: '/admin/komisi', label: 'admin.nav.commission', icon: 'percent' },
+  { to: '/admin/afiliasi', label: 'admin.nav.affiliate', icon: 'users' },
 ];
 
 /** Jumlah transfer yang menunggu verifikasi (badge menu Transaksi). */
@@ -158,6 +160,7 @@ export function AdminApp() {
         <Route path="pengaturan" element={<BillingSettingsPage />} />
         <Route path="kas" element={<CashPage />} />
         <Route path="komisi" element={<CommissionPage />} />
+        <Route path="afiliasi" element={<AffiliateAdminPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppShell>

@@ -14,6 +14,7 @@
 
 .bnr-track {
   display: flex;
+  align-items: flex-start;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -66,32 +67,26 @@
   color: var(--bnr-ink);
 }
 
-.bnr-img {
-  position: absolute;
-  inset: 0;
+/* Banner bergambar: gambar utuh sesuai rasio aslinya, tanpa dipotong dan tanpa lapisan gelap. */
+.bnr-card.is-image {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  background: #fff;
+  color: inherit;
+}
+.bnr-img-full {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
+  height: auto;
 }
-/* Gradasi gelap agar teks di atas foto tetap terbaca (kontras tinggi). */
-.bnr-card.has-image {
-  color: #fff;
+.bnr-img-link {
+  display: block;
+  border-radius: inherit;
 }
-.bnr-card.has-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    90deg,
-    rgba(16, 12, 32, 0.82) 0%,
-    rgba(16, 12, 32, 0.6) 45%,
-    rgba(16, 12, 32, 0.08) 100%
-  );
-}
-.bnr-card.has-image .bnr-deco {
-  display: none;
+.bnr-img-link:focus-visible {
+  outline: 4px solid #f7c948;
+  outline-offset: -4px;
 }
 
 .bnr-text {
@@ -135,7 +130,7 @@
     transform 0.12s,
     box-shadow 0.12s;
 }
-.bnr-tone-sun:not(.has-image) .bnr-cta {
+.bnr-tone-sun .bnr-cta {
   background: var(--bnr-ink);
   color: #fff;
   border-color: var(--bnr-ink);
@@ -226,8 +221,8 @@
 }
 
 /* Dasbor (orang tua/admin): lebih ringkas agar data utama tetap terlihat. */
-.bnr-at-parent .bnr-card,
-.bnr-at-admin .bnr-card {
+.bnr-at-parent .bnr-card:not(.is-image),
+.bnr-at-admin .bnr-card:not(.is-image) {
   min-height: 176px;
   padding: clamp(18px, 3vw, 32px);
 }
@@ -245,15 +240,12 @@
 }
 
 @media (max-width: 640px) {
-  .bnr-card {
+  .bnr-card:not(.is-image) {
     min-height: 180px;
     align-items: flex-end;
   }
   .bnr-text {
     max-width: 100%;
-  }
-  .bnr-card.has-image::before {
-    background: linear-gradient(0deg, rgba(16, 12, 32, 0.85) 0%, rgba(16, 12, 32, 0.25) 100%);
   }
   .bnr-deco {
     top: 18px;

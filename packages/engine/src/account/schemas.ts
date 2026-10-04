@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { referralInputSchema } from '../affiliate/affiliate.js';
 import { COLORS, type ObjectId } from '../generator/assets.js';
 import { jagoStateSchema } from '../scoring/jago.js';
 import { skillIdSchema } from '../generator/template.js';
@@ -69,6 +70,8 @@ export const parentRegisterSchema = z.strictObject({
   email,
   password,
   consent: z.literal(true, { error: 'persetujuan pengolahan data wajib dicentang' }),
+  /** Kode referal opsional (afiliasi, D-063); kosong = tanpa referal. */
+  referralCode: referralInputSchema.optional(),
 });
 /** `familyCode` boleh berisi kode keluarga ATAU kode kelas (D-025). */
 export const childLoginSchema = z.strictObject({

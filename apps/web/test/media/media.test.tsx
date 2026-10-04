@@ -277,3 +277,34 @@ describe('admin banner', () => {
     setSession('staff', null);
   });
 });
+
+describe('banner bergambar (gambar utuh)', () => {
+  it('gambar tampil tanpa judul di atasnya; judul jadi teks alternatif; seluruh gambar bisa diketuk', () => {
+    inRouter(
+      <BannerSlides
+        placement="landing"
+        items={[
+          {
+            id: 'b1',
+            title: 'Belajar dan Bermain di UdaKids',
+            subtitle: 'Coba mulai gratis',
+            ctaLabel: 'Daftar',
+            ctaUrl: '/orang-tua/daftar',
+            imageId: '00000000-0000-4000-8000-000000000001',
+            tone: 'grape',
+          },
+        ]}
+      />,
+    );
+    const img = screen.getByRole('img', {
+      name: 'Belajar dan Bermain di UdaKids. Coba mulai gratis',
+    });
+    expect(img).toHaveClass('bnr-img-full');
+    expect(img.closest('a')).toHaveAttribute('href', '/orang-tua/daftar');
+    // Judul hanya untuk pembaca layar (bukan teks besar di atas gambar).
+    expect(screen.getByRole('heading', { name: 'Belajar dan Bermain di UdaKids' })).toHaveClass(
+      'bnr-sr',
+    );
+    expect(document.querySelector('.bnr-title')).toBeNull();
+  });
+});

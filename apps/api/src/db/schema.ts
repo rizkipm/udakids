@@ -13,6 +13,7 @@ import {
   timestamp,
   uniqueIndex,
   uuid,
+  type AnyPgColumn,
 } from 'drizzle-orm/pg-core';
 
 // PRD A12 + D-014..D-017. Privasi: data anak HANYA nickname + momo_color (+ hash sandi gambar).
@@ -50,9 +51,21 @@ export const parents = pgTable(
     newsOptOutAt: timestamp('news_opt_out_at', { withTimezone: true }),
     emailVerifiedAt: timestamp('email_verified_at', { withTimezone: true }),
     active: boolean('active').notNull().default(true),
+    /** Kode referal milik akun ini (D-063); dibuat saat pertama kali membuka menu Afiliasi. */
+    referralCode: text('referral_code').unique(),
+    /** Yang mengajak (dikunci saat daftar; tidak bisa diubah, tidak bisa diri sendiri). */
+    referredBy: uuid('referred_by').references((): AnyPgColumn => parents.id, {
+      onDelete: 'set null',
+    }),
+    referredAt: timestamp('referred_at', { withTimezone: true }),
+    /** Hash IP saat daftar (HMAC, tidak bisa dibalik) — hanya untuk deteksi akun palsu afiliasi. */
+    signupIpHash: text('signup_ip_hash'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [uniqueIndex('parents_email_lower_uq').on(sql`lower(${t.email})`)],
+  (t) => [
+    uniqueIndex('parents_email_lower_uq').on(sql`lower(${t.email})`),
+    index('parents_referred_by_idx').on(t.referredBy),
+  ],
 );
 
 export const classes = pgTable('classes', {
@@ -541,4 +554,144 @@ export const emailOutbox = pgTable(
     sentAt: timestamp('sent_at', { withTimezone: true }),
   },
   (t) => [index('email_outbox_status_idx').on(t.status, t.nextAttemptAt)],
+);
+
+// ------------------------------------------------------------------ afiliasi orang tua (D-063)
+
+/** Kode sekali pakai untuk aksi sensitif (mis. ganti rekening pencairan), terpisah dari verifikasi daftar. */
+export const actionCodes = pgTable(
+  'action_codes',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    purpose: text('purpose').notNull(),
+    codeHash: text('code_hash').notNull(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    attempts: integer('attempts').notNull().default(0),
+    consumedAt: timestamp('consumed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('action_codes_parent_idx').on(t.parentId, t.purpose, t.createdAt)],
+);
+
+/** Klik link referal per hari (WIB) — angka saja, tanpa data pengunjung. */
+export const affiliateClickDays = pgTable(
+  'affiliate_click_days',
+  {
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    day: text('day').notNull(),
+    clicks: integer('clicks').notNull().default(0),
+  },
+  (t) => [primaryKey({ columns: [t.parentId, t.day] })],
+);
+
+/** Rekening pencairan (satu per akun). Nomor disimpan terenkripsi; hash HMAC untuk mendeteksi rekening kembar. */
+export const affiliateAccounts = pgTable(
+  'affiliate_accounts',
+  {
+    parentId: uuid('parent_id')
+      .primaryKey()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    providerId: text('provider_id').notNull(),
+    providerName: text('provider_name').notNull(),
+    kind: text('kind').notNull(),
+    accountSealed: jsonb('account_sealed').notNull(),
+    accountLast4: text('account_last4').notNull(),
+    accountHash: text('account_hash').notNull(),
+    holderName: text('holder_name').notNull(),
+    /** Nama rekening cocok dengan nama akun saat disimpan. */
+    nameMatch: boolean('name_match').notNull(),
+    /** pending (menunggu admin) | verified | rejected */
+    status: text('status').notNull(),
+    reviewNote: text('review_note'),
+    verifiedBy: uuid('verified_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    verifiedAt: timestamp('verified_at', { withTimezone: true }),
+    changedAt: timestamp('changed_at', { withTimezone: true }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('affiliate_accounts_hash_idx').on(t.accountHash)],
+);
+
+/** Pengajuan pencairan. Saldo dikunci saat diajukan (catatan `payout` di buku besar). */
+export const affiliatePayouts = pgTable(
+  'affiliate_payouts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    number: text('number').notNull().unique(),
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    amount: integer('amount').notNull(),
+    providerName: text('provider_name').notNull(),
+    kind: text('kind').notNull(),
+    accountSealed: jsonb('account_sealed').notNull(),
+    accountLast4: text('account_last4').notNull(),
+    holderName: text('holder_name').notNull(),
+    /** requested | paid | rejected | cancelled */
+    status: text('status').notNull(),
+    note: text('note'),
+    transferRef: text('transfer_ref'),
+    requestedAt: timestamp('requested_at', { withTimezone: true }).notNull().defaultNow(),
+    reviewedBy: uuid('reviewed_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    paidAt: timestamp('paid_at', { withTimezone: true }),
+    cashEntryId: uuid('cash_entry_id').references(() => cashEntries.id, { onDelete: 'set null' }),
+  },
+  (t) => [
+    index('affiliate_payouts_parent_idx').on(t.parentId, t.requestedAt),
+    // Satu pengajuan terbuka per akun — dijaga database, bukan hanya kode.
+    uniqueIndex('affiliate_payouts_open_uq')
+      .on(t.parentId)
+      .where(sql`${t.status} = 'requested'`),
+  ],
+);
+
+/**
+ * Buku besar afiliasi: setiap gerakan saldo adalah baris baru (jumlah tidak pernah diubah). Saldo = jumlah baris
+ * `available`. Indeks unik menjamin satu bonus per teman, satu komisi per pesanan, dan satu catatan per jenis per
+ * pencairan, sehingga tidak ada saldo ganda walau permintaan diulang.
+ */
+export const affiliateLedger = pgTable(
+  'affiliate_ledger',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    parentId: uuid('parent_id')
+      .notNull()
+      .references(() => parents.id, { onDelete: 'cascade' }),
+    /** signup_bonus | commission | payout | payout_return | adjustment */
+    type: text('type').notNull(),
+    /** pending | available | void */
+    state: text('state').notNull(),
+    amount: integer('amount').notNull(),
+    /** Komisi: dasar (harga tanpa kode unik) & persen yang berlaku saat dicatat. */
+    baseAmount: integer('base_amount'),
+    rateBp: integer('rate_bp'),
+    refereeId: uuid('referee_id').references(() => parents.id, { onDelete: 'set null' }),
+    orderId: uuid('order_id').references(() => orders.id, { onDelete: 'set null' }),
+    payoutId: uuid('payout_id').references(() => affiliatePayouts.id, { onDelete: 'set null' }),
+    /** Komisi bisa dicairkan mulai waktu ini; bonus: batas waktu syarat aktif. */
+    availableAt: timestamp('available_at', { withTimezone: true }),
+    note: text('note'),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('affiliate_ledger_parent_idx').on(t.parentId, t.createdAt),
+    index('affiliate_ledger_pending_idx').on(t.state, t.availableAt),
+    uniqueIndex('affiliate_ledger_bonus_uq')
+      .on(t.refereeId)
+      .where(sql`${t.type} = 'signup_bonus'`),
+    uniqueIndex('affiliate_ledger_commission_uq')
+      .on(t.orderId)
+      .where(sql`${t.type} = 'commission'`),
+    uniqueIndex('affiliate_ledger_payout_uq')
+      .on(t.payoutId, t.type)
+      .where(sql`${t.payoutId} is not null`),
+    check('affiliate_ledger_state_ck', sql`${t.state} in ('pending', 'available', 'void')`),
+  ],
 );
