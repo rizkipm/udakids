@@ -133,6 +133,7 @@ export class AdminDirectoryController {
             : sql`p.created_at desc`;
     const res = await this.db.execute(sql`
       select p.id, p.name, p.email, p.family_code, p.active, p.consent_at, p.created_at, p.email_verified_at,
+        p.must_change_password,
         (select max(k.last_active_at) from children k where k.parent_id = p.id) as last_active,
         count(*) over() as total
       from parents p
@@ -169,6 +170,7 @@ export class AdminDirectoryController {
           consentAt: iso(r.consent_at ? new Date(String(r.consent_at)) : null),
           /** Null = email belum diverifikasi (belum bisa masuk; D-044). */
           emailVerifiedAt: r.email_verified_at ? iso(new Date(String(r.email_verified_at))) : null,
+          mustChangePassword: Boolean(r.must_change_password),
           createdAt: iso(new Date(String(r.created_at))),
           lastActiveAt: r.last_active ? iso(new Date(String(r.last_active))) : null,
           /** Paket yang dibeli keluarga (berlaku untuk semua anaknya). */

@@ -13,7 +13,7 @@ Argumen: kode unit, mis. `P-BT-04`. Tanpa argumen → tanya kodenya. Satu pemang
 2. Baca `docs/rencana-gudang-gambar-menu-belajar.md` (bagian 4 dan 6), `docs/rencana-worksheet-kosakata.md`
    (bagian 4: nomor model soal), `docs/content/buku-10-level.md` (pola 10 level), dan aturan di `CLAUDE.md`.
 3. **Cek keputusan:** cari di `docs/decisions.md` keputusan yang menyetujui Menu Belajar dan buku Baca Tulis
-   (D-065 dst.). Bila belum ada:
+   (nomor D setelah D-065). Bila belum ada:
    - mapel Berhitung/English/Sains dengan topik buku yang sudah ada → boleh lanjut;
    - buku baru (mis. Baca Tulis `literasi/*`, English TK/Kelas 1) → **berhenti dan tanya user** sebelum membuat
      buku atau katalog baru.

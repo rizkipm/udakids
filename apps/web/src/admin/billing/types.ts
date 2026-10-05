@@ -79,6 +79,9 @@ export type OrderRow = {
   createdAt: string;
   parentName?: string;
   parentEmail?: string;
+  /** Follow up email untuk pesanan belum dibayar: jumlah & waktu terakhir (daftar admin). */
+  followUps?: number;
+  lastFollowUpAt?: string | null;
 };
 
 export type CashEntry = {

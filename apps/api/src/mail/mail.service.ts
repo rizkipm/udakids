@@ -43,6 +43,12 @@ export function mailConfig() {
       .split(',')
       .map((x) => x.trim().toLowerCase())
       .filter(Boolean),
+    // Salinan email "Akun sudah aktif" (admin menandai terverifikasi) untuk memastikan email terkirim.
+    // "off" = tanpa salinan. Password sementara disembunyikan di salinan.
+    verifyCopy: (process.env.MAIL_VERIFY_COPY ?? 'workbyrizki@gmail.com')
+      .split(',')
+      .map((x) => x.trim().toLowerCase())
+      .filter((x) => x && x !== 'off'),
     appUrl:
       process.env.APP_PUBLIC_URL?.trim() ||
       process.env.WEB_ORIGIN?.split(',')[0]?.trim() ||
@@ -166,6 +172,11 @@ export class MailService implements OnModuleInit, OnModuleDestroy {
   /** Salinan untuk direksi (MAIL_DIRECTOR). */
   async notifyDirector(mail: MailContent, meta: { kind: string; refId?: string }) {
     return this.enqueue(mailConfig().director, mail, meta);
+  }
+
+  /** Salinan email "Akun sudah aktif" (MAIL_VERIFY_COPY). */
+  async copyAdminVerified(mail: MailContent, meta: { kind: string; refId?: string }) {
+    return this.enqueue(mailConfig().verifyCopy, mail, meta);
   }
 
   /** Kirim email yang jatuh tempo. Panggilan bersamaan diantrekan (satu per satu, tanpa kirim ganda). */

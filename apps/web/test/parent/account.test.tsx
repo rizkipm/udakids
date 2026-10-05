@@ -232,6 +232,59 @@ describe('admin: tandai email terverifikasi → password sementara', () => {
       await within(dialog).findByRole('button', { name: t('admin.family.tempCopied') }),
     ).toBeInTheDocument();
   });
+
+  it('kirim ulang info akun hanya selama password sementara belum diganti, dengan konfirmasi', async () => {
+    const base = {
+      name: 'Keluarga',
+      familyCode: 'ABC234',
+      active: true,
+      consentAt: '2026-09-01T00:00:00Z',
+      emailVerifiedAt: '2026-10-01T00:00:00Z',
+      createdAt: '2026-09-01T00:00:00Z',
+      lastActiveAt: null,
+      plan: { tier: 'free', source: null, endsAt: null, books: [] },
+      grants: [],
+      premiumChildren: 0,
+      children: [],
+    };
+    const waiting = {
+      ...base,
+      id: '00000000-0000-4000-8000-000000000002',
+      name: 'Keluarga Ani',
+      email: 'ani@contoh.id',
+      mustChangePassword: true,
+    } as unknown as FamilyRow;
+    const done = {
+      ...base,
+      id: '00000000-0000-4000-8000-000000000003',
+      name: 'Keluarga Budi',
+      email: 'budi@contoh.id',
+      mustChangePassword: false,
+    } as unknown as FamilyRow;
+    mockApi({
+      '/admin/directory/summary': {},
+      '/admin/directory/families': { page: 1, pageSize: 20, total: 2, items: [waiting, done] },
+      [`POST /admin/mail/parents/${waiting.id}/verify`]: {
+        ok: true,
+        changed: true,
+        email: 'ani@contoh.id',
+        tempPassword: 'Zq8nVb4kLm2p',
+      },
+    });
+    const confirm = vi.fn(() => true);
+    vi.stubGlobal('confirm', confirm);
+    renderAdmin(<FamiliesPage />, '/admin/keluarga');
+    const resend = await screen.findAllByRole('button', { name: t('admin.family.resend') });
+    // Hanya keluarga Ani (password sementara belum diganti); tombol "Tandai" tidak tampil lagi.
+    expect(resend).toHaveLength(1);
+    expect(screen.queryByRole('button', { name: t('admin.family.verifyEmail') })).toBeNull();
+    fireEvent.click(resend[0]!);
+    expect(confirm).toHaveBeenCalledWith(t('admin.family.resendConfirm', { name: 'Keluarga Ani' }));
+    const dialog = await screen.findByRole('dialog', {
+      name: t('admin.family.tempTitle', { name: 'Keluarga Ani' }),
+    });
+    expect(within(dialog).getByTestId('temp-password')).toHaveTextContent('Zq8nVb4kLm2p');
+  });
 });
 
 describe('kontak WhatsApp', () => {

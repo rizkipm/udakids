@@ -7,9 +7,11 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import {
   accessFrom,
+  adminWhatsappHref,
   entitlementEnd,
   FREE_ACCESS,
   OPEN_ORDER_STATUSES,
@@ -26,6 +28,7 @@ import {
   cashEntries,
   children,
   classes,
+  emailOutbox,
   entitlements,
   orders,
   packages,
@@ -38,6 +41,7 @@ import { MailService } from '../mail/mail.service.js';
 import {
   directorNotice,
   orderCreated,
+  orderFollowUp,
   orderPaid,
   orderRejected,
   proofReceived,
@@ -45,6 +49,10 @@ import {
 } from '../mail/templates.js';
 
 type PackageRow = typeof packages.$inferSelect;
+/** Follow up pesanan belum dibayar (admin → email orang tua): status yang boleh & jeda minimal. */
+export const FOLLOW_UP_STATUSES: readonly OrderStatus[] = ['awaiting_payment', 'expired'];
+export const FOLLOW_UP_COOLDOWN_MS = 24 * 3600_000;
+const FOLLOW_UP_KIND = 'order_followup';
 /** Pesanan terbuka (menunggu bayar/verifikasi) maksimal per keluarga. */
 export const MAX_OPEN_ORDERS = 3;
 type Book = { domain: string; grade: string };
@@ -121,36 +129,8 @@ export class BillingService {
   private async notify(ev: 'created' | 'proof' | 'paid' | 'rejected', orderId: string) {
     if (!this.mail) return;
     try {
-      const [o] = await this.db
-        .select({ order: orders, parentName: parents.name, parentEmail: parents.email })
-        .from(orders)
-        .innerJoin(parents, eq(parents.id, orders.parentId))
-        .where(eq(orders.id, orderId));
-      if (!o) return;
-      const [ent] =
-        ev === 'paid'
-          ? await this.db
-              .select({ endsAt: entitlements.endsAt })
-              .from(entitlements)
-              .where(eq(entitlements.orderId, orderId))
-          : [];
-      const snap = o.order.packageSnapshot as { name: string };
-      const m = o.order.methodSnapshot as OrderMail['method'];
-      const data: OrderMail = {
-        number: o.order.number,
-        parentName: o.parentName,
-        parentEmail: o.parentEmail,
-        packageName: snap.name,
-        priceNormal: o.order.priceNormal,
-        discount: o.order.discount,
-        uniqueCode: o.order.uniqueCode,
-        amount: o.order.amount,
-        method: m,
-        expiresAt: o.order.expiresAt,
-        orderId: o.order.id,
-        note: o.order.note,
-        endsAt: ent?.endsAt ?? null,
-      };
+      const data = await this.orderMail(orderId, ev === 'paid');
+      if (!data) return;
       const ctx = this.mail.ctx();
       const forParent =
         ev === 'created'
@@ -160,7 +140,7 @@ export class BillingService {
             : ev === 'paid'
               ? orderPaid(ctx, data)
               : orderRejected(ctx, data);
-      await this.mail.enqueue(o.parentEmail, forParent, { kind: `order_${ev}`, refId: orderId });
+      await this.mail.enqueue(data.parentEmail, forParent, { kind: `order_${ev}`, refId: orderId });
       await this.mail.notifyDirector(directorNotice(ctx, ev, data), {
         kind: `director_${ev}`,
         refId: orderId,
@@ -168,6 +148,85 @@ export class BillingService {
     } catch (err) {
       new Logger('Billing').warn(`email transaksi gagal diantrekan: ${(err as Error).message}`);
     }
+  }
+
+  /** Data email untuk satu pesanan (+ tanggal akhir akses bila sudah lunas). */
+  private async orderMail(orderId: string, withEnd = false): Promise<OrderMail | null> {
+    const [o] = await this.db
+      .select({ order: orders, parentName: parents.name, parentEmail: parents.email })
+      .from(orders)
+      .innerJoin(parents, eq(parents.id, orders.parentId))
+      .where(eq(orders.id, orderId));
+    if (!o) return null;
+    const [ent] = withEnd
+      ? await this.db
+          .select({ endsAt: entitlements.endsAt })
+          .from(entitlements)
+          .where(eq(entitlements.orderId, orderId))
+      : [];
+    const snap = o.order.packageSnapshot as { name: string };
+    return {
+      number: o.order.number,
+      parentName: o.parentName,
+      parentEmail: o.parentEmail,
+      packageName: snap.name,
+      priceNormal: o.order.priceNormal,
+      discount: o.order.discount,
+      uniqueCode: o.order.uniqueCode,
+      amount: o.order.amount,
+      method: o.order.methodSnapshot as OrderMail['method'],
+      expiresAt: o.order.expiresAt,
+      orderId: o.order.id,
+      note: o.order.note,
+      endsAt: ent?.endsAt ?? null,
+    };
+  }
+
+  /** Riwayat follow up per pesanan, dari antrean email (tanpa kolom baru). */
+  private followUpStats(orderId: string) {
+    return this.db
+      .select({
+        n: sql<number>`count(*)::int`,
+        last: sql<Date | null>`max(${emailOutbox.createdAt})`,
+      })
+      .from(emailOutbox)
+      .where(and(eq(emailOutbox.kind, FOLLOW_UP_KIND), eq(emailOutbox.refId, orderId)));
+  }
+
+  /**
+   * Admin: follow up pesanan yang belum dibayar (menunggu bayar / kedaluwarsa) lewat email ke orang tua,
+   * berisi cara bayar atau ajakan memesan ulang, plus kontak admin & grup WhatsApp. Maksimal sekali per 24 jam.
+   */
+  async followUp(id: string, now = new Date()) {
+    await this.expireStale(now);
+    if (!this.mail) throw new ServiceUnavailableException('Layanan email tidak aktif');
+    const [order] = await this.db.select(orderColumns).from(orders).where(eq(orders.id, id));
+    if (!order) throw new NotFoundException('Pesanan tidak ditemukan');
+    if (!FOLLOW_UP_STATUSES.includes(order.status as OrderStatus))
+      throw new BadRequestException('Follow up hanya untuk pesanan yang belum dibayar');
+    const [prev] = await this.followUpStats(id);
+    const last = prev?.last ? new Date(prev.last) : null;
+    if (last && now.getTime() - last.getTime() < FOLLOW_UP_COOLDOWN_MS)
+      throw new ConflictException(
+        'Pesanan ini sudah di-follow up dalam 24 jam terakhir. Beri waktu orang tua membalas dulu.',
+      );
+    const data = (await this.orderMail(id))!;
+    const contact = await this.settings.get('contact');
+    await this.mail.enqueue(
+      data.parentEmail,
+      orderFollowUp(this.mail.ctx(), data, {
+        expired: order.status === 'expired',
+        adminWhatsapp: adminWhatsappHref(contact) || undefined,
+        group: contact.groupWhatsapp || undefined,
+      }),
+      { kind: FOLLOW_UP_KIND, refId: id },
+    );
+    const [after] = await this.followUpStats(id);
+    return {
+      sentTo: data.parentEmail,
+      followUps: after?.n ?? 1,
+      lastFollowUpAt: after?.last ? new Date(after.last).toISOString() : now.toISOString(),
+    };
   }
 
   /** Pesanan menunggu bayar yang lewat batas waktu → kedaluwarsa. */
@@ -454,7 +513,15 @@ export class BillingService {
   async adminOrders(status?: string) {
     await this.expireStale();
     return this.db
-      .select({ ...orderColumns, parentName: parents.name, parentEmail: parents.email })
+      .select({
+        ...orderColumns,
+        parentName: parents.name,
+        parentEmail: parents.email,
+        followUps: sql<number>`(select count(*)::int from ${emailOutbox} f
+          where f.kind = ${FOLLOW_UP_KIND} and f.ref_id = ${orders.id}::text)`,
+        lastFollowUpAt: sql<string | null>`(select max(f.created_at) from ${emailOutbox} f
+          where f.kind = ${FOLLOW_UP_KIND} and f.ref_id = ${orders.id}::text)`,
+      })
       .from(orders)
       .innerJoin(parents, eq(orders.parentId, parents.id))
       .where(status ? eq(orders.status, status) : undefined)

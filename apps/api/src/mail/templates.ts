@@ -83,6 +83,15 @@ const groupBlock = (link?: string) =>
 const groupText = (link?: string) =>
   link ? `\n\nGabung grup WhatsApp orang tua untuk info dan bantuan: ${link}` : '';
 
+/** Tombol "Hubungi admin" lewat WhatsApp; kosong = tidak ditampilkan. */
+const adminWaBlock = (link?: string) =>
+  link
+    ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 18px;background:#f4f0ff;border-radius:16px;border:2px solid ${C.grape}"><tr><td style="padding:14px 16px">
+<p style="margin:0 0 10px;font-size:15px;line-height:1.6;color:${C.ink}"><strong>Ada kendala?</strong><br>Admin kami siap membantu lewat WhatsApp.</p>
+<a href="${esc(link)}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:700;color:#ffffff;background:${C.grape};text-decoration:none;border-radius:999px">Hubungi admin</a>
+</td></tr></table>`
+    : '';
+
 /** Kotak info berwarna, berisi baris label → nilai. */
 const infoBox = (rows: [string, string][], tone: Tone = 'grape') => {
   const [fg, bg] = toneColor[tone];
@@ -328,6 +337,42 @@ export function adminVerified(
   return { subject, html, text };
 }
 
+/**
+ * Salinan email "Akun sudah aktif" untuk pemantau (MAIL_VERIFY_COPY), agar admin tahu email terkirim.
+ * Password sementara TIDAK ikut: admin sudah melihatnya sekali di pop-up.
+ */
+export function adminVerifiedCopy(
+  ctx: MailContext,
+  d: { name: string; email: string; familyCode: string; at: Date },
+): MailContent {
+  const subject = `Salinan: akun ${d.email} sudah diaktifkan`;
+  const html = layout(ctx, {
+    title: 'Salinan email akun aktif',
+    preheader: `Email "Akun sudah aktif" sudah dikirim ke ${d.email}.`,
+    tone: 'leaf',
+    body: [
+      p(
+        `Admin menandai email **${d.email}** terverifikasi. Email "Akun sudah aktif" berisi password sementara sudah dikirim ke orang tua.`,
+      ),
+      infoBox(
+        [
+          ['Nama', d.name],
+          ['Email', d.email],
+          ['Kode keluarga', d.familyCode],
+          ['Waktu', dateTime(d.at)],
+          ['Password sementara', 'disembunyikan (hanya di email orang tua dan pop-up admin)'],
+        ],
+        'leaf',
+      ),
+      note(
+        'Status pengiriman ke orang tua bisa dicek di Admin → Email. Bila orang tua tidak menerima email, cek folder spam atau kirim password lewat WhatsApp.',
+      ),
+    ].join('\n'),
+  });
+  const text = `Salinan email akun aktif\n\nAdmin menandai email ${d.email} terverifikasi. Email "Akun sudah aktif" berisi password sementara sudah dikirim ke orang tua.\n\nNama: ${d.name}\nEmail: ${d.email}\nKode keluarga: ${d.familyCode}\nWaktu: ${dateTime(d.at)}\nPassword sementara: disembunyikan (hanya di email orang tua dan pop-up admin)\n\nStatus pengiriman ke orang tua bisa dicek di Admin → Email.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
 // ------------------------------------------------------------------ transaksi (orang tua)
 
 export type OrderMail = {
@@ -479,6 +524,71 @@ export function orderRejected(ctx: MailContext, o: OrderMail): MailContent {
 }
 
 // ------------------------------------------------------------------ salinan untuk direksi
+
+/**
+ * Follow up admin untuk pesanan yang belum dibayar: pengingat cara bayar (menunggu bayar) atau ajakan memesan
+ * ulang (kedaluwarsa), plus kontak admin dan grup WhatsApp bila diatur.
+ */
+export function orderFollowUp(
+  ctx: MailContext,
+  o: OrderMail,
+  opt: { expired: boolean; adminWhatsapp?: string; group?: string },
+): MailContent {
+  const contactText = `${opt.adminWhatsapp ? `\n\nAda kendala? Hubungi admin lewat WhatsApp: ${opt.adminWhatsapp}` : ''}${groupText(opt.group)}`;
+  const contact = [adminWaBlock(opt.adminWhatsapp), groupBlock(opt.group)];
+  if (opt.expired) {
+    const url = parentUrl(ctx, '/paket');
+    const subject = `Pesanan ${o.number} sudah lewat batas bayar`;
+    const html = layout(ctx, {
+      title: 'Masih ingin berlangganan?',
+      preheader: `Pesanan ${o.number} belum dibayar sampai batas waktu. Pesan ulang kapan saja.`,
+      tone: 'sun',
+      body: [
+        p(
+          `Halo ${o.parentName}, pesanan **${o.number}** (${o.packageName}) belum kami terima pembayarannya sampai batas waktu, jadi nomor transfernya sudah tidak berlaku.`,
+        ),
+        p('Kalau masih ingin berlangganan, Anda bisa membuat pesanan baru dengan mudah.'),
+        button(url, 'Pilih paket lagi'),
+        ...contact,
+        note('Abaikan email ini bila Anda sudah tidak berminat. Terima kasih.'),
+      ].join('\n'),
+    });
+    const text = `Halo ${o.parentName},\n\nPesanan ${o.number} (${o.packageName}) belum kami terima pembayarannya sampai batas waktu, jadi nomor transfernya sudah tidak berlaku.\nKalau masih ingin berlangganan, buat pesanan baru: ${url}${contactText}${footerText(ctx)}`;
+    return { subject, html, text };
+  }
+  const subject = `Pengingat pesanan ${o.number}: transfer ${rupiah(o.amount)}`;
+  const html = layout(ctx, {
+    title: 'Pesanan Anda menunggu pembayaran',
+    preheader: `Transfer tepat ${rupiah(o.amount)} sebelum ${dateTime(o.expiresAt)}.`,
+    tone: 'sun',
+    body: [
+      p(
+        `Halo ${o.parentName}, pesanan **${o.number}** (${o.packageName}) masih menunggu pembayaran. Berikut detailnya agar mudah dilanjutkan.`,
+      ),
+      bigBox(
+        'Total transfer',
+        rupiah(o.amount),
+        'sun',
+        'Transfer tepat sampai 3 digit terakhir agar cepat dicocokkan',
+      ),
+      infoBox(
+        [
+          ['Bank / e-wallet', o.method.provider],
+          ['Nomor rekening', o.method.accountNumber],
+          ['Atas nama', o.method.accountName],
+          ['Bayar sebelum', dateTime(o.expiresAt)],
+        ],
+        'grape',
+      ),
+      p('Setelah transfer, unggah foto bukti transfer di halaman pesanan.'),
+      button(orderUrl(ctx, o.orderId), 'Lanjutkan pembayaran'),
+      ...contact,
+      note('Abaikan email ini bila Anda sudah membayar dan mengunggah bukti transfer.'),
+    ].join('\n'),
+  });
+  const text = `Halo ${o.parentName},\n\nPesanan ${o.number} (${o.packageName}) masih menunggu pembayaran.\nTotal transfer: ${rupiah(o.amount)} (tepat sampai 3 digit terakhir)\nKe: ${o.method.provider} ${o.method.accountNumber} a.n. ${o.method.accountName}\nBayar sebelum: ${dateTime(o.expiresAt)}\n\nLanjutkan pembayaran: ${orderUrl(ctx, o.orderId)}${contactText}${footerText(ctx)}`;
+  return { subject, html, text };
+}
 
 export type DirectorEvent = 'created' | 'proof' | 'paid' | 'rejected';
 const directorTitle: Record<DirectorEvent, string> = {

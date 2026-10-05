@@ -11,6 +11,8 @@ Udakids mengirim email lewat **Gmail SMTP** dari akun pengirim `project.udacodin
 | Kode ganti email (ke email baru)      | orang tua             | Akun saya → ganti email (D-064)               |
 | Email akun sudah diganti (email lama) | orang tua             | kode ganti email cocok (D-064)                |
 | Akun sudah aktif + password sementara | orang tua             | admin "Tandai email terverifikasi" (D-064)    |
+| Follow up pesanan belum dibayar       | orang tua             | admin "Follow up via email" (D-065)           |
+| Salinan akun aktif (tanpa password)   | `MAIL_VERIFY_COPY`    | admin "Tandai email terverifikasi" (D-064)    |
 | Pesanan dibuat (instruksi transfer)   | orang tua + direksi   | pesanan baru                                  |
 | Bukti transfer diterima               | orang tua + direksi   | orang tua mengunggah bukti                    |
 | Pembayaran dikonfirmasi (paket aktif) | orang tua + direksi   | admin menyetujui                              |
@@ -41,6 +43,14 @@ MAIL_FROM="Udakids <helo@eduskul.my.id>"
 Pastikan DNS domain pengirim punya SPF yang memuat IP server email dan DKIM `default._domainkey` dari cPanel
 (di Cloudflare: catatan DNS-only, tanpa proksi). Cek dari laptop dulu dengan `pnpm dev` + **Admin → Email → Kirim
 email uji**; konfigurasi yang sama lalu disalin ke `.env` server.
+
+**Cek dari server** (setelah build): `node apps/api/dist/cli/mail-check.js alamat@tujuan` (di dev: `pnpm mail:check
+alamat@tujuan`). Alat ini mencetak konfigurasi yang terbaca (password hanya panjangnya), lalu menguji DNS, port, login
+SMTP, dan mengirim email uji langsung, plus ringkasan antrean yang gagal. Setiap kegagalan disertai penjelasan.
+
+Server cPanel/Exim bisa menahan sapaan **10–40 detik** (cek DNS balik dan ident IP pengirim). Batas tunggu aplikasi
+90 detik (`SMTP_TIMEOUT_MS`), jadi email tetap terkirim walau lambat. Password selain Gmail dipakai apa adanya
+(spasi tidak dibuang).
 
 ## Langkah di Gmail (sekali saja)
 
@@ -75,13 +85,16 @@ dengan password biasa.
 
 ### Bila ada kendala
 
-| Gejala di Admin → Email                                | Penyebab & solusi                                                                  |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| `Invalid login` / `Username and Password not accepted` | App Password salah atau Verifikasi 2 Langkah mati. Buat App Password baru.         |
-| Opsi App Password tidak muncul                         | Verifikasi 2 Langkah belum aktif, atau akun Workspace yang dibatasi admin.         |
-| Email masuk ke Spam                                    | Tandai "Bukan spam" sekali; pastikan `APP_PUBLIC_URL` memakai https.               |
-| `Daily user sending limit exceeded`                    | Batas Gmail sekitar 500 email/hari. Antrean mencoba lagi otomatis (hingga 12 jam). |
-| Status "Menunggu SMTP"                                 | `SMTP_USER`/`SMTP_PASS` kosong di `.env` server. Isi, lalu restart API.            |
+| Gejala di Admin → Email                                                                              | Penyebab & solusi                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Invalid login` / `Username and Password not accepted`                                               | App Password salah atau Verifikasi 2 Langkah mati. Buat App Password baru.                                                                                                             |
+| Opsi App Password tidak muncul                                                                       | Verifikasi 2 Langkah belum aktif, atau akun Workspace yang dibatasi admin.                                                                                                             |
+| Email masuk ke Spam                                                                                  | Tandai "Bukan spam" sekali; pastikan `APP_PUBLIC_URL` memakai https.                                                                                                                   |
+| `Daily user sending limit exceeded`                                                                  | Batas Gmail sekitar 500 email/hari. Antrean mencoba lagi otomatis (hingga 12 jam).                                                                                                     |
+| Status "Menunggu SMTP"                                                                               | `SMTP_USER`/`SMTP_PASS` kosong di `.env` server. Isi, lalu restart API.                                                                                                                |
+| `Connection timeout` / `ETIMEDOUT` / `Greeting never received` di server, padahal di laptop berhasil | Penyedia VPS memblokir port SMTP keluar (minta dibuka), firewall keluar, atau IP server diblokir hosting email (minta whitelist IP server di Niagahoster). Cek dengan `mail-check.js`. |
+| `Invalid login` / `535` di server                                                                    | Password di `.env` server berbeda (salah salin, tanda kutip). Tulis `SMTP_PASS='…'`, lalu restart API.                                                                                 |
+| Sudah diperbaiki, email lama tetap gagal                                                             | Klik **Kirim ulang** di Admin → Email, atau **Kirim ulang info akun** di Admin → Keluarga.                                                                                             |
 
 Bila App Password bocor: hapus di <https://myaccount.google.com/apppasswords>, buat yang baru, ganti `SMTP_PASS`.
 Mengganti password Gmail juga mencabut semua App Password.

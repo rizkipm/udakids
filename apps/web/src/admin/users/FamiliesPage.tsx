@@ -22,6 +22,7 @@ import {
   ActiveBadge,
   childReportPath,
   ColorDot,
+  confirmAction,
   Loadable,
   useAction,
   useDebounced,
@@ -285,14 +286,21 @@ export function FamiliesPage() {
     );
     if (ok) reload();
   }
-  /** Tandai terverifikasi → server membuat password sementara & mengirimnya ke email (D-064). */
+  /**
+   * Tandai terverifikasi → server membuat password sementara & mengirimnya ke email (D-064). Kirim ulang
+   * (email belum sampai) membuat password sementara BARU; yang lama tidak berlaku lagi.
+   */
   async function verifyEmail(p: FamilyRow) {
+    if (p.emailVerifiedAt && !confirmAction(t('admin.family.resendConfirm', { name: p.name })))
+      return;
     const res = await action.run(
       () =>
         call<{ email: string; tempPassword: string }>(`/admin/mail/parents/${p.id}/verify`, {
           method: 'POST',
         }),
-      t('admin.family.emailVerified', { name: p.name }),
+      p.emailVerifiedAt
+        ? t('admin.family.resent', { name: p.name, email: p.email })
+        : t('admin.family.emailVerified', { name: p.name }),
     );
     if (res) {
       setIssued({ name: p.name, email: res.email, tempPassword: res.tempPassword });
@@ -596,6 +604,16 @@ export function FamiliesPage() {
                             onClick={() => void verifyEmail(p)}
                           >
                             {t('admin.family.verifyEmail')}
+                          </Button>
+                        )}
+                        {p.emailVerifiedAt && p.mustChangePassword && (
+                          <Button
+                            variant="secondary"
+                            disabled={action.busy}
+                            title={t('admin.family.resendHint')}
+                            onClick={() => void verifyEmail(p)}
+                          >
+                            {t('admin.family.resend')}
                           </Button>
                         )}
                         <PasswordSetter

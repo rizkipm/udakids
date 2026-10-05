@@ -1363,4 +1363,37 @@ Keluhan peserta: lupa password, tidak bisa mengganti password/email, dan sulit m
   link wa.me, pesan pembuka opsional, dan link grup `chat.whatsapp.com`. Tombol "Hubungi admin" melayang di kanan
   bawah pada landing, area orang tua, dan admin/guru; **tidak di area anak** (`/play`, PRD A17). Link grup hanya
   dipakai di email (verifikasi, selamat datang, akun aktif), tidak dibuka di API publik.
+- **Salinan ke pemantau** (permintaan pemilik produk, 2026-10-06): setiap "Tandai email terverifikasi" juga
+  mengirim email "Salinan: akun … sudah diaktifkan" ke `MAIL_VERIFY_COPY` (bawaan `workbyrizki@gmail.com`, `off` =
+  mati) untuk memastikan email terkirim. Salinan berisi nama, email, kode keluarga, dan waktu, **tanpa** password
+  sementara (admin sudah melihatnya di pop-up).
+- **Kirim ulang info akun** (2026-10-06): bila email "Akun sudah aktif" tidak sampai, admin bisa menekan **Kirim
+  ulang info akun** di Admin → Keluarga selama orang tua belum mengganti password sementara
+  (`must_change_password`). Password sementara **baru** dibuat (yang lama tidak berlaku) dan dikirim lagi, dengan
+  konfirmasi. Setelah orang tua memilih password sendiri, server menolak (409) agar password itu tidak tertimpa.
+- **Email dari server hosting** (2026-10-06): batas tunggu SMTP 90 detik (Exim/cPanel bisa menahan sapaan 10–40
+  detik), password selain Gmail tidak dibuang spasinya, dan alat diagnosa `mail-check` (`pnpm mail:check`).
+- **Kirim ulang info akun** (2026-10-06): bila email "Akun sudah aktif" tidak sampai, admin menekan **Kirim
+  ulang info akun** di Admin → Keluarga (dengan konfirmasi). Hanya tersedia selama orang tua belum mengganti
+  password sementara (`must_change_password`). Password sementara **baru** dibuat dan dikirim lagi (yang lama tidak
+  berlaku), termasuk salinannya. Setelah orang tua memilih password sendiri, server menolak (409) agar password itu
+  tidak tertimpa.
 - Migrasi `0014_parent_account` hanya menambah kolom (aman untuk data yang ada).
+
+## D-065 — Follow up pesanan belum dibayar lewat email
+
+Tanggal 2026-10-06 · Status **Disetujui** (permintaan pemilik produk: "bagi yang belum bayar, admin bisa klik tombol
+untuk follow up… kirim email dulu").
+
+- **Tombol "Follow up via email"** di detail pesanan (Admin → Transaksi) untuk status **menunggu bayar** dan
+  **kedaluwarsa**. Pesanan yang menunggu verifikasi, lunas, ditolak, atau dibatalkan tidak punya tombol ini (server
+  menolak 400).
+- **Isi email ke orang tua:**
+  - menunggu bayar: total transfer, rekening tujuan, batas bayar, dan tombol "Lanjutkan pembayaran";
+  - kedaluwarsa: nomor transfer sudah tidak berlaku, dengan ajakan memesan ulang lewat tombol "Pilih paket lagi";
+  - keduanya menampilkan **"Ada kendala? Hubungi admin"** (WhatsApp admin) dan **Gabung grup WhatsApp**, bila diisi di
+    Admin → Pengaturan → Kontak WhatsApp (D-064).
+- **Batas:** sekali per pesanan per 24 jam (409), dengan konfirmasi sebelum kirim. Riwayat follow up (jumlah dan
+  waktu terakhir) diambil dari antrean email (`email_outbox`, kind `order_followup`), jadi **tanpa migrasi**.
+  Daftar transaksi menampilkan "Follow up n×".
+- Hanya admin. Email transaksi lain dan salinan direksi tidak berubah. Tidak ada yang tampil di area anak.

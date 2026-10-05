@@ -43,6 +43,10 @@ const FILTERS: Filter[] = [
   'all',
 ];
 
+/** Sama dengan server (BillingService): pesanan belum dibayar, jeda follow up 24 jam. */
+const FOLLOW_UP_STATUSES: readonly OrderStatus[] = ['awaiting_payment', 'expired'];
+const FOLLOW_UP_COOLDOWN_MS = 24 * 3600_000;
+
 export function OrderStatusBadge({ status }: { status: OrderStatus }) {
   const s = STATUS[status];
   return <Badge tone={s?.tone ?? 'muted'}>{s ? t(s.label) : status}</Badge>;
@@ -106,6 +110,26 @@ function OrderDetail({
   const [reason, setReason] = useState('');
   const canApprove = order.status !== 'paid' && order.status !== 'cancelled';
   const canReject = order.status === 'awaiting_review' || order.status === 'awaiting_payment';
+  const canFollowUp = FOLLOW_UP_STATUSES.includes(order.status);
+  const nextFollowUp = order.lastFollowUpAt
+    ? new Date(new Date(order.lastFollowUpAt).getTime() + FOLLOW_UP_COOLDOWN_MS)
+    : null;
+  const followUpWait = !!nextFollowUp && nextFollowUp.getTime() > Date.now();
+
+  /** Kirim email follow up ke orang tua (cara bayar / pesan ulang + kontak admin & grup). */
+  async function followUp() {
+    if (!confirmAction(t('admin.order.followUpConfirm', { email: order.parentEmail ?? '' })))
+      return;
+    const out = await action.run(
+      () =>
+        call<{ sentTo: string; followUps: number; lastFollowUpAt: string }>(
+          `/admin/orders/${order.id}/follow-up`,
+          { method: 'POST', body: {} },
+        ),
+      t('admin.order.followedUp', { email: order.parentEmail ?? '' }),
+    );
+    if (out) onChanged({ ...order, followUps: out.followUps, lastFollowUpAt: out.lastFollowUpAt });
+  }
 
   async function approve() {
     if (
@@ -210,12 +234,42 @@ function OrderDetail({
               <dd>{order.note}</dd>
             </>
           )}
+          {!!order.followUps && order.lastFollowUpAt && (
+            <>
+              <dt>{t('admin.order.followUp')}</dt>
+              <dd>
+                {t('admin.order.followUpInfo', {
+                  n: order.followUps,
+                  date: formatDate(order.lastFollowUpAt),
+                })}
+              </dd>
+            </>
+          )}
         </dl>
         <div>
           <h3 className="adm-group-title">{t('admin.order.proof')}</h3>
           <Proof order={order} />
         </div>
       </div>
+      {canFollowUp && (
+        <div className="adm-order-actions">
+          <Button
+            variant="secondary"
+            disabled={action.busy || followUpWait}
+            onClick={() => void followUp()}
+          >
+            <Icon name="mail" />
+            {t('admin.order.followUpButton')}
+          </Button>
+          <span className="ui-muted">
+            {followUpWait && nextFollowUp
+              ? t('admin.order.followUpWait', { date: formatDate(nextFollowUp.toISOString()) })
+              : order.status === 'expired'
+                ? t('admin.order.followUpHintExpired')
+                : t('admin.order.followUpHint')}
+          </span>
+        </div>
+      )}
       {(canApprove || canReject) && (
         <div className="adm-order-actions">
           {canApprove && (
@@ -291,7 +345,14 @@ export function OrdersPage() {
     {
       key: 'status',
       label: t('admin.col.status'),
-      render: (o) => <OrderStatusBadge status={o.status} />,
+      render: (o) => (
+        <>
+          <OrderStatusBadge status={o.status} />
+          {!!o.followUps && (
+            <div className="ui-muted">{t('admin.order.followUpCount', { n: o.followUps })}</div>
+          )}
+        </>
+      ),
     },
     {
       key: 'actions',

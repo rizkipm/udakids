@@ -170,6 +170,91 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(outbox.some((x) => x.to === director)).toBe(true);
   });
 
+  it('follow up pesanan belum dibayar: email ke orang tua, sekali per 24 jam, kedaluwarsa → ajak pesan ulang', async () => {
+    const { http, auth, adminToken, pool } = ctx;
+    const token = (await http().post('/auth/parent/login').send({ email, password }).expect(200))
+      .body.token as string;
+    const pkg = await http()
+      .post('/admin/packages')
+      .set(auth(adminToken))
+      .send({ name: 'Semua buku 90 hari', scope: 'all', durationDays: 90, price: 120_000 })
+      .expect(201);
+    const m = await http()
+      .post('/admin/payment-methods')
+      .set(auth(adminToken))
+      .send({ kind: 'bank', provider: 'BRI', accountNumber: '5550001112', accountName: 'Udakids' })
+      .expect(201);
+    const order = await http()
+      .post('/parent/orders')
+      .set(auth(token))
+      .send({ packageId: pkg.body.id, methodId: m.body.id })
+      .expect(201);
+    const id = order.body.id as string;
+    await http()
+      .put('/admin/contact')
+      .set(auth(adminToken))
+      .send({
+        adminWhatsapp: '085364665287',
+        adminMessage: '',
+        groupWhatsapp: 'https://chat.whatsapp.com/GrupBayar1',
+      })
+      .expect(200);
+
+    // Menunggu bayar → pengingat berisi cara bayar + kontak admin & grup.
+    const first = await http()
+      .post(`/admin/orders/${id}/follow-up`)
+      .set(auth(adminToken))
+      .expect(200);
+    expect(first.body).toMatchObject({ sentTo: email, followUps: 1 });
+    await flushed();
+    const reminder = lastTo(email);
+    expect(reminder.subject).toMatch(/^Pengingat pesanan .*: transfer Rp/);
+    expect(reminder.text).toContain('BRI 5550001112');
+    expect(reminder.text).toContain('https://wa.me/6285364665287');
+    expect(reminder.html).toContain('Hubungi admin');
+    expect(reminder.html).toContain('https://chat.whatsapp.com/GrupBayar1');
+    // Daftar admin menampilkan riwayat follow up; follow up lagi dalam 24 jam ditolak.
+    const list = await http()
+      .get('/admin/orders?status=awaiting_payment')
+      .set(auth(adminToken))
+      .expect(200);
+    const row = (list.body as { id: string; followUps: number; lastFollowUpAt: string }[]).find(
+      (o) => o.id === id,
+    )!;
+    expect(row.followUps).toBe(1);
+    expect(row.lastFollowUpAt).toBeTruthy();
+    await http().post(`/admin/orders/${id}/follow-up`).set(auth(adminToken)).expect(409);
+
+    // Lewat 24 jam dan pesanan kedaluwarsa → ajakan memesan ulang.
+    await pool.query(
+      "update email_outbox set created_at = now() - interval '25 hours' where kind = 'order_followup' and ref_id = $1",
+      [id],
+    );
+    await pool.query("update orders set expires_at = now() - interval '1 hour' where id = $1", [
+      id,
+    ]);
+    const second = await http()
+      .post(`/admin/orders/${id}/follow-up`)
+      .set(auth(adminToken))
+      .expect(200);
+    expect(second.body.followUps).toBe(2);
+    await flushed();
+    const expired = lastTo(email);
+    expect(expired.subject).toMatch(/sudah lewat batas bayar/);
+    expect(expired.text).toContain('/orang-tua/paket');
+    expect(expired.text).not.toContain('5550001112');
+
+    // Hanya admin; pesanan lunas tidak bisa di-follow up.
+    await http().post(`/admin/orders/${id}/follow-up`).set(auth(token)).expect(403);
+    const paid = (
+      await pool.query<{ id: string }>("select id from orders where status = 'paid' limit 1")
+    ).rows[0]!.id;
+    await pool.query(
+      "update email_outbox set created_at = now() - interval '25 hours' where kind = 'order_followup'",
+    );
+    await http().post(`/admin/orders/${paid}/follow-up`).set(auth(adminToken)).expect(400);
+  });
+
   it('admin: ringkasan tanpa isi email, email uji, verifikasi manual', async () => {
     const { http, auth, adminToken, pool } = ctx;
     const o = await http().get('/admin/mail').set(auth(adminToken)).expect(200);
@@ -225,22 +310,37 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(mail.text).toContain(v.body.tempPassword);
     expect(mail.text).toContain('https://chat.whatsapp.com/GrupOrtu123');
     expect(mail.html).toContain('Gabung grup WhatsApp');
+    // Salinan ke pemantau (MAIL_VERIFY_COPY) untuk memastikan email terkirim, tanpa password sementara.
+    const copy = lastTo('workbyrizki@gmail.com');
+    expect(copy.subject).toBe('Salinan: akun kedua@contoh.id sudah diaktifkan');
+    expect(copy.text).toContain('kedua@contoh.id');
+    expect(copy.text).not.toContain(v.body.tempPassword);
+    expect(copy.html).not.toContain(v.body.tempPassword);
     // Isi email (berisi password sementara) dihapus dari antrean setelah terkirim.
     const stored = await pool.query(
       "select html, text from email_outbox where kind = 'admin-verified' and status = 'sent'",
     );
     expect(stored.rows.every((r: { html: null; text: null }) => !r.html && !r.text)).toBe(true);
-    // Password lama tidak berlaku; password sementara bisa dipakai dan wajib diganti.
-    await http()
-      .post('/auth/parent/login')
-      .send({ email: 'kedua@contoh.id', password })
-      .expect(401);
+    // Kirim ulang (email belum sampai): password sementara BARU, yang lama tidak berlaku lagi.
+    const again = await http()
+      .post(`/admin/mail/parents/${p!.id}/verify`)
+      .set(auth(adminToken))
+      .expect(200);
+    expect(again.body.tempPassword).not.toBe(v.body.tempPassword);
+    await flushed();
+    expect(lastTo('kedua@contoh.id').text).toContain(again.body.tempPassword);
+    // Password lama dan password sementara pertama tidak berlaku; yang baru bisa dipakai dan wajib diganti.
+    for (const old of [password, v.body.tempPassword])
+      await http()
+        .post('/auth/parent/login')
+        .send({ email: 'kedua@contoh.id', password: old })
+        .expect(401);
     const login = await http()
       .post('/auth/parent/login')
-      .send({ email: 'kedua@contoh.id', password: v.body.tempPassword })
+      .send({ email: 'kedua@contoh.id', password: again.body.tempPassword })
       .expect(200);
     expect(login.body.mustChangePassword).toBe(true);
-    tempLogin = { token: login.body.token, password: v.body.tempPassword };
+    tempLogin = { token: login.body.token, password: again.body.tempPassword };
   });
 
   let tempLogin: { token: string; password: string };
@@ -267,6 +367,10 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(old.body.message).toMatch(/Password sudah diganti/);
     const fresh = await http().get('/parent/account').set(auth(changed.body.token)).expect(200);
     expect(fresh.body.mustChangePassword).toBe(false);
+    // Setelah orang tua memilih password sendiri, admin tidak bisa menimpanya lewat "kirim ulang".
+    const pid = (await ctx.pool.query("select id from parents where email = 'kedua@contoh.id'"))
+      .rows[0].id;
+    await http().post(`/admin/mail/parents/${pid}/verify`).set(auth(ctx.adminToken)).expect(409);
     await flushed();
     expect(lastTo('kedua@contoh.id').subject).toMatch(/Password akun .* sudah diganti/);
     const named = await http()

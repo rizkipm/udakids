@@ -99,6 +99,7 @@ const ICONS = {
   back: 'M15 18l-6-6 6-6',
   check: 'M5 12l5 5 9-10',
   play: 'M8 5v14l11-7z',
+  mail: 'M4 6h16v12H4zM4 7l8 6 8-6',
 } as const;
 
 /** Ikon garis sederhana (tanpa emoji). */

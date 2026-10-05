@@ -393,7 +393,7 @@ sudah ada (Math Pra-TK/TK/Kelas 1, Sains TK/Kelas 1, English Pra-TK).
 
 | Fase | Isi                                                                                                       | Hasil                                | Perkiraan  |
 | ---- | --------------------------------------------------------------------------------------------------------- | ------------------------------------ | ---------- |
-| G0   | Keputusan (bagian 8), catat D-065 dst.                                                                    | Arah disetujui                       | 2 hari     |
+| G0   | Keputusan (bagian 8), catat keputusan baru                                                                | Arah disetujui                       | 2 hari     |
 | G1   | Kamus Bergambar (skema + admin) dan **AI Gambar di admin** (kunci aman, batas biaya, Batch, grid, review) | Bisa generate gambar sendiri         | 2–3 minggu |
 | G2   | Generate Kamus T1 (500 kata, 1.500 gambar), generator soal membaca kamus                                  | Soal yang ada langsung lebih beragam | 1 minggu   |
 | G3   | Menu Belajar + pemutar pelajaran (7 layar) + Berlatih + model 10, 11, 12, 14, 16, 18                      | Kerangka siap diisi                  | 3–4 minggu |

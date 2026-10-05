@@ -139,7 +139,7 @@ ketiganya bisa dikelompokkan dalam rak **Calistung** bersama buku Math yang sesu
 | **Data anak minimal**                                                                | Tidak ada data anak, nama, atau skor yang dikirim ke penyedia AI. Yang dikirim hanya parameter topik dan isi PDF.                                                                                                                                                                                                                                                                           |
 | **Engine deterministik, tanpa `eval`**                                               | AI menulis JSON template yang divalidasi Zod. Jawaban soal matematika dihitung generator, bukan ditulis AI.                                                                                                                                                                                                                                                                                 |
 | **Aturan UX anak** (Basic tanpa teks wajib dibaca, maks 4 kartu, tanpa kata "salah") | Dijadikan aturan pemeriksa otomatis tambahan di validator, sehingga draft yang melanggar tidak bisa disetujui.                                                                                                                                                                                                                                                                              |
-| **Keputusan di luar PRD wajib ditanya**                                              | Generator AI di admin, penyedia AI, format pelajaran, perluasan suara Momo ke narasi pelajaran (D-035 saat ini hanya perintah dan respons), buku Baca Tulis, dan interaksi menebalkan huruf adalah keputusan baru. Dicatat sebagai D-065 dst. setelah disetujui.                                                                                                                            |
+| **Keputusan di luar PRD wajib ditanya**                                              | Generator AI di admin, penyedia AI, format pelajaran, perluasan suara Momo ke narasi pelajaran (D-035 saat ini hanya perintah dan respons), buku Baca Tulis, dan interaksi menebalkan huruf adalah keputusan baru. Dicatat sebagai keputusan baru (nomor D berikutnya) setelah disetujui.                                                                                                   |
 | **Syarat penyedia AI**                                                               | Pilih penyedia yang syaratnya mengizinkan pembuatan konten untuk produk anak, lewat API berbayar, bukan akun konsumen (pelajaran dari D-035 soal Google AI Studio). Kunci API hanya di server, disimpan terenkripsi seperti kunci suara.                                                                                                                                                    |
 
 ## 4. Alur yang diusulkan
@@ -172,7 +172,7 @@ Setiap fase bisa dirilis sendiri dan langsung memberi manfaat.
 
 ### Fase 0: Keputusan dan pagar (± 3 hari)
 
-- Putuskan pertanyaan di bagian 8, lalu catat sebagai D-065 dan seterusnya.
+- Putuskan pertanyaan di bagian 8, lalu catat sebagai keputusan baru (nomor D berikutnya).
 - Tambahkan aturan UX anak ke validator (Basic tanpa teks wajib, maks 4 pilihan, pengecoh ≠ jawaban), supaya
   berlaku juga untuk soal buatan manual.
 - Tambahkan kolom asal-usul pada skill: `source` (formulir/PDF/manual), `sourceRef` (file + halaman),

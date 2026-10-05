@@ -175,6 +175,53 @@ describe('OrdersPage', () => {
     const call = fetch.mock.calls.find(([u]) => String(u).endsWith('/reject'))!;
     expect(JSON.parse(String(call[1]!.body))).toEqual({ reason: 'Nominal tidak sesuai' });
   });
+
+  it('follow up pesanan belum dibayar: konfirmasi, kirim email, lalu tombol menunggu 24 jam', async () => {
+    const unpaid: OrderRow = {
+      ...order,
+      status: 'awaiting_payment',
+      proofMime: null,
+      proofAt: null,
+      followUps: 0,
+      lastFollowUpAt: null,
+    };
+    const fetch = mockApi({
+      '/admin/orders': [unpaid],
+      [`POST /admin/orders/${order.id}/follow-up`]: {
+        sentTo: order.parentEmail,
+        followUps: 1,
+        lastFollowUpAt: new Date().toISOString(),
+      },
+    });
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true);
+    renderAdmin(<OrdersPage />, '/admin/transaksi');
+    fireEvent.click(
+      await screen.findByRole('button', {
+        name: t('admin.order.openLabel', { number: order.number }),
+      }),
+    );
+    expect(screen.getByText(t('admin.order.followUpHint'))).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: t('admin.order.followUpButton') }));
+    expect(confirm).toHaveBeenCalledWith(
+      t('admin.order.followUpConfirm', { email: order.parentEmail ?? '' }),
+    );
+    expect(
+      await screen.findByText(t('admin.order.followedUp', { email: order.parentEmail ?? '' })),
+    ).toBeInTheDocument();
+    expect(fetch.mock.calls.some(([u]) => String(u).endsWith('/follow-up'))).toBe(true);
+    expect(screen.getByRole('button', { name: t('admin.order.followUpButton') })).toBeDisabled();
+  });
+
+  it('pesanan yang menunggu verifikasi atau lunas tidak punya tombol follow up', async () => {
+    mockApi({ '/admin/orders': [order] });
+    renderAdmin(<OrdersPage />, '/admin/transaksi');
+    fireEvent.click(
+      await screen.findByRole('button', {
+        name: t('admin.order.openLabel', { number: order.number }),
+      }),
+    );
+    expect(screen.queryByRole('button', { name: t('admin.order.followUpButton') })).toBeNull();
+  });
 });
 
 describe('CommissionPage', () => {

@@ -40,5 +40,6 @@ describe('skill tetap jalan dengan urutan kunci jsonb', () => {
     }
     expect(checked).toBeGreaterThan(0);
     expect(broken).toEqual([]);
-  });
+    // Memeriksa ribuan skill; dengan coverage bisa melewati batas bawaan 5 detik.
+  }, 60_000);
 });

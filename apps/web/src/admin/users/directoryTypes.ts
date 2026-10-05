@@ -27,6 +27,8 @@ export type FamilyRow = {
   consentAt: string | null;
   /** Null = email belum diverifikasi (D-044). */
   emailVerifiedAt: string | null;
+  /** Password sementara dari admin belum diganti orang tua (D-064): info akun boleh dikirim ulang. */
+  mustChangePassword?: boolean;
   createdAt: string | null;
   lastActiveAt: string | null;
   /** Paket yang dibeli keluarga (berlaku untuk semua anak). */

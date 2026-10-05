@@ -182,6 +182,13 @@ export class AdminBillingController {
     return this.billing.approve(id, user.id);
   }
 
+  /** Follow up pesanan belum dibayar lewat email ke orang tua (maks. sekali per 24 jam). */
+  @Post('orders/:id/follow-up')
+  @HttpCode(200)
+  followUp(@Param('id', ParseUUIDPipe) id: string) {
+    return this.billing.followUp(id);
+  }
+
   @Post('orders/:id/reject')
   @HttpCode(200)
   reject(

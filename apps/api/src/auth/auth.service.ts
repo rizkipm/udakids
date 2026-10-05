@@ -44,6 +44,7 @@ import {
 import { MailService } from '../mail/mail.service.js';
 import {
   adminVerified,
+  adminVerifiedCopy,
   emailChangeCode,
   emailChanged,
   passwordChanged,
@@ -924,6 +925,11 @@ export class AuthService {
   async adminVerifyParent(parentId: string) {
     const [row] = await this.db.select().from(parents).where(eq(parents.id, parentId));
     if (!row) throw new NotFoundException('Akun orang tua tidak ditemukan');
+    // Kirim ulang hanya selama password sementara belum diganti: password pilihan orang tua tidak ditimpa.
+    if (row.emailVerifiedAt && !row.mustChangePassword)
+      throw new ConflictException(
+        'Orang tua sudah mengganti password sendiri. Pakai "Atur password" bila memang perlu direset.',
+      );
     const password = tempPassword();
     await this.storePassword(row.id, password, true);
     await this.db
@@ -951,6 +957,16 @@ export class AuthService {
         group: await this.group(),
       }),
       { kind: 'admin-verified', refId: row.id },
+    );
+    // Salinan tanpa password ke pemantau (MAIL_VERIFY_COPY) untuk memastikan email terkirim.
+    await this.mail.copyAdminVerified(
+      adminVerifiedCopy(this.mail.ctx(), {
+        name: row.name,
+        email: row.email,
+        familyCode: row.familyCode,
+        at: new Date(),
+      }),
+      { kind: 'admin-verified-copy', refId: row.id },
     );
     return { ok: true, email: row.email, tempPassword: password };
   }
