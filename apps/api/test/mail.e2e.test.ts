@@ -190,10 +190,167 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const [p] = (
       await pool.query<{ id: string }>("select id from parents where email = 'kedua@contoh.id'")
     ).rows;
-    await http().post(`/admin/mail/parents/${p!.id}/verify`).set(auth(adminToken)).expect(200);
+    // Kontak WhatsApp diatur admin (D-064): nomor HP diubah jadi wa.me; link grup ikut di email.
+    await http()
+      .put('/admin/contact')
+      .set(auth(adminToken))
+      .send({ adminWhatsapp: 'https://evil.com', adminMessage: '', groupWhatsapp: '' })
+      .expect(400);
+    const saved = await http()
+      .put('/admin/contact')
+      .set(auth(adminToken))
+      .send({
+        adminWhatsapp: '0812-3456-7890',
+        adminMessage: 'Halo admin Udakids',
+        groupWhatsapp: 'https://chat.whatsapp.com/GrupOrtu123',
+      })
+      .expect(200);
+    expect(saved.body.adminWhatsapp).toBe('https://wa.me/6281234567890');
+    const pub = await http().get('/public/contact').expect(200);
+    expect(pub.body).toEqual({
+      adminWhatsapp: 'https://wa.me/6281234567890?text=Halo+admin+Udakids',
+    });
+    expect(JSON.stringify(pub.body)).not.toContain('chat.whatsapp.com');
+    await http().put('/admin/contact').send({}).expect(401);
+
+    // Tandai terverifikasi → password sementara acak, dikirim ke email + dikembalikan sekali ke admin.
+    const v = await http()
+      .post(`/admin/mail/parents/${p!.id}/verify`)
+      .set(auth(adminToken))
+      .expect(200);
+    expect(v.body.tempPassword).toMatch(/^[A-Za-z2-9]{12}$/);
+    await flushed();
+    const mail = lastTo('kedua@contoh.id');
+    expect(mail.subject).toMatch(/sudah aktif/);
+    expect(mail.text).toContain(v.body.tempPassword);
+    expect(mail.text).toContain('https://chat.whatsapp.com/GrupOrtu123');
+    expect(mail.html).toContain('Gabung grup WhatsApp');
+    // Isi email (berisi password sementara) dihapus dari antrean setelah terkirim.
+    const stored = await pool.query(
+      "select html, text from email_outbox where kind = 'admin-verified' and status = 'sent'",
+    );
+    expect(stored.rows.every((r: { html: null; text: null }) => !r.html && !r.text)).toBe(true);
+    // Password lama tidak berlaku; password sementara bisa dipakai dan wajib diganti.
     await http()
       .post('/auth/parent/login')
       .send({ email: 'kedua@contoh.id', password })
+      .expect(401);
+    const login = await http()
+      .post('/auth/parent/login')
+      .send({ email: 'kedua@contoh.id', password: v.body.tempPassword })
+      .expect(200);
+    expect(login.body.mustChangePassword).toBe(true);
+    tempLogin = { token: login.body.token, password: v.body.tempPassword };
+  });
+
+  let tempLogin: { token: string; password: string };
+
+  it('akun orang tua (D-064): ganti password mencabut sesi lama; profil & nama', async () => {
+    const { http, auth } = ctx;
+    const me = await http().get('/parent/account').set(auth(tempLogin.token)).expect(200);
+    expect(me.body).toMatchObject({ email: 'kedua@contoh.id', mustChangePassword: true });
+    const wrong = await http()
+      .post('/parent/account/password')
+      .set(auth(tempLogin.token))
+      .send({ currentPassword: 'bukan-ini-123', password: 'barubaru123' })
+      .expect(400);
+    expect(wrong.body.issues[0].path).toBe('currentPassword');
+    // Tunggu detik berikutnya agar token lama pasti lebih tua dari waktu ganti password.
+    await new Promise((r) => setTimeout(r, 1100));
+    const changed = await http()
+      .post('/parent/account/password')
+      .set(auth(tempLogin.token))
+      .send({ currentPassword: tempLogin.password, password: 'barubaru123' })
+      .expect(200);
+    expect(changed.body.token).toBeTruthy();
+    const old = await http().get('/parent/account').set(auth(tempLogin.token)).expect(401);
+    expect(old.body.message).toMatch(/Password sudah diganti/);
+    const fresh = await http().get('/parent/account').set(auth(changed.body.token)).expect(200);
+    expect(fresh.body.mustChangePassword).toBe(false);
+    await flushed();
+    expect(lastTo('kedua@contoh.id').subject).toMatch(/Password akun .* sudah diganti/);
+    const named = await http()
+      .patch('/parent/account')
+      .set(auth(changed.body.token))
+      .send({ name: 'Ayah Dua Baru' })
+      .expect(200);
+    expect(named.body.name).toBe('Ayah Dua Baru');
+    tempLogin = { token: changed.body.token, password: 'barubaru123' };
+  });
+
+  it('ganti email (D-064): kode ke email baru; email lama diberi tahu', async () => {
+    const { http, auth } = ctx;
+    const t = auth(tempLogin.token);
+    await http()
+      .post('/parent/account/email')
+      .set(t)
+      .send({ email: 'ganti@contoh.id', currentPassword: 'salah-salah-1' })
+      .expect(400);
+    await http()
+      .post('/parent/account/email')
+      .set(t)
+      .send({ email, currentPassword: tempLogin.password })
+      .expect(409);
+    const req = await http()
+      .post('/parent/account/email')
+      .set(t)
+      .send({ email: 'ganti@contoh.id', currentPassword: tempLogin.password })
+      .expect(200);
+    expect(req.body.pendingEmail).toBe('ganti@contoh.id');
+    await flushed();
+    const code = codeFrom(lastTo('ganti@contoh.id'));
+    // Sebelum kode dimasukkan, email lama masih berlaku.
+    expect((await http().get('/parent/account').set(t)).body).toMatchObject({
+      email: 'kedua@contoh.id',
+      pendingEmail: 'ganti@contoh.id',
+    });
+    await http().post('/parent/account/email/verify').set(t).send({ code: '000000' }).expect(400);
+    const ok = await http().post('/parent/account/email/verify').set(t).send({ code }).expect(200);
+    expect(ok.body).toMatchObject({ email: 'ganti@contoh.id', pendingEmail: null });
+    await flushed();
+    expect(lastTo('kedua@contoh.id').subject).toMatch(/Email akun .* sudah diganti/);
+    await http()
+      .post('/auth/parent/login')
+      .send({ email: 'ganti@contoh.id', password: tempLogin.password })
+      .expect(200);
+    await http()
+      .post('/auth/parent/login')
+      .send({ email: 'kedua@contoh.id', password: tempLogin.password })
+      .expect(401);
+  });
+
+  it('lupa password (D-064): jawaban sama; kode → password baru → langsung masuk', async () => {
+    const { http } = ctx;
+    const a = await http()
+      .post('/auth/parent/forgot')
+      .send({ email: 'ganti@contoh.id' })
+      .expect(200);
+    const b = await http()
+      .post('/auth/parent/forgot')
+      .send({ email: 'tidakada@contoh.id' })
+      .expect(200);
+    expect(a.body).toEqual(b.body);
+    await flushed();
+    const m = lastTo('ganti@contoh.id');
+    expect(m.subject).toMatch(/^\d{6} adalah kode untuk membuat password baru/);
+    const code = codeFrom(m);
+    await http()
+      .post('/auth/parent/reset')
+      .send({ email: 'ganti@contoh.id', code: '000000', password: 'lupa12345' })
+      .expect(400);
+    const r = await http()
+      .post('/auth/parent/reset')
+      .send({ email: 'ganti@contoh.id', code, password: 'lupa12345' })
+      .expect(200);
+    expect(r.body).toMatchObject({ mustChangePassword: false });
+    expect(r.body.token).toBeTruthy();
+    await http()
+      .post('/auth/parent/reset')
+      .send({ email: 'ganti@contoh.id', code, password: 'lupa99999' })
+      .expect(400);
+    await http()
+      .post('/auth/parent/login')
+      .send({ email: 'ganti@contoh.id', password: 'lupa12345' })
       .expect(200);
   });
 

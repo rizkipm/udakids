@@ -12,10 +12,10 @@ export const isChildLimitError = (err: unknown) =>
 export const atChildLimit = (count: number) => count >= MAX_CHILDREN_PER_PARENT;
 
 /** "3 dari 7 anak terdaftar" — info batas yang selalu terlihat di dasbor. */
-export function ChildCount({ count }: { count: number }) {
+export function ChildCount({ count, className }: { count: number; className?: string }) {
   const n = MAX_CHILDREN_PER_PARENT;
   return (
-    <p className="ui-muted" data-testid="child-count">
+    <p className={className ?? 'ui-muted'} data-testid="child-count">
       {t(atChildLimit(count) ? 'parent.limit.countFull' : 'parent.limit.count', { count, n })}
     </p>
   );

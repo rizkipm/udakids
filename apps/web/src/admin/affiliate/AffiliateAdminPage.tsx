@@ -5,6 +5,7 @@ import {
   formatRupiah,
   type AffiliateSettings,
 } from '@little-coder/engine';
+import { useLocation } from 'react-router-dom';
 import { useApiCall, useFetch } from '../../auth/useApi';
 import { t, type MessageKey } from '../../i18n';
 import { ShellIconSvg, type ShellIcon } from '../../ui/AppShell';
@@ -164,7 +165,11 @@ const Flags = ({ flags }: { flags: Flag[] }) =>
 
 /** Admin afiliasi (D-063): ringkasan & insight, antrean pencairan, verifikasi rekening, afiliator, pengaturan. */
 export function AffiliateAdminPage() {
-  const [tab, setTab] = useState<Tab>('overview');
+  // `?tab=payouts` dari dasbor admin langsung membuka antrean yang dimaksud.
+  const asked = new URLSearchParams(useLocation().search).get('tab');
+  const [tab, setTab] = useState<Tab>(
+    TABS.some((x) => x.id === asked) ? (asked as Tab) : 'overview',
+  );
   const o = useFetch<Overview>('staff', '/admin/affiliate');
   const badge: Partial<Record<Tab, number>> = {
     payouts: o.data?.payoutRequests ?? 0,

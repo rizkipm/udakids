@@ -156,12 +156,18 @@ export class AdminUsersController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body(new ZodPipe(setPasswordSchema)) body: z.infer<typeof setPasswordSchema>,
   ) {
+    // Password dari admin = sementara: orang tua diminta segera menggantinya; sesi lama keluar (D-064).
     const [row] = await this.db
       .update(parents)
-      .set({ passwordHash: await hashSecret(body.password) })
+      .set({
+        passwordHash: await hashSecret(body.password),
+        mustChangePassword: true,
+        passwordChangedAt: new Date(Math.floor(Date.now() / 1000) * 1000),
+      })
       .where(eq(parents.id, id))
       .returning({ id: parents.id });
     if (!row) throw new NotFoundException('Orang tua tidak ditemukan');
+    forgetAccount(id);
     return { ok: true };
   }
 

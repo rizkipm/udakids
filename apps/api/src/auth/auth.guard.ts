@@ -16,7 +16,8 @@ import { IS_PUBLIC, ROLES } from './decorators.js';
 
 /** Cache singkat status akun (aktif + peran) agar guard tidak query DB di setiap request. */
 const ACCOUNT_TTL_MS = 10_000;
-const accounts = new Map<string, { at: number; account: { role: Role; name: string } | null }>();
+type Account = { role: Role; name: string; passwordChangedAt?: number };
+const accounts = new Map<string, { at: number; account: Account | null }>();
 /** Lupakan cache akun (dipanggil saat akun dinonaktifkan, diubah perannya, atau dihapus). */
 export const forgetAccount = (id: string) => {
   for (const k of accounts.keys()) if (k.endsWith(`:${id}`)) accounts.delete(k);
@@ -35,11 +36,11 @@ export class AuthGuard implements CanActivate {
     @Inject(DB) private readonly db: Db,
   ) {}
 
-  private async account(id: string, role: Role): Promise<{ role: Role; name: string } | null> {
+  private async account(id: string, role: Role): Promise<Account | null> {
     const key = `${role === 'admin' || role === 'facilitator' ? 'staff' : role}:${id}`;
     const hit = accounts.get(key);
     if (hit && Date.now() - hit.at < ACCOUNT_TTL_MS) return hit.account;
-    let account: { role: Role; name: string } | null = null;
+    let account: Account | null = null;
     if (role === 'admin' || role === 'facilitator') {
       const [r] = await this.db
         .select({ role: staffUsers.role, name: staffUsers.name, active: staffUsers.active })
@@ -48,10 +49,19 @@ export class AuthGuard implements CanActivate {
       if (r?.active) account = { role: r.role as Role, name: r.name };
     } else if (role === 'parent') {
       const [r] = await this.db
-        .select({ name: parents.name, active: parents.active })
+        .select({
+          name: parents.name,
+          active: parents.active,
+          passwordChangedAt: parents.passwordChangedAt,
+        })
         .from(parents)
         .where(eq(parents.id, id));
-      if (r?.active) account = { role: 'parent', name: r.name };
+      if (r?.active)
+        account = {
+          role: 'parent',
+          name: r.name,
+          ...(r.passwordChangedAt && { passwordChangedAt: r.passwordChangedAt.getTime() }),
+        };
     } else if (role === 'child') {
       const [r] = await this.db
         .select({ name: children.nickname, active: children.active })
@@ -72,14 +82,19 @@ export class AuthGuard implements CanActivate {
     const header: string | undefined = req.headers?.authorization;
     const token = header?.startsWith('Bearer ') ? header.slice(7) : undefined;
     if (!token) throw new UnauthorizedException('Silakan masuk dulu');
-    let payload: { sub: string; role: Role; name: string };
+    let payload: { sub: string; role: Role; name: string; iat?: number };
     try {
-      payload = await this.jwt.verifyAsync<{ sub: string; role: Role; name: string }>(token);
+      payload = await this.jwt.verifyAsync<{ sub: string; role: Role; name: string; iat?: number }>(
+        token,
+      );
     } catch {
       throw new UnauthorizedException('Sesi berakhir, silakan masuk lagi');
     }
     const account = await this.account(payload.sub, payload.role);
     if (!account) throw new UnauthorizedException('Akun tidak aktif. Silakan masuk lagi.');
+    // Password diganti (D-064): token yang terbit sebelumnya tidak berlaku lagi.
+    if (account.passwordChangedAt && (payload.iat ?? 0) * 1000 < account.passwordChangedAt)
+      throw new UnauthorizedException('Password sudah diganti. Silakan masuk lagi.');
     const user: SessionUser = { id: payload.sub, role: account.role, name: account.name };
     req.user = user;
 

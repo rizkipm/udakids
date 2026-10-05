@@ -7,7 +7,16 @@ import { ShellIconSvg } from '../../ui/AppShell';
 import { Kpi } from '../../ui/charts';
 import { Pager } from '../../ui/Pager';
 import { PlanBadge } from '../../ui/PlanBadge';
-import { Button, Empty, formatDate, Notice, PageHeader, SelectField, TextArea } from '../../ui/ui';
+import {
+  Button,
+  Dialog,
+  Empty,
+  formatDate,
+  Notice,
+  PageHeader,
+  SelectField,
+  TextArea,
+} from '../../ui/ui';
 import {
   ActionNotice,
   ActiveBadge,
@@ -256,6 +265,7 @@ export function FamiliesPage() {
   const action = useAction();
   const [pinFor, setPinFor] = useState<string>();
   const [premiumFor, setPremiumFor] = useState<Target>();
+  const [issued, setIssued] = useState<{ name: string; email: string; tempPassword: string }>();
 
   const reload = () => {
     summary.reload();
@@ -275,12 +285,19 @@ export function FamiliesPage() {
     );
     if (ok) reload();
   }
+  /** Tandai terverifikasi → server membuat password sementara & mengirimnya ke email (D-064). */
   async function verifyEmail(p: FamilyRow) {
-    const ok = await action.run(
-      () => call(`/admin/mail/parents/${p.id}/verify`, { method: 'POST' }).then(() => true),
+    const res = await action.run(
+      () =>
+        call<{ email: string; tempPassword: string }>(`/admin/mail/parents/${p.id}/verify`, {
+          method: 'POST',
+        }),
       t('admin.family.emailVerified', { name: p.name }),
     );
-    if (ok) reload();
+    if (res) {
+      setIssued({ name: p.name, email: res.email, tempPassword: res.tempPassword });
+      reload();
+    }
   }
 
   async function setPassword(p: FamilyRow, password: string) {
@@ -581,7 +598,11 @@ export function FamiliesPage() {
                             {t('admin.family.verifyEmail')}
                           </Button>
                         )}
-                        <PasswordSetter busy={action.busy} onSubmit={(pw) => setPassword(p, pw)} />
+                        <PasswordSetter
+                          busy={action.busy}
+                          note={t('admin.user.passwordForceNote')}
+                          onSubmit={(pw) => setPassword(p, pw)}
+                        />
                       </div>
                     </li>
                   );
@@ -662,6 +683,62 @@ export function FamiliesPage() {
           }}
         />
       )}
+      <TempPasswordDialog issued={issued} onClose={() => setIssued(undefined)} />
     </>
+  );
+}
+
+/** Password sementara hanya ditampilkan sekali; admin bisa menyalinnya untuk dikirim lewat WhatsApp. */
+function TempPasswordDialog({
+  issued,
+  onClose,
+}: {
+  issued?: { name: string; email: string; tempPassword: string };
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  useEffect(() => setCopied(false), [issued]);
+  async function copy() {
+    if (!issued) return;
+    const text = t('admin.family.tempCopyText', {
+      email: issued.email,
+      password: issued.tempPassword,
+    });
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  }
+  return (
+    <Dialog
+      open={!!issued}
+      title={t('admin.family.tempTitle', { name: issued?.name ?? '' })}
+      onClose={onClose}
+      actions={
+        <>
+          <Button variant="secondary" onClick={() => void copy()}>
+            {copied ? t('admin.family.tempCopied') : t('admin.family.tempCopy')}
+          </Button>
+          <Button onClick={onClose}>{t('admin.family.tempDone')}</Button>
+        </>
+      }
+    >
+      {issued && (
+        <>
+          <p>{t('admin.family.tempIntro')}</p>
+          <dl className="dir-temp">
+            <dt>{t('admin.family.tempEmail')}</dt>
+            <dd>{issued.email}</dd>
+            <dt>{t('admin.family.tempPassword')}</dt>
+            <dd>
+              <code data-testid="temp-password">{issued.tempPassword}</code>
+            </dd>
+          </dl>
+          <Notice tone="warning">{t('admin.family.tempNote')}</Notice>
+        </>
+      )}
+    </Dialog>
   );
 }

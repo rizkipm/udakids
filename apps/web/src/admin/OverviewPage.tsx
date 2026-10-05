@@ -11,6 +11,7 @@ import { CountUp, DayBars, Kpi, Meter, Ring } from '../ui/charts';
 import { Badge, Card, Empty, PageHeader, Table, formatDate, type Column } from '../ui/ui';
 import { Loadable, percent, skillPath } from './common';
 import type { AdminInsights } from './insightsTypes';
+import { AffiliateCommissionOverview } from './OverviewAffiliate';
 
 export const MIN_ANSWERS_FOR_DIFFICULTY = 5;
 
@@ -176,7 +177,7 @@ function RecentSignups() {
         {list.length === 0 ? (
           <Empty>{t('admin.ins.noSignups')}</Empty>
         ) : (
-          <ul className="ins-orders">
+          <ul className="ins-orders ins-signups">
             {list.map((n) => (
               <li key={n.key}>
                 <div>
@@ -396,7 +397,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
         </Panel>
       </div>
 
-      <RecentSignups />
+      <AffiliateCommissionOverview />
 
       <div className="ins-grid three">
         <Panel
@@ -474,6 +475,8 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
           </Link>
         </Panel>
       </div>
+
+      <RecentSignups />
     </>
   );
 }

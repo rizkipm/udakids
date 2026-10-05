@@ -6,6 +6,8 @@ import {
   normalizeReferralCode,
   parentLoginSchema,
   parentRegisterSchema,
+  passwordForgotSchema,
+  passwordResetSchema,
   type SessionUser,
   MAX_CHILDREN_PER_PARENT,
 } from '@little-coder/engine';
@@ -93,6 +95,13 @@ export function ParentLogin() {
             error={errors.password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p className="pa-forgot">
+            <Link
+              to={`/orang-tua/lupa-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
+            >
+              {t('parent.forgot.link')}
+            </Link>
+          </p>
           <Button type="submit" disabled={busy} className="pa-wide">
             {busy ? t('parent.loading') : t('parent.login.submit')}
           </Button>
@@ -403,6 +412,179 @@ export function ParentVerify() {
         <p className="pa-switch">
           {t('parent.verify.wrongEmail')}{' '}
           <Link to="/orang-tua/daftar">{t('parent.verify.toRegister')}</Link>
+        </p>
+      </Card>
+    </AuthLayout>
+  );
+}
+
+/**
+ * Lupa password (D-064): (1) email → kode dikirim, (2) kode + password baru → langsung masuk. Jawaban
+ * server selalu sama, jadi halaman ini tidak membocorkan apakah email terdaftar.
+ */
+export function ParentForgot() {
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const [email, setEmail] = useState((params.get('email') ?? '').trim());
+  const [sentTo, setSentTo] = useState<string>();
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [error, setError] = useState<string>();
+  const [info, setInfo] = useState<string>();
+  const [busy, setBusy] = useState(false);
+  const [wait, setWait] = useState(0);
+
+  useEffect(() => {
+    if (wait <= 0) return;
+    const id = setTimeout(() => setWait((w) => w - 1), 1000);
+    return () => clearTimeout(id);
+  }, [wait]);
+
+  async function request(e?: FormEvent) {
+    e?.preventDefault();
+    setError(undefined);
+    setInfo(undefined);
+    const parsed = passwordForgotSchema.safeParse({ email });
+    if (!parsed.success) {
+      setErrors(fieldErrors(parsed.error.issues));
+      return;
+    }
+    setErrors({});
+    setBusy(true);
+    try {
+      const res = await api<{ cooldownSeconds: number }>('/auth/parent/forgot', {
+        body: parsed.data,
+      });
+      setSentTo(parsed.data.email);
+      setWait(res.cooldownSeconds ?? RESEND_SECONDS);
+      setInfo(t('parent.forgot.sent', { email: parsed.data.email }));
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function reset(e: FormEvent) {
+    e.preventDefault();
+    setError(undefined);
+    setInfo(undefined);
+    const parsed = passwordResetSchema.safeParse({ email: sentTo, code, password });
+    const next = parsed.success ? {} : fieldErrors(parsed.error.issues);
+    if (confirm !== password && !next.password) next.confirm = t('parent.register.confirmMismatch');
+    setErrors(next);
+    if (!parsed.success || Object.keys(next).length > 0) return;
+    setBusy(true);
+    try {
+      const res = await api<AuthResponse>('/auth/parent/reset', { body: parsed.data });
+      storeSession(res);
+      navigate('/orang-tua', { replace: true });
+    } catch (err) {
+      const left = err instanceof ApiError ? err.body.attemptsLeft : undefined;
+      setError(
+        typeof left === 'number'
+          ? `${errorMessage(err)} ${t('parent.verify.attemptsLeft', { n: left })}`
+          : errorMessage(err),
+      );
+      setErrors(serverFieldErrors(err));
+      setCode('');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <AuthLayout
+      variant="parent"
+      title={t('site.auth.parent.title')}
+      text={t('site.auth.parent.text')}
+    >
+      <Card title={t('parent.forgot.title')}>
+        <p className="ui-muted pa-gap">
+          {sentTo ? t('parent.forgot.step2') : t('parent.forgot.step1')}
+        </p>
+        {sentTo && (
+          <Notice tone="info">
+            <strong>{t('parent.verify.spamTitle')}</strong> {t('parent.verify.spam')}
+          </Notice>
+        )}
+        {error && <Notice tone="error">{error}</Notice>}
+        {info && <Notice tone="success">{info}</Notice>}
+        {!sentTo ? (
+          <form onSubmit={request} noValidate>
+            <RequiredNote />
+            <TextField
+              required
+              label={t('parent.login.email')}
+              type="email"
+              autoComplete="username"
+              value={email}
+              error={errors.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Button type="submit" disabled={busy} className="pa-wide">
+              {busy ? t('parent.loading') : t('parent.forgot.send')}
+            </Button>
+          </form>
+        ) : (
+          <form onSubmit={reset} noValidate>
+            <RequiredNote />
+            <TextField
+              required
+              label={t('parent.verify.code')}
+              hint={t('parent.forgot.codeHint')}
+              className="pa-otp"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              pattern="[0-9]*"
+              maxLength={6}
+              value={code}
+              error={errors.code}
+              onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+            />
+            <PasswordField
+              required
+              label={t('parent.forgot.newPassword')}
+              hint={t('parent.register.passwordHint')}
+              autoComplete="new-password"
+              value={password}
+              error={errors.password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <PasswordField
+              required
+              label={t('parent.register.confirm')}
+              autoComplete="new-password"
+              value={confirm}
+              error={errors.confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+            <Button type="submit" disabled={busy || code.length !== 6} className="pa-wide">
+              {busy ? t('parent.loading') : t('parent.forgot.submit')}
+            </Button>
+            <div className="pa-verify-actions">
+              <Button variant="ghost" disabled={busy || wait > 0} onClick={() => void request()}>
+                {wait > 0 ? t('parent.verify.resendIn', { n: wait }) : t('parent.verify.resend')}
+              </Button>
+              <Button
+                variant="ghost"
+                disabled={busy}
+                onClick={() => {
+                  setSentTo(undefined);
+                  setInfo(undefined);
+                  setError(undefined);
+                }}
+              >
+                {t('parent.forgot.otherEmail')}
+              </Button>
+            </div>
+          </form>
+        )}
+        <p className="pa-switch">
+          {t('parent.forgot.remember')}{' '}
+          <Link to="/orang-tua/masuk">{t('parent.forgot.toLogin')}</Link>
         </p>
       </Card>
     </AuthLayout>

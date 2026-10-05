@@ -8,6 +8,8 @@ import {
   familyCodeSchema,
   parentLoginSchema,
   parentRegisterSchema,
+  passwordForgotSchema,
+  passwordResetSchema,
   staffLoginSchema,
   type SessionUser,
   momoStyleSchema,
@@ -62,6 +64,28 @@ export class AuthController {
     @Req() req: Request,
   ) {
     return this.auth.resendCode(body.email, clientIp(req));
+  }
+
+  /** Lupa password (D-064): kirim kode ke email (jawaban selalu sama). */
+  @Public()
+  @Post('parent/forgot')
+  @HttpCode(200)
+  parentForgot(
+    @Body(new ZodPipe(passwordForgotSchema)) body: z.infer<typeof passwordForgotSchema>,
+    @Req() req: Request,
+  ) {
+    return this.auth.requestPasswordReset(body.email, clientIp(req));
+  }
+
+  /** Kode cocok → password baru tersimpan → langsung masuk (D-064). */
+  @Public()
+  @Post('parent/reset')
+  @HttpCode(200)
+  parentReset(
+    @Body(new ZodPipe(passwordResetSchema)) body: z.infer<typeof passwordResetSchema>,
+    @Req() req: Request,
+  ) {
+    return this.auth.resetPassword(body.email, body.code, body.password, clientIp(req));
   }
 
   @Public()

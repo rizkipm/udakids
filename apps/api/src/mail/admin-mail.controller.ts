@@ -10,13 +10,13 @@ import {
   Post,
 } from '@nestjs/common';
 import { emailSchema, type SessionUser } from '@little-coder/engine';
-import { and, eq, isNull } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { z } from 'zod';
-import { forgetAccount } from '../auth/auth.guard.js';
+import { AuthService } from '../auth/auth.service.js';
 import { CurrentUser, Roles } from '../auth/decorators.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
-import { parents, staffUsers } from '../db/schema.js';
+import { staffUsers } from '../db/schema.js';
 import { MailService } from './mail.service.js';
 import { testEmail } from './templates.js';
 
@@ -27,6 +27,7 @@ export class AdminMailController {
   constructor(
     private readonly mail: MailService,
     @Inject(DB) private readonly db: Db,
+    private readonly auth: AuthService,
   ) {}
 
   @Get()
@@ -62,16 +63,16 @@ export class AdminMailController {
     return { ok: true };
   }
 
-  /** Tandai email orang tua terverifikasi (mis. orang tua tidak menerima email). */
+  /**
+   * Tandai email orang tua terverifikasi (mis. orang tua tidak menerima email) + buat password sementara
+   * acak (D-064). Email ke orang tua berisi info verifikasi + password sementara; admin juga menerima
+   * password itu sekali untuk disalin. Orang tua diminta segera mengganti password setelah masuk.
+   */
   @Post('parents/:id/verify')
   @HttpCode(200)
   async verifyParent(@Param('id', ParseUUIDPipe) id: string) {
-    const [row] = await this.db
-      .update(parents)
-      .set({ emailVerifiedAt: new Date() })
-      .where(and(eq(parents.id, id), isNull(parents.emailVerifiedAt)))
-      .returning({ id: parents.id });
-    forgetAccount(id);
-    return { ok: true, changed: !!row };
+    const res = await this.auth.adminVerifyParent(id);
+    void this.mail.flush();
+    return { ...res, changed: true };
   }
 }

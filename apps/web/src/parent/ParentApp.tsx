@@ -1,16 +1,18 @@
 import { AffiliatePage } from './AffiliatePage';
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { setSession, useSession } from '../auth/session';
 import { useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
 import { AppShell, ShellIconSvg } from '../ui/AppShell';
+import { Button, Dialog } from '../ui/ui';
+import { AccountPage, type ParentAccount } from './AccountPage';
 import { ChildForm } from './ChildForm';
 import { Dashboard } from './Dashboard';
 import { OrderPage, OrdersPage } from './Orders';
 import { PackagesPage } from './PackagesPage';
-import { ParentLogin, ParentRegister, ParentVerify } from './ParentAuth';
+import { ParentForgot, ParentLogin, ParentRegister, ParentVerify } from './ParentAuth';
 import { ReportPage } from './ReportPage';
 import './parent.css';
 
@@ -49,6 +51,46 @@ function usePendingOrders(path: string) {
     : 0;
 }
 
+/**
+ * Password sementara (dari admin, D-064) → pop-up "segera ganti password" di setiap halaman kecuali
+ * "Akun saya". Bisa ditutup, tetapi muncul lagi saat berpindah halaman sampai password diganti.
+ */
+function MustChangePassword({ path }: { path: string }) {
+  const navigate = useNavigate();
+  const { data, reload } = useFetch<ParentAccount>('parent', '/parent/account');
+  const [closedOn, setClosedOn] = useState<string>();
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [path]);
+  const open = !!data?.mustChangePassword && path !== '/orang-tua/akun' && closedOn !== path;
+  return (
+    <Dialog
+      open={open}
+      tone="warning"
+      title={t('parent.account.mustChangeTitle')}
+      onClose={() => setClosedOn(path)}
+      actions={
+        <>
+          <Button variant="ghost" onClick={() => setClosedOn(path)}>
+            {t('parent.account.later')}
+          </Button>
+          <Button onClick={() => navigate('/orang-tua/akun')}>
+            {t('parent.account.changeNow')}
+          </Button>
+        </>
+      }
+    >
+      <p>{t('parent.account.mustChange')}</p>
+    </Dialog>
+  );
+}
+
 /** Tata letak area orang tua (sidebar bisa disembunyikan; laci di tablet/HP). */
 function ParentLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
@@ -77,6 +119,7 @@ function ParentLayout({ children }: { children: ReactNode }) {
           badge: pending,
           badgeLabel: `${t('parent.nav.orders')}, ${t('parent.nav.pending', { n: pending })}`,
         },
+        { to: '/orang-tua/akun', label: t('parent.nav.account'), icon: 'badge' },
       ]}
       extra={
         <Link to="/play" className="pa-side-play" title={t('parent.dash.play')}>
@@ -95,6 +138,7 @@ function ParentLayout({ children }: { children: ReactNode }) {
       }}
     >
       <div className="pa-main">{children}</div>
+      <MustChangePassword path={pathname} />
     </AppShell>
   );
 }
@@ -132,7 +176,16 @@ export function ParentApp() {
           </GuestOnly>
         }
       />
+      <Route
+        path="lupa-password"
+        element={
+          <GuestOnly>
+            <ParentForgot />
+          </GuestOnly>
+        }
+      />
       <Route index element={guarded(<Dashboard />)} />
+      <Route path="akun" element={guarded(<AccountPage />)} />
       <Route path="anak/baru" element={guarded(<ChildForm mode="new" />)} />
       <Route path="anak/:id" element={guarded(<ReportPage />)} />
       <Route path="anak/:id/ubah" element={guarded(<ChildForm mode="edit" />)} />

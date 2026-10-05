@@ -712,9 +712,22 @@
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
+/* Lencana sebaris dengan nominal (tidak menambah baris baru). */
+.ins-orders li {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
 .ins-orders .ui-badge {
-  grid-column: 1 / -1;
-  justify-self: start;
+  justify-self: end;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .ins-orders li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .ins-orders .ui-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
 }
 .ins-learn {
   display: flex;
@@ -1581,5 +1594,171 @@
   }
   .aa-amount {
     font-size: 22px;
+  }
+}
+
+/* Password sementara setelah "Tandai email terverifikasi" (D-064) */
+.dir-temp {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  margin: 12px 0;
+}
+.dir-temp dt {
+  font-weight: 700;
+}
+.dir-temp dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.dir-temp code {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  user-select: all;
+}
+
+/* Pendaftar terbaru: dua kolom di layar lebar. */
+.ins-signups {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  column-gap: 24px;
+}
+.ins-signups .ins-amount {
+  color: var(--ui-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Afiliasi & komisi di dasbor (D-063) */
+.aff-ov {
+  margin-bottom: 16px;
+}
+.aff-ov-head {
+  margin: 8px 0 12px;
+}
+.aff-ov-head h2 {
+  margin: 0 0 2px;
+  font-size: 18px;
+}
+.aff-ov-head p {
+  margin: 0;
+  font-size: 14px;
+}
+.aff-ov-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.aff-ov-stats.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.aff-ov-stat {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #f7f5fd;
+}
+.aff-ov-stat span {
+  color: var(--ui-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.aff-ov-stat strong {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.aff-ov-stat small {
+  color: var(--ui-muted);
+  font-size: 12px;
+}
+.aff-ov-todos {
+  display: grid;
+  gap: 6px;
+}
+.aff-ov-todo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #fff6dc;
+  color: #7a4b00;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.aff-ov-todo:hover {
+  text-decoration: underline;
+}
+.aff-ov-todo svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+.aff-ov-clear {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #ecf8f0;
+  color: #1d7a44;
+  font-size: 14px;
+  font-weight: 600;
+}
+.aff-ov-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 4px;
+}
+.aff-ov-split h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.aff-ov-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.aff-ov-shares {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.aff-ov-shares li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--ui-line);
+}
+.aff-ov-shares li > div {
+  display: grid;
+  min-width: 0;
+}
+.aff-ov-shares small {
+  color: var(--ui-muted);
+}
+@media (max-width: 1200px) {
+  .aff-ov-split {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .aff-ov-stats.three {
+    grid-template-columns: 1fr;
+  }
+  .aff-ov-shares li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .aff-ov-shares .ui-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
 }

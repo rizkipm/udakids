@@ -60,6 +60,10 @@ export function smtpFromEnv(): MailTransport | null {
     port: c.port,
     secure: c.secure,
     auth: { user: c.user, pass: c.pass },
+    // Satu koneksi dipakai ulang: jabat tangan TLS ke server hosting bisa ~10 detik per email.
+    pool: true,
+    maxConnections: 1,
+    maxMessages: 100,
     requireTLS: !c.secure,
     tls: { minVersion: 'TLSv1.2' },
   });

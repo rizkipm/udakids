@@ -8,9 +8,11 @@ export const MIN_PASSWORD = 8;
 export function PasswordSetter({
   onSubmit,
   busy,
+  note,
 }: {
   onSubmit: (password: string) => Promise<boolean>;
   busy?: boolean;
+  note?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
@@ -39,6 +41,7 @@ export function PasswordSetter({
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      {note && <p className="ui-hint">{note}</p>}
       <Button type="submit" disabled={busy || password.length < MIN_PASSWORD}>
         {t('admin.save')}
       </Button>

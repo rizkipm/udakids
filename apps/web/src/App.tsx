@@ -1,6 +1,7 @@
 import { ReferralLanding } from './site/ReferralLanding';
 import { Unsubscribe } from './site/Unsubscribe';
 import { Route, Routes } from 'react-router-dom';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { AdminApp } from './admin/AdminApp';
 import { FacilitatorApp } from './facilitator/FacilitatorApp';
 import { RequireRole } from './auth/RequireRole';
@@ -15,6 +16,16 @@ function Placeholder({ text }: { text: string }) {
 }
 
 export function App() {
+  return (
+    <>
+      <AppRoutes />
+      {/* Tombol WhatsApp admin (D-064): landing, orang tua, admin/guru — tidak di area anak. */}
+      <WhatsAppButton />
+    </>
+  );
+}
+
+function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />

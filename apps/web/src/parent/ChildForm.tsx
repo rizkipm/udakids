@@ -14,7 +14,9 @@ import type { ChildProfile } from '../api/types';
 import { useApiCall, useFetch } from '../auth/useApi';
 import { t } from '../i18n';
 import { familySteps, Stepper } from '../site/AuthLayout';
-import { Button, Card, Notice, RequiredNote, Spinner, TextField } from '../ui/ui';
+import { Momo } from '../components/Momo';
+import { ShellIconSvg } from '../ui/AppShell';
+import { Button, Notice, RequiredNote, Spinner, TextField } from '../ui/ui';
 import { ColorPicker } from './ColorPicker';
 import { MomoStudio, plainLook } from '../components/MomoStudio';
 import { fieldErrors, serverFieldErrors } from './form';
@@ -102,18 +104,37 @@ function Form({
         ? t('parent.form.editTitle', { name: child?.nickname ?? '' })
         : t('parent.form.pinTitle', { name: child?.nickname ?? '' });
 
+  const subtitle =
+    mode === 'new'
+      ? t('parent.form.newLead')
+      : mode === 'edit'
+        ? t('parent.form.editLead')
+        : t('parent.form.pinLead');
+  // Nomor bagian mengikuti bagian yang tampil (mode pin hanya punya sandi gambar).
+  let step = 0;
+  const num = () => ++step;
+
   return (
-    <div className="pa-form">
+    <div className="cf">
       {welcome && mode === 'new' && <Stepper current={3} labels={familySteps()} />}
       <ChildLimitDialog open={limitOpen} onClose={() => setLimitOpen(false)} />
-      <Card title={title}>
-        {mode === 'new' && count !== undefined && <ChildCount count={count} />}
-        {withProfile && <Notice tone="info">{t('parent.form.privacy')}</Notice>}
-        {error && <Notice tone="error">{error}</Notice>}
-        <form onSubmit={submit} noValidate>
-          {withProfile && <RequiredNote />}
+      <header className="cf-head">
+        <div>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+        </div>
+        {mode === 'new' && count !== undefined && <ChildCount count={count} className="cf-count" />}
+      </header>
+      {error && <Notice tone="error">{error}</Notice>}
+      <div className={`cf-layout${withProfile ? '' : ' is-single'}`}>
+        <form className="cf-form" onSubmit={submit} noValidate>
           {withProfile && (
-            <>
+            <section className="cf-section" aria-labelledby="cf-profile">
+              <h2 id="cf-profile">
+                <span className="cf-num">{num()}</span>
+                {t('parent.form.sectionProfile')}
+              </h2>
+              <RequiredNote />
               <TextField
                 required
                 label={t('parent.form.nickname')}
@@ -139,34 +160,52 @@ function Form({
                   showPrimary={false}
                 />
               </details>
+            </section>
+          )}
+          {withProfile && (
+            <section className="cf-section" aria-labelledby="cf-class">
+              <h2 id="cf-class">
+                <span className="cf-num">{num()}</span>
+                {t('parent.form.sectionClass')}
+              </h2>
               <TextField
                 label={t('parent.form.classCode')}
                 hint={t('parent.form.classCodeHint')}
                 autoComplete="off"
                 maxLength={6}
+                className="cf-code"
                 value={classCode}
                 error={errors.classCode}
                 onChange={(e) =>
                   setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))
                 }
               />
-            </>
+            </section>
           )}
           {withPin && (
-            <fieldset
-              className="pa-pin-field"
-              aria-describedby={errors.pin ? 'pa-pin-error' : undefined}
-            >
-              <legend>{t('parent.form.pin')}</legend>
-              <PinSetter onChange={setPin} />
-              {errors.pin && (
-                <p id="pa-pin-error" className="ui-error pa-field-error" role="alert">
-                  {errors.pin}
-                </p>
-              )}
-            </fieldset>
+            <section className="cf-section" aria-labelledby="cf-pin">
+              <h2 id="cf-pin">
+                <span className="cf-num">{num()}</span>
+                {t('parent.form.sectionPin')}
+              </h2>
+              <fieldset
+                className="pa-pin-field"
+                aria-describedby={errors.pin ? 'pa-pin-error' : undefined}
+              >
+                <legend>{t('parent.form.pin')}</legend>
+                <PinSetter onChange={setPin} />
+                {errors.pin && (
+                  <p id="pa-pin-error" className="ui-error pa-field-error" role="alert">
+                    {errors.pin}
+                  </p>
+                )}
+              </fieldset>
+            </section>
           )}
-          <div className="ui-row pa-form-actions">
+          <div className="cf-actions">
+            <Link className="ui-btn ui-btn-ghost" to="/orang-tua">
+              {t('parent.cancel')}
+            </Link>
             <Button type="submit" disabled={busy}>
               {busy
                 ? t('parent.saving')
@@ -176,12 +215,25 @@ function Form({
                     ? t('parent.form.submitEdit')
                     : t('parent.form.submitPin')}
             </Button>
-            <Link className="ui-btn ui-btn-ghost" to="/orang-tua">
-              {t('parent.cancel')}
-            </Link>
           </div>
         </form>
-      </Card>
+        {withProfile && (
+          <aside className="cf-side" aria-label={t('parent.form.preview')}>
+            <div className="cf-preview">
+              <span className="cf-preview-label">{t('parent.form.preview')}</span>
+              <Momo color={color} look={look} mood="happy" size={132} />
+              <strong className="cf-preview-name">
+                {nickname.trim() || t('parent.form.previewName')}
+              </strong>
+              <small>{t('parent.form.previewHint')}</small>
+            </div>
+            <div className="cf-privacy">
+              <ShellIconSvg name="badge" />
+              <p>{t('parent.form.privacy')}</p>
+            </div>
+          </aside>
+        )}
+      </div>
     </div>
   );
 }

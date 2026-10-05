@@ -2,12 +2,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import {
   affiliateSettingsSchema,
   billingSettingsSchema,
+  contactSettingsSchema,
+  DEFAULT_CONTACT_SETTINGS,
   DEFAULT_AFFILIATE_SETTINGS,
   DEFAULT_BILLING_SETTINGS,
   DEFAULT_VOICE_SETTINGS,
   voiceSettingsSchema,
   type AffiliateSettings,
   type BillingSettings,
+  type ContactSettings,
   type VoiceSettings,
 } from '@little-coder/engine';
 import { eq } from 'drizzle-orm';
@@ -19,13 +22,16 @@ const DEFS = {
   billing: { schema: billingSettingsSchema, defaults: DEFAULT_BILLING_SETTINGS },
   voice: { schema: voiceSettingsSchema, defaults: DEFAULT_VOICE_SETTINGS },
   affiliate: { schema: affiliateSettingsSchema, defaults: DEFAULT_AFFILIATE_SETTINGS },
+  contact: { schema: contactSettingsSchema, defaults: DEFAULT_CONTACT_SETTINGS },
 } as const;
 type Key = keyof typeof DEFS;
 type Value<K extends Key> = K extends 'billing'
   ? BillingSettings
   : K extends 'affiliate'
     ? AffiliateSettings
-    : VoiceSettings;
+    : K extends 'contact'
+      ? ContactSettings
+      : VoiceSettings;
 
 /** Pengaturan admin di tabel `app_settings` (D-036); nilai yang hilang/rusak → bawaan. */
 @Injectable()

@@ -35,7 +35,8 @@ import { PracticeController } from './practice/practice.controller.js';
 import { PublicController } from './public/public.controller.js';
 import { InsightsController } from './reports/insights.controller.js';
 import { ReportsService } from './reports/reports.service.js';
-import { SettingsService } from './settings/settings.service.js';
+import { AdminContactController, PublicContactController } from './settings/contact.controller.js';
+import { ParentAccountController } from './parent/account.controller.js';
 import { TTS_PROVIDER, ttsFromEnv } from './voice/tts.provider.js';
 import { AdminVoiceController, VoiceController } from './voice/voice.controller.js';
 import { VoiceService } from './voice/voice.service.js';
@@ -70,13 +71,15 @@ import { VoiceService } from './voice/voice.service.js';
     ParentAffiliateController,
     PublicReferralController,
     AdminAffiliateController,
+    ParentAccountController,
+    PublicContactController,
+    AdminContactController,
   ],
   providers: [
     NewsService,
     ExpiryReminderService,
     ReportsService,
     ContentService,
-    SettingsService,
     BillingService,
     AffiliateService,
     VoiceService,

@@ -25,6 +25,8 @@ import {
   type MomoLook,
 } from '@little-coder/engine';
 import { randomInt } from 'node:crypto';
+import { SettingsService } from '../settings/settings.service.js';
+import { forgetAccount } from './auth.guard.js';
 import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import { uniqueEntryCode } from '../common/codes.js';
 import { TOKEN_TTL } from '../common/config.js';
@@ -40,7 +42,27 @@ import {
   staffUsers,
 } from '../db/schema.js';
 import { MailService } from '../mail/mail.service.js';
-import { verifyEmail, welcome } from '../mail/templates.js';
+import {
+  adminVerified,
+  emailChangeCode,
+  emailChanged,
+  passwordChanged,
+  passwordResetCode,
+  verifyEmail,
+  welcome,
+} from '../mail/templates.js';
+
+/** Tujuan kode 6 angka di `email_verifications` (D-044, D-064). */
+type CodePurpose = 'verify' | 'reset' | 'email';
+
+/** Password sementara: 12 karakter tanpa huruf/angka yang mudah tertukar (0/O, 1/l/I). */
+const TEMP_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+export function tempPassword(length = 12): string {
+  let out = '';
+  for (let i = 0; i < length; i++) out += TEMP_ALPHABET[randomInt(TEMP_ALPHABET.length)];
+  // Selalu ada huruf besar, huruf kecil, dan angka.
+  return /[A-Z]/.test(out) && /[a-z]/.test(out) && /\d/.test(out) ? out : tempPassword(length);
+}
 
 export type AuthResult = { token: string; user: SessionUser };
 /** Pendaftaran berhasil tetapi email harus diverifikasi dulu (D-044). */
@@ -66,7 +88,13 @@ export class AuthService {
     @Inject(DB) private readonly db: Db,
     private readonly jwt: JwtService,
     private readonly mail: MailService,
+    private readonly settings: SettingsService,
   ) {}
+
+  /** Link grup WhatsApp orang tua untuk email (D-064); kosong = tidak dicantumkan. */
+  private async group(): Promise<string | undefined> {
+    return (await this.settings.get('contact')).groupWhatsapp || undefined;
+  }
 
   private sign(user: SessionUser, ttl: string): Promise<string> {
     return this.jwt.signAsync(
@@ -161,7 +189,7 @@ export class AuthService {
     email: string,
     password: string,
     ip = 'unknown',
-  ): Promise<AuthResult & { familyCode: string }> {
+  ): Promise<AuthResult & { familyCode: string; mustChangePassword: boolean }> {
     const key = `parent:${email}`;
     const ipKey = `ip:${ip}`;
     this.limiter.check(key);
@@ -185,7 +213,7 @@ export class AuthService {
       });
     }
     const res = await this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
-    return { ...res, familyCode: row.familyCode };
+    return { ...res, familyCode: row.familyCode, mustChangePassword: row.mustChangePassword };
   }
 
   // ---------------------------------------------------------------- verifikasi email (D-044)
@@ -194,32 +222,98 @@ export class AuthService {
   readonly verifyLimiter = new RateLimiter(10, 15 * 60_000);
   readonly resendLimiter = new RateLimiter(5, 60 * 60_000);
 
-  /** Buat kode 6 digit baru (kode lama tidak berlaku), simpan hash-nya, kirim lewat email. */
-  private async sendCode(p: { id: string; name: string; email: string }, fresh = false) {
+  /**
+   * Buat kode 6 digit baru untuk satu tujuan (kode lama dengan tujuan sama tidak berlaku), simpan hash-nya.
+   * Mengembalikan kode, atau null bila masih dalam jeda kirim ulang.
+   */
+  private async newCode(
+    parentId: string,
+    purpose: CodePurpose,
+    opts: { fresh?: boolean; newEmail?: string } = {},
+  ): Promise<string | null> {
+    const mine = and(
+      eq(emailVerifications.parentId, parentId),
+      eq(emailVerifications.purpose, purpose),
+    );
     const [last] = await this.db
       .select({ createdAt: emailVerifications.createdAt })
       .from(emailVerifications)
-      .where(eq(emailVerifications.parentId, p.id))
+      .where(mine)
       .orderBy(desc(emailVerifications.createdAt))
       .limit(1);
-    if (!fresh && last && Date.now() - last.createdAt.getTime() < RESEND_COOLDOWN_MS) return false;
+    if (!opts.fresh && last && Date.now() - last.createdAt.getTime() < RESEND_COOLDOWN_MS)
+      return null;
     const code = String(randomInt(0, 1_000_000)).padStart(6, '0');
     await this.db
       .update(emailVerifications)
       .set({ consumedAt: new Date() })
-      .where(and(eq(emailVerifications.parentId, p.id), isNull(emailVerifications.consumedAt)));
+      .where(and(mine, isNull(emailVerifications.consumedAt)));
     await this.db.insert(emailVerifications).values({
-      parentId: p.id,
-      codeHash: await hashSecret(`email:${p.id}:${code}`),
+      parentId,
+      purpose,
+      newEmail: opts.newEmail ?? null,
+      codeHash: await hashSecret(`${purpose === 'verify' ? 'email' : purpose}:${parentId}:${code}`),
       expiresAt: new Date(Date.now() + CODE_TTL_MIN * 60_000),
     });
+    return code;
+  }
+
+  /**
+   * Cocokkan kode terbaru untuk satu tujuan. Gagal → percobaan dicatat; berhasil → kode dipakai habis.
+   * `fail` melempar error (dengan batas percobaan).
+   */
+  private async takeCode(
+    parentId: string,
+    purpose: CodePurpose,
+    code: string,
+    fail: (message: string, extra?: Record<string, unknown>) => never,
+  ) {
+    const [v] = await this.db
+      .select()
+      .from(emailVerifications)
+      .where(
+        and(
+          eq(emailVerifications.parentId, parentId),
+          eq(emailVerifications.purpose, purpose),
+          isNull(emailVerifications.consumedAt),
+        ),
+      )
+      .orderBy(desc(emailVerifications.createdAt))
+      .limit(1);
+    if (!v || v.expiresAt.getTime() < Date.now())
+      return fail('Kode sudah kedaluwarsa. Kirim kode baru, ya.', { expired: true });
+    if (v.attempts >= CODE_MAX_ATTEMPTS)
+      return fail('Terlalu banyak percobaan. Kirim kode baru, ya.', { expired: true });
+    const secret = `${purpose === 'verify' ? 'email' : purpose}:${parentId}:${code}`;
+    if (!(await verifySecret(secret, v.codeHash))) {
+      await this.db
+        .update(emailVerifications)
+        .set({ attempts: v.attempts + 1 })
+        .where(eq(emailVerifications.id, v.id));
+      return fail('Kode belum cocok. Periksa lagi email Anda.', {
+        attemptsLeft: Math.max(0, CODE_MAX_ATTEMPTS - v.attempts - 1),
+      });
+    }
+    await this.db
+      .update(emailVerifications)
+      .set({ consumedAt: new Date() })
+      .where(eq(emailVerifications.id, v.id));
+    return v;
+  }
+
+  /** Kode verifikasi pendaftaran (D-044) + ajakan grup WhatsApp (D-064). */
+  private async sendCode(p: { id: string; name: string; email: string }, fresh = false) {
+    const code = await this.newCode(p.id, 'verify', { fresh });
+    if (!code) return false;
     await this.mail.enqueue(
       p.email,
-      verifyEmail(this.mail.ctx(), { name: p.name, code, minutes: CODE_TTL_MIN }),
-      {
-        kind: 'verify',
-        refId: p.id,
-      },
+      verifyEmail(this.mail.ctx(), {
+        name: p.name,
+        code,
+        minutes: CODE_TTL_MIN,
+        group: await this.group(),
+      }),
+      { kind: 'verify', refId: p.id },
     );
     return true;
   }
@@ -264,35 +358,17 @@ export class AuthService {
     if (!row) return fail('Kode tidak cocok atau sudah kedaluwarsa.');
     if (row.emailVerifiedAt)
       throw new ConflictException('Email sudah terverifikasi. Silakan masuk.');
-    const [v] = await this.db
-      .select()
-      .from(emailVerifications)
-      .where(and(eq(emailVerifications.parentId, row.id), isNull(emailVerifications.consumedAt)))
-      .orderBy(desc(emailVerifications.createdAt))
-      .limit(1);
-    if (!v || v.expiresAt.getTime() < Date.now())
-      return fail('Kode sudah kedaluwarsa. Kirim kode baru, ya.', { expired: true });
-    if (v.attempts >= CODE_MAX_ATTEMPTS)
-      return fail('Terlalu banyak percobaan. Kirim kode baru, ya.', { expired: true });
-    if (!(await verifySecret(`email:${row.id}:${code}`, v.codeHash))) {
-      await this.db
-        .update(emailVerifications)
-        .set({ attempts: v.attempts + 1 })
-        .where(eq(emailVerifications.id, v.id));
-      return fail('Kode belum cocok. Periksa lagi email Anda.', {
-        attemptsLeft: Math.max(0, CODE_MAX_ATTEMPTS - v.attempts - 1),
-      });
-    }
+    await this.takeCode(row.id, 'verify', code, fail);
     const now = new Date();
-    await this.db
-      .update(emailVerifications)
-      .set({ consumedAt: now })
-      .where(eq(emailVerifications.id, v.id));
     await this.db.update(parents).set({ emailVerifiedAt: now }).where(eq(parents.id, row.id));
     this.verifyLimiter.reset(key);
     await this.mail.enqueue(
       row.email,
-      welcome(this.mail.ctx(), { name: row.name, familyCode: row.familyCode }),
+      welcome(this.mail.ctx(), {
+        name: row.name,
+        familyCode: row.familyCode,
+        group: await this.group(),
+      }),
       {
         kind: 'welcome',
         refId: row.id,
@@ -618,5 +694,269 @@ export class AuthService {
       .from(staffUsers)
       .where(eq(staffUsers.id, user.id));
     return { ...user, ...s };
+  }
+
+  // ---------------------------------------------------------------- akun orang tua (D-064)
+
+  /** Simpan password baru; token lama tidak berlaku lagi (guard membandingkan `passwordChangedAt`). */
+  private async storePassword(parentId: string, password: string, mustChange: boolean) {
+    // Detik dibulatkan ke bawah agar token baru yang terbit di detik yang sama tetap berlaku.
+    const changedAt = new Date(Math.floor(Date.now() / 1000) * 1000);
+    await this.db
+      .update(parents)
+      .set({
+        passwordHash: await hashSecret(password),
+        passwordChangedAt: changedAt,
+        mustChangePassword: mustChange,
+      })
+      .where(eq(parents.id, parentId));
+    forgetAccount(parentId);
+  }
+
+  /** 5 permintaan kode lupa password per jam per email; per IP lebih longgar. */
+  readonly forgotLimiter = new RateLimiter(5, 60 * 60_000);
+
+  /** Lupa password: kirim kode ke email. Jawaban selalu sama (tidak membocorkan email terdaftar). */
+  async requestPasswordReset(email: string, ip = 'unknown') {
+    this.forgotLimiter.check(`forgot:${email}`);
+    this.forgotLimiter.check(`forgot-ip:${ip}`);
+    this.forgotLimiter.fail(`forgot:${email}`);
+    const [row] = await this.db
+      .select({ id: parents.id, name: parents.name, email: parents.email })
+      .from(parents)
+      .where(and(sql`lower(${parents.email}) = ${email}`, eq(parents.active, true)));
+    if (row) {
+      const code = await this.newCode(row.id, 'reset');
+      if (code)
+        await this.mail.enqueue(
+          row.email,
+          passwordResetCode(this.mail.ctx(), { name: row.name, code, minutes: CODE_TTL_MIN }),
+          { kind: 'reset', refId: row.id },
+        );
+    } else this.forgotLimiter.fail(`forgot-ip:${ip}`);
+    return { ok: true, cooldownSeconds: RESEND_COOLDOWN_MS / 1000 };
+  }
+
+  /**
+   * Buat password baru dengan kode dari email → langsung masuk. Kode dari email juga membuktikan email itu
+   * milik orang tua, jadi akun yang belum terverifikasi ikut terverifikasi.
+   */
+  async resetPassword(
+    email: string,
+    code: string,
+    password: string,
+    ip = 'unknown',
+  ): Promise<AuthResult & { familyCode: string; mustChangePassword: boolean }> {
+    const key = `reset:${email}`;
+    this.verifyLimiter.check(key);
+    this.ipFails.check(`ip:${ip}`);
+    const fail = (message: string, extra: Record<string, unknown> = {}): never => {
+      this.verifyLimiter.fail(key);
+      this.ipFails.fail(`ip:${ip}`);
+      throw new BadRequestException({ message, ...extra });
+    };
+    const [row] = await this.db
+      .select()
+      .from(parents)
+      .where(and(sql`lower(${parents.email}) = ${email}`, eq(parents.active, true)));
+    if (!row) return fail('Kode tidak cocok atau sudah kedaluwarsa.');
+    await this.takeCode(row.id, 'reset', code, fail);
+    await this.storePassword(row.id, password, false);
+    if (!row.emailVerifiedAt)
+      await this.db
+        .update(parents)
+        .set({ emailVerifiedAt: new Date() })
+        .where(eq(parents.id, row.id));
+    this.verifyLimiter.reset(key);
+    this.limiter.reset(`parent:${email}`);
+    await this.mail.enqueue(row.email, passwordChanged(this.mail.ctx(), { name: row.name }), {
+      kind: 'password',
+      refId: row.id,
+    });
+    const res = await this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
+    return { ...res, familyCode: row.familyCode, mustChangePassword: false };
+  }
+
+  /** Data akun orang tua untuk halaman "Akun saya". */
+  async parentAccount(parentId: string) {
+    const [row] = await this.db
+      .select({
+        name: parents.name,
+        email: parents.email,
+        familyCode: parents.familyCode,
+        mustChangePassword: parents.mustChangePassword,
+        passwordChangedAt: parents.passwordChangedAt,
+      })
+      .from(parents)
+      .where(eq(parents.id, parentId));
+    if (!row) throw new NotFoundException('Akun tidak ditemukan');
+    // Ganti email yang masih menunggu kode (bila ada).
+    const [pending] = await this.db
+      .select({ newEmail: emailVerifications.newEmail, expiresAt: emailVerifications.expiresAt })
+      .from(emailVerifications)
+      .where(
+        and(
+          eq(emailVerifications.parentId, parentId),
+          eq(emailVerifications.purpose, 'email'),
+          isNull(emailVerifications.consumedAt),
+        ),
+      )
+      .orderBy(desc(emailVerifications.createdAt))
+      .limit(1);
+    return {
+      ...row,
+      pendingEmail: pending && pending.expiresAt.getTime() > Date.now() ? pending.newEmail : null,
+    };
+  }
+
+  /** Edit nama orang tua. */
+  async updateParentProfile(parentId: string, name: string) {
+    await this.db.update(parents).set({ name }).where(eq(parents.id, parentId));
+    forgetAccount(parentId);
+    return this.parentAccount(parentId);
+  }
+
+  private async checkPassword(parentId: string, password: string, ipKey: string) {
+    const key = `account:${parentId}`;
+    this.limiter.check(key);
+    this.ipFails.check(ipKey);
+    const [row] = await this.db.select().from(parents).where(eq(parents.id, parentId));
+    if (!row || !(await verifySecret(password, row.passwordHash))) {
+      this.limiter.fail(key);
+      this.ipFails.fail(ipKey);
+      throw new BadRequestException({
+        message: 'Password saat ini belum benar.',
+        issues: [{ path: 'currentPassword', message: 'Password saat ini belum benar.' }],
+      });
+    }
+    this.limiter.reset(key);
+    return row;
+  }
+
+  /** Ganti password (password lama wajib benar). Mengembalikan token baru; perangkat lain keluar. */
+  async changeParentPassword(
+    parentId: string,
+    currentPassword: string,
+    password: string,
+    ip = 'unknown',
+  ): Promise<AuthResult> {
+    const row = await this.checkPassword(parentId, currentPassword, `ip:${ip}`);
+    await this.storePassword(parentId, password, false);
+    await this.mail.enqueue(row.email, passwordChanged(this.mail.ctx(), { name: row.name }), {
+      kind: 'password',
+      refId: row.id,
+    });
+    return this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
+  }
+
+  private async emailTaken(email: string, exceptId: string) {
+    const [other] = await this.db
+      .select({ id: parents.id })
+      .from(parents)
+      .where(sql`lower(${parents.email}) = ${email}`);
+    return !!other && other.id !== exceptId;
+  }
+
+  /** Ganti email: konfirmasi password, kirim kode ke email BARU. Email lama tetap berlaku sampai kode cocok. */
+  async requestEmailChange(
+    parentId: string,
+    newEmail: string,
+    currentPassword: string,
+    ip = 'unknown',
+  ) {
+    const row = await this.checkPassword(parentId, currentPassword, `ip:${ip}`);
+    if (row.email.toLowerCase() === newEmail)
+      throw new BadRequestException({
+        message: 'Email baru sama dengan email sekarang.',
+        issues: [{ path: 'email', message: 'Email baru sama dengan email sekarang.' }],
+      });
+    if (await this.emailTaken(newEmail, parentId))
+      throw new ConflictException({
+        message: 'Email ini sudah dipakai akun lain.',
+        issues: [{ path: 'email', message: 'Email ini sudah dipakai akun lain.' }],
+      });
+    this.resendLimiter.check(`email-change:${parentId}`);
+    this.resendLimiter.fail(`email-change:${parentId}`);
+    const code = await this.newCode(parentId, 'email', { fresh: true, newEmail });
+    await this.mail.enqueue(
+      newEmail,
+      emailChangeCode(this.mail.ctx(), { name: row.name, code: code!, minutes: CODE_TTL_MIN }),
+      { kind: 'email-change', refId: parentId },
+    );
+    return { ok: true, pendingEmail: newEmail, minutes: CODE_TTL_MIN };
+  }
+
+  /** Kode cocok → email akun diganti; pemberitahuan dikirim ke email lama. */
+  async confirmEmailChange(parentId: string, code: string, ip = 'unknown') {
+    const key = `email-confirm:${parentId}`;
+    this.verifyLimiter.check(key);
+    const fail = (message: string, extra: Record<string, unknown> = {}): never => {
+      this.verifyLimiter.fail(key);
+      this.ipFails.fail(`ip:${ip}`);
+      throw new BadRequestException({ message, ...extra });
+    };
+    const v = await this.takeCode(parentId, 'email', code, fail);
+    const newEmail = v.newEmail!;
+    if (await this.emailTaken(newEmail, parentId))
+      throw new ConflictException('Email ini sudah dipakai akun lain.');
+    const [old] = await this.db.select().from(parents).where(eq(parents.id, parentId));
+    await this.db
+      .update(parents)
+      .set({ email: newEmail, emailVerifiedAt: new Date() })
+      .where(eq(parents.id, parentId));
+    this.verifyLimiter.reset(key);
+    if (old)
+      await this.mail.enqueue(
+        old.email,
+        emailChanged(this.mail.ctx(), { name: old.name, newEmail }),
+        {
+          kind: 'email-change',
+          refId: parentId,
+        },
+      );
+    return this.parentAccount(parentId);
+  }
+
+  /**
+   * Admin: tandai email terverifikasi + buat password sementara acak (D-064). Password dikirim lewat email
+   * (pilihan pemilik produk) dan dikembalikan sekali ke admin untuk disalin; orang tua wajib segera mengganti.
+   */
+  async adminVerifyParent(parentId: string) {
+    const [row] = await this.db.select().from(parents).where(eq(parents.id, parentId));
+    if (!row) throw new NotFoundException('Akun orang tua tidak ditemukan');
+    const password = tempPassword();
+    await this.storePassword(row.id, password, true);
+    await this.db
+      .update(parents)
+      .set({ emailVerifiedAt: row.emailVerifiedAt ?? new Date() })
+      .where(eq(parents.id, row.id));
+    // Kode verifikasi yang belum dipakai tidak diperlukan lagi.
+    await this.db
+      .update(emailVerifications)
+      .set({ consumedAt: new Date() })
+      .where(
+        and(
+          eq(emailVerifications.parentId, row.id),
+          eq(emailVerifications.purpose, 'verify'),
+          isNull(emailVerifications.consumedAt),
+        ),
+      );
+    await this.mail.enqueue(
+      row.email,
+      adminVerified(this.mail.ctx(), {
+        name: row.name,
+        email: row.email,
+        tempPassword: password,
+        familyCode: row.familyCode,
+        group: await this.group(),
+      }),
+      { kind: 'admin-verified', refId: row.id },
+    );
+    return { ok: true, email: row.email, tempPassword: password };
+  }
+
+  /** Admin mengatur password orang tua → orang tua diminta menggantinya setelah masuk. */
+  async adminSetParentPassword(parentId: string, password: string) {
+    await this.storePassword(parentId, password, true);
   }
 }

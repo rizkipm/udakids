@@ -60,6 +60,10 @@ export const parents = pgTable(
     referredAt: timestamp('referred_at', { withTimezone: true }),
     /** Hash IP saat daftar (HMAC, tidak bisa dibalik) — hanya untuk deteksi akun palsu afiliasi. */
     signupIpHash: text('signup_ip_hash'),
+    /** Password terakhir diganti (D-064): token yang terbit sebelum ini tidak berlaku lagi. */
+    passwordChangedAt: timestamp('password_changed_at', { withTimezone: true }),
+    /** Password sementara dari admin → orang tua diminta segera menggantinya setelah masuk (D-064). */
+    mustChangePassword: boolean('must_change_password').notNull().default(false),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
@@ -524,6 +528,10 @@ export const emailVerifications = pgTable(
       .notNull()
       .references(() => parents.id, { onDelete: 'cascade' }),
     codeHash: text('code_hash').notNull(),
+    /** `verify` (daftar, D-044), `reset` (lupa password), `email` (ganti email) — D-064. */
+    purpose: text('purpose').notNull().default('verify'),
+    /** Untuk `email`: alamat baru yang menunggu dikonfirmasi kode. */
+    newEmail: text('new_email'),
     expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
     attempts: integer('attempts').notNull().default(0),
     consumedAt: timestamp('consumed_at', { withTimezone: true }),

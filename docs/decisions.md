@@ -1338,3 +1338,29 @@ teman aktif, komisi 1 tingkat dengan pohon visual, verifikasi rekening manual ol
   `GET /public/affiliate`, mengikuti pengaturan admin; hilang bila program dimatikan) dan info satu akun untuk hingga
   7 anak. Teks paket keluarga dan pintu masuk orang tua ikut menyebut batas 7 anak. Hanya untuk orang dewasa (landing),
   tidak tampil di area anak.
+
+## D-064 — Akun orang tua (lupa/ganti password, edit profil), kontak WhatsApp, password sementara dari admin
+
+Keluhan peserta: lupa password, tidak bisa mengganti password/email, dan sulit menghubungi admin.
+
+- **Lupa password** (`/orang-tua/lupa-password`, tautan di halaman masuk): kode 6 angka ke email (mekanisme sama
+  dengan verifikasi D-044: hash, 15 menit, 5 percobaan, jeda 60 detik, jawaban selalu sama). Kode cocok → password
+  baru disimpan dan orang tua langsung masuk; akun yang belum terverifikasi ikut terverifikasi.
+- **Akun saya** (`/orang-tua/akun`):
+  - ubah nama;
+  - ganti email: password saat ini wajib, kode dikirim ke email **baru**, email lama tetap berlaku sampai kode
+    cocok, lalu email lama diberi tahu;
+  - ganti password: password lama wajib, password baru minimal 8 karakter dan berbeda.
+- **Sesi dicabut saat password berganti:** `parents.password_changed_at`; token yang dibuat sebelum waktu itu
+  ditolak (401). Perangkat yang mengganti password menerima token baru.
+- **Tandai email terverifikasi (admin):** server membuat password sementara acak (12 karakter, tanpa huruf mirip),
+  menandai email terverifikasi, dan mengirim email "Akun sudah aktif" berisi email, password sementara, dan kode
+  keluarga. Admin melihat password itu sekali di pop-up dan bisa menyalinnya. **Pengecualian D-044** (disetujui
+  pemilik produk): password sementara ditulis di email. Mitigasi: `must_change_password` → pop-up "Segera ganti
+  password" di area orang tua sampai diganti, sesi lama dicabut, isi email dihapus dari antrean setelah terkirim.
+  "Atur password" oleh admin juga mewajibkan orang tua menggantinya.
+- **Kontak WhatsApp** (`app_settings.contact`, Admin → Pengaturan): nomor HP (08… otomatis jadi `wa.me/62…`) atau
+  link wa.me, pesan pembuka opsional, dan link grup `chat.whatsapp.com`. Tombol "Hubungi admin" melayang di kanan
+  bawah pada landing, area orang tua, dan admin/guru; **tidak di area anak** (`/play`, PRD A17). Link grup hanya
+  dipakai di email (verifikasi, selamat datang, akun aktif), tidak dibuka di API publik.
+- Migrasi `0014_parent_account` hanya menambah kolom (aman untuk data yang ada).

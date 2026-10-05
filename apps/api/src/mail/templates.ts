@@ -72,6 +72,17 @@ const button = (href: string, label: string) =>
 <a href="${esc(href)}" style="display:inline-block;padding:14px 26px;font-size:16px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:999px">${esc(label)}</a>
 </td></tr></table>`;
 
+/** Ajakan gabung grup WhatsApp orang tua (D-064); kosong = tidak ditampilkan. */
+const groupBlock = (link?: string) =>
+  link
+    ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 18px;background:#e7f7ee;border-radius:16px;border:2px solid #128c4a"><tr><td style="padding:14px 16px">
+<p style="margin:0 0 10px;font-size:15px;line-height:1.6;color:${C.ink}"><strong>Gabung grup WhatsApp orang tua</strong><br>Dapatkan info materi baru, tips belajar, dan bantuan dari admin.</p>
+<a href="${esc(link)}" style="display:inline-block;padding:12px 22px;font-size:15px;font-weight:700;color:#ffffff;background:#128c4a;text-decoration:none;border-radius:999px">Gabung grup WhatsApp</a>
+</td></tr></table>`
+    : '';
+const groupText = (link?: string) =>
+  link ? `\n\nGabung grup WhatsApp orang tua untuk info dan bantuan: ${link}` : '';
+
 /** Kotak info berwarna, berisi baris label → nilai. */
 const infoBox = (rows: [string, string][], tone: Tone = 'grape') => {
   const [fg, bg] = toneColor[tone];
@@ -140,7 +151,7 @@ const footerText = (ctx: MailContext) =>
 
 export function verifyEmail(
   ctx: MailContext,
-  d: { name: string; code: string; minutes: number },
+  d: { name: string; code: string; minutes: number; group?: string },
 ): MailContent {
   const subject = `${d.code} adalah kode verifikasi ${ctx.brand}`;
   const html = layout(ctx, {
@@ -155,13 +166,17 @@ export function verifyEmail(
       p(
         'Kalau Anda tidak merasa mendaftar, abaikan saja email ini — akun tidak akan aktif tanpa kode di atas.',
       ),
+      groupBlock(d.group),
     ].join('\n'),
   });
-  const text = `Halo, ${d.name}!\n\nTerima kasih sudah mendaftar di ${ctx.brand}.\nKode verifikasi Anda: ${d.code}\n(Berlaku ${d.minutes} menit.)\n\nKalau Anda tidak merasa mendaftar, abaikan email ini.${footerText(ctx)}`;
+  const text = `Halo, ${d.name}!\n\nTerima kasih sudah mendaftar di ${ctx.brand}.\nKode verifikasi Anda: ${d.code}\n(Berlaku ${d.minutes} menit.)\n\nKalau Anda tidak merasa mendaftar, abaikan email ini.${groupText(d.group)}${footerText(ctx)}`;
   return { subject, html, text };
 }
 
-export function welcome(ctx: MailContext, d: { name: string; familyCode: string }): MailContent {
+export function welcome(
+  ctx: MailContext,
+  d: { name: string; familyCode: string; group?: string },
+): MailContent {
   const url = `${ctx.appUrl.replace(/\/$/, '')}/orang-tua`;
   const subject = `Selamat datang di ${ctx.brand}!`;
   const html = layout(ctx, {
@@ -181,9 +196,135 @@ export function welcome(ctx: MailContext, d: { name: string; familyCode: string 
       p('2. Buka halaman anak, masukkan kode keluarga, lalu biarkan si kecil memilih namanya.'),
       p('3. Pantau progres belajarnya setiap minggu di dasbor orang tua.'),
       button(url, 'Buka dasbor orang tua'),
+      groupBlock(d.group),
     ].join('\n'),
   });
-  const text = `Halo ${d.name}, akun ${ctx.brand} Anda sudah aktif.\nKode keluarga: ${d.familyCode}\n\n1. Tambahkan profil anak.\n2. Buka halaman anak dan masukkan kode keluarga.\n3. Pantau progres di dasbor: ${url}${footerText(ctx)}`;
+  const text = `Halo ${d.name}, akun ${ctx.brand} Anda sudah aktif.\nKode keluarga: ${d.familyCode}\n\n1. Tambahkan profil anak.\n2. Buka halaman anak dan masukkan kode keluarga.\n3. Pantau progres di dasbor: ${url}${groupText(d.group)}${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+// ------------------------------------------------------------------ akun orang tua (D-064)
+
+const parentUrl = (ctx: MailContext, path = '') =>
+  `${ctx.appUrl.replace(/\/$/, '')}/orang-tua${path}`;
+
+/** Kode lupa password. */
+export function passwordResetCode(
+  ctx: MailContext,
+  d: { name: string; code: string; minutes: number },
+): MailContent {
+  const subject = `${d.code} adalah kode untuk membuat password baru ${ctx.brand}`;
+  const html = layout(ctx, {
+    title: 'Buat password baru',
+    preheader: `Kode Anda: ${d.code}. Berlaku ${d.minutes} menit.`,
+    body: [
+      p(
+        `Halo ${d.name}, kami menerima permintaan untuk membuat password baru akun ${ctx.brand} Anda.`,
+      ),
+      bigBox('Kode', d.code, 'grape', `Berlaku ${d.minutes} menit`),
+      p('Masukkan kode ini di halaman **Lupa password**, lalu buat password baru.'),
+      p(
+        'Kalau Anda tidak meminta ini, abaikan saja email ini. Password Anda tidak berubah tanpa kode di atas.',
+      ),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\n\nKode untuk membuat password baru: ${d.code}\n(Berlaku ${d.minutes} menit.)\nMasukkan di halaman Lupa password, lalu buat password baru.\n\nKalau Anda tidak meminta ini, abaikan email ini.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+/** Kode konfirmasi email baru (dikirim ke alamat BARU). */
+export function emailChangeCode(
+  ctx: MailContext,
+  d: { name: string; code: string; minutes: number },
+): MailContent {
+  const subject = `${d.code} adalah kode konfirmasi email baru ${ctx.brand}`;
+  const html = layout(ctx, {
+    title: 'Konfirmasi email baru',
+    preheader: `Kode Anda: ${d.code}. Berlaku ${d.minutes} menit.`,
+    body: [
+      p(`Halo ${d.name}, alamat ini akan dipakai sebagai email baru akun ${ctx.brand} Anda.`),
+      bigBox('Kode konfirmasi', d.code, 'grape', `Berlaku ${d.minutes} menit`),
+      p('Masukkan kode ini di halaman **Akun saya** untuk menyelesaikan penggantian email.'),
+      p('Kalau Anda tidak meminta ini, abaikan saja email ini.'),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\n\nKode konfirmasi email baru: ${d.code}\n(Berlaku ${d.minutes} menit.)\nMasukkan di halaman Akun saya.\n\nKalau Anda tidak meminta ini, abaikan email ini.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+/** Pemberitahuan keamanan ke email LAMA setelah email akun diganti. */
+export function emailChanged(ctx: MailContext, d: { name: string; newEmail: string }): MailContent {
+  const subject = `Email akun ${ctx.brand} Anda sudah diganti`;
+  const html = layout(ctx, {
+    title: 'Email akun sudah diganti',
+    preheader: 'Email masuk akun Anda sekarang alamat baru.',
+    tone: 'sun',
+    body: [
+      p(`Halo ${d.name}, email untuk masuk ke akun ${ctx.brand} Anda sekarang **${d.newEmail}**.`),
+      p(
+        'Kalau Anda tidak melakukan perubahan ini, segera hubungi admin lewat tombol WhatsApp di halaman kami.',
+      ),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\n\nEmail untuk masuk ke akun ${ctx.brand} Anda sekarang ${d.newEmail}.\nKalau Anda tidak melakukan perubahan ini, segera hubungi admin.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+/** Pemberitahuan keamanan setelah password diganti / dibuat ulang. */
+export function passwordChanged(ctx: MailContext, d: { name: string }): MailContent {
+  const subject = `Password akun ${ctx.brand} Anda sudah diganti`;
+  const html = layout(ctx, {
+    title: 'Password sudah diganti',
+    preheader: 'Password akun Anda baru saja diganti.',
+    tone: 'sun',
+    body: [
+      p(
+        `Halo ${d.name}, password akun ${ctx.brand} Anda baru saja diganti. Perangkat lain yang masih masuk akan diminta masuk lagi.`,
+      ),
+      p(
+        'Kalau bukan Anda yang menggantinya, segera buat password baru lewat **Lupa password** dan hubungi admin.',
+      ),
+      button(parentUrl(ctx, '/lupa-password'), 'Buat password baru'),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\n\nPassword akun ${ctx.brand} Anda baru saja diganti.\nKalau bukan Anda, buat password baru di ${parentUrl(ctx, '/lupa-password')} dan hubungi admin.${footerText(ctx)}`;
+  return { subject, html, text };
+}
+
+/**
+ * Admin menandai email terverifikasi + membuat password sementara (D-064). Atas pilihan pemilik produk,
+ * password sementara ikut dikirim di email ini (pengecualian D-044); orang tua diminta segera menggantinya.
+ */
+export function adminVerified(
+  ctx: MailContext,
+  d: { name: string; email: string; tempPassword: string; familyCode: string; group?: string },
+): MailContent {
+  const url = parentUrl(ctx, '/masuk');
+  const subject = `Akun ${ctx.brand} Anda sudah aktif`;
+  const html = layout(ctx, {
+    title: 'Email Anda sudah diverifikasi',
+    preheader: 'Akun Anda sudah aktif. Masuk dengan password sementara, lalu segera ganti.',
+    tone: 'leaf',
+    body: [
+      p(
+        `Halo ${d.name}, admin ${ctx.brand} sudah memverifikasi email Anda. Akun Anda sekarang aktif.`,
+      ),
+      infoBox(
+        [
+          ['Email', d.email],
+          ['Password sementara', d.tempPassword],
+          ['Kode keluarga', d.familyCode],
+        ],
+        'leaf',
+      ),
+      p(
+        '**Penting:** setelah berhasil masuk, segera ganti password ini di menu **Akun saya**. Jangan bagikan password kepada siapa pun.',
+      ),
+      button(url, 'Masuk sekarang'),
+      groupBlock(d.group),
+    ].join('\n'),
+  });
+  const text = `Halo ${d.name},\n\nAdmin ${ctx.brand} sudah memverifikasi email Anda. Akun Anda sekarang aktif.\n\nEmail: ${d.email}\nPassword sementara: ${d.tempPassword}\nKode keluarga: ${d.familyCode}\n\nPenting: setelah berhasil masuk, segera ganti password di menu Akun saya.\nMasuk: ${url}${groupText(d.group)}${footerText(ctx)}`;
   return { subject, html, text };
 }
 

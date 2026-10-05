@@ -121,16 +121,19 @@ export function DayBars({
   format = (n: number) => n.toLocaleString('id-ID'),
   height = 160,
   dayLabel,
+  labelEvery,
 }: {
   data: { date: string; value: number }[];
   label: string;
   format?: (n: number) => string;
   height?: number;
   dayLabel: (date: string, index: number) => string;
+  /** Tampilkan label sumbu setiap n batang (bawaan: otomatis untuk > 14 batang). */
+  labelEvery?: number;
 }) {
   const on = useMounted();
   const max = Math.max(1, ...data.map((d) => d.value));
-  const every = data.length > 14 ? Math.ceil(data.length / 7) : 1;
+  const every = labelEvery ?? (data.length > 14 ? Math.ceil(data.length / 7) : 1);
   return (
     <ol className="ch-bars" style={{ height }} aria-label={label}>
       {data.map((d, i) => (

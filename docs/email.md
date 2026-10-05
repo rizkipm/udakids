@@ -6,13 +6,41 @@ Udakids mengirim email lewat **Gmail SMTP** dari akun pengirim `project.udacodin
 | ------------------------------------- | --------------------- | --------------------------------------------- |
 | Kode verifikasi 6 angka               | orang tua yang daftar | daftar, kirim ulang, masuk sebelum verifikasi |
 | Selamat datang (+ kode keluarga)      | orang tua             | setelah email terverifikasi                   |
+| Kode buat password baru               | orang tua             | "Lupa password?" (D-064)                      |
+| Password sudah diganti                | orang tua             | ganti/buat password baru (D-064)              |
+| Kode ganti email (ke email baru)      | orang tua             | Akun saya → ganti email (D-064)               |
+| Email akun sudah diganti (email lama) | orang tua             | kode ganti email cocok (D-064)                |
+| Akun sudah aktif + password sementara | orang tua             | admin "Tandai email terverifikasi" (D-064)    |
 | Pesanan dibuat (instruksi transfer)   | orang tua + direksi   | pesanan baru                                  |
 | Bukti transfer diterima               | orang tua + direksi   | orang tua mengunggah bukti                    |
 | Pembayaran dikonfirmasi (paket aktif) | orang tua + direksi   | admin menyetujui                              |
 | Pembayaran belum bisa dikonfirmasi    | orang tua + direksi   | admin menolak (dengan alasan)                 |
 
 Direksi = `MAIL_DIRECTOR` (bawaan `udacodingofficial@gmail.com`). Semua email ditutup dengan
-**"Momo From Udakids"**. Email **tidak pernah** berisi password, sandi gambar anak, atau data anak.
+**"Momo From Udakids"**. Email **tidak pernah** berisi password, sandi gambar anak, atau data anak — dengan satu
+pengecualian yang disetujui pemilik produk (D-064): email "Akun sudah aktif" setelah admin menandai email
+terverifikasi berisi **password sementara** acak. Orang tua lalu diminta segera menggantinya, dan isi email tetap
+dihapus dari antrean setelah terkirim.
+
+Email kode verifikasi, selamat datang, dan "Akun sudah aktif" menampilkan tombol **Gabung grup WhatsApp** bila
+admin mengisi link grup di **Admin → Pengaturan → Kontak WhatsApp**.
+
+### SMTP hosting sendiri (Niagahoster/cPanel)
+
+Gmail dibatasi sekitar 500 email/hari. Untuk volume lebih besar, pakai akun email domain sendiri, misalnya:
+
+```env
+SMTP_HOST=srv176.niagahoster.com   # nama server cPanel, bukan mail.<domain> bila domain diproksi Cloudflare
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=helo@eduskul.my.id
+SMTP_PASS='password-akun-email'   # pakai tanda kutip tunggal bila ada karakter $ # ' " atau spasi
+MAIL_FROM="Udakids <helo@eduskul.my.id>"
+```
+
+Pastikan DNS domain pengirim punya SPF yang memuat IP server email dan DKIM `default._domainkey` dari cPanel
+(di Cloudflare: catatan DNS-only, tanpa proksi). Cek dari laptop dulu dengan `pnpm dev` + **Admin → Email → Kirim
+email uji**; konfigurasi yang sama lalu disalin ke `.env` server.
 
 ## Langkah di Gmail (sekali saja)
 
@@ -79,5 +107,6 @@ Mengganti password Gmail juga mencabut semua App Password.
 - **Admin:**
   - **Admin → Email:** status pengirim (user disamarkan), email uji, 50 email terakhir, kirim ulang;
   - **Admin → Keluarga:** lencana "Email belum diverifikasi" dan tombol **Tandai email terverifikasi**, untuk
-    orang tua yang tidak menerima email.
+    orang tua yang tidak menerima email. Tombol ini membuat password sementara acak (12 karakter), menampilkannya
+    sekali di pop-up (bisa disalin untuk WhatsApp), dan mengirimkannya ke email orang tua (D-064).
 - Test: `apps/api/test/mail.e2e.test.ts` memakai pengirim palsu, sehingga tidak ada email sungguhan yang dikirim.

@@ -11,6 +11,7 @@ import { Button, Card, Empty, formatDate, Notice, Spinner } from '../ui/ui';
 import { BannerSlider } from '../components/BannerSlider';
 import { ClaimChild } from './ClaimChild';
 import { atChildLimit, ChildCount, ChildLimitDialog } from './ChildLimit';
+import { ReferralCard } from './ReferralCard';
 import { NewsToggle } from './NewsToggle';
 import { CountUp, Kpi } from '../ui/charts';
 import { ChildProgress, ProgressIcon, type OverviewChild } from './Progress';
@@ -175,7 +176,7 @@ function FamilyHero({
       <div className="pd-hero-text">
         <h1 id="pd-hero-title">{t('parent.dash.title', { name })}</h1>
         <p>{kids.length ? t('parent.ov.heroLead') : t('parent.dash.subtitle')}</p>
-        <ChildCount count={kids.length} />
+        <ChildCount count={kids.length} className="pd-hero-count" />
         <div className="ui-row">
           <Link className="ui-btn ui-btn-primary" to="/play">
             {t('parent.dash.play')}
@@ -260,6 +261,7 @@ export function Dashboard() {
       {/* Banner setelah data utama dimuat: dasbor tetap jadi permintaan pertama. */}
       {data && <BannerSlider placement="parent" />}
       {data && <ExpiryNotice />}
+      {data && <ReferralCard />}
 
       {state?.saved && !deleted && (
         <Notice tone="success">{t('parent.dash.saved', { name: state.saved })}</Notice>

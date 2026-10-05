@@ -198,6 +198,37 @@ export const emailVerifySchema = z.strictObject({
 });
 export const emailResendSchema = z.strictObject({ email: emailSchema });
 
+/** Kode 6 angka dari email (verifikasi, lupa password, ganti email). */
+const sixDigitCode = z
+  .string()
+  .trim()
+  .regex(/^\d{6}$/, 'kode 6 angka');
+
+/** Lupa password orang tua (D-064): minta kode ke email, lalu buat password baru dengan kode itu. */
+export const passwordForgotSchema = z.strictObject({ email: emailSchema });
+export const passwordResetSchema = z.strictObject({
+  email: emailSchema,
+  code: sixDigitCode,
+  password,
+});
+/** Orang tua mengganti password saat sudah masuk (password lama wajib benar). */
+export const passwordChangeSchema = z
+  .strictObject({ currentPassword: z.string().min(1).max(128), password })
+  .refine((v) => v.currentPassword !== v.password, {
+    path: ['password'],
+    message: 'password baru harus berbeda dari password lama',
+  });
+/** Edit profil orang tua: nama. */
+export const parentProfileSchema = z.strictObject({
+  name: z.string().trim().min(1, 'nama wajib diisi').max(60),
+});
+/** Ganti email: konfirmasi password, kode dikirim ke email BARU, baru tersimpan setelah kode cocok. */
+export const emailChangeRequestSchema = z.strictObject({
+  email: emailSchema,
+  currentPassword: z.string().min(1).max(128),
+});
+export const emailChangeConfirmSchema = z.strictObject({ code: sixDigitCode });
+
 /** Anak mengubah tampilan Momo-nya sendiri (D-051). */
 export const momoStyleSchema = z.strictObject({
   momoColor: z.enum(MOMO_COLORS),
