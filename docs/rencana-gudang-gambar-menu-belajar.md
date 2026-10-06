@@ -1,6 +1,7 @@
 # Rencana: Gudang Gambar AI Hemat Biaya dan Menu Belajar Pra-TK, TK, Kelas 1
 
-Status: **Usulan**, menunggu keputusan pemilik produk (bagian 8). Ditulis 2026-10-05.
+Status: **Sebagian disetujui** (D-068, 2026-10-07): AI Gambar di admin, simpan di PostgreSQL, pelajaran di katalog,
+unit P-MA-01. Sisa bagian 8 masih usulan. Ditulis 2026-10-05.
 Pembaca: pemilik produk, tim konten, dan tim pengembang Udakids.
 Melengkapi [rencana-studio-soal.md](rencana-studio-soal.md) dan [rencana-worksheet-kosakata.md](rencana-worksheet-kosakata.md).
 Data tabel bagian 6 juga tersedia sebagai CSV di [blueprint/menu-belajar.csv](blueprint/menu-belajar.csv),
@@ -189,7 +190,7 @@ sudah ada (Math Pra-TK/TK/Kelas 1, Sains TK/Kelas 1, English Pra-TK).
 
 | Kode    | Unit                        | Tujuan · rujukan                                                                    | Belajar (layar)     | Berlatih (model) | Tantangan (soal)            | Tema kosakata                | Worksheet cetak            |
 | ------- | --------------------------- | ----------------------------------------------------------------------------------- | ------------------- | ---------------- | --------------------------- | ---------------------------- | -------------------------- |
-| P-MA-01 | Bilangan 1 sampai 5         | Membilang dan mengenal lambang 1–5 · _CP Fondasi; NEL; EYFS_                        | kenalan, kata, coba | 3, 4, 8          | Ada: Math Pra-TK A, B, C, D | buah, hewan, mainan          | hitung & tulis             |
+| P-MA-01 | Bilangan 1 sampai 10        | Membilang dan mengenal lambang 1–10 · _CP Fondasi; NEL; EYFS_                       | kenalan, kata, coba | 3, 4, 8          | Worksheet A; Math A–D       | buah, hewan, mainan          | hitung & tulis             |
 | P-MA-02 | Lihat sekilas 1 sampai 5    | Mengenali banyak benda tanpa menghitung satu-satu · _EYFS Number (subitising)_      | kenalan, coba       | 16, 3            | BARU 10 level               | titik, buah                  | kartu titik                |
 | P-MA-03 | Bilangan 6 sampai 10        | Membilang dan mengenal lambang 6–10 · _CP Fondasi; NEL_                             | kenalan, coba       | 3, 4, 5          | Ada: Math Pra-TK E, F, G, H | makanan, kendaraan           | hitung & tulis             |
 | P-MA-04 | Jari tangan dan angka       | Menunjukkan bilangan dengan jari · _NEL Numeracy_                                   | kenalan, coba       | 8, 16            | BARU 10 level               | tubuh (jari)                 | tarik garis jari ↔ angka   |

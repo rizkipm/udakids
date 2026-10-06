@@ -4,8 +4,10 @@ import {
   OBJECTS,
   OBJECT_IDS,
   COLORS,
+  ALL_SHAPE_IDS,
   SHAPE_IDS,
   type ObjectId,
+  type ShapeId,
 } from '../assets.js';
 import type { Choice, ItemCore, Layout, Visual } from '../item.js';
 import type { Rng } from '../rng.js';
@@ -36,9 +38,7 @@ export const range = (min = 0, max = 100) =>
 
 export const objectIdSchema = z.enum(OBJECT_IDS as [ObjectId, ...ObjectId[]]);
 export const colorSchema = z.enum(COLORS);
-export const shapeIdSchema = z.enum(
-  SHAPE_IDS as [(typeof SHAPE_IDS)[number], ...(typeof SHAPE_IDS)[number][]],
-);
+export const shapeIdSchema = z.enum(ALL_SHAPE_IDS as [ShapeId, ...ShapeId[]]);
 export const layoutSchema = z.enum(['row', 'rows', 'scatter', 'ring', 'grid']);
 
 export const between = (rng: Rng, [a, b]: readonly [number, number]) => rng.int(a, b);

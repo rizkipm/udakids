@@ -124,7 +124,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(res.body.books.map((b: { title: string }) => b.title)).toEqual([
         'Math Pra-TK',
         'Math Kindergarten (TK)',
-        'Math TK (OSN)',
+        'Math TK (Olimpiade)',
         'Math Grade 1',
         'Math Grade 2',
         'Math Grade 1-2 (OSN)',
@@ -133,7 +133,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'Math Grade 5-6 (OSN)',
         'Math SMP Kelas 7-9 (OSN)',
         'Sains Kindergarten (TK)',
-        'Sains TK (OSN)',
+        'Sains TK (Olimpiade)',
         'Sains Grade 1',
         'Sains Grade 2',
         'Sains Grade 1-2 (OSN)',
@@ -143,6 +143,8 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'Sains Grade 5-6 (OSN)',
         'Sains SMP Kelas 7-9 (OSN)',
         'English Pra-TK',
+        'English TK (Olimpiade)',
+        'Worksheet Pra-TK',
       ]);
       expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
@@ -165,7 +167,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         (await q('select count(*) n from children where active')) +
         (await q('select count(*) n from staff_users where active'));
       expect(res.body).toMatchObject({
-        books: 21,
+        books: 23,
         totalLevels: SKILL_COUNT,
         users,
         rounds: await q("select count(*) n from events where type = 'quiz_result'"),
@@ -1330,17 +1332,17 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('manifest kalimat → admin membuat klip sekali → klip di-cache selamanya', async () => {
       const before = await http().get('/voice/lines').expect(200);
       expect(before.body.enabled).toBe(true);
-      expect(Object.keys(before.body.lines)).toHaveLength(32);
+      expect(Object.keys(before.body.lines)).toHaveLength(35);
       expect(before.body.lines.vo_cmd_pick_one).toMatchObject({ clip: null });
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 32, created: 32, failed: 0, skipped: 0 });
+        .expect(200, { total: 35, created: 35, failed: 0, skipped: 0 });
       const calls = ttsCalls.length;
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 32, created: 0, failed: 0, skipped: 32 });
+        .expect(200, { total: 35, created: 0, failed: 0, skipped: 35 });
       expect(ttsCalls.length).toBe(calls); // tidak dibuat ulang
       const after = await http().get('/voice/lines').expect(200);
       const key = after.body.lines.vo_cmd_pick_one.clip;

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   correctNeeded,
+  durationShort,
   durationWords,
   formatClock,
   rankLeaders,
@@ -205,5 +206,12 @@ describe('waktu pengerjaan & papan peringkat (D-024)', () => {
     expect(durationWords(120_000)).toBe('2 menit');
     expect(durationWords(0)).toBe('0 detik');
     expect(durationWords(3_600_000)).toBe('1 jam');
+    // Ringkas untuk kartu dasbor: paling banyak dua satuan.
+    expect(durationShort(8_156_000)).toBe('2 jam 15 mnt');
+    expect(durationShort(7_200_000)).toBe('2 jam');
+    expect(durationShort(956_000)).toBe('15 mnt 56 dtk');
+    expect(durationShort(900_000)).toBe('15 mnt');
+    expect(durationShort(56_000)).toBe('56 dtk');
+    expect(durationShort(-5)).toBe('0 dtk');
   });
 });

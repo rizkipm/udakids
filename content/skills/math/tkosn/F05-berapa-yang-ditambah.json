@@ -1,0 +1,61 @@
+{
+  "id": "math.tkosn.f5.berapa-yang-ditambah",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 5,
+  "title": "Pasar buah: tambah dan kurang — Level 5 — Berapa yang ditambah?",
+  "tier": "basic",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 4]
+    },
+    "constraint": "a + b <= 10",
+    "derived": {
+      "c": "a + b"
+    },
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Di piring ada {a} {benda}. Ibu menambah lagi sampai jadi {c} {benda}. Berapa {benda} yang ditambah?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a"
+      },
+      {
+        "kind": "text",
+        "text": "{a} + … = {c}"
+      }
+    ],
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "c",
+        "tag": "jumlah-akhir"
+      },
+      {
+        "expr": "b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "angka-awal"
+      }
+    ],
+    "choices": 3,
+    "explain": "Hitung terus dari {a} sampai {c}: ada {answer} {benda} yang ditambah."
+  }
+}

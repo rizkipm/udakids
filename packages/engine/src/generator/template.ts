@@ -1,10 +1,21 @@
 import { z } from 'zod';
+import { lessonSchema } from '../content/lesson.js';
 import { OBJECTS } from './assets.js';
 import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/index.js';
 import { allVisuals, type Choice, type Item, type ItemCore } from './item.js';
+import { GLYPHS } from './glyphs.js';
 import { createRng } from './rng.js';
 
-export const DOMAINS = ['math', 'literasi', 'sains', 'english', 'logika', 'spasial'] as const;
+// `worksheet` (D-068): buku lembar kerja interaktif per jenjang (tebalkan, sambung titik, …) dengan pelajaran.
+export const DOMAINS = [
+  'math',
+  'literasi',
+  'sains',
+  'english',
+  'logika',
+  'spasial',
+  'worksheet',
+] as const;
 // Urutan = urutan tampil buku (per mata pelajaran). Buku per kelas (sd1–sd4, D-032) berdampingan dengan
 // buku gabungan lama (sd12, sd34) yang tetap dipertahankan; sd56 = OSN Kategori C (D-048); smp79 = OSN SMP Kategori D (D-049);
 // tkosn = olimpiade TK, Math & Sains (D-050).
@@ -85,10 +96,23 @@ export const catalogSchema = z.strictObject({
       z.strictObject({
         code: z.string().regex(/^[A-Z]{1,2}$/),
         title: z.string().min(3),
+        /**
+         * Bagian di dalam buku (D-069), mis. "EMC · Eduversal Mathematics Competition — Penyisihan Final
+         * Provinsi 2026" (singkatan · nama — keterangan; dipecah saat tampil). Materi dengan `group` yang sama tampil di bawah satu
+         * judul bagian; materi tanpa `group` tampil lebih dulu tanpa judul.
+         */
+        group: z.string().trim().min(2).max(100).optional(),
         /** Materi singkat untuk dibacakan ke anak sebelum bermain (D-026). */
         intro: z.string().trim().min(10).max(300).optional(),
         /** 1–3 hal penting ("Ingat!") dari topik ini. */
         tips: z.array(z.string().trim().min(3).max(120)).min(1).max(3).optional(),
+        /**
+         * Topik mandiri (D-068): levelnya terbuka sejak awal dan tidak ikut mengunci topik sesudahnya —
+         * untuk topik tambahan yang disisipkan ke buku yang sudah dimainkan anak.
+         */
+        standalone: z.boolean().optional(),
+        /** Pelajaran sebelum latihan (Menu Belajar, D-068). */
+        lesson: lessonSchema.optional(),
       }),
     )
     .min(1),
@@ -96,6 +120,8 @@ export const catalogSchema = z.strictObject({
 export type Catalog = z.infer<typeof catalogSchema>;
 
 export const MAX_ATTEMPTS = 100;
+/** Batas titik sambung titik (target sentuh ≥ 64 px tetap muat di layar HP). */
+export const MAX_DOTS = 12;
 /** Batas panjang kalimat soal (D-049): soal cerita/olimpiade boleh panjang, maksimal 500 karakter. */
 export const MAX_PROMPT_LENGTH = 500;
 
@@ -193,6 +219,20 @@ export function itemProblems(item: ItemCore): string[] {
       }
       break;
     }
+    case 'spell': {
+      checkChoices(it.letters, 'spell', true);
+      const blanks = it.slots.filter((x) => x === null).length;
+      if (blanks === 0) out.push('spell: tidak ada kotak kosong');
+      if (it.answer.length !== blanks) out.push('spell: jawaban ≠ banyak kotak kosong');
+      const pool = it.letters.map((c) => (c.visual.kind === 'word' ? c.visual.text : ''));
+      for (const a of it.answer) {
+        const k = pool.indexOf(a);
+        if (k < 0) out.push(`spell: huruf "${a}" tidak ada di kartu`);
+        else pool.splice(k, 1);
+      }
+      if (pool.length === 0) out.push('spell: butuh huruf pengecoh');
+      break;
+    }
     case 'build':
       if (it.target < 1 || it.target > it.max) out.push('target build di luar batas');
       break;
@@ -202,6 +242,18 @@ export function itemProblems(item: ItemCore): string[] {
     case 'number-input':
       if (!Number.isFinite(it.answer)) out.push('jawaban isian bukan angka');
       break;
+    case 'trace':
+      if (!(it.glyph in GLYPHS)) out.push(`goresan angka "${it.glyph}" tidak ada`);
+      if (it.tolerance < 6 || it.tolerance > 24) out.push('toleransi menebalkan di luar 6–24');
+      break;
+    case 'connect': {
+      const ids = new Set(it.dots.map((d) => d.id));
+      if (ids.size !== it.dots.length) out.push('connect: id titik kembar');
+      if (it.answer.length !== it.dots.length || it.answer.some((a) => !ids.has(a)))
+        out.push('connect: urutan tidak mencakup semua titik');
+      if (it.dots.length < 3 || it.dots.length > MAX_DOTS) out.push(`connect: titik 3–${MAX_DOTS}`);
+      break;
+    }
   }
   if (item.prompt.length > MAX_PROMPT_LENGTH)
     out.push(`kalimat soal > ${MAX_PROMPT_LENGTH} karakter`);

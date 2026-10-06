@@ -1,13 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import {
   affiliateSettingsSchema,
+  aiImageSettingsSchema,
   billingSettingsSchema,
   contactSettingsSchema,
   DEFAULT_CONTACT_SETTINGS,
   DEFAULT_AFFILIATE_SETTINGS,
   DEFAULT_BILLING_SETTINGS,
   DEFAULT_VOICE_SETTINGS,
+  DEFAULT_AI_IMAGE_SETTINGS,
   voiceSettingsSchema,
+  type AiImageSettings,
   type AffiliateSettings,
   type BillingSettings,
   type ContactSettings,
@@ -23,6 +26,7 @@ const DEFS = {
   voice: { schema: voiceSettingsSchema, defaults: DEFAULT_VOICE_SETTINGS },
   affiliate: { schema: affiliateSettingsSchema, defaults: DEFAULT_AFFILIATE_SETTINGS },
   contact: { schema: contactSettingsSchema, defaults: DEFAULT_CONTACT_SETTINGS },
+  ai_image: { schema: aiImageSettingsSchema, defaults: DEFAULT_AI_IMAGE_SETTINGS },
 } as const;
 type Key = keyof typeof DEFS;
 type Value<K extends Key> = K extends 'billing'
@@ -31,7 +35,9 @@ type Value<K extends Key> = K extends 'billing'
     ? AffiliateSettings
     : K extends 'contact'
       ? ContactSettings
-      : VoiceSettings;
+      : K extends 'ai_image'
+        ? AiImageSettings
+        : VoiceSettings;
 
 /** Pengaturan admin di tabel `app_settings` (D-036); nilai yang hilang/rusak → bawaan. */
 @Injectable()

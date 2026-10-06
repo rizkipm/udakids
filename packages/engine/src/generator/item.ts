@@ -1,4 +1,6 @@
-import type { Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
+import type { BodyPart, Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
+import type { DotPictureId } from './dot-pictures.js';
+import type { GlyphId } from './glyphs.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
 export type Relation = 'in-front' | 'behind' | 'inside' | 'outside' | 'above' | 'below' | 'beside';
@@ -16,6 +18,10 @@ export type Visual =
     }
   | { kind: 'mixed'; parts: { object: ObjectId; count: number }[] }
   | { kind: 'dots'; count: number; layout: Layout; countAlong?: boolean }
+  /** Satu muka dadu dengan pola mata 1–6 (D-069). */
+  | { kind: 'die'; value: number; color?: Color }
+  /** Anak berdiri; bagian tubuh `part` ditandai lingkaran + panah (D-070). */
+  | { kind: 'body'; part?: BodyPart }
   | {
       kind: 'cubes';
       counts: number[];
@@ -41,6 +47,8 @@ export type Visual =
   | { kind: 'equation'; left: number; op: '+' | '-'; right: number; result?: number }
   | { kind: 'swatch'; color: Color }
   | { kind: 'word'; text: string }
+  /** Kotak huruf untuk melengkapi kata (D-071); '' = kotak kosong yang harus diisi. */
+  | { kind: 'letters'; letters: string[] }
   | { kind: 'yesno'; value: boolean }
   | { kind: 'row'; items: Visual[] }
   /** Teks panjang (soal cerita / pilihan untuk kelas 3+). */
@@ -113,10 +121,16 @@ export type Choice = {
 
 export type Interaction =
   | { type: 'pick-one'; choices: Choice[]; answer: string; arrangement?: 'row' | 'column' | 'grid' }
-  | { type: 'tap-all'; choices: Choice[]; answer: string[] }
+  /** `style: 'balloons'` = permainan pecahkan balon (kartu melayang, pecah saat diketuk). */
+  | { type: 'tap-all'; choices: Choice[]; answer: string[]; style?: 'balloons' }
   | { type: 'order'; choices: Choice[]; answer: string[] }
   | { type: 'group'; groups: Choice[]; items: Choice[]; answer: Record<string, string> }
   | { type: 'match'; left: Choice[]; right: Choice[]; answer: Record<string, string> }
+  /**
+   * Lengkapi nama (D-070): kotak huruf, `null` = kosong. Anak mengetuk kartu huruf (`letters`) untuk mengisi
+   * kotak kosong dari kiri. Nilai jawaban = huruf di kotak kosong berurutan (bukan id kartu).
+   */
+  | { type: 'spell'; slots: (string | null)[]; letters: Choice[]; answer: string[] }
   | {
       type: 'build';
       target: number;
@@ -127,7 +141,31 @@ export type Interaction =
     }
   | { type: 'number-line'; min: number; max: number; start?: number; answer: number }
   /** Isian singkat angka (kelas 3+, format isian OSN). `decimals` = jumlah angka di belakang koma. */
-  | { type: 'number-input'; answer: number; unit?: string; decimals?: number };
+  | { type: 'number-input'; answer: number; unit?: string; decimals?: number }
+  /**
+   * Menebalkan angka mengikuti goresan bernomor (D-068). Nilai jawaban = banyak goresan yang keluar jalur
+   * sebelum angka selesai; benar bila ≤ `maxSlips`. Tulisan anak tidak disimpan.
+   */
+  | {
+      type: 'trace';
+      glyph: GlyphId;
+      /** `solid` = angka abu-abu tebal; `dotted` = titik-titik saja (lebih sulit). */
+      guide: 'solid' | 'dotted';
+      /** Toleransi jarak jari ke jalur (satuan glyph, tinggi 140). */
+      tolerance: number;
+      maxSlips: number;
+    }
+  /**
+   * Sambung titik bernomor berurutan sampai gambar jadi (D-068). Nilai jawaban = SEMUA ketukan, termasuk
+   * yang keliru; benar bila urutannya lengkap dan ketukan keliru ≤ `maxSlips`.
+   */
+  | {
+      type: 'connect';
+      picture: DotPictureId;
+      dots: { id: string; label: number; x: number; y: number }[];
+      answer: string[];
+      maxSlips: number;
+    };
 
 export type InteractionType = Interaction['type'];
 
@@ -180,13 +218,35 @@ export function checkAnswer(item: Pick<Item, 'interaction'>, value: AnswerValue)
       return {
         correct: typeof value === 'object' && !Array.isArray(value) && sameRecord(value, it.answer),
       };
+    case 'spell':
+      return {
+        correct:
+          Array.isArray(value) &&
+          value.length === it.answer.length &&
+          value.every((v, i) => v.toUpperCase() === it.answer[i]),
+      };
     case 'build':
       return { correct: value === it.target };
     case 'number-line':
       return { correct: value === it.answer };
     case 'number-input':
       return { correct: typeof value === 'number' && Math.abs(value - it.answer) < 1e-9 };
+    case 'trace':
+      return { correct: typeof value === 'number' && value >= 0 && value <= it.maxSlips };
+    case 'connect':
+      return { correct: Array.isArray(value) && connectSlips(it.answer, value) <= it.maxSlips };
   }
+}
+
+/** Banyak ketukan keliru; `Infinity` bila urutan belum lengkap. */
+export function connectSlips(answer: readonly string[], taps: readonly string[]): number {
+  let k = 0;
+  let wrong = 0;
+  for (const tap of taps) {
+    if (k < answer.length && tap === answer[k]) k++;
+    else wrong++;
+  }
+  return k === answer.length ? wrong : Infinity;
 }
 
 /** Semua visual di soal (stimulus, pilihan, reteach), termasuk isi `row`. */
@@ -204,9 +264,11 @@ export function allVisuals(item: ItemCore): Visual[] {
       ? [...it.groups, ...it.items]
       : it.type === 'match'
         ? [...it.left, ...it.right]
-        : 'choices' in it
-          ? it.choices
-          : [];
+        : it.type === 'spell'
+          ? it.letters
+          : 'choices' in it
+            ? it.choices
+            : [];
   choices.forEach((c) => push(c.visual));
   return out;
 }

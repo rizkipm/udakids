@@ -54,6 +54,11 @@ function correctAnswer(item: Item): AnswerValue {
       return it.target;
     case 'number-input':
       return it.answer;
+    case 'trace':
+      return 0;
+    case 'connect':
+    case 'spell':
+      return it.answer;
   }
 }
 
@@ -61,6 +66,19 @@ function correctAnswer(item: Item): AnswerValue {
 const CASES: [FamilyName, Record<string, unknown>][] = [
   ['numeral-tap-all', {}],
   ['numeral-tap-all', { values: [1, 20], tiles: [5, 6] }],
+  ['numeral-tap-all', { values: [1, 10], tiles: [5, 8], style: 'balloons' }],
+  ['numeral-trace', {}],
+  ['numeral-trace', { values: [0, 10], guide: 'dotted', showCount: false }],
+  ['numeral-trace', { values: [0, 10], ask: 'count', tolerance: 10, maxSlips: 1 }],
+  ['connect-dots', {}],
+  ['connect-dots', { dots: [4, 10], maxSlips: 0 }],
+  ['english-word', { topics: ['animal', 'body', 'shape'], mode: 'pick-word', choices: 4 }],
+  ['english-word', { topics: ['classroom', 'bathroom'], mode: 'spell', blanks: [1, 3] }],
+  ['english-word', { topics: ['fruit', 'toy'], mode: 'sort' }],
+  ['english-word', { topics: ['shape'], mode: 'tap-same' }],
+  ['english-count', { mode: 'word-picture', range: [1, 20], choices: 4 }],
+  ['english-pronoun', { mode: 'pick', pool: 'mixed' }],
+  ['english-talk', { mode: 'greet', choices: 4 }],
   ['numeral-listen', { values: [1, 10], choices: 4 }],
   ...(['objects', 'dots', 'shapes', 'cubes', 'frame', 'stickers'] as const).flatMap((visual) =>
     (['row', 'rows', 'scatter', 'ring'] as const).map(
@@ -268,6 +286,51 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
   ],
   ['clock', { mode: 'read', minutes: [0, 30] }],
   ['clock', { mode: 'match', minutes: [0, 15, 30, 45], choices: 4 }],
+  [
+    'match-pairs',
+    {
+      items: [
+        {
+          prompt: 'Pasangkan benda dengan bentuknya.',
+          pairs: [
+            {
+              left: { visual: { kind: 'object', object: 'ketupat' } },
+              right: {
+                visual: { kind: 'shape', shape: 'belah-ketupat', color: 'hijau', size: 'm' },
+              },
+            },
+            {
+              left: { visual: { kind: 'object', object: 'piring' } },
+              right: { visual: { kind: 'shape', shape: 'lingkaran', color: 'biru', size: 'm' } },
+            },
+            {
+              left: { visual: { kind: 'die', value: 4 } },
+              right: { visual: { kind: 'numeral', value: 4 } },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  ['number-order', { min: 100, max: 999, length: [3, 4], consecutive: false, direction: 'desc' }],
+  [
+    'spell-word',
+    {
+      items: [
+        {
+          prompt: 'Lengkapi nama hewan ini.',
+          stimulus: [{ kind: 'object', object: 'paus' }],
+          word: 'PAUS',
+          show: 'P___',
+        },
+        {
+          prompt: 'Lengkapi namanya.',
+          stimulus: [{ kind: 'body', part: 'mata' }],
+          word: 'KEPITING',
+        },
+      ],
+    },
+  ],
   [
     'mix',
     {

@@ -22,6 +22,8 @@ import {
   stopSpeaking,
 } from '../audio/speech';
 import { VisualView } from '../components/visuals';
+import { ConnectDots } from './games/ConnectDots';
+import { TraceBoard } from './games/TraceBoard';
 import { t, type MessageKey } from '../i18n';
 import './play.css';
 
@@ -58,6 +60,9 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   build: 'play.cmd.build',
   'number-line': 'play.cmd.numberLine',
   'number-input': 'play.cmd.numberInput',
+  trace: 'play.cmd.trace',
+  connect: 'play.cmd.connect',
+  spell: 'play.cmd.spell',
 };
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
@@ -323,12 +328,32 @@ function InteractionView(props: ViewProps<Interaction>) {
       return <Group {...props} interaction={it} />;
     case 'match':
       return <Match {...props} interaction={it} />;
+    case 'spell':
+      return <Spell {...props} interaction={it} />;
     case 'build':
       return <Build {...props} interaction={it} />;
     case 'number-line':
       return <NumberLine {...props} interaction={it} />;
     case 'number-input':
       return <NumberInput {...props} interaction={it} />;
+    case 'trace':
+      return (
+        <TraceBoard
+          glyph={it.glyph}
+          guide={it.guide}
+          tolerance={it.tolerance}
+          disabled={props.disabled}
+          onDone={(slips) => props.onSubmit(slips)}
+        />
+      );
+    case 'connect':
+      return (
+        <ConnectDots
+          interaction={it}
+          disabled={props.disabled}
+          onDone={(taps) => props.onSubmit(taps)}
+        />
+      );
   }
 }
 
@@ -469,7 +494,7 @@ function TapAll({
   return (
     <>
       <div
-        className="choices arrange-grid"
+        className={`choices arrange-grid${it.style === 'balloons' ? ' is-balloons' : ''}`}
         style={{ ['--cols' as string]: gridColumns(it.choices.length, false) }}
       >
         {it.choices.map((c) => (
@@ -544,6 +569,72 @@ function Order({
       <CheckButton
         disabled={disabled || picked.length !== it.choices.length}
         onClick={() => onSubmit(picked)}
+      />
+    </>
+  );
+}
+
+/**
+ * Lengkapi nama (D-070): kartu huruf mengisi kotak kosong dari kiri; ketuk kotak yang terisi untuk
+ * mengembalikan hurufnya. Tanpa drag.
+ */
+function Spell({
+  interaction: it,
+  onSubmit,
+  disabled,
+  showAnswer,
+}: ViewProps<Extract<Interaction, { type: 'spell' }>>) {
+  const [picked, setPicked] = useState<string[]>([]);
+  useEffect(() => setPicked([]), [it]);
+  const byId = useMemo(() => new Map(it.letters.map((c) => [c.id, c])), [it]);
+  const blanks = it.slots.filter((x) => x === null).length;
+  const letterOf = (id: string) => {
+    const v = byId.get(id)?.visual;
+    return v?.kind === 'word' ? v.text : '';
+  };
+  let k = 0;
+  return (
+    <>
+      <div className="spell-slots" aria-label={t('play.spellSlots')}>
+        {it.slots.map((fixed, i) => {
+          if (fixed !== null)
+            return (
+              <span key={i} className="spell-slot is-fixed">
+                {fixed}
+              </span>
+            );
+          const n = k++;
+          const id = picked[n];
+          const letter = showAnswer ? it.answer[n] : id ? letterOf(id) : '';
+          return (
+            <button
+              key={i}
+              type="button"
+              className={`spell-slot${letter ? ' is-filled' : ''}${n === picked.length && !showAnswer ? ' is-next' : ''}`}
+              disabled={disabled || showAnswer || !id}
+              aria-label={letter || t('play.spellEmpty')}
+              onClick={() => setPicked((p) => p.filter((_, j) => j !== n))}
+            >
+              {letter}
+            </button>
+          );
+        })}
+      </div>
+      <div className="choices arrange-row spell-letters">
+        {it.letters
+          .filter((c) => !picked.includes(c.id))
+          .map((c) => (
+            <ChoiceCard
+              key={c.id}
+              choice={c}
+              disabled={disabled || showAnswer || picked.length >= blanks}
+              onClick={() => setPicked((p) => (p.length < blanks ? [...p, c.id] : p))}
+            />
+          ))}
+      </div>
+      <CheckButton
+        disabled={disabled || picked.length !== blanks}
+        onClick={() => onSubmit(picked.map(letterOf))}
       />
     </>
   );

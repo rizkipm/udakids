@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  ALL_SHAPE_IDS,
   COLORS,
   REAL_WORLD_SHAPES,
   REAL_WORLD_SOLIDS,
@@ -24,17 +25,23 @@ import {
   capitalize,
 } from './common.js';
 
-const shapeIds = z.enum(SHAPE_IDS as [ShapeId, ...ShapeId[]]);
+const shapeIds = z.enum(ALL_SHAPE_IDS as [ShapeId, ...ShapeId[]]);
 const solidIds = z.enum(SOLID_IDS as [SolidId, ...SolidId[]]);
 const say = (id: string) => (id in SHAPES ? SHAPES[id as ShapeId].say : SOLIDS[id as SolidId].say);
 
-const flatVisual = (rng: { pick<T>(xs: readonly T[]): T }, shape: ShapeId): Visual => ({
-  kind: 'shape',
-  shape,
-  color: rng.pick(COLORS),
-  size: rng.pick(['s', 'm', 'l'] as const),
-  rotate: rng.pick([0, 0, 0, 20, 45]),
-});
+const flatVisual = (rng: { pick<T>(xs: readonly T[]): T }, shape: ShapeId): Visual => {
+  const color = rng.pick(COLORS);
+  const size = rng.pick(['s', 'm', 'l'] as const);
+  const rotate = rng.pick([0, 0, 0, 20, 45]);
+  // Persegi diputar 45° terlihat seperti belah ketupat (D-069): cukup dimiringkan sedikit.
+  return {
+    kind: 'shape',
+    shape,
+    color,
+    size,
+    rotate: shape === 'persegi' && rotate === 45 ? 20 : rotate,
+  };
+};
 const solidVisual = (rng: { pick<T>(xs: readonly T[]): T }, solid: SolidId): Visual => ({
   kind: 'solid',
   solid,
@@ -80,7 +87,8 @@ export const shapeTap = defineFamily({
       };
     }
     const all = p.kind === 'flat' ? SHAPE_IDS : SOLID_IDS;
-    const pool = (p.pool ?? all).filter((id) => (all as readonly string[]).includes(id));
+    const valid: readonly string[] = p.kind === 'flat' ? ALL_SHAPE_IDS : SOLID_IDS;
+    const pool = (p.pool ?? all).filter((id) => valid.includes(id));
     const targets = (p.targets ?? pool).filter((id) => pool.includes(id));
     if (targets.length === 0 || pool.length < 2) reject('pool/target tidak cocok dengan jenis');
     const target = rng.pick(targets);
@@ -122,7 +130,8 @@ export const shapeName = defineFamily({
   }),
   generate(p, rng) {
     const all = p.kind === 'flat' ? SHAPE_IDS : SOLID_IDS;
-    const pool = (p.pool ?? all).filter((id) => (all as readonly string[]).includes(id));
+    const valid: readonly string[] = p.kind === 'flat' ? ALL_SHAPE_IDS : SOLID_IDS;
+    const pool = (p.pool ?? all).filter((id) => valid.includes(id));
     if (pool.length < p.choices) reject('pool kurang');
     const options = rng.sample(pool, p.choices);
     const target = options[0]!;
@@ -245,14 +254,18 @@ export const realWorldShape = defineFamily({
   params: z.strictObject({
     kind: z.enum(['flat', 'solid']).default('flat'),
     choices: z.number().int().min(2).max(4).default(3),
+    /** Bangun datar yang boleh muncul (jawaban & pengecoh); default = bangun datar bawaan. */
+    pool: z.array(shapeIds).min(2).optional(),
   }),
   generate(p, rng) {
+    const all: readonly string[] = p.kind === 'flat' ? (p.pool ?? SHAPE_IDS) : SOLID_IDS;
     const map = (p.kind === 'flat' ? REAL_WORLD_SHAPES : REAL_WORLD_SOLIDS) as Partial<
       Record<ObjectId, string>
     >;
-    const object = rng.pick(Object.keys(map) as ObjectId[]);
+    const objects = (Object.keys(map) as ObjectId[]).filter((o) => all.includes(map[o]!));
+    if (objects.length === 0) reject('tidak ada benda untuk pool ini');
+    const object = rng.pick(objects);
     const target = map[object]!;
-    const all: readonly string[] = p.kind === 'flat' ? SHAPE_IDS : SOLID_IDS;
     const others = rng.sample(
       all.filter((s) => s !== target),
       p.choices - 1,

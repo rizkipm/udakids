@@ -1,0 +1,67 @@
+{
+  "id": "math.tkosn.f3.kalimat-tambah-bergambar-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 3,
+  "title": "Pasar buah: tambah dan kurang — Level 3 — Kalimat tambah bergambar sampai 10",
+  "tier": "basic",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 5]
+    },
+    "constraint": "a + b <= 10",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Lihat gambarnya. {a} + {b} = …",
+    "say": "Lihat gambarnya. {a} tambah {b} sama dengan berapa?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=b"
+      },
+      {
+        "kind": "equation",
+        "left": "=a",
+        "op": "+",
+        "right": "=b"
+      }
+    ],
+    "answer": "a + b",
+    "distractors": [
+      {
+        "expr": "a + b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "hanya-satu-kelompok"
+      }
+    ],
+    "choices": 3,
+    "explain": "{a} tambah {b} sama dengan {answer}. Hitung semua {benda} di gambar."
+  }
+}

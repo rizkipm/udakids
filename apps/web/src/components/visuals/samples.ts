@@ -13,6 +13,8 @@ export const SAMPLE_VISUALS: { [K in Kind]: Extract<Visual, { kind: K }> } = {
     ],
   },
   dots: { kind: 'dots', count: 6, layout: 'ring' },
+  die: { kind: 'die', value: 5, color: 'merah' },
+  body: { kind: 'body', part: 'hidung' },
   cubes: { kind: 'cubes', counts: [3, 4], colors: ['merah', 'biru'], separated: true },
   frame: { kind: 'frame', filled: 7, size: 10 },
   numeral: { kind: 'numeral', value: 14 },
@@ -34,6 +36,7 @@ export const SAMPLE_VISUALS: { [K in Kind]: Extract<Visual, { kind: K }> } = {
   equation: { kind: 'equation', left: 5, op: '-', right: 2 },
   swatch: { kind: 'swatch', color: 'oranye' },
   word: { kind: 'word', text: 'segitiga' },
+  letters: { kind: 'letters', letters: ['d', '', 'g'] },
   yesno: { kind: 'yesno', value: true },
   row: {
     kind: 'row',

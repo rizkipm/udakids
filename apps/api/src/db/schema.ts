@@ -3,6 +3,7 @@ import {
   boolean,
   check,
   customType,
+  doublePrecision,
   index,
   integer,
   jsonb,
@@ -706,4 +707,68 @@ export const affiliateLedger = pgTable(
       .where(sql`${t.payoutId} is not null`),
     check('affiliate_ledger_state_ck', sql`${t.state} in ('pending', 'available', 'void')`),
   ],
+);
+
+// ------------------------------------------------------------------ AI Gambar (D-068)
+
+/**
+ * Gudang gambar AI: setiap gambar dibuat SEKALI di admin lalu dipakai ulang. `fingerprint` =
+ * SHA-256(gaya|jenis|subjek|varian|catatan|model|kualitas|ukuran|latar|referensi) — permintaan yang sama
+ * memakai baris yang sudah ada (tidak membayar dua kali). Tidak ada data anak di tabel ini.
+ */
+export const aiImages = pgTable(
+  'ai_images',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    fingerprint: text('fingerprint').notNull().unique(),
+    kind: text('kind').notNull(),
+    subject: text('subject').notNull(),
+    label: text('label').notNull(),
+    labelEn: text('label_en'),
+    theme: text('theme'),
+    variant: integer('variant').notNull().default(1),
+    prompt: text('prompt').notNull(),
+    model: text('model').notNull(),
+    quality: text('quality').notNull(),
+    size: text('size').notNull(),
+    status: text('status').notNull().default('review'),
+    mime: text('mime').notNull(),
+    data: bytea('data').notNull(),
+    bytes: integer('bytes').notNull(),
+    costUsd: doublePrecision('cost_usd').notNull().default(0),
+    /** Gambar karakter yang dipakai sebagai referensi (mis. Momo), agar karakter konsisten. */
+    referenceId: uuid('reference_id'),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    reviewedBy: uuid('reviewed_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+  },
+  (t) => [
+    index('ai_images_subject_idx').on(t.subject, t.status),
+    check('ai_images_status_ck', sql`${t.status} in ('review', 'approved', 'rejected')`),
+    check('ai_images_kind_ck', sql`${t.kind} in ('object', 'character', 'scene')`),
+  ],
+);
+
+/**
+ * Log audit & biaya AI: setiap panggilan (berhasil/gagal), penggantian kunci, dan perubahan pengaturan.
+ * Dipakai untuk batas biaya harian/bulanan. API key TIDAK PERNAH ditulis di sini.
+ */
+export const aiUsage = pgTable(
+  'ai_usage',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    action: text('action').notNull(),
+    model: text('model'),
+    imageId: uuid('image_id').references(() => aiImages.id, { onDelete: 'set null' }),
+    inputTokens: integer('input_tokens'),
+    cachedTokens: integer('cached_tokens'),
+    outputTokens: integer('output_tokens'),
+    costUsd: doublePrecision('cost_usd').notNull().default(0),
+    ok: boolean('ok').notNull(),
+    detail: text('detail'),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('ai_usage_created_idx').on(t.createdAt)],
 );

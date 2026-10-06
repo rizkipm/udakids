@@ -1,0 +1,61 @@
+{
+  "id": "math.tkosn.f6.cerita-memetik-buah-tambah",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 6,
+  "title": "Pasar buah: tambah dan kurang — Level 6 — Cerita memetik buah (tambah)",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [2, 5]
+    },
+    "constraint": "a + b <= 10",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"],
+      "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"]
+    },
+    "prompt": "{nama} memetik {a} {benda} pada pagi hari dan {b} {benda} pada sore hari. Berapa semua {benda} yang dipetik {nama}?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=b"
+      }
+    ],
+    "answer": "a + b",
+    "distractors": [
+      {
+        "expr": "a + b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "hanya-satu-kelompok"
+      }
+    ],
+    "choices": 3,
+    "explain": "Pagi {a}, sore {b}. Digabung jadi {answer} {benda}."
+  }
+}

@@ -31,6 +31,15 @@ export function FlatShape({ shape, color, size = 'm', rotate = 0 }: FlatShapePro
     case 'segi-enam':
       el = <polygon points={polygonPoints(50, 50, 45 * k, 6, 0)} {...p} />;
       break;
+    case 'belah-ketupat':
+      // Diagonal tegak lebih panjang dari diagonal mendatar: tidak tertukar dengan persegi miring.
+      el = (
+        <polygon
+          points={`50,${50 - 46 * k} ${50 + 31 * k},50 50,${50 + 46 * k} ${50 - 31 * k},50`}
+          {...p}
+        />
+      );
+      break;
   }
   return <g transform={rotate ? `rotate(${rotate} 50 50)` : undefined}>{el}</g>;
 }

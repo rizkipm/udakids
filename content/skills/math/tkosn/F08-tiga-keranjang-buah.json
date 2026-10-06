@@ -1,0 +1,67 @@
+{
+  "id": "math.tkosn.f8.tiga-keranjang-buah",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 8,
+  "title": "Pasar buah: tambah dan kurang — Level 8 — Tiga keranjang buah",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [1, 4],
+      "c": [1, 4]
+    },
+    "constraint": "a + b + c <= 10",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Ada tiga keranjang. Isinya {a}, {b}, dan {c} {benda}. Berapa semua {benda}nya?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=b"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=c"
+      }
+    ],
+    "answer": "a + b + c",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-satu-keranjang"
+      },
+      {
+        "expr": "a + b + c + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b + c - 1",
+        "tag": "kurang-satu"
+      }
+    ],
+    "choices": 3,
+    "explain": "{a} tambah {b} jadi {=a+b}, tambah {c} lagi jadi {answer}."
+  }
+}

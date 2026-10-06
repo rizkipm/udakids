@@ -44,6 +44,12 @@ function maskedAnswer(item: ContestItem): AnswerValue {
     case 'number-line':
     case 'number-input':
       return it.answer;
+    case 'trace':
+      return 0;
+    case 'connect':
+      return it.dots.map((d) => to(d.id));
+    case 'spell':
+      return it.answer;
   }
 }
 

@@ -1,0 +1,56 @@
+{
+  "id": "math.tkosn.h4.bandingkan-ratusan-bulat",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 4,
+  "title": "Timbangan angka dan dadu — Level 4 — Bandingkan ratusan bulat",
+  "tier": "basic",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 9],
+      "k": [1, 9]
+    },
+    "derived": {
+      "a": "h * 100",
+      "b": "k * 100"
+    },
+    "prompt": "Tanda yang tepat: {a} … {b}",
+    "say": "Pilih tanda yang tepat untuk {a} dan {b}.",
+    "stimulus": [
+      {
+        "kind": "numeral",
+        "value": "=a"
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "numeral",
+        "value": "=b"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Bandingkan ratusannya: {a} {answer_say} {b}."
+  }
+}

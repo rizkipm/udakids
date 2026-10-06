@@ -597,16 +597,18 @@
 }
 .pd-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 12px;
   margin: 4px 0 16px;
 }
 .pd-kpi {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas: 'icon value' 'icon label' 'icon hint';
   align-items: center;
+  align-content: center;
   column-gap: 12px;
+  row-gap: 2px;
   padding: 14px 16px;
   border-radius: 16px;
   color: var(--ui-ink);
@@ -945,6 +947,10 @@
   .pd-hero-kpis {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  /* Jumlah kartu ganjil: kartu terakhir memakai lebar penuh agar tidak ada lubang. */
+  .pd-kpis > .pd-kpi:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 @media (max-width: 520px) {
   .pd-hero {
@@ -954,8 +960,16 @@
   .pd-hero-art {
     display: none;
   }
-  .pd-kpi-value {
-    font-size: 22px;
+  .pd-kpi {
+    padding: 12px;
+    column-gap: 10px;
+  }
+  .pd-kpi-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .pd-kpi-label {
+    font-size: 13px;
   }
   .pd-child {
     padding: 14px;

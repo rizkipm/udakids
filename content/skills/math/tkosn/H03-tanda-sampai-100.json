@@ -1,0 +1,52 @@
+{
+  "id": "math.tkosn.h3.tanda-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 3,
+  "title": "Timbangan angka dan dadu — Level 3 — Tanda <, >, = sampai 100",
+  "tier": "basic",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 99],
+      "b": [10, 99]
+    },
+    "prompt": "Tanda yang tepat: {a} … {b}",
+    "say": "Pilih tanda yang tepat untuk {a} dan {b}.",
+    "stimulus": [
+      {
+        "kind": "numeral",
+        "value": "=a"
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "numeral",
+        "value": "=b"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Bandingkan puluhannya dulu, lalu satuannya. {a} {answer_say} {b}."
+  }
+}

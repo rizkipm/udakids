@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import {
+  ALL_SHAPE_IDS,
+  BODY_PART_IDS,
+  type BodyPart,
   COINS,
   COLORS,
   OBJECT_IDS,
-  SHAPE_IDS,
   SIZES,
   SOLID_IDS,
   type ObjectId,
@@ -35,6 +37,15 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
     }),
     z.strictObject({ kind: z.literal('dots'), count, layout, countAlong: z.boolean().optional() }),
     z.strictObject({
+      kind: z.literal('body'),
+      part: z.enum(BODY_PART_IDS as [BodyPart, ...BodyPart[]]).optional(),
+    }),
+    z.strictObject({
+      kind: z.literal('die'),
+      value: z.number().int().min(1).max(6),
+      color: color.optional(),
+    }),
+    z.strictObject({
       kind: z.literal('cubes'),
       counts: z.array(count).min(1),
       colors: z.array(color).min(1),
@@ -52,7 +63,7 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
     z.strictObject({ kind: z.literal('blank') }),
     z.strictObject({
       kind: z.literal('shape'),
-      shape: z.enum(SHAPE_IDS as [ShapeId, ...ShapeId[]]),
+      shape: z.enum(ALL_SHAPE_IDS as [ShapeId, ...ShapeId[]]),
       color,
       size: z.enum(SIZES),
       rotate: z.number().optional(),
@@ -60,7 +71,7 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
     z.strictObject({
       kind: z.literal('shapes'),
       items: z
-        .array(z.strictObject({ shape: z.enum(SHAPE_IDS as [ShapeId, ...ShapeId[]]), color }))
+        .array(z.strictObject({ shape: z.enum(ALL_SHAPE_IDS as [ShapeId, ...ShapeId[]]), color }))
         .min(1),
       layout,
       countAlong: z.boolean().optional(),
@@ -93,6 +104,10 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
     }),
     z.strictObject({ kind: z.literal('swatch'), color }),
     z.strictObject({ kind: z.literal('word'), text: z.string().min(1).max(40) }),
+    z.strictObject({
+      kind: z.literal('letters'),
+      letters: z.array(z.string().max(1)).min(2).max(12),
+    }),
     z.strictObject({ kind: z.literal('yesno'), value: z.boolean() }),
     z.strictObject({ kind: z.literal('row'), items: z.array(visualSchema).min(1).max(12) }),
     z.strictObject({ kind: z.literal('text'), text: z.string().min(1).max(200) }),

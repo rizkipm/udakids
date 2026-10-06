@@ -1,0 +1,52 @@
+{
+  "id": "math.tkosn.h2.tanda-sampai-20",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 2,
+  "title": "Timbangan angka dan dadu — Level 2 — Tanda <, >, = sampai 20",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "b": [1, 20]
+    },
+    "prompt": "Tanda yang tepat: {a} … {b}",
+    "say": "Pilih tanda yang tepat untuk {a} dan {b}.",
+    "stimulus": [
+      {
+        "kind": "numeral",
+        "value": "=a"
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "numeral",
+        "value": "=b"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "{a} {answer_say} {b}. Mulut buaya terbuka ke angka yang lebih besar."
+  }
+}

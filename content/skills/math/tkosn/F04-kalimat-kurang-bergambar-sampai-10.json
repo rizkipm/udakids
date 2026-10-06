@@ -1,0 +1,62 @@
+{
+  "id": "math.tkosn.f4.kalimat-kurang-bergambar-sampai-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 4,
+  "title": "Pasar buah: tambah dan kurang — Level 4 — Kalimat kurang bergambar sampai 10",
+  "tier": "basic",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [4, 10],
+      "b": [1, 5]
+    },
+    "constraint": "b < a",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Lihat gambarnya. {a} − {b} = …",
+    "say": "Lihat gambarnya. {a} kurang {b} sama dengan berapa?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a",
+        "crossed": "=b"
+      },
+      {
+        "kind": "equation",
+        "left": "=a",
+        "op": "-",
+        "right": "=b"
+      }
+    ],
+    "answer": "a - b",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "expr": "a - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 3,
+    "explain": "{a} kurang {b} sama dengan {answer}. Hitung {benda} yang tidak dicoret."
+  }
+}

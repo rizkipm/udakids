@@ -1,0 +1,108 @@
+{
+  "id": "math.tkosn.h6.ratusan-sama-lihat-puluhan-dan-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 6,
+  "title": "Timbangan angka dan dadu — Level 6 — Ratusan sama, lihat puluhan dan satuan",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9],
+            "p": [0, 9]
+          },
+          "derived": {
+            "a": "h * 100 + t * 10 + o",
+            "b": "h * 100 + p * 10 + o"
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "say": "Pilih tanda yang tepat untuk {a} dan {b}.",
+          "stimulus": [
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "text",
+              "text": "…"
+            },
+            {
+              "kind": "numeral",
+              "value": "=b"
+            }
+          ],
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ratusannya sama, jadi lihat puluhannya. {a} {answer_say} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "o": [0, 9],
+            "p": [0, 9]
+          },
+          "derived": {
+            "a": "h * 100 + t * 10 + o",
+            "b": "h * 100 + t * 10 + p"
+          },
+          "prompt": "Tanda yang tepat: {a} … {b}",
+          "say": "Pilih tanda yang tepat untuk {a} dan {b}.",
+          "stimulus": [
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "text",
+              "text": "…"
+            },
+            {
+              "kind": "numeral",
+              "value": "=b"
+            }
+          ],
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ratusan dan puluhannya sama, jadi lihat satuannya. {a} {answer_say} {b}."
+        }
+      }
+    ]
+  }
+}

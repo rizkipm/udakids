@@ -27,6 +27,12 @@ function rightAnswer(item: ContestItem): AnswerValue {
     case 'number-line':
     case 'number-input':
       return it.answer;
+    case 'trace':
+      return 0;
+    case 'connect':
+      return it.answer.map(to);
+    case 'spell':
+      return it.answer;
   }
 }
 /** Jawaban yang pasti keliru (id tak dikenal / angka mustahil). */

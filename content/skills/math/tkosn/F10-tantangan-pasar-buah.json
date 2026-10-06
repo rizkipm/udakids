@@ -1,0 +1,213 @@
+{
+  "id": "math.tkosn.f10.tantangan-pasar-buah",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 10,
+  "title": "Pasar buah: tambah dan kurang — Level 10 — Tantangan pasar buah",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 5]
+          },
+          "constraint": "a + b <= 10",
+          "words": {
+            "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+          },
+          "prompt": "Lihat gambarnya. {a} + {b} = …",
+          "say": "Lihat gambarnya. {a} tambah {b} sama dengan berapa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a"
+            },
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=b"
+            },
+            {
+              "kind": "equation",
+              "left": "=a",
+              "op": "+",
+              "right": "=b"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} tambah {b} sama dengan {answer}. Hitung semua {benda} di gambar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 10",
+          "derived": {
+            "c": "a + b"
+          },
+          "words": {
+            "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+          },
+          "prompt": "Di piring ada {a} {benda}. Ibu menambah lagi sampai jadi {c} {benda}. Berapa {benda} yang ditambah?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a"
+            },
+            {
+              "kind": "text",
+              "text": "{a} + … = {c}"
+            }
+          ],
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "jumlah-akhir"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "angka-awal"
+            }
+          ],
+          "choices": 3,
+          "explain": "Hitung terus dari {a} sampai {c}: ada {answer} {benda} yang ditambah."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 10],
+            "b": [1, 5]
+          },
+          "constraint": "b < a",
+          "words": {
+            "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"],
+            "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"]
+          },
+          "prompt": "Di keranjang {nama} ada {a} {benda}. {b} {benda} dijual ke pembeli. Berapa {benda} yang tersisa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a",
+              "crossed": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "Ada {a}, dijual {b}. Yang tersisa {answer} {benda}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 4],
+            "b": [1, 4],
+            "c": [1, 4]
+          },
+          "constraint": "a + b + c <= 10",
+          "words": {
+            "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+          },
+          "prompt": "Ada tiga keranjang. Isinya {a}, {b}, dan {c} {benda}. Berapa semua {benda}nya?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a"
+            },
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=b"
+            },
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=c"
+            }
+          ],
+          "answer": "a + b + c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-keranjang"
+            },
+            {
+              "expr": "a + b + c + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b + c - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} tambah {b} jadi {=a+b}, tambah {c} lagi jadi {answer}."
+        }
+      }
+    ]
+  }
+}

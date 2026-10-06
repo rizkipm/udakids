@@ -1,0 +1,60 @@
+{
+  "id": "math.tkosn.f1.gabungkan-buah-sampai-6",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 1,
+  "title": "Pasar buah: tambah dan kurang — Level 1 — Gabungkan buah sampai 6",
+  "tier": "basic",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [1, 4]
+    },
+    "constraint": "a + b <= 6",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Ada {a} {benda} di keranjang kiri dan {b} {benda} di keranjang kanan. Berapa semua {benda}nya?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a"
+      },
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=b"
+      }
+    ],
+    "answer": "a + b",
+    "distractors": [
+      {
+        "expr": "a + b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "hanya-satu-kelompok"
+      }
+    ],
+    "choices": 3,
+    "explain": "Gabungkan lalu hitung semuanya: {a} dan {b} jadi {answer} {benda}."
+  }
+}

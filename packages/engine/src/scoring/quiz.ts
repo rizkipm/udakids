@@ -97,23 +97,44 @@ export function levelStatuses(
   categories: readonly string[],
   skills: readonly LevelNode[],
   results: Readonly<Record<string, QuizResult | undefined>>,
+  /** Kode topik mandiri (D-068): terbuka sejak awal dan tidak mengunci topik sesudahnya. */
+  standalone: ReadonlySet<string> = new Set(),
 ): Record<string, LevelStatus> {
   const out: Record<string, LevelStatus> = {};
   let categoryOpen = true;
   for (const code of categories) {
     const levels = skills.filter((s) => s.category === code).sort((a, b) => a.order - b.order);
     if (levels.length === 0) continue;
-    let open = categoryOpen;
+    const alone = standalone.has(code);
+    let open = categoryOpen || alone;
     for (const lvl of levels) {
       const passed = results[lvl.id]?.passed === true;
       out[lvl.id] = passed ? 'passed' : open ? 'open' : 'locked';
       // Level yang lulus tetap bisa diulang; level berikutnya terbuka hanya bila ini lulus.
       open = open && passed;
     }
-    categoryOpen = categoryOpen && results[levels[0]!.id]?.passed === true;
+    if (!alone) categoryOpen = categoryOpen && results[levels[0]!.id]?.passed === true;
   }
   return out;
 }
+
+/**
+ * Topik mandiri yang dilewati saat memilih "level berikutnya" (D-068): bila anak sudah pernah bermain di topik
+ * biasa buku itu, ia tidak dialihkan ke topik tambahan — anak baru tetap mulai dari topik mandiri di depan.
+ */
+export function skippedStandalone(
+  skills: readonly LevelNode[],
+  results: Readonly<Record<string, QuizResult | undefined>>,
+  standalone: ReadonlySet<string>,
+): ReadonlySet<string> {
+  const playedRegular = skills.some((s) => !standalone.has(s.category) && results[s.id]);
+  return playedRegular ? standalone : new Set();
+}
+
+/** Kode topik mandiri di katalog (untuk `levelStatuses`). */
+export const standaloneCodes = (
+  categories: readonly { code: string; standalone?: boolean }[],
+): ReadonlySet<string> => new Set(categories.filter((c) => c.standalone).map((c) => c.code));
 
 /** Total skor = jumlah skor terbaik semua level yang pernah dimainkan. */
 export const totalPoints = (results: Readonly<Record<string, QuizResult | undefined>>) =>
@@ -172,4 +193,18 @@ export function durationWords(ms: number): string {
   const s = total % 60;
   const parts = [h && `${h} jam`, m && `${m} menit`, (s || total === 0) && `${s} detik`];
   return parts.filter(Boolean).join(' ');
+}
+
+/**
+ * Durasi ringkas untuk kartu angka (dasbor): paling banyak dua satuan, mis. "2 jam 15 mnt", "15 mnt 56 dtk",
+ * "56 dtk". Teks lengkap tetap memakai `durationWords` (pembaca layar, tooltip).
+ */
+export function durationShort(ms: number): string {
+  const total = Math.max(0, Math.round(ms / 1000));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  if (h) return m ? `${h} jam ${m} mnt` : `${h} jam`;
+  if (m) return s ? `${m} mnt ${s} dtk` : `${m} mnt`;
+  return `${s} dtk`;
 }

@@ -100,6 +100,11 @@ export const exprFamily = defineFamily({
        * Semua label menjadi pilihan; pengecoh diabaikan.
        */
       labels: z.record(z.string().regex(/^-?\d+$/), z.string().min(1).max(40)).optional(),
+      /**
+       * Cara membacakan tiap label (D-069), mis. {"1": "lebih dari"} untuk ">". Juga mengisi `{answer_say}`
+       * di kalimat soal/pembahasan. Tanpa ini, label dibacakan apa adanya.
+       */
+      labelSay: z.record(z.string().regex(/^-?\d+$/), z.string().min(1).max(60)).optional(),
     })
     .superRefine((p, ctx) => {
       const issue = (message: string) => ctx.addIssue({ code: 'custom', message });
@@ -107,6 +112,8 @@ export const exprFamily = defineFamily({
         issue('isian belum mendukung jawaban pecahan');
       if (p.labels && p.mode === 'input') issue('`labels` hanya untuk mode pilihan');
       if (p.labels && Object.keys(p.labels).length < 2) issue('`labels` butuh minimal 2 kategori');
+      if (p.labelSay && Object.keys(p.labelSay).some((k) => !p.labels?.[k]))
+        issue('`labelSay` hanya untuk kunci yang ada di `labels`');
       if (p.format === 'fraction' ? !p.fraction : !p.answer)
         issue(p.format === 'fraction' ? 'format pecahan butuh `fraction`' : 'butuh `answer`');
       const known = new Set([...Object.keys(p.vars), ...Object.keys(p.derived)]);
@@ -138,7 +145,13 @@ export const exprFamily = defineFamily({
         for (const m of text.matchAll(TEMPLATE_RE)) {
           const name = m[1]!;
           const bare = name.startsWith('w:') ? name.slice(2) : name;
-          if (!name.startsWith('=') && !known.has(bare) && !(bare in p.words) && bare !== 'answer')
+          if (
+            !name.startsWith('=') &&
+            !known.has(bare) &&
+            !(bare in p.words) &&
+            bare !== 'answer' &&
+            bare !== 'answer_say'
+          )
             issue(`template "{${name}}" tidak dikenal`);
         }
       }
@@ -162,6 +175,7 @@ export const exprFamily = defineFamily({
 
     // Jawaban.
     let answerText: string;
+    let answerSay: string | undefined;
     let answerKey: string;
     let choices: Choice[] = [];
     let answerValue = 0;
@@ -203,12 +217,13 @@ export const exprFamily = defineFamily({
       if (text === undefined) reject(`jawaban ${raw} tidak punya label`);
       answerValue = raw;
       answerText = text!;
+      answerSay = p.labelSay?.[String(raw)];
       answerKey = `l${raw}`;
       choices = rng.shuffle(
         Object.entries(p.labels).map(([k, t]) => ({
           id: `l${k}`,
           visual: { kind: 'text', text: t } as Visual,
-          say: t,
+          say: p.labelSay?.[k] ?? t,
           ...(k !== String(raw) && { tag: 'label-lain' }),
         })),
       );
@@ -268,6 +283,7 @@ export const exprFamily = defineFamily({
     const fill = (text: string) => {
       const out = text.replace(TEMPLATE_RE, (_, name: string) => {
         if (name === 'answer') return answerText;
+        if (name === 'answer_say') return answerSay ?? answerText;
         if (name.startsWith('=')) return formatId(evalNumber(name.slice(1), vars));
         // {w:a} = bilangan dalam kata ("tujuh"), untuk soal "tulis angka yang kamu dengar".
         if (name.startsWith('w:')) return numberWord(vars[name.slice(2)]!);

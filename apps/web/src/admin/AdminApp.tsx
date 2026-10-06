@@ -31,6 +31,7 @@ import { SkillList } from './skills/SkillList';
 import { FamiliesPage } from './users/FamiliesPage';
 import { StaffPage } from './users/StaffPage';
 import { VoicePage } from './voice/VoicePage';
+import { AiImagesPage } from './ai/AiImagesPage';
 import { MailPage } from './mail/MailPage';
 import { NotificationBell } from './notifications/NotificationBell';
 import './admin.css';
@@ -44,6 +45,7 @@ const NAV: (NavItem | { group: MessageKey })[] = [
   { to: '/admin/level', label: 'admin.nav.levels', icon: 'map' },
   { to: '/admin/galeri', label: 'admin.nav.gallery', icon: 'image' },
   { to: '/admin/suara', label: 'admin.nav.voice', icon: 'speaker' },
+  { to: '/admin/ai-gambar', label: 'admin.nav.ai', icon: 'image' },
   { group: 'admin.nav.groupPeople' },
   { to: '/admin/staf', label: 'admin.nav.staff', icon: 'badge' },
   { to: '/admin/keluarga', label: 'admin.nav.families', icon: 'users' },
@@ -155,6 +157,7 @@ export function AdminApp() {
         <Route path="banner" element={<BannersPage />} />
         <Route path="dokumentasi" element={<GalleryAdminPage />} />
         <Route path="suara" element={<VoicePage />} />
+        <Route path="ai-gambar" element={<AiImagesPage />} />
         <Route path="email" element={<MailPage />} />
         <Route path="transaksi" element={<OrdersPage />} />
         <Route path="paket" element={<PackagesPage />} />

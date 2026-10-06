@@ -27,6 +27,8 @@ export const numeralTapAll = defineFamily({
   params: z.strictObject({
     values: range(0, 20).default([1, 3]),
     tiles: range(2, 8).default([3, 5]),
+    /** `balloons` = permainan pecahkan balon angka (D-068). */
+    style: z.enum(['cards', 'balloons']).default('cards'),
   }),
   generate(p, rng) {
     const target = between(rng, p.values);
@@ -44,11 +46,18 @@ export const numeralTapAll = defineFamily({
       visual: { kind: 'numeral', value },
     }));
     return {
-      prompt: `Ketuk semua angka ${target}.`,
-      say: `Ketuk semua angka ${numberWord(target)}.`,
+      prompt:
+        p.style === 'balloons'
+          ? `Pecahkan semua balon angka ${target}.`
+          : `Ketuk semua angka ${target}.`,
+      say:
+        p.style === 'balloons'
+          ? `Pecahkan semua balon angka ${numberWord(target)}!`
+          : `Ketuk semua angka ${numberWord(target)}.`,
       stimulus: [],
       interaction: {
         type: 'tap-all',
+        ...(p.style === 'balloons' && { style: 'balloons' as const }),
         choices,
         answer: choices
           .filter((c) => c.visual.kind === 'numeral' && c.visual.value === target)
@@ -199,35 +208,45 @@ export const represent = defineFamily({
 });
 
 export const numberOrder = defineFamily({
-  description: 'Susun angka dari yang paling kecil.',
+  description: 'Susun angka dari yang paling kecil (atau paling besar).',
   params: z.strictObject({
-    max: z.number().int().min(3).max(100).default(5),
+    /** Angka terkecil yang boleh muncul (D-069: ratusan untuk EMC). */
+    min: z.number().int().min(0).max(999).default(1),
+    max: z.number().int().min(3).max(999).default(5),
     length: range(2, 6).default([3, 4]),
     consecutive: z.boolean().default(true),
+    /** Semua angka kelipatan `step` (mis. 10 → puluhan, 100 → ratusan bulat). */
+    step: z.number().int().min(1).max(100).default(1),
+    direction: z.enum(['asc', 'desc']).default('asc'),
   }),
   generate(p, rng) {
+    if (p.min >= p.max) reject('min harus lebih kecil dari max');
     const len = between(rng, p.length);
-    if (len > p.max) reject('panjang > max');
+    // Angka yang boleh dipakai: kelipatan `step` di rentang min..max.
+    const first = Math.max(p.step, Math.ceil(p.min / p.step) * p.step);
+    const pool: number[] = [];
+    for (let v = first; v <= p.max; v += p.step) pool.push(v);
+    if (len > pool.length) reject('panjang > banyak angka');
     let values: number[];
     if (p.consecutive) {
-      const start = rng.int(1, p.max - len + 1);
-      values = Array.from({ length: len }, (_, i) => start + i);
+      const start = rng.int(0, pool.length - len);
+      values = pool.slice(start, start + len);
     } else {
-      values = rng
-        .sample(
-          Array.from({ length: p.max }, (_, i) => i + 1),
-          len,
-        )
-        .sort((a, b) => a - b);
+      values = rng.sample(pool, len).sort((a, b) => a - b);
     }
+    if (p.direction === 'desc') values.reverse();
     const choices = rng.shuffle(values.map((v) => numeralChoice(v)));
     if (choices.every((c, i) => c.id === `n${values[i]}`)) reject('sudah terurut');
+    const desc = p.direction === 'desc';
     return {
-      prompt: 'Susun angka dari yang paling kecil.',
+      prompt: desc ? 'Susun angka dari yang paling besar.' : 'Susun angka dari yang paling kecil.',
       stimulus: [],
       interaction: { type: 'order', choices, answer: values.map((v) => `n${v}`) },
       reteach: {
-        say: `Kita hitung: ${values.map(numberWord).join(', ')}. Yang paling kecil di depan.`,
+        say:
+          p.min <= 1 && p.step === 1 && !desc
+            ? `Kita hitung: ${values.map(numberWord).join(', ')}. Yang paling kecil di depan.`
+            : `${desc ? 'Yang paling besar di depan' : 'Yang paling kecil di depan'}: ${values.map(numberWord).join(', ')}.${p.max >= 100 ? ' Bandingkan ratusannya dulu, lalu puluhan, lalu satuan.' : ''}`,
         show: [
           { kind: 'row', items: values.map((value) => ({ kind: 'numeral', value }) as Visual) },
         ],

@@ -21,6 +21,9 @@ export const COMMAND_KEYS = {
   build: 'vo_cmd_build',
   'number-line': 'vo_cmd_number_line',
   'number-input': 'vo_cmd_number_input',
+  trace: 'vo_cmd_trace',
+  connect: 'vo_cmd_connect',
+  spell: 'vo_cmd_spell',
 } as const satisfies Record<InteractionType, string>;
 
 export const RIGHT_KEYS = [
@@ -145,7 +148,9 @@ export const ENGLISH_VOICE_STYLE =
 export const voiceProfileOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceProfile => {
   if (!skillId.startsWith('english.')) return { lang: 'id-ID' };
   if (part === 'choice') return { lang: 'en-GB', style: ENGLISH_WORD_STYLE };
-  if (skillId.startsWith('english.prek.')) return { lang: 'id-ID', style: ID_EN_VOICE_STYLE };
+  // Pra-TK dan TK Olimpiade (D-062, D-071): perintah Bahasa Indonesia dengan kata English di dalamnya.
+  if (skillId.startsWith('english.prek.') || skillId.startsWith('english.tkosn.'))
+    return { lang: 'id-ID', style: ID_EN_VOICE_STYLE };
   return { lang: 'en-GB', style: ENGLISH_VOICE_STYLE };
 };
 export const voiceLangOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceLang =>

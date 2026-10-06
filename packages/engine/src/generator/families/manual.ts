@@ -18,7 +18,8 @@ const manualItem = z
         }),
       )
       .min(2)
-      .max(6),
+      // Sampai 10 gambar untuk soal "silang semua" gaya lomba (D-070).
+      .max(10),
     /** Indeks pilihan yang benar; array = "ketuk semua yang benar". */
     answer: z.union([z.number().int().min(0), z.array(z.number().int().min(0)).min(1)]),
     reteach: z.string().max(400).default('Yuk kita lihat lagi bersama.'),

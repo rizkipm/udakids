@@ -1,0 +1,97 @@
+{
+  "id": "math.tkosn.g4.sebelum-dan-di-antara-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "G",
+  "order": 4,
+  "title": "Kereta angka ratusan — Level 4 — Sebelum dan di antara (ratusan)",
+  "tier": "basic",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 999]
+          },
+          "prompt": "Angka berapa yang tepat sebelum {a}?",
+          "stimulus": [
+            {
+              "kind": "object",
+              "object": "kereta"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a"
+            }
+          ],
+          "answer": "a - 1",
+          "distractors": [
+            {
+              "expr": "a + 1",
+              "tag": "sesudah"
+            },
+            {
+              "expr": "a - 10",
+              "tag": "loncat-sepuluh"
+            },
+            {
+              "expr": "a - 2",
+              "tag": "loncat-dua"
+            }
+          ],
+          "choices": 3,
+          "explain": "Sebelum berarti kurang satu: sebelum {a} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 997]
+          },
+          "prompt": "Angka berapa yang ada di antara {a} dan {=a+2}?",
+          "stimulus": [
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "blank"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a+2"
+            }
+          ],
+          "answer": "a + 1",
+          "distractors": [
+            {
+              "expr": "a + 3",
+              "tag": "sesudah"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "loncat-sepuluh"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "sebelum"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a}, {answer}, {=a+2}. Angka di tengah adalah {answer}."
+        }
+      }
+    ]
+  }
+}

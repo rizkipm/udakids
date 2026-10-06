@@ -1,0 +1,56 @@
+{
+  "id": "math.tkosn.f7.cerita-jual-buah-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 7,
+  "title": "Pasar buah: tambah dan kurang — Level 7 — Cerita jual buah (kurang)",
+  "tier": "basic",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 10],
+      "b": [1, 5]
+    },
+    "constraint": "b < a",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"],
+      "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"]
+    },
+    "prompt": "Di keranjang {nama} ada {a} {benda}. {b} {benda} dijual ke pembeli. Berapa {benda} yang tersisa?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a",
+        "crossed": "=b"
+      }
+    ],
+    "answer": "a - b",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "expr": "a - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 3,
+    "explain": "Ada {a}, dijual {b}. Yang tersisa {answer} {benda}."
+  }
+}

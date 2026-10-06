@@ -5,6 +5,7 @@ import {
   FREE_ACCESS,
   generateItem,
   levelStatuses,
+  standaloneCodes,
   withAccess,
   PASS_SCORE,
   QUIZ_LENGTH,
@@ -53,6 +54,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           shelves.map((s) => s.category.code),
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
+          standaloneCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data.access ?? FREE_ACCESS,
@@ -102,6 +104,12 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           <h2 id="lesson-title">{t('play.topic.lesson')}</h2>
           <SpeakButton text={readAloud} label={t('play.topic.listen')} />
         </div>
+        {category.lesson && (
+          <Link className="kid-btn big-play lesson-open" to={`/play/belajar/${token}`}>
+            <PlayIcon />
+            {t('play.lesson.open', { title: category.lesson.judul })}
+          </Link>
+        )}
         <p className="lesson-intro">{intro}</p>
         {tips.length > 0 && (
           <ul className="lesson-tips" aria-label={t('play.topic.tip')}>

@@ -110,6 +110,15 @@ function CatalogEditor({
                 onChange={(e) => setCat(i, { title: e.target.value })}
               />
             </div>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <TextField
+                label={t('admin.catalog.group')}
+                value={c.group ?? ''}
+                maxLength={100}
+                placeholder={t('admin.catalog.groupHint')}
+                onChange={(e) => setCat(i, { group: e.target.value || undefined })}
+              />
+            </div>
             <Button
               variant="ghost"
               onClick={() => move(i, -1)}

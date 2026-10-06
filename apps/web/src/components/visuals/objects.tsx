@@ -4,6 +4,8 @@ import { Blob, Cone, Cuboid, Cylinder, LINE, Sphere, Tube, starPoints } from './
 import { OUTLINE, PALETTE, shade, tint } from './palette';
 import { ENGLISH_OBJECT_ART } from './objects-english';
 import { EXTRA_OBJECT_ART } from './objects-extra';
+import { ESC_OBJECT_ART } from './objects-esc';
+import { EMC_ENGLISH_OBJECT_ART } from './objects-emc';
 
 export type ObjectArtProps = { color?: Color };
 export type ObjectArt = (props: ObjectArtProps) => JSX.Element;
@@ -329,6 +331,8 @@ const centered = (id: StretchId): ObjectArt =>
  */
 export const OBJECT_ART: Record<ObjectId, ObjectArt> = {
   ...EXTRA_OBJECT_ART,
+  ...ESC_OBJECT_ART,
+  ...EMC_ENGLISH_OBJECT_ART,
   ...ENGLISH_OBJECT_ART,
   apel: ({ color }) => (
     <g>

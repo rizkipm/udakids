@@ -1,0 +1,120 @@
+/*
+ * Animasi ringan untuk ilustrasi (D-070): paus menyembur, api menyala, air menetes, baling-baling berputar.
+ * Hanya hiasan; mati bila pengguna memilih gerak dikurangi.
+ */
+.va-bob,
+.va-sway,
+.va-flicker,
+.va-rotor,
+.va-pulse,
+.va-spout {
+  transform-box: fill-box;
+}
+.va-bob {
+  transform-origin: center;
+  animation: va-bob 2.6s ease-in-out infinite;
+}
+@keyframes va-bob {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.va-sway {
+  transform-origin: 50% 100%;
+  animation: va-sway 2.8s ease-in-out infinite;
+}
+@keyframes va-sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+.va-flicker {
+  transform-origin: 50% 100%;
+  animation: va-flicker 0.8s ease-in-out infinite alternate;
+}
+@keyframes va-flicker {
+  to {
+    transform: scale(1.08, 0.9);
+  }
+}
+.va-rotor {
+  transform-origin: center;
+  animation: va-rotor 0.45s linear infinite;
+}
+@keyframes va-rotor {
+  50% {
+    transform: scaleX(0.25);
+  }
+}
+.va-pulse {
+  transform-origin: center;
+  animation: va-pulse 1.6s ease-out infinite;
+}
+@keyframes va-pulse {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+.va-spout {
+  transform-origin: 50% 100%;
+  animation: va-spout 1.8s ease-in-out infinite;
+}
+@keyframes va-spout {
+  0%,
+  100% {
+    transform: scaleY(0.7);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1.1);
+    opacity: 1;
+  }
+}
+.va-drip {
+  animation: va-drip 1.6s ease-in infinite;
+}
+@keyframes va-drip {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+.va-wave {
+  animation: va-wave 3s ease-in-out infinite;
+}
+@keyframes va-wave {
+  50% {
+    transform: translateX(-5px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .va-bob,
+  .va-sway,
+  .va-flicker,
+  .va-rotor,
+  .va-pulse,
+  .va-spout,
+  .va-drip,
+  .va-wave {
+    animation: none;
+  }
+}

@@ -1,6 +1,8 @@
 import { FREE_ACCESS, withAccess, type Access, type PlayStatus } from '../billing/billing.js';
 import {
   levelStatuses,
+  skippedStandalone,
+  standaloneCodes,
   passedLevels,
   totalPoints,
   totalTimeMs,
@@ -30,7 +32,7 @@ export type InsightBook = {
   domain: string;
   grade: string;
   title: string;
-  categories: readonly { code: string; title: string }[];
+  categories: readonly { code: string; title: string; standalone?: boolean }[];
 };
 
 export type DayActivity = { date: string; rounds: number; passed: number; minutes: number };
@@ -165,14 +167,16 @@ export function childInsights(input: {
     const book = books.find((b) => b.domain === lastBook.domain && b.grade === lastBook.grade)!;
     const inBook = skills.filter((s) => s.domain === book.domain && s.grade === book.grade);
     const order = book.categories.map((c) => c.code);
+    const alone = standaloneCodes(book.categories);
     const statuses: Record<string, PlayStatus> = withAccess(
-      levelStatuses(order, inBook, results),
+      levelStatuses(order, inBook, results, alone),
       inBook,
       access,
     );
-    const sorted = [...inBook].sort(
-      (a, b) => order.indexOf(a.category) - order.indexOf(b.category) || a.order - b.order,
-    );
+    const skip = skippedStandalone(inBook, results, alone);
+    const sorted = [...inBook]
+      .filter((s) => !skip.has(s.category))
+      .sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category) || a.order - b.order);
     const target =
       sorted.find((s) => statuses[s.id] === 'open') ??
       sorted.find((s) => statuses[s.id] === 'paid');

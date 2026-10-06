@@ -546,6 +546,34 @@ export const EXTRA_OBJECT_ART = {
       <path d="M30 42 l8 4" stroke="#ffffff" strokeWidth={4} strokeLinecap="round" />
     </g>
   ),
+  // Ketupat lebaran: anyaman janur berbentuk belah ketupat (D-069, soal bangun datar EMC TK).
+  ketupat: ({ color }) => {
+    const fill = tint(color, '#9ccc4a');
+    return (
+      <g>
+        <path
+          d="M50 18 C44 10 38 8 30 8 M50 18 C56 10 62 8 70 8"
+          fill="none"
+          stroke={shade(fill, -0.3)}
+          strokeWidth={5}
+          strokeLinecap="round"
+        />
+        <polygon points="50,18 82,54 50,90 18,54" fill={fill} {...LINE} />
+        <path
+          d="M28.7 42 L60.7 78 M39.3 30 L71.3 66 M28.7 66 L60.7 30 M39.3 78 L71.3 42"
+          stroke={shade(fill, -0.3)}
+          strokeWidth={2.5}
+        />
+        <path
+          d="M44 30 L34 42"
+          stroke="#ffffff"
+          strokeWidth={4}
+          strokeLinecap="round"
+          opacity={0.7}
+        />
+      </g>
+    );
+  },
 } satisfies Record<string, ObjectArt>;
 
 const GLASS_C = '#bfe6ff';

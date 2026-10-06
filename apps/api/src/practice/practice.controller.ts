@@ -4,6 +4,7 @@ import {
   GRADES,
   jagoStateSchema,
   levelStatuses,
+  standaloneCodes,
   mergeJago,
   isPassed,
   passedLevels,
@@ -267,10 +268,13 @@ export class PracticeController {
             categories: skillCatalogs.categories,
           })
           .from(skillCatalogs)
-      ).map((c) => [
-        `${c.domain}/${c.grade}`,
-        (c.categories as { code: string }[]).map((x) => x.code),
-      ]),
+      ).map((c) => {
+        const cats = c.categories as { code: string; standalone?: boolean }[];
+        return [
+          `${c.domain}/${c.grade}` as string,
+          { codes: cats.map((x) => x.code), standalone: standaloneCodes(cats) },
+        ] as const;
+      }),
     );
     const results = await this.quizzes(tx, childId);
     const access = await this.billing.accessForChild(childId);
@@ -279,13 +283,14 @@ export class PracticeController {
     for (const q of [...quizzes].sort((a, b) => a.ts - b.ts)) {
       const node = byId.get(q.skillId);
       const key = node && `${node.domain}/${node.grade}`;
-      const categories = key ? books.get(key) : undefined;
+      const book = key ? books.get(key) : undefined;
       const status =
-        node && categories
+        node && book
           ? levelStatuses(
-              categories,
+              book.codes,
               nodes.filter((n) => n.domain === node.domain && n.grade === node.grade),
               results,
+              book.standalone,
             )[q.skillId]
           : undefined;
       // Level berbayar yang belum dibeli juga ditolak (D-036), sama seperti level terkunci.

@@ -18,7 +18,7 @@ export type ItemDraft = {
 
 export const MAX_STIMULUS = 4;
 export const MIN_CHOICES = 2;
-export const MAX_CHOICES = 6;
+export const MAX_CHOICES = 10;
 
 export const newChoice = (value = 1): ChoiceDraft => ({
   visual: { kind: 'numeral', value },

@@ -1,0 +1,115 @@
+/* Animasi ringan ilustrasi English TK Olimpiade (D-071) dan kotak huruf kosong. Hanya hiasan. */
+.ve-rain,
+.ve-snow,
+.ve-wind,
+.ve-flash,
+.ve-bob,
+.ve-sway,
+.ve-blink,
+.ve-shine,
+.va-blank rect {
+  transform-box: fill-box;
+}
+.ve-rain {
+  animation: ve-rain 1.1s linear infinite;
+}
+@keyframes ve-rain {
+  0% {
+    transform: translateY(-3px);
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(5px);
+    opacity: 0.4;
+  }
+}
+.ve-snow {
+  animation: ve-snow 3s ease-in-out infinite;
+}
+@keyframes ve-snow {
+  50% {
+    transform: translate(3px, 4px);
+  }
+}
+.ve-wind {
+  animation: ve-wind 2.2s ease-in-out infinite;
+}
+@keyframes ve-wind {
+  50% {
+    transform: translateX(4px);
+  }
+}
+.ve-flash {
+  animation: ve-flash 1.8s ease-in-out infinite;
+}
+@keyframes ve-flash {
+  0%,
+  60%,
+  100% {
+    opacity: 1;
+  }
+  70%,
+  80% {
+    opacity: 0.35;
+  }
+}
+.ve-bob {
+  transform-origin: center;
+  animation: ve-bob 2.6s ease-in-out infinite;
+}
+@keyframes ve-bob {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.ve-sway {
+  transform-origin: 50% 0;
+  animation: ve-sway 3s ease-in-out infinite;
+}
+@keyframes ve-sway {
+  50% {
+    transform: rotate(2deg);
+  }
+}
+.ve-blink {
+  animation: ve-blink 1.4s steps(2, end) infinite;
+}
+@keyframes ve-blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+.ve-shine {
+  animation: ve-shine 2.4s ease-in-out infinite;
+}
+@keyframes ve-shine {
+  50% {
+    opacity: 0.4;
+  }
+}
+.va-blank rect {
+  transform-origin: center;
+  animation: ve-blank 1.6s ease-in-out infinite;
+}
+@keyframes ve-blank {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ve-rain,
+  .ve-snow,
+  .ve-wind,
+  .ve-flash,
+  .ve-bob,
+  .ve-sway,
+  .ve-blink,
+  .ve-shine,
+  .va-blank rect {
+    animation: none;
+  }
+}

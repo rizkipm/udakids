@@ -1,0 +1,62 @@
+{
+  "id": "math.tkosn.h8.mata-dadu-dan-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 8,
+  "title": "Timbangan angka dan dadu — Level 8 — Mata dadu dan angka",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "n": [2, 12]
+    },
+    "prompt": "Jumlah mata dadu … {n}",
+    "say": "Hitung semua mata dadu, lalu bandingkan dengan {n}. Pilih tanda yang tepat.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "die",
+            "value": "=a"
+          },
+          {
+            "kind": "die",
+            "value": "=b"
+          }
+        ]
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "numeral",
+        "value": "=n"
+      }
+    ],
+    "answer": "(a + b > n) * 1 + (a + b < n) * 2 + (a + b == n) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Mata dadu {a} tambah {b} jadi {=a+b}. Jadi {=a+b} {answer_say} {n}."
+  }
+}

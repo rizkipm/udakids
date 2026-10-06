@@ -6,6 +6,8 @@ export const PICKER_KINDS = [
   'objects',
   'numeral',
   'dots',
+  'die',
+  'body',
   'shape',
   'solid',
   'coin',
@@ -32,6 +34,10 @@ export function defaultVisual(kind: PickerKind): Visual {
       return { kind: 'numeral', value: 1 };
     case 'dots':
       return { kind: 'dots', count: 3, layout: 'row' };
+    case 'die':
+      return { kind: 'die', value: 3 };
+    case 'body':
+      return { kind: 'body', part: 'mata' };
     case 'shape':
       return { kind: 'shape', shape: 'lingkaran', color: 'merah', size: 'm' };
     case 'solid':

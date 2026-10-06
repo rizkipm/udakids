@@ -12,6 +12,7 @@ import { seed } from '../scripts/seed.js';
 import { configureApp } from '../src/common/app-setup.js';
 import { TTS_PROVIDER } from '../src/voice/tts.provider.js';
 import { MAIL_TRANSPORT, type MailTransport } from '../src/mail/mail.service.js';
+import { IMAGE_PROVIDER, type ImageProviderFactory } from '../src/ai/openai.provider.js';
 
 /** Database test tersedia? (test e2e dilewati bila Postgres tidak jalan). */
 export async function dbAvailable(url: string) {
@@ -32,7 +33,7 @@ export async function dbAvailable(url: string) {
  */
 export async function startApp(
   url: string,
-  opts: { paywall?: boolean; mail?: MailTransport | null } = {},
+  opts: { paywall?: boolean; mail?: MailTransport | null; image?: ImageProviderFactory } = {},
 ) {
   process.env.DATABASE_URL = url;
   const pool = new Pool({ connectionString: url });
@@ -56,6 +57,8 @@ export async function startApp(
     .useValue(null)
     .overrideProvider(MAIL_TRANSPORT)
     .useValue(opts.mail ?? null)
+    .overrideProvider(IMAGE_PROVIDER)
+    .useValue(opts.image ?? null)
     .compile();
   const app: INestApplication = configureApp(
     moduleRef.createNestApplication<NestExpressApplication>(),

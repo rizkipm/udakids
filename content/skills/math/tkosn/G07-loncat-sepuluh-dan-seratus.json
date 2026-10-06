@@ -1,0 +1,84 @@
+{
+  "id": "math.tkosn.g7.loncat-sepuluh-dan-seratus",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "G",
+  "order": 7,
+  "title": "Kereta angka ratusan — Level 7 — Loncat sepuluh dan seratus",
+  "tier": "basic",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6],
+            "t": [0, 5]
+          },
+          "derived": {
+            "a": "h * 100 + t * 10"
+          },
+          "prompt": "Lanjutkan loncat sepuluh: {a}, {=a+10}, {=a+20}, …",
+          "say": "Lanjutkan loncat sepuluh. {a}, {=a+10}, {=a+20}, lalu berapa?",
+          "answer": "a + 30",
+          "distractors": [
+            {
+              "expr": "a + 21",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 40",
+              "tag": "kelewatan"
+            },
+            {
+              "expr": "a + 120",
+              "tag": "loncat-seratus"
+            }
+          ],
+          "choices": 3,
+          "explain": "Setiap langkah bertambah sepuluh. Sesudah {=a+20} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6],
+            "u": [0, 99]
+          },
+          "derived": {
+            "a": "h * 100 + u"
+          },
+          "prompt": "Lanjutkan loncat seratus: {a}, {=a+100}, {=a+200}, …",
+          "say": "Lanjutkan loncat seratus. {a}, {=a+100}, {=a+200}, lalu berapa?",
+          "answer": "a + 300",
+          "distractors": [
+            {
+              "expr": "a + 210",
+              "tag": "tambah-sepuluh"
+            },
+            {
+              "expr": "a + 201",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 400",
+              "tag": "kelewatan"
+            }
+          ],
+          "choices": 3,
+          "explain": "Setiap langkah bertambah seratus. Sesudah {=a+200} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

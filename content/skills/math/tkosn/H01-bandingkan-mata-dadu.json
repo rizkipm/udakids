@@ -1,0 +1,52 @@
+{
+  "id": "math.tkosn.h1.bandingkan-mata-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "H",
+  "order": 1,
+  "title": "Timbangan angka dan dadu — Level 1 — Bandingkan mata dadu",
+  "tier": "basic",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu dengan tanda <, >, ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6]
+    },
+    "prompt": "Bandingkan mata dadu. Tanda yang tepat: {a} … {b}",
+    "say": "Bandingkan mata dadunya. Kiri {a}, kanan {b}. Pilih tanda yang tepat.",
+    "stimulus": [
+      {
+        "kind": "die",
+        "value": "=a"
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "die",
+        "value": "=b"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Dadu kiri bermata {a}, dadu kanan bermata {b}. Jadi {a} {answer_say} {b}."
+  }
+}

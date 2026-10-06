@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { buildExtra } from './extra';
 import {
+  BODY_PARTS,
   OBJECTS,
   SAY_COLOR,
   SHAPES,
@@ -15,6 +16,7 @@ import { layoutCells, type CellLayout } from './layout';
 import { OBJECT_ART, STRETCH_ART, isStretchable, type StretchArt } from './objects';
 import { FONT, OUTLINE, PALETTE, TOKENS, shade } from './palette';
 import { Coin, FlatShape, SolidShape } from './shapes';
+import { BodyFigure } from './objects-esc';
 
 export type VisualViewProps = {
   visual: Visual;
@@ -163,6 +165,41 @@ function cellGrid(items: ReactNode[], L: CellLayout, opts: CellOpts, label: stri
     label,
   };
 }
+
+/** Letak mata dadu 1–6 (pola dadu asli) di kotak 100×100. */
+const DIE_PIPS: Record<number, [number, number][]> = {
+  1: [[50, 50]],
+  2: [
+    [30, 30],
+    [70, 70],
+  ],
+  3: [
+    [28, 28],
+    [50, 50],
+    [72, 72],
+  ],
+  4: [
+    [30, 30],
+    [70, 30],
+    [30, 70],
+    [70, 70],
+  ],
+  5: [
+    [28, 28],
+    [72, 28],
+    [50, 50],
+    [28, 72],
+    [72, 72],
+  ],
+  6: [
+    [30, 26],
+    [70, 26],
+    [30, 50],
+    [70, 50],
+    [30, 74],
+    [70, 74],
+  ],
+};
 
 const Dot = () => <circle cx={50} cy={50} r={34} fill={TOKENS.dot} {...LINE} />;
 
@@ -612,6 +649,39 @@ function build(v: Visual, countStep?: number): Built {
         label: `${SHAPES[v.shape].say} ${SAY_COLOR[v.color]} ${SIZE_WORD[v.size]}`,
         body: <FlatShape shape={v.shape} color={v.color} size={v.size} rotate={v.rotate} />,
       };
+    case 'body':
+      return {
+        w: 120,
+        h: 160,
+        label: v.part ? `anak, ${BODY_PARTS[v.part]} ditandai` : 'anak berdiri',
+        body: <BodyFigure part={v.part} />,
+      };
+    case 'die': {
+      const fill = v.color ? PALETTE[v.color].fill : '#ffffff';
+      const pip = v.color ? '#ffffff' : OUTLINE;
+      return {
+        w: 100,
+        h: 100,
+        label: `dadu bermata ${v.value}`,
+        body: (
+          <>
+            <rect
+              x={6}
+              y={6}
+              width={88}
+              height={88}
+              rx={18}
+              fill={fill}
+              {...LINE}
+              strokeWidth={4}
+            />
+            {(DIE_PIPS[v.value] ?? []).map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r={8.5} fill={pip} />
+            ))}
+          </>
+        ),
+      };
+    }
     case 'solid':
       return {
         w: 100,
@@ -709,6 +779,40 @@ function build(v: Visual, countStep?: number): Built {
         h: 120,
         label: `${v.left} ${opWord} ${v.right} sama dengan ${res}`,
         body: <>{parts}</>,
+      };
+    }
+    case 'letters': {
+      // Kotak huruf (D-071): huruf yang diketahui tercetak, kotak kosong bergaris putus dan berkedip lembut.
+      const box = 62;
+      const w = v.letters.length * box + 16;
+      return {
+        w,
+        h: 90,
+        label: v.letters.map((l) => l || 'kosong').join(', '),
+        body: (
+          <>
+            {v.letters.map((l, i) => (
+              <g key={i} className={l ? undefined : 'va-blank'}>
+                <rect
+                  x={8 + i * box}
+                  y={12}
+                  width={box - 4}
+                  height={66}
+                  rx={8}
+                  fill={l ? TOKENS.card : TOKENS.blankFill}
+                  stroke={l ? OUTLINE : TOKENS.muted}
+                  strokeWidth={3}
+                  strokeDasharray={l ? undefined : '8 6'}
+                />
+                {l && (
+                  <Text x={8 + i * box + (box - 4) / 2} y={46} size={36}>
+                    {l.toUpperCase()}
+                  </Text>
+                )}
+              </g>
+            ))}
+          </>
+        ),
       };
     }
     case 'word': {

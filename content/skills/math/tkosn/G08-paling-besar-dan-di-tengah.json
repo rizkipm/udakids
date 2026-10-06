@@ -1,0 +1,60 @@
+{
+  "id": "math.tkosn.g8.paling-besar-dan-di-tengah",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "G",
+  "order": 8,
+  "title": "Kereta angka ratusan — Level 8 — Paling besar dan di tengah",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "applying",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "x": [0, 99],
+            "y": [0, 99],
+            "z": [0, 99]
+          },
+          "derived": {
+            "a": "h * 100 + x",
+            "b": "h * 100 + y",
+            "c": "h * 100 + z"
+          },
+          "constraint": "x != y && y != z && x != z",
+          "prompt": "Gerbong mana yang nomornya paling besar: {a}, {b}, atau {c}?",
+          "answer": "max(a, b, c)",
+          "distractors": ["a", "b", "c"],
+          "choices": 3,
+          "explain": "Ratusannya sama, jadi lihat puluhan lalu satuan. Yang paling besar {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999],
+            "c": [100, 999]
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Urutkan dari yang terkecil: {a}, {b}, {c}. Angka yang ada di tengah adalah …",
+          "answer": "a + b + c - max(a, b, c) - min(a, b, c)",
+          "distractors": ["a", "b", "c"],
+          "choices": 3,
+          "explain": "Urutannya {=min(a,b,c)}, {answer}, {=max(a,b,c)}."
+        }
+      }
+    ]
+  }
+}

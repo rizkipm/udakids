@@ -7,6 +7,8 @@ import { clockFamily } from './clock.js';
 import { z } from 'zod';
 import { defineFamily } from './common.js';
 import { manual } from './manual.js';
+import { matchPairs } from './match.js';
+import { spellWord } from './spell.js';
 import { money } from './money.js';
 import {
   build,
@@ -32,10 +34,18 @@ import {
   solidTrace,
 } from './shapes.js';
 import { sizeCompare } from './size.js';
+import { connectDots, numeralTrace } from './writing.js';
+import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
 
 const BASE_FAMILIES = {
   'numeral-tap-all': numeralTapAll,
   'numeral-listen': numeralListen,
+  'numeral-trace': numeralTrace,
+  'connect-dots': connectDots,
+  'english-word': englishWord,
+  'english-count': englishCount,
+  'english-pronoun': englishPronoun,
+  'english-talk': englishTalk,
   count,
   build,
   represent,
@@ -63,6 +73,8 @@ const BASE_FAMILIES = {
   facts: factsFamily,
   clock: clockFamily,
   manual,
+  'match-pairs': matchPairs,
+  'spell-word': spellWord,
 } satisfies Record<string, Family>;
 
 type BaseName = keyof typeof BASE_FAMILIES;
@@ -117,4 +129,5 @@ export const FAMILY_NAMES = Object.keys(FAMILIES) as FamilyName[];
 
 export { Reject } from './common.js';
 export type { ManualItem } from './manual.js';
+export type { MatchItem } from './match.js';
 export { formatId } from './expr.js';

@@ -1,0 +1,55 @@
+{
+  "id": "math.tkosn.f2.buah-dimakan-kelinci",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "F",
+  "order": 2,
+  "title": "Pasar buah: tambah dan kurang — Level 2 — Buah dimakan kelinci",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "osn": "EMC TK (Eduversal Mathematics Competition)",
+    "kognitif": "knowing",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 8],
+      "b": [1, 4]
+    },
+    "constraint": "b < a",
+    "words": {
+      "benda": ["apel", "jeruk", "pisang", "mangga", "stroberi", "nanas", "tomat", "wortel"]
+    },
+    "prompt": "Ada {a} {benda} di meja. {b} {benda} dimakan kelinci. Tinggal berapa {benda}?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "layout": "row",
+        "object": "{benda}",
+        "count": "=a",
+        "crossed": "=b"
+      }
+    ],
+    "answer": "a - b",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "expr": "a - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 3,
+    "explain": "Yang dicoret sudah dimakan. Hitung yang tidak dicoret: {answer} {benda}."
+  }
+}

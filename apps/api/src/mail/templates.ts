@@ -877,3 +877,28 @@ export function affiliateAccountReviewed(
   const text = `${subject}.\nRekening: ${d.provider} •••• ${d.last4}${d.reason ? `\nCatatan admin: ${d.reason}` : ''}\n${affiliateUrl(ctx)}${footerText(ctx)}`;
   return { subject, html, text };
 }
+
+// ------------------------------------------------------------------ AI Gambar (D-068)
+
+/** Pemberitahuan ke direksi: kunci AI diganti/dihapus, atau pengaturan biaya diubah. */
+export function aiNotice(
+  ctx: MailContext,
+  d: { title: string; by: string; detail: string; at?: Date },
+): MailContent {
+  const subject = `[${ctx.brand}] AI Gambar: ${d.title}`;
+  const when = dateTime(d.at ?? new Date());
+  const html = layout(ctx, {
+    title: `AI Gambar: ${d.title}`,
+    preheader: `${d.title} oleh ${d.by}`,
+    tone: 'leaf',
+    body: [
+      p(`${d.title} oleh ${d.by} pada ${when}.`),
+      p(d.detail),
+      p(
+        'Bila ini bukan tindakan tim Anda, segera hapus kunci di panel admin dan cabut kunci di OpenAI.',
+      ),
+    ].join('\n'),
+  });
+  const text = `AI Gambar: ${d.title}\noleh ${d.by} pada ${when}\n${d.detail}\n\nBila ini bukan tindakan tim Anda, segera hapus kunci di panel admin dan cabut kunci di OpenAI.${footerText(ctx)}`;
+  return { subject, html, text };
+}

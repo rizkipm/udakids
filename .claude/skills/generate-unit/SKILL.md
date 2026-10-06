@@ -20,13 +20,16 @@ Argumen: kode unit, mis. `P-BT-04`. Tanpa argumen → tanya kodenya. Satu pemang
 
 ## 2. Draf pelajaran (Belajar)
 
-Tulis `content/lessons/<grade>/<KODE>.json` (format draf v0; belum dibaca aplikasi sampai fase G3):
+Pelajaran menempel di kategori katalog yang dipakai unit itu: isi kolom `lesson` pada kategori di
+`content/skills/<domain>/<grade>/_catalog.json` (skema `lessonSchema` di `packages/engine/src/content/lesson.ts`,
+D-068). Aplikasi langsung membacanya (tombol "Belajar dulu" di halaman topik, `/play/belajar/:token`). Bila unit
+butuh topik soal baru di buku yang sudah dimainkan anak, beri kategori itu `"standalone": true` agar tidak
+mengunci topik lain.
 
 ```json
-{
+"lesson": {
   "kode": "P-BT-04",
   "version": 1,
-  "status": "draft",
   "judul": "Huruf a dan i",
   "layar": [
     { "jenis": "kenalan", "teks": "Ini huruf a.", "suara": "Ini huruf a. A.", "huruf": "a" },
@@ -47,6 +50,11 @@ Tulis `content/lessons/<grade>/<KODE>.json` (format draf v0; belum dibaca aplika
 }
 ```
 
+Tambahan yang didukung pemutar: `angka` (0–10, deret angka yang bisa diketuk + Momo menulis), `kartu` (1–5 kartu
+angka-kata-suku kata-gambar di layar `kata`), dan layar `coba` dengan `mode` `tebal` (menebalkan angka, tidak
+dinilai) atau `hitung` (ketuk benda satu per satu). Contoh lengkap: buku `worksheet/prek` kategori `A` (P-MA-01). Unit lembar kerja interaktif (tebalkan, sambung
+titik, balon) masuk buku **Worksheet** jenjangnya, satu topik per lembar kerja.
+
 - Jenis layar hanya `kenalan`, `bunyi`, `kata`, `gabung`, `cerita`, `coba`, `ingat` (ikuti kolom "Belajar").
   3–6 layar, layar terakhir `ingat`.
 - `teks` ≤ 120 huruf, kalimat pendek, dan semua teks punya `suara`. English: narasi Bahasa Indonesia, kata target
@@ -62,8 +70,8 @@ Tulis `content/lessons/<grade>/<KODE>.json` (format draf v0; belum dibaca aplika
     1–3 `tips`), lalu 10 file `<KODE-KATEGORI><nn>-<slug>.json`, Level 1–10 mudah → sulit, Level 10 gabungan;
   - domain: Baca Tulis = `literasi`, Berhitung = `math`, English = `english`, Sains = `sains`; grade: Pra-TK =
     `prek`, TK = `tk`, Kelas 1 = `sd1`;
-  - hanya interaksi yang sudah ada (`pick-one`, `tap-all`, `order`, `group`, `match`, `build`, `number-line`,
-    `number-input`). Model "Baru" di kolom Berlatih (10, 11, 13, 14, 16, 19, 23, …) diganti model yang sudah ada,
+  - hanya interaksi yang sudah ada (`pick-one`, `tap-all` (boleh `style: balloons`), `order`, `group`, `match`, `build`,
+    `number-line`, `number-input`, `trace` lewat family `numeral-trace`, `connect` lewat family `connect-dots`). Model "Baru" di kolom Berlatih (10, 11, 13, 14, 16, 19, 23, …) diganti model yang sudah ada,
     lalu dicatat di laporan;
   - setiap level minimal 24 soal unik, maks 4 pilihan, `say`, `reteach`, `source`, dan `tags` rujukan dari kolom
     Rujukan; Basic tanpa teks yang wajib dibaca.

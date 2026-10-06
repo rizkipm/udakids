@@ -105,8 +105,11 @@ export const bookKey = (c: { domain: string; grade: string }) => `${c.domain}/${
 export function firstOpen(
   shelves: Shelf[],
   statuses: Readonly<Record<string, PlayStatus>>,
+  /** Topik mandiri yang dilewati (anak sudah bermain di topik biasa, D-068). */
+  skip: ReadonlySet<string> = new Set(),
 ): { shelf: Shelf; skill: SkillTemplate; level: number } | undefined {
   for (const shelf of shelves) {
+    if (skip.has(shelf.category.code)) continue;
     const i = shelf.skills.findIndex((k) => statuses[k.id] === 'open');
     if (i >= 0) return { shelf, skill: shelf.skills[i]!, level: i + 1 };
   }

@@ -117,11 +117,95 @@ export const OBJECTS = {
   'anak-membaca': { say: 'anak membaca', countable: false },
   'anak-menyanyi': { say: 'anak menyanyi', countable: false },
   'anak-duduk': { say: 'anak duduk', countable: false },
+  // Tambahan D-069 (EMC TK): benda berbentuk belah ketupat.
+  ketupat: { say: 'ketupat', countable: false },
+  // Tambahan D-070 (ESC Sains TK): hewan laut & makanannya, kendaraan, alat kebersihan, benda alam, api & air,
+  // dan anak memakai pancaindra. countable: false agar soal membilang yang ada tidak berubah.
+  paus: { say: 'paus', countable: false },
+  hiu: { say: 'hiu', countable: false },
+  gurita: { say: 'gurita', countable: false },
+  kepiting: { say: 'kepiting', countable: false },
+  penyu: { say: 'penyu', countable: false },
+  buaya: { say: 'buaya', countable: false },
+  ulat: { say: 'ulat', countable: false },
+  'lumba-lumba': { say: 'lumba-lumba', countable: false },
+  daun: { say: 'daun', countable: false },
+  rumput: { say: 'rumput', countable: false },
+  motor: { say: 'sepeda motor', countable: false },
+  helikopter: { say: 'helikopter', countable: false },
+  perahu: { say: 'perahu', countable: false },
+  truk: { say: 'truk', countable: false },
+  sapu: { say: 'sapu', countable: false },
+  pel: { say: 'alat pel', countable: false },
+  kemoceng: { say: 'kemoceng', countable: false },
+  'tempat-sampah': { say: 'tempat sampah', countable: false },
+  'sikat-gigi': { say: 'sikat gigi', countable: false },
+  sabun: { say: 'sabun', countable: false },
+  gunung: { say: 'gunung', countable: false },
+  pelangi: { say: 'pelangi', countable: false },
+  laut: { say: 'laut', countable: false },
+  lilin: { say: 'lilin', countable: false },
+  kompor: { say: 'kompor', countable: false },
+  'api-unggun': { say: 'api unggun', countable: false },
+  keran: { say: 'keran air', countable: false },
+  gembor: { say: 'penyiram tanaman', countable: false },
+  'anak-mendengar': { say: 'anak mendengar', countable: false },
+  'anak-melihat': { say: 'anak melihat', countable: false },
+  'anak-mencium': { say: 'anak mencium bunga', countable: false },
+  'anak-meraba': { say: 'tangan meraba', countable: false },
+  'anak-mandi': { say: 'anak mandi', countable: false },
+  'anak-menyiram': { say: 'anak menyiram tanaman', countable: false },
+  // Tambahan D-071 (English TK Olimpiade): cuaca, benda kelas, kamar mandi, mainan, sayur/buah, harimau, dan
+  // orang (untuk he/she). countable: false agar soal membilang yang ada tidak berubah.
+  hujan: { say: 'hujan', countable: false },
+  salju: { say: 'salju', countable: false },
+  angin: { say: 'angin', countable: false },
+  petir: { say: 'badai petir', countable: false },
+  kursi: { say: 'kursi', countable: false },
+  tas: { say: 'tas', countable: false },
+  penghapus: { say: 'penghapus', countable: false },
+  penggaris: { say: 'penggaris', countable: false },
+  gunting: { say: 'gunting', countable: false },
+  krayon: { say: 'krayon', countable: false },
+  'papan-tulis': { say: 'papan tulis', countable: false },
+  kloset: { say: 'kloset', countable: false },
+  handuk: { say: 'handuk', countable: false },
+  sisir: { say: 'sisir', countable: false },
+  'pasta-gigi': { say: 'pasta gigi', countable: false },
+  cermin: { say: 'cermin', countable: false },
+  boneka: { say: 'boneka', countable: false },
+  robot: { say: 'robot', countable: false },
+  'boneka-beruang': { say: 'boneka beruang', countable: false },
+  ceri: { say: 'ceri', countable: false },
+  bawang: { say: 'bawang', countable: false },
+  kentang: { say: 'kentang', countable: false },
+  harimau: { say: 'harimau', countable: false },
+  'anak-laki-laki': { say: 'anak laki-laki', countable: false },
+  'anak-perempuan': { say: 'anak perempuan', countable: false },
+  ayah: { say: 'ayah', countable: false },
+  ibu: { say: 'ibu', countable: false },
+  kakek: { say: 'kakek', countable: false },
+  nenek: { say: 'nenek', countable: false },
 } as const satisfies Record<string, { say: string; countable: boolean }>;
 
 export type ObjectId = keyof typeof OBJECTS;
 export const OBJECT_IDS = Object.keys(OBJECTS) as ObjectId[];
 export const COUNTABLE_OBJECTS = OBJECT_IDS.filter((id) => OBJECTS[id].countable);
+
+/** Bagian tubuh yang bisa ditunjuk pada visual `body` (D-070). */
+export const BODY_PARTS = {
+  kepala: 'kepala',
+  rambut: 'rambut',
+  mata: 'mata',
+  telinga: 'telinga',
+  hidung: 'hidung',
+  mulut: 'mulut',
+  tangan: 'tangan',
+  perut: 'perut',
+  kaki: 'kaki',
+} as const;
+export type BodyPart = keyof typeof BODY_PARTS;
+export const BODY_PART_IDS = Object.keys(BODY_PARTS) as BodyPart[];
 
 export const COLORS = ['merah', 'biru', 'kuning', 'hijau', 'ungu', 'oranye'] as const;
 export type Color = (typeof COLORS)[number];
@@ -133,9 +217,23 @@ export const SHAPES = {
   'persegi-panjang': { say: 'persegi panjang', sides: 4 },
   'segi-lima': { say: 'segi lima', sides: 5 },
   'segi-enam': { say: 'segi enam', sides: 6 },
+  'belah-ketupat': { say: 'belah ketupat', sides: 4 },
 } as const;
 export type ShapeId = keyof typeof SHAPES;
-export const SHAPE_IDS = Object.keys(SHAPES) as ShapeId[];
+/** Semua bangun datar yang bisa digambar (skema visual, pilihan `pool`). */
+export const ALL_SHAPE_IDS = Object.keys(SHAPES) as ShapeId[];
+/**
+ * Bangun datar bawaan generator (pilihan acak & `pool` default). Belah ketupat (D-069) hanya muncul
+ * bila disebut di `pool`, agar soal lama tidak berubah dan tidak tertukar dengan persegi miring.
+ */
+export const SHAPE_IDS: ShapeId[] = [
+  'lingkaran',
+  'segitiga',
+  'persegi',
+  'persegi-panjang',
+  'segi-lima',
+  'segi-enam',
+];
 
 export const SOLIDS = {
   bola: { say: 'bola', rolls: true, stacks: false, face: 'lingkaran' },
@@ -165,6 +263,7 @@ export const REAL_WORLD_SHAPES: Partial<Record<ObjectId, ShapeId>> = {
   buku: 'persegi-panjang',
   pintu: 'persegi-panjang',
   jendela: 'persegi',
+  ketupat: 'belah-ketupat',
 };
 export const REAL_WORLD_SOLIDS: Partial<Record<ObjectId, SolidId>> = {
   bola: 'bola',

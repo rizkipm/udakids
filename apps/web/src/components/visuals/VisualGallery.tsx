@@ -4,7 +4,7 @@ import {
   COLORS,
   OBJECT_IDS,
   POSITION_REFERENCES,
-  SHAPE_IDS,
+  ALL_SHAPE_IDS,
   SIZES,
   SOLID_IDS,
   type Layout,
@@ -63,7 +63,7 @@ export function VisualGallery() {
       'shapes',
       {
         kind: 'shapes',
-        items: SHAPE_IDS.map((shape, i) => ({ shape, color: COLORS[i % COLORS.length]! })),
+        items: ALL_SHAPE_IDS.map((shape, i) => ({ shape, color: COLORS[i % COLORS.length]! })),
         layout: 'row',
       },
     ],
@@ -140,7 +140,7 @@ export function VisualGallery() {
       </Section>
 
       <Section title="Shapes, solids, coins">
-        {SHAPE_IDS.flatMap((shape) =>
+        {ALL_SHAPE_IDS.flatMap((shape) =>
           SIZES.map((size) => (
             <Tile key={`${shape}-${size}`} label={`${shape} ${size}`}>
               <VisualView visual={{ kind: 'shape', shape, color: 'biru', size }} size={80} />

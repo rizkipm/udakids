@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import {
+  ALL_SHAPE_IDS,
+  BODY_PART_IDS,
+  BODY_PARTS,
   COINS,
   COLORS,
   OBJECT_IDS,
   OBJECTS,
-  SHAPE_IDS,
   SOLID_IDS,
   visualSchema,
   type Visual,
@@ -183,13 +185,54 @@ function KindFields({ value, onChange }: { value: Visual; onChange: (v: Visual) 
           />
         </>
       );
+    case 'body':
+      return (
+        <SelectField
+          label={L('part')}
+          value={value.part ?? ''}
+          options={[{ value: '', label: '—' }, ...opt(BODY_PART_IDS, (p) => BODY_PARTS[p])]}
+          onChange={(e) => {
+            const next: V<'body'> = {
+              kind: 'body',
+              part: (e.target.value || undefined) as V<'body'>['part'],
+            };
+            if (next.part === undefined) delete next.part;
+            onChange(next);
+          }}
+        />
+      );
+    case 'die':
+      return (
+        <>
+          <NumberInput
+            label={L('value')}
+            value={value.value}
+            min={1}
+            max={6}
+            onChange={(n) => onChange({ ...value, value: n })}
+          />
+          <SelectField
+            label={L('color')}
+            value={value.color ?? ''}
+            options={optionalColor}
+            onChange={(e) => {
+              const next: V<'die'> = {
+                ...value,
+                color: (e.target.value || undefined) as V<'die'>['color'],
+              };
+              if (next.color === undefined) delete next.color;
+              onChange(next);
+            }}
+          />
+        </>
+      );
     case 'shape':
       return (
         <>
           <SelectField
             label={L('shape')}
             value={value.shape}
-            options={opt(SHAPE_IDS)}
+            options={opt(ALL_SHAPE_IDS)}
             onChange={(e) => onChange({ ...value, shape: e.target.value as V<'shape'>['shape'] })}
           />
           <SelectField

@@ -1460,3 +1460,156 @@ tercatat terkirim tapi tidak sampai).
     alamat itu wajib diteruskan ke kotak masuk yang dibaca tim (Cloudflare Email Routing).
 - **SEO lanjutan:** isi cadangan untuk crawler di `index.html` disamakan dengan landing (mata pelajaran & jenjang,
   cara belajar, keamanan anak, tautan orang tua), agar yang dibaca mesin pencari sama dengan yang dilihat pengunjung.
+
+## D-068 — AI Gambar di admin (OpenAI), unit P-MA-01: pelajaran angka, menebalkan & sambung titik
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk; pilihan dikonfirmasi lewat pertanyaan:
+rentang 1–10 dengan P-MA-03 tetap, model `gpt-5.6-luna`, simpan di PostgreSQL, poin masuk Skor Jago). Menjawab
+sebagian bagian 8 [rencana-gudang-gambar-menu-belajar.md](rencana-gudang-gambar-menu-belajar.md).
+
+- **AI Gambar hanya di admin** (Admin → AI Gambar, `/admin/ai-gambar`). Anak tidak pernah memicu AI; tidak ada data
+  anak yang dikirim ke OpenAI. Gambar = aset statis yang direview manusia sebelum tayang.
+- **Model:** `gpt-5.6-luna` adalah model teks, jadi gambar dibuat lewat **Responses API**: luna + alat
+  `image_generation` yang dipaksa (`tool_choice`), kualitas **low**, WebP, latar transparan. Cadangan: Images API
+  langsung (`gpt-image-2`). Semua bisa diganti di admin.
+- **Hemat token (pola clipvideo):** awalan prompt tetap (`AI_STYLE_GUIDE`) + `prompt_cache_key` → cache prompt
+  OpenAI; `store: false`; alat dipaksa sehingga tidak ada balasan teks; token cache dicatat per panggilan
+  (`ai_usage.cached_tokens`); kualitas low (lebih murah dan cukup untuk ikon anak).
+- **Sekali generate, dipakai selamanya:** sidik jari SHA-256 (versi gaya, jenis, subjek, kata, varian, catatan,
+  model, kualitas, ukuran, latar, referensi). Permintaan yang sama memakai baris yang ada tanpa biaya; varian baru
+  = gambar baru. **Karakter Momo** dibuat sekali (jenis `character`, subjek `momo`), disetujui, lalu dikirim sebagai
+  gambar referensi untuk setiap adegan bersama Momo, sehingga karakternya tidak dibuat ulang.
+- **Penyimpanan:** tabel `ai_images` (bytea, ikut `db:backup`) dan `ai_usage` (biaya + audit), migrasi
+  `0017_ai_images`. Publik hanya `GET /pictures/:id` untuk gambar **disetujui** (cache permanen); pratinjau admin
+  lewat endpoint ber-token.
+- **Keamanan kunci:** hanya admin; kunci tulis saja (tampil `••••abcd`), AES-256-GCM (`secret-box`), **wajib sandi
+  admin** untuk mengganti kunci atau pengaturan biaya (5 salah / 15 menit), email ke direksi saat kunci diganti/
+  dihapus atau batas dinaikkan, error OpenAI disensor (`sk-…`), log tanpa kunci, tombol nonaktif & hapus kunci.
+  Prompt disusun server dari kata + panduan gaya (admin hanya isi kata dan catatan ≤ 120 huruf). Batas biaya
+  harian/bulanan (bawaan US$5/US$50, kalender WIB) ditegakkan Udakids sebelum setiap panggilan; generate maks.
+  30 / 10 menit per admin. `.env OPENAI_API_KEY` dipakai lebih dulu bila diisi (disarankan kosong).
+- **Unit P-MA-01 "Bilangan 1 sampai 10"** (CSV diubah dari 1–5; P-MA-03 tetap): pelajaran 6 layar menempel di
+  kategori katalog (`lesson`, skema `lessonSchema`), dibuka dari tombol "Belajar dulu" di halaman topik
+  (`/play/belajar/:token`): ketuk angka → disebut + Momo menulis + benda sebanyak angka; kartu kata dengan suku
+  kata yang disorot (sa-tu … se-pu-luh); coba menghitung (ketuk benda satu per satu); coba menebalkan 1–3 (tidak
+  dinilai); ingat → "Ayo latihan". Suara pelajaran memakai suara perangkat (D-035 belum diperluas ke narasi
+  pelajaran).
+- **Interaksi baru (masuk Skor Jago):** `trace` (family `numeral-trace`: tebalkan 0–10 mengikuti goresan bernomor,
+  jalur goresan buatan sendiri; benar setelah semua goresan selesai dengan keluar jalur ≤ `maxSlips`; keluar jalur
+  → goresan diulang lembut tanpa kata "salah"; tulisan anak tidak disimpan), `connect` (family `connect-dots`:
+  sambung titik 1–N sampai gambar jadi; benar bila ketukan keliru ≤ `maxSlips`), dan `tap-all` gaya `balloons`
+  (pecahkan balon angka).
+- **Buku baru "Worksheet Pra-TK"** (domain `worksheet`, permintaan pemilik produk: Pra-TK → Worksheet → judul yang
+  sesuai). Topik A **"Mengenal angka 1 sampai 10"** berisi pelajaran P-MA-01 + 10 level: tebalkan 1–3, 4–6, 7–10,
+  balon ≤ 5, sambung titik ≤ 6, tebalkan titik-titik 0–10, balon ≤ 10, sambung titik ≤ 10, hitung lalu tebalkan,
+  tantangan campuran. Akses anak: `/play` → Pra-TK → tab **Worksheet**. Pengelompokan berikutnya di buku yang sama
+  (satu topik per lembar kerja): Mengenal huruf vokal, Menebalkan garis & pola, Huruf awal benda, Cocokkan gambar.
+  Buku Math Pra-TK tidak berubah (tetap 25 topik).
+- `standalone: true` (topik mandiri yang tidak mengunci topik lain; dicek juga di server, dan tidak dipilih sebagai
+  "level berikutnya" bila anak sudah bermain di topik biasa) tersedia untuk topik tambahan yang kelak disisipkan ke
+  buku yang sudah dimainkan anak.
+- Contoh lembar kerja yang dikirim hanya acuan bentuk latihan; goresan, gambar sambung titik, dan teks dibuat sendiri.
+
+## D-069 — EMC TK (Eduversal Mathematics Competition) di buku Math TK (OSN)
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Penempatan:** TK (OSN) → Matematika → bagian **"EMC · Eduversal Mathematics Competition"**. Kategori katalog
+  mendapat field opsional **`group`** (2–60 huruf); daftar materi anak menampilkan materi tanpa `group` lebih dulu,
+  lalu satu judul bagian per `group` (nomor materi mulai dari 1 di tiap bagian). Bisa diubah di admin → Katalog.
+  Tanpa migrasi DB (kategori disimpan sebagai jsonb).
+- **Empat materi `standalone`** (F–I, 10 level per materi; terbuka sejak awal, tidak mengunci materi A–E), mengikuti
+  kisi-kisi EMC TK:
+  - **F Pasar buah: tambah dan kurang** — penjumlahan & pengurangan bergambar (gabung, coret, kalimat matematika,
+    berapa yang ditambah, soal cerita, tiga keranjang).
+  - **G Kereta angka ratusan** — mengurutkan puluhan/ratusan bulat/ratusan, sebelum–sesudah–di antara, loncat 10/100.
+  - **H Timbangan angka dan dadu** — tanda >, <, = untuk mata dadu, bilangan sampai 20/100/ratusan, jumlah mata dua
+    dadu, mata dadu vs angka.
+  - **I Kota bentuk** — lingkaran, segitiga, persegi, persegi panjang, **belah ketupat**; benda di sekitar, tarik
+    garis benda ↔ bentuk dan angka ↔ kumpulan bentuk, belah ketupat vs persegi, pola.
+  - Pola level: 1–8 konsep & penerapan → 9 teka-teki gaya EMC (bank soal `manual`) → 10 tantangan campuran.
+- **Komponen baru (engine + web):**
+  - Visual **`die`** (mata dadu 1–6, SVG pola dadu asli; juga di editor visual admin).
+  - Bangun datar **`belah-ketupat`** dan benda **`ketupat`**. `SHAPE_IDS` tetap 6 bentuk lama (pilihan acak & pool
+    default), sehingga soal lama tidak berubah; belah ketupat hanya muncul bila disebut di `pool` (`ALL_SHAPE_IDS` =
+    semua bentuk). Persegi tidak lagi diputar 45° agar tidak tertukar dengan belah ketupat. `real-world-shape`
+    mendapat param `pool`.
+  - `number-order`: param `min`, `step`, `direction` (`asc`/`desc`), batas sampai 999; nilai bawaan menghasilkan soal
+    yang sama seperti sebelumnya.
+  - `expr`: **`labelSay`** (cara membacakan label, mis. ">" → "lebih dari") dan token **`{answer_say}`**.
+  - Family **`match-pairs`**: bank soal "tarik garis" (2–5 pasangan, kolom kanan diacak; anak mengetuk kiri lalu
+    kanan, tanpa drag). Editor bank soal manual yang ada tidak berubah.
+- Contoh lembar kerja yang dikirim hanya acuan bentuk soal; soal, gambar, dan teks dibuat sendiri (tidak menyalin bank
+  soal EMC). Semua dibacakan, jawaban berupa kartu besar, tanpa batas waktu.
+
+## D-070 — ESC Sains TK (Eduversal Science Competition), judul bagian lomba, "TK (Olimpiade)"
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk; pilihan dikonfirmasi lewat pertanyaan: nama
+ESC, interaksi ketuk huruf, gambar SVG sendiri).
+
+- **Nama jenjang** `tkosn` di area anak: **"TK (Olimpiade)"**; buku: "Math TK (Olimpiade)" dan "Sains TK (Olimpiade)".
+- **Judul bagian lomba** (`group`, kini ≤ 100 huruf) berpola `SINGKATAN · Nama lomba — keterangan` dan tampil sebagai
+  kartu judul: lencana singkatan, nama lomba tebal, keterangan + jumlah materi, tombol dengar.
+  - Math: "EMC · Eduversal Mathematics Competition — Penyisihan Final Provinsi 2026" (D-069).
+  - Sains: **"ESC · Eduversal Science Competition — Penyisihan Final Provinsi 2026"**.
+- **Sains TK (Olimpiade), empat materi `standalone`** (F–I, 10 level; level 9 teka-teki gaya ESC, level 10
+  tantangan campuran), mengikuti kisi-kisi 2026:
+  - **F Kendaraan, alat kebersihan, dan benda alam** — silang kendaraan darat/air/udara, hubungkan kendaraan ↔
+    tempat, tulis nama kendaraan, silang alat kebersihan & gunanya, benda alam vs buatan manusia, tebak benda alam.
+  - **G Hewan: berkembang biak, makanan, dan bergerak** — silang hewan laut + tulis namanya (P _ _ _, G _ R _ T _,
+    H _ _, K _ P _ T _ _ G, P _ _ Y _), hubungkan hewan ↔ makanan, bertelur/melahirkan, cara bergerak, ciri
+    (berkaki dua, berbisa, bersayap, bercapit).
+  - **H Tubuhku: bagian dan fungsinya** — tunjuk/nama bagian tubuh pada gambar anak, tulis nama anggota tubuh
+    (M _ _ _, H _ _ _ NG, M _ _ _ T, K _ _ _ L _, T _ NG _ _, K _ _ _), "Aku … dengan …", hubungkan kegiatan ↔
+    pancaindra, fungsi anggota tubuh, menjaga tubuh.
+  - **I Manfaat api dan air** — api atau air, silang yang memakai api/air, hubungkan benda ↔ manfaat, keselamatan
+    api & hemat air, api dan air mengubah benda.
+- **Format soal mengikuti lembar contoh** (silang, lengkapi nama, "Aku … dengan …", tunjuk bagian tubuh, hubungkan),
+  tetapi kalimat dan gambar dibuat sendiri (PRD A17: tidak menyalin soal/aset pihak lain).
+- **Komponen baru:**
+  - Interaksi **`spell`** + family **`spell-word`** (bank soal): kotak huruf dengan kotak kosong (pola `show`,
+    mis. "G_R_T_"; bawaan huruf pertama lalu berselang-seling), kartu huruf = huruf hilang + 1–4 pengecoh yang tidak
+    ada di kata. Anak mengetuk kartu untuk mengisi kotak dari kiri; ketuk kotak terisi untuk mengembalikan. Nilai
+    jawaban = huruf (bukan id), jadi aman untuk lomba tanpa penyamaran. Perintah suara `vo_cmd_spell`.
+  - Visual **`body`**: anak berdiri, bagian tubuh (`kepala`, `rambut`, `mata`, `telinga`, `hidung`, `mulut`,
+    `tangan`, `perut`, `kaki`) ditandai lingkaran kuning berdenyut + panah. Juga di editor visual admin.
+  - **34 ilustrasi SVG baru** (paus, hiu, gurita, kepiting, penyu, buaya, ulat, lumba-lumba, daun, rumput, motor,
+    helikopter, perahu, truk, sapu, alat pel, kemoceng, tempat sampah, sikat gigi, sabun, gunung, pelangi, laut,
+    lilin, kompor, api unggun, keran, penyiram tanaman, anak mendengar/melihat/mencium/meraba/mandi/menyiram), semua
+    `countable: false` agar soal membilang lama tidak berubah.
+  - **Animasi ringan** (`va-*`: paus menyembur, api menyala, air menetes, baling-baling, ombak, gelombang suara),
+    mati bila "kurangi gerak" aktif.
+  - Bank soal `manual` kini sampai **10 pilihan** (soal "silang semua" seperti lembar lomba).
+
+## D-071 — English TK (Olimpiade): kisi-kisi Final 2026, soal dibuat dari kosakata
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk).
+
+- **Buku baru `english/tkosn` "English TK (Olimpiade)"**, di jenjang TK (Olimpiade) bersama Math dan Sains (OSN).
+  12 materi × 10 level, dikelompokkan dengan `group` (D-069) sesuai kisi-kisi Final 2026:
+  - **Kisi-kisi 1** (hewan, cuaca, bagian tubuh, buah & sayur): A Animals, B Fruits and vegetables, C Weather,
+    D My body;
+  - **Kisi-kisi 2** (benda di kelas, peralatan toilet, benda umum): E In the classroom, F In the bathroom,
+    G Things and toys;
+  - **Kisi-kisi 3** (bangun datar): H Shapes;
+  - **Kisi-kisi 4** (he, she, it & percakapan): I He, she, it; J Everyday talk;
+  - **Simulasi Final 2026**: K Numbers (kata bilangan one–twenty, dari contoh soal "hitung dan lingkari"),
+    L Simulasi Final 2026 (paket 1–10 campuran semua kisi-kisi).
+    Semua materi `standalone` agar anak bisa langsung berlatih kisi-kisi mana pun.
+- **Model soal mengikuti contoh lembar olimpiade**: "Lengkapilah nama hewan" (kotak huruf, huruf pertama tampil),
+  "Silang/lingkari nama yang tepat" (2–4 kartu kata huruf besar), "I like my …" (pilih gambar dari kalimat),
+  "Hitung dan lingkari jumlah" (kata bilangan), ditambah dengar-lalu-pilih, kelompokkan (tap-all), ketuk semua bentuk
+  yang sama, he/she/it (isi & pilih gambar), dan percakapan (jawaban yang tepat, sapaan dari gambar, What is this?,
+  What colour is it?). **Bentuk soal disamakan, isinya tidak disalin**: kata, kalimat, dan gambar dibuat sendiri
+  (aturan CLAUDE.md: dilarang menyalin soal/aset pihak lain).
+- **Selalu berbeda**: soal tidak dari bank tetap, tetapi dibuat engine dari kosakata 150+ kata (family baru
+  `english-word`, `english-count`, `english-pronoun`, `english-talk`). Setiap level menghasilkan ≥ 48 soal berbeda
+  (kebanyakan ratusan); ronde menghindari soal kembar dan soal 3 ronde terakhir (D-028), jadi setiap kali level
+  dibuka soalnya berbeda.
+- **Komponen baru**: visual `letters` (kotak huruf, kotak kosong berkedip lembut); 29 ilustrasi SVG baru
+  (`objects-emc.tsx`: hujan, salju, angin, petir, kursi, tas, penghapus, penggaris, gunting, krayon, papan tulis,
+  kloset, handuk, sisir, pasta gigi, cermin, boneka, robot, boneka beruang, ceri, bawang, kentang, harimau, anak
+  laki-laki, anak perempuan, ayah, ibu berkerudung, kakek, nenek) dengan animasi ringan yang mati saat
+  "kurangi gerakan". Tidak menyimpan data anak apa pun (gambar orang hanya untuk he/she).
+- **Suara**: seperti English Pra-TK (D-062), perintah English TK Olimpiade dibacakan dalam Bahasa Indonesia dengan
+  kata English di dalamnya; kartu kata dibacakan suara English (en-GB) saat diketuk.

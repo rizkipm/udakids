@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  durationShort,
   durationWords,
   type ChildInsights,
   type Color,
@@ -158,8 +159,6 @@ function Insight({
   );
 }
 
-const minutesText = (ms: number) => (ms > 0 ? durationWords(ms) : t('parent.ov.zeroTime'));
-
 /** Panel progres satu anak. `actions` = tombol kelola (laporan, ubah, sandi, hapus). */
 export function ChildProgress({ child, actions }: { child: OverviewChild; actions: ReactNode }) {
   const ins = child.insights;
@@ -246,7 +245,17 @@ export function ChildProgress({ child, actions }: { child: OverviewChild; action
               tone="sun"
               icon={<Icon name="clock" />}
               label={t('parent.ov.time')}
-              value={minutesText(ins.totals.timeMs)}
+              value={
+                ins.totals.timeMs > 0 ? (
+                  // Ringkas di kartu; teks lengkap untuk tooltip dan pembaca layar.
+                  <span title={durationWords(ins.totals.timeMs)}>
+                    <span aria-hidden>{durationShort(ins.totals.timeMs)}</span>
+                    <span className="pd-sr-only">{durationWords(ins.totals.timeMs)}</span>
+                  </span>
+                ) : (
+                  t('parent.ov.zeroTime')
+                )
+              }
             />
           </div>
 

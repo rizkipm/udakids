@@ -60,13 +60,17 @@ export const CONTEST_GRACE_MS = 5_000;
 export type PublicChoice = Omit<Choice, 'tag'>;
 export type PublicInteraction =
   | { type: 'pick-one'; choices: PublicChoice[]; arrangement?: 'row' | 'column' | 'grid' }
-  | { type: 'tap-all'; choices: PublicChoice[] }
+  | { type: 'tap-all'; choices: PublicChoice[]; style?: 'balloons' }
   | { type: 'order'; choices: PublicChoice[] }
   | { type: 'group'; groups: PublicChoice[]; items: PublicChoice[] }
   | { type: 'match'; left: PublicChoice[]; right: PublicChoice[] }
+  | { type: 'spell'; slots: (string | null)[]; letters: PublicChoice[] }
   | Extract<Interaction, { type: 'build' }>
   | { type: 'number-line'; min: number; max: number; start?: number }
-  | { type: 'number-input'; unit?: string; decimals?: number };
+  | { type: 'number-input'; unit?: string; decimals?: number }
+  /** Menebalkan tidak punya kunci rahasia (angkanya memang ditampilkan). */
+  | Extract<Interaction, { type: 'trace' }>
+  | Omit<Extract<Interaction, { type: 'connect' }>, 'answer'>;
 export type PublicItem = {
   prompt: string;
   say?: string;
@@ -98,7 +102,11 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
       };
       break;
     case 'tap-all':
-      interaction = { type: i.type, choices: strip(i.choices) };
+      interaction = {
+        type: i.type,
+        choices: strip(i.choices),
+        ...(i.style && { style: i.style }),
+      };
       break;
     case 'order':
       // Urutan asli bisa membocorkan jawaban → selalu diacak.
@@ -118,6 +126,9 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
         right: strip(shuffle(i.right, `${seed}/match`)),
       };
       break;
+    case 'spell':
+      interaction = { type: i.type, slots: i.slots, letters: strip(i.letters) };
+      break;
     case 'build':
       interaction = i;
       break;
@@ -136,6 +147,14 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
         ...(i.decimals !== undefined && { decimals: i.decimals }),
       };
       break;
+    case 'trace':
+      interaction = i;
+      break;
+    case 'connect': {
+      const { answer: _answer, ...rest } = i;
+      interaction = rest;
+      break;
+    }
   }
   return {
     prompt: item.prompt,

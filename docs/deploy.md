@@ -10,6 +10,11 @@ Browser / iPad ──HTTPS──▶ Nginx ──┬── /        → apps/web/
 Semua data (akun, anak, progres, soal, katalog, materi, level, dialog) ada di **PostgreSQL**. Folder `content/`
 hanya dipakai untuk mengisi database pertama kali (seed).
 
+> **Deploy bersih (hanya soal, tanpa pengguna/data percobaan):** ikuti Langkah 5 **A**. `pnpm deploy:db` hanya
+> mengisi konten (katalog/buku, semua skill & soal, level Petualangan, dialog Momo) dan **satu** akun admin dari
+> `ADMIN_EMAIL`/`ADMIN_PASSWORD`. Tidak ada orang tua, anak, kelas, progres, pesanan, atau gambar AI yang dibuat.
+> Jangan memakai Langkah 5 B (`db:restore`) dari laptop pengembang — itu ikut membawa akun & data percobaan.
+
 ---
 
 ## Langkah 0 — Siapkan
@@ -76,7 +81,7 @@ DATABASE_URL=postgres://littlecoder:GANTI-password-db-yang-kuat@localhost:5432/l
 API_PORT=7177
 JWT_SECRET=<hasil: openssl rand -base64 48>
 ADMIN_EMAIL=admin@sekolah.id
-ADMIN_PASSWORD=<password admin pertama yang kuat>
+ADMIN_PASSWORD=<password admin pertama yang kuat>   # wajib di produksi; hanya dipakai saat admin pertama dibuat
 WEB_ORIGIN=https://app.contoh.id
 VITE_API_URL=/api
 VITE_FEATURE_VOICE=false
@@ -89,7 +94,12 @@ SMTP_PASS=<App Password 16 huruf>
 MAIL_FROM="Udakids <project.udacoding@gmail.com>"
 MAIL_DIRECTOR=udacodingofficial@gmail.com
 APP_PUBLIC_URL=https://app.contoh.id
+# AI Gambar (D-068): biarkan KOSONG. Isi kunci OpenAI lewat Admin → AI Gambar (terenkripsi, butuh sandi admin).
+OPENAI_API_KEY=
 ```
+
+> `JWT_SECRET` jangan diganti setelah dipakai: selain sesi login, kunci API yang disimpan admin (suara Momo, AI
+> Gambar) dienkripsi dengan turunan `JWT_SECRET`. Bila berganti, kunci itu harus diisi ulang di panel admin.
 
 > Email: tanpa `SMTP_PASS`, pendaftar baru tidak menerima kode verifikasi dan belum bisa masuk (admin bisa
 > menandai terverifikasi manual di Admin → Keluarga). Setelah API jalan, kirim email uji dari **Admin → Email**.
@@ -103,12 +113,41 @@ pnpm build          # engine → apps/api/dist → apps/web/dist
 
 ## Langkah 5 — Isi database (pilih salah satu)
 
-**A. Server baru (mulai dari nol):**
+**A. Server baru, hanya soal (disarankan):**
 
 ```bash
 pnpm deploy:db
 # Migrasi database selesai.
-# skill: 2880 ditambahkan … dialog: 1 … admin dibuat: admin@sekolah.id
+# skill: 4160 ditambahkan/diperbarui dari … file
+# level: 3 ditambahkan/diperbarui
+# dialog: 1 ditambahkan/diperbarui
+# admin dibuat: admin@sekolah.id
+```
+
+Periksa bahwa database bersih (hanya konten + 1 admin):
+
+```bash
+psql "$(grep ^DATABASE_URL .env | cut -d= -f2-)" -c "
+  select (select count(*) from staff_users) as staf, (select count(*) from parents) as orang_tua,
+         (select count(*) from children) as anak, (select count(*) from classes) as kelas,
+         (select count(*) from skills where status = 'active') as skill_aktif,
+         (select count(*) from skill_catalogs) as buku"
+# staf = 1, orang_tua = 0, anak = 0, kelas = 0, skill_aktif ≈ 4160, buku = 23
+```
+
+(Diuji 2026-10-07 pada database kosong dengan `NODE_ENV=production`: 4.160 skill, 23 buku, 3 level, 1 dialog,
+1 admin; 0 orang tua/anak/kelas/progres/pesanan/gambar AI. Satu baris `app_settings` "news" hanyalah penanda waktu
+email info materi baru, D-053.)
+
+**A2. Server lama yang terlanjur berisi data percobaan → kosongkan lalu isi soal saja** (MENGHAPUS SEMUA akun,
+anak, progres, pesanan di server itu; pastikan memang tidak ada data asli):
+
+```bash
+pnpm db:backup                                   # cadangan dulu, untuk jaga-jaga
+sudo systemctl stop littlecoder-api
+sudo -u postgres psql -c "DROP DATABASE littlecoder;" -c "CREATE DATABASE littlecoder OWNER littlecoder;"
+pnpm deploy:db                                   # isi ulang: konten + admin dari .env
+sudo systemctl start littlecoder-api
 ```
 
 **B. Pindah dari laptop/server lama beserta SEMUA data** (akun, anak, progres):
@@ -136,6 +175,10 @@ pnpm --filter @little-coder/api voice:prod    # node dist/cli/voice.js → "Suar
 
 Cara membuat key: Google Cloud Console → aktifkan **Cloud Text-to-Speech API** → Credentials → Create API key →
 batasi key hanya untuk API itu. Tanpa key, aplikasi tetap jalan dengan suara browser.
+
+**AI Gambar (opsional, D-068):** setelah API jalan, masuk admin → **AI Gambar** → isi API key OpenAI (kunci
+Project khusus yang terbatas, dengan batas biaya) + sandi admin → **Uji kunci**. Atur batas biaya harian/bulanan
+di kartu Pengaturan. Kunci tidak pernah ditulis di `.env` atau log.
 
 Keluar dari user littlecoder: `exit`.
 
@@ -193,6 +236,11 @@ sudo -u littlecoder -H bash -c '
   pnpm deploy:db'
 sudo systemctl restart littlecoder-api
 ```
+
+`deploy:db` saat update hanya menjalankan migrasi baru (mis. `0017_ai_images`) dan menambah/memperbarui soal yang
+`version`-nya naik. Akun, progres anak, dan suntingan admin tidak disentuh, dan tidak ada data percobaan yang
+ditambahkan. Jalankan build di server saat API dihentikan atau segera restart setelahnya: build menghapus lalu
+membuat ulang folder `dist/` yang sedang dipakai API.
 
 ## Periksa bila ada masalah
 

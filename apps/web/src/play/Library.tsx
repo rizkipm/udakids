@@ -4,6 +4,8 @@ import {
   FREE_ACCESS,
   GRADES,
   levelStatuses,
+  skippedStandalone,
+  standaloneCodes,
   totalPoints,
   withAccess,
   type Color,
@@ -100,13 +102,22 @@ export function Library({ momoColor }: { momoColor: Color }) {
           shelves.map((s) => s.category.code),
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
+          standaloneCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data?.access ?? FREE_ACCESS,
       ),
     [shelves, progress.quizzes, data?.access],
   );
-  const next = firstOpen(shelves, statuses);
+  const next = firstOpen(
+    shelves,
+    statuses,
+    skippedStandalone(
+      shelves.flatMap((s) => s.skills),
+      progress.quizzes,
+      standaloneCodes(shelves.map((s) => s.category)),
+    ),
+  );
   // Jenjang terpilih selalu terlihat di baris chip yang bisa digeser.
   useEffect(() => {
     const nav = gradeNav.current;
@@ -254,21 +265,72 @@ export function Library({ momoColor }: { momoColor: Color }) {
         {activeBook && grades.length > 1 ? `${activeBook.title} · ` : ''}
         {t('play.home.topics')}
       </h2>
-      <ol className="topic-grid">
-        {shelves.map((s, i) => (
-          <li key={s.category.code}>
-            <TopicCard
-              links={links}
-              shelf={s}
-              n={i + 1}
-              statuses={statuses}
-              isNext={next?.shelf === s}
-            />
-          </li>
-        ))}
-      </ol>
+      {sectionsOf(shelves).map(({ group, shelves: list }) => (
+        <section key={group ?? ''} className={group ? 'topic-section is-group' : 'topic-section'}>
+          {group && <GroupHeader group={group} topics={list.length} />}
+          <ol className="topic-grid">
+            {list.map((s, i) => (
+              <li key={s.category.code}>
+                <TopicCard
+                  links={links}
+                  shelf={s}
+                  n={i + 1}
+                  statuses={statuses}
+                  isNext={next?.shelf === s}
+                />
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
     </main>
   );
+}
+
+/**
+ * Judul bagian (D-069, D-070). Teks `group` berpola "SINGKATAN · Nama lomba — keterangan", mis.
+ * "EMC · Eduversal Mathematics Competition — Penyisihan Final Provinsi 2026": singkatan jadi lencana, nama
+ * lomba tebal, keterangan di bawahnya. Teks tanpa pola ini tampil apa adanya.
+ */
+function GroupHeader({ group, topics }: { group: string; topics: number }) {
+  const m = /^(\S{2,12}) · (.+?)(?: [—–-] (.+))?$/.exec(group);
+  const badge = m?.[1];
+  const title = m ? m[2]! : group;
+  const note = m?.[3];
+  return (
+    <header className="topic-group">
+      <span className="topic-group-badge">
+        <TrophyIcon size={22} />
+        {badge}
+      </span>
+      <span className="topic-group-text">
+        <strong>{title}</strong>
+        <span>
+          {note && <>{note} · </>}
+          {t('play.home.groupTopics', { n: topics })}
+        </span>
+      </span>
+      <SpeakButton text={note ? `${title}. ${note}.` : title} />
+    </header>
+  );
+}
+
+/**
+ * Bagian di dalam buku (D-069): materi tanpa `group` lebih dulu (tanpa judul), lalu tiap `group`
+ * (mis. EMC) dengan judulnya sendiri. Nomor materi mulai dari 1 di setiap bagian.
+ */
+function sectionsOf(shelves: Shelf[]): { group?: string; shelves: Shelf[] }[] {
+  const out: { group?: string; shelves: Shelf[] }[] = [];
+  const plain = shelves.filter((s) => !s.category.group);
+  if (plain.length > 0) out.push({ shelves: plain });
+  for (const s of shelves) {
+    const g = s.category.group;
+    if (!g) continue;
+    const sec = out.find((x) => x.group === g);
+    if (sec) sec.shelves.push(s);
+    else out.push({ group: g, shelves: [s] });
+  }
+  return out;
 }
 
 function TopicCard({

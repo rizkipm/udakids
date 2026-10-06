@@ -32,6 +32,13 @@ export function toPlayable(p: PublicItem, index: number): Item {
     case 'number-input':
       interaction = { ...it, answer: Number.NaN };
       break;
+    case 'trace':
+      interaction = it;
+      break;
+    case 'connect':
+    case 'spell':
+      interaction = { ...it, answer: [] };
+      break;
   }
   return {
     prompt: p.prompt,
