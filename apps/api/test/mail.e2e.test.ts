@@ -166,6 +166,8 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       expect(kinds.some((r) => r.kind === k && r.to_email === director)).toBe(true);
     expect(kinds.every((r) => r.status === 'sent' && r.html === null)).toBe(true);
     const paidMail = outbox.filter((x) => x.to === email).at(-1)!;
+    // Email transaksi juga membawa List-Unsubscribe (mailto ke alamat pengirim).
+    expect(paidMail.headers?.['List-Unsubscribe']).toMatch(/^<mailto:[^>]+\?subject=[^>]+>$/);
     expect(paidMail.html).toContain('Momo From Udakids');
     expect(outbox.some((x) => x.to === director)).toBe(true);
   });
@@ -527,6 +529,10 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const toParent = mails.find((m) => m.to === email)!;
     expect(toParent.subject).toMatch(/2 level latihan baru/);
     expect(toParent.html).toContain('Berhenti menerima info materi baru');
+    // Header List-Unsubscribe (Gmail) menunjuk ke halaman berhenti berlangganan milik orang tua itu.
+    expect(toParent.headers?.['List-Unsubscribe']).toMatch(
+      /^<https?:\/\/[^>]+\/berhenti-langganan\?p=[^>]+&t=[^>]+>, <mailto:[^>]+\?subject=[^>]+>$/,
+    );
     // Catatan kecil tidak tampil sebagai tag HTML mentah; logo ditempel (CID).
     expect(toParent.html).not.toContain('&lt;span');
     expect(toParent.html).toContain('cid:momo-logo@udakids');
@@ -713,5 +719,11 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(o.html).toContain('A &amp; B');
     expect(o.html).toContain('Momo From Udakids');
     expect(o.text).toContain('50.123');
+    // Penutup mengajak membalas (balasan menaikkan kepercayaan Gmail), bukan "mohon tidak membalas".
+    for (const m of [v, o]) {
+      expect(m.html).toContain('Balas email ini');
+      expect(m.text).toContain('Balas email ini');
+      expect(`${m.html}${m.text}`).not.toMatch(/tidak membalas/i);
+    }
   });
 });

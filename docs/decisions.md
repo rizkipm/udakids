@@ -1427,3 +1427,36 @@ Tanggal 2026-10-06 · Status **Disetujui** (pilihan pemilik produk: "Daftar & ma
   ke atau diterima dari Google.
 - **Pengaturan:** `GOOGLE_CLIENT_ID` di `.env` server (kosong = tombol tidak tampil). Panduan: `docs/google-login.md`.
   Contoh Nginx: CSP mengizinkan `accounts.google.com/gsi`, `Referrer-Policy: strict-origin-when-cross-origin`.
+
+## D-067 — Audit SEO (perbaikan) dan keterkiriman email
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk: audit SEO yang sudah diterapkan dan email yang
+tercatat terkirim tapi tidak sampai).
+
+- **SEO** (melanjutkan commit `b376764`, rencana `docs/rencana-seo-marketing.md`):
+  - judul ≤ 60 huruf dan deskripsi ≤ 155 huruf yang sesuai isi aplikasi (Pra-TK sampai SMP; matematika, sains,
+    English, logika), meta `keywords` berisi nama internal dihapus;
+  - data terstruktur `WebApplication` jujur: gratis dengan level awal, paket Premium tersedia (bukan "harga 0"
+    tanpa keterangan); logo organisasi memakai PNG;
+  - gambar pratinjau 1200×669 JPEG ±240 KB (sebelumnya JPEG berlabel PNG, 850 KB, ukuran tidak sesuai meta);
+  - **area anak (`/play`, `/play/daftar`, `/play/gabung`) dan login staf → `noindex`** dan keluar dari sitemap:
+    pemasaran hanya untuk orang tua (PRD A17). `robots.txt` hanya memblokir area privat; halaman `noindex` tidak
+    di-Disallow agar mesin pencari bisa membaca `noindex`;
+  - deskripsi daftar tidak lagi menjanjikan "akses penuh" (sebagian level berbayar).
+- **Email:** status "Terkirim" hanya berarti diterima server SMTP; tanpa alat, admin tidak bisa tahu email ditolak
+  atau masuk spam. SPF domain memuat `include:eduskul.my.id` (memasukkan dirinya sendiri): server Niagahoster tetap
+  lolos, tetapi email yang keluar lewat relay MailChannels mendapat PermError (uji mail-tester: `T_SPF_PERMERROR`),
+  sehingga perlu dirapikan di Cloudflare. Perbaikan di aplikasi:
+  - **Admin → Email → Cek DNS email** (`GET /admin/mail/dns`): SPF, DKIM (`default`), DMARC, daftar masalah, dan
+    usulan SPF. Hanya membaca DNS;
+  - status `sent` kini berlabel **"Diterima server"** (bukan "Terkirim") dengan catatan bahwa belum tentu sampai;
+  - **ID server SMTP** disimpan (`email_outbox.smtp_response`, migrasi `0016_email_tracking`) dan tampil di daftar,
+    untuk dilacak di cPanel → Track Delivery;
+  - semua email membawa header `List-Unsubscribe` (info materi: tautan berhenti berlangganan + mailto; lainnya:
+    mailto ke pengirim). Uji mail-tester: 9/10, sisa potongan karena link situs dijawab 403 oleh pengaman bot
+    Cloudflare (perlu diatur di Cloudflare, bukan di kode).
+  - penutup semua email: **"Ada pertanyaan? Balas email ini"** (sebelumnya "Mohon tidak membalas"), karena balasan
+    menaikkan kepercayaan Gmail (persetujuan pemilik produk 2026-10-07). Balasan masuk ke alamat pengirim, jadi
+    alamat itu wajib diteruskan ke kotak masuk yang dibaca tim (Cloudflare Email Routing).
+- **SEO lanjutan:** isi cadangan untuk crawler di `index.html` disamakan dengan landing (mata pelajaran & jenjang,
+  cara belajar, keamanan anak, tautan orang tua), agar yang dibaca mesin pencari sama dengan yang dilihat pengunjung.

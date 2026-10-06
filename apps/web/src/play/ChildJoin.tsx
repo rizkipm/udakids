@@ -175,15 +175,7 @@ export function ChildJoin({ self = false }: { self?: boolean }) {
 
   return (
     <main className="kid-screen join-screen">
-      <Seo
-        title={self ? 'Daftar Sendiri Anak' : 'Gabung Kelas'}
-        description={
-          self
-            ? 'Pendaftaran mandiri anak dengan nama panggilan dan 3 gambar sandi rahasia.'
-            : 'Gabung kelas Little Coder dengan kode kelas dari guru atau sekolah.'
-        }
-        canonical={self ? '/play/daftar' : '/play/gabung'}
-      />
+      <Seo title={self ? 'Daftar Sendiri Anak' : 'Gabung Kelas'} noindex />
       <ol
         className="join-steps"
         aria-label={t('play.join.progress', { n: stepNo + 1, total: STEPS.length })}

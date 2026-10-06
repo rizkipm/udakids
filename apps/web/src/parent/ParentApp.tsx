@@ -160,7 +160,7 @@ export function ParentApp() {
           <GuestOnly>
             <Seo
               title="Masuk Akun Keluarga"
-              description="Masuk ke dasbor orang tua Udakids Little Coder untuk memantau kemajuan belajar anak."
+              description="Masuk ke dasbor orang tua Udakids untuk memantau kemajuan belajar anak. Bisa dengan akun Google."
               canonical="/orang-tua/masuk"
             />
             <ParentLogin />
@@ -173,7 +173,7 @@ export function ParentApp() {
           <GuestOnly>
             <Seo
               title="Daftar Akun Keluarga"
-              description="Daftar akun keluarga di Udakids Little Coder. Dapatkan akses penuh modul coding, matematika, dan sains hingga 7 anak."
+              description="Daftar gratis akun keluarga Udakids untuk sampai 7 anak, cukup dengan akun Google. Pantau latihan matematika, sains, dan bahasa Inggris anak."
               canonical="/orang-tua/daftar"
             />
             <ParentRegister />

@@ -21,7 +21,9 @@ export type MailTransport = {
     subject: string;
     html: string;
     text: string;
-  }): Promise<void>;
+    /** Header tambahan (mis. List-Unsubscribe untuk email info materi). */
+    headers?: Record<string, string>;
+  }): Promise<string | void>;
 };
 export const MAIL_TRANSPORT = Symbol('MAIL_TRANSPORT');
 
@@ -75,7 +77,7 @@ export function smtpFromEnv(): MailTransport | null {
   });
   return {
     async send(msg) {
-      await tx.sendMail({
+      const info = await tx.sendMail({
         ...msg,
         // Logo Momo ditempel sebagai lampiran inline bila template memakainya.
         ...(msg.html.includes(`cid:${MOMO_LOGO_CID}`) && {
@@ -90,9 +92,14 @@ export function smtpFromEnv(): MailTransport | null {
           ],
         }),
       });
+      // Jawaban server (mis. "250 OK id=1xDmjJ-…") untuk dilacak di cPanel → Track Delivery.
+      return typeof info.response === 'string' ? info.response : undefined;
     },
   };
 }
+
+/** Link berhenti berlangganan di email info materi (D-053) → header List-Unsubscribe. */
+const UNSUBSCRIBE_URL = /https?:\/\/[^\s"<>]+\/berhenti-langganan\?[^\s"<>]+/;
 
 /** Kode verifikasi (6 angka) tidak boleh terlihat di admin/riwayat. */
 const maskCodes = (subject: string) => subject.replace(/\b\d{6}\b/g, '••••••');
@@ -244,12 +251,21 @@ export class MailService implements OnModuleInit, OnModuleDestroy {
         continue;
       }
       try {
-        await this.transport.send({
+        // List-Unsubscribe di semua email (penilaian spam memotong skor bila tidak ada): email info materi →
+        // tautan berhenti berlangganan + mailto; email lain → mailto ke alamat pengirim.
+        const fromAddress = /<([^>]+)>/.exec(from)?.[1] ?? from;
+        const mailto = `<mailto:${fromAddress}?subject=${encodeURIComponent('Berhenti menerima email')}>`;
+        const unsubscribeUrl =
+          m.kind === 'news' ? UNSUBSCRIBE_URL.exec(m.text ?? '')?.[0] : undefined;
+        const response = await this.transport.send({
           from,
           to: m.toEmail,
           subject: m.subject,
           html: m.html ?? '',
           text: m.text ?? '',
+          headers: {
+            'List-Unsubscribe': unsubscribeUrl ? `<${unsubscribeUrl}>, ${mailto}` : mailto,
+          },
         });
         await this.db
           .update(emailOutbox)
@@ -260,6 +276,7 @@ export class MailService implements OnModuleInit, OnModuleDestroy {
             html: null,
             text: null,
             lastError: null,
+            smtpResponse: response ? response.slice(0, 200) : null,
             attempts: m.attempts + 1,
           })
           .where(eq(emailOutbox.id, m.id));
@@ -299,6 +316,7 @@ export class MailService implements OnModuleInit, OnModuleDestroy {
         status: emailOutbox.status,
         attempts: emailOutbox.attempts,
         lastError: emailOutbox.lastError,
+        smtpResponse: emailOutbox.smtpResponse,
         createdAt: emailOutbox.createdAt,
         sentAt: emailOutbox.sentAt,
       })

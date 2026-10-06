@@ -41,11 +41,7 @@ export function StaffLogin() {
 
   return (
     <AuthLayout variant="staff" title={t('site.auth.staff.title')} text={t('site.auth.staff.text')}>
-      <Seo
-        title="Masuk Guru &amp; Fasilitator"
-        description="Portal masuk untuk fasilitator kelas dan admin sekolah Udakids Little Coder."
-        canonical="/masuk/staf"
-      />
+      <Seo title="Masuk Guru & Fasilitator" noindex />
       <Card title={t('staff.login.title')}>
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit}>

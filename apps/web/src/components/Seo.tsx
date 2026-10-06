@@ -7,15 +7,15 @@ interface SeoProps {
   noindex?: boolean;
 }
 
-const DEFAULT_TITLE = 'Udakids Little Coder – Belajar Coding, Logika, Matematika & Sains Anak';
+const DEFAULT_TITLE = 'Udakids – Game Edukasi Anak: Matematika, Sains & English';
 const DEFAULT_DESCRIPTION =
-  'Platform edukasi interaktif untuk anak Pra-TK sampai SD (usia 3–12 tahun). Belajar coding visual, logika berpikir, matematika, dan sains bersama robot Momo. Kurikulum Merdeka & standar internasional, tanpa iklan, dan bisa offline.';
+  'Latihan interaktif Pra-TK sampai SMP: matematika, sains, bahasa Inggris, dan logika bersama robot Momo. Soal dibacakan, tanpa iklan, bisa offline.';
 const BASE_URL = 'https://kids.eduskul.my.id';
 
 export function Seo({ title, description, canonical, noindex = false }: SeoProps) {
   useEffect(() => {
     // 1. Update Title
-    const fullTitle = title ? `${title} | Udakids Little Coder` : DEFAULT_TITLE;
+    const fullTitle = title ? `${title} | Udakids` : DEFAULT_TITLE;
     document.title = fullTitle;
 
     // 2. Update or create Meta Description

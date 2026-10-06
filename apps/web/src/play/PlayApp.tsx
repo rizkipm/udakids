@@ -43,11 +43,8 @@ export function PlayApp() {
   if (!session) {
     return (
       <div className="kid-app">
-        <Seo
-          title="Area Main Anak"
-          description="Masuk ke arena belajar bermain Little Coder bersama robot Momo dengan kode keluarga dan gambar rahasia."
-          canonical="/play"
-        />
+        {/* Area anak tidak dipromosikan ke mesin pencari (pemasaran hanya untuk orang tua, PRD A17). */}
+        <Seo title="Area Main Anak" noindex />
         <Routes>
           <Route path="gabung" element={<ChildJoin />} />
           <Route path="daftar" element={<ChildJoin self />} />

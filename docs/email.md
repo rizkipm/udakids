@@ -83,6 +83,44 @@ dengan password biasa.
 10. Opsional, supaya balasan sampai ke direksi: di Gmail pengirim, buka **Setelan → Lihat semua setelan → Akun →
     Kirim email sebagai → edit → "Balas ke"**, isi `udacodingofficial@gmail.com`.
 
+### Email "Diterima server" tapi tidak sampai ke inbox
+
+Status **Diterima server** berarti server SMTP (mis. Niagahoster) sudah menerima email. Gmail bisa saja menolaknya
+atau menaruhnya di spam bila **SPF/DKIM domain pengirim tidak lolos**. Penolakannya hanya kembali ke kotak masuk
+pengirim, jadi tidak terlihat di aplikasi.
+
+1. **Admin → Email → Cek DNS email → Periksa DNS.** Panel ini membaca SPF, DKIM, dan DMARC domain pengirim, lalu
+   menampilkan masalah dan usulan catatan SPF yang benar.
+2. Perbaiki di **Cloudflare → DNS** (domain memakai nameserver Cloudflare, jadi cPanel tidak bisa memperbaikinya
+   otomatis). Contoh 2026-10-07: SPF berisi `include:eduskul.my.id` (memasukkan dirinya sendiri; server yang tercantum
+   lebih dulu tetap lolos, pengirim lain PermError). Usulan: `v=spf1 ip4:45.143.81.101 include:relay.mailchannels.net ip4:45.143.81.145 ~all`. Bila domain juga
+   memakai Cloudflare Email Routing, tambahkan `include:_spf.mx.cloudflare.net` sebelum `~all`.
+3. Cocokkan kunci **DKIM** di Cloudflare (`default._domainkey`) dengan yang ditampilkan di cPanel → **Email
+   Deliverability** (harus sama persis).
+4. Lacak email tertentu: salin **ID server** di daftar email (mis. `1xDmjJ-…`), lalu cari di cPanel → **Track
+   Delivery** untuk melihat apakah Gmail menerima (`Accepted`) atau menolak (`Rejected`, dengan alasannya).
+5. Setelah DNS diubah, tunggu ±15 menit, periksa DNS lagi, lalu kirim email uji ke alamat Gmail.
+
+**Masuk Spam padahal sampai** (uji mail-tester 2026-10-07: email aplikasi 9/10, DKIM & DMARC lolos):
+
+1. Rapikan SPF seperti di atas (pemeriksa SpamAssassin memberi `T_SPF_PERMERROR` karena email keluar lewat relay
+   MailChannels milik Niagahoster).
+2. Link di email (`https://kids.eduskul.my.id`) dijawab **403 Forbidden** untuk pemeriksa link otomatis → poin
+   dipotong. Di Cloudflare → **Security → Bots**, matikan _Bot Fight Mode_ (atau pada Super Bot Fight Mode, pilih
+   _Allow_ untuk "Definitely automated"), lalu cek **Security → Events** bahwa tidak ada lagi blokir ke halaman
+   publik.
+3. Reputasi domain baru di Gmail: minta penerima pertama menandai **Bukan spam** dan menyimpan pengirim ke kontak;
+   pantau di [Gmail Postmaster Tools](https://postmaster.google.com/) (verifikasi domain dengan TXT di Cloudflare).
+4. Setelah 2–4 minggu stabil, naikkan DMARC dari `p=none` ke `p=quarantine`.
+5. Email mengajak orang tua **membalas** (penutup "Ada pertanyaan? Balas email ini"). MX `eduskul.my.id` mengarah ke
+   Cloudflare Email Routing, jadi pastikan di Cloudflare → **Email → Email Routing** ada aturan yang meneruskan
+   `helo@eduskul.my.id` ke kotak masuk yang dibaca tim, dan uji dengan membalas satu email.
+6. Bila tetap masuk Spam, pertimbangkan layanan email transaksi (mis. Brevo, Amazon SES, Postmark) dengan DKIM di
+   domain sendiri.
+
+Semua email membawa header `List-Unsubscribe` (mailto ke pengirim). Email info materi baru (D-053) membawa header `List-Unsubscribe` (tautan berhenti berlangganan), sesuai syarat
+pengirim massal Gmail.
+
 ### Bila ada kendala
 
 | Gejala di Admin → Email                                                                              | Penyebab & solusi                                                                                                                                                                      |

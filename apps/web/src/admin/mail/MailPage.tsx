@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { errorMessage } from '../../api/client';
 import { useApiCall, useFetch } from '../../auth/useApi';
 import { t, type MessageKey } from '../../i18n';
 import { Badge, Button, Card, Notice, PageHeader, Stat, TextField } from '../../ui/ui';
@@ -12,6 +13,8 @@ type MailRow = {
   status: string;
   attempts: number;
   lastError: string | null;
+  /** Jawaban server SMTP, mis. "250 OK id=1xDmjJ-…" (untuk cPanel → Track Delivery). */
+  smtpResponse?: string | null;
   createdAt: string;
   sentAt: string | null;
 };
@@ -56,6 +59,104 @@ type NewsOverview = {
   subscribers: number;
   unsubscribed: number;
 };
+
+type DnsReport = {
+  domain: string;
+  smtpHost: string;
+  smtpIps: string[];
+  spf: {
+    record: string | null;
+    ok: boolean;
+    issues: string[];
+    warnings?: string[];
+    suggested: string | null;
+  };
+  dkim: { selector: string; found: boolean; issues: string[] };
+  dmarc: { record: string | null; policy: string | null; issues: string[] };
+  ok: boolean;
+};
+
+/** ID antrean server dari jawaban SMTP ("250 OK id=1xDmjJ-…" → "1xDmjJ-…"). */
+const smtpId = (r?: string | null) => (r ? (/id=([\w.-]+)/i.exec(r)?.[1] ?? r) : null);
+
+/** Cek SPF/DKIM/DMARC domain pengirim: email "Diterima server" tapi tidak sampai biasanya karena ini. */
+function DnsPanel() {
+  const call = useApiCall('staff');
+  const [report, setReport] = useState<DnsReport | null>();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string>();
+  async function check() {
+    setBusy(true);
+    setError(undefined);
+    try {
+      setReport((await call<{ report: DnsReport | null }>('/admin/mail/dns')).report);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+  const row = (label: string, ok: boolean, value: string | null, issues: string[]) => (
+    <>
+      <dt>{label}</dt>
+      <dd>
+        <Badge tone={ok ? 'success' : 'warning'}>
+          {value ? t('admin.mail.dns.found') : t('admin.mail.dns.missing')}
+        </Badge>
+        {value && <code className="adm-mail-dns-record">{value}</code>}
+        {issues.map((x) => (
+          <small key={x} className="adm-mail-error">
+            {x}
+          </small>
+        ))}
+      </dd>
+    </>
+  );
+  return (
+    <Card title={t('admin.mail.dns.title')}>
+      <p className="ui-muted">{t('admin.mail.dns.intro')}</p>
+      {error && <Notice tone="error">{error}</Notice>}
+      {report === null && <Notice tone="info">{t('admin.mail.dns.skipped')}</Notice>}
+      {report && (
+        <>
+          <Notice tone={report.ok ? 'success' : 'warning'}>
+            {report.ok ? t('admin.mail.dns.ok') : t('admin.mail.dns.problem')}
+          </Notice>
+          <dl className="adm-mail-config">
+            {row(t('admin.mail.dns.spf'), report.spf.ok, report.spf.record, report.spf.issues)}
+            {row(
+              t('admin.mail.dns.dkim', { selector: report.dkim.selector }),
+              report.dkim.found,
+              report.dkim.found ? 'v=DKIM1' : null,
+              report.dkim.issues,
+            )}
+            {row(
+              t('admin.mail.dns.dmarc'),
+              !!report.dmarc.record,
+              report.dmarc.record,
+              report.dmarc.issues,
+            )}
+          </dl>
+          {report.spf.warnings?.map((x) => (
+            <Notice key={x} tone="info">
+              {x}
+            </Notice>
+          ))}
+          {report.spf.suggested && (
+            <>
+              <p>{t('admin.mail.dns.suggested')}</p>
+              <code className="adm-mail-dns-record">{report.spf.suggested}</code>
+              <p className="ui-muted">{t('admin.mail.dns.after')}</p>
+            </>
+          )}
+        </>
+      )}
+      <Button variant="secondary" disabled={busy} onClick={() => void check()}>
+        {t('admin.mail.dns.check')}
+      </Button>
+    </Card>
+  );
+}
 
 /** Info materi baru otomatis (D-053): status, jadwal, nyala/mati, kirim sekarang. */
 function NewsPanel() {
@@ -216,8 +317,10 @@ export function MailPage() {
                   </div>
                 </form>
               </Card>
+              <DnsPanel />
               <NewsPanel />
               <Card title={t('admin.mail.recentTitle')}>
+                <p className="ui-muted">{t('admin.mail.sentNote')}</p>
                 {d.recent.length === 0 ? (
                   <p className="ui-muted">{t('admin.mail.empty')}</p>
                 ) : (
@@ -232,6 +335,11 @@ export function MailPage() {
                             {when(m.sentAt ?? m.createdAt)}
                           </small>
                           {m.lastError && <small className="adm-mail-error">{m.lastError}</small>}
+                          {m.status === 'sent' && smtpId(m.smtpResponse) && (
+                            <small className="ui-muted adm-mail-smtp">
+                              {t('admin.mail.smtpId', { id: smtpId(m.smtpResponse)! })}
+                            </small>
+                          )}
                         </div>
                         <div className="ui-row">
                           <Badge tone={STATUS_TONE[m.status] ?? 'neutral'}>

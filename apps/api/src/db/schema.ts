@@ -559,6 +559,8 @@ export const emailOutbox = pgTable(
     status: text('status').notNull().default('queued'),
     attempts: integer('attempts').notNull().default(0),
     lastError: text('last_error'),
+    /** Jawaban server SMTP saat diterima (mis. "250 OK id=1xDmjJ-…") untuk dilacak di cPanel → Track Delivery. */
+    smtpResponse: text('smtp_response'),
     nextAttemptAt: timestamp('next_attempt_at', { withTimezone: true }).notNull().defaultNow(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     sentAt: timestamp('sent_at', { withTimezone: true }),

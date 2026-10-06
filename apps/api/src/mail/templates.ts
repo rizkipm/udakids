@@ -142,7 +142,7 @@ ${opts.body}
 <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:${C.ink}">Salam hangat,<br><strong>Momo From ${esc(ctx.brand)}</strong></p>
 </td></tr>
 <tr><td align="center" style="padding:18px 10px 0;font-size:12px;line-height:1.6;color:${C.muted}">
-Email ini dikirim otomatis oleh ${esc(ctx.brand)}. Mohon tidak membalas email ini.<br>
+Ada pertanyaan? Balas email ini, tim ${esc(ctx.brand)} siap membantu.<br>
 Kami tidak pernah meminta password atau sandi gambar anak lewat email.<br>
 <a href="${esc(ctx.appUrl)}" style="color:${C.grape};font-weight:700;text-decoration:none">Momo From ${esc(ctx.brand)}</a>${
     opts.unsubscribe
@@ -154,7 +154,7 @@ Kami tidak pernah meminta password atau sandi gambar anak lewat email.<br>
 }
 
 const footerText = (ctx: MailContext) =>
-  `\n\nSalam hangat,\nMomo From ${ctx.brand}\n\n—\nEmail ini dikirim otomatis. Mohon tidak membalas.\nKami tidak pernah meminta password atau sandi gambar anak lewat email.\n${ctx.appUrl}`;
+  `\n\nSalam hangat,\nMomo From ${ctx.brand}\n\n—\nAda pertanyaan? Balas email ini, tim ${ctx.brand} siap membantu.\nKami tidak pernah meminta password atau sandi gambar anak lewat email.\n${ctx.appUrl}`;
 
 // ------------------------------------------------------------------ verifikasi & sambutan
 

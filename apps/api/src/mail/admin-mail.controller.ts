@@ -17,7 +17,8 @@ import { CurrentUser, Roles } from '../auth/decorators.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { staffUsers } from '../db/schema.js';
-import { MailService } from './mail.service.js';
+import { checkMailDns } from './dns-check.js';
+import { mailConfig, MailService } from './mail.service.js';
 import { testEmail } from './templates.js';
 
 /** Admin: status pengiriman email, email uji, kirim ulang, verifikasi manual orang tua (D-044). */
@@ -33,6 +34,13 @@ export class AdminMailController {
   @Get()
   overview() {
     return this.mail.overview();
+  }
+
+  /** Cek DNS email domain pengirim (SPF, DKIM, DMARC): penyebab umum email "Terkirim" tapi tidak sampai. */
+  @Get('dns')
+  async dns() {
+    const c = mailConfig();
+    return { report: await checkMailDns(c.from, c.host) };
   }
 
   /** Kirim email uji ke alamat tertentu (bawaan: email admin yang login). */
