@@ -43,6 +43,9 @@ Bila Nginx memasang header CSP sendiri, tambahkan alamat Google seperti di `depl
 
 ## 3. Cara kerja
 
+- **Tampilan:** halaman daftar dan masuk menampilkan dua pilihan: tombol Google (disarankan) dan tombol isi
+  manual. Form email + password muncul setelah memilih isi manual. Bila Google tidak tersedia (Client ID kosong,
+  offline, atau diblokir), form manual langsung tampil.
 - **Akun baru:** orang tua memilih akun Google → muncul langkah "Satu langkah lagi" (nama bisa diubah, kode
   referal ikut terbawa, centang persetujuan wajib) → akun dibuat, email langsung terverifikasi (tanpa kode),
   email sambutan terkirim, lalu lanjut menambah profil anak.

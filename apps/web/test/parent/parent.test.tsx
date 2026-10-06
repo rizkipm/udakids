@@ -40,8 +40,10 @@ const pick = (p: PinPicture) =>
   );
 
 describe('pendaftaran orang tua', () => {
-  it('tidak mengirim tanpa persetujuan', () => {
+  it('tidak mengirim tanpa persetujuan', async () => {
     renderParent('/orang-tua/daftar');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.register.submit') });
     fireEvent.change(screen.getByLabelText(t('parent.register.name')), {
       target: { value: 'Ibu Sari' },
     });
@@ -75,6 +77,8 @@ describe('pendaftaran orang tua', () => {
         : Promise.resolve(json([])),
     );
     renderParent('/orang-tua/daftar');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.register.submit') });
     fireEvent.change(screen.getByLabelText(t('parent.register.name')), {
       target: { value: 'Ibu Sari' },
     });
@@ -151,6 +155,8 @@ describe('verifikasi email (D-044)', () => {
       return Promise.resolve(json([]));
     });
     renderParent('/orang-tua/daftar');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.register.submit') });
     fill();
     fireEvent.click(screen.getByRole('button', { name: t('parent.register.submit') }));
     const input = await screen.findByLabelText(t('parent.verify.code'), { exact: false });
@@ -187,6 +193,8 @@ describe('verifikasi email (D-044)', () => {
       ),
     );
     renderParent('/orang-tua/masuk');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.login.submit') });
     fireEvent.change(screen.getByLabelText(t('parent.login.email'), { exact: false }), {
       target: { value: 'sari@contoh.id' },
     });
@@ -206,8 +214,10 @@ describe('verifikasi email (D-044)', () => {
 });
 
 describe('formulir daftar: tanda wajib & lihat password', () => {
-  it('semua isian wajib bertanda * dan required; password bisa ditampilkan/disembunyikan', () => {
+  it('semua isian wajib bertanda * dan required; password bisa ditampilkan/disembunyikan', async () => {
     renderParent('/orang-tua/daftar');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.register.submit') });
     for (const key of [
       'parent.register.name',
       'parent.register.email',

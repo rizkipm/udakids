@@ -1406,12 +1406,20 @@ Tanggal 2026-10-06 · Status **Disetujui** (pilihan pemilik produk: "Daftar & ma
 - **Tampilan:** tombol resmi Google Identity Services ("Daftar dengan Google" / "Lanjutkan dengan Google") di
   `/orang-tua/daftar` dan `/orang-tua/masuk`, plus pop-up One Tap yang menawarkan akun Google aktif. Form email
   tetap ada di bawahnya ("atau daftar dengan email"). Tidak ada di area anak.
+- **Google diutamakan** (permintaan pemilik produk, 2026-10-06, karena banyak daftar manual gagal verifikasi):
+  halaman daftar dan masuk awalnya hanya menampilkan dua pilihan, yaitu tombol Google (dengan catatan "tanpa
+  mengetik email dan tanpa kode verifikasi") dan tombol **"Isi email secara manual"** / **"Masuk dengan email &
+  password"**. Form lama baru muncul setelah memilih manual, disertai catatan kode verifikasi dan tautan kembali
+  ke Google. Form manual langsung tampil bila Google belum diatur, skripnya gagal dimuat, atau tidak siap dalam
+  6 detik, serta pada tautan berisi `?email=`.
 - **Server** (`POST /auth/parent/google`, `GET /auth/parent/google` = Client ID): verifikasi ID token tanpa library
   tambahan (RS256 dengan kunci publik Google, `iss`, `aud` = `GOOGLE_CLIENT_ID`, `exp`, `email_verified`).
   Client secret tidak dipakai. Gagal verifikasi dihitung di batas percobaan per IP.
 - **Akun baru:** tanpa `consent` server hanya mengembalikan nama & email (akun belum dibuat). Setelah persetujuan
   (teks sama dengan daftar biasa, UU PDP), akun dibuat dengan email terverifikasi, `google_sub`, kode referal
-  (D-063), dan email sambutan. Password acak yang tidak bisa dipakai; orang tua bisa membuatnya lewat "Lupa
+  (D-063), dan email sambutan. Kode referal ikut otomatis dari link `/r/KODE` atau halaman daftar, tampil di
+  langkah persetujuan (bisa diketik/diubah, kode tidak dikenal ditandai). Akun lama yang masuk dengan Google tidak
+  mendapat pengajak baru (referal dikunci saat daftar). Password acak yang tidak bisa dipakai; orang tua bisa membuatnya lewat "Lupa
   password?".
 - **Akun lama:** cocok `google_sub` atau email → langsung masuk, tersambung, dan ditandai terverifikasi. Email yang
   sudah tersambung ke akun Google lain ditolak (409). Akun nonaktif ditolak.

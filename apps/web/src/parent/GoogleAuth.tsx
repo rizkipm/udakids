@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { normalizeReferralCode, isReferralCode, type SessionUser } from '@little-coder/engine';
 import { api, errorMessage } from '../api/client';
+import { rememberReferral } from '../site/referral';
 import { t } from '../i18n';
 import { Button, Checkbox, Notice, TextField } from '../ui/ui';
+import { useReferralPreview } from './referralPreview';
 
 /**
  * Daftar/masuk orang tua dengan Google (D-066): tombol resmi Google Identity Services + pop-up One Tap yang
@@ -79,33 +81,49 @@ export function sendGoogle(credential: string, extra: Record<string, unknown> = 
   });
 }
 
+/** Batas tunggu tombol Google siap; lewat dari ini form manual ditampilkan (mis. skrip diblokir). */
+export const GOOGLE_READY_TIMEOUT_MS = 6000;
+export type GoogleStatus = 'loading' | 'ready' | 'off';
+
 /**
- * Tombol "Daftar/Lanjutkan dengan Google" + One Tap. Tidak tampil bila Google belum diatur di server atau
- * skrip Google gagal dimuat (misalnya offline); form email tetap bisa dipakai.
+ * Tombol "Daftar/Lanjutkan dengan Google" + One Tap. `onStatus('off')` bila Google belum diatur di server,
+ * skrip gagal dimuat (offline/diblokir), atau tidak siap dalam batas waktu: halaman lalu menampilkan form
+ * manual sehingga orang tua tidak pernah terkunci.
  */
 export function GoogleButton({
   context,
   onCredential,
+  onStatus,
 }: {
   context: 'signup' | 'signin';
   onCredential: (credential: string) => void;
+  onStatus?: (s: Exclude<GoogleStatus, 'loading'>) => void;
 }) {
   const box = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const handler = useRef(onCredential);
   handler.current = onCredential;
+  const status = useRef(onStatus);
+  status.current = onStatus;
 
   useEffect(() => {
     let alive = true;
+    let done = false;
     let gid: GoogleId | undefined;
+    const report = (s: 'ready' | 'off') => {
+      if (!alive || done) return;
+      done = true;
+      status.current?.(s);
+    };
+    const timer = setTimeout(() => report('off'), GOOGLE_READY_TIMEOUT_MS);
     void googleClientId().then(async (clientId) => {
-      if (!clientId || !alive) return;
+      if (!clientId || !alive) return report('off');
       try {
         gid = await loadGoogle();
       } catch {
-        return;
+        return report('off');
       }
-      if (!alive || !box.current) return;
+      if (!alive || !box.current || done) return;
       gid.initialize({
         client_id: clientId,
         callback: (r: { credential?: string }) => r.credential && handler.current(r.credential),
@@ -118,32 +136,31 @@ export function GoogleButton({
       });
       gid.renderButton(box.current, {
         type: 'standard',
-        theme: 'outline',
+        theme: 'filled_blue',
         size: 'large',
         shape: 'pill',
-        text: context === 'signup' ? 'signup_with' : 'continue_with',
+        text: context === 'signup' ? 'signup_with' : 'signin_with',
         logo_alignment: 'left',
         locale: 'id',
         width: Math.min(400, Math.max(240, box.current.clientWidth || 320)),
       });
+      clearTimeout(timer);
       setReady(true);
+      report('ready');
       // Pop-up kecil One Tap: menawarkan akun Google yang aktif di perangkat ini.
       gid.prompt();
     });
     return () => {
       alive = false;
+      clearTimeout(timer);
       gid?.cancel();
     };
   }, [context]);
 
   return (
-    <div className="pa-google" hidden={!ready}>
+    <div className="pa-google" aria-busy={!ready}>
+      {!ready && <p className="pa-google-loading ui-muted">{t('parent.choice.loading')}</p>}
       <div ref={box} className="pa-google-btn" />
-      <p className="pa-or">
-        <span>
-          {context === 'signup' ? t('parent.google.orRegister') : t('parent.google.orLogin')}
-        </span>
-      </p>
     </div>
   );
 }
@@ -161,6 +178,9 @@ export function GoogleConsent({
   onCancel: () => void;
 }) {
   const [name, setName] = useState(pending.name);
+  // Kode referal (D-063): terisi dari link /r/KODE atau halaman daftar; bisa diketik/diubah di sini.
+  const [code, setCode] = useState(referral ?? '');
+  const preview = useReferralPreview(code);
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string>();
@@ -171,16 +191,18 @@ export function GoogleConsent({
     const next: Record<string, string> = {};
     if (!name.trim()) next.name = t('parent.google.nameRequired');
     if (!consent) next.consent = t('parent.consent.required');
+    const referralCode = normalizeReferralCode(code);
+    if (referralCode && (!isReferralCode(referralCode) || preview?.valid === false))
+      next.referralCode = t('parent.register.referralInvalid');
     setErrors(next);
     if (Object.keys(next).length > 0) return;
-    const code = normalizeReferralCode(referral ?? '');
     setBusy(true);
     setError(undefined);
     try {
       const res = await sendGoogle(pending.credential, {
         consent: true,
         name: name.trim(),
-        ...(isReferralCode(code) && { referralCode: code }),
+        ...(referralCode && { referralCode }),
       });
       if ('needsConsent' in res) throw new Error(t('parent.google.retry'));
       onDone(res);
@@ -203,6 +225,29 @@ export function GoogleConsent({
         value={name}
         error={errors.name}
         onChange={(e) => setName(e.target.value)}
+      />
+      <TextField
+        label={t('parent.register.referral')}
+        hint={
+          preview?.valid
+            ? t('parent.register.referralBy', { name: preview.name ?? '' })
+            : t('parent.register.referralHint')
+        }
+        autoComplete="off"
+        autoCapitalize="characters"
+        spellCheck={false}
+        maxLength={12}
+        value={code}
+        error={
+          errors.referralCode ??
+          (preview?.valid === false ? t('parent.register.referralInvalid') : undefined)
+        }
+        onChange={(e) => {
+          setCode(e.target.value);
+          // Pesan kode keliru dari percobaan sebelumnya hilang begitu kode diubah.
+          setErrors(({ referralCode: _old, ...rest }) => rest);
+          if (isReferralCode(e.target.value)) rememberReferral(e.target.value);
+        }}
       />
       <ConsentSection />
       <Checkbox

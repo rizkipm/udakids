@@ -592,6 +592,15 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
         clientId: 'test-client.apps.googleusercontent.com',
       });
 
+      // Pengajak (D-063): orang tua terverifikasi yang sudah punya kode referal.
+      const referrerToken = (
+        await http().post('/auth/parent/login').send({ email, password }).expect(200)
+      ).body.token as string;
+      const refCode = (
+        await http().get('/parent/affiliate').set(ctx.auth(referrerToken)).expect(200)
+      ).body.code as string;
+      expect(refCode).toMatch(/^[A-Z0-9]{6,}$/);
+
       // Akun baru: tanpa persetujuan → hanya nama & email, belum ada akun.
       const cred = idToken({ sub: 'g-111', email: 'Ortu.Google@Gmail.com', name: 'Ibu Google' });
       const ask = await http().post('/auth/parent/google').send({ credential: cred }).expect(200);
@@ -606,7 +615,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       // Setuju → akun dibuat, langsung terverifikasi & masuk, email sambutan terkirim.
       const made = await http()
         .post('/auth/parent/google')
-        .send({ credential: cred, consent: true, name: 'Bunda Rara' })
+        .send({ credential: cred, consent: true, name: 'Bunda Rara', referralCode: refCode })
         .expect(200);
       expect(made.body).toMatchObject({
         created: true,
@@ -621,6 +630,17 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       ).rows[0];
       expect(row.google_sub).toBe('g-111');
       expect(row.email_verified_at).toBeTruthy();
+      // Kode referal terpasang otomatis: pengajak tercatat, bonus ajak teman masuk sebagai tertahan.
+      const link = (
+        await pool.query(
+          `select r.email as referrer, l.type, l.state, l.amount
+             from parents p join parents r on r.id = p.referred_by
+             left join affiliate_ledger l on l.referee_id = p.id and l.parent_id = r.id
+            where p.email = 'ortu.google@gmail.com'`,
+        )
+      ).rows[0];
+      expect(link).toMatchObject({ referrer: email, type: 'signup_bonus', state: 'pending' });
+      expect(link.amount).toBeGreaterThan(0);
       await flushed();
       expect(lastTo('ortu.google@gmail.com').subject).toMatch(/Selamat datang|Selamat bergabung/i);
       const account = await http()
@@ -636,8 +656,16 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       // Akun lama (email + password) dengan email yang sama → langsung masuk & tersambung.
       const old = await http()
         .post('/auth/parent/google')
-        .send({ credential: idToken({ sub: 'g-222', email, name: 'Siapa Saja' }) })
+        .send({
+          credential: idToken({ sub: 'g-222', email, name: 'Siapa Saja' }),
+          referralCode: refCode,
+        })
         .expect(200);
+      // Akun lama tidak mendapat pengajak baru (referal dikunci saat daftar).
+      expect(
+        (await pool.query('select referred_by from parents where lower(email) = $1', [email]))
+          .rows[0].referred_by,
+      ).toBeNull();
       expect(old.body.created).toBe(false);
       expect(
         (await pool.query('select google_sub from parents where lower(email) = $1', [email]))

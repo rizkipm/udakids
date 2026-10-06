@@ -46,9 +46,11 @@ afterEach(() => {
 });
 
 describe('lupa password', () => {
-  it('halaman masuk punya tautan "Lupa password?" yang membawa email', () => {
+  it('halaman masuk punya tautan "Lupa password?" yang membawa email', async () => {
     mockApi({});
     renderParent('/orang-tua/masuk');
+    // Tanpa Google di test → form manual tampil setelah pengecekan (D-066).
+    await screen.findByRole('button', { name: t('parent.login.submit') });
     fireEvent.change(screen.getByLabelText(label('parent.login.email')), {
       target: { value: 'a@contoh.id' },
     });

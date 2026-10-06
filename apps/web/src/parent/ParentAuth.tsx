@@ -18,10 +18,12 @@ import { AuthLayout, familySteps } from '../site/AuthLayout';
 import { forgetReferral, readReferral, rememberReferral } from '../site/referral';
 import { Button, Card, Checkbox, Notice, PasswordField, RequiredNote, TextField } from '../ui/ui';
 import { fieldErrors, serverFieldErrors } from './form';
+import { useReferralPreview } from './referralPreview';
 import {
   ConsentSection,
   GoogleButton,
   GoogleConsent,
+  type GoogleStatus,
   sendGoogle,
   type GoogleAuthResult,
   type GooglePending,
@@ -93,10 +95,67 @@ function GoogleConsentCard({
   );
 }
 
+/**
+ * Pilihan awal daftar/masuk (D-066): Google disarankan, isi manual sebagai alternatif. Form manual langsung
+ * tampil bila Google tidak tersedia (belum diatur, offline, diblokir) atau orang tua memilihnya.
+ */
+function useAuthMode(initialManual: boolean) {
+  const [google, setGoogle] = useState<GoogleStatus>('loading');
+  const [manual, setManual] = useState(initialManual);
+  return {
+    google,
+    setGoogle,
+    manual,
+    setManual,
+    showForm: manual || google === 'off',
+    canGoBack: manual && google !== 'off',
+  };
+}
+
+function AuthChoice({
+  context,
+  onCredential,
+  mode,
+}: {
+  context: 'signup' | 'signin';
+  onCredential: (credential: string) => void;
+  mode: ReturnType<typeof useAuthMode>;
+}) {
+  const signup = context === 'signup';
+  return (
+    <div className="pa-choice">
+      <GoogleButton context={context} onCredential={onCredential} onStatus={mode.setGoogle} />
+      <p className="pa-choice-hint">
+        {signup ? t('parent.choice.googleHintRegister') : t('parent.choice.googleHintLogin')}
+      </p>
+      <p className="pa-or">
+        <span>{t('parent.choice.or')}</span>
+      </p>
+      <Button variant="secondary" className="pa-wide" onClick={() => mode.setManual(true)}>
+        {signup ? t('parent.choice.manualRegister') : t('parent.choice.manualLogin')}
+      </Button>
+    </div>
+  );
+}
+
+function BackToChoice({ mode }: { mode: ReturnType<typeof useAuthMode> }) {
+  if (!mode.canGoBack) return null;
+  return (
+    <p className="pa-choice-back">
+      <button type="button" className="pa-link-button" onClick={() => mode.setManual(false)}>
+        {t('parent.choice.back')}
+      </button>
+    </p>
+  );
+}
+
 export function ParentLogin() {
   const navigate = useNavigate();
   const from = (useLocation().state as { from?: string } | null)?.from;
-  const [email, setEmail] = useState('');
+  const [search] = useSearchParams();
+  // Datang dari tautan berisi email (mis. setelah verifikasi) → langsung form manual.
+  const [email, setEmail] = useState(() => search.get('email') ?? '');
+  const mode = useAuthMode(!!search.get('email'));
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string>();
@@ -142,8 +201,15 @@ export function ParentLogin() {
           <p className="ui-muted pa-gap">{t('parent.login.subtitle')}</p>
           <p className="ui-muted">{t('parent.login.childLimit', { n: MAX_CHILDREN_PER_PARENT })}</p>
           {(error ?? google.error) && <Notice tone="error">{error ?? google.error}</Notice>}
-          <GoogleButton context="signin" onCredential={(c) => void google.onCredential(c)} />
-          <form onSubmit={submit} noValidate>
+          {!mode.showForm && (
+            <AuthChoice
+              context="signin"
+              mode={mode}
+              onCredential={(c) => void google.onCredential(c)}
+            />
+          )}
+          {mode.showForm && <BackToChoice mode={mode} />}
+          <form onSubmit={submit} noValidate hidden={!mode.showForm}>
             <RequiredNote />
             <TextField
               required
@@ -183,21 +249,6 @@ export function ParentLogin() {
   );
 }
 
-/** Cek kode referal (D-063): nama pengajak tersamar, atau kode tidak dikenal. */
-function useReferralPreview(raw: string) {
-  const [state, setState] = useState<{ code: string; name?: string; valid: boolean }>();
-  const code = normalizeReferralCode(raw);
-  useEffect(() => {
-    if (!isReferralCode(code)) return setState(undefined);
-    const ctl = new AbortController();
-    api<{ valid: boolean; name?: string }>(`/referral/${code}`, { signal: ctl.signal })
-      .then((r) => setState({ code, valid: r.valid, name: r.name }))
-      .catch(() => undefined);
-    return () => ctl.abort();
-  }, [code]);
-  return state?.code === code ? state : undefined;
-}
-
 export function ParentRegister() {
   const navigate = useNavigate();
   const [search] = useSearchParams();
@@ -212,6 +263,7 @@ export function ParentRegister() {
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
   const google = useGoogleFlow();
+  const mode = useAuthMode(false);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -269,10 +321,20 @@ export function ParentRegister() {
           <Notice tone="info">
             {t('parent.register.childLimit', { n: MAX_CHILDREN_PER_PARENT })}
           </Notice>
-          <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>
+          {mode.showForm && <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>}
           {(error ?? google.error) && <Notice tone="error">{error ?? google.error}</Notice>}
-          <GoogleButton context="signup" onCredential={(c) => void google.onCredential(c)} />
-          <form onSubmit={submit} noValidate>
+          {!mode.showForm && (
+            <AuthChoice
+              context="signup"
+              mode={mode}
+              onCredential={(c) => void google.onCredential(c)}
+            />
+          )}
+          {mode.showForm && <BackToChoice mode={mode} />}
+          {mode.showForm && mode.google !== 'off' && (
+            <Notice tone="info">{t('parent.choice.manualHintRegister')}</Notice>
+          )}
+          <form onSubmit={submit} noValidate hidden={!mode.showForm}>
             <RequiredNote />
             <TextField
               required
@@ -327,6 +389,7 @@ export function ParentRegister() {
               }
               onChange={(e) => {
                 setReferral(e.target.value);
+                setErrors(({ referralCode: _old, ...rest }) => rest);
                 if (isReferralCode(e.target.value)) rememberReferral(e.target.value);
               }}
             />
