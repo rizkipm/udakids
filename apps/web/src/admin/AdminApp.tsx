@@ -5,6 +5,7 @@ import { useFetch } from '../auth/useApi';
 import { VisualGallery } from '../components/visuals';
 import { t, type MessageKey } from '../i18n';
 import { AppShell, type ShellIcon } from '../ui/AppShell';
+import { Seo } from '../components/Seo';
 import { PageHeader } from '../ui/ui';
 import { AffiliateAdminPage } from './affiliate/AffiliateAdminPage';
 import { BillingSettingsPage } from './billing/BillingSettingsPage';
@@ -132,6 +133,7 @@ export function AdminApp() {
       user={{ name: session?.user.name ?? '—', caption: t('admin.topbar.signedInAs') }}
       onLogout={logout}
     >
+      <Seo title="Panel Admin" noindex />
       <Routes>
         <Route index element={<OverviewPage />} />
         <Route path="skill" element={<SkillList />} />

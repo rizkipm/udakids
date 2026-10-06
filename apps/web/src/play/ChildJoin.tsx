@@ -15,6 +15,7 @@ import { rememberFamilyCode, setSession, type Session } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { VisualView } from '../components/visuals';
 import { t } from '../i18n';
+import { Seo } from '../components/Seo';
 import { SpeakButton } from './ItemPlayer';
 
 type Step = 'code' | 'name' | 'color' | 'pin' | 'confirm' | 'done';
@@ -174,6 +175,15 @@ export function ChildJoin({ self = false }: { self?: boolean }) {
 
   return (
     <main className="kid-screen join-screen">
+      <Seo
+        title={self ? 'Daftar Sendiri Anak' : 'Gabung Kelas'}
+        description={
+          self
+            ? 'Pendaftaran mandiri anak dengan nama panggilan dan 3 gambar sandi rahasia.'
+            : 'Gabung kelas Little Coder dengan kode kelas dari guru atau sekolah.'
+        }
+        canonical={self ? '/play/daftar' : '/play/gabung'}
+      />
       <ol
         className="join-steps"
         aria-label={t('play.join.progress', { n: stepNo + 1, total: STEPS.length })}

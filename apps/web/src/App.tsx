@@ -10,9 +10,15 @@ import { ParentApp } from './parent/ParentApp';
 import { PlayApp } from './play/PlayApp';
 import { Landing } from './site/Landing';
 import { StaffLogin } from './staff/StaffLogin';
+import { Seo } from './components/Seo';
 
-function Placeholder({ text }: { text: string }) {
-  return <main className="page">{text}</main>;
+function Placeholder({ text, title }: { text: string; title?: string }) {
+  return (
+    <main className="page">
+      <Seo title={title ?? 'Udakids Little Coder'} noindex />
+      {text}
+    </main>
+  );
 }
 
 export function App() {
@@ -52,9 +58,12 @@ function AppRoutes() {
       />
       <Route
         path="/laporan/:token"
-        element={<Placeholder text={t('common.placeholder.report')} />}
+        element={<Placeholder text={t('common.placeholder.report')} title="Laporan Belajar Anak" />}
       />
-      <Route path="*" element={<Placeholder text={t('common.notFound')} />} />
+      <Route
+        path="*"
+        element={<Placeholder text={t('common.notFound')} title="Halaman Tidak Ditemukan" />}
+      />
     </Routes>
   );
 }

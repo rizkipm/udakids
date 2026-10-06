@@ -4,6 +4,7 @@ import { emailSchema } from '@little-coder/engine';
 import { api, errorMessage } from '../api/client';
 import { setSession, type Session } from '../auth/session';
 import { t } from '../i18n';
+import { Seo } from '../components/Seo';
 import { AuthLayout } from '../site/AuthLayout';
 import { Button, Card, Notice, PasswordField, RequiredNote, TextField } from '../ui/ui';
 
@@ -40,6 +41,11 @@ export function StaffLogin() {
 
   return (
     <AuthLayout variant="staff" title={t('site.auth.staff.title')} text={t('site.auth.staff.text')}>
+      <Seo
+        title="Masuk Guru &amp; Fasilitator"
+        description="Portal masuk untuk fasilitator kelas dan admin sekolah Udakids Little Coder."
+        canonical="/masuk/staf"
+      />
       <Card title={t('staff.login.title')}>
         {error && <Notice tone="error">{error}</Notice>}
         <form onSubmit={submit}>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { api } from '../api/client';
 import { Momo } from '../components/Momo';
+import { Seo } from '../components/Seo';
 import { t } from '../i18n';
 import { Card, Notice } from '../ui/ui';
 
@@ -21,6 +22,7 @@ export function Unsubscribe() {
       className="ui-shell"
       style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: 16 }}
     >
+      <Seo title="Berhenti Berlangganan" noindex />
       <Card title={t('site.unsub.title')}>
         <div style={{ display: 'grid', justifyItems: 'center', gap: 12, maxWidth: 440 }}>
           <Momo mood={state === 'error' ? 'curious' : 'happy'} size={110} />
