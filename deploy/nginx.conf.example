@@ -52,6 +52,18 @@ server {
         # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
     }
 
+    # SEO & Crawlers: robots.txt dan sitemap.xml langsung disajikan dari file statis
+    location = /robots.txt {
+        try_files $uri =404;
+        access_log off;
+        log_not_found off;
+    }
+
+    location = /sitemap.xml {
+        try_files $uri =404;
+        access_log off;
+    }
+
     # SPA: semua rute (/play, /orang-tua, /admin, ...) ke index.html
     location / {
         try_files $uri /index.html;

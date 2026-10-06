@@ -13,6 +13,7 @@ import { BannerSlider } from '../components/BannerSlider';
 import { GallerySection, useHasGallery } from './GallerySection';
 import { TopTenSection } from './TopTen';
 import { NewFeaturesSection } from './NewFeatures';
+import { Seo } from '../components/Seo';
 import './site.css';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
@@ -232,6 +233,7 @@ export function Landing() {
   const fmt = (n?: number) => (n ?? 0).toLocaleString('id-ID');
   return (
     <div className="site">
+      <Seo canonical="/" />
       <SiteNav />
 
       <main>

@@ -15,6 +15,7 @@ import { ProfilePage } from './Profile';
 import { TopicPage } from './Topic';
 import { MomoPage } from './MomoPage';
 import { OwnMomoLook } from '../components/Momo';
+import { Seo } from '../components/Seo';
 import { PlayErrorBoundary } from './PlayErrorBoundary';
 import { flushPractice, pullPractice } from './sync';
 import './play.css';
@@ -42,6 +43,11 @@ export function PlayApp() {
   if (!session) {
     return (
       <div className="kid-app">
+        <Seo
+          title="Area Main Anak"
+          description="Masuk ke arena belajar bermain Little Coder bersama robot Momo dengan kode keluarga dan gambar rahasia."
+          canonical="/play"
+        />
         <Routes>
           <Route path="gabung" element={<ChildJoin />} />
           <Route path="daftar" element={<ChildJoin self />} />
@@ -54,6 +60,7 @@ export function PlayApp() {
   const look = me.data?.momoLook ?? null;
   return (
     <OwnMomoLook look={look}>
+      <Seo title="Arena Belajar Momo" noindex />
       <div className="kid-app">
         <PlayErrorBoundary resetKey={pathname}>
           <Routes>

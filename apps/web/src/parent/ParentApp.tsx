@@ -4,6 +4,7 @@ import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-r
 import { setSession, useSession } from '../auth/session';
 import { useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
+import { Seo } from '../components/Seo';
 import { t } from '../i18n';
 import { AppShell, ShellIconSvg } from '../ui/AppShell';
 import { Button, Dialog } from '../ui/ui';
@@ -137,6 +138,7 @@ function ParentLayout({ children }: { children: ReactNode }) {
         navigate('/orang-tua/masuk', { replace: true });
       }}
     >
+      <Seo title="Dasbor Orang Tua" noindex />
       <div className="pa-main">{children}</div>
       <MustChangePassword path={pathname} />
     </AppShell>
@@ -156,6 +158,11 @@ export function ParentApp() {
         path="masuk"
         element={
           <GuestOnly>
+            <Seo
+              title="Masuk Akun Keluarga"
+              description="Masuk ke dasbor orang tua Udakids Little Coder untuk memantau kemajuan belajar anak."
+              canonical="/orang-tua/masuk"
+            />
             <ParentLogin />
           </GuestOnly>
         }
@@ -164,6 +171,11 @@ export function ParentApp() {
         path="daftar"
         element={
           <GuestOnly>
+            <Seo
+              title="Daftar Akun Keluarga"
+              description="Daftar akun keluarga di Udakids Little Coder. Dapatkan akses penuh modul coding, matematika, dan sains hingga 7 anak."
+              canonical="/orang-tua/daftar"
+            />
             <ParentRegister />
           </GuestOnly>
         }
@@ -172,6 +184,7 @@ export function ParentApp() {
         path="verifikasi"
         element={
           <GuestOnly>
+            <Seo title="Verifikasi Akun Orang Tua" noindex />
             <ParentVerify />
           </GuestOnly>
         }
@@ -180,6 +193,7 @@ export function ParentApp() {
         path="lupa-password"
         element={
           <GuestOnly>
+            <Seo title="Lupa Password Orang Tua" noindex />
             <ParentForgot />
           </GuestOnly>
         }

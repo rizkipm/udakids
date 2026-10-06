@@ -4,6 +4,7 @@ import { ClassStudentsPage } from '../admin/classes/ClassStudentsPage';
 import { setSession, useSession } from '../auth/session';
 import { t } from '../i18n';
 import { AppShell } from '../ui/AppShell';
+import { Seo } from '../components/Seo';
 import { FacilitatorHome } from './FacilitatorHome';
 import '../admin/admin.css';
 
@@ -27,6 +28,7 @@ export function FacilitatorApp() {
         navigate('/masuk/staf', { replace: true });
       }}
     >
+      <Seo title="Panel Fasilitator" noindex />
       <Routes>
         <Route index element={<FacilitatorHome />} />
         <Route path="kelas" element={<ClassesPage base="/fasilitator/kelas" canAssign={false} />} />
