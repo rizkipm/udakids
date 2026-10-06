@@ -73,6 +73,16 @@ export const parentRegisterSchema = z.strictObject({
   /** Kode referal opsional (afiliasi, D-063); kosong = tanpa referal. */
   referralCode: referralInputSchema.optional(),
 });
+/**
+ * Daftar/masuk orang tua dengan Google (D-066): `credential` = ID token dari Google Identity Services.
+ * Akun baru wajib `consent: true` (persetujuan sama dengan daftar biasa); nama boleh diubah.
+ */
+export const parentGoogleSchema = z.strictObject({
+  credential: z.string().min(20).max(4096),
+  consent: z.literal(true).optional(),
+  name: z.string().trim().min(1, 'nama wajib diisi').max(60).optional(),
+  referralCode: referralInputSchema.optional(),
+});
 /** `familyCode` boleh berisi kode keluarga ATAU kode kelas (D-025). */
 export const childLoginSchema = z.strictObject({
   familyCode: familyCodeSchema,

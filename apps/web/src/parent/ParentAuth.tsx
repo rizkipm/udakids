@@ -18,6 +18,14 @@ import { AuthLayout, familySteps } from '../site/AuthLayout';
 import { forgetReferral, readReferral, rememberReferral } from '../site/referral';
 import { Button, Card, Checkbox, Notice, PasswordField, RequiredNote, TextField } from '../ui/ui';
 import { fieldErrors, serverFieldErrors } from './form';
+import {
+  ConsentSection,
+  GoogleButton,
+  GoogleConsent,
+  sendGoogle,
+  type GoogleAuthResult,
+  type GooglePending,
+} from './GoogleAuth';
 
 type AuthResponse = { token: string; user: SessionUser; familyCode: string };
 /** Pendaftaran baru menunggu kode verifikasi email (D-044). */
@@ -31,6 +39,60 @@ function storeSession(res: AuthResponse) {
   rememberFamilyCode(res.familyCode);
 }
 
+/**
+ * Alur Google (D-066): akun lama langsung masuk; akun baru menampilkan langkah persetujuan dulu. Akun baru
+ * lanjut ke wizard keluarga (tambah anak), akun lama ke dasbor (atau halaman asal).
+ */
+function useGoogleFlow(from?: string) {
+  const navigate = useNavigate();
+  const [pending, setPending] = useState<GooglePending>();
+  const [error, setError] = useState<string>();
+  const [busy, setBusy] = useState(false);
+
+  function finish(res: GoogleAuthResult) {
+    storeSession(res);
+    forgetReferral();
+    if (res.created) navigate('/orang-tua/anak/baru', { replace: true, state: { welcome: true } });
+    else navigate(from && from.startsWith('/orang-tua') ? from : '/orang-tua', { replace: true });
+  }
+
+  async function onCredential(credential: string) {
+    setError(undefined);
+    setBusy(true);
+    try {
+      const res = await sendGoogle(credential);
+      if ('needsConsent' in res) setPending({ credential, email: res.email, name: res.name });
+      else finish(res);
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return { pending, setPending, error, busy, onCredential, finish };
+}
+
+/** Kartu "Satu langkah lagi" untuk akun Google baru. */
+function GoogleConsentCard({
+  google,
+  referral,
+}: {
+  google: ReturnType<typeof useGoogleFlow>;
+  referral?: string;
+}) {
+  return (
+    <Card title={t('parent.google.consentTitle')}>
+      <GoogleConsent
+        pending={google.pending!}
+        referral={referral}
+        onDone={google.finish}
+        onCancel={() => google.setPending(undefined)}
+      />
+    </Card>
+  );
+}
+
 export function ParentLogin() {
   const navigate = useNavigate();
   const from = (useLocation().state as { from?: string } | null)?.from;
@@ -39,6 +101,7 @@ export function ParentLogin() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
+  const google = useGoogleFlow(from);
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -72,45 +135,50 @@ export function ParentLogin() {
       title={t('site.auth.parent.title')}
       text={t('site.auth.parent.text')}
     >
-      <Card title={t('parent.login.title')}>
-        <p className="ui-muted pa-gap">{t('parent.login.subtitle')}</p>
-        <p className="ui-muted">{t('parent.login.childLimit', { n: MAX_CHILDREN_PER_PARENT })}</p>
-        {error && <Notice tone="error">{error}</Notice>}
-        <form onSubmit={submit} noValidate>
-          <RequiredNote />
-          <TextField
-            required
-            label={t('parent.login.email')}
-            type="email"
-            autoComplete="username"
-            value={email}
-            error={errors.email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <PasswordField
-            required
-            label={t('parent.login.password')}
-            autoComplete="current-password"
-            value={password}
-            error={errors.password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <p className="pa-forgot">
-            <Link
-              to={`/orang-tua/lupa-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
-            >
-              {t('parent.forgot.link')}
-            </Link>
+      {google.pending ? (
+        <GoogleConsentCard google={google} referral={readReferral()} />
+      ) : (
+        <Card title={t('parent.login.title')}>
+          <p className="ui-muted pa-gap">{t('parent.login.subtitle')}</p>
+          <p className="ui-muted">{t('parent.login.childLimit', { n: MAX_CHILDREN_PER_PARENT })}</p>
+          {(error ?? google.error) && <Notice tone="error">{error ?? google.error}</Notice>}
+          <GoogleButton context="signin" onCredential={(c) => void google.onCredential(c)} />
+          <form onSubmit={submit} noValidate>
+            <RequiredNote />
+            <TextField
+              required
+              label={t('parent.login.email')}
+              type="email"
+              autoComplete="username"
+              value={email}
+              error={errors.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <PasswordField
+              required
+              label={t('parent.login.password')}
+              autoComplete="current-password"
+              value={password}
+              error={errors.password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <p className="pa-forgot">
+              <Link
+                to={`/orang-tua/lupa-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
+              >
+                {t('parent.forgot.link')}
+              </Link>
+            </p>
+            <Button type="submit" disabled={busy || google.busy} className="pa-wide">
+              {busy ? t('parent.loading') : t('parent.login.submit')}
+            </Button>
+          </form>
+          <p className="pa-switch">
+            {t('parent.login.noAccount')}{' '}
+            <Link to="/orang-tua/daftar">{t('parent.login.toRegister')}</Link>
           </p>
-          <Button type="submit" disabled={busy} className="pa-wide">
-            {busy ? t('parent.loading') : t('parent.login.submit')}
-          </Button>
-        </form>
-        <p className="pa-switch">
-          {t('parent.login.noAccount')}{' '}
-          <Link to="/orang-tua/daftar">{t('parent.login.toRegister')}</Link>
-        </p>
-      </Card>
+        </Card>
+      )}
     </AuthLayout>
   );
 }
@@ -143,6 +211,7 @@ export function ParentRegister() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
+  const google = useGoogleFlow();
 
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -190,107 +259,102 @@ export function ParentRegister() {
       text={t('site.auth.parent.text')}
       steps={{ current: 1, labels: familySteps() }}
     >
-      <Card title={t('parent.register.title')}>
-        <p className="ui-muted pa-gap">
-          {t('parent.register.subtitle', { n: MAX_CHILDREN_PER_PARENT })}
-        </p>
-        <Notice tone="info">
-          {t('parent.register.childLimit', { n: MAX_CHILDREN_PER_PARENT })}
-        </Notice>
-        <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>
-        {error && <Notice tone="error">{error}</Notice>}
-        <form onSubmit={submit} noValidate>
-          <RequiredNote />
-          <TextField
-            required
-            label={t('parent.register.name')}
-            hint={t('parent.register.nameHint')}
-            autoComplete="name"
-            value={name}
-            error={errors.name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <TextField
-            required
-            label={t('parent.register.email')}
-            type="email"
-            autoComplete="email"
-            value={email}
-            error={errors.email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <PasswordField
-            required
-            label={t('parent.register.password')}
-            hint={t('parent.register.passwordHint')}
-            autoComplete="new-password"
-            value={password}
-            error={errors.password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <PasswordField
-            required
-            label={t('parent.register.confirm')}
-            autoComplete="new-password"
-            value={confirm}
-            error={errors.confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-          />
-          <TextField
-            label={t('parent.register.referral')}
-            hint={
-              preview?.valid
-                ? t('parent.register.referralBy', { name: preview.name ?? '' })
-                : t('parent.register.referralHint')
-            }
-            autoComplete="off"
-            autoCapitalize="characters"
-            spellCheck={false}
-            maxLength={12}
-            value={referral}
-            error={
-              errors.referralCode ??
-              (preview?.valid === false ? t('parent.register.referralInvalid') : undefined)
-            }
-            onChange={(e) => {
-              setReferral(e.target.value);
-              if (isReferralCode(e.target.value)) rememberReferral(e.target.value);
-            }}
-          />
-          <section className="pa-consent" aria-labelledby="pa-consent-title">
-            <h3 id="pa-consent-title">{t('parent.consent.title')}</h3>
-            <ul>
-              <li>{t('parent.consent.parent')}</li>
-              <li>{t('parent.consent.child')}</li>
-              <li>{t('parent.consent.none')}</li>
-              <li>{t('parent.consent.delete')}</li>
-              <li>{t('parent.consent.news')}</li>
-            </ul>
-            <p className="ui-muted">{t('parent.consent.law')}</p>
-          </section>
-          <Checkbox
-            required
-            label={t('parent.consent.label')}
-            checked={consent}
-            aria-invalid={errors.consent ? true : undefined}
-            aria-describedby={errors.consent ? 'pa-consent-error' : undefined}
-            onChange={(e) => setConsent(e.target.checked)}
-          />
-          {errors.consent && (
-            <p id="pa-consent-error" className="ui-error pa-field-error" role="alert">
-              {errors.consent}
-            </p>
-          )}
-          <Notice tone="info">{t('parent.register.emailNote')}</Notice>
-          <Button type="submit" disabled={busy} className="pa-wide">
-            {busy ? t('parent.saving') : t('parent.register.submit')}
-          </Button>
-        </form>
-        <p className="pa-switch">
-          {t('parent.register.haveAccount')}{' '}
-          <Link to="/orang-tua/masuk">{t('parent.register.toLogin')}</Link>
-        </p>
-      </Card>
+      {google.pending ? (
+        <GoogleConsentCard google={google} referral={referral} />
+      ) : (
+        <Card title={t('parent.register.title')}>
+          <p className="ui-muted pa-gap">
+            {t('parent.register.subtitle', { n: MAX_CHILDREN_PER_PARENT })}
+          </p>
+          <Notice tone="info">
+            {t('parent.register.childLimit', { n: MAX_CHILDREN_PER_PARENT })}
+          </Notice>
+          <p className="pa-steps-hint">{t('parent.register.stepsHint')}</p>
+          {(error ?? google.error) && <Notice tone="error">{error ?? google.error}</Notice>}
+          <GoogleButton context="signup" onCredential={(c) => void google.onCredential(c)} />
+          <form onSubmit={submit} noValidate>
+            <RequiredNote />
+            <TextField
+              required
+              label={t('parent.register.name')}
+              hint={t('parent.register.nameHint')}
+              autoComplete="name"
+              value={name}
+              error={errors.name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              required
+              label={t('parent.register.email')}
+              type="email"
+              autoComplete="email"
+              value={email}
+              error={errors.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <PasswordField
+              required
+              label={t('parent.register.password')}
+              hint={t('parent.register.passwordHint')}
+              autoComplete="new-password"
+              value={password}
+              error={errors.password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <PasswordField
+              required
+              label={t('parent.register.confirm')}
+              autoComplete="new-password"
+              value={confirm}
+              error={errors.confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+            <TextField
+              label={t('parent.register.referral')}
+              hint={
+                preview?.valid
+                  ? t('parent.register.referralBy', { name: preview.name ?? '' })
+                  : t('parent.register.referralHint')
+              }
+              autoComplete="off"
+              autoCapitalize="characters"
+              spellCheck={false}
+              maxLength={12}
+              value={referral}
+              error={
+                errors.referralCode ??
+                (preview?.valid === false ? t('parent.register.referralInvalid') : undefined)
+              }
+              onChange={(e) => {
+                setReferral(e.target.value);
+                if (isReferralCode(e.target.value)) rememberReferral(e.target.value);
+              }}
+            />
+            <ConsentSection />
+            <Checkbox
+              required
+              label={t('parent.consent.label')}
+              checked={consent}
+              aria-invalid={errors.consent ? true : undefined}
+              aria-describedby={errors.consent ? 'pa-consent-error' : undefined}
+              onChange={(e) => setConsent(e.target.checked)}
+            />
+            {errors.consent && (
+              <p id="pa-consent-error" className="ui-error pa-field-error" role="alert">
+                {errors.consent}
+              </p>
+            )}
+            <Notice tone="info">{t('parent.register.emailNote')}</Notice>
+            <Button type="submit" disabled={busy || google.busy} className="pa-wide">
+              {busy ? t('parent.saving') : t('parent.register.submit')}
+            </Button>
+          </form>
+          <p className="pa-switch">
+            {t('parent.register.haveAccount')}{' '}
+            <Link to="/orang-tua/masuk">{t('parent.register.toLogin')}</Link>
+          </p>
+        </Card>
+      )}
     </AuthLayout>
   );
 }

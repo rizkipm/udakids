@@ -24,10 +24,11 @@ import {
   parseMomoLook,
   type MomoLook,
 } from '@little-coder/engine';
-import { randomInt } from 'node:crypto';
+import { randomBytes, randomInt } from 'node:crypto';
 import { SettingsService } from '../settings/settings.service.js';
 import { forgetAccount } from './auth.guard.js';
-import { and, desc, eq, isNull, sql } from 'drizzle-orm';
+import { and, desc, eq, isNull, or, sql } from 'drizzle-orm';
+import { GoogleVerifier } from './google.js';
 import { uniqueEntryCode } from '../common/codes.js';
 import { TOKEN_TTL } from '../common/config.js';
 import { hashSecret, pinSecret, randomToken, verifySecret } from '../common/crypto.js';
@@ -90,6 +91,7 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly mail: MailService,
     private readonly settings: SettingsService,
+    private readonly google: GoogleVerifier,
   ) {}
 
   /** Link grup WhatsApp orang tua untuk email (D-064); kosong = tidak dicantumkan. */
@@ -215,6 +217,102 @@ export class AuthService {
     }
     const res = await this.issue({ id: row.id, role: 'parent', name: row.name }, TOKEN_TTL.parent);
     return { ...res, familyCode: row.familyCode, mustChangePassword: row.mustChangePassword };
+  }
+
+  /**
+   * Daftar/masuk dengan Google (D-066). Akun yang sudah ada (cocok `google_sub` atau email) langsung masuk dan
+   * tersambung; email dianggap terverifikasi karena Google sudah membuktikannya. Akun baru butuh persetujuan
+   * dulu: tanpa `consent` server hanya mengembalikan nama & email untuk ditampilkan, tanpa membuat akun.
+   */
+  async parentGoogle(
+    input: { credential: string; consent?: true; name?: string; referralCode?: string },
+    ip = 'unknown',
+  ): Promise<
+    | (AuthResult & { familyCode: string; mustChangePassword: boolean; created: boolean })
+    | { needsConsent: true; email: string; name: string }
+  > {
+    const ipKey = `ip:${ip}`;
+    this.ipFails.check(ipKey);
+    const g = await this.google.verify(input.credential).catch((err: unknown) => {
+      this.ipFails.fail(ipKey);
+      throw err;
+    });
+    const [row] = await this.db
+      .select()
+      .from(parents)
+      .where(or(eq(parents.googleSub, g.sub), sql`lower(${parents.email}) = ${g.email}`))
+      .orderBy(sql`(${parents.googleSub} = ${g.sub}) desc nulls last`)
+      .limit(1);
+    if (row) {
+      if (!row.active)
+        throw new ForbiddenException('Akun ini sedang dinonaktifkan. Hubungi admin.');
+      if (row.googleSub && row.googleSub !== g.sub)
+        throw new ConflictException('Email ini sudah tersambung dengan akun Google lain.');
+      if (!row.googleSub || !row.emailVerifiedAt) {
+        await this.db
+          .update(parents)
+          .set({ googleSub: g.sub, emailVerifiedAt: row.emailVerifiedAt ?? new Date() })
+          .where(eq(parents.id, row.id));
+        // Kode verifikasi yang belum dipakai tidak diperlukan lagi.
+        if (!row.emailVerifiedAt)
+          await this.db
+            .update(emailVerifications)
+            .set({ consumedAt: new Date() })
+            .where(
+              and(
+                eq(emailVerifications.parentId, row.id),
+                eq(emailVerifications.purpose, 'verify'),
+                isNull(emailVerifications.consumedAt),
+              ),
+            );
+      }
+      const res = await this.issue(
+        { id: row.id, role: 'parent', name: row.name },
+        TOKEN_TTL.parent,
+      );
+      return {
+        ...res,
+        familyCode: row.familyCode,
+        mustChangePassword: row.mustChangePassword,
+        created: false,
+      };
+    }
+    if (input.consent !== true) return { needsConsent: true, email: g.email, name: g.name };
+    const signupKey = `signup:${ip}`;
+    this.ipSignups.check(signupKey);
+    const familyCode = await this.uniqueFamilyCode();
+    const [created] = await this.db
+      .insert(parents)
+      .values({
+        name: input.name ?? g.name,
+        email: g.email,
+        // Tanpa password yang bisa dipakai; orang tua bisa membuatnya lewat "Lupa password?".
+        passwordHash: await hashSecret(randomBytes(32).toString('base64url')),
+        familyCode,
+        consentAt: new Date(),
+        emailVerifiedAt: new Date(),
+        googleSub: g.sub,
+        signupIpHash: fingerprint('ip', ip),
+      })
+      .onConflictDoNothing()
+      .returning();
+    if (!created) throw new ConflictException('Email sudah terdaftar. Silakan masuk.');
+    this.ipSignups.fail(signupKey);
+    await this.attachReferral(created.id, created.email, input.referralCode);
+    await this.mail.enqueue(
+      created.email,
+      welcome(this.mail.ctx(), {
+        name: created.name,
+        familyCode: created.familyCode,
+        group: await this.group(),
+      }),
+      { kind: 'welcome', refId: created.id },
+    );
+    const res = await this.issue(
+      { id: created.id, role: 'parent', name: created.name },
+      TOKEN_TTL.parent,
+    );
+    return { ...res, familyCode, mustChangePassword: false, created: true };
   }
 
   // ---------------------------------------------------------------- verifikasi email (D-044)

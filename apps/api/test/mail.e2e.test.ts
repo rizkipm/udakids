@@ -567,6 +567,103 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     expect(ov.body).toMatchObject({ enabled: true, pending: { total: 0 } });
   });
 
+  it('daftar & masuk dengan Google (D-066): persetujuan dulu, akun lama tersambung, token dicek ketat', async () => {
+    const { http, pool, app } = ctx;
+    const { generateKeyPairSync, sign } = await import('node:crypto');
+    const { GoogleVerifier } = await import('../src/auth/google.js');
+    process.env.GOOGLE_CLIENT_ID = 'test-client.apps.googleusercontent.com';
+    const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+    app.get(GoogleVerifier).useKeys([{ ...publicKey.export({ format: 'jwk' }), kid: 'k1' }]);
+    const now = Math.floor(Date.now() / 1000);
+    const b64 = (o: object) => Buffer.from(JSON.stringify(o)).toString('base64url');
+    const idToken = (claims: Record<string, unknown>, kid = 'k1') => {
+      const head = `${b64({ alg: 'RS256', kid, typ: 'JWT' })}.${b64({
+        iss: 'https://accounts.google.com',
+        aud: process.env.GOOGLE_CLIENT_ID,
+        iat: now,
+        exp: now + 3600,
+        email_verified: true,
+        ...claims,
+      })}`;
+      return `${head}.${sign('RSA-SHA256', Buffer.from(head), privateKey).toString('base64url')}`;
+    };
+    try {
+      expect((await http().get('/auth/parent/google').expect(200)).body).toEqual({
+        clientId: 'test-client.apps.googleusercontent.com',
+      });
+
+      // Akun baru: tanpa persetujuan → hanya nama & email, belum ada akun.
+      const cred = idToken({ sub: 'g-111', email: 'Ortu.Google@Gmail.com', name: 'Ibu Google' });
+      const ask = await http().post('/auth/parent/google').send({ credential: cred }).expect(200);
+      expect(ask.body).toEqual({
+        needsConsent: true,
+        email: 'ortu.google@gmail.com',
+        name: 'Ibu Google',
+      });
+      const none = await pool.query("select 1 from parents where email = 'ortu.google@gmail.com'");
+      expect(none.rowCount).toBe(0);
+
+      // Setuju → akun dibuat, langsung terverifikasi & masuk, email sambutan terkirim.
+      const made = await http()
+        .post('/auth/parent/google')
+        .send({ credential: cred, consent: true, name: 'Bunda Rara' })
+        .expect(200);
+      expect(made.body).toMatchObject({
+        created: true,
+        user: { role: 'parent', name: 'Bunda Rara' },
+      });
+      expect(made.body.token).toBeTruthy();
+      expect(made.body.familyCode).toMatch(/^[A-Z0-9]{6}$/);
+      const row = (
+        await pool.query(
+          "select google_sub, email_verified_at from parents where email = 'ortu.google@gmail.com'",
+        )
+      ).rows[0];
+      expect(row.google_sub).toBe('g-111');
+      expect(row.email_verified_at).toBeTruthy();
+      await flushed();
+      expect(lastTo('ortu.google@gmail.com').subject).toMatch(/Selamat datang|Selamat bergabung/i);
+      const account = await http()
+        .get('/parent/account')
+        .set(ctx.auth(made.body.token))
+        .expect(200);
+      expect(account.body.email).toBe('ortu.google@gmail.com');
+
+      // Masuk lagi dengan Google → akun yang sama.
+      const again = await http().post('/auth/parent/google').send({ credential: cred }).expect(200);
+      expect(again.body).toMatchObject({ created: false, familyCode: made.body.familyCode });
+
+      // Akun lama (email + password) dengan email yang sama → langsung masuk & tersambung.
+      const old = await http()
+        .post('/auth/parent/google')
+        .send({ credential: idToken({ sub: 'g-222', email, name: 'Siapa Saja' }) })
+        .expect(200);
+      expect(old.body.created).toBe(false);
+      expect(
+        (await pool.query('select google_sub from parents where lower(email) = $1', [email]))
+          .rows[0].google_sub,
+      ).toBe('g-222');
+      await http().post('/auth/parent/login').send({ email, password }).expect(200);
+      // Email itu sudah tersambung ke akun Google lain → ditolak.
+      await http()
+        .post('/auth/parent/google')
+        .send({ credential: idToken({ sub: 'g-333', email, name: 'X' }) })
+        .expect(409);
+
+      // Token tidak sah ditolak: aplikasi lain, kedaluwarsa, email belum terverifikasi, kunci asing, diubah.
+      for (const bad of [
+        idToken({ sub: 'g-9', email: 'x@gmail.com', aud: 'aplikasi-lain' }),
+        idToken({ sub: 'g-9', email: 'x@gmail.com', exp: now - 600 }),
+        idToken({ sub: 'g-9', email: 'x@gmail.com', email_verified: false }),
+        idToken({ sub: 'g-9', email: 'x@gmail.com' }, 'kunci-lain'),
+        `${cred.slice(0, -4)}AAAA`,
+      ])
+        await http().post('/auth/parent/google').send({ credential: bad }).expect(401);
+    } finally {
+      delete process.env.GOOGLE_CLIENT_ID;
+    }
+  });
+
   it('template: escape & footer', () => {
     const ctxMail = { appUrl: 'https://udakids.id', brand: 'Udakids' };
     const v = verifyEmail(ctxMail, { name: '<script>x</script>', code: '123456', minutes: 15 });

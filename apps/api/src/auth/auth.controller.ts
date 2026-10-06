@@ -7,6 +7,7 @@ import {
   classJoinSchema,
   familyCodeSchema,
   parentLoginSchema,
+  parentGoogleSchema,
   parentRegisterSchema,
   passwordForgotSchema,
   passwordResetSchema,
@@ -19,6 +20,7 @@ import type { z } from 'zod';
 import { clientIp } from '../common/rate-limit.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { AuthService } from './auth.service.js';
+import { googleClientId } from './google.js';
 import { CurrentUser, Public, Roles } from './decorators.js';
 
 @Controller('auth')
@@ -86,6 +88,24 @@ export class AuthController {
     @Req() req: Request,
   ) {
     return this.auth.resetPassword(body.email, body.code, body.password, clientIp(req));
+  }
+
+  /** Client ID Google untuk tombol "Lanjutkan dengan Google" (D-066); null = fitur nonaktif. */
+  @Public()
+  @Get('parent/google')
+  googleConfig() {
+    return { clientId: googleClientId() || null };
+  }
+
+  /** Daftar/masuk dengan Google: akun lama langsung masuk; akun baru butuh persetujuan (D-066). */
+  @Public()
+  @Post('parent/google')
+  @HttpCode(200)
+  parentGoogle(
+    @Body(new ZodPipe(parentGoogleSchema)) body: z.infer<typeof parentGoogleSchema>,
+    @Req() req: Request,
+  ) {
+    return this.auth.parentGoogle(body, clientIp(req));
   }
 
   @Public()

@@ -1397,3 +1397,25 @@ untuk follow up… kirim email dulu").
   waktu terakhir) diambil dari antrean email (`email_outbox`, kind `order_followup`), jadi **tanpa migrasi**.
   Daftar transaksi menampilkan "Follow up n×".
 - Hanya admin. Email transaksi lain dan salinan direksi tidak berubah. Tidak ada yang tampil di area anak.
+
+## D-066 — Daftar & masuk orang tua dengan Google
+
+Tanggal 2026-10-06 · Status **Disetujui** (pilihan pemilik produk: "Daftar & masuk", akun lama "Otomatis tersambung",
+"Tombol + pop-up otomatis"). Alasan: banyak orang tua kesulitan mengetik email secara manual.
+
+- **Tampilan:** tombol resmi Google Identity Services ("Daftar dengan Google" / "Lanjutkan dengan Google") di
+  `/orang-tua/daftar` dan `/orang-tua/masuk`, plus pop-up One Tap yang menawarkan akun Google aktif. Form email
+  tetap ada di bawahnya ("atau daftar dengan email"). Tidak ada di area anak.
+- **Server** (`POST /auth/parent/google`, `GET /auth/parent/google` = Client ID): verifikasi ID token tanpa library
+  tambahan (RS256 dengan kunci publik Google, `iss`, `aud` = `GOOGLE_CLIENT_ID`, `exp`, `email_verified`).
+  Client secret tidak dipakai. Gagal verifikasi dihitung di batas percobaan per IP.
+- **Akun baru:** tanpa `consent` server hanya mengembalikan nama & email (akun belum dibuat). Setelah persetujuan
+  (teks sama dengan daftar biasa, UU PDP), akun dibuat dengan email terverifikasi, `google_sub`, kode referal
+  (D-063), dan email sambutan. Password acak yang tidak bisa dipakai; orang tua bisa membuatnya lewat "Lupa
+  password?".
+- **Akun lama:** cocok `google_sub` atau email → langsung masuk, tersambung, dan ditandai terverifikasi. Email yang
+  sudah tersambung ke akun Google lain ditolak (409). Akun nonaktif ditolak.
+- **Data:** kolom baru `parents.google_sub` (unik, migrasi `0015_google_login`). Tidak ada data anak yang dikirim
+  ke atau diterima dari Google.
+- **Pengaturan:** `GOOGLE_CLIENT_ID` di `.env` server (kosong = tombol tidak tampil). Panduan: `docs/google-login.md`.
+  Contoh Nginx: CSP mengizinkan `accounts.google.com/gsi`, `Referrer-Policy: strict-origin-when-cross-origin`.

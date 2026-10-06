@@ -64,6 +64,8 @@ export const parents = pgTable(
     passwordChangedAt: timestamp('password_changed_at', { withTimezone: true }),
     /** Password sementara dari admin → orang tua diminta segera menggantinya setelah masuk (D-064). */
     mustChangePassword: boolean('must_change_password').notNull().default(false),
+    /** Akun Google yang tersambung (klaim `sub`, D-066); null = belum pernah masuk dengan Google. */
+    googleSub: text('google_sub').unique(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [

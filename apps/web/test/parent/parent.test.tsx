@@ -56,7 +56,10 @@ describe('pendaftaran orang tua', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: t('parent.register.submit') }));
     expect(screen.getByText(t('parent.consent.required'))).toBeInTheDocument();
-    expect(fetchMock).not.toHaveBeenCalled();
+    // Hanya pengaturan tombol Google yang diambil; pendaftaran tidak dikirim.
+    expect(fetchMock.mock.calls.some(([u]) => String(u).endsWith('/auth/parent/register'))).toBe(
+      false,
+    );
   });
 
   it('dengan persetujuan: menyimpan sesi, mengingat kode keluarga, lalu langkah 2 (profil anak)', async () => {
@@ -92,7 +95,10 @@ describe('pendaftaran orang tua', () => {
     expect(
       screen.getByRole('list', { name: t('site.steps.label', { n: 3, total: 3 }) }),
     ).toBeInTheDocument();
-    const body = JSON.parse((fetchMock.mock.calls[0]![1] as RequestInit).body as string) as Record<
+    const registerCall = fetchMock.mock.calls.find(([u]) =>
+      String(u).endsWith('/auth/parent/register'),
+    )!;
+    const body = JSON.parse((registerCall[1] as RequestInit).body as string) as Record<
       string,
       unknown
     >;
