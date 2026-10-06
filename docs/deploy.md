@@ -1,5 +1,7 @@
 # Deploy ke server — langkah demi langkah
 
+Untuk server produksi Contabo yang sudah berjalan (kids.eduskul.my.id), pakai [deploy-contabo.md](deploy-contabo.md).
+
 Contoh memakai **VPS Ubuntu 24.04** dengan domain `app.contoh.id` (ganti dengan domain Anda). Hasil akhirnya:
 
 ```text
