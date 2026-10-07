@@ -978,6 +978,47 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(row.categories.at(-1)).toMatchObject({ code: 'Y', mock: true, group: mockY.group });
       expect(row.categories.filter((c) => c.group?.startsWith('KMSI') && !c.mock)).toHaveLength(7);
     });
+
+    it('Worksheet lama disunting admin → judul jadi PAUD, materi baru B–E ditambahkan (D-075)', async () => {
+      const content = catalogSchema.parse(
+        JSON.parse(
+          readFileSync(
+            join(
+              import.meta.dirname,
+              '..',
+              '..',
+              '..',
+              'content',
+              'skills',
+              'worksheet',
+              'prek',
+              '_catalog.json',
+            ),
+            'utf8',
+          ),
+        ),
+      );
+      const a = {
+        ...content.categories[0]!,
+        title: 'Angka 1–10 (disunting admin)',
+        group: undefined,
+      };
+      await pool.query(
+        `update skill_catalogs set title = 'Worksheet Pra-TK', categories = $1,
+           updated_by = (select id from staff_users where role = 'admin' limit 1)
+         where domain = 'worksheet' and grade = 'prek'`,
+        [JSON.stringify([a])],
+      );
+      await mergeNewCategories(drizzle(pool, { schema }), content);
+      const row = (
+        await pool.query(
+          "select title, categories from skill_catalogs where domain = 'worksheet' and grade = 'prek'",
+        )
+      ).rows[0] as { title: string; categories: { code: string; title: string }[] };
+      expect(row.title).toBe('Worksheet PAUD');
+      expect(row.categories.map((c) => c.code)).toEqual(['A', 'B', 'C', 'D', 'E']);
+      expect(row.categories[0]!.title).toBe('Angka 1–10 (disunting admin)');
+    });
   });
 
   describe('admin: level', () => {

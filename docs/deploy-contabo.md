@@ -28,14 +28,15 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
-## Rilis 2026-10-08 (D-073 … D-076): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD
+## Rilis 2026-10-08 (D-073 … D-077): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD, katalog ringan
 
 **Isi rilis:**
 
 - Video panduan & artikel di landing, artikel dengan banyak gambar (slider), 10 Besar, "Lanjutkan permainan" (D-073, D-076).
 - Olimpiade KMSI untuk TK s.d. SMP (soal + 3 mock test per buku, KKM) dan peringkat mock di landing (D-074).
 - Mock test pindah ke dalam bagian lombanya: EMC/ESC/EEC/KMSI → "Kisi-kisi soal & topik" lalu "Mock test" (D-076).
-- Worksheet PAUD Baca Tulis + game interaktif (D-075).
+- Worksheet PAUD Baca Tulis + game interaktif; label Pra-TK → PAUD (D-075).
+- Layar tunggu Momo yang animatif + katalog dikompres (±35 MB → ±3 MB) dan tidak diunduh ulang tiap halaman (D-077).
 
 **Yang dibawa ke server hanya kode, migrasi, dan konten soal** dari git. Akun, anak, skor, progres, artikel, atau
 gambar percobaan di laptop **tidak** ikut, karena semua itu hanya ada di database laptop dan database laptop tidak
@@ -51,7 +52,17 @@ Tanpa env baru dan tanpa dependensi sistem baru. **Perlu `migrate:prod` DAN `see
 
 ### 1. Laptop: cek, commit, push
 
-Hentikan `pnpm dev` dulu (Ctrl+C), karena build menghapus `dist/` yang sedang dipakai dev server.
+Kode rilis ini sudah ada di `origin/main` (commit `1afa173` "update soal soal KMSI"). Cek dulu apakah masih ada
+perubahan yang belum dikirim:
+
+```bash
+cd ~/Repo/udakids
+git fetch origin && git status -sb
+# "## main...origin/main" tanpa [ahead …] dan tanpa file M/?? → sudah lengkap, langsung ke langkah 2.
+```
+
+Bila masih ada file berubah, lanjutkan langkah di bawah. Hentikan `pnpm dev` dulu (Ctrl+C), karena build
+menghapus `dist/` yang sedang dipakai dev server.
 
 ```bash
 cd ~/Repo/udakids
@@ -109,6 +120,7 @@ Keluaran `seed:prod` yang diharapkan:
 
 ```text
 skill: … ditambahkan/diperbarui dari 5561 file    ← > 0 (KMSI Kelas 1–SMP, mock, worksheet PAUD)
+katalog lama yang disunting admin juga mendapat materi baru; judul "Pra-TK" → "PAUD" dan "(OSN)" → "(Olimpiade)" ikut diganti
 skill: … skill lama tidak ada di konten → draft     ← boleh muncul
 level: 0 ditambahkan/diperbarui
 dialog: 1 ditambahkan/diperbarui                    ← kalimat suara baru (game PAUD)
@@ -142,6 +154,16 @@ psql "$U" -c "
          (select count(*) from skills where status = 'active') skill_aktif"   # ortu & anak = langkah 2
 curl -s http://127.0.0.1:7177/leaderboard/public/mocks | grep -o '"competition":"[A-Z]*"' | sort | uniq -c
 # KMSI, EMC, ESC, EEC
+psql "$U" -c "select domain, title, jsonb_array_length(categories) materi from skill_catalogs where grade = 'prek' order by domain"
+# english   English PAUD    …
+# math      Math PAUD       …
+# worksheet Worksheet PAUD  5
+
+# Katalog dikompres (D-077): ganti email & sandi admin Anda
+T=$(curl -s -X POST http://127.0.0.1:7177/auth/staff/login -H 'Content-Type: application/json' \
+  -d '{"email":"EMAIL-ADMIN","password":"SANDI-ADMIN"}' | sed 's/.*"token":"\([^"]*\)".*/\1/')
+curl -s -o /dev/null -w "gzip %{size_download} byte\n" -H "Accept-Encoding: gzip" -H "Authorization: Bearer $T" \
+  http://127.0.0.1:7177/catalog                                         # ±3.000.000 (bukan ±35.000.000)
 ```
 
 **Bila ada buku dengan `mock` = 0 atau judul masih "(OSN)":** katalog itu pernah diubah lewat Admin → Katalog.
@@ -199,26 +221,17 @@ git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl 
 - Pulihkan dari `/root/backups/sebelum-deploy-….dump` hanya bila data rusak (lihat bagian Rollback rilis
   2026-10-07). Semua perubahan setelah cadangan akan hilang.
 
-### Tambahan rilis yang sama (D-075): Worksheet PAUD Baca Tulis + game
+### Bila Worksheet/judul PAUD belum berubah (cadangan, biasanya tidak perlu)
 
-Tanpa migrasi baru. `seed:prod` menambah 40 level Worksheet PAUD (Game angka, Huruf vokal a dan i, Huruf vokal
-u, e, o, Game huruf) dan 4 kalimat suara Momo, serta mengganti judul katalog yang belum pernah disunting admin.
-Judul yang pernah disunting admin (kolom `disunting_admin` = `t`) diganti cukup judulnya, tanpa menyentuh isi:
+`seed:prod` sudah mengganti judul "Pra-TK" → "PAUD" dan menambah materi B–E Worksheet walau katalognya pernah
+disunting admin. Bila setelah langkah 4 judul masih "Pra-TK", ganti judulnya saja (isi tidak disentuh):
 
 ```bash
 psql "$U" -c "update skill_catalogs set title = replace(title, 'Pra-TK', 'PAUD') where grade = 'prek' and title like '%Pra-TK%'"
-psql "$U" -c "select domain, title, jsonb_array_length(categories) materi from skill_catalogs where grade = 'prek' order by domain"
-# english   English PAUD    …
-# math      Math PAUD       …
-# worksheet Worksheet PAUD  5
 ```
 
-Bila `Worksheet PAUD` masih 1 materi dan `disunting_admin` = `t`, jalankan
-`psql "$U" -c "update skill_catalogs set updated_by = null where domain='worksheet' and grade='prek'"` lalu
-`seed:prod` sekali lagi (suntingan admin di katalog Worksheet akan diganti isi dari `content/`).
-
-Cek di browser: `/play` → **PAUD** → **Worksheet**: bagian **Numerasi · Berhitung** (2 materi) dan **Literasi ·
-Baca Tulis** (3 materi, "Huruf vokal a dan i" langsung terbuka, ada tombol "Belajar dulu").
+Bila Worksheet masih 1 materi, kirim hasil query `select … where grade = 'prek'` di langkah 4 (jangan langsung
+memakai `seed:prod --force`, karena itu menimpa semua suntingan admin).
 
 ---
 
