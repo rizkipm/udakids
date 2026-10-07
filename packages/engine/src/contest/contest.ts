@@ -250,6 +250,8 @@ export function buildContestItems(
   count: number,
   seed: string,
 ): ContestItem[] {
+  // Mock test (D-072) tidak membuat soal sendiri: tidak ikut jadi sumber soal lomba.
+  templates = templates.filter((t) => t.family !== 'mock');
   const byId = new Map(templates.map((t) => [t.id, t]));
   const plan = planContestSkills(templates, count, seed);
   const rng = createRng(`items/${seed}`);

@@ -347,6 +347,8 @@ describe('semua family', () => {
     const tested = new Set(CASES.map(([f]) => f));
     for (const name of FAMILY_NAMES) {
       expect(FAMILIES[name].description.length).toBeGreaterThan(5);
+      // `mock` (D-072) tidak membuat soal sendiri; diuji di mock.test.ts.
+      if (name === 'mock') continue;
       expect(tested.has(name), `family ${name} belum diuji`).toBe(true);
     }
   });

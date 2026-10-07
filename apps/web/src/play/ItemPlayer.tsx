@@ -46,6 +46,11 @@ export type ItemPlayerProps = {
    * diteruskan ke sini tanpa tanda benar/keliru. Suara memakai suara perangkat (tanpa id soal).
    */
   onSubmitValue?: (value: AnswerValue) => void;
+  /**
+   * `false` = jawaban diperiksa (onAnswer) tetapi tanda benar/belum tepat TIDAK ditampilkan — Mock Test
+   * olimpiade (D-072), seperti lembar lomba; hasil & pembahasan tampil di akhir.
+   */
+  showMarks?: boolean;
 };
 
 /** Soal yang sedang tampil: kartu pilihan English diucapkan suara Momo dari server (D-059, D-062). */
@@ -91,6 +96,7 @@ export function ItemPlayer({
   disabled = false,
   tier,
   onSubmitValue,
+  showMarks = true,
 }: ItemPlayerProps) {
   const [locked, setLocked] = useState(false);
   const [result, setResult] = useState<AnswerResult>();
@@ -185,7 +191,9 @@ export function ItemPlayer({
           ))}
         </div>
       )}
-      <div className={`interaction${result ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}>
+      <div
+        className={`interaction${result && showMarks ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}
+      >
         <ItemVoice.Provider value={item}>
           <InteractionView
             interaction={item.interaction}
@@ -194,7 +202,7 @@ export function ItemPlayer({
             showAnswer={
               showAnswer || (result !== undefined && !result.correct && mode === 'preview')
             }
-            result={result}
+            result={showMarks ? result : undefined}
           />
         </ItemVoice.Provider>
       </div>

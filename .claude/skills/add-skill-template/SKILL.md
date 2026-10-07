@@ -24,6 +24,11 @@ description: Buat skill template Pustaka Latihan (content/skills/<domain>/*.json
 - Tingkat Basic: semua soal dibacakan, jawaban berupa gambar; setiap kata benda punya gambar di
   `apps/web/public/assets/`.
 - Isi `tags` kurikulum (`merdeka`, `sg`, `ixlRef` hanya referensi internal). Jangan menyalin soal IXL.
+- **Buku olimpiade (`tkosn`, `sd12`, `sd34`, `sd56`, `smp79`, dan buku OSN baru) wajib punya Mock Test** (D-072):
+  kategori `Z` "Mock Test …" (group `Mock Test · …`, `standalone: true`) dengan satu skill `family: "mock"`
+  (`Z01-mock-test-<n>-soal.json`). Jumlah soal = jumlah soal lomba asli (TK: 25; 9 mudah / 8 sedang / 8 sulit),
+  diambil otomatis dari level 1–3 / 4–7 / 8–10 semua materi di buku itu. Setiap materi tetap 10 level, dan materi
+  diberi `group` per lomba (mis. `OSN TK · …`, `EMC · …`, `ESC · …`, `EEC · …`).
 
 ## Verifikasi
 

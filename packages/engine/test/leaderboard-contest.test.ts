@@ -103,6 +103,7 @@ describe('lomba live (D-042)', () => {
     for (const f of files) {
       if (byType.size >= 8) break;
       const t = skillTemplateSchema.parse(JSON.parse(readFileSync(new URL(f, root), 'utf8')));
+      if (t.family === 'mock') continue; // mock test (D-072) tidak membuat soal sendiri
       for (const band of [0, 2]) {
         const it = generateItem(t, { seed: 11, band });
         if (!byType.has(it.interaction.type)) byType.set(it.interaction.type, it);

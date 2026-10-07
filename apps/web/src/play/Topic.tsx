@@ -5,6 +5,7 @@ import {
   FREE_ACCESS,
   generateItem,
   levelStatuses,
+  isMockSkill,
   standaloneCodes,
   withAccess,
   PASS_SCORE,
@@ -23,6 +24,9 @@ import { CheckIcon, LockIcon, PlayIcon, StatIcon } from './icons';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
 import { useLinks } from './links';
 import { PremiumNotice } from './PremiumNotice';
+import { MockBoard } from './MockBoard';
+import { MockHistory } from './MockHistory';
+import { MockOverview } from './MockTest';
 import { useProgress } from './practiceStore';
 import { PageHead } from './Profile';
 
@@ -92,7 +96,31 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   const paidNext = !open && shelf.skills.some((k) => book.statuses[k.id] === 'paid');
   const intro = category.intro ?? t('play.topic.introFallback', { topic: category.title });
   const tips = category.tips ?? [];
+  // Mock Test olimpiade (D-072): aturan & tombolnya berbeda dari level biasa.
+  const mockSkill = shelf.skills[0] && isMockSkill(shelf.skills[0]) ? shelf.skills[0] : undefined;
+  const mockOpen =
+    mockSkill && ['open', 'passed'].includes(book.statuses[mockSkill.id] ?? '')
+      ? mockSkill
+      : undefined;
   const readAloud = [intro, ...tips.map((x) => `${t('play.topic.tip')} ${x}`)].join(' ');
+
+  if (mockSkill) {
+    return (
+      <main className="library topic-page">
+        <PageHead title={category.title} sub={shelf.catalog.title} />
+        <MockOverview
+          mock={mockSkill}
+          tips={tips}
+          momoColor={momoColor}
+          best={progress.quizzes[mockSkill.id]}
+          start={mockOpen ? links.level(mockOpen.id) : undefined}
+          locked={paidNext ? <PremiumNotice access={data.access ?? FREE_ACCESS} mock /> : undefined}
+        />
+        <MockHistory mock={mockSkill} momoColor={momoColor} />
+        <MockBoard skillId={mockSkill.id} momoColor={momoColor} compact />
+      </main>
+    );
+  }
 
   return (
     <main className="library topic-page">

@@ -15,6 +15,10 @@ import {
   compareLeaders,
   rankByAverage,
   rating2,
+  mockConfigOf,
+  mockMaxPoints,
+  rankMockBoard,
+  skillTemplateSchema,
   type SessionUser,
   parseMomoLook,
   type MomoLook,
@@ -72,7 +76,37 @@ type Snapshot = {
   boards: Map<string, Board>;
   /** Jumlah level aktif per `domain/grade` dan per `domain/grade/kategori`. */
   levels: Map<string, number>;
+  /** Papan per Mock Test olimpiade (D-072), kunci = id skill mock. */
+  mocks: Map<string, MockBoard>;
 };
+type MockEntry = {
+  id: string;
+  nickname: string;
+  momoColor: string;
+  momoLook: MomoLook | null;
+  points: number;
+  score: number;
+  correct: number;
+  total: number;
+  timeMs: number;
+  attempts: number;
+  position: number;
+};
+type MockBoard = {
+  skillId: string;
+  domain: string;
+  grade: string;
+  book: string;
+  title: string;
+  maxPoints: number;
+  questions: number;
+  rows: MockEntry[];
+};
+const mockQuery = z.object({
+  page: z.coerce.number().int().min(1).max(10_000).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(50),
+});
+const skillId = z.string().regex(/^[a-z]+(\.[a-z0-9-]+)+$/);
 
 const n = (v: unknown) => Number(v ?? 0);
 const gradeRank = (g: string) => GRADES.indexOf(g as (typeof GRADES)[number]);
@@ -115,6 +149,64 @@ export class LeaderboardController {
             participants: snap.boards.get(`average:${b.key}`)!.length,
           })),
       ],
+    };
+  }
+
+  /** Daftar Mock Test olimpiade yang punya papan peringkat (kategori "Mock test" + mata pelajaran). */
+  @Get('mocks')
+  async mocks() {
+    const snap = await this.snapshot();
+    return {
+      updatedAt: snap.at.toISOString(),
+      mocks: [...snap.mocks.values()]
+        .sort((a, b) => byBook(a, b))
+        .map((m) => ({
+          skillId: m.skillId,
+          domain: m.domain,
+          grade: m.grade,
+          book: m.book,
+          title: m.title,
+          participants: m.rows.length,
+        })),
+    };
+  }
+
+  /**
+   * Papan satu Mock Test (D-072): percobaan terbaik tiap anak, poin tertinggi → waktu tercepat. Anak lain hanya
+   * terlihat nama panggilan + warna Momo (tanpa id).
+   */
+  @Get('mock/:skillId')
+  async mockBoard(
+    @CurrentUser() user: SessionUser,
+    @Param('skillId', new ZodPipe(skillId)) id: string,
+    @Query(new ZodPipe(mockQuery)) q: z.infer<typeof mockQuery>,
+  ) {
+    const snap = await this.snapshot();
+    const m = snap.mocks.get(id);
+    if (!m) throw new NotFoundException('Mock test tidak ditemukan');
+    const viewer = user.role === 'child' ? user.id : null;
+    const row = (r: MockEntry) => {
+      const { id: rowId, ...rest } = r;
+      return { ...rest, isMe: viewer !== null && rowId === viewer };
+    };
+    const start = LEADERBOARD_TOP + (q.page - 1) * q.pageSize;
+    const mine = viewer ? m.rows.find((r) => r.id === viewer) : undefined;
+    return {
+      skillId: m.skillId,
+      book: m.book,
+      title: m.title,
+      maxPoints: m.maxPoints,
+      questions: m.questions,
+      updatedAt: snap.at.toISOString(),
+      total: m.rows.length,
+      top: m.rows.slice(0, LEADERBOARD_TOP).map(row),
+      rest: {
+        page: q.page,
+        pageSize: q.pageSize,
+        total: Math.max(0, m.rows.length - LEADERBOARD_TOP),
+        items: m.rows.slice(start, start + q.pageSize).map(row),
+      },
+      me: mine ? row(mine) : null,
     };
   }
 
@@ -317,8 +409,9 @@ export class LeaderboardController {
   }
 
   private async build(): Promise<Snapshot> {
-    const [played, passed, catalogs, levels, answered, kids] = await Promise.all([
-      this.db.execute(sql`
+    const [played, passed, catalogs, levels, answered, kids, mockSkills, mockBest, mockAnswered] =
+      await Promise.all([
+        this.db.execute(sql`
         select c.id, c.nickname, c.momo_color, c.momo_look, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
           sum(coalesce((e.payload->>'durationMs')::numeric, 0)) as time_ms
@@ -327,29 +420,54 @@ export class LeaderboardController {
         left join skills s on s.id = e.payload->>'skillId'
         where e.type = 'quiz_result'
         group by c.id, c.nickname, c.momo_color, s.domain, s.grade`),
-      this.db.execute(sql`
+        this.db.execute(sql`
         select qr.child_id, s.domain, s.grade, count(*) filter (where qr.passed) as passed,
           sum(qr.best) as points, sum(coalesce(qr.best_time_ms, 0)) as best_time_ms
         from quiz_results qr
         join children c on c.id = qr.child_id and c.active
         left join skills s on s.id = qr.skill_id
         group by qr.child_id, s.domain, s.grade`),
-      this.db.execute(sql`select domain, grade, title, categories from skill_catalogs`),
-      this.db.execute(sql`
+        this.db.execute(sql`select domain, grade, title, categories from skill_catalogs`),
+        this.db.execute(sql`
         select domain, grade, category, count(*) as n from skills
         where status = 'active' group by domain, grade, category`),
-      // Total soal dijawab (D-045) — sumber yang sama dengan laporan anak.
-      this.db.execute(sql`
+        // Total soal dijawab (D-045) — sumber yang sama dengan laporan anak.
+        this.db.execute(sql`
         select sm.child_id, s.domain, s.grade, sum(sm.answered) as answered
         from skill_mastery sm
         join children c on c.id = sm.child_id and c.active
         left join skills s on s.id = sm.skill_id
         group by sm.child_id, s.domain, s.grade`),
-      // Semua anak aktif: yang belum pernah bermain tetap tampil di papan global (paling bawah).
-      this.db.execute(sql`select id, nickname, momo_color, momo_look from children where active`),
-    ]);
+        // Semua anak aktif: yang belum pernah bermain tetap tampil di papan global (paling bawah).
+        this.db.execute(sql`select id, nickname, momo_color, momo_look from children where active`),
+        // Mock Test olimpiade (D-072): skill mock aktif, percobaan terbaik tiap anak, dan soal yang dijawab.
+        this.db.execute(sql`
+        select id, domain, grade, template from skills
+        where status = 'active' and template->>'family' = 'mock'`),
+        this.db.execute(sql`
+        select distinct on (e.child_id, s.id)
+          e.child_id, s.id as skill_id, c.nickname, c.momo_color, c.momo_look,
+          (e.payload->>'points')::int as points, (e.payload->>'score')::int as score,
+          (e.payload->>'correct')::int as correct, (e.payload->>'total')::int as total,
+          coalesce((e.payload->>'durationMs')::bigint, 0) as time_ms,
+          count(*) over (partition by e.child_id, s.id) as attempts
+        from events e
+        join children c on c.id = e.child_id and c.active
+        join skills s on s.id = e.payload->>'skillId' and s.template->>'family' = 'mock'
+        where e.type = 'quiz_result' and e.payload ? 'points'
+        order by e.child_id, s.id, (e.payload->>'points')::int desc,
+          coalesce((e.payload->>'durationMs')::bigint, 0) asc, e.ts asc`),
+        this.db.execute(sql`
+        select e.child_id, s.domain, s.grade, sum((e.payload->>'total')::int) as answered
+        from events e
+        join children c on c.id = e.child_id and c.active
+        join skills s on s.id = e.payload->>'skillId' and s.template->>'family' = 'mock'
+        where e.type = 'quiz_result'
+        group by e.child_id, s.domain, s.grade`),
+      ]);
     const answeredAgg = new Map<string, number>();
-    for (const r of answered.rows) {
+    // Soal mock test tidak tercatat per soal (tanpa Skor Jago), jadi jumlahnya diambil dari hasil ronde.
+    for (const r of [...answered.rows, ...mockAnswered.rows]) {
       const id = String(r.child_id);
       const add = (key: string) =>
         answeredAgg.set(key, (answeredAgg.get(key) ?? 0) + n(r.answered));
@@ -470,7 +588,38 @@ export class LeaderboardController {
         .map((r, i) => ({ ...r, position: board.length + i + 1 }));
       boards.set(key, [...board, ...idle]);
     }
-    return { at: new Date(), books, boards, levels: levelCount };
+    const mocks = new Map<string, MockBoard>();
+    for (const r of mockSkills.rows) {
+      const parsed = skillTemplateSchema.safeParse(r.template);
+      if (!parsed.success) continue;
+      const c = mockConfigOf(parsed.data);
+      const book = books.get(`${String(r.domain)}/${String(r.grade)}`);
+      const rows = mockBest.rows
+        .filter((x) => String(x.skill_id) === String(r.id))
+        .map((x) => ({
+          id: String(x.child_id),
+          nickname: String(x.nickname),
+          momoColor: String(x.momo_color),
+          momoLook: parseMomoLook(x.momo_look),
+          points: n(x.points),
+          score: n(x.score),
+          correct: n(x.correct),
+          total: n(x.total),
+          timeMs: n(x.time_ms),
+          attempts: n(x.attempts),
+        }));
+      mocks.set(String(r.id), {
+        skillId: String(r.id),
+        domain: String(r.domain),
+        grade: String(r.grade),
+        book: book?.title ?? `${String(r.domain)} ${String(r.grade)}`,
+        title: parsed.data.title.split(' — ')[0]!,
+        maxPoints: mockMaxPoints(c),
+        questions: c.questions,
+        rows: rankMockBoard(rows),
+      });
+    }
+    return { at: new Date(), books, boards, levels: levelCount, mocks };
   }
 }
 

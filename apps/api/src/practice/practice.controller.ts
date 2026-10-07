@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Inject, Param, Post } from '@nestjs/common';
 import {
   needsPurchase,
   GRADES,
@@ -9,6 +9,7 @@ import {
   isPassed,
   passedLevels,
   practiceSyncSchema,
+  skillIdSchema,
   quizScore,
   rankLeaders,
   totalPoints,
@@ -17,6 +18,11 @@ import {
   type PracticeSync,
   type QuizResult,
   type SessionUser,
+  mockConfigOf,
+  mockPointsRange,
+  mockScore100,
+  type MockConfig,
+  type SkillTemplate,
 } from '@little-coder/engine';
 import { and, count, desc, eq, inArray, sql } from 'drizzle-orm';
 import { CurrentUser, Roles } from '../auth/decorators.js';
@@ -47,6 +53,30 @@ export type LeaderRow = {
   highest: { book: string; level: number } | null;
 };
 
+type QuizIn = PracticeSync['quizzes'][number];
+
+/** Mock Test (D-072): jumlah soal sesuai konfigurasi dan poin dalam rentang yang mungkin. Level biasa selalu sah. */
+function validMock(q: QuizIn, mocks: Map<string, MockConfig>): boolean {
+  const c = mocks.get(q.skillId);
+  if (!c) return q.points === undefined && q.review === undefined;
+  if (q.total !== c.questions || q.points === undefined || q.correct > q.total) return false;
+  // Laporan (opsional) harus satu entri per soal, dengan jumlah benar yang sama.
+  if (
+    q.review &&
+    (q.review.length !== q.total ||
+      q.review.filter((r) => r.outcome === 'right').length !== q.correct)
+  )
+    return false;
+  const [min, max] = mockPointsRange(c);
+  return q.points >= min && q.points <= max;
+}
+
+/** Skor 0–100: Mock Test dari poin gaya EMC, level biasa dari persen benar. */
+function scoreOf(q: QuizIn, mocks?: Map<string, MockConfig>): number {
+  const c = mocks?.get(q.skillId);
+  return c ? mockScore100(c, q.points ?? 0) : quizScore(q.correct, q.total);
+}
+
 @Roles('child')
 @Controller('practice')
 export class PracticeController {
@@ -68,6 +98,49 @@ export class PracticeController {
    * Profil anak (D-022): total skor (jumlah skor terbaik per level), level lulus, peringkat di kelas
    * workshop (hanya posisi sendiri, tanpa nama anak lain), dan riwayat ronde terbaru.
    */
+  /**
+   * Laporan Mock Test milik anak yang login SAJA (D-072): percobaan terbaru beserta hasil tiap soal. Anak lain tidak
+   * bisa melihat laporan ini (hanya `user.id` sendiri).
+   */
+  @Get('mock/:skillId/attempts')
+  async mockAttempts(
+    @CurrentUser() user: SessionUser,
+    @Param('skillId', new ZodPipe(skillIdSchema)) skillId: string,
+  ) {
+    const rows = await this.db
+      .select({ id: events.id, ts: events.ts, payload: events.payload })
+      .from(events)
+      .where(
+        and(
+          eq(events.childId, user.id),
+          eq(events.type, 'quiz_result'),
+          sql`${events.payload}->>'skillId' = ${skillId}`,
+        ),
+      )
+      .orderBy(desc(events.ts))
+      .limit(20);
+    return rows.map((r) => {
+      const p = r.payload as {
+        correct: number;
+        total: number;
+        score: number;
+        points?: number;
+        durationMs?: number;
+        review?: unknown[];
+      };
+      return {
+        id: r.id,
+        ts: r.ts.toISOString(),
+        correct: p.correct,
+        total: p.total,
+        score: p.score,
+        points: p.points ?? null,
+        durationMs: p.durationMs ?? null,
+        review: Array.isArray(p.review) ? p.review : null,
+      };
+    });
+  }
+
   @Get('profile')
   async profile(@CurrentUser() user: SessionUser) {
     const mine = await this.quizzes(this.db, user.id);
@@ -246,8 +319,13 @@ export class PracticeController {
     tx: Pick<Db, 'select'>,
     childId: string,
     quizzes: PracticeSync['quizzes'],
-  ): Promise<{ allowed: PracticeSync['quizzes']; rejected: string[] }> {
+  ): Promise<{
+    allowed: PracticeSync['quizzes'];
+    rejected: string[];
+    mocks?: Map<string, MockConfig>;
+  }> {
     if (quizzes.length === 0) return { allowed: [], rejected: [] };
+    const mocks = await this.mockConfigs(tx);
     const nodes = await tx
       .select({
         id: skills.id,
@@ -294,14 +372,28 @@ export class PracticeController {
             )[q.skillId]
           : undefined;
       // Level berbayar yang belum dibeli juga ditolak (D-036), sama seperti level terkunci.
-      if (!status || status === 'locked' || needsPurchase(access, node!)) {
+      if (
+        !status ||
+        status === 'locked' ||
+        needsPurchase(access, { ...node!, ...(mocks.has(q.skillId) && { family: 'mock' }) }) ||
+        !validMock(q, mocks)
+      ) {
         rejected.push(q.id);
         continue;
       }
       allowed.push(q);
-      results[q.skillId] = recordQuiz(results[q.skillId], quizScore(q.correct, q.total), q.ts);
+      results[q.skillId] = recordQuiz(results[q.skillId], scoreOf(q, mocks), q.ts);
     }
-    return { allowed, rejected };
+    return { allowed, rejected, mocks };
+  }
+
+  /** Konfigurasi Mock Test olimpiade (D-072) per id skill. */
+  private async mockConfigs(tx: Pick<Db, 'select'>): Promise<Map<string, MockConfig>> {
+    const rows = await tx
+      .select({ id: skills.id, template: skills.template })
+      .from(skills)
+      .where(sql`${skills.template}->>'family' = 'mock'`);
+    return new Map(rows.map((r) => [r.id, mockConfigOf(r.template as SkillTemplate)]));
   }
 
   private async quizzes(
@@ -417,7 +509,7 @@ export class PracticeController {
       }
       // Kunci level juga dicek di server (bukan hanya di perangkat): ronde untuk level yang masih
       // terkunci, atau skill yang tidak aktif, ditolak agar skor & papan peringkat tidak bisa dicurangi.
-      const { allowed, rejected } = await this.unlockedQuizzes(tx, user.id, body.quizzes);
+      const { allowed, rejected, mocks } = await this.unlockedQuizzes(tx, user.id, body.quizzes);
       // Hasil ronde: idempoten per id (event quiz_result), skor terbaik & lulus tidak pernah turun.
       if (allowed.length > 0) {
         const fresh = await tx
@@ -431,7 +523,9 @@ export class PracticeController {
                 skillId: q.skillId,
                 correct: q.correct,
                 total: q.total,
-                score: quizScore(q.correct, q.total),
+                score: scoreOf(q, mocks),
+                ...(q.points !== undefined && { points: q.points }),
+                ...(q.review && { review: q.review }),
                 ...(q.durationMs !== undefined && { durationMs: q.durationMs }),
               },
               ts: new Date(q.ts),
@@ -443,12 +537,7 @@ export class PracticeController {
         const current = await this.quizzes(tx, user.id);
         for (const q of [...allowed].sort((a, b) => a.ts - b.ts)) {
           if (!freshIds.has(q.id)) continue;
-          const next = recordQuiz(
-            current[q.skillId],
-            quizScore(q.correct, q.total),
-            q.ts,
-            q.durationMs,
-          );
+          const next = recordQuiz(current[q.skillId], scoreOf(q, mocks), q.ts, q.durationMs);
           current[q.skillId] = next;
           const row = {
             best: next.best,

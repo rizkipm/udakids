@@ -281,6 +281,8 @@ export class VoiceService {
       .where(and(eq(skills.id, skillId), eq(skills.status, 'active')));
     if (!row) return undefined;
     const template = skillTemplateSchema.parse(row.template);
+    // Mock test (D-072) tidak punya soal sendiri; soalnya membawa id level sumber.
+    if (template.family === 'mock') return undefined;
     const item = generateItem(template, { seed, band });
     // Basic: kalimat soal & pembahasan. Kelas 1+: hanya kalimat soal "dengar" (dikte) — D-043.
     if (template.tier !== 'basic' && !(part === 'prompt' && isListeningItem(item)))

@@ -143,6 +143,16 @@ export const classRosterSchema = z.strictObject({
   nicknames: z.array(nicknameSchema).min(1).max(60),
 });
 
+export const mockReviewEntrySchema = z.strictObject({
+  skillId: skillIdSchema,
+  version: z.number().int().positive(),
+  seed: z.number().int().min(0).max(2_147_483_647),
+  band: z.number().int().min(0).max(2),
+  difficulty: z.enum(['easy', 'medium', 'hard']),
+  outcome: z.enum(['right', 'wrong', 'skip']),
+});
+export type MockReviewEntry = z.infer<typeof mockReviewEntrySchema>;
+
 /** Sinkronisasi latihan Pustaka dari perangkat anak (event item_answer + state Skor Jago). */
 export const practiceSyncSchema = z.strictObject({
   answers: z
@@ -175,6 +185,13 @@ export const practiceSyncSchema = z.strictObject({
           .min(0)
           .max(6 * 3600_000)
           .optional(),
+        /** Poin gaya EMC untuk Mock Test olimpiade (D-072); diperiksa & diubah ke skor 0–100 di server. */
+        points: z.number().int().min(-5000).max(5000).optional(),
+        /**
+         * Laporan Mock Test (D-072): tiap soal cukup disimpan sebagai level sumber + seed + band + hasilnya, karena
+         * soal dibuat ulang secara deterministik. Jawaban yang dipilih anak tidak disimpan.
+         */
+        review: z.array(mockReviewEntrySchema).max(50).optional(),
       }),
     )
     .max(200)

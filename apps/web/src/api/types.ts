@@ -304,3 +304,41 @@ export type LeaderboardDetail = {
     levels: number;
   }[];
 };
+
+/** Papan peringkat Mock Test olimpiade (D-072). */
+export type MockBoardList = {
+  updatedAt: string;
+  mocks: {
+    skillId: string;
+    domain: string;
+    grade: string;
+    book: string;
+    title: string;
+    participants: number;
+  }[];
+};
+export type MockBoardRow = {
+  position: number;
+  isMe: boolean;
+  nickname: string;
+  momoColor: string;
+  momoLook?: MomoLook | null;
+  points: number;
+  score: number;
+  correct: number;
+  total: number;
+  timeMs: number;
+  attempts: number;
+};
+export type MockBoardData = {
+  skillId: string;
+  book: string;
+  title: string;
+  maxPoints: number;
+  questions: number;
+  updatedAt: string;
+  total: number;
+  top: MockBoardRow[];
+  rest: { page: number; pageSize: number; total: number; items: MockBoardRow[] };
+  me: MockBoardRow | null;
+};

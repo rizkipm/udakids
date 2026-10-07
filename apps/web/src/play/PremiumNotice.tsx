@@ -17,20 +17,31 @@ function InfoIcon() {
 }
 
 /** Kalimat yang dibacakan untuk anak (tanpa harga, tanpa ajakan membeli langsung). */
-export const premiumSay = (access: Access) =>
+export const premiumSay = (access: Access, mock = false) =>
   access.expired
     ? t('play.premium.sayExpired')
-    : t('play.premium.say', { n: access.freeLevels + 1 });
+    : mock
+      ? t('play.premium.sayMock')
+      : t('play.premium.say', { n: access.freeLevels + 1 });
 
 /**
  * Info level Premium untuk anak (D-046). Sesuai D-036: tanpa harga, tanpa tombol beli, tanpa tautan ke
  * pembayaran di area anak — hanya penjelasan untuk anak + langkah yang ditujukan ke Ayah/Bunda
  * (dibuka di halaman orang tua yang butuh login orang tua).
  */
-export function PremiumNotice({ access, compact = false }: { access: Access; compact?: boolean }) {
+export function PremiumNotice({
+  access,
+  compact = false,
+  mock = false,
+}: {
+  access: Access;
+  compact?: boolean;
+  /** Mock Test olimpiade (D-072): khusus Premium seluruhnya, bukan "level n ke atas". */
+  mock?: boolean;
+}) {
   const me = useFetch<{ selfCode?: string | null }>('child', access.noParent ? '/auth/me' : null);
   const code = me.data?.selfCode ?? null;
-  const say = premiumSay(access);
+  const say = premiumSay(access, mock);
   return (
     <section className={`kid-alert${compact ? ' is-compact' : ''}`} role="note">
       <div className="kid-alert-head">
@@ -38,16 +49,20 @@ export function PremiumNotice({ access, compact = false }: { access: Access; com
         <strong>
           {access.expired
             ? t('play.premium.titleExpired')
-            : t('play.premium.title', { n: access.freeLevels + 1 })}
+            : mock
+              ? t('play.premium.titleMock')
+              : t('play.premium.title', { n: access.freeLevels + 1 })}
         </strong>
         <SpeakButton text={say} />
       </div>
       <p>
         {access.expired
           ? t('play.premium.kidExpired')
-          : access.freeLevels > 0
-            ? t('play.premium.kid', { free: access.freeLevels })
-            : t('play.premium.kidNoFree')}
+          : mock
+            ? t('play.premium.kidMock', { free: access.freeLevels })
+            : access.freeLevels > 0
+              ? t('play.premium.kid', { free: access.freeLevels })
+              : t('play.premium.kidNoFree')}
       </p>
       {!compact && (
         <div className="kid-alert-parent">

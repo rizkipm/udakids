@@ -16,6 +16,7 @@ import {
   itemKey,
   rememberRound,
   isPassed,
+  isMockSkill,
   levelStatuses,
   standaloneCodes,
   PASS_SCORE,
@@ -49,6 +50,7 @@ import { PremiumNotice, premiumSay } from './PremiumNotice';
 import { loadProgress, newId, stateOf, updateProgress, useProgress } from './practiceStore';
 import { flushPractice } from './sync';
 import { useStopwatch } from './useStopwatch';
+import { MockTest } from './MockTest';
 
 type Phase =
   | { name: 'question' }
@@ -129,7 +131,8 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const round = useMemo(
     () =>
       // Level terkunci/berbayar tidak dibuat soalnya (template berbayar dikirim tanpa isi soal).
-      stableSkill && playable
+      // Mock test (D-072) punya layar sendiri (MockTest); jangan buat ronde 10 soal darinya.
+      stableSkill && playable && !isMockSkill(stableSkill)
         ? generateRound(stableSkill, {
             seed: seedBase,
             avoid: loadProgress(childId).recentItems?.[stableSkill.id],
@@ -188,6 +191,15 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
         <Link className="kid-btn" to={links.topic(skill)}>
           {t('play.quiz.backTopic')}
         </Link>
+      </main>
+    );
+  }
+  // Mock test (D-072): PracticeRoute akan menampilkan MockTest; jangan sempat tampil "tidak ditemukan".
+  if (skill && isMockSkill(skill)) {
+    return (
+      <main className="kid-screen">
+        <Momo own color={momoColor} mood="idle" size={140} />
+        <p className="kid-note">{t('play.library.loading')}</p>
       </main>
     );
   }
@@ -602,8 +614,21 @@ function Feedback({
 
 /** Rute latihan: "Coba lagi" memulai ronde baru (state di-reset lewat key). */
 export function PracticeRoute({ momoColor }: { momoColor: Color }) {
-  const { token } = useParams();
+  const { token = '' } = useParams();
   const [run, setRun] = useState(0);
+  const { data } = useCatalog();
+  const links = useLinks(data);
+  const skill = data?.skills.find((s) => s.id === links?.skillOf(token));
+  // Mock Test olimpiade (D-072): 25 soal gabungan semua materi, dinilai gaya EMC.
+  if (skill && isMockSkill(skill))
+    return (
+      <MockTest
+        key={`${token}-${run}`}
+        mock={skill}
+        momoColor={momoColor}
+        onRestart={() => setRun((r) => r + 1)}
+      />
+    );
   return (
     <Practice
       key={`${token}-${run}`}

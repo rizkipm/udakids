@@ -13,6 +13,7 @@ import type {
   LeaderboardRow,
   LeaderboardScope,
   LeaderboardScopes,
+  MockBoardList,
 } from '../api/types';
 import { speak } from '../audio/speech';
 import { useApiCall, useFetch } from '../auth/useApi';
@@ -22,14 +23,20 @@ import { pageList } from '../ui/Pager';
 import { formatStamp } from '../ui/ui';
 import { SpeakButton } from './ItemPlayer';
 import { Crown, StatIcon } from './icons';
+import { MockBoard } from './MockBoard';
 import { PageHead } from './Profile';
 
 const SCOPE_KEY = 'lc.rank.scope';
 const MODE_KEY = 'lc.rank.mode';
 
-function rememberedMode(): LeaderboardMode {
+/** Tab papan: rata-rata, total skor, atau Mock Test olimpiade (D-072). */
+type Tab = LeaderboardMode | 'mock';
+const MOCK_KEY = 'lc.rank.mock';
+
+function rememberedMode(): Tab {
   try {
-    return localStorage.getItem(MODE_KEY) === 'total' ? 'total' : 'average';
+    const v = localStorage.getItem(MODE_KEY);
+    return v === 'total' || v === 'mock' ? v : 'average';
   } catch {
     return 'average';
   }
@@ -70,14 +77,26 @@ const scopeLabel = (s: Pick<LeaderboardScope, 'key' | 'title'>) =>
 export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
   const scopes = useFetch<LeaderboardScopes>('child', '/leaderboard/scopes');
   const [scope, setScope] = useState(rememberedScope);
-  const [mode, setMode] = useState<LeaderboardMode>(rememberedMode);
+  const [tab, setTab] = useState<Tab>(rememberedMode);
+  const isMock = tab === 'mock';
+  const mode: LeaderboardMode = tab === 'mock' ? 'average' : tab;
   const known = scopes.data?.scopes;
   // Lingkup tersimpan yang sudah tidak ada (buku tanpa peserta) → kembali ke global.
   const active = !known || known.some((s) => s.key === scope) ? scope : 'global';
   const board = useFetch<Leaderboard>(
     'child',
-    `/leaderboard?scope=${active}&mode=${mode}&pageSize=${PAGE_SIZE}`,
+    isMock ? null : `/leaderboard?scope=${active}&mode=${mode}&pageSize=${PAGE_SIZE}`,
   );
+  const mocks = useFetch<MockBoardList>('child', isMock ? '/leaderboard/mocks' : null);
+  const [mockId, setMockId] = useState(() => {
+    try {
+      return localStorage.getItem(MOCK_KEY) ?? '';
+    } catch {
+      return '';
+    }
+  });
+  const mockList = mocks.data?.mocks ?? [];
+  const activeMock = mockList.find((m) => m.skillId === mockId) ?? mockList[0];
   const call = useApiCall('child');
   const [paged, setPaged] = useState<{ key: string; page: number; items: LeaderboardRow[] }>();
   const [loadingPage, setLoadingPage] = useState(false);
@@ -106,9 +125,21 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
     }
   };
 
-  const chooseMode = (m: LeaderboardMode) => {
-    speak(t(m === 'total' ? 'rank.mode.total' : 'rank.mode.average'));
-    setMode(m);
+  const chooseMock = (id: string, title: string) => {
+    speak(title);
+    setMockId(id);
+    try {
+      localStorage.setItem(MOCK_KEY, id);
+    } catch {
+      /* abaikan */
+    }
+  };
+
+  const chooseMode = (m: Tab) => {
+    speak(
+      t(m === 'total' ? 'rank.mode.total' : m === 'mock' ? 'rank.mode.mock' : 'rank.mode.average'),
+    );
+    setTab(m);
     try {
       localStorage.setItem(MODE_KEY, m);
     } catch {
@@ -153,166 +184,235 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
 
   return (
     <main className="library board-page rank-page">
-      <PageHead title={t('rank.title')} sub={t(mode === 'total' ? 'rank.subTotal' : 'rank.sub')} />
+      <PageHead
+        title={t('rank.title')}
+        sub={t(isMock ? 'rank.subMock' : mode === 'total' ? 'rank.subTotal' : 'rank.sub')}
+      />
 
       <div className="rank-modes" role="group" aria-label={t('rank.mode.label')}>
-        {(['average', 'total'] as const).map((m) => (
+        {(['average', 'total', 'mock'] as const).map((m) => (
           <button
             key={m}
             type="button"
-            className={`rank-mode${m === mode ? ' is-on' : ''}`}
-            aria-pressed={m === mode}
+            className={`rank-mode${m === tab ? ' is-on' : ''}`}
+            aria-pressed={m === tab}
             onClick={() => chooseMode(m)}
           >
-            <StatIcon kind={m === 'total' ? 'points' : 'passed'} size={22} />
-            <strong>{t(m === 'total' ? 'rank.mode.total' : 'rank.mode.average')}</strong>
+            <StatIcon
+              kind={m === 'total' ? 'points' : m === 'mock' ? 'time' : 'passed'}
+              size={22}
+            />
+            <strong>
+              {t(
+                m === 'total'
+                  ? 'rank.mode.total'
+                  : m === 'mock'
+                    ? 'rank.mode.mock'
+                    : 'rank.mode.average',
+              )}
+            </strong>
           </button>
         ))}
       </div>
 
-      {known && known.length > 1 && (
-        <nav className="rank-scopes" aria-label={t('rank.scopes')}>
-          {known.map((s) => (
-            <button
-              key={s.key}
-              type="button"
-              className={`rank-scope${s.key === active ? ' is-on' : ''}`}
-              aria-pressed={s.key === active}
-              onClick={() => choose(s)}
-            >
-              <strong>{scopeLabel(s)}</strong>
-            </button>
-          ))}
-        </nav>
-      )}
-
-      <div className="kid-say board-intro">
-        <SpeakButton text={say} />
-        <p>{say}</p>
-      </div>
-      {data && data.played !== undefined && data.played < data.total && (
-        <p className="rank-played">
-          {t('rank.played', {
-            played: data.played.toLocaleString('id-ID'),
-            total: data.total.toLocaleString('id-ID'),
-          })}
-        </p>
-      )}
-
-      {!data ? (
-        <section className="board-empty">
-          <Momo own color={momoColor} mood={board.error ? 'curious' : 'idle'} size={120} />
-          <p className="kid-note">{board.error ? t('rank.offline') : t('rank.loading')}</p>
-        </section>
-      ) : data.total === 0 ? (
-        <section className="board-empty">
-          <Momo own color={momoColor} mood="happy" size={120} />
-          <p className="kid-note">{t('rank.empty')}</p>
-        </section>
-      ) : (
+      {isMock && (
         <>
-          <section className="rank-announce" aria-labelledby="rank-announce-title">
-            <header className="rank-announce-head">
-              <h2 id="rank-announce-title">
-                {t('rank.announce')} · {boardName}
-              </h2>
-              <small>
-                <time dateTime={data.updatedAt}>
-                  {t('rank.announceSub', { time: formatStamp(data.updatedAt) })}
-                </time>
-              </small>
-            </header>
-
-            <ol className="podium" aria-label={t('rank.top')}>
-              {[podium[1], podium[0], podium[2]].map((r, i) =>
-                !r ? (
-                  <li key={`empty-${i}`} className={`podium-spot is-empty slot-${i}`} aria-hidden />
-                ) : (
-                  <li
-                    key={`${r.position}-${r.nickname}`}
-                    className={`podium-spot place-${Math.min(r.position, 3)} slot-${i}${r.isMe ? ' is-me' : ''}`}
-                  >
-                    {r.position === 1 && <Crown size={44} />}
-                    <Momo
-                      color={r.momoColor as Color}
-                      look={r.momoLook ?? null}
-                      mood="proud"
-                      size={i === 1 ? 104 : 84}
-                    />
-                    <strong className="podium-name">{r.nickname}</strong>
-                    {idle(r) ? (
-                      <span className="podium-raw">{t('rank.idle')}</span>
-                    ) : (
-                      <>
-                        <span className="podium-points rank-avg">{metric(r, mode)}</span>
-                        {mode === 'average' && (
-                          <span className="podium-raw">
-                            {t('rank.raw', { average: formatAverage(r.average) })}
-                          </span>
-                        )}
-                        <span className="podium-meta">
-                          <span>{volume(r)}</span>
-                          <span className="rank-time">
-                            <StatIcon kind="time" size={16} />
-                            {formatClock(timeOf(r, mode))}
-                          </span>
-                        </span>
-                      </>
-                    )}
-                    <DetailButton row={r} onOpen={setOpen} compact />
-                    <span className="podium-block">{r.position}</span>
-                  </li>
-                ),
-              )}
-            </ol>
-
-            {list.length > 0 && (
-              <ol className="rank-list" aria-label={t('rank.announce')}>
-                {list.map((r) => (
-                  <RankRow
-                    key={`${r.position}-${r.nickname}`}
-                    row={r}
-                    mode={mode}
-                    onOpen={setOpen}
-                  />
-                ))}
-              </ol>
-            )}
-            {data.total < 3 && <p className="kid-note">{t('rank.few')}</p>}
-          </section>
-
-          {meOutside && (
-            <section className="rank-mine" aria-label={t('rank.posCard')}>
-              <h2>{t('rank.posCard')}</h2>
-              <ol className="rank-list">
-                <RankRow row={meOutside} mode={mode} onOpen={setOpen} />
-              </ol>
-            </section>
+          {mockList.length > 0 && (
+            <nav className="rank-scopes" aria-label={t('rank.mock.subjects')}>
+              {mockList.map((m) => (
+                <button
+                  key={m.skillId}
+                  type="button"
+                  className={`rank-scope${m.skillId === activeMock?.skillId ? ' is-on' : ''}`}
+                  aria-pressed={m.skillId === activeMock?.skillId}
+                  onClick={() => chooseMock(m.skillId, m.book)}
+                >
+                  <strong>{m.book}</strong>
+                </button>
+              ))}
+            </nav>
           )}
-
-          {data.rest.total > 0 && (
-            <section ref={othersRef} className="rank-others" aria-labelledby="rank-others-title">
-              <h2 id="rank-others-title">{t('rank.others')}</h2>
-              <p className="rank-others-sub" aria-live="polite">
-                {loadingPage
-                  ? t('rank.loadingMore')
-                  : t('rank.othersSub', {
-                      from: from.toLocaleString('id-ID'),
-                      to: (from + restItems.length - 1).toLocaleString('id-ID'),
-                      total: data.total.toLocaleString('id-ID'),
-                    })}
+          {activeMock ? (
+            <MockBoard
+              key={activeMock.skillId}
+              skillId={activeMock.skillId}
+              momoColor={momoColor}
+            />
+          ) : (
+            <section className="board-empty">
+              <Momo own color={momoColor} mood={mocks.error ? 'curious' : 'idle'} size={120} />
+              <p className="kid-note">
+                {mocks.error
+                  ? t('rank.offline')
+                  : mocks.data
+                    ? t('rank.mock.none')
+                    : t('rank.loading')}
               </p>
-              <ol className={`rank-list is-small${loadingPage ? ' is-loading' : ''}`}>
-                {restItems.map((r) => (
-                  <RankRow key={`${r.position}-${r.nickname}`} row={r} mode={mode} />
-                ))}
-              </ol>
-              {pages > 1 && (
-                <Pager page={page} pages={pages} busy={loadingPage} onGo={(n) => void goPage(n)} />
-              )}
             </section>
           )}
-          <p className="board-rule">{t(mode === 'total' ? 'rank.ruleTotal' : 'rank.rule')}</p>
+        </>
+      )}
+
+      {!isMock && (
+        <>
+          {known && known.length > 1 && (
+            <nav className="rank-scopes" aria-label={t('rank.scopes')}>
+              {known.map((s) => (
+                <button
+                  key={s.key}
+                  type="button"
+                  className={`rank-scope${s.key === active ? ' is-on' : ''}`}
+                  aria-pressed={s.key === active}
+                  onClick={() => choose(s)}
+                >
+                  <strong>{scopeLabel(s)}</strong>
+                </button>
+              ))}
+            </nav>
+          )}
+
+          <div className="kid-say board-intro">
+            <SpeakButton text={say} />
+            <p>{say}</p>
+          </div>
+          {data && data.played !== undefined && data.played < data.total && (
+            <p className="rank-played">
+              {t('rank.played', {
+                played: data.played.toLocaleString('id-ID'),
+                total: data.total.toLocaleString('id-ID'),
+              })}
+            </p>
+          )}
+
+          {!data ? (
+            <section className="board-empty">
+              <Momo own color={momoColor} mood={board.error ? 'curious' : 'idle'} size={120} />
+              <p className="kid-note">{board.error ? t('rank.offline') : t('rank.loading')}</p>
+            </section>
+          ) : data.total === 0 ? (
+            <section className="board-empty">
+              <Momo own color={momoColor} mood="happy" size={120} />
+              <p className="kid-note">{t('rank.empty')}</p>
+            </section>
+          ) : (
+            <>
+              <section className="rank-announce" aria-labelledby="rank-announce-title">
+                <header className="rank-announce-head">
+                  <h2 id="rank-announce-title">
+                    {t('rank.announce')} · {boardName}
+                  </h2>
+                  <small>
+                    <time dateTime={data.updatedAt}>
+                      {t('rank.announceSub', { time: formatStamp(data.updatedAt) })}
+                    </time>
+                  </small>
+                </header>
+
+                <ol className="podium" aria-label={t('rank.top')}>
+                  {[podium[1], podium[0], podium[2]].map((r, i) =>
+                    !r ? (
+                      <li
+                        key={`empty-${i}`}
+                        className={`podium-spot is-empty slot-${i}`}
+                        aria-hidden
+                      />
+                    ) : (
+                      <li
+                        key={`${r.position}-${r.nickname}`}
+                        className={`podium-spot place-${Math.min(r.position, 3)} slot-${i}${r.isMe ? ' is-me' : ''}`}
+                      >
+                        {r.position === 1 && <Crown size={44} />}
+                        <Momo
+                          color={r.momoColor as Color}
+                          look={r.momoLook ?? null}
+                          mood="proud"
+                          size={i === 1 ? 104 : 84}
+                        />
+                        <strong className="podium-name">{r.nickname}</strong>
+                        {idle(r) ? (
+                          <span className="podium-raw">{t('rank.idle')}</span>
+                        ) : (
+                          <>
+                            <span className="podium-points rank-avg">{metric(r, mode)}</span>
+                            {mode === 'average' && (
+                              <span className="podium-raw">
+                                {t('rank.raw', { average: formatAverage(r.average) })}
+                              </span>
+                            )}
+                            <span className="podium-meta">
+                              <span>{volume(r)}</span>
+                              <span className="rank-time">
+                                <StatIcon kind="time" size={16} />
+                                {formatClock(timeOf(r, mode))}
+                              </span>
+                            </span>
+                          </>
+                        )}
+                        <DetailButton row={r} onOpen={setOpen} compact />
+                        <span className="podium-block">{r.position}</span>
+                      </li>
+                    ),
+                  )}
+                </ol>
+
+                {list.length > 0 && (
+                  <ol className="rank-list" aria-label={t('rank.announce')}>
+                    {list.map((r) => (
+                      <RankRow
+                        key={`${r.position}-${r.nickname}`}
+                        row={r}
+                        mode={mode}
+                        onOpen={setOpen}
+                      />
+                    ))}
+                  </ol>
+                )}
+                {data.total < 3 && <p className="kid-note">{t('rank.few')}</p>}
+              </section>
+
+              {meOutside && (
+                <section className="rank-mine" aria-label={t('rank.posCard')}>
+                  <h2>{t('rank.posCard')}</h2>
+                  <ol className="rank-list">
+                    <RankRow row={meOutside} mode={mode} onOpen={setOpen} />
+                  </ol>
+                </section>
+              )}
+
+              {data.rest.total > 0 && (
+                <section
+                  ref={othersRef}
+                  className="rank-others"
+                  aria-labelledby="rank-others-title"
+                >
+                  <h2 id="rank-others-title">{t('rank.others')}</h2>
+                  <p className="rank-others-sub" aria-live="polite">
+                    {loadingPage
+                      ? t('rank.loadingMore')
+                      : t('rank.othersSub', {
+                          from: from.toLocaleString('id-ID'),
+                          to: (from + restItems.length - 1).toLocaleString('id-ID'),
+                          total: data.total.toLocaleString('id-ID'),
+                        })}
+                  </p>
+                  <ol className={`rank-list is-small${loadingPage ? ' is-loading' : ''}`}>
+                    {restItems.map((r) => (
+                      <RankRow key={`${r.position}-${r.nickname}`} row={r} mode={mode} />
+                    ))}
+                  </ol>
+                  {pages > 1 && (
+                    <Pager
+                      page={page}
+                      pages={pages}
+                      busy={loadingPage}
+                      onGo={(n) => void goPage(n)}
+                    />
+                  )}
+                </section>
+              )}
+              <p className="board-rule">{t(mode === 'total' ? 'rank.ruleTotal' : 'rank.rule')}</p>
+            </>
+          )}
         </>
       )}
 

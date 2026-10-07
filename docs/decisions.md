@@ -1613,3 +1613,59 @@ Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk).
   "kurangi gerakan". Tidak menyimpan data anak apa pun (gambar orang hanya untuk he/she).
 - **Suara**: seperti English Pra-TK (D-062), perintah English TK Olimpiade dibacakan dalam Bahasa Indonesia dengan
   kata English di dalamnya; kartu kata dibacakan suara English (en-GB) saat diketuk.
+
+## D-072 — Mock Test olimpiade (25 soal, penilaian gaya EMC) & bagian lomba di buku TK (Olimpiade)
+
+Tanggal 2026-10-07 · Status **Disetujui** (permintaan pemilik produk; pilihan dikonfirmasi: penilaian gaya EMC dengan
+pengurangan, stopwatch tanpa batas waktu, satu mock test per buku, bagian "OSN TK" + "EEC").
+
+- **Riset penilaian olimpiade:** Math Kangaroo kelas 1–4 (anak TK ikut kelas 1): 24 soal, 75 menit, sepertiga soal
+  bernilai 3/4/5 poin, salah tidak dikurangi. EMC Eduversal (data 2020, SD–SMA): 45 soal, 120 menit; benar +8/+20/+40
+  dan salah −2/−5/−10 untuk soal mudah/sedang/sulit, kosong 0. Peringkat umumnya: poin tertinggi, lalu (Udakids)
+  waktu tercepat.
+- **Aturan baru konten:** setiap buku olimpiade punya, selain 10 level per materi, **satu Mock Test** dengan jumlah
+  soal seperti lomba asli (TK: **25**) yang menggabungkan semua materi di buku itu. Dicatat juga di skill
+  `add-skill-template`.
+- **Bentuk:** kategori `Z` "Mock Test Olimpiade …" (group "Mock Test · Simulasi lomba 25 soal — penilaian gaya EMC",
+  standalone) berisi satu skill `family: "mock"` yang hanya menyimpan konfigurasi (`questions` 25, `plan` 9 mudah /
+  8 sedang / 8 sulit, `levels` 1–3 / 4–7 / 8–10, `points` EMC, `referenceMinutes` 60). Soal disusun
+  `generateMockRound` dari level-level buku itu, urut mudah → sulit, materi bergiliran, tanpa soal kembar, dan
+  menghindari soal ronde sebelumnya. Soal membawa id/seed level sumbernya, jadi suara Momo dan pemeriksaan jawaban
+  sama seperti level biasa. Level berbayar yang belum dibeli tidak ikut jadi sumber.
+- **Saat mengerjakan:** tanda benar/belum tepat tidak tampil per soal (seperti lembar lomba); tombol **Lewati**
+  (nilai 0); **stopwatch tanpa batas waktu** (D-024) dengan acuan "±60 menit" sebagai informasi saja — tidak ada
+  hitung mundur. Hasil: skor 0–100, poin EMC (mis. 300/552), jumlah benar/belum tepat/dilewati per tingkat,
+  durasi, dan **pembahasan** tiap soal (jawaban + penjelasan).
+- **Skor:** poin = Σ (+8/+20/+40 benar, −2/−5/−10 belum tepat, 0 dilewati); **skor 0–100 = max(0, poin) / poin
+  maksimal × 100**, disimpan seperti hasil level (skor terbaik tidak turun, waktu skor terbaik) sehingga **masuk skor
+  utama dan papan peringkat**. Server memeriksa ulang: jumlah soal harus sesuai konfigurasi dan poin dalam rentang
+  yang mungkin (−138 … 552); `points` di level biasa ditolak. Field opsional `points` di `practiceSync.quizzes`
+  (tanpa migrasi DB).
+- **Bagian lomba yang seragam:** Math & Sains TK (Olimpiade) materi A–E kini berjudul bagian
+  **"OSN TK · Olimpiade Sains Nasional TK — materi umum"**, F–I tetap EMC/ESC; English TK (Olimpiade) materi A–K masuk
+  **"EEC · Eduversal English Competition — Final 2026"**, dan materi "Simulasi Final 2026" (L) dihapus karena
+  digantikan Mock Test (skill lama otomatis menjadi draft saat seed).
+- **Khusus anak berpaket** (keputusan pemilik produk): bila paywall aktif, Mock Test tidak termasuk "level gratis"
+  (`needsPurchase` dengan `family: 'mock'`), tampil terkunci dengan pemberitahuan Premium yang ramah anak (tanpa
+  harga), dan hasilnya ditolak server untuk anak tanpa paket. Alasan: soal sedang/sulit diambil dari level 4–10 yang
+  memang berbayar.
+- **Perbaikan API macet saat restart:** koneksi SSE statistik langsung menahan `server.close()`, sehingga
+  `nest --watch` (dan `systemctl restart`) menunggu selamanya dan semua `/api` menjawab 500. API kini memutus semua
+  koneksi saat menerima SIGTERM/SIGINT (`main.ts`).
+- **Peringkat mock test:** hasil mock ikut papan global & per buku (seperti ronde biasa), dan setiap mock test punya
+  **papan sendiri** — di menu Peringkat (tab **Mock test** + pilihan mata pelajaran per buku olimpiade) dan di halaman
+  topik mock test ("Papan peringkat mock test ini", 10 besar + posisimu). Urutan gaya olimpiade: percobaan terbaik tiap
+  anak, **poin tertinggi → waktu tercepat** (poin & waktu sama → posisi sama). Hanya nama panggilan + warna Momo yang
+  terlihat (tanpa id anak lain). API `GET /leaderboard/mocks` dan `GET /leaderboard/mock/:skillId`; 25 soal mock ikut
+  dihitung sebagai "soal dijawab".
+- **Laporan mock test-ku (khusus anak itu sendiri):** setiap percobaan menyimpan laporan ringkas per soal (level
+  sumber + versi + seed + band + tingkat + hasil benar/belum tepat/dilewati; jawaban yang dipilih tidak disimpan) di
+  event `quiz_result` (`review`, diperiksa server: satu entri per soal, jumlah benar cocok). Di halaman topik mock
+  ada bagian **"Laporan mock test-ku"**: daftar percobaan (termasuk yang belum terkirim dari perangkat) yang bisa
+  dibuka untuk melihat ringkasan, rincian per tingkat, dan pembahasan tiap soal (jawaban benar + penjelasan). Soal
+  dibuat ulang secara deterministik; bila level sumbernya sudah berubah versi, laporan menulis "soal ini sudah
+  diperbarui". API `GET /practice/mock/:skillId/attempts` hanya untuk peran anak dan hanya mengembalikan percobaan
+  `user.id` sendiri — anak lain tidak bisa melihat laporan orang lain. Tampilan mock (ringkasan, soal, hasil,
+  laporan, papan) diuji tanpa meluber di lebar 390 / 820 / 1280 px.
+- Mock test tidak dipakai sebagai sumber soal lomba live (D-042). Kata "salah" tidak dipakai di layar anak
+  ("belum tepat"), tanpa merah besar.

@@ -128,10 +128,11 @@ export const bookKey = (b: { domain: string; grade: string }) => `${b.domain}/${
 /** Level ini perlu dibuka dengan paket? (level > freeLevels di buku yang belum dibeli). */
 export function needsPurchase(
   access: Access,
-  node: { domain: string; grade: string; order: number },
+  node: { domain: string; grade: string; order: number; family?: string },
 ): boolean {
   if (!access.paywall || access.all) return false;
-  if (node.order <= access.freeLevels) return false;
+  // Mock Test olimpiade (D-072) khusus anak berpaket: tidak termasuk level gratis.
+  if (node.order <= access.freeLevels && node.family !== 'mock') return false;
   return !access.books.includes(bookKey(node));
 }
 

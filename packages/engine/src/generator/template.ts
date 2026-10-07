@@ -282,6 +282,8 @@ export const TEMPLATE_SAMPLE_SIZE = 200;
 
 /** PRD A7 no. 7 — hasilkan N soal (seed tetap) dan kumpulkan masalahnya. */
 export function validateTemplate(template: SkillTemplate, n = TEMPLATE_SAMPLE_SIZE): string[] {
+  // Mock test (D-072) tidak membuat soal sendiri; isinya diperiksa lewat level sumbernya.
+  if (template.family === 'mock') return [];
   const problems = new Set<string>();
   for (let i = 0; i < n; i++) {
     try {

@@ -36,6 +36,7 @@ import {
 import { sizeCompare } from './size.js';
 import { connectDots, numeralTrace } from './writing.js';
 import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
+import { mockFamily } from './mock.js';
 
 const BASE_FAMILIES = {
   'numeral-tap-all': numeralTapAll,
@@ -122,7 +123,10 @@ const mix = defineFamily({
   },
 });
 
-export const FAMILIES = { ...BASE_FAMILIES, mix } satisfies Record<string, Family>;
+export const FAMILIES = { ...BASE_FAMILIES, mix, mock: mockFamily } satisfies Record<
+  string,
+  Family
+>;
 
 export type FamilyName = keyof typeof FAMILIES;
 export const FAMILY_NAMES = Object.keys(FAMILIES) as FamilyName[];
