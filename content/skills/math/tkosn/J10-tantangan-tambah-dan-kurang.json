@@ -1,0 +1,221 @@
+{
+  "id": "math.tkosn.j10.tantangan-tambah-dan-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "J",
+  "order": 10,
+  "title": "Tambah dan kurang angka sederhana — Level 10 — Tantangan tambah dan kurang",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "reasoning",
+    "osn": "KMSI Level A (TK) — Penyisihan 2026",
+    "kisi-kisi": "Menjumlahkan dan mengurangkan angka sederhana"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a + b <= 10",
+          "prompt": "{a} + {b} = …",
+          "say": "{a} tambah {b} sama dengan berapa?",
+          "stimulus": [
+            {
+              "kind": "equation",
+              "left": "=a",
+              "op": "+",
+              "right": "=b"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3,
+          "explain": "Mulai dari {a}, hitung maju {b} kali: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 10],
+            "b": [1, 7]
+          },
+          "constraint": "b < a",
+          "prompt": "{a} − {b} = …",
+          "say": "{a} kurang {b} sama dengan berapa?",
+          "stimulus": [
+            {
+              "kind": "equation",
+              "left": "=a",
+              "op": "-",
+              "right": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "Mulai dari {a}, hitung mundur {b} kali: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 7],
+            "b": [1, 6]
+          },
+          "constraint": "a + b <= 10",
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "{a} + … = {c}",
+          "say": "{a} tambah berapa sama dengan {c}?",
+          "stimulus": [
+            {
+              "kind": "text",
+              "text": "{a} + … = {c}"
+            }
+          ],
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "jumlah-akhir"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "angka-awal"
+            }
+          ],
+          "choices": 3,
+          "explain": "Hitung maju dari {a} sampai {c}: ada {answer} langkah."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 10",
+          "words": {
+            "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"],
+            "benda": ["apel", "jeruk", "pisang", "balon", "bola", "bunga"]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ibu memberi {b} {benda} lagi. Sekarang {benda} {nama} ada berapa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a"
+            },
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=b"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} tambah {b} jadi {answer} {benda}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 10],
+            "b": [1, 4]
+          },
+          "constraint": "b < a",
+          "words": {
+            "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"],
+            "benda": ["apel", "jeruk", "pisang", "balon", "bola", "bunga"]
+          },
+          "prompt": "{nama} punya {a} {benda}. {b} {benda} diberikan kepada adik. Tinggal berapa {benda} {nama}?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a",
+              "crossed": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} kurang {b} tinggal {answer} {benda}."
+        }
+      }
+    ]
+  }
+}

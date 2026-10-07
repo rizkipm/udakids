@@ -1,0 +1,50 @@
+{
+  "id": "math.sd56.n8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "N",
+  "order": 8,
+  "title": "Persamaan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Persamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "values": [4000, 5000, 6000, 7000]
+      },
+      "p": {
+        "values": [1500, 2000, 2500, 3000]
+      }
+    },
+    "derived": {
+      "t1": "2 * b + 3 * p",
+      "t2": "b + 3 * p"
+    },
+    "prompt": "Harga 2 buku dan 3 pensil Rp{t1}. Harga 1 buku dan 3 pensil Rp{t2}. Harga 1 pensil Rp …",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "t1 - t2",
+        "tag": "harga-buku"
+      },
+      {
+        "expr": "t2 / 3",
+        "tag": "lupa-buku"
+      },
+      {
+        "expr": "p + 500",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisih = harga 1 buku = {=t1-t2}; pensil = ({t2} − {=t1-t2}) : 3 = {answer}."
+  }
+}

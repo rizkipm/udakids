@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.k3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "K",
+  "order": 3,
+  "title": "Bangun datar — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 3],
+      "s": {
+        "values": [90, 180, 45, 60, 120]
+      }
+    },
+    "derived": {
+      "r": "7 * k"
+    },
+    "constraint": "(2 * 22 * k * s) % 360 == 0",
+    "prompt": "Panjang busur lingkaran r = {r} cm dengan sudut pusat {s}° adalah … cm. (π = 22/7)",
+    "answer": "2 * 22 * k * s / 360",
+    "distractors": [
+      {
+        "expr": "22 * 7 * k * k * s / 360",
+        "tag": "luas-juring"
+      },
+      {
+        "expr": "2 * 22 * k",
+        "tag": "keliling"
+      },
+      {
+        "expr": "22 * k * s / 360",
+        "tag": "setengah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{s}/360 × 2 × 22/7 × {r} = {answer} cm."
+  }
+}

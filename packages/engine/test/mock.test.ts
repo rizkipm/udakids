@@ -52,10 +52,12 @@ const right = (item: Item): AnswerValue => {
 describe('Mock Test olimpiade TK (D-072)', () => {
   for (const book of ['math/tkosn', 'sains/tkosn', 'english/tkosn']) {
     const skills = load(book);
-    const mock = skills.find(isMockSkill)!;
+    // Mock olimpiade gaya EMC (kategori Z); mock KMSI (Y, D-074) diuji di bawah.
+    const mock = skills.find((s) => isMockSkill(s) && s.category === 'Z')!;
 
-    it(`${book}: ada tepat satu mock, 25 soal 9/8/8, mudah → sulit, tanpa kembar`, () => {
-      expect(skills.filter(isMockSkill)).toHaveLength(1);
+    it(`${book}: 3 mock EMC (Z) + 3 mock KMSI (Y), 25 soal 9/8/8, mudah → sulit, tanpa kembar`, () => {
+      expect(skills.filter((s) => isMockSkill(s) && s.category === 'Z')).toHaveLength(3);
+      expect(skills.filter((s) => isMockSkill(s) && s.category === 'Y')).toHaveLength(3);
       expect(validateTemplate(mock)).toEqual([]);
       const round = generateMockRound(mock, skills, { seed: 42 });
       expect(round).toHaveLength(25);
@@ -129,18 +131,28 @@ describe('penilaian gaya EMC', () => {
   });
 
   it('konfigurasi dari template mock', () => {
-    const mock = load('english/tkosn').find(isMockSkill)!;
-    expect(mockConfigOf(mock).questions).toBe(25);
+    const book = load('english/tkosn');
+    expect(mockConfigOf(book.find((s) => isMockSkill(s) && s.category === 'Z')!).questions).toBe(
+      25,
+    );
+    // KMSI Level A (D-074): 20 soal, benar 4, KKM 40, hanya materi KMSI.
+    const kmsi = mockConfigOf(book.find((s) => isMockSkill(s) && s.category === 'Y')!);
+    expect(kmsi).toMatchObject({ questions: 20, passPoints: 40 });
+    expect(kmsi.points.hard).toEqual({ right: 4, wrong: 0 });
+    expect(kmsi.categories).toEqual(['L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S']);
   });
 });
 
 describe('Mock Test khusus anak berpaket', () => {
-  it('mock tidak termasuk level gratis; level biasa 1–3 tetap gratis', async () => {
+  it('Mock 1 gratis sekali, Mock 2–3 & mengulang khusus Premium', async () => {
     const { needsPurchase } = await import('../src/index.js');
     const free = { paywall: true, freeLevels: 3, all: false, books: [] as string[] };
     const node = { domain: 'math', grade: 'tkosn', order: 1 };
     expect(needsPurchase(free, node)).toBe(false);
-    expect(needsPurchase(free, { ...node, family: 'mock' })).toBe(true);
+    // Mock test 1 gratis; Mock test 2 & 3 khusus Premium.
+    expect(needsPurchase(free, { ...node, family: 'mock' })).toBe(false);
+    expect(needsPurchase(free, { ...node, order: 2, family: 'mock' })).toBe(true);
+    expect(needsPurchase(free, { ...node, order: 3, family: 'mock' })).toBe(true);
     expect(needsPurchase({ ...free, books: ['math/tkosn'] }, { ...node, family: 'mock' })).toBe(
       false,
     );
@@ -166,5 +178,33 @@ describe('papan peringkat mock test', () => {
       'e5',
     ]);
     expect(rankMockBoard([])).toEqual([]);
+  });
+});
+
+describe('mock test 1–3 tidak saling mengunci', () => {
+  it('Mock 2 & 3 terbuka walau Mock 1 belum lulus', async () => {
+    const { levelStatuses } = await import('../src/index.js');
+    const nodes = [1, 2, 3].map((order) => ({
+      id: `z${order}`,
+      category: 'Z',
+      order,
+      family: 'mock',
+    }));
+    expect(levelStatuses(['Z'], nodes, {})).toEqual({ z1: 'open', z2: 'open', z3: 'open' });
+    const normal = [1, 2].map((order) => ({ id: `a${order}`, category: 'A', order }));
+    expect(levelStatuses(['A'], normal, {})).toEqual({ a1: 'open', a2: 'locked' });
+  });
+});
+
+describe('paling aktif (landing page)', () => {
+  it('soal terbanyak → waktu lebih lama; tanpa soal tidak masuk', async () => {
+    const { rankByActivity } = await import('../src/index.js');
+    const r = rankByActivity([
+      { nickname: 'A', questions: 30, timeMs: 100 },
+      { nickname: 'B', questions: 50, timeMs: 10 },
+      { nickname: 'C', questions: 30, timeMs: 900 },
+      { nickname: 'D', questions: 0, timeMs: 999 },
+    ]);
+    expect(r.map((x) => `${x.position}${x.nickname}`)).toEqual(['1B', '2C', '3A']);
   });
 });

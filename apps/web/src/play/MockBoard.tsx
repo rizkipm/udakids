@@ -1,3 +1,4 @@
+import './mock.css';
 import { durationWords, formatClock, type Color } from '@little-coder/engine';
 import type { MockBoardData, MockBoardRow } from '../api/types';
 import { useFetch } from '../auth/useApi';

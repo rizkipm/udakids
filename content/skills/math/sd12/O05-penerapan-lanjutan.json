@@ -1,0 +1,62 @@
+{
+  "id": "math.sd12.o5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "O",
+  "order": 5,
+  "title": "Pecahan sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": {
+        "values": [3, 4, 5, 6, 8]
+      },
+      "n": [1, 7]
+    },
+    "constraint": "n < d",
+    "prompt": "Pita dibagi {d} sama panjang. {n} bagian diwarnai. Bagian yang TIDAK diwarnai …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "bar",
+        "hideNumber": true
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "d - n",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "n",
+        "den": "d",
+        "tag": "yang-diwarnai"
+      },
+      {
+        "num": "d - n",
+        "den": "n",
+        "tag": "penyebut-salah"
+      },
+      {
+        "num": "d",
+        "den": "d - n",
+        "tag": "terbalik"
+      }
+    ],
+    "choices": 4,
+    "explain": "Yang tidak diwarnai {=d-n} dari {d} bagian: {answer}."
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "id": "math.sd12.o10.tantangan-pecahan-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "O",
+  "order": 10,
+  "title": "Pecahan sederhana — Level 10 — Tantangan pecahan sederhana",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 10]
+          },
+          "derived": {
+            "a": "4 * h"
+          },
+          "prompt": "Seperempat dari {a} adalah …",
+          "answer": "h",
+          "distractors": [
+            {
+              "expr": "2 * h",
+              "tag": "setengah"
+            },
+            {
+              "expr": "a - 4",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Seperempat dari {a} = {a} : 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 5, 6, 8]
+            },
+            "n": [1, 7]
+          },
+          "constraint": "n < d",
+          "prompt": "Pita dibagi {d} sama panjang. {n} bagian diwarnai. Bagian yang TIDAK diwarnai …",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "d - n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "yang-diwarnai"
+            },
+            {
+              "num": "d - n",
+              "den": "n",
+              "tag": "penyebut-salah"
+            },
+            {
+              "num": "d",
+              "den": "d - n",
+              "tag": "terbalik"
+            }
+          ],
+          "choices": 4,
+          "explain": "Yang tidak diwarnai {=d-n} dari {d} bagian: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [3, 15]
+          },
+          "derived": {
+            "a": "2 * h"
+          },
+          "prompt": "Ibu punya {a} apel. Setengahnya diberikan ke tetangga. Apel ibu tinggal …",
+          "answer": "h",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "utuh"
+            },
+            {
+              "expr": "h - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "dikurang-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setengah dari {a} = {answer}, jadi tinggal {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 9]
+          },
+          "derived": {
+            "a": "4 * h"
+          },
+          "prompt": "Ada {a} siswa. Seperempatnya memakai kacamata. Yang tidak memakai kacamata ada …",
+          "answer": "3 * h",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "yang-berkacamata"
+            },
+            {
+              "expr": "2 * h",
+              "tag": "setengah"
+            },
+            {
+              "expr": "a - 4",
+              "tag": "dikurang-4"
+            }
+          ],
+          "choices": 4,
+          "explain": "Seperempat dari {a} = {h}; {a} − {h} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Pecahan yang menunjukkan \"setengah\" adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2/1"
+                  },
+                  "say": "2/1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/4"
+                  },
+                  "say": "1/4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/3"
+                  },
+                  "say": "1/3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setengah ditulis 1/2."
+            },
+            {
+              "prompt": "Mana yang paling besar?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/8"
+                  },
+                  "say": "1/8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/3"
+                  },
+                  "say": "1/3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/4"
+                  },
+                  "say": "1/4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Penyebut terkecil, bagian terbesar."
+            },
+            {
+              "prompt": "2/4 sama dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/4"
+                  },
+                  "say": "1/4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2/2"
+                  },
+                  "say": "2/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4/2"
+                  },
+                  "say": "4/2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dua dari empat bagian = setengah."
+            },
+            {
+              "prompt": "Pizza dipotong 8 sama besar, dimakan 3. Sisanya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5/8"
+                  },
+                  "say": "5/8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5/3"
+                  },
+                  "say": "5/3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8/5"
+                  },
+                  "say": "8/5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3/8"
+                  },
+                  "say": "3/8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 − 3 = 5 bagian dari 8."
+            },
+            {
+              "prompt": "Setengah jam = … menit",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 jam = 60 menit; setengahnya 30."
+            },
+            {
+              "prompt": "Seperempat dari 20 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                }
+              ],
+              "answer": 0,
+              "reteach": "20 : 4 = 5."
+            },
+            {
+              "prompt": "3 siswi berbagi 3 kotak teh sama banyak. Tiap siswi mendapat …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 kotak"
+                  },
+                  "say": "1 kotak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 kotak"
+                  },
+                  "say": "3 kotak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2 kotak"
+                  },
+                  "say": "1/2 kotak"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 kotak"
+                  },
+                  "say": "2 kotak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 : 3 = 1."
+            },
+            {
+              "prompt": "Gambar dibagi 4 sama besar, 4 bagian diarsir. Pecahannya sama dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 (utuh)"
+                  },
+                  "say": "1 (utuh)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/4"
+                  },
+                  "say": "1/4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4/1 lebih dari utuh"
+                  },
+                  "say": "4/1 lebih dari utuh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4/4 = 1 utuh."
+            },
+            {
+              "prompt": "Dua pertiga dari 9 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sepertiga 9 = 3; dua pertiga = 6."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

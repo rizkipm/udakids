@@ -1,7 +1,7 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { and, asc, desc, eq, gt, inArray, isNull, lte, or, sql } from 'drizzle-orm';
 import type { Db } from '../db/db.module.js';
-import { banners, galleryItems, media } from '../db/schema.js';
+import { articles, banners, galleryItems, media } from '../db/schema.js';
 import type {
   BannerInput,
   BannerPlacement,
@@ -109,6 +109,8 @@ export class MediaStore {
           inArray(media.id, list),
           sql`not exists (select 1 from ${banners} where ${banners.imageId} = ${media.id})`,
           sql`not exists (select 1 from ${galleryItems} where ${galleryItems.imageId} = ${media.id})`,
+          sql`not exists (select 1 from ${articles} where ${articles.coverImageId} = ${media.id})`,
+          sql`not exists (select 1 from ${articles} where ${articles.imageIds} ? ${media.id}::text)`,
         ),
       );
   }
@@ -122,6 +124,8 @@ export class MediaStore {
           sql`${media.createdAt} < now() - interval '1 day'`,
           sql`not exists (select 1 from ${banners} where ${banners.imageId} = ${media.id})`,
           sql`not exists (select 1 from ${galleryItems} where ${galleryItems.imageId} = ${media.id})`,
+          sql`not exists (select 1 from ${articles} where ${articles.coverImageId} = ${media.id})`,
+          sql`not exists (select 1 from ${articles} where ${articles.imageIds} ? ${media.id}::text)`,
         ),
       );
   }

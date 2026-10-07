@@ -101,6 +101,7 @@ export function MockHistory({ mock, momoColor }: { mock: SkillTemplate; momoColo
           score={score}
           timeMs={current.durationMs}
           referenceMinutes={config.referenceMinutes}
+          passPoints={config.passPoints}
           momoColor={momoColor}
           actions={
             <div className="mock-actions">

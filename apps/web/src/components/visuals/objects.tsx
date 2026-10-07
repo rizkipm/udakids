@@ -5,7 +5,9 @@ import { OUTLINE, PALETTE, shade, tint } from './palette';
 import { ENGLISH_OBJECT_ART } from './objects-english';
 import { EXTRA_OBJECT_ART } from './objects-extra';
 import { ESC_OBJECT_ART } from './objects-esc';
+import { KMSI_OBJECT_ART } from './objects-kmsi';
 import { EMC_ENGLISH_OBJECT_ART } from './objects-emc';
+import { VOKAL_OBJECT_ART } from './objects-vokal';
 
 export type ObjectArtProps = { color?: Color };
 export type ObjectArt = (props: ObjectArtProps) => JSX.Element;
@@ -332,7 +334,9 @@ const centered = (id: StretchId): ObjectArt =>
 export const OBJECT_ART: Record<ObjectId, ObjectArt> = {
   ...EXTRA_OBJECT_ART,
   ...ESC_OBJECT_ART,
+  ...KMSI_OBJECT_ART,
   ...EMC_ENGLISH_OBJECT_ART,
+  ...VOKAL_OBJECT_ART,
   ...ENGLISH_OBJECT_ART,
   apel: ({ color }) => (
     <g>

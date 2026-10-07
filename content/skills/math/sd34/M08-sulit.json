@@ -1,0 +1,35 @@
+{
+  "id": "math.sd34.m8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "M",
+  "order": 8,
+  "title": "Pecahan sederhana — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [2, 9],
+      "c": [1, 6],
+      "d": [2, 9]
+    },
+    "constraint": "a < b && c < d && b != d",
+    "prompt": "Bandingkan: {a}/{b} … {c}/{d}",
+    "answer": "(a * d > c * b) * 1 + (a * d < c * b) * 2 + (a * d == c * b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "explain": "Kali silang: {a} × {d} = {=a*d} dan {c} × {b} = {=c*b}. Jadi {a}/{b} {answer} {c}/{d}."
+  }
+}

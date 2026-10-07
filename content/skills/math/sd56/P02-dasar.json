@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.p2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "P",
+  "order": 2,
+  "title": "Teori bilangan sederhana — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [2, 12],
+      "p": [2, 9],
+      "r": [2, 9]
+    },
+    "derived": {
+      "a": "x * p",
+      "b": "x * r"
+    },
+    "constraint": "p != r",
+    "prompt": "FPB dari {a} dan {b} adalah …",
+    "answer": "gcd(a, b)",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "kpk"
+      },
+      {
+        "expr": "x * 2 * (gcd(p, r) == 1) + 1",
+        "tag": "lain"
+      },
+      {
+        "expr": "min(a, b)",
+        "tag": "terkecil"
+      }
+    ],
+    "choices": 4,
+    "explain": "FPB({a}, {b}) = {answer}."
+  }
+}

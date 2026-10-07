@@ -9,7 +9,9 @@ import {
   MOCK_DIFFICULTIES,
   mockConfigOf,
   mockMaxPoints,
+  mockRetakeLocked,
   recordQuiz,
+  mockPassScore,
   rememberRound,
   scoreMock,
   type AnswerResult,
@@ -27,8 +29,8 @@ import { Momo } from '../components/Momo';
 import { t, type MessageKey } from '../i18n';
 import { useCatalog } from './catalog';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
-import { PlayIcon } from './icons';
 import { useLinks } from './links';
+import { MomoLoader } from './MomoLoader';
 import { loadProgress, newId, updateProgress } from './practiceStore';
 import { flushPractice } from './sync';
 import { useStopwatch } from './useStopwatch';
@@ -58,7 +60,7 @@ export function MockTest({
 }) {
   const session = useSession('child')!;
   const childId = session.user.id;
-  const { data } = useCatalog();
+  const { data, failed: catalogFailed, retry: retryCatalog } = useCatalog();
   const links = useLinks(data);
   const config = useMemo(() => mockConfigOf(mock), [mock]);
   const [seed] = useState(() => Math.floor(Date.now() % 1_000_000_000));
@@ -87,12 +89,7 @@ export function MockTest({
   useEffect(() => () => stopSpeaking(), []);
 
   if (!data || !links || !round) {
-    return (
-      <main className="kid-screen">
-        <Momo own color={momoColor} mood="idle" size={140} />
-        <p className="kid-note">{t('play.library.loading')}</p>
-      </main>
-    );
+    return <MomoLoader color={momoColor} failed={catalogFailed} onRetry={retryCatalog} />;
   }
   const topicHref = links.topic(mock);
   if (round.length === 0) {
@@ -107,6 +104,25 @@ export function MockTest({
     );
   }
 
+  const attempts = loadProgress(childId).quizzes[mock.id]?.attempts ?? 0;
+  if (
+    phase === 'question' &&
+    outcomes.length === 0 &&
+    mockRetakeLocked(data.access ?? FREE_ACCESS, mock, attempts)
+  ) {
+    return (
+      <main className="kid-screen">
+        <Momo own color={momoColor} mood="curious" size={140} />
+        <section className="kid-alert" role="note">
+          <strong>{t('play.mock.retakeTitle')}</strong>
+          <p>{t('play.mock.retakeBody')}</p>
+        </section>
+        <Link className="kid-btn" to={topicHref}>
+          {t('play.quiz.backTopic')}
+        </Link>
+      </main>
+    );
+  }
   if ((mock as SkillTemplate & { stub?: boolean }).stub) {
     return (
       <main className="kid-screen">
@@ -131,7 +147,7 @@ export function MockTest({
       ...p,
       quizzes: {
         ...p.quizzes,
-        [mock.id]: recordQuiz(p.quizzes[mock.id], score.score, now, timeMs),
+        [mock.id]: recordQuiz(p.quizzes[mock.id], score.score, now, timeMs, mockPassScore(config)),
       },
       quizOutbox: [
         ...p.quizOutbox,
@@ -293,6 +309,7 @@ function MockResult({
         score={result.score}
         timeMs={result.timeMs}
         referenceMinutes={referenceMinutes}
+        passPoints={mockConfigOf(mock).passPoints}
         momoColor={momoColor}
         praise
         actions={
@@ -322,6 +339,7 @@ export function MockReportView({
   score: s,
   timeMs,
   referenceMinutes,
+  passPoints,
   momoColor,
   praise = false,
   actions,
@@ -333,6 +351,8 @@ export function MockReportView({
   score: MockScore;
   timeMs: number | null;
   referenceMinutes: number;
+  /** KKM lomba (poin), mis. KMSI (D-074). */
+  passPoints?: number;
   momoColor: Color;
   praise?: boolean;
   actions?: ReactNode;
@@ -372,6 +392,13 @@ export function MockReportView({
             </span>
           </div>
         </div>
+        {passPoints !== undefined && (
+          <p className={`mock-kkm${s.points >= passPoints ? ' is-pass' : ''}`}>
+            {s.points >= passPoints
+              ? t('play.mock.kkmPass', { kkm: passPoints })
+              : t('play.mock.kkmNotYet', { kkm: passPoints, gap: passPoints - s.points })}
+          </p>
+        )}
         <div className="mock-table-wrap">
           <table className="mock-points">
             <thead>
@@ -488,17 +515,13 @@ export function MockOverview({
   mock,
   tips,
   momoColor,
-  best,
-  start,
-  locked,
+  children,
 }: {
   mock: SkillTemplate;
   tips: readonly string[];
   momoColor: Color;
-  best?: { best: number; bestTimeMs?: number; attempts: number };
-  /** Tautan mulai (undefined bila terkunci). */
-  start?: string;
-  locked?: ReactNode;
+  /** Pilihan Mock test 1–3 (kartu + tombol mulai). */
+  children?: ReactNode;
 }) {
   const c = mockConfigOf(mock);
   const say = t('play.mock.introSay', { n: c.questions, minutes: c.referenceMinutes });
@@ -508,7 +531,9 @@ export function MockOverview({
         <Momo own color={momoColor} mood="curious" size={72} />
         <div className="mock-head-text">
           <h2 id="mock-title">{t('play.mock.heading')}</h2>
-          <p>{t('play.mock.subtitle', { n: c.questions })}</p>
+          <p>
+            {t(c.categories ? 'play.mock.subtitleGroup' : 'play.mock.subtitle', { n: c.questions })}
+          </p>
         </div>
         <SpeakButton text={say} label={t('play.topic.listen')} />
       </div>
@@ -527,25 +552,27 @@ export function MockOverview({
           <strong>{t('play.mock.factNoLimit')}</strong>
           <span>{t('play.mock.factReference', { minutes: c.referenceMinutes })}</span>
         </li>
-        <li>
-          <strong>{t('play.mock.factNew')}</strong>
-          <span>{t('play.mock.factRetry')}</span>
-        </li>
+        {c.passPoints !== undefined ? (
+          <li>
+            <strong>{t('play.mock.factKkm', { kkm: c.passPoints })}</strong>
+            <span>{t('play.mock.factKkmHint', { max: mockMaxPoints(c) })}</span>
+          </li>
+        ) : (
+          <li>
+            <strong>{t('play.mock.factNew')}</strong>
+            <span>{t('play.mock.factRetry')}</span>
+          </li>
+        )}
       </ul>
       <div className="mock-scoring">
         <h3>{c.rule}</h3>
         <MockPointsTable config={c} />
-        <p className="mock-formula">{t('play.mock.formula', { max: mockMaxPoints(c) })}</p>
-      </div>
-      {best && (
-        <p className="mock-best">
-          {t('play.mock.best', {
-            score: best.best,
-            time: best.bestTimeMs !== undefined ? formatClock(best.bestTimeMs) : '–',
-          })}{' '}
-          {t('play.mock.attempts', { n: best.attempts })}
+        <p className="mock-formula">
+          {c.passPoints !== undefined
+            ? t('play.mock.formulaKkm', { max: mockMaxPoints(c), kkm: c.passPoints })
+            : t('play.mock.formula', { max: mockMaxPoints(c) })}
         </p>
-      )}
+      </div>
       {tips.length > 0 && (
         <ul className="mock-tips">
           {tips.map((tip) => (
@@ -553,15 +580,7 @@ export function MockOverview({
           ))}
         </ul>
       )}
-      {locked}
-      {start && (
-        <div className="topic-cta mock-cta">
-          <Link className="kid-btn big-play" to={start}>
-            <PlayIcon />
-            {t('play.mock.start')}
-          </Link>
-        </div>
-      )}
+      {children}
     </section>
   );
 }

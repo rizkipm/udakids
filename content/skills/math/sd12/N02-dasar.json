@@ -1,0 +1,47 @@
+{
+  "id": "math.sd12.n2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "N",
+  "order": 2,
+  "title": "Nilai tempat dan lambang bilangan — Level 2 — Dasar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": [1, 9],
+      "p": [0, 9],
+      "s": [0, 9]
+    },
+    "derived": {
+      "n": "r * 100 + p * 10 + s"
+    },
+    "constraint": "r != p && p != s && r != s",
+    "prompt": "Pada bilangan {n}, angka puluhannya adalah …",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "r",
+        "tag": "ratusan"
+      },
+      {
+        "expr": "s",
+        "tag": "satuan"
+      },
+      {
+        "expr": "p + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n}: ratusan {r}, puluhan {p}, satuan {s}."
+  }
+}

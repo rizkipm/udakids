@@ -186,6 +186,29 @@ export const OBJECTS = {
   ibu: { say: 'ibu', countable: false },
   kakek: { say: 'kakek', countable: false },
   nenek: { say: 'nenek', countable: false },
+  // Tambahan D-074 (KMSI Level A Sains): rasa makanan, lidah, dan tempat tinggal hewan.
+  permen: { say: 'permen', countable: false },
+  madu: { say: 'madu', countable: false },
+  gula: { say: 'gula', countable: false },
+  garam: { say: 'garam', countable: false },
+  kerupuk: { say: 'kerupuk', countable: false },
+  kopi: { say: 'kopi', countable: false },
+  obat: { say: 'obat', countable: false },
+  pare: { say: 'pare', countable: false },
+  'jeruk-nipis': { say: 'jeruk nipis', countable: false },
+  lidah: { say: 'lidah', countable: false },
+  kandang: { say: 'kandang', countable: false },
+  kolam: { say: 'kolam', countable: false },
+  'sarang-lebah': { say: 'sarang lebah', countable: false },
+  // Tambahan D-075 (Worksheet PAUD — huruf vokal): kata berawalan i, u, e, o.
+  itik: { say: 'itik', countable: false },
+  udang: { say: 'udang', countable: false },
+  unta: { say: 'unta', countable: false },
+  elang: { say: 'elang', countable: false },
+  emas: { say: 'emas', countable: false },
+  obor: { say: 'obor', countable: false },
+  obeng: { say: 'obeng', countable: false },
+  ombak: { say: 'ombak', countable: false },
 } as const satisfies Record<string, { say: string; countable: boolean }>;
 
 export type ObjectId = keyof typeof OBJECTS;

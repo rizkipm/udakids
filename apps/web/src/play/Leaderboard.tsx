@@ -97,6 +97,10 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
   });
   const mockList = mocks.data?.mocks ?? [];
   const activeMock = mockList.find((m) => m.skillId === mockId) ?? mockList[0];
+  const activeBook = activeMock ? `${activeMock.domain}/${activeMock.grade}` : '';
+  const mockBooks = [...new Map(mockList.map((m) => [`${m.domain}/${m.grade}`, m])).values()].map(
+    (m) => ({ key: `${m.domain}/${m.grade}`, book: m.book, first: m }),
+  );
   const call = useApiCall('child');
   const [paged, setPaged] = useState<{ key: string; page: number; items: LeaderboardRow[] }>();
   const [loadingPage, setLoadingPage] = useState(false);
@@ -218,19 +222,37 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
       {isMock && (
         <>
           {mockList.length > 0 && (
-            <nav className="rank-scopes" aria-label={t('rank.mock.subjects')}>
-              {mockList.map((m) => (
-                <button
-                  key={m.skillId}
-                  type="button"
-                  className={`rank-scope${m.skillId === activeMock?.skillId ? ' is-on' : ''}`}
-                  aria-pressed={m.skillId === activeMock?.skillId}
-                  onClick={() => chooseMock(m.skillId, m.book)}
-                >
-                  <strong>{m.book}</strong>
-                </button>
-              ))}
-            </nav>
+            <>
+              <nav className="rank-scopes" aria-label={t('rank.mock.subjects')}>
+                {mockBooks.map((b) => (
+                  <button
+                    key={b.key}
+                    type="button"
+                    className={`rank-scope${b.key === activeBook ? ' is-on' : ''}`}
+                    aria-pressed={b.key === activeBook}
+                    onClick={() => chooseMock(b.first.skillId, b.book)}
+                  >
+                    <strong>{b.book}</strong>
+                  </button>
+                ))}
+              </nav>
+              <nav className="rank-scopes is-sub" aria-label={t('rank.mock.which')}>
+                {mockList
+                  .filter((m) => `${m.domain}/${m.grade}` === activeBook)
+                  .map((m) => (
+                    <button
+                      key={m.skillId}
+                      type="button"
+                      className={`rank-scope${m.skillId === activeMock?.skillId ? ' is-on' : ''}`}
+                      aria-pressed={m.skillId === activeMock?.skillId}
+                      onClick={() => chooseMock(m.skillId, m.title)}
+                    >
+                      <strong>{m.title}</strong>
+                      <small>{t('rank.mock.participants', { n: m.participants })}</small>
+                    </button>
+                  ))}
+              </nav>
+            </>
           )}
           {activeMock ? (
             <MockBoard

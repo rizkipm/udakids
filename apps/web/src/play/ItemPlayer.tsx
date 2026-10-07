@@ -22,8 +22,12 @@ import {
   stopSpeaking,
 } from '../audio/speech';
 import { VisualView } from '../components/visuals';
+import { CatchGame } from './games/CatchGame';
 import { ConnectDots } from './games/ConnectDots';
+import { MazeBoard } from './games/MazeBoard';
+import { MemoryGame } from './games/MemoryGame';
 import { TraceBoard } from './games/TraceBoard';
+import { WordSearch } from './games/WordSearch';
 import { t, type MessageKey } from '../i18n';
 import './play.css';
 
@@ -68,6 +72,10 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   trace: 'play.cmd.trace',
   connect: 'play.cmd.connect',
   spell: 'play.cmd.spell',
+  maze: 'play.cmd.maze',
+  'word-search': 'play.cmd.wordSearch',
+  memory: 'play.cmd.memory',
+  catch: 'play.cmd.catch',
 };
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
@@ -307,7 +315,11 @@ function ChoiceCard({
     >
       {badge !== undefined && <span className="choice-badge">{badge}</span>}
       {choice.visual.kind === 'text' || choice.visual.kind === 'word' ? (
-        <span className="choice-text">{choice.visual.text}</span>
+        <span
+          className={`choice-text${choice.visual.kind === 'word' && choice.visual.text.length === 1 ? ' is-letter' : ''}`}
+        >
+          {choice.visual.text}
+        </span>
       ) : (
         <VisualView visual={choice.visual} size={size} />
       )}
@@ -362,6 +374,21 @@ function InteractionView(props: ViewProps<Interaction>) {
           onDone={(taps) => props.onSubmit(taps)}
         />
       );
+    case 'maze':
+      return <MazeBoard interaction={it} disabled={props.disabled} onDone={props.onSubmit} />;
+    case 'word-search':
+      return <WordSearch interaction={it} disabled={props.disabled} onDone={props.onSubmit} />;
+    case 'memory':
+      return (
+        <MemoryGame
+          interaction={it}
+          disabled={props.disabled}
+          reveal={props.showAnswer}
+          onDone={props.onSubmit}
+        />
+      );
+    case 'catch':
+      return <CatchGame interaction={it} disabled={props.disabled} onDone={props.onSubmit} />;
   }
 }
 

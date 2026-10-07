@@ -1,5 +1,6 @@
 import type { BodyPart, Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
 import type { DotPictureId } from './dot-pictures.js';
+import { catchReplay, mazeReplay, memoryReplay, wordSearchReplay } from './games.js';
 import type { GlyphId } from './glyphs.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
@@ -165,7 +166,44 @@ export type Interaction =
       dots: { id: string; label: number; x: number; y: number }[];
       answer: string[];
       maxSlips: number;
-    };
+    }
+  /**
+   * Labirin (D-075): ketuk kotak sebaris/sekolom untuk berjalan (tidak menembus dinding) dari `start` ke
+   * `goal`. `marks` = huruf/angka di kotak (yang bukan `decoy` berada di jalan keluar, berurutan). Nilai
+   * jawaban = semua ketukan ("c12"); benar bila sampai di pintu keluar dan ketukan menabrak ≤ `maxSlips`.
+   */
+  | {
+      type: 'maze';
+      cols: number;
+      rows: number;
+      walls: number[];
+      start: number;
+      goal: number;
+      marks: { cell: number; text: string; say: string; decoy?: boolean }[];
+      maxSlips: number;
+    }
+  /**
+   * Cari kata (D-075): kotak huruf `letters` (cols × rows); anak mengetuk huruf berurutan dari huruf pertama
+   * kata (mendatar/menurun). Nilai jawaban = semua ketukan; benar bila semua kata ketemu dan slip ≤ `maxSlips`.
+   */
+  | {
+      type: 'word-search';
+      cols: number;
+      rows: number;
+      letters: string;
+      words: { id: string; text: string; cells: number[]; visual: Visual; say: string }[];
+      maxSlips: number;
+    }
+  /**
+   * Kartu pasangan / memori (D-075): kartu tertutup dibalik dua-dua; `pair` sama = pasangan. Nilai jawaban =
+   * urutan kartu yang dibalik; benar bila semua berpasangan dan pasangan meleset ≤ `maxSlips`.
+   */
+  | { type: 'memory'; cards: (Choice & { pair: string })[]; maxSlips: number }
+  /**
+   * Tangkap (D-075): benda bergerak pelan melintas dan terus berputar sampai ditangkap (tanpa hitung mundur).
+   * Nilai jawaban = semua ketukan; benar bila semua `answer` tertangkap dan ketukan meleset ≤ `maxSlips`.
+   */
+  | { type: 'catch'; choices: Choice[]; answer: string[]; maxSlips: number };
 
 export type InteractionType = Interaction['type'];
 
@@ -235,6 +273,30 @@ export function checkAnswer(item: Pick<Item, 'interaction'>, value: AnswerValue)
       return { correct: typeof value === 'number' && value >= 0 && value <= it.maxSlips };
     case 'connect':
       return { correct: Array.isArray(value) && connectSlips(it.answer, value) <= it.maxSlips };
+    case 'maze': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = mazeReplay(it, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
+    case 'word-search': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = wordSearchReplay(
+        it,
+        it.words.map((w) => w.text),
+        value,
+      );
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
+    case 'memory': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = memoryReplay(it.cards, value);
+      return { correct: r.done && r.misses <= it.maxSlips };
+    }
+    case 'catch': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = catchReplay(it.answer, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
   }
 }
 
@@ -266,9 +328,13 @@ export function allVisuals(item: ItemCore): Visual[] {
         ? [...it.left, ...it.right]
         : it.type === 'spell'
           ? it.letters
-          : 'choices' in it
-            ? it.choices
-            : [];
+          : it.type === 'memory'
+            ? it.cards
+            : it.type === 'word-search'
+              ? it.words
+              : 'choices' in it
+                ? it.choices
+                : [];
   choices.forEach((c) => push(c.visual));
   return out;
 }

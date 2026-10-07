@@ -131,8 +131,9 @@ export function needsPurchase(
   node: { domain: string; grade: string; order: number; family?: string },
 ): boolean {
   if (!access.paywall || access.all) return false;
-  // Mock Test olimpiade (D-072) khusus anak berpaket: tidak termasuk level gratis.
-  if (node.order <= access.freeLevels && node.family !== 'mock') return false;
+  // Mock Test olimpiade (D-072): Mock test 1 gratis (sekali), Mock test 2 & 3 khusus Premium.
+  const free = node.family === 'mock' ? node.order === 1 : node.order <= access.freeLevels;
+  if (free) return false;
   return !access.books.includes(bookKey(node));
 }
 
@@ -392,3 +393,17 @@ export const userListQuerySchema = z.object({
     .default(20),
 });
 export type UserListQuery = z.infer<typeof userListQuerySchema>;
+
+/** Anak punya akses Premium ke buku ini (atau paywall mati)? */
+export const hasBookAccess = (access: Access, node: { domain: string; grade: string }) =>
+  !access.paywall || access.all || access.books.includes(bookKey(node));
+
+/**
+ * Mock Test (D-072): anak tanpa Premium hanya boleh mengerjakan Mock test 1 SATU kali; mengulang (dan Mock 2–3)
+ * khusus Premium. `attempts` = berapa kali mock ini sudah dikerjakan.
+ */
+export const mockRetakeLocked = (
+  access: Access,
+  node: { domain: string; grade: string },
+  attempts: number,
+) => !hasBookAccess(access, node) && attempts >= 1;

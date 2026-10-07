@@ -449,3 +449,521 @@
     opacity: 0.85;
   }
 }
+
+/* ------------------------------------------------------------------
+ * Game Worksheet PAUD (D-075): labirin, cari kata, kartu pasangan, tangkap.
+ * Target sentuh ≥ 64 px (maks. 5 kolom di layar 390 px), tanpa merah besar, tanpa batas waktu.
+ * ------------------------------------------------------------------ */
+
+/* Labirin */
+.maze-board,
+.ws-board,
+.mem-board,
+.catch-board {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  /* Ukuran kotak mengikuti lebar papan (juga di pratinjau admin yang lebih sempit). */
+  container-type: inline-size;
+}
+.maze-grid {
+  --cell: min(84px, calc((100vw - 56px) / var(--cols)));
+  --cell: min(84px, calc((100cqw - 28px) / var(--cols)));
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  padding: 6px;
+  background: #fffdf6;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  outline-offset: 4px;
+}
+.maze-grid:focus-visible {
+  outline: 4px solid var(--kid-sun, #f7c948);
+}
+.maze-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 3px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  color: var(--kid-ink, #1d1a2e);
+  transition: background 0.2s;
+}
+.maze-cell.w-n {
+  border-top-color: var(--kid-line, #2b2540);
+}
+.maze-cell.w-e {
+  border-right-color: var(--kid-line, #2b2540);
+}
+.maze-cell.w-s {
+  border-bottom-color: var(--kid-line, #2b2540);
+}
+.maze-cell.w-w {
+  border-left-color: var(--kid-line, #2b2540);
+}
+.maze-cell.is-near {
+  background: #f3efff;
+}
+.maze-cell.is-trail {
+  background: #e7f6ec;
+}
+.maze-cell.is-goal {
+  background: #fff4cf;
+}
+.maze-cell:focus-visible {
+  outline: 3px solid var(--kid-primary, #5b3fd6);
+  outline-offset: -6px;
+}
+.maze-cell.is-bump {
+  animation: soft-shake 360ms ease-in-out;
+}
+.maze-mark {
+  display: grid;
+  place-items: center;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--kid-primary, #5b3fd6);
+  font-size: calc(var(--cell) * 0.36);
+  font-weight: 900;
+  line-height: 1;
+}
+.maze-cell.is-got .maze-mark {
+  background: var(--kid-good, #2e9e5b);
+  border-color: var(--kid-good, #2e9e5b);
+  color: #fff;
+  animation: mark-pop 420ms ease-out;
+}
+.maze-flag {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 40%;
+  height: 40%;
+  pointer-events: none;
+}
+.maze-momo {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: var(--cell);
+  height: var(--cell);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform: translate(calc(var(--c) * var(--cell)), calc(var(--r) * var(--cell)));
+  transition: transform 160ms linear;
+  z-index: 2;
+}
+.maze-momo svg {
+  width: 72%;
+  height: auto;
+  filter: drop-shadow(0 2px 0 rgba(43, 37, 64, 0.25));
+}
+.maze-board.is-done .maze-momo {
+  animation: hop 600ms ease-in-out 2;
+}
+.maze-hint {
+  margin: 0;
+  text-align: center;
+}
+
+/* Cari kata */
+.ws-words {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.ws-word {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--kid-touch, 64px);
+  padding: 4px 14px 4px 6px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--kid-line, #2b2540);
+}
+.ws-words li.is-found .ws-word {
+  background: var(--found, #95d5b2);
+}
+.ws-words li.is-found .ws-word span {
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+}
+.ws-grid {
+  --cell: min(68px, calc((100vw - 48px) / var(--cols)));
+  --cell: min(72px, calc((100cqw - 16px - (var(--cols) - 1) * 3px) / var(--cols)));
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 3px;
+  padding: 4px;
+  background: #fffdf6;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+}
+.ws-cell {
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid #ddd5f3;
+  border-radius: 14px;
+  background: #fff;
+  font: inherit;
+  font-size: calc(var(--cell) * 0.46);
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    transform 0.15s;
+}
+.ws-cell.is-sel {
+  background: var(--kid-soft, #efe7ff);
+  border-color: var(--kid-primary, #5b3fd6);
+  transform: scale(1.06);
+}
+.ws-cell.is-found {
+  background: var(--found);
+  border-color: color-mix(in srgb, var(--found) 55%, #2b2540);
+}
+.ws-cell.is-shake {
+  animation: soft-shake 360ms ease-in-out;
+}
+.ws-cell:focus-visible,
+.ws-word:focus-visible {
+  outline: 3px solid var(--kid-primary, #5b3fd6);
+  outline-offset: 2px;
+}
+
+/* Kartu pasangan */
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, calc(var(--cols) * 128px));
+}
+.mem-card {
+  aspect-ratio: 4 / 5;
+  min-height: var(--kid-touch, 64px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  perspective: 700px;
+  cursor: pointer;
+}
+.mem-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(0.3, 1.3, 0.5, 1);
+}
+.mem-card.is-up .mem-inner {
+  transform: rotateY(180deg);
+}
+.mem-back,
+.mem-front {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.mem-back {
+  background:
+    radial-gradient(circle at 25% 25%, #ffffff40 0 10%, transparent 11%),
+    repeating-linear-gradient(45deg, #6d52e0 0 10px, #5b3fd6 10px 20px);
+}
+.mem-front {
+  background: #fff;
+  transform: rotateY(180deg);
+  overflow: hidden;
+}
+.mem-front svg {
+  max-width: 88%;
+  height: auto;
+}
+.mem-letter {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.mem-card.is-matched .mem-front {
+  background: #e7f6ec;
+  border-color: var(--kid-good, #2e9e5b);
+  animation: mark-pop 420ms ease-out;
+}
+.mem-card:focus-visible .mem-inner {
+  outline: 4px solid var(--kid-sun, #f7c948);
+  outline-offset: 3px;
+  border-radius: 18px;
+}
+
+/* Tangkap */
+.catch-sky {
+  --lane-h: 104px;
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  height: calc(var(--lane-h) * 3 + 12px);
+  overflow: hidden;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 15% 20%, #ffffffcc 0 6%, transparent 7%),
+    radial-gradient(circle at 70% 12%, #ffffffaa 0 5%, transparent 6%),
+    linear-gradient(#cfeeff, #eaf8ff 70%, #dff3d8);
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+}
+.catch-item {
+  position: absolute;
+  top: calc(var(--lane) * var(--lane-h) + 10px);
+  left: 0;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  animation: catch-drift var(--dur) linear var(--delay) infinite;
+}
+.catch-body {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+}
+.catch-body.is-wobble {
+  animation: soft-shake 380ms ease-in-out;
+}
+.catch-item.is-caught {
+  animation: none;
+  visibility: hidden;
+}
+.catch-item:focus-visible .catch-body {
+  outline: 4px solid var(--kid-sun, #f7c948);
+  outline-offset: 3px;
+}
+.catch-letter {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.catch-letter.is-small {
+  font-size: 1.3rem;
+}
+.catch-basket {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  font-weight: 800;
+}
+.catch-got {
+  display: flex;
+  gap: 6px;
+}
+.catch-got-item {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--kid-good, #2e9e5b);
+  border-radius: 12px;
+  background: #fff;
+  animation: mark-pop 420ms ease-out;
+}
+@keyframes catch-drift {
+  from {
+    /* Lebar papan (container query); cadangan: lebar layar. */
+    transform: translateX(calc(100vw + 20px));
+    transform: translateX(calc(100cqw + 10px));
+  }
+  to {
+    transform: translateX(-120px);
+  }
+}
+@keyframes soft-shake {
+  25% {
+    transform: translateX(-5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(3deg);
+  }
+}
+@keyframes mark-pop {
+  0% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes hop {
+  50% {
+    transform: translate(calc(var(--c) * var(--cell)), calc(var(--r) * var(--cell) - 12px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maze-cell.is-bump,
+  .maze-cell.is-got .maze-mark,
+  .maze-board.is-done .maze-momo,
+  .ws-cell.is-shake,
+  .catch-body.is-wobble,
+  .catch-got-item,
+  .mem-card.is-matched .mem-front {
+    animation: none;
+  }
+  .maze-momo,
+  .mem-inner {
+    transition: none;
+  }
+  /* Tangkap tanpa gerak: benda diam berjajar. */
+  .catch-sky {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+  }
+  .catch-item {
+    position: static;
+    animation: none;
+  }
+}
+
+/* Pelajaran huruf vokal (D-075) */
+.letter-tile {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  min-width: 84px;
+  padding: 6px 12px;
+}
+.letter-tile small {
+  font-size: 0.75em;
+}
+.letter-tile.is-big {
+  min-width: 120px;
+  min-height: 110px;
+  font-size: 3.4rem;
+}
+.letter-pair {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+.letter-pics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.letter-pic {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  font-size: 1.6rem;
+}
+.sound-screen {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.sound-pics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+.sound-card.is-on {
+  border-color: var(--kid-good, #2e9e5b);
+  background: #e9f7ef;
+}
+.find-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(64px, 96px));
+  gap: 10px;
+  justify-content: center;
+}
+.find-tile {
+  aspect-ratio: 1;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #fff;
+  font:
+    900 2.6rem/1 system-ui,
+    sans-serif;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+}
+.find-tile.is-got {
+  background: var(--kid-good, #2e9e5b);
+  color: #fff;
+  animation: mark-pop 420ms ease-out;
+}
+.find-tile.is-shake {
+  animation: soft-shake 360ms ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .find-tile.is-got,
+  .find-tile.is-shake {
+    animation: none;
+  }
+}
+/* Kartu pilihan berisi satu huruf: besar dan jelas. */
+.choice-text.is-letter {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+}
+/* Layar sempit (≤ 420 px): papan labirin & cari kata memakai sebagian margin layar agar 5 kotak tetap ≥ 64 px. */
+@media (max-width: 420px) {
+  .maze-board,
+  .ws-board {
+    width: calc(100% + 24px);
+    margin-inline: -12px;
+  }
+}

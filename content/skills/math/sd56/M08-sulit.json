@@ -1,0 +1,50 @@
+{
+  "id": "math.sd56.m8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "M",
+  "order": 8,
+  "title": "Bangun ruang — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": {
+        "values": [10, 20, 30]
+      },
+      "p": {
+        "values": [10, 20, 25]
+      },
+      "l": {
+        "values": [10, 20, 40]
+      }
+    },
+    "constraint": "(s * s * s) % (p * l) == 0",
+    "prompt": "Air dari kubus penuh rusuk {s} cm dituang ke balok alas {p} cm × {l} cm. Tinggi air di balok … cm.",
+    "answer": "s * s * s / (p * l)",
+    "distractors": [
+      {
+        "expr": "s * s * s / p",
+        "tag": "bagi-panjang"
+      },
+      {
+        "expr": "s",
+        "tag": "sama-rusuk"
+      },
+      {
+        "expr": "s * s / l",
+        "tag": "salah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Volume {=s*s*s} cm³ : ({p} × {l}) = {answer} cm."
+  }
+}

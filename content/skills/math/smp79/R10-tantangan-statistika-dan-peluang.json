@@ -1,0 +1,466 @@
+{
+  "id": "math.smp79.r10.tantangan-statistika-dan-peluang",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "R",
+  "order": 10,
+  "title": "Statistika dan peluang — Level 10 — Tantangan statistika dan peluang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 5],
+            "p": [1, 4],
+            "q": [1, 4]
+          },
+          "derived": {
+            "m": "k * p",
+            "b": "k * q"
+          },
+          "constraint": "(m * 100) % (m + b) == 0",
+          "prompt": "Kantong berisi {m} kelereng merah dan {b} biru. Peluang terambil merah = …%",
+          "answer": "m * 100 / (m + b)",
+          "distractors": [
+            {
+              "expr": "b * 100 / (m + b)",
+              "tag": "biru"
+            },
+            {
+              "expr": "m * 100 / b",
+              "tag": "banding"
+            },
+            {
+              "expr": "m",
+              "tag": "banyaknya"
+            }
+          ],
+          "choices": 4,
+          "explain": "{m} : {=m+b} = {answer}%."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 50]
+          },
+          "derived": {
+            "n": "6 * k"
+          },
+          "prompt": "Sebuah dadu dilempar {n} kali. Frekuensi harapan muncul mata genap …",
+          "answer": "3 * k",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "per-6"
+            },
+            {
+              "expr": "n",
+              "tag": "semua"
+            },
+            {
+              "expr": "2 * k",
+              "tag": "dua-pertiga"
+            }
+          ],
+          "choices": 4,
+          "explain": "1/2 × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [0, 3]
+          },
+          "prompt": "Tiga koin dilempar bersamaan. Peluang muncul tepat {k} gambar = …/8.",
+          "answer": "(k == 0) + (k == 3) + 3 * (k == 1) + 3 * (k == 2)",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "k"
+            },
+            {
+              "expr": "2",
+              "tag": "dua"
+            },
+            {
+              "expr": "4",
+              "tag": "empat"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak susunan = C(3, {k}) = {answer} dari 8."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "na": [10, 15],
+            "ra": [60, 85],
+            "h": [1, 5],
+            "c": [1, 2]
+          },
+          "derived": {
+            "nb": "c * na",
+            "rb": "ra + 3 * h"
+          },
+          "constraint": "(na * ra + nb * rb) % (na + nb) == 0",
+          "prompt": "Nilai rata-rata kelas A ({na} siswa) {ra}, kelas B ({nb} siswa) {rb}. Rata-rata gabungan …",
+          "answer": "(na * ra + nb * rb) / (na + nb)",
+          "distractors": [
+            {
+              "expr": "(ra + rb) / 2",
+              "tag": "rata-dua"
+            },
+            {
+              "expr": "ra",
+              "tag": "kelas-A"
+            },
+            {
+              "expr": "rb",
+              "tag": "kelas-B"
+            }
+          ],
+          "choices": 4,
+          "explain": "({na}·{ra} + {nb}·{rb}) : {=na+nb} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Kuartil bawah (Q1) dari 2, 4, 5, 7, 8, 10, 12 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4,5"
+                  },
+                  "say": "4,5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Median bagian kiri 2, 4, 5."
+            },
+            {
+              "prompt": "Dua dadu dilempar. Peluang muncul mata kembar …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/6"
+                  },
+                  "say": "1/6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/3"
+                  },
+                  "say": "1/3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/36"
+                  },
+                  "say": "1/36"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/12"
+                  },
+                  "say": "1/12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 dari 36."
+            },
+            {
+              "prompt": "Satu kartu diambil dari 52 kartu bridge. Peluang kartu As …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/13"
+                  },
+                  "say": "1/13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/52"
+                  },
+                  "say": "1/52"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4/13"
+                  },
+                  "say": "4/13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/4"
+                  },
+                  "say": "1/4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4/52."
+            },
+            {
+              "prompt": "Data 4, 6, 6, 8, x mempunyai rata-rata 6. Nilai x …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah 30."
+            },
+            {
+              "prompt": "Peluang suatu kejadian yang pasti terjadi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,5"
+                  },
+                  "say": "0,5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pasti = 1."
+            },
+            {
+              "prompt": "Dari 5 siswa dipilih ketua dan wakil. Banyak cara …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "120"
+                  },
+                  "say": "120"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 × 4."
+            },
+            {
+              "prompt": "Simpangan (jangkauan) data 15, 8, 22, 10, 19 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22"
+                  },
+                  "say": "22"
+                }
+              ],
+              "answer": 0,
+              "reteach": "22 − 8."
+            },
+            {
+              "prompt": "Peluang terambil huruf vokal dari kata \"MATEMATIKA\" …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2/5"
+                  },
+                  "say": "2/5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4/9"
+                  },
+                  "say": "4/9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3/10"
+                  },
+                  "say": "3/10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "A, E, A, I, A = 5 dari 10."
+            },
+            {
+              "prompt": "Modus data 3, 5, 5, 6, 7, 7, 7, 8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6,5"
+                  },
+                  "say": "6,5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 muncul 3 kali."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

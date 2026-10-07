@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.r8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "R",
+  "order": 8,
+  "title": "Statistika sederhana — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 5],
+      "p": [1, 6],
+      "q": [1, 6]
+    },
+    "derived": {
+      "a": "5 * k * p",
+      "b": "5 * k",
+      "c": "5 * k * q"
+    },
+    "constraint": "(b * 100) % (a + b + c) == 0",
+    "prompt": "Data: {a} siswa suka bola, {b} suka renang, {c} suka catur. Persentase yang suka renang … %.",
+    "answer": "b * 100 / (a + b + c)",
+    "distractors": [
+      {
+        "expr": "b",
+        "tag": "jumlah"
+      },
+      {
+        "expr": "a * 100 / (a + b + c)",
+        "tag": "bola"
+      },
+      {
+        "expr": "100 - b * 100 / (a + b + c)",
+        "tag": "sisa"
+      }
+    ],
+    "choices": 4,
+    "explain": "{b} : {=a+b+c} × 100% = {answer}%."
+  }
+}

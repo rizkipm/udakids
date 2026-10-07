@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.q3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "Q",
+  "order": 3,
+  "title": "Perbandingan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [1, 5],
+      "q": [2, 7],
+      "k": {
+        "values": [5000, 10000, 20000]
+      }
+    },
+    "derived": {
+      "t": "(p + q) * k"
+    },
+    "constraint": "p != q",
+    "prompt": "Perbandingan uang A : B = {p} : {q}. Jumlah uang mereka Rp{t}. Uang B Rp …",
+    "answer": "q * k",
+    "distractors": [
+      {
+        "expr": "p * k",
+        "tag": "uang-A"
+      },
+      {
+        "expr": "t / 2",
+        "tag": "setengah"
+      },
+      {
+        "expr": "t * q / p",
+        "tag": "salah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{q}/({p} + {q}) × {t} = {answer}."
+  }
+}

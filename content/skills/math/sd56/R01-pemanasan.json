@@ -1,0 +1,45 @@
+{
+  "id": "math.sd56.r1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "R",
+  "order": 1,
+  "title": "Statistika sederhana — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [50, 100],
+      "b": [50, 100],
+      "c": [50, 100],
+      "d": [50, 100]
+    },
+    "constraint": "(a + b + c + d) % 4 == 0",
+    "prompt": "Rata-rata dari {a}, {b}, {c}, {d} adalah …",
+    "answer": "(a + b + c + d) / 4",
+    "distractors": [
+      {
+        "expr": "(a + b + c + d) / 3",
+        "tag": "bagi-3"
+      },
+      {
+        "expr": "a + b + c + d",
+        "tag": "jumlah"
+      },
+      {
+        "expr": "(max(a, b, c, d) + min(a, b, c, d)) / 2",
+        "tag": "tengah"
+      }
+    ],
+    "choices": 4,
+    "explain": "({a} + {b} + {c} + {d}) : 4 = {answer}."
+  }
+}

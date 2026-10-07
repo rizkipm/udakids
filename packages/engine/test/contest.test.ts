@@ -15,6 +15,7 @@ import {
   type AnswerValue,
   type ContestItem,
   type SkillTemplate,
+  mazePath,
 } from '../src/index.js';
 
 const root = new URL('../../../content/skills/', import.meta.url);
@@ -49,6 +50,16 @@ function maskedAnswer(item: ContestItem): AnswerValue {
     case 'connect':
       return it.dots.map((d) => to(d.id));
     case 'spell':
+      return it.answer;
+    case 'maze':
+      return mazePath(it, it.start, it.goal)
+        .slice(1)
+        .map((c) => `c${c}`);
+    case 'word-search':
+      return it.words.flatMap((w) => w.cells.map((c) => `c${c}`));
+    case 'memory':
+      return [...it.cards].sort((a, b) => a.pair.localeCompare(b.pair)).map((c) => c.id);
+    case 'catch':
       return it.answer;
   }
 }

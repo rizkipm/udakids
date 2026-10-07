@@ -1,0 +1,109 @@
+{
+  "id": "math.tkosn.j8.cerita-tambah-dan-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "J",
+  "order": 8,
+  "title": "Tambah dan kurang angka sederhana — Level 8 — Cerita tambah dan kurang",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Penyisihan 2026",
+    "kisi-kisi": "Menjumlahkan dan mengurangkan angka sederhana"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 10",
+          "words": {
+            "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"],
+            "benda": ["apel", "jeruk", "pisang", "balon", "bola", "bunga"]
+          },
+          "prompt": "{nama} punya {a} {benda}. Ibu memberi {b} {benda} lagi. Sekarang {benda} {nama} ada berapa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a"
+            },
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=b"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} tambah {b} jadi {answer} {benda}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 10],
+            "b": [1, 4]
+          },
+          "constraint": "b < a",
+          "words": {
+            "nama": ["Ani", "Budi", "Sari", "Raka", "Nina", "Dodi", "Maya", "Tono"],
+            "benda": ["apel", "jeruk", "pisang", "balon", "bola", "bunga"]
+          },
+          "prompt": "{nama} punya {a} {benda}. {b} {benda} diberikan kepada adik. Tinggal berapa {benda} {nama}?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "layout": "row",
+              "object": "{benda}",
+              "count": "=a",
+              "crossed": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} kurang {b} tinggal {answer} {benda}."
+        }
+      }
+    ]
+  }
+}

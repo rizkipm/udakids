@@ -28,6 +28,200 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
+## Rilis 2026-10-08 (D-073 … D-076): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD
+
+**Isi rilis:**
+
+- Video panduan & artikel di landing, artikel dengan banyak gambar (slider), 10 Besar, "Lanjutkan permainan" (D-073, D-076).
+- Olimpiade KMSI untuk TK s.d. SMP (soal + 3 mock test per buku, KKM) dan peringkat mock di landing (D-074).
+- Mock test pindah ke dalam bagian lombanya: EMC/ESC/EEC/KMSI → "Kisi-kisi soal & topik" lalu "Mock test" (D-076).
+- Worksheet PAUD Baca Tulis + game interaktif (D-075).
+
+**Yang dibawa ke server hanya kode, migrasi, dan konten soal** dari git. Akun, anak, skor, progres, artikel, atau
+gambar percobaan di laptop **tidak** ikut, karena semua itu hanya ada di database laptop dan database laptop tidak
+dikirim. Jangan memakai `db:backup`/`db:restore` dari laptop untuk rilis ini.
+
+Tanpa env baru dan tanpa dependensi sistem baru. **Perlu `migrate:prod` DAN `seed:prod`.**
+
+> Diuji 2026-10-08 di laptop dengan database kosong + `NODE_ENV=production`:
+>
+> - Hasil: 20 migrasi, 27 buku, 5.534 skill aktif (54 mock test), 3 level, 1 dialog, 1 admin.
+> - Data lain kosong: 0 orang tua/anak/kelas/event/skor/artikel/media.
+> - Satu baris `app_settings` "news" hanya penanda waktu email info materi, bukan data percobaan.
+
+### 1. Laptop: cek, commit, push
+
+Hentikan `pnpm dev` dulu (Ctrl+C), karena build menghapus `dist/` yang sedang dipakai dev server.
+
+```bash
+cd ~/Repo/udakids
+pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
+# semua harus hijau; validate:content: "0 error"
+
+git add -A
+# pastikan tidak ada rahasia / dump / data lokal yang ikut:
+git status --short | grep -E "\.env$|\.dump$|backups/|test-results|\.png$" || echo "aman"
+git diff --cached --stat -- apps/api/drizzle | tail -3   # harus ada 0018_videos_articles.sql & 0019_article_images.sql
+git commit -m "KMSI, mock test per lomba, artikel multi-gambar, Worksheet PAUD (D-073..D-076)"
+git push origin main
+git log -1 --oneline                                      # catat hash commit ini
+```
+
+Bila `grep` menampilkan file selain `aman`, batalkan dengan `git reset <file>` lalu ulangi `git status`.
+
+### 2. Server: masuk, cadangkan, catat angka awal
+
+```bash
+ssh root@169.58.177.74
+cd /var/www/kids.eduskul.my.id
+PREV=$(git rev-parse --short HEAD); echo "versi sekarang: $PREV"
+U=$(grep "^DATABASE_URL=" .env | cut -d= -f2- | tr -d '"')
+git status --short                                   # harus kosong (tidak ada suntingan langsung di server)
+mkdir -p /root/backups && chmod 700 /root/backups
+pg_dump "$U" -Fc -f /root/backups/sebelum-deploy-$(date +%F-%H%M).dump && ls -lh /root/backups | tail -1
+psql "$U" -c "
+  select (select count(*) from parents)  ortu,
+         (select count(*) from children) anak,
+         (select count(*) from events)   event,
+         (select count(*) from skills where status = 'active') skill_aktif,
+         (select count(*) from skill_catalogs) buku,
+         (select count(*) from drizzle.__drizzle_migrations) migrasi"
+```
+
+**Catat angkanya.** `ortu` dan `anak` harus tetap sama setelah deploy (event boleh bertambah karena anak bermain).
+`migrasi` sekarang 18 (0000–0017). Bila sudah 19, rilis D-073 sebelumnya sudah sempat masuk; tidak apa-apa.
+
+### 3. Ambil kode, build, migrasi, seed
+
+```bash
+git pull origin main
+git log -1 --oneline                                 # = hash dari langkah 1
+git diff --stat $PREV HEAD -- apps/api/drizzle | tail -3
+pnpm install --frozen-lockfile
+pnpm build                                           # engine, api, web: Done
+systemctl stop little-coder-api
+pnpm --filter @little-coder/api migrate:prod         # "Migrasi database selesai." (0018 + 0019)
+pnpm --filter @little-coder/api seed:prod            # soal, buku, dialog baru
+systemctl start little-coder-api
+```
+
+Keluaran `seed:prod` yang diharapkan:
+
+```text
+skill: … ditambahkan/diperbarui dari 5561 file    ← > 0 (KMSI Kelas 1–SMP, mock, worksheet PAUD)
+skill: … skill lama tidak ada di konten → draft     ← boleh muncul
+level: 0 ditambahkan/diperbarui
+dialog: 1 ditambahkan/diperbarui                    ← kalimat suara baru (game PAUD)
+```
+
+**Jangan** jalankan `pnpm db:seed`, `pnpm db:setup`, `pnpm db:restore`, `pnpm db:generate`, atau `seed:prod --force`
+di server (yang terakhir menimpa suntingan admin).
+
+Bila `pnpm build` gagal: jangan migrasi/seed, jalankan `systemctl start little-coder-api` (bila sempat di-stop),
+lalu kirim pesan error-nya.
+
+### 4. Periksa
+
+```bash
+sleep 5
+systemctl is-active little-coder-api                                   # active
+curl -s http://127.0.0.1:7177/health; echo                             # "status":"ok","db":"up"
+psql "$U" -tAc "select count(*) from drizzle.__drizzle_migrations"     # 20
+psql "$U" -tAc "select to_regclass('videos'), to_regclass('articles')" # videos | articles
+psql "$U" -tAc "select count(*) from skill_catalogs"                   # 27
+psql "$U" -tAc "select count(*) from skills where template->>'family' = 'mock' and status = 'active'"   # 54
+psql "$U" -c "
+  select domain, grade, title,
+         (select count(*) from jsonb_array_elements(categories) c where c->>'mock' = 'true') mock,
+         updated_by is not null disunting_admin
+  from skill_catalogs where grade in ('tkosn','sd12','sd34','sd56','smp79') order by grade, domain"
+# 15 baris; kolom mock: 2 untuk tkosn (EMC/ESC/EEC + KMSI), 1 untuk sd12…smp79 (KMSI)
+psql "$U" -c "
+  select (select count(*) from parents)  ortu,
+         (select count(*) from children) anak,
+         (select count(*) from skills where status = 'active') skill_aktif"   # ortu & anak = langkah 2
+curl -s http://127.0.0.1:7177/leaderboard/public/mocks | grep -o '"competition":"[A-Z]*"' | sort | uniq -c
+# KMSI, EMC, ESC, EEC
+```
+
+**Bila ada buku dengan `mock` = 0 atau judul masih "(OSN)":** katalog itu pernah diubah lewat Admin → Katalog.
+Seed sekarang tetap menambahkan materi baru, memindahkan mock, dan mengganti "(OSN)" → "(Olimpiade)" tanpa menghapus
+suntingan admin. Jadi cukup jalankan `seed:prod` sekali lagi. Bila masih belum berubah, kirim hasil query di atas.
+
+**Worksheet PAUD:** bila judulnya masih "Pra-TK" atau Worksheet hanya 1 materi, ikuti catatan "Tambahan rilis yang sama
+(D-075)" di bawah.
+
+**Nginx (sekali saja, untuk video YouTube):**
+
+```bash
+grep -n "Content-Security-Policy\|set \$csp" /etc/nginx/sites-enabled/*
+```
+
+- Tidak ada hasil → lewati.
+- Ada → di `img-src …;` tambahkan ` https://i.ytimg.com`, dan di `frame-src …;` tambahkan
+  ` https://www.youtube-nocookie.com`. Bila belum ada `frame-src`, buat `frame-src https://www.youtube-nocookie.com;`.
+  Contohnya ada di `deploy/nginx.conf.example`.
+- Lalu jalankan `nginx -t && systemctl reload nginx`.
+
+Gambar artikel tidak perlu perubahan Nginx, karena dilayani dari `/api/media/…` (domain yang sama).
+
+### 5. Cek di browser (jendela penyamaran)
+
+1. `https://kids.eduskul.my.id/play` → masuk anak → **TK (Olimpiade)** → **Matematika**. Harus tampil bagian
+   **EMC** dengan subjudul "Kisi-kisi soal & topik" lalu "Mock test", dan bagian **KMSI** dengan susunan yang sama.
+2. **Kelas 1–2 (Olimpiade)** → **English** → bagian KMSI: 12 materi + "Mock test".
+3. Landing → **Peringkat Mock Test**: tab KMSI 2026, EMC · Matematika, ESC · Sains, EEC · English.
+4. `/masuk/staf` → Admin → **Artikel & berita** → tulis artikel, unggah 2–3 gambar sekaligus, status **Terbit**.
+   Di `/artikel/<slug>`, gambarnya harus bisa digeser. Admin → **Video panduan** → tempel satu tautan YouTube.
+5. **PAUD** → **Worksheet**: bagian Numerasi dan Literasi, "Huruf vokal a dan i" langsung terbuka.
+
+Artikel, video, dan banner diisi lewat Admin di server. Isi percobaan di laptop memang tidak ikut terbawa.
+
+Perangkat anak memperbarui katalog sendiri saat online. Bila masih tampil versi lama, muat ulang halaman.
+
+### 6. Opsional: suara Momo untuk kalimat baru
+
+Bila `GOOGLE_TTS_API_KEY` sudah diisi di Admin/`.env`:
+
+```bash
+pnpm --filter @little-coder/api voice:prod           # "Suara Momo: … dibuat"
+```
+
+### Rollback
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl restart little-coder-api
+```
+
+- Migrasi 0018/0019 hanya menambah tabel/kolom, dan seed hanya menambah konten, jadi kode lama tetap jalan tanpa
+  memulihkan database.
+- Pulihkan dari `/root/backups/sebelum-deploy-….dump` hanya bila data rusak (lihat bagian Rollback rilis
+  2026-10-07). Semua perubahan setelah cadangan akan hilang.
+
+### Tambahan rilis yang sama (D-075): Worksheet PAUD Baca Tulis + game
+
+Tanpa migrasi baru. `seed:prod` menambah 40 level Worksheet PAUD (Game angka, Huruf vokal a dan i, Huruf vokal
+u, e, o, Game huruf) dan 4 kalimat suara Momo, serta mengganti judul katalog yang belum pernah disunting admin.
+Judul yang pernah disunting admin (kolom `disunting_admin` = `t`) diganti cukup judulnya, tanpa menyentuh isi:
+
+```bash
+psql "$U" -c "update skill_catalogs set title = replace(title, 'Pra-TK', 'PAUD') where grade = 'prek' and title like '%Pra-TK%'"
+psql "$U" -c "select domain, title, jsonb_array_length(categories) materi from skill_catalogs where grade = 'prek' order by domain"
+# english   English PAUD    …
+# math      Math PAUD       …
+# worksheet Worksheet PAUD  5
+```
+
+Bila `Worksheet PAUD` masih 1 materi dan `disunting_admin` = `t`, jalankan
+`psql "$U" -c "update skill_catalogs set updated_by = null where domain='worksheet' and grade='prek'"` lalu
+`seed:prod` sekali lagi (suntingan admin di katalog Worksheet akan diganti isi dari `content/`).
+
+Cek di browser: `/play` → **PAUD** → **Worksheet**: bagian **Numerasi · Berhitung** (2 materi) dan **Literasi ·
+Baca Tulis** (3 materi, "Huruf vokal a dan i" langsung terbuka, ada tombol "Belajar dulu").
+
+---
+
 ## Rilis 2026-10-07 (commit `5be6a4e`): migrasi 0017 + soal baru
 
 Isi: AI Gambar di admin (tabel `ai_images`, `ai_usage`), buku **Worksheet Pra-TK** (pelajaran angka, tebalkan,

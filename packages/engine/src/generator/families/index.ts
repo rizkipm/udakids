@@ -35,6 +35,8 @@ import {
 } from './shapes.js';
 import { sizeCompare } from './size.js';
 import { connectDots, numeralTrace } from './writing.js';
+import { letterFind, letterTapAll, letterTrace } from './letters.js';
+import { catchItemsFamily, mazePathFamily, memoryPairsFamily, wordSearchFamily } from './games.js';
 import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
 import { mockFamily } from './mock.js';
 
@@ -43,6 +45,13 @@ const BASE_FAMILIES = {
   'numeral-listen': numeralListen,
   'numeral-trace': numeralTrace,
   'connect-dots': connectDots,
+  'letter-trace': letterTrace,
+  'letter-find': letterFind,
+  'letter-tap-all': letterTapAll,
+  'maze-path': mazePathFamily,
+  'word-search': wordSearchFamily,
+  'memory-pairs': memoryPairsFamily,
+  'catch-items': catchItemsFamily,
   'english-word': englishWord,
   'english-count': englishCount,
   'english-pronoun': englishPronoun,

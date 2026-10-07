@@ -9,7 +9,7 @@ interface SeoProps {
 
 const DEFAULT_TITLE = 'Udakids – Game Edukasi Anak: Matematika, Sains & English';
 const DEFAULT_DESCRIPTION =
-  'Latihan interaktif Pra-TK sampai SMP: matematika, sains, bahasa Inggris, dan logika bersama robot Momo. Soal dibacakan, tanpa iklan, bisa offline.';
+  'Latihan interaktif PAUD sampai SMP: matematika, sains, bahasa Inggris, dan logika bersama robot Momo. Soal dibacakan, tanpa iklan, bisa offline.';
 const BASE_URL = 'https://kids.eduskul.my.id';
 
 export function Seo({ title, description, canonical, noindex = false }: SeoProps) {

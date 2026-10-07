@@ -16,6 +16,7 @@ import {
   type Item,
   type ItemCore,
   type SkillTemplate,
+  mazePath,
 } from '../src/index.js';
 
 const tpl = (
@@ -59,6 +60,16 @@ function correctAnswer(item: Item): AnswerValue {
     case 'connect':
     case 'spell':
       return it.answer;
+    case 'maze':
+      return mazePath(it, it.start, it.goal)
+        .slice(1)
+        .map((c) => `c${c}`);
+    case 'word-search':
+      return it.words.flatMap((w) => w.cells.map((c) => `c${c}`));
+    case 'memory':
+      return [...it.cards].sort((a, b) => a.pair.localeCompare(b.pair)).map((c) => c.id);
+    case 'catch':
+      return it.answer;
   }
 }
 
@@ -71,6 +82,16 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
   ['numeral-trace', { values: [0, 10], guide: 'dotted', showCount: false }],
   ['numeral-trace', { values: [0, 10], ask: 'count', tolerance: 10, maxSlips: 1 }],
   ['connect-dots', {}],
+  // Huruf vokal & game Worksheet PAUD (D-075).
+  ['letter-trace', { letters: ['a', 'i', 'u', 'e', 'o'], case: 'both' }],
+  ['letter-find', { mode: 'initial', letters: ['a', 'u'] }],
+  ['letter-find', { mode: 'case', letters: ['e', 'o'], pool: ['a'] }],
+  ['letter-tap-all', { letters: ['i'], pool: ['a', 'i'] }],
+  ['maze-path', { mode: 'vowels', decoys: [1, 3] }],
+  ['maze-path', { mode: 'numbers', count: [4, 6], cols: [5, 5], rows: [4, 5] }],
+  ['word-search', { theme: 'vokal', words: [2, 3] }],
+  ['memory-pairs', { mode: 'letter-picture', pairs: [2, 4] }],
+  ['catch-items', { mode: 'letter', letters: ['o'], case: 'upper' }],
   ['connect-dots', { dots: [4, 10], maxSlips: 0 }],
   ['english-word', { topics: ['animal', 'body', 'shape'], mode: 'pick-word', choices: 4 }],
   ['english-word', { topics: ['classroom', 'bathroom'], mode: 'spell', blanks: [1, 3] }],

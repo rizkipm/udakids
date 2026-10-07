@@ -6,7 +6,8 @@ import {
   type PlayStatus,
   type SkillTemplate,
 } from '@little-coder/engine';
-import { api } from '../api/client';
+import { api, ApiError } from '../api/client';
+import { bigDelete, bigGet, bigSet } from './bigStore';
 import type { CatalogResponse } from '../api/types';
 import { getSession } from '../auth/session';
 import { t, type MessageKey } from '../i18n';
@@ -31,26 +32,106 @@ function cached(childId: string | undefined): CatalogResponse | undefined {
   }
 }
 
-/** Katalog Pustaka: tampilkan salinan anak ini di perangkat dulu (offline), lalu perbarui dari server. */
+/** Salinan di memori dipakai ulang antarhalaman selama ini (tidak mengunduh katalog lagi). */
+const FRESH_MS = 3 * 60_000;
+/** Jeda coba ulang otomatis bila jaringan/server sesaat gagal. */
+const RETRY_MS = [1500, 4000];
+
+let shared: { childId: string; data: CatalogResponse; at: number } | undefined;
+let inflight: { childId: string; promise: Promise<CatalogResponse> } | undefined;
+
+/** Untuk test: lupakan katalog di memori. */
+export const resetCatalogMemory = () => {
+  shared = undefined;
+  inflight = undefined;
+};
+
+/** Simpan salinan offline: localStorage bila muat, selain itu IndexedDB (katalog lengkap bisa puluhan MB). */
+function save(childId: string, res: CatalogResponse) {
+  const key = keyFor(childId);
+  try {
+    localStorage.setItem(key, JSON.stringify(res));
+    void bigDelete(key);
+  } catch {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      /* abaikan */
+    }
+    void bigSet(key, res);
+  }
+}
+
+async function download(token: string): Promise<CatalogResponse> {
+  for (let i = 0; ; i++) {
+    try {
+      return await api<CatalogResponse>('/catalog', { token });
+    } catch (err) {
+      // 4xx (mis. sesi habis) tidak membaik dengan dicoba ulang.
+      const client = err instanceof ApiError && err.status >= 400 && err.status < 500;
+      if (client || i >= RETRY_MS.length) throw err;
+      await new Promise((r) => setTimeout(r, RETRY_MS[i]));
+    }
+  }
+}
+
+/**
+ * Katalog Pustaka: salinan anak ini di perangkat dulu (offline), lalu perbarui dari server. Satu unduhan
+ * dipakai bersama semua halaman (beranda, topik, latihan, pelajaran); gagal sesaat → dicoba ulang otomatis;
+ * `retry` untuk tombol "Coba lagi".
+ */
 export function useCatalog() {
   const childId = getSession('child')?.user.id;
-  const [data, setData] = useState<CatalogResponse | undefined>(() => cached(childId));
+  const [data, setData] = useState<CatalogResponse | undefined>(
+    () => (shared && shared.childId === childId ? shared.data : undefined) ?? cached(childId),
+  );
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     const session = getSession('child');
     if (!session?.token) return;
-    api<CatalogResponse>('/catalog', { token: session.token })
-      .then((res) => {
-        setData(res);
-        try {
-          localStorage.setItem(keyFor(session.user.id), JSON.stringify(res));
-        } catch {
-          /* abaikan */
-        }
-      })
-      .catch(() => setFailed(true));
-  }, []);
-  return { data, failed: failed && !data };
+    const id = session.user.id;
+    let live = true;
+    if (!data)
+      void bigGet<CatalogResponse>(keyFor(id)).then((d) => {
+        if (live && d) setData((cur) => cur ?? d);
+      });
+    if (attempt === 0 && shared?.childId === id && Date.now() - shared.at < FRESH_MS) {
+      return () => {
+        live = false;
+      };
+    }
+    if (!inflight || inflight.childId !== id) {
+      const promise = download(session.token);
+      inflight = { childId: id, promise };
+      promise
+        .then((res) => {
+          shared = { childId: id, data: res, at: Date.now() };
+          save(id, res);
+        })
+        .catch(() => {})
+        .finally(() => {
+          if (inflight?.promise === promise) inflight = undefined;
+        });
+    }
+    setFailed(false);
+    inflight.promise.then(
+      (res) => live && setData(res),
+      () => live && setFailed(true),
+    );
+    return () => {
+      live = false;
+    };
+    // Sekali per halaman, atau saat anak menekan "Coba lagi".
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attempt]);
+  return {
+    data,
+    failed: failed && !data,
+    /** Sedang mencoba lagi setelah gagal (untuk animasi). */
+    retrying: attempt > 0 && !failed && !data,
+    retry: () => setAttempt((a) => a + 1),
+  };
 }
 
 export type Shelf = {
@@ -116,7 +197,7 @@ export function firstOpen(
   return undefined;
 }
 
-/** Label jenjang untuk anak (Pra-TK, TK, Kelas 1, …, Kelas 1–2 (OSN)). */
+/** Label jenjang untuk anak (Pra-TK, TK, Kelas 1, …, Kelas 1–2 (Olimpiade)). */
 export const gradeLabel = (g: string) => {
   const key = `play.grade.${g}` as MessageKey;
   const label = t(key);

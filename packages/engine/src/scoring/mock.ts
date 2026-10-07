@@ -2,6 +2,7 @@ import type { Item } from '../generator/item.js';
 import { createRng } from '../generator/rng.js';
 import { generateItem, type SkillTemplate } from '../generator/template.js';
 import { itemKey } from './round.js';
+import { PASS_SCORE } from './quiz.js';
 import {
   MOCK_DIFFICULTIES,
   mockConfigSchema,
@@ -32,7 +33,8 @@ export function mockSources(
       s.grade === mock.grade &&
       !isMockSkill(s) &&
       !s.stub &&
-      s.status === 'active',
+      s.status === 'active' &&
+      (!c.categories || c.categories.includes(s.category)),
   );
   const out = { easy: [], medium: [], hard: [] } as Record<MockDifficulty, SkillTemplate[]>;
   for (const d of MOCK_DIFFICULTIES) {
@@ -148,6 +150,17 @@ export function scoreMock(
     byDifficulty: by,
   };
 }
+
+/**
+ * Batas lulus mock dalam skor 0–100 (D-074): KKM (poin) dikonversi ke skor; tanpa KKM = batas lulus biasa.
+ * Poin KMSI berkelipatan 4, jadi poin ≥ KKM ⇔ skor ≥ batas ini.
+ */
+export const mockPassScore = (c: MockConfig) =>
+  c.passPoints === undefined ? PASS_SCORE : mockScore100(c, c.passPoints);
+
+/** Lolos KKM? (poin, bukan skor). Tanpa KKM: skor ≥ batas lulus biasa. */
+export const mockPassed = (c: MockConfig, points: number) =>
+  c.passPoints === undefined ? mockScore100(c, points) >= PASS_SCORE : points >= c.passPoints;
 
 /** Batas poin yang mungkin untuk satu konfigurasi (dipakai server memeriksa kiriman perangkat). */
 export const mockPointsRange = (c: MockConfig): [number, number] => [

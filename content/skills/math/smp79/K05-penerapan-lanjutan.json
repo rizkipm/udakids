@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.k5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "K",
+  "order": 5,
+  "title": "Bangun datar — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 4],
+      "t": {
+        "values": [0, 1]
+      }
+    },
+    "derived": {
+      "p": "(t == 0) * 6 * k + (t == 1) * 10 * k",
+      "q": "(t == 0) * 8 * k + (t == 1) * 24 * k"
+    },
+    "prompt": "Belah ketupat dengan diagonal {p} cm dan {q} cm. Panjang sisinya … cm.",
+    "answer": "(t == 0) * 5 * k + (t == 1) * 13 * k",
+    "distractors": [
+      {
+        "expr": "(p + q) / 2",
+        "tag": "rata-rata"
+      },
+      {
+        "expr": "p * q / 2",
+        "tag": "luas"
+      },
+      {
+        "expr": "max(p, q)",
+        "tag": "diagonal"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setengah diagonal {=p/2} dan {=q/2}; sisi = √(…) = {answer} cm."
+  }
+}

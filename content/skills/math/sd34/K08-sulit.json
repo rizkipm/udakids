@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.k8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "K",
+  "order": 8,
+  "title": "Operasi bilangan dan penaksiran — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan dan penaksiran"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [30, 45],
+      "n": [100, 400]
+    },
+    "constraint": "n % k != 0",
+    "prompt": "{n} siswa ikut darmawisata. Satu bus memuat {k} siswa. Bus yang diperlukan paling sedikit …",
+    "answer": "ceil(n / k)",
+    "distractors": [
+      {
+        "expr": "floor(n / k)",
+        "tag": "tidak-dibulatkan-ke-atas"
+      },
+      {
+        "expr": "ceil(n / k) + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "n - k",
+        "tag": "dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}; sisa siswa tetap perlu bus, jadi {answer} bus."
+  }
+}

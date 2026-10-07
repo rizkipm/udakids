@@ -52,3 +52,27 @@ export function rankByAverage<T extends AverageRow>(rows: readonly T[]): Ranked<
 
 /** Jumlah teratas yang ditampilkan sebagai "papan pengumuman" (detail bisa dibuka). */
 export const LEADERBOARD_TOP = 25;
+
+/** Periode papan landing page (zona WIB). */
+export const BOARD_PERIODS = ['all', 'month', 'week', 'day'] as const;
+export type BoardPeriod = (typeof BOARD_PERIODS)[number];
+
+export type ActivityRow = { questions: number; timeMs: number; nickname: string };
+
+/**
+ * Paling aktif (landing page): soal dijawab terbanyak di periode itu; sama → waktu bermain lebih lama → nama.
+ * Anak tanpa soal di periode itu tidak masuk papan.
+ */
+export function rankByActivity<T extends ActivityRow>(
+  rows: readonly T[],
+): (T & { position: number })[] {
+  return rows
+    .filter((r) => r.questions > 0)
+    .sort(
+      (a, b) =>
+        b.questions - a.questions ||
+        b.timeMs - a.timeMs ||
+        a.nickname.localeCompare(b.nickname, 'id'),
+    )
+    .map((r, i) => ({ ...r, position: i + 1 }));
+}

@@ -1,6 +1,7 @@
 export * from './assets.js';
 export * from './dot-pictures.js';
 export * from './english-vocab.js';
+export * from './games.js';
 export * from './glyphs.js';
 export * from './expr.js';
 export * from './item.js';

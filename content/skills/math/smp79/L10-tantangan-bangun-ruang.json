@@ -1,0 +1,462 @@
+{
+  "id": "math.smp79.l10.tantangan-bangun-ruang",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "L",
+  "order": 10,
+  "title": "Bangun ruang — Level 10 — Tantangan bangun ruang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": {
+              "values": [3, 6, 9, 12, 15]
+            }
+          },
+          "prompt": "Volume bola dengan jari-jari {r} cm adalah … cm³. (π = 3,14)",
+          "format": "decimal",
+          "answer": "4 * 3.14 * r * r * r / 3",
+          "distractors": [
+            {
+              "expr": "4 * 3.14 * r * r",
+              "tag": "luas"
+            },
+            {
+              "expr": "3.14 * r * r * r",
+              "tag": "tanpa-4-per-3"
+            },
+            {
+              "expr": "4 * 3.14 * r * r * r",
+              "tag": "tanpa-bagi-3"
+            }
+          ],
+          "choices": 4,
+          "explain": "4/3 × 3,14 × {r}³ = {answer} cm³."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 2],
+            "m": [3, 10]
+          },
+          "derived": {
+            "r": "7 * k",
+            "s": "7 * k + m"
+          },
+          "prompt": "Kerucut dengan r = {r} cm dan garis pelukis {s} cm. Luas selimutnya … cm². (π = 22/7)",
+          "answer": "22 * k * s",
+          "distractors": [
+            {
+              "expr": "22 * 7 * k * k",
+              "tag": "luas-alas"
+            },
+            {
+              "expr": "22 * k * s + 22 * 7 * k * k",
+              "tag": "luas-permukaan"
+            },
+            {
+              "expr": "2 * 22 * k * s",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "πrs = 22/7 × {r} × {s} = {answer} cm²."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 2],
+            "t": [5, 15]
+          },
+          "derived": {
+            "r": "7 * k"
+          },
+          "prompt": "Tangki tabung r = {r} dm, t = {t} dm diisi penuh. Isinya … liter. (π = 22/7)",
+          "answer": "22 * 7 * k * k * t",
+          "distractors": [
+            {
+              "expr": "22 * 7 * k * k * t / 1000",
+              "tag": "salah-konversi"
+            },
+            {
+              "expr": "2 * 22 * k * t",
+              "tag": "selimut"
+            },
+            {
+              "expr": "22 * 7 * k * k",
+              "tag": "alas"
+            }
+          ],
+          "choices": 4,
+          "explain": "22/7 × {r}² × {t} dm³ = {answer} liter."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [20, 21, 28]
+            }
+          },
+          "prompt": "Kubus rusuk {s} cm dilubangi tabung tembus r = 7 cm sepanjang rusuk. Sisa volume … cm³. (π = 22/7)",
+          "answer": "s * s * s - 154 * s",
+          "distractors": [
+            {
+              "expr": "s * s * s",
+              "tag": "tanpa-lubang"
+            },
+            {
+              "expr": "154 * s",
+              "tag": "lubang"
+            },
+            {
+              "expr": "s * s * s - 154",
+              "tag": "lupa-tinggi"
+            }
+          ],
+          "choices": 4,
+          "explain": "{s}³ − 154 × {s} = {answer} cm³."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Banyak diagonal ruang kubus adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Menghubungkan titik berseberangan."
+            },
+            {
+              "prompt": "Rumus Euler bangun ruang: S + T − R = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "S + T = R + 2."
+            },
+            {
+              "prompt": "Jika jari-jari bola dijadikan 2 kali, volumenya menjadi … kali.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sebanding r³."
+            },
+            {
+              "prompt": "Volume kerucut 1/3 dari tabung dengan alas dan tinggi sama. Jika volume tabung 600 cm³, volume kerucut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200 cm³"
+                  },
+                  "say": "200 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.800 cm³"
+                  },
+                  "say": "1.800 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "400 cm³"
+                  },
+                  "say": "400 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "300 cm³"
+                  },
+                  "say": "300 cm³"
+                }
+              ],
+              "answer": 0,
+              "reteach": "600 : 3."
+            },
+            {
+              "prompt": "Panjang diagonal ruang balok 3 × 4 × 12 cm adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 cm"
+                  },
+                  "say": "13 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19 cm"
+                  },
+                  "say": "19 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm"
+                  },
+                  "say": "12 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "√(9 + 16 + 144)."
+            },
+            {
+              "prompt": "Luas permukaan kubus 150 cm². Volumenya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "125 cm³"
+                  },
+                  "say": "125 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 cm³"
+                  },
+                  "say": "25 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "150 cm³"
+                  },
+                  "say": "150 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "216 cm³"
+                  },
+                  "say": "216 cm³"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rusuk 5."
+            },
+            {
+              "prompt": "Banyak bidang diagonal kubus …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Enam bidang."
+            },
+            {
+              "prompt": "Air dalam tabung r = 10 cm naik 3 cm saat bola dimasukkan. Volume bola …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "300π cm³"
+                  },
+                  "say": "300π cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "900π cm³"
+                  },
+                  "say": "900π cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30π cm³"
+                  },
+                  "say": "30π cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100π cm³"
+                  },
+                  "say": "100π cm³"
+                }
+              ],
+              "answer": 0,
+              "reteach": "π × 100 × 3."
+            },
+            {
+              "prompt": "Limas segi enam memiliki … rusuk.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 alas + 6 tegak."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

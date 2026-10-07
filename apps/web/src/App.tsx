@@ -9,6 +9,7 @@ import { t } from './i18n';
 import { ParentApp } from './parent/ParentApp';
 import { PlayApp } from './play/PlayApp';
 import { Landing } from './site/Landing';
+import { ArticleDetailPage, ArticlesPage } from './site/SiteContent';
 import { StaffLogin } from './staff/StaffLogin';
 import { Seo } from './components/Seo';
 
@@ -40,6 +41,8 @@ function AppRoutes() {
       <Route path="/masuk/staf" element={<StaffLogin />} />
       <Route path="/berhenti-langganan" element={<Unsubscribe />} />
       <Route path="/r/:code" element={<ReferralLanding />} />
+      <Route path="/artikel" element={<ArticlesPage />} />
+      <Route path="/artikel/:slug" element={<ArticleDetailPage />} />
       <Route
         path="/admin/*"
         element={

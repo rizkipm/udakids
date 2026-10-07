@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.q2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "Q",
+  "order": 2,
+  "title": "Perbandingan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [4, 12],
+      "b": [6, 24],
+      "v": [1, 3]
+    },
+    "derived": {
+      "w": "a * b * v",
+      "t": "b * v"
+    },
+    "constraint": "a != b",
+    "prompt": "{a} pekerja menyelesaikan rumah dalam {t} hari. Jika {b} pekerja, selesai dalam … hari.",
+    "answer": "a * v",
+    "distractors": [
+      {
+        "expr": "t * b / a",
+        "tag": "senilai"
+      },
+      {
+        "expr": "t - (b - a)",
+        "tag": "dikurang"
+      },
+      {
+        "expr": "w / a",
+        "tag": "tetap"
+      }
+    ],
+    "choices": 4,
+    "explain": "Berbalik nilai: {a} × {t} : {b} = {answer}."
+  }
+}

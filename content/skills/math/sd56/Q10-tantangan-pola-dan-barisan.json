@@ -1,0 +1,455 @@
+{
+  "id": "math.sd56.q10.tantangan-pola-dan-barisan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "Q",
+  "order": 10,
+  "title": "Pola dan barisan — Level 10 — Tantangan pola dan barisan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "b": [2, 9],
+            "n": [10, 30]
+          },
+          "prompt": "Suku ke-{n} dari barisan {a}, {=a+b}, {=a+2*b}, … adalah …",
+          "answer": "a + (n - 1) * b",
+          "distractors": [
+            {
+              "expr": "a + n * b",
+              "tag": "tanpa-kurang-satu"
+            },
+            {
+              "expr": "n * b",
+              "tag": "tanpa-a"
+            },
+            {
+              "expr": "a * n",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "U{n} = {a} + ({n} − 1) × {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 20]
+          },
+          "prompt": "Bilangan segitiga ke-{n} (1, 3, 6, 10, …) adalah …",
+          "answer": "n * (n + 1) / 2",
+          "distractors": [
+            {
+              "expr": "n * n",
+              "tag": "persegi"
+            },
+            {
+              "expr": "n * (n + 1)",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "n * (n - 1) / 2",
+              "tag": "sebelumnya"
+            }
+          ],
+          "choices": 4,
+          "explain": "{n} × {=n+1} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 30]
+          },
+          "prompt": "Pola korek api: 1 persegi butuh 4 batang, 2 persegi berderet 7 batang, 3 persegi 10 batang. Untuk {n} persegi butuh … batang.",
+          "answer": "3 * n + 1",
+          "distractors": [
+            {
+              "expr": "4 * n",
+              "tag": "empat-tiap"
+            },
+            {
+              "expr": "3 * n",
+              "tag": "lupa-satu"
+            },
+            {
+              "expr": "3 * n + 4",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "4 + 3 × ({n} − 1) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 15],
+            "b": [2, 8],
+            "n": [8, 40]
+          },
+          "derived": {
+            "u": "a + (n - 1) * b"
+          },
+          "prompt": "Barisan {a}, {=a+b}, {=a+2*b}, … Suku ke berapa yang bernilai {u}?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(u - a) / b + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "u / b",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "({u} − {a}) : {b} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "1, 1, 2, 3, 5, 8, … Suku berikutnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Fibonacci: 5 + 8."
+            },
+            {
+              "prompt": "2, 6, 12, 20, 30, … Suku berikutnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42"
+                  },
+                  "say": "42"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "44"
+                  },
+                  "say": "44"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "say": "36"
+                }
+              ],
+              "answer": 0,
+              "reteach": "n(n + 1): 6 × 7."
+            },
+            {
+              "prompt": "Jumlah 1 + 2 + 3 + … + 50 = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.275"
+                  },
+                  "say": "1.275"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.250"
+                  },
+                  "say": "1.250"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.550"
+                  },
+                  "say": "2.550"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.300"
+                  },
+                  "say": "1.300"
+                }
+              ],
+              "answer": 0,
+              "reteach": "50 × 51 : 2."
+            },
+            {
+              "prompt": "3, 7, 15, 31, … Suku berikutnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "63"
+                  },
+                  "say": "63"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "62"
+                  },
+                  "say": "62"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "47"
+                  },
+                  "say": "47"
+                }
+              ],
+              "answer": 0,
+              "reteach": "× 2 + 1."
+            },
+            {
+              "prompt": "Huruf ke-100 dari pola ABCABCABC… adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "A"
+                  },
+                  "say": "A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak ada"
+                  },
+                  "say": "tidak ada"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "B"
+                  },
+                  "say": "B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "C"
+                  },
+                  "say": "C"
+                }
+              ],
+              "answer": 0,
+              "reteach": "100 = 3 × 33 + 1."
+            },
+            {
+              "prompt": "Banyak titik pada pola segitiga ke-6 (1, 3, 6, 10, …) …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "21"
+                  },
+                  "say": "21"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28"
+                  },
+                  "say": "28"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 × 7 : 2."
+            },
+            {
+              "prompt": "100, 95, 85, 70, 50, … Suku berikutnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "say": "35"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisih 5, 10, 15, 20, 25."
+            },
+            {
+              "prompt": "Suku ke-20 dari 5, 8, 11, … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "62"
+                  },
+                  "say": "62"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "63"
+                  },
+                  "say": "63"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65"
+                  },
+                  "say": "65"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 + 19 × 3."
+            },
+            {
+              "prompt": "1, 4, 9, 16, 25, … Bilangan ke-10 …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "81"
+                  },
+                  "say": "81"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "121"
+                  },
+                  "say": "121"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10²."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

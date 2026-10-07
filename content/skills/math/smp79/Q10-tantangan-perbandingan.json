@@ -1,0 +1,473 @@
+{
+  "id": "math.smp79.q10.tantangan-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "Q",
+  "order": 10,
+  "title": "Perbandingan — Level 10 — Tantangan perbandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 5],
+            "q": [2, 7],
+            "k": {
+              "values": [5000, 10000, 20000]
+            }
+          },
+          "derived": {
+            "t": "(p + q) * k"
+          },
+          "constraint": "p != q",
+          "prompt": "Perbandingan uang A : B = {p} : {q}. Jumlah uang mereka Rp{t}. Uang B Rp …",
+          "answer": "q * k",
+          "distractors": [
+            {
+              "expr": "p * k",
+              "tag": "uang-A"
+            },
+            {
+              "expr": "t / 2",
+              "tag": "setengah"
+            },
+            {
+              "expr": "t * q / p",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{q}/({p} + {q}) × {t} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [6, 12],
+            "v": {
+              "values": [40, 50, 60, 80]
+            },
+            "w": [2, 5]
+          },
+          "derived": {
+            "j": "v * w"
+          },
+          "prompt": "Mobil berangkat pukul {h}.00 dengan kecepatan {v} km/jam dan menempuh {j} km. Tiba pukul … (jam)",
+          "answer": "h + w",
+          "distractors": [
+            {
+              "expr": "h + w + 1",
+              "tag": "lebih"
+            },
+            {
+              "expr": "w",
+              "tag": "lamanya"
+            },
+            {
+              "expr": "h + j / 100",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{j} : {v} = {w} jam; tiba pukul {answer}.00."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 40],
+            "b": [10, 30],
+            "v": [1, 2]
+          },
+          "derived": {
+            "t": "(a + b) * v"
+          },
+          "prompt": "Persediaan makanan cukup untuk {a} ekor ayam selama {t} hari. Jika ditambah {b} ekor, cukup untuk … hari.",
+          "answer": "a * v",
+          "distractors": [
+            {
+              "expr": "t - b",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "b * v",
+              "tag": "salah"
+            },
+            {
+              "expr": "t",
+              "tag": "tetap"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} × {t} : ({a} + {b}) = {answer} hari."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [20, 50],
+            "q": [30, 60],
+            "w": [1, 4]
+          },
+          "derived": {
+            "j": "(p + q) * w"
+          },
+          "prompt": "Ali dan Budi berlawanan arah dari jarak {j} km dengan kecepatan {p} dan {q} km/jam. Bertemu setelah … jam.",
+          "answer": "w",
+          "distractors": [
+            {
+              "expr": "j / p",
+              "tag": "satu-orang"
+            },
+            {
+              "expr": "j / (q - p + 100)",
+              "tag": "salah"
+            },
+            {
+              "expr": "w + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{j} : ({p} + {q}) = {answer} jam."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Perbandingan umur ayah dan anak 7 : 2, selisihnya 30 tahun. Umur ayah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42"
+                  },
+                  "say": "42"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "say": "35"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "49"
+                  },
+                  "say": "49"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 bagian = 30."
+            },
+            {
+              "prompt": "a : b = 2 : 3 dan b : c = 4 : 5. a : c = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 : 15"
+                  },
+                  "say": "8 : 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 : 12"
+                  },
+                  "say": "10 : 12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 5"
+                  },
+                  "say": "2 : 5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 : 5"
+                  },
+                  "say": "6 : 5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 : 12 : 15."
+            },
+            {
+              "prompt": "Mesin A menyelesaikan pekerjaan 6 jam, mesin B 3 jam. Bersama-sama selesai dalam …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 jam"
+                  },
+                  "say": "2 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4,5 jam"
+                  },
+                  "say": "4,5 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 jam"
+                  },
+                  "say": "3 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 jam"
+                  },
+                  "say": "9 jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1/6 + 1/3 = 1/2."
+            },
+            {
+              "prompt": "Kecepatan 72 km/jam sama dengan … m/detik.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7,2"
+                  },
+                  "say": "7,2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200"
+                  },
+                  "say": "200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "72"
+                  },
+                  "say": "72"
+                }
+              ],
+              "answer": 0,
+              "reteach": "72.000 : 3.600."
+            },
+            {
+              "prompt": "Denah 1 : 200, ruangan 4 cm × 3 cm. Luas sebenarnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48 m²"
+                  },
+                  "say": "48 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "480 m²"
+                  },
+                  "say": "480 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 m²"
+                  },
+                  "say": "12 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24 m²"
+                  },
+                  "say": "24 m²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 m × 6 m."
+            },
+            {
+              "prompt": "Contoh perbandingan berbalik nilai adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "banyak pekerja dan waktu penyelesaian"
+                  },
+                  "say": "banyak pekerja dan waktu penyelesaian"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "banyak barang dan harga"
+                  },
+                  "say": "banyak barang dan harga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jarak dan bensin"
+                  },
+                  "say": "jarak dan bensin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "waktu dan jarak (kecepatan tetap)"
+                  },
+                  "say": "waktu dan jarak (kecepatan tetap)"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Berbalik."
+            },
+            {
+              "prompt": "Resep 4 porsi butuh 300 g tepung. Untuk 10 porsi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "750 g"
+                  },
+                  "say": "750 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "600 g"
+                  },
+                  "say": "600 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3.000 g"
+                  },
+                  "say": "3.000 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.200 g"
+                  },
+                  "say": "1.200 g"
+                }
+              ],
+              "answer": 0,
+              "reteach": "75 g per porsi."
+            },
+            {
+              "prompt": "Perbandingan sisi dua kubus 1 : 2. Perbandingan volumenya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 8"
+                  },
+                  "say": "1 : 8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 8"
+                  },
+                  "say": "2 : 8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 2"
+                  },
+                  "say": "1 : 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 4"
+                  },
+                  "say": "1 : 4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pangkat tiga."
+            },
+            {
+              "prompt": "Jarak pada peta 5 cm mewakili 25 km. Skalanya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 500.000"
+                  },
+                  "say": "1 : 500.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 50.000"
+                  },
+                  "say": "1 : 50.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 5.000.000"
+                  },
+                  "say": "1 : 5.000.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 25"
+                  },
+                  "say": "1 : 25"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2.500.000 : 5."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

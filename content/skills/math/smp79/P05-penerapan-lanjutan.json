@@ -1,0 +1,45 @@
+{
+  "id": "math.smp79.p5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 5,
+  "title": "Pola dan barisan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "n": [4, 9]
+    },
+    "derived": {
+      "p": "(n==4)*16+(n==5)*32+(n==6)*64+(n==7)*128+(n==8)*256+(n==9)*512"
+    },
+    "prompt": "Jumlah {n} suku pertama deret geometri {a} + {=a*2} + {=a*4} + … adalah …",
+    "answer": "a * (p - 1)",
+    "distractors": [
+      {
+        "expr": "a * p",
+        "tag": "tanpa-kurang"
+      },
+      {
+        "expr": "a * p / 2",
+        "tag": "suku-terakhir"
+      },
+      {
+        "expr": "a * (2 * p - 1)",
+        "tag": "lebih-satu-suku"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sn = {a}(2^{n} − 1) = {answer}."
+  }
+}

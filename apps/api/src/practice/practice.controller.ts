@@ -5,6 +5,7 @@ import {
   jagoStateSchema,
   levelStatuses,
   standaloneCodes,
+  groupStartCodes,
   mergeJago,
   isPassed,
   passedLevels,
@@ -19,6 +20,9 @@ import {
   type QuizResult,
   type SessionUser,
   mockConfigOf,
+  mockPassScore,
+  PASS_SCORE,
+  mockRetakeLocked,
   mockPointsRange,
   mockScore100,
   type MockConfig,
@@ -75,6 +79,12 @@ function validMock(q: QuizIn, mocks: Map<string, MockConfig>): boolean {
 function scoreOf(q: QuizIn, mocks?: Map<string, MockConfig>): number {
   const c = mocks?.get(q.skillId);
   return c ? mockScore100(c, q.points ?? 0) : quizScore(q.correct, q.total);
+}
+
+/** Batas lulus skor 0–100: mock dengan KKM (D-074) memakai KKM-nya, lainnya batas biasa. */
+function passScoreOf(q: QuizIn, mocks?: Map<string, MockConfig>): number {
+  const c = mocks?.get(q.skillId);
+  return c ? mockPassScore(c) : PASS_SCORE;
 }
 
 @Roles('child')
@@ -139,6 +149,27 @@ export class PracticeController {
         review: Array.isArray(p.review) ? p.review : null,
       };
     });
+  }
+
+  /**
+   * Level terakhir yang dimainkan anak ini (D-073), dari perangkat mana pun: dipakai tombol "Lanjutkan" di beranda.
+   * Mock test tidak ikut (mock dimulai sendiri dari halaman topiknya).
+   */
+  @Get('resume')
+  async resume(@CurrentUser() user: SessionUser) {
+    const res = await this.db.execute(sql`
+      select e.payload->>'skillId' as skill_id, e.ts
+      from events e
+      join skills s on s.id = e.payload->>'skillId' and s.status = 'active'
+      where e.child_id = ${user.id}
+        and e.type in ('item_answer', 'quiz_result')
+        and coalesce(s.template->>'family', '') <> 'mock'
+      order by e.ts desc
+      limit 1`);
+    const row = res.rows[0];
+    return row
+      ? { skillId: String(row.skill_id), ts: new Date(String(row.ts)).toISOString() }
+      : null;
   }
 
   @Get('profile')
@@ -333,6 +364,7 @@ export class PracticeController {
         grade: skills.grade,
         category: skills.category,
         order: skills.order,
+        family: sql<string>`${skills.template}->>'family'`,
       })
       .from(skills)
       .where(eq(skills.status, 'active'));
@@ -347,10 +379,14 @@ export class PracticeController {
           })
           .from(skillCatalogs)
       ).map((c) => {
-        const cats = c.categories as { code: string; standalone?: boolean }[];
+        const cats = c.categories as { code: string; group?: string; standalone?: boolean }[];
         return [
           `${c.domain}/${c.grade}` as string,
-          { codes: cats.map((x) => x.code), standalone: standaloneCodes(cats) },
+          {
+            codes: cats.map((x) => x.code),
+            standalone: standaloneCodes(cats),
+            groupStarts: groupStartCodes(cats),
+          },
         ] as const;
       }),
     );
@@ -369,6 +405,7 @@ export class PracticeController {
               nodes.filter((n) => n.domain === node.domain && n.grade === node.grade),
               results,
               book.standalone,
+              book.groupStarts,
             )[q.skillId]
           : undefined;
       // Level berbayar yang belum dibeli juga ditolak (D-036), sama seperti level terkunci.
@@ -376,13 +413,21 @@ export class PracticeController {
         !status ||
         status === 'locked' ||
         needsPurchase(access, { ...node!, ...(mocks.has(q.skillId) && { family: 'mock' }) }) ||
-        !validMock(q, mocks)
+        !validMock(q, mocks) ||
+        // Tanpa Premium, Mock test 1 hanya boleh dikerjakan sekali (D-072).
+        (mocks.has(q.skillId) && mockRetakeLocked(access, node!, results[q.skillId]?.attempts ?? 0))
       ) {
         rejected.push(q.id);
         continue;
       }
       allowed.push(q);
-      results[q.skillId] = recordQuiz(results[q.skillId], scoreOf(q, mocks), q.ts);
+      results[q.skillId] = recordQuiz(
+        results[q.skillId],
+        scoreOf(q, mocks),
+        q.ts,
+        undefined,
+        passScoreOf(q, mocks),
+      );
     }
     return { allowed, rejected, mocks };
   }
@@ -537,7 +582,13 @@ export class PracticeController {
         const current = await this.quizzes(tx, user.id);
         for (const q of [...allowed].sort((a, b) => a.ts - b.ts)) {
           if (!freshIds.has(q.id)) continue;
-          const next = recordQuiz(current[q.skillId], scoreOf(q, mocks), q.ts, q.durationMs);
+          const next = recordQuiz(
+            current[q.skillId],
+            scoreOf(q, mocks),
+            q.ts,
+            q.durationMs,
+            passScoreOf(q, mocks),
+          );
           current[q.skillId] = next;
           const row = {
             best: next.best,

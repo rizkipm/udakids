@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.n3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "N",
+  "order": 3,
+  "title": "Aritmetika sosial — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "values": [200000, 400000, 500000]
+      },
+      "a": {
+        "values": [10, 20, 30]
+      },
+      "b": {
+        "values": [10, 20, 50]
+      }
+    },
+    "prompt": "Barang Rp{h} diskon {a}% lalu diskon lagi {b}%. Harga akhir Rp …",
+    "answer": "h * (100 - a) * (100 - b) / 10000",
+    "distractors": [
+      {
+        "expr": "h * (100 - a - b) / 100",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "h * (100 - a) / 100",
+        "tag": "sekali"
+      },
+      {
+        "expr": "h * a * b / 10000",
+        "tag": "salah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bertingkat: {h} × (1 − {a}%) × (1 − {b}%) = {answer}."
+  }
+}

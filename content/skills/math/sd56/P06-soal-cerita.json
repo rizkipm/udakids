@@ -1,0 +1,42 @@
+{
+  "id": "math.sd56.p6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "P",
+  "order": 6,
+  "title": "Teori bilangan sederhana — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [3, 9],
+      "n": [50, 200]
+    },
+    "prompt": "Banyak bilangan kelipatan {k} dari 1 sampai {n} adalah …",
+    "answer": "floor(n / k)",
+    "distractors": [
+      {
+        "expr": "ceil(n / k) + (n % k == 0)",
+        "tag": "ke-atas"
+      },
+      {
+        "expr": "floor(n / k) - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "n - k",
+        "tag": "dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} : {k} = {answer} (dibulatkan ke bawah)."
+  }
+}

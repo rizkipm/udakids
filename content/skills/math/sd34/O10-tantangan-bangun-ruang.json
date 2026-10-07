@@ -1,0 +1,459 @@
+{
+  "id": "math.sd34.o10.tantangan-bangun-ruang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "O",
+  "order": 10,
+  "title": "Bangun ruang — Level 10 — Tantangan bangun ruang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 10]
+          },
+          "prompt": "Volume kubus dengan rusuk {s} cm adalah … cm³.",
+          "answer": "s * s * s",
+          "distractors": [
+            {
+              "expr": "s * s",
+              "tag": "luas"
+            },
+            {
+              "expr": "12 * s",
+              "tag": "panjang-rusuk"
+            },
+            {
+              "expr": "6 * s * s",
+              "tag": "luas-permukaan"
+            }
+          ],
+          "choices": 4,
+          "explain": "{s} × {s} × {s} = {answer} cm³."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 8]
+          },
+          "prompt": "Prisma segi-{n} punya … rusuk.",
+          "answer": "3 * n",
+          "distractors": [
+            {
+              "expr": "2 * n",
+              "tag": "limas"
+            },
+            {
+              "expr": "n + 2",
+              "tag": "sisi"
+            },
+            {
+              "expr": "2 * n + 2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Prisma segi-n: rusuk = 3n = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [20, 40, 50, 60]
+            },
+            "l": {
+              "values": [20, 25, 30]
+            },
+            "t": {
+              "values": [20, 30, 40]
+            }
+          },
+          "prompt": "Akuarium {p} cm × {l} cm × {t} cm diisi air penuh. Air yang diperlukan … liter. (1 liter = 1.000 cm³)",
+          "answer": "p * l * t / 1000",
+          "distractors": [
+            {
+              "expr": "p * l * t / 100",
+              "tag": "bagi-100"
+            },
+            {
+              "expr": "p * l * t",
+              "tag": "tidak-dikonversi"
+            },
+            {
+              "expr": "(p + l + t) / 10",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p} × {l} × {t} = {=p*l*t} cm³ = {answer} liter."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5]
+          },
+          "derived": {
+            "s": "2 * k"
+          },
+          "prompt": "Kubus besar bersisi {s} cm diisi kubus kecil bersisi 2 cm. Banyak kubus kecil …",
+          "answer": "k * k * k",
+          "distractors": [
+            {
+              "expr": "s * s * s / 2",
+              "tag": "volume-dibagi-2"
+            },
+            {
+              "expr": "k * k",
+              "tag": "satu-lapis"
+            },
+            {
+              "expr": "s * s * s",
+              "tag": "tidak-dibagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "({s} : 2)³ = {k}³ = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Bangun ruang yang tidak punya titik sudut dan rusuk adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bola"
+                  },
+                  "say": "bola"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerucut"
+                  },
+                  "say": "kerucut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "limas"
+                  },
+                  "say": "limas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kubus"
+                  },
+                  "say": "kubus"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bola tidak punya rusuk."
+            },
+            {
+              "prompt": "Kaleng susu berbentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tabung"
+                  },
+                  "say": "tabung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "limas"
+                  },
+                  "say": "limas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerucut"
+                  },
+                  "say": "kerucut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "balok"
+                  },
+                  "say": "balok"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kaleng = tabung."
+            },
+            {
+              "prompt": "Jaring-jaring kubus terdiri dari … persegi.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kubus 6 sisi."
+            },
+            {
+              "prompt": "Banyak titik sudut balok …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Balok 8 titik sudut."
+            },
+            {
+              "prompt": "Topi ulang tahun berbentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerucut"
+                  },
+                  "say": "kerucut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "prisma"
+                  },
+                  "say": "prisma"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tabung"
+                  },
+                  "say": "tabung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "bola"
+                  },
+                  "say": "bola"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kerucut."
+            },
+            {
+              "prompt": "Banyak kubus pada susunan 4 × 4 × 4 dikurangi kubus pojok (8) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "56"
+                  },
+                  "say": "56"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "64"
+                  },
+                  "say": "64"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48"
+                  },
+                  "say": "48"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                }
+              ],
+              "answer": 0,
+              "reteach": "64 − 8 = 56."
+            },
+            {
+              "prompt": "Bangun ruang dengan 5 sisi, 9 rusuk, 6 titik sudut adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "prisma segitiga"
+                  },
+                  "say": "prisma segitiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kubus"
+                  },
+                  "say": "kubus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "balok"
+                  },
+                  "say": "balok"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "limas segi empat"
+                  },
+                  "say": "limas segi empat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Prisma segitiga."
+            },
+            {
+              "prompt": "Volume kubus 125 cm³. Panjang rusuknya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 cm"
+                  },
+                  "say": "5 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12,5 cm"
+                  },
+                  "say": "12,5 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 cm"
+                  },
+                  "say": "25 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 cm"
+                  },
+                  "say": "15 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 × 5 × 5 = 125."
+            },
+            {
+              "prompt": "Piramida di Mesir berbentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "limas segi empat"
+                  },
+                  "say": "limas segi empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "prisma"
+                  },
+                  "say": "prisma"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kerucut"
+                  },
+                  "say": "kerucut"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kubus"
+                  },
+                  "say": "kubus"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Limas alas persegi."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

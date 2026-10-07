@@ -2,8 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   GLYPH_HEIGHT,
+  GLYPHS,
   glyphOf,
+  isLetterGlyph,
   numberWord,
+  type GlyphId,
   strokePath,
   type Color,
   type LessonCard,
@@ -19,6 +22,7 @@ import { shelvesOf, useCatalog, bookKey } from './catalog';
 import { TraceBoard } from './games/TraceBoard';
 import { SpeakButton } from './ItemPlayer';
 import { useLinks } from './links';
+import { MomoLoader } from './MomoLoader';
 import { PageHead } from './Profile';
 import './games/games.css';
 
@@ -45,7 +49,7 @@ const numColor = (n: number) => NUM_COLOR[n % NUM_COLOR.length]!;
 export function LessonPage({ momoColor }: { momoColor: Color }) {
   const { token = '' } = useParams();
   useSession('child');
-  const { data } = useCatalog();
+  const { data, failed: catalogFailed, retry: retryCatalog } = useCatalog();
   const links = useLinks(data);
   const where = links?.topicOf(token);
   const shelf = useMemo(() => {
@@ -65,12 +69,7 @@ export function LessonPage({ momoColor }: { momoColor: Color }) {
   }, [screen]);
 
   if (!data || !links) {
-    return (
-      <main className="kid-screen">
-        <Momo own color={momoColor} mood="idle" size={140} />
-        <p className="kid-note">{t('play.library.loading')}</p>
-      </main>
-    );
+    return <MomoLoader color={momoColor} failed={catalogFailed} onRetry={retryCatalog} />;
   }
   if (!shelf || !lesson || !screen || !where) {
     return (
@@ -136,12 +135,24 @@ function ScreenBody({ screen }: { screen: LessonScreen }) {
   switch (screen.jenis) {
     case 'kenalan':
     case 'ingat':
+      if (screen.huruf)
+        return (
+          <LetterStrip
+            letters={screen.huruf}
+            pictures={screen.gambar ?? []}
+            words={screen.jenis === 'ingat'}
+          />
+        );
       return screen.angka ? (
         <NumberStrip
           numbers={screen.angka}
           object={screen.gambar?.[0]}
           words={screen.jenis === 'ingat'}
         />
+      ) : null;
+    case 'bunyi':
+      return screen.huruf ? (
+        <SoundScreen letter={screen.huruf[0]!} pictures={screen.gambar ?? []} />
       ) : null;
     case 'kata':
       return (
@@ -162,14 +173,209 @@ function ScreenBody({ screen }: { screen: LessonScreen }) {
         />
       );
     case 'coba':
-      return screen.mode === 'hitung' ? (
-        <CountTry n={screen.angka![0]!} object={screen.gambar![0]!} />
-      ) : (
-        <TraceTry numbers={screen.angka ?? [1]} />
+      if (screen.mode === 'hitung')
+        return <CountTry n={screen.angka![0]!} object={screen.gambar![0]!} />;
+      if (screen.mode === 'cari') return <FindLetter letter={screen.huruf![0]!} />;
+      return (
+        <TraceTry
+          glyphs={
+            screen.huruf
+              ? screen.huruf.filter((h) => h in GLYPHS).map((h) => h as GlyphId)
+              : (screen.angka ?? [1]).map((n) => glyphOf(n).id)
+          }
+        />
       );
     default:
       return null;
   }
+}
+
+/** Warna huruf vokal (cerah, kontras dengan garis tepi gelap). */
+const LETTER_COLOR: Record<string, string> = {
+  a: '#e63946',
+  i: '#f3722c',
+  u: '#e9a400',
+  e: '#43aa8b',
+  o: '#277da1',
+};
+const letterColor = (ch: string) => LETTER_COLOR[ch.toLowerCase()] ?? '#5b3fd6';
+const letterName = (ch: string) =>
+  ch === ch.toUpperCase() ? `huruf ${ch.toLowerCase()} besar` : `huruf ${ch}`;
+
+/** Huruf besar-kecil yang bisa diketuk: disebut, Momo menuliskannya, dan gambar berawalan huruf itu muncul. */
+function LetterStrip({
+  letters,
+  pictures,
+  words,
+}: {
+  letters: string[];
+  pictures: ObjectId[];
+  words?: boolean;
+}) {
+  const [on, setOn] = useState<number>();
+  const tap = (k: number) => {
+    setOn(k);
+    const ch = letters[k]!;
+    const pic = pictures[k];
+    speak(pic ? `${letterName(ch)}. ${ch}, seperti ${pic.replace('-', ' ')}.` : letterName(ch));
+  };
+  const ch = on !== undefined ? letters[on]! : undefined;
+  return (
+    <>
+      <div className="number-strip" role="group" aria-label={t('play.lesson.letters')}>
+        {letters.map((l, k) => (
+          <button
+            key={l}
+            type="button"
+            className={`number-tile letter-tile${on === k ? ' is-on' : ''}`}
+            style={{ background: letterColor(l) }}
+            aria-label={letterName(l)}
+            onClick={() => tap(k)}
+          >
+            {l.toUpperCase()}
+            <small>{l.toLowerCase()}</small>
+          </button>
+        ))}
+      </div>
+      {words && pictures.length > 0 && (
+        <div className="letter-pics">
+          {letters.map((l, k) =>
+            pictures[k] ? (
+              <span key={l} className="letter-pic">
+                <VisualView visual={{ kind: 'object', object: pictures[k]! }} size={64} />
+                <b style={{ color: letterColor(l) }}>{l}</b>
+              </span>
+            ) : null,
+          )}
+        </div>
+      )}
+      {ch && (
+        <div className="number-focus" key={ch}>
+          <span className="letter-pair">
+            {isLetterGlyph(ch.toUpperCase() as GlyphId) && (
+              <GlyphWrite glyph={ch.toUpperCase() as GlyphId} color={letterColor(ch)} size={120} />
+            )}
+            {isLetterGlyph(ch.toLowerCase() as GlyphId) && (
+              <GlyphWrite glyph={ch.toLowerCase() as GlyphId} color={letterColor(ch)} size={120} />
+            )}
+          </span>
+          {pictures[on!] && (
+            <div className="number-focus-objects">
+              <VisualView visual={{ kind: 'object', object: pictures[on!]! }} size={150} />
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+
+/** Bunyi huruf: huruf besar + gambar berawalan huruf itu; ketuk gambar → bunyi depan lalu kata per suku kata. */
+function SoundScreen({ letter, pictures }: { letter: string; pictures: ObjectId[] }) {
+  const [on, setOn] = useState<ObjectId>();
+  return (
+    <div className="sound-screen">
+      <button
+        type="button"
+        className="number-tile letter-tile is-big"
+        style={{ background: letterColor(letter) }}
+        aria-label={letterName(letter)}
+        onClick={() => speak(`${letter}. ${letter}. ${letter}.`, { rate: 0.8 })}
+      >
+        {letter.toUpperCase()}
+        <small>{letter.toLowerCase()}</small>
+      </button>
+      <div className="sound-pics" role="group" aria-label={t('play.lesson.sound')}>
+        {pictures.map((pic) => {
+          const word = pic.replace('-', ' ');
+          return (
+            <button
+              key={pic}
+              type="button"
+              className={`word-card sound-card${on === pic ? ' is-on' : ''}`}
+              aria-label={word}
+              onClick={() => {
+                setOn(pic);
+                speak(`${letter}... ${word}`, { rate: 0.85 });
+              }}
+            >
+              <VisualView visual={{ kind: 'object', object: pic }} size={96} />
+              <span className="word-card-word">
+                <b style={{ color: letterColor(letter) }}>{word[0]}</b>
+                {word.slice(1)}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/** Coba mencari huruf: ketuk semua huruf yang sama di antara huruf lain (tidak dinilai). */
+const FIND_OTHERS: Record<string, string[]> = {
+  a: ['o', 'e', 'd', 'b'],
+  i: ['l', 't', 'j', 'u'],
+  u: ['n', 'o', 'v', 'a'],
+  e: ['c', 'a', 'o', 'b'],
+  o: ['a', 'c', 'e', 'u'],
+};
+function FindLetter({ letter }: { letter: string }) {
+  const tiles = useMemo(() => {
+    const others = FIND_OTHERS[letter] ?? ['b', 'm', 's', 't'];
+    // Susunan tetap (bukan acak) supaya layar pelajaran sama setiap dibuka.
+    return [
+      letter,
+      others[0]!,
+      others[1]!,
+      letter,
+      others[2]!,
+      others[3]!,
+      others[0]!,
+      letter,
+      others[1]!,
+    ];
+  }, [letter]);
+  const total = tiles.filter((x) => x === letter).length;
+  const [got, setGot] = useState<number[]>([]);
+  const [shake, setShake] = useState<{ k: number; n: number }>();
+  const tap = (k: number) => {
+    if (got.includes(k)) return;
+    if (tiles[k] !== letter) {
+      setShake((s) => ({ k, n: (s?.n ?? 0) + 1 }));
+      speak(`${letterName(tiles[k]!)}. ${t('play.lesson.findLetter', { letter })}?`);
+      return;
+    }
+    const next = [...got, k];
+    setGot(next);
+    speak(
+      next.length >= total
+        ? t('play.lesson.findDone', { letter })
+        : t('play.lesson.findLeft', { n: numberWord(total - next.length), letter }),
+    );
+  };
+  return (
+    <>
+      <div className="find-grid">
+        {tiles.map((ch, k) => (
+          <button
+            key={`${k}-${shake?.k === k ? shake.n : 0}`}
+            type="button"
+            className={`find-tile${got.includes(k) ? ' is-got' : ''}${shake?.k === k ? ' is-shake' : ''}`}
+            aria-label={letterName(ch)}
+            onClick={() => tap(k)}
+          >
+            {ch}
+          </button>
+        ))}
+      </div>
+      <p className="kid-note" aria-live="polite">
+        {got.length >= total
+          ? t('play.lesson.findDone', { letter })
+          : t('play.lesson.findLeft', { n: total - got.length, letter })}
+      </p>
+    </>
+  );
 }
 
 /** Deretan angka besar: ketuk → angka disebut, Momo menuliskannya, dan benda sebanyak angka itu muncul. */
@@ -206,7 +412,7 @@ function NumberStrip({
       {words && <p className="kid-note">{numbers.map((n) => numberWord(n)).join(', ')}</p>}
       {on !== undefined && (
         <div className="number-focus" key={on}>
-          <GlyphWrite n={on} color={numColor(on)} />
+          <GlyphWrite glyph={glyphOf(on).id} color={numColor(on)} />
           {object && on > 0 && (
             <div className="number-focus-objects" aria-label={`${on} ${object}`}>
               <VisualView
@@ -222,8 +428,16 @@ function NumberStrip({
 }
 
 /** Momo "menulis" angka: goresan bernomor muncul satu per satu (animasi garis). */
-export function GlyphWrite({ n, color, size = 150 }: { n: number; color: string; size?: number }) {
-  const g = glyphOf(n);
+export function GlyphWrite({
+  glyph,
+  color,
+  size = 150,
+}: {
+  glyph: GlyphId;
+  color: string;
+  size?: number;
+}) {
+  const g = GLYPHS[glyph];
   const pad = 12;
   const w = g.width + pad * 2;
   const h = GLYPH_HEIGHT + pad * 2;
@@ -273,11 +487,21 @@ function WordCards({ cards }: { cards: LessonCard[] }) {
     <div className="word-cards">
       {cards.map((c, k) => (
         <button key={c.kata} type="button" className="word-card" onClick={() => read(k)}>
-          <span className="word-card-num" style={{ color: numColor(c.angka) }}>
-            {c.angka}
-          </span>
+          {c.huruf ? (
+            <span className="word-card-num" style={{ color: letterColor(c.huruf) }}>
+              {c.huruf}
+            </span>
+          ) : (
+            <span className="word-card-num" style={{ color: numColor(c.angka ?? 0) }}>
+              {c.angka}
+            </span>
+          )}
           <VisualView
-            visual={{ kind: 'objects', object: c.gambar, count: c.angka, layout: 'rows' }}
+            visual={
+              c.huruf
+                ? { kind: 'object', object: c.gambar }
+                : { kind: 'objects', object: c.gambar, count: c.angka ?? 1, layout: 'rows' }
+            }
             size={90}
           />
           <span className="word-card-word">
@@ -326,32 +550,36 @@ function CountTry({ n, object }: { n: number; object: ObjectId }) {
           );
         })}
       </div>
-      {done && <GlyphWrite n={n} color={numColor(n)} size={120} />}
+      {done && <GlyphWrite glyph={glyphOf(n).id} color={numColor(n)} size={120} />}
     </>
   );
 }
 
-/** Coba menebalkan beberapa angka berurutan. Tidak dinilai (latihan bebas). */
-function TraceTry({ numbers }: { numbers: number[] }) {
+/** Coba menebalkan beberapa angka/huruf berurutan. Tidak dinilai (latihan bebas). */
+function TraceTry({ glyphs }: { glyphs: GlyphId[] }) {
   const [k, setK] = useState(0);
   const [finished, setFinished] = useState(false);
-  const n = numbers[k]!;
+  const glyph = glyphs[k]!;
+  const letters = glyphs.some(isLetterGlyph);
   return (
     <>
       <TraceBoard
-        key={`${k}-${n}`}
-        glyph={glyphOf(n).id}
+        key={`${k}-${glyph}`}
+        glyph={glyph}
         tolerance={20}
         size={260}
         onDone={() => {
-          if (k + 1 < numbers.length) window.setTimeout(() => setK(k + 1), 1100);
+          if (k + 1 < glyphs.length) window.setTimeout(() => setK(k + 1), 1100);
           else setFinished(true);
         }}
       />
       <p className="kid-note">
         {finished
-          ? t('play.lesson.traceAll')
-          : t('play.lesson.traceOf', { n: k + 1, of: numbers.length })}
+          ? t(letters ? 'play.lesson.traceLettersAll' : 'play.lesson.traceAll')
+          : t(letters ? 'play.lesson.traceLetterOf' : 'play.lesson.traceOf', {
+              n: k + 1,
+              of: glyphs.length,
+            })}
       </p>
     </>
   );

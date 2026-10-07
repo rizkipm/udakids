@@ -1,0 +1,51 @@
+{
+  "id": "math.sd34.q7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "Q",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [10, 30],
+      "h": {
+        "values": [8000, 9000, 10000]
+      },
+      "m": {
+        "values": [1000, 2000, 3000]
+      }
+    },
+    "derived": {
+      "b": "n * h",
+      "j": "h + m"
+    },
+    "prompt": "Pedagang membeli {n} kg jeruk seharga Rp{b}. Dijual Rp{j} per kg dan habis. Keuntungannya Rp …",
+    "answer": "n * m",
+    "distractors": [
+      {
+        "expr": "m",
+        "tag": "untung-per-kg"
+      },
+      {
+        "expr": "n * j",
+        "tag": "hasil-jual"
+      },
+      {
+        "expr": "n * m + m",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Penjualan {n} × {j} = {=n*j}; untung {=n*j} − {b} = {answer}."
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "id": "math.smp79.k10.tantangan-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "K",
+  "order": 10,
+  "title": "Bangun datar — Level 10 — Tantangan bangun datar",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3],
+            "s": {
+              "values": [90, 180, 45, 60, 120]
+            }
+          },
+          "derived": {
+            "r": "7 * k"
+          },
+          "constraint": "(2 * 22 * k * s) % 360 == 0",
+          "prompt": "Panjang busur lingkaran r = {r} cm dengan sudut pusat {s}° adalah … cm. (π = 22/7)",
+          "answer": "2 * 22 * k * s / 360",
+          "distractors": [
+            {
+              "expr": "22 * 7 * k * k * s / 360",
+              "tag": "luas-juring"
+            },
+            {
+              "expr": "2 * 22 * k",
+              "tag": "keliling"
+            },
+            {
+              "expr": "22 * k * s / 360",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{s}/360 × 2 × 22/7 × {r} = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 4],
+            "t": {
+              "values": [0, 1]
+            }
+          },
+          "derived": {
+            "p": "(t == 0) * 6 * k + (t == 1) * 10 * k",
+            "q": "(t == 0) * 8 * k + (t == 1) * 24 * k"
+          },
+          "prompt": "Belah ketupat dengan diagonal {p} cm dan {q} cm. Panjang sisinya … cm.",
+          "answer": "(t == 0) * 5 * k + (t == 1) * 13 * k",
+          "distractors": [
+            {
+              "expr": "(p + q) / 2",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "p * q / 2",
+              "tag": "luas"
+            },
+            {
+              "expr": "max(p, q)",
+              "tag": "diagonal"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setengah diagonal {=p/2} dan {=q/2}; sisi = √(…) = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 5]
+          },
+          "derived": {
+            "a": "3 * k",
+            "b": "4 * k"
+          },
+          "prompt": "Keliling segitiga siku-siku dengan sisi tegak {a} cm dan {b} cm adalah … cm.",
+          "answer": "12 * k",
+          "distractors": [
+            {
+              "expr": "7 * k",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "6 * k * k",
+              "tag": "luas"
+            },
+            {
+              "expr": "14 * k",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} + {b} + {=5*k} = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 6]
+          },
+          "derived": {
+            "p": "8 * k",
+            "l": "6 * k"
+          },
+          "prompt": "Persegi panjang {p} × {l} cm. Panjang diagonalnya … cm.",
+          "answer": "10 * k",
+          "distractors": [
+            {
+              "expr": "14 * k",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "2 * k",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "48 * k * k",
+              "tag": "luas"
+            }
+          ],
+          "choices": 4,
+          "explain": "√({p}² + {l}²) = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Tripel Pythagoras adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8, 15, 17"
+                  },
+                  "say": "8, 15, 17"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6, 8, 11"
+                  },
+                  "say": "6, 8, 11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7, 24, 26"
+                  },
+                  "say": "7, 24, 26"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5, 12, 14"
+                  },
+                  "say": "5, 12, 14"
+                }
+              ],
+              "answer": 0,
+              "reteach": "64 + 225 = 289."
+            },
+            {
+              "prompt": "Segitiga dengan sisi 5, 7, 9 termasuk segitiga …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tumpul"
+                  },
+                  "say": "tumpul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama sisi"
+                  },
+                  "say": "sama sisi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "siku-siku"
+                  },
+                  "say": "siku-siku"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lancip"
+                  },
+                  "say": "lancip"
+                }
+              ],
+              "answer": 0,
+              "reteach": "81 > 25 + 49."
+            },
+            {
+              "prompt": "Luas daerah persegi bersisi 14 cm dikurangi lingkaran dalamnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42 cm²"
+                  },
+                  "say": "42 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "154 cm²"
+                  },
+                  "say": "154 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "196 cm²"
+                  },
+                  "say": "196 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "56 cm²"
+                  },
+                  "say": "56 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "196 − 154."
+            },
+            {
+              "prompt": "Sudut keliling yang menghadap busur sama dengan sudut pusat 100° besarnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50°"
+                  },
+                  "say": "50°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200°"
+                  },
+                  "say": "200°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80°"
+                  },
+                  "say": "80°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100°"
+                  },
+                  "say": "100°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setengah sudut pusat."
+            },
+            {
+              "prompt": "Jarak titik (1, 2) dan (4, 6) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "√7"
+                  },
+                  "say": "√7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                }
+              ],
+              "answer": 0,
+              "reteach": "√(9 + 16)."
+            },
+            {
+              "prompt": "Jumlah sudut dalam segi delapan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.080°"
+                  },
+                  "say": "1.080°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.440°"
+                  },
+                  "say": "1.440°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "720°"
+                  },
+                  "say": "720°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "900°"
+                  },
+                  "say": "900°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(8 − 2) × 180°."
+            },
+            {
+              "prompt": "Dua segitiga sebangun dengan perbandingan sisi 2 : 3. Perbandingan luasnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 : 9"
+                  },
+                  "say": "4 : 9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 : 27"
+                  },
+                  "say": "8 : 27"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 : 9"
+                  },
+                  "say": "6 : 9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 3"
+                  },
+                  "say": "2 : 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kuadrat perbandingan."
+            },
+            {
+              "prompt": "Garis singgung persekutuan luar dua lingkaran r₁ = 7, r₂ = 2, jarak pusat 13. Panjangnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "√(169 − 25)."
+            },
+            {
+              "prompt": "Diagonal persegi bersisi 5 cm adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5√2 cm"
+                  },
+                  "say": "5√2 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 cm"
+                  },
+                  "say": "25 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 cm"
+                  },
+                  "say": "5 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "s√2."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

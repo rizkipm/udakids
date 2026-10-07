@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.p1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 1,
+  "title": "Pola dan barisan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 10],
+      "b": [2, 6],
+      "n": [6, 20]
+    },
+    "constraint": "(n * (2 * a + (n - 1) * b)) % 2 == 0",
+    "prompt": "Jumlah {n} suku pertama deret {a} + {=a+b} + {=a+2*b} + … adalah …",
+    "answer": "n * (2 * a + (n - 1) * b) / 2",
+    "distractors": [
+      {
+        "expr": "a + (n - 1) * b",
+        "tag": "suku-ke-n"
+      },
+      {
+        "expr": "n * (a + n * b) / 2",
+        "tag": "salah"
+      },
+      {
+        "expr": "n * (2 * a + n * b) / 2",
+        "tag": "tanpa-kurang-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sn = {n}/2 × (2·{a} + ({n} − 1)·{b}) = {answer}."
+  }
+}

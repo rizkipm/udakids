@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.j6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "J",
+  "order": 6,
+  "title": "Operasi bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": {
+        "values": [2, 4, 5]
+      },
+      "c": [1, 4],
+      "d": {
+        "values": [2, 4, 5, 10]
+      }
+    },
+    "constraint": "a < b && c < d",
+    "prompt": "{a}/{b} + {c}/{d} = … (dalam desimal)",
+    "format": "decimal",
+    "answer": "a / b + c / d",
+    "distractors": [
+      {
+        "expr": "(a + c) / (b + d)",
+        "tag": "pembilang-penyebut-dijumlah"
+      },
+      {
+        "expr": "a / b * c / d",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a / b + c / d + 0.5",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Ubah ke desimal lalu jumlahkan: {answer}."
+  }
+}

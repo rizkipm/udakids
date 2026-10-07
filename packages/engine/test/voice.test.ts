@@ -93,7 +93,7 @@ describe('suara Momo (D-035)', () => {
         readFileSync(new URL('../../../content/dialog/momo.id.json', import.meta.url), 'utf8'),
       ),
     );
-    expect(Object.keys(COMMAND_KEYS)).toHaveLength(11);
+    expect(Object.keys(COMMAND_KEYS)).toHaveLength(15);
     for (const k of VOICE_LINE_KEYS) {
       expect(dialog.lines[k], k).toBeDefined();
       expect(dialog.lines[k]!.text).not.toMatch(/\b(salah|gagal)\b/i);

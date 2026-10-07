@@ -35,9 +35,37 @@ export const mockConfigSchema = z
     referenceMinutes: z.number().int().min(5).max(240).default(60),
     /** Nama aturan penilaian untuk ditampilkan. */
     rule: z.string().trim().min(2).max(80).default('Penilaian gaya EMC (Eduversal)'),
+    /**
+     * Kode materi sumber soal (D-074), mis. materi KMSI saja. Tanpa ini: semua materi di buku (D-072).
+     */
+    categories: z
+      .array(z.string().regex(/^[A-Z]{1,2}$/))
+      .min(1)
+      .optional(),
+    /**
+     * KKM lomba dalam poin (D-074), mis. KMSI Level A 40 dari 80, Level 1–4 72 dari 120. Bila diisi, mock "lulus"
+     * bila poin ≥ KKM (bukan skor ≥ 70) dan hasil menampilkan lolos/belum lolos KKM.
+     */
+    passPoints: z.number().int().min(1).max(5000).optional(),
   })
   .refine((c) => c.plan.easy + c.plan.medium + c.plan.hard === c.questions, {
     message: 'jumlah soal per tingkat harus sama dengan questions',
     path: ['plan'],
-  });
+  })
+  .refine(
+    (c) =>
+      c.passPoints === undefined ||
+      c.passPoints <=
+        c.plan.easy * c.points.easy.right +
+          c.plan.medium * c.points.medium.right +
+          c.plan.hard * c.points.hard.right,
+    { message: 'KKM melebihi poin maksimal', path: ['passPoints'] },
+  );
+
+/** Penilaian KMSI (D-074): benar 4, salah 0, kosong 0 untuk semua tingkat. */
+export const KMSI_POINTS = {
+  easy: { right: 4, wrong: 0 },
+  medium: { right: 4, wrong: 0 },
+  hard: { right: 4, wrong: 0 },
+} as const;
 export type MockConfig = z.infer<typeof mockConfigSchema>;

@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.l8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "L",
+  "order": 8,
+  "title": "Bangun datar — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 10],
+      "n": {
+        "values": [100, 200, 500, 1000]
+      }
+    },
+    "derived": {
+      "d": "7 * k"
+    },
+    "prompt": "Roda berdiameter {d} cm berputar {n} kali. Jarak yang ditempuh … m. (π = 22/7)",
+    "format": "decimal",
+    "answer": "22 * k * n / 100",
+    "distractors": [
+      {
+        "expr": "22 * k * n",
+        "tag": "tidak-dikonversi"
+      },
+      {
+        "expr": "22 * k * n / 1000",
+        "tag": "bagi-1000"
+      },
+      {
+        "expr": "7 * k * n / 100",
+        "tag": "pakai-diameter"
+      }
+    ],
+    "choices": 4,
+    "explain": "Keliling {=22*k} cm × {n} = {=22*k*n} cm = {answer} m."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.k5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "K",
+  "order": 5,
+  "title": "Operasi bilangan dan penaksiran — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan dan penaksiran"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [120, 980],
+      "b": [120, 980]
+    },
+    "constraint": "a % 100 != 50 && b % 100 != 50",
+    "prompt": "Taksiran {a} + {b} dengan pembulatan ke ratusan terdekat adalah …",
+    "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "hasil-tepat"
+      },
+      {
+        "expr": "floor(a / 100) * 100 + floor(b / 100) * 100",
+        "tag": "dibulatkan-ke-bawah"
+      },
+      {
+        "expr": "ceil(a / 100) * 100 + ceil(b / 100) * 100",
+        "tag": "dibulatkan-ke-atas"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a} ≈ {=round(a/100)*100}, {b} ≈ {=round(b/100)*100}; jumlahnya {answer}."
+  }
+}

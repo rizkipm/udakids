@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.r8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "R",
+  "order": 8,
+  "title": "Statistika dan peluang — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "na": [10, 15],
+      "ra": [60, 85],
+      "h": [1, 5],
+      "c": [1, 2]
+    },
+    "derived": {
+      "nb": "c * na",
+      "rb": "ra + 3 * h"
+    },
+    "constraint": "(na * ra + nb * rb) % (na + nb) == 0",
+    "prompt": "Nilai rata-rata kelas A ({na} siswa) {ra}, kelas B ({nb} siswa) {rb}. Rata-rata gabungan …",
+    "answer": "(na * ra + nb * rb) / (na + nb)",
+    "distractors": [
+      {
+        "expr": "(ra + rb) / 2",
+        "tag": "rata-dua"
+      },
+      {
+        "expr": "ra",
+        "tag": "kelas-A"
+      },
+      {
+        "expr": "rb",
+        "tag": "kelas-B"
+      }
+    ],
+    "choices": 4,
+    "explain": "({na}·{ra} + {nb}·{rb}) : {=na+nb} = {answer}."
+  }
+}

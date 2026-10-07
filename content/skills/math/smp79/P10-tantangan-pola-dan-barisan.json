@@ -1,0 +1,468 @@
+{
+  "id": "math.smp79.p10.tantangan-pola-dan-barisan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 10,
+  "title": "Pola dan barisan — Level 10 — Tantangan pola dan barisan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "b": [2, 9]
+          },
+          "derived": {
+            "u3": "a + 2 * b",
+            "u7": "a + 6 * b"
+          },
+          "prompt": "Barisan aritmetika U3 = {u3} dan U7 = {u7}. Beda barisan …",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "(u7 - u3) / 7",
+              "tag": "bagi-7"
+            },
+            {
+              "expr": "u7 - u3",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "(U7 − U3) : 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "n": [4, 9]
+          },
+          "derived": {
+            "p": "(n==4)*16+(n==5)*32+(n==6)*64+(n==7)*128+(n==8)*256+(n==9)*512"
+          },
+          "prompt": "Jumlah {n} suku pertama deret geometri {a} + {=a*2} + {=a*4} + … adalah …",
+          "answer": "a * (p - 1)",
+          "distractors": [
+            {
+              "expr": "a * p",
+              "tag": "tanpa-kurang"
+            },
+            {
+              "expr": "a * p / 2",
+              "tag": "suku-terakhir"
+            },
+            {
+              "expr": "a * (2 * p - 1)",
+              "tag": "lebih-satu-suku"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sn = {a}(2^{n} − 1) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 30],
+            "m": {
+              "values": [10, 15, 20]
+            },
+            "k": [3, 7]
+          },
+          "derived": {
+            "t": "m * k",
+            "p": "(k==3)*8+(k==4)*16+(k==5)*32+(k==6)*64+(k==7)*128"
+          },
+          "prompt": "Bakteri membelah menjadi 2 setiap {m} menit. Awalnya {a} bakteri. Setelah {t} menit jumlahnya …",
+          "answer": "a * p",
+          "distractors": [
+            {
+              "expr": "a * 2 * k",
+              "tag": "dikali"
+            },
+            {
+              "expr": "a * p * 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + p",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{t} : {m} = {k} kali membelah; {a} × 2^{k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 25],
+            "b": [2, 4],
+            "n": [10, 20]
+          },
+          "constraint": "(n * (2 * a + (n - 1) * b)) % 2 == 0",
+          "prompt": "Gedung pertunjukan: baris pertama {a} kursi, tiap baris berikutnya {b} kursi lebih banyak. Ada {n} baris. Banyak kursi seluruhnya …",
+          "answer": "n * (2 * a + (n - 1) * b) / 2",
+          "distractors": [
+            {
+              "expr": "a + (n - 1) * b",
+              "tag": "baris-terakhir"
+            },
+            {
+              "expr": "n * a",
+              "tag": "tanpa-tambah"
+            },
+            {
+              "expr": "n * (a + n * b)",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sn = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "2, 5, 10, 17, 26, … Suku ke-10 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "101"
+                  },
+                  "say": "101"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "122"
+                  },
+                  "say": "122"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "82"
+                  },
+                  "say": "82"
+                }
+              ],
+              "answer": 0,
+              "reteach": "n² + 1."
+            },
+            {
+              "prompt": "Deret 3 + 6 + 12 + … + 384 terdiri dari … suku.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "128"
+                  },
+                  "say": "128"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3·2⁷ = 384."
+            },
+            {
+              "prompt": "Suku tengah barisan aritmetika 5, …, 85 dengan 9 suku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(5 + 85) : 2."
+            },
+            {
+              "prompt": "Jumlah deret geometri tak hingga 8 + 4 + 2 + … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "∞"
+                  },
+                  "say": "∞"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                }
+              ],
+              "answer": 0,
+              "reteach": "a/(1 − r) = 8/0,5."
+            },
+            {
+              "prompt": "1, 3, 6, 10, 15, … Selisih suku ke-20 dan ke-19 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "210"
+                  },
+                  "say": "210"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  },
+                  "say": "19"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "21"
+                  },
+                  "say": "21"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisih ke-n = n."
+            },
+            {
+              "prompt": "Barisan 7, 11, 15, … Suku pertama yang lebih dari 100 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "103"
+                  },
+                  "say": "103"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "99"
+                  },
+                  "say": "99"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "101"
+                  },
+                  "say": "101"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "104"
+                  },
+                  "say": "104"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 + 4·24."
+            },
+            {
+              "prompt": "Rasio barisan geometri 81, 27, 9, … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/3"
+                  },
+                  "say": "1/3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−3"
+                  },
+                  "say": "−3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/9"
+                  },
+                  "say": "1/9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "27/81."
+            },
+            {
+              "prompt": "Banyak bilangan tiga angka yang habis dibagi 7 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "128"
+                  },
+                  "say": "128"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "129"
+                  },
+                  "say": "129"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "142"
+                  },
+                  "say": "142"
+                }
+              ],
+              "answer": 0,
+              "reteach": "105 sampai 994."
+            },
+            {
+              "prompt": "Pola segitiga Pascal baris ke-5 (mulai 1) jumlahnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "say": "32"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2⁴."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

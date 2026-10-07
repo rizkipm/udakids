@@ -1,0 +1,448 @@
+{
+  "id": "math.sd12.k10.tantangan-pengukuran-dan-alat-ukur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "K",
+  "order": 10,
+  "title": "Pengukuran dan alat ukur — Level 10 — Tantangan pengukuran dan alat ukur",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pengukuran dan alat ukur"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [25, 45],
+            "b": [5, 15]
+          },
+          "prompt": "Berat kakak {a} kg. Berat adik {b} kg lebih ringan. Berat adik … kg.",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a - b - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} − {b} = {answer} kg."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{a} meter = … cm.",
+          "answer": "a * 100",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "kali-1000"
+            },
+            {
+              "expr": "a + 100",
+              "tag": "tambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "1 m = 100 cm, jadi {a} m = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 20],
+            "b": [2, 8],
+            "c": [1, 6]
+          },
+          "prompt": "Ember berisi {a} liter air. Dipakai {b} liter, lalu diisi lagi {c} liter. Air di ember sekarang … liter.",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "semua-ditambah"
+            },
+            {
+              "expr": "a - b - c",
+              "tag": "semua-dikurang"
+            },
+            {
+              "expr": "a - b",
+              "tag": "lupa-isi"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} − {b} + {c} = {answer} liter."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [50, 950]
+          },
+          "prompt": "{a} kg {b} gram = … gram.",
+          "answer": "a * 1000 + b",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a * 1000 - b",
+              "tag": "dikurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} kg = {=a*1000} gram, ditambah {b} gram = {answer} gram."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Alat untuk mengukur panjang buku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "penggaris"
+                  },
+                  "say": "penggaris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "termometer"
+                  },
+                  "say": "termometer"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gelas ukur"
+                  },
+                  "say": "gelas ukur"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "timbangan"
+                  },
+                  "say": "timbangan"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panjang diukur dengan penggaris."
+            },
+            {
+              "prompt": "Alat untuk mengukur berat beras adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "timbangan"
+                  },
+                  "say": "timbangan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jam"
+                  },
+                  "say": "jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "penggaris"
+                  },
+                  "say": "penggaris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "meteran"
+                  },
+                  "say": "meteran"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Berat diukur dengan timbangan."
+            },
+            {
+              "prompt": "Alat untuk mengukur suhu badan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "termometer"
+                  },
+                  "say": "termometer"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "timbangan"
+                  },
+                  "say": "timbangan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "penggaris"
+                  },
+                  "say": "penggaris"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gelas ukur"
+                  },
+                  "say": "gelas ukur"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Suhu diukur dengan termometer."
+            },
+            {
+              "prompt": "Penjahit mengukur panjang kain dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "meteran"
+                  },
+                  "say": "meteran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "timbangan"
+                  },
+                  "say": "timbangan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gelas"
+                  },
+                  "say": "gelas"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "termometer"
+                  },
+                  "say": "termometer"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Meteran kain lentur, cocok untuk mengukur badan dan kain."
+            },
+            {
+              "prompt": "Satuan yang cocok untuk berat seekor kambing adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kilogram"
+                  },
+                  "say": "kilogram"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "menit"
+                  },
+                  "say": "menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "meter"
+                  },
+                  "say": "meter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "liter"
+                  },
+                  "say": "liter"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Berat memakai kilogram."
+            },
+            {
+              "prompt": "Satuan yang cocok untuk isi botol minum adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "liter"
+                  },
+                  "say": "liter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "kilogram"
+                  },
+                  "say": "kilogram"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sentimeter"
+                  },
+                  "say": "sentimeter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jam"
+                  },
+                  "say": "jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Isi zat cair memakai liter."
+            },
+            {
+              "prompt": "Mana yang paling panjang?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 meter"
+                  },
+                  "say": "1 meter"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50 cm"
+                  },
+                  "say": "50 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "99 cm"
+                  },
+                  "say": "99 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90 cm"
+                  },
+                  "say": "90 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 meter = 100 cm, lebih panjang dari 99 cm."
+            },
+            {
+              "prompt": "Mana yang paling berat?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 kg"
+                  },
+                  "say": "2 kg"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 kg"
+                  },
+                  "say": "1 kg"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.500 gram"
+                  },
+                  "say": "1.500 gram"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "900 gram"
+                  },
+                  "say": "900 gram"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 kg = 2.000 gram, paling berat."
+            },
+            {
+              "prompt": "Ozi mengukur meja dengan jengkal: 6 jengkal. Dani: 5 jengkal. Mengapa berbeda?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jengkal mereka tidak sama panjang"
+                  },
+                  "say": "jengkal mereka tidak sama panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "mejanya berubah"
+                  },
+                  "say": "mejanya berubah"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Dani salah hitung pasti"
+                  },
+                  "say": "Dani salah hitung pasti"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jengkal selalu sama"
+                  },
+                  "say": "jengkal selalu sama"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jengkal tiap orang berbeda, jadi hasilnya bisa berbeda. Karena itu kita memakai satuan baku seperti cm."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

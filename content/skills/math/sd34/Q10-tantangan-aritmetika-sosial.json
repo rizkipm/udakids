@@ -1,0 +1,477 @@
+{
+  "id": "math.sd34.q10.tantangan-aritmetika-sosial",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "Q",
+  "order": 10,
+  "title": "Aritmetika sosial — Level 10 — Tantangan aritmetika sosial",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 12],
+            "h": {
+              "values": [2500, 3000, 3500, 4000, 5000]
+            }
+          },
+          "derived": {
+            "t": "n * h"
+          },
+          "prompt": "Harga {n} buku Rp{t}. Harga 1 buku Rp …",
+          "answer": "h",
+          "distractors": [
+            {
+              "expr": "t - n",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "h + 500",
+              "tag": "lebih"
+            },
+            {
+              "expr": "t / 10",
+              "tag": "bagi-10"
+            }
+          ],
+          "choices": 4,
+          "explain": "{t} : {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [40000, 60000, 80000, 100000, 120000]
+            },
+            "p": {
+              "values": [10, 20, 25, 50]
+            }
+          },
+          "prompt": "Baju Rp{h} mendapat diskon {p}%. Harga setelah diskon Rp …",
+          "answer": "h - h * p / 100",
+          "distractors": [
+            {
+              "expr": "h * p / 100",
+              "tag": "besar-diskon"
+            },
+            {
+              "expr": "h - p",
+              "tag": "dikurang-persen"
+            },
+            {
+              "expr": "h + h * p / 100",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Diskon {p}% = {=h*p/100}; {h} − {=h*p/100} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10, 30],
+            "h": {
+              "values": [8000, 9000, 10000]
+            },
+            "m": {
+              "values": [1000, 2000, 3000]
+            }
+          },
+          "derived": {
+            "b": "n * h",
+            "j": "h + m"
+          },
+          "prompt": "Pedagang membeli {n} kg jeruk seharga Rp{b}. Dijual Rp{j} per kg dan habis. Keuntungannya Rp …",
+          "answer": "n * m",
+          "distractors": [
+            {
+              "expr": "m",
+              "tag": "untung-per-kg"
+            },
+            {
+              "expr": "n * j",
+              "tag": "hasil-jual"
+            },
+            {
+              "expr": "n * m + m",
+              "tag": "lebih"
+            }
+          ],
+          "choices": 4,
+          "explain": "Penjualan {n} × {j} = {=n*j}; untung {=n*j} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": {
+              "values": [14000, 15000, 16000]
+            },
+            "p": {
+              "values": [10000, 11000, 12000, 13000]
+            }
+          },
+          "derived": {
+            "t": "2 * g + 3 * p"
+          },
+          "prompt": "Harga 2 kg gula dan 3 kg tepung Rp{t}. Harga 1 kg gula Rp{g}. Harga 1 kg tepung Rp …",
+          "answer": "p",
+          "distractors": [
+            {
+              "expr": "(t - g) / 3",
+              "tag": "satu-gula"
+            },
+            {
+              "expr": "t / 5",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "p + 1000",
+              "tag": "lebih"
+            }
+          ],
+          "choices": 4,
+          "explain": "({t} − 2 × {g}) : 3 = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Harga 1 lusin pensil Rp36.000. Harga 1 pensil …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp3.000"
+                  },
+                  "say": "Rp3.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.000"
+                  },
+                  "say": "Rp2.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp36.000"
+                  },
+                  "say": "Rp36.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp3.600"
+                  },
+                  "say": "Rp3.600"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 lusin = 12; 36.000 : 12 = 3.000."
+            },
+            {
+              "prompt": "Membeli seharga Rp50.000, dijual Rp45.000. Pedagang …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp5.000"
+                  },
+                  "say": "rugi Rp5.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp45.000"
+                  },
+                  "say": "untung Rp45.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp5.000"
+                  },
+                  "say": "untung Rp5.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "impas"
+                  },
+                  "say": "impas"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jual < beli: rugi."
+            },
+            {
+              "prompt": "1 kodi = … buah",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 kodi = 20."
+            },
+            {
+              "prompt": "Uang Rp100.000 dibelikan 3 buku @Rp18.000. Sisa uang …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp46.000"
+                  },
+                  "say": "Rp46.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp82.000"
+                  },
+                  "say": "Rp82.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp36.000"
+                  },
+                  "say": "Rp36.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp54.000"
+                  },
+                  "say": "Rp54.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "100.000 − 54.000."
+            },
+            {
+              "prompt": "Mana yang lebih murah per buah?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 buah Rp12.000"
+                  },
+                  "say": "3 buah Rp12.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 buah Rp18.000"
+                  },
+                  "say": "4 buah Rp18.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 buah Rp9.000"
+                  },
+                  "say": "2 buah Rp9.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 buah Rp5.000"
+                  },
+                  "say": "1 buah Rp5.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rp4.000 per buah termurah."
+            },
+            {
+              "prompt": "Diskon 50% lalu diskon lagi 50% sama dengan diskon …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75%"
+                  },
+                  "say": "75%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100%"
+                  },
+                  "say": "100%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50%"
+                  },
+                  "say": "50%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25%"
+                  },
+                  "say": "25%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisa 1/2 × 1/2 = 1/4, jadi diskon 75%."
+            },
+            {
+              "prompt": "Ayah menabung Rp2.000.000 dengan bunga 5% per tahun. Bunga setahun …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp100.000"
+                  },
+                  "say": "Rp100.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp1.000.000"
+                  },
+                  "say": "Rp1.000.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp200.000"
+                  },
+                  "say": "Rp200.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp10.000"
+                  },
+                  "say": "Rp10.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5% × 2.000.000."
+            },
+            {
+              "prompt": "Lima buah apel Rp15.000. Harga 8 buah apel …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp24.000"
+                  },
+                  "say": "Rp24.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp18.000"
+                  },
+                  "say": "Rp18.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp20.000"
+                  },
+                  "say": "Rp20.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp30.000"
+                  },
+                  "say": "Rp30.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rp3.000 × 8."
+            },
+            {
+              "prompt": "Satu rim kertas berisi … lembar.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "500"
+                  },
+                  "say": "500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.000"
+                  },
+                  "say": "1.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "144"
+                  },
+                  "say": "144"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 rim = 500 lembar."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

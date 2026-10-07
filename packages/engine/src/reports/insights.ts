@@ -3,6 +3,7 @@ import {
   levelStatuses,
   skippedStandalone,
   standaloneCodes,
+  groupStartCodes,
   passedLevels,
   totalPoints,
   totalTimeMs,
@@ -32,7 +33,7 @@ export type InsightBook = {
   domain: string;
   grade: string;
   title: string;
-  categories: readonly { code: string; title: string; standalone?: boolean }[];
+  categories: readonly { code: string; title: string; group?: string; standalone?: boolean }[];
 };
 
 export type DayActivity = { date: string; rounds: number; passed: number; minutes: number };
@@ -169,7 +170,7 @@ export function childInsights(input: {
     const order = book.categories.map((c) => c.code);
     const alone = standaloneCodes(book.categories);
     const statuses: Record<string, PlayStatus> = withAccess(
-      levelStatuses(order, inBook, results, alone),
+      levelStatuses(order, inBook, results, alone, groupStartCodes(book.categories)),
       inBook,
       access,
     );

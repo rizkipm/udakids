@@ -1,0 +1,42 @@
+{
+  "id": "math.sd12.p7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "P",
+  "order": 7,
+  "title": "Waktu — Level 7 — Soal cerita lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 7],
+      "k": [3, 13]
+    },
+    "prompt": "Hari ini hari ke-{a} dalam seminggu (Senin = 1). {k} hari lagi adalah hari ke- …",
+    "answer": "(a + k - 1) % 7 + 1",
+    "distractors": [
+      {
+        "expr": "a + k",
+        "tag": "lewat-7"
+      },
+      {
+        "expr": "(a + k) % 7 + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "k",
+        "tag": "jumlah-hari"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hitung maju {k} hari, setelah hari ke-7 kembali ke 1: hari ke-{answer}."
+  }
+}

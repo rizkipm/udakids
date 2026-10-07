@@ -5,6 +5,7 @@ import {
   type Choice,
   type Interaction,
   type Item,
+  type Visual,
 } from '../generator/item.js';
 import { createRng } from '../generator/rng.js';
 import { DOMAINS, GRADES, generateItem, type SkillTemplate } from '../generator/template.js';
@@ -70,7 +71,18 @@ export type PublicInteraction =
   | { type: 'number-input'; unit?: string; decimals?: number }
   /** Menebalkan tidak punya kunci rahasia (angkanya memang ditampilkan). */
   | Extract<Interaction, { type: 'trace' }>
-  | Omit<Extract<Interaction, { type: 'connect' }>, 'answer'>;
+  | Omit<Extract<Interaction, { type: 'connect' }>, 'answer'>
+  /** Labirin tidak punya kunci rahasia (jalannya memang terlihat). */
+  | Extract<Interaction, { type: 'maze' }>
+  /** Cari kata tanpa letak kata (perangkat mencocokkan dari hurufnya). */
+  | {
+      type: 'word-search';
+      cols: number;
+      rows: number;
+      letters: string;
+      words: { id: string; text: string; visual: Visual; say: string }[];
+      maxSlips: number;
+    };
 export type PublicItem = {
   prompt: string;
   say?: string;
@@ -155,6 +167,17 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
       interaction = rest;
       break;
     }
+    case 'maze':
+      interaction = i;
+      break;
+    case 'word-search':
+      interaction = { ...i, words: i.words.map(({ cells: _cells, ...w }) => w) };
+      break;
+    case 'memory':
+    case 'catch':
+      // Pasangan kartu & benda yang harus ditangkap = kunci jawaban; tidak dipakai di lomba (lihat
+      // `contestSafeTemplate`).
+      throw new Error(`interaksi ${i.type} tidak dipakai di lomba`);
   }
   return {
     prompt: item.prompt,
@@ -238,6 +261,17 @@ export function planContestSkills(
   return Array.from({ length: count }, (_, i) => draw(topics[i % topics.length]!));
 }
 
+/** Family yang soalnya butuh kunci jawaban di perangkat (D-075). */
+const CONTEST_UNSAFE_FAMILIES = new Set(['memory-pairs', 'catch-items']);
+
+/** Skill boleh jadi sumber soal lomba: bukan mock test dan tidak (pernah) memakai game berkunci. */
+export function contestSafeTemplate(t: Pick<SkillTemplate, 'family' | 'params'>): boolean {
+  if (t.family === 'mock' || CONTEST_UNSAFE_FAMILIES.has(t.family)) return false;
+  if (t.family !== 'mix') return true;
+  const parts = (t.params as { parts?: { family: string }[] }).parts ?? [];
+  return !parts.some((p) => CONTEST_UNSAFE_FAMILIES.has(p.family));
+}
+
 /** Soal lomba lengkap (dengan kunci) yang disimpan di server. `key` = rahasia penyamar id pilihan. */
 export type ContestItem = Item & { key: string; tier?: SkillTemplate['tier'] };
 
@@ -250,8 +284,9 @@ export function buildContestItems(
   count: number,
   seed: string,
 ): ContestItem[] {
-  // Mock test (D-072) tidak membuat soal sendiri: tidak ikut jadi sumber soal lomba.
-  templates = templates.filter((t) => t.family !== 'mock');
+  // Mock test (D-072) tidak membuat soal sendiri: tidak ikut jadi sumber soal lomba. Game kartu pasangan &
+  // tangkap (D-075) butuh kunci jawaban di perangkat, jadi juga tidak ikut.
+  templates = templates.filter(contestSafeTemplate);
   const byId = new Map(templates.map((t) => [t.id, t]));
   const plan = planContestSkills(templates, count, seed);
   const rng = createRng(`items/${seed}`);

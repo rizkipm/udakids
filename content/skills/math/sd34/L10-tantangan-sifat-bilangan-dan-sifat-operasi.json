@@ -1,0 +1,462 @@
+{
+  "id": "math.sd34.l10.tantangan-sifat-bilangan-dan-sifat-operasi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "L",
+  "order": 10,
+  "title": "Sifat bilangan dan sifat operasi — Level 10 — Tantangan sifat bilangan dan sifat",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Sifat bilangan dan sifat operasi"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "a != b",
+          "prompt": "KPK dari {a} dan {b} adalah …",
+          "answer": "lcm(a, b)",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "dikali"
+            },
+            {
+              "expr": "gcd(a, b)",
+              "tag": "fpb"
+            },
+            {
+              "expr": "lcm(a, b) * 2",
+              "tag": "kelipatan-berikutnya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kelipatan persekutuan terkecil {a} dan {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [5, 30],
+            "c": [2, 20]
+          },
+          "constraint": "b != c",
+          "prompt": "{a} × ({b} + {c}) = {a} × {b} + {a} × …",
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "b"
+            },
+            {
+              "expr": "a",
+              "tag": "a"
+            },
+            {
+              "expr": "b + c",
+              "tag": "jumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sifat penyebaran: {a} × ({b} + {c}) = {a} × {b} + {a} × {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 8],
+            "p": [2, 7],
+            "r": [2, 7]
+          },
+          "derived": {
+            "a": "x * p",
+            "b": "x * r"
+          },
+          "constraint": "gcd(p, r) == 1 && p != r",
+          "prompt": "{a} kue dan {b} permen dibagikan sama banyak ke beberapa anak tanpa sisa. Paling banyak anak yang mendapat …",
+          "answer": "gcd(a, b)",
+          "distractors": [
+            {
+              "expr": "lcm(a, b)",
+              "tag": "kpk"
+            },
+            {
+              "expr": "a + b",
+              "tag": "jumlah"
+            },
+            {
+              "expr": "x * 2",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "FPB({a}, {b}) = {answer} anak."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 20, 30, 40, 50, 60, 70, 80, 90]
+            }
+          },
+          "prompt": "Bilangan prima di antara {a} dan {=a+10} ada berapa?",
+          "answer": "(a == 10) * 4 + (a == 20) * 2 + (a == 30) * 2 + (a == 40) * 3 + (a == 50) * 2 + (a == 60) * 2 + (a == 70) * 3 + (a == 80) * 2 + (a == 90) * 1",
+          "distractors": [
+            {
+              "expr": "5",
+              "tag": "lima"
+            },
+            {
+              "expr": "0",
+              "tag": "nol"
+            },
+            {
+              "expr": "6",
+              "tag": "enam"
+            }
+          ],
+          "choices": 4,
+          "explain": "Periksa satu per satu bilangan yang hanya punya faktor 1 dan dirinya sendiri: ada {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Bilangan prima terkecil adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 hanya punya faktor 1 dan 2."
+            },
+            {
+              "prompt": "Faktor dari 12 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 2, 3, 4, 6, 12"
+                  },
+                  "say": "1, 2, 3, 4, 6, 12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 12"
+                  },
+                  "say": "1, 12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 2, 3, 4, 5, 12"
+                  },
+                  "say": "1, 2, 3, 4, 5, 12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2, 4, 6, 8, 10, 12"
+                  },
+                  "say": "2, 4, 6, 8, 10, 12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Semua pembagi habis 12."
+            },
+            {
+              "prompt": "Ani berenang tiap 4 hari, Budi tiap 6 hari. Hari ini berenang bersama. Bersama lagi setelah … hari.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "KPK 4 dan 6 = 12."
+            },
+            {
+              "prompt": "Faktorisasi prima dari 24 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2³ × 3"
+                  },
+                  "say": "2³ × 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × 6"
+                  },
+                  "say": "4 × 6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2² × 3²"
+                  },
+                  "say": "2² × 3²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 × 12"
+                  },
+                  "say": "2 × 12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "24 = 2 × 2 × 2 × 3."
+            },
+            {
+              "prompt": "FPB 18 dan 24 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "72"
+                  },
+                  "say": "72"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Faktor sama terbesar 6."
+            },
+            {
+              "prompt": "Mana yang termasuk bilangan prima?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  },
+                  "say": "29"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "27"
+                  },
+                  "say": "27"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "21"
+                  },
+                  "say": "21"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "33"
+                  },
+                  "say": "33"
+                }
+              ],
+              "answer": 0,
+              "reteach": "29 hanya habis dibagi 1 dan 29."
+            },
+            {
+              "prompt": "25 × 99 = 25 × 100 − 25 × 1 = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.475"
+                  },
+                  "say": "2.475"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.425"
+                  },
+                  "say": "2.425"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.575"
+                  },
+                  "say": "2.575"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.500"
+                  },
+                  "say": "2.500"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2.500 − 25 = 2.475."
+            },
+            {
+              "prompt": "Kelipatan persekutuan 3 dan 5 yang kurang dari 40 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 dan 30"
+                  },
+                  "say": "15 dan 30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 5, 15"
+                  },
+                  "say": "3, 5, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 saja"
+                  },
+                  "say": "15 saja"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 dan 16"
+                  },
+                  "say": "8 dan 16"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelipatan 15."
+            },
+            {
+              "prompt": "Banyak faktor dari 36 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1, 2, 3, 4, 6, 9, 12, 18, 36."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

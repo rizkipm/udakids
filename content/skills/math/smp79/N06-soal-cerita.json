@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.n6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "N",
+  "order": 6,
+  "title": "Aritmetika sosial — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "values": [1000000, 2000000, 4000000]
+      },
+      "p": {
+        "values": [6, 9, 12, 15]
+      },
+      "n": {
+        "values": [4, 6, 8]
+      }
+    },
+    "derived": {
+      "a": "m + m * p / 100 * n / 12"
+    },
+    "prompt": "Tabungan awal Rp{m}, setelah {n} bulan menjadi Rp{a}. Bunga per tahun … %.",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "p * n / 12",
+        "tag": "per-periode"
+      },
+      {
+        "expr": "p / 2",
+        "tag": "setengah"
+      },
+      {
+        "expr": "p + 3",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "({a} − {m}) : {m} × 12/{n} × 100% = {answer}%."
+  }
+}

@@ -29,6 +29,11 @@ description: Buat skill template Pustaka Latihan (content/skills/<domain>/*.json
   (`Z01-mock-test-<n>-soal.json`). Jumlah soal = jumlah soal lomba asli (TK: 25; 9 mudah / 8 sedang / 8 sulit),
   diambil otomatis dari level 1–3 / 4–7 / 8–10 semua materi di buku itu. Setiap materi tetap 10 level, dan materi
   diberi `group` per lomba (mis. `OSN TK · …`, `EMC · …`, `ESC · …`, `EEC · …`).
+- **Lomba dengan materi sendiri (mis. KMSI, D-074):** materi per butir kisi-kisi (10 level) dengan `group`
+  `KMSI · Kompetensi Matematika Sains dan Bahasa Inggris — Penyisihan 2026`, plus kategori `Y` "Mock Test KMSI …"
+  (group `Mock Test KMSI · …`) berisi 3 mock. Config mock memakai `categories` (hanya materi lomba itu),
+  `points` lomba (KMSI: benar 4, salah 0, kosong 0), `passPoints` = KKM (Level A 40 dari 20 soal; Level 1–4 72 dari
+  30 soal), dan `rule` yang menjelaskan penilaian. Cek: `generateMockRound` menghasilkan jumlah soal penuh.
 
 ## Verifikasi
 

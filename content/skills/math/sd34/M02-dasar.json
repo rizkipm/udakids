@@ -1,0 +1,52 @@
+{
+  "id": "math.sd34.m2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "M",
+  "order": 2,
+  "title": "Pecahan sederhana — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [1, 5],
+      "d": [7, 12]
+    },
+    "constraint": "a + b < d",
+    "prompt": "{a}/{d} + {b}/{d} = …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a + b",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "a + b",
+        "den": "2 * d",
+        "tag": "penyebut-dijumlah"
+      },
+      {
+        "num": "a * b",
+        "den": "d",
+        "tag": "dikali"
+      },
+      {
+        "num": "a + b + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Penyebut sama: jumlahkan pembilangnya. {answer}."
+  }
+}

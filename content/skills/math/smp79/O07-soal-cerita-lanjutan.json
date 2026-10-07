@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.o7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "O",
+  "order": 7,
+  "title": "Teori bilangan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 5],
+      "b": [3, 7],
+      "n": [50, 200]
+    },
+    "constraint": "a != b && gcd(a, b) == 1",
+    "prompt": "Banyak bilangan 1 sampai {n} yang habis dibagi {a} atau {b} adalah …",
+    "answer": "floor(n / a) + floor(n / b) - floor(n / lcm(a, b))",
+    "distractors": [
+      {
+        "expr": "floor(n / a) + floor(n / b)",
+        "tag": "dobel"
+      },
+      {
+        "expr": "floor(n / (a * b))",
+        "tag": "keduanya"
+      },
+      {
+        "expr": "floor(n / a)",
+        "tag": "satu-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Inklusi–eksklusi: {answer}."
+  }
+}

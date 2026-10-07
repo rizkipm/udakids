@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import {
   FREE_ACCESS,
   GRADES,
+  isMockSkill,
   levelStatuses,
   skippedStandalone,
   standaloneCodes,
+  groupStartCodes,
   totalPoints,
   withAccess,
   type Color,
@@ -25,10 +27,12 @@ import {
   useCatalog,
   type Shelf,
 } from './catalog';
-import { CheckIcon, DoorIcon, LockIcon, PlayIcon, StatIcon, TrophyIcon } from './icons';
+import { BookIcon, CheckIcon, DoorIcon, LockIcon, PlayIcon, StatIcon, TrophyIcon } from './icons';
 import { SpeakButton } from './ItemPlayer';
 import { useLinks, type Links } from './links';
-import { useProgress } from './practiceStore';
+import { MomoLoader } from './MomoLoader';
+import { RESUME_MAX_AGE_MS, useProgress } from './practiceStore';
+import { useFetch } from '../auth/useApi';
 
 const BOOK_KEY = 'lc.library.book';
 const GRADE_KEY = 'lc.library.grade';
@@ -66,7 +70,7 @@ const bookLabel = (b: { domain: string; title: string }) => {
 export function Library({ momoColor }: { momoColor: Color }) {
   const session = useSession('child')!;
   const progress = useProgress(session.user.id);
-  const { data, failed } = useCatalog();
+  const { data, failed, retry: retryCatalog } = useCatalog();
   const links = useLinks(data);
   const [book, setBook] = useState(() => remembered(BOOK_KEY));
   const [grade, setGrade] = useState(() => remembered(GRADE_KEY));
@@ -103,12 +107,14 @@ export function Library({ momoColor }: { momoColor: Color }) {
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
           standaloneCodes(shelves.map((s) => s.category)),
+          groupStartCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data?.access ?? FREE_ACCESS,
       ),
     [shelves, progress.quizzes, data?.access],
   );
+  const lastPlayed = useFetch<{ skillId: string; ts: string } | null>('child', '/practice/resume');
   const next = firstOpen(
     shelves,
     statuses,
@@ -176,57 +182,123 @@ export function Library({ momoColor }: { momoColor: Color }) {
     return (
       <main className="home">
         {top}
-        <section className="home-empty">
-          <Momo own color={momoColor} mood={failed ? 'curious' : 'idle'} size={140} />
-          <p className="kid-note">
-            {failed ? t('play.library.offline') : t('play.library.loading')}
-          </p>
-        </section>
+        <MomoLoader compact color={momoColor} failed={failed} onRetry={retryCatalog} />
       </main>
     );
   }
 
-  const say = next
-    ? t('play.home.nextSay', {
+  // "Lanjutkan" (D-073): ronde yang belum selesai di perangkat ini, atau level terakhir dari server.
+  const resumeTarget = (() => {
+    if (!data || !links) return undefined;
+    const local = progress.inProgress;
+    const fresh = local && Date.now() - local.ts < RESUME_MAX_AGE_MS ? local : undefined;
+    const id = fresh?.skillId ?? lastPlayed.data?.skillId;
+    if (!id) return undefined;
+    const all = shelvesOf(data);
+    const shelf = all.find((s) => s.skills.some((k) => k.id === id));
+    const skill = shelf?.skills.find((k) => k.id === id);
+    if (!shelf || !skill || isMockSkill(skill)) return undefined;
+    const inBook = all.filter((s) => bookKey(s.catalog) === bookKey(shelf.catalog));
+    const status = withAccess(
+      levelStatuses(
+        inBook.map((s) => s.category.code),
+        inBook.flatMap((s) => s.skills),
+        progress.quizzes,
+        standaloneCodes(inBook.map((s) => s.category)),
+        groupStartCodes(inBook.map((s) => s.category)),
+      ),
+      inBook.flatMap((s) => s.skills),
+      data.access ?? FREE_ACCESS,
+    )[skill.id];
+    if (status !== 'open' && status !== 'passed') return undefined;
+    return {
+      shelf,
+      skill,
+      level: shelf.skills.indexOf(skill) + 1,
+      question: fresh?.skillId === id ? fresh.history.length + 1 : undefined,
+    };
+  })();
+
+  const say = resumeTarget
+    ? t('play.home.resumeSay', {
         name: session.user.name,
-        topic: next.shelf.category.title,
-        n: next.level,
+        topic: resumeTarget.shelf.category.title,
+        n: resumeTarget.level,
       })
-    : t('play.home.allDone');
+    : next
+      ? t('play.home.nextSay', {
+          name: session.user.name,
+          topic: next.shelf.category.title,
+          n: next.level,
+        })
+      : t('play.home.allDone');
 
   return (
     <main className="home">
       {top}
 
       <ContestEntryCard />
-      <section className="continue-card">
-        <Momo own color={momoColor} mood={next ? 'happy' : 'proud'} size={96} />
-        <div className="continue-body">
-          <div className="kid-say">
-            <SpeakButton text={say} />
-            <p>{next ? t('play.home.next') : t('play.home.allDone')}</p>
-          </div>
-          {next && (
+      {resumeTarget ? (
+        <section className="continue-card is-resume">
+          <Momo own color={momoColor} mood="happy" size={96} />
+          <div className="continue-body">
+            <div className="kid-say">
+              <SpeakButton text={say} />
+              <p>{t('play.home.resume')}</p>
+            </div>
             <p className="continue-what">
-              <strong>{next.shelf.category.title}</strong>
+              <strong>{resumeTarget.shelf.category.title}</strong>
               <span>
-                {t('play.library.level', { n: next.level })} · {levelLabel(next.skill.title)}
+                {t('play.library.level', { n: resumeTarget.level })} ·{' '}
+                {levelLabel(resumeTarget.skill.title)}
+                {resumeTarget.question !== undefined && (
+                  <> · {t('play.home.resumeQuestion', { n: resumeTarget.question })}</>
+                )}
               </span>
             </p>
-          )}
-        </div>
-        {next && (
-          <div className="continue-actions">
-            <Link className="kid-btn big-play" to={links.level(next.skill.id)}>
-              <PlayIcon />
-              {t('play.home.play')}
-            </Link>
-            <Link className="kid-link" to={links.topic(next.skill)}>
-              {t('play.topic.readShort')}
-            </Link>
           </div>
-        )}
-      </section>
+          <div className="continue-actions">
+            <Link className="kid-btn big-play" to={links.level(resumeTarget.skill.id)}>
+              <PlayIcon />
+              {t('play.home.resumeButton')}
+            </Link>
+            {next && next.skill.id !== resumeTarget.skill.id && (
+              <Link className="kid-link" to={links.level(next.skill.id)}>
+                {t('play.home.orNext', { topic: next.shelf.category.title, n: next.level })}
+              </Link>
+            )}
+          </div>
+        </section>
+      ) : (
+        <section className="continue-card">
+          <Momo own color={momoColor} mood={next ? 'happy' : 'proud'} size={96} />
+          <div className="continue-body">
+            <div className="kid-say">
+              <SpeakButton text={say} />
+              <p>{next ? t('play.home.next') : t('play.home.allDone')}</p>
+            </div>
+            {next && (
+              <p className="continue-what">
+                <strong>{next.shelf.category.title}</strong>
+                <span>
+                  {t('play.library.level', { n: next.level })} · {levelLabel(next.skill.title)}
+                </span>
+              </p>
+            )}
+          </div>
+          {next && (
+            <div className="continue-actions">
+              <Link className="kid-btn big-play" to={links.level(next.skill.id)}>
+                <PlayIcon />
+                {t('play.home.play')}
+              </Link>
+              <Link className="kid-link" to={links.topic(next.skill)}>
+                {t('play.topic.readShort')}
+              </Link>
+            </div>
+          )}
+        </section>
+      )}
 
       {grades.length > 1 && (
         <nav ref={gradeNav} className="grade-chips" aria-label={t('play.library.grades')}>
@@ -265,24 +337,55 @@ export function Library({ momoColor }: { momoColor: Color }) {
         {activeBook && grades.length > 1 ? `${activeBook.title} · ` : ''}
         {t('play.home.topics')}
       </h2>
-      {sectionsOf(shelves).map(({ group, shelves: list }) => (
-        <section key={group ?? ''} className={group ? 'topic-section is-group' : 'topic-section'}>
-          {group && <GroupHeader group={group} topics={list.length} />}
-          <ol className="topic-grid">
-            {list.map((s, i) => (
+      {sectionsOf(shelves).map(({ group, shelves: list }) => {
+        // Mock test lomba (D-076) tampil di dalam bagian lombanya, sesudah kisi-kisi, dengan subjudul sendiri.
+        const topics = group ? list.filter((s) => !isMockShelf(s)) : list;
+        const mocks = group ? list.filter(isMockShelf) : [];
+        const split = topics.length > 0 && mocks.length > 0;
+        const grid = (items: Shelf[], mock = false) => (
+          <ol className={`topic-grid${mock ? ' is-mock' : ''}`}>
+            {items.map((s, i) => (
               <li key={s.category.code}>
                 <TopicCard
                   links={links}
                   shelf={s}
                   n={i + 1}
+                  mock={mock}
                   statuses={statuses}
                   isNext={next?.shelf === s}
                 />
               </li>
             ))}
           </ol>
-        </section>
-      ))}
+        );
+        return (
+          <section key={group ?? ''} className={group ? 'topic-section is-group' : 'topic-section'}>
+            {group && (
+              <GroupHeader
+                group={group}
+                topics={topics.length}
+                mocks={mocks.reduce((n, s) => n + s.skills.filter(isMockSkill).length, 0)}
+              />
+            )}
+            {split ? (
+              <>
+                <h3 className="topic-sub">
+                  <BookIcon size={20} />
+                  {t('play.home.subTopics')}
+                </h3>
+                {grid(topics)}
+                <h3 className="topic-sub is-mock">
+                  <TrophyIcon size={20} />
+                  {t('play.home.subMocks')}
+                </h3>
+                {grid(mocks, true)}
+              </>
+            ) : (
+              grid(list, mocks.length > 0 && topics.length === 0)
+            )}
+          </section>
+        );
+      })}
     </main>
   );
 }
@@ -292,11 +395,17 @@ export function Library({ momoColor }: { momoColor: Color }) {
  * "EMC · Eduversal Mathematics Competition — Penyisihan Final Provinsi 2026": singkatan jadi lencana, nama
  * lomba tebal, keterangan di bawahnya. Teks tanpa pola ini tampil apa adanya.
  */
-function GroupHeader({ group, topics }: { group: string; topics: number }) {
+function GroupHeader({ group, topics, mocks }: { group: string; topics: number; mocks: number }) {
   const m = /^(\S{2,12}) · (.+?)(?: [—–-] (.+))?$/.exec(group);
   const badge = m?.[1];
   const title = m ? m[2]! : group;
   const note = m?.[3];
+  const count = [
+    topics > 0 && t('play.home.groupTopics', { n: topics }),
+    mocks > 0 && t('play.home.groupMocks', { n: mocks }),
+  ]
+    .filter(Boolean)
+    .join(' · ');
   return (
     <header className="topic-group">
       <span className="topic-group-badge">
@@ -307,10 +416,10 @@ function GroupHeader({ group, topics }: { group: string; topics: number }) {
         <strong>{title}</strong>
         <span>
           {note && <>{note} · </>}
-          {t('play.home.groupTopics', { n: topics })}
+          {count}
         </span>
       </span>
-      <SpeakButton text={note ? `${title}. ${note}.` : title} />
+      <SpeakButton text={note ? `${title}. ${note}. ${count}.` : `${title}. ${count}.`} />
     </header>
   );
 }
@@ -319,6 +428,9 @@ function GroupHeader({ group, topics }: { group: string; topics: number }) {
  * Bagian di dalam buku (D-069): materi tanpa `group` lebih dulu (tanpa judul), lalu tiap `group`
  * (mis. EMC) dengan judulnya sendiri. Nomor materi mulai dari 1 di setiap bagian.
  */
+/** Materi mock test: tanda katalog `mock` (D-076) atau level ber-family `mock` (D-072). */
+const isMockShelf = (s: Shelf) => s.category.mock === true || s.skills.some(isMockSkill);
+
 function sectionsOf(shelves: Shelf[]): { group?: string; shelves: Shelf[] }[] {
   const out: { group?: string; shelves: Shelf[] }[] = [];
   const plain = shelves.filter((s) => !s.category.group);
@@ -337,12 +449,14 @@ function TopicCard({
   links,
   shelf,
   n,
+  mock = false,
   statuses,
   isNext,
 }: {
   links: Links;
   shelf: Shelf;
   n: number;
+  mock?: boolean;
   statuses: Record<string, PlayStatus>;
   isNext: boolean;
 }) {
@@ -354,12 +468,12 @@ function TopicCard({
   return (
     <Link
       to={links.topic(shelf.skills[0]!)}
-      className={`topic-card ${state}`}
+      className={`topic-card ${state}${mock ? ' is-mock' : ''}`}
       aria-label={`${shelf.category.title}. ${
         locked ? t('play.home.lockedTopic') : t('play.home.progress', { passed, total })
       }`}
     >
-      <span className="topic-num">{n}</span>
+      <span className="topic-num">{mock ? <TrophyIcon size={20} /> : n}</span>
       <span className="topic-title">{shelf.category.title}</span>
       <span className="topic-foot">
         {locked ? (

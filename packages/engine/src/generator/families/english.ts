@@ -89,6 +89,7 @@ const NAME_PROMPT: Partial<Record<EnTopic, string>> = {
   weather: 'Cuaca apa ini? Pilih kata yang benar.',
   body: 'Bagian tubuh yang ditunjuk namanya apa?',
   shape: 'Bangun datar apa ini? Pilih namanya.',
+  transport: 'Kendaraan apa ini? Pilih namanya.',
 };
 
 export const englishWord = defineFamily({
@@ -206,13 +207,17 @@ export const englishWord = defineFamily({
       }
       case 'sort': {
         const topics = [...new Set(pool.map((x) => x.topic))].filter(
-          (t) => t !== 'body' && t !== 'shape' && t !== 'weather',
+          (t) => t !== 'body' && t !== 'shape' && t !== 'weather' && t !== 'transport',
         );
         if (topics.length === 0) reject('topik tidak bisa dikelompokkan');
         const topic = rng.pick(topics);
         const inTopic = EN_WORDS.filter((x) => x.topic === topic);
         const outTopic = EN_WORDS.filter(
-          (x) => x.topic !== topic && x.pic.kind === 'object' && x.topic !== 'person',
+          (x) =>
+            x.topic !== topic &&
+            x.pic.kind === 'object' &&
+            x.topic !== 'person' &&
+            x.topic !== 'transport',
         );
         const yes = rng.sample(inTopic, rng.int(2, 3));
         const no = rng
@@ -264,7 +269,11 @@ export const englishWord = defineFamily({
 // ------------------------------------------------------------------ angka & kata bilangan
 
 const COUNT_NOUNS = EN_WORDS.filter(
-  (x) => x.pic.kind === 'object' && OBJECTS[x.pic.object].countable && x.word !== 'grapes',
+  (x) =>
+    x.pic.kind === 'object' &&
+    OBJECTS[x.pic.object].countable &&
+    x.word !== 'grapes' &&
+    x.topic !== 'transport',
 );
 const IRREGULAR: Record<string, string> = {
   fish: 'fish',

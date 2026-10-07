@@ -24,6 +24,10 @@ export const COMMAND_KEYS = {
   trace: 'vo_cmd_trace',
   connect: 'vo_cmd_connect',
   spell: 'vo_cmd_spell',
+  maze: 'vo_cmd_maze',
+  'word-search': 'vo_cmd_word_search',
+  memory: 'vo_cmd_memory',
+  catch: 'vo_cmd_catch',
 } as const satisfies Record<InteractionType, string>;
 
 export const RIGHT_KEYS = [
@@ -108,6 +112,10 @@ const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
       return [...it.groups, ...it.items];
     case 'match':
       return [...it.left, ...it.right];
+    case 'catch':
+      return it.choices;
+    case 'memory':
+      return it.cards;
     default:
       return [];
   }

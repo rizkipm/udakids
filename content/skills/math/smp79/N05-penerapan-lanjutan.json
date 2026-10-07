@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.n5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "N",
+  "order": 5,
+  "title": "Aritmetika sosial — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "values": [1200000, 2400000, 3600000]
+      },
+      "p": {
+        "values": [10, 12]
+      },
+      "n": {
+        "values": [10, 12]
+      }
+    },
+    "prompt": "Pinjaman Rp{m} dengan bunga {p}% per tahun, dicicil {n} bulan. Besar cicilan per bulan Rp …",
+    "answer": "(m + m * p / 100 * n / 12) / n",
+    "distractors": [
+      {
+        "expr": "m / n",
+        "tag": "tanpa-bunga"
+      },
+      {
+        "expr": "m * p / 100 / n",
+        "tag": "bunga-saja"
+      },
+      {
+        "expr": "(m + m * p / 100) / n",
+        "tag": "setahun"
+      }
+    ],
+    "choices": 4,
+    "explain": "(Pokok + bunga) : {n} = {answer}."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "math.sd56.p5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "P",
+  "order": 5,
+  "title": "Teori bilangan sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "b": [0, 9]
+    },
+    "prompt": "Bilangan {a}□{b} habis dibagi 3. Angka □ terkecil yang mungkin …",
+    "answer": "(3 - (a + b) % 3) % 3",
+    "distractors": [
+      {
+        "expr": "3 - (a + b) % 3",
+        "tag": "tanpa-nol"
+      },
+      {
+        "expr": "(a + b) % 3",
+        "tag": "sisa"
+      },
+      {
+        "expr": "3",
+        "tag": "tiga"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah angka {a} + □ + {b} harus kelipatan 3: □ = {answer}."
+  }
+}

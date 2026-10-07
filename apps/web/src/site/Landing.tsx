@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GRADES } from '@little-coder/engine';
 import { api } from '../api/client';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Momo } from '../components/Momo';
 import { APP_NAME } from '../config/app';
 import { t, type MessageKey } from '../i18n';
@@ -12,7 +12,9 @@ import { PricingSection } from './Pricing';
 import { BannerSlider } from '../components/BannerSlider';
 import { GallerySection, useHasGallery } from './GallerySection';
 import { TopTenSection } from './TopTen';
+import { MockTopTenSection } from './MockTopTen';
 import { NewFeaturesSection } from './NewFeatures';
+import { ArticlesSection, VideosSection } from './SiteContent';
 import { Seo } from '../components/Seo';
 import './site.css';
 
@@ -180,6 +182,8 @@ export function gradeSpan(books: { grade: string }[] | undefined): string {
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const hasGallery = useHasGallery();
+  // Di halaman lain (mis. /artikel) tautan bagian landing kembali ke beranda.
+  const home = useLocation().pathname === '/' ? '' : '/';
   return (
     <header className="site-nav">
       <Link to="/" className="site-brand" aria-label={APP_NAME}>
@@ -208,14 +212,15 @@ export function SiteNav() {
         className={`site-menu${open ? ' is-open' : ''}`}
         onClick={() => setOpen(false)}
       >
-        <a href="#buku">{t('site.nav.books')}</a>
-        <a href="#kurikulum">{t('site.nav.subjects')}</a>
-        <a href="#fitur-baru">{t('site.nav.news')}</a>
-        <a href="#cara">{t('site.nav.how')}</a>
-        <a href="#pintu">{t('site.nav.doors')}</a>
-        <a href="#harga">{t('site.nav.price')}</a>
-        {hasGallery && <a href="#galeri">{t('media.nav.gallery')}</a>}
-        <a href="#aman">{t('site.nav.safe')}</a>
+        <a href={`${home}#buku`}>{t('site.nav.books')}</a>
+        <a href={`${home}#kurikulum`}>{t('site.nav.subjects')}</a>
+        <a href={`${home}#fitur-baru`}>{t('site.nav.news')}</a>
+        <a href={`${home}#cara`}>{t('site.nav.how')}</a>
+        <a href={`${home}#pintu`}>{t('site.nav.doors')}</a>
+        <a href={`${home}#harga`}>{t('site.nav.price')}</a>
+        {hasGallery && <a href={`${home}#galeri`}>{t('media.nav.gallery')}</a>}
+        <a href={`${home}#aman`}>{t('site.nav.safe')}</a>
+        <Link to="/artikel">{t('site.nav.articles')}</Link>
         <Link to="/orang-tua/masuk" className="site-btn ghost">
           {t('site.nav.parent')}
         </Link>
@@ -332,6 +337,8 @@ export function Landing() {
         </section>
 
         <BannerSlider placement="landing" />
+        <TopTenSection />
+        <MockTopTenSection />
 
         <section id="pintu" className="site-section doors">
           <h2>{t('site.doors.title')}</h2>
@@ -464,8 +471,6 @@ export function Landing() {
           </div>
         </section>
 
-        <TopTenSection />
-
         <PricingSection
           bookTitle={(domain, grade) =>
             shelf?.books.find((b) => b.domain === domain && b.grade === grade)?.title ??
@@ -473,6 +478,8 @@ export function Landing() {
           }
         />
 
+        <VideosSection />
+        <ArticlesSection />
         <GallerySection />
 
         <section id="aman" className="site-section safe">
@@ -512,16 +519,23 @@ export function Landing() {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <span>
-          © {new Date().getFullYear()} {APP_NAME}
-        </span>
-        <nav>
-          <Link to="/play">{t('site.footer.child')}</Link>
-          <Link to="/orang-tua/masuk">{t('site.footer.parent')}</Link>
-          <Link to="/masuk/staf">{t('site.footer.staff')}</Link>
-        </nav>
-      </footer>
+      <SiteFooter />
     </div>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <span>
+        © {new Date().getFullYear()} {APP_NAME}
+      </span>
+      <nav>
+        <Link to="/artikel">{t('site.footer.articles')}</Link>
+        <Link to="/play">{t('site.footer.child')}</Link>
+        <Link to="/orang-tua/masuk">{t('site.footer.parent')}</Link>
+        <Link to="/masuk/staf">{t('site.footer.staff')}</Link>
+      </nav>
+    </footer>
   );
 }

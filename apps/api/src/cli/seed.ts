@@ -30,6 +30,59 @@ function jsonFiles(dir: string): { path: string; data: unknown }[] {
     .map((path) => ({ path, data: JSON.parse(readFileSync(path, 'utf8')) }));
 }
 
+type Catalog = ReturnType<typeof catalogSchema.parse>;
+/**
+ * Materi mock test: tanda `mock` (D-076) atau judul bagian lama "Mock Test …" (D-072/D-074). Kode Y/Z juga dipakai
+ * materi biasa di buku lain, jadi tidak dikenali dari kodenya.
+ */
+const isMockSection = (x: { group?: string; mock?: boolean }) =>
+  x.mock === true || x.group?.startsWith('Mock Test') === true;
+
+/**
+ * Katalog yang pernah disunting admin tidak ditimpa (D-055), tetapi materi BARU dari content/ (kode yang belum
+ * ada di DB, mis. materi KMSI D-074) tetap ditambahkan agar levelnya terlihat anak. Suntingan admin pada materi
+ * lama dipertahankan; mock test tetap di akhir dan ikut pindah ke bagian lombanya (D-076). Judul "(OSN)" → "(Olimpiade)" dan "Pra-TK" →
+ * "PAUD" ikut diganti bila hanya itu bedanya dengan content/.
+ */
+export async function mergeNewCategories(
+  db: ReturnType<typeof drizzle<typeof schema>>,
+  c: Catalog,
+) {
+  const [row] = await db
+    .select({ title: schema.skillCatalogs.title, categories: schema.skillCatalogs.categories })
+    .from(schema.skillCatalogs)
+    .where(
+      and(
+        eq(schema.skillCatalogs.domain, c.domain),
+        eq(schema.skillCatalogs.grade, c.grade),
+        sql`${schema.skillCatalogs.updatedBy} is not null`,
+      ),
+    );
+  if (!row) return;
+  const stored = (row.categories as Catalog['categories']) ?? [];
+  // Mock test pindah ke bagian lombanya (D-076): judul bagian & tanda `mock` mengikuti content/.
+  let moved = false;
+  const current = stored.map((x) => {
+    const src = c.categories.find((y) => y.code === x.code);
+    if (!src?.mock || !isMockSection(x) || (x.mock && x.group === src.group)) return x;
+    moved = true;
+    return { ...x, group: src.group, mock: true };
+  });
+  const have = new Set(current.map((x) => x.code));
+  const added = c.categories.filter((x) => !have.has(x.code));
+  // Penggantian nama resmi (bukan suntingan admin): "(OSN)" → "(Olimpiade)" (D-070), "Pra-TK" → "PAUD" (D-075).
+  const renamed = row.title.replace('(OSN)', '(Olimpiade)').replace('Pra-TK', 'PAUD');
+  const title = renamed === c.title ? c.title : row.title;
+  if (added.length === 0 && !moved && title === row.title) return;
+  const all = [...current, ...added];
+  const categories = [...all.filter((x) => !isMockSection(x)), ...all.filter(isMockSection)];
+  // updatedBy tetap (masih dianggap suntingan admin), hanya isinya yang dilengkapi.
+  await db
+    .update(schema.skillCatalogs)
+    .set({ title, categories, updatedAt: new Date() })
+    .where(and(eq(schema.skillCatalogs.domain, c.domain), eq(schema.skillCatalogs.grade, c.grade)));
+}
+
 export async function seed(
   db: ReturnType<typeof drizzle<typeof schema>>,
   opts: { force?: boolean; log?: (m: string) => void } = {},
@@ -65,6 +118,7 @@ export async function seed(
         // Katalog yang pernah disunting admin tidak ditimpa, kecuali --force.
         ...(opts.force ? {} : { setWhere: isNull(schema.skillCatalogs.updatedBy) }),
       });
+    if (!opts.force) await mergeNewCategories(db, c);
   }
 
   let added = 0;

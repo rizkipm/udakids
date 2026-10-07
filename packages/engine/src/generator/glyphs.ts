@@ -1,6 +1,7 @@
 /**
- * Jalur goresan angka 0–10 untuk menebalkan (interaksi `trace`) dan animasi Momo menulis. Dibuat sendiri
- * (bukan salinan lembar kerja mana pun): setiap angka = 1–2 goresan bernomor, koordinat di kotak
+ * Jalur goresan angka 0–10 dan huruf vokal a i u e o / A I U E O (D-075) untuk menebalkan (interaksi `trace`)
+ * dan animasi Momo menulis. Dibuat sendiri (bukan salinan lembar kerja mana pun): setiap angka/huruf =
+ * 1–4 goresan bernomor, koordinat di kotak
  * `GLYPH_HEIGHT` tinggi (sumbu y ke bawah), sudah dicacah menjadi titik-titik berjarak ±`STEP`.
  *
  * Pemeriksaan menebalkan juga di sini (fungsi murni): jari harus mulai di titik awal goresan, tetap di
@@ -9,7 +10,13 @@
 export type Pt = { x: number; y: number };
 export type Glyph = { id: GlyphId; width: number; strokes: Pt[][] };
 
-export const GLYPH_IDS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] as const;
+export const DIGIT_GLYPH_IDS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] as const;
+/** Huruf vokal kecil & besar (D-075). */
+export const VOWELS = ['a', 'i', 'u', 'e', 'o'] as const;
+export type Vowel = (typeof VOWELS)[number];
+export const LETTER_GLYPH_IDS = ['a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O'] as const;
+export type LetterGlyphId = (typeof LETTER_GLYPH_IDS)[number];
+export const GLYPH_IDS = [...DIGIT_GLYPH_IDS, ...LETTER_GLYPH_IDS] as const;
 export type GlyphId = (typeof GLYPH_IDS)[number];
 
 export const GLYPH_HEIGHT = 140;
@@ -58,7 +65,7 @@ const join = (...parts: Pt[][]): Pt[] => parts.flat();
 const P = (x: number, y: number): Pt => ({ x, y });
 
 /** Goresan kasar per angka (sebelum dicacah). */
-const RAW: Record<Exclude<GlyphId, '10'>, Pt[][]> = {
+const RAW: Record<Exclude<(typeof DIGIT_GLYPH_IDS)[number], '10'>, Pt[][]> = {
   // Mulai di atas, memutar ke kiri (berlawanan jarum jam) sampai kembali ke atas.
   '0': [arc(50, 70, 32, 52, -90, -450)],
   // Garis miring naik, lalu turun lurus.
@@ -87,6 +94,52 @@ const RAW: Record<Exclude<GlyphId, '10'>, Pt[][]> = {
   '9': [join(arc(50, 44, 26, 27, 0, -360), line([76, 44], [72, 126]))],
 };
 
+/**
+ * Huruf vokal. Huruf kecil berdiri di garis dasar y=126 dengan tinggi badan ±70 (seperti buku tulis
+ * bergaris); huruf besar setinggi angka. Arah goresan mengikuti cara menulis yang diajarkan di PAUD/TK.
+ */
+const LETTERS: Record<LetterGlyphId, { width: number; strokes: Pt[][] }> = {
+  // Bulatan (mulai kanan atas, memutar ke kiri), lalu tiang turun di kanan.
+  a: { width: 90, strokes: [arc(44, 92, 26, 32, -40, -400), line([70, 58], [70, 126])] },
+  // Tiang turun, lalu titik di atasnya.
+  i: { width: 50, strokes: [line([25, 62], [25, 126]), arc(25, 36, 5, 5, -90, -450)] },
+  // Turun, melengkung di bawah, naik; lalu tiang turun di kanan.
+  u: {
+    width: 90,
+    strokes: [
+      join(line([18, 58], [18, 98]), arc(43, 98, 25, 28, 180, 0), line([68, 98], [68, 58])),
+      line([68, 58], [68, 126]),
+    ],
+  },
+  // Garis tengah ke kanan, lalu memutar ke atas, ke kiri, dan ke bawah.
+  e: { width: 90, strokes: [join(line([18, 92], [70, 92]), arc(44, 92, 26, 34, 0, -305))] },
+  // Bulatan, mulai di atas memutar ke kiri.
+  o: { width: 90, strokes: [arc(45, 92, 27, 34, -90, -450)] },
+  // Miring kiri, miring kanan (dari puncak), lalu palang.
+  A: {
+    width: 100,
+    strokes: [line([50, 16], [16, 126]), line([50, 16], [84, 126]), line([30, 84], [70, 84])],
+  },
+  I: { width: 50, strokes: [line([25, 16], [25, 126])] },
+  U: {
+    width: 100,
+    strokes: [
+      join(line([20, 16], [20, 88]), arc(50, 88, 30, 38, 180, 0), line([80, 88], [80, 16])),
+    ],
+  },
+  // Tiang, lalu tiga palang dari atas ke bawah.
+  E: {
+    width: 90,
+    strokes: [
+      line([22, 16], [22, 126]),
+      line([22, 16], [74, 16]),
+      line([22, 70], [66, 70]),
+      line([22, 126], [74, 126]),
+    ],
+  },
+  O: { width: 100, strokes: [arc(50, 71, 34, 55, -90, -450)] },
+};
+
 const shift = (strokes: Pt[][], dx: number, sx = 1) =>
   strokes.map((s) => s.map((p) => ({ x: p.x * sx + dx, y: p.y })));
 
@@ -97,7 +150,15 @@ function build(id: GlyphId): Glyph {
     const zero = shift(RAW['0'], 62, 0.9);
     return { id, width: 160, strokes: [...one, ...zero].map(resample) };
   }
-  return { id, width: DIGIT_WIDTH, strokes: RAW[id].map(resample) };
+  if (id in LETTERS) {
+    const l = LETTERS[id as LetterGlyphId];
+    return { id, width: l.width, strokes: l.strokes.map(resample) };
+  }
+  return {
+    id,
+    width: DIGIT_WIDTH,
+    strokes: RAW[id as Exclude<GlyphId, '10' | LetterGlyphId>].map(resample),
+  };
 }
 
 export const GLYPHS: Record<GlyphId, Glyph> = Object.fromEntries(
@@ -106,10 +167,13 @@ export const GLYPHS: Record<GlyphId, Glyph> = Object.fromEntries(
 
 export const glyphOf = (n: number): Glyph => {
   const id = String(n);
-  if (!(GLYPH_IDS as readonly string[]).includes(id))
+  if (!(DIGIT_GLYPH_IDS as readonly string[]).includes(id))
     throw new Error(`tidak ada goresan angka ${n}`);
   return GLYPHS[id as GlyphId];
 };
+
+export const isLetterGlyph = (id: GlyphId): id is LetterGlyphId =>
+  (LETTER_GLYPH_IDS as readonly string[]).includes(id);
 
 /** Jalur SVG (`d`) untuk satu goresan. */
 export const strokePath = (stroke: readonly Pt[]) =>
@@ -148,7 +212,11 @@ export function traceStep(
 ): TraceState {
   if (state.status === 'done' || state.status === 'off') return state;
   if (state.status === 'idle') {
-    return dist(p, stroke[0]!) <= tolerance * 1.4 ? { reached: 0, status: 'drawing' } : state;
+    if (dist(p, stroke[0]!) > tolerance * 1.4) return state;
+    // Goresan sekecil titik (titik huruf i): menyentuhnya sudah cukup.
+    if (stroke.every((q) => dist(p, q) <= tolerance))
+      return { reached: stroke.length - 1, status: 'done' };
+    return { reached: 0, status: 'drawing' };
   }
   if (distanceToStroke(stroke, p) > tolerance * 1.6) return { ...state, status: 'off' };
   let reached = state.reached;

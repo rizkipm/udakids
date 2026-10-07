@@ -6,10 +6,10 @@ import { gradeSpan, groupSubjects, subjectList } from '../../src/site/Landing';
 describe('rentang jenjang di landing', () => {
   it('dihitung dari buku yang ada (urut GRADES), bukan teks tetap', () => {
     expect(gradeSpan([{ grade: 'sd4' }, { grade: 'prek' }, { grade: 'tk' }])).toBe(
-      'Dari Pra-TK sampai kelas 4',
+      'Dari PAUD sampai kelas 4',
     );
     expect(gradeSpan([{ grade: 'smp79' }, { grade: 'prek' }, { grade: 'sd56' }])).toBe(
-      'Dari Pra-TK sampai SMP',
+      'Dari PAUD sampai SMP',
     );
     expect(gradeSpan([{ grade: 'tk' }, { grade: 'tkosn' }])).toBe('Untuk TK');
     expect(gradeSpan(undefined)).toBe(t('site.hero.kicker'));

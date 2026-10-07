@@ -19,6 +19,7 @@ import {
   isMockSkill,
   levelStatuses,
   standaloneCodes,
+  groupStartCodes,
   PASS_SCORE,
   QUIZ_LENGTH,
   quizScore,
@@ -44,10 +45,18 @@ import { VisualView } from '../components/visuals';
 import { t, type MessageKey } from '../i18n';
 import { levelLabel, shelvesOf, useCatalog } from './catalog';
 import { useLinks } from './links';
+import { MomoLoader } from './MomoLoader';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
 import { PlayIcon } from './icons';
 import { PremiumNotice, premiumSay } from './PremiumNotice';
-import { loadProgress, newId, stateOf, updateProgress, useProgress } from './practiceStore';
+import {
+  loadProgress,
+  newId,
+  RESUME_MAX_AGE_MS,
+  stateOf,
+  updateProgress,
+  useProgress,
+} from './practiceStore';
 import { flushPractice } from './sync';
 import { useStopwatch } from './useStopwatch';
 import { MockTest } from './MockTest';
@@ -74,7 +83,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const session = useSession('child')!;
   const childId = session.user.id;
   const progress = useProgress(childId);
-  const { data } = useCatalog();
+  const { data, failed: catalogFailed, retry: retryCatalog } = useCatalog();
   const links = useLinks(data);
   const skillId = links?.skillOf(token) ?? '';
   const skill = data?.skills.find((s) => s.id === skillId);
@@ -95,6 +104,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
           standaloneCodes(shelves.map((s) => s.category)),
+          groupStartCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data.access ?? FREE_ACCESS,
@@ -106,7 +116,22 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     };
   }, [data, skill, progress.quizzes]);
 
-  const [seedBase] = useState(() => Math.floor(Date.now() % 1_000_000));
+  // Lanjutkan ronde yang belum selesai (D-073): ronde yang sama disusun ulang dari seed + daftar hindar tersimpan.
+  const resume = useMemo(() => {
+    const snap = loadProgress(childId).inProgress;
+    return skill &&
+      snap?.skillId === skill.id &&
+      snap.version === skill.version &&
+      snap.history.length > 0 &&
+      Date.now() - snap.ts < RESUME_MAX_AGE_MS
+      ? snap
+      : undefined;
+    // Dibaca sekali per skill; jangan ikut berubah saat snapshot diperbarui.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [skill?.id, skill?.version, childId]);
+  const [freshSeed] = useState(() => Math.floor(Date.now() % 1_000_000));
+  const seedBase = resume?.seedBase ?? freshSeed;
+  const avoidUsed = useRef<string[]>([]);
   const [index, setIndex] = useState(0);
   const [history, setHistory] = useState<boolean[]>([]);
   const [phase, setPhase] = useState<Phase>({ name: 'question' });
@@ -135,12 +160,43 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       stableSkill && playable && !isMockSkill(stableSkill)
         ? generateRound(stableSkill, {
             seed: seedBase,
-            avoid: loadProgress(childId).recentItems?.[stableSkill.id],
+            avoid: (avoidUsed.current =
+              resume?.avoid ?? loadProgress(childId).recentItems?.[stableSkill.id] ?? []),
           })
         : undefined,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [stableSkill, seedBase, childId, playable],
   );
   const item: Item | undefined = round?.[index];
+
+  // Lanjutkan: kembalikan nomor soal & jawaban yang sudah diberikan (sekali, saat ronde tersimpan ditemukan).
+  const restored = useRef(false);
+  useEffect(() => {
+    if (!resume || !round || restored.current) return;
+    restored.current = true;
+    // Lanjut dari soal pertama yang belum dijawab.
+    const done = Math.min(resume.history.length, round.length - 1);
+    setIndex(done);
+    setHistory(resume.history.slice(0, done));
+  }, [resume, round]);
+
+  // Simpan posisi ronde yang sedang berjalan (D-073) supaya bisa dilanjutkan setelah keluar/ganti halaman.
+  useEffect(() => {
+    if (!round || !stableSkill || phase.name === 'done' || history.length === 0) return;
+    if (resume && !restored.current) return;
+    updateProgress(childId, (p) => ({
+      ...p,
+      inProgress: {
+        skillId: stableSkill.id,
+        version: stableSkill.version,
+        seedBase,
+        avoid: avoidUsed.current,
+        index: history.length,
+        history,
+        ts: Date.now(),
+      },
+    }));
+  }, [round, stableSkill, index, history, phase.name, seedBase, childId, resume]);
 
   const paid = status === 'paid';
   const locked = status === 'locked' || paid;
@@ -170,12 +226,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   }, [round, stableSkill, locked, childId]);
 
   if (!data || !links) {
-    return (
-      <main className="kid-screen">
-        <Momo own color={momoColor} mood="idle" size={140} />
-        <p className="kid-note">{t('play.library.loading')}</p>
-      </main>
-    );
+    return <MomoLoader color={momoColor} failed={catalogFailed} onRetry={retryCatalog} />;
   }
   if (locked && skill) {
     return (
@@ -196,12 +247,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   }
   // Mock test (D-072): PracticeRoute akan menampilkan MockTest; jangan sempat tampil "tidak ditemukan".
   if (skill && isMockSkill(skill)) {
-    return (
-      <main className="kid-screen">
-        <Momo own color={momoColor} mood="idle" size={140} />
-        <p className="kid-note">{t('play.library.loading')}</p>
-      </main>
-    );
+    return <MomoLoader color={momoColor} />;
   }
   if (!skill || !item || !book) {
     return (
@@ -223,6 +269,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     const timeMs = Math.round(watch.elapsed());
     updateProgress(childId, (p) => ({
       ...p,
+      inProgress: undefined,
       quizzes: { ...p.quizzes, [skill.id]: recordQuiz(p.quizzes[skill.id], score, now, timeMs) },
       quizOutbox: [
         ...p.quizOutbox,
@@ -461,7 +508,11 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
               <button
                 type="button"
                 className="kid-btn secondary"
-                onClick={() => navigate(links.topic(skill))}
+                onClick={() => {
+                  // Berhenti dengan sengaja: ronde dibuang (tidak dilanjutkan), sesuai pesan dialog.
+                  updateProgress(childId, (p) => ({ ...p, inProgress: undefined }));
+                  navigate(links.topic(skill));
+                }}
               >
                 {t('play.quiz.quitLeave')}
               </button>

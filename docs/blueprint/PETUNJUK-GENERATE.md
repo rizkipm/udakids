@@ -49,7 +49,7 @@ Keputusan itu akan dicatat di `docs/decisions.md`.
 
 ## Urutan kerja yang disarankan
 
-1. **Fase G4 (Pra-TK):** kerjakan dari kode terkecil per mapel (P-BT-01, P-BT-02, …), karena unit awal menjadi
+1. **Fase G4 (PAUD):** kerjakan dari kode terkecil per mapel (P-BT-01, P-BT-02, …), karena unit awal menjadi
    dasar unit berikutnya.
 2. **Fase G5 (TK)**, lalu **G6 (Kelas 1)**.
 3. Unit yang Tantangan-nya "Ada: …" lebih cepat, karena hanya perlu pelajaran.

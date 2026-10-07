@@ -116,9 +116,9 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     expect(res.body.rest).toMatchObject({ page: 1, total: 0, items: [] });
   });
 
-  it('per buku: Math Pra-TK — rata-rata sama 90, tapi Alya 2 ronde di atas Budi 1 ronde (D-045)', async () => {
+  it('per buku: Math PAUD — rata-rata sama 90, tapi Alya 2 ronde di atas Budi 1 ronde (D-045)', async () => {
     const res = await get('/leaderboard?scope=math/prek').expect(200);
-    expect(res.body.title).toBe('Math Pra-TK');
+    expect(res.body.title).toBe('Math PAUD');
     expect((res.body.top as Row[]).map((r) => [r.nickname, r.average, r.rounds])).toEqual([
       ['Citra', 93.33, 3],
       ['Alya', 90, 2],
@@ -131,7 +131,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     const scopes = await get('/leaderboard/scopes', kids.Budi!.token).expect(200);
     expect(scopes.body.scopes).toEqual([
       { key: 'global', title: 'Global', participants: 3 },
-      { key: 'math/prek', domain: 'math', grade: 'prek', title: 'Math Pra-TK', participants: 3 },
+      { key: 'math/prek', domain: 'math', grade: 'prek', title: 'Math PAUD', participants: 3 },
       {
         key: 'sains/tk',
         domain: 'sains',
@@ -159,7 +159,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     ]);
     expect(res.body.books[0].totalLevels).toBeGreaterThan(0);
     expect(res.body.topics.length).toBeGreaterThan(0);
-    expect(res.body.topics[0]).toMatchObject({ book: 'Math Pra-TK', rounds: expect.any(Number) });
+    expect(res.body.topics[0]).toMatchObject({ book: 'Math PAUD', rounds: expect.any(Number) });
     const scoped = await get(
       `/leaderboard/detail/${kids.Alya!.id}?scope=sains/tk`,
       kids.Budi!.token,
@@ -291,9 +291,11 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     for (const r of res.body.top) {
       expect(Object.keys(r).sort()).toEqual(
         [
+          'average',
           'momoColor',
           'momoLook',
           'nickname',
+          'rating',
           'passedLevels',
           'points',
           'position',
@@ -304,6 +306,19 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       );
     }
     expect(res.body.top[0]).toMatchObject({ nickname: 'Budi', points: 170, questions: 30 });
+    // Papan lain (D-073): rata-rata & paling aktif per periode, tetap tanpa id anak.
+    for (const q of [
+      'board=average&period=all',
+      'board=average&period=week',
+      'board=active&period=day',
+    ]) {
+      const b = await ctx.http().get(`/leaderboard/public?${q}`).expect(200);
+      for (const r of b.body.top) expect(r).not.toHaveProperty('childId');
+    }
+    // "Paling aktif" tidak punya periode "semua": server memakai bulan ini.
+    const all = await ctx.http().get('/leaderboard/public?board=active&period=all').expect(200);
+    expect(all.body).toMatchObject({ board: 'active', period: 'month' });
+    await ctx.http().get('/leaderboard/public?board=lain').expect(400);
     // Papan lengkap tetap butuh login; jumlah soal sama dengan laporan anak.
     await ctx.http().get('/leaderboard').expect(401);
     const board = await get('/leaderboard?mode=total').expect(200);

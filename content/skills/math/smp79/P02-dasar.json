@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.p2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 2,
+  "title": "Pola dan barisan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "r": [2, 3],
+      "n": [5, 8]
+    },
+    "derived": {
+      "k": "n - 1",
+      "p": "(r==2)*(k==4)*16+(r==2)*(k==5)*32+(r==2)*(k==6)*64+(r==2)*(k==7)*128+(r==3)*(k==4)*81+(r==3)*(k==5)*243+(r==3)*(k==6)*729+(r==3)*(k==7)*2187"
+    },
+    "prompt": "Suku ke-{n} barisan geometri {a}, {=a*r}, {=a*r*r}, … adalah …",
+    "answer": "a * p",
+    "distractors": [
+      {
+        "expr": "a * p * r",
+        "tag": "pangkat-n"
+      },
+      {
+        "expr": "a * r * k",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a + p",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Un = {a} × {r}^{k} = {answer}."
+  }
+}

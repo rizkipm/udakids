@@ -7,6 +7,7 @@ import {
   levelStatuses,
   isMockSkill,
   standaloneCodes,
+  groupStartCodes,
   withAccess,
   PASS_SCORE,
   QUIZ_LENGTH,
@@ -23,10 +24,9 @@ import { bookKey, levelLabel, shelvesOf, useCatalog } from './catalog';
 import { CheckIcon, LockIcon, PlayIcon, StatIcon } from './icons';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
 import { useLinks } from './links';
+import { MomoLoader } from './MomoLoader';
 import { PremiumNotice } from './PremiumNotice';
-import { MockBoard } from './MockBoard';
-import { MockHistory } from './MockHistory';
-import { MockOverview } from './MockTest';
+import { MockSection } from './MockSection';
 import { useProgress } from './practiceStore';
 import { PageHead } from './Profile';
 
@@ -38,7 +38,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   const { token = '' } = useParams();
   const session = useSession('child')!;
   const progress = useProgress(session.user.id);
-  const { data } = useCatalog();
+  const { data, failed: catalogFailed, retry: retryCatalog } = useCatalog();
   const links = useLinks(data);
   const where = links?.topicOf(token);
   const domain = where?.domain ?? '';
@@ -59,6 +59,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
           standaloneCodes(shelves.map((s) => s.category)),
+          groupStartCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data.access ?? FREE_ACCESS,
@@ -68,12 +69,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
 
   const shelf = book?.shelf;
   if (!data || !links) {
-    return (
-      <main className="kid-screen">
-        <Momo own color={momoColor} mood="idle" size={140} />
-        <p className="kid-note">{t('play.library.loading')}</p>
-      </main>
-    );
+    return <MomoLoader color={momoColor} failed={catalogFailed} onRetry={retryCatalog} />;
   }
   if (!book || !shelf) {
     return (
@@ -98,26 +94,21 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   const tips = category.tips ?? [];
   // Mock Test olimpiade (D-072): aturan & tombolnya berbeda dari level biasa.
   const mockSkill = shelf.skills[0] && isMockSkill(shelf.skills[0]) ? shelf.skills[0] : undefined;
-  const mockOpen =
-    mockSkill && ['open', 'passed'].includes(book.statuses[mockSkill.id] ?? '')
-      ? mockSkill
-      : undefined;
   const readAloud = [intro, ...tips.map((x) => `${t('play.topic.tip')} ${x}`)].join(' ');
 
   if (mockSkill) {
     return (
       <main className="library topic-page">
         <PageHead title={category.title} sub={shelf.catalog.title} />
-        <MockOverview
-          mock={mockSkill}
+        <MockSection
+          mocks={shelf.skills.filter(isMockSkill)}
           tips={tips}
+          statuses={book.statuses}
+          results={progress.quizzes}
+          access={data.access ?? FREE_ACCESS}
           momoColor={momoColor}
-          best={progress.quizzes[mockSkill.id]}
-          start={mockOpen ? links.level(mockOpen.id) : undefined}
-          locked={paidNext ? <PremiumNotice access={data.access ?? FREE_ACCESS} mock /> : undefined}
+          levelHref={(id) => links.level(id)}
         />
-        <MockHistory mock={mockSkill} momoColor={momoColor} />
-        <MockBoard skillId={mockSkill.id} momoColor={momoColor} compact />
       </main>
     );
   }

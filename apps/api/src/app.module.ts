@@ -39,6 +39,7 @@ import { AdminContactController, PublicContactController } from './settings/cont
 import { ParentAccountController } from './parent/account.controller.js';
 import { TTS_PROVIDER, ttsFromEnv } from './voice/tts.provider.js';
 import { AdminAiController, PicturesController } from './ai/ai.controller.js';
+import { SiteContentController } from './site/site-content.controller.js';
 import { AiImageService } from './ai/ai-image.service.js';
 import { IMAGE_PROVIDER } from './ai/openai.provider.js';
 import { AdminVoiceController, VoiceController } from './voice/voice.controller.js';
@@ -73,6 +74,7 @@ import { VoiceService } from './voice/voice.service.js';
     AdminVoiceController,
     AdminAiController,
     PicturesController,
+    SiteContentController,
     ParentAffiliateController,
     PublicReferralController,
     AdminAffiliateController,

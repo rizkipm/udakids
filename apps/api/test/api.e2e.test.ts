@@ -5,6 +5,7 @@ import { Test } from '@nestjs/testing';
 import type { INestApplication } from '@nestjs/common';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import {
+  catalogSchema,
   generateItem,
   initialJago,
   skillTemplateSchema,
@@ -13,11 +14,12 @@ import {
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { Pool } from 'pg';
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import * as schema from '../src/db/schema.js';
 import { seed } from '../scripts/seed.js';
+import { mergeNewCategories } from '../src/cli/seed.js';
 import { MAIL_TRANSPORT } from '../src/mail/mail.service.js';
 import { TTS_PROVIDER } from '../src/voice/tts.provider.js';
 import { configureApp } from '../src/common/app-setup.js';
@@ -122,39 +124,43 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(res.body.totalLevels).toBe(SKILL_COUNT);
       // Urut per mata pelajaran lalu jenjang (GRADES): buku per kelas (D-032) di samping buku gabungan lama.
       expect(res.body.books.map((b: { title: string }) => b.title)).toEqual([
-        'Math Pra-TK',
+        'Math PAUD',
         'Math Kindergarten (TK)',
         'Math TK (Olimpiade)',
         'Math Grade 1',
         'Math Grade 2',
-        'Math Grade 1-2 (OSN)',
+        'Math Grade 1-2 (Olimpiade)',
         'Math Grade 3',
-        'Math Grade 3-4 (OSN)',
-        'Math Grade 5-6 (OSN)',
-        'Math SMP Kelas 7-9 (OSN)',
+        'Math Grade 3-4 (Olimpiade)',
+        'Math Grade 5-6 (Olimpiade)',
+        'Math SMP Kelas 7-9 (Olimpiade)',
         'Sains Kindergarten (TK)',
         'Sains TK (Olimpiade)',
         'Sains Grade 1',
         'Sains Grade 2',
-        'Sains Grade 1-2 (OSN)',
+        'Sains Grade 1-2 (Olimpiade)',
         'Sains Grade 3',
         'Sains Grade 4',
-        'Sains Grade 3-4 (OSN)',
-        'Sains Grade 5-6 (OSN)',
-        'Sains SMP Kelas 7-9 (OSN)',
-        'English Pra-TK',
+        'Sains Grade 3-4 (Olimpiade)',
+        'Sains Grade 5-6 (Olimpiade)',
+        'Sains SMP Kelas 7-9 (Olimpiade)',
+        'English PAUD',
         'English TK (Olimpiade)',
-        'Worksheet Pra-TK',
+        'English Grade 1-2 (Olimpiade)',
+        'English Grade 3-4 (Olimpiade)',
+        'English Grade 5-6 (Olimpiade)',
+        'English SMP Kelas 7-9 (Olimpiade)',
+        'Worksheet PAUD',
       ]);
       expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
       // Rujukan kurikulum dari tag skill (D-059); rujukan internal (ixlRef) tidak pernah tampil.
       const std = (title: string) =>
         res.body.books.find((b: { title: string }) => b.title === title).standards;
-      expect(std('Math Pra-TK')).toEqual(['merdeka', 'singapore']);
+      expect(std('Math PAUD')).toEqual(['merdeka', 'singapore']);
       expect(std('Math Kindergarten (TK)')).toEqual(['merdeka', 'singapore']);
-      expect(std('Sains SMP Kelas 7-9 (OSN)')).toEqual(['merdeka', 'timss', 'osn']);
-      expect(std('English Pra-TK')).toEqual(['singapore', 'cambridge']);
+      expect(std('Sains SMP Kelas 7-9 (Olimpiade)')).toEqual(['merdeka', 'timss', 'osn']);
+      expect(std('English PAUD')).toEqual(['singapore', 'cambridge']);
       expect(std('Math Grade 3')).toEqual(['merdeka', 'singapore', 'cambridge', 'osn']);
       expect(JSON.stringify(res.body)).not.toMatch(/ixl/i);
     });
@@ -167,7 +173,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         (await q('select count(*) n from children where active')) +
         (await q('select count(*) n from staff_users where active'));
       expect(res.body).toMatchObject({
-        books: 23,
+        books: 27,
         totalLevels: SKILL_COUNT,
         users,
         rounds: await q("select count(*) n from events where type = 'quiz_result'"),
@@ -412,7 +418,8 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'sd34' && c.domain === 'sains',
         ).categories,
-      ).toHaveLength(10);
+        // 10 materi OSN + 7 materi KMSI (K–Q) + Mock Test KMSI (Y), D-074.
+      ).toHaveLength(18);
       await http().get('/parent/children').set(auth(childToken)).expect(403);
       await http().get('/admin/skills').set(auth(childToken)).expect(403);
       await http().get('/levels').set(auth(childToken)).expect(200);
@@ -554,7 +561,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         played: 3,
         rank: { position: 1, of: 1 },
         className: null,
-        highest: { book: 'Math Pra-TK', level: 1 },
+        highest: { book: 'Math PAUD', level: 1 },
       });
       expect(noClass.body.history).toHaveLength(3);
       expect(noClass.body.history[0]).toMatchObject({
@@ -629,7 +636,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         points: 100,
         passed: 1,
         timeMs: 95_000,
-        highest: { book: 'Math Pra-TK', level: 1 },
+        highest: { book: 'Math PAUD', level: 1 },
         me: false,
       });
       expect(board.body.me).toMatchObject({ position: 2, nickname: 'Alya', me: true });
@@ -883,7 +890,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .send({
           domain: 'math',
           grade: 'prek',
-          title: 'Math Pra-TK',
+          title: 'Math PAUD',
           categories: [{ code: 'A', title: 'Bilangan sampai 3' }],
         })
         .expect(400);
@@ -899,7 +906,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .send({
           domain: 'math',
           grade: 'prek',
-          title: 'Math Pra-TK (uji)',
+          title: 'Math PAUD (uji)',
           categories: cur.categories,
         })
         .expect(200);
@@ -911,10 +918,66 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
             "select title from skill_catalogs where domain = 'math' and grade = 'prek'",
           )
         ).rows[0].title;
-      expect(await title()).toBe('Math Pra-TK (uji)');
+      expect(await title()).toBe('Math PAUD (uji)');
       await seed(db, { force: true, log: () => {} });
-      expect(await title()).toBe('Math Pra-TK');
+      expect(await title()).toBe('Math PAUD');
     }, 120_000); // seed 2×: ±2.700 skill
+
+    it('katalog suntingan admin tetap mendapat materi BARU dari content (D-074), suntingan lama dipertahankan', async () => {
+      const content = catalogSchema.parse(
+        JSON.parse(
+          readFileSync(
+            join(
+              import.meta.dirname,
+              '..',
+              '..',
+              '..',
+              'content',
+              'skills',
+              'math',
+              'sd12',
+              '_catalog.json',
+            ),
+            'utf8',
+          ),
+        ),
+      );
+      // Katalog lama yang disunting admin: materi OSN (judul lama "(OSN)") + mock KMSI dengan judul bagian lama
+      // "Mock Test KMSI · …" tanpa tanda `mock` (sebelum D-076).
+      const mockY = content.categories.find((c) => c.code === 'Y')!;
+      const old = [
+        ...content.categories
+          .filter((c) => !c.group)
+          .map((c, i) => (i === 0 ? { ...c, title: 'Bilangan (disunting admin)' } : c)),
+        { ...mockY, mock: undefined, group: 'Mock Test KMSI · Simulasi penyisihan 30 soal' },
+      ];
+      // Langsung di DB: admin tidak boleh menghapus materi yang masih dipakai skill, jadi kondisi "katalog lama"
+      // (sebelum materi baru ditambahkan ke content/) disiapkan tanpa API.
+      await pool.query(
+        `update skill_catalogs set title = 'Math Grade 1-2 (OSN)', categories = $1,
+           updated_by = (select id from staff_users where role = 'admin' limit 1)
+         where domain = 'math' and grade = 'sd12'`,
+        [JSON.stringify(old)],
+      );
+      const db = drizzle(pool, { schema });
+      await mergeNewCategories(db, content);
+      const row = (
+        await pool.query(
+          "select title, categories, updated_by from skill_catalogs where domain = 'math' and grade = 'sd12'",
+        )
+      ).rows[0] as {
+        title: string;
+        categories: { code: string; title: string; group?: string; mock?: boolean }[];
+        updated_by: string;
+      };
+      expect(row.title).toBe('Math Grade 1-2 (Olimpiade)');
+      expect(row.updated_by).not.toBeNull();
+      expect(row.categories[0]!.title).toBe('Bilangan (disunting admin)');
+      expect(row.categories.map((c) => c.code)).toEqual(content.categories.map((c) => c.code));
+      // Mock test pindah ke bagian lombanya (D-076), tetap di akhir.
+      expect(row.categories.at(-1)).toMatchObject({ code: 'Y', mock: true, group: mockY.group });
+      expect(row.categories.filter((c) => c.group?.startsWith('KMSI') && !c.mock)).toHaveLength(7);
+    });
   });
 
   describe('admin: level', () => {
@@ -1080,7 +1143,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .post('/admin/packages')
         .set(auth(adminToken))
         .send({
-          name: 'Math Pra-TK selamanya',
+          name: 'Math PAUD selamanya',
           scope: 'books',
           books: [{ domain: 'math', grade: 'prek' }],
           durationDays: null,
@@ -1110,7 +1173,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       await http().get('/admin/packages').set(auth(parentToken)).expect(403);
       const ov = await http().get('/parent/billing').set(auth(parentToken)).expect(200);
       expect(ov.body.packages[0]).toMatchObject({
-        name: 'Math Pra-TK selamanya',
+        name: 'Math PAUD selamanya',
         pricing: { normal: 35_000, final: 28_000 },
       });
       expect(ov.body.methods[0]).toMatchObject({ provider: 'BCA', accountNumber: '123 456 7890' });
@@ -1212,7 +1275,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       await http().post(`/admin/orders/${orderId}/approve`).set(auth(adminToken)).expect(409);
       const ov = await http().get('/parent/billing').set(auth(parentToken)).expect(200);
       expect(ov.body.entitlements[0]).toMatchObject({
-        name: 'Math Pra-TK selamanya',
+        name: 'Math PAUD selamanya',
         endsAt: null,
       });
       expect(ov.body.access.books).toEqual(['math/prek']);
@@ -1239,7 +1302,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       const res = await http().get('/public/pricing').expect(200);
       expect(res.body).toMatchObject({ paywall: true, freeLevels: 2 });
       expect(res.body.packages[0]).toMatchObject({
-        name: 'Math Pra-TK selamanya',
+        name: 'Math PAUD selamanya',
         pricing: { normal: 35_000, final: 28_000 },
       });
       expect(Object.keys(res.body.packages[0])).not.toContain('sold');
@@ -1332,17 +1395,17 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('manifest kalimat → admin membuat klip sekali → klip di-cache selamanya', async () => {
       const before = await http().get('/voice/lines').expect(200);
       expect(before.body.enabled).toBe(true);
-      expect(Object.keys(before.body.lines)).toHaveLength(35);
+      expect(Object.keys(before.body.lines)).toHaveLength(39);
       expect(before.body.lines.vo_cmd_pick_one).toMatchObject({ clip: null });
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 35, created: 35, failed: 0, skipped: 0 });
+        .expect(200, { total: 39, created: 39, failed: 0, skipped: 0 });
       const calls = ttsCalls.length;
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 35, created: 0, failed: 0, skipped: 35 });
+        .expect(200, { total: 39, created: 0, failed: 0, skipped: 39 });
       expect(ttsCalls.length).toBe(calls); // tidak dibuat ulang
       const after = await http().get('/voice/lines').expect(200);
       const key = after.body.lines.vo_cmd_pick_one.clip;
@@ -1368,7 +1431,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       await http().get(`/voice/item/${g1.id}?seed=5&band=0`).expect(404);
     });
 
-    it('English Pra-TK: narasi Bahasa Indonesia, kartu kata dengan suara English (D-062)', async () => {
+    it('English PAUD: narasi Bahasa Indonesia, kartu kata dengan suara English (D-062)', async () => {
       const [en] = (
         await pool.query(
           "select id, template from skills where domain = 'english' and grade = 'prek' order by id limit 1",

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.p7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "P",
+  "order": 7,
+  "title": "Teori bilangan sederhana — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [3, 8],
+      "c": [4, 10]
+    },
+    "constraint": "a != b && b != c && a != c",
+    "prompt": "Tiga lampu berkedip tiap {a}, {b}, dan {c} detik. Mulai bersama, berkedip bersama lagi setelah … detik.",
+    "answer": "lcm(a, b, c)",
+    "distractors": [
+      {
+        "expr": "a * b * c",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "lcm(a, b)",
+        "tag": "dua-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "KPK({a}, {b}, {c}) = {answer}."
+  }
+}

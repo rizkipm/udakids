@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.l2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "L",
+  "order": 2,
+  "title": "Sifat bilangan dan sifat operasi — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Sifat bilangan dan sifat operasi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "n": [20, 99]
+    },
+    "constraint": "n % a != 0",
+    "prompt": "{n} : {a} = {=floor(n/a)} sisa …",
+    "answer": "n % a",
+    "distractors": [
+      {
+        "expr": "a - n % a",
+        "tag": "kekurangan"
+      },
+      {
+        "expr": "n % a + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "floor(n / a)",
+        "tag": "hasil-bagi"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a} × {=floor(n/a)} = {=a*floor(n/a)}; {n} − {=a*floor(n/a)} = sisa {answer}."
+  }
+}

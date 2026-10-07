@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.o3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "O",
+  "order": 3,
+  "title": "Teori bilangan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "values": [2, 3, 7, 8]
+      },
+      "n": [10, 99]
+    },
+    "derived": {
+      "m": "(n - 1) % 4"
+    },
+    "prompt": "Angka satuan dari {b}^{n} adalah …",
+    "answer": "(b==2)*((m==0)*2+(m==1)*4+(m==2)*8+(m==3)*6)+(b==3)*((m==0)*3+(m==1)*9+(m==2)*7+(m==3)*1)+(b==7)*((m==0)*7+(m==1)*9+(m==2)*3+(m==3)*1)+(b==8)*((m==0)*8+(m==1)*4+(m==2)*2+(m==3)*6)",
+    "distractors": [
+      {
+        "expr": "b",
+        "tag": "basis"
+      },
+      {
+        "expr": "(b * n) % 10",
+        "tag": "dikali"
+      },
+      {
+        "expr": "(b + n) % 10",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Pola angka satuan berulang tiap 4; urutan ke-{=m+1} → {answer}."
+  }
+}

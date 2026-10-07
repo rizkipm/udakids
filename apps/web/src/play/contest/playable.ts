@@ -39,6 +39,13 @@ export function toPlayable(p: PublicItem, index: number): Item {
     case 'spell':
       interaction = { ...it, answer: [] };
       break;
+    case 'maze':
+      interaction = it;
+      break;
+    case 'word-search':
+      // Letak kata tidak dikirim saat lomba; papan mencocokkan dari huruf di kotak.
+      interaction = { ...it, words: it.words.map((w) => ({ ...w, cells: [] })) };
+      break;
   }
   return {
     prompt: p.prompt,

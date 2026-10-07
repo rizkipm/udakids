@@ -120,7 +120,7 @@ pnpm build          # engine → apps/api/dist → apps/web/dist
 ```bash
 pnpm deploy:db
 # Migrasi database selesai.
-# skill: 4160 ditambahkan/diperbarui dari … file
+# skill: 5534 ditambahkan/diperbarui dari … file
 # level: 3 ditambahkan/diperbarui
 # dialog: 1 ditambahkan/diperbarui
 # admin dibuat: admin@sekolah.id
@@ -134,10 +134,10 @@ psql "$(grep ^DATABASE_URL .env | cut -d= -f2-)" -c "
          (select count(*) from children) as anak, (select count(*) from classes) as kelas,
          (select count(*) from skills where status = 'active') as skill_aktif,
          (select count(*) from skill_catalogs) as buku"
-# staf = 1, orang_tua = 0, anak = 0, kelas = 0, skill_aktif ≈ 4160, buku = 23
+# staf = 1, orang_tua = 0, anak = 0, kelas = 0, skill_aktif ≈ 5534, buku = 27
 ```
 
-(Diuji 2026-10-07 pada database kosong dengan `NODE_ENV=production`: 4.160 skill, 23 buku, 3 level, 1 dialog,
+(Diuji 2026-10-08 pada database kosong dengan `NODE_ENV=production`: 20 migrasi, 5.534 skill, 27 buku, 3 level, 1 dialog,
 1 admin; 0 orang tua/anak/kelas/progres/pesanan/gambar AI. Satu baris `app_settings` "news" hanyalah penanda waktu
 email info materi baru, D-053.)
 

@@ -1,0 +1,466 @@
+{
+  "id": "math.sd56.r10.tantangan-statistika-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "R",
+  "order": 10,
+  "title": "Statistika sederhana — Level 10 — Tantangan statistika sederhana",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 10],
+            "b": [5, 10],
+            "c": [5, 10],
+            "d": [5, 10]
+          },
+          "constraint": "a != b && a != c && a != d && b != c && b != d && c != d",
+          "prompt": "Modus dari data {a}, {b}, {a}, {c}, {d}, {a}, {b} adalah …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "muncul-dua"
+            },
+            {
+              "expr": "c",
+              "tag": "c"
+            },
+            {
+              "expr": "d",
+              "tag": "d"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} muncul 3 kali, paling sering."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 30],
+            "r": [60, 90]
+          },
+          "prompt": "Rata-rata nilai {n} siswa adalah {r}. Jumlah nilai mereka …",
+          "answer": "n * r",
+          "distractors": [
+            {
+              "expr": "n + r",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "r",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "n * r / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{n} × {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 9],
+            "r": [25, 40],
+            "k": [1, 2]
+          },
+          "derived": {
+            "s": "r + k"
+          },
+          "prompt": "Rata-rata berat {n} anak {r} kg. Seorang anak lagi bergabung sehingga rata-rata menjadi {s} kg. Berat anak itu … kg.",
+          "answer": "(n + 1) * s - n * r",
+          "distractors": [
+            {
+              "expr": "s",
+              "tag": "rata-rata-baru"
+            },
+            {
+              "expr": "n * s - n * r",
+              "tag": "lupa-satu"
+            },
+            {
+              "expr": "(n + 1) * s",
+              "tag": "jumlah-baru"
+            }
+          ],
+          "choices": 4,
+          "explain": "({n} + 1) × {s} − {n} × {r} = {answer} kg."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 5],
+            "p": [1, 6],
+            "q": [1, 6]
+          },
+          "derived": {
+            "a": "5 * k * p",
+            "b": "5 * k",
+            "c": "5 * k * q"
+          },
+          "constraint": "(b * 100) % (a + b + c) == 0",
+          "prompt": "Data: {a} siswa suka bola, {b} suka renang, {c} suka catur. Persentase yang suka renang … %.",
+          "answer": "b * 100 / (a + b + c)",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "jumlah"
+            },
+            {
+              "expr": "a * 100 / (a + b + c)",
+              "tag": "bola"
+            },
+            {
+              "expr": "100 - b * 100 / (a + b + c)",
+              "tag": "sisa"
+            }
+          ],
+          "choices": 4,
+          "explain": "{b} : {=a+b+c} × 100% = {answer}%."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Data: 6, 7, 7, 8, 9, 9, 9, 10. Modusnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 muncul 3 kali."
+            },
+            {
+              "prompt": "Median dari 4, 9, 2, 7, 5, 8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6,5"
+                  },
+                  "say": "6,5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urut: 2, 4, 5, 7, 8, 9 → (5 + 7) : 2."
+            },
+            {
+              "prompt": "Diagram yang paling tepat untuk perbandingan bagian dari keseluruhan adalah diagram …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garis"
+                  },
+                  "say": "garis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "batang selalu"
+                  },
+                  "say": "batang selalu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gambar acak"
+                  },
+                  "say": "gambar acak"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Diagram lingkaran."
+            },
+            {
+              "prompt": "Rata-rata 5 bilangan 12. Jika satu bilangan 20 dihapus, rata-rata sisanya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(60 − 20) : 4."
+            },
+            {
+              "prompt": "Data suhu selama seminggu paling tepat disajikan dengan diagram …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "garis"
+                  },
+                  "say": "garis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "venn"
+                  },
+                  "say": "venn"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pohon"
+                  },
+                  "say": "pohon"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Perubahan waktu."
+            },
+            {
+              "prompt": "Nilai: 70 (3 siswa), 80 (5 siswa), 90 (2 siswa). Rata-ratanya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "79"
+                  },
+                  "say": "79"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80"
+                  },
+                  "say": "80"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "78"
+                  },
+                  "say": "78"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "81"
+                  },
+                  "say": "81"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(210 + 400 + 180) : 10."
+            },
+            {
+              "prompt": "Banyak data 7. Median adalah data ke- …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3,5"
+                  },
+                  "say": "3,5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(7 + 1) : 2."
+            },
+            {
+              "prompt": "Rata-rata dua bilangan 15, selisihnya 6. Bilangan terkecil …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah 30."
+            },
+            {
+              "prompt": "Dalam diagram lingkaran, 25% siswa suka basket. Sudut juringnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90°"
+                  },
+                  "say": "90°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25°"
+                  },
+                  "say": "25°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45°"
+                  },
+                  "say": "45°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "120°"
+                  },
+                  "say": "120°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "25% × 360°."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -3,6 +3,7 @@ import { lessonSchema } from '../content/lesson.js';
 import { OBJECTS } from './assets.js';
 import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/index.js';
 import { allVisuals, type Choice, type Item, type ItemCore } from './item.js';
+import { countWord, mazePath } from './games.js';
 import { GLYPHS } from './glyphs.js';
 import { createRng } from './rng.js';
 
@@ -33,7 +34,7 @@ export const GRADES = [
   'smp79',
 ] as const;
 export const GRADE_LABEL: Record<(typeof GRADES)[number], string> = {
-  prek: 'Pra-TK',
+  prek: 'PAUD',
   tk: 'Kindergarten (TK)',
   tkosn: 'TK (Olimpiade)',
   sd1: 'Kelas 1',
@@ -111,6 +112,11 @@ export const catalogSchema = z.strictObject({
          * untuk topik tambahan yang disisipkan ke buku yang sudah dimainkan anak.
          */
         standalone: z.boolean().optional(),
+        /**
+         * Mock test lomba (D-076): tampil di dalam bagian lombanya (`group` sama dengan kisi-kisinya, mis. EMC),
+         * di bawah subjudul "Mock test", sesudah materi kisi-kisi.
+         */
+        mock: z.boolean().optional(),
         /** Pelajaran sebelum latihan (Menu Belajar, D-068). */
         lesson: lessonSchema.optional(),
       }),
@@ -230,7 +236,7 @@ export function itemProblems(item: ItemCore): string[] {
         if (k < 0) out.push(`spell: huruf "${a}" tidak ada di kartu`);
         else pool.splice(k, 1);
       }
-      if (pool.length === 0) out.push('spell: butuh huruf pengecoh');
+      if (it.letters.length < 2) out.push('spell: butuh minimal 2 kartu huruf');
       break;
     }
     case 'build':
@@ -252,6 +258,49 @@ export function itemProblems(item: ItemCore): string[] {
       if (it.answer.length !== it.dots.length || it.answer.some((a) => !ids.has(a)))
         out.push('connect: urutan tidak mencakup semua titik');
       if (it.dots.length < 3 || it.dots.length > MAX_DOTS) out.push(`connect: titik 3–${MAX_DOTS}`);
+      break;
+    }
+    case 'maze': {
+      const n = it.cols * it.rows;
+      if (it.cols < 2 || it.rows < 2 || it.cols > 6 || it.rows > 6) out.push('maze: ukuran 2–6');
+      if (it.walls.length !== n) out.push('maze: dinding ≠ banyak kotak');
+      const path = mazePath(it, it.start, it.goal);
+      if (path.length < 2) out.push('maze: pintu keluar tidak tersambung');
+      const onPath = it.marks.filter((m) => !m.decoy).map((m) => path.indexOf(m.cell));
+      if (onPath.some((i) => i < 0)) out.push('maze: tanda jalan tidak di jalan keluar');
+      if (onPath.some((v, i) => i > 0 && v <= onPath[i - 1]!))
+        out.push('maze: tanda jalan tidak urut');
+      if (it.marks.some((m) => m.decoy && path.includes(m.cell)))
+        out.push('maze: pengecoh di jalan keluar');
+      if (new Set(it.marks.map((m) => m.cell)).size !== it.marks.length)
+        out.push('maze: tanda kembar');
+      break;
+    }
+    case 'word-search': {
+      if (it.letters.length !== it.cols * it.rows) out.push('cari kata: huruf ≠ banyak kotak');
+      if (it.words.length < 1) out.push('cari kata: tanpa kata');
+      for (const w of it.words) {
+        if (w.cells.length !== w.text.length || w.cells.some((c, k) => it.letters[c] !== w.text[k]))
+          out.push(`cari kata: "${w.text}" tidak cocok dengan kotak`);
+        if (countWord(it.letters, it.cols, it.rows, w.text) !== 1)
+          out.push(`cari kata: "${w.text}" muncul ≠ 1 kali`);
+      }
+      break;
+    }
+    case 'memory': {
+      checkChoices(it.cards, 'memory', true);
+      const pairs = new Map<string, number>();
+      for (const c of it.cards) pairs.set(c.pair, (pairs.get(c.pair) ?? 0) + 1);
+      if ([...pairs.values()].some((v) => v !== 2))
+        out.push('memory: setiap pasangan harus 2 kartu');
+      if (pairs.size < 2 || pairs.size > 6) out.push('memory: 2–6 pasangan');
+      break;
+    }
+    case 'catch': {
+      const ids = checkChoices(it.choices, 'catch', true);
+      if (it.answer.length === 0) out.push('catch tanpa jawaban');
+      if (it.answer.length === it.choices.length) out.push('catch: semua benda benar');
+      if (it.answer.some((a) => !ids.has(a))) out.push('jawaban catch tidak ada di pilihan');
       break;
     }
   }

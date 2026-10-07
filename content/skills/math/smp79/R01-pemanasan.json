@@ -1,0 +1,46 @@
+{
+  "id": "math.smp79.r1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "R",
+  "order": 1,
+  "title": "Statistika dan peluang — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [4, 9],
+      "r": [50, 80],
+      "k": [1, 4]
+    },
+    "derived": {
+      "x": "r + k * (n + 1)"
+    },
+    "prompt": "Rata-rata {n} data adalah {r}. Ditambah satu data bernilai {x}, rata-ratanya menjadi …",
+    "answer": "r + k",
+    "distractors": [
+      {
+        "expr": "(r + x) / 2",
+        "tag": "rata-dua"
+      },
+      {
+        "expr": "r",
+        "tag": "tetap"
+      },
+      {
+        "expr": "r + k + 1",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "({n} × {r} + {x}) : {=n+1} = {answer}."
+  }
+}

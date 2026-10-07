@@ -1,0 +1,459 @@
+{
+  "id": "math.sd34.n10.tantangan-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "N",
+  "order": 10,
+  "title": "Bangun datar — Level 10 — Tantangan bangun datar",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 20],
+            "t": [3, 16]
+          },
+          "constraint": "(a * t) % 2 == 0",
+          "prompt": "Luas segitiga dengan alas {a} cm dan tinggi {t} cm adalah … cm².",
+          "answer": "a * t / 2",
+          "distractors": [
+            {
+              "expr": "a * t",
+              "tag": "lupa-bagi-2"
+            },
+            {
+              "expr": "a + t",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a * t / 2 + a",
+              "tag": "lebih"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} × {t} : 2 = {answer} cm²."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 20],
+            "l": [2, 12]
+          },
+          "derived": {
+            "luas": "p * l"
+          },
+          "constraint": "l < p",
+          "prompt": "Persegi panjang luasnya {luas} cm² dan panjangnya {p} cm. Lebarnya … cm.",
+          "answer": "l",
+          "distractors": [
+            {
+              "expr": "luas - p",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "l + 2",
+              "tag": "lebih"
+            },
+            {
+              "expr": "p - l",
+              "tag": "selisih"
+            }
+          ],
+          "choices": 4,
+          "explain": "{luas} : {p} = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [10, 30],
+            "l": [8, 20],
+            "a": [2, 5],
+            "b": [2, 5]
+          },
+          "prompt": "Kebun {p} m × {l} m ditanami rumput, kecuali kolam {a} m × {b} m. Luas rumput … m².",
+          "answer": "p * l - a * b",
+          "distractors": [
+            {
+              "expr": "p * l",
+              "tag": "lupa-kolam"
+            },
+            {
+              "expr": "p * l + a * b",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "2 * (p + l) - a * b",
+              "tag": "keliling"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p} × {l} − {a} × {b} = {answer} m²."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 8],
+            "l": [2, 6]
+          },
+          "prompt": "Lantai {p} m × {l} m dipasang ubin persegi 50 cm × 50 cm. Banyak ubin yang diperlukan …",
+          "answer": "p * l * 4",
+          "distractors": [
+            {
+              "expr": "p * l",
+              "tag": "per-m2"
+            },
+            {
+              "expr": "p * l * 2",
+              "tag": "dua"
+            },
+            {
+              "expr": "2 * (p + l) * 2",
+              "tag": "keliling"
+            }
+          ],
+          "choices": 4,
+          "explain": "Tiap m² perlu 4 ubin: {p} × {l} × 4 = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Sudut yang besarnya 90° disebut sudut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "siku-siku"
+                  },
+                  "say": "siku-siku"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tumpul"
+                  },
+                  "say": "tumpul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lurus"
+                  },
+                  "say": "lurus"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lancip"
+                  },
+                  "say": "lancip"
+                }
+              ],
+              "answer": 0,
+              "reteach": "90° = siku-siku."
+            },
+            {
+              "prompt": "Sudut 120° termasuk sudut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tumpul"
+                  },
+                  "say": "tumpul"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "refleks"
+                  },
+                  "say": "refleks"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lancip"
+                  },
+                  "say": "lancip"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "siku-siku"
+                  },
+                  "say": "siku-siku"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Antara 90° dan 180°."
+            },
+            {
+              "prompt": "Bangun yang punya 4 sisi, sepasang sisi sejajar saja adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "trapesium"
+                  },
+                  "say": "trapesium"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jajar genjang"
+                  },
+                  "say": "jajar genjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "layang-layang"
+                  },
+                  "say": "layang-layang"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Itu trapesium."
+            },
+            {
+              "prompt": "Keliling persegi 48 cm. Luasnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "144 cm²"
+                  },
+                  "say": "144 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "96 cm²"
+                  },
+                  "say": "96 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 cm²"
+                  },
+                  "say": "12 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48 cm²"
+                  },
+                  "say": "48 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisi 12 cm."
+            },
+            {
+              "prompt": "Banyak simetri lipat persegi adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 diagonal + 2 tengah."
+            },
+            {
+              "prompt": "Jumlah sudut dalam segitiga adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "180°"
+                  },
+                  "say": "180°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90°"
+                  },
+                  "say": "90°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "360°"
+                  },
+                  "say": "360°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "270°"
+                  },
+                  "say": "270°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selalu 180°."
+            },
+            {
+              "prompt": "Persegi panjang 12 cm × 8 cm dan persegi bersisi 10 cm. Yang kelilingnya lebih besar …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama besar"
+                  },
+                  "say": "sama besar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak dapat ditentukan"
+                  },
+                  "say": "tidak dapat ditentukan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Keduanya 40 cm."
+            },
+            {
+              "prompt": "Jam pukul 03.00, sudut antara kedua jarum …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90°"
+                  },
+                  "say": "90°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60°"
+                  },
+                  "say": "60°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30°"
+                  },
+                  "say": "30°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "180°"
+                  },
+                  "say": "180°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 × 30° = 90°."
+            },
+            {
+              "prompt": "Dua persegi bersisi 5 cm ditempel jadi persegi panjang. Kelilingnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30 cm"
+                  },
+                  "say": "30 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40 cm"
+                  },
+                  "say": "40 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20 cm"
+                  },
+                  "say": "20 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 cm"
+                  },
+                  "say": "25 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 + 5 + 10 + 5 = 30."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "math.sd34.k4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "K",
+  "order": 4,
+  "title": "Operasi bilangan dan penaksiran — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan dan penaksiran"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [11, 989]
+    },
+    "constraint": "a % 10 != 5 && a % 10 != 0",
+    "prompt": "{a} dibulatkan ke puluhan terdekat menjadi …",
+    "answer": "round(a / 10) * 10",
+    "distractors": [
+      {
+        "expr": "floor(a / 10) * 10 + 10 * (a % 10 < 5)",
+        "tag": "arah-terbalik"
+      },
+      {
+        "expr": "round(a / 100) * 100",
+        "tag": "ratusan"
+      },
+      {
+        "expr": "a",
+        "tag": "tidak-dibulatkan"
+      }
+    ],
+    "choices": 4,
+    "explain": "Lihat satuannya: ≥ 5 naik, < 5 turun. {a} ≈ {answer}."
+  }
+}

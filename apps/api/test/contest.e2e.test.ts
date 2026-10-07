@@ -1,4 +1,4 @@
-import { maskIds, type AnswerValue, type ContestItem } from '@little-coder/engine';
+import { mazePath, maskIds, type AnswerValue, type ContestItem } from '@little-coder/engine';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { dbAvailable, startApp } from './e2e-setup.js';
 
@@ -33,6 +33,16 @@ function rightAnswer(item: ContestItem): AnswerValue {
       return it.answer.map(to);
     case 'spell':
       return it.answer;
+    case 'maze':
+      return mazePath(it, it.start, it.goal)
+        .slice(1)
+        .map((c) => `c${c}`);
+    case 'word-search':
+      return it.words.flatMap((w) => w.cells.map((c) => `c${c}`));
+    case 'memory':
+    case 'catch':
+      // Tidak dipakai di lomba (D-075).
+      throw new Error(`${it.type} tidak dipakai di lomba`);
   }
 }
 /** Jawaban yang pasti keliru (id tak dikenal / angka mustahil). */

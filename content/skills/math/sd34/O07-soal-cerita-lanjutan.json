@@ -1,0 +1,49 @@
+{
+  "id": "math.sd34.o7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "O",
+  "order": 7,
+  "title": "Bangun ruang — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "values": [20, 40, 50, 60]
+      },
+      "l": {
+        "values": [20, 25, 30]
+      },
+      "t": {
+        "values": [20, 30, 40]
+      }
+    },
+    "prompt": "Akuarium {p} cm × {l} cm × {t} cm diisi air penuh. Air yang diperlukan … liter. (1 liter = 1.000 cm³)",
+    "answer": "p * l * t / 1000",
+    "distractors": [
+      {
+        "expr": "p * l * t / 100",
+        "tag": "bagi-100"
+      },
+      {
+        "expr": "p * l * t",
+        "tag": "tidak-dikonversi"
+      },
+      {
+        "expr": "(p + l + t) / 10",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{p} × {l} × {t} = {=p*l*t} cm³ = {answer} liter."
+  }
+}

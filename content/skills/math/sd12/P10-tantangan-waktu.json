@@ -1,0 +1,456 @@
+{
+  "id": "math.sd12.p10.tantangan-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "P",
+  "order": 10,
+  "title": "Waktu — Level 10 — Tantangan waktu",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5]
+          },
+          "prompt": "{a} jam = … menit.",
+          "answer": "a * 60",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 30",
+              "tag": "setengah"
+            },
+            {
+              "expr": "a + 60",
+              "tag": "tambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "1 jam = 60 menit, jadi {a} jam = {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 15],
+            "k": [2, 5]
+          },
+          "prompt": "Raka berangkat pukul {a}.00 dan tiba {k} jam kemudian. Raka tiba pukul …",
+          "answer": "a + k",
+          "distractors": [
+            {
+              "expr": "a - k",
+              "tag": "mundur"
+            },
+            {
+              "expr": "a + k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k",
+              "tag": "lamanya"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} + {k} = pukul {answer}.00."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 7],
+            "k": [3, 13]
+          },
+          "prompt": "Hari ini hari ke-{a} dalam seminggu (Senin = 1). {k} hari lagi adalah hari ke- …",
+          "answer": "(a + k - 1) % 7 + 1",
+          "distractors": [
+            {
+              "expr": "a + k",
+              "tag": "lewat-7"
+            },
+            {
+              "expr": "(a + k) % 7 + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k",
+              "tag": "jumlah-hari"
+            }
+          ],
+          "choices": 4,
+          "explain": "Hitung maju {k} hari, setelah hari ke-7 kembali ke 1: hari ke-{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [13, 19],
+            "m": {
+              "values": [10, 20, 30, 40]
+            },
+            "d": {
+              "values": [45, 50, 75, 90]
+            }
+          },
+          "prompt": "Film mulai pukul {a}.{m} dan berlangsung {d} menit. Film selesai pukul {=a+floor((m+d)/60)}.… (menit berapa?)",
+          "answer": "(m + d) % 60",
+          "distractors": [
+            {
+              "expr": "m + d",
+              "tag": "lewat-60"
+            },
+            {
+              "expr": "(m + d) % 60 + 10",
+              "tag": "lebih-10"
+            },
+            {
+              "expr": "d",
+              "tag": "durasi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Tambahkan {d} menit ke pukul {a}.{m}: menitnya {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "1 hari = … jam",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sehari semalam 24 jam."
+            },
+            {
+              "prompt": "Hari setelah Jumat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sabtu"
+                  },
+                  "say": "Sabtu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Senin"
+                  },
+                  "say": "Senin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kamis"
+                  },
+                  "say": "Kamis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Minggu"
+                  },
+                  "say": "Minggu"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumat, lalu Sabtu."
+            },
+            {
+              "prompt": "3 hari sebelum Rabu adalah hari …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Minggu"
+                  },
+                  "say": "Minggu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Senin"
+                  },
+                  "say": "Senin"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sabtu"
+                  },
+                  "say": "Sabtu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Selasa"
+                  },
+                  "say": "Selasa"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selasa, Senin, Minggu."
+            },
+            {
+              "prompt": "Pukul 07.30 sama dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "setengah delapan"
+                  },
+                  "say": "setengah delapan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tujuh tiga puluh malam"
+                  },
+                  "say": "tujuh tiga puluh malam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "delapan lewat tiga puluh"
+                  },
+                  "say": "delapan lewat tiga puluh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "setengah tujuh"
+                  },
+                  "say": "setengah tujuh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "07.30 = setengah delapan."
+            },
+            {
+              "prompt": "Bulan setelah Juni adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Juli"
+                  },
+                  "say": "Juli"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Juni"
+                  },
+                  "say": "Juni"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Mei"
+                  },
+                  "say": "Mei"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Agustus"
+                  },
+                  "say": "Agustus"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Juni, lalu Juli."
+            },
+            {
+              "prompt": "1 tahun = … bulan",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 12 bulan dalam setahun."
+            },
+            {
+              "prompt": "Ani tidur pukul 21.00 dan bangun pukul 05.00. Lama Ani tidur …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 jam"
+                  },
+                  "say": "8 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 jam"
+                  },
+                  "say": "6 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 jam"
+                  },
+                  "say": "9 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16 jam"
+                  },
+                  "say": "16 jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "21.00 sampai 05.00 = 8 jam."
+            },
+            {
+              "prompt": "Seperempat jam = … menit",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "60 : 4 = 15."
+            },
+            {
+              "prompt": "Tanggal 28 Februari (bukan tahun kabisat), besoknya tanggal …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 Maret"
+                  },
+                  "say": "1 Maret"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29 Februari"
+                  },
+                  "say": "29 Februari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30 Februari"
+                  },
+                  "say": "30 Februari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 Februari"
+                  },
+                  "say": "1 Februari"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Februari biasa ada 28 hari."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

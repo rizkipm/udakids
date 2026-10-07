@@ -152,3 +152,221 @@
     order: -1;
   }
 }
+
+/* Video & artikel landing (D-073). */
+.mda-video-thumb {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--ui-line);
+  margin: -4px 0 14px;
+}
+.mda-video-add {
+  max-width: 640px;
+}
+.mda-articles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.mda-article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  padding: 12px;
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+}
+.mda-thumb-empty {
+  background: var(--ui-bg);
+}
+.mda-article-text {
+  flex: 1 1 260px;
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+.mda-article-text strong {
+  overflow-wrap: anywhere;
+}
+.mda-article-text small {
+  color: var(--ui-muted);
+  overflow-wrap: anywhere;
+}
+.mda-article-preview {
+  max-height: 80vh;
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  background: #fff;
+}
+.mda-article-preview .art-full {
+  margin: 0;
+}
+.mda-article-preview .art-full h1 {
+  font-size: 1.6rem;
+}
+.mda-article-preview.site {
+  min-height: 0;
+}
+.mda-editor > * {
+  min-width: 0;
+}
+.mda-editor input[type='file'] {
+  max-width: 100%;
+}
+.mda-editor .ui-field textarea,
+.mda-video-add .ui-field textarea,
+.mda-photo-form .ui-field textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  min-height: 0;
+  height: auto;
+  resize: vertical;
+}
+
+/* Gambar artikel ganda (D-076): grid thumbnail berurutan, gambar pertama = sampul, zona unggah. */
+.mda-count {
+  color: var(--ui-muted);
+  font-weight: 600;
+  font-size: 0.85em;
+}
+.mda-images {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.mda-image {
+  position: relative;
+  display: grid;
+  border: 1px solid var(--ui-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ui-bg);
+}
+.mda-image.is-cover {
+  border: 2px solid var(--ui-primary);
+}
+.mda-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.mda-image-no {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(29 26 46 / 75%);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.mda-image.is-cover .mda-image-no {
+  background: var(--ui-primary);
+}
+.mda-image-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: var(--ui-surface, #fff);
+}
+.mda-image-tools button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid var(--ui-line);
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mda-image-tools button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.mda-image-tools .mda-image-cover {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mda-image-tools .mda-image-del {
+  margin-left: auto;
+  color: #b42318;
+}
+.mda-drop {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 20px 16px;
+  border: 2px dashed var(--ui-line);
+  border-radius: 12px;
+  background: var(--ui-bg);
+  color: var(--ui-muted);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.mda-drop strong {
+  color: inherit;
+  font-weight: 700;
+}
+.mda-drop:hover,
+.mda-drop.is-over,
+.mda-drop:focus-within {
+  border-color: var(--ui-primary);
+  background: #f4efff;
+  color: #3d2a9a;
+}
+.mda-drop.is-busy {
+  cursor: progress;
+  opacity: 0.7;
+}
+.mda-drop input[type='file'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.mda-thumb-wrap {
+  position: relative;
+  flex: none;
+}
+.mda-thumb-count {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgb(29 26 46 / 75%);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.mda-article-preview .art-full > * {
+  max-width: none;
+}

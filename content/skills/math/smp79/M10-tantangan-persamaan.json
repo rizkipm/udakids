@@ -1,0 +1,469 @@
+{
+  "id": "math.smp79.m10.tantangan-persamaan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "M",
+  "order": 10,
+  "title": "Persamaan — Level 10 — Tantangan persamaan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Persamaan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "x": [1, 10],
+            "y": [1, 15]
+          },
+          "derived": {
+            "p": "a * x + y",
+            "q": "x + y"
+          },
+          "prompt": "Jika {a}x + y = {p} dan x + y = {q}, maka y = …",
+          "answer": "y",
+          "distractors": [
+            {
+              "expr": "x",
+              "tag": "x"
+            },
+            {
+              "expr": "q",
+              "tag": "q"
+            },
+            {
+              "expr": "y + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "({a} − 1)x = {p} − {q} → x = {x}; y = {q} − {x} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "x": [1, 15],
+            "b": [1, 20]
+          },
+          "derived": {
+            "c": "a * x + b"
+          },
+          "prompt": "Penyelesaian {a}x + {b} > {c} adalah x > …",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "(c + b) / a",
+              "tag": "tanda"
+            },
+            {
+              "expr": "c - b",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "x + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a}x > {c} − {b} → x > {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15],
+            "b": [2, 15]
+          },
+          "derived": {
+            "s": "a + b",
+            "p": "a * b"
+          },
+          "constraint": "a != b",
+          "prompt": "Jumlah dua bilangan {s} dan hasil kalinya {p}. Bilangan yang lebih besar …",
+          "answer": "max(a, b)",
+          "distractors": [
+            {
+              "expr": "min(a, b)",
+              "tag": "kecil"
+            },
+            {
+              "expr": "s / 2",
+              "tag": "setengah"
+            },
+            {
+              "expr": "p / s",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "x² − {s}x + {p} = 0 → {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [5, 15],
+            "k": [3, 5]
+          },
+          "derived": {
+            "d": "(k - 1) * b"
+          },
+          "prompt": "Umur A sekarang {k} kali umur B. Selisih umur mereka {d} tahun. Umur B sekarang … tahun.",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "k * b",
+              "tag": "umur-A"
+            },
+            {
+              "expr": "d / k",
+              "tag": "bagi-k"
+            },
+            {
+              "expr": "d",
+              "tag": "selisih"
+            }
+          ],
+          "choices": 4,
+          "explain": "({k} − 1) × B = {d} → B = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Himpunan penyelesaian x² − 5x + 6 = 0 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "{2, 3}"
+                  },
+                  "say": "{2, 3}"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "{1, 6}"
+                  },
+                  "say": "{1, 6}"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "{−1, 6}"
+                  },
+                  "say": "{−1, 6}"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "{−2, −3}"
+                  },
+                  "say": "{−2, −3}"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(x − 2)(x − 3)."
+            },
+            {
+              "prompt": "Jika 3x + 2y = 12 dan x = 2, maka y = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 + 2y = 12."
+            },
+            {
+              "prompt": "Penyelesaian 2(x − 3) ≤ 3x + 1 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "x ≥ −7"
+                  },
+                  "say": "x ≥ −7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "x ≤ −7"
+                  },
+                  "say": "x ≤ −7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "x ≥ 7"
+                  },
+                  "say": "x ≥ 7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "x ≤ 7"
+                  },
+                  "say": "x ≤ 7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "−6 − 1 ≤ x."
+            },
+            {
+              "prompt": "Persamaan garis melalui (0, 3) dengan gradien 2 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "y = 2x + 3"
+                  },
+                  "say": "y = 2x + 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "y = 2x − 3"
+                  },
+                  "say": "y = 2x − 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "y = −2x + 3"
+                  },
+                  "say": "y = −2x + 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "y = 3x + 2"
+                  },
+                  "say": "y = 3x + 2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "y = mx + c."
+            },
+            {
+              "prompt": "Gradien garis 4x − 2y = 8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−2"
+                  },
+                  "say": "−2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "y = 2x − 4."
+            },
+            {
+              "prompt": "Diskriminan x² + 4x + 4 = 0 bernilai …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−16"
+                  },
+                  "say": "−16"
+                }
+              ],
+              "answer": 0,
+              "reteach": "b² − 4ac = 16 − 16."
+            },
+            {
+              "prompt": "Jika x − y = 2 dan x² − y² = 20, maka x + y = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22"
+                  },
+                  "say": "22"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(x − y)(x + y) = 20."
+            },
+            {
+              "prompt": "Nilai x yang memenuhi |x − 3| = 5 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 atau −2"
+                  },
+                  "say": "8 atau −2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 atau −8"
+                  },
+                  "say": "2 atau −8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 saja"
+                  },
+                  "say": "8 saja"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−2 saja"
+                  },
+                  "say": "−2 saja"
+                }
+              ],
+              "answer": 0,
+              "reteach": "x − 3 = ±5."
+            },
+            {
+              "prompt": "Sebuah segi empat panjangnya 3 cm lebih dari lebarnya, luasnya 40 cm². Lebarnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 cm"
+                  },
+                  "say": "5 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 cm"
+                  },
+                  "say": "8 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 cm"
+                  },
+                  "say": "4 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 cm"
+                  },
+                  "say": "10 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "l(l + 3) = 40."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,290 @@
+/* Layar tunggu Momo (memuat buku / buku belum bisa diambil). Warna dari token area anak (play.css). */
+.momo-loader {
+  gap: 10px;
+  text-align: center;
+}
+.ml-stage {
+  position: relative;
+  width: min(100%, 360px);
+  height: 330px;
+  padding-top: 70px;
+  display: grid;
+  place-items: center;
+}
+.momo-loader.is-compact .ml-stage {
+  height: 290px;
+}
+
+/* Momo: melayang pelan; ketuk → melompat & berputar kecil */
+.ml-momo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: var(--kid-touch, 64px);
+  min-height: var(--kid-touch, 64px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+.ml-momo:focus-visible {
+  outline: 4px solid var(--kid-sun, #f7c948);
+  outline-offset: 6px;
+  border-radius: 24px;
+}
+.ml-momo-body {
+  display: block;
+  animation: ml-float 2.4s ease-in-out infinite;
+}
+.ml-momo-body.is-hop {
+  animation:
+    ml-hop 700ms cubic-bezier(0.3, 1.4, 0.5, 1),
+    ml-float 2.4s ease-in-out 700ms infinite;
+}
+.ml-shadow {
+  width: 90px;
+  height: 14px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: rgba(43, 37, 64, 0.14);
+  animation: ml-shadow 2.4s ease-in-out infinite;
+}
+.momo-loader.is-failed .ml-momo-body {
+  animation: ml-search 2.8s ease-in-out infinite;
+}
+.ml-glass {
+  position: absolute;
+  right: -26px;
+  bottom: 26px;
+  animation: ml-glass 2.8s ease-in-out infinite;
+  transform-origin: 20% 20%;
+}
+
+/* Buku terbang dari kiri ke pelukan Momo, bergantian */
+.ml-books {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ml-book {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  opacity: 0;
+  animation: ml-book 2.2s ease-in-out infinite;
+}
+
+/* Bintang yang bisa diketuk */
+.ml-star {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--kid-touch, 64px);
+  height: var(--kid-touch, 64px);
+  margin: -32px 0 0 -32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  animation: ml-twinkle 2.1s ease-in-out infinite;
+  z-index: 1;
+}
+.ml-star:focus-visible {
+  outline: 3px solid var(--kid-primary, #5b3fd6);
+  border-radius: 50%;
+}
+.ml-star.is-got {
+  animation: ml-collect 520ms ease-in forwards;
+  pointer-events: none;
+}
+
+/* Gelembung ucapan Momo */
+.ml-bubble {
+  position: absolute;
+  /* Di atas kepala Momo, tidak menutupi wajahnya. */
+  top: 0;
+  width: max-content;
+  left: 50%;
+  max-width: 230px;
+  margin: 0;
+  padding: 8px 14px;
+  transform: translateX(-50%);
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: #fff;
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--kid-line, #2b2540);
+  animation: ml-bubble 2.6s ease-out forwards;
+  z-index: 3;
+}
+
+.ml-message {
+  margin: 0;
+  min-height: 2.6em;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--kid-primary, #5b3fd6);
+  animation: ml-line 420ms ease-out;
+}
+.momo-loader.is-failed .ml-message {
+  color: var(--kid-ink, #1d1a2e);
+}
+
+/* Bilah kemajuan lembut (tanpa angka & tanpa hitung mundur) */
+.ml-progress {
+  width: min(80%, 280px);
+  height: 16px;
+  overflow: hidden;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 999px;
+  background: var(--kid-soft, #efe7ff);
+}
+.ml-progress span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  border-radius: 999px;
+  background: repeating-linear-gradient(45deg, var(--kid-sun, #f7c948) 0 10px, #ffd97a 10px 20px);
+  animation: ml-slide 1.6s ease-in-out infinite;
+}
+.ml-hint {
+  margin: 0;
+}
+.ml-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@keyframes ml-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes ml-shadow {
+  50% {
+    transform: scaleX(0.8);
+    opacity: 0.6;
+  }
+}
+@keyframes ml-hop {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  40% {
+    transform: translateY(-46px) rotate(-8deg) scale(1.05);
+  }
+  70% {
+    transform: translateY(0) rotate(6deg) scale(0.97, 1.03);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@keyframes ml-search {
+  0%,
+  100% {
+    transform: rotate(0) translateX(0);
+  }
+  25% {
+    transform: rotate(-6deg) translateX(-8px);
+  }
+  75% {
+    transform: rotate(6deg) translateX(8px);
+  }
+}
+@keyframes ml-glass {
+  0%,
+  100% {
+    transform: rotate(-8deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(10deg) translate(-14px, -6px);
+  }
+}
+@keyframes ml-book {
+  0% {
+    opacity: 0;
+    transform: translate(-190px, -70px) rotate(-30deg) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-20px, -10px) rotate(6deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-20px, 4px) rotate(0) scale(0.6);
+  }
+}
+@keyframes ml-twinkle {
+  50% {
+    transform: scale(1.15) rotate(12deg);
+  }
+}
+@keyframes ml-collect {
+  60% {
+    transform: scale(1.5) rotate(40deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120px) scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes ml-bubble {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.9);
+  }
+  12%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ml-line {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes ml-slide {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(260%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-momo-body,
+  .ml-momo-body.is-hop,
+  .momo-loader.is-failed .ml-momo-body,
+  .ml-shadow,
+  .ml-glass,
+  .ml-star,
+  .ml-message,
+  .ml-bubble {
+    animation: none;
+  }
+  .ml-books {
+    display: none;
+  }
+  .ml-star.is-got {
+    animation: none;
+    visibility: hidden;
+  }
+  .ml-progress span {
+    animation: none;
+    width: 100%;
+    opacity: 0.6;
+  }
+}

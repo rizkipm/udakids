@@ -1,0 +1,53 @@
+{
+  "id": "math.sd56.o7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "O",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [20, 40],
+      "r": [1, 4],
+      "k": {
+        "values": [22000, 24000, 25000]
+      },
+      "m": {
+        "values": [3000, 4000, 5000]
+      }
+    },
+    "derived": {
+      "b": "n * k",
+      "h": "k + m"
+    },
+    "constraint": "(n - r) * h > b",
+    "prompt": "Pedagang membeli {n} kg telur Rp{b}. {r} kg pecah, sisanya dijual Rp{h} per kg. Untung Rp …",
+    "answer": "(n - r) * h - b",
+    "distractors": [
+      {
+        "expr": "n * h - b",
+        "tag": "lupa-pecah"
+      },
+      {
+        "expr": "(n - r) * m",
+        "tag": "untung-per-kg"
+      },
+      {
+        "expr": "(n - r) * h",
+        "tag": "hasil-jual"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hasil jual {=(n-r)*h} − modal {b} = {answer}."
+  }
+}

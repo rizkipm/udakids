@@ -18,6 +18,8 @@ export const EN_TOPICS = [
   'toy',
   'shape',
   'person',
+  // KMSI Level A (D-074): alat transportasi.
+  'transport',
 ] as const;
 export type EnTopic = (typeof EN_TOPICS)[number];
 
@@ -34,6 +36,7 @@ export const EN_TOPIC_NAME: Record<EnTopic, { en: string; id: string }> = {
   toy: { en: 'toys', id: 'mainan' },
   shape: { en: 'shapes', id: 'bangun datar' },
   person: { en: 'people', id: 'orang' },
+  transport: { en: 'transportation', id: 'alat transportasi' },
 };
 
 export type EnPicture =
@@ -197,6 +200,19 @@ export const EN_WORDS: EnWord[] = [
     ['diamond', 'belah ketupat', { kind: 'shape', shape: 'belah-ketupat' }],
     ['star', 'bintang', o('bintang')],
   ]),
+  // KMSI Level A (D-074). Tidak ikut mode "kelompokkan" dan soal hitung (train/plane/boat/bicycle juga mainan).
+  ...w('transport', [
+    ['car', 'mobil', o('mobil')],
+    ['bus', 'bus', o('bus')],
+    ['motorcycle', 'sepeda motor', o('motor')],
+    ['truck', 'truk', o('truk')],
+    ['bicycle', 'sepeda', o('sepeda')],
+    ['train', 'kereta', o('kereta')],
+    ['plane', 'pesawat', o('pesawat')],
+    ['helicopter', 'helikopter', o('helikopter')],
+    ['ship', 'kapal', o('kapal')],
+    ['boat', 'perahu', o('perahu')],
+  ]),
   ...[
     ['boy', 'anak laki-laki', 'anak-laki-laki', 'he'],
     ['girl', 'anak perempuan', 'anak-perempuan', 'she'],
@@ -254,6 +270,8 @@ export function enSentence(x: EnWord): string {
       return x.word === 'grapes' ? 'I like grapes.' : `I eat ${article(x.word)} ${x.word}.`;
     case 'weather':
       return `It is ${x.word} today.`;
+    case 'transport':
+      return `I go by ${x.word}.`;
     case 'body':
       return `This is my ${x.word}.`;
     case 'shape':

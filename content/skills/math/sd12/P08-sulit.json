@@ -1,0 +1,47 @@
+{
+  "id": "math.sd12.p8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "P",
+  "order": 8,
+  "title": "Waktu — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [13, 19],
+      "m": {
+        "values": [10, 20, 30, 40]
+      },
+      "d": {
+        "values": [45, 50, 75, 90]
+      }
+    },
+    "prompt": "Film mulai pukul {a}.{m} dan berlangsung {d} menit. Film selesai pukul {=a+floor((m+d)/60)}.… (menit berapa?)",
+    "answer": "(m + d) % 60",
+    "distractors": [
+      {
+        "expr": "m + d",
+        "tag": "lewat-60"
+      },
+      {
+        "expr": "(m + d) % 60 + 10",
+        "tag": "lebih-10"
+      },
+      {
+        "expr": "d",
+        "tag": "durasi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Tambahkan {d} menit ke pukul {a}.{m}: menitnya {answer}."
+  }
+}

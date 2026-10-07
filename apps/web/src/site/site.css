@@ -1592,3 +1592,196 @@
   font-size: 0.9rem;
   margin: 12px 0 0;
 }
+
+/* 10 Besar: tab papan + podium 1–2–3 + daftar 4–10 (D-073) */
+.topten-tabs,
+.topten-periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.topten-tab,
+.topten-period {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 2px solid #2b2540;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.topten-period {
+  min-height: 38px;
+  padding: 6px 14px;
+  font-weight: 700;
+  border-color: #c9c2e8;
+}
+.topten-tab.is-on {
+  background: #5b3fd6;
+  border-color: #5b3fd6;
+  color: #fff;
+}
+.topten-period.is-on {
+  background: #f7c948;
+  border-color: #2b2540;
+}
+/* Peringkat Mock Test (D-074) */
+.mt-rule {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #5a5470;
+}
+@media (max-width: 640px) {
+  /* Pilihan lomba/jenjang/mapel/mock: satu baris yang bisa digeser, tidak memanjang ke bawah. */
+  .mocktop .topten-tabs,
+  .mocktop .topten-periods {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+  }
+  .mocktop .topten-tab,
+  .mocktop .topten-period {
+    flex: none;
+  }
+}
+.mt-kkm {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #1d6b3c;
+  background: #e3f6ec;
+  border: 1px solid #a8e0bf;
+  vertical-align: middle;
+}
+.topten-podium {
+  list-style: none;
+  margin: 14px 0 6px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 10px;
+}
+.tp-spot {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+  min-width: 0;
+}
+.tp-spot.is-empty {
+  visibility: hidden;
+}
+.tp-crown {
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #f2b705;
+}
+.tp-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.05rem;
+}
+.tp-metric {
+  font-weight: 900;
+  color: #5b3fd6;
+}
+.tp-detail {
+  color: #5a5470;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.tp-block {
+  width: 100%;
+  margin-top: 6px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #2b2540;
+  border-radius: 14px 14px 0 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+.tp-spot.place-1 .tp-block {
+  height: 96px;
+  background: linear-gradient(#ffd45c, #e9a400);
+}
+.tp-spot.place-2 .tp-block {
+  height: 70px;
+  background: linear-gradient(#c9d3e3, #8e9ab3);
+}
+.tp-spot.place-3 .tp-block {
+  height: 54px;
+  background: linear-gradient(#f2b48a, #cf7c45);
+}
+.topten-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.topten-list li {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 2px solid #ece7fb;
+  border-radius: 14px;
+  background: #fff;
+}
+.tl-name {
+  display: grid;
+  min-width: 0;
+}
+.tl-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tl-name small {
+  color: #5a5470;
+  font-weight: 600;
+}
+.tl-metric {
+  font-weight: 900;
+  color: #5b3fd6;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .topten-podium {
+    gap: 6px;
+  }
+  .tp-name {
+    font-size: 0.9rem;
+  }
+  .tp-detail {
+    display: none;
+  }
+  .tp-spot.place-1 .tp-block {
+    height: 72px;
+  }
+  .tp-spot.place-2 .tp-block {
+    height: 54px;
+  }
+  .tp-spot.place-3 .tp-block {
+    height: 42px;
+  }
+  .topten-list li {
+    grid-template-columns: auto auto 1fr;
+  }
+  .tl-metric {
+    grid-column: 3;
+  }
+}

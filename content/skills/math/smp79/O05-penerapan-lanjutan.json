@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.o5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "O",
+  "order": 5,
+  "title": "Teori bilangan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "b": [4, 10],
+      "r": [1, 2]
+    },
+    "constraint": "a != b && r < min(a, b)",
+    "prompt": "Bilangan bulat positif terkecil yang bila dibagi {a} dan {b} sama-sama bersisa {r} adalah …",
+    "answer": "lcm(a, b) + r",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "tanpa-sisa"
+      },
+      {
+        "expr": "a * b + r",
+        "tag": "dikali"
+      },
+      {
+        "expr": "lcm(a, b) - r",
+        "tag": "dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "KPK + sisa = {answer}."
+  }
+}

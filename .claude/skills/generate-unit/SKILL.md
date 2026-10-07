@@ -1,6 +1,6 @@
 ---
 name: generate-unit
-description: Generate satu unit Menu Belajar (Pra-TK/TK/Kelas 1) dari docs/blueprint/menu-belajar.csv berdasarkan kodenya (mis. P-BT-04) — draf pelajaran, 10 level soal bila "BARU", dan daftar gambar yang kurang. Pakai saat user mengetik /generate-unit <KODE>.
+description: Generate satu unit Menu Belajar (PAUD/TK/Kelas 1) dari docs/blueprint/menu-belajar.csv berdasarkan kodenya (mis. P-BT-04) — draf pelajaran, 10 level soal bila "BARU", dan daftar gambar yang kurang. Pakai saat user mengetik /generate-unit <KODE>.
 ---
 
 # Generate satu unit Menu Belajar
@@ -68,10 +68,16 @@ titik, balon) masuk buku **Worksheet** jenjangnya, satu topik per lembar kerja.
 - Kolom Tantangan **"BARU 10 level"** → ikuti skill `add-skill-template`:
   - kategori baru di `content/skills/<domain>/<grade>/_catalog.json` (kode berikutnya, `intro` ≤ 300 huruf,
     1–3 `tips`), lalu 10 file `<KODE-KATEGORI><nn>-<slug>.json`, Level 1–10 mudah → sulit, Level 10 gabungan;
-  - domain: Baca Tulis = `literasi`, Berhitung = `math`, English = `english`, Sains = `sains`; grade: Pra-TK =
-    `prek`, TK = `tk`, Kelas 1 = `sd1`;
+  - domain: Baca Tulis = `literasi`, Berhitung = `math`, English = `english`, Sains = `sains`; grade: PAUD
+    (dulu Pra-TK) = `prek`, TK = `tk`, Kelas 1 = `sd1`. **Pengecualian PAUD (D-075):** unit Baca Tulis PAUD
+    (P-BT-xx) masuk buku `worksheet/prek` (Worksheet PAUD), bagian `group` "Literasi · Baca Tulis — …"; unit
+    Berhitung lembar kerja masuk bagian "Numerasi · Berhitung — …". Kategori baru disisipkan di bagiannya
+    (kode berikutnya yang belum dipakai);
   - hanya interaksi yang sudah ada (`pick-one`, `tap-all` (boleh `style: balloons`), `order`, `group`, `match`, `build`,
-    `number-line`, `number-input`, `trace` lewat family `numeral-trace`, `connect` lewat family `connect-dots`). Model "Baru" di kolom Berlatih (10, 11, 13, 14, 16, 19, 23, …) diganti model yang sudah ada,
+    `number-line`, `number-input`, `trace` lewat family `numeral-trace`/`letter-trace` (huruf a i u e o), `connect` lewat
+    family `connect-dots`, dan game D-075: `maze-path`, `word-search`, `memory-pairs`, `catch-items`; huruf vokal lewat
+    `letter-find`/`letter-tap-all`). Goresan huruf baru (selain vokal) atau garis/pola (P-BT-02/03) perlu ditambah
+    dulu di `packages/engine/src/generator/glyphs.ts`. Model "Baru" di kolom Berlatih (10, 11, 13, 14, 16, 19, 23, …) diganti model yang sudah ada,
     lalu dicatat di laporan;
   - setiap level minimal 24 soal unik, maks 4 pilihan, `say`, `reteach`, `source`, dan `tags` rujukan dari kolom
     Rujukan; Basic tanpa teks yang wajib dibaca.

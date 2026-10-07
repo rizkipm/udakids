@@ -1,0 +1,53 @@
+{
+  "id": "math.tkosn.j7.angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "J",
+  "order": 7,
+  "title": "Tambah dan kurang angka sederhana — Level 7 — Angka yang hilang",
+  "tier": "basic",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Penyisihan 2026",
+    "kisi-kisi": "Menjumlahkan dan mengurangkan angka sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 7],
+      "b": [1, 6]
+    },
+    "constraint": "a + b <= 10",
+    "derived": {
+      "c": "a + b"
+    },
+    "prompt": "{a} + … = {c}",
+    "say": "{a} tambah berapa sama dengan {c}?",
+    "stimulus": [
+      {
+        "kind": "text",
+        "text": "{a} + … = {c}"
+      }
+    ],
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "c",
+        "tag": "jumlah-akhir"
+      },
+      {
+        "expr": "b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a",
+        "tag": "angka-awal"
+      }
+    ],
+    "choices": 3,
+    "explain": "Hitung maju dari {a} sampai {c}: ada {answer} langkah."
+  }
+}

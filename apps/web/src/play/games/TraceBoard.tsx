@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import {
   GLYPH_HEIGHT,
   GLYPHS,
+  isLetterGlyph,
   interpolate,
   strokePath,
   traceFraction,
@@ -147,7 +148,9 @@ export function TraceBoard({
         height={size}
         className="trace-svg"
         role="img"
-        aria-label={t('play.trace.label', { n: glyph })}
+        aria-label={t(isLetterGlyph(glyph) ? 'play.trace.labelLetter' : 'play.trace.label', {
+          n: glyph,
+        })}
         onPointerDown={onDown}
         onPointerMove={onMove}
         onPointerUp={onUp}

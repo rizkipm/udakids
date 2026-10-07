@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.o1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "O",
+  "order": 1,
+  "title": "Aritmetika sosial — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "values": [20000, 40000, 50000, 80000, 100000]
+      },
+      "p": {
+        "values": [5, 10, 15, 20, 25]
+      }
+    },
+    "derived": {
+      "j": "b + b * p / 100"
+    },
+    "prompt": "Harga beli Rp{b}, harga jual Rp{j}. Persentase untung … %.",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "p * 2",
+        "tag": "dua-kali"
+      },
+      {
+        "expr": "(j - b) / 1000",
+        "tag": "salah"
+      },
+      {
+        "expr": "100 - p",
+        "tag": "sisa"
+      }
+    ],
+    "choices": 4,
+    "explain": "Untung {=j-b} : {b} × 100% = {answer}%."
+  }
+}

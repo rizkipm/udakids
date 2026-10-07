@@ -772,3 +772,48 @@ export const aiUsage = pgTable(
   },
   (t) => [index('ai_usage_created_idx').on(t.createdAt)],
 );
+
+// ------------------------------------------------------------------ video panduan & artikel (D-073)
+
+/** Video panduan YouTube di landing page. Hanya id video (11 karakter) yang disimpan; diputar lewat youtube-nocookie. */
+export const videos = pgTable(
+  'videos',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    youtubeId: text('youtube_id').notNull(),
+    title: text('title').notNull(),
+    description: text('description').notNull().default(''),
+    active: boolean('active').notNull().default(true),
+    sort: integer('sort').notNull().default(0),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('videos_active_sort_idx').on(t.active, t.sort)],
+);
+
+/** Artikel / berita dari admin: teks + gambar sampul (media), tampil di landing dan /artikel. */
+export const articles = pgTable(
+  'articles',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    slug: text('slug').notNull().unique(),
+    title: text('title').notNull(),
+    summary: text('summary').notNull(),
+    body: text('body').notNull(),
+    coverImageId: uuid('cover_image_id').references(() => media.id, { onDelete: 'set null' }),
+    /** Semua gambar artikel berurutan (D-076); gambar pertama = sampul (`cover_image_id`). Detail = slider. */
+    imageIds: jsonb('image_ids')
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'::jsonb`),
+    status: text('status').notNull().default('draft'),
+    publishedAt: timestamp('published_at', { withTimezone: true }),
+    createdBy: uuid('created_by').references(() => staffUsers.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('articles_status_published_idx').on(t.status, t.publishedAt),
+    check('articles_status_ck', sql`${t.status} in ('draft', 'published')`),
+  ],
+);

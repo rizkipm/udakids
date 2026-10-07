@@ -1645,7 +1645,7 @@ pengurangan, stopwatch tanpa batas waktu, satu mock test per buku, bagian "OSN T
   **"OSN TK · Olimpiade Sains Nasional TK — materi umum"**, F–I tetap EMC/ESC; English TK (Olimpiade) materi A–K masuk
   **"EEC · Eduversal English Competition — Final 2026"**, dan materi "Simulasi Final 2026" (L) dihapus karena
   digantikan Mock Test (skill lama otomatis menjadi draft saat seed).
-- **Khusus anak berpaket** (keputusan pemilik produk): bila paywall aktif, Mock Test tidak termasuk "level gratis"
+- **Khusus anak berpaket** (keputusan pemilik produk; **diganti D-073**: Mock test 1 gratis satu kali): bila paywall aktif, Mock Test tidak termasuk "level gratis"
   (`needsPurchase` dengan `family: 'mock'`), tampil terkunci dengan pemberitahuan Premium yang ramah anak (tanpa
   harga), dan hasilnya ditolak server untuk anak tanpa paket. Alasan: soal sedang/sulit diambil dari level 4–10 yang
   memang berbayar.
@@ -1669,3 +1669,209 @@ pengurangan, stopwatch tanpa batas waktu, satu mock test per buku, bagian "OSN T
   laporan, papan) diuji tanpa meluber di lebar 390 / 820 / 1280 px.
 - Mock test tidak dipakai sebagai sumber soal lomba live (D-042). Kata "salah" tidak dipakai di layar anak
   ("belum tepat"), tanpa merah besar.
+
+## D-073 — Landing (10 Besar, video panduan, artikel), lanjutkan permainan, 3 mock test per buku olimpiade
+
+Tanggal: 2026-10-07. Disetujui pemilik produk (jawaban: "Ketiganya sama 9/8/8", "Nilai peringkat + soal dijawab",
+"Tombol besar 'Lanjutkan'", "Teks + gambar sampul").
+
+- **Urutan landing:** hero → banner → **10 Besar Global** → … Bagian 10 Besar memakai podium 1–2–3 + daftar 4–10
+  (seperti menu Peringkat) dengan tiga papan: **Total skor**, **Rata-rata tertinggi** (nilai peringkat berbobot
+  D-045), dan **Paling aktif** (soal dijawab; seri → waktu bermain lebih lama). Rata-rata & paling aktif punya
+  periode **semua / bulan ini / minggu ini / hari ini** (zona WIB; paling aktif tanpa "semua" — permintaan `period=all` memakai bulan ini). API publik
+  `GET /leaderboard/public?board=&period=` hanya mengirim nama panggilan + warna/tampilan Momo (tanpa id anak).
+- **Video panduan:** admin menempel tautan YouTube (watch, youtu.be, shorts, embed, live, atau id) di Admin →
+  **Video panduan**; yang disimpan hanya id 11 karakter + judul/keterangan/urutan/aktif (tabel `videos`). Landing
+  menampilkan gambar dari `i.ytimg.com`; video baru dimuat saat diketuk, di dialog lewat **youtube-nocookie**. CSP
+  nginx: `img-src https://i.ytimg.com`, `frame-src https://www.youtube-nocookie.com`.
+- **Artikel/berita:** Admin → **Artikel & berita** (tabel `articles`): judul, slug unik (dibuat dari judul; bentrok
+  → akhiran `-2`, `-3`, …), ringkasan, isi **teks biasa** (baris kosong = paragraf, `## ` = subjudul, `- ` =
+  daftar; tidak ada HTML dari admin), gambar sampul (unggahan media D-042, terlindung dari pembersihan otomatis,
+  dibuang saat diganti/artikel dihapus), status draf/terbit (tanggal terbit diisi saat pertama kali terbit). Landing
+  menampilkan 3 artikel terbaru + "Lihat semua" → `/artikel` (per halaman) dan `/artikel/:slug`. Publik hanya
+  melihat artikel terbit dan video aktif.
+- **Lanjutkan permainan:** ronde latihan yang belum selesai disimpan di perangkat (`inProgress`: skill + versi +
+  seed + daftar hindar + jawaban, maks. 7 hari) sehingga soal yang sama tersusun ulang dan anak kembali ke soal
+  berikutnya yang belum dijawab. Beranda menampilkan kartu besar **"Lanjutkan permainan terakhir"** (soal n dari
+  10); di perangkat lain, kartu memakai level terakhir dari server (`GET /practice/resume`, tanpa mock test).
+  Selesai atau keluar dengan sengaja menghapus simpanan.
+- **3 mock test per buku olimpiade** (Math/Sains/English TK): Mock test 1 (id lama dipertahankan agar riwayat tidak
+  hilang), 2, dan 3 — semua 25 soal 9/8/8 dari kisi-kisi buku yang sama; soal berbeda karena seed baru tiap
+  percobaan dan menghindari soal sebelumnya. Mock test tidak berurutan (2 tidak menunggu 1 lulus).
+  **Gratis:** Mock test 1 boleh **satu kali** (tanpa ulang); Mock 2 & 3 khusus Premium. **Premium/kelas:** semua
+  mock boleh diulang, dengan riwayat + poin (laporan mock test-ku D-072). Server menolak hasil yang melanggar
+  (`needsPurchase` untuk mock = order > 1; `mockRetakeLocked` = tanpa akses buku & sudah ≥ 1 percobaan). Ini
+  menggantikan aturan "Khusus anak berpaket" di D-072.
+
+## D-074 — KMSI (Kompetensi Matematika Sains dan Bahasa Inggris): Level A (TK), KKM, mock & peringkat publik
+
+Tanggal 2026-10-07 · Status **Disetujui** (pemilik produk; dikonfirmasi lewat pertanyaan: nama "KMSI", per butir
+kisi-kisi dikerjakan bertahap per jenjang, Level A benar 4 / salah & kosong 0, 3 mock per buku seperti TK).
+
+- **Ketentuan lomba KMSI (penyisihan 2026):** 5 kategori — TK (Level A), Kelas 1–2 (Level 1), Kelas 3–4 (Level 2),
+  Kelas 5–6 (Level 3), SMP 7–9 (Level 4); 60 menit; Level A 20 soal, Level 1–4 30 soal pilihan ganda; benar 4,
+  salah 0, kosong 0; KKM lolos Level A **40**, Level 1–4 **72**. Peserta boleh ikut beberapa mapel dan level di
+  atasnya (aplikasi tidak membatasi jenjang).
+- **Penempatan:** jenjang yang sudah ada (`tkosn`, `sd12`, `sd34`, `sd56`, `smp79`). Label anak berubah dari "(OSN)"
+  menjadi **"(Olimpiade)"**: "Kelas 1–2 (Olimpiade)", "Kelas 3–4 (Olimpiade)", "Kelas 5–6 (Olimpiade)",
+  "SMP Kelas 7–9 (Olimpiade)"; judul buku "Math/Sains Grade 1-2 (Olimpiade)" dst. Materi KMSI = bagian (`group`)
+  **"KMSI · Kompetensi Matematika Sains dan Bahasa Inggris — Penyisihan 2026"**, satu materi per butir kisi-kisi ×
+  10 level (pola sama dengan TK Olimpiade: 1–8 konsep & penerapan, 9 teka-teki gaya KMSI, 10 tantangan campuran),
+  semua `standalone`.
+- **Tahap 1 (sesi ini) — Level A (TK):** Math J–M (tambah/kurang, nama bangun datar, melanjutkan pola, mengurutkan
+  angka), Sains J–Q (pancaindra, rasa manis/asin/asam/pahit, hewan–buah–sayur, melengkapi huruf nama benda,
+  anggota tubuh, cuaca & benda langit, tempat tinggal hewan, kebiasaan baik), English L–S (animals & fruits,
+  numbers, school things, counting, body parts, huruf hilang nama buah, susun huruf acak, transportation) — 200
+  level.
+- **Tahap 2 — Level 1–4 (selesai 2026-10-08)**, mock 30 soal 10/10/10, KKM 72:
+  - **Kelas 1–2 (`sd12`)** — Math K–Q (pengukuran & alat ukur, operasi bilangan, sifat bilangan & operasi, nilai
+    tempat & lambang bilangan, pecahan sederhana, waktu, bangun datar); Sains K–Q (benda & sifatnya, energi &
+    perubahannya, perubahan wujud, anggota tubuh & kesehatan, gaya & bunyi, makhluk hidup, lingkungan); **English
+    Grade 1-2 (Olimpiade)** A–L (number & simple math, colors, animals, fruits & vegetables, body parts, school
+    objects, food & drink, family members, daily activities & habits, introducing oneself, simple descriptions,
+    basic grammar & expressions).
+  - **Kelas 3–4 (`sd34`)** — Math K–Q (operasi & penaksiran, sifat bilangan/KPK/FPB, pecahan, bangun datar, bangun
+    ruang, persamaan, aritmetika sosial); Sains K–Q (makhluk hidup, benda & sifatnya, gaya & gerak, energi,
+    pelestarian hewan, keterampilan proses sains, lingkungan & SDA); **English Grade 3-4** A–L (number & math, food
+    & meals, animals, likes & dislikes, simple present, present continuous, house & rooms, hobbies, transportation,
+    introducing oneself, prepositions of place, descriptive text/reading).
+  - **Kelas 5–6 (`sd56`)** — Math K–R (operasi bilangan bulat/pangkat/akar, bangun datar & lingkaran, bangun ruang,
+    persamaan, aritmetika sosial, teori bilangan sederhana, pola & barisan, statistika sederhana); Sains K–R (energi
+    & gaya, pesawat sederhana, gaya–energi–magnet, alat optik, metode ilmiah, makhluk hidup, benda & sifatnya,
+    lingkungan & SDA); **English Grade 5-6** A–L (jobs, WH-questions, simple past, routines, present simple vs
+    continuous, clothes, weather & seasons, comparison, house & places, descriptive text, narrative/recount reading —
+    dua butir kisi-kisi "Reading and Descriptive Text" dibedakan agar soal tidak kembar —, vocabulary & proverbs).
+  - **SMP 7–9 (`smp79`)** — Math J–R (operasi bilangan, bangun datar & Pythagoras, bangun ruang, persamaan & SPLDV,
+    aritmetika sosial, teori bilangan, pola & barisan, perbandingan, statistika & peluang); Sains K–R (klasifikasi
+    makhluk hidup, kesehatan & tubuh, ekologi, genetika, zat & perubahan, bioteknologi, energi & gaya, metode ilmiah
+    & bioteknologi); **English SMP Kelas 7-9** A–L (synonym/antonym, parts of speech, prepositions, speaking
+    expressions, past simple/continuous/perfect, modals & conditionals, comparison, descriptive/report text,
+    biography/recount, data reading, public space & environment, functional texts).
+  - Pola level sama untuk semua: tabel fakta (Sains/kosakata, family `facts`: tanya atribut → tanya nama → benar/
+    salah → mana yang berbeda) atau bank soal mudah/sedang/sulit (grammar & bacaan) atau template hitung (`expr`,
+    Matematika), lalu level 9 teka-teki gaya KMSI dan level 10 tantangan campuran. Soal pangkat memakai tabel nilai
+    karena evaluator ekspresi tidak punya operator pangkat.
+  - **Seed & katalog suntingan admin:** katalog yang pernah disunting admin tetap tidak ditimpa, tetapi `db:seed`
+    kini menambahkan **materi baru** dari `content/` (kode yang belum ada di DB) dan mengganti judul "(OSN)" →
+    "(Olimpiade)"; suntingan admin pada materi lama tetap, bagian "Mock Test …" tetap di akhir
+    (`mergeNewCategories`). Tanpa ini, materi KMSI Math/Sains Kelas 1–4 tidak muncul di server yang katalognya
+    pernah disunting.
+  - Landing: chip jenjang di "Peringkat Mock Test Olimpiade" diurutkan TK → SMP dan bisa digeser di HP.
+  - Total KMSI: 1.290 level + 45 mock (5 jenjang × 3 mapel × 3 mock); seluruh konten lolos `validate:content`
+    (200 soal per level) dan setiap mock tersusun penuh hanya dari materi KMSI.
+- **Mock Test KMSI:** kategori `Y` "Mock Test KMSI <mapel> TK" (group "Mock Test KMSI · Simulasi penyisihan 20 soal
+  — benar 4, KKM 40"), 3 mock per buku (akses sama dengan D-073: Mock 1 gratis sekali, Mock 2–3 & mengulang
+  Premium). Konfigurasi mock baru:
+  - `categories`: soal hanya dari materi lomba itu (mock lama tanpa field ini tetap dari semua materi buku);
+  - `points`: KMSI `{ right: 4, wrong: 0 }` untuk semua tingkat (`KMSI_POINTS`);
+  - `passPoints` (KKM): mock "lulus" bila poin ≥ KKM (`mockPassed`), dicatat lewat `recordQuiz(…, passScore)` dengan
+    `mockPassScore` = KKM dikonversi ke skor 0–100 (Level A 40/80 → 50; Level 1–4 72/120 → 60), di perangkat dan
+    server. Ringkasan mock menampilkan "KKM 40 · poin untuk lolos (maks. 80)"; hasil menampilkan "Poinmu mencapai
+    KKM — lolos ke babak berikutnya" atau "Tinggal n poin lagi" (tanpa kata "gagal", tanpa merah).
+  - Stopwatch tanpa batas waktu tetap (D-024); 60 menit hanya acuan.
+- **Komponen baru:** topik kosakata English `transport` (10 kendaraan; tidak ikut mode kelompokkan/hitung agar soal
+  lama tetap); `spell-word` boleh `extra: 0` → **susun huruf acak** (kartu tepat huruf kata itu, tidak pernah sudah
+  urut); 13 SVG (`objects-kmsi.tsx`): permen, madu, gula, garam, kerupuk, kopi, obat, pare, jeruk nipis, lidah,
+  kandang, kolam, sarang lebah; teks kartu "Belum dicoba · n soal baru" mengikuti jumlah soal mock.
+- **Landing — "Peringkat Mock Test Olimpiade"** (setelah 10 Besar Global): pilih lomba (**KMSI 2026** /
+  Olimpiade gaya EMC), jenjang, mata pelajaran, dan mock test 1–3; podium 1–2–3 + daftar 4–10 dengan poin/maks,
+  jumlah benar, waktu, dan lencana **Lolos KKM**; baris aturan (jumlah soal, penilaian, KKM) dan jumlah peserta yang
+  lolos KKM. API publik `GET /leaderboard/public/mocks` dan `GET /leaderboard/public/mock/:skillId` (10 besar) hanya
+  mengirim nama panggilan + tampilan Momo (tanpa id anak), dari snapshot yang sama (cache 10 detik). Nama lomba
+  diambil dari judul bagian mock ("Mock Test KMSI · …" → KMSI).
+- Contoh soal yang dikirim hanya acuan bentuk; soal, kalimat, dan gambar dibuat sendiri (PRD A17).
+
+## D-075 — PAUD, Worksheet PAUD Baca Tulis (huruf vokal P-BT-04/05) & game interaktif
+
+Tanggal: 2026-10-07. Disetujui pemilik produk (jawaban: "Semua label", game "Labirin, Cari kata, Kartu pasangan,
+Tangkap — semuanya", bunyi P-BT-01 "Momo menirukan bunyi", cakupan "Bertahap").
+
+- **Pra-TK → PAUD** di semua label (chip jenjang, landing "Dari PAUD sampai SMP", SEO, judul buku Math/English/
+  Worksheet PAUD, blueprint). Kode jenjang tetap `prek`, jadi progres anak dan id skill tidak berubah. Judul
+  katalog yang pernah disunting admin tidak ditimpa seed; diganti dengan SQL khusus judul (docs/deploy-contabo.md).
+- **Worksheet PAUD dikelompokkan** dengan `group` (D-069): "Numerasi · Berhitung — …" (A Mengenal angka 1–10,
+  B Game angka) dan "Literasi · Baca Tulis — …" (C Huruf vokal a dan i = P-BT-04, D Huruf vokal u, e, o =
+  P-BT-05, E Game huruf). Unit Baca Tulis PAUD masuk buku Worksheet (bukan buku `literasi`), atas permintaan
+  pemilik produk. Topik game (B, E) `standalone`.
+- **Rantai kunci per bagian:** topik biasa pertama setiap bagian setelah bagian pertama terbuka sejak awal
+  (`groupStartCodes`, dipakai web dan server), jadi Baca Tulis tidak menunggu Berhitung; di dalam bagian tetap
+  berurutan (D menunggu Level 1 C). Buku lain tidak berubah (bagian keduanya hanya berisi topik mandiri).
+- **Pelajaran huruf** (`lessonSchema` diperluas): `kenalan`/`ingat` dengan `huruf` (ketuk → disebut, Momo menulis
+  huruf besar & kecil, gambar berawalan huruf itu), `bunyi` (ketuk gambar → bunyi depan lalu kata), `kata` dengan
+  kartu `huruf` + suku kata (a-yam, i-kan), `coba` `tebal` huruf dan `cari` huruf (tidak dinilai).
+- **Huruf vokal di engine:** goresan a i u e o / A I U E O (`glyphs.ts`, dibuat sendiri; titik huruf i cukup
+  disentuh); family `letter-trace`, `letter-find` (dengar, tunjuk, huruf depan, gambar berawalan, besar-kecil),
+  `letter-tap-all` (balon huruf). Pengecoh: vokal lain, huruf bentuk mirip (a/o, e/c, u/n, i/l), lalu konsonan.
+  Gambar baru (buatan sendiri): itik, udang, unta, elang, emas, obor, obeng, ombak; kata lain dari contoh lembar
+  kerja dicatat di `docs/blueprint/gambar-kurang.csv`.
+- **Empat game baru (interaksi + family), dinilai engine dari ketukan, tanpa batas waktu & tanpa nyawa:**
+  - `maze` / `maze-path`: labirin sempurna ber-seed (maks. 5 kolom), ketuk kotak sebaris/sekolom untuk berjalan;
+    huruf A I U E O atau angka 1…n berurutan di jalan keluar, pengecoh di jalan buntu; menabrak dinding = slip.
+  - `word-search` / `word-search`: kotak huruf maks. 5×5, kata bergambar (buah, hewan, angka, berawalan vokal),
+    mendatar/menurun, ketuk huruf berurutan. Penilaian dari huruf di kotak (`wordSearchStep`, sama di web & server),
+    setiap kata dijamin muncul tepat sekali.
+  - `memory` / `memory-pairs`: kartu pasangan angka ↔ banyak benda, huruf besar ↔ kecil, huruf ↔ gambar.
+  - `catch` / `catch-items`: benda melintas pelan dan terus berputar sampai ditangkap; bila gerak dikurangi
+    (`prefers-reduced-motion`), benda diam berjajar.
+  - Target sentuh ≥ 64 px juga di layar 360 px (papan memakai sebagian margin layar). Kalimat perintah baru di
+    dialog Momo (`vo_cmd_maze`, `vo_cmd_word_search`, `vo_cmd_memory`, `vo_cmd_catch`).
+  - Lomba live: labirin & cari kata boleh (letak kata tidak dikirim); kartu pasangan & tangkap tidak dipakai
+    karena kunci jawabannya harus ada di perangkat (`contestSafeTemplate`).
+- **Konten:** 40 level baru (B, C, D, E × 10), setiap level ≥ 36 soal unik; level tebalkan digabung dengan cari
+  huruf sesuai kolom CSV "tebalkan + cari huruf". Status unit P-BT-04/05 di blueprint: Draf.
+- **Berikutnya (sesi lain):** P-BT-01 (bunyi di sekitar, ditirukan suara Momo), P-BT-02/03 (garis tegak/mendatar,
+  lengkung/lingkaran/zig-zag: perlu goresan pola di `glyphs.ts`), dan konsonan/suku kata (Ba Bi Bu Be Bo) dari
+  contoh lembar kerja. Contoh lembar kerja hanya acuan bentuk; soal, kalimat, dan gambar dibuat sendiri.
+
+## D-076 — Mock test di dalam bagian lombanya; detail artikel baru & gambar artikel ganda (slider)
+
+**Diminta pemilik produk.**
+
+- **Mock test masuk ke bagian lombanya.** Sebelumnya mock tampil sebagai bagian terpisah ("Mock Test …"), seolah
+  bukan bagian dari olimpiade. Sekarang materi mock memakai `group` yang sama dengan kisi-kisinya, plus tanda
+  katalog baru `mock: true`. Mock Z TK masuk ke EMC (Matematika), ESC (Sains), atau EEC (English); mock Y masuk ke
+  KMSI di semua buku olimpiade. Di Library, setiap bagian lomba menampilkan subjudul **Kisi-kisi soal & topik**
+  lalu **Mock test**. Kartu mock memakai ikon piala, dan judul bagian menampilkan "n materi · m mock test".
+  Mock tetap `standalone`, jadi aturan kunci tidak berubah (`groupStartCodes` melewati topik mandiri).
+- **Seed:** katalog yang pernah disunting admin juga mendapat `group`/`mock` baru untuk materi mock (judul lain
+  tidak disentuh). Mock tetap ditaruh di akhir. Mock dikenali dari `mock: true`, atau dari judul lama "Mock Test …".
+- **Papan peringkat mock di landing:** nama lomba diambil dari singkatan judul bagian (`competitionOf`): KMSI, EMC,
+  ESC, EEC. Judul lama tetap dikenali. Urutan tab: KMSI, EMC · Matematika, ESC · Sains, EEC · English. Sebelumnya
+  EMC, ESC, dan EEC digabung dalam satu tab "Olimpiade (gaya EMC)".
+- **Gambar artikel ganda.**
+  - Kolom baru `articles.image_ids` (jsonb, migrasi 0019, berisi sampul lama), maksimal 10 gambar.
+  - Gambar pertama menjadi sampul (`cover_image_id` tetap diisi untuk kartu).
+  - Admin dapat memilih atau menyeret banyak gambar sekaligus (JPG/PNG/WEBP ≤ 3 MB per gambar, ukuran dan rasio
+    bebas), mengatur urutan, memilih "Jadikan sampul", dan menghapus gambar.
+  - Gambar yang dilepas atau artikel yang dihapus → gambar dihapus bila tidak dipakai di tempat lain
+    (`dropIfUnused` juga memeriksa `image_ids`).
+- **Detail artikel `/artikel/:slug` dirombak.**
+  - Header berisi label, judul, ringkasan, tanggal, perkiraan "n menit baca", dan tombol bagikan (WhatsApp, salin
+    tautan).
+  - Galeri `ArticleGallery`: satu gambar tampil besar; lebih dari satu tampil sebagai slider dengan panah,
+    penanda n/total, thumbnail, geser jari, dan tombol panah keyboard. Gambar tampil utuh di atas latar buram,
+    sehingga gambar potret maupun lanskap tetap rapi.
+  - Lebar baca nyaman (720 px), kartu ajakan "Main sekarang", dan "Artikel lainnya" (3 terbaru).
+  - Saat memuat tampil kerangka (skeleton). Pratinjau admin memakai galeri yang sama.
+  - Ini halaman situs untuk orang dewasa, bukan area anak; tidak ada harga atau promosi.
+
+## D-077 — Layar tunggu Momo yang hidup & katalog lebih ringan
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: layar "Momo sedang menyiapkan buku…" / "Momo belum bisa
+mengambil buku" sering muncul dan terasa monoton.
+
+- **Penyebab:** katalog (`GET /catalog`, seluruh bank soal) ±35 MB dikirim tanpa kompresi, diunduh ulang di setiap
+  halaman anak (beranda, topik, latihan, pelajaran), tidak dicoba ulang saat gagal sesaat, dan salinan offline di
+  localStorage (±5 MB) gagal tersimpan diam-diam.
+- **Server:** katalog dikemas sekali per versi konten (jumlah & `updated_at` skill/katalog) × akses anak, dikompres
+  gzip (35 MB → ±2,8 MB), diberi `ETag` + `Cache-Control: private, no-cache` (perangkat yang katalognya sama
+  menerima 304 tanpa isi). Memakai `zlib` bawaan Node, tanpa dependensi baru.
+- **Web:** satu unduhan dipakai bersama semua halaman (diperbarui paling cepat 3 menit sekali), coba ulang otomatis
+  2× (1,5 dtk, 4 dtk; 4xx tidak diulang), tombol "Coba lagi", dan coba lagi otomatis saat internet tersambung.
+  Salinan offline di localStorage bila muat, selain itu IndexedDB (`lc-store`, tanpa Dexie).
+- **Layar tunggu (`MomoLoader`):** Momo melayang, buku terbang ke pelukannya, kalimat bergantian, bilah kemajuan
+  lembut (tanpa angka & hitung mundur). Interaktif: ketuk Momo → melompat & menyapa (gelembung + suara), ketuk
+  bintang → dikumpulkan & dihitung ("Bintang terkumpul: 2 dari 5"). Saat buku belum didapat: Momo mencari dengan kaca
+  pembesar, pesan ramah (tanpa kata "salah/gagal", tanpa merah), tombol besar "Coba lagi"; pesan berbeda bila
+  perangkat offline. Dipakai di beranda, topik, latihan, pelajaran, dan mock test (sebelumnya empat halaman itu
+  tidak punya keadaan gagal sama sekali). `prefers-reduced-motion` mematikan animasi.

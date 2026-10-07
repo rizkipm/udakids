@@ -11,7 +11,7 @@ server {
     # Header keamanan (audit D-040 M7). Berlaku juga di blok location yang tidak punya add_header sendiri;
     # blok yang menambah header (assets, SPA) mengulanginya lewat include snippet di bawah.
     # Google (D-066): skrip, tombol (iframe), dan gaya tombol "Lanjutkan dengan Google" dari accounts.google.com.
-    set $csp "default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; script-src 'self' https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/; connect-src 'self' https://accounts.google.com/gsi/; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+    set $csp "default-src 'self'; img-src 'self' data: blob: https://i.ytimg.com; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; script-src 'self' https://accounts.google.com/gsi/client; frame-src https://accounts.google.com/gsi/ https://www.youtube-nocookie.com; connect-src 'self' https://accounts.google.com/gsi/; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
 
     # Statistik realtime landing (Server-Sent Events): jangan di-buffer, koneksi boleh lama
     location = /api/public/stats/stream {

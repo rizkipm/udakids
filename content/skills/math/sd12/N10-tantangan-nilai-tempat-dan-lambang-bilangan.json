@@ -1,0 +1,460 @@
+{
+  "id": "math.sd12.n10.tantangan-nilai-tempat-dan-lambang-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "N",
+  "order": 10,
+  "title": "Nilai tempat dan lambang bilangan — Level 10 — Tantangan nilai tempat dan lamban",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [101, 999]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Lambang bilangan dari {w:n} adalah …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 100",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "n - 10",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{w:n} ditulis {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "p": [1, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "r * 100 + p * 10 + s"
+          },
+          "constraint": "r != p && p != s",
+          "prompt": "Nilai angka {p} pada bilangan {n} adalah …",
+          "answer": "p * 10",
+          "distractors": [
+            {
+              "expr": "p",
+              "tag": "angkanya"
+            },
+            {
+              "expr": "p * 100",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "n",
+              "tag": "bilangannya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Angka {p} di posisi puluhan bernilai {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9],
+            "p": [1, 9]
+          },
+          "derived": {
+            "n": "k * 1000 + k * 10 + k"
+          },
+          "prompt": "Lambang bilangan dari {w:n} adalah …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "k * 1000 + k * 100 + k",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "k * 1000 + k * 100 + k * 10",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "k * 100 + k * 10 + k",
+              "tag": "tanpa-ribuan"
+            }
+          ],
+          "choices": 4,
+          "explain": "{w:n} ditulis {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 89999],
+            "d": [1, 9]
+          },
+          "prompt": "Bilangan yang lebih besar dari {n} adalah …",
+          "answer": "n + d * 100",
+          "distractors": [
+            {
+              "expr": "n - d * 100",
+              "tag": "lebih-kecil"
+            },
+            {
+              "expr": "n - 1000",
+              "tag": "ribuan"
+            },
+            {
+              "expr": "n - d",
+              "tag": "satuan"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bandingkan dari angka paling kiri. {answer} lebih besar."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Pada bilangan 4096, nilai tempat ratusan ditempati angka …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak ada"
+                  },
+                  "say": "tidak ada"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4096: ribuan 4, ratusan 0, puluhan 9, satuan 6."
+            },
+            {
+              "prompt": "Angka 271 dibaca …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua ratus tujuh puluh satu"
+                  },
+                  "say": "dua ratus tujuh puluh satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua tujuh puluh satu"
+                  },
+                  "say": "dua tujuh puluh satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua ratus tujuh satu"
+                  },
+                  "say": "dua ratus tujuh satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "dua tujuh satu"
+                  },
+                  "say": "dua tujuh satu"
+                }
+              ],
+              "answer": 0,
+              "reteach": "271 = 200 + 70 + 1."
+            },
+            {
+              "prompt": "Angka 902 dibaca …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sembilan ratus dua"
+                  },
+                  "say": "sembilan ratus dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sembilan ratus kosong dua"
+                  },
+                  "say": "sembilan ratus kosong dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sembilan nol dua"
+                  },
+                  "say": "sembilan nol dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sembilan ratus nol dua"
+                  },
+                  "say": "sembilan ratus nol dua"
+                }
+              ],
+              "answer": 0,
+              "reteach": "902 = 900 + 2."
+            },
+            {
+              "prompt": "Pada 1.972, angka ratusan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1.972: ribuan 1, ratusan 9."
+            },
+            {
+              "prompt": "Angka puluhan dari 367, 456, 678, 897 berturut-turut …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6, 5, 7, 9"
+                  },
+                  "say": "6, 5, 7, 9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 5, 7, 3"
+                  },
+                  "say": "4, 5, 7, 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 4, 8, 7"
+                  },
+                  "say": "3, 4, 8, 7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7, 6, 8, 7"
+                  },
+                  "say": "7, 6, 8, 7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ambil angka kedua dari kanan."
+            },
+            {
+              "prompt": "\"Tiga ribu tiga puluh tiga\" ditulis …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3033"
+                  },
+                  "say": "3033"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3333"
+                  },
+                  "say": "3333"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3303"
+                  },
+                  "say": "3303"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3330"
+                  },
+                  "say": "3330"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3000 + 30 + 3 = 3033."
+            },
+            {
+              "prompt": "Bilangan yang lebih besar dari 35.475 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35.575"
+                  },
+                  "say": "35.575"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "34.475"
+                  },
+                  "say": "34.475"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "34.495"
+                  },
+                  "say": "34.495"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35.467"
+                  },
+                  "say": "35.467"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ratusan 5 > 4."
+            },
+            {
+              "prompt": "Bilangan terkecil yang dibuat dari kartu 3, 0, 7 (tiga angka, tidak diawali 0) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "307"
+                  },
+                  "say": "307"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "703"
+                  },
+                  "say": "703"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "037"
+                  },
+                  "say": "037"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "370"
+                  },
+                  "say": "370"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Angka 0 tidak boleh di depan; 307 terkecil."
+            },
+            {
+              "prompt": "Urutan dari yang terkecil adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16, 17, 18, 19"
+                  },
+                  "say": "16, 17, 18, 19"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11, 10, 9, 8"
+                  },
+                  "say": "11, 10, 9, 8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 3, 2, 1"
+                  },
+                  "say": "4, 3, 2, 1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16, 17, 19, 18"
+                  },
+                  "say": "16, 17, 19, 18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Makin ke kanan makin besar."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

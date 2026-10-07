@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.p7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 7,
+  "title": "Pola dan barisan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 30],
+      "m": {
+        "values": [10, 15, 20]
+      },
+      "k": [3, 7]
+    },
+    "derived": {
+      "t": "m * k",
+      "p": "(k==3)*8+(k==4)*16+(k==5)*32+(k==6)*64+(k==7)*128"
+    },
+    "prompt": "Bakteri membelah menjadi 2 setiap {m} menit. Awalnya {a} bakteri. Setelah {t} menit jumlahnya …",
+    "answer": "a * p",
+    "distractors": [
+      {
+        "expr": "a * 2 * k",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a * p * 2",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + p",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{t} : {m} = {k} kali membelah; {a} × 2^{k} = {answer}."
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "id": "math.sd12.q10.tantangan-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "Q",
+  "order": 10,
+  "title": "Bangun datar — Level 10 — Tantangan bangun datar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 20],
+            "l": [2, 9]
+          },
+          "constraint": "p > l",
+          "prompt": "Persegi panjang panjangnya {p} cm dan lebarnya {l} cm. Kelilingnya … cm.",
+          "answer": "2 * (p + l)",
+          "distractors": [
+            {
+              "expr": "p * l",
+              "tag": "luas"
+            },
+            {
+              "expr": "p + l",
+              "tag": "setengah"
+            },
+            {
+              "expr": "2 * p + l",
+              "tag": "kurang-satu-sisi"
+            }
+          ],
+          "choices": 4,
+          "explain": "2 × ({p} + {l}) = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "prompt": "Luas persegi dengan sisi {s} cm adalah … cm².",
+          "answer": "s * s",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "keliling"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "s * s + s",
+              "tag": "lebih"
+            }
+          ],
+          "choices": 4,
+          "explain": "{s} × {s} = {answer} cm²."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 25]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Taman persegi kelilingnya {k} m. Panjang satu sisinya … m.",
+          "answer": "s",
+          "distractors": [
+            {
+              "expr": "k - 4",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "s + 4",
+              "tag": "tambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{k} : 4 = {answer} m."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [2, 8]
+          },
+          "constraint": "p > l",
+          "prompt": "Pak Ozi memagari kebun persegi panjang {p} m × {l} m. Tiang dipasang tiap 1 m di sekeliling kebun. Banyak tiang …",
+          "answer": "2 * (p + l)",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "p * l",
+              "tag": "luas"
+            },
+            {
+              "expr": "p + l",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Keliling {=2*(p+l)} m, jadi ada {answer} tiang (berkeliling, titik awal = titik akhir)."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Bangun yang tidak punya sudut adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "trapesium"
+                  },
+                  "say": "trapesium"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga"
+                  },
+                  "say": "segitiga"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lingkaran tidak punya sudut."
+            },
+            {
+              "prompt": "Bangun dengan 4 sisi sama panjang dan 4 sudut siku-siku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "trapesium"
+                  },
+                  "say": "trapesium"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "jajar genjang"
+                  },
+                  "say": "jajar genjang"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Itu persegi."
+            },
+            {
+              "prompt": "Banyak sudut pada segi lima adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Segi lima: 5 sisi, 5 sudut."
+            },
+            {
+              "prompt": "Dua segitiga siku-siku yang sama ditempel sisi miringnya bisa membentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segi lima"
+                  },
+                  "say": "segi lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "trapesium"
+                  },
+                  "say": "trapesium"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dua segitiga siku-siku membentuk persegi panjang."
+            },
+            {
+              "prompt": "Permukaan uang logam berbentuk …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segi enam"
+                  },
+                  "say": "segi enam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga"
+                  },
+                  "say": "segitiga"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Uang logam bulat."
+            },
+            {
+              "prompt": "Persegi panjang 6 cm × 4 cm dipotong jadi persegi 2 cm × 2 cm. Banyak persegi kecil …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(6 : 2) × (4 : 2) = 3 × 2 = 6."
+            },
+            {
+              "prompt": "Keliling persegi 36 cm. Luasnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "81 cm²"
+                  },
+                  "say": "81 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 cm²"
+                  },
+                  "say": "9 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "144 cm²"
+                  },
+                  "say": "144 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36 cm²"
+                  },
+                  "say": "36 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisi 9 cm, luas 9 × 9 = 81."
+            },
+            {
+              "prompt": "Bangun yang semua sisinya tidak sama panjang dan punya 3 sudut adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga sembarang"
+                  },
+                  "say": "segitiga sembarang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga sama sisi"
+                  },
+                  "say": "segitiga sama sisi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Segitiga sembarang."
+            },
+            {
+              "prompt": "Banyak persegi kecil pada papan catur 2 × 2 (hitung semua ukuran) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 persegi kecil + 1 persegi besar = 5."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

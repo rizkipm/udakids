@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.k1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "K",
+  "order": 1,
+  "title": "Bangun datar — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 5],
+      "t": {
+        "values": [0, 1, 2]
+      }
+    },
+    "derived": {
+      "a": "(t == 0) * 3 * k + (t == 1) * 5 * k + (t == 2) * 6 * k",
+      "b": "(t == 0) * 4 * k + (t == 1) * 12 * k + (t == 2) * 8 * k"
+    },
+    "prompt": "Segitiga siku-siku dengan sisi tegak {a} cm dan {b} cm. Sisi miringnya … cm.",
+    "answer": "(t == 0) * 5 * k + (t == 1) * 13 * k + (t == 2) * 10 * k",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "max(a, b) + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a * b / 2",
+        "tag": "luas"
+      }
+    ],
+    "choices": 4,
+    "explain": "c² = {a}² + {b}² → c = {answer}."
+  }
+}

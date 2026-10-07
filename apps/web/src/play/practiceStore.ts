@@ -40,7 +40,23 @@ export type ChildProgress = {
   stickers: string[];
   /** Kunci soal yang baru keluar per skill (D-028): ronde berikutnya memberi soal lain. */
   recentItems?: Record<string, string[]>;
+  /**
+   * Ronde yang belum selesai (D-073): disimpan tiap soal agar anak bisa melanjutkan soal yang sama setelah keluar.
+   * `avoid` = daftar soal yang dihindari saat ronde dibuat, supaya ronde yang sama bisa disusun ulang persis.
+   */
+  inProgress?: {
+    skillId: string;
+    version: number;
+    seedBase: number;
+    avoid: string[];
+    index: number;
+    history: boolean[];
+    ts: number;
+  };
 };
+
+/** Ronde yang belum selesai dianggap kedaluwarsa setelah 7 hari. */
+export const RESUME_MAX_AGE_MS = 7 * 24 * 3600_000;
 
 const empty = (): ChildProgress => ({
   states: {},

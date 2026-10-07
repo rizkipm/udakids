@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.o2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "O",
+  "order": 2,
+  "title": "Aritmetika sosial — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "values": [100000, 200000, 400000]
+      },
+      "p": {
+        "values": [10, 20, 25]
+      },
+      "q": {
+        "values": [10, 5]
+      }
+    },
+    "prompt": "Harga Rp{h}, diskon {p}%, lalu dikenai pajak {q}%. Harga akhir Rp …",
+    "answer": "h * (100 - p) / 100 * (100 + q) / 100",
+    "distractors": [
+      {
+        "expr": "h * (100 - p + q) / 100",
+        "tag": "persen-dijumlah"
+      },
+      {
+        "expr": "h * (100 - p) / 100",
+        "tag": "lupa-pajak"
+      },
+      {
+        "expr": "h * (100 + q) / 100",
+        "tag": "lupa-diskon"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setelah diskon {=h*(100-p)/100}; pajak {q}%: {answer}."
+  }
+}

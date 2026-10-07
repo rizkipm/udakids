@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.k4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "K",
+  "order": 4,
+  "title": "Bangun datar — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 2],
+      "s": {
+        "values": [90, 180, 45, 36, 72]
+      }
+    },
+    "derived": {
+      "r": "7 * k"
+    },
+    "constraint": "(22 * 7 * k * k * s) % 360 == 0",
+    "prompt": "Luas juring lingkaran r = {r} cm dengan sudut pusat {s}° adalah … cm². (π = 22/7)",
+    "answer": "22 * 7 * k * k * s / 360",
+    "distractors": [
+      {
+        "expr": "2 * 22 * k * s / 360",
+        "tag": "busur"
+      },
+      {
+        "expr": "22 * 7 * k * k",
+        "tag": "luas-lingkaran"
+      },
+      {
+        "expr": "22 * 7 * k * k * s / 180",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "{s}/360 × 22/7 × {r}² = {answer} cm²."
+  }
+}

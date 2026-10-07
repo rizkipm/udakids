@@ -23,7 +23,9 @@ import { LevelList } from './levels/LevelList';
 import { OverviewPage } from './OverviewPage';
 import { ContestsPage } from './contests/ContestsPage';
 import { BannersPage } from './media/BannersPage';
+import { ArticlesAdminPage } from './media/ArticlesAdminPage';
 import { GalleryAdminPage } from './media/GalleryAdminPage';
+import { VideosAdminPage } from './media/VideosAdminPage';
 import { ChildReportPage } from './reports/ChildReportPage';
 import { ReportsPage } from './reports/ReportsPage';
 import { SkillEditorRoute } from './skills/SkillEditorRoute';
@@ -61,6 +63,8 @@ const NAV: (NavItem | { group: MessageKey })[] = [
   { to: '/admin/lomba', label: 'admin.nav.contests', icon: 'flag' },
   { to: '/admin/banner', label: 'admin.nav.banners', icon: 'image' },
   { to: '/admin/dokumentasi', label: 'admin.nav.docs', icon: 'image' },
+  { to: '/admin/video', label: 'admin.nav.videos', icon: 'play' },
+  { to: '/admin/artikel', label: 'admin.nav.articles', icon: 'book' },
   { group: 'admin.nav.groupFinance' },
   { to: '/admin/kas', label: 'admin.nav.cash', icon: 'wallet' },
   { to: '/admin/komisi', label: 'admin.nav.commission', icon: 'percent' },
@@ -156,6 +160,8 @@ export function AdminApp() {
         <Route path="lomba" element={<ContestsPage />} />
         <Route path="banner" element={<BannersPage />} />
         <Route path="dokumentasi" element={<GalleryAdminPage />} />
+        <Route path="video" element={<VideosAdminPage />} />
+        <Route path="artikel" element={<ArticlesAdminPage />} />
         <Route path="suara" element={<VoicePage />} />
         <Route path="ai-gambar" element={<AiImagesPage />} />
         <Route path="email" element={<MailPage />} />

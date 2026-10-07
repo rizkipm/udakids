@@ -1,0 +1,472 @@
+{
+  "id": "math.tkosn.m10.tantangan-mengurutkan-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "M",
+  "order": 10,
+  "title": "Mengurutkan angka — Level 10 — Tantangan mengurutkan angka",
+  "tier": "basic",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "reasoning",
+    "osn": "KMSI Level A (TK) — Penyisihan 2026",
+    "kisi-kisi": "Mengurutkan angka dari yang terkecil ke yang besar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "number-order",
+        "params": {
+          "max": 20,
+          "length": [4, 5],
+          "consecutive": false
+        }
+      },
+      {
+        "family": "number-next",
+        "params": {
+          "max": 20,
+          "mode": "missing"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 18]
+          },
+          "prompt": "Angka berapa yang ada di antara {a} dan {=a+2}?",
+          "say": "Angka berapa yang ada di antara {a} dan {=a+2}?",
+          "stimulus": [
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "blank"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a+2"
+            }
+          ],
+          "answer": "a + 1",
+          "distractors": [
+            {
+              "expr": "a + 3",
+              "tag": "kelewatan"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "sebelum"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a}, {answer}, {=a+2}. Angka di tengah adalah {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9, 12, 13"
+                  },
+                  "say": "9, 12, 13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9, 13, 12"
+                  },
+                  "say": "9, 13, 12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13, 12, 9"
+                  },
+                  "say": "13, 12, 9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 9, 12, 13."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 11, 18"
+                  },
+                  "say": "3, 11, 18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 18, 11"
+                  },
+                  "say": "3, 18, 11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18, 11, 3"
+                  },
+                  "say": "18, 11, 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 3, 11, 18."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 10, 19"
+                  },
+                  "say": "1, 10, 19"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 19, 10"
+                  },
+                  "say": "1, 19, 10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19, 10, 1"
+                  },
+                  "say": "19, 10, 1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 1, 10, 19."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 13, 16, 18"
+                  },
+                  "say": "3, 13, 16, 18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18, 16, 13, 3"
+                  },
+                  "say": "18, 16, 13, 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18, 16, 13, 3"
+                  },
+                  "say": "18, 16, 13, 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 3, 13, 16, 18."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9, 14, 16, 17"
+                  },
+                  "say": "9, 14, 16, 17"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14, 17, 16, 9"
+                  },
+                  "say": "14, 17, 16, 9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17, 16, 14, 9"
+                  },
+                  "say": "17, 16, 14, 9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 9, 14, 16, 17."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2, 4, 17"
+                  },
+                  "say": "2, 4, 17"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17, 2, 4"
+                  },
+                  "say": "17, 2, 4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17, 4, 2"
+                  },
+                  "say": "17, 4, 2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 2, 4, 17."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 8, 15, 16"
+                  },
+                  "say": "4, 8, 15, 16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 8, 16, 15"
+                  },
+                  "say": "4, 8, 16, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16, 15, 8, 4"
+                  },
+                  "say": "16, 15, 8, 4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 4, 8, 15, 16."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13, 16, 17, 18"
+                  },
+                  "say": "13, 16, 17, 18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17, 16, 13, 18"
+                  },
+                  "say": "17, 16, 13, 18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18, 17, 16, 13"
+                  },
+                  "say": "18, 17, 16, 13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 13, 16, 17, 18."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 2, 5, 15"
+                  },
+                  "say": "1, 2, 5, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5, 1, 2, 15"
+                  },
+                  "say": "5, 1, 2, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15, 5, 2, 1"
+                  },
+                  "say": "15, 5, 2, 1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 1, 2, 5, 15."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15, 16, 17, 20"
+                  },
+                  "say": "15, 16, 17, 20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16, 15, 17, 20"
+                  },
+                  "say": "16, 15, 17, 20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20, 17, 16, 15"
+                  },
+                  "say": "20, 17, 16, 15"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 15, 16, 17, 20."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 11, 15, 19"
+                  },
+                  "say": "4, 11, 15, 19"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19, 4, 11, 15"
+                  },
+                  "say": "19, 4, 11, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19, 15, 11, 4"
+                  },
+                  "say": "19, 15, 11, 4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 4, 11, 15, 19."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3, 9, 16, 20"
+                  },
+                  "say": "3, 9, 16, 20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9, 20, 3, 16"
+                  },
+                  "say": "9, 20, 3, 16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20, 16, 9, 3"
+                  },
+                  "say": "20, 16, 9, 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 3, 9, 16, 20."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1, 3, 5, 15"
+                  },
+                  "say": "1, 3, 5, 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5, 15, 3, 1"
+                  },
+                  "say": "5, 15, 3, 1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15, 5, 3, 1"
+                  },
+                  "say": "15, 5, 3, 1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 1, 3, 5, 15."
+            },
+            {
+              "prompt": "Urutan mana yang benar dari yang terkecil?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2, 4, 8"
+                  },
+                  "say": "2, 4, 8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4, 8, 2"
+                  },
+                  "say": "4, 8, 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8, 4, 2"
+                  },
+                  "say": "8, 4, 2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Dari yang terkecil: 2, 4, 8."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

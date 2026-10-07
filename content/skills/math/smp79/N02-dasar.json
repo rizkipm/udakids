@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.n2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "N",
+  "order": 2,
+  "title": "Aritmetika sosial — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "values": [40000, 60000, 80000, 100000, 120000]
+      },
+      "p": {
+        "values": [10, 20, 25]
+      }
+    },
+    "derived": {
+      "j": "b * (100 + p) / 100"
+    },
+    "prompt": "Barang dijual Rp{j} dengan untung {p}%. Harga belinya Rp …",
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "j - j * p / 100",
+        "tag": "persen-dari-jual"
+      },
+      {
+        "expr": "j",
+        "tag": "harga-jual"
+      },
+      {
+        "expr": "b + 5000",
+        "tag": "lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "{j} : (1 + {p}%) = {answer}."
+  }
+}

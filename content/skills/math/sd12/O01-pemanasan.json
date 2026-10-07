@@ -1,0 +1,62 @@
+{
+  "id": "math.sd12.o1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "O",
+  "order": 1,
+  "title": "Pecahan sederhana — Level 1 — Pemanasan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": {
+        "values": [2, 3, 4, 6, 8]
+      },
+      "n": [1, 7]
+    },
+    "constraint": "n < d",
+    "prompt": "Kue dipotong {d} sama besar. Dimakan {n} potong. Bagian yang dimakan adalah …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "circle",
+        "hideNumber": true
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "n",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "d - n",
+        "den": "d",
+        "tag": "sisa"
+      },
+      {
+        "num": "n",
+        "den": "d + 1",
+        "tag": "penyebut-lebih"
+      },
+      {
+        "num": "d",
+        "den": "n",
+        "tag": "terbalik"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} dari {d} bagian sama besar: {answer}."
+  }
+}

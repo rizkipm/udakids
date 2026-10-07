@@ -1,0 +1,459 @@
+{
+  "id": "math.sd34.k10.tantangan-operasi-bilangan-dan-penaksiran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "K",
+  "order": 10,
+  "title": "Operasi bilangan dan penaksiran — Level 10 — Tantangan operasi bilangan dan pena",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Operasi bilangan dan penaksiran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 120],
+            "b": [3, 9]
+          },
+          "derived": {
+            "c": "a * b"
+          },
+          "prompt": "{c} : {b} = …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "c - b",
+              "tag": "dikurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "{c} : {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 980],
+            "b": [120, 980]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50",
+          "prompt": "Taksiran {a} + {b} dengan pembulatan ke ratusan terdekat adalah …",
+          "answer": "round(a / 100) * 100 + round(b / 100) * 100",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hasil-tepat"
+            },
+            {
+              "expr": "floor(a / 100) * 100 + floor(b / 100) * 100",
+              "tag": "dibulatkan-ke-bawah"
+            },
+            {
+              "expr": "ceil(a / 100) * 100 + ceil(b / 100) * 100",
+              "tag": "dibulatkan-ke-atas"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} ≈ {=round(a/100)*100}, {b} ≈ {=round(b/100)*100}; jumlahnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 48],
+            "b": [5, 20],
+            "c": [20, 150]
+          },
+          "constraint": "c < a * b",
+          "prompt": "Satu kardus berisi {a} buku. Sekolah membeli {b} kardus, lalu {c} buku dibagikan. Sisa buku …",
+          "answer": "a * b - c",
+          "distractors": [
+            {
+              "expr": "a * b + c",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a + b - c",
+              "tag": "salah-operasi"
+            },
+            {
+              "expr": "a * b",
+              "tag": "lupa-kurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} × {b} = {=a*b}; {=a*b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [30, 45],
+            "n": [100, 400]
+          },
+          "constraint": "n % k != 0",
+          "prompt": "{n} siswa ikut darmawisata. Satu bus memuat {k} siswa. Bus yang diperlukan paling sedikit …",
+          "answer": "ceil(n / k)",
+          "distractors": [
+            {
+              "expr": "floor(n / k)",
+              "tag": "tidak-dibulatkan-ke-atas"
+            },
+            {
+              "expr": "ceil(n / k) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - k",
+              "tag": "dikurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}; sisa siswa tetap perlu bus, jadi {answer} bus."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Taksiran terbaik 498 + 302 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "800"
+                  },
+                  "say": "800"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "900"
+                  },
+                  "say": "900"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "600"
+                  },
+                  "say": "600"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "700"
+                  },
+                  "say": "700"
+                }
+              ],
+              "answer": 0,
+              "reteach": "498 ≈ 500, 302 ≈ 300."
+            },
+            {
+              "prompt": "Hasil 25 × 4 × 17 paling mudah dihitung sebagai …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100 × 17 = 1.700"
+                  },
+                  "say": "100 × 17 = 1.700"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100 + 17"
+                  },
+                  "say": "100 + 17"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 × 68"
+                  },
+                  "say": "25 × 68"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29 × 17"
+                  },
+                  "say": "29 × 17"
+                }
+              ],
+              "answer": 0,
+              "reteach": "25 × 4 = 100."
+            },
+            {
+              "prompt": "Pak Budi punya 3 kandang, tiap kandang 24 ayam. 18 ayam dijual. Sisa ayam …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "54"
+                  },
+                  "say": "54"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "72"
+                  },
+                  "say": "72"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90"
+                  },
+                  "say": "90"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                }
+              ],
+              "answer": 0,
+              "reteach": "72 − 18 = 54."
+            },
+            {
+              "prompt": "Bilangan yang jika dikali 8 lalu ditambah 6 hasilnya 70 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "64"
+                  },
+                  "say": "64"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "70 − 6 = 64; 64 : 8 = 8."
+            },
+            {
+              "prompt": "999 + 999 + 999 = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.997"
+                  },
+                  "say": "2.997"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.897"
+                  },
+                  "say": "2.897"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.999"
+                  },
+                  "say": "2.999"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3.000"
+                  },
+                  "say": "3.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 × 1.000 − 3 = 2.997."
+            },
+            {
+              "prompt": "Rina membaca 15 halaman setiap hari. Buku 200 halaman selesai dibaca pada hari ke- …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                }
+              ],
+              "answer": 0,
+              "reteach": "13 hari = 195 halaman; hari ke-14 selesai."
+            },
+            {
+              "prompt": "48 : 4 × 3 = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "say": "36"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48"
+                  },
+                  "say": "48"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kiri ke kanan: 12 × 3 = 36."
+            },
+            {
+              "prompt": "Jumlah 1 + 2 + 3 + … + 10 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "say": "55"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(1 + 10) × 10 : 2 = 55."
+            },
+            {
+              "prompt": "Taksiran 4.873 dibulatkan ke ribuan terdekat …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5.000"
+                  },
+                  "say": "5.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4.000"
+                  },
+                  "say": "4.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4.900"
+                  },
+                  "say": "4.900"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4.800"
+                  },
+                  "say": "4.800"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ratusannya 8 ≥ 5, naik."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

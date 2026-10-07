@@ -19,6 +19,7 @@ export * from './content/dialog.js';
 export * from './content/voice.js';
 export * from './content/lesson.js';
 export * from './content/ai-image.js';
+export * from './content/site.js';
 export * from './billing/billing.js';
 export * from './affiliate/affiliate.js';
 export * from './reports/insights.js';

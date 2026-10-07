@@ -1,0 +1,48 @@
+{
+  "id": "math.sd34.l7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "L",
+  "order": 7,
+  "title": "Sifat bilangan dan sifat operasi — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Sifat bilangan dan sifat operasi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [3, 8],
+      "p": [2, 7],
+      "r": [2, 7]
+    },
+    "derived": {
+      "a": "x * p",
+      "b": "x * r"
+    },
+    "constraint": "gcd(p, r) == 1 && p != r",
+    "prompt": "{a} kue dan {b} permen dibagikan sama banyak ke beberapa anak tanpa sisa. Paling banyak anak yang mendapat …",
+    "answer": "gcd(a, b)",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "kpk"
+      },
+      {
+        "expr": "a + b",
+        "tag": "jumlah"
+      },
+      {
+        "expr": "x * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "FPB({a}, {b}) = {answer} anak."
+  }
+}

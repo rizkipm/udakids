@@ -12,9 +12,9 @@ from openpyxl.formatting.rule import CellIsRule
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 rows = list(csv.DictReader(open(f'{ROOT}/docs/blueprint/menu-belajar.csv')))
 
-GRADE_CODE = {'Pra-TK': 'prek', 'TK': 'tk', 'Kelas 1': 'sd1'}
+GRADE_CODE = {'PAUD': 'prek', 'TK': 'tk', 'Kelas 1': 'sd1'}
 DOMAIN = {'Baca Tulis': 'literasi', 'Berhitung': 'math', 'English': 'english', 'Sains': 'sains'}
-FASE = {'Pra-TK': 'G4', 'TK': 'G5', 'Kelas 1': 'G6'}
+FASE = {'PAUD': 'G4', 'TK': 'G5', 'Kelas 1': 'G6'}
 MODELS = [
     (1, 'Dengar lalu pilih gambar', 'pick-one', 'Ada'), (2, 'Ketuk semua', 'tap-all', 'Ada'),
     (3, 'Hitung lalu pilih angka', 'pick-one', 'Ada'), (4, 'Susun benda / kubus', 'build', 'Ada'),
@@ -50,7 +50,7 @@ def gpt_prompt(r):
         bagian_soal = (
             f'BAGIAN B (soal): buat 10 file skill JSON (Level 1–10, mudah ke sulit, Level 10 tantangan gabungan) '
             f'format Udakids: id "{dom}.{grade}.<kode><n>.<slug>", domain "{dom}", grade "{grade}", '
-            f'family "manual" (atau family lain yang sudah ada), tier "basic" untuk Pra-TK/TK. '
+            f'family "manual" (atau family lain yang sudah ada), tier "basic" untuk PAUD/TK. '
             f'Setiap level minimal 24 soal unik, 3–4 pilihan, satu jawaban benar, pengecoh dari miskonsepsi umum, '
             f'setiap soal punya "say" (dibacakan), "reteach", dan "source". Gunakan hanya interaksi yang sudah ada '
             f'(pick-one, tap-all, order, group, match, build, number-line, number-input).')
@@ -96,7 +96,7 @@ ws = wb.active
 ws.title = 'Petunjuk'
 ws.column_dimensions['A'].width = 110
 lines = [
-    ('Menu Belajar Udakids: Pra-TK, TK, Kelas 1', True),
+    ('Menu Belajar Udakids: PAUD, TK, Kelas 1', True),
     ('Sumber: docs/rencana-gudang-gambar-menu-belajar.md · data: docs/blueprint/menu-belajar.csv · petunjuk lengkap: docs/blueprint/PETUNJUK-GENERATE.md', False),
     ('', False),
     ('CARA MEMAKAI FILE INI', True),
@@ -108,7 +108,7 @@ lines = [
     ('5. Sheet "Ringkasan" menghitung progres otomatis dari kolom Status.', False),
     ('', False),
     ('URUTAN YANG DISARANKAN', True),
-    ('• Fase G4 = Pra-TK, G5 = TK, G6 = Kelas 1. Kerjakan berurutan dari kode terkecil (unit awal jadi dasar unit berikutnya).', False),
+    ('• Fase G4 = PAUD, G5 = TK, G6 = Kelas 1. Kerjakan berurutan dari kode terkecil (unit awal jadi dasar unit berikutnya).', False),
     ('• Soal "BARU 10 level" bisa digenerate sekarang. Pelajaran (Belajar) disimpan sebagai draf sampai pemutar pelajaran selesai dibangun (fase G3).', False),
     ('• Model latihan berstatus "Baru" (sheet Model Soal) belum ada di aplikasi; sementara soal memakai model yang sudah ada.', False),
     ('', False),
@@ -161,7 +161,7 @@ for val, color in [('Draf', 'FFF59D'), ('Review', 'FFCC80'), ('Terbit', 'A5D6A7'
 ws = wb.create_sheet('Ringkasan')
 header(ws, ['Jenjang', 'Mapel', 'Unit', 'Soal baru', 'Draf', 'Review', 'Terbit', 'Progres'], [10, 12, 8, 10, 8, 8, 8, 10])
 R = "'Menu Belajar'"
-for g in ['Pra-TK', 'TK', 'Kelas 1']:
+for g in ['PAUD', 'TK', 'Kelas 1']:
     for m in ['Baca Tulis', 'Berhitung', 'English', 'Sains']:
         n = ws.max_row + 1
         crit = f'{R}!$B:$B,"{g}",{R}!$C:$C,"{m}"'

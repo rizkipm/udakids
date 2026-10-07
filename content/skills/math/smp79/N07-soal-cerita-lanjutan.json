@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.n7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "N",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 5],
+      "k": {
+        "values": [3000, 4000, 5000]
+      },
+      "p": {
+        "values": [10, 20, 25, 50]
+      }
+    },
+    "derived": {
+      "b": "n * 12 * k",
+      "h": "k * (100 + p) / 100"
+    },
+    "prompt": "Pedagang membeli {n} lusin buku Rp{b}. Dijual Rp{h} per buah. Persentase untung … %.",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "p * 2",
+        "tag": "dua-kali"
+      },
+      {
+        "expr": "100 - p",
+        "tag": "sisa"
+      },
+      {
+        "expr": "p / 2",
+        "tag": "setengah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Modal {b}, jual {=n*12*h}; untung {=n*12*h-b} = {answer}%."
+  }
+}

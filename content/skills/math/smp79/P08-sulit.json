@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.p8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "P",
+  "order": 8,
+  "title": "Pola dan barisan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola dan baris"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 25],
+      "b": [2, 4],
+      "n": [10, 20]
+    },
+    "constraint": "(n * (2 * a + (n - 1) * b)) % 2 == 0",
+    "prompt": "Gedung pertunjukan: baris pertama {a} kursi, tiap baris berikutnya {b} kursi lebih banyak. Ada {n} baris. Banyak kursi seluruhnya …",
+    "answer": "n * (2 * a + (n - 1) * b) / 2",
+    "distractors": [
+      {
+        "expr": "a + (n - 1) * b",
+        "tag": "baris-terakhir"
+      },
+      {
+        "expr": "n * a",
+        "tag": "tanpa-tambah"
+      },
+      {
+        "expr": "n * (a + n * b)",
+        "tag": "salah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sn = {answer}."
+  }
+}

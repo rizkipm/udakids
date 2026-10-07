@@ -32,7 +32,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 1.4rem;
+  /* Menyesuaikan layar: kalimat panjang di HP tidak tiba-tiba besar. */
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.4rem);
   font-weight: 700;
 }
 .kid-say p {
@@ -1836,8 +1837,8 @@
 }
 .kid-btn.big-play {
   min-height: 76px;
-  font-size: 1.5rem;
-  padding: 0 32px;
+  font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
+  padding: 0 clamp(18px, 4vw, 32px);
   background: var(--kid-good);
 }
 .home-h2 {
@@ -1920,6 +1921,34 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: #6b6385;
+}
+/* Subjudul di dalam bagian lomba (D-076): kisi-kisi dulu, lalu mock test lomba itu. */
+.topic-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 10px;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #4a4166;
+}
+.topic-group + .topic-sub {
+  margin-top: 4px;
+}
+.topic-sub::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--kid-line) 14%, transparent);
+}
+.topic-sub.is-mock {
+  color: #b4410f;
+}
+.topic-card.is-mock .topic-num {
+  color: #fff;
+  background: linear-gradient(135deg, #f59e0b, #d9480f);
 }
 @media (max-width: 520px) {
   .topic-group {
@@ -2992,9 +3021,11 @@ button.level-card.is-paid {
   .rank-row,
   .rank-list.is-small .rank-row {
     grid-template-columns: 44px minmax(0, 1fr) auto;
+    /* Nama + keterangan selebar baris (tidak terjepit poin); poin & waktu di baris kedua. */
     grid-template-areas:
-      'pos name avg'
-      'pos time detail';
+      'pos name name'
+      'pos time avg'
+      'pos detail detail';
     row-gap: 4px;
   }
   .rank-row > .momo {
@@ -3126,6 +3157,27 @@ button.level-card.is-paid {
 }
 .rank-mode.is-on {
   background: #f7c948;
+}
+@media (max-width: 640px) {
+  /* Tiga mode sejajar (bukan bertumpuk ke bawah). */
+  .rank-modes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .rank-mode {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px;
+    border-radius: 18px;
+    font-size: 0.85rem;
+    line-height: 1.15;
+    text-align: center;
+  }
+  .board-intro {
+    font-size: 1.05rem;
+  }
 }
 .rank-mode:focus-visible {
   outline: 4px solid var(--primary);

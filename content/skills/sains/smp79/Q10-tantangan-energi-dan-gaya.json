@@ -1,0 +1,455 @@
+{
+  "id": "sains.smp79.q10.tantangan-energi-dan-gaya",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "Q",
+  "order": 10,
+  "title": "Energi dan gaya — Level 10 — Tantangan energi dan gaya",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Energi dan gaya"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [5, 100],
+            "s": [2, 20]
+          },
+          "prompt": "Gaya {f} N memindahkan benda sejauh {s} m. Usahanya … J.",
+          "answer": "f * s",
+          "distractors": [
+            {
+              "expr": "f + s",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "f / s",
+              "tag": "dibagi"
+            },
+            {
+              "expr": "f * s / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "W = F × s = {answer} J."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 20],
+            "v": [2, 12]
+          },
+          "constraint": "(m * v * v) % 2 == 0",
+          "prompt": "Energi kinetik benda {m} kg yang bergerak {v} m/s adalah … J.",
+          "answer": "m * v * v / 2",
+          "distractors": [
+            {
+              "expr": "m * v * v",
+              "tag": "lupa-setengah"
+            },
+            {
+              "expr": "m * v / 2",
+              "tag": "tanpa-kuadrat"
+            },
+            {
+              "expr": "m * v",
+              "tag": "momentum"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ek = ½ × {m} × {v}² = {answer} J."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [10, 500],
+            "a": [2, 10]
+          },
+          "derived": {
+            "f": "p * a"
+          },
+          "prompt": "Gaya {f} N bekerja pada luas {a} m². Tekanannya … Pa.",
+          "answer": "p",
+          "distractors": [
+            {
+              "expr": "f * a",
+              "tag": "dikali"
+            },
+            {
+              "expr": "f",
+              "tag": "gaya"
+            },
+            {
+              "expr": "f - a",
+              "tag": "dikurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "P = F : A = {answer} Pa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 20]
+          },
+          "prompt": "Tekanan hidrostatis air pada kedalaman {h} m (ρ = 1.000 kg/m³, g = 10 m/s²) adalah … Pa.",
+          "answer": "1000 * 10 * h",
+          "distractors": [
+            {
+              "expr": "1000 * h",
+              "tag": "tanpa-g"
+            },
+            {
+              "expr": "10 * h",
+              "tag": "tanpa-rho"
+            },
+            {
+              "expr": "1000 * 10 * h / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "P = ρ g h = {answer} Pa."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Satuan daya dalam SI adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "watt"
+                  },
+                  "say": "watt"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "newton"
+                  },
+                  "say": "newton"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "pascal"
+                  },
+                  "say": "pascal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "joule"
+                  },
+                  "say": "joule"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Watt."
+            },
+            {
+              "prompt": "Hukum Newton III berbunyi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "gaya aksi = − gaya reaksi"
+                  },
+                  "say": "gaya aksi = − gaya reaksi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "energi kekal"
+                  },
+                  "say": "energi kekal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "F = m × a"
+                  },
+                  "say": "F = m × a"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "benda diam tetap diam"
+                  },
+                  "say": "benda diam tetap diam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Aksi-reaksi."
+            },
+            {
+              "prompt": "Dongkrak hidrolik bekerja berdasarkan hukum …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pascal"
+                  },
+                  "say": "Pascal"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Archimedes"
+                  },
+                  "say": "Archimedes"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Newton I"
+                  },
+                  "say": "Newton I"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Ohm"
+                  },
+                  "say": "Ohm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pascal."
+            },
+            {
+              "prompt": "Benda tenggelam jika massa jenisnya … massa jenis zat cair.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih besar dari"
+                  },
+                  "say": "lebih besar dari"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama dengan"
+                  },
+                  "say": "sama dengan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak bergantung"
+                  },
+                  "say": "tidak bergantung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lebih kecil dari"
+                  },
+                  "say": "lebih kecil dari"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tenggelam."
+            },
+            {
+              "prompt": "Ketika bola dilempar ke atas, di titik tertinggi energi kinetiknya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "nol (minimum)"
+                  },
+                  "say": "nol (minimum)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "negatif"
+                  },
+                  "say": "negatif"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "maksimum"
+                  },
+                  "say": "maksimum"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama dengan Ep awal"
+                  },
+                  "say": "sama dengan Ep awal"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kecepatan 0."
+            },
+            {
+              "prompt": "Penumpang terdorong ke depan saat bus direm mendadak sesuai hukum …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Newton I (kelembaman)"
+                  },
+                  "say": "Newton I (kelembaman)"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Newton II"
+                  },
+                  "say": "Newton II"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Newton III"
+                  },
+                  "say": "Newton III"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Pascal"
+                  },
+                  "say": "Pascal"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Inersia."
+            },
+            {
+              "prompt": "Gaya apung benda yang tercelup sama dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berat zat cair yang dipindahkan"
+                  },
+                  "say": "berat zat cair yang dipindahkan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "volume benda"
+                  },
+                  "say": "volume benda"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berat benda di udara"
+                  },
+                  "say": "berat benda di udara"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "massa benda"
+                  },
+                  "say": "massa benda"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Archimedes."
+            },
+            {
+              "prompt": "Lampu 100 W menyala 10 jam menghabiskan energi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 kWh"
+                  },
+                  "say": "1 kWh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.000 kWh"
+                  },
+                  "say": "1.000 kWh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 kWh"
+                  },
+                  "say": "10 kWh"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,1 kWh"
+                  },
+                  "say": "0,1 kWh"
+                }
+              ],
+              "answer": 0,
+              "reteach": "100 × 10 Wh."
+            },
+            {
+              "prompt": "Bola 2 kg jatuh dari 5 m (g = 10). Kecepatan saat menyentuh tanah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 m/s"
+                  },
+                  "say": "10 m/s"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 m/s"
+                  },
+                  "say": "5 m/s"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100 m/s"
+                  },
+                  "say": "100 m/s"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20 m/s"
+                  },
+                  "say": "20 m/s"
+                }
+              ],
+              "answer": 0,
+              "reteach": "mgh = ½mv²."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

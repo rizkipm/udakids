@@ -1,0 +1,48 @@
+{
+  "id": "math.sd12.p1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "P",
+  "order": 1,
+  "title": "Waktu — Level 1 — Pemanasan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 12]
+    },
+    "prompt": "Jarum pendek di angka {h} dan jarum panjang di angka 12. Pukul berapa?",
+    "stimulus": [
+      {
+        "kind": "clock",
+        "hour": "=h",
+        "minute": 0
+      }
+    ],
+    "answer": "h",
+    "distractors": [
+      {
+        "expr": "h % 12 + 1",
+        "tag": "satu-jam-lagi"
+      },
+      {
+        "expr": "(h + 10) % 12 + 1",
+        "tag": "sebelumnya"
+      },
+      {
+        "expr": "12",
+        "tag": "dua-belas"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jarum panjang di 12 berarti tepat; pukul {answer}."
+  }
+}

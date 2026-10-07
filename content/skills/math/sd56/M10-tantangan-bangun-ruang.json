@@ -1,0 +1,469 @@
+{
+  "id": "math.sd56.m10.tantangan-bangun-ruang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "M",
+  "order": 10,
+  "title": "Bangun ruang — Level 10 — Tantangan bangun ruang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3],
+            "t": [5, 20]
+          },
+          "derived": {
+            "r": "7 * k"
+          },
+          "prompt": "Volume tabung dengan jari-jari {r} cm dan tinggi {t} cm adalah … cm³. (π = 22/7)",
+          "answer": "22 * 7 * k * k * t",
+          "distractors": [
+            {
+              "expr": "22 * 7 * k * k",
+              "tag": "luas-alas"
+            },
+            {
+              "expr": "44 * k * t",
+              "tag": "selimut"
+            },
+            {
+              "expr": "22 * 7 * k * k * t / 3",
+              "tag": "kerucut"
+            }
+          ],
+          "choices": 4,
+          "explain": "22/7 × {r}² × {t} = {answer} cm³."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 2],
+            "m": [1, 5]
+          },
+          "derived": {
+            "r": "7 * k",
+            "t": "3 * m"
+          },
+          "prompt": "Volume kerucut dengan jari-jari {r} cm dan tinggi {t} cm adalah … cm³. (π = 22/7)",
+          "answer": "22 * 7 * k * k * m",
+          "distractors": [
+            {
+              "expr": "22 * 7 * k * k * 3 * m",
+              "tag": "tabung"
+            },
+            {
+              "expr": "22 * k * m",
+              "tag": "salah"
+            },
+            {
+              "expr": "22 * 7 * k * k",
+              "tag": "luas-alas"
+            }
+          ],
+          "choices": 4,
+          "explain": "1/3 × 22/7 × {r}² × {t} = {answer} cm³."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "v": "s * s * s"
+          },
+          "prompt": "Kubus bervolume {v} cm³. Panjang rusuknya … cm.",
+          "answer": "s",
+          "distractors": [
+            {
+              "expr": "v / 3",
+              "tag": "bagi-3"
+            },
+            {
+              "expr": "v / 6",
+              "tag": "bagi-6"
+            },
+            {
+              "expr": "s * s",
+              "tag": "kuadrat"
+            }
+          ],
+          "choices": 4,
+          "explain": "∛{v} = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [10, 20, 30]
+            },
+            "p": {
+              "values": [10, 20, 25]
+            },
+            "l": {
+              "values": [10, 20, 40]
+            }
+          },
+          "constraint": "(s * s * s) % (p * l) == 0",
+          "prompt": "Air dari kubus penuh rusuk {s} cm dituang ke balok alas {p} cm × {l} cm. Tinggi air di balok … cm.",
+          "answer": "s * s * s / (p * l)",
+          "distractors": [
+            {
+              "expr": "s * s * s / p",
+              "tag": "bagi-panjang"
+            },
+            {
+              "expr": "s",
+              "tag": "sama-rusuk"
+            },
+            {
+              "expr": "s * s / l",
+              "tag": "salah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Volume {=s*s*s} cm³ : ({p} × {l}) = {answer} cm."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Bola bisa menggelinding karena …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "permukaannya lengkung tanpa rusuk"
+                  },
+                  "say": "permukaannya lengkung tanpa rusuk"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "punya alas datar"
+                  },
+                  "say": "punya alas datar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "berwarna"
+                  },
+                  "say": "berwarna"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "ringan"
+                  },
+                  "say": "ringan"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisi lengkung."
+            },
+            {
+              "prompt": "Jaring-jaring tabung terdiri atas …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 lingkaran dan 1 persegi panjang"
+                  },
+                  "say": "2 lingkaran dan 1 persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 persegi"
+                  },
+                  "say": "2 persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 lingkaran"
+                  },
+                  "say": "3 lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 lingkaran dan segitiga"
+                  },
+                  "say": "1 lingkaran dan segitiga"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Alas, tutup, selimut."
+            },
+            {
+              "prompt": "Kubus kecil 1 cm³ yang muat dalam kotak 4 × 3 × 2 cm ada …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48"
+                  },
+                  "say": "48"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 × 3 × 2."
+            },
+            {
+              "prompt": "Jika rusuk kubus diperbesar 2 kali, volumenya menjadi … kali.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2³."
+            },
+            {
+              "prompt": "Volume kerucut = … volume tabung yang alas dan tingginya sama.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/3"
+                  },
+                  "say": "1/3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama dengan"
+                  },
+                  "say": "sama dengan"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2/3"
+                  },
+                  "say": "2/3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kerucut 1/3 tabung."
+            },
+            {
+              "prompt": "Banyak rusuk prisma segi lima …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 × 5."
+            },
+            {
+              "prompt": "Kubus dicat seluruh permukaannya lalu dipotong jadi 27 kubus kecil. Kubus kecil yang tidak terkena cat …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hanya tengah."
+            },
+            {
+              "prompt": "1 dm³ = … liter",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.000"
+                  },
+                  "say": "1.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 dm³ = 1 liter."
+            },
+            {
+              "prompt": "Volume bola = 4/3 × π × r³. Jika r = 3 cm dan π = 3,14, volumenya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "113,04 cm³"
+                  },
+                  "say": "113,04 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37,68 cm³"
+                  },
+                  "say": "37,68 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28,26 cm³"
+                  },
+                  "say": "28,26 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "84,78 cm³"
+                  },
+                  "say": "84,78 cm³"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4/3 × 3,14 × 27."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

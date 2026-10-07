@@ -1,0 +1,48 @@
+{
+  "id": "math.sd12.n6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "N",
+  "order": 6,
+  "title": "Nilai tempat dan lambang bilangan — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 9],
+      "r": [0, 9],
+      "p": [0, 9],
+      "s": [0, 9]
+    },
+    "derived": {
+      "n": "k * 1000 + r * 100 + p * 10 + s"
+    },
+    "constraint": "k != r && r != p && p != s && k != p && k != s && r != s",
+    "prompt": "Pada bilangan {n}, angka yang menempati ratusan adalah …",
+    "answer": "r",
+    "distractors": [
+      {
+        "expr": "k",
+        "tag": "ribuan"
+      },
+      {
+        "expr": "p",
+        "tag": "puluhan"
+      },
+      {
+        "expr": "s",
+        "tag": "satuan"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n}: ribuan {k}, ratusan {r}, puluhan {p}, satuan {s}."
+  }
+}

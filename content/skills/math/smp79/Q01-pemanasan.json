@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.q1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "Q",
+  "order": 1,
+  "title": "Perbandingan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [3, 12],
+      "p": {
+        "values": [3000, 4000, 5000, 6000]
+      }
+    },
+    "derived": {
+      "h": "a * p"
+    },
+    "constraint": "a != b",
+    "prompt": "{a} buku harganya Rp{h}. Harga {b} buku Rp …",
+    "answer": "b * p",
+    "distractors": [
+      {
+        "expr": "h * b",
+        "tag": "tanpa-bagi"
+      },
+      {
+        "expr": "h + (b - a) * 1000",
+        "tag": "salah"
+      },
+      {
+        "expr": "h",
+        "tag": "sama"
+      }
+    ],
+    "choices": 4,
+    "explain": "Senilai: {h} : {a} × {b} = {answer}."
+  }
+}

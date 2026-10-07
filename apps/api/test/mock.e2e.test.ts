@@ -39,16 +39,18 @@ describe.skipIf(!up)('Mock Test olimpiade (e2e)', () => {
     const mocks = (r.body.skills as { id: string; family: string }[]).filter(
       (s) => s.family === 'mock',
     );
-    expect(mocks.map((s) => s.id).sort()).toEqual([
-      'english.tkosn.z1.mock-test-25-soal',
-      MOCK,
-      'sains.tkosn.z1.mock-test-25-soal',
-    ]);
+    // Tiga mock test per buku olimpiade TK (Mock test 1 memakai id lama agar riwayat tidak hilang),
+    // ditambah tiga mock KMSI per buku olimpiade TK–SMP (D-074): 3 × 3 TK + 3 × 3 × 4 jenjang lain.
+    expect(mocks).toHaveLength(54);
+    expect(mocks.map((s) => s.id)).toContain('math.tkosn.y1.kmsi-mock-test-1');
+    expect(mocks.map((s) => s.id)).toContain(MOCK);
+    expect(mocks.map((s) => s.id)).toContain('english.tkosn.z3.mock-test-3');
     const math = r.body.catalogs.find(
       (c: { domain: string; grade: string }) => c.domain === 'math' && c.grade === 'tkosn',
     );
     expect(math.categories[0].group).toMatch(/^OSN TK/);
-    expect(math.categories.at(-1)).toMatchObject({ code: 'Z', standalone: true });
+    expect(math.categories.at(-2)).toMatchObject({ code: 'Z', standalone: true });
+    expect(math.categories.at(-1)).toMatchObject({ code: 'Y', standalone: true });
   });
 
   it('hasil sah: skor dari poin (300/552 → 54), durasi tersimpan, masuk skor utama', async () => {
@@ -215,5 +217,74 @@ describe.skipIf(!up)('Mock Test olimpiade (e2e)', () => {
       .get(`/practice/mock/${MOCK}/attempts`)
       .set(ctx.auth(ctx.adminToken))
       .expect(403);
+  });
+
+  it('tanpa Premium: Mock test 1 hanya sekali, Mock 2–3 terkunci; Premium bebas mengulang', async () => {
+    const billing = { paywall: true, freeLevels: 2, orderExpiryHours: 24, classFullAccess: true };
+    await ctx
+      .http()
+      .put('/admin/billing/settings')
+      .set(ctx.auth(ctx.adminToken))
+      .send(billing)
+      .expect(200);
+    try {
+      const free = await ctx.newChild('Uji Mock Gratis');
+      const send = (skillId: string) =>
+        ctx
+          .http()
+          .post('/practice/sync')
+          .set(ctx.auth(free.token))
+          .send({
+            answers: [],
+            states: [],
+            quizzes: [
+              { id: randomUUID(), ts: Date.now(), skillId, correct: 10, total: 25, points: 200 },
+            ],
+          })
+          .expect(200);
+      expect((await send(MOCK)).body.rejectedQuizzes).toEqual([]);
+      expect((await send(MOCK)).body.rejectedQuizzes).toHaveLength(1);
+      expect((await send('math.tkosn.z2.mock-test-2')).body.rejectedQuizzes).toHaveLength(1);
+      // Katalog: Mock 2 dikirim tanpa isi (berbayar), Mock 1 tidak.
+      const cat = await ctx.http().get('/catalog').set(ctx.auth(free.token)).expect(200);
+      const byId = new Map(
+        (cat.body.skills as { id: string; stub?: boolean }[]).map((s) => [s.id, s]),
+      );
+      expect(byId.get(MOCK)?.stub).toBeUndefined();
+      expect(byId.get('math.tkosn.z2.mock-test-2')?.stub).toBe(true);
+      // Premium: boleh mengulang dan membuka Mock 2.
+      await ctx
+        .http()
+        .post('/admin/premium')
+        .set(ctx.auth(ctx.adminToken))
+        .send({ childId: free.id, durationDays: 30, note: 'uji' })
+        .expect(201);
+      expect((await send(MOCK)).body.rejectedQuizzes).toEqual([]);
+      expect((await send('math.tkosn.z2.mock-test-2')).body.rejectedQuizzes).toEqual([]);
+    } finally {
+      await ctx
+        .http()
+        .put('/admin/billing/settings')
+        .set(ctx.auth(ctx.adminToken))
+        .send({ ...billing, paywall: false })
+        .expect(200);
+    }
+  });
+
+  it('papan landing: total, rata-rata & paling aktif per periode, tanpa login & tanpa id anak', async () => {
+    const http = () => ctx.http();
+    const total = await http().get('/leaderboard/public').expect(200);
+    expect(total.body).toMatchObject({ board: 'total', period: 'all' });
+    const active = await http().get('/leaderboard/public?board=active&period=day').expect(200);
+    expect(active.body).toMatchObject({ board: 'active', period: 'day' });
+    expect(active.body.top.length).toBeGreaterThan(0);
+    // Soal mock (25 per ronde) ikut dihitung; urutan soal terbanyak dulu.
+    const qs = active.body.top.map((r: { questions: number }) => r.questions);
+    expect([...qs].sort((a: number, b: number) => b - a)).toEqual(qs);
+    expect(qs[0]).toBeGreaterThanOrEqual(25);
+    const avg = await http().get('/leaderboard/public?board=average&period=week').expect(200);
+    expect(avg.body.top[0]).toHaveProperty('rating');
+    expect(JSON.stringify(active.body)).not.toMatch(/childId|"id"/);
+    await http().get('/leaderboard/public?board=active&period=year').expect(400);
   });
 });

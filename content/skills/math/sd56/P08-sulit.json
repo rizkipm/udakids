@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.p8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "P",
+  "order": 8,
+  "title": "Teori bilangan sederhana — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Penyisihan 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [3, 12],
+      "p": [2, 7],
+      "r": [2, 7]
+    },
+    "derived": {
+      "a": "x * p",
+      "b": "x * r"
+    },
+    "constraint": "gcd(p, r) == 1 && p != r",
+    "prompt": "{a} apel dan {b} jeruk dimasukkan ke kantong dengan isi sama tanpa sisa. Paling banyak kantong …, tiap kantong berisi {=a/gcd(a,b)} apel.",
+    "answer": "gcd(a, b)",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "kpk"
+      },
+      {
+        "expr": "p + r",
+        "tag": "isi"
+      },
+      {
+        "expr": "x * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "FPB({a}, {b}) = {answer} kantong."
+  }
+}

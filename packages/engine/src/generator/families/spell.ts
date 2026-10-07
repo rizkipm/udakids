@@ -18,8 +18,11 @@ const spellItem = z
      * Default: huruf pertama tampil, lalu kosong–tampil berselang-seling.
      */
     show: z.string().optional(),
-    /** Banyak kartu huruf pengecoh (default 2). */
-    extra: z.number().int().min(1).max(4).default(2),
+    /**
+     * Banyak kartu huruf pengecoh (default 2). 0 + `show` semua "_" = "rapikan huruf acak" (D-074): kartunya
+     * tepat huruf kata itu yang diacak.
+     */
+    extra: z.number().int().min(0).max(4).default(2),
     reteach: z.string().max(400).optional(),
   })
   .superRefine((it, ctx) => {
@@ -57,7 +60,10 @@ export const spellWord = defineFamily({
     if (!show.includes('_')) reject('tidak ada huruf yang hilang');
     const answer = [...it.word].filter((_, i) => show[i] === '_');
     const others = [...LETTERS].filter((c) => !it.word.includes(c));
-    const letters = rng.shuffle([...answer, ...rng.sample(others, it.extra)]).map(letterChoice);
+    const shuffled = rng.shuffle([...answer, ...rng.sample(others, it.extra)]);
+    // Huruf acak yang kebetulan sudah urut bukan teka-teki lagi.
+    if (it.extra === 0 && shuffled.join('') === answer.join('')) reject('huruf acak masih urut');
+    const letters = shuffled.map(letterChoice);
     const spaced = [...it.word.toLowerCase()].join(' ');
     return {
       prompt: it.prompt,

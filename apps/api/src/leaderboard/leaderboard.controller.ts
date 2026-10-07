@@ -11,6 +11,8 @@ import {
   DOMAINS,
   GRADES,
   LEADERBOARD_TOP,
+  BOARD_PERIODS,
+  rankByActivity,
   average2,
   compareLeaders,
   rankByAverage,
@@ -46,6 +48,25 @@ const boardQuery = z.object({
   pageSize: z.coerce.number().int().min(1).max(100).default(50),
 });
 const detailQuery = z.object({ scope: scopeSchema, mode: modeSchema });
+const publicQuery = z.object({
+  board: z.enum(['total', 'average', 'active']).default('total'),
+  period: z.enum(BOARD_PERIODS).default('all'),
+});
+type PeriodRow = {
+  id: string;
+  nickname: string;
+  momoColor: string;
+  momoLook: MomoLook | null;
+  rounds: number;
+  scoreSum: number;
+  timeMs: number;
+  questions: number;
+};
+type PeriodBoards = {
+  at: Date;
+  average: (PeriodRow & { position: number; average: number; rating: number })[];
+  active: (PeriodRow & { position: number })[];
+};
 const uuid = z.uuid();
 
 type Agg = {
@@ -67,7 +88,7 @@ type Book = {
   domain: string;
   grade: string;
   title: string;
-  categories: { code: string; title: string }[];
+  categories: { code: string; title: string; group?: string }[];
 };
 type Snapshot = {
   at: Date;
@@ -100,8 +121,21 @@ type MockBoard = {
   title: string;
   maxPoints: number;
   questions: number;
+  /** Urutan mock di materinya (Mock test 1, 2, 3). */
+  order: number;
+  /** Singkatan lomba dari judul bagian mock (D-074, D-076), mis. "KMSI", "EMC", "ESC", "EEC". */
+  competition: string;
+  /** KKM lomba dalam poin, bila ada (KMSI). */
+  passPoints: number | null;
   rows: MockEntry[];
 };
+
+/**
+ * Singkatan lomba dari judul bagian mock: "KMSI · Kompetensi …" / "EMC · Eduversal …" (D-076) → "KMSI" / "EMC";
+ * judul lama "Mock Test KMSI · …" (D-074) → "KMSI"; "Mock Test · …" (D-072) → "Olimpiade".
+ */
+export const competitionOf = (group: string | undefined) =>
+  /^(?:Mock Test )?([^\s·]{2,12}) ·/.exec(group ?? '')?.[1] ?? 'Olimpiade';
 const mockQuery = z.object({
   page: z.coerce.number().int().min(1).max(10_000).default(1),
   pageSize: z.coerce.number().int().min(1).max(100).default(50),
@@ -214,27 +248,170 @@ export class LeaderboardController {
    * Top 10 global untuk landing page (D-045), tanpa login: urut total skor → level lulus → waktu.
    * Hanya nama panggilan + warna Momo (tanpa id anak), dari snapshot yang sama (cache 10 detik).
    */
+  /**
+   * 10 besar untuk landing page (D-045, diperluas D-073), tanpa login — hanya nama panggilan + warna Momo:
+   * - `board=total` (semua waktu): total skor → level lulus → waktu;
+   * - `board=average` (semua / bulan / minggu / hari ini, WIB): nilai peringkat tertimbang (D-045);
+   * - `board=active` (hari / minggu / bulan): soal dijawab terbanyak → waktu bermain lebih lama.
+   */
+  /**
+   * Daftar Mock Test olimpiade untuk landing (D-074), tanpa login: lomba (KMSI / Olimpiade), jenjang, mata
+   * pelajaran, dan jumlah peserta. Tidak ada data anak.
+   */
   @Public()
-  @Get('public')
-  async publicTop() {
+  @Get('public/mocks')
+  async publicMocks() {
     const snap = await this.snapshot();
-    const board = snap.boards.get(`total:${GLOBAL}`) ?? [];
     return {
       updatedAt: snap.at.toISOString(),
-      participants: board.length,
-      played: playedCount(board),
-      top: board.slice(0, PUBLIC_TOP).map((r) => ({
+      mocks: [...snap.mocks.values()]
+        .sort((a, b) => byBook(a, b) || a.order - b.order)
+        .map((m) => ({
+          skillId: m.skillId,
+          domain: m.domain,
+          grade: m.grade,
+          book: m.book,
+          title: m.title,
+          order: m.order,
+          competition: m.competition,
+          questions: m.questions,
+          maxPoints: m.maxPoints,
+          passPoints: m.passPoints,
+          participants: m.rows.length,
+        })),
+    };
+  }
+
+  /**
+   * 10 besar satu Mock Test untuk landing (D-074), tanpa login: percobaan terbaik, poin tertinggi → waktu tercepat.
+   * Hanya nama panggilan + tampilan Momo (tanpa id anak), jumlah benar, waktu, dan lolos KKM.
+   */
+  @Public()
+  @Get('public/mock/:skillId')
+  async publicMock(@Param('skillId', new ZodPipe(skillId)) id: string) {
+    const snap = await this.snapshot();
+    const m = snap.mocks.get(id);
+    if (!m) throw new NotFoundException('Mock test tidak ditemukan');
+    return {
+      skillId: m.skillId,
+      book: m.book,
+      title: m.title,
+      competition: m.competition,
+      questions: m.questions,
+      maxPoints: m.maxPoints,
+      passPoints: m.passPoints,
+      updatedAt: snap.at.toISOString(),
+      participants: m.rows.length,
+      passed: m.passPoints === null ? null : m.rows.filter((r) => r.points >= m.passPoints!).length,
+      top: m.rows.slice(0, PUBLIC_TOP).map((r) => ({
         position: r.position,
         nickname: r.nickname,
         momoColor: r.momoColor,
         momoLook: r.momoLook,
         points: r.points,
-        questions: r.questions,
-        passedLevels: r.passedLevels,
-        rounds: r.rounds,
-        timeMs: r.bestTimeMs,
+        correct: r.correct,
+        total: r.total,
+        timeMs: r.timeMs,
+        passed: m.passPoints === null ? null : r.points >= m.passPoints,
       })),
     };
+  }
+
+  @Public()
+  @Get('public')
+  async publicTop(@Query(new ZodPipe(publicQuery)) q: z.infer<typeof publicQuery>) {
+    const snap = await this.snapshot();
+    if (q.board === 'total' || (q.board === 'average' && q.period === 'all')) {
+      const board = snap.boards.get(`${q.board}:${GLOBAL}`) ?? [];
+      const ranked = q.board === 'average' ? board.filter((r) => r.rounds > 0) : board;
+      return {
+        updatedAt: snap.at.toISOString(),
+        board: q.board,
+        period: 'all',
+        participants: board.length,
+        played: playedCount(board),
+        ranked: ranked.length,
+        top: ranked.slice(0, PUBLIC_TOP).map((r) => ({
+          position: r.position,
+          nickname: r.nickname,
+          momoColor: r.momoColor,
+          momoLook: r.momoLook,
+          points: r.points,
+          questions: r.questions,
+          passedLevels: r.passedLevels,
+          rounds: r.rounds,
+          timeMs: q.board === 'total' ? r.bestTimeMs : r.timeMs,
+          average: r.average,
+          rating: r.rating,
+        })),
+      };
+    }
+    const period = q.period === 'all' ? 'month' : q.period;
+    const p = await this.periodBoards(period);
+    const ranked = q.board === 'average' ? p.average : p.active;
+    return {
+      updatedAt: p.at.toISOString(),
+      board: q.board,
+      period,
+      participants: snap.boards.get(`total:${GLOBAL}`)?.length ?? 0,
+      played: p.active.length,
+      ranked: ranked.length,
+      top: ranked.slice(0, PUBLIC_TOP).map((r) => ({
+        position: r.position,
+        nickname: r.nickname,
+        momoColor: r.momoColor,
+        momoLook: r.momoLook,
+        points: 0,
+        questions: r.questions,
+        passedLevels: 0,
+        rounds: r.rounds,
+        timeMs: r.timeMs,
+        average: average2(r.scoreSum, r.rounds),
+        rating: rating2(r.scoreSum, r.rounds),
+      })),
+    };
+  }
+
+  private periodCache = new Map<string, { at: number; value: Promise<PeriodBoards> }>();
+
+  /** Papan per periode (WIB), dihitung dari event dan disimpan sebentar seperti snapshot utama. */
+  private periodBoards(period: 'month' | 'week' | 'day'): Promise<PeriodBoards> {
+    const ttl = Number(process.env.LEADERBOARD_CACHE_MS ?? 10_000);
+    const hit = this.periodCache.get(period);
+    if (hit && Date.now() - hit.at < ttl) return hit.value;
+    const value = (async (): Promise<PeriodBoards> => {
+      const unit = period === 'day' ? 'day' : period === 'week' ? 'week' : 'month';
+      const res = await this.db.execute(sql`
+        with q as (
+          select e.child_id,
+            count(*) filter (where e.type = 'quiz_result') as rounds,
+            coalesce(sum((e.payload->>'score')::numeric) filter (where e.type = 'quiz_result'), 0) as score_sum,
+            coalesce(sum(coalesce((e.payload->>'durationMs')::numeric, 0)) filter (where e.type = 'quiz_result'), 0) as time_ms,
+            count(*) filter (where e.type = 'item_answer') as answers,
+            coalesce(sum((e.payload->>'total')::int) filter (where e.type = 'quiz_result' and e.payload ? 'points'), 0) as mock_questions
+          from events e
+          where e.type in ('quiz_result', 'item_answer')
+            and e.ts >= (date_trunc(${unit}, now() at time zone 'Asia/Jakarta') at time zone 'Asia/Jakarta')
+          group by e.child_id
+        )
+        select q.*, c.nickname, c.momo_color, c.momo_look
+        from q join children c on c.id = q.child_id and c.active`);
+      const rows = res.rows.map((r) => ({
+        id: String(r.child_id),
+        nickname: String(r.nickname),
+        momoColor: String(r.momo_color),
+        momoLook: parseMomoLook(r.momo_look),
+        rounds: n(r.rounds),
+        scoreSum: n(r.score_sum),
+        timeMs: n(r.time_ms),
+        // Soal mock test tidak tercatat per soal, jadi diambil dari jumlah soal ronde mock.
+        questions: n(r.answers) + n(r.mock_questions),
+      }));
+      return { at: new Date(), average: rankByAverage(rows), active: rankByActivity(rows) };
+    })();
+    this.periodCache.set(period, { at: Date.now(), value });
+    value.catch(() => this.periodCache.delete(period));
+    return value;
   }
 
   @Get()
@@ -484,7 +661,7 @@ export class LeaderboardController {
         grade: String(r.grade),
         title: String(r.title),
         categories: Array.isArray(r.categories)
-          ? (r.categories as { code: string; title: string }[])
+          ? (r.categories as { code: string; title: string; group?: string }[])
           : [],
       });
     }
@@ -613,9 +790,15 @@ export class LeaderboardController {
         domain: String(r.domain),
         grade: String(r.grade),
         book: book?.title ?? `${String(r.domain)} ${String(r.grade)}`,
-        title: parsed.data.title.split(' — ')[0]!,
+        // "Mock test 1" (label level); bukunya tersedia di `book`.
+        title: parsed.data.title.split(' — ')[2] ?? parsed.data.title,
         maxPoints: mockMaxPoints(c),
         questions: c.questions,
+        order: parsed.data.order,
+        competition: competitionOf(
+          book?.categories.find((x) => x.code === parsed.data.category)?.group,
+        ),
+        passPoints: c.passPoints ?? null,
         rows: rankMockBoard(rows),
       });
     }

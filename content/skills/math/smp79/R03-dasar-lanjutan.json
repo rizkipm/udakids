@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.r3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "R",
+  "order": 3,
+  "title": "Statistika dan peluang — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Penyisihan 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 5],
+      "p": [1, 4],
+      "q": [1, 4]
+    },
+    "derived": {
+      "m": "k * p",
+      "b": "k * q"
+    },
+    "constraint": "(m * 100) % (m + b) == 0",
+    "prompt": "Kantong berisi {m} kelereng merah dan {b} biru. Peluang terambil merah = …%",
+    "answer": "m * 100 / (m + b)",
+    "distractors": [
+      {
+        "expr": "b * 100 / (m + b)",
+        "tag": "biru"
+      },
+      {
+        "expr": "m * 100 / b",
+        "tag": "banding"
+      },
+      {
+        "expr": "m",
+        "tag": "banyaknya"
+      }
+    ],
+    "choices": 4,
+    "explain": "{m} : {=m+b} = {answer}%."
+  }
+}
