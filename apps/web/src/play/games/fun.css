@@ -943,3 +943,25 @@
     transition: none;
   }
 }
+
+/* Poin per soal (D-078): catatan "belum pas" pada game tombol Selesai, titik ronde setengah poin. */
+.game-retry {
+  margin: 0 auto 8px;
+  max-width: 420px;
+  padding: 8px 14px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+  background: #fff4cf;
+  font-weight: 800;
+  text-align: center;
+  color: var(--kid-ink, #1d1a2e);
+  animation: fun-wobble 0.45s ease-in-out;
+}
+.quiz-dot.is-right.is-half {
+  background: linear-gradient(90deg, var(--kid-good, #2e9e5b) 50%, #c9f0d3 50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-retry {
+    animation: none;
+  }
+}

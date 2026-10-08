@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { jigsawStep, type Interaction, type Visual } from '@little-coder/engine';
+import { jigsawStep, type Interaction, type Visual, gameOver } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { OBJECT_ART } from '../../components/visuals/objects';
 import { t } from '../../i18n';
@@ -72,6 +72,8 @@ export function JigsawGame({
     const r = jigsawStep(placed, tap, total);
     if (r.slip) {
       setWobble((w) => ({ slot, n: (w?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      if (gameOver(it, taps.current)) return onDone(taps.current);
       speak(t('play.jigsaw.again'));
       return;
     }

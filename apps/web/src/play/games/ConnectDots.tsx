@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
-import { DOT_PICTURES, numberWord, type Interaction } from '@little-coder/engine';
+import { DOT_PICTURES, numberWord, type Interaction, MAX_MISTAKES } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { t } from '../../i18n';
 import './games.css';
@@ -64,6 +64,8 @@ export function ConnectDots({
       } else speak(numberWord(next.label));
     } else {
       setShake((s) => ({ id: best.id, n: (s?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      if (all.length - done >= MAX_MISTAKES) return onDone?.(all);
       speak(t('play.connect.findNext', { n: numberWord(next.label) }));
     }
   };

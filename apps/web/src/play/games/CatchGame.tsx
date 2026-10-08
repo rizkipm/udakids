@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Interaction } from '@little-coder/engine';
+import { gameOver, type Interaction } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
@@ -48,6 +48,8 @@ export function CatchGame({
       return;
     }
     setWobble((w) => ({ id, n: (w?.n ?? 0) + 1 }));
+    // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+    if (gameOver(it, taps.current)) return onDone?.(taps.current);
     speak(t('play.catch.notThis', { thing: choice.say ?? '' }));
   };
 

@@ -1,7 +1,15 @@
 import type { BodyPart, Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
 import type { DotPictureId } from './dot-pictures.js';
 import { catchReplay, mazeReplay, memoryReplay, wordSearchReplay } from './games.js';
-import { crosswordReplay, hopReplay, jigsawReplay, sortReplay, sumOf } from './play.js';
+import {
+  crosswordReplay,
+  hopReplay,
+  itemPoints,
+  jigsawReplay,
+  MAX_MISTAKES,
+  sortReplay,
+  sumOf,
+} from './play.js';
 import type { GlyphId } from './glyphs.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
@@ -345,7 +353,105 @@ export type Item = ItemCore & { skillId: string; version: number; seed: number; 
 
 export type AnswerValue = string | string[] | Record<string, string> | number;
 
-export type AnswerResult = { correct: boolean; chosenDistractor?: string };
+export type AnswerResult = {
+  correct: boolean;
+  chosenDistractor?: string;
+  /** Poin soal 0–10 (D-078): benar 10, benar setelah keliru sekali 5, salah 0. */
+  points?: number;
+  /** Kekeliruan yang dihitung di game. */
+  mistakes?: number;
+};
+
+/** Game ketuk: setiap ketukan keliru dihitung (D-078); kekeliruan ke-2 mengakhiri soal sebagai salah. */
+export const TAP_GAMES: ReadonlySet<InteractionType> = new Set([
+  'maze',
+  'word-search',
+  'memory',
+  'catch',
+  'hop',
+  'sort',
+  'crossword',
+  'jigsaw',
+  'connect',
+]);
+
+/**
+ * Game dengan tombol Selesai (D-078): jawaban keliru pertama mengurangi 5 poin dan anak boleh membetulkan; keliru
+ * ke-2 membuat soal salah. Soal kuis biasa (pilihan, urutkan, pasangkan tanpa gaya game) tetap sekali jawab.
+ */
+export function isRetryGame(it: Interaction): boolean {
+  return (
+    it.type === 'sum' ||
+    (it.type === 'build' && it.style === 'feed') ||
+    (it.type === 'spell' && it.style === 'train') ||
+    (it.type === 'order' && it.style !== undefined) ||
+    (it.type === 'match' && it.style === 'labels')
+  );
+}
+
+/**
+ * Kekeliruan yang dihitung di game ketuk dan apakah game sudah selesai. Kelonggaran wajar: labirin & cari kata
+ * boleh keliru sekali tanpa pengurangan (anak sedang menjelajah); kartu pasangan hanya dihitung keliru bila
+ * pasangannya sudah pernah terlihat. `undefined` untuk interaksi yang bukan game ketuk.
+ */
+export function gameMistakes(
+  it: Interaction,
+  taps: readonly string[],
+): { mistakes: number; done: boolean } | undefined {
+  switch (it.type) {
+    case 'maze': {
+      const r = mazeReplay(it, taps);
+      return { mistakes: Math.max(0, r.slips - 1), done: r.done };
+    }
+    case 'word-search': {
+      const r = wordSearchReplay(
+        it,
+        it.words.map((w) => w.text),
+        taps,
+      );
+      return { mistakes: Math.max(0, r.slips - 1), done: r.done };
+    }
+    case 'memory': {
+      const r = memoryReplay(it.cards, taps);
+      return { mistakes: r.errors, done: r.done };
+    }
+    case 'catch': {
+      const r = catchReplay(it.answer, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'hop': {
+      const r = hopReplay(it.answer, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'sort': {
+      const r = sortReplay(it.items, it.answer, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'crossword': {
+      const r = crosswordReplay(it, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'jigsaw': {
+      const r = jigsawReplay(it, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'connect': {
+      let k = 0;
+      let wrong = 0;
+      for (const tap of taps) {
+        if (k < it.answer.length && tap === it.answer[k]) k++;
+        else wrong++;
+      }
+      return { mistakes: wrong, done: k === it.answer.length };
+    }
+    default:
+      return undefined;
+  }
+}
+
+/** Soal game ketuk berakhir (kekeliruan mencapai batas) walau belum selesai. */
+export const gameOver = (it: Interaction, taps: readonly string[]) =>
+  (gameMistakes(it, taps)?.mistakes ?? 0) >= MAX_MISTAKES;
 
 const sameSet = (a: readonly string[], b: readonly string[]) =>
   a.length === b.length && [...a].sort().join('|') === [...b].sort().join('|');
@@ -354,8 +460,23 @@ const sameRecord = (a: Record<string, string>, b: Record<string, string>) =>
   Object.keys(a).length === Object.keys(b).length &&
   Object.entries(a).every(([k, v]) => b[k] === v);
 
-/** Periksa jawaban anak untuk satu soal. */
+/**
+ * Periksa jawaban anak untuk satu soal, termasuk poinnya (D-078). Game ketuk: benar bila selesai dengan kekeliruan
+ * < 2 (keliru sekali = 5 poin). Soal lain: benar 10, salah 0 (kekeliruan game tombol Selesai ditambahkan pemutar).
+ */
 export function checkAnswer(item: Pick<Item, 'interaction'>, value: AnswerValue): AnswerResult {
+  const it = item.interaction;
+  if (TAP_GAMES.has(it.type)) {
+    const g = Array.isArray(value) ? gameMistakes(it, value) : undefined;
+    const correct = !!g && g.done && g.mistakes < MAX_MISTAKES;
+    const mistakes = g?.mistakes ?? MAX_MISTAKES;
+    return { correct, mistakes, points: itemPoints(correct, mistakes) };
+  }
+  const r = checkBasic(item, value);
+  return { ...r, points: itemPoints(r.correct) };
+}
+
+function checkBasic(item: Pick<Item, 'interaction'>, value: AnswerValue): AnswerResult {
   const it = item.interaction;
   switch (it.type) {
     case 'pick-one': {

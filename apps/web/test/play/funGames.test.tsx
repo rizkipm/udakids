@@ -196,3 +196,62 @@ describe('game seru', () => {
     expect(n).toBe(160);
   });
 });
+
+describe('poin soal game (D-078)', () => {
+  const sortParams = {
+    bins: [
+      { id: 'darat', label: 'hewan darat', icon: { object: 'rumput' } },
+      { id: 'air', label: 'hewan air', icon: { object: 'laut' } },
+    ],
+    items: [
+      { bin: 'darat', item: { object: 'sapi' } },
+      { bin: 'darat', item: { object: 'kuda' } },
+      { bin: 'air', item: { object: 'ikan' } },
+      { bin: 'air', item: { object: 'paus' } },
+    ],
+    count: [4, 4],
+  };
+  const wrongBin = (sort: Extract<Interaction, { type: 'sort' }>) => {
+    const x = sort.items[0]!;
+    const bin = sort.bins.find((b) => b.id !== sort.answer[x.id])!;
+    return screen.getByRole('button', { name: t('play.sort.bin', { name: bin.say! }) });
+  };
+
+  it('game ketuk: keliru sekali tetap lanjut (5 poin), keliru kedua langsung mengakhiri soal (0 poin)', () => {
+    const one = play('sort-game', sortParams);
+    const s1 = one.it.interaction as Extract<Interaction, { type: 'sort' }>;
+    fireEvent.click(wrongBin(s1));
+    expect(one.onAnswer).not.toHaveBeenCalled();
+    for (const x of s1.items) {
+      const bin = s1.bins.find((b) => b.id === s1.answer[x.id])!;
+      fireEvent.click(screen.getByRole('button', { name: t('play.sort.bin', { name: bin.say! }) }));
+    }
+    expect(one.onAnswer.mock.calls[0]![0]).toMatchObject({ correct: true, points: 5 });
+    one.unmount();
+
+    const two = play('sort-game', sortParams);
+    const s2 = two.it.interaction as Extract<Interaction, { type: 'sort' }>;
+    fireEvent.click(wrongBin(s2));
+    fireEvent.click(wrongBin(s2));
+    expect(two.onAnswer).toHaveBeenCalledTimes(1);
+    expect(two.onAnswer.mock.calls[0]![0]).toMatchObject({ correct: false, points: 0 });
+  });
+
+  it('game tombol Selesai: jawaban keliru pertama boleh dibetulkan (5 poin)', () => {
+    const { it, onAnswer, container } = play('sum-game', {
+      style: 'balance',
+      target: [4, 4],
+      values: [1],
+      showNumber: true,
+    });
+    const tok = container.querySelector<HTMLButtonElement>('.sum-token')!;
+    fireEvent.click(tok);
+    check();
+    expect(onAnswer).not.toHaveBeenCalled();
+    expect(screen.getByText(t('play.game.retryNote'))).toBeInTheDocument();
+    const sum = it.interaction as Extract<Interaction, { type: 'sum' }>;
+    for (let k = 1; k < sum.target; k++) fireEvent.click(tok);
+    check();
+    expect(onAnswer.mock.calls[0]![0]).toMatchObject({ correct: true, points: 5 });
+  });
+});

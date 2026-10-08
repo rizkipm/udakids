@@ -12,6 +12,8 @@ import {
   practiceSyncSchema,
   skillIdSchema,
   quizScore,
+  roundScore,
+  validRoundPoints,
   rankLeaders,
   totalPoints,
   totalTimeMs,
@@ -62,7 +64,13 @@ type QuizIn = PracticeSync['quizzes'][number];
 /** Mock Test (D-072): jumlah soal sesuai konfigurasi dan poin dalam rentang yang mungkin. Level biasa selalu sah. */
 function validMock(q: QuizIn, mocks: Map<string, MockConfig>): boolean {
   const c = mocks.get(q.skillId);
-  if (!c) return q.points === undefined && q.review === undefined;
+  if (!c)
+    return (
+      q.points === undefined &&
+      q.review === undefined &&
+      (q.roundPoints === undefined || validRoundPoints(q.roundPoints, q.correct, q.total))
+    );
+  if (q.roundPoints !== undefined) return false;
   if (q.total !== c.questions || q.points === undefined || q.correct > q.total) return false;
   // Laporan (opsional) harus satu entri per soal, dengan jumlah benar yang sama.
   if (
@@ -78,7 +86,11 @@ function validMock(q: QuizIn, mocks: Map<string, MockConfig>): boolean {
 /** Skor 0–100: Mock Test dari poin gaya EMC, level biasa dari persen benar. */
 function scoreOf(q: QuizIn, mocks?: Map<string, MockConfig>): number {
   const c = mocks?.get(q.skillId);
-  return c ? mockScore100(c, q.points ?? 0) : quizScore(q.correct, q.total);
+  if (c) return mockScore100(c, q.points ?? 0);
+  // Level biasa: dari poin soal (D-078) bila ada, selain itu persen benar (perangkat lama).
+  return q.roundPoints !== undefined
+    ? roundScore(q.roundPoints, q.total)
+    : quizScore(q.correct, q.total);
 }
 
 /** Batas lulus skor 0–100: mock dengan KKM (D-074) memakai KKM-nya, lainnya batas biasa. */
@@ -570,6 +582,7 @@ export class PracticeController {
                 total: q.total,
                 score: scoreOf(q, mocks),
                 ...(q.points !== undefined && { points: q.points }),
+                ...(q.roundPoints !== undefined && { roundPoints: q.roundPoints }),
                 ...(q.review && { review: q.review }),
                 ...(q.durationMs !== undefined && { durationMs: q.durationMs }),
               },

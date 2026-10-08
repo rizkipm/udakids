@@ -185,6 +185,11 @@ export const practiceSyncSchema = z.strictObject({
           .min(0)
           .max(6 * 3600_000)
           .optional(),
+        /**
+         * Poin ronde level biasa (D-078): jumlah poin soal (benar 10, benar setelah keliru sekali 5, salah 0).
+         * Diperiksa terhadap `correct` di server. Tanpa field ini (perangkat lama) skor = persen benar.
+         */
+        roundPoints: z.number().int().min(0).max(500).optional(),
         /** Poin gaya EMC untuk Mock Test olimpiade (D-072); diperiksa & diubah ke skor 0–100 di server. */
         points: z.number().int().min(-5000).max(5000).optional(),
         /**

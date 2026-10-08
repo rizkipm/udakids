@@ -564,9 +564,13 @@ describe('checkAnswer & chosenDistractor', () => {
       distractors: [{ expr: 'a', tag: 'hanya-satu' }],
     });
     const item = generateItem(t, { seed: 1, band: 0 });
-    expect(checkAnswer(item, 'n2')).toEqual({ correct: false, chosenDistractor: 'hanya-satu' });
-    expect(checkAnswer(item, 'tidak-ada')).toEqual({ correct: false });
-    expect(checkAnswer(item, 'n4')).toEqual({ correct: true });
+    expect(checkAnswer(item, 'n2')).toEqual({
+      correct: false,
+      chosenDistractor: 'hanya-satu',
+      points: 0,
+    });
+    expect(checkAnswer(item, 'tidak-ada')).toEqual({ correct: false, points: 0 });
+    expect(checkAnswer(item, 'n4')).toEqual({ correct: true, points: 10 });
   });
 
   it('tap-all, order, group, build, number-line menolak jawaban keliru', () => {

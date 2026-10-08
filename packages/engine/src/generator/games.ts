@@ -303,20 +303,34 @@ export function memoryReplay(
 ) {
   const pairOf = new Map(cards.map((c) => [c.id, c.pair]));
   const matched = new Set<string>();
+  const seen = new Set<string>();
   let open: string[] = [];
   let misses = 0;
+  // Kekeliruan sungguhan (D-078): pasangan kartu pertama sudah pernah terlihat, tetapi yang dibuka kartu lain.
+  // Meleset karena belum pernah melihat pasangannya adalah bagian wajar dari permainan memori.
+  let errors = 0;
   for (const id of flips) {
     if (!pairOf.has(id) || matched.has(id) || open.includes(id)) continue;
     open.push(id);
-    if (open.length < 2) continue;
+    if (open.length < 2) {
+      seen.add(id);
+      continue;
+    }
     const [a, b] = open as [string, string];
     if (pairOf.get(a) === pairOf.get(b)) {
       matched.add(a);
       matched.add(b);
-    } else misses++;
+    } else {
+      misses++;
+      // Keliru bila pasangan kartu pertama sudah diketahui letaknya, atau kartu kedua sudah pernah terlihat (jadi
+      // sudah diketahui bukan pasangannya).
+      const mateKnown = [...seen].some((x) => x !== a && pairOf.get(x) === pairOf.get(a));
+      if (mateKnown || seen.has(b)) errors++;
+    }
+    seen.add(b);
     open = [];
   }
-  return { matched: [...matched], open, misses, done: matched.size === cards.length };
+  return { matched: [...matched], open, misses, errors, done: matched.size === cards.length };
 }
 
 // ------------------------------------------------------------ tangkap

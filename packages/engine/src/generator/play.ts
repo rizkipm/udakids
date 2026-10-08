@@ -1,5 +1,20 @@
 import type { Rng } from './rng.js';
 
+// ------------------------------------------------------------ poin soal (D-078 lanjutan)
+
+/** Nilai satu soal di ronde. */
+export const ITEM_POINTS = 10;
+/** Pengurangan setiap kekeliruan di game. */
+export const MISTAKE_PENALTY = 5;
+/** Kekeliruan ke-2 mengakhiri soal game sebagai salah (tidak dipaksa sampai benar). */
+export const MAX_MISTAKES = 2;
+/** Ronde gagal bila lebih dari 3 soal salah (selain skor < 70). */
+export const MAX_WRONG_ITEMS = 3;
+
+/** Poin satu soal: benar tanpa keliru 10, keliru sekali 5, salah 0. */
+export const itemPoints = (correct: boolean, mistakes = 0) =>
+  correct ? Math.max(0, ITEM_POINTS - MISTAKE_PENALTY * Math.min(mistakes, MAX_MISTAKES)) : 0;
+
 /**
  * Logika murni game seru (D-078): neraca/toko/truk (jumlah), lompat kodok, sortir keranjang, teka-teki silang,
  * dan puzzle susun. Web hanya menggambar dan mengirim ketukan; penilaian dihitung ulang di sini dari daftar

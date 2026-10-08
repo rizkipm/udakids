@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { hopStep, signedWord, type Interaction } from '@little-coder/engine';
+import { hopStep, signedWord, type Interaction, gameOver } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { Momo } from '../../components/Momo';
 import { t } from '../../i18n';
@@ -70,6 +70,8 @@ export function HopGame({
     const r = hopStep(it.answer, landed, v);
     if (r.slip) {
       setWobble((w) => ({ v, n: (w?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      if (gameOver(it, taps.current)) return onDone(taps.current);
       speak(t('play.hop.again', { n: signedWord(at) }));
       return;
     }

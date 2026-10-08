@@ -1957,6 +1957,31 @@ Tanggal: 2026-10-08. Disetujui pemilik produk:
 - Ketahanan: 280 level game (termasuk Worksheet) × 1.200 soal = 336.000 soal tanpa gagal; setiap level ≥ 16 soal
   unik per tingkat kesulitan.
 
+**Poin soal: jawaban salah diterima dan dikurangi poin (lanjutan, disetujui "Poin per soal").** Sebelumnya
+sebagian besar game memaksa anak terus mengetuk sampai benar (batas `maxSlips` 4–10), jadi hampir tidak pernah
+salah.
+
+- Setiap soal bernilai **10 poin**; setiap kekeliruan di game **−5 poin**.
+  - Kekeliruan ke-2 membuat soal itu **salah (0 poin)**, dan game langsung lanjut ke soal berikutnya.
+  - Benar setelah keliru sekali = 5 poin.
+  - Soal kuis biasa tetap: benar 10, salah 0.
+- Skor ronde = jumlah poin 10 soal (0–100). Lulus bila skor ≥ 70 **dan** tidak lebih dari 3 soal salah; selain itu
+  gagal dan level diulang (`roundScore`, `roundPassed`).
+- Game ketuk (labirin, cari kata, kartu pasangan, tangkap/balon, lompat, sortir, teka-teki silang, puzzle, sambung
+  titik): kekeliruan dihitung dari ketukan di engine (`gameMistakes`, `gameOver`). Kelonggaran wajar:
+  - Labirin & cari kata: keliru pertama tidak dikurangi (anak sedang menjelajah).
+  - Kartu pasangan: dihitung keliru hanya bila pasangannya sudah pernah terlihat, atau kartu yang sama yang sudah
+    diketahui bukan pasangannya dibuka lagi.
+- Game tombol Selesai (neraca, Toko Momo, truk, kereta, label, bianglala/roket, beri makan, `isRetryGame`):
+  - Jawaban keliru pertama → catatan "Belum pas. Betulkan jawabannya, ya. Poin soal ini jadi 5." dan anak boleh
+    membetulkan.
+  - Keliru kedua → salah.
+- Tanpa kata "salah/gagal", tanpa nyawa, dan tanpa menampilkan sisa kesempatan. Titik ronde bernilai 5 poin
+  tampil setengah hijau. Hasil ronde menampilkan "x dari 10 soal benar · y dari 100 poin".
+- Server: perangkat mengirim `roundPoints`; server memeriksanya terhadap jumlah benar (5×benar ≤ poin ≤ 10×benar)
+  dan memakainya sebagai skor. Perangkat lama tanpa `roundPoints` tetap dinilai dari persen benar. Mock test
+  (`points`) dan lomba live tidak berubah.
+
 **Mesin game (engine, dinilai dari ketukan; tanpa batas waktu dan tanpa nyawa):**
 
 - Interaksi baru:

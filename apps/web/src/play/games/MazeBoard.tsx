@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { mazeMove, mazeNeighbors, OBJECTS, WALL, type Interaction } from '@little-coder/engine';
+import {
+  mazeMove,
+  mazeNeighbors,
+  OBJECTS,
+  WALL,
+  type Interaction,
+  gameOver,
+} from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { Momo } from '../../components/Momo';
 import { VisualView } from '../../components/visuals';
@@ -54,6 +61,8 @@ export function MazeBoard({
     const step = mazeMove(it, pos, cell);
     if (!step) {
       setBump((b) => ({ cell, n: (b?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      if (gameOver(it, taps.current)) return onDone?.(taps.current);
       speak(t('play.maze.wall'));
       return;
     }

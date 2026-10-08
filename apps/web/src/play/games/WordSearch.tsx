@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { wordSearchStep, type Interaction, type WordSearchState } from '@little-coder/engine';
+import {
+  wordSearchStep,
+  type Interaction,
+  type WordSearchState,
+  MAX_MISTAKES,
+} from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
@@ -27,11 +32,13 @@ export function WordSearch({
   const [cells, setCells] = useState<Record<string, number[]>>({});
   const [shake, setShake] = useState<{ cell: number; n: number }>();
   const taps = useRef<string[]>([]);
+  const slips = useRef(0);
   useEffect(() => {
     setState({ found: [], sel: [] });
     setCells({});
     setShake(undefined);
     taps.current = [];
+    slips.current = 0;
   }, [it]);
 
   const texts = it.words.map((w) => w.text);
@@ -60,6 +67,10 @@ export function WordSearch({
       if (all) onDone?.(taps.current);
     } else if (r.slip) {
       setShake((s) => ({ cell, n: (s?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      slips.current += 1;
+      // Cari kata: keliru pertama tanpa pengurangan (menjelajah), sama dengan penilaian engine.
+      if (slips.current - 1 >= MAX_MISTAKES) return onDone?.(taps.current);
       speak(r.sel.length ? t('play.wordSearch.newStart') : t('play.wordSearch.firstLetter'));
     } else speak(it.letters[cell]!.toLowerCase());
   };

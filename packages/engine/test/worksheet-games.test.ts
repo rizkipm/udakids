@@ -187,7 +187,7 @@ describe('kartu pasangan', () => {
     expect(memoryReplay(cards, ['a', 'b'])).toMatchObject({ misses: 1, done: false });
   });
 
-  it('semua mode valid; benar bila selesai dengan meleset ≤ maxSlips', () => {
+  it('semua mode valid; keliru dihitung bila kartu sudah pernah terlihat (D-078)', () => {
     for (const mode of ['numeral-count', 'letter-case', 'letter-picture'] as const)
       for (let seed = 0; seed < 20; seed++) {
         const it = item('memory-pairs', { mode, pairs: [2, 4], maxSlips: 1 }, seed);
@@ -197,9 +197,13 @@ describe('kartu pasangan', () => {
           .sort((a, b) => a.pair.localeCompare(b.pair))
           .map((c) => c.id);
         expect(checkAnswer(it, perfect).correct).toBe(true);
-        const other = mem.cards.find((c) => c.pair !== mem.cards[0]!.pair)!;
-        const sloppy = [mem.cards[0]!.id, other.id, mem.cards[0]!.id, other.id, ...perfect];
-        expect(checkAnswer(it, sloppy).correct).toBe(false);
+        const a = mem.cards[0]!.id;
+        const other = mem.cards.find((c) => c.pair !== mem.cards[0]!.pair)!.id;
+        // Pertama kali meleset: wajar (belum pernah melihat). Mengulang pasangan yang sudah terlihat = keliru.
+        const once = [a, other, a, other, ...perfect];
+        expect(checkAnswer(it, once)).toMatchObject({ correct: true, points: 5, mistakes: 1 });
+        const twice = [a, other, a, other, a, other, ...perfect];
+        expect(checkAnswer(it, twice)).toMatchObject({ correct: false, points: 0 });
         expect(checkAnswer(it, 'k0').correct).toBe(false);
       }
   });

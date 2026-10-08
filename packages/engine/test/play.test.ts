@@ -3,6 +3,13 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCrossword,
   checkAnswer,
+  gameOver,
+  isRetryGame,
+  itemPoints,
+  mazePath,
+  roundPassed,
+  roundScore,
+  validRoundPoints,
   contestSafeTemplate,
   mockSources,
   createRng,
@@ -199,5 +206,82 @@ describe('level game tidak masuk mock test & lomba (D-078)', () => {
       for (const t of book.filter((x) => x.category === 'GM'))
         expect(contestSafeTemplate(t), t.id).toBe(false);
     }
+  });
+});
+
+describe('poin soal & ronde (D-078: salah diterima, dikurangi poin)', () => {
+  it('poin soal: benar 10, keliru sekali 5, keliru dua kali 0 dan salah', () => {
+    expect(itemPoints(true)).toBe(10);
+    expect(itemPoints(true, 1)).toBe(5);
+    expect(itemPoints(false, 0)).toBe(0);
+    const items = [{ id: 'i0' }, { id: 'i1' }];
+    const sort = {
+      interaction: {
+        type: 'sort',
+        style: 'baskets',
+        bins: [],
+        items,
+        answer: { i0: 'b-a', i1: 'b-b' },
+        maxSlips: 9,
+      },
+    } as unknown as Pick<Item, 'interaction'>;
+    expect(checkAnswer(sort, ['i0>b-a', 'i1>b-b'])).toMatchObject({ correct: true, points: 10 });
+    expect(checkAnswer(sort, ['i0>b-b', 'i0>b-a', 'i1>b-b'])).toMatchObject({
+      correct: true,
+      points: 5,
+      mistakes: 1,
+    });
+    // Keliru kedua mengakhiri soal (tidak dipaksa sampai benar) walau `maxSlips` konten lebih longgar.
+    expect(checkAnswer(sort, ['i0>b-b', 'i0>b-b'])).toMatchObject({ correct: false, points: 0 });
+    expect(gameOver(sort.interaction, ['i0>b-b', 'i0>b-b'])).toBe(true);
+    expect(gameOver(sort.interaction, ['i0>b-b'])).toBe(false);
+  });
+
+  it('labirin: menabrak dinding sekali tidak dikurangi (menjelajah), berikutnya dikurangi', () => {
+    const t = skillTemplateSchema.parse({
+      id: 'worksheet.prek.z1.uji',
+      version: 1,
+      domain: 'worksheet',
+      grade: 'prek',
+      category: 'B',
+      order: 1,
+      title: 'Uji',
+      tier: 'basic',
+      family: 'maze-path',
+      params: { mode: 'numbers', cols: [3, 3], rows: [3, 3] },
+    });
+    const it = generateItem(t, { seed: 1, band: 1 });
+    const m = it.interaction as Extract<Item['interaction'], { type: 'maze' }>;
+    const path = mazePath(m, m.start, m.goal)
+      .slice(1)
+      .map((c) => `c${c}`);
+    const wall = `c${m.start}`;
+    expect(checkAnswer(it, path)).toMatchObject({ points: 10 });
+    expect(checkAnswer(it, [wall, ...path])).toMatchObject({ points: 10 });
+    expect(checkAnswer(it, [wall, wall, ...path])).toMatchObject({ points: 5 });
+    expect(checkAnswer(it, [wall, wall, wall, ...path])).toMatchObject({
+      correct: false,
+      points: 0,
+    });
+  });
+
+  it('game tombol Selesai boleh dibetulkan; soal kuis biasa sekali jawab', () => {
+    expect(isRetryGame({ type: 'sum' } as Item['interaction'])).toBe(true);
+    expect(isRetryGame({ type: 'spell', style: 'train' } as Item['interaction'])).toBe(true);
+    expect(isRetryGame({ type: 'spell' } as Item['interaction'])).toBe(false);
+    expect(isRetryGame({ type: 'pick-one' } as Item['interaction'])).toBe(false);
+  });
+
+  it('skor ronde dari poin; gagal bila < 70 atau lebih dari 3 soal salah', () => {
+    expect(roundScore(100)).toBe(100);
+    expect(roundScore(75)).toBe(75);
+    expect(roundPassed(70, 3)).toBe(true);
+    expect(roundPassed(69, 0)).toBe(false);
+    expect(roundPassed(80, 4)).toBe(false);
+    // 10 soal benar tapi tiap soal sempat keliru → 50 poin → gagal.
+    expect(roundPassed(roundScore(10 * 5), 0)).toBe(false);
+    expect(validRoundPoints(75, 8, 10)).toBe(true);
+    expect(validRoundPoints(85, 8, 10)).toBe(false);
+    expect(validRoundPoints(35, 8, 10)).toBe(false);
   });
 });

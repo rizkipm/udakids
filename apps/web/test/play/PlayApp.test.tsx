@@ -250,7 +250,7 @@ describe('ronde level (D-021)', () => {
       );
     }
     expect(screen.getByText('Skor 70')).toBeInTheDocument();
-    expect(screen.getByText('7 dari 10 soal benar')).toBeInTheDocument();
+    expect(screen.getByText('7 dari 10 soal benar · 70 dari 100 poin')).toBeInTheDocument();
     expect(screen.getByText('Lulus! Level berikutnya terbuka.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: t('play.quiz.nextLevelN', { n: 2 }) })).toHaveAttribute(
       'href',
@@ -281,7 +281,9 @@ describe('ronde level (D-021)', () => {
       );
     }
     expect(screen.getByText('Skor 60')).toBeInTheDocument();
-    expect(screen.getByText(/^Hampir! Butuh minimal 7 jawaban tepat/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/^Hampir! Butuh skor minimal 70 dan paling banyak 3 soal belum tepat/),
+    ).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /Lanjut ke Level/ })).toBeNull();
     expect(screen.getByRole('link', { name: t('play.quiz.readLesson') })).toHaveAttribute(
       'href',

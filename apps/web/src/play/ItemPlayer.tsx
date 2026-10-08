@@ -1,6 +1,9 @@
 import { useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
+  isRetryGame,
+  itemPoints,
+  MAX_MISTAKES,
   isAudioOnlyItem,
   spokenPrompt,
   voiceLangOf,
@@ -120,6 +123,8 @@ export function ItemPlayer({
 }: ItemPlayerProps) {
   const [locked, setLocked] = useState(false);
   const [result, setResult] = useState<AnswerResult>();
+  // Game tombol Selesai (D-078): kekeliruan pertama −5 poin dan boleh dibetulkan; nomor kekeliruan untuk animasi.
+  const [mistakes, setMistakes] = useState(0);
   const say = item.say ?? item.prompt;
 
   const submitOnly = onSubmitValue !== undefined;
@@ -149,6 +154,7 @@ export function ItemPlayer({
   useEffect(() => {
     setLocked(false);
     setResult(undefined);
+    setMistakes(0);
     if (mode === 'play') (submitOnly ? speakPlain : speakPrompt)(item, tier);
     return () => stopSpeaking();
   }, [item, mode, tier, submitOnly]);
@@ -161,9 +167,21 @@ export function ItemPlayer({
       return;
     }
     const r = checkAnswer(item, value);
+    if (!r.correct && isRetryGame(item.interaction) && mistakes + 1 < MAX_MISTAKES) {
+      // Belum pas: poin soal ini berkurang, anak membetulkan jawabannya (tanpa kata "salah").
+      setMistakes((m) => m + 1);
+      speak(t('play.game.retry'));
+      return;
+    }
+    const total = isRetryGame(item.interaction)
+      ? mistakes + (r.correct ? 0 : 1)
+      : (r.mistakes ?? 0);
+    const final = isRetryGame(item.interaction)
+      ? { ...r, mistakes: total, points: itemPoints(r.correct, mistakes) }
+      : r;
     setLocked(true);
-    setResult(r);
-    onAnswer?.({ ...r, value });
+    setResult(final);
+    onAnswer?.({ ...final, value });
   };
 
   const inactive = locked || disabled;
@@ -215,6 +233,11 @@ export function ItemPlayer({
         className={`interaction${result && showMarks ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}
       >
         <ItemVoice.Provider value={item}>
+          {mistakes > 0 && !locked && (
+            <p key={mistakes} className="game-retry" role="status">
+              {t('play.game.retryNote')}
+            </p>
+          )}
           <InteractionView
             interaction={item.interaction}
             onSubmit={submit}

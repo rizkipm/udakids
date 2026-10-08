@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Interaction } from '@little-coder/engine';
+import { gameOver, type Interaction } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
@@ -73,6 +73,11 @@ export function MemoryGame({
     }
     setOpen(now);
     setBusy(true);
+    // Kekeliruan ke-2 (D-078; pasangan sudah pernah terlihat): soal berakhir, lanjut ke soal berikutnya.
+    if (gameOver(it, flips.current)) {
+      timer.current = window.setTimeout(() => onDone?.(flips.current), PEEK_MS);
+      return;
+    }
     timer.current = window.setTimeout(() => {
       setOpen([]);
       setBusy(false);

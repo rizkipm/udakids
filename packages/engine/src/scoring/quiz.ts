@@ -5,6 +5,8 @@ import { z } from 'zod';
  * (≥ 7 dari 10). Lulus membuka level berikutnya di materi yang sama; lulus Level 1 membuka
  * materi berikutnya.
  */
+import { ITEM_POINTS, MAX_WRONG_ITEMS, MISTAKE_PENALTY } from '../generator/play.js';
+
 export const QUIZ_LENGTH = 10;
 export const PASS_SCORE = 70;
 
@@ -15,6 +17,26 @@ export const quizBand = (index: number) => QUIZ_BANDS[Math.min(index, QUIZ_BANDS
 export const quizScore = (correct: number, total = QUIZ_LENGTH) =>
   total <= 0 ? 0 : Math.round((Math.max(0, Math.min(correct, total)) / total) * 100);
 export const isPassed = (score: number) => score >= PASS_SCORE;
+
+/**
+ * Skor ronde dari poin soal (D-078): tiap soal 0–10 poin (benar 10, benar setelah keliru sekali 5, salah 0).
+ * 10 soal × 10 poin = 100.
+ */
+export const roundScore = (points: number, total = QUIZ_LENGTH) =>
+  total <= 0
+    ? 0
+    : Math.round(
+        (Math.max(0, Math.min(points, ITEM_POINTS * total)) / (ITEM_POINTS * total)) * 100,
+      );
+/** Lulus ronde: skor ≥ 70 dan tidak lebih dari 3 soal salah. */
+export const roundPassed = (score: number, wrong: number) =>
+  isPassed(score) && wrong <= MAX_WRONG_ITEMS;
+/** Poin ronde masuk akal untuk jumlah benar ini (benar 5 atau 10 poin, salah 0). Dipakai server. */
+export const validRoundPoints = (points: number, correct: number, total: number) =>
+  Number.isInteger(points) &&
+  correct <= total &&
+  points >= (ITEM_POINTS - MISTAKE_PENALTY) * correct &&
+  points <= ITEM_POINTS * correct;
 /** Jumlah benar minimal untuk lulus. */
 export const correctNeeded = (total = QUIZ_LENGTH) => Math.ceil((PASS_SCORE / 100) * total);
 

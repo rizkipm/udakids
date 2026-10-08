@@ -1723,6 +1723,46 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       );
     });
 
+    it('poin ronde (D-078): skor dari poin soal; poin tidak masuk akal ditolak', async () => {
+      const skillId = 'math.prek.a1.kenali-angka-1-sampai-2';
+      const reg = await http()
+        .post('/auth/child/register')
+        .send({ nickname: 'Poin', momoColor: 'hijau', pin })
+        .expect(201);
+      const childToken = reg.body.token as string;
+      // 8 soal benar, 3 di antaranya setelah keliru sekali (5 poin) → 65 poin → skor 65, belum lulus.
+      const ok = {
+        id: randomUUID(),
+        skillId,
+        correct: 8,
+        total: 10,
+        roundPoints: 65,
+        ts: Date.now() + 10,
+      };
+      const res = await http()
+        .post('/practice/sync')
+        .set(auth(childToken))
+        .send({ answers: [], states: [], quizzes: [ok] })
+        .expect(200);
+      expect(res.body.rejectedQuizzes ?? []).toEqual([]);
+      expect(res.body.quizzes[skillId]).toMatchObject({ last: 65 });
+      // 8 benar tidak mungkin 95 poin (maks. 80).
+      const bad = {
+        id: randomUUID(),
+        skillId,
+        correct: 8,
+        total: 10,
+        roundPoints: 95,
+        ts: Date.now() + 20,
+      };
+      const rej = await http()
+        .post('/practice/sync')
+        .set(auth(childToken))
+        .send({ answers: [], states: [], quizzes: [bad] })
+        .expect(200);
+      expect(rej.body.rejectedQuizzes).toEqual([bad.id]);
+    });
+
     it('sync: state Skor Jago untuk skill yang tidak ada diabaikan', async () => {
       const reg = await http()
         .post('/auth/child/register')

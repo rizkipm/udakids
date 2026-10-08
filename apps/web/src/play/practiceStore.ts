@@ -51,6 +51,8 @@ export type ChildProgress = {
     avoid: string[];
     index: number;
     history: boolean[];
+    /** Poin per soal (D-078); tidak ada pada ronde lama. */
+    points?: number[];
     ts: number;
   };
 };

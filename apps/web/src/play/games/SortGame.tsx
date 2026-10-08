@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { sortStep, type Interaction } from '@little-coder/engine';
+import { sortStep, type Interaction, gameOver } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
@@ -91,6 +91,8 @@ export function SortGame({
     const r = sortStep(it.items, it.answer, placed, bin);
     if (r.slip) {
       setShake((s) => ({ bin, n: (s?.n ?? 0) + 1 }));
+      // Kekeliruan ke-2 (D-078): soal berakhir, lanjut ke soal berikutnya (tidak dipaksa sampai benar).
+      if (gameOver(it, taps.current)) return onDone(taps.current);
       speak(t('play.sort.again', { thing: current.say ?? '' }));
       return;
     }

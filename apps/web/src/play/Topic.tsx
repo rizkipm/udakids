@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  correctNeeded,
+  MAX_WRONG_ITEMS,
   FREE_ACCESS,
   generateItem,
   levelStatuses,
@@ -149,8 +149,8 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           <p className="levels-rule">
             {t('play.library.rule', {
               total: QUIZ_LENGTH,
-              need: correctNeeded(),
               pass: PASS_SCORE,
+              wrong: MAX_WRONG_ITEMS,
             })}
           </p>
         </div>

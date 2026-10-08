@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   answerJago,
-  correctNeeded,
   isListeningItem,
   FREE_ACCESS,
   RESULT_KEYS,
@@ -15,14 +14,16 @@ import {
   generateRound,
   itemKey,
   rememberRound,
-  isPassed,
   isMockSkill,
   levelStatuses,
   standaloneCodes,
   groupStartCodes,
   PASS_SCORE,
   QUIZ_LENGTH,
-  quizScore,
+  roundPassed,
+  roundScore,
+  ITEM_POINTS,
+  MAX_WRONG_ITEMS,
   recordQuiz,
   type AnswerResult,
   type AnswerValue,
@@ -134,6 +135,8 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   const avoidUsed = useRef<string[]>([]);
   const [index, setIndex] = useState(0);
   const [history, setHistory] = useState<boolean[]>([]);
+  // Poin per soal (D-078): benar 10, benar setelah keliru sekali 5, salah 0.
+  const [points, setPoints] = useState<number[]>([]);
   const [phase, setPhase] = useState<Phase>({ name: 'question' });
   const [confirmQuit, setConfirmQuit] = useState(false);
   const navigate = useNavigate();
@@ -178,6 +181,8 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     const done = Math.min(resume.history.length, round.length - 1);
     setIndex(done);
     setHistory(resume.history.slice(0, done));
+    // Ronde lama tanpa poin: benar = 10, salah = 0.
+    setPoints((resume.points ?? resume.history.map((ok) => (ok ? ITEM_POINTS : 0))).slice(0, done));
   }, [resume, round]);
 
   // Simpan posisi ronde yang sedang berjalan (D-073) supaya bisa dilanjutkan setelah keluar/ganti halaman.
@@ -193,10 +198,11 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
         avoid: avoidUsed.current,
         index: history.length,
         history,
+        points,
         ts: Date.now(),
       },
     }));
-  }, [round, stableSkill, index, history, phase.name, seedBase, childId, resume]);
+  }, [round, stableSkill, index, history, points, phase.name, seedBase, childId, resume]);
 
   const paid = status === 'paid';
   const locked = status === 'locked' || paid;
@@ -261,9 +267,12 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     );
   }
 
-  const finish = (answers: boolean[]) => {
+  const finish = (answers: boolean[], pts: number[]) => {
     const correct = answers.filter(Boolean).length;
-    const score = quizScore(correct, QUIZ_LENGTH);
+    // Skor = jumlah poin soal (D-078); gagal bila < 70 atau lebih dari 3 soal salah.
+    const roundPoints = pts.reduce((a, b) => a + b, 0);
+    const score = roundScore(roundPoints, QUIZ_LENGTH);
+    const wrong = answers.length - correct;
     const now = Date.now();
     const id = newId();
     const timeMs = Math.round(watch.elapsed());
@@ -273,7 +282,15 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       quizzes: { ...p.quizzes, [skill.id]: recordQuiz(p.quizzes[skill.id], score, now, timeMs) },
       quizOutbox: [
         ...p.quizOutbox,
-        { id, skillId: skill.id, correct, total: QUIZ_LENGTH, ts: now, durationMs: timeMs },
+        {
+          id,
+          skillId: skill.id,
+          correct,
+          total: QUIZ_LENGTH,
+          roundPoints,
+          ts: now,
+          durationMs: timeMs,
+        },
       ],
       quizHistory: [
         {
@@ -283,7 +300,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
           score,
           correct,
           total: QUIZ_LENGTH,
-          passed: isPassed(score),
+          passed: roundPassed(score, wrong),
           durationMs: timeMs,
           ts: now,
         },
@@ -291,7 +308,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
       ].slice(0, 50),
     }));
     void flushPractice(childId);
-    const passed = isPassed(score);
+    const passed = roundPassed(score, wrong);
     // Suara Momo: skor, lalu hasil (lulus / coba lagi). Waktu tetap terlihat di layar.
     speakLine(scoreKey(score), t('play.quiz.score', { score }), {
       onEnd: () =>
@@ -302,14 +319,14 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
             )
           : speakLine(
               RESULT_KEYS.retry,
-              t('play.quiz.failed', { need: correctNeeded(), pass: PASS_SCORE }),
+              t('play.quiz.failedPoints', { pass: PASS_SCORE, wrong: MAX_WRONG_ITEMS }),
             ),
     });
     setPhase({ name: 'done', score, correct, timeMs });
   };
 
   const next = () => {
-    if (index + 1 >= QUIZ_LENGTH) return finish(history);
+    if (index + 1 >= QUIZ_LENGTH) return finish(history, points);
     setIndex((i) => i + 1);
     setPhase({ name: 'question' });
   };
@@ -334,8 +351,12 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
     }));
     void flushPractice(childId);
     setHistory((h) => [...h, r.correct]);
+    const got = r.points ?? (r.correct ? ITEM_POINTS : 0);
+    setPoints((p) => [...p, got]);
     const message = r.correct
-      ? `${t('play.quiz.right')} ${t(PRAISE[(seedBase + index) % PRAISE.length]!)}`
+      ? got < ITEM_POINTS
+        ? t('play.quiz.rightHalf', { points: got })
+        : `${t('play.quiz.right')} ${t(PRAISE[(seedBase + index) % PRAISE.length]!)}`
       : `${t('play.quiz.wrong')} ${item.reteach.say}`;
     // Respons jawaban dengan suara Momo; pembahasan dibacakan hanya di Basic (anak belum membaca).
     if (r.correct) {
@@ -401,7 +422,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
         {Array.from({ length: QUIZ_LENGTH }, (_, i) => (
           <span
             key={i}
-            className={`quiz-dot${history[i] === true ? ' is-right' : history[i] === false ? ' is-wrong' : i === index ? ' is-current' : ''}`}
+            className={`quiz-dot${history[i] === true ? (points[i] !== undefined && points[i]! < ITEM_POINTS ? ' is-right is-half' : ' is-right') : history[i] === false ? ' is-wrong' : i === index ? ' is-current' : ''}`}
           />
         ))}
       </div>
@@ -412,7 +433,8 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
   );
 
   if (phase.name === 'done') {
-    const passed = isPassed(phase.score);
+    const wrongCount = history.filter((ok) => !ok).length;
+    const passed = roundPassed(phase.score, wrongCount);
     return (
       <main className="practice">
         {header}
@@ -420,7 +442,12 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
           <Momo own color={momoColor} mood={passed ? 'proud' : 'curious'} size={130} />
           <p className="result-score">{t('play.quiz.score', { score: phase.score })}</p>
           <p className="result-summary">
-            {t('play.quiz.summary', { correct: phase.correct, total: QUIZ_LENGTH })}
+            {t('play.quiz.summaryPoints', {
+              correct: phase.correct,
+              total: QUIZ_LENGTH,
+              points: points.reduce((a, b) => a + b, 0),
+              max: QUIZ_LENGTH * ITEM_POINTS,
+            })}
           </p>
           <p className="result-time">
             <ClockIcon />
@@ -428,13 +455,16 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
           </p>
           <div className="quiz-dots">
             {history.map((ok, i) => (
-              <span key={i} className={`quiz-dot ${ok ? 'is-right' : 'is-wrong'}`} />
+              <span
+                key={i}
+                className={`quiz-dot ${ok ? (points[i]! < ITEM_POINTS ? 'is-right is-half' : 'is-right') : 'is-wrong'}`}
+              />
             ))}
           </div>
           <p className="result-message">
             {passed
               ? t(book.next ? 'play.quiz.passed' : 'play.quiz.passedLast')
-              : t('play.quiz.failed', { need: correctNeeded(), pass: PASS_SCORE })}
+              : t('play.quiz.failedPoints', { pass: PASS_SCORE, wrong: MAX_WRONG_ITEMS })}
           </p>
           <div className="result-actions">
             {passed ? (
