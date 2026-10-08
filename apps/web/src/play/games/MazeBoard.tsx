@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { mazeMove, mazeNeighbors, WALL, type Interaction } from '@little-coder/engine';
+import { mazeMove, mazeNeighbors, OBJECTS, WALL, type Interaction } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { Momo } from '../../components/Momo';
+import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
 import './games.css';
 
@@ -136,8 +137,24 @@ export function MazeBoard({
               }
               onClick={() => go(cell)}
             >
-              {mark && <span className="maze-mark">{mark.text}</span>}
-              {cell === it.goal && <ExitFlag />}
+              {mark &&
+                (mark.visual ? (
+                  <span className="maze-mark is-pic">
+                    <VisualView visual={mark.visual} size={40} />
+                  </span>
+                ) : (
+                  <span className={`maze-mark${mark.text.length > 3 ? ' is-long' : ''}`}>
+                    {mark.text}
+                  </span>
+                ))}
+              {cell === it.goal &&
+                (it.goalVisual ? (
+                  <span className="maze-goal-pic">
+                    <VisualView visual={it.goalVisual} size={44} />
+                  </span>
+                ) : (
+                  <ExitFlag />
+                ))}
             </button>
           );
         })}
@@ -146,10 +163,21 @@ export function MazeBoard({
           style={{ ['--r' as string]: r, ['--c' as string]: c }}
           aria-hidden
         >
-          <Momo own mood={done ? 'proud' : 'happy'} size={52} />
+          {/* Tokoh labirin bertema (D-078): traktor, astronot, kucing, …; default Momo. */}
+          {it.walker ? (
+            <VisualView visual={{ kind: 'object', object: it.walker }} size={50} />
+          ) : (
+            <Momo own mood={done ? 'proud' : 'happy'} size={52} />
+          )}
         </span>
       </div>
-      <p className="kid-note maze-hint">{done ? t('play.maze.done') : t('play.maze.hint')}</p>
+      <p className="kid-note maze-hint">
+        {done
+          ? t('play.maze.done')
+          : it.walker
+            ? t('play.maze.hintWalker', { who: OBJECTS[it.walker].say })
+            : t('play.maze.hint')}
+      </p>
     </div>
   );
 }

@@ -111,7 +111,8 @@ describe.skipIf(!up)('video panduan & artikel (e2e)', () => {
       // Akses berbeda (staf melihat semua) → ETag berbeda.
       const staff = await http().get('/catalog').set(admin()).expect(200);
       expect(staff.headers.etag).not.toBe(etag);
-    });
+      // Empat kali memuat katalog lengkap (±5.800 skill, D-078) saat semua suite jalan paralel: > 5 detik bawaan.
+    }, 20_000);
   });
 
   describe('artikel', () => {

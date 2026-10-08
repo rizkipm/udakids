@@ -14,6 +14,7 @@ import {
   rankContest,
   skillTemplateSchema,
   type Item,
+  contestSafeTemplate,
 } from '../src/index.js';
 
 describe('peringkat rata-rata tertimbang (D-042, D-045)', () => {
@@ -103,7 +104,8 @@ describe('lomba live (D-042)', () => {
     for (const f of files) {
       if (byType.size >= 8) break;
       const t = skillTemplateSchema.parse(JSON.parse(readFileSync(new URL(f, root), 'utf8')));
-      if (t.family === 'mock') continue; // mock test (D-072) tidak membuat soal sendiri
+      // Mock test (D-072) tidak membuat soal sendiri; game berkunci (D-075, D-078) tidak dipakai di lomba.
+      if (!contestSafeTemplate(t)) continue;
       for (const band of [0, 2]) {
         const it = generateItem(t, { seed: 11, band });
         if (!byType.has(it.interaction.type)) byType.set(it.interaction.type, it);

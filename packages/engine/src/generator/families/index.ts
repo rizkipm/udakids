@@ -39,6 +39,21 @@ import { letterFind, letterTapAll, letterTrace } from './letters.js';
 import { catchItemsFamily, mazePathFamily, memoryPairsFamily, wordSearchFamily } from './games.js';
 import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
 import { mockFamily } from './mock.js';
+import {
+  catchGame,
+  crosswordGame,
+  feedGame,
+  hopGame,
+  jigsawGame,
+  labelGame,
+  mazeGame,
+  pairsGame,
+  sortGame,
+  sumGame,
+  trainGame,
+  wheelGame,
+  wordHunt,
+} from './fun.js';
 
 const BASE_FAMILIES = {
   'numeral-tap-all': numeralTapAll,
@@ -85,6 +100,20 @@ const BASE_FAMILIES = {
   manual,
   'match-pairs': matchPairs,
   'spell-word': spellWord,
+  // Game seru (D-078).
+  'sum-game': sumGame,
+  'hop-game': hopGame,
+  'sort-game': sortGame,
+  'crossword-game': crosswordGame,
+  'jigsaw-game': jigsawGame,
+  'pairs-game': pairsGame,
+  'catch-game': catchGame,
+  'train-game': trainGame,
+  'label-game': labelGame,
+  'wheel-game': wheelGame,
+  'feed-game': feedGame,
+  'maze-game': mazeGame,
+  'word-hunt': wordHunt,
 } satisfies Record<string, Family>;
 
 type BaseName = keyof typeof BASE_FAMILIES;
@@ -144,3 +173,35 @@ export { Reject } from './common.js';
 export type { ManualItem } from './manual.js';
 export type { MatchItem } from './match.js';
 export { formatId } from './expr.js';
+
+/**
+ * Family game (D-075 Worksheet, D-078 Game seru): level game tidak dipakai sebagai sumber soal mock test maupun
+ * lomba live (soal lomba/mock harus berbentuk soal lembar lomba, dan sebagian game butuh kunci di perangkat).
+ */
+export const GAME_FAMILIES: ReadonlySet<string> = new Set([
+  'maze-path',
+  'word-search',
+  'memory-pairs',
+  'catch-items',
+  'sum-game',
+  'hop-game',
+  'sort-game',
+  'crossword-game',
+  'jigsaw-game',
+  'pairs-game',
+  'catch-game',
+  'train-game',
+  'label-game',
+  'wheel-game',
+  'feed-game',
+  'maze-game',
+  'word-hunt',
+]);
+
+/** Level memakai family game (langsung atau sebagai bagian `mix`)? */
+export function usesGameFamily(t: { family: string; params?: unknown }): boolean {
+  if (GAME_FAMILIES.has(t.family)) return true;
+  if (t.family !== 'mix') return false;
+  const parts = (t.params as { parts?: { family: string }[] } | undefined)?.parts ?? [];
+  return parts.some((p) => GAME_FAMILIES.has(p.family));
+}

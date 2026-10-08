@@ -1,6 +1,7 @@
 import type { BodyPart, Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
 import type { DotPictureId } from './dot-pictures.js';
 import { catchReplay, mazeReplay, memoryReplay, wordSearchReplay } from './games.js';
+import { crosswordReplay, hopReplay, jigsawReplay, sortReplay, sumOf } from './play.js';
 import type { GlyphId } from './glyphs.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
@@ -102,6 +103,18 @@ export type Visual =
       both: number;
       object: ObjectId;
     }
+  /**
+   * Puzzle (D-078): gambar `picture` dibagi `cols` × `rows`. `holed` = gambar utuh dengan satu kepingan
+   * (`index`) hilang; `piece` = hanya kepingan `index` (kartu pilihan "kepingan mana yang pas?").
+   */
+  | {
+      kind: 'puzzle';
+      picture: Visual;
+      cols: number;
+      rows: number;
+      show: 'holed' | 'piece';
+      index: number;
+    }
   /** Benda diukur dengan kubus satuan (panjang/tinggi). */
   | {
       kind: 'measure';
@@ -124,14 +137,29 @@ export type Interaction =
   | { type: 'pick-one'; choices: Choice[]; answer: string; arrangement?: 'row' | 'column' | 'grid' }
   /** `style: 'balloons'` = permainan pecahkan balon (kartu melayang, pecah saat diketuk). */
   | { type: 'tap-all'; choices: Choice[]; answer: string[]; style?: 'balloons' }
-  | { type: 'order'; choices: Choice[]; answer: string[] }
+  /** `style` (D-078): `ferris` = kabin bianglala, `rocket` = panel hitung mundur roket. Penilaian sama. */
+  | { type: 'order'; choices: Choice[]; answer: string[]; style?: 'ferris' | 'rocket' }
   | { type: 'group'; groups: Choice[]; items: Choice[]; answer: Record<string, string> }
-  | { type: 'match'; left: Choice[]; right: Choice[]; answer: Record<string, string> }
+  /** `style: 'labels'` (D-078) = tempel kartu kata ke gambarnya. Penilaian sama. */
+  | {
+      type: 'match';
+      left: Choice[];
+      right: Choice[];
+      answer: Record<string, string>;
+      style?: 'labels';
+    }
   /**
    * Lengkapi nama (D-070): kotak huruf, `null` = kosong. Anak mengetuk kartu huruf (`letters`) untuk mengisi
    * kotak kosong dari kiri. Nilai jawaban = huruf di kotak kosong berurutan (bukan id kartu).
    */
-  | { type: 'spell'; slots: (string | null)[]; letters: Choice[]; answer: string[] }
+  | {
+      type: 'spell';
+      slots: (string | null)[];
+      letters: Choice[];
+      answer: string[];
+      /** `train` (D-078) = gerbong kereta: angka/huruf yang hilang. Penilaian sama. */
+      style?: 'train';
+    }
   | {
       type: 'build';
       target: number;
@@ -139,6 +167,10 @@ export type Interaction =
       object?: ObjectId;
       max: number;
       frameSize?: 5 | 10 | 20;
+      /** `feed` (D-078) = beri makan hewan: benda masuk ke mangkuk. Penilaian sama. */
+      style?: 'feed';
+      /** Hewan yang diberi makan (default kucing). */
+      eater?: ObjectId;
     }
   | { type: 'number-line'; min: number; max: number; start?: number; answer: number }
   /** Isian singkat angka (kelas 3+, format isian OSN). `decimals` = jumlah angka di belakang koma. */
@@ -179,8 +211,11 @@ export type Interaction =
       walls: number[];
       start: number;
       goal: number;
-      marks: { cell: number; text: string; say: string; decoy?: boolean }[];
+      marks: { cell: number; text: string; say: string; decoy?: boolean; visual?: Visual }[];
       maxSlips: number;
+      /** Tokoh yang berjalan (D-078); default Momo. `goal` = gambar di pintu keluar. */
+      walker?: ObjectId;
+      goalVisual?: Visual;
     }
   /**
    * Cari kata (D-075): kotak huruf `letters` (cols × rows); anak mengetuk huruf berurutan dari huruf pertama
@@ -203,7 +238,93 @@ export type Interaction =
    * Tangkap (D-075): benda bergerak pelan melintas dan terus berputar sampai ditangkap (tanpa hitung mundur).
    * Nilai jawaban = semua ketukan; benar bila semua `answer` tertangkap dan ketukan meleset ≤ `maxSlips`.
    */
-  | { type: 'catch'; choices: Choice[]; answer: string[]; maxSlips: number };
+  | {
+      type: 'catch';
+      choices: Choice[];
+      answer: string[];
+      maxSlips: number;
+      /** Latar (D-078): langit (default), luar angkasa, laut, atau kebun. */
+      scene?: 'sky' | 'space' | 'sea' | 'farm';
+    }
+  /**
+   * Jumlahkan sampai pas (D-078): neraca seimbang, Toko Momo (bayar dengan koin), atau truk muatan. Anak
+   * mengetuk token (persediaan tak terbatas, bisa dikeluarkan lagi). Nilai jawaban = id token yang terpasang;
+   * benar bila jumlah nilainya = `target` dan banyaknya ≤ `maxTokens`. `given` = nilai yang sudah ada di sisi
+   * anak sejak awal (mis. 4 + … = 7).
+   */
+  | {
+      type: 'sum';
+      style: 'balance' | 'shop' | 'truck';
+      target: number;
+      given: number;
+      tokens: (Choice & { value: number })[];
+      /** Yang ditimbang / dibeli / diangkut (ditampilkan di sisi lawan). */
+      show: Visual;
+      maxTokens: number;
+    }
+  /**
+   * Lompat (D-078): kodok (atau anak berjalan) di papan batu bernomor `stones`. Anak mengetuk batu tempat
+   * mendarat satu per satu. Nilai jawaban = semua ketukan (angka batu); benar bila urutan `answer` lengkap dan
+   * ketukan keliru ≤ `maxSlips`.
+   */
+  | {
+      type: 'hop';
+      style: 'frog' | 'steps';
+      stones: number[];
+      start: number;
+      answer: number[];
+      maxSlips: number;
+    }
+  /**
+   * Sortir keranjang (D-078): benda datang satu per satu; anak mengetuk keranjangnya. Nilai jawaban = semua
+   * ketukan "benda>keranjang"; benar bila semua benda masuk dan ketukan keliru ≤ `maxSlips`.
+   */
+  | {
+      type: 'sort';
+      style: 'baskets' | 'trucks';
+      bins: Choice[];
+      items: Choice[];
+      answer: Record<string, string>;
+      maxSlips: number;
+    }
+  /**
+   * Teka-teki silang bergambar (D-078): anak mengetuk gambar petunjuk, lalu kartu huruf untuk mengisi kotak
+   * kata itu dari depan. Nilai jawaban = semua ketukan "kata:huruf"; benar bila semua kotak terisi dan
+   * ketukan keliru ≤ `maxSlips`. `prefill` = kotak yang sudah terbuka sejak awal.
+   */
+  | {
+      type: 'crossword';
+      cols: number;
+      rows: number;
+      words: {
+        id: string;
+        text: string;
+        cells: number[];
+        dir: 'across' | 'down';
+        visual: Visual;
+        say: string;
+      }[];
+      letters: Choice[];
+      prefill: number[];
+      maxSlips: number;
+      /** Tokoh tema di atas papan (traktor, truk, ikan, …). */
+      mascot?: ObjectId;
+    }
+  /**
+   * Puzzle susun (D-078): gambar dibagi `cols` × `rows`; kepingan `p<k>` milik kotak `k`. Anak mengetuk
+   * kepingan lalu kotaknya. Nilai jawaban = ketukan "p<k>@<kotak>"; benar bila semua terpasang dan ketukan
+   * keliru ≤ `maxSlips`. `fixed` = kotak yang sudah terpasang sejak awal.
+   */
+  | {
+      type: 'jigsaw';
+      picture: Visual;
+      cols: number;
+      rows: number;
+      /** Urutan tampil kepingan (sudah diacak). */
+      pieces: string[];
+      fixed: number[];
+      maxSlips: number;
+    };
 
 export type InteractionType = Interaction['type'];
 
@@ -297,6 +418,34 @@ export function checkAnswer(item: Pick<Item, 'interaction'>, value: AnswerValue)
       const r = catchReplay(it.answer, value);
       return { correct: r.done && r.slips <= it.maxSlips };
     }
+    case 'sum':
+      return {
+        correct:
+          Array.isArray(value) &&
+          value.length <= it.maxTokens &&
+          sumOf(it.tokens, value) !== undefined &&
+          it.given + sumOf(it.tokens, value)! === it.target,
+      };
+    case 'hop': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = hopReplay(it.answer, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
+    case 'sort': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = sortReplay(it.items, it.answer, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
+    case 'crossword': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = crosswordReplay(it, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
+    case 'jigsaw': {
+      if (!Array.isArray(value)) return { correct: false };
+      const r = jigsawReplay(it, value);
+      return { correct: r.done && r.slips <= it.maxSlips };
+    }
   }
 }
 
@@ -317,6 +466,7 @@ export function allVisuals(item: ItemCore): Visual[] {
   const push = (v: Visual) => {
     out.push(v);
     if (v.kind === 'row') v.items.forEach(push);
+    if (v.kind === 'puzzle') push(v.picture);
   };
   item.stimulus.forEach(push);
   item.reteach.show?.forEach(push);
@@ -330,11 +480,19 @@ export function allVisuals(item: ItemCore): Visual[] {
           ? it.letters
           : it.type === 'memory'
             ? it.cards
-            : it.type === 'word-search'
+            : it.type === 'word-search' || it.type === 'crossword'
               ? it.words
-              : 'choices' in it
-                ? it.choices
-                : [];
+              : it.type === 'sum'
+                ? [...it.tokens, { id: 'show', visual: it.show }]
+                : it.type === 'sort'
+                  ? [...it.bins, ...it.items]
+                  : it.type === 'jigsaw'
+                    ? [{ id: 'picture', visual: it.picture }]
+                    : 'choices' in it
+                      ? it.choices
+                      : [];
   choices.forEach((c) => push(c.visual));
+  if (it.type === 'maze') it.marks.forEach((m) => m.visual && push(m.visual));
+  if (it.type === 'maze' && it.goalVisual) push(it.goalVisual);
   return out;
 }

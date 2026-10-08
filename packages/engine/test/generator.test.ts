@@ -17,6 +17,10 @@ import {
   type ItemCore,
   type SkillTemplate,
   mazePath,
+  crosswordSolution,
+  jigsawSolution,
+  sortSolution,
+  sumSolution,
 } from '../src/index.js';
 
 const tpl = (
@@ -70,6 +74,16 @@ function correctAnswer(item: Item): AnswerValue {
       return [...it.cards].sort((a, b) => a.pair.localeCompare(b.pair)).map((c) => c.id);
     case 'catch':
       return it.answer;
+    case 'sum':
+      return sumSolution(it.tokens, it.target - it.given)!;
+    case 'hop':
+      return it.answer.map(String);
+    case 'sort':
+      return sortSolution(it.items, it.answer);
+    case 'crossword':
+      return crosswordSolution(it);
+    case 'jigsaw':
+      return jigsawSolution(it);
   }
 }
 
@@ -101,6 +115,138 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
   ['english-pronoun', { mode: 'pick', pool: 'mixed' }],
   ['english-talk', { mode: 'greet', choices: 4 }],
   ['numeral-listen', { values: [1, 10], choices: 4 }],
+  // Game seru (D-078).
+  ['sum-game', { style: 'balance', target: [2, 6], values: [1, 2] }],
+  [
+    'sum-game',
+    { style: 'balance', target: [5, 10], given: [1, 4], values: [1, 2, 3], showNumber: true },
+  ],
+  [
+    'sum-game',
+    {
+      style: 'shop',
+      target: [300, 1500],
+      step: 100,
+      values: [100, 200, 500, 1000],
+      objects: ['kue', 'permen'],
+    },
+  ],
+  [
+    'sum-game',
+    { style: 'truck', target: [6, 10], values: [2, 3, 5], maxTokens: 5, showNumber: true },
+  ],
+  ['hop-game', { mode: 'count', board: [0, 10], start: [0, 3], hops: [2, 5] }],
+  ['hop-game', { mode: 'add', board: [0, 10], start: [1, 5], hops: [1, 5], style: 'steps' }],
+  ['hop-game', { mode: 'sub', board: [0, 10], start: [5, 10], hops: [1, 5] }],
+  [
+    'hop-game',
+    { mode: 'skip', board: [0, 100], boardStep: 10, start: [0, 30], hops: [2, 5], step: 10 },
+  ],
+  ['hop-game', { mode: 'skip', board: [0, 20], start: [0, 4], hops: [3, 5], step: 2 }],
+  [
+    'sort-game',
+    {
+      bins: [
+        { id: 'darat', label: 'hewan darat', icon: { object: 'rumput' } },
+        { id: 'air', label: 'hewan air', icon: { object: 'laut' } },
+      ],
+      items: [
+        { bin: 'darat', item: { object: 'sapi' } },
+        { bin: 'darat', item: { object: 'kuda' } },
+        { bin: 'darat', item: { object: 'gajah' } },
+        { bin: 'air', item: { object: 'ikan' } },
+        { bin: 'air', item: { object: 'paus' } },
+        { bin: 'air', item: { object: 'gurita' } },
+      ],
+    },
+  ],
+  ['crossword-game', { theme: 'transportasi', words: [2, 3] }],
+  ['crossword-game', { theme: 'en-animals', words: [3, 4], reveal: 'none', lang: 'en', maxLen: 4 }],
+  ['crossword-game', { theme: 'angka', words: [2, 3], reveal: 'half' }],
+  ['jigsaw-game', { pictures: ['kucing', 'roket'], cols: [2, 3], rows: [2, 3] }],
+  ['jigsaw-game', { mode: 'pick', pictures: ['traktor', 'astronot'], choices: 3 }],
+  [
+    'pairs-game',
+    {
+      pairs: [
+        { a: { object: 'lebah' }, b: { object: 'sarang-lebah' } },
+        { a: { object: 'ikan' }, b: { object: 'kolam' } },
+        { a: { object: 'ayam' }, b: { object: 'kandang' } },
+        { a: { object: 'burung' }, b: { object: 'sarang' } },
+      ],
+      what: 'hewan dan rumahnya',
+    },
+  ],
+  [
+    'catch-game',
+    {
+      targets: [{ object: 'botol' }, { object: 'kaleng' }],
+      decoys: [{ object: 'ikan' }, { object: 'kepiting' }],
+      what: 'sampah',
+      scene: 'sea',
+    },
+  ],
+  ['train-game', { mode: 'numbers', start: [1, 5], length: [4, 5], blanks: [1, 2] }],
+  ['train-game', { mode: 'numbers', start: [20, 30], descending: true, step: 2 }],
+  ['train-game', { mode: 'alphabet', lowercase: true, lang: 'en' }],
+  [
+    'train-game',
+    {
+      mode: 'word',
+      words: [
+        { text: 'CAT', object: 'kucing' },
+        { text: 'SUN', object: 'matahari' },
+      ],
+      lang: 'en',
+    },
+  ],
+  [
+    'label-game',
+    {
+      words: [
+        { word: 'cat', picture: { object: 'kucing' } },
+        { word: 'dog', picture: { object: 'anjing' } },
+        { word: 'sun', picture: { object: 'matahari' } },
+      ],
+      lang: 'en',
+    },
+  ],
+  ['wheel-game', { mode: 'numbers', values: [1, 10] }],
+  ['wheel-game', { mode: 'countdown', style: 'rocket', values: [1, 10], count: [4, 6] }],
+  ['wheel-game', { mode: 'size' }],
+  ['wheel-game', { mode: 'number-words', values: [1, 10], step: 1 }],
+  ['feed-game', { mode: 'count', target: [1, 10] }],
+  ['feed-game', { mode: 'add', target: [3, 8], first: [1, 3] }],
+  ['feed-game', { mode: 'more', target: [1, 9] }],
+  ['feed-game', { mode: 'less', target: [2, 10] }],
+  [
+    'maze-game',
+    {
+      walker: 'astronot',
+      goal: { object: 'roket' },
+      marks: [{ numeral: 1 }, { numeral: 2 }, { numeral: 3 }, { numeral: 4 }],
+      decoys: [{ numeral: 7 }, { numeral: 9 }],
+    },
+  ],
+  [
+    'maze-game',
+    {
+      walker: 'traktor',
+      goal: { object: 'rumah' },
+      marks: [{ object: 'benih' }, { object: 'tunas' }, { object: 'pohon' }],
+      use: [3, 3],
+    },
+  ],
+  [
+    'word-hunt',
+    {
+      words: [
+        { text: 'CAT', picture: { object: 'kucing' } },
+        { text: 'DOG', picture: { object: 'anjing' } },
+        { text: 'SUN', picture: { object: 'matahari' } },
+      ],
+    },
+  ],
   ...(['objects', 'dots', 'shapes', 'cubes', 'frame', 'stickers'] as const).flatMap((visual) =>
     (['row', 'rows', 'scatter', 'ring'] as const).map(
       (layout) =>

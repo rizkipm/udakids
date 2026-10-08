@@ -41,7 +41,12 @@ function rightAnswer(item: ContestItem): AnswerValue {
       return it.words.flatMap((w) => w.cells.map((c) => `c${c}`));
     case 'memory':
     case 'catch':
-      // Tidak dipakai di lomba (D-075).
+    case 'sum':
+    case 'hop':
+    case 'sort':
+    case 'crossword':
+    case 'jigsaw':
+      // Tidak dipakai di lomba (D-075, D-078).
       throw new Error(`${it.type} tidak dipakai di lomba`);
   }
 }

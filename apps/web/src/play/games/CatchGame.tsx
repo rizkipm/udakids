@@ -52,7 +52,7 @@ export function CatchGame({
   };
 
   return (
-    <div className={`catch-board${done ? ' is-done' : ''}`}>
+    <div className={`catch-board scene-${it.scene ?? 'sky'}${done ? ' is-done' : ''}`}>
       <div className="catch-sky" role="group" aria-label={t('play.catch.label')}>
         {it.choices.map((c, i) => {
           const lane = i % LANES;
@@ -80,7 +80,11 @@ export function CatchGame({
                 className={`catch-body${wobble?.id === c.id ? ' is-wobble' : ''}`}
               >
                 {c.visual.kind === 'word' ? (
-                  <span className="catch-letter">{c.visual.text}</span>
+                  <span
+                    className={`catch-letter${c.visual.text.length > 2 ? ' is-long' : ''}${c.visual.text.length > 6 ? ' is-xlong' : ''}`}
+                  >
+                    {c.visual.text}
+                  </span>
                 ) : (
                   <VisualView visual={c.visual} size={64} />
                 )}

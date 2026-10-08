@@ -209,6 +209,14 @@ export const OBJECTS = {
   obor: { say: 'obor', countable: false },
   obeng: { say: 'obeng', countable: false },
   ombak: { say: 'ombak', countable: false },
+  // Tambahan D-078 (game seru): kendaraan, luar angkasa, laut, dan pertumbuhan tanaman.
+  traktor: { say: 'traktor', countable: false },
+  roket: { say: 'roket', countable: true },
+  planet: { say: 'planet', countable: true },
+  astronot: { say: 'astronot', countable: false },
+  kerang: { say: 'kerang', countable: true },
+  benih: { say: 'benih', countable: false },
+  tunas: { say: 'tunas', countable: false },
 } as const satisfies Record<string, { say: string; countable: boolean }>;
 
 export type ObjectId = keyof typeof OBJECTS;

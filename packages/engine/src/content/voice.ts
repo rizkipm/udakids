@@ -28,6 +28,11 @@ export const COMMAND_KEYS = {
   'word-search': 'vo_cmd_word_search',
   memory: 'vo_cmd_memory',
   catch: 'vo_cmd_catch',
+  sum: 'vo_cmd_sum',
+  hop: 'vo_cmd_hop',
+  sort: 'vo_cmd_sort',
+  crossword: 'vo_cmd_crossword',
+  jigsaw: 'vo_cmd_jigsaw',
 } as const satisfies Record<InteractionType, string>;
 
 export const RIGHT_KEYS = [
@@ -116,6 +121,12 @@ const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
       return it.choices;
     case 'memory':
       return it.cards;
+    case 'sort':
+      return [...it.bins, ...it.items];
+    case 'sum':
+      return it.tokens;
+    case 'crossword':
+      return it.letters;
     default:
       return [];
   }

@@ -152,7 +152,8 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'English SMP Kelas 7-9 (Olimpiade)',
         'Worksheet PAUD',
       ]);
-      expect(res.body.books[0]).toMatchObject({ topics: 25, levels: 250 });
+      // 25 topik materi + topik Game seru (D-078).
+      expect(res.body.books[0]).toMatchObject({ topics: 26, levels: 260 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
       // Rujukan kurikulum dari tag skill (D-059); rujukan internal (ixlRef) tidak pernah tampil.
       const std = (title: string) =>
@@ -413,13 +414,13 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'prek' && c.domain === 'math',
         ).categories,
-      ).toHaveLength(25);
+      ).toHaveLength(26);
       expect(
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'sd34' && c.domain === 'sains',
         ).categories,
-        // 10 materi OSN + 7 materi KMSI (K–Q) + Mock Test KMSI (Y), D-074.
-      ).toHaveLength(18);
+        // 10 materi OSN + 7 materi KMSI (K–Q) + Game seru (GM, D-078) + Mock Test KMSI (Y), D-074.
+      ).toHaveLength(19);
       await http().get('/parent/children').set(auth(childToken)).expect(403);
       await http().get('/admin/skills').set(auth(childToken)).expect(403);
       await http().get('/levels').set(auth(childToken)).expect(200);
@@ -658,7 +659,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         rep.body.areas.find(
           (a: { grade: string; domain: string }) => a.grade === 'prek' && a.domain === 'math',
         ).categories,
-      ).toHaveLength(25);
+      ).toHaveLength(26);
       expect(rep.body.recommendations).toHaveLength(3);
       expect(rep.body.recommendations[0].id).toBe('math.prek.b3.hitung-gambar-sampai-3');
       const prek = rep.body.areas.find(
@@ -1436,17 +1437,17 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('manifest kalimat → admin membuat klip sekali → klip di-cache selamanya', async () => {
       const before = await http().get('/voice/lines').expect(200);
       expect(before.body.enabled).toBe(true);
-      expect(Object.keys(before.body.lines)).toHaveLength(39);
+      expect(Object.keys(before.body.lines)).toHaveLength(44);
       expect(before.body.lines.vo_cmd_pick_one).toMatchObject({ clip: null });
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 39, created: 39, failed: 0, skipped: 0 });
+        .expect(200, { total: 44, created: 44, failed: 0, skipped: 0 });
       const calls = ttsCalls.length;
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 39, created: 0, failed: 0, skipped: 39 });
+        .expect(200, { total: 44, created: 0, failed: 0, skipped: 44 });
       expect(ttsCalls.length).toBe(calls); // tidak dibuat ulang
       const after = await http().get('/voice/lines').expect(200);
       const key = after.body.lines.vo_cmd_pick_one.clip;

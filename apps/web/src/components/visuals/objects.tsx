@@ -8,6 +8,7 @@ import { ESC_OBJECT_ART } from './objects-esc';
 import { KMSI_OBJECT_ART } from './objects-kmsi';
 import { EMC_ENGLISH_OBJECT_ART } from './objects-emc';
 import { VOKAL_OBJECT_ART } from './objects-vokal';
+import { FUN_OBJECT_ART } from './objects-fun';
 
 export type ObjectArtProps = { color?: Color };
 export type ObjectArt = (props: ObjectArtProps) => JSX.Element;
@@ -337,6 +338,7 @@ export const OBJECT_ART: Record<ObjectId, ObjectArt> = {
   ...KMSI_OBJECT_ART,
   ...EMC_ENGLISH_OBJECT_ART,
   ...VOKAL_OBJECT_ART,
+  ...FUN_OBJECT_ART,
   ...ENGLISH_OBJECT_ART,
   apel: ({ color }) => (
     <g>

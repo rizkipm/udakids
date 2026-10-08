@@ -61,6 +61,8 @@ function maskedAnswer(item: ContestItem): AnswerValue {
       return [...it.cards].sort((a, b) => a.pair.localeCompare(b.pair)).map((c) => c.id);
     case 'catch':
       return it.answer;
+    default:
+      throw new Error(`${it.type} tidak dipakai di lomba`);
   }
 }
 

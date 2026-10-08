@@ -493,6 +493,71 @@ function build(v: Visual, countStep?: number): Built {
     case 'venn':
     case 'measure':
       return buildExtra(v);
+    case 'puzzle': {
+      // Puzzle (D-078): gambar utuh dengan lubang kepingan, atau satu kepingan saja.
+      if (v.picture.kind !== 'object') return build(v.picture, countStep);
+      const Art = OBJECT_ART[v.picture.object];
+      const name = say(v.picture.object);
+      const w = 100 / v.cols;
+      const h = 100 / v.rows;
+      const x = (v.index % v.cols) * w;
+      const y = Math.floor(v.index / v.cols) * h;
+      if (v.show === 'holed')
+        return {
+          w: 100,
+          h: 100,
+          label: `gambar ${name}, satu kepingan hilang`,
+          body: (
+            <g>
+              <rect
+                x={0}
+                y={0}
+                width={100}
+                height={100}
+                rx={4}
+                fill="#fffaf0"
+                stroke={OUTLINE}
+                strokeWidth={2}
+              />
+              <Art color={v.picture.color} />
+              <rect
+                x={x + 1}
+                y={y + 1}
+                width={w - 2}
+                height={h - 2}
+                rx={3}
+                fill="#ffffff"
+                stroke={TOKENS.muted}
+                strokeWidth={2}
+                strokeDasharray="5 4"
+              />
+            </g>
+          ),
+        };
+      return {
+        w,
+        h,
+        label: `kepingan gambar ${name}`,
+        body: (
+          <g>
+            <svg x={0} y={0} width={w} height={h} viewBox={`${x} ${y} ${w} ${h}`}>
+              <rect x={x} y={y} width={w} height={h} fill="#fffaf0" />
+              <Art color={v.picture.color} />
+            </svg>
+            <rect
+              x={0.75}
+              y={0.75}
+              width={w - 1.5}
+              height={h - 1.5}
+              rx={2}
+              fill="none"
+              stroke={OUTLINE}
+              strokeWidth={1.5}
+            />
+          </g>
+        ),
+      };
+    }
     case 'objects': {
       const L = layoutCells(v.count, v.layout, v.object);
       const Art = OBJECT_ART[v.object];

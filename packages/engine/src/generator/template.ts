@@ -4,6 +4,7 @@ import { OBJECTS } from './assets.js';
 import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/index.js';
 import { allVisuals, type Choice, type Item, type ItemCore } from './item.js';
 import { countWord, mazePath } from './games.js';
+import { crosswordLetters, fewestTokens, sumOf } from './play.js';
 import { GLYPHS } from './glyphs.js';
 import { createRng } from './rng.js';
 
@@ -230,7 +231,9 @@ export function itemProblems(item: ItemCore): string[] {
       const blanks = it.slots.filter((x) => x === null).length;
       if (blanks === 0) out.push('spell: tidak ada kotak kosong');
       if (it.answer.length !== blanks) out.push('spell: jawaban ≠ banyak kotak kosong');
-      const pool = it.letters.map((c) => (c.visual.kind === 'word' ? c.visual.text : ''));
+      const pool = it.letters.map((c) =>
+        c.visual.kind === 'word' ? c.visual.text.toUpperCase() : '',
+      );
       for (const a of it.answer) {
         const k = pool.indexOf(a);
         if (k < 0) out.push(`spell: huruf "${a}" tidak ada di kartu`);
@@ -303,6 +306,80 @@ export function itemProblems(item: ItemCore): string[] {
       if (it.answer.some((a) => !ids.has(a))) out.push('jawaban catch tidak ada di pilihan');
       break;
     }
+    case 'sum': {
+      checkChoices(it.tokens, 'sum');
+      if (it.tokens.length < 1 || it.tokens.length > 4) out.push('sum: 1–4 jenis token');
+      if (it.tokens.some((t) => !(t.value > 0) || !Number.isInteger(t.value)))
+        out.push('sum: nilai token harus bilangan bulat positif');
+      const need = it.target - it.given;
+      if (need < 1) out.push('sum: tidak ada yang perlu ditambahkan');
+      else if (
+        fewestTokens(
+          it.tokens.map((t) => t.value),
+          need,
+        ) > it.maxTokens
+      )
+        out.push('sum: target tidak bisa dicapai dalam batas token');
+      if (it.maxTokens > 12) out.push('sum: maks. 12 token');
+      if (sumOf(it.tokens, []) !== 0) out.push('sum: token tidak valid');
+      break;
+    }
+    case 'hop': {
+      const stones = new Set(it.stones);
+      if (stones.size !== it.stones.length) out.push('hop: batu kembar');
+      if (it.stones.length < 3 || it.stones.length > 21) out.push('hop: 3–21 batu');
+      if (!stones.has(it.start)) out.push('hop: awal tidak di papan');
+      if (it.answer.length < 1) out.push('hop: tanpa lompatan');
+      if (it.answer.some((a) => !stones.has(a))) out.push('hop: tujuan tidak di papan');
+      if (it.answer.some((a, i) => a === (i === 0 ? it.start : it.answer[i - 1])))
+        out.push('hop: lompatan di tempat');
+      break;
+    }
+    case 'sort': {
+      const bins = checkChoices(it.bins, 'keranjang');
+      const items = checkChoices(it.items, 'benda', true);
+      if (it.bins.length < 2 || it.bins.length > 3) out.push('sort: 2–3 keranjang');
+      if (it.items.length < 3 || it.items.length > 10) out.push('sort: 3–10 benda');
+      if (Object.keys(it.answer).length !== it.items.length)
+        out.push('sort: benda tanpa keranjang');
+      for (const [k, v] of Object.entries(it.answer))
+        if (!items.has(k) || !bins.has(v)) out.push(`sort: ${k}→${v} tidak valid`);
+      if (new Set(Object.values(it.answer)).size < 2) out.push('sort: semua benda satu keranjang');
+      break;
+    }
+    case 'crossword': {
+      const n = it.cols * it.rows;
+      if (it.cols < 2 || it.rows < 2 || it.cols > 7 || it.rows > 7)
+        out.push('crossword: ukuran 2–7');
+      if (it.words.length < 2 || it.words.length > 5) out.push('crossword: 2–5 kata');
+      const letters = crosswordLetters(it);
+      for (const w of it.words) {
+        if (w.cells.length !== w.text.length || w.cells.some((c) => c < 0 || c >= n))
+          out.push(`crossword: "${w.text}" tidak cocok dengan kotak`);
+        if (w.cells.some((c, k) => letters[c] !== w.text[k]))
+          out.push(`crossword: "${w.text}" bertabrakan`);
+      }
+      const tiles = new Set(it.letters.map((c) => (c.visual.kind === 'word' ? c.visual.text : '')));
+      for (const w of it.words)
+        for (const ch of w.text)
+          if (!tiles.has(ch)) out.push(`crossword: kartu huruf "${ch}" tidak ada`);
+      checkChoices(it.letters, 'crossword');
+      if (it.letters.length > 10) out.push('crossword: maks. 10 kartu huruf');
+      const all = new Set(it.words.flatMap((w) => w.cells));
+      if (it.prefill.some((c) => !all.has(c))) out.push('crossword: kotak terbuka di luar kata');
+      if (it.prefill.length >= all.size) out.push('crossword: semua kotak sudah terbuka');
+      break;
+    }
+    case 'jigsaw': {
+      if (it.cols < 2 || it.rows < 2 || it.cols > 3 || it.rows > 3) out.push('jigsaw: ukuran 2–3');
+      const total = it.cols * it.rows;
+      if (it.pieces.length !== total || new Set(it.pieces).size !== total)
+        out.push('jigsaw: kepingan ≠ banyak kotak');
+      if (it.pieces.some((p) => !/^p\d+$/.test(p) || Number(p.slice(1)) >= total))
+        out.push('jigsaw: id kepingan tidak valid');
+      if (it.fixed.length >= total) out.push('jigsaw: semua kepingan sudah terpasang');
+      break;
+    }
   }
   if (item.prompt.length > MAX_PROMPT_LENGTH)
     out.push(`kalimat soal > ${MAX_PROMPT_LENGTH} karakter`);
@@ -323,6 +400,8 @@ export function itemProblems(item: ItemCore): string[] {
       out.push('diagram: label ≠ nilai');
     if (v.kind === 'table' && v.rows.some((r) => r.length !== v.headers.length))
       out.push('tabel: kolom tidak sama');
+    if (v.kind === 'puzzle' && v.index >= v.cols * v.rows)
+      out.push('puzzle: kepingan di luar gambar');
   }
   return out;
 }

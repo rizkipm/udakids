@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
   isAudioOnlyItem,
@@ -28,7 +28,17 @@ import { MazeBoard } from './games/MazeBoard';
 import { MemoryGame } from './games/MemoryGame';
 import { TraceBoard } from './games/TraceBoard';
 import { WordSearch } from './games/WordSearch';
+import { CrosswordGame } from './games/Crossword';
+import { FeedCat } from './games/FeedCat';
+import { HopGame } from './games/HopGame';
+import { JigsawGame } from './games/Jigsaw';
+import { LabelMatch } from './games/Labels';
+import { SortGame } from './games/SortGame';
+import { SumGame } from './games/SumGame';
+import { TrainSpell } from './games/Train';
+import { WheelGame } from './games/Wheel';
 import { t, type MessageKey } from '../i18n';
+import { ItemVoice } from './itemVoice';
 import './play.css';
 
 export type ItemPlayerProps = {
@@ -57,9 +67,6 @@ export type ItemPlayerProps = {
   showMarks?: boolean;
 };
 
-/** Soal yang sedang tampil: kartu pilihan English diucapkan suara Momo dari server (D-059, D-062). */
-const ItemVoice = createContext<Item | undefined>(undefined);
-
 const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   'pick-one': 'play.cmd.pickOne',
   'tap-all': 'play.cmd.tapAll',
@@ -76,6 +83,11 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   'word-search': 'play.cmd.wordSearch',
   memory: 'play.cmd.memory',
   catch: 'play.cmd.catch',
+  sum: 'play.cmd.sum',
+  hop: 'play.cmd.hop',
+  sort: 'play.cmd.sort',
+  crossword: 'play.cmd.crossword',
+  jigsaw: 'play.cmd.jigsaw',
 };
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
@@ -343,15 +355,32 @@ function InteractionView(props: ViewProps<Interaction>) {
     case 'tap-all':
       return <TapAll {...props} interaction={it} />;
     case 'order':
-      return <Order {...props} interaction={it} />;
+      // Bianglala / roket (D-078): tampilan game, penilaian sama.
+      return it.style ? (
+        <WheelGame {...props} interaction={it} />
+      ) : (
+        <Order {...props} interaction={it} />
+      );
     case 'group':
       return <Group {...props} interaction={it} />;
     case 'match':
-      return <Match {...props} interaction={it} />;
+      return it.style === 'labels' ? (
+        <LabelMatch {...props} interaction={it} />
+      ) : (
+        <Match {...props} interaction={it} />
+      );
     case 'spell':
-      return <Spell {...props} interaction={it} />;
+      return it.style === 'train' ? (
+        <TrainSpell {...props} interaction={it} />
+      ) : (
+        <Spell {...props} interaction={it} />
+      );
     case 'build':
-      return <Build {...props} interaction={it} />;
+      return it.style === 'feed' ? (
+        <FeedCat {...props} interaction={it} />
+      ) : (
+        <Build {...props} interaction={it} />
+      );
     case 'number-line':
       return <NumberLine {...props} interaction={it} />;
     case 'number-input':
@@ -389,6 +418,17 @@ function InteractionView(props: ViewProps<Interaction>) {
       );
     case 'catch':
       return <CatchGame interaction={it} disabled={props.disabled} onDone={props.onSubmit} />;
+    // Game seru (D-078).
+    case 'sum':
+      return <SumGame {...props} interaction={it} />;
+    case 'hop':
+      return <HopGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'sort':
+      return <SortGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'crossword':
+      return <CrosswordGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'jigsaw':
+      return <JigsawGame {...props} interaction={it} onDone={props.onSubmit} />;
   }
 }
 

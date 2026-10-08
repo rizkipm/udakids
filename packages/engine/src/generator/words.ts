@@ -33,6 +33,9 @@ export function numberWord(n: number): string {
   return `${th === 1 ? 'seribu' : `${numberWord(th)} ribu`}${rest ? ` ${numberWord(rest)}` : ''}`;
 }
 
+/** Bilangan bulat termasuk negatif: −3 → "negatif tiga" (D-078, lompat kodok bilangan bulat). */
+export const signedWord = (n: number) => (n < 0 ? `negatif ${numberWord(-n)}` : numberWord(n));
+
 /** 1 → "pertama", 2 → "kedua", ... */
 export function ordinalWord(n: number): string {
   return n === 1 ? 'pertama' : `ke${numberWord(n)}`;

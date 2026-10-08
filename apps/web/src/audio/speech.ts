@@ -446,7 +446,13 @@ const voicedCards = (item: Partial<Pick<Item, 'interaction'>>) => {
         ? [...it.groups, ...it.items]
         : it.type === 'match'
           ? [...it.left, ...it.right]
-          : [];
+          : it.type === 'sort'
+            ? [...it.bins, ...it.items]
+            : it.type === 'sum'
+              ? it.tokens
+              : it.type === 'crossword'
+                ? it.letters
+                : [];
   return cards.filter((c) => c.say);
 };
 

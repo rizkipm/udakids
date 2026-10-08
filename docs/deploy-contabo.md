@@ -28,7 +28,7 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
-## Rilis 2026-10-08 (D-073 … D-077): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD, katalog ringan
+## Rilis 2026-10-08 (D-073 … D-078): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD, katalog ringan, Game seru
 
 **Isi rilis:**
 
@@ -37,6 +37,10 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 - Mock test pindah ke dalam bagian lombanya: EMC/ESC/EEC/KMSI → "Kisi-kisi soal & topik" lalu "Mock test" (D-076).
 - Worksheet PAUD Baca Tulis + game interaktif; label Pra-TK → PAUD (D-075).
 - Layar tunggu Momo yang animatif + katalog dikompres (±35 MB → ±3 MB) dan tidak diunduh ulang tiap halaman (D-077).
+- **Game seru (D-078):** topik "Game seru" (10 level, 10 jenis game berbeda) di 26 buku: PAUD, TK, Kelas 1–3, Sains
+  Kelas 4, dan semua buku Olimpiade. Topik Game angka & Game huruf di Worksheet PAUD dirombak supaya tidak ada jenis
+  game yang berulang (12 level lama → draft, progres level yang dipertahankan tetap). Level game tidak dipakai mock
+  test maupun lomba live.
 
 **Yang dibawa ke server hanya kode, migrasi, dan konten soal** dari git. Akun, anak, skor, progres, artikel, atau
 gambar percobaan di laptop **tidak** ikut, karena semua itu hanya ada di database laptop dan database laptop tidak
@@ -46,14 +50,15 @@ Tanpa env baru dan tanpa dependensi sistem baru. **Perlu `migrate:prod` DAN `see
 
 > Diuji 2026-10-08 di laptop dengan database kosong + `NODE_ENV=production`:
 >
-> - Hasil: 20 migrasi, 27 buku, 5.534 skill aktif (54 mock test), 3 level, 1 dialog, 1 admin.
+> - Hasil: 20 migrasi, 27 buku, 5.794 skill aktif (54 mock test, 260 level Game seru di 26 buku), 3 level, 1 dialog,
+>   1 admin.
 > - Data lain kosong: 0 orang tua/anak/kelas/event/skor/artikel/media.
 > - Satu baris `app_settings` "news" hanya penanda waktu email info materi, bukan data percobaan.
 
 ### 1. Laptop: cek, commit, push
 
-Kode rilis ini sudah ada di `origin/main` (commit `1afa173` "update soal soal KMSI"). Cek dulu apakah masih ada
-perubahan yang belum dikirim:
+Sebagian rilis ini (termasuk migrasi 0018/0019) sudah ada di `origin/main` (commit `1afa173`, `d436640`). Game seru
+(D-078) dan beberapa perbaikan lain **belum di-commit** (±350 file per 2026-10-08). Cek dulu:
 
 ```bash
 cd ~/Repo/udakids
@@ -72,8 +77,8 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
 git add -A
 # pastikan tidak ada rahasia / dump / data lokal yang ikut:
 git status --short | grep -E "\.env$|\.dump$|backups/|test-results|\.png$" || echo "aman"
-git diff --cached --stat -- apps/api/drizzle | tail -3   # harus ada 0018_videos_articles.sql & 0019_article_images.sql
-git commit -m "KMSI, mock test per lomba, artikel multi-gambar, Worksheet PAUD (D-073..D-076)"
+git diff --cached --stat -- apps/api/drizzle | tail -3   # boleh kosong: 0018 & 0019 sudah di origin/main
+git commit -m "Game seru 26 buku + Worksheet PAUD comply, layar tunggu Momo, katalog ringan (D-077, D-078)"
 git push origin main
 git log -1 --oneline                                      # catat hash commit ini
 ```
@@ -100,7 +105,8 @@ psql "$U" -c "
 ```
 
 **Catat angkanya.** `ortu` dan `anak` harus tetap sama setelah deploy (event boleh bertambah karena anak bermain).
-`migrasi` sekarang 18 (0000–0017). Bila sudah 19, rilis D-073 sebelumnya sudah sempat masuk; tidak apa-apa.
+`migrasi` sekarang 18 (0000–0017), 19, atau 20 bila commit `1afa173`/`d436640` sudah pernah di-deploy. Semua aman:
+`migrate:prod` hanya menjalankan yang belum ada.
 
 ### 3. Ambil kode, build, migrasi, seed
 
@@ -119,11 +125,11 @@ systemctl start little-coder-api
 Keluaran `seed:prod` yang diharapkan:
 
 ```text
-skill: … ditambahkan/diperbarui dari 5561 file    ← > 0 (KMSI Kelas 1–SMP, mock, worksheet PAUD)
+skill: … ditambahkan/diperbarui dari 5821 file    ← > 0 (KMSI, mock, worksheet PAUD, Game seru 260 level)
 katalog lama yang disunting admin juga mendapat materi baru; judul "Pra-TK" → "PAUD" dan "(OSN)" → "(Olimpiade)" ikut diganti
-skill: … skill lama tidak ada di konten → draft     ← boleh muncul
+skill: … skill lama tidak ada di konten → draft     ← ±12 (level Worksheet game yang diganti, D-078)
 level: 0 ditambahkan/diperbarui
-dialog: 1 ditambahkan/diperbarui                    ← kalimat suara baru (game PAUD)
+dialog: 1 ditambahkan/diperbarui                    ← kalimat suara baru (game PAUD & Game seru)
 ```
 
 **Jangan** jalankan `pnpm db:seed`, `pnpm db:setup`, `pnpm db:restore`, `pnpm db:generate`, atau `seed:prod --force`
@@ -142,6 +148,9 @@ psql "$U" -tAc "select count(*) from drizzle.__drizzle_migrations"     # 20
 psql "$U" -tAc "select to_regclass('videos'), to_regclass('articles')" # videos | articles
 psql "$U" -tAc "select count(*) from skill_catalogs"                   # 27
 psql "$U" -tAc "select count(*) from skills where template->>'family' = 'mock' and status = 'active'"   # 54
+psql "$U" -tAc "select count(*) from skills where category = 'GM' and status = 'active'"              # 260
+psql "$U" -tAc "select count(*) from skill_catalogs where categories::text like '%\"GM\"%'"           # 26
+psql "$U" -tAc "select count(*) from skills where domain = 'worksheet' and category in ('B','E') and status = 'active'"  # 20
 psql "$U" -c "
   select domain, grade, title,
          (select count(*) from jsonb_array_elements(categories) c where c->>'mock' = 'true') mock,
@@ -165,6 +174,9 @@ T=$(curl -s -X POST http://127.0.0.1:7177/auth/staff/login -H 'Content-Type: app
 curl -s -o /dev/null -w "gzip %{size_download} byte\n" -H "Accept-Encoding: gzip" -H "Authorization: Bearer $T" \
   http://127.0.0.1:7177/catalog                                         # ±3.000.000 (bukan ±35.000.000)
 ```
+
+**Bila jumlah katalog dengan GM < 26:** katalog itu pernah disunting admin dan topik baru belum masuk; jalankan
+`seed:prod` sekali lagi (topik baru ditambahkan tanpa menghapus suntingan admin).
 
 **Bila ada buku dengan `mock` = 0 atau judul masih "(OSN)":** katalog itu pernah diubah lewat Admin → Katalog.
 Seed sekarang tetap menambahkan materi baru, memindahkan mock, dan mengganti "(OSN)" → "(Olimpiade)" tanpa menghapus
@@ -196,6 +208,9 @@ Gambar artikel tidak perlu perubahan Nginx, karena dilayani dari `/api/media/…
 4. `/masuk/staf` → Admin → **Artikel & berita** → tulis artikel, unggah 2–3 gambar sekaligus, status **Terbit**.
    Di `/artikel/<slug>`, gambarnya harus bisa digeser. Admin → **Video panduan** → tempel satu tautan YouTube.
 5. **PAUD** → **Worksheet**: bagian Numerasi dan Literasi, "Huruf vokal a dan i" langsung terbuka.
+6. Buku mana saja (mis. **Kelas 1** → **Matematika**, **TK (Olimpiade)** → **Sains**): paling bawah ada bagian
+   **Game Seru Momo** berisi 1 topik, 10 level dengan jenis game berbeda. Level 1 bisa langsung dimainkan.
+7. Mock test di buku Olimpiade tidak pernah berisi soal game (kartu pasangan, labirin, neraca, …).
 
 Artikel, video, dan banner diisi lewat Admin di server. Isi percobaan di laptop memang tidak ikut terbawa.
 

@@ -79,6 +79,14 @@ export const SAMPLE_VISUALS: { [K in Kind]: Extract<Visual, { kind: K }> } = {
     highlight: [10, 20, 30],
   },
   venn: { kind: 'venn', a: 'Merah', b: 'Bulat', onlyA: 2, onlyB: 3, both: 1, object: 'apel' },
+  puzzle: {
+    kind: 'puzzle',
+    picture: { kind: 'object', object: 'traktor' },
+    cols: 2,
+    rows: 2,
+    show: 'holed',
+    index: 3,
+  },
   measure: {
     kind: 'measure',
     object: 'pensil',

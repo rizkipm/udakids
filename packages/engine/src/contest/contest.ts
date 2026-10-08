@@ -1,3 +1,4 @@
+import { GAME_FAMILIES } from '../generator/families/index.js';
 import { z } from 'zod';
 import {
   checkAnswer,
@@ -175,8 +176,13 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
       break;
     case 'memory':
     case 'catch':
-      // Pasangan kartu & benda yang harus ditangkap = kunci jawaban; tidak dipakai di lomba (lihat
-      // `contestSafeTemplate`).
+    case 'sum':
+    case 'hop':
+    case 'sort':
+    case 'crossword':
+    case 'jigsaw':
+      // Pasangan kartu, benda yang harus ditangkap, dan umpan balik tiap ketukan game seru (D-078) butuh kunci
+      // jawaban di perangkat; tidak dipakai di lomba (lihat `contestSafeTemplate`).
       throw new Error(`interaksi ${i.type} tidak dipakai di lomba`);
   }
   return {
@@ -262,14 +268,21 @@ export function planContestSkills(
 }
 
 /** Family yang soalnya butuh kunci jawaban di perangkat (D-075). */
-const CONTEST_UNSAFE_FAMILIES = new Set(['memory-pairs', 'catch-items']);
 
 /** Skill boleh jadi sumber soal lomba: bukan mock test dan tidak (pernah) memakai game berkunci. */
+/**
+ * Labirin & cari kata Worksheet PAUD boleh di lomba (D-075: letak kata tidak dikirim, dinilai dari huruf di kotak).
+ * Game lain (kartu pasangan, tangkap, dan semua game seru D-078) tidak.
+ */
+const CONTEST_GAME_OK: ReadonlySet<string> = new Set(['maze-path', 'word-search']);
+const contestUnsafeGame = (family: string) =>
+  GAME_FAMILIES.has(family) && !CONTEST_GAME_OK.has(family);
+
 export function contestSafeTemplate(t: Pick<SkillTemplate, 'family' | 'params'>): boolean {
-  if (t.family === 'mock' || CONTEST_UNSAFE_FAMILIES.has(t.family)) return false;
+  if (t.family === 'mock' || contestUnsafeGame(t.family)) return false;
   if (t.family !== 'mix') return true;
   const parts = (t.params as { parts?: { family: string }[] }).parts ?? [];
-  return !parts.some((p) => CONTEST_UNSAFE_FAMILIES.has(p.family));
+  return !parts.some((p) => contestUnsafeGame(p.family));
 }
 
 /** Soal lomba lengkap (dengan kunci) yang disimpan di server. `key` = rahasia penyamar id pilihan. */

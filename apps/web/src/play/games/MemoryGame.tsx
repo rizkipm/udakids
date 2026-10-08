@@ -7,6 +7,13 @@ import './games.css';
 
 type Memory = Extract<Interaction, { type: 'memory' }>;
 
+/** Ukuran kartu kata (D-078): makin panjang kata terpanjangnya, makin kecil hurufnya; huruf tunggal tetap besar. */
+const wordSize = (text: string) => {
+  const longest = Math.max(...text.split(' ').map((w) => w.length));
+  if (text.length <= 2) return '';
+  return longest >= 8 ? ' is-word is-long' : longest >= 6 ? ' is-word is-mid' : ' is-word';
+};
+
 /** Lama dua kartu yang belum cocok tetap terbuka sebelum ditutup lagi (ms). */
 const PEEK_MS = 1100;
 
@@ -107,7 +114,10 @@ export function MemoryGame({
                 </span>
                 <span className="mem-front">
                   {card.visual.kind === 'word' ? (
-                    <span className="mem-letter">{card.visual.text}</span>
+                    // Kata/soal (D-078) lebih kecil dan boleh turun baris; huruf tunggal tetap besar.
+                    <span className={`mem-letter${wordSize(card.visual.text)}`}>
+                      {card.visual.text}
+                    </span>
                   ) : (
                     <VisualView visual={card.visual} size={84} />
                   )}

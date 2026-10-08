@@ -1875,3 +1875,125 @@ mengambil buku" sering muncul dan terasa monoton.
   pembesar, pesan ramah (tanpa kata "salah/gagal", tanpa merah), tombol besar "Coba lagi"; pesan berbeda bila
   perangkat offline. Dipakai di beranda, topik, latihan, pelajaran, dan mock test (sebelumnya empat halaman itu
   tidak punya keadaan gagal sama sekali). `prefers-reduced-motion` mematikan animasi.
+
+## D-078 — Game seru berlevel per buku (PAUD, TK, Kelas 1, Kelas 2 — Matematika, Sains, English PAUD)
+
+Tanggal: 2026-10-08. Disetujui pemilik produk:
+
+- Game baru: "Sortir keranjang, Neraca seimbang, Lompat kodok, Toko Momo", ditambah teka-teki silang bertema,
+  angka/huruf yang hilang, tempel kata ke benda, puzzle, bianglala, hitung langkah, tema astronot, kucing, dan
+  kendaraan.
+- Letak: 1 topik di akhir buku.
+- Cakupan: bertahap.
+- Lanjutan dari pemilik produk: "game jangan sampai ada yang berulang tipenya dalam 1 topik".
+
+**Topik `GM` "Game seru …"** ada di akhir buku, di bagian `Game · Game Seru Momo — …`. Topik ini `standalone`
+(langsung terbuka, tidak mengunci topik lain) dan berisi 10 level. Aturan paket/level gratis sama dengan topik lain.
+
+**Aturan: 10 level = 10 jenis game berbeda.**
+
+- Jenis dihitung per mekanik yang dirasakan anak:
+  - isi sampai pas (neraca / Toko Momo / truk / beri makan)
+  - lompat (kodok / langkah)
+  - urut (bianglala / roket)
+  - kereta (angka/huruf hilang)
+  - sortir
+  - teka-teki silang
+  - puzzle (susun / pilih kepingan)
+  - labirin
+  - kartu pasangan
+  - tangkap (termasuk balon)
+  - tempel label
+  - cari kata
+  - sambung titik
+- Tidak ada level "tantangan campuran", karena isinya pasti mengulang jenis. Satu level boleh memakai beberapa
+  bagian dari jenis yang sama (mis. sortir hewan + sortir siang/malam), supaya isinya bervariasi.
+- Dicek dua kali: generator konten menolak buku dengan jenis kembar, dan test engine (`play.test.ts`) membuat soal
+  dari semua topik GM di `content/` lalu memastikan setiap level satu jenis dan setiap topik punya 10 jenis berbeda.
+
+**Isi per buku:**
+
+| Buku          | 10 level (jenis berbeda)                                                                                                                                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Math PAUD     | hewan lapar (isi), kereta angka, lompat kodok berhitung, bianglala angka, sortir bentuk, balon angka (tangkap), puzzle, labirin traktor angka, kartu angka ↔ benda, sambung titik                                                                            |
+| English PAUD  | kartu huruf besar-kecil, kereta alfabet, tangkap animals, tempel kata, sortir animals/food/toys, cari kata, teka-teki silang hewan, bianglala number words, labirin astronot alfabet, puzzle hewan (nama English)                                            |
+| Math TK       | Toko Momo, lompat tambah/kurang, kereta angka sampai 20, roket hitung mundur, sortir menggelinding, teka-teki silang angka, labirin astronot loncat dua, kartu soal ↔ hasil, puzzle pilih kepingan, tempel nama bangun datar                                 |
+| Sains TK      | sortir (darat/air, hidup/tak hidup, siang/malam), kartu hewan ↔ rumah, tangkap sampah di laut, bianglala kecil → besar, labirin traktor menanam, teka-teki silang cuaca, puzzle hewan & tumbuhan, tempel nama benda langit, cari kata alam, beri makan hewan |
+| Math Kelas 1  | lompat tambah/kurang sampai 20, kereta loncat 2/5/10, Toko Momo, bianglala sampai 100, sortir bangun datar/ruang, kartu penjumlahan sampai 20, teka-teki silang nama bilangan, labirin truk loncat lima, tangkap pasangan sepuluh, tempel nama bangun ruang  |
+| Sains Kelas 1 | sortir bunyi/cahaya & panas/dingin, kartu hewan ↔ makanan, tangkap hewan bertelur, bianglala daur hidup & ukuran, labirin truk sampah, teka-teki silang luar angkasa, puzzle alam, tempel nama cuaca, cari kata hewan, kereta kata sains                     |
+| Math Kelas 2  | sortir genap/ganjil, lompat loncat 10/5/3/4, neraca penjumlahan dua angka, bianglala sampai 1.000, kereta pola bilangan, kartu penjumlahan berulang, teka-teki silang bilangan, tangkap kelipatan lima, labirin koin dari terkecil, tempel waktu ke jam      |
+| Sains Kelas 2 | sortir magnet & padat/cair, kartu hewan ↔ cara bergerak, tangkap benda yang mencair, bianglala ringan → berat, labirin robot magnet, teka-teki silang panas & dingin, puzzle benda, tempel sifat benda, cari kata sains, kereta kata benda                   |
+
+**Tahap 3 (lanjutan, disetujui: "Semua, termasuk Olimpiade"):**
+
+- Buku reguler Matematika Kelas 3, Sains Kelas 3, dan Sains Kelas 4.
+- 14 buku Olimpiade (Matematika, Sains, English; TK, Kelas 1–2, 3–4, 5–6, SMP). Gamenya mengikuti kisi-kisi
+  buku, mis.:
+  - Matematika: FPB/KPK, pecahan ↔ desimal ↔ persen, bilangan prima/kuadrat/kubik, bilangan bulat negatif,
+    bentuk aljabar, Fibonacci.
+  - Sains: konduktor/isolator, perpindahan kalor, organ & organel sel, besaran pokok, unsur/senyawa/campuran,
+    tata surya, metode ilmiah.
+  - English: verb -ing/past, synonym/antonym, comparative, adverb, noun/verb, tenses.
+- Total sekarang 26 buku × 10 level (+ 2 topik game Worksheet PAUD). Di buku Olimpiade, topik GM ada tepat sebelum mock test (mock tetap paling
+  akhir, aturan seed D-076). Di layar, bagian "Game" tetap tampil paling bawah.
+- **Level game tidak pernah menjadi sumber soal mock test** (`mockSources` melewati `usesGameFamily`) dan
+  tidak dipakai di lomba live. Pengecualian yang sudah disetujui di D-075 tetap berlaku: labirin & cari kata
+  Worksheet PAUD boleh dipakai di lomba.
+- **Worksheet PAUD (D-075) dibuat comply:**
+  - Topik "Game angka" (B) dan "Game huruf" (E) sebelumnya memakai labirin/kartu/tangkap 2–3 kali.
+  - Level yang jenisnya sudah unik tidak diubah (B01–B03, B07, E01–E03, E06), sehingga id dan progres anak
+    tetap.
+  - Level lain diganti:
+    - B: hewan lapar, lompat kodok, kereta angka, bianglala, sortir angka/huruf, sambung titik.
+    - E: sortir gambar berawalan vokal, kereta vokal, bianglala a-i-u-e-o, puzzle, tempel huruf depan,
+      teka-teki silang kata vokal.
+  - Id lama yang diganti menjadi draft lewat seed (tidak tampil lagi).
+- Engine tambahan:
+  - Teka-teki silang dengan kata sendiri (`custom`, petunjuk boleh kata, mis. "kucing" → CAT).
+  - Lompat kodok bilangan negatif (`signedWord`: "negatif tiga").
+  - Label satu huruf.
+  - Label & kartu pasangan tidak pernah memuat kata/gambar kembar.
+  - Teks panjang di kartu, labirin, tangkap, dan bianglala tetap muat.
+- Ketahanan: 280 level game (termasuk Worksheet) × 1.200 soal = 336.000 soal tanpa gagal; setiap level ≥ 16 soal
+  unik per tingkat kesulitan.
+
+**Mesin game (engine, dinilai dari ketukan; tanpa batas waktu dan tanpa nyawa):**
+
+- Interaksi baru:
+  - `sum`: neraca, toko, atau truk. Jumlah token harus tepat dan ≤ `maxTokens`. Neraca miring ke sisi yang lebih
+    berat.
+  - `hop`: papan batu zig-zag 5 per baris; anak mengetuk batu tempat mendarat.
+  - `sort`: benda datang satu per satu, lalu dimasukkan ke 2–3 keranjang/truk.
+  - `crossword`: teka-teki silang bergambar ber-seed (`buildCrossword`). Anak mengetuk gambar, lalu kartu huruf.
+  - `jigsaw`: kepingan dipotong dari ilustrasi 100×100. Visual `puzzle` (gambar berlubang / satu kepingan) untuk
+    "kepingan mana yang pas".
+- Gaya tampilan baru (penilaian tidak berubah):
+  - `order`: `ferris` (bianglala) dan `rocket` (hitung mundur).
+  - `spell`: `train` (gerbong angka/huruf yang hilang).
+  - `match`: `labels` (tempel kata).
+  - `build`: `feed` + `eater` (beri makan hewan).
+  - `maze`: `walker`, `goalVisual`, dan tanda bergambar.
+  - `catch`: `scene` (langit, angkasa, laut, kebun).
+- Family berbasis data (`families/fun.ts`): `sum-game`, `hop-game`, `sort-game`, `crossword-game`, `jigsaw-game`,
+  `pairs-game`, `catch-game`, `train-game`, `label-game`, `wheel-game`, `feed-game`, `maze-game`, `word-hunt`.
+  Isi game ditulis di JSON lewat `spec` gambar (object/shape/solid/numeral/word/coin/die + `say`). Untuk buku
+  English, `say` diisi kata English agar dibacakan suara English.
+- Tambahan tahap 2:
+  - Gambar jam di JSON (`clock: "07:30"`).
+  - Bianglala mode `sequence` (daur hidup, ringan → berat).
+  - Kartu pasangan tidak pernah memuat dua kartu yang sama (mis. dua kartu "5").
+  - Nama gambar puzzle bisa English (`names`).
+  - Tema teka-teki silang `bilangan` dan `panas`.
+- Variasi & ketahanan:
+  - Setiap level ≥ 16 soal unik per tingkat kesulitan (sebagian besar ≥ 100), sehingga satu ronde tidak berisi soal
+    kembar.
+  - 120.000 soal acak (1.500 per level) dibuat tanpa gagal.
+- Lomba live: semua game seru tidak dipakai (`CONTEST_UNSAFE_FAMILIES`), karena umpan balik tiap ketukan butuh
+  kunci jawaban di perangkat.
+- Suara: perintah baru `vo_cmd_sum`, `vo_cmd_hop`, `vo_cmd_sort`, `vo_cmd_crossword`, `vo_cmd_jigsaw`.
+- Ilustrasi baru (buatan sendiri): traktor, roket, planet, astronot, kerang, benih, tunas.
+- UX anak:
+  - Target sentuh ≥ 64 px, semua lewat ketukan (tanpa drag).
+  - Saat belum tepat, benda hanya bergoyang dan Momo mengajak mencoba lagi; tidak ada kata "salah"/"gagal" dan
+    tidak ada merah besar.
+  - Gerak dikurangi bila `prefers-reduced-motion`.

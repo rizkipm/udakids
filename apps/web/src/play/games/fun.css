@@ -1,0 +1,945 @@
+/* Game seru (D-078): neraca, toko, truk, lompat kodok, sortir, teka-teki silang, puzzle, kereta, label,
+   bianglala/roket, kucing. Target sentuh ≥ 64 px; tanpa merah besar; gerak dikurangi bila diminta. */
+
+.sum-board,
+.hop-board,
+.sort-board,
+.cross-board,
+.jig-board,
+.train-board,
+.label-board,
+.wheel-board,
+.feed-board {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.fun-word {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--kid-ink, #1d1a2e);
+}
+.fun-word.is-small {
+  font-size: 0.8rem;
+}
+
+/* Kartu ketuk bersama (angka/huruf/kata/gambar). */
+.fun-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 560px;
+}
+.fun-tile {
+  min-width: var(--kid-touch, 64px);
+  min-height: var(--kid-touch, 64px);
+  padding: 6px 14px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.fun-tile.is-word {
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+}
+.fun-tile.is-card {
+  padding: 6px;
+}
+.fun-tile:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.fun-tile:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--kid-line, #2b2540);
+}
+.fun-tile.is-held {
+  background: var(--kid-sun, #f7c948);
+  transform: translateY(-4px);
+}
+.fun-tile:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.fun-tile:focus-visible,
+.sum-token:focus-visible,
+.hop-stone:focus-visible,
+.sort-bin:focus-visible,
+.cross-clue:focus-visible,
+.cross-letter:focus-visible,
+.jig-slot:focus-visible,
+.jig-piece:focus-visible,
+.wheel-cabin:focus-visible,
+.label-pic-btn:focus-visible,
+.feed-add:focus-visible,
+.feed-bowl:focus-visible {
+  outline: 4px solid var(--kid-primary, #5b3fd6);
+  outline-offset: 3px;
+}
+
+@keyframes fun-wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(6px) rotate(3deg);
+  }
+}
+@keyframes fun-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes fun-hop {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  45% {
+    transform: translate(-50%, -26px);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+.is-wobble,
+.is-shake {
+  animation: fun-wobble 0.45s ease-in-out;
+}
+
+/* ------------------------------------------------------------ neraca, toko, truk */
+
+.balance {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 420px);
+}
+.balance-beam {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 8px solid var(--kid-line, #2b2540);
+  border-radius: 4px;
+  transform: rotate(var(--tilt, 0deg));
+  transform-origin: 50% 100%;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.balance-pan {
+  min-height: 112px;
+  display: grid;
+  place-items: end center;
+  padding: 8px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-top: 0;
+  border-radius: 0 0 60px 60px;
+  background: #fff4cf;
+}
+.balance-pan.is-right {
+  background: var(--kid-soft, #efe7ff);
+}
+.balance-stand {
+  width: 110px;
+  margin-top: -6px;
+}
+.sum-board.is-even .balance-beam {
+  border-bottom-color: var(--kid-good, #2e9e5b);
+}
+.sum-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.sum-chip {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 2px 8px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 12px;
+  background: #ffd166;
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+  animation: fun-pop 0.25s ease-out;
+}
+.sum-chip.is-given {
+  background: #c9f0d3;
+  cursor: default;
+}
+.sum-chip.is-coin {
+  padding: 2px;
+  border-radius: 50%;
+  background: #fff;
+}
+.sum-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.sum-token {
+  min-width: 76px;
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #ffd166;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+}
+.sum-token.is-coin {
+  background: #fff;
+  border-radius: 50%;
+}
+.sum-token:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--kid-line, #2b2540);
+}
+.sum-token:disabled {
+  opacity: 0.5;
+}
+.shop {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  width: min(100%, 420px);
+}
+.shop-counter {
+  padding: 12px 18px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 22px;
+  background: repeating-linear-gradient(90deg, #ffe6de 0 22px, #fff 22px 44px);
+}
+.shop-tray {
+  width: 100%;
+  min-height: 84px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 10px;
+  border: 4px dashed var(--kid-line, #2b2540);
+  border-radius: 22px;
+  background: #fffaf0;
+}
+.shop-total {
+  font-weight: 800;
+  color: #5d5873;
+}
+.truck {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: min(100%, 420px);
+}
+.truck-sign {
+  position: absolute;
+  right: 4px;
+  top: -6px;
+  padding: 4px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 12px;
+  background: #fff;
+}
+.truck-bed {
+  width: 70%;
+  min-height: 64px;
+  display: grid;
+  place-items: end center;
+  justify-self: start;
+  margin-left: 2%;
+  padding: 6px;
+}
+.truck-body {
+  width: 100%;
+  height: auto;
+  margin-top: -18px;
+}
+
+/* ------------------------------------------------------------ lompat kodok */
+
+.hop-pond {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 20% 30%, #ffffff55 0 8%, transparent 9%),
+    linear-gradient(#bfe8ff, #8fd3f5);
+}
+.hop-board.is-steps .hop-pond {
+  background: linear-gradient(#e7f7d9, #c9ecb0);
+}
+.hop-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.hop-row.is-back {
+  justify-content: flex-end;
+}
+.hop-stone {
+  position: relative;
+  width: clamp(64px, 15vw, 76px);
+  height: clamp(64px, 15vw, 76px);
+  display: grid;
+  place-items: end center;
+  padding-bottom: 6px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 46% 54% 48% 52%;
+  background: #e6e1d6;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  cursor: pointer;
+}
+.hop-board.is-steps .hop-stone {
+  border-radius: 16px;
+  background: #fff4cf;
+}
+.hop-stone.is-path {
+  background: #c9f0d3;
+}
+.hop-stone.is-here {
+  background: #ffd166;
+}
+.hop-num {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+}
+.hop-hero {
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  transform: translate(-50%, 0);
+  animation: fun-hop 0.45s ease-out;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------ sortir keranjang */
+
+.sort-belt {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: min(100%, 420px);
+  padding: 12px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 24px;
+  background: repeating-linear-gradient(90deg, #e9e4f8 0 18px, #f6f3ff 18px 36px);
+}
+.sort-item {
+  min-width: 120px;
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 24px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  cursor: pointer;
+  animation: fun-pop 0.3s ease-out;
+}
+.sort-count {
+  font-weight: 800;
+  color: #5d5873;
+}
+.sort-bins {
+  display: grid;
+  grid-template-columns: repeat(var(--bins, 2), minmax(0, 1fr));
+  gap: 10px;
+  width: min(100%, 520px);
+}
+.sort-bin {
+  display: grid;
+  justify-items: center;
+  align-content: end;
+  gap: 4px;
+  min-height: 170px;
+  padding: 10px 6px 4px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 22px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  cursor: pointer;
+}
+.sort-bin:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--kid-line, #2b2540);
+}
+.sort-bin-name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--kid-ink, #1d1a2e);
+}
+.sort-bin-in {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  min-height: 28px;
+}
+.sort-bin-thumb {
+  animation: fun-pop 0.25s ease-out;
+}
+.sort-bin-thumb .fun-word.is-small {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: var(--kid-soft, #efe7ff);
+  white-space: nowrap;
+}
+.sort-basket-art {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+}
+
+/* ------------------------------------------------------------ teka-teki silang */
+
+.cross-clues {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.cross-mascot {
+  display: grid;
+  place-items: center;
+  animation: bob 2.4s ease-in-out infinite;
+}
+.cross-clue {
+  position: relative;
+  min-width: 72px;
+  min-height: 72px;
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  cursor: pointer;
+}
+.cross-clue.is-on {
+  background: #fff4cf;
+  transform: translateY(-3px);
+}
+.cross-clue.is-done {
+  background: #c9f0d3;
+}
+.cross-clue-n,
+.cross-cell-n {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--kid-primary, #5b3fd6);
+}
+.cross-grid {
+  --cell: min(44px, calc((100vw - 64px) / var(--cols)));
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-template-rows: repeat(var(--rows), var(--cell));
+  gap: 3px;
+}
+.cross-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 8px;
+  background: #fff;
+  font-size: calc(var(--cell) * 0.5);
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+}
+.cross-cell.is-active {
+  background: #fff4cf;
+}
+.cross-cell.is-filled {
+  animation: fun-pop 0.25s ease-out;
+}
+.cross-letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 520px;
+}
+.cross-letter {
+  width: var(--kid-touch, 64px);
+  height: var(--kid-touch, 64px);
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+  background: var(--kid-soft, #efe7ff);
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+}
+.cross-letter:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--kid-line, #2b2540);
+}
+
+/* ------------------------------------------------------------ puzzle */
+
+.jig-frame {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  gap: 0;
+  padding: 6px;
+  border: 5px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: #fff;
+}
+.jig-slot {
+  width: var(--cell);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px dashed #b8aee6;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+.jig-slot svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.jig-slot.is-filled {
+  border: 1px solid #e4defa;
+  cursor: default;
+}
+.jig-slot.is-filled > span {
+  animation: fun-pop 0.25s ease-out;
+}
+.jig-slot.is-ready {
+  background: #fff4cf;
+}
+.jig-ghost {
+  opacity: 0.18;
+  filter: grayscale(1);
+}
+.jig-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.jig-piece {
+  min-width: var(--kid-touch, 64px);
+  min-height: var(--kid-touch, 64px);
+  padding: 4px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  cursor: pointer;
+}
+.jig-piece.is-held {
+  border-color: var(--kid-primary, #5b3fd6);
+  background: #fff4cf;
+  transform: translateY(-5px) rotate(-3deg);
+}
+
+/* ------------------------------------------------------------ kereta */
+
+.train {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 6px 4px 12px;
+  border-bottom: 6px solid #a0673a;
+}
+.train-engine {
+  flex: none;
+  width: 84px;
+  height: auto;
+}
+.train-car {
+  position: relative;
+  flex: none;
+  width: var(--kid-touch, 64px);
+  height: var(--kid-touch, 64px);
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 12px 12px 6px 6px;
+  background: #4aa8ff;
+  font: inherit;
+}
+.train-car::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 6px;
+  right: 6px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 20% 50%, #2b2540 0 5px, transparent 6px),
+    radial-gradient(circle at 80% 50%, #2b2540 0 5px, transparent 6px);
+}
+.train-car.is-blank {
+  background: #fff;
+  border-style: dashed;
+  cursor: pointer;
+}
+.train-car.is-blank.is-filled {
+  border-style: solid;
+  background: #ffd166;
+}
+.train-car.is-next {
+  box-shadow: 0 0 0 4px #ffd16699;
+}
+.train-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+}
+
+/* ------------------------------------------------------------ tempel label */
+
+.label-pics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.label-pic {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.label-pic-btn {
+  padding: 8px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  cursor: pointer;
+}
+.label-pic-btn.is-ready {
+  background: #fff4cf;
+}
+.label-sticker,
+.label-empty {
+  min-width: 96px;
+  min-height: 48px;
+  border-radius: 12px;
+}
+.label-sticker {
+  border: 3px solid var(--kid-line, #2b2540);
+  background: #ffd166;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  transform: rotate(-3deg);
+  animation: fun-pop 0.25s ease-out;
+  cursor: pointer;
+}
+.label-empty {
+  border: 3px dashed #b8aee6;
+}
+
+/* ------------------------------------------------------------ bianglala & roket */
+
+.ferris {
+  position: relative;
+  width: min(300px, 86vw);
+  aspect-ratio: 1;
+}
+.ferris-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(var(--turn, 0deg));
+  transition: transform 0.6s ease-out;
+}
+.ferris-seat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.wheel-cabin {
+  min-width: var(--kid-touch, 64px);
+  min-height: var(--kid-touch, 64px);
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px 18px 22px 22px;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.wheel-cabin.is-filled {
+  background: #ffd166;
+  animation: fun-pop 0.25s ease-out;
+}
+.wheel-cabin.is-next {
+  box-shadow: 0 0 0 4px #b8a4ff;
+}
+.wheel-cabin-n {
+  font-weight: 900;
+  color: #9a90c4;
+}
+.rocket-pad {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.rocket-art {
+  width: 80px;
+  height: auto;
+}
+.rocket-flame {
+  opacity: 0.3;
+}
+.rocket-art.is-ready {
+  animation: bob 1.2s ease-in-out infinite;
+}
+.rocket-art.is-ready .rocket-flame {
+  opacity: 1;
+}
+.rocket-panel {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #241d45;
+}
+
+/* ------------------------------------------------------------ kucing */
+
+.feed-scene {
+  display: grid;
+  justify-items: center;
+}
+.cat-art {
+  width: 150px;
+  height: auto;
+}
+.feed-bowl {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  margin-top: -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.feed-food {
+  min-height: 44px;
+  display: grid;
+  place-items: end center;
+}
+.feed-bowl-art {
+  width: 170px;
+  height: auto;
+}
+.feed-count {
+  position: absolute;
+  bottom: 6px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #fff;
+}
+.feed-add {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 80px;
+  padding: 6px 18px 6px 10px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 24px;
+  background: #bfe8ff;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+}
+.feed-add:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--kid-line, #2b2540);
+}
+
+/* ------------------------------------------------------------ latar tangkap & labirin bertema */
+
+.catch-board.scene-space .catch-sky {
+  background:
+    radial-gradient(circle at 12% 18%, #fff 0 1.2%, transparent 1.5%),
+    radial-gradient(circle at 62% 30%, #fff 0 1%, transparent 1.3%),
+    radial-gradient(circle at 84% 70%, #fff 0 1.2%, transparent 1.5%),
+    radial-gradient(circle at 30% 80%, #fff 0 0.9%, transparent 1.2%),
+    linear-gradient(#1c1640, #3b2d7a);
+}
+.catch-board.scene-sea .catch-sky {
+  background:
+    radial-gradient(circle at 18% 70%, #ffffff66 0 3%, transparent 3.5%),
+    radial-gradient(circle at 72% 40%, #ffffff55 0 2%, transparent 2.5%),
+    linear-gradient(#7fd3f7, #2f8fd0);
+}
+.catch-board.scene-farm .catch-sky {
+  background: linear-gradient(#cfeeff 0 55%, #a7dd8b 55%);
+}
+.mem-letter.is-word {
+  padding: 0 4px;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+.mem-letter.is-mid {
+  font-size: 1.05rem;
+}
+.mem-letter.is-long {
+  font-size: 0.88rem;
+  letter-spacing: -0.01em;
+}
+.wheel-cabin .fun-word,
+.cross-clue .fun-word {
+  max-width: 104px;
+  font-size: 0.85rem;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-align: center;
+}
+.sort-item .fun-word,
+.fun-tile .fun-word {
+  max-width: 220px;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-align: center;
+}
+.catch-letter.is-long {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+.catch-letter.is-xlong {
+  font-size: 0.8rem;
+}
+.cross-clue .fun-word {
+  padding: 0 6px;
+}
+.maze-mark.is-long {
+  width: 92%;
+  aspect-ratio: auto;
+  min-height: 60%;
+  border-radius: 14px;
+  font-size: calc(var(--cell) * 0.16);
+  line-height: 1.1;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  text-align: center;
+}
+.maze-mark.is-pic {
+  background: #fff;
+  padding: 2px;
+}
+.maze-goal-pic {
+  display: grid;
+  place-items: center;
+}
+
+@media (max-width: 440px) {
+  .train-engine {
+    width: 64px;
+  }
+  .train-car:not(.is-blank) {
+    width: 52px;
+    height: 52px;
+  }
+  .train-val {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 380px) {
+  .sum-token {
+    min-width: 66px;
+    min-height: 66px;
+    font-size: 1.4rem;
+  }
+  .hop-pond {
+    padding: 10px;
+    gap: 10px;
+  }
+  .hop-row {
+    gap: 6px;
+  }
+  .sort-bin {
+    min-height: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-wobble,
+  .is-shake,
+  .hop-hero,
+  .sum-chip,
+  .sort-item,
+  .sort-bin-thumb,
+  .cross-mascot,
+  .cross-cell.is-filled,
+  .jig-slot.is-filled > span,
+  .label-sticker,
+  .wheel-cabin.is-filled,
+  .rocket-art.is-ready {
+    animation: none;
+  }
+  .balance-beam,
+  .ferris-art {
+    transition: none;
+  }
+}

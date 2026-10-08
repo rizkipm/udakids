@@ -195,6 +195,14 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
       object: objectId,
     }),
     z.strictObject({
+      kind: z.literal('puzzle'),
+      picture: visualSchema,
+      cols: z.number().int().min(2).max(3),
+      rows: z.number().int().min(2).max(3),
+      show: z.enum(['holed', 'piece']),
+      index: z.number().int().min(0).max(8),
+    }),
+    z.strictObject({
       kind: z.literal('measure'),
       object: objectId,
       length: z.number().int().min(1).max(12),

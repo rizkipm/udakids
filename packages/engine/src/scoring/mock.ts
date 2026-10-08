@@ -1,6 +1,7 @@
 import type { Item } from '../generator/item.js';
 import { createRng } from '../generator/rng.js';
 import { generateItem, type SkillTemplate } from '../generator/template.js';
+import { usesGameFamily } from '../generator/families/index.js';
 import { itemKey } from './round.js';
 import { PASS_SCORE } from './quiz.js';
 import {
@@ -21,7 +22,7 @@ export * from '../generator/mock-config.js';
 export const isMockSkill = (t: Pick<SkillTemplate, 'family'>) => t.family === 'mock';
 export const mockConfigOf = (t: SkillTemplate): MockConfig => mockConfigSchema.parse(t.params);
 
-/** Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan versi terkunci/stub). */
+/** Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan game, bukan versi terkunci/stub). */
 export function mockSources(
   mock: SkillTemplate,
   book: readonly (SkillTemplate & { stub?: boolean })[],
@@ -32,6 +33,8 @@ export function mockSources(
       s.domain === mock.domain &&
       s.grade === mock.grade &&
       !isMockSkill(s) &&
+      // Level game (D-078) bukan soal lembar lomba.
+      !usesGameFamily(s) &&
       !s.stub &&
       s.status === 'active' &&
       (!c.categories || c.categories.includes(s.category)),
