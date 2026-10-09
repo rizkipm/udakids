@@ -1,12 +1,17 @@
 /**
- * Buat foto realistis untuk simulasi pelajaran SD (`peraga`, D-093) lewat AI Gambar, lalu setujui otomatis:
- *   pnpm lesson:photos -- math sd1 sains sd1 --dry-run   hitung foto yang belum ada + perkiraan biaya
- *   pnpm lesson:photos -- math sd1 sains sd1              buat & setujui
+ * Foto realistis untuk simulasi pelajaran SD (`peraga`, D-093):
+ *   pnpm lesson:photos -- math sd1 sains sd1 --dry-run   hitung foto yang belum ada
+ *   pnpm lesson:photos -- math sd1 sains sd1              cari di Pexels, saring Claude, setujui (D-095)
+ *   pnpm lesson:photos -- math sd1 --max=20               coba sebagian dulu
+ *   pnpm lesson:photos -- math sd1 --ai                   buat dengan AI Gambar berbayar (cara lama, D-093)
  *   node dist/cli/lesson-photos.js math sd1 …             (server)
- * Memakai layanan yang sama dengan Admin → AI Gambar (kunci admin terenkripsi, batas biaya harian/bulanan, audit,
- * sidik jari): foto yang sudah ada dipakai ulang tanpa biaya. Foto baru langsung disetujui (keputusan pemilik
- * produk, D-093) lewat `setStatus` — tercatat di audit dan tetap bisa ditolak admin. Subjek yang pernah DITOLAK
- * admin tidak disetujui ulang (tetap menunggu review).
+ * Bawaan (D-095): foto stok GRATIS dari Pexels (PEXELS_API_KEY). Tiap kandidat dilihat Claude (cocok dengan
+ * label, pantas untuk anak, tanpa tulisan/logo); yang pertama lolos diunduh, disimpan di gudang `ai_images`
+ * (model `pexels`, biaya 0, kredit fotografer di kolom prompt) dan langsung disetujui. Tidak ada yang lolos →
+ * tetap gambar cadangan SVG. Subjek yang sudah punya foto disetujui dilewati; subjek yang fotonya pernah DITOLAK
+ * admin tidak dicari ulang.
+ * Mode `--ai` memakai layanan Admin → AI Gambar (batas biaya, audit, sidik jari); foto baru disetujui lewat
+ * `setStatus`, kecuali subjek yang pernah ditolak admin.
  */
 import '../common/env.js';
 import {
@@ -15,13 +20,19 @@ import {
   type AiImageRequest,
   type PeragaPhoto,
 } from '@little-coder/engine';
+import { createHash } from 'node:crypto';
+import { claudeCost } from '@little-coder/engine';
 import { and, eq, like } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { AiImageService } from '../ai/ai-image.service.js';
 import { DEFAULT_DATABASE_URL } from '../common/config.js';
 import * as schema from '../db/schema.js';
-import { aiUsage, skillCatalogs, staffUsers } from '../db/schema.js';
+import { open, type Sealed } from '../common/secret-box.js';
+import { aiImages, aiUsage, appSettings, skillCatalogs, staffUsers } from '../db/schema.js';
+import { CLAUDE_KEY_SETTING } from '../ai/ai-image.service.js';
+import { ClaudePhotoScreener, type PhotoScreener } from '../photos/photo-screen.js';
+import { PexelsClient, pexelsCredit, pexelsQueries, type PexelsPhoto } from '../photos/pexels.js';
 import { MailService } from '../mail/mail.service.js';
 import { SettingsService } from '../settings/settings.service.js';
 
@@ -36,7 +47,47 @@ export const peragaPhotoRequest = (f: PeragaPhoto): AiImageRequest => ({
   style: 'foto',
 });
 
-async function main(books: [string, string][], dryRun: boolean) {
+/** Kunci Claude: `.env` (ANTHROPIC_API_KEY) lebih dulu, lalu kunci yang diisi admin (terenkripsi). */
+async function loadClaudeKey(db: ReturnType<typeof drizzle<typeof schema>>) {
+  const env = process.env.ANTHROPIC_API_KEY?.trim();
+  if (env) return env;
+  const [row] = await db.select().from(appSettings).where(eq(appSettings.key, CLAUDE_KEY_SETTING));
+  return open((row?.value as Sealed | undefined) ?? null);
+}
+
+/** Paling banyak sekian kandidat yang dilihat Claude per foto (menjaga biaya). */
+export const MAX_SCREENED = 6;
+
+/**
+ * Cari satu foto Pexels yang lolos penyaringan Claude (D-095): kata kunci English lebih dulu lalu dipersempit,
+ * kandidat dilihat berurutan sampai ada yang cocok, pantas untuk anak, dan tanpa tulisan/logo.
+ */
+export async function findStockPhoto(
+  f: PeragaPhoto,
+  pexels: Pick<PexelsClient, 'search'>,
+  screener: PhotoScreener,
+  onVerdict: (v: Awaited<ReturnType<PhotoScreener['check']>>, p: PexelsPhoto) => Promise<void>,
+): Promise<{ photo: PexelsPhoto; query: string } | null> {
+  const seen = new Set<number>();
+  for (const query of pexelsQueries(f.label, f.en)) {
+    for (const photo of await pexels.search(query, 4)) {
+      if (seen.has(photo.id)) continue;
+      if (seen.size >= MAX_SCREENED) return null;
+      seen.add(photo.id);
+      const verdict = await screener.check(photo.small, f.label, f.en);
+      await onVerdict(verdict, photo);
+      if (verdict.ok) return { photo, query };
+    }
+  }
+  return null;
+}
+
+async function main(
+  books: [string, string][],
+  dryRun: boolean,
+  mode: 'pexels' | 'ai',
+  max = Infinity,
+) {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL });
   try {
     const db = drizzle(pool, { schema });
@@ -60,7 +111,108 @@ async function main(books: [string, string][], dryRun: boolean) {
     }
     const [admin] = await db.select().from(staffUsers).where(eq(staffUsers.role, 'admin')).limit(1);
     if (!admin) throw new Error('Belum ada akun admin');
-    const ai = new AiImageService(db, new SettingsService(db), new MailService(db), null);
+    const settings = new SettingsService(db);
+    const s = await settings.get('ai_image');
+    if (mode === 'pexels') {
+      const pexelsKey = process.env.PEXELS_API_KEY?.trim();
+      if (!pexelsKey) throw new Error('PEXELS_API_KEY belum diisi di .env');
+      const claudeKey = await loadClaudeKey(db);
+      if (!claudeKey)
+        throw new Error(
+          'Kunci Claude belum ada (Admin → AI Gambar, atau ANTHROPIC_API_KEY di .env)',
+        );
+      const have = await db
+        .select({ subject: aiImages.subject, status: aiImages.status, model: aiImages.model })
+        .from(aiImages);
+      const approved = new Set(have.filter((h) => h.status === 'approved').map((h) => h.subject));
+      const rejected = new Set(
+        have.filter((h) => h.status === 'rejected' && h.model === 'pexels').map((h) => h.subject),
+      );
+      const missing = [...photos.values()].filter(
+        (f) => !approved.has(f.id) && !rejected.has(f.id),
+      );
+      const todo = missing.slice(0, max);
+      console.log(
+        `${photos.size} foto simulasi di ${books.map((b) => b.join('/')).join(', ')}: ` +
+          `${photos.size - missing.length} sudah ada/ditolak admin, ${missing.length} belum ada, ` +
+          `${todo.length} dicari sekarang di Pexels (gratis; penyaringan Claude ±US$0,003 per kandidat).`,
+      );
+      if (dryRun) return;
+      const pexels = new PexelsClient(pexelsKey, fetch, undefined, (m) => console.log(m));
+      const screener = new ClaudePhotoScreener(claudeKey, s.claudeModel);
+      let found = 0;
+      let missed = 0;
+      let failed = 0;
+      let usd = 0;
+      for (const f of todo) {
+        if (usd >= s.dailyLimitUsd) {
+          console.warn(`Berhenti: biaya penyaringan mencapai batas harian US$${s.dailyLimitUsd}.`);
+          break;
+        }
+        try {
+          const hit = await findStockPhoto(f, pexels, screener, async (verdict, p) => {
+            const cost = claudeCost(s, verdict.usage);
+            usd += cost;
+            await db.insert(aiUsage).values({
+              action: 'photo-screen',
+              ok: verdict.ok,
+              model: s.claudeModel,
+              costUsd: cost,
+              inputTokens:
+                verdict.usage.input + verdict.usage.cachedRead + verdict.usage.cacheWrite,
+              cachedTokens: verdict.usage.cachedRead,
+              outputTokens: verdict.usage.output,
+              detail: `pexels#${p.id}:${f.id} ${verdict.reason}`.slice(0, 500),
+              createdBy: admin.id,
+            });
+          });
+          if (!hit) {
+            missed++;
+            console.log(`kosong ${f.id} (tetap gambar cadangan)`);
+            continue;
+          }
+          const file = await pexels.download(hit.photo.large);
+          await db
+            .insert(aiImages)
+            .values({
+              fingerprint: createHash('sha256')
+                .update(`pexels|${f.id}|${hit.photo.id}`)
+                .digest('hex'),
+              kind: peragaPhotoRequest(f).kind,
+              subject: f.id,
+              label: f.label,
+              labelEn: f.en ?? null,
+              variant: 1,
+              prompt: pexelsCredit(hit.photo, hit.query),
+              model: 'pexels',
+              quality: 'stok',
+              size: `${hit.photo.width}x${hit.photo.height}`,
+              status: 'approved',
+              mime: file.mime,
+              data: file.data,
+              bytes: file.data.length,
+              costUsd: 0,
+              createdBy: admin.id,
+              reviewedBy: admin.id,
+              reviewedAt: new Date(),
+            })
+            .onConflictDoNothing();
+          found++;
+          console.log(`foto   ${f.id} ← Pexels #${hit.photo.id} (${hit.photo.photographer})`);
+        } catch (err) {
+          failed++;
+          console.warn(`gagal  ${f.id}: ${(err as Error).message.slice(0, 160)}`);
+          if (/ditolak|401|403/.test((err as Error).message)) break;
+        }
+      }
+      console.log(
+        `Selesai: ${found} foto Pexels disetujui, ${missed} tanpa foto cocok (gambar cadangan), ${failed} gagal, ` +
+          `biaya penyaringan Claude ±US$${usd.toFixed(2)}.`,
+      );
+      return;
+    }
+
+    const ai = new AiImageService(db, settings, new MailService(db), null);
     const status = await ai.overview();
     console.log(
       `${photos.size} foto simulasi di ${books.map((b) => b.join('/')).join(', ')}. ` +
@@ -72,6 +224,7 @@ async function main(books: [string, string][], dryRun: boolean) {
     let approved = 0;
     let cost = 0;
     let failed = 0;
+    let streak = 0;
     for (const f of photos.values()) {
       try {
         const res = await ai.generate(peragaPhotoRequest(f), admin.id);
@@ -91,11 +244,18 @@ async function main(books: [string, string][], dryRun: boolean) {
           }
         }
         console.log(`${res.reused ? 'ada   ' : 'dibuat'} ${f.id}`);
+        streak = 0;
       } catch (err) {
         failed++;
+        streak++;
         console.warn(`gagal  ${f.id}: ${(err as Error).message.slice(0, 160)}`);
         // Batas biaya / kuota tercapai: berhenti, jalankan lagi nanti (yang sudah ada dilewati).
         if (/batas|limit|429|dinonaktifkan/i.test((err as Error).message)) break;
+        // Gagal beruntun (mis. pengaturan AI Gambar tidak didukung model): berhenti, perbaiki pengaturan dulu.
+        if (streak >= 3) {
+          console.warn('Berhenti: 3 foto gagal beruntun. Periksa pengaturan di Admin → AI Gambar.');
+          break;
+        }
       }
     }
     console.log(
@@ -114,10 +274,13 @@ if (require.main === module) {
   const books: [string, string][] = [];
   for (let i = 0; i + 1 < words.length; i += 2) books.push([words[i]!, words[i + 1]!]);
   if (!books.length) {
-    console.error('Pakai: pnpm lesson:photos -- <domain> <grade> [<domain> <grade> …] [--dry-run]');
+    console.error(
+      'Pakai: pnpm lesson:photos -- <domain> <grade> [<domain> <grade> …] [--dry-run] [--ai]',
+    );
     process.exit(1);
   }
-  main(books, dryRun).catch((err: unknown) => {
+  const max = Number(args.find((a) => a.startsWith('--max='))?.slice(6)) || Infinity;
+  main(books, dryRun, args.includes('--ai') ? 'ai' : 'pexels', max).catch((err: unknown) => {
     console.error((err as Error).message);
     process.exit(1);
   });

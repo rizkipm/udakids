@@ -28,6 +28,86 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
+## Rilis berikutnya (D-095): foto simulasi dari Pexels, kredit foto, galeri admin
+
+**Isi rilis:** `lesson:photos` mencari foto gratis di Pexels lalu disaring Claude (D-095), `--max=N`, berhenti
+sendiri setelah 3 gagal beruntun, kredit fotografer di Admin → AI Gambar, baris kredit Pexels di footer landing,
+galeri AI Gambar menampilkan "Disetujui" lebih dulu.
+
+**Tanpa migrasi, tanpa perubahan `content/`** → `migrate:prod`/`seed:prod` tidak wajib (aman bila dijalankan).
+**Tanpa `carry`.** Env baru: `PEXELS_API_KEY` (wajib untuk `lesson:photos`).
+
+### 1. Laptop: cek, commit, push
+
+```bash
+cd ~/Repo/udakids
+# hentikan pnpm dev dulu (Ctrl+C)
+pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
+git add -A
+git status --short | grep -E "\.env$|\.dump$|backups/|\.ndjson" || echo "aman"
+git commit -m "Foto simulasi dari Pexels disaring Claude, kredit foto, galeri admin (D-095)"
+git push origin main
+git log -1 --oneline                                      # catat hash
+```
+
+### 2. Server: kode baru
+
+```bash
+ssh root@169.58.177.74
+cd /var/www/kids.eduskul.my.id
+PREV=$(git rev-parse --short HEAD); echo $PREV
+git pull origin main
+git log -1 --oneline                                      # = hash langkah 1
+pnpm install --frozen-lockfile
+pnpm build                                                # engine, api, web: Done
+systemctl restart little-coder-api
+sleep 5; curl -s http://127.0.0.1:7177/health; echo       # "status":"ok"
+```
+
+### 3. Server: kunci Pexels
+
+```bash
+nano .env          # tambah satu baris (tanpa spasi/kutip): PEXELS_API_KEY=<kunci dari pexels.com/api>
+grep -c "^PEXELS_API_KEY=." .env                          # 1
+```
+
+Kunci Claude sudah ada di server (dibawa `carry`). Cek di Admin → AI Gambar: "Kunci Claude" terisi.
+
+### 4. Server: foto simulasi Kelas 1
+
+```bash
+cd /var/www/kids.eduskul.my.id/apps/api
+B="math sd1 sains sd1 math sd12 sains sd12 english sd12"
+node dist/cli/lesson-photos.js $B --dry-run               # "… belum ada, … dicari sekarang"
+node dist/cli/lesson-photos.js $B --max=5                 # coba 5: baris "foto   … ← Pexels #…"
+nohup node dist/cli/lesson-photos.js $B > /root/lesson-photos.log 2>&1 &
+tail -f /root/lesson-photos.log                           # Ctrl+C = berhenti memantau saja
+```
+
+- Lama: ±2–4 jam (batas Pexels 200 permintaan/jam; skrip menunggu sendiri).
+- Biaya: foto 0; penyaringan Claude ±US$2–4 total, ikut batas harian AI Gambar.
+- Baris akhir: `Selesai: … foto Pexels disetujui, … tanpa foto cocok (gambar cadangan), 0 gagal, biaya …`.
+- Terputus/berhenti → jalankan perintah `nohup` yang sama lagi; foto yang sudah ada dilewati.
+- `gagal … Kunci Pexels ditolak` → perbaiki `PEXELS_API_KEY` di `.env`, lalu jalankan lagi (tanpa restart API).
+
+### 5. Periksa
+
+- Admin → AI Gambar: galeri langsung "Disetujui"; kartu foto Pexels memuat "Pexels #… · Foto: …".
+- Foto yang kurang pas → **Tolak**; foto itu tidak dicari ulang dan kartunya kembali ke gambar cadangan.
+- Kelas 1 → English → "Fruits and vegetables" → "Belajar dulu" → simulasi: kartu memakai foto asli.
+- Landing (`https://kids.eduskul.my.id`): footer "Sebagian foto pelajaran berasal dari Pexels".
+
+### Rollback
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl restart little-coder-api
+```
+
+Foto yang sudah tersimpan tetap aman dan tetap tampil (aplikasi anak tidak berubah di rilis ini).
+
+---
+
 ## Rilis berikutnya (D-079 … D-094): PAUD lengkap, Video Momo semua topik, simulasi Kelas 1, semua suara Chirp 3 HD
 
 **Isi rilis:**

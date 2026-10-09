@@ -62,6 +62,8 @@ const imageView = (r: typeof aiImages.$inferSelect) => ({
   status: r.status as AiImageStatus,
   bytes: r.bytes,
   costUsd: r.costUsd,
+  // Foto stok Pexels (D-095): kredit fotografer + tautan disimpan di kolom prompt.
+  credit: r.model === 'pexels' ? r.prompt : null,
   createdAt: r.createdAt.toISOString(),
   reviewedAt: r.reviewedAt?.toISOString() ?? null,
 });

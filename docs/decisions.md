@@ -2597,3 +2597,32 @@ Tanggal: 2026-10-09. Disetujui pemilik produk (jawaban: "Dari level gratis").
 - Soalnya lebih mudah daripada lomba asli. Anak Premium dan anak kelas tetap mendapat soal dari level 8–10.
 - Test: `packages/engine/test/mock.test.ts` (TK & Kelas 1–2, semua mock). Audit browser: 15 mock PAUD–Kelas 1–2
   bisa dimainkan dan suaranya Chirp.
+
+## D-095 — Foto simulasi dari Pexels (gratis), disaring Claude, bukan AI Gambar berbayar
+
+Tanggal: 2026-10-09. Disetujui pemilik produk (jawaban: "Claude menyaring, lalu otomatis", "Gambar cadangan SVG",
+"Hanya di Admin & halaman Tentang"). Polanya mengikuti proyek clipvideo (Pexels lebih dulu, dipersempit bila kosong,
+setiap kandidat disaring).
+
+- **Sumber bawaan `lesson:photos`:** foto stok Pexels (`PEXELS_API_KEY` di `.env`, gratis).
+  - Kata kunci dari `foto.en` (English), lalu dipersempit ke 3 dan 2 kata pertama.
+  - Mode lama (AI Gambar berbayar, D-093) tetap ada lewat `--ai`.
+- **Penyaringan Claude** (kunci Claude admin, model `claudeModel` AI Gambar, effort rendah): tiap kandidat dilihat
+  dan hanya lolos bila **cocok** dengan label, **pantas untuk anak** (tanpa kekerasan, pakaian terbuka, rokok/alkohol,
+  hal menakutkan), dan **tanpa tulisan/angka/logo** yang menonjol.
+  - Maksimal 6 kandidat per foto. Biaya ±US$0,003 per kandidat, dicatat di `ai_usage` (`photo-screen`) dan ikut batas
+    biaya harian AI Gambar.
+  - Kandidat pertama yang lolos diunduh dan langsung disetujui.
+- **Tidak ada yang lolos:** tetap gambar cadangan SVG, tanpa AI berbayar otomatis.
+- **Penyimpanan:** gudang yang sama (`ai_images`, model `pexels`, biaya 0), jadi aplikasi anak tidak berubah
+  (`/pictures/subject/:subject`) dan foto ikut `pg_dump`/`carry`.
+  - Subjek yang sudah punya foto disetujui dilewati.
+  - Foto Pexels yang **ditolak admin** tidak dicari ulang.
+  - Tanpa migrasi; kredit disimpan di kolom `prompt`.
+- **Kredit (lisensi Pexels tidak mewajibkan atribusi, panduan API memintanya bila memungkinkan):**
+  - kredit per foto (fotografer + tautan) tampil di Admin → AI Gambar;
+  - footer landing: "Sebagian foto pelajaran berasal dari Pexels";
+  - area anak tanpa teks kredit dan tanpa tautan keluar.
+- **Batas Pexels:** 200 permintaan/jam, 20.000/bulan. Klien menunggu sendiri bila jatah per jam habis.
+- **Uji coba 9 Okt 2026 (laptop, english/sd12):** 62 foto lolos dari 128 kandidat yang dilihat, biaya Claude US$0,36.
+  Penolakan yang benar, mis. foto bertulisan besar "Wash your hands!".

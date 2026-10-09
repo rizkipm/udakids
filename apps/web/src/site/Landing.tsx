@@ -536,6 +536,13 @@ export function SiteFooter() {
         <Link to="/orang-tua/masuk">{t('site.footer.parent')}</Link>
         <Link to="/masuk/staf">{t('site.footer.staff')}</Link>
       </nav>
+      {/* Kredit foto stok simulasi pelajaran (D-095); kredit per foto ada di Admin → AI Gambar. */}
+      <p className="site-credit">
+        {t('site.footer.photos')}{' '}
+        <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">
+          Pexels
+        </a>
+      </p>
     </footer>
   );
 }

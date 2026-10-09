@@ -64,6 +64,7 @@ type ImageRow = {
   status: AiImageStatus;
   bytes: number;
   costUsd: number;
+  credit?: string | null;
   createdAt: string;
 };
 
@@ -385,7 +386,8 @@ function GenerateCard({ overview, onMade }: { overview: Overview; onMade: () => 
 }
 
 function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
-  const [status, setStatus] = useState<AiImageStatus>('review');
+  // Bawaan: gambar yang sudah disetujui (yang tampil ke anak); review & ditolak lewat filter.
+  const [status, setStatus] = useState<AiImageStatus>('approved');
   const list = useFetch<ImageRow[]>('staff', `/admin/ai/images?status=${status}&r=${rev}`);
   const call = useApiCall('staff');
   const action = useAction();
@@ -406,7 +408,7 @@ function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
           label={t('admin.ai.filter')}
           value={status}
           onChange={(e) => setStatus(e.target.value as AiImageStatus)}
-          options={(['review', 'approved', 'rejected'] as const).map((s) => ({
+          options={(['approved', 'review', 'rejected'] as const).map((s) => ({
             value: s,
             label: t(`admin.ai.status.${s}`),
           }))}
@@ -428,6 +430,7 @@ function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
                   <small className="ui-muted">
                     {img.label} · v{img.variant} · {formatBytes(img.bytes)} · {usd(img.costUsd)}
                   </small>
+                  {img.credit && <small className="ui-muted adm-ai-credit">{img.credit}</small>}
                   <div className="ui-row">
                     {img.status !== 'approved' && (
                       <Button

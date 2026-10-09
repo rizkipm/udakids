@@ -40,8 +40,10 @@ ditambahkan aplikasi di depannya, jadi jangan menulis layar `tonton`. Semua kali
 
   Pilih yang benar-benar cocok. Jangan memakai pohon untuk "akar"; lebih baik `word`.
 
-- **`foto` (realistis, dibuat AI sekali lalu dipakai ulang)**:
+- **`foto` (realistis; dicari di Pexels lalu disaring Claude, D-095; disimpan sekali lalu dipakai ulang)**:
   - Bentuknya `{"id": "foto-<slug>", "label": "<deskripsi Indonesia ≤ 80>", "en": "<English singkat>"}`.
+  - `en` adalah kata kunci pencarian Pexels: tulis benda/adegan yang umum difoto (mis. `a whole onion`,
+    `children washing hands`), bukan kalimat panjang. Bila tidak ada foto yang lolos, gambar cadangan yang tampil.
   - Satu foto = satu benda/adegan nyata yang jelas.
   - Tanpa tulisan, angka, atau logo di foto (foto tidak boleh memuat jawaban soal).
   - Orang hanya anak/orang dewasa rekaan, berpakaian sopan.
@@ -114,7 +116,8 @@ alat di atas: pakai `jelajah` (kartu kategori) atau `pola`/`benda` untuk konsep 
 npx tsx --conditions=source check.ts <domain> <grade> <file.json>   # dari packages/engine
 python3 merge.py <domain> <grade> <file.json>                         # gabung ke _catalog.json
 pnpm validate:content                                                  # harus 0 error
-pnpm lesson:photos -- <domain> <grade> --dry-run                       # jumlah foto & biaya
+pnpm lesson:photos -- <domain> <grade> --dry-run                       # jumlah foto yang belum ada
+pnpm lesson:photos -- <domain> <grade> [--max=20]                      # cari di Pexels + saring Claude (D-095)
 ```
 
 Contoh lengkap ada di `math/sd1` topik E, `sains/sd1` topik I & E, dan `english/sd12` topik B.
