@@ -28,7 +28,7 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
-## Rilis berikutnya (D-096 … D-101): Kelas 4, UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3–4
+## Rilis berikutnya (D-096 … D-106): Kelas 4, UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3–4, Hias Momo
 
 **Isi rilis** (semua belum di-deploy setelah commit `9628db2`, D-095):
 
@@ -43,6 +43,17 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
   - teks campuran diputar per kalimat.
 - **D-099/D-100 — ringkasan admin:** grafik lebih analitis, filter bulan/tahun, section Afiliasi & Komisi owner.
 - **D-101 — EMC Kelas 3–4:** 8 materi kisi-kisi + mock 40 soal + game, 101 level di `math/sd34`.
+- **D-102 / D-104 — Hias Momo:**
+  - 8 model karakter, pola badan, pernak-pernik;
+  - warna sendiri (pemilih warna + kode `#RRGGBB`);
+  - gaya rambut pendek/keren (cepak, jabrik, belah samping, mohawk, gelombang, topi terbalik, bandana);
+  - tombol Acak/Kembalikan.
+  - Disimpan di `momo_look` yang sudah ada, tanpa migrasi.
+- **D-103 — siapa yang sedang bermain:** detail di admin, toast ajakan di landing.
+- **D-105 — papan peringkat:** "Main 2 jam lalu" di setiap baris (hanya di area masuk, tidak di landing publik).
+- **D-106 — suara:**
+  - suara bawaan browser dihapus total;
+  - tebakan bahasa diperbaiki ("Momo baru!", "Siap main?", "Putar video" tidak lagi dibacakan suara British).
 
 **Yang perlu di server:**
 
@@ -63,7 +74,7 @@ cd ~/Repo/udakids
 pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
 git add -A
 git status --short | grep -E "\.env$|\.dump$|backups/|\.ndjson" || echo "aman"
-git commit -m "Kelas 4 + 6 game, merek UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3-4 (D-096…D-101)"
+git commit -m "Kelas 4 + 6 game, UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3-4, Hias Momo (D-096…D-106)"
 git push origin main
 git log -1 --oneline
 scp backups/baru-2026-10-09.ndjson.gz root@169.58.177.74:/root/backups/
@@ -151,6 +162,12 @@ Hasil yang diharapkan:
   - tombol "Dengarkan": kalimat Indonesia bersuara Indonesia, kalimat English bersuara British, tanpa suara robot HP;
   - jawab satu soal keliru: pembahasan berbahasa Indonesia dibacakan suara Indonesia.
 - **Admin → Ringkasan:** grafik baru dan filter bulan/tahun tampil.
+- **Anak → Profil → Hias Momo:**
+  - tab Model/Warna/Pola/Kepala/Pernik tampil;
+  - ketuk "Acak" dan tab "Pernik": suaranya suara Momo berbahasa Indonesia, bukan suara robot English;
+  - ketik kode warna `#13C2C2` → Momo berganti warna;
+  - Simpan → Momo baru tampil di profil dan papan peringkat.
+- **Anak → Papan peringkat:** setiap baris bertuliskan "Main … lalu".
 
 Bila ada kalimat yang diam (tanpa suara), tunggu sebentar lalu ketuk speaker lagi: klip baru sedang dibuat.
 

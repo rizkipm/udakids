@@ -57,7 +57,8 @@ const claudeKeyBody = z.strictObject({
 });
 const settingsBody = z.strictObject({ settings: aiImageSettingsSchema, password });
 const listQuery = z.strictObject({
-  status: z.enum(AI_IMAGE_STATUSES).optional(),
+  /** `all` = semua status (termasuk ditolak). */
+  status: z.enum([...AI_IMAGE_STATUSES, 'all']).optional(),
   subject: aiSubjectSchema.optional(),
   page: z.coerce.number().int().min(0).max(1000).default(0),
   /** Penanda muat ulang dari halaman admin (memutus cache setelah gambar dibuat/disetujui); diabaikan. */
@@ -173,6 +174,11 @@ export class AdminAiController {
   @Get('images')
   list(@Query(new ZodPipe(listQuery)) q: z.infer<typeof listQuery>) {
     return this.ai.list(q);
+  }
+
+  @Get('images/count')
+  count(@Query(new ZodPipe(listQuery)) q: z.infer<typeof listQuery>) {
+    return this.ai.count(q);
   }
 
   /** Pratinjau untuk admin (semua status). Diambil lewat fetch + token, bukan <img> publik. */

@@ -232,6 +232,8 @@ export type LeaderboardRow = {
   /** Jumlah waktu skor terbaik (urutan mode `total`). */
   bestTimeMs: number;
   passedLevels: number;
+  /** Ronde terakhir (ISO); null = belum pernah bermain (D-105). */
+  lastPlayedAt?: string | null;
 };
 /** Urutan papan (D-043): rata-rata (D-042) atau total skor (D-024). */
 export type LeaderboardMode = 'average' | 'total';
@@ -329,6 +331,8 @@ export type MockBoardRow = {
   total: number;
   timeMs: number;
   attempts: number;
+  /** Percobaan terakhir di mock ini (ISO, D-105). */
+  lastPlayedAt?: string | null;
 };
 export type MockBoardData = {
   skillId: string;

@@ -407,3 +407,67 @@
 .ich-empty.is-full {
   inset: 0;
 }
+
+/* Batang mendatar berperingkat */
+.ich-barlist {
+  display: grid;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ich-barlist li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.ich-barlist-rank {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #efeaff;
+  color: var(--ui-primary);
+  font-weight: 800;
+}
+.ich-barlist-head {
+  display: flex;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: 5px;
+}
+.ich-barlist-head span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ich-barlist-head b {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.ich-barlist-track {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: #f1eef9;
+  overflow: hidden;
+}
+.ich-barlist-track span {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  transition: width 0.5s ease;
+}
+.ich-barlist small {
+  display: block;
+  margin-top: 4px;
+  color: var(--ui-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ich-barlist-track span {
+    transition: none;
+  }
+}

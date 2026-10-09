@@ -386,9 +386,16 @@ function GenerateCard({ overview, onMade }: { overview: Overview; onMade: () => 
 }
 
 function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
-  // Bawaan: gambar yang sudah disetujui (yang tampil ke anak); review & ditolak lewat filter.
-  const [status, setStatus] = useState<AiImageStatus>('approved');
-  const list = useFetch<ImageRow[]>('staff', `/admin/ai/images?status=${status}&r=${rev}`);
+  // Bawaan: gambar yang sudah disetujui (yang tampil ke anak); review, ditolak, atau semua lewat filter.
+  const [status, setStatus] = useState<AiImageStatus | 'all'>('approved');
+  const [page, setPage] = useState(0);
+  const query = `status=${status}&page=${page}&r=${rev}`;
+  const list = useFetch<ImageRow[]>('staff', `/admin/ai/images?${query}`);
+  const count = useFetch<{ total: number; pageSize: number }>(
+    'staff',
+    `/admin/ai/images/count?status=${status}&r=${rev}`,
+  );
+  const pages = count.data ? Math.max(1, Math.ceil(count.data.total / count.data.pageSize)) : 1;
   const call = useApiCall('staff');
   const action = useAction();
   async function review(id: string, next: AiImageStatus) {
@@ -397,9 +404,23 @@ function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
     );
     if (ok) {
       list.reload();
+      count.reload();
       onChanged();
     }
   }
+  const pager = count.data && (
+    <div className="ui-row adm-ai-pager">
+      <span className="ui-muted">
+        {t('admin.ai.pageInfo', { page: page + 1, pages, total: count.data.total })}
+      </span>
+      <Button variant="secondary" disabled={page === 0} onClick={() => setPage(page - 1)}>
+        {t('admin.ai.prev')}
+      </Button>
+      <Button variant="secondary" disabled={page + 1 >= pages} onClick={() => setPage(page + 1)}>
+        {t('admin.ai.next')}
+      </Button>
+    </div>
+  );
   return (
     <Card
       title={t('admin.ai.gridTitle')}
@@ -407,8 +428,11 @@ function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
         <SelectField
           label={t('admin.ai.filter')}
           value={status}
-          onChange={(e) => setStatus(e.target.value as AiImageStatus)}
-          options={(['approved', 'review', 'rejected'] as const).map((s) => ({
+          onChange={(e) => {
+            setStatus(e.target.value as AiImageStatus | 'all');
+            setPage(0);
+          }}
+          options={(['approved', 'review', 'rejected', 'all'] as const).map((s) => ({
             value: s,
             label: t(`admin.ai.status.${s}`),
           }))}
@@ -416,6 +440,7 @@ function ImageGrid({ rev, onChanged }: { rev: number; onChanged: () => void }) {
       }
     >
       <p className="ui-muted">{t('admin.ai.gridHint')}</p>
+      {pager}
       <ActionNotice error={action.error} />
       <Loadable loading={list.loading} error={list.error} hasData={!!list.data}>
         {() =>

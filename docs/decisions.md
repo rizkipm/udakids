@@ -2869,3 +2869,123 @@ infographic screen + figures", game per topik + 2 game baru + topik GE + ambil f
 - **Urutan bagian di buku:** bagian EMC berada di antara bagian olimpiade lain (setelah KMSI Final), bukan sesudah
   "Game · Game Seru Momo". Daftar materi di area anak kini selalu menaruh bagian `Game · …` paling akhir (sesuai
   D-078), sehingga katalog yang pernah disunting admin (urutan disimpan di server) juga tampil benar tanpa migrasi.
+
+## D-105 — Papan peringkat menampilkan kapan terakhir bermain
+
+Tanggal: 2026-10-10. Permintaan pemilik produk: "di papan peringkat ini tampilkan kapan terakhir bermainnya".
+Detail waktu dipilih pemilik produk: **sampai jam**, untuk semua baris. Pilihan lainnya: versi kasar tanpa jam,
+atau detail hanya untuk diri sendiri.
+
+- Setiap baris dan podium di `/play/peringkat` menampilkan "Main 5 menit lalu", "Main 2 jam lalu",
+  "Main kemarin", "Main 3 hari lalu", "Main 2 minggu lalu", dan seterusnya.
+  - Dihitung dari ronde `quiz_result` terakhir (`lastPlayedAt`).
+  - Di papan per buku, yang dipakai adalah ronde terakhir di buku itu. Di papan Mock Test, percobaan terakhir
+    di mock itu.
+  - Kemarin/hari dihitung dari tanggal kalender WIB.
+  - Ikut dibacakan di label pembaca layar.
+- **Privasi.** Ini memperluas D-024, yang sebelumnya hanya mengirim nama panggilan + warna Momo dan angka skor ke
+  perangkat anak lain. Kini waktu ronde terakhir juga terkirim, jadi pola kapan seorang anak bermain bisa
+  terlihat oleh anak lain di papan.
+  - Mitigasi: hanya untuk papan di area masuk (`GET /leaderboard`, `/leaderboard/mock/:id`).
+  - Landing publik tanpa login (`/leaderboard/public*`) **tidak** mengirim waktu ini. Ini diuji di e2e.
+
+## D-102 — Hias Momo lebih kreatif: model karakter, pola, pernak-pernik, warna sendiri (kode hex)
+
+Tanggal: 2026-10-10. Permintaan pemilik produk: hias Momo lebih kreatif dan interaktif, model karakter lebih
+banyak, warna di luar palet, dan anak bisa memilih kode warnanya sendiri. Memperluas D-051.
+
+- **Data:** semua di `children.momo_look` (jsonb) yang sudah ada, **tanpa migrasi**. Skema
+  `momoLookSchema` (`packages/engine/src/avatar/momo.ts`) menambah:
+  - `model`: kotak (asli), bulat, kucing, kelinci, beruang, alien, TV, dino.
+  - `body`: warna badan sendiri; kosong = `momoColor`, yang tetap 6 warna lama untuk kompatibilitas.
+  - `pattern`: titik, garis, bintang, hati.
+  - `extra` + `extraColor`: kacamata, kacamata hitam, dasi kupu-kupu, syal, headphone, stiker bintang. Dipasang
+    terpisah dari aksesori kepala sehingga bisa dipadukan.
+  - Aksesori kepala baru: mahkota, bunga.
+  - `gradient`, `accessoryColor`, `extraColor` kini menerima nama palet **atau** kode hex.
+- **Kode warna:** hanya `#` + 6 digit hex, dinormalisasi ke huruf kecil dan divalidasi di server. Nilai lain
+  (nama CSS, `url(...)`, 3 digit) ditolak 400, sehingga aman dipakai langsung di SVG. Di studio, ketikan `f80`
+  atau `#FF8800` diterima lalu dinormalisasi.
+- **Studio (`MomoStudio`):**
+  - Tab bergambar: Model · Warna · Pola · Kepala · Pernik.
+  - Setiap baris warna punya palet, tombol "Bebas" (pemilih warna bawaan perangkat), dan kotak "Kode warna".
+  - Momo di pratinjau bereaksi saat diketuk: ganti ekspresi, memantul, dan bersuara. Animasi mati bila gerak
+    dikurangi.
+  - Tombol **Acak** dan **Kembalikan** (ke tampilan saat halaman dibuka).
+  - Semua pilihan bergambar, ≥ 64 px, dan dibacakan saat diketuk. Petunjuk kode warna bernada netral.
+- **Tetap berlaku dari D-051:** tampilan robot, bukan data pribadi. Semua pilihan untuk semua anak tanpa label
+  laki-laki/perempuan; tanpa data gender/agama; tanpa emoji (SVG). Data lama tetap terbaca. Orang tua memakai
+  studio yang sama di formulir profil anak, tanpa baris warna utama.
+
+## D-103 — Siapa yang sedang bermain: detail di admin, toast ajakan di landing
+
+Tanggal: 2026-10-10. Disetujui pemilik produk (jawaban: "Nama panggilan + materi", "Lengkap").
+
+- **Sedang bermain** = anak aktif (sinkron jawaban/masuk) dalam 10 menit terakhir (`last_active_at`, sama dengan
+  angka "sedang belajar" D-033). Materinya diambil dari jawaban terakhir (`events`). Kueri bersama:
+  `apps/api/src/live/live.ts`.
+- **Admin (`GET /admin/live`, kartu "Sedang bermain" di Ringkasan, diperbarui tiap 15 detik selama tab terlihat):**
+  - nama panggilan + warna Momo;
+  - jenis akun: keluarga (nama & email orang tua), siswa kelas (nama & kode kelas), atau daftar sendiri (kode keluarga
+    sendiri);
+  - buku, topik, dan level yang sedang dimainkan;
+  - soal tepat/dijawab hari ini (WIB), dan terakhir aktif.
+- **Landing (`GET /public/playing`, toast):**
+  - hanya **nama panggilan, tampilan Momo, buku, dan topik** — tanpa id anak, waktu, kelas, atau data orang tua;
+  - anak yang tergabung di **kelas sekolah tidak ditampilkan**; cache 15 detik, maks. 12 anak.
+  - Ini **pengecualian yang disetujui** atas D-033 (statistik publik hanya angka) dan D-105 (landing tanpa waktu
+    bermain): aktivitas "sedang bermain" kini terlihat publik bersama nama panggilan. Waktu persis tetap tidak
+    dikirim. Diuji di e2e (`live.e2e.test.ts`: kunci respons publik persis lima kolom itu).
+- **Posisi & perilaku toast** (pola social-proof yang tidak mengganggu):
+  - desktop: kanan bawah tepat di atas tombol WhatsApp (di sana hanya gambar hero; kiri bawah ternyata menutupi
+    statistik dan tombol ajakan hero);
+  - HP: di atas, tepat di bawah menu (di bawah layar ada tombol "Main sekarang" dan WhatsApp);
+  - muncul pertama setelah 8 detik, tampil 7 detik, jeda 20 detik, **maks. 4 kali per kunjungan**; berhenti saat
+    disorot; bisa ditutup (tidak muncul lagi di kunjungan itu);
+  - tombol "Ayo main juga" ke `/play`; dibacakan pembaca layar secara sopan (`aria-live="polite"`); tanpa animasi
+    bila pengguna memilih gerak dikurangi; hanya di landing (tidak di area anak).
+
+## D-106 — Hanya suara Chirp yang disetujui; suara bawaan browser dihapus; tebakan bahasa diperbaiki
+
+Tanggal: 2026-10-10. Keluhan pemilik produk di Hias Momo: tombol "Acak" dan tab "Pernik" bersuara aneh, "seperti
+bahasa Inggris tapi tidak jelas". Diminta: pastikan suara sesuai yang ditetapkan, hapus suara bawaan.
+
+- **Temuan:**
+  - Penebak bahasa (D-098) memakai daftar kata English yang dibuat dari konten buku English. Daftar itu ikut
+    memuat kata Indonesia dan nama: momo, hati, baru, orang, benda, nama, lain, bantu, kota, naik, serta.
+    Akibatnya "Momo baru!", "Momo kucing", dan "Hati" dibacakan **suara British**.
+  - Teks UI lain juga terkena: "Main", "Siap main?", "Putar video", "Jam +1", "Tabel data", "Mock test",
+    "Lomba live", "Buka menu".
+  - Kata singkatan tanpa konteks ("Pernik") diucapkan tidak jelas walau sudah memakai suara Indonesia.
+- **Perbaikan bahasa (`packages/engine/src/content/voice.ts`):**
+  - Kata Indonesia di atas menjadi penanda Indonesia.
+  - Nama (Momo, Andi) dan istilah pinjaman yang lazim di teks Indonesia (video, data, jam, mock, test, English)
+    menjadi netral. Kalimat yang tak pasti mengikuti suara Indonesia.
+  - Kalimat English sungguhan tetap memakai suara British.
+  - Test regresi: semua teks yang dibacakan di area anak (`play`, `rank`, `contest`, `common`) harus tertebak
+    Indonesia.
+- **Hias Momo:**
+  - Semua kalimat studio dipaksa suara Indonesia.
+  - Tab mengucapkan kalimat lengkap ("Pilih pernak-pernik", "Pilih model Momo", …).
+  - Warna kode diucapkan "Warna pilihanmu", tanpa membacakan angka hex.
+- **Suara browser dihapus seluruhnya (`apps/web/src/audio/speech.ts`):**
+  - Tidak ada lagi `speechSynthesis`, termasuk saat server tanpa Chirp dan untuk membuka kunci suara iPhone/iPad
+    (kini memakai audio senyap).
+  - Bila klip tidak bisa diputar: dicoba ulang sekali, lalu Momo diam dan layar soal menampilkan teksnya.
+  - Ini mengganti "cadangan: suara browser" dari D-035/D-091.
+- Klip British lama untuk teks yang salah tebak tidak dipakai lagi (kuncinya berbeda); dibiarkan di cache.
+
+## D-104 — Hias Momo: gaya rambut pendek & gaya "keren" (tanpa label gender)
+
+Tanggal: 2026-10-10. Pertanyaan pemilik produk: "kenapa semua pilihannya hanya Momo untuk perempuan? Momo lelakinya
+tidak ada? Buat dengan berbagai model rambut dan gaya lelaki keren."
+
+- **Tetap tanpa label laki-laki/perempuan** (D-051, PRD A17): tidak ada pilihan "Momo lelaki/perempuan" dan tidak
+  ada data gender yang disimpan. Yang kurang sebelumnya adalah ragam gaya rambut pendek dan gaya sporty, jadi
+  itulah yang ditambah. Semua tersedia untuk semua anak.
+- **Aksesori kepala baru** (ditaruh di depan daftar):
+  - rambut: cepak, jabrik, belah samping, mohawk, gelombang;
+  - topi terbalik, bandana.
+  - Rambut jabrik, mohawk, dan topi terbalik menyembunyikan antena.
+- **Pernak-pernik baru:** dasi dan medali.
+- Data tetap di `momo_look`, tanpa migrasi. Semua nama baru lolos test bahasa suara Indonesia (D-106).

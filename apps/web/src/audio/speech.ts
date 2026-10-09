@@ -1,7 +1,6 @@
 import {
   langSegments,
   speechSegments,
-  speechText,
   voiceLangFor,
   type Item,
   type VoiceLang,
@@ -10,9 +9,9 @@ import { API_URL } from '../config/app';
 
 /**
  * Suara Momo & soal. SEMUA kalimat memakai klip suara server Chirp 3 HD (D-091): kalimat Momo, soal,
- * pembahasan, kartu, pelajaran, dan teks antarmuka (`speak` → `/voice/say`). Suara browser (TTS id-ID) hanya
- * cadangan terakhir: offline untuk kalimat yang belum pernah diputar, server/kunci suara tidak ada, atau klip
- * gagal. Aman bila speechSynthesis/Audio tidak ada (mis. jsdom / browser lama): diam saja.
+ * pembahasan, kartu, pelajaran, dan teks antarmuka (`speak` → `/voice/say`). Suara bawaan browser TIDAK dipakai
+ * sama sekali (D-106): di banyak perangkat suaranya English/Melayu dan tidak jelas. Bila klip tidak bisa diputar,
+ * Momo diam dan layar soal menampilkan teksnya. Aman bila Audio tidak ada (mis. jsdom / browser lama): diam saja.
  */
 let enabled = true;
 
@@ -20,93 +19,6 @@ export const setSpeechEnabled = (on: boolean) => {
   enabled = on;
   if (!on) stopSpeaking();
 };
-
-function synth(): SpeechSynthesis | undefined {
-  return typeof window !== 'undefined' && 'speechSynthesis' in window
-    ? window.speechSynthesis
-    : undefined;
-}
-
-// Daftar suara dimuat asinkron di banyak browser (Chrome/Android): simpan & segarkan saat berubah.
-let voices: SpeechSynthesisVoice[] = [];
-function refreshVoices() {
-  try {
-    voices = synth()?.getVoices() ?? [];
-  } catch {
-    voices = [];
-  }
-}
-refreshVoices();
-synth()?.addEventListener?.('voiceschanged', refreshVoices);
-
-/**
- * Suara perempuan dulu (D-062): suara Momo perempuan, dan suara pria bawaan perangkat (mis. "Daniel" en-GB di
- * iPad/Mac) terlalu berat untuk anak. Nama suara dari Apple, Google, dan Microsoft.
- */
-const FEMALE_VOICE =
-  /\b(female|woman|samantha|karen|moira|tessa|serena|kate|martha|fiona|victoria|allison|ava|susan|zira|hazel|libby|sonia|maisie|emma|amy|joanna|kimberly|salli|olivia|stephanie|catherine|damayanti|gadis|google bahasa indonesia|google uk english female|google us english)\b/i;
-const MALE_VOICE =
-  /\b(male|man|daniel|arthur|oliver|fred|alex|tom|aaron|rishi|george|ryan|thomas|guy|david|mark|james|brian|matthew|ardi|andika|reed|rocko|eddy|grandpa)\b/i;
-/** 0 = perempuan dikenal, 1 = tidak diketahui, 2 = pria dikenal. */
-const genderRank = (v: SpeechSynthesisVoice) =>
-  FEMALE_VOICE.test(v.name) && !/\bmale\b/i.test(v.name) ? 0 : MALE_VOICE.test(v.name) ? 2 : 1;
-const voiceRank = (v: SpeechSynthesisVoice) => genderRank(v) * 2 + (v.localService ? 0 : 1);
-const isGB = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase() === 'en-gb';
-
-/**
- * Suara Indonesia; untuk kata English: perempuan dulu, lalu British (D-059). Di setiap bahasa dipilih suara
- * perempuan lebih dulu (D-062). undefined = suara bawaan perangkat. Suara Melayu tidak dipakai lagi (D-098):
- * terdengar "bahasa Malaysia" bagi anak.
- */
-function pickVoice(lang: VoiceLang = 'id-ID'): SpeechSynthesisVoice | undefined {
-  if (voices.length === 0) refreshVoices();
-  const by = (f: (v: SpeechSynthesisVoice) => boolean) =>
-    voices.filter(f).sort((a, b) => voiceRank(a) - voiceRank(b))[0];
-  if (lang === 'en-GB')
-    // Kata Inggris: suara perempuan lebih penting daripada aksen; di antara yang setara, British lebih dulu.
-    return voices
-      .filter((v) => v.lang.toLowerCase().startsWith('en'))
-      .sort(
-        (a, b) =>
-          genderRank(a) - genderRank(b) ||
-          Number(!isGB(a)) - Number(!isGB(b)) ||
-          Number(!a.localService) - Number(!b.localService),
-      )[0];
-  return (
-    by((v) => v.lang.replace('_', '-').toLowerCase() === 'id-id') ??
-    by((v) => v.lang.toLowerCase().startsWith('id'))
-  );
-}
-
-/**
- * Pecah teks panjang per kalimat (. ! ?, ≤ 180 huruf): Chrome memotong ucapan yang lebih dari ±15 detik.
- */
-export function speechChunks(text: string, max = 180): string[] {
-  // Tanpa lookbehind regex: tidak didukung Safari/iOS < 16.4 (akan merusak seluruh aplikasi).
-  const parts = (
-    text
-      .replace(/\s+/g, ' ')
-      .trim()
-      .match(/[^.!?]+[.!?]*/g) ?? []
-  ).map((p) => p.trim());
-  const out: string[] = [];
-  for (const p of parts) {
-    if (!p) continue;
-    if (p.length <= max) {
-      out.push(p);
-      continue;
-    }
-    let rest = p;
-    while (rest.length > max) {
-      const cut = rest.lastIndexOf(' ', max);
-      const at = cut > max / 2 ? cut : max;
-      out.push(rest.slice(0, at).trim());
-      rest = rest.slice(at).trim();
-    }
-    if (rest) out.push(rest);
-  }
-  return out;
-}
 
 /**
  * Pemberitahuan "suara tidak keluar" (mesin suara tidak ada / gagal walau sudah dicoba ulang), supaya
@@ -124,14 +36,9 @@ function reportTrouble(text: string) {
   window.dispatchEvent(new CustomEvent(SPEECH_TROUBLE, { detail: { text } }));
 }
 
-/** Referensi ucapan aktif: tanpa ini Chrome bisa membuangnya (GC) dan `onend` tidak pernah terpanggil. */
-const keep: { list: SpeechSynthesisUtterance[] } = { list: [] };
-let seq = 0;
-/** Bila ucapan tidak mulai dalam waktu ini, coba ulang dengan suara bawaan perangkat. */
-const START_TIMEOUT_MS = 1800;
-
 type SpeakOpts = {
   onEnd?: () => void;
+  /** Lama: kecepatan suara browser. Diabaikan sejak D-106 (hanya Chirp). */
   rate?: number;
   /** Satu bahasa untuk seluruh teks. */
   lang?: VoiceLang;
@@ -168,7 +75,9 @@ const isOnline = () => typeof navigator === 'undefined' || navigator.onLine !== 
 
 function speakNow(text: string, opts: SpeakOpts) {
   if (!chirpOn()) {
-    browserSpeak(text, { ...opts, lang: opts.lang ?? 'id-ID' });
+    // Tanpa Chirp (server tanpa kunci suara / perangkat tanpa Audio): diam, layar menampilkan teksnya (D-106).
+    reportTrouble(text);
+    opts.onEnd?.();
     return;
   }
   // D-098: kalimat demi kalimat dengan suara sesuai bahasanya (teks campuran seperti "Hari ini kita belajar
@@ -189,110 +98,19 @@ function speakNow(text: string, opts: SpeakOpts) {
 /** Rangkaian kalimat yang sedang diputar; dinaikkan saat berhenti agar sisa rangkaian tidak lanjut. */
 let chainSeq = 0;
 
-/** Suara browser (cadangan terakhir, D-091). */
-function browserSpeak(text: string, opts: SpeakOpts = {}) {
-  stopAudio();
-  const s = synth();
-  if (!enabled || !text) {
-    opts.onEnd?.();
-    return;
-  }
-  if (!s) {
-    reportTrouble(text);
-    opts.onEnd?.();
-    return;
-  }
-  const token = ++seq;
-  const busy = s.speaking || s.pending;
-  s.cancel();
-  // Naskah ucapan (D-087): simbol, titik-titik, Rp, satuan → kata, sama seperti suara server.
-  const chunks = speechChunks(speechText(text, opts.lang ?? 'id-ID'));
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    if (token === seq) keep.list = [];
-    opts.onEnd?.();
-  };
-
-  let attemptNo = 0;
-  const start = (attempt: 0 | 1) => {
-    if (token !== seq) return;
-    const mine = ++attemptNo;
-    const stale = () => token !== seq || mine !== attemptNo;
-    let started = false;
-    const voice = attempt === 0 ? pickVoice(opts.lang) : undefined;
-    const list = chunks.map((c, i) => {
-      const u = new SpeechSynthesisUtterance(c);
-      // Percobaan kedua: tanpa bahasa/suara khusus → suara bawaan perangkat (lebih baik daripada diam).
-      if (attempt === 0) {
-        u.lang = voice?.lang.replace('_', '-') ?? opts.lang ?? 'id-ID';
-        if (voice) u.voice = voice;
-      }
-      u.rate = opts.rate ?? 0.9;
-      u.pitch = 1.1;
-      u.onstart = () => {
-        started = true;
-      };
-      u.onerror = (e) => {
-        const err = (e as SpeechSynthesisErrorEvent).error;
-        if (mine !== attemptNo) return; // ucapan percobaan lama yang dibatalkan
-        if (token !== seq || err === 'interrupted' || err === 'canceled') return finish();
-        // Belum ada ketukan di halaman ini: mencoba ulang percuma — minta anak mengetuk speaker.
-        if (err === 'not-allowed') {
-          reportBlocked(text);
-          return finish();
-        }
-        if (!started && attempt === 0) {
-          s.cancel();
-          start(1);
-        } else {
-          reportTrouble(text);
-          finish();
-        }
-      };
-      if (i === chunks.length - 1) u.onend = finish;
-      return u;
-    });
-    keep.list = list;
-    // Chrome Android kadang "tertidur" (paused) setelah tab berpindah.
-    if (s.paused) s.resume();
-    for (const u of list) {
-      if (stale()) break; // percobaan ini sudah diganti (mis. dicoba ulang tanpa suara Indonesia)
-      s.speak(u);
-    }
-    setTimeout(() => {
-      if (stale() || finished || started || s.speaking) return;
-      if (attempt === 0) {
-        s.cancel();
-        start(1);
-      } else {
-        reportTrouble(text);
-        finish();
-      }
-    }, START_TIMEOUT_MS);
-  };
-
-  // cancel() lalu speak() seketika kadang membuat ucapan baru hilang (Chrome): beri jeda singkat.
-  if (busy) setTimeout(() => start(0), 80);
-  else start(0);
-}
-
 export function stopSpeaking(keepChain = false) {
   waitSeq++;
   if (keepChain !== true) chainSeq++;
-  seq++;
-  keep.list = [];
-  synth()?.cancel();
   stopAudio();
 }
 
-export const speechAvailable = () => synth() !== undefined;
+/** Perangkat bisa memutar klip suara (elemen Audio). */
+export const speechAvailable = () => canPlayAudio();
 
 /**
  * iOS/iPadOS (semua browser di iPhone/iPad) dan sebagian Android hanya mengizinkan suara setelah ada
  * ketukan pengguna. Suara soal pertama diputar otomatis (bukan dari ketukan) → diblokir dan soal tidak
- * terdengar. Pasang sekali: ketukan/tombol pertama "membuka kunci" suara browser & audio klip.
+ * terdengar. Pasang sekali: ketukan/tombol pertama "membuka kunci" audio klip.
  */
 let unlocked = false;
 const SILENT_WAV =
@@ -314,20 +132,7 @@ export function installAudioUnlock() {
 export function unlockNow() {
   if (unlocked) return;
   unlocked = true;
-  const s = synth();
-  if (s) {
-    try {
-      if (s.paused) s.resume();
-      // Ucapan kosong tanpa suara di dalam ketukan = izin suara untuk halaman ini.
-      if (!s.speaking && !s.pending) {
-        const u = new SpeechSynthesisUtterance(' ');
-        u.volume = 0;
-        s.speak(u);
-      }
-    } catch {
-      /* abaikan */
-    }
-  }
+  // Audio senyap di dalam ketukan = izin memutar klip suara untuk halaman ini.
   if (canPlayAudio()) {
     try {
       const a = new Audio(SILENT_WAV);
@@ -357,7 +162,7 @@ export function audioReady(): boolean {
 /**
  * Suara Momo: klip MP3 yang dibuat sekali di server (Google Cloud TTS) lalu di-cache selamanya
  * (`Cache-Control: immutable`). Hanya PERINTAH soal & RESPONS jawaban (kunci dialog `vo_*`), serta
- * kalimat soal tingkat Basic. Bila klip belum ada, suara mati, atau offline → suara browser.
+ * kalimat soal tingkat Basic. Bila klip belum ada atau gagal → dicoba ulang sekali, lalu diam (D-106).
  */
 type VoiceManifest = {
   enabled: boolean;
@@ -367,7 +172,7 @@ type VoiceManifest = {
 
 const MANIFEST_KEY = 'lc.voice';
 /**
- * Bila klip belum mulai terdengar dalam waktu ini, pakai suara browser. Klip yang belum pernah dibuat perlu
+ * Bila klip belum mulai terdengar dalam waktu ini, dicoba ulang sekali. Klip yang belum pernah dibuat perlu
  * dibuat server dulu (±1–3 detik), jadi waktunya cukup longgar (D-091).
  */
 const CLIP_START_MS = 6000;
@@ -407,7 +212,6 @@ export function loadVoice(base = API_URL): Promise<void> {
 /** Hanya untuk test. */
 export function resetVoice(m?: VoiceManifest) {
   manifest = m;
-  voices = [];
   loading = undefined;
   audio = undefined;
 }
@@ -439,14 +243,13 @@ function playClip(
     if (done || audio !== a) return;
     done = true;
     stopAudio();
-    // D-098: hanya Chirp. Coba ulang sekali (klip baru bisa butuh waktu dibuat); bila tetap gagal, Momo diam dan
-    // layar soal menampilkan teksnya — tanpa suara browser (yang di sebagian HP bersuara Melayu/English).
+    // D-098, D-106: hanya Chirp. Coba ulang sekali (klip baru bisa butuh waktu dibuat); bila tetap gagal, Momo diam
+    // dan layar soal menampilkan teksnya — tanpa suara browser (yang di sebagian HP bersuara Melayu/English).
     if (blocked) {
       reportBlocked(fallbackText);
       onEnd?.();
     } else if (retry)
       playClip(`${url}${url.includes('?') ? '&' : '?'}r=1`, fallbackText, onEnd, lang, false);
-    else if (manifest?.enabled === false) browserSpeak(fallbackText, { onEnd, lang });
     else {
       reportTrouble(fallbackText);
       onEnd?.();
@@ -493,7 +296,7 @@ export const itemVoiceUrl = (
 ) =>
   `${API_URL}/voice/item/${encodeURIComponent(item.skillId)}?seed=${item.seed}&band=${item.band}&part=${part}${choiceId ? `&c=${encodeURIComponent(choiceId)}` : ''}&v=${manifest?.rev ?? '0'}`;
 
-/** Ucapkan kalimat soal Basic dengan suara Momo (cadangan: suara browser). */
+/** Ucapkan kalimat soal Basic dengan suara Momo (Chirp). */
 export function speakItem(
   item: { skillId: string; seed: number; band: number },
   text: string,
@@ -645,8 +448,8 @@ export function sayUrl(text: string, lang: VoiceLang = 'id-ID') {
 
 /**
  * Pakai suara Chirp dari server? (D-098) Ya, kecuali server memang tanpa suara Chirp (`enabled: false`, mis.
- * pengembangan tanpa kunci) atau perangkat tidak bisa memutar audio. Juga saat offline: klip yang pernah diputar
- * ada di cache browser. Suara browser TIDAK dipakai sebagai cadangan selama Chirp aktif.
+ * pengembangan tanpa kunci) atau perangkat tidak bisa memutar audio — maka diam (D-106). Juga saat offline: klip
+ * yang pernah diputar ada di cache browser.
  */
 function chirpOn() {
   return manifest?.enabled !== false && canPlayAudio();

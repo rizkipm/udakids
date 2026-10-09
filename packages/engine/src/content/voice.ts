@@ -244,9 +244,18 @@ const ID_MARKERS = new Set(
     'jika maka sama lebih paling setiap semua sebuah seorang ketuk benar tepat soal ayo bagus coba lagi teks ' +
     'bacaan gambar menunjukkan bentuk kerja masa lalu sekarang sedang telah belum bisa dapat perlu menjadi ' +
     'seperti agar supaya tetapi namun lalu kemudian sebelum sesudah setelah karena itulah yaitu yakni kalau ' +
-    'halo hai teman belajar hari kita ingat contoh'
+    'halo hai teman belajar hari kita ingat contoh ' +
+    // Kata Indonesia yang ikut terambil ke daftar English dari teks campuran buku English (D-106): "Momo baru!",
+    // "Hati" sempat dibacakan suara British.
+    'baru hati orang benda nama lain bantu kota naik serta aku kamu main siap lanjut putar jeda adegan tabel ' +
+    'laporan akunmu gratis khusus lomba buka'
   ).split(' '),
 );
+/**
+ * Netral, tidak menentukan bahasa (D-106): nama karakter/orang dan istilah pinjaman yang lazim di teks Indonesia
+ * ("Putar video", "Mock test", "Tabel data", "Jam +1").
+ */
+const NEUTRAL_WORDS = new Set(['momo', 'andi', 'video', 'data', 'jam', 'mock', 'test', 'english']);
 const EN_MARKERS = new Set(
   [
     (
@@ -258,7 +267,7 @@ const EN_MARKERS = new Set(
     ).split(' '),
   ]
     .flat()
-    .filter((w) => !ID_MARKERS.has(w)),
+    .filter((w) => !ID_MARKERS.has(w) && !NEUTRAL_WORDS.has(w)),
 );
 
 /**

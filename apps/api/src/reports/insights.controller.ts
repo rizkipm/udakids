@@ -95,10 +95,11 @@ export class InsightsController {
         count(*) filter (where status = 'awaiting_payment' and expires_at > now()) as queue_payment
       from orders`);
 
+    // Terlaris = paling banyak terjual (jumlah pesanan lunas), bukan nominal; pendapatan hanya pemecah seri.
     const topPackages = await this.rows(sql`
       select package_snapshot->>'name' as name, count(*) as sold, sum(amount) as revenue
       from orders where status = 'paid' and ${cur('reviewed_at')}
-      group by 1 order by revenue desc limit 5`);
+      group by 1 order by sold desc, revenue desc limit 8`);
 
     const recentOrders = await this.rows(sql`
       select o.id, o.number, o.amount, o.status, o.created_at, o.package_snapshot->>'name' as package,

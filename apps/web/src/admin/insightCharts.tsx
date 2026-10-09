@@ -1184,3 +1184,45 @@ export function FunnelShape({
     </div>
   );
 }
+
+/**
+ * Batang mendatar berperingkat (mis. paket terlaris): panjang = dibanding nilai terbesar, label & angka selalu
+ * terbaca tanpa sorot. Satu warna karena satu metrik; urutan ditentukan pemanggil.
+ */
+export function BarList({
+  items,
+  label,
+  color = SERIES.grape,
+}: {
+  items: { key: string; label: string; value: number; display: string; sub?: string }[];
+  label: string;
+  color?: string;
+}) {
+  const max = Math.max(1, ...items.map((x) => x.value));
+  return (
+    <ol className="ich-barlist" aria-label={label}>
+      {items.map((x, i) => (
+        <li key={x.key}>
+          <span className="ich-barlist-rank" aria-hidden>
+            {i + 1}
+          </span>
+          <div className="ich-barlist-body">
+            <div className="ich-barlist-head">
+              <span>{x.label}</span>
+              <b>{x.display}</b>
+            </div>
+            <span className="ich-barlist-track" aria-hidden>
+              <span
+                style={{
+                  width: `${Math.max(x.value ? 2 : 0, (x.value / max) * 100)}%`,
+                  background: color,
+                }}
+              />
+            </span>
+            {x.sub && <small>{x.sub}</small>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}

@@ -8,6 +8,7 @@ import { t, type MessageKey } from '../i18n';
 import { BookSlider } from './BookSlider';
 import { Blocks, Cloud, Icon, ProgramCard, Star, type FeatureIcon } from './Decor';
 import { useLiveStats } from './liveStats';
+import { PlayingToast } from './PlayingToast';
 import { PricingSection } from './Pricing';
 import { BannerSlider } from '../components/BannerSlider';
 import { GallerySection, useHasGallery } from './GallerySection';
@@ -520,6 +521,8 @@ export function Landing() {
       </main>
 
       <SiteFooter />
+      {/* Teman yang sedang bermain (D-103). */}
+      <PlayingToast />
     </div>
   );
 }

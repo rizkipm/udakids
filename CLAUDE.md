@@ -99,7 +99,7 @@ Orang tua baru wajib verifikasi email (kode 6 angka) sebelum bisa masuk; email t
   `optimalSteps: "auto"` ditulis ke `content/.generated/optimal.json`, jangan ubah file sumber.
 - Suara Momo (D-035): hanya perintah soal & respons jawaban (kunci dialog `vo_*`), plus kalimat soal Basic.
   Klip dibuat server lewat Google Cloud TTS lalu di-cache di PostgreSQL (`voice_clips`). Kunci API hanya di server,
-  bukan kunci Google AI Studio. Cadangan: suara browser.
+  bukan kunci Google AI Studio. Tanpa suara browser sama sekali (D-106): klip gagal → Momo diam, teks tampil.
 - Billing (D-036): uang = rupiah bulat. Kunci level berbayar dicek di perangkat (`paid`) DAN server. Harga, paket, dan
   komisi tidak pernah tampil di area anak.
 - Semua teks UI lewat `apps/web/src/i18n/id.json` (siap `en.json`). Nama produk/karakter hanya di

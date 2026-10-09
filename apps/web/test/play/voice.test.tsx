@@ -12,6 +12,7 @@ import {
   speakLine,
   stopSpeaking,
 } from '../../src/audio/speech';
+import { SPEECH_TROUBLE } from '../../src/audio/speech';
 import { langSegments, speechSegments } from '@little-coder/engine';
 
 /** Audio palsu: mencatat URL yang diputar. */
@@ -99,12 +100,16 @@ describe('suara Momo (D-035)', () => {
     expect(spoken).toEqual([]);
   });
 
-  it('suara Momo dimatikan admin → suara browser (cadangan)', () => {
+  it('suara Momo dimatikan admin → Momo diam (layar menampilkan teks), tanpa suara browser (D-106)', () => {
     resetVoice({ enabled: false, rev: 'r0', lines: {} });
+    const trouble = vi.fn();
+    window.addEventListener(SPEECH_TROUBLE, trouble);
     speakLine('vo_cmd_pick_one', 'Pilih satu.');
     speakItem({ skillId: 'math.prek.a1.x', seed: 3, band: 0 }, 'Ketuk lingkaran.');
     expect(played).toEqual([]);
-    expect(spoken).toEqual(['Pilih satu.', 'Ketuk lingkaran.']);
+    expect(spoken).toEqual([]);
+    expect(trouble).toHaveBeenCalledTimes(2);
+    window.removeEventListener(SPEECH_TROUBLE, trouble);
   });
 
   it('daftar suara belum dimuat → dimuat dulu, lalu klip server (D-091)', async () => {

@@ -137,6 +137,15 @@ describe.skipIf(!up)('AI Gambar (e2e)', () => {
     // Halaman admin menambah penanda muat ulang `r`; kunci lain tetap ditolak.
     await http().get('/admin/ai/images?status=review&r=3').set(admin()).expect(200);
     await http().get('/admin/ai/images?status=review&x=1').set(admin()).expect(400);
+    // Galeri: filter "Semua" (termasuk ditolak) + jumlah untuk penomoran halaman.
+    const all = (await http().get('/admin/ai/images?status=all&page=0').set(admin()).expect(200))
+      .body;
+    const n = (await http().get('/admin/ai/images/count?status=all').set(admin()).expect(200)).body;
+    expect(n).toEqual({ total: all.length, pageSize: 48 });
+    expect(
+      (await http().get('/admin/ai/images/count?status=review').set(admin()).expect(200)).body
+        .total,
+    ).toBeLessThanOrEqual(n.total);
     await http().get(`/pictures/${img.id}`).expect(404);
     const f = await http().get(`/admin/ai/images/${img.id}/file`).set(admin()).expect(200);
     expect(f.headers['cache-control']).toBe('private, no-store');

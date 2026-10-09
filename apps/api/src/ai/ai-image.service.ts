@@ -69,6 +69,9 @@ const imageView = (r: typeof aiImages.$inferSelect) => ({
 });
 export type AiImageView = ReturnType<typeof imageView>;
 
+/** Banyak gambar per halaman galeri admin. */
+export const AI_IMAGE_PAGE = 48;
+
 /** Awal hari & bulan di WIB (batas biaya mengikuti kalender Indonesia). */
 const startOf = (unit: 'day' | 'month'): SQL =>
   sql`(date_trunc(${unit}, now() at time zone 'Asia/Jakarta') at time zone 'Asia/Jakarta')`;
@@ -569,19 +572,36 @@ export class AiImageService {
     return { reused: false, costUsd: cost + claudeUsd, image: imageView(saved!) };
   }
 
-  async list(q: { status?: AiImageStatus; subject?: string; page: number }) {
-    const where = and(
-      q.status ? eq(aiImages.status, q.status) : ne(aiImages.status, 'rejected'),
+  /** Filter galeri admin: status tertentu, `all` = semua status, kosong = selain yang ditolak. */
+  private listWhere(q: { status?: AiImageStatus | 'all'; subject?: string }) {
+    return and(
+      q.status === 'all'
+        ? undefined
+        : q.status
+          ? eq(aiImages.status, q.status)
+          : ne(aiImages.status, 'rejected'),
       q.subject ? eq(aiImages.subject, q.subject) : undefined,
     );
+  }
+
+  async list(q: { status?: AiImageStatus | 'all'; subject?: string; page: number }) {
     const rows = await this.db
       .select()
       .from(aiImages)
-      .where(where)
+      .where(this.listWhere(q))
       .orderBy(desc(aiImages.createdAt))
-      .limit(48)
-      .offset(q.page * 48);
+      .limit(AI_IMAGE_PAGE)
+      .offset(q.page * AI_IMAGE_PAGE);
     return rows.map(imageView);
+  }
+
+  /** Jumlah gambar untuk filter yang sama (penomoran halaman galeri admin). */
+  async count(q: { status?: AiImageStatus | 'all'; subject?: string }) {
+    const [row] = await this.db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(aiImages)
+      .where(this.listWhere(q));
+    return { total: row?.n ?? 0, pageSize: AI_IMAGE_PAGE };
   }
 
   async setStatus(id: string, status: AiImageStatus, userId: string) {

@@ -23,6 +23,7 @@ import { pageList } from '../ui/Pager';
 import { formatStamp } from '../ui/ui';
 import { SpeakButton } from './ItemPlayer';
 import { Crown, StatIcon } from './icons';
+import { lastPlayedLabel } from './lastPlayed';
 import { MockBoard } from './MockBoard';
 import { PageHead } from './Profile';
 
@@ -367,6 +368,9 @@ export function LeaderboardPage({ momoColor }: { momoColor: Color }) {
                                 <StatIcon kind="time" size={16} />
                                 {formatClock(timeOf(r, mode))}
                               </span>
+                              {r.lastPlayedAt && (
+                                <span className="rank-last">{lastPlayedLabel(r.lastPlayedAt)}</span>
+                              )}
                             </span>
                           </>
                         )}
@@ -538,23 +542,23 @@ function RankRow({
   mode: LeaderboardMode;
   onOpen?: (r: LeaderboardRow) => void;
 }) {
+  const last = lastPlayedLabel(row.lastPlayedAt);
+  const say = idle(row)
+    ? t('rank.idleSay', { position: row.position, name: row.nickname })
+    : t(mode === 'total' ? 'rank.rowSayTotal' : 'rank.rowSay', {
+        position: row.position,
+        name: row.nickname,
+        average: formatAverage(row.rating),
+        raw: formatAverage(row.average),
+        points: row.points.toLocaleString('id-ID'),
+        rounds: row.rounds,
+        questions: row.questions,
+        time: durationWords(timeOf(row, mode)),
+      });
   return (
     <li
       className={`rank-row${row.isMe ? ' is-me' : ''}${row.position <= 3 && !idle(row) ? ` place-${row.position}` : ''}${idle(row) ? ' is-idle' : ''}`}
-      aria-label={
-        idle(row)
-          ? t('rank.idleSay', { position: row.position, name: row.nickname })
-          : t(mode === 'total' ? 'rank.rowSayTotal' : 'rank.rowSay', {
-              position: row.position,
-              name: row.nickname,
-              average: formatAverage(row.rating),
-              raw: formatAverage(row.average),
-              points: row.points.toLocaleString('id-ID'),
-              rounds: row.rounds,
-              questions: row.questions,
-              time: durationWords(timeOf(row, mode)),
-            })
-      }
+      aria-label={last ? `${say} ${last}.` : say}
     >
       <span className="rank-pos">{row.position}</span>
       <Momo color={row.momoColor as Color} look={row.momoLook ?? null} mood="happy" size={44} />
@@ -567,6 +571,7 @@ function RankRow({
             {mode === 'average' && <> · {t('rank.raw', { average: formatAverage(row.average) })}</>}
           </small>
         )}
+        {last && <small className="rank-last">{last}</small>}
       </span>
       {idle(row) ? (
         <span className="rank-idle">{t('rank.idle')}</span>

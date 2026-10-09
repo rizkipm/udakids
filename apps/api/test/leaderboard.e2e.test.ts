@@ -16,6 +16,7 @@ type Row = {
   average: number;
   rounds: number;
   timeMs: number;
+  lastPlayedAt?: string | null;
 };
 
 describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
@@ -101,6 +102,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
         'bestTimeMs',
         'childId',
         'isMe',
+        'lastPlayedAt',
         'momoColor',
         'momoLook',
         'nickname',
@@ -114,6 +116,9 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       ].sort(),
     );
     expect(res.body.rest).toMatchObject({ page: 1, total: 0, items: [] });
+    // Kapan terakhir bermain (D-105): ronde terbaru anak itu.
+    const last = Date.parse(top[0]!.lastPlayedAt as string);
+    expect(Date.now() - last).toBeLessThan(5 * 60_000);
   });
 
   it('per buku: Math PAUD — rata-rata sama 90, tapi Alya 2 ronde di atas Budi 1 ronde (D-045)', async () => {
@@ -178,13 +183,21 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     const res = await get('/leaderboard').expect(200);
     expect(res.body).toMatchObject({ total: 4, played: 3 });
     const last = (res.body.top as Row[]).at(-1)!;
-    expect(last).toMatchObject({ position: 4, nickname: 'Zaki', rounds: 0, average: 0 });
+    expect(last).toMatchObject({
+      position: 4,
+      nickname: 'Zaki',
+      rounds: 0,
+      average: 0,
+      lastPlayedAt: null,
+    });
     const total = await get('/leaderboard?mode=total').expect(200);
     expect((total.body.top as Row[]).at(-1)).toMatchObject({ position: 4, nickname: 'Zaki' });
     const book = await get('/leaderboard?scope=math/prek').expect(200);
     expect((book.body.top as Row[]).some((r) => r.nickname === 'Zaki')).toBe(false);
     const pub = await ctx.http().get('/leaderboard/public').expect(200);
     expect(pub.body).toMatchObject({ participants: 4, played: 3 });
+    // Landing publik (tanpa login) tidak menampilkan kapan anak bermain.
+    expect(pub.body.top[0]).not.toHaveProperty('lastPlayedAt');
     const scopes = await get('/leaderboard/scopes').expect(200);
     expect(scopes.body.scopes[0]).toMatchObject({ key: 'global', participants: 4 });
     // Anak itu sendiri melihat posisinya di papan global.
@@ -348,8 +361,38 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       .http()
       .put('/auth/me/momo')
       .set(ctx.auth(kid.token))
-      .send({ momoColor: 'ungu', momoLook: { accessory: 'mahkota' } })
+      .send({ momoColor: 'ungu', momoLook: { accessory: 'mahkota-emas' } })
       .expect(400);
+    // D-102: model, pola, pernak-pernik, dan kode warna sendiri tersimpan (hex dinormalisasi).
+    const custom = await ctx
+      .http()
+      .put('/auth/me/momo')
+      .set(ctx.auth(kid.token))
+      .send({
+        momoColor: 'ungu',
+        momoLook: {
+          model: 'dino',
+          body: '#13C2C2',
+          gradient: '#ff8800',
+          pattern: 'bintang',
+          accessory: 'mahkota',
+          extra: 'kacamata',
+          extraColor: 'merah',
+        },
+      })
+      .expect(200);
+    expect(custom.body.momoLook).toMatchObject({ model: 'dino', body: '#13c2c2' });
+    const again = await get('/leaderboard', kid.token).expect(200);
+    const row = again.body.me ?? again.body.top.find((r: { isMe: boolean }) => r.isMe);
+    expect(row.momoLook).toMatchObject({ model: 'dino', pattern: 'bintang', extra: 'kacamata' });
+    // Kode warna hanya "#" + 6 hex — tidak bisa menyisipkan nilai lain ke SVG.
+    for (const body of ['red', '#fff', 'url(#a)'])
+      await ctx
+        .http()
+        .put('/auth/me/momo')
+        .set(ctx.auth(kid.token))
+        .send({ momoColor: 'ungu', momoLook: { body } })
+        .expect(400);
     await ctx
       .http()
       .put('/auth/me/momo')

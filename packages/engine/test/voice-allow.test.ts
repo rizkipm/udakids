@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  langSegments,
   buildVoiceAllowList,
   generateItem,
   itemVoiceTexts,
@@ -119,6 +120,14 @@ describe('bahasa suara mengikuti kalimat (D-098)', () => {
     expect(textLanguage('Reveal = mengungkapkan; conceal = menyembunyikan.')).toBe('id');
     expect(textLanguage('Ketuk semua antonim dari "visible".')).toBe('id');
     expect(textLanguage('7 + 5')).toBeUndefined();
+  });
+  it('D-106: kata Indonesia & nama yang sempat terbaca English tidak lagi memakai suara British', () => {
+    for (const t of ['Momo baru!', 'Momo kucing', 'Hati', 'Siap main?', 'Putar video', 'Mock test'])
+      expect(textLanguage(t)).not.toBe('en');
+    expect(langSegments('Hai! Aku Momo-mu!').every((s) => s.lang === 'id-ID')).toBe(true);
+    // Kalimat English sungguhan tetap English.
+    expect(textLanguage('Momo went to the library with his friend.')).toBe('en');
+    expect(textLanguage('We watched a video about the moon.')).toBe('en');
   });
   it('buku English: penjelasan Indonesia → suara Indonesia; kalimat English → British', () => {
     const id = 'english.smp79.fh1.warm-up-notices-and-ads';

@@ -80,6 +80,8 @@ type Agg = {
   points: number;
   /** Jumlah waktu skor terbaik tiap level (D-024). */
   bestTimeMs: number;
+  /** Ronde terakhir (epoch ms); null = belum pernah bermain. */
+  lastPlayedAt: number | null;
 };
 type Entry = Agg & { id: string; nickname: string; momoColor: string; momoLook: MomoLook | null };
 type Board = (Entry & { average: number; rating: number; position: number })[];
@@ -111,6 +113,8 @@ type MockEntry = {
   total: number;
   timeMs: number;
   attempts: number;
+  /** Percobaan terakhir di mock ini (epoch ms). */
+  lastPlayedAt: number | null;
   position: number;
 };
 type MockBoard = {
@@ -225,8 +229,12 @@ export class LeaderboardController {
     if (!m) throw new NotFoundException('Mock test tidak ditemukan');
     const viewer = user.role === 'child' ? user.id : null;
     const row = (r: MockEntry) => {
-      const { id: rowId, ...rest } = r;
-      return { ...rest, isMe: viewer !== null && rowId === viewer };
+      const { id: rowId, lastPlayedAt, ...rest } = r;
+      return {
+        ...rest,
+        lastPlayedAt: lastPlayedAt === null ? null : new Date(lastPlayedAt).toISOString(),
+        isMe: viewer !== null && rowId === viewer,
+      };
     };
     const start = LEADERBOARD_TOP + (q.page - 1) * q.pageSize;
     const mine = viewer ? m.rows.find((r) => r.id === viewer) : undefined;
@@ -596,7 +604,8 @@ export class LeaderboardController {
         this.db.execute(sql`
         select c.id, c.nickname, c.momo_color, c.momo_look, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
-          sum(coalesce((e.payload->>'durationMs')::numeric, 0)) as time_ms
+          sum(coalesce((e.payload->>'durationMs')::numeric, 0)) as time_ms,
+          max(e.ts) as last_ts
         from events e
         join children c on c.id = e.child_id and c.active
         left join skills s on s.id = e.payload->>'skillId'
@@ -632,7 +641,8 @@ export class LeaderboardController {
           (e.payload->>'points')::int as points, (e.payload->>'score')::int as score,
           (e.payload->>'correct')::int as correct, (e.payload->>'total')::int as total,
           coalesce((e.payload->>'durationMs')::bigint, 0) as time_ms,
-          count(*) over (partition by e.child_id, s.id) as attempts
+          count(*) over (partition by e.child_id, s.id) as attempts,
+          max(e.ts) over (partition by e.child_id, s.id) as last_ts
         from events e
         join children c on c.id = e.child_id and c.active
         join skills s on s.id = e.payload->>'skillId' and s.template->>'family' = 'mock'
@@ -708,7 +718,11 @@ export class LeaderboardController {
         passedLevels: levelAgg.get(`${id}|${scope}`)?.passed ?? 0,
         points: levelAgg.get(`${id}|${scope}`)?.points ?? 0,
         bestTimeMs: levelAgg.get(`${id}|${scope}`)?.bestTimeMs ?? 0,
+        lastPlayedAt: null,
       };
+      const last = r.last_ts ? new Date(r.last_ts as string).getTime() : null;
+      if (last !== null && (cur.lastPlayedAt === null || last > cur.lastPlayedAt))
+        cur.lastPlayedAt = last;
       cur.rounds += n(r.rounds);
       cur.scoreSum += n(r.score_sum);
       cur.timeMs += n(r.time_ms);
@@ -762,6 +776,7 @@ export class LeaderboardController {
             passedLevels: lv?.passed ?? 0,
             points: lv?.points ?? 0,
             bestTimeMs: lv?.bestTimeMs ?? 0,
+            lastPlayedAt: null,
             average: 0,
             rating: 0,
           };
@@ -789,6 +804,7 @@ export class LeaderboardController {
           total: n(x.total),
           timeMs: n(x.time_ms),
           attempts: n(x.attempts),
+          lastPlayedAt: x.last_ts ? new Date(x.last_ts as string).getTime() : null,
         }));
       const competition = competitionOf(
         book?.categories.find((x) => x.code === parsed.data.category)?.group,
@@ -833,5 +849,7 @@ function publicRow(r: Board[number], viewer: string | null, withId: boolean) {
     timeMs: r.timeMs,
     bestTimeMs: r.bestTimeMs,
     passedLevels: r.passedLevels,
+    /** Kapan terakhir bermain (D-105): hanya untuk papan di area masuk, tidak di landing publik. */
+    lastPlayedAt: r.lastPlayedAt === null ? null : new Date(r.lastPlayedAt).toISOString(),
   };
 }

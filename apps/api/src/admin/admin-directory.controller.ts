@@ -26,6 +26,7 @@ import { CurrentUser, Roles } from '../auth/decorators.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { children, entitlements, staffUsers } from '../db/schema.js';
+import { bookLabel, livePlayers } from '../live/live.js';
 
 type Ent = typeof entitlements.$inferSelect;
 const iso = (d: Date | null) => (d ? d.toISOString() : null);
@@ -199,6 +200,35 @@ export class AdminDirectoryController {
             }),
         };
       }),
+    };
+  }
+
+  /**
+   * Anak yang sedang bermain (D-103): aktif ≤ 10 menit, jenis akun (keluarga / kelas / daftar sendiri) dengan orang
+   * tua atau kelasnya, materi terakhir, dan jawaban hari ini (WIB). Khusus admin.
+   */
+  @Get('live')
+  async live() {
+    const rows = await livePlayers(this.db);
+    return {
+      windowMin: 10,
+      at: new Date().toISOString(),
+      items: rows.map((r) => ({
+        id: r.id,
+        nickname: r.nickname,
+        momoColor: r.momoColor,
+        type: r.parentId ? 'family' : r.selfCode ? 'self' : 'class',
+        parent: r.parentId ? { id: r.parentId, name: r.parentName, email: r.parentEmail } : null,
+        class: r.classId ? { id: r.classId, name: r.className, code: r.classCode } : null,
+        selfCode: r.selfCode,
+        book: r.domain && r.grade ? bookLabel(r.domain, r.grade) : null,
+        topic: r.topic,
+        level: r.order,
+        levelTitle: r.levelTitle?.split(' — ').at(-1) ?? null,
+        answeredToday: r.answeredToday,
+        correctToday: r.correctToday,
+        lastActiveAt: r.lastActiveAt.toISOString(),
+      })),
     };
   }
 

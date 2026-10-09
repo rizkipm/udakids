@@ -12,6 +12,7 @@ import { Badge, Card, Empty, PageHeader, Table, formatDate, type Column } from '
 import { Loadable, percent, skillPath } from './common';
 import type { AdminInsights } from './insightsTypes';
 import { AffiliateSection, CommissionSection } from './OverviewAffiliate';
+import { LivePlayers } from './LivePlayers';
 import {
   Panel,
   Row,
@@ -40,6 +41,7 @@ import {
   ColumnChart,
   Donut,
   Funnel,
+  BarList,
   Heatmap,
   LineChart,
   MetricTabs,
@@ -427,6 +429,77 @@ export function PeriodFilter({
   );
 }
 
+type PackageMetric = 'sold' | 'revenue';
+
+/** Paket terlaris = paling banyak terjual; tab pendapatan untuk membandingkan nilai uangnya. */
+function TopPackages({ s }: { s: AdminInsights['sales'] }) {
+  const [metric, setMetric] = useState<PackageMetric>('sold');
+  const opts: { key: PackageMetric; label: string }[] = [
+    { key: 'sold', label: t('admin.ins.pkgBySold') },
+    { key: 'revenue', label: t('admin.ins.pkgByRevenue') },
+  ];
+  const soldTotal = Math.max(
+    s.paid,
+    s.topPackages.reduce((a, x) => a + x.sold, 0),
+  );
+  const pct = (n: number, total: number) => (total ? Math.round((n / total) * 100) : 0);
+  const ranked = [...s.topPackages]
+    .sort((a, b) => b[metric] - a[metric] || b.sold - a.sold || b.revenue - a.revenue)
+    .slice(0, 5);
+  const current = opts.find((o) => o.key === metric)!;
+  return (
+    <Panel
+      title={t('admin.ins.topPackages')}
+      sub={t('admin.ins.topPackagesSub')}
+      action={<Link to="/admin/paket">{t('admin.ins.manage')}</Link>}
+      className="is-chart"
+    >
+      {s.topPackages.length === 0 ? (
+        <Empty>{t('admin.ins.noSales')}</Empty>
+      ) : (
+        <>
+          <MetricTabs
+            options={opts}
+            value={metric}
+            onChange={setMetric}
+            label={t('admin.ins.topPackages')}
+          />
+          <BarList
+            label={`${t('admin.ins.topPackages')}: ${current.label}`}
+            items={ranked.map((x) => ({
+              key: x.name,
+              label: x.name,
+              value: x[metric],
+              display:
+                metric === 'sold'
+                  ? t('admin.ins.sold', { n: x.sold.toLocaleString('id-ID') })
+                  : rupiahShort(x.revenue),
+              sub:
+                metric === 'sold'
+                  ? `${t('admin.ins.shareSold', { pct: pct(x.sold, soldTotal) })} · ${rupiahShort(x.revenue)}`
+                  : `${t('admin.ins.share', { pct: pct(x.revenue, s.revenue) })} · ${t('admin.ins.sold', { n: x.sold })}`,
+            }))}
+          />
+          <ChartTable
+            head={[
+              t('admin.ins.colPackage'),
+              t('admin.ins.pkgBySold'),
+              t('admin.ins.revenue'),
+              t('admin.ins.colShareSold'),
+            ]}
+            rows={ranked.map((x) => [
+              x.name,
+              x.sold,
+              formatRupiah(x.revenue),
+              `${pct(x.sold, soldTotal)}%`,
+            ])}
+          />
+        </>
+      )}
+    </Panel>
+  );
+}
+
 function AdminInsightsView({ d }: { d: AdminInsights }) {
   const s = d.sales;
   const u = d.users;
@@ -646,29 +719,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
       </div>
 
       <div className="ins-grid">
-        <Panel
-          title={t('admin.ins.topPackages')}
-          action={<Link to="/admin/paket">{t('admin.ins.manage')}</Link>}
-        >
-          {s.topPackages.length === 0 ? (
-            <Empty>{t('admin.ins.noSales')}</Empty>
-          ) : (
-            <ol className="ins-rank">
-              {s.topPackages.map((x) => (
-                <li key={x.name}>
-                  <span>{x.name}</span>
-                  <strong>{rupiahShort(x.revenue)}</strong>
-                  <small>
-                    {t('admin.ins.sold', { n: x.sold })} ·{' '}
-                    {t('admin.ins.share', {
-                      pct: s.revenue ? Math.round((x.revenue / s.revenue) * 100) : 0,
-                    })}
-                  </small>
-                </li>
-              ))}
-            </ol>
-          )}
-        </Panel>
+        <TopPackages s={s} />
 
         <Panel
           title={t('admin.ins.recentOrders')}
@@ -1137,6 +1188,8 @@ export function OverviewPage() {
         </p>
       </div>
       <BannerSlider placement="admin" />
+      {/* Sedang bermain sekarang (D-103): langsung, tidak mengikuti filter periode. */}
+      <LivePlayers />
       <div className={insights.loading && insights.data ? 'ins-refetch' : undefined}>
         <Loadable loading={insights.loading} error={insights.error} hasData={!!insights.data}>
           {() => <AdminInsightsView d={insights.data!} />}

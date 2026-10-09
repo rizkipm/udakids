@@ -27,6 +27,7 @@ import { useLinks } from './links';
 import { MomoLoader } from './MomoLoader';
 import { PremiumNotice } from './PremiumNotice';
 import { MockSection } from './MockSection';
+import { materiOf } from './materi/registry';
 import { useProgress } from './practiceStore';
 import { PageHead } from './Profile';
 
@@ -95,6 +96,8 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   // Mock Test olimpiade (D-072): aturan & tombolnya berbeda dari level biasa.
   const mockSkill = shelf.skills[0] && isMockSkill(shelf.skills[0]) ? shelf.skills[0] : undefined;
   const readAloud = topicReadAloud(intro, tips, t('play.topic.tip'));
+  // Materi lengkap (purwarupa): bab berurutan untuk topik yang sudah punya.
+  const materi = materiOf(domain, grade, code);
 
   if (mockSkill) {
     return (
@@ -123,8 +126,20 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           <h2 id="lesson-title">{t('play.topic.lesson')}</h2>
           <SpeakButton text={readAloud} label={t('play.topic.listen')} />
         </div>
+        {materi && (
+          <Link className="kid-btn big-play lesson-open" to={`/play/belajar/${token}/lengkap`}>
+            <PlayIcon />
+            <span className="materi-open">
+              {t('play.materi.open', { title: materi.judul })}
+              <small>{t('play.materi.openSub', { n: materi.bab.length })}</small>
+            </span>
+          </Link>
+        )}
         {book.lesson && (
-          <Link className="kid-btn big-play lesson-open" to={`/play/belajar/${token}`}>
+          <Link
+            className={`kid-btn lesson-open${materi ? ' secondary' : ' big-play'}`}
+            to={`/play/belajar/${token}`}
+          >
             <PlayIcon />
             {t('play.lesson.open', { title: book.lesson.judul })}
           </Link>

@@ -14,6 +14,7 @@ import { Public } from '../auth/decorators.js';
 import { BillingService } from '../billing/billing.service.js';
 import { DB, type Db } from '../db/db.module.js';
 import { SettingsService } from '../settings/settings.service.js';
+import { bookLabel, livePlayers } from '../live/live.js';
 import {
   children,
   events,
@@ -28,6 +29,15 @@ import {
 export const ACTIVE_WINDOW_MS = 10 * 60_000;
 /** Jeda kirim ulang statistik ke landing (SSE). */
 export const STATS_TICK_MS = 10_000;
+
+/** Satu anak di toast "sedang bermain" landing (D-103). */
+export type PublicPlaying = {
+  nickname: string;
+  momoColor: string;
+  momoLook: unknown;
+  book: string;
+  topic: string;
+};
 
 export type PublicStats = {
   books: number;
@@ -124,6 +134,27 @@ export class PublicController {
     };
   }
 
+  private playing?: { at: number; value: PublicPlaying[] };
+
+  /**
+   * Siapa yang sedang bermain, untuk toast ajakan di landing (D-103): hanya nama panggilan, tampilan Momo, dan
+   * materinya. Tanpa id, waktu, kelas, atau data orang tua; anak yang tergabung di kelas sekolah tidak ditampilkan.
+   * Di-cache 15 detik.
+   */
+  async nowPlaying(now = Date.now()): Promise<PublicPlaying[]> {
+    if (this.playing && now - this.playing.at < 15_000) return this.playing.value;
+    const rows = await livePlayers(this.db, { publicOnly: true });
+    const value = rows.map((r) => ({
+      nickname: r.nickname,
+      momoColor: r.momoColor,
+      momoLook: r.momoLook,
+      book: bookLabel(r.domain!, r.grade!),
+      topic: r.topic ?? r.levelTitle?.split(' — ')[0] ?? '',
+    }));
+    this.playing = { at: now, value };
+    return value;
+  }
+
   private cache?: { at: number; value: PublicStats };
 
   /**
@@ -172,6 +203,12 @@ export class PublicController {
   @Get('stats')
   getStats() {
     return this.stats();
+  }
+
+  @Public()
+  @Get('playing')
+  getPlaying() {
+    return this.nowPlaying();
   }
 
   /** Statistik realtime (Server-Sent Events): dikirim saat tersambung, lalu tiap ada perubahan (cek 10 dtk). */

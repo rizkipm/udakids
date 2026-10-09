@@ -7,6 +7,7 @@ import { t } from '../i18n';
 import { formatStamp } from '../ui/ui';
 import { SpeakButton } from './ItemPlayer';
 import { Crown, StatIcon } from './icons';
+import { lastPlayedLabel } from './lastPlayed';
 
 const pts = (n: number) => n.toLocaleString('id-ID');
 
@@ -100,6 +101,9 @@ export function MockBoard({
                         <StatIcon kind="time" size={16} />
                         {formatClock(r.timeMs)}
                       </span>
+                      {r.lastPlayedAt && (
+                        <span className="rank-last">{lastPlayedLabel(r.lastPlayedAt)}</span>
+                      )}
                     </span>
                     <span className="podium-block">{r.position}</span>
                   </li>
@@ -130,17 +134,19 @@ export function MockBoard({
 }
 
 function MockRow({ row }: { row: MockBoardRow }) {
+  const last = lastPlayedLabel(row.lastPlayedAt);
+  const say = t('rank.mock.rowSay', {
+    position: row.position,
+    name: row.nickname,
+    points: pts(row.points),
+    correct: row.correct,
+    total: row.total,
+    time: durationWords(row.timeMs),
+  });
   return (
     <li
       className={`rank-row${row.isMe ? ' is-me' : ''}${row.position <= 3 ? ` place-${row.position}` : ''}`}
-      aria-label={t('rank.mock.rowSay', {
-        position: row.position,
-        name: row.nickname,
-        points: pts(row.points),
-        correct: row.correct,
-        total: row.total,
-        time: durationWords(row.timeMs),
-      })}
+      aria-label={last ? `${say} ${last}.` : say}
     >
       <span className="rank-pos">{row.position}</span>
       <Momo color={row.momoColor as Color} look={row.momoLook ?? null} mood="happy" size={44} />
@@ -151,6 +157,7 @@ function MockRow({ row }: { row: MockBoardRow }) {
           {t('rank.mock.correct', { n: row.correct, total: row.total })} ·{' '}
           {t('rank.mock.score', { n: row.score })} · {t('rank.mock.attempts', { n: row.attempts })}
         </small>
+        {last && <small className="rank-last">{last}</small>}
       </span>
       <span className="rank-avg">{t('rank.mock.points', { n: pts(row.points) })}</span>
       <span className="rank-time">

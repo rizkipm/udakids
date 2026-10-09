@@ -61,7 +61,10 @@ export const insights: AdminInsights = {
     uniqueCode: 9_000,
     queue: { review: 3, payment: 2 },
     review: { reviewed: 12, medianHours: 0.5, p90Hours: 6, oldestPendingHours: 30 },
-    topPackages: [{ name: 'Akses Semua', sold: 20, revenue: 900_000 }],
+    topPackages: [
+      { name: 'Akses Semua', sold: 2, revenue: 900_000 },
+      { name: 'Kumbang', sold: 20, revenue: 400_000 },
+    ],
   },
   recentOrders: [
     {
@@ -193,7 +196,13 @@ describe('AdminApp', () => {
       'href',
       '/admin/transaksi',
     );
-    expect(screen.getByText('Akses Semua', { selector: '.ins-rank span' })).toBeInTheDocument();
+    // Paket terlaris diurutkan dari jumlah terjual (bukan nominal); tab Pendapatan membalik urutannya.
+    const pkgNames = () =>
+      [...document.querySelectorAll('.ich-barlist-head span')].map((el) => el.textContent);
+    expect(pkgNames()).toEqual(['Kumbang', 'Akses Semua']);
+    const pkgTabs = screen.getByRole('group', { name: t('admin.ins.topPackages') });
+    fireEvent.click(within(pkgTabs).getByRole('button', { name: t('admin.ins.pkgByRevenue') }));
+    expect(pkgNames()).toEqual(['Akses Semua', 'Kumbang']);
     // Grafik pendapatan: satu batang per hari yang ada pendapatannya (hari 0 = Rp0 tidak digambar).
     expect(
       screen

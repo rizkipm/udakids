@@ -1,15 +1,137 @@
+/* Studio Momo (D-051, D-102). Semua target ≥ 64 px; pilihan dibacakan saat diketuk. */
 .ms {
   display: grid;
-  gap: 14px;
+  gap: 16px;
+}
+.ms-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 30% 20%, #fff7d6 0, transparent 55%),
+    radial-gradient(circle at 80% 90%, #e9e3ff 0, transparent 60%), #fff;
+  border: 3px solid #2b2540;
 }
 .ms-preview {
   display: grid;
   place-items: center;
-  padding: 8px;
+  min-height: 190px;
+  padding: 0;
+  border: 0;
   border-radius: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.ms-preview:focus-visible {
+  outline: 3px solid #5b3fd6;
+  outline-offset: 4px;
+}
+.ms-bounce {
+  display: inline-block;
+  animation: ms-bounce 0.55s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes ms-bounce {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  35% {
+    transform: scale(1.12, 0.92) rotate(-4deg);
+  }
+  65% {
+    transform: scale(0.96, 1.06) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+.ms-stage-actions {
+  display: grid;
+  gap: 10px;
+}
+.ms-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 132px;
+  min-height: 64px;
+  padding: 0 16px;
+  border: 3px solid #2b2540;
+  border-radius: 20px;
+  background: #f7c948;
+  color: #2b2540;
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #2b2540;
+}
+.ms-action.is-secondary {
   background: #fff;
+}
+.ms-action:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #2b2540;
+}
+.ms-action:focus-visible {
+  outline: 3px solid #5b3fd6;
+  outline-offset: 3px;
+}
+
+.ms-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(64px, 1fr));
+  gap: 6px;
+}
+.ms-tab {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 72px;
+  padding: 6px 8px;
+  border: 3px solid #d8d3e6;
+  border-radius: 18px;
+  background: #fff;
+  color: #2b2540;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.ms-tab.is-on {
+  border-color: #2b2540;
+  background: #efeaff;
+  box-shadow: 0 0 0 4px #f7c948;
+}
+.ms-tab:focus-visible {
+  outline: 3px solid #5b3fd6;
+  outline-offset: 2px;
+}
+.ms-tab-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+.ms-tab-icon.ms-rainbow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   border: 3px solid #2b2540;
 }
+.ms-panel {
+  display: grid;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 24px;
+  background: #faf8ff;
+  border: 2px solid #e4def5;
+}
+
 .ms-group {
   margin: 0;
   padding: 0;
@@ -25,6 +147,7 @@
   gap: 10px;
 }
 .ms-opt {
+  position: relative;
   display: grid;
   place-items: center;
   min-width: 64px;
@@ -34,15 +157,18 @@
   border-radius: 18px;
   background: #fff;
   cursor: pointer;
+  transition: transform 0.12s;
 }
 .ms-opt:hover {
   border-color: #8a6cf0;
+  transform: translateY(-2px);
 }
 .ms-opt.is-on {
   border-color: #2b2540;
   box-shadow: 0 0 0 4px #f7c948;
 }
-.ms-opt:focus-visible {
+.ms-opt:focus-visible,
+.ms-custom:focus-within {
   outline: 3px solid #5b3fd6;
   outline-offset: 2px;
 }
@@ -54,4 +180,99 @@
   height: 44px;
   border-radius: 50%;
   border: 3px solid #2b2540;
+}
+.ms-rainbow {
+  background: conic-gradient(
+    #ef6f6c,
+    #f7c948,
+    #46b97a,
+    #2bb5a8,
+    #4f8ff7,
+    #8a6cf0,
+    #f58fc0,
+    #ef6f6c
+  );
+}
+
+/* Warna sendiri: pemilih warna asli browser di atas tombol bergambar pelangi. */
+.ms-custom {
+  min-width: 76px;
+  gap: 2px;
+}
+.ms-custom-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #2b2540;
+}
+.ms-color-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+.ms-hex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.ms-hex label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.ms-hex input {
+  width: 10ch;
+  min-height: 64px;
+  padding: 0 10px;
+  border: 3px solid #d8d3e6;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+}
+.ms-hex input:focus {
+  outline: 3px solid #5b3fd6;
+  outline-offset: 1px;
+  border-color: #2b2540;
+}
+.ms-hex-btn {
+  min-height: 64px;
+  padding: 0 16px;
+  border: 3px solid #2b2540;
+  border-radius: 14px;
+  background: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.ms-hex-hint {
+  color: #5d5873;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .ms-stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .ms-stage-actions {
+    grid-auto-flow: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-bounce {
+    animation: none;
+  }
+  .ms-opt {
+    transition: none;
+  }
 }
