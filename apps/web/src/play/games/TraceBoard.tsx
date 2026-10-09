@@ -3,6 +3,8 @@ import {
   GLYPH_HEIGHT,
   GLYPHS,
   isLetterGlyph,
+  isStrokeGlyph,
+  STROKE_NAMES,
   interpolate,
   strokePath,
   traceFraction,
@@ -148,9 +150,11 @@ export function TraceBoard({
         height={size}
         className="trace-svg"
         role="img"
-        aria-label={t(isLetterGlyph(glyph) ? 'play.trace.labelLetter' : 'play.trace.label', {
-          n: glyph,
-        })}
+        aria-label={
+          isStrokeGlyph(glyph)
+            ? t('play.trace.labelStroke', { n: STROKE_NAMES[glyph] })
+            : t(isLetterGlyph(glyph) ? 'play.trace.labelLetter' : 'play.trace.label', { n: glyph })
+        }
         onPointerDown={onDown}
         onPointerMove={onMove}
         onPointerUp={onUp}

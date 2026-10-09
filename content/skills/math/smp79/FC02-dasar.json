@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fc2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 2,
+  "title": "Aritmetika sosial — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [10, 90],
+      "a": {
+        "values": [10, 20, 25, 30, 40, 50]
+      },
+      "b": {
+        "values": [5, 10, 20]
+      }
+    },
+    "derived": {
+      "h": "10000 * m"
+    },
+    "prompt": "Harga sepatu di sebuah toko di Malang Rp{h}. Toko memberi diskon {a}%, lalu diskon lagi {b}% dari harga setelah diskon pertama. Harga yang dibayar Rp …",
+    "answer": "m * (100 - a) * (100 - b)",
+    "distractors": [
+      {
+        "expr": "100 * m * (100 - a - b)",
+        "tag": "diskon-dijumlah"
+      },
+      {
+        "expr": "100 * m * (100 - a)",
+        "tag": "satu-diskon"
+      },
+      {
+        "expr": "100 * m * (a + b)",
+        "tag": "besar-diskon"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setelah diskon pertama: {h} × {=100-a}% = {=100*m*(100-a)}. Setelah diskon kedua: × {=100-b}% = {answer}."
+  }
+}

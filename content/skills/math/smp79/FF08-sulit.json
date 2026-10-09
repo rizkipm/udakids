@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.ff8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 8,
+  "title": "Persamaan dan pertidaksamaan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 6],
+      "q": [2, 6],
+      "a": [1, 12],
+      "b": [1, 12],
+      "c": [1, 6]
+    },
+    "derived": {
+      "tt": "p * q * c - q * a + p * b",
+      "s": "p + q"
+    },
+    "constraint": "p != q",
+    "prompt": "Bilangan bulat terkecil x yang memenuhi (x + {a})/{p} + (x − {b})/{q} > {c} adalah …",
+    "answer": "floor(tt / s) + 1",
+    "distractors": [
+      {
+        "expr": "floor(tt / s)",
+        "tag": "batas-ikut"
+      },
+      {
+        "expr": "floor((p * q * c - a + b) / s) + 1",
+        "tag": "lupa-kali-silang"
+      },
+      {
+        "expr": "floor(tt / (p * q)) + 1",
+        "tag": "bagi-pq"
+      }
+    ],
+    "choices": 4,
+    "allowNegative": true,
+    "explain": "Kalikan {=p*q}: {q}(x + {a}) + {p}(x − {b}) > {=p*q*c}, jadi {s}x > {tt} dan x > {=tt/s}. Bilangan bulat terkecilnya {answer}."
+  }
+}

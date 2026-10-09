@@ -1,0 +1,69 @@
+{
+  "id": "math.sd34.ff7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [2000, 10000],
+        "step": 1000
+      },
+      "h": {
+        "range": [150000, 500000],
+        "step": 25000
+      },
+      "s": {
+        "range": [20000, 100000],
+        "step": 5000
+      }
+    },
+    "words": {
+      "nama": [
+        "Alya",
+        "Raka",
+        "Dimas",
+        "Sari",
+        "Bayu",
+        "Putri",
+        "Nina",
+        "Adit",
+        "Tegar",
+        "Wulan",
+        "Fajar",
+        "Laras"
+      ]
+    },
+    "constraint": "h > s && (h - s) % a != 0",
+    "prompt": "{nama} menabung Rp{a} setiap hari. Ia ingin membeli sepeda seharga Rp{h} dan sudah punya Rp{s}. Paling sedikit ia harus menabung … hari lagi.",
+    "answer": "ceil((h - s) / a)",
+    "distractors": [
+      {
+        "expr": "floor((h - s) / a)",
+        "tag": "dibulatkan-ke-bawah"
+      },
+      {
+        "expr": "ceil(h / a)",
+        "tag": "lupa-uang-yang-ada"
+      },
+      {
+        "expr": "ceil((h - s) / a) + 1",
+        "tag": "lebih-satu-hari"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kurang {h} − {s} = {=h-s}. Dalam {=floor((h-s)/a)} hari baru terkumpul {=a*floor((h-s)/a)}, masih kurang. Jadi perlu {answer} hari."
+  }
+}

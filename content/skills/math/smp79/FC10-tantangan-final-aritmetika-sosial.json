@@ -1,0 +1,594 @@
+{
+  "id": "math.smp79.fc10.tantangan-final-aritmetika-sosial",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 10,
+  "title": "Aritmetika sosial — Level 10 — Tantangan final aritmetika sosial",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 50],
+            "p": {
+              "values": [6, 8, 9, 10, 12, 15, 18]
+            },
+            "n": [3, 24]
+          },
+          "derived": {
+            "mo": "100000 * k"
+          },
+          "constraint": "(k * p * n) % 3 == 0",
+          "prompt": "Rina menabung Rp{mo} di koperasi sekolah dengan bunga tunggal {p}% per tahun. Setelah {n} bulan, jumlah tabungannya Rp …",
+          "answer": "mo + mo * p * n / 1200",
+          "distractors": [
+            {
+              "expr": "mo * p * n / 1200",
+              "tag": "bunganya-saja"
+            },
+            {
+              "expr": "mo + mo * p * n / 100",
+              "tag": "bulan-dianggap-tahun"
+            },
+            {
+              "expr": "mo + mo * p / 100",
+              "tag": "setahun"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bunga = {n}/12 × {p}% × {mo} = {=mo*p*n/1200}. Tabungan = {mo} + {=mo*p*n/1200} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 50],
+            "p": {
+              "values": [6, 9, 12, 15, 18, 8, 10]
+            },
+            "n": [3, 30]
+          },
+          "derived": {
+            "mo": "100000 * k",
+            "tot": "mo + mo * p * n / 1200"
+          },
+          "constraint": "(k * p) % 3 == 0",
+          "prompt": "Modal Rp{mo} disimpan dengan bunga tunggal {p}% per tahun hingga menjadi Rp{tot}. Lama menyimpan … bulan.",
+          "answer": "n",
+          "unit": "bulan",
+          "distractors": [
+            {
+              "expr": "(tot - mo) * 100 / (mo * p)",
+              "tag": "dalam-tahun"
+            },
+            {
+              "expr": "n + 12",
+              "tag": "tambah-setahun"
+            },
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bunga = {tot} − {mo} = {=tot-mo}. Bunga sebulan = {p}% × {mo} : 12 = {=mo*p/1200}. Lama = {=tot-mo} : {=mo*p/1200} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [1, 10],
+            "r": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "x": [5, 15],
+            "y": [2, 10]
+          },
+          "derived": {
+            "n": "20 * q",
+            "s": "q * (100 - r) / 5",
+            "b": "1000 * x",
+            "j": "1000 * (x + y)"
+          },
+          "constraint": "s * j - n * b > 0",
+          "prompt": "Pak Mamat membeli {n} kg salak Rp{b} per kg. Sebanyak {r}% salak busuk dan dibuang. Sisanya dijual Rp{j} per kg. Keuntungan Pak Mamat Rp …",
+          "answer": "s * j - n * b",
+          "distractors": [
+            {
+              "expr": "n * (j - b)",
+              "tag": "lupa-busuk"
+            },
+            {
+              "expr": "s * (j - b)",
+              "tag": "busuk-gratis"
+            },
+            {
+              "expr": "s * j",
+              "tag": "hasil-jual"
+            }
+          ],
+          "choices": 4,
+          "explain": "Salak yang terjual {n} × {=100-r}% = {s} kg. Untung = {s} × {j} − {n} × {b} = {=s*j} − {=n*b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [10, 50],
+            "d": {
+              "values": [10, 20, 25, 40, 50]
+            },
+            "u": {
+              "values": [10, 20, 25, 30, 50]
+            }
+          },
+          "derived": {
+            "b": "10 * w * (100 - d)",
+            "lb": "10 * w * (100 + u)"
+          },
+          "constraint": "(w * (100 - d) * (100 + u)) % 10 == 0",
+          "prompt": "Pedagang membeli barang Rp{b}. Ia ingin memberi diskon {d}% dari harga label dan tetap untung {u}%. Harga label harus Rp …",
+          "answer": "lb",
+          "distractors": [
+            {
+              "expr": "b * (100 + u + d) / 100",
+              "tag": "persen-dijumlah"
+            },
+            {
+              "expr": "b * (100 + u) / 100",
+              "tag": "lupa-diskon"
+            },
+            {
+              "expr": "b * (100 + u) * (100 + d) / 10000",
+              "tag": "diskon-ditambahkan"
+            }
+          ],
+          "choices": 4,
+          "explain": "Harga jual = {b} × {=100+u}% = {=b*(100+u)/100}. Harga jual itu {=100-d}% dari label, jadi label = {=b*(100+u)/100} : {=100-d}% = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Harga sebuah barang setelah diskon 20% adalah Rp96.000. Harga sebelum diskon adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp120.000"
+                  },
+                  "say": "Rp120.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp115.200"
+                  },
+                  "say": "Rp115.200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp76.800"
+                  },
+                  "say": "Rp76.800"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp116.000"
+                  },
+                  "say": "Rp116.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rp96.000 adalah 80% harga awal. Harga awal = 96.000 : 80% = Rp120.000."
+            },
+            {
+              "prompt": "Diskon 20% yang dilanjutkan diskon 10% setara dengan diskon tunggal …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28%"
+                  },
+                  "say": "28%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30%"
+                  },
+                  "say": "30%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25%"
+                  },
+                  "say": "25%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32%"
+                  },
+                  "say": "32%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisa harga 80% × 90% = 72%. Jadi diskon totalnya 100% − 72% = 28%."
+            },
+            {
+              "prompt": "Pedagang menjual dua barang masing-masing Rp120.000. Barang pertama untung 20%, barang kedua rugi 20%. Secara keseluruhan pedagang …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp10.000"
+                  },
+                  "say": "rugi Rp10.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "tidak untung dan tidak rugi"
+                  },
+                  "say": "tidak untung dan tidak rugi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp10.000"
+                  },
+                  "say": "untung Rp10.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp4.000"
+                  },
+                  "say": "rugi Rp4.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Modal pertama 120.000 : 120% = 100.000, modal kedua 120.000 : 80% = 150.000. Total modal 250.000, total jual 240.000, jadi rugi Rp10.000."
+            },
+            {
+              "prompt": "Tabungan Rp2.000.000 dengan bunga tunggal 12% per tahun menjadi Rp2.300.000 setelah … bulan.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga Rp300.000. Bunga sebulan = 12% × 2.000.000 : 12 = Rp20.000. Lama = 300.000 : 20.000 = 15 bulan."
+            },
+            {
+              "prompt": "Bruto 4 karung beras 250 kg dengan tara 2%. Harga beli seluruhnya Rp2.450.000. Harga beli per kg neto adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp10.000"
+                  },
+                  "say": "Rp10.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp9.800"
+                  },
+                  "say": "Rp9.800"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp10.200"
+                  },
+                  "say": "Rp10.200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp9.000"
+                  },
+                  "say": "Rp9.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Neto = 98% × 250 = 245 kg. Harga per kg = 2.450.000 : 245 = Rp10.000."
+            },
+            {
+              "prompt": "Harga sebuah barang sudah termasuk PPN 11% adalah Rp222.000. Harga sebelum PPN adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp200.000"
+                  },
+                  "say": "Rp200.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp197.580"
+                  },
+                  "say": "Rp197.580"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp199.800"
+                  },
+                  "say": "Rp199.800"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp211.000"
+                  },
+                  "say": "Rp211.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rp222.000 adalah 111% harga awal. Harga awal = 222.000 : 111% = Rp200.000."
+            },
+            {
+              "prompt": "Modal Rp5.000.000 di koperasi mendapat bunga tunggal 1,5% per bulan. Bunga selama 8 bulan adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp600.000"
+                  },
+                  "say": "Rp600.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp75.000"
+                  },
+                  "say": "Rp75.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp60.000"
+                  },
+                  "say": "Rp60.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp750.000"
+                  },
+                  "say": "Rp750.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga sebulan 1,5% × 5.000.000 = Rp75.000. Selama 8 bulan: 8 × 75.000 = Rp600.000."
+            },
+            {
+              "prompt": "Andi membeli 3 lusin pensil seharga Rp54.000, lalu menjual semuanya Rp2.000 per batang. Persentase keuntungannya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "33⅓%"
+                  },
+                  "say": "33⅓%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25%"
+                  },
+                  "say": "25%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18%"
+                  },
+                  "say": "18%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30%"
+                  },
+                  "say": "30%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 lusin = 36 batang, hasil jual 72.000. Untung 18.000 : 54.000 × 100% = 33⅓%."
+            },
+            {
+              "prompt": "Harga label dinaikkan 25%, lalu diberi diskon 20%. Dibanding harga awal, harga akhirnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama"
+                  },
+                  "say": "sama"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "naik 5%"
+                  },
+                  "say": "naik 5%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun 5%"
+                  },
+                  "say": "turun 5%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "naik 45%"
+                  },
+                  "say": "naik 45%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "125% × 80% = 100%. Jadi harga akhirnya sama dengan harga awal."
+            },
+            {
+              "prompt": "Tara sebuah kiriman 3% dari bruto dan netonya 485 kg. Bruto kiriman itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "500 kg"
+                  },
+                  "say": "500 kg"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "499,55 kg"
+                  },
+                  "say": "499,55 kg"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "470,45 kg"
+                  },
+                  "say": "470,45 kg"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "488 kg"
+                  },
+                  "say": "488 kg"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Neto = 97% bruto. Bruto = 485 : 97% = 500 kg."
+            },
+            {
+              "prompt": "Toko A memberi diskon 30%. Toko B memberi diskon 20% lalu 10%. Untuk barang seharga Rp200.000, selisih harga bayar di kedua toko adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.000"
+                  },
+                  "say": "Rp4.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp0"
+                  },
+                  "say": "Rp0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.000"
+                  },
+                  "say": "Rp2.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp6.000"
+                  },
+                  "say": "Rp6.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Toko A: 70% × 200.000 = 140.000. Toko B: 80% × 90% × 200.000 = 144.000. Selisih Rp4.000."
+            },
+            {
+              "prompt": "Modal Rp800.000 dengan bunga tunggal menjadi Rp872.000 setelah 9 bulan. Persentase bunga per tahun adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12%"
+                  },
+                  "say": "12%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9%"
+                  },
+                  "say": "9%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10%"
+                  },
+                  "say": "10%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8%"
+                  },
+                  "say": "8%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga 9 bulan Rp72.000, jadi setahun 72.000 : 9 × 12 = Rp96.000. Persen = 96.000 : 800.000 = 12%."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

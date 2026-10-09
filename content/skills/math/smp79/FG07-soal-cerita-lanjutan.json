@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.fg7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 7,
+  "title": "Perbandingan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 7],
+      "q": [1, 6],
+      "m": [3, 12],
+      "t": [1, 20]
+    },
+    "derived": {
+      "aa": "p * m",
+      "bb": "q * m",
+      "g": "gcd(aa - t, bb + t)",
+      "r": "(aa - t) / g",
+      "s": "(bb + t) / g"
+    },
+    "constraint": "gcd(p, q) == 1 && t < aa && r * q != s * p && r <= 40 && s <= 40",
+    "prompt": "Perbandingan kelereng Adi dan Budi {p} : {q}. Setelah Adi memberikan {t} kelereng kepada Budi, perbandingannya menjadi {r} : {s}. Banyak kelereng Adi mula-mula …",
+    "answer": "aa",
+    "distractors": [
+      {
+        "expr": "bb",
+        "tag": "milik-budi"
+      },
+      {
+        "expr": "aa - t",
+        "tag": "sesudah-memberi"
+      },
+      {
+        "expr": "aa + t",
+        "tag": "ditambah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Misal Adi {p}n dan Budi {q}n. ({p}n − {t}) : ({q}n + {t}) = {r} : {s}, sehingga n = {m}. Adi mula-mula {p} × {m} = {answer}."
+  }
+}

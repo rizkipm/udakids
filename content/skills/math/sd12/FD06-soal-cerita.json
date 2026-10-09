@@ -1,0 +1,54 @@
+{
+  "id": "math.sd12.fd6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FD",
+  "order": 6,
+  "title": "Bangun datar — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "range": [20, 60],
+        "step": 5
+      },
+      "l": {
+        "range": [10, 40],
+        "step": 5
+      },
+      "k": [2, 4]
+    },
+    "constraint": "l < p",
+    "prompt": "Pak Budi berlari mengelilingi lapangan persegi panjang berukuran {p} m × {l} m sebanyak {k} kali. Jarak yang ditempuh Pak Budi … m.",
+    "answer": "2 * (p + l) * k",
+    "distractors": [
+      {
+        "expr": "(p + l) * k",
+        "tag": "setengah-keliling"
+      },
+      {
+        "expr": "2 * (p + l)",
+        "tag": "satu-putaran"
+      },
+      {
+        "expr": "p * l",
+        "tag": "luas"
+      },
+      {
+        "expr": "2 * (p + l) * (k + 1)",
+        "tag": "lebih-seputaran"
+      }
+    ],
+    "choices": 4,
+    "explain": "Satu putaran = keliling = 2 × ({p} + {l}) = {=2*(p+l)} m. {k} putaran = {answer} m."
+  }
+}

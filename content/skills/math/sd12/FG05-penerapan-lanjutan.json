@@ -1,0 +1,43 @@
+{
+  "id": "math.sd12.fg5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FG",
+  "order": 5,
+  "title": "Pola bilangan sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [10, 99],
+      "a": [6, 20],
+      "b": [1, 5]
+    },
+    "prompt": "{x}, {=x+a}, {=x+a-b}, {=x+2*a-b}, {=x+2*a-2*b}, … Bilangan berikutnya adalah …",
+    "answer": "x + 3 * a - 2 * b",
+    "distractors": [
+      {
+        "expr": "x + 2 * a - 3 * b",
+        "tag": "kurang-lagi"
+      },
+      {
+        "expr": "x + 3 * a - b",
+        "tag": "lupa-kurang"
+      },
+      {
+        "expr": "x + 3 * a - 2 * b + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Polanya ditambah {a}, lalu dikurangi {b}, bergantian. Berikutnya ditambah {a}: {=x+2*a-2*b} + {a} = {answer}."
+  }
+}

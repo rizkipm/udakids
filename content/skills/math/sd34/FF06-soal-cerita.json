@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.ff6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 6,
+  "title": "Aritmetika sosial — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [10, 30],
+      "c": {
+        "range": [5000, 12000],
+        "step": 1000
+      },
+      "j": {
+        "range": [8000, 20000],
+        "step": 1000
+      }
+    },
+    "derived": {
+      "b": "n * c"
+    },
+    "constraint": "j > c",
+    "prompt": "Pedagang di Pasar Turi membeli {n} buah semangka seharga Rp{b} untuk semuanya. Setiap semangka dijual Rp{j}. Jika semua terjual, keuntungannya Rp…",
+    "answer": "n * j - b",
+    "distractors": [
+      {
+        "expr": "j - c",
+        "tag": "untung-satu-buah"
+      },
+      {
+        "expr": "n * j",
+        "tag": "hasil-jual"
+      },
+      {
+        "expr": "(j - c) * (n - 1)",
+        "tag": "kurang-satu-buah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hasil jual {n} × {j} = {=n*j}. Untung {=n*j} − {b} = {answer}."
+  }
+}

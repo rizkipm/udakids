@@ -1,0 +1,52 @@
+{
+  "id": "math.sd56.fb2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 2,
+  "title": "Geometri — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": {
+        "range": [20, 160],
+        "step": 5
+      }
+    },
+    "prompt": "Besar sudut pada gambar {d}°. Besar pelurusnya adalah …",
+    "stimulus": [
+      {
+        "kind": "angle",
+        "degrees": "=d",
+        "showValue": true
+      }
+    ],
+    "answer": "180 - d",
+    "unit": "°",
+    "distractors": [
+      {
+        "expr": "90 - d",
+        "tag": "penyiku"
+      },
+      {
+        "expr": "360 - d",
+        "tag": "satu-putaran"
+      },
+      {
+        "expr": "d",
+        "tag": "sudut-sendiri"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sudut dan pelurusnya berjumlah 180°: 180° − {d}° = {answer}."
+  }
+}

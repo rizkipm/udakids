@@ -32,8 +32,11 @@ function cached(childId: string | undefined): CatalogResponse | undefined {
   }
 }
 
-/** Salinan di memori dipakai ulang antarhalaman selama ini (tidak mengunduh katalog lagi). */
-const FRESH_MS = 3 * 60_000;
+/**
+ * Salinan di memori dipakai ulang antarhalaman selama ini. Singkat, supaya perubahan akses (mis. admin baru memberi
+ * Premium) cepat terlihat; unduhan ulang murah karena server menjawab 304 bila katalog sama (ETag, D-077).
+ */
+const FRESH_MS = 15_000;
 /** Jeda coba ulang otomatis bila jaringan/server sesaat gagal. */
 const RETRY_MS = [1500, 4000];
 

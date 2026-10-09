@@ -1,0 +1,51 @@
+{
+  "id": "math.sd56.fc8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 8,
+  "title": "Aritmetika sosial — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [100000, 1000000],
+        "step": 20000
+      },
+      "d": {
+        "values": [10, 20, 25, 30]
+      },
+      "p": {
+        "values": [5, 10, 11]
+      }
+    },
+    "constraint": "(h * (100 - d) * (100 + p)) % 10000 == 0",
+    "prompt": "Harga sebuah barang Rp{h}. Toko memberi diskon {d}%, lalu harga setelah diskon dikenai pajak {p}%. Harga yang dibayar adalah Rp…",
+    "answer": "h * (100 - d) * (100 + p) / 10000",
+    "distractors": [
+      {
+        "expr": "h * (100 - d + p) / 100",
+        "tag": "persen-digabung"
+      },
+      {
+        "expr": "h * (100 - d) / 100",
+        "tag": "lupa-pajak"
+      },
+      {
+        "expr": "h * (100 - d - p) / 100",
+        "tag": "pajak-dikurangi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setelah diskon: Rp{=h*(100-d)/100}. Pajak {p}% dari harga itu: Rp{=h*(100-d)*p/10000}. Bayar Rp{answer}."
+  }
+}

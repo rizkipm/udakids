@@ -1,0 +1,542 @@
+{
+  "id": "math.smp79.fg10.tantangan-final-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 10,
+  "title": "Perbandingan — Level 10 — Tantangan final perbandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 30],
+            "h": [10, 40],
+            "k": [2, 10]
+          },
+          "constraint": "h > k + 2 && (a * h) % (h - k) == 0",
+          "prompt": "Sebuah pekerjaan dapat diselesaikan {a} pekerja dalam {h} hari. Agar selesai {k} hari lebih cepat, banyak pekerja tambahan yang diperlukan …",
+          "answer": "a * h / (h - k) - a",
+          "distractors": [
+            {
+              "expr": "a * h / (h - k)",
+              "tag": "total-pekerja"
+            },
+            {
+              "expr": "k",
+              "tag": "sama-dengan-hari"
+            },
+            {
+              "expr": "a * (h + k) / h - a",
+              "tag": "senilai"
+            }
+          ],
+          "choices": 4,
+          "explain": "Pekerjaan = {a} × {h} = {=a*h} pekerja-hari. Dalam {=h-k} hari perlu {=a*h} : {=h-k} = {=a*h/(h-k)} pekerja. Tambahannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 4],
+            "q": [2, 5],
+            "k": [1, 4]
+          },
+          "derived": {
+            "a": "k * p * (p + q)",
+            "b": "k * q * (p + q)"
+          },
+          "constraint": "p < q && gcd(p, q) == 1",
+          "prompt": "Pak Budi dapat mengecat pagar sekolah sendirian dalam {a} hari, sedangkan Pak Dodi dalam {b} hari. Jika bekerja bersama, pagar selesai dicat dalam … hari.",
+          "answer": "k * p * q",
+          "distractors": [
+            {
+              "expr": "(a + b) / 2",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "b - a",
+              "tag": "selisih"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sehari bersama: 1/{a} + 1/{b} = {=a+b}/{=a*b} bagian. Waktu = {=a*b} : {=a+b} = {answer} hari."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 7],
+            "q": [1, 6],
+            "m": [3, 12],
+            "t": [1, 20]
+          },
+          "derived": {
+            "aa": "p * m",
+            "bb": "q * m",
+            "g": "gcd(aa - t, bb + t)",
+            "r": "(aa - t) / g",
+            "s": "(bb + t) / g"
+          },
+          "constraint": "gcd(p, q) == 1 && t < aa && r * q != s * p && r <= 40 && s <= 40",
+          "prompt": "Perbandingan kelereng Adi dan Budi {p} : {q}. Setelah Adi memberikan {t} kelereng kepada Budi, perbandingannya menjadi {r} : {s}. Banyak kelereng Adi mula-mula …",
+          "answer": "aa",
+          "distractors": [
+            {
+              "expr": "bb",
+              "tag": "milik-budi"
+            },
+            {
+              "expr": "aa - t",
+              "tag": "sesudah-memberi"
+            },
+            {
+              "expr": "aa + t",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Misal Adi {p}n dan Budi {q}n. ({p}n − {t}) : ({q}n + {t}) = {r} : {s}, sehingga n = {m}. Adi mula-mula {p} × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 24],
+            "b": [4, 24],
+            "x": [1, 5]
+          },
+          "constraint": "a != b && (a * x) % b == 0 && a - x - a * x / b > 0",
+          "prompt": "Bak mandi dapat diisi penuh oleh keran A dalam {a} jam atau oleh keran B dalam {b} jam. Mula-mula kedua keran dibuka bersama selama {x} jam, lalu keran B ditutup. Sisa bak dipenuhi keran A dalam … jam.",
+          "answer": "a - x - a * x / b",
+          "distractors": [
+            {
+              "expr": "a - x",
+              "tag": "lupa-keran-b"
+            },
+            {
+              "expr": "a - a * x / b",
+              "tag": "lupa-keran-a"
+            },
+            {
+              "expr": "a * b / (a + b)",
+              "tag": "waktu-bersama"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam {x} jam terisi {x}/{a} + {x}/{b} bagian. Sisanya diisi A: {a} × (1 − {x}/{a} − {x}/{b}) = {a} − {x} − {=a*x/b} = {answer} jam."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Jika A : B = 2 : 3 dan B : C = 4 : 5, maka A : B : C adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 : 12 : 15"
+                  },
+                  "say": "8 : 12 : 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 3 : 5"
+                  },
+                  "say": "2 : 3 : 5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 : 9 : 10"
+                  },
+                  "say": "6 : 9 : 10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 : 6 : 5"
+                  },
+                  "say": "4 : 6 : 5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Samakan B menjadi 12: A : B = 8 : 12 dan B : C = 12 : 15. Jadi 8 : 12 : 15."
+            },
+            {
+              "prompt": "12 pekerja dapat membangun rumah dalam 30 hari. Setelah 10 hari bekerja, 4 pekerja berhenti. Sisa pekerjaan selesai dalam … hari lagi.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisa pekerjaan = 12 × 20 = 240 pekerja-hari. Dikerjakan 8 pekerja: 240 : 8 = 30 hari."
+            },
+            {
+              "prompt": "Pada denah berskala 1 : 200, sebuah kamar berukuran 2 cm × 1,5 cm. Luas kamar sebenarnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 m²"
+                  },
+                  "say": "12 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 m²"
+                  },
+                  "say": "6 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1,2 m²"
+                  },
+                  "say": "1,2 m²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24 m²"
+                  },
+                  "say": "24 m²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ukuran sebenarnya 400 cm × 300 cm = 4 m × 3 m. Luasnya 12 m²."
+            },
+            {
+              "prompt": "Ali dapat mengecat pagar dalam 6 jam, Beni dalam 3 jam, dan Candra dalam 2 jam. Jika mereka bekerja bersama, pagar selesai dalam …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 jam"
+                  },
+                  "say": "1 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 jam"
+                  },
+                  "say": "2 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 jam 40 menit"
+                  },
+                  "say": "3 jam 40 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30 menit"
+                  },
+                  "say": "30 menit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Per jam: 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 1 pagar. Jadi selesai dalam 1 jam."
+            },
+            {
+              "prompt": "Perbandingan uang A dan B adalah 5 : 3. Selisih uang mereka Rp40.000. Jumlah uang mereka adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp160.000"
+                  },
+                  "say": "Rp160.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp100.000"
+                  },
+                  "say": "Rp100.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp60.000"
+                  },
+                  "say": "Rp60.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp120.000"
+                  },
+                  "say": "Rp120.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisih 2 bagian = 40.000, jadi 1 bagian = 20.000. Jumlah 8 bagian = Rp160.000."
+            },
+            {
+              "prompt": "Dengan kecepatan 60 km/jam, perjalanan ditempuh dalam 4 jam. Agar tiba 1 jam lebih cepat, kecepatannya harus …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80 km/jam"
+                  },
+                  "say": "80 km/jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75 km/jam"
+                  },
+                  "say": "75 km/jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45 km/jam"
+                  },
+                  "say": "45 km/jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90 km/jam"
+                  },
+                  "say": "90 km/jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jarak = 60 × 4 = 240 km. Dalam 3 jam: 240 : 3 = 80 km/jam."
+            },
+            {
+              "prompt": "Persediaan pakan cukup untuk 40 ekor ayam selama 15 hari. Setelah 5 hari, 20 ekor ayam dijual. Sisa pakan cukup untuk … hari lagi.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisa pakan = 40 × 10 = 400 ayam-hari. Untuk 20 ayam: 400 : 20 = 20 hari."
+            },
+            {
+              "prompt": "Perbandingan umur A dan B sekarang 3 : 4. Lima tahun lalu perbandingannya 2 : 3. Umur A sekarang adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 tahun"
+                  },
+                  "say": "15 tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 tahun"
+                  },
+                  "say": "12 tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20 tahun"
+                  },
+                  "say": "20 tahun"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 tahun"
+                  },
+                  "say": "10 tahun"
+                }
+              ],
+              "answer": 0,
+              "reteach": "A = 3k, B = 4k. (3k − 5) : (4k − 5) = 2 : 3, jadi 9k − 15 = 8k − 10, k = 5. A = 15 tahun."
+            },
+            {
+              "prompt": "Uang dibagikan kepada P, Q, dan R dengan P : Q = 2 : 3 dan Q : R = 4 : 5. Jika R menerima Rp150.000, jumlah seluruh uang adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp350.000"
+                  },
+                  "say": "Rp350.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp300.000"
+                  },
+                  "say": "Rp300.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp250.000"
+                  },
+                  "say": "Rp250.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp400.000"
+                  },
+                  "say": "Rp400.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "P : Q : R = 8 : 12 : 15. R = 15 bagian = 150.000, jadi 1 bagian = 10.000. Total 35 bagian = Rp350.000."
+            },
+            {
+              "prompt": "Keran A mengisi bak penuh dalam 3 jam, sedangkan lubang B mengosongkan bak penuh dalam 6 jam. Jika keduanya dibuka pada bak kosong, bak penuh dalam …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 jam"
+                  },
+                  "say": "6 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 jam"
+                  },
+                  "say": "2 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4,5 jam"
+                  },
+                  "say": "4,5 jam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 jam"
+                  },
+                  "say": "9 jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Per jam terisi 1/3 − 1/6 = 1/6 bak. Jadi penuh dalam 6 jam."
+            },
+            {
+              "prompt": "Peta berskala 1 : 500.000. Sebuah daerah pada peta luasnya 4 cm². Luas daerah sebenarnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100 km²"
+                  },
+                  "say": "100 km²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20 km²"
+                  },
+                  "say": "20 km²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.000 km²"
+                  },
+                  "say": "2.000 km²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 km²"
+                  },
+                  "say": "10 km²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 cm pada peta = 5 km, jadi 1 cm² = 5 × 5 = 25 km². Luas = 4 × 25 = 100 km²."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

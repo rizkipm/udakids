@@ -1,0 +1,590 @@
+{
+  "id": "math.sd34.ff10.tantangan-final-aritmetika-sosial",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 10,
+  "title": "Aritmetika sosial — Level 10 — Tantangan final aritmetika sosial",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "range": [1000, 3000],
+              "step": 250
+            },
+            "n": [2, 11]
+          },
+          "derived": {
+            "h": "12 * x"
+          },
+          "prompt": "Harga 1 lusin pensil Rp{h}. Harga {n} pensil adalah Rp…",
+          "answer": "x * n",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "harga-selusin"
+            },
+            {
+              "expr": "x",
+              "tag": "harga-satu"
+            },
+            {
+              "expr": "h - x * n",
+              "tag": "sisa-lusin"
+            }
+          ],
+          "choices": 4,
+          "explain": "1 lusin = 12 buah. Harga 1 pensil = {h} : 12 = {x}. {n} pensil = {n} × {x} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [40000, 50000, 60000, 80000, 90000, 120000]
+            },
+            "p": {
+              "values": [10, 20, 25, 50]
+            },
+            "u": {
+              "values": [100000, 150000, 200000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Bayu",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Fajar",
+              "Laras"
+            ]
+          },
+          "constraint": "u > h - h * p / 100",
+          "prompt": "Tas seharga Rp{h} mendapat diskon {p}%. {nama} membayar dengan uang Rp{u}. Uang kembaliannya Rp…",
+          "answer": "u - h + h * p / 100",
+          "distractors": [
+            {
+              "expr": "u - h",
+              "tag": "lupa-diskon"
+            },
+            {
+              "expr": "h * p / 100",
+              "tag": "besar-diskon"
+            },
+            {
+              "expr": "u - h * p / 100",
+              "tag": "kurangi-diskon"
+            }
+          ],
+          "choices": 4,
+          "explain": "Diskon {p}% dari {h} = {=h*p/100}. Harga bayar {=h-h*p/100}. Kembalian {u} − {=h-h*p/100} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [2000, 10000],
+              "step": 1000
+            },
+            "h": {
+              "range": [150000, 500000],
+              "step": 25000
+            },
+            "s": {
+              "range": [20000, 100000],
+              "step": 5000
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Bayu",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Fajar",
+              "Laras"
+            ]
+          },
+          "constraint": "h > s && (h - s) % a != 0",
+          "prompt": "{nama} menabung Rp{a} setiap hari. Ia ingin membeli sepeda seharga Rp{h} dan sudah punya Rp{s}. Paling sedikit ia harus menabung … hari lagi.",
+          "answer": "ceil((h - s) / a)",
+          "distractors": [
+            {
+              "expr": "floor((h - s) / a)",
+              "tag": "dibulatkan-ke-bawah"
+            },
+            {
+              "expr": "ceil(h / a)",
+              "tag": "lupa-uang-yang-ada"
+            },
+            {
+              "expr": "ceil((h - s) / a) + 1",
+              "tag": "lebih-satu-hari"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kurang {h} − {s} = {=h-s}. Dalam {=floor((h-s)/a)} hari baru terkumpul {=a*floor((h-s)/a)}, masih kurang. Jadi perlu {answer} hari."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": {
+              "range": [3000, 9000],
+              "step": 500
+            },
+            "p": {
+              "range": [1000, 3000],
+              "step": 500
+            }
+          },
+          "derived": {
+            "x": "3 * b + 2 * p",
+            "y": "b + 2 * p"
+          },
+          "constraint": "b != p",
+          "prompt": "Harga 3 buku dan 2 pensil Rp{x}. Harga 1 buku dan 2 pensil Rp{y}. Harga 1 buku adalah Rp…",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "p",
+              "tag": "harga-pensil"
+            },
+            {
+              "expr": "x - y",
+              "tag": "lupa-dibagi-dua"
+            },
+            {
+              "expr": "(x - y) / 3",
+              "tag": "dibagi-tiga"
+            }
+          ],
+          "choices": 4,
+          "explain": "Selisih kedua belanjaan adalah 2 buku: {x} − {y} = {=x-y}. Harga 1 buku = {=x-y} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Harga 2 kg gula Rp34.000. Harga 5 kg gula adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp85.000"
+                  },
+                  "say": "Rp85.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp68.000"
+                  },
+                  "say": "Rp68.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp170.000"
+                  },
+                  "say": "Rp170.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp80.000"
+                  },
+                  "say": "Rp80.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Harga 1 kg = 34.000 : 2 = 17.000. Harga 5 kg = 5 × 17.000 = Rp85.000."
+            },
+            {
+              "prompt": "Toko kue memberi promo \"beli 3 gratis 1\". Harga 1 donat Rp4.000. Uang yang dibayar untuk mendapat 12 donat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp36.000"
+                  },
+                  "say": "Rp36.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp48.000"
+                  },
+                  "say": "Rp48.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp32.000"
+                  },
+                  "say": "Rp32.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp40.000"
+                  },
+                  "say": "Rp40.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setiap 4 donat cukup membayar 3. 12 donat = 3 kelompok, jadi membayar 9 donat: 9 × 4.000 = Rp36.000."
+            },
+            {
+              "prompt": "Pak Hasan membeli sepeda bekas Rp600.000 dan memperbaikinya dengan biaya Rp50.000. Sepeda itu dijual Rp750.000. Keuntungannya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp100.000"
+                  },
+                  "say": "Rp100.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp150.000"
+                  },
+                  "say": "Rp150.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp200.000"
+                  },
+                  "say": "Rp200.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp50.000"
+                  },
+                  "say": "Rp50.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Modal 600.000 + 50.000 = 650.000. Untung 750.000 − 650.000 = Rp100.000."
+            },
+            {
+              "prompt": "Baju seharga Rp80.000 mendapat diskon 25%. Harga baju setelah diskon adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp60.000"
+                  },
+                  "say": "Rp60.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp20.000"
+                  },
+                  "say": "Rp20.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp55.000"
+                  },
+                  "say": "Rp55.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp75.000"
+                  },
+                  "say": "Rp75.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "25% dari 80.000 = 20.000. Harga setelah diskon 80.000 − 20.000 = Rp60.000."
+            },
+            {
+              "prompt": "Ibu membeli 3 kg daging ayam seharga Rp32.000 per kg dan membayar Rp100.000. Uang kembaliannya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.000"
+                  },
+                  "say": "Rp4.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp68.000"
+                  },
+                  "say": "Rp68.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp6.000"
+                  },
+                  "say": "Rp6.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp14.000"
+                  },
+                  "say": "Rp14.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Belanja 3 × 32.000 = 96.000. Kembalian 100.000 − 96.000 = Rp4.000."
+            },
+            {
+              "prompt": "Pedagang membeli 20 kg jeruk seharga Rp200.000. Ternyata 4 kg busuk. Sisanya dijual Rp12.000 per kg. Pedagang itu mengalami …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp8.000"
+                  },
+                  "say": "rugi Rp8.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp8.000"
+                  },
+                  "say": "untung Rp8.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp40.000"
+                  },
+                  "say": "untung Rp40.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp48.000"
+                  },
+                  "say": "rugi Rp48.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Terjual 16 kg × 12.000 = 192.000. Modal 200.000 lebih besar, jadi rugi 200.000 − 192.000 = Rp8.000."
+            },
+            {
+              "prompt": "Harga 4 buku sama dengan harga 6 pensil. Harga 1 pensil Rp2.000. Harga 1 buku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp3.000"
+                  },
+                  "say": "Rp3.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.000"
+                  },
+                  "say": "Rp4.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp12.000"
+                  },
+                  "say": "Rp12.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.000"
+                  },
+                  "say": "Rp2.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "6 pensil = 6 × 2.000 = 12.000. Jadi 4 buku = 12.000 dan 1 buku = 12.000 : 4 = Rp3.000."
+            },
+            {
+              "prompt": "Uang Dita Rp50.000. Ia membeli 2 tiket masuk kebun binatang seharga Rp12.500 per tiket dan jajan Rp9.000. Sisa uang Dita adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp16.000"
+                  },
+                  "say": "Rp16.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp28.500"
+                  },
+                  "say": "Rp28.500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp25.000"
+                  },
+                  "say": "Rp25.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp41.000"
+                  },
+                  "say": "Rp41.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tiket 2 × 12.500 = 25.000. Pengeluaran 25.000 + 9.000 = 34.000. Sisa 50.000 − 34.000 = Rp16.000."
+            },
+            {
+              "prompt": "Harga 1 lusin gelas Rp60.000. Bu Ani membeli 30 gelas. Uang yang dibayar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp150.000"
+                  },
+                  "say": "Rp150.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp180.000"
+                  },
+                  "say": "Rp180.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp120.000"
+                  },
+                  "say": "Rp120.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp1.800.000"
+                  },
+                  "say": "Rp1.800.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Harga 1 gelas = 60.000 : 12 = 5.000. 30 gelas = 30 × 5.000 = Rp150.000."
+            },
+            {
+              "prompt": "Harga 2 apel dan 1 jeruk Rp11.000. Harga 1 apel dan 1 jeruk Rp7.000. Harga 1 apel adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.000"
+                  },
+                  "say": "Rp4.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp3.000"
+                  },
+                  "say": "Rp3.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp7.000"
+                  },
+                  "say": "Rp7.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp5.500"
+                  },
+                  "say": "Rp5.500"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisih kedua belanjaan adalah 1 apel: 11.000 − 7.000 = Rp4.000."
+            },
+            {
+              "prompt": "Sinta menabung Rp5.000 setiap minggu. Paling sedikit setelah berapa minggu tabungannya cukup untuk membeli sepatu seharga Rp72.000?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "14 minggu baru Rp70.000, belum cukup. 15 minggu = Rp75.000, sudah cukup."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

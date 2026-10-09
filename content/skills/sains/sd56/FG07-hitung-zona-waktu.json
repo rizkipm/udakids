@@ -1,0 +1,48 @@
+{
+  "id": "sains.sd56.fg7.hitung-zona-waktu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 7,
+  "title": "Bumi dan antariksa — Level 7 — Hitung: zona waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bumi dan antariksa"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [90, 105, 120]
+      },
+      "b": {
+        "values": [105, 120, 135, 150]
+      },
+      "h": [5, 18]
+    },
+    "constraint": "b > a && h + (b - a) / 15 <= 23",
+    "prompt": "Bumi berotasi 360° dalam 24 jam, sehingga setiap selisih 15° bujur waktunya berbeda 1 jam. Kota P terletak di {a}° BT dan kota Q di {b}° BT. Saat di kota P pukul {h}.00, di kota Q pukul … .00",
+    "answer": "h + (b - a) / 15",
+    "distractors": [
+      {
+        "expr": "h - (b - a) / 15",
+        "tag": "arah-terbalik"
+      },
+      {
+        "expr": "h + (b - a) / 15 + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "(b - a) / 15",
+        "tag": "selisih-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisih bujur {b} − {a} = {=b-a}°, jadi selisih waktu {=b-a} : 15 = {=(b-a)/15} jam. Kota Q di timur lebih dulu siang: {h} + {=(b-a)/15} = pukul {answer}.00."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "sains.sd56.ff7.hitung-konversi-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FF",
+  "order": 7,
+  "title": "Materi dan perubahannya — Level 7 — Hitung: konversi suhu",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Materi dan perubahannya"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "c": {
+        "range": [0, 100],
+        "step": 5
+      }
+    },
+    "words": {
+      "benda": [
+        "air di dalam panci",
+        "susu hangat",
+        "air kolam",
+        "teh di dalam gelas",
+        "air di dalam termos"
+      ]
+    },
+    "prompt": "Termometer Celsius menunjukkan suhu {benda} {c} °C. Jika dinyatakan dalam skala Fahrenheit, suhunya adalah … °F.",
+    "answer": "9 * c / 5 + 32",
+    "constraint": "(9 * c) % 5 == 0",
+    "distractors": [
+      {
+        "expr": "9 * c / 5",
+        "tag": "lupa-tambah-32"
+      },
+      {
+        "expr": "c + 32",
+        "tag": "langsung-tambah"
+      },
+      {
+        "expr": "2 * c + 32",
+        "tag": "dikali-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "°F = 9/5 × °C + 32. 9/5 × {c} = {=9*c/5}. Ditambah 32 menjadi {answer} °F."
+  }
+}

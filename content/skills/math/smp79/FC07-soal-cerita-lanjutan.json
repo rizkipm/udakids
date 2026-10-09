@@ -1,0 +1,53 @@
+{
+  "id": "math.smp79.fc7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "q": [1, 10],
+      "r": {
+        "values": [5, 10, 15, 20, 25]
+      },
+      "x": [5, 15],
+      "y": [2, 10]
+    },
+    "derived": {
+      "n": "20 * q",
+      "s": "q * (100 - r) / 5",
+      "b": "1000 * x",
+      "j": "1000 * (x + y)"
+    },
+    "constraint": "s * j - n * b > 0",
+    "prompt": "Pak Mamat membeli {n} kg salak Rp{b} per kg. Sebanyak {r}% salak busuk dan dibuang. Sisanya dijual Rp{j} per kg. Keuntungan Pak Mamat Rp …",
+    "answer": "s * j - n * b",
+    "distractors": [
+      {
+        "expr": "n * (j - b)",
+        "tag": "lupa-busuk"
+      },
+      {
+        "expr": "s * (j - b)",
+        "tag": "busuk-gratis"
+      },
+      {
+        "expr": "s * j",
+        "tag": "hasil-jual"
+      }
+    ],
+    "choices": 4,
+    "explain": "Salak yang terjual {n} × {=100-r}% = {s} kg. Untung = {s} × {j} − {n} × {b} = {=s*j} − {=n*b} = {answer}."
+  }
+}

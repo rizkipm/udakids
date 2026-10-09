@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.fg5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 5,
+  "title": "Perbandingan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [1, 4],
+      "q": [2, 5],
+      "k": [1, 4]
+    },
+    "derived": {
+      "a": "k * p * (p + q)",
+      "b": "k * q * (p + q)"
+    },
+    "constraint": "p < q && gcd(p, q) == 1",
+    "prompt": "Pak Budi dapat mengecat pagar sekolah sendirian dalam {a} hari, sedangkan Pak Dodi dalam {b} hari. Jika bekerja bersama, pagar selesai dicat dalam … hari.",
+    "answer": "k * p * q",
+    "distractors": [
+      {
+        "expr": "(a + b) / 2",
+        "tag": "rata-rata"
+      },
+      {
+        "expr": "a + b",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "b - a",
+        "tag": "selisih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sehari bersama: 1/{a} + 1/{b} = {=a+b}/{=a*b} bagian. Waktu = {=a*b} : {=a+b} = {answer} hari."
+  }
+}

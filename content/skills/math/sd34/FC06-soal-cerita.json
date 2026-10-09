@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.fc6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FC",
+  "order": 6,
+  "title": "Bangun datar — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [10, 40],
+      "l": [5, 30],
+      "d": [1, 4]
+    },
+    "constraint": "l < p",
+    "prompt": "Kebun Pak Darto di Madura berbentuk persegi panjang {p} m × {l} m. Sekeliling kebun akan dipagari, kecuali pintu selebar {d} m. Panjang pagar yang diperlukan adalah …",
+    "stimulus": [
+      {
+        "kind": "rect",
+        "w": "=p",
+        "h": "=l",
+        "unit": "m"
+      }
+    ],
+    "answer": "2 * (p + l) - d",
+    "unit": "m",
+    "distractors": [
+      {
+        "expr": "2 * (p + l)",
+        "tag": "lupa-pintu"
+      },
+      {
+        "expr": "p + l - d",
+        "tag": "setengah-keliling"
+      },
+      {
+        "expr": "p * l - d",
+        "tag": "luas"
+      }
+    ],
+    "choices": 4,
+    "explain": "Keliling = 2 × ({p} + {l}) = {=2*(p+l)} m. Dikurangi pintu {d} m = {answer}."
+  }
+}

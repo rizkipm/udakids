@@ -1,0 +1,190 @@
+{
+  "id": "math.tkosn.fa8.cerita-bergambar-jawa-timur",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FA",
+  "order": 8,
+  "title": "Tambah dan kurang dengan gambar — Level 8 — Cerita bergambar Jawa Timur",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [1, 4]
+          },
+          "constraint": "a + b <= 10",
+          "words": {
+            "nama": ["Sekar", "Bagus", "Dimas", "Ayu", "Raka", "Wulan", "Bima", "Laras"]
+          },
+          "prompt": "{nama} memetik {a} apel di kebun apel Batu, lalu memetik {b} apel lagi. Berapa apel yang dipetik {nama}?",
+          "say": "{nama} memetik {a} apel di kebun apel Batu, lalu memetik {b} apel lagi. Berapa apel yang dipetik {nama}?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "apel",
+              "count": "=a",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "apel",
+              "count": "=b",
+              "layout": "row"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a",
+              "tag": "hanya-satu-kelompok"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} apel ditambah {b} apel sama dengan {answer} apel."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 9],
+            "b": [1, 4]
+          },
+          "constraint": "b < a",
+          "words": {
+            "nama": ["Sekar", "Bagus", "Dimas", "Ayu", "Raka", "Wulan", "Bima", "Laras"]
+          },
+          "prompt": "{nama} membawa {a} kerupuk ke Pantai Kenjeran. {b} kerupuk dimakan teman. Berapa kerupuk yang tersisa?",
+          "say": "{nama} membawa {a} kerupuk ke Pantai Kenjeran. {b} kerupuk dimakan teman. Berapa kerupuk yang tersisa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "kerupuk",
+              "count": "=a",
+              "layout": "rows",
+              "crossed": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} kerupuk, dimakan {b}. {a} kurang {b} sama dengan {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 9],
+            "b": [1, 3]
+          },
+          "constraint": "b < a",
+          "prompt": "Pak Tani di Kediri punya {a} sapi. {b} sapi dijual di pasar. Berapa sapi yang masih ada?",
+          "say": "Pak Tani di Kediri punya {a} sapi. {b} sapi dijual di pasar. Berapa sapi yang masih ada?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "sapi",
+              "count": "=a",
+              "layout": "rows",
+              "crossed": "=b"
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "expr": "a - b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a + b",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} sapi, dijual {b}. {a} kurang {b} sama dengan {answer} sapi."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 4]
+          },
+          "constraint": "a + b <= 10",
+          "prompt": "Di kolam ada {a} itik. Lalu datang {b} itik lagi. Berapa itik di kolam sekarang?",
+          "say": "Di kolam ada {a} itik. Lalu datang {b} itik lagi. Berapa itik di kolam sekarang?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "itik",
+              "count": "=a",
+              "layout": "row"
+            },
+            {
+              "kind": "objects",
+              "object": "itik",
+              "count": "=b",
+              "layout": "row"
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "b",
+              "tag": "hanya-yang-datang"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} itik ditambah {b} itik sama dengan {answer} itik."
+        }
+      }
+    ]
+  }
+}

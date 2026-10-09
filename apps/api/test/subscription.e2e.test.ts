@@ -191,6 +191,34 @@ describe.skipIf(!hasDb)('paket berlangganan: masa berlaku & kedaluwarsa', () => 
     expect(cat.body.access.expired).toBeUndefined();
   });
 
+  it('anak baru di keluarga dengan Premium keluarga lama dari admin (sudah dipecah D-041) → bukan "paket berakhir"', async () => {
+    const { http, auth, pool } = ctx;
+    const p = await http()
+      .post('/auth/parent/register')
+      .send({ name: 'Bapak Lama', email: 'lama@contoh.id', password: 'rahasia123', consent: true })
+      .expect(201);
+    // Premium keluarga dari admin yang sudah diakhiri saat dipecah per anak (migrasi 0008).
+    await pool.query(
+      `insert into entitlements (parent_id, name, scope, books, source, starts_at, ends_at)
+       values ($1, 'Premium', 'all', '[]', 'admin', now() - interval '7 days', now() - interval '6 days')`,
+      [p.body.user.id],
+    );
+    const c = await http()
+      .post('/parent/children')
+      .set(auth(p.body.token))
+      .send({ nickname: 'Baru', momoColor: 'biru', pin })
+      .expect(201);
+    const token = (
+      await http()
+        .post('/auth/child/login')
+        .send({ familyCode: p.body.familyCode, childId: c.body.id, pin })
+        .expect(200)
+    ).body.token;
+    const cat = await http().get('/catalog').set(auth(token)).expect(200);
+    expect(cat.body.access.all).toBe(false);
+    expect(cat.body.access.expired).toBeUndefined();
+  });
+
   it('pengingat masa paket via email (D-054): H-5, H-3, H-1 sekali saja; tidak dikirim bila sudah diperpanjang', async () => {
     const { pool } = ctx;
     const { ExpiryReminderService } = await import('../src/billing/expiry-reminder.service.js');

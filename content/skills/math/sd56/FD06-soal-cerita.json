@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.fd6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 6,
+  "title": "Pola, baris, dan deret — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 25],
+      "b": [2, 5],
+      "n": [10, 20]
+    },
+    "prompt": "Di gedung pertunjukan di Surabaya, baris pertama berisi {a} kursi. Setiap baris berikutnya bertambah {b} kursi. Jika ada {n} baris, banyak kursi seluruhnya adalah …",
+    "answer": "n * (2 * a + (n - 1) * b) / 2",
+    "distractors": [
+      {
+        "expr": "a + (n - 1) * b",
+        "tag": "baris-terakhir"
+      },
+      {
+        "expr": "n * a + n * b",
+        "tag": "tambah-tetap"
+      },
+      {
+        "expr": "n * (a + (n - 1) * b)",
+        "tag": "semua-baris-terakhir"
+      }
+    ],
+    "choices": 4,
+    "explain": "Baris terakhir {a} + {=n-1} × {b} = {=a+(n-1)*b}. Jumlah = {n} × ({a} + {=a+(n-1)*b}) : 2 = {answer}."
+  }
+}

@@ -14,6 +14,8 @@ export type ImageResult = {
 export type ImageProvider = {
   generate(input: {
     prompt: string;
+    /** Panduan gaya (ilustrasi atau foto realistis, D-088). Bawaan: ilustrasi. */
+    styleGuide?: string;
     settings: AiImageSettings;
     reference?: { mime: string; data: Buffer };
   }): Promise<ImageResult>;
@@ -71,8 +73,11 @@ export class OpenAiImages implements ImageProvider {
     prompt,
     settings: s,
     reference,
+    styleGuide = AI_STYLE_GUIDE,
   }: {
     prompt: string;
+    /** Panduan gaya (ilustrasi atau foto realistis, D-088). */
+    styleGuide?: string;
     settings: AiImageSettings;
     reference?: { mime: string; data: Buffer };
   }): Promise<ImageResult> {
@@ -80,7 +85,7 @@ export class OpenAiImages implements ImageProvider {
       if (reference) throw new Error('Gambar referensi hanya bisa di mode responses');
       const json = (await this.post('/images/generations', {
         model: s.imageModel,
-        prompt: `${AI_STYLE_GUIDE}\n\n${prompt}`,
+        prompt: `${styleGuide}\n\n${prompt}`,
         size: s.size,
         quality: s.quality,
         background: s.background,
@@ -104,7 +109,7 @@ export class OpenAiImages implements ImageProvider {
     };
     const body = (withModel: boolean) => ({
       model: s.textModel,
-      instructions: AI_STYLE_GUIDE,
+      instructions: styleGuide,
       input: [
         {
           role: 'user',

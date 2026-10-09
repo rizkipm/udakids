@@ -9,6 +9,7 @@ import {
   DEFAULT_BILLING_SETTINGS,
   DEFAULT_VOICE_SETTINGS,
   DEFAULT_AI_IMAGE_SETTINGS,
+  upgradeVoiceSettings,
   voiceSettingsSchema,
   type AiImageSettings,
   type AffiliateSettings,
@@ -51,7 +52,9 @@ export class SettingsService {
       ...def.defaults,
       ...(row?.value as object),
     });
-    return (parsed.success ? parsed.data : def.defaults) as Value<K>;
+    const value = (parsed.success ? parsed.data : def.defaults) as Value<K>;
+    // Gaya suara bawaan lama ("robot", pelan) → bawaan baru (D-087); suntingan admin tetap.
+    return (key === 'voice' ? upgradeVoiceSettings(value as VoiceSettings) : value) as Value<K>;
   }
 
   async set<K extends Key>(key: K, value: Value<K>, userId: string | null): Promise<Value<K>> {

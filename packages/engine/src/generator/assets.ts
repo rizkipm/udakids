@@ -217,6 +217,12 @@ export const OBJECTS = {
   kerang: { say: 'kerang', countable: true },
   benih: { say: 'benih', countable: false },
   tunas: { say: 'tunas', countable: false },
+  // Tambahan D-079 (P-MA-14 Pagi, siang, malam): suasana waktu dan kegiatan anak.
+  pagi: { say: 'pagi', countable: false },
+  siang: { say: 'siang', countable: false },
+  malam: { say: 'malam', countable: false },
+  'anak-bangun': { say: 'bangun tidur', countable: false },
+  'anak-sekolah': { say: 'berangkat sekolah', countable: false },
 } as const satisfies Record<string, { say: string; countable: boolean }>;
 
 export type ObjectId = keyof typeof OBJECTS;
@@ -236,6 +242,16 @@ export const BODY_PARTS = {
   kaki: 'kaki',
 } as const;
 export type BodyPart = keyof typeof BODY_PARTS;
+/** Pancaindra (D-089): nama alat indra, sebutan indranya, dan kegunaannya. */
+export const SENSES = {
+  mata: { say: 'mata', indra: 'indra penglihat', verb: 'melihat' },
+  telinga: { say: 'telinga', indra: 'indra pendengar', verb: 'mendengar' },
+  hidung: { say: 'hidung', indra: 'indra pencium', verb: 'mencium bau' },
+  lidah: { say: 'lidah', indra: 'indra pengecap', verb: 'merasakan rasa makanan' },
+  kulit: { say: 'kulit', indra: 'indra peraba', verb: 'meraba' },
+} as const;
+export type SenseId = keyof typeof SENSES;
+export const SENSE_IDS = Object.keys(SENSES) as SenseId[];
 export const BODY_PART_IDS = Object.keys(BODY_PARTS) as BodyPart[];
 
 export const COLORS = ['merah', 'biru', 'kuning', 'hijau', 'ungu', 'oranye'] as const;
@@ -282,6 +298,9 @@ export const SOLID_IDS = Object.keys(SOLIDS) as SolidId[];
 /** Koin Rupiah yang beredar (emisi 2016). */
 export const COINS = [100, 200, 500, 1000] as const;
 export type CoinValue = (typeof COINS)[number];
+/** Uang kertas yang dikenalkan di PAUD (D-081). */
+export const NOTES = [1000, 2000, 5000, 10000, 20000, 50000, 100000] as const;
+export type NoteValue = (typeof NOTES)[number];
 
 export const SIZES = ['s', 'm', 'l'] as const;
 export type Size = (typeof SIZES)[number];

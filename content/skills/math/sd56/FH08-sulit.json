@@ -1,0 +1,57 @@
+{
+  "id": "math.sd56.fh8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 8,
+  "title": "Statistika sederhana — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "f1": [1, 6],
+      "f2": [1, 6],
+      "f3": [1, 6],
+      "f4": [1, 6],
+      "f5": [1, 6]
+    },
+    "derived": {
+      "n": "f1 + f2 + f3 + f4 + f5",
+      "p": "(f1 + f2 + f3 + f4 + f5 + 1) / 2"
+    },
+    "constraint": "n % 2 == 1",
+    "prompt": "Tabel menunjukkan nilai kuis sekelompok siswa. Median nilai kuis adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Nilai", "6", "7", "8", "9", "10"],
+        "rows": [["Frekuensi", "=f1", "=f2", "=f3", "=f4", "=f5"]]
+      }
+    ],
+    "answer": "6 + (p > f1) + (p > f1 + f2) + (p > f1 + f2 + f3) + (p > f1 + f2 + f3 + f4)",
+    "distractors": [
+      {
+        "expr": "p",
+        "tag": "letak-median"
+      },
+      {
+        "expr": "8",
+        "tag": "nilai-tengah-tabel"
+      },
+      {
+        "expr": "max(f1, f2, f3, f4, f5)",
+        "tag": "frekuensi-terbesar"
+      }
+    ],
+    "choices": 4,
+    "explain": "Ada {n} data, median adalah data ke-{p}. Jumlahkan frekuensi dari nilai 6 sampai melewati {p}. Median = {answer}."
+  }
+}

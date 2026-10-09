@@ -1,0 +1,53 @@
+{
+  "id": "math.sd56.fb8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 8,
+  "title": "Geometri — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [4, 10],
+      "l": [3, 8],
+      "t": [3, 8]
+    },
+    "constraint": "p >= l",
+    "prompt": "Balok kayu berukuran {p} cm × {l} cm × {t} cm dicat seluruh permukaannya, lalu dipotong menjadi kubus-kubus kecil berusuk 1 cm. Banyak kubus kecil yang sama sekali tidak terkena cat adalah …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "cm"
+      }
+    ],
+    "answer": "(p - 2) * (l - 2) * (t - 2)",
+    "distractors": [
+      {
+        "expr": "(p - 1) * (l - 1) * (t - 1)",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "p * l * t - (p - 2) * (l - 2) * (t - 2)",
+        "tag": "yang-terkena-cat"
+      },
+      {
+        "expr": "p * l * t - 2 * (p * l + p * t + l * t)",
+        "tag": "kurangi-luas"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kubus tanpa cat ada di bagian dalam: setiap ukuran dikurangi 2 (sisi kiri-kanan). ({=p-2}) × ({=l-2}) × ({=t-2}) = {answer}."
+  }
+}

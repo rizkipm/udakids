@@ -4,8 +4,6 @@ import {
   GRADES,
   jagoStateSchema,
   levelStatuses,
-  standaloneCodes,
-  groupStartCodes,
   mergeJago,
   isPassed,
   passedLevels,
@@ -391,15 +389,8 @@ export class PracticeController {
           })
           .from(skillCatalogs)
       ).map((c) => {
-        const cats = c.categories as { code: string; group?: string; standalone?: boolean }[];
-        return [
-          `${c.domain}/${c.grade}` as string,
-          {
-            codes: cats.map((x) => x.code),
-            standalone: standaloneCodes(cats),
-            groupStarts: groupStartCodes(cats),
-          },
-        ] as const;
+        const cats = c.categories as { code: string }[];
+        return [`${c.domain}/${c.grade}` as string, { codes: cats.map((x) => x.code) }] as const;
       }),
     );
     const results = await this.quizzes(tx, childId);
@@ -416,8 +407,6 @@ export class PracticeController {
               book.codes,
               nodes.filter((n) => n.domain === node.domain && n.grade === node.grade),
               results,
-              book.standalone,
-              book.groupStarts,
             )[q.skillId]
           : undefined;
       // Level berbayar yang belum dibeli juga ditolak (D-036), sama seperti level terkunci.

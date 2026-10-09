@@ -1,0 +1,78 @@
+{
+  "id": "sains.sd34.gf2.lompat-suhu-naik-turun",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd34",
+  "category": "GF",
+  "order": 2,
+  "title": "Game Final KMSI — Level 2 — Lompat suhu naik turun",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "game": "lompat",
+    "olimpiade": "game",
+    "kognitif": "applying",
+    "kisi-kisi": "Materi, perubahan materi, dan campuran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "hop-game",
+        "params": {
+          "mode": "skip",
+          "board": [-20, 80],
+          "boardStep": 5,
+          "start": [-20, 20],
+          "hops": [3, 5],
+          "step": 10,
+          "style": "steps",
+          "prompt": "Suhu zat {start} °C. Suhunya naik {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "say": "Suhu zat {start} derajat Celsius. Suhunya naik {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "reteach": "Naik {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+        }
+      },
+      {
+        "family": "hop-game",
+        "params": {
+          "mode": "skip",
+          "board": [-15, 45],
+          "boardStep": 3,
+          "start": [-15, 0],
+          "hops": [3, 5],
+          "step": 6,
+          "style": "steps",
+          "prompt": "Suhu zat {start} °C. Suhunya naik {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "say": "Suhu zat {start} derajat Celsius. Suhunya naik {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "reteach": "Naik {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+        }
+      },
+      {
+        "family": "hop-game",
+        "params": {
+          "mode": "add",
+          "board": [-10, 10],
+          "start": [-8, -1],
+          "hops": [3, 6],
+          "style": "steps",
+          "prompt": "Suhu zat {start} °C. Suhunya naik {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "say": "Suhu zat {start} derajat Celsius. Suhunya naik {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "reteach": "Naik {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+        }
+      },
+      {
+        "family": "hop-game",
+        "params": {
+          "mode": "sub",
+          "board": [-10, 10],
+          "start": [1, 8],
+          "hops": [3, 6],
+          "style": "steps",
+          "prompt": "Suhu zat {start} °C. Suhunya turun {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "say": "Suhu zat {start} derajat Celsius. Suhunya turun {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+          "reteach": "Turun {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+        }
+      }
+    ]
+  }
+}

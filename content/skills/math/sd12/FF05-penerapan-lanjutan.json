@@ -1,0 +1,60 @@
+{
+  "id": "math.sd12.ff5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 5,
+  "title": "Tabel dan diagram — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 20],
+      "b": [5, 20],
+      "c": [5, 20],
+      "d": [5, 20]
+    },
+    "derived": {
+      "t": "a + b + c + d"
+    },
+    "prompt": "Seluruh siswa yang ditanya ada {t} anak. Berapa siswa yang memilih Renang?",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Olahraga kesukaan",
+        "headers": ["Olahraga", "Banyak siswa"],
+        "rows": [
+          ["Sepak bola", "=a"],
+          ["Renang", "?"],
+          ["Senam", "=c"],
+          ["Lari", "=d"]
+        ]
+      }
+    ],
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "t - a - c",
+        "tag": "lupa-satu"
+      },
+      {
+        "expr": "a + c + d",
+        "tag": "yang-diketahui"
+      },
+      {
+        "expr": "b + 2",
+        "tag": "lebih-2"
+      }
+    ],
+    "choices": 4,
+    "explain": "Yang diketahui {a} + {c} + {d} = {=a+c+d}. Renang = {t} − {=a+c+d} = {answer} siswa."
+  }
+}

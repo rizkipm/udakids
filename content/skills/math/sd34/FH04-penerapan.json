@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fh4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 4,
+  "title": "Teori bilangan sederhana — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 12],
+      "m": [20, 99],
+      "n": [150, 400]
+    },
+    "prompt": "Banyak bilangan kelipatan {a} dari {m} sampai {n} adalah …",
+    "answer": "floor(n / a) - floor((m - 1) / a)",
+    "distractors": [
+      {
+        "expr": "floor(n / a)",
+        "tag": "mulai-dari-1"
+      },
+      {
+        "expr": "floor((n - m) / a)",
+        "tag": "selisih-dibagi"
+      },
+      {
+        "expr": "floor(n / a) - floor((m - 1) / a) + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kelipatan {a} sampai {n} ada {=floor(n/a)}. Sebelum {m} ada {=floor((m-1)/a)}. Jadi {=floor(n/a)} − {=floor((m-1)/a)} = {answer}."
+  }
+}

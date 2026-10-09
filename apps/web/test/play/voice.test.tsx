@@ -2,7 +2,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   itemVoiceUrl,
   loadVoice,
+  pushVoiceContest,
+  pushVoiceItem,
+  pushVoiceLesson,
   resetVoice,
+  sayUrl,
+  speak,
   speakItem,
   speakLine,
   stopSpeaking,
@@ -57,16 +62,40 @@ const manifest = {
 };
 
 describe('suara Momo (D-035)', () => {
-  it('kalimat dengan klip → putar klip Momo; tanpa klip → suara browser', () => {
+  it('kalimat dengan klip → putar klip Momo; tanpa klip → suara Chirp lewat /voice/say (D-091)', () => {
     resetVoice(manifest);
     speakLine('vo_cmd_pick_one', 'cadangan');
     expect(played).toHaveLength(1);
     expect(played[0]).toMatch(new RegExp(`/voice/clip/${'a'.repeat(64)}$`));
     expect(spoken).toEqual([]);
     speakLine('vo_right_1', 'cadangan');
-    expect(spoken).toEqual(['Tepat!']); // teks dari dialog (bisa disunting admin)
+    // Teks dari dialog (bisa disunting admin), dibuatkan suara server — bukan suara browser.
+    expect(played.at(-1)).toContain('/voice/say?t=Tepat%21');
     speakLine('vo_tidak_ada', 'Teks cadangan');
-    expect(spoken.at(-1)).toBe('Teks cadangan');
+    expect(played.at(-1)).toContain('/voice/say?t=Teks+cadangan');
+    expect(spoken).toEqual([]);
+  });
+
+  it('semua teks lewat suara server dengan konteks soal/pelajaran/lomba yang sedang tampil (D-091)', () => {
+    resetVoice(manifest);
+    const pop = pushVoiceItem({ skillId: 'math.prek.a1.x', seed: 4, band: 1 });
+    const popL = pushVoiceLesson({ domain: 'sains', grade: 'tk', code: 'B' });
+    const popC = pushVoiceContest({
+      entryId: '0'.repeat(8) + '-0000-0000-0000-' + '0'.repeat(12),
+      index: 2,
+    });
+    speak('Ayo coba!');
+    const url = new URL(played.at(-1)!, 'http://x');
+    expect(url.pathname).toMatch(/\/voice\/say$/);
+    expect(url.searchParams.get('t')).toBe('Ayo coba!');
+    expect(url.searchParams.get('i')).toBe('math.prek.a1.x~4~1');
+    expect(url.searchParams.get('s')).toBe('sains~tk~B');
+    expect(url.searchParams.get('c')).toMatch(/~2$/);
+    popC();
+    popL();
+    pop();
+    expect(sayUrl('Halo')).not.toContain('&i=');
+    expect(spoken).toEqual([]);
   });
 
   it('suara Momo mati / belum dimuat → semuanya suara browser', () => {

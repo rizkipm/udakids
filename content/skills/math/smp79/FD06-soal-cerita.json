@@ -1,0 +1,46 @@
+{
+  "id": "math.smp79.fd6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 6,
+  "title": "Pola, baris, dan deret bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 30],
+      "b": [2, 6],
+      "n": [8, 25]
+    },
+    "derived": {
+      "s": "n * (2 * a + (n - 1) * b) / 2"
+    },
+    "prompt": "Gedung pertunjukan di Surabaya: baris pertama berisi {a} kursi dan setiap baris berikutnya {b} kursi lebih banyak. Jika seluruhnya ada {s} kursi, banyak barisnya …",
+    "answer": "n",
+    "distractors": [
+      {
+        "expr": "round(s / a)",
+        "tag": "bagi-baris-pertama"
+      },
+      {
+        "expr": "round(s / (a + (n - 1) * b))",
+        "tag": "bagi-baris-terakhir"
+      },
+      {
+        "expr": "n + 2",
+        "tag": "lebih-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "S = n/2 × (2 × {a} + (n − 1) × {b}). Untuk n = {n}: {n}/2 × ({=2*a} + {=(n-1)*b}) = {s}. Jadi ada {answer} baris."
+  }
+}

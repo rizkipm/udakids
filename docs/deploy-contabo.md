@@ -28,6 +28,170 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
+## Rilis berikutnya (D-079 … D-091): PAUD lengkap, Video Momo semua topik, semua suara Chirp 3 HD
+
+**Isi rilis:**
+
+- PAUD lengkap:
+  - Worksheet PAUD 21 topik (210 level), termasuk latihan menulis angka 1–10 dan huruf a–z (D-079 … D-083);
+  - game lama Worksheet dikembalikan sebagai topik T/U (D-089).
+- Semua topik terbuka di Level 1, dan anak boleh memilih topik acak (D-082).
+- "Belajar dulu" dengan Video Momo di semua topik (D-090), plus pelajaran pancaindra interaktif dan game "ketuk di
+  wajah" (D-089).
+- Semua suara memakai Chirp 3 HD dari server (D-091); simulasi pelajaran & AI Gambar dari sesi lain (D-087, D-088,
+  D-092).
+- **Tanpa migrasi baru** setelah 0019, tanpa dependensi atau env wajib baru. Bila rilis 2026-10-08 (D-073 … D-078) belum
+  pernah di-deploy, langkah ini sekaligus membawanya: `migrate:prod` menjalankan 0018/0019 yang belum ada.
+- **Kunci API & suara tidak diisi dua kali:** file `carry` membawa dari laptop ke server:
+  - API key Google TTS & Claude (dan OpenAI bila ada);
+  - pengaturan suara & AI Gambar;
+  - ±10.000 klip Chirp dan gambar AI yang sudah dibayar.
+
+### 0. Laptop: siapkan file `carry` (kunci API + klip suara)
+
+Tunggu `pnpm voice:generate -- --all` selesai. Lalu buat file dengan kata sandi sementara (minimal 12 huruf, jangan
+disimpan di file atau git):
+
+```bash
+cd ~/Repo/udakids
+read -rs CARRY_PASSPHRASE && export CARRY_PASSPHRASE      # ketik kata sandi sementara, Enter
+pnpm carry:export -- $PWD/backups/carry-$(date +%F).ndjson.gz
+# "Diekspor: kunci voice_key, ai_claude_key; pengaturan voice; ±10000 klip suara (±200 MB) → …"
+```
+
+Isi file tidak berisi API key dalam bentuk terbaca: kunci dikunci dengan kata sandi tadi. Folder `backups/` tidak
+masuk git.
+
+### 1. Laptop: cek, commit, push
+
+Hentikan `pnpm dev` dulu (Ctrl+C), karena build menghapus `dist/` yang sedang dipakai dev server.
+
+```bash
+cd ~/Repo/udakids
+pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
+# semua hijau; validate:content: "0 error". (pnpm lint memeriksa juga docs/udakids.code-workspace milik Anda —
+# bila hanya file itu yang ditandai, jalankan: npx prettier --write docs/udakids.code-workspace, atau abaikan.)
+
+git add -A
+git status --short | grep -E "\.env$|\.dump$|backups/|test-results|\.ndjson" || echo "aman"
+git diff --cached --stat -- apps/api/drizzle | tail -3    # kosong (tidak ada migrasi baru)
+git commit -m "PAUD lengkap, Video Momo semua topik, suara Chirp 3 HD, carry kunci & klip (D-079…D-092)"
+git push origin main
+git log -1 --oneline                                      # catat hash ini
+```
+
+Bila `grep` menampilkan file selain `aman`, batalkan dengan `git reset <file>`.
+
+### 2. Server: masuk, cadangkan, catat angka awal
+
+```bash
+ssh root@169.58.177.74
+cd /var/www/kids.eduskul.my.id
+PREV=$(git rev-parse --short HEAD); echo "versi sekarang: $PREV"
+U=$(grep "^DATABASE_URL=" .env | cut -d= -f2- | tr -d '"')
+git status --short                                        # harus kosong
+mkdir -p /root/backups && chmod 700 /root/backups
+pg_dump "$U" -Fc -f /root/backups/sebelum-deploy-$(date +%F-%H%M).dump && ls -lh /root/backups | tail -1
+psql "$U" -c "
+  select (select count(*) from parents)  ortu,
+         (select count(*) from children) anak,
+         (select count(*) from skills where status = 'active') skill_aktif,
+         (select count(*) from voice_clips) klip_suara,
+         (select count(*) from drizzle.__drizzle_migrations) migrasi"
+```
+
+**Catat angkanya.** `ortu` dan `anak` harus tetap sama setelah deploy.
+
+### 3. Laptop: kirim file `carry` ke server
+
+Di terminal laptop (bukan di ssh):
+
+```bash
+cd ~/Repo/udakids
+scp backups/carry-*.ndjson.gz root@169.58.177.74:/root/backups/
+```
+
+### 4. Server: ambil kode, build, migrasi, seed, impor kunci & suara
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git pull origin main
+git log -1 --oneline                                      # = hash dari langkah 1
+pnpm install --frozen-lockfile
+pnpm build                                                # engine, api, web: Done
+systemctl stop little-coder-api
+pnpm --filter @little-coder/api migrate:prod              # "Migrasi database selesai."
+pnpm --filter @little-coder/api seed:prod                 # soal, buku, pelajaran, dialog baru
+cd apps/api
+read -rs CARRY_PASSPHRASE && export CARRY_PASSPHRASE      # kata sandi yang sama dengan langkah 0
+node dist/cli/carry.js import /root/backups/carry-*.ndjson.gz
+# "Diimpor: kunci voice_key (…TN-U), ai_claude_key (…qgAA); pengaturan voice; ±10000 dari ±10000 klip baru …"
+unset CARRY_PASSPHRASE
+cd ../..
+systemctl start little-coder-api
+```
+
+Keluaran `seed:prod` yang diharapkan:
+
+- `skill: … ditambahkan/diperbarui` lebih dari 0 (Worksheet PAUD, latihan menulis, pancaindra, KMSI);
+- `skill lama … → draft` boleh muncul.
+
+Kunci API diimpor dengan `JWT_SECRET` server (dibaca dari `.env`), jadi Admin → Suara Momo dan Admin → AI Gambar
+langsung terisi. Impor aman diulang: klip yang sudah ada dilewati, dan kunci ditimpa dengan nilai yang sama.
+
+Bila `pnpm build` gagal: jangan migrasi/seed, jalankan `systemctl start little-coder-api` bila sempat di-stop,
+lalu kirim pesan error-nya.
+
+### 5. Periksa
+
+```bash
+sleep 5
+systemctl is-active little-coder-api                                   # active
+curl -s http://127.0.0.1:7177/health; echo                             # "status":"ok","db":"up"
+psql "$U" -tAc "select count(*) from drizzle.__drizzle_migrations"     # 20
+psql "$U" -tAc "select count(*) from skills where domain='worksheet' and grade='prek' and status='active'"   # 210
+psql "$U" -tAc "select string_agg(c->>'code', ' ') from skill_catalogs, jsonb_array_elements(categories) c
+  where domain='worksheet' and grade='prek'"
+# A I F G H M N B T J K L C D O P Q R S E U
+psql "$U" -tAc "select c->'lesson'->>'kode' from skill_catalogs, jsonb_array_elements(categories) c
+  where domain='sains' and grade='tkosn' and c->>'code'='A'"                                              # K-SA-12
+psql "$U" -tAc "select key, value->>'last4' from app_settings where key like '%key' order by key"
+# ai_claude_key | qgAA   ·   voice_key | TN-U
+psql "$U" -tAc "select value->>'model', value->>'voice' from app_settings where key='voice'"   # chirp3-hd | Leda
+psql "$U" -tAc "select count(*) from voice_clips"                      # ±10000
+curl -s -o /dev/null -w "%{http_code}\n" "http://127.0.0.1:7177/voice/say?t=Tepat%21"            # 200
+curl -s -o /dev/null -w "%{http_code}\n" "http://127.0.0.1:7177/voice/say?t=beli%20saham%20sekarang"  # 404
+cd apps/api && node dist/cli/voice.js --all --dry-run; cd ../..        # "… 0 belum bersuara" (atau sedikit)
+psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from children) anak"   # = langkah 2
+```
+
+### 6. Cek di browser (jendela penyamaran)
+
+- `https://kids.eduskul.my.id/play` → PAUD → Worksheet: Numerasi 9 materi, Literasi 12 materi; label "Disarankan".
+- Buka topik apa saja → "Belajar dulu" → Video Momo memutar contoh soal ("Contoh soal" → "Ini jawabannya").
+  Suaranya Chirp (suara manusia yang natural), bukan suara bawaan HP.
+- Sains TK (Olimpiade) → "Tubuhku dan pancaindra" → Video Momo, jelajah wajah, game ketuk di wajah (Level 1).
+- Admin → Suara Momo: model chirp3-hd, kunci …TN-U, jumlah klip ±10.000. Admin → AI Gambar: kunci Claude terisi.
+
+### 7. Bersihkan file `carry`
+
+```bash
+rm /root/backups/carry-*.ndjson.gz                        # server
+rm ~/Repo/udakids/backups/carry-*.ndjson.gz               # laptop
+```
+
+### Rollback
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl restart little-coder-api
+```
+
+Data tidak perlu dipulihkan, karena rilis ini tidak mengubah struktur tabel. Soal baru dari `seed:prod`, kunci, dan
+klip suara tetap ada tanpa mengganggu versi lama. Pulihkan cadangan `pg_dump` hanya bila diminta.
+
+---
+
 ## Rilis 2026-10-08 (D-073 … D-078): migrasi 0018 + 0019, KMSI, mock test, artikel, PAUD, katalog ringan, Game seru
 
 **Isi rilis:**

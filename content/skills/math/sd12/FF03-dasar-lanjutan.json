@@ -1,0 +1,54 @@
+{
+  "id": "math.sd12.ff3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 3,
+  "title": "Tabel dan diagram — Level 3 — Dasar lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "b": [2, 9],
+      "c": [2, 9],
+      "d": [2, 9]
+    },
+    "constraint": "b > c",
+    "prompt": "Diagram batang menunjukkan balon yang terjual. Berapa lebih banyak balon biru daripada balon hijau?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Balon terjual",
+        "labels": ["Merah", "Biru", "Hijau", "Kuning"],
+        "values": ["=a*10", "=b*10", "=c*10", "=d*10"],
+        "unit": "balon"
+      }
+    ],
+    "answer": "(b - c) * 10",
+    "distractors": [
+      {
+        "expr": "b * 10",
+        "tag": "baca-satu"
+      },
+      {
+        "expr": "(b + c) * 10",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "b - c",
+        "tag": "lupa-skala"
+      }
+    ],
+    "choices": 4,
+    "explain": "Balon biru {=b*10}, balon hijau {=c*10}. {=b*10} − {=c*10} = {answer} balon."
+  }
+}

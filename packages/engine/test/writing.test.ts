@@ -22,7 +22,6 @@ import {
   interpolate,
   lessonSchema,
   lessonScreenSchema,
-  levelStatuses,
   skippedStandalone,
   standaloneCodes,
   picturesWith,
@@ -241,7 +240,7 @@ describe('soal menebalkan & sambung titik', () => {
   });
 });
 
-describe('topik mandiri (standalone) tidak mengunci buku', () => {
+describe('topik mandiri (standalone) dilewati saat memilih level berikutnya', () => {
   const node = (category: string, order: number) => ({
     id: `${category}${order}`,
     category,
@@ -250,23 +249,10 @@ describe('topik mandiri (standalone) tidak mengunci buku', () => {
   const skills = [node('Z', 1), node('Z', 2), node('A', 1), node('A', 2), node('B', 1)];
   const passed = { passed: true, best: 90, last: 90, attempts: 1, ts: 1 };
 
-  it('tanpa standalone, Z di depan mengunci A', () => {
-    const s = levelStatuses(['Z', 'A', 'B'], skills, {});
-    expect(s).toMatchObject({ Z1: 'open', A1: 'locked' });
-  });
-
-  it('Z mandiri: terbuka, A tetap terbuka, B terbuka setelah A1 lulus', () => {
+  it('anak baru mulai dari topik mandiri; setelah bermain di topik biasa, topik mandiri dilewati', () => {
     const alone = standaloneCodes([{ code: 'Z', standalone: true }, { code: 'A' }]);
-    const s0 = levelStatuses(['Z', 'A', 'B'], skills, {}, alone);
-    expect(s0).toMatchObject({ Z1: 'open', Z2: 'locked', A1: 'open', B1: 'locked' });
-    const s1 = levelStatuses(['Z', 'A', 'B'], skills, { A1: passed }, alone);
-    expect(s1).toMatchObject({ Z1: 'open', B1: 'open' });
-  });
-
-  it('Z mandiri di tengah buku tetap terbuka walau topik sebelumnya belum lulus', () => {
-    const alone = new Set(['Z']);
-    const s = levelStatuses(['A', 'Z', 'B'], skills, {}, alone);
-    expect(s).toMatchObject({ A1: 'open', Z1: 'open', B1: 'locked' });
+    expect(skippedStandalone(skills, {}, alone).size).toBe(0);
+    expect([...skippedStandalone(skills, { A1: passed }, alone)]).toEqual(['Z']);
   });
 });
 
@@ -336,7 +322,12 @@ describe('AI Gambar (pengaturan & prompt)', () => {
   it('perkiraan biaya mengikuti kualitas dan mode', () => {
     const low = estimateImageCost(DEFAULT_AI_IMAGE_SETTINGS);
     const high = estimateImageCost({ ...DEFAULT_AI_IMAGE_SETTINGS, quality: 'high' });
-    const images = estimateImageCost({ ...DEFAULT_AI_IMAGE_SETTINGS, mode: 'images' });
+    // Tanpa penulis prompt Claude (D-092): hanya harga gambar.
+    const images = estimateImageCost({
+      ...DEFAULT_AI_IMAGE_SETTINGS,
+      mode: 'images',
+      promptWriter: 'none',
+    });
     expect(low).toBeGreaterThan(0.006);
     expect(high).toBeGreaterThan(low);
     expect(images).toBe(0.006);

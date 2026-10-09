@@ -1,0 +1,600 @@
+{
+  "id": "math.sd12.fd10.tantangan-final-bangun-datar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FD",
+  "order": 10,
+  "title": "Bangun datar — Level 10 — Tantangan final bangun datar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 10],
+            "l": [2, 9]
+          },
+          "derived": {
+            "a": "p * l"
+          },
+          "constraint": "l < p",
+          "prompt": "Luas persegi panjang {a} petak satuan. Panjangnya {p} petak. Lebarnya … petak.",
+          "answer": "l",
+          "distractors": [
+            {
+              "expr": "a - p",
+              "tag": "dikurang"
+            },
+            {
+              "expr": "p",
+              "tag": "sama-panjang"
+            },
+            {
+              "expr": "l + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "l - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "2 * l",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Luas = panjang × lebar. {p} × … = {a}, jadi lebarnya {a} : {p} = {answer} petak."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 20],
+            "l": [2, 12]
+          },
+          "constraint": "l < p && (p + l) % 2 == 0",
+          "prompt": "Keliling sebuah persegi sama dengan keliling persegi panjang {p} cm × {l} cm. Panjang sisi persegi itu … cm.",
+          "answer": "(p + l) / 2",
+          "distractors": [
+            {
+              "expr": "p + l",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "(p + l) / 2 + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Keliling persegi panjang 2 × ({p} + {l}) = {=2*(p+l)} cm. Sisi persegi = {=2*(p+l)} : 4 = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6],
+            "s": [2, 15]
+          },
+          "prompt": "{n} persegi sama besar dengan sisi {s} cm disusun berjajar dalam satu baris menjadi persegi panjang. Keliling persegi panjang itu … cm.",
+          "answer": "(2 * n + 2) * s",
+          "distractors": [
+            {
+              "expr": "4 * n * s",
+              "tag": "jumlah-keliling"
+            },
+            {
+              "expr": "(2 * n + 1) * s",
+              "tag": "kurang-satu-sisi"
+            },
+            {
+              "expr": "n * s",
+              "tag": "panjangnya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang {n} × {s} = {=n*s} cm, lebar {s} cm. Keliling 2 × ({=n*s} + {s}) = {answer} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "s": [1, 10]
+          },
+          "derived": {
+            "t": "2 * m"
+          },
+          "prompt": "{t} persegi kecil bersisi {s} cm disusun menjadi persegi panjang 2 baris, setiap baris {m} persegi. Keliling persegi panjang itu … cm.",
+          "answer": "2 * s * (m + 2)",
+          "distractors": [
+            {
+              "expr": "4 * s * t",
+              "tag": "jumlah-keliling"
+            },
+            {
+              "expr": "2 * s * (m + 1)",
+              "tag": "lebar-satu"
+            },
+            {
+              "expr": "s * (m + 2)",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang {m} × {s} = {=m*s} cm, lebar 2 × {s} = {=2*s} cm. Keliling 2 × ({=m*s} + {=2*s}) = {answer} cm."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Papan berbentuk persegi dibagi menjadi 2 × 2 petak persegi kecil. Banyak semua persegi pada papan itu (kecil dan besar) adalah …",
+              "stimulus": [
+                {
+                  "kind": "rect",
+                  "w": 2,
+                  "h": 2,
+                  "unit": "petak",
+                  "grid": true
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 4 persegi kecil dan 1 persegi besar (seluruh papan). Jumlahnya 5."
+            },
+            {
+              "prompt": "Sebuah persegi digunting lurus dari satu titik sudut ke titik sudut di seberangnya. Terbentuk dua bangun …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga"
+                  },
+                  "say": "segitiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "lingkaran"
+                  },
+                  "say": "lingkaran"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Garis dari sudut ke sudut seberang membelah persegi menjadi 2 segitiga."
+            },
+            {
+              "prompt": "Keliling sebuah persegi 36 cm. Panjang sisinya … cm.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Persegi punya 4 sisi sama panjang. 36 : 4 = 9 cm."
+            },
+            {
+              "prompt": "Bangun datar yang memiliki 6 sisi dan 6 titik sudut adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segi enam"
+                  },
+                  "say": "segi enam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segi lima"
+                  },
+                  "say": "segi lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belah ketupat"
+                  },
+                  "say": "belah ketupat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Segi enam punya 6 sisi dan 6 titik sudut."
+            },
+            {
+              "prompt": "Banyak titik sudut 2 segitiga, 3 persegi, dan 1 lingkaran adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  },
+                  "say": "19"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2 × 3 + 3 × 4 + 0 = 6 + 12 = 18. Lingkaran tidak punya titik sudut."
+            },
+            {
+              "prompt": "Kawat sepanjang 40 cm dibentuk menjadi persegi panjang dengan panjang 12 cm. Lebarnya … cm.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28"
+                  },
+                  "say": "28"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panjang + lebar = 40 : 2 = 20 cm. Lebar = 20 − 12 = 8 cm."
+            },
+            {
+              "prompt": "Persegi panjang pada gambar terdiri atas petak-petak. Banyak petak yang berada di tepi (menyentuh garis keliling) adalah …",
+              "stimulus": [
+                {
+                  "kind": "rect",
+                  "w": 6,
+                  "h": 4,
+                  "unit": "petak",
+                  "grid": true
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Semua petak 6 × 4 = 24. Petak di dalam 4 × 2 = 8. Petak di tepi 24 − 8 = 16."
+            },
+            {
+              "prompt": "Tiga persegi bersisi 5 cm disusun berjajar menjadi persegi panjang. Kelilingnya … cm.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Panjang 3 × 5 = 15 cm, lebar 5 cm. Keliling 2 × (15 + 5) = 40 cm."
+            },
+            {
+              "prompt": "Bangun datar yang keempat sisinya sama panjang tetapi sudutnya tidak siku-siku adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "belah ketupat"
+                  },
+                  "say": "belah ketupat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi"
+                  },
+                  "say": "persegi"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "persegi panjang"
+                  },
+                  "say": "persegi panjang"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "segitiga"
+                  },
+                  "say": "segitiga"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Belah ketupat: 4 sisi sama panjang, sudutnya tidak siku-siku. Persegi sudutnya siku-siku."
+            },
+            {
+              "prompt": "Segitiga yang ketiga sisinya sama panjang kelilingnya 27 cm. Panjang satu sisinya … cm.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tiga sisi sama panjang: 27 : 3 = 9 cm."
+            },
+            {
+              "prompt": "Sebuah persegi digambari kedua garis dari sudut ke sudut seberangnya (garis menyilang). Banyak semua segitiga yang terlihat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 4 segitiga kecil. Setiap garis juga membagi persegi menjadi 2 segitiga besar, jadi 4 segitiga besar. 4 + 4 = 8."
+            },
+            {
+              "prompt": "Lantai berukuran 5 m × 3 m ditutup ubin persegi bersisi 1 m. Banyak ubin yang diperlukan …",
+              "stimulus": [
+                {
+                  "kind": "rect",
+                  "w": 5,
+                  "h": 3,
+                  "unit": "m",
+                  "grid": true
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 baris ubin, setiap baris 3 ubin: 5 × 3 = 15 ubin."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fg1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 1,
+  "title": "Perbandingan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [1, 9],
+      "q": [1, 9],
+      "r": [1, 9],
+      "s": [1, 9],
+      "k": [1, 5]
+    },
+    "derived": {
+      "aa": "p * r * k",
+      "cc": "q * s * k"
+    },
+    "constraint": "gcd(p, q) == 1 && gcd(r, s) == 1 && p != q && r != s",
+    "prompt": "Diketahui A : B = {p} : {q} dan B : C = {r} : {s}. Jika C = {cc}, maka A = …",
+    "answer": "aa",
+    "distractors": [
+      {
+        "expr": "cc * p / s",
+        "tag": "lewati-b"
+      },
+      {
+        "expr": "q * r * k",
+        "tag": "nilai-b"
+      },
+      {
+        "expr": "cc * p / q",
+        "tag": "pakai-ab"
+      }
+    ],
+    "choices": 4,
+    "explain": "Samakan B: A : B : C = {=p*r} : {=q*r} : {=q*s}. A = {=p*r}/{=q*s} × {cc} = {answer}."
+  }
+}

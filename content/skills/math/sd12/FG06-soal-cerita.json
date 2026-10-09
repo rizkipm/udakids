@@ -1,0 +1,57 @@
+{
+  "id": "math.sd12.fg6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FG",
+  "order": 6,
+  "title": "Pola bilangan sederhana — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 10],
+      "k": [2, 5],
+      "n": [5, 12]
+    },
+    "words": {
+      "nama": [
+        "Dimas",
+        "Sari",
+        "Rina",
+        "Bagus",
+        "Laras",
+        "Fajar",
+        "Nadia",
+        "Rizal",
+        "Wulan",
+        "Arif"
+      ]
+    },
+    "prompt": "Hari pertama {nama} membaca {a} halaman. Setiap hari ia membaca {k} halaman lebih banyak dari hari sebelumnya. Pada hari ke-{n}, {nama} membaca … halaman.",
+    "answer": "a + (n - 1) * k",
+    "distractors": [
+      {
+        "expr": "a + n * k",
+        "tag": "lebih-sehari"
+      },
+      {
+        "expr": "n * k",
+        "tag": "lupa-awal"
+      },
+      {
+        "expr": "a + (n - 2) * k",
+        "tag": "kurang-sehari"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dari hari ke-1 ke hari ke-{n} ada {=n-1} kali tambah {k}. {a} + {=n-1} × {k} = {answer} halaman."
+  }
+}

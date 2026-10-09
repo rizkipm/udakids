@@ -1,0 +1,52 @@
+{
+  "id": "math.sd12.fh8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 8,
+  "title": "Aritmetika sosial — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "range": [1000, 4000],
+        "step": 500
+      },
+      "e": {
+        "range": [500, 2000],
+        "step": 500
+      }
+    },
+    "derived": {
+      "t1": "2 * p + e",
+      "t2": "p + e"
+    },
+    "prompt": "Harga 2 pensil dan 1 penghapus Rp{t1}. Harga 1 pensil dan 1 penghapus Rp{t2}. Harga 1 pensil Rp …",
+    "answer": "p",
+    "distractors": [
+      {
+        "expr": "e",
+        "tag": "harga-penghapus"
+      },
+      {
+        "expr": "t2",
+        "tag": "pensil-dan-penghapus"
+      },
+      {
+        "expr": "t1 / 2",
+        "tag": "dibagi-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bandingkan kedua belanja: selisihnya tepat 1 pensil. Rp{t1} − Rp{t2} = Rp{answer}."
+  }
+}

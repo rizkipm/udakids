@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.fc3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 3,
+  "title": "Aritmetika sosial — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [3, 40],
+      "t": {
+        "values": [2, 4, 5, 8, 10, 15, 20]
+      }
+    },
+    "derived": {
+      "nt": "w * (100 - t)"
+    },
+    "prompt": "Neto kiriman kopi dari Bondowoso {nt} kg dengan tara {t}% dari bruto. Bruto kiriman kopi itu … kg.",
+    "answer": "100 * w",
+    "unit": "kg",
+    "distractors": [
+      {
+        "expr": "nt + nt * t / 100",
+        "tag": "tara-dari-neto"
+      },
+      {
+        "expr": "nt + t",
+        "tag": "tara-kg"
+      },
+      {
+        "expr": "nt - nt * t / 100",
+        "tag": "dikurangi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Neto = {=100-t}% dari bruto. Bruto = {nt} : {=100-t}% = {nt} × 100 : {=100-t} = {answer}."
+  }
+}

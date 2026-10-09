@@ -1,0 +1,568 @@
+{
+  "id": "math.sd12.fa10.tantangan-final-operasi-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FA",
+  "order": 10,
+  "title": "Operasi bilangan — Level 10 — Tantangan final operasi bilangan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [150, 600],
+            "k": [105, 390]
+          },
+          "derived": {
+            "s": "a + k"
+          },
+          "prompt": "{a} + … = {s}",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "s + a",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "k + 10",
+              "tag": "lebih-10"
+            },
+            {
+              "expr": "k - 10",
+              "tag": "kurang-10"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan yang hilang = {s} − {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 900],
+            "b": [100, 290],
+            "c": [50, 250]
+          },
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - b - c",
+              "tag": "dari-kanan"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua-ditambah"
+            },
+            {
+              "expr": "a - b + c + 10",
+              "tag": "lebih-10"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kerjakan dari kiri: {a} − {b} = {=a-b}, lalu {=a-b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 10],
+            "k": [3, 10],
+            "d": [2, 15]
+          },
+          "constraint": "d < m * k",
+          "prompt": "Satu kotak berisi {m} kue lumpur. Bu Sari membeli {k} kotak, lalu {d} kue diberikan kepada tetangga. Kue Bu Sari sekarang ada …",
+          "answer": "m * k - d",
+          "distractors": [
+            {
+              "expr": "m * k",
+              "tag": "lupa-diberikan"
+            },
+            {
+              "expr": "m + k - d",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "m * k + d",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Semua kue {m} × {k} = {=m*k}. Diberikan {d}, sisa {=m*k} − {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [20, 300],
+            "d": [10, 200]
+          },
+          "derived": {
+            "a": "b + d",
+            "s": "a + b"
+          },
+          "constraint": "b != d",
+          "prompt": "Jumlah dua bilangan adalah {s} dan selisihnya {d}. Bilangan yang lebih besar adalah …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "yang-kecil"
+            },
+            {
+              "expr": "s - d",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "s + d",
+              "tag": "lupa-bagi-dua"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan besar = ({s} + {d}) : 2 = {answer}. Cek: {answer} + {b} = {s} dan {answer} − {b} = {d}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Jika 345 + … = 600, bilangan yang tepat adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "255"
+                  },
+                  "say": "255"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "355"
+                  },
+                  "say": "355"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "245"
+                  },
+                  "say": "245"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "265"
+                  },
+                  "say": "265"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan yang hilang = 600 − 345 = 255."
+            },
+            {
+              "prompt": "Hasil dari 999 − 99 − 9 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "891"
+                  },
+                  "say": "891"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "909"
+                  },
+                  "say": "909"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "881"
+                  },
+                  "say": "881"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "801"
+                  },
+                  "say": "801"
+                }
+              ],
+              "answer": 0,
+              "reteach": "999 − 99 = 900, lalu 900 − 9 = 891."
+            },
+            {
+              "prompt": "Hasil dari 25 + 25 + 25 + 25 + 25 + 25 + 25 + 25 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200"
+                  },
+                  "say": "200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "175"
+                  },
+                  "say": "175"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "225"
+                  },
+                  "say": "225"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "250"
+                  },
+                  "say": "250"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 8 kali 25. Empat kali 25 = 100, jadi delapan kali 25 = 200."
+            },
+            {
+              "prompt": "Isi kotak A tiga kali isi kotak B. Jumlah isi kedua kotak 48 kelereng. Isi kotak A … kelereng.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "say": "36"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "say": "32"
+                }
+              ],
+              "answer": 0,
+              "reteach": "A dan B bersama sama dengan 4 bagian B. Satu bagian = 48 : 4 = 12. Kotak A = 3 × 12 = 36."
+            },
+            {
+              "prompt": "Sebuah bilangan dikali 4, lalu ditambah 7, hasilnya 43. Bilangan itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mundur dari hasil: 43 − 7 = 36, lalu 36 : 4 = 9."
+            },
+            {
+              "prompt": "Momo menjumlahkan semua bilangan dari 1 sampai 10. Hasilnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "say": "55"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pasangkan: 1 + 10, 2 + 9, 3 + 8, 4 + 7, 5 + 6. Ada 5 pasang bernilai 11, jadi 55."
+            },
+            {
+              "prompt": "Tanda yang tepat agar 8 … 6 − 4 = 44 benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "×"
+                  },
+                  "say": "×"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "+"
+                  },
+                  "say": "+"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−"
+                  },
+                  "say": "−"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": ":"
+                  },
+                  "say": ":"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Coba setiap tanda. 8 × 6 = 48, lalu 48 − 4 = 44."
+            },
+            {
+              "prompt": "Hasil dari 100 − 98 + 96 − 94 + 92 − 90 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kelompokkan: (100 − 98) + (96 − 94) + (92 − 90) = 2 + 2 + 2 = 6."
+            },
+            {
+              "prompt": "Dua bilangan jumlahnya 50 dan selisihnya 10. Hasil kali kedua bilangan itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "600"
+                  },
+                  "say": "600"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "500"
+                  },
+                  "say": "500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "400"
+                  },
+                  "say": "400"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "625"
+                  },
+                  "say": "625"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan besar = (50 + 10) : 2 = 30, bilangan kecil = 20. Hasil kali 30 × 20 = 600."
+            },
+            {
+              "prompt": "Ani punya 4 kotak. Setiap kotak berisi 3 kantong, dan setiap kantong berisi 5 permen. Banyak permen Ani …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "say": "35"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Banyak kantong 4 × 3 = 12. Banyak permen 12 × 5 = 60."
+            },
+            {
+              "prompt": "Bilangan terbesar yang membuat 7 × … < 50 benar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "43"
+                  },
+                  "say": "43"
+                }
+              ],
+              "answer": 0,
+              "reteach": "7 × 7 = 49 masih kurang dari 50, sedangkan 7 × 8 = 56 sudah lebih."
+            },
+            {
+              "prompt": "Jika A + A + A = 27 dan A + B = 15, nilai B adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "A = 27 : 3 = 9. Lalu B = 15 − 9 = 6."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

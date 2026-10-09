@@ -1,0 +1,50 @@
+{
+  "id": "math.sd12.fh7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [500, 1500],
+        "step": 100
+      },
+      "x": [1, 5],
+      "y": [1, 5]
+    },
+    "prompt": "Harga 1 tahu Rp{h}. Harga 1 tempe sama dengan harga 2 tahu. Ibu membeli {x} tahu dan {y} tempe. Ibu membayar Rp …",
+    "answer": "h * (x + 2 * y)",
+    "distractors": [
+      {
+        "expr": "h * (x + y)",
+        "tag": "tempe-sama"
+      },
+      {
+        "expr": "h * (2 * x + y)",
+        "tag": "tertukar"
+      },
+      {
+        "expr": "h * (x + 2 * y) + h",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "h * (x + 2 * y) - h",
+        "tag": "kurang-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Harga tempe 2 × Rp{h} = Rp{=2*h}. Bayar {x} × Rp{h} + {y} × Rp{=2*h} = Rp{answer}."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "math.tkosn.fc6.tiga-dadu-dan-sebuah-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FC",
+  "order": 6,
+  "title": "Membandingkan dengan <, >, = — Level 6 — Tiga dadu dan sebuah angka",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu menggunakan tanda <, >, dan ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "c": [1, 6],
+      "n": [5, 15]
+    },
+    "constraint": "a + b + c - n <= 3 && n - a - b - c <= 3",
+    "prompt": "Jumlah mata tiga dadu … {n}. Pilih tanda yang tepat.",
+    "say": "Hitung semua mata pada tiga dadu, lalu bandingkan dengan {n}. Pilih tanda yang tepat.",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "die",
+            "value": "=a"
+          },
+          {
+            "kind": "die",
+            "value": "=b"
+          },
+          {
+            "kind": "die",
+            "value": "=c"
+          }
+        ]
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "numeral",
+        "value": "=n"
+      }
+    ],
+    "answer": "(a + b + c > n) * 1 + (a + b + c < n) * 2 + (a + b + c == n) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Mata dadu {a}, {b}, dan {c} jumlahnya {=a+b+c}. Jadi {=a+b+c} {answer_say} {n}."
+  }
+}

@@ -42,6 +42,7 @@ import { AdminAiController, PicturesController } from './ai/ai.controller.js';
 import { SiteContentController } from './site/site-content.controller.js';
 import { AiImageService } from './ai/ai-image.service.js';
 import { IMAGE_PROVIDER } from './ai/openai.provider.js';
+import { PROMPT_WRITER } from './ai/claude.provider.js';
 import { AdminVoiceController, VoiceController } from './voice/voice.controller.js';
 import { VoiceService } from './voice/voice.service.js';
 
@@ -94,6 +95,7 @@ import { VoiceService } from './voice/voice.service.js';
     { provide: TTS_PROVIDER, useFactory: ttsFromEnv },
     // null = OpenAI sungguhan; test mengganti dengan penyedia palsu (tanpa panggilan berbayar).
     { provide: IMAGE_PROVIDER, useValue: null },
+    { provide: PROMPT_WRITER, useValue: null },
   ],
 })
 export class AppModule {}

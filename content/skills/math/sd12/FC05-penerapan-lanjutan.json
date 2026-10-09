@@ -1,0 +1,46 @@
+{
+  "id": "math.sd12.fc5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 5,
+  "title": "Waktu — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [1, 9],
+      "k": [1, 3]
+    },
+    "words": {
+      "hari": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
+    },
+    "constraint": "t + 7 * k <= 31",
+    "prompt": "Tanggal {t} Juli jatuh pada hari {hari}. Hari {hari} {k} minggu kemudian jatuh pada tanggal … Juli.",
+    "answer": "t + 7 * k",
+    "distractors": [
+      {
+        "expr": "t + k",
+        "tag": "tambah-minggu"
+      },
+      {
+        "expr": "t + 7 * k - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "t + 7 * k + 7",
+        "tag": "lebih-seminggu"
+      }
+    ],
+    "choices": 4,
+    "explain": "{k} minggu = {k} × 7 = {=7*k} hari. Tanggal {t} + {=7*k} = {answer}."
+  }
+}

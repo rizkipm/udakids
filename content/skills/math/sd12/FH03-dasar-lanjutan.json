@@ -1,0 +1,60 @@
+{
+  "id": "math.sd12.fh3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 3,
+  "title": "Aritmetika sosial — Level 3 — Dasar lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [500, 3500],
+        "step": 500
+      },
+      "k": [2, 9]
+    },
+    "words": {
+      "barang": ["onde-onde", "lemper", "klepon", "pisang goreng"],
+      "nama": [
+        "Dimas",
+        "Sari",
+        "Rina",
+        "Bagus",
+        "Laras",
+        "Fajar",
+        "Nadia",
+        "Rizal",
+        "Wulan",
+        "Arif"
+      ]
+    },
+    "prompt": "Harga satu {barang} Rp{h}. {nama} membeli {k} {barang}. Ia harus membayar Rp …",
+    "answer": "h * k",
+    "distractors": [
+      {
+        "expr": "h * (k - 1)",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "h * k + h",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "h * k + 500",
+        "tag": "lebih-500"
+      }
+    ],
+    "choices": 4,
+    "explain": "{k} × Rp{h} = Rp{answer}."
+  }
+}

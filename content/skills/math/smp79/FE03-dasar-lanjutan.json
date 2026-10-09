@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.fe3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 3,
+  "title": "Teori bilangan lanjutan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [12, 99],
+      "n": [20, 999]
+    },
+    "derived": {
+      "dd": "a % 10",
+      "e": "(n - 1) % 4 + 1",
+      "u1": "dd",
+      "u2": "(dd * dd) % 10",
+      "u3": "(u2 * dd) % 10",
+      "u4": "(u3 * dd) % 10"
+    },
+    "constraint": "dd != 0 && dd != 1 && dd != 5 && dd != 6",
+    "prompt": "Angka satuan dari {a}^{n} adalah …",
+    "answer": "(e == 1) * u1 + (e == 2) * u2 + (e == 3) * u3 + (e == 4) * u4",
+    "distractors": [
+      {
+        "expr": "dd",
+        "tag": "angka-satuan-basis"
+      },
+      {
+        "expr": "(n * dd) % 10",
+        "tag": "dikali-pangkat"
+      },
+      {
+        "expr": "(e == 1) * u2 + (e == 2) * u3 + (e == 3) * u4 + (e == 4) * u1",
+        "tag": "siklus-geser"
+      }
+    ],
+    "choices": 4,
+    "explain": "Angka satuan pangkat {dd} berulang: {u1}, {u2}, {u3}, {u4}. {n} : 4 bersisa {=n%4} (sisa 0 berarti urutan ke-4), jadi angka satuannya {answer}."
+  }
+}

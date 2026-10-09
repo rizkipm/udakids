@@ -1,0 +1,42 @@
+{
+  "id": "math.sd12.fg4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FG",
+  "order": 4,
+  "title": "Pola bilangan sederhana — Level 4 — Penerapan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 60],
+      "d": [1, 6]
+    },
+    "prompt": "{a}, {=a+d}, {=a+2*d+1}, {=a+3*d+3}, {=a+4*d+6}, … Bilangan berikutnya adalah …",
+    "answer": "a + 5 * d + 10",
+    "distractors": [
+      {
+        "expr": "a + 5 * d + 9",
+        "tag": "beda-sama"
+      },
+      {
+        "expr": "a + 5 * d + 11",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + 6 * d + 14",
+        "tag": "loncat"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisihnya {d}, {=d+1}, {=d+2}, {=d+3}, jadi berikutnya {=d+4}. {=a+4*d+6} + {=d+4} = {answer}."
+  }
+}

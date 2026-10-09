@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.fa4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 4,
+  "title": "Operasi bilangan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": {
+        "values": [2, 3, 5, 6, 7]
+      },
+      "a": [2, 7],
+      "b": [2, 7],
+      "c": [1, 6]
+    },
+    "derived": {
+      "x": "a * a * r",
+      "y": "b * b * r",
+      "z": "c * c * r"
+    },
+    "constraint": "a + b - c > 0 && a != b && a != c && b != c",
+    "prompt": "Bentuk sederhana √{x} + √{y} − √{z} = …√{r}",
+    "answer": "a + b - c",
+    "distractors": [
+      {
+        "expr": "a + b + c",
+        "tag": "tanda"
+      },
+      {
+        "expr": "a * a + b * b - c * c",
+        "tag": "lupa-akar"
+      },
+      {
+        "expr": "a + b",
+        "tag": "lupa-kurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "√{x} = {a}√{r}, √{y} = {b}√{r}, √{z} = {c}√{r}. Jadi ({a} + {b} − {c})√{r} = {answer}√{r}."
+  }
+}

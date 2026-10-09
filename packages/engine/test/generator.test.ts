@@ -96,6 +96,23 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
   ['numeral-trace', { values: [0, 10], guide: 'dotted', showCount: false }],
   ['numeral-trace', { values: [0, 10], ask: 'count', tolerance: 10, maxSlips: 1 }],
   ['connect-dots', {}],
+  // Lihat sekilas, dengar bunyi, garis pramenulis (D-080).
+  ['subitize', { mode: 'dots' }],
+  ['subitize', { mode: 'match', values: [1, 5] }],
+  ['sound', { mode: 'listen', groups: ['hewan', 'benda'] }],
+  ['sound', { mode: 'makes-sound', groups: ['kendaraan'], items: [4, 5] }],
+  ['stroke-trace', { strokes: ['lingkaran', 'spiral'], guide: 'dotted' }],
+  ['stroke-find', { mode: 'picture', strokes: ['zigzag', 'gelombang', 'lengkung'] }],
+  ['sense-tap', { mode: 'use' }],
+  ['sense-tap', { mode: 'function', choices: [3, 4] }],
+  // Berhitung PAUD: jari, antrean, pagi-siang-malam (D-079).
+  ['fingers', { mode: 'count', values: [1, 10] }],
+  ['fingers', { mode: 'match', values: [6, 10], items: [3, 4] }],
+  ['fingers', { mode: 'tap-all', values: [1, 6] }],
+  ['queue', { mode: 'which', theme: 'kendaraan', length: [4, 5] }],
+  ['queue', { mode: 'build', length: [3, 5] }],
+  ['day-time', { mode: 'routine', steps: [2, 4] }],
+  ['day-time', { mode: 'order-times' }],
   // Huruf vokal & game Worksheet PAUD (D-075).
   ['letter-trace', { letters: ['a', 'i', 'u', 'e', 'o'], case: 'both' }],
   ['letter-find', { mode: 'initial', letters: ['a', 'u'] }],

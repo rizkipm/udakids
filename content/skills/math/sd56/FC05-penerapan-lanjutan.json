@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fc5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 5,
+  "title": "Aritmetika sosial — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": {
+        "range": [4500000, 9000000],
+        "step": 250000
+      },
+      "b": {
+        "values": [2000000, 3000000, 4000000]
+      },
+      "p": {
+        "values": [5, 10, 15]
+      }
+    },
+    "words": {
+      "nama": ["Budi", "Hasan", "Joko", "Slamet", "Agus"]
+    },
+    "constraint": "g > b",
+    "prompt": "Gaji Pak {nama} Rp{g} sebulan. Bagian gaji di atas Rp{b} dikenai pajak {p}%. Gaji bersih yang diterima Pak {nama} adalah Rp…",
+    "answer": "g - (g - b) * p / 100",
+    "distractors": [
+      {
+        "expr": "g - g * p / 100",
+        "tag": "pajak-seluruh-gaji"
+      },
+      {
+        "expr": "(g - b) * p / 100",
+        "tag": "besar-pajak"
+      },
+      {
+        "expr": "g - b * p / 100",
+        "tag": "pajak-batas"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kena pajak Rp{g} − Rp{b} = Rp{=g-b}. Pajak {p}% × Rp{=g-b} = Rp{=(g-b)*p/100}. Bersih Rp{answer}."
+  }
+}

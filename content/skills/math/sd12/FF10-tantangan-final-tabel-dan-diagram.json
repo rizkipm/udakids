@@ -1,0 +1,703 @@
+{
+  "id": "math.sd12.ff10.tantangan-final-tabel-dan-diagram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 10,
+  "title": "Tabel dan diagram — Level 10 — Tantangan final tabel dan diagram",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [2, 10],
+            "c": [2, 10],
+            "d": [2, 10]
+          },
+          "derived": {
+            "x1": "a * 500",
+            "x2": "b * 500",
+            "x3": "c * 500",
+            "x4": "d * 500"
+          },
+          "prompt": "Tabel menunjukkan tabungan Laras selama 4 minggu. Jumlah tabungan Laras Rp …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "caption": "Tabungan Laras",
+              "headers": ["Minggu", "Tabungan"],
+              "rows": [
+                ["Ke-1", "Rp{x1}"],
+                ["Ke-2", "Rp{x2}"],
+                ["Ke-3", "Rp{x3}"],
+                ["Ke-4", "Rp{x4}"]
+              ]
+            }
+          ],
+          "answer": "(a + b + c + d) * 500",
+          "distractors": [
+            {
+              "expr": "(a + b + c + d) * 500 - 500",
+              "tag": "kurang-500"
+            },
+            {
+              "expr": "(a + b + c) * 500",
+              "tag": "lupa-satu-minggu"
+            },
+            {
+              "expr": "(a + b + c + d) * 500 + 1000",
+              "tag": "lebih-1000"
+            }
+          ],
+          "choices": 4,
+          "explain": "Rp{x1} + Rp{x2} + Rp{x3} + Rp{x4} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [5, 20],
+            "c": [5, 20],
+            "d": [5, 20]
+          },
+          "derived": {
+            "t": "a + b + c + d"
+          },
+          "prompt": "Seluruh siswa yang ditanya ada {t} anak. Berapa siswa yang memilih Renang?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "caption": "Olahraga kesukaan",
+              "headers": ["Olahraga", "Banyak siswa"],
+              "rows": [
+                ["Sepak bola", "=a"],
+                ["Renang", "?"],
+                ["Senam", "=c"],
+                ["Lari", "=d"]
+              ]
+            }
+          ],
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "t - a - c",
+              "tag": "lupa-satu"
+            },
+            {
+              "expr": "a + c + d",
+              "tag": "yang-diketahui"
+            },
+            {
+              "expr": "b + 2",
+              "tag": "lebih-2"
+            }
+          ],
+          "choices": 4,
+          "explain": "Yang diketahui {a} + {c} + {d} = {=a+c+d}. Renang = {t} − {=a+c+d} = {answer} siswa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 20],
+            "b": [8, 18],
+            "c": [10, 20],
+            "d": [8, 18],
+            "e": [10, 20],
+            "f": [8, 18]
+          },
+          "constraint": "a + c + e > b + d + f",
+          "prompt": "Berapa selisih banyak siswa laki-laki seluruhnya dan siswa perempuan seluruhnya?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "caption": "Peserta lomba mewarnai",
+              "headers": ["Kelas", "Laki-laki", "Perempuan"],
+              "rows": [
+                ["1A", "=a", "=b"],
+                ["1B", "=c", "=d"],
+                ["2A", "=e", "=f"]
+              ]
+            }
+          ],
+          "answer": "(a + c + e) - (b + d + f)",
+          "distractors": [
+            {
+              "expr": "a + c + e",
+              "tag": "laki-laki-saja"
+            },
+            {
+              "expr": "a - b",
+              "tag": "satu-kelas"
+            },
+            {
+              "expr": "(a + c + e) - (b + d + f) + 2",
+              "tag": "lebih-2"
+            },
+            {
+              "expr": "(a + c + e) + (b + d + f)",
+              "tag": "semua-siswa"
+            }
+          ],
+          "choices": 4,
+          "explain": "Laki-laki {a} + {c} + {e} = {=a+c+e}. Perempuan {b} + {d} + {f} = {=b+d+f}. Selisih {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12],
+            "d": [2, 12]
+          },
+          "derived": {
+            "hi": "max(a, b, c, d)",
+            "lo": "min(a, b, c, d)"
+          },
+          "constraint": "hi > lo",
+          "prompt": "Diagram batang menunjukkan roti yang terjual. Penjualan hari Jumat sama dengan selisih penjualan terbanyak dan tersedikit. Jumlah roti terjual dari Senin sampai Jumat …",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "caption": "Roti terjual",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a*5", "=b*5", "=c*5", "=d*5"],
+              "unit": "roti"
+            }
+          ],
+          "answer": "(a + b + c + d) * 5 + (hi - lo) * 5",
+          "distractors": [
+            {
+              "expr": "(a + b + c + d) * 5",
+              "tag": "lupa-jumat"
+            },
+            {
+              "expr": "(a + b + c + d) * 5 + hi * 5",
+              "tag": "jumat-terbanyak"
+            },
+            {
+              "expr": "(hi - lo) * 5",
+              "tag": "jumat-saja"
+            }
+          ],
+          "choices": 4,
+          "explain": "Senin–Kamis {=(a+b+c+d)*5}. Jumat {=hi*5} − {=lo*5} = {=(hi-lo)*5}. Jumlahnya {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Berapa selisih pemilih buah terbanyak dan tersedikit?",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "caption": "Buah kesukaan",
+                  "headers": ["Buah", "Banyak anak"],
+                  "rows": [
+                    ["Apel", 8],
+                    ["Jeruk", 12],
+                    ["Mangga", 15],
+                    ["Salak", 5]
+                  ]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Terbanyak Mangga 15, tersedikit Salak 5. 15 − 5 = 10."
+            },
+            {
+              "prompt": "Kelas mana yang mengumpulkan 15 botol lebih banyak daripada kelas 1A?",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "caption": "Botol bekas terkumpul",
+                  "labels": ["1A", "1B", "2A", "2B"],
+                  "values": [30, 45, 25, 40],
+                  "unit": "botol"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1B"
+                  },
+                  "say": "1B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2A"
+                  },
+                  "say": "2A"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2B"
+                  },
+                  "say": "2B"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1A"
+                  },
+                  "say": "1A"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1A mengumpulkan 30. 30 + 15 = 45, yaitu kelas 1B."
+            },
+            {
+              "prompt": "Berapa buku yang dipinjam pada hari Selasa?",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "caption": "Buku dipinjam (1 gambar = 2 buku)",
+                  "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+                  "values": [4, 6, 3, 5],
+                  "pictogram": "buku"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selasa ada 6 gambar. 1 gambar = 2 buku, jadi 6 × 2 = 12 buku."
+            },
+            {
+              "prompt": "Jumlah tabungan ketiga anak adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "caption": "Tabungan",
+                  "headers": ["Nama", "Tabungan"],
+                  "rows": [
+                    ["Ani", "Rp5.000"],
+                    ["Budi", "Rp7.500"],
+                    ["Cici", "Rp6.000"]
+                  ]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp18.500"
+                  },
+                  "say": "Rp18.500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp17.500"
+                  },
+                  "say": "Rp17.500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp18.000"
+                  },
+                  "say": "Rp18.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp19.500"
+                  },
+                  "say": "Rp19.500"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Rp5.000 + Rp7.500 + Rp6.000 = Rp18.500."
+            },
+            {
+              "prompt": "Berapa banyak siswa perempuan seluruhnya?",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "caption": "Siswa kelas 2",
+                  "headers": ["Kelas", "Laki-laki", "Perempuan"],
+                  "rows": [
+                    ["2A", 14, 13],
+                    ["2B", 12, 16]
+                  ]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  },
+                  "say": "29"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "26"
+                  },
+                  "say": "26"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "27"
+                  },
+                  "say": "27"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "say": "55"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Perempuan 2A ada 13 dan 2B ada 16. 13 + 16 = 29."
+            },
+            {
+              "prompt": "Pada hari apa penjualan es dawet dua kali penjualan hari Senin?",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "caption": "Es dawet terjual",
+                  "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+                  "values": [15, 25, 30, 20],
+                  "unit": "gelas"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rabu"
+                  },
+                  "say": "Rabu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Selasa"
+                  },
+                  "say": "Selasa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kamis"
+                  },
+                  "say": "Kamis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Senin"
+                  },
+                  "say": "Senin"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Senin 15 gelas. Dua kalinya 30 gelas, yaitu hari Rabu."
+            },
+            {
+              "prompt": "Banyak siswa yang memilih Renang adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "caption": "Olahraga kesukaan",
+                  "headers": ["Olahraga", "Turus"],
+                  "rows": [
+                    ["Sepak bola", "||||| |||"],
+                    ["Renang", "||||| ||||| |||"],
+                    ["Bulu tangkis", "||||| |"]
+                  ]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setiap ikat turus ||||| bernilai 5. Renang: 5 + 5 + 3 = 13."
+            },
+            {
+              "prompt": "Selisih banyak pemilih Renang dan Bulu tangkis adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "caption": "Olahraga kesukaan",
+                  "headers": ["Olahraga", "Turus"],
+                  "rows": [
+                    ["Sepak bola", "||||| |||"],
+                    ["Renang", "||||| ||||| |||"],
+                    ["Bulu tangkis", "||||| |"]
+                  ]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  },
+                  "say": "19"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Renang 13, Bulu tangkis 6. 13 − 6 = 7."
+            },
+            {
+              "prompt": "Diagram batang menunjukkan hasil panen jagung empat petani. Jumlah semua hasil panen … kg.",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "caption": "Panen jagung (kg)",
+                  "labels": ["Pak Ali", "Pak Budi", "Pak Cokro", "Pak Didi"],
+                  "values": [10, 20, 15, 25],
+                  "unit": "kg"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "70"
+                  },
+                  "say": "70"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75"
+                  },
+                  "say": "75"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80"
+                  },
+                  "say": "80"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 + 20 + 15 + 25 = 70 kg."
+            },
+            {
+              "prompt": "Nilai ulangan 6 anak: 7, 8, 7, 9, 7, 8. Nilai yang paling sering muncul adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Nilai 7 muncul 3 kali, nilai 8 dua kali, nilai 9 sekali."
+            },
+            {
+              "prompt": "Berapa ikan lebih banyak tangkapan Pak Budi daripada Pak Ali?",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "caption": "Ikan tangkapan (1 gambar = 5 ikan)",
+                  "labels": ["Pak Ali", "Pak Budi", "Pak Cokro"],
+                  "values": [3, 5, 4],
+                  "pictogram": "ikan"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pak Budi 5 gambar, Pak Ali 3 gambar. Selisih 2 gambar × 5 = 10 ikan."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

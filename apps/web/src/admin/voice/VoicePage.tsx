@@ -6,6 +6,7 @@ import {
   SCORE_KEYS,
   WRONG_KEYS,
   type VoiceSettings,
+  VOICE_MODELS,
 } from '@little-coder/engine';
 import { useApiCall, useFetch } from '../../auth/useApi';
 import { API_URL } from '../../config/app';
@@ -26,7 +27,7 @@ import type { VoiceGenerateResult, VoiceOverview } from '../billing/types';
 import { formatBytes, useBlobCall } from '../billing/util';
 
 /** Nama suara Gemini-TTS yang cocok untuk Momo (bisa diketik nama lain). */
-const VOICES = ['Leda', 'Achird', 'Sulafat', 'Aoede', 'Puck', 'Zephyr', 'Kore', 'Laomedeia'];
+const VOICES = ['Leda', 'Aoede', 'Kore', 'Sulafat', 'Achird', 'Puck', 'Zephyr', 'Laomedeia'];
 
 export const VOICE_GROUPS: { title: MessageKey; keys: readonly string[] }[] = [
   { title: 'admin.voice.group.cmd', keys: Object.values(COMMAND_KEYS) },
@@ -67,6 +68,8 @@ function SettingsForm({ initial, onSaved }: { initial: VoiceSettings; onSaved: (
         <div className="adm-fields">
           <TextField
             label={t('admin.voice.model')}
+            hint={t('admin.voice.modelHint')}
+            list="adm-voice-models"
             required
             minLength={3}
             maxLength={60}
@@ -95,6 +98,11 @@ function SettingsForm({ initial, onSaved }: { initial: VoiceSettings; onSaved: (
             onChange={(e) => set('rate', Number(e.target.value))}
           />
         </div>
+        <datalist id="adm-voice-models">
+          {VOICE_MODELS.map((m) => (
+            <option key={m} value={m} />
+          ))}
+        </datalist>
         <datalist id="adm-voice-names">
           {VOICES.map((v) => (
             <option key={v} value={v} />

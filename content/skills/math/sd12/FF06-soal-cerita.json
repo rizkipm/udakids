@@ -1,0 +1,56 @@
+{
+  "id": "math.sd12.ff6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 6,
+  "title": "Tabel dan diagram — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 8],
+      "b": [2, 8],
+      "c": [2, 8],
+      "d": [2, 8],
+      "k": {
+        "values": [2, 5, 10]
+      }
+    },
+    "prompt": "Pada piktogram, 1 gambar mewakili {k} botol. Berapa botol yang dikumpulkan kelas 2A dan 2C?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Botol bekas (1 gambar = {k} botol)",
+        "labels": ["2A", "2B", "2C", "2D"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "pictogram": "botol"
+      }
+    ],
+    "answer": "k * (a + c)",
+    "distractors": [
+      {
+        "expr": "a + c",
+        "tag": "lupa-skala"
+      },
+      {
+        "expr": "k * a",
+        "tag": "satu-kelas"
+      },
+      {
+        "expr": "k * (a + b + c + d)",
+        "tag": "semua-kelas"
+      }
+    ],
+    "choices": 4,
+    "explain": "2A ada {a} gambar, 2C ada {c} gambar: {=a+c} gambar. {=a+c} × {k} = {answer} botol."
+  }
+}

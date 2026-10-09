@@ -40,8 +40,9 @@ describe.skipIf(!up)('Mock Test olimpiade (e2e)', () => {
       (s) => s.family === 'mock',
     );
     // Tiga mock test per buku olimpiade TK (Mock test 1 memakai id lama agar riwayat tidak hilang),
-    // ditambah tiga mock KMSI per buku olimpiade TK–SMP (D-074): 3 × 3 TK + 3 × 3 × 4 jenjang lain.
-    expect(mocks).toHaveLength(54);
+    // ditambah tiga mock KMSI per buku olimpiade TK–SMP (D-074): 3 × 3 TK + 3 × 3 × 4 jenjang lain,
+    // dan tiga mock KMSI Final Jatim per buku Matematika, Sains & English TK sampai SMP (D-080, D-084–D-086): 3 × 5 × 3.
+    expect(mocks).toHaveLength(99);
     expect(mocks.map((s) => s.id)).toContain('math.tkosn.y1.kmsi-mock-test-1');
     expect(mocks.map((s) => s.id)).toContain(MOCK);
     expect(mocks.map((s) => s.id)).toContain('english.tkosn.z3.mock-test-3');
@@ -49,8 +50,10 @@ describe.skipIf(!up)('Mock Test olimpiade (e2e)', () => {
       (c: { domain: string; grade: string }) => c.domain === 'math' && c.grade === 'tkosn',
     );
     expect(math.categories[0].group).toMatch(/^OSN TK/);
-    expect(math.categories.at(-2)).toMatchObject({ code: 'Z', standalone: true });
-    expect(math.categories.at(-1)).toMatchObject({ code: 'Y', standalone: true });
+    // Mock tetap paling akhir: Z (EMC), Y (KMSI Penyisihan), FY (KMSI Final Jatim, D-086).
+    expect(math.categories.at(-3)).toMatchObject({ code: 'Z', standalone: true });
+    expect(math.categories.at(-2)).toMatchObject({ code: 'Y', standalone: true });
+    expect(math.categories.at(-1)).toMatchObject({ code: 'FY', standalone: true, mock: true });
   });
 
   it('hasil sah: skor dari poin (300/552 → 54), durasi tersimpan, masuk skor utama', async () => {

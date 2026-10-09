@@ -1,0 +1,55 @@
+{
+  "id": "math.smp79.fh1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 1,
+  "title": "Statistika dan peluang — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 40],
+      "b": [10, 40],
+      "c": [10, 40],
+      "d": [10, 40],
+      "e": [10, 40]
+    },
+    "constraint": "(a + b + c + d + e) % 5 == 0",
+    "prompt": "Diagram batang menunjukkan banyak pengunjung perpustakaan sekolah selama lima hari. Rata-rata pengunjung per hari adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Pengunjung perpustakaan",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+        "values": ["=a", "=b", "=c", "=d", "=e"],
+        "unit": "orang"
+      }
+    ],
+    "answer": "(a + b + c + d + e) / 5",
+    "distractors": [
+      {
+        "expr": "c",
+        "tag": "data-tengah"
+      },
+      {
+        "expr": "(max(a, b, c, d, e) + min(a, b, c, d, e)) / 2",
+        "tag": "tengah-jangkauan"
+      },
+      {
+        "expr": "(a + b + c + d + e) / 4",
+        "tag": "bagi-4"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah pengunjung {a} + {b} + {c} + {d} + {e} = {=a+b+c+d+e}. Rata-rata = {=a+b+c+d+e} : 5 = {answer}."
+  }
+}

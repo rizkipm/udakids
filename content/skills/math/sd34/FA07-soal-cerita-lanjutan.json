@@ -1,0 +1,47 @@
+{
+  "id": "math.sd34.fa7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FA",
+  "order": 7,
+  "title": "Operasi bilangan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [35, 80],
+      "h": [3, 7],
+      "m": {
+        "values": [4, 5, 6, 8]
+      },
+      "j": [10, 40]
+    },
+    "constraint": "j * m < a * h",
+    "prompt": "Bu Sari di Surabaya membuat {a} kue lapis setiap hari selama {h} hari. Kue dikemas {m} buah per kotak. Setelah {j} kotak terjual, sisa kue adalah …",
+    "answer": "a * h - j * m",
+    "distractors": [
+      {
+        "expr": "a * h - j",
+        "tag": "kotak-dianggap-kue"
+      },
+      {
+        "expr": "a * h + j * m",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "a * h - (j - 1) * m",
+        "tag": "kurang-satu-kotak"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kue dibuat {a} × {h} = {=a*h}. Terjual {j} × {m} = {=j*m}. Sisa {=a*h} − {=j*m} = {answer}."
+  }
+}

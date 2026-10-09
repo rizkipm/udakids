@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fh1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 1,
+  "title": "Teori bilangan sederhana — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "n": [20, 99]
+    },
+    "constraint": "n % a != 0",
+    "prompt": "Sisa pembagian {n} : {a} adalah …",
+    "answer": "n % a",
+    "distractors": [
+      {
+        "expr": "floor(n / a)",
+        "tag": "hasil-bagi"
+      },
+      {
+        "expr": "a - n % a",
+        "tag": "kekurangan"
+      },
+      {
+        "expr": "n % a + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} = {=floor(n/a)} × {a} + {answer}. Jadi sisanya {answer}."
+  }
+}

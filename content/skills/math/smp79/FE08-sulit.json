@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fe8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 8,
+  "title": "Teori bilangan lanjutan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [190, 2889]
+    },
+    "derived": {
+      "pos": "k - 189",
+      "num": "100 + floor((pos - 1) / 3)",
+      "idx": "(pos - 1) % 3",
+      "d0": "floor(num / 100)",
+      "d1": "floor(num / 10) % 10",
+      "d2": "num % 10"
+    },
+    "prompt": "Bilangan asli ditulis berderet tanpa spasi: 123456789101112131415… Angka ke-{k} pada deretan itu adalah …",
+    "answer": "(idx == 0) * d0 + (idx == 1) * d1 + (idx == 2) * d2",
+    "distractors": [
+      {
+        "expr": "(idx == 0) * d1 + (idx == 1) * d2 + (idx == 2) * floor((num + 1) / 100)",
+        "tag": "geser-satu"
+      },
+      {
+        "expr": "d2",
+        "tag": "angka-satuan"
+      },
+      {
+        "expr": "(num + 1) % 10",
+        "tag": "bilangan-berikutnya"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bilangan 1–9 memakai 9 angka dan 10–99 memakai 180 angka. Sisa {=k-189} angka masuk ke bilangan tiga angka: bilangan {num}, angka ke-{=idx+1}. Jadi {answer}."
+  }
+}

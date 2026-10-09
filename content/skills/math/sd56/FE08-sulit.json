@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.fe8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FE",
+  "order": 8,
+  "title": "Teori bilangan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [100, 500],
+      "a": {
+        "values": [2, 3, 4, 5, 6]
+      },
+      "b": {
+        "values": [5, 7, 9, 10]
+      }
+    },
+    "constraint": "a < b && b % a != 0",
+    "prompt": "Banyak bilangan dari 1 sampai {n} yang habis dibagi {a} atau habis dibagi {b} adalah …",
+    "answer": "floor(n / a) + floor(n / b) - floor(n / lcm(a, b))",
+    "distractors": [
+      {
+        "expr": "floor(n / a) + floor(n / b)",
+        "tag": "terhitung-dua-kali"
+      },
+      {
+        "expr": "floor(n / lcm(a, b))",
+        "tag": "keduanya-saja"
+      },
+      {
+        "expr": "floor(n / a) + floor(n / b) - 2 * floor(n / lcm(a, b))",
+        "tag": "hanya-satu-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kelipatan {a}: {=floor(n/a)}. Kelipatan {b}: {=floor(n/b)}. Kelipatan keduanya ({=lcm(a,b)}) terhitung dua kali: {=floor(n/lcm(a,b))}. Jadi {answer}."
+  }
+}

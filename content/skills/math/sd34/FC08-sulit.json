@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.fc8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FC",
+  "order": 8,
+  "title": "Bangun datar — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [8, 30],
+      "l": [6, 25],
+      "s": [2, 5]
+    },
+    "constraint": "l < p && s < l",
+    "prompt": "Karton berbentuk persegi panjang {p} cm × {l} cm. Di salah satu pojoknya dipotong sebuah persegi bersisi {s} cm. Keliling karton yang tersisa adalah …",
+    "answer": "2 * (p + l)",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "2 * (p + l) - 2 * s",
+        "tag": "dikurangi-dua-sisi"
+      },
+      {
+        "expr": "2 * (p + l) - 4 * s",
+        "tag": "dikurangi-keliling-persegi"
+      },
+      {
+        "expr": "2 * (p + l) + 2 * s",
+        "tag": "ditambah-dua-sisi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dua potongan sisi yang hilang diganti dua sisi baru yang sama panjang, jadi keliling tetap 2 × ({p} + {l}) = {answer}."
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "math.sd56.fh5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 5,
+  "title": "Statistika sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [60, 95],
+      "b": [60, 95],
+      "c": [60, 95],
+      "d": [60, 95],
+      "e": [60, 100]
+    },
+    "derived": {
+      "r": "(a + b + c + d + e) / 5"
+    },
+    "constraint": "r == floor(r)",
+    "prompt": "Rata-rata nilai 5 anak pada tabel adalah {r}. Nilai Eka yang tertutup tanda tanya adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Nama", "Nilai"],
+        "rows": [
+          ["Ayu", "=a"],
+          ["Bima", "=b"],
+          ["Citra", "=c"],
+          ["Dodi", "=d"],
+          ["Eka", "?"]
+        ]
+      }
+    ],
+    "answer": "5 * r - (a + b + c + d)",
+    "distractors": [
+      {
+        "expr": "5 * r",
+        "tag": "jumlah-lima-nilai"
+      },
+      {
+        "expr": "r",
+        "tag": "rata-rata"
+      },
+      {
+        "expr": "(a + b + c + d) / 4",
+        "tag": "rata-rata-empat"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah 5 nilai = 5 × {r} = {=5*r}. Empat nilai berjumlah {=a+b+c+d}. Nilai Eka = {=5*r} − {=a+b+c+d} = {answer}."
+  }
+}

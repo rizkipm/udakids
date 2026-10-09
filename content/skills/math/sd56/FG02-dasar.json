@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.fg2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 2,
+  "title": "Perbandingan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [4, 20],
+      "d": [6, 30],
+      "b": [3, 30]
+    },
+    "constraint": "a != b && (a * d) % b == 0",
+    "prompt": "Pekerjaan merenovasi musala dapat diselesaikan {a} pekerja dalam {d} hari. Jika dikerjakan {b} pekerja, pekerjaan itu selesai dalam … hari.",
+    "answer": "a * d / b",
+    "distractors": [
+      {
+        "expr": "d * b / a",
+        "tag": "senilai"
+      },
+      {
+        "expr": "a * d",
+        "tag": "lupa-bagi"
+      },
+      {
+        "expr": "d + a - b",
+        "tag": "tambah-kurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Berbalik nilai: {a} × {d} = {=a*d} hari-pekerja. {=a*d} : {b} = {answer}."
+  }
+}

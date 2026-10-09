@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { COUNTABLE_OBJECTS, type ObjectId } from '../assets.js';
 import { buildWordSearch, carveMaze, mazeDeadEnds, mazePath } from '../games.js';
-import { VOWELS, type Vowel } from '../glyphs.js';
+import { ALPHABET, VOWELS, type Letter } from '../glyphs.js';
 import type { Choice, Visual } from '../item.js';
 import { numberWord } from '../words.js';
 import { between, defineFamily, range, reject } from './common.js';
-import { letterSay, VOWEL_WORDS } from './letters.js';
+import { LETTER_WORDS, letterSay, VOWEL_WORDS } from './letters.js';
 
 /**
  * Game interaktif Worksheet PAUD (D-075): labirin, cari kata, kartu pasangan, dan tangkap — untuk berhitung
@@ -13,6 +13,8 @@ import { letterSay, VOWEL_WORDS } from './letters.js';
  */
 
 const vowelSchema = z.enum(VOWELS);
+/** Huruf a–z untuk kartu pasangan & tangkap huruf (D-083). */
+const letterSchema = z.enum(ALPHABET);
 const caseSchema = z.enum(['lower', 'upper']);
 const shown = (v: string, c: 'lower' | 'upper') => (c === 'upper' ? v.toUpperCase() : v);
 
@@ -185,7 +187,7 @@ export const memoryPairsFamily = defineFamily({
   params: z.strictObject({
     mode: z.enum(['numeral-count', 'letter-case', 'letter-picture']).default('numeral-count'),
     values: range(1, 10).default([1, 5]),
-    letters: z.array(vowelSchema).min(2).max(5).default(['a', 'i', 'u', 'e', 'o']),
+    letters: z.array(letterSchema).min(2).max(6).default(['a', 'i', 'u', 'e', 'o']),
     pairs: range(2, 6).default([3, 3]),
     maxSlips: z.number().int().min(0).max(30).default(10),
   }),
@@ -221,7 +223,7 @@ export const memoryPairsFamily = defineFamily({
       });
     } else {
       if (p.letters.length < want) reject('huruf kurang untuk banyak pasangan');
-      rng.sample(p.letters, want).forEach((v: Vowel, j) => {
+      rng.sample(p.letters, want).forEach((v: Letter, j) => {
         cards.push({ id: '', pair: `q${j}`, visual: { kind: 'word', text: v }, say: letterSay(v) });
         if (p.mode === 'letter-case')
           cards.push({
@@ -231,7 +233,8 @@ export const memoryPairsFamily = defineFamily({
             say: letterSay(v.toUpperCase()),
           });
         else {
-          const w = rng.pick(VOWEL_WORDS[v]);
+          if (!LETTER_WORDS[v].length) reject(`huruf ${v} belum punya gambar`);
+          const w = rng.pick(LETTER_WORDS[v]);
           cards.push({
             id: '',
             pair: `q${j}`,
@@ -268,8 +271,8 @@ export const catchItemsFamily = defineFamily({
   params: z.strictObject({
     mode: z.enum(['numeral', 'letter', 'initial']).default('numeral'),
     values: range(0, 10).default([1, 5]),
-    letters: z.array(vowelSchema).min(1).max(5).default(['a']),
-    pool: z.array(vowelSchema).max(5).default(['a', 'i', 'u', 'e', 'o']),
+    letters: z.array(letterSchema).min(1).max(6).default(['a']),
+    pool: z.array(letterSchema).max(8).default(['a', 'i', 'u', 'e', 'o']),
     case: caseSchema.default('lower'),
     items: range(4, 8).default([5, 6]),
     targets: range(1, 4).default([2, 3]),
@@ -303,7 +306,10 @@ export const catchItemsFamily = defineFamily({
     } else if (p.mode === 'letter') {
       const v = rng.pick(p.letters);
       const t = shown(v, p.case);
-      const others = [...p.pool.filter((x) => x !== v), 'b', 'm', 's'].map((x) => shown(x, p.case));
+      // Pengisi b/m/s hanya bila bukan huruf yang dicari (huruf konsonan, D-083).
+      const others = [...new Set([...p.pool, 'b', 'm', 's'])]
+        .filter((x) => x !== v)
+        .map((x) => shown(x, p.case));
       targetText = letterSay(t);
       targetSay = letterSay(t);
       right = Array.from({ length: hits }, () => ({
@@ -317,8 +323,9 @@ export const catchItemsFamily = defineFamily({
       });
     } else {
       const v = rng.pick(p.letters);
-      const mine = VOWEL_WORDS[v];
-      const rest = p.pool.filter((x) => x !== v).flatMap((x) => VOWEL_WORDS[x]);
+      const mine = LETTER_WORDS[v];
+      if (!mine.length) reject(`huruf ${v} belum punya gambar`);
+      const rest = p.pool.filter((x) => x !== v).flatMap((x) => LETTER_WORDS[x]);
       if (!rest.length) reject('butuh gambar lain');
       targetText = `gambar berawalan huruf ${v}`;
       targetSay = `gambar yang dimulai dengan huruf ${v}`;

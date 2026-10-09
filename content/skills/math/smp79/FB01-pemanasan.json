@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.fb1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 1,
+  "title": "Geometri — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 7],
+      "c": [2, 7],
+      "b": [5, 40],
+      "d": [5, 40]
+    },
+    "derived": {
+      "x": "(180 - b + d) / (a + c)"
+    },
+    "constraint": "(180 - b + d) % (a + c) == 0 && c * x - d > 0",
+    "prompt": "Sudut ({a}x + {b})° dan ({c}x − {d})° saling berpelurus. Nilai x adalah …",
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "(90 - b + d) / (a + c)",
+        "tag": "penyiku"
+      },
+      {
+        "expr": "(180 - b - d) / (a + c)",
+        "tag": "tanda"
+      },
+      {
+        "expr": "(180 + b + d) / (a + c)",
+        "tag": "tanda-lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Berpelurus berarti jumlahnya 180°: ({a}x + {b}) + ({c}x − {d}) = 180, jadi {=a+c}x = {=180-b+d} dan x = {answer}."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "sains.smp79.fa7.hitung-kapasitas-vital-paru",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 7,
+  "title": "Makhluk hidup dan sistem kehidupan — Level 7 — Hitung: kapasitas vital paru",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Makhluk hidup dan sistem kehidupan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": {
+        "range": [400, 600],
+        "step": 50
+      },
+      "a": {
+        "range": [1500, 3000],
+        "step": 100
+      },
+      "b": {
+        "range": [1000, 1500],
+        "step": 100
+      }
+    },
+    "prompt": "Hasil spirometer Rani: volume tidal {t} mL, volume cadangan inspirasi {a} mL, dan volume cadangan ekspirasi {b} mL. Kapasitas vital paru-parunya … mL.",
+    "answer": "t + a + b",
+    "unit": "mL",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "lupa-tidal"
+      },
+      {
+        "expr": "t + a",
+        "tag": "lupa-ekspirasi"
+      },
+      {
+        "expr": "t + a + b + 1000",
+        "tag": "tambah-residu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kapasitas vital = volume tidal + cadangan inspirasi + cadangan ekspirasi = {t} + {a} + {b} = {answer} mL."
+  }
+}

@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Inject,
+  Logger,
   NotFoundException,
   Param,
   Post,
@@ -16,6 +17,8 @@ import {
 } from '@nestjs/common';
 import {
   dialogFileSchema,
+  DOMAINS,
+  GRADES,
   VOICE_ITEM_PARTS,
   VOICE_LINE_KEYS,
   voiceProfileOf,
@@ -51,6 +54,35 @@ const itemQuery = z.strictObject({
   v: z.string().max(20).optional(),
 });
 
+/** Kunci kalimat pelajaran (D-088), mis. "2", "3.b.mata", "3.k.makan-apel.ok". */
+const lessonQuery = z.strictObject({
+  k: z.string().regex(/^\d{1,2}(\.[a-z0-9-]{1,40}){0,3}$/),
+  v: z.string().max(20).optional(),
+});
+
+/**
+ * Suara untuk teks dari perangkat (D-091): teks + konteks soal (`i` = skillId~seed~band) dan/atau pelajaran
+ * (`s` = domain~grade~kode). Server hanya membuat suara bila teks berasal dari aplikasi (`sayAllowed`).
+ */
+const sayQuery = z.strictObject({
+  t: z.string().min(1).max(600),
+  l: z.enum(['id-ID', 'en-GB']).default('id-ID'),
+  i: z
+    .string()
+    .regex(/^[a-z0-9.-]{3,120}~\d{1,10}~[0-2]$/)
+    .optional(),
+  s: z
+    .string()
+    .regex(/^[a-z]{2,12}~[a-z0-9]{2,8}~[A-Z]{1,2}$/)
+    .optional(),
+  /** Soal lomba live: id peserta ~ nomor soal. */
+  c: z
+    .string()
+    .regex(/^[0-9a-f-]{36}~\d{1,3}$/)
+    .optional(),
+  v: z.string().max(20).optional(),
+});
+
 function sendClip(res: Response, clip: { mime: string; data: Buffer }) {
   res
     .status(200)
@@ -62,9 +94,13 @@ function sendClip(res: Response, clip: { mime: string; data: Buffer }) {
 /** Suara Momo untuk perangkat anak (tanpa login: elemen <audio> tidak bisa mengirim token). */
 @Controller('voice')
 export class VoiceController {
-  /** Permintaan soal Basic: 300 / 10 menit per IP; klip BARU (berbayar): 60 / 10 menit per IP. */
-  private readonly limiter = new RateLimiter(300, 10 * 60_000);
-  private readonly newClips = new RateLimiter(60, 10 * 60_000);
+  /**
+   * Semua suara anak (D-091): 2000 permintaan / 10 menit per IP (satu kelas sering berbagi IP Wi-Fi sekolah);
+   * klip BARU (berbayar): 200 / 10 menit per IP, ditambah batas harian `TTS_DAILY_LIMIT`.
+   */
+  private readonly limiter = new RateLimiter(2000, 10 * 60_000);
+  private readonly newClips = new RateLimiter(200, 10 * 60_000);
+  private readonly log = new Logger('Voice');
 
   constructor(private readonly voice: VoiceService) {}
 
@@ -81,6 +117,77 @@ export class VoiceController {
     @Res() res: Response,
   ) {
     const clip = await this.voice.clip(key);
+    if (!clip) throw new NotFoundException('Suara belum tersedia');
+    sendClip(res, clip);
+  }
+
+  /**
+   * Suara Chirp untuk kalimat pelajaran "Belajar dulu" & simulasi (D-088). Teks diambil server dari pelajaran di
+   * katalog (bukan teks bebas dari perangkat), dengan batas yang sama seperti suara soal.
+   */
+  @Public()
+  @Get('lesson/:domain/:grade/:code')
+  async lesson(
+    @Param('domain', new ZodPipe(z.enum(DOMAINS))) domain: (typeof DOMAINS)[number],
+    @Param('grade', new ZodPipe(z.enum(GRADES))) grade: (typeof GRADES)[number],
+    @Param('code', new ZodPipe(z.string().regex(/^[A-Z]{1,2}$/))) code: string,
+    @Query(new ZodPipe(lessonQuery)) q: z.infer<typeof lessonQuery>,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const ipKey = `voice:${clientIp(req)}`;
+    this.limiter.check(ipKey);
+    this.limiter.fail(ipKey);
+    const text = await this.voice.lessonText(domain, grade, code, q.k);
+    if (!text) throw new NotFoundException('Kalimat pelajaran tidak ditemukan');
+    // Profil suara mengikuti buku: jenjang (gaya & kecepatan) dan bahasa narasi.
+    const profile = voiceProfileOf(`${domain}.${grade}.pelajaran`, 'prompt');
+    if (!(await this.voice.hasClip(text, profile))) {
+      this.newClips.check(ipKey);
+      this.newClips.fail(ipKey);
+    }
+    const key = await this.voice.ensure(text, undefined, profile);
+    const clip = key && (await this.voice.clip(key));
+    if (!clip) throw new NotFoundException('Suara belum tersedia');
+    sendClip(res, clip);
+  }
+
+  /** Semua kalimat lain di aplikasi (D-091): antarmuka, game, pelajaran otomatis, kartu, nama huruf/angka. */
+  @Public()
+  @Get('say')
+  async say(
+    @Query(new ZodPipe(sayQuery)) q: z.infer<typeof sayQuery>,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    const ipKey = `voice:${clientIp(req)}`;
+    this.limiter.check(ipKey);
+    this.limiter.fail(ipKey);
+    const [skillId, seed, band] = q.i?.split('~') ?? [];
+    const item = skillId ? { skillId, seed: Number(seed), band: Number(band) } : undefined;
+    const lesson = q.s?.split('~');
+    const [entryId, at] = q.c?.split('~') ?? [];
+    const contest = entryId ? { entryId, index: Number(at) } : undefined;
+    if (!(await this.voice.sayAllowed(q.t, { item, lesson, contest }))) {
+      this.log.warn(`teks suara ditolak (bukan teks aplikasi): ${q.t.slice(0, 80)}`);
+      throw new NotFoundException('Teks ini tidak dibuatkan suara');
+    }
+    // Profil mengikuti konteks: buku soal/pelajaran (jenjang & bahasa), kata English (kartu), atau umum.
+    const base = item?.skillId ?? (lesson ? `${lesson[0]}.${lesson[1]}.pelajaran` : undefined);
+    const profile =
+      q.l === 'en-GB'
+        ? base?.startsWith('english.')
+          ? voiceProfileOf(base, 'choice')
+          : { lang: 'en-GB' as const }
+        : base
+          ? { ...voiceProfileOf(base, 'prompt'), lang: 'id-ID' as const }
+          : undefined;
+    if (!(await this.voice.hasClip(q.t, profile))) {
+      this.newClips.check(ipKey);
+      this.newClips.fail(ipKey);
+    }
+    const key = await this.voice.ensure(q.t, undefined, profile);
+    const clip = key && (await this.voice.clip(key));
     if (!clip) throw new NotFoundException('Suara belum tersedia');
     sendClip(res, clip);
   }

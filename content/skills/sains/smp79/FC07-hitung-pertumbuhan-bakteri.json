@@ -1,0 +1,58 @@
+{
+  "id": "sains.smp79.fc7.hitung-pertumbuhan-bakteri",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 7,
+  "title": "Mikrobiologi — Level 7 — Hitung: pertumbuhan bakteri",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Mikrobiologi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": {
+        "values": [10, 15, 20, 30]
+      },
+      "k": [2, 6],
+      "n": [2, 40]
+    },
+    "derived": {
+      "m": "t * k",
+      "p": "(k == 2) * 4 + (k == 3) * 8 + (k == 4) * 16 + (k == 5) * 32 + (k == 6) * 64"
+    },
+    "prompt": "Satu bakteri membelah menjadi dua setiap {t} menit. Mula-mula ada {n} bakteri. Jika semua tetap hidup, setelah {m} menit jumlahnya … bakteri.",
+    "answer": "n * p",
+    "unit": "bakteri",
+    "distractors": [
+      {
+        "expr": "n * 2 * k",
+        "tag": "dikali-bukan-pangkat"
+      },
+      {
+        "expr": "n * p / 2",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "n * p * 2",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "n * p * 4",
+        "tag": "lebih-dua"
+      },
+      {
+        "expr": "p",
+        "tag": "lupa-jumlah-awal"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dalam {m} menit terjadi {m} : {t} = {k} kali pembelahan. Jumlah = {n} × 2 pangkat {k} = {n} × {p} = {answer} bakteri."
+  }
+}

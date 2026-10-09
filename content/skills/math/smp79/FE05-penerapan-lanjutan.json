@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fe5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 5,
+  "title": "Teori bilangan lanjutan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [2, 12],
+      "p": [2, 9],
+      "q": [2, 9]
+    },
+    "derived": {
+      "x": "g * p",
+      "y": "g * q",
+      "l": "g * p * q"
+    },
+    "constraint": "gcd(p, q) == 1 && p != q",
+    "prompt": "FPB dua bilangan adalah {g} dan KPK-nya {l}. Jika salah satu bilangan adalah {x}, bilangan yang lain adalah …",
+    "answer": "y",
+    "distractors": [
+      {
+        "expr": "l / x",
+        "tag": "lupa-fpb"
+      },
+      {
+        "expr": "g * l",
+        "tag": "fpb-kali-kpk"
+      },
+      {
+        "expr": "l - x",
+        "tag": "selisih"
+      }
+    ],
+    "choices": 4,
+    "explain": "FPB × KPK = hasil kali kedua bilangan: {g} × {l} = {x} × b. Jadi b = {=g*l} : {x} = {answer}."
+  }
+}

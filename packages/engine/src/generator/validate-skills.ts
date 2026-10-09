@@ -1,3 +1,5 @@
+import { lessonFor, pickExamples } from '../content/auto-lesson.js';
+import { lessonScreenSchema } from '../content/lesson.js';
 import type { ContentFile } from '../levels/validate.js';
 import {
   catalogSchema,
@@ -56,5 +58,25 @@ export function validateSkillContent(input: {
     for (const p of validateTemplate(s, input.sampleSize)) errors.push(`${f.path}: ${p}`);
     skills.push(s);
   }
+  // D-090: setiap topik (kecuali Mock Test) punya penjelasan "Belajar dulu" dengan Video Momo dan ≥ 2 contoh
+  // soal yang bisa dibuat; layar pelajaran (manual + otomatis) valid.
+  for (const cat of catalogs)
+    for (const c of cat.categories) {
+      const own = skills.filter(
+        (k) => k.domain === cat.domain && k.grade === cat.grade && k.category === c.code,
+      );
+      const lesson = lessonFor(c, own);
+      if (!lesson) continue;
+      const where = `${cat.domain}/${cat.grade}/${c.code}`;
+      if (!lesson.layar.some((x) => x.jenis === 'tonton'))
+        errors.push(`${where}: pelajaran tanpa Video Momo`);
+      lesson.layar.forEach((x, i) => {
+        const r = lessonScreenSchema.safeParse(x);
+        if (!r.success) errors.push(`${where}: layar ${i + 1} — ${r.error.issues[0]?.message}`);
+      });
+      const want = Math.min(2, own.filter((k) => k.family !== 'mock').length);
+      if (pickExamples(own, want).length < want)
+        errors.push(`${where}: contoh soal untuk video < ${want}`);
+    }
   return { errors, skills, catalogs };
 }

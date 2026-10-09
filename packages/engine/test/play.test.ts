@@ -146,16 +146,58 @@ function gameKind(it: Item): string {
   }
 }
 
+describe('lompat dengan kalimat tema (D-084)', () => {
+  it('termometer: kalimat & suara sendiri, tanpa gambar persamaan, jawaban tetap dari papan', () => {
+    const t = skillTemplateSchema.parse({
+      id: 'sains.sd12.gf2.uji',
+      version: 1,
+      domain: 'sains',
+      grade: 'sd12',
+      category: 'GF',
+      order: 2,
+      title: 'Uji',
+      tier: 'intermediate',
+      family: 'hop-game',
+      params: {
+        style: 'steps',
+        mode: 'skip',
+        board: [20, 40],
+        boardStep: 2,
+        step: 2,
+        start: [20, 24],
+        hops: [3, 3],
+        prompt:
+          'Suhu air {start} °C, naik {step} °C tiap menit. Ketuk suhunya {n} menit berikutnya.',
+        say: 'Suhu air {start} derajat, naik {step} derajat tiap menit.',
+        reteach: 'Suhunya {list}. Akhirnya {end} derajat.',
+      },
+    });
+    for (let seed = 0; seed < 20; seed++) {
+      const it = generateItem(t, { seed, band: 1 });
+      if (it.interaction.type !== 'hop') throw new Error(it.interaction.type);
+      const { start, answer } = it.interaction;
+      expect(answer).toEqual([start + 2, start + 4, start + 6]);
+      expect(it.prompt).toBe(
+        `Suhu air ${start} °C, naik 2 °C tiap menit. Ketuk suhunya 3 menit berikutnya.`,
+      );
+      expect(it.say).toMatch(/derajat, naik dua derajat/);
+      expect(it.reteach.say).toMatch(/derajat\.$/);
+      expect(it.stimulus).toEqual([]);
+    }
+  });
+});
+
 describe('topik Game seru di content/ (D-078)', () => {
   const root = new URL('../../../content/skills/', import.meta.url);
   const files = readdirSync(root, { recursive: true })
     .map(String)
-    // Topik game: GM di setiap buku, plus Game angka (B) & Game huruf (E) di Worksheet PAUD (D-075).
-    .filter((f) => /(^|\/)GM\d\d-[^/]+\.json$/.test(f) || /^worksheet\/prek\/[BE]\d\d-/.test(f));
+    // Topik game: GM di setiap buku, GF (Game Final KMSI, D-080), plus Game angka (B) & Game huruf (E) di
+    // Worksheet PAUD (D-075).
+    .filter((f) => /(^|\/)G[MF]\d\d-[^/]+\.json$/.test(f) || /^worksheet\/prek\/[BE]\d\d-/.test(f));
   const books = new Map<string, string[]>();
   for (const f of files) {
     const name = f.split('/').pop()!;
-    const topic = `${f.split('/').slice(0, 2).join('/')}/${name.startsWith('GM') ? 'GM' : name[0]}`;
+    const topic = `${f.split('/').slice(0, 2).join('/')}/${/^G[MF]/.test(name) ? name.slice(0, 2) : name[0]}`;
     books.set(topic, [...(books.get(topic) ?? []), f]);
   }
 
@@ -180,6 +222,7 @@ describe('topik Game seru di content/ (D-078)', () => {
 });
 
 describe('level game tidak masuk mock test & lomba (D-078)', () => {
+  const GAME_TOPICS = ['GM', 'GF'];
   const root = new URL('../../../content/skills/', import.meta.url);
   const books = ['math/tkosn', 'sains/sd12', 'english/sd34', 'math/smp79'];
   it('mockSources & contestSafeTemplate melewati topik game', () => {
@@ -199,11 +242,11 @@ describe('level game tidak masuk mock test & lomba (D-078)', () => {
         const src = Object.values(mockSources(m, book)).flat();
         expect(src.length, m.id).toBeGreaterThan(0);
         expect(
-          src.filter((t) => t.category === 'GM'),
+          src.filter((t) => GAME_TOPICS.includes(t.category)),
           m.id,
         ).toEqual([]);
       }
-      for (const t of book.filter((x) => x.category === 'GM'))
+      for (const t of book.filter((x) => GAME_TOPICS.includes(x.category)))
         expect(contestSafeTemplate(t), t.id).toBe(false);
     }
   });

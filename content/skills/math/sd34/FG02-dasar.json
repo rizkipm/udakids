@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fg2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FG",
+  "order": 2,
+  "title": "Pola dan deret bilangan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [100, 500],
+      "d": [6, 40]
+    },
+    "constraint": "a > 4 * d",
+    "prompt": "{a}, {=a-d}, …, {=a-3*d}, {=a-4*d}. Bilangan yang hilang adalah …",
+    "answer": "a - 2 * d",
+    "distractors": [
+      {
+        "expr": "a - 2 * d + 10",
+        "tag": "puluhan"
+      },
+      {
+        "expr": "a - 3 * d",
+        "tag": "bergeser"
+      },
+      {
+        "expr": "a - d - 1",
+        "tag": "kurang-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setiap langkah berkurang {d}. {=a-d} − {d} = {answer}."
+  }
+}

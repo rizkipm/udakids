@@ -1,0 +1,47 @@
+{
+  "id": "math.sd56.fc1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 1,
+  "title": "Aritmetika sosial — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "values": [5, 10, 15, 20, 25, 30, 40, 60, 75]
+      },
+      "h": {
+        "range": [20000, 500000],
+        "step": 10000
+      }
+    },
+    "prompt": "{p}% dari Rp{h} adalah Rp…",
+    "answer": "h * p / 100",
+    "distractors": [
+      {
+        "expr": "h * p / 10",
+        "tag": "bagi-10"
+      },
+      {
+        "expr": "h - h * p / 100",
+        "tag": "sisa"
+      },
+      {
+        "expr": "h * p / 1000",
+        "tag": "bagi-1000"
+      }
+    ],
+    "choices": 4,
+    "explain": "{p}% × Rp{h} = {p}/100 × {h} = Rp{answer}."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "math.smp79.fb6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 6,
+  "title": "Geometri — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 3],
+      "h": [6, 30],
+      "u": [1, 2],
+      "v": [1, 3]
+    },
+    "derived": {
+      "r": "7 * k",
+      "p": "11 * u",
+      "l": "14 * v"
+    },
+    "constraint": "(k * k * h) % (u * v) == 0",
+    "prompt": "Air dalam tabung berjari-jari {r} cm setinggi {h} cm dituang seluruhnya ke wadah balok dengan alas {p} cm × {l} cm. Tinggi air di wadah balok … cm. (π = 22/7)",
+    "stimulus": [
+      {
+        "kind": "solid",
+        "solid": "tabung",
+        "color": "biru"
+      },
+      {
+        "kind": "solid",
+        "solid": "balok",
+        "color": "hijau"
+      }
+    ],
+    "answer": "k * k * h / (u * v)",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "h",
+        "tag": "tinggi-sama"
+      },
+      {
+        "expr": "2 * k * k * h / (u * v)",
+        "tag": "dua-kali"
+      },
+      {
+        "expr": "k * h / (u * v)",
+        "tag": "lupa-kuadrat"
+      }
+    ],
+    "choices": 4,
+    "explain": "Volume air = 22/7 × {r} × {r} × {h} = {=154*k*k*h} cm³. Tinggi di balok = {=154*k*k*h} : ({p} × {l}) = {answer}."
+  }
+}

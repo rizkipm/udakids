@@ -1,0 +1,128 @@
+{
+  "id": "math.tkosn.fc8.cerita-toko-kue-dan-lempar-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FC",
+  "order": 8,
+  "title": "Membandingkan dengan <, >, = — Level 8 — Cerita toko kue dan lempar dadu",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu menggunakan tanda <, >, dan ="
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [100, 999]
+          },
+          "words": {
+            "kota1": ["Malang", "Kediri", "Jember", "Madiun"],
+            "kota2": ["Gresik", "Sidoarjo", "Blitar", "Tuban"]
+          },
+          "prompt": "Toko kue di {kota1} membuat {a} kue. Toko kue di {kota2} membuat {b} kue. Tanda yang tepat: {a} … {b}",
+          "say": "Toko kue di {kota1} membuat {a} kue. Toko kue di {kota2} membuat {b} kue. Pilih tanda yang tepat.",
+          "stimulus": [
+            {
+              "kind": "object",
+              "object": "kue"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "text",
+              "text": "…"
+            },
+            {
+              "kind": "numeral",
+              "value": "=b"
+            }
+          ],
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Bandingkan ratusannya dulu, lalu puluhan, lalu satuan. {a} {answer_say} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [1, 6],
+            "c": [1, 6],
+            "d": [1, 6]
+          },
+          "words": {
+            "nama": ["Sekar", "Dimas", "Ayu", "Raka"],
+            "teman": ["Bagus", "Wulan", "Bima", "Laras"]
+          },
+          "prompt": "{nama} dan {teman} masing-masing melempar dua dadu. Jumlah mata dadu {nama} … jumlah mata dadu {teman}.",
+          "say": "{nama} dan {teman} masing-masing melempar dua dadu. Dadu {nama} di kiri, dadu {teman} di kanan. Pilih tanda yang tepat.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "die",
+                  "value": "=a"
+                },
+                {
+                  "kind": "die",
+                  "value": "=b"
+                }
+              ]
+            },
+            {
+              "kind": "text",
+              "text": "…"
+            },
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "die",
+                  "value": "=c"
+                },
+                {
+                  "kind": "die",
+                  "value": "=d"
+                }
+              ]
+            }
+          ],
+          "answer": "(a + b > c + d) * 1 + (a + b < c + d) * 2 + (a + b == c + d) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Dadu {nama} {a} tambah {b} jadi {=a+b}. Dadu {teman} {c} tambah {d} jadi {=c+d}. Jadi {=a+b} {answer_say} {=c+d}."
+        }
+      }
+    ]
+  }
+}

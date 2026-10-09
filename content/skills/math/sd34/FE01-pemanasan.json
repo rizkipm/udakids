@@ -1,0 +1,54 @@
+{
+  "id": "math.sd34.fe1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 1,
+  "title": "Tabel dan diagram — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 40],
+      "b": [5, 40],
+      "c": [5, 40],
+      "d": [5, 40]
+    },
+    "prompt": "Berapa porsi rawon dan soto yang terjual seluruhnya?",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Makanan terjual di warung",
+        "labels": ["Pecel", "Rawon", "Soto", "Rujak"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "unit": "porsi"
+      }
+    ],
+    "answer": "b + c",
+    "unit": "porsi",
+    "distractors": [
+      {
+        "expr": "a + d",
+        "tag": "batang-lain"
+      },
+      {
+        "expr": "b",
+        "tag": "satu-batang"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "tiga-batang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Rawon {b} porsi dan soto {c} porsi. {b} + {c} = {answer}."
+  }
+}

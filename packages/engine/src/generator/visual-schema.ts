@@ -5,17 +5,22 @@ import {
   type BodyPart,
   COINS,
   COLORS,
+  NOTES,
   OBJECT_IDS,
   SIZES,
+  SENSE_IDS,
   SOLID_IDS,
   type ObjectId,
+  type SenseId,
   type ShapeId,
   type SolidId,
 } from './assets.js';
+import { GLYPH_IDS } from './glyphs.js';
 import type { Visual } from './item.js';
 
 const objectId = z.enum(OBJECT_IDS as [ObjectId, ...ObjectId[]]);
 const color = z.enum(COLORS);
+const senseId = z.enum(SENSE_IDS as [SenseId, ...SenseId[]]);
 const count = z.number().int().min(0).max(30);
 const layout = z.enum(['row', 'rows', 'scatter', 'ring', 'grid']);
 
@@ -40,11 +45,26 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
       kind: z.literal('body'),
       part: z.enum(BODY_PART_IDS as [BodyPart, ...BodyPart[]]).optional(),
     }),
+    z.strictObject({ kind: z.literal('sense'), sense: senseId }),
+    z.strictObject({ kind: z.literal('face'), sense: senseId.optional() }),
     z.strictObject({
       kind: z.literal('die'),
       value: z.number().int().min(1).max(6),
       color: color.optional(),
     }),
+    z
+      .strictObject({
+        kind: z.literal('fingers'),
+        count: z.number().int().min(1).max(10),
+        tone: z.number().int().min(0).max(2).optional(),
+        split: z.number().int().min(1).max(5).optional(),
+        /** Satu tangan: tangan kiri (dicerminkan). */
+        mirror: z.boolean().optional(),
+      })
+      .refine(
+        (v) => v.split === undefined || (v.count - v.split >= 1 && v.count - v.split <= 5),
+        'split: tiap tangan 1–5 jari',
+      ),
     z.strictObject({
       kind: z.literal('cubes'),
       counts: z.array(count).min(1),
@@ -82,6 +102,8 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
       color,
     }),
     z.strictObject({ kind: z.literal('coin'), value: z.literal([...COINS]) }),
+    z.strictObject({ kind: z.literal('note'), value: z.literal([...NOTES]) }),
+    z.strictObject({ kind: z.literal('glyph'), glyph: z.enum(GLYPH_IDS) }),
     z.strictObject({
       kind: z.literal('object'),
       object: objectId,

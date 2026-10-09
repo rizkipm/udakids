@@ -1,0 +1,53 @@
+{
+  "id": "math.sd12.fh6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 6,
+  "title": "Aritmetika sosial — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": {
+        "values": [10000, 20000]
+      },
+      "h": {
+        "range": [1500, 4500],
+        "step": 500
+      },
+      "k": [2, 4],
+      "p": {
+        "range": [500, 2500],
+        "step": 500
+      }
+    },
+    "constraint": "k * h + p <= u - 500",
+    "prompt": "Nadia membawa uang Rp{u}. Ia membeli {k} buku tulis seharga Rp{h} per buku dan sebuah pensil Rp{p}. Sisa uang Nadia Rp …",
+    "answer": "u - k * h - p",
+    "distractors": [
+      {
+        "expr": "u - h - p",
+        "tag": "lupa-dikali"
+      },
+      {
+        "expr": "u - k * h",
+        "tag": "lupa-pensil"
+      },
+      {
+        "expr": "k * h + p",
+        "tag": "total-belanja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Belanja {k} × Rp{h} + Rp{p} = Rp{=k*h+p}. Sisa Rp{u} − Rp{=k*h+p} = Rp{answer}."
+  }
+}

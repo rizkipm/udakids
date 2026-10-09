@@ -1,14 +1,30 @@
 import { createHash } from 'node:crypto';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { Inject, Injectable, Logger, Optional } from '@nestjs/common';
 import {
+  buildVoiceAllowList,
+  collectTexts,
+  exampleAnswerSay,
+  voiceProfileOf,
   dialogFileSchema,
   generateItem,
-  isListeningItem,
+  itemVoiceTexts,
+  lessonFor,
+  lessonVoiceTexts,
+  voiceTextAllowed,
+  voiceVocabulary,
+  type SkillTemplate,
+  type VoiceAllowList,
+  lessonSchema,
+  lessonVoiceLines,
   skillTemplateSchema,
+  speechText,
   VOICE_LINE_KEYS,
   voiceItemText,
   voiceSettingsFor,
   type DialogFile,
+  type Item,
   type VoiceItemPart,
   type VoiceLang,
   type VoiceProfile,
@@ -16,7 +32,15 @@ import {
 } from '@little-coder/engine';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DB, type Db } from '../db/db.module.js';
-import { appSettings, dialogs, skills, voiceClips } from '../db/schema.js';
+import {
+  appSettings,
+  contestEntries,
+  dialogs,
+  skillCatalogs,
+  skills,
+  voiceClips,
+} from '../db/schema.js';
+import { i18nDir } from '../common/config.js';
 import { open, seal, type Sealed } from '../common/secret-box.js';
 import { SettingsService } from '../settings/settings.service.js';
 import { GoogleCloudTts, TTS_PROVIDER, type TtsProvider } from './tts.provider.js';
@@ -119,11 +143,14 @@ export class VoiceService {
     }
   }
 
-  /** Kunci klip. Bahasa hanya ikut dihitung bila bukan Indonesia, jadi klip lama tetap berlaku. */
+  /**
+   * Kunci klip. Bahasa hanya ikut dihitung bila bukan Indonesia. Teks yang di-hash adalah naskah ucapan
+   * (`speechText`, D-087), jadi perbaikan aturan baca otomatis membuat klip baru.
+   */
   static keyOf(text: string, s: VoiceSettings, lang: VoiceLang = 'id-ID') {
     return createHash('sha256')
       .update(
-        `${s.model}|${s.voice}|${s.style}|${s.rate}|${lang === 'id-ID' ? '' : `${lang}|`}${text}`,
+        `${s.model}|${s.voice}|${s.style}|${s.rate}|${lang === 'id-ID' ? '' : `${lang}|`}${speechText(text, lang)}`,
       )
       .digest('hex');
   }
@@ -227,7 +254,8 @@ export class VoiceService {
     try {
       const provider = await this.provider();
       if (!provider) return null;
-      const out = await provider.synthesize(text, s, lang);
+      // Yang dikirim ke mesin suara: naskah ucapan (simbol → kata, D-087); teks asli tetap disimpan.
+      const out = await provider.synthesize(speechText(text, lang), s, lang);
       await this.db
         .insert(voiceClips)
         .values({
@@ -284,12 +312,295 @@ export class VoiceService {
     // Mock test (D-072) tidak punya soal sendiri; soalnya membawa id level sumber.
     if (template.family === 'mock') return undefined;
     const item = generateItem(template, { seed, band });
-    // Basic: kalimat soal & pembahasan. Kelas 1+: hanya kalimat soal "dengar" (dikte) — D-043.
-    if (template.tier !== 'basic' && !(part === 'prompt' && isListeningItem(item)))
-      return undefined;
-    // Kartu pilihan hanya untuk buku English (kata Inggris diucapkan suara Momo, bukan suara perangkat) — D-062.
-    if (part === 'choice' && template.domain !== 'english') return undefined;
+    // D-091: semua jenjang & semua mata pelajaran memakai suara Chirp — kalimat soal, pembahasan, dan kartu.
     return voiceItemText(item, part, choiceId);
+  }
+
+  /** Kalimat pelajaran dari katalog (D-088): hanya teks yang ada di pelajaran topik itu. */
+  async lessonText(domain: string, grade: string, code: string, key: string) {
+    const [row] = await this.db
+      .select({ categories: skillCatalogs.categories })
+      .from(skillCatalogs)
+      .where(and(eq(skillCatalogs.domain, domain), eq(skillCatalogs.grade, grade)));
+    const cat = (row?.categories as { code: string; lesson?: unknown }[] | undefined)?.find(
+      (c) => c.code === code,
+    );
+    const parsed = lessonSchema.safeParse(cat?.lesson);
+    if (!parsed.success) return undefined;
+    return lessonVoiceLines(parsed.data)[key];
+  }
+
+  // ------------------------------------------------------------ semua teks aplikasi (D-091)
+
+  private globalList?: { at: number; list: VoiceAllowList };
+  private readonly topicLists = new Map<string, { at: number; list: VoiceAllowList }>();
+  private static readonly LIST_TTL = 10 * 60_000;
+
+  /** Template i18n web (semua file `id/*.json`); kosong bila foldernya tidak ada (dicatat di log). */
+  private i18nTemplates(): string[] {
+    try {
+      const dir = i18nDir();
+      return readdirSync(dir)
+        .filter((f) => f.endsWith('.json'))
+        .flatMap((f) => collectTexts(JSON.parse(readFileSync(join(dir, f), 'utf8'))));
+    } catch (err) {
+      this.log.warn(`teks i18n tidak terbaca (${(err as Error).message}); set I18N_DIR`);
+      return [];
+    }
+  }
+
+  /**
+   * Daftar umum: template i18n, dialog Momo, teks katalog (judul, intro, tips, pelajaran manual), judul level,
+   * dan kosakata aplikasi. Disusun ulang tiap 10 menit (suntingan admin ikut masuk).
+   */
+  async globalAllowList(): Promise<VoiceAllowList> {
+    if (this.globalList && Date.now() - this.globalList.at < VoiceService.LIST_TTL)
+      return this.globalList.list;
+    const [catalogs, levels, dialog] = await Promise.all([
+      this.db
+        .select({ title: skillCatalogs.title, categories: skillCatalogs.categories })
+        .from(skillCatalogs),
+      this.db.select({ title: skills.title }).from(skills).where(eq(skills.status, 'active')),
+      this.dialog(),
+    ]);
+    const texts = [
+      ...collectTexts(catalogs),
+      ...levels.flatMap((l) => [l.title, l.title.split('—').at(-1)!.trim()]),
+      ...collectTexts(dialog.lines),
+    ];
+    const list = buildVoiceAllowList({
+      texts,
+      templates: this.i18nTemplates(),
+      words: voiceVocabulary(),
+    });
+    this.globalList = { at: Date.now(), list };
+    return list;
+  }
+
+  /** Teks satu soal (diturunkan ulang dari skill + seed + band). */
+  async itemAllowList(skillId: string, seed: number, band: number) {
+    const [row] = await this.db
+      .select({ template: skills.template })
+      .from(skills)
+      .where(eq(skills.id, skillId));
+    if (!row) return undefined;
+    const template = skillTemplateSchema.parse(row.template);
+    if (template.family === 'mock') return undefined;
+    try {
+      return buildVoiceAllowList({ texts: itemVoiceTexts(generateItem(template, { seed, band })) });
+    } catch {
+      return undefined;
+    }
+  }
+
+  /** Teks pelajaran satu topik — manual atau otomatis (D-090) — termasuk soal contoh video. */
+  async lessonAllowList(domain: string, grade: string, code: string) {
+    const id = `${domain}/${grade}/${code}`;
+    const hit = this.topicLists.get(id);
+    if (hit && Date.now() - hit.at < VoiceService.LIST_TTL) return hit.list;
+    const [cat] = await this.db
+      .select({ categories: skillCatalogs.categories })
+      .from(skillCatalogs)
+      .where(and(eq(skillCatalogs.domain, domain), eq(skillCatalogs.grade, grade)));
+    const category = (
+      cat?.categories as
+        { code: string; title: string; intro?: string; tips?: string[] }[] | undefined
+    )?.find((c) => c.code === code);
+    if (!category) return undefined;
+    const rows = await this.db
+      .select({ template: skills.template })
+      .from(skills)
+      .where(
+        and(
+          eq(skills.domain, domain),
+          eq(skills.grade, grade),
+          eq(skills.category, code),
+          eq(skills.status, 'active'),
+        ),
+      );
+    const levels: SkillTemplate[] = rows.flatMap((r) => {
+      const p = skillTemplateSchema.safeParse(r.template);
+      return p.success ? [p.data] : [];
+    });
+    const parsed = lessonSchema.safeParse((category as { lesson?: unknown }).lesson);
+    const lesson = lessonFor(
+      { ...category, ...(parsed.success && { lesson: parsed.data }) },
+      levels,
+    );
+    const list = buildVoiceAllowList({ texts: lesson ? lessonVoiceTexts(lesson, levels) : [] });
+    if (this.topicLists.size > 500) this.topicLists.clear();
+    this.topicLists.set(id, { at: Date.now(), list });
+    return list;
+  }
+
+  /**
+   * Teks dari perangkat boleh dibuatkan suara? Hanya bila berasal dari aplikasi (daftar umum, soal yang sedang
+   * tampil, atau pelajaran topik yang sedang dibuka) — tidak pernah teks bebas.
+   */
+  async sayAllowed(
+    text: string,
+    ctx: {
+      item?: { skillId: string; seed: number; band: number };
+      lesson?: string[];
+      contest?: { entryId: string; index: number };
+    },
+  ) {
+    const lists: VoiceAllowList[] = [await this.globalAllowList()];
+    if (ctx.item) {
+      const l = await this.itemAllowList(ctx.item.skillId, ctx.item.seed, ctx.item.band);
+      if (l) lists.push(l);
+    }
+    if (ctx.lesson) {
+      const [domain, grade, code] = ctx.lesson as [string, string, string];
+      const l = await this.lessonAllowList(domain, grade, code);
+      if (l) lists.push(l);
+    }
+    if (ctx.contest) {
+      const [entry] = await this.db
+        .select({ items: contestEntries.items })
+        .from(contestEntries)
+        .where(eq(contestEntries.id, ctx.contest.entryId));
+      const it = (entry?.items as Item[] | undefined)?.[ctx.contest.index];
+      if (it) lists.push(buildVoiceAllowList({ texts: itemVoiceTexts(it) }));
+    }
+    return voiceTextAllowed(text, lists);
+  }
+
+  /**
+   * Kalimat yang PERSIS diucapkan aplikasi dan bisa dibuat lebih dulu (D-091): teks antarmuka anak tanpa isian,
+   * "Dengarkan" di halaman topik, dan semua kalimat pelajaran (manual/otomatis: Video Momo + jawaban contoh,
+   * layar, bacaan, titik jelajah). Soal tetap dibuat saat diputar (disiapkan lebih dulu oleh perangkat).
+   */
+  async pregenTexts(): Promise<{ text: string; profile?: VoiceProfile }[]> {
+    const out = new Map<string, { text: string; profile?: VoiceProfile }>();
+    const add = (text: string | undefined, profile?: VoiceProfile) => {
+      const t = text?.trim();
+      if (t && t.length <= 600) out.set(`${profile?.style ?? ''}|${t}`, { text: t, profile });
+    };
+    const dir = i18nDir();
+    let tip = 'Ingat:';
+    for (const f of ['play.json', 'contest.json', 'rank.json']) {
+      try {
+        const dict = JSON.parse(readFileSync(join(dir, f), 'utf8')) as Record<string, string>;
+        if (f === 'play.json' && dict['topic.tip']) tip = dict['topic.tip'];
+        for (const v of Object.values(dict)) if (!/\{\w+\}/.test(v)) add(v);
+      } catch {
+        /* folder i18n tidak ada: lewati */
+      }
+    }
+    const catalogs = await this.db
+      .select({
+        domain: skillCatalogs.domain,
+        grade: skillCatalogs.grade,
+        categories: skillCatalogs.categories,
+      })
+      .from(skillCatalogs);
+    const all = await this.db
+      .select({ template: skills.template })
+      .from(skills)
+      .where(eq(skills.status, 'active'));
+    const templates = all.flatMap((r) => {
+      const p = skillTemplateSchema.safeParse(r.template);
+      return p.success ? [p.data] : [];
+    });
+    for (const cat of catalogs) {
+      const profile: VoiceProfile = {
+        ...voiceProfileOf(`${cat.domain}.${cat.grade}.pelajaran`, 'prompt'),
+        lang: 'id-ID',
+      };
+      for (const c of cat.categories as {
+        code: string;
+        title: string;
+        intro?: string;
+        tips?: string[];
+        lesson?: unknown;
+      }[]) {
+        // Tombol "Dengarkan" di halaman topik (Topic.tsx: intro + "Ingat: tip").
+        if (c.intro) add([c.intro, ...(c.tips ?? []).map((x) => `${tip} ${x}`)].join(' '));
+        const levels = templates.filter(
+          (t) => t.domain === cat.domain && t.grade === cat.grade && t.category === c.code,
+        );
+        const parsed = lessonSchema.safeParse(c.lesson);
+        const lesson = lessonFor(
+          {
+            title: c.title,
+            ...(c.intro && { intro: c.intro }),
+            ...(c.tips && { tips: c.tips }),
+            ...(parsed.success && { lesson: parsed.data }),
+          },
+          levels,
+        );
+        if (!lesson) continue;
+        for (const screen of lesson.layar) {
+          if (screen.jenis !== 'tonton') add(screen.suara, profile);
+          for (const a of screen.adegan ?? []) {
+            add(a.suara, profile);
+            const skill = a.contoh && levels.find((k) => k.order === a.contoh!.level);
+            if (skill)
+              try {
+                add(
+                  exampleAnswerSay(generateItem(skill, { seed: a.contoh!.seed, band: 0 })),
+                  profile,
+                );
+              } catch {
+                /* contoh tidak bisa dibuat */
+              }
+          }
+          for (const k of screen.kalimat ?? []) add(k.suara ?? k.teks, profile);
+          for (const p of screen.titik ?? []) add(p.suara, profile);
+        }
+      }
+    }
+    return [...out.values()];
+  }
+
+  /** Buat lebih dulu klip `pregenTexts` yang belum ada (CLI `voice:generate -- --all`). */
+  async generateAll(
+    opts: {
+      dryRun?: boolean;
+      max?: number;
+      parallel?: number;
+      gapMs?: number;
+      retryWaitMs?: number;
+      onProgress?: (done: number, total: number, created: number, failed: number) => void;
+    } = {},
+  ) {
+    const s = await this.settings.get('voice');
+    const list = await this.pregenTexts();
+    const missing: typeof list = [];
+    for (const x of list) if (!(await this.hasClip(x.text, x.profile))) missing.push(x);
+    const chars = missing.reduce(
+      (n, x) => n + speechText(x.text, x.profile?.lang ?? 'id-ID').length,
+      0,
+    );
+    if (opts.dryRun)
+      return { total: list.length, missing: missing.length, chars, created: 0, failed: 0 };
+    let created = 0;
+    let failed = 0;
+    let todo = missing.slice(0, opts.max ?? missing.length);
+    const total = todo.length;
+    // Kuota Google Chirp 3 HD ±200 permintaan/menit per proyek: 5 klip tiap 2 detik (±150/menit). Yang gagal
+    // (mis. 429 kuota) dicoba lagi setelah jeda 65 detik, maks. 3 putaran.
+    const batch = Math.max(1, Math.min(10, opts.parallel ?? 5));
+    const gapMs = opts.gapMs ?? 2000;
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    for (let round = 0; round < 4 && todo.length; round++) {
+      if (round > 0) await wait(opts.retryWaitMs ?? 65_000);
+      const retry: typeof todo = [];
+      for (let i = 0; i < todo.length; i += batch) {
+        const started = Date.now();
+        const part = todo.slice(i, i + batch);
+        const done = await Promise.all(part.map((x) => this.ensure(x.text, s, x.profile)));
+        done.forEach((k, j) => (k ? created++ : retry.push(part[j]!)));
+        if (opts.onProgress && (created % 200 < batch || i + batch >= todo.length))
+          opts.onProgress(created, total, created, retry.length);
+        const left = gapMs - (Date.now() - started);
+        if (left > 0) await wait(left);
+      }
+      todo = retry;
+    }
+    failed = todo.length;
+    return { total: list.length, missing: missing.length, chars, created, failed };
   }
 
   async stats() {

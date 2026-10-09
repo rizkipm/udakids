@@ -1,0 +1,222 @@
+/* Simulasi foto realistis (D-088). Target sentuh ≥ 64 px; sorotan lembut, tanpa merah besar. */
+.sim {
+  display: grid;
+  gap: 16px;
+}
+.sim-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .sim-stage {
+    grid-template-columns: 1fr;
+  }
+}
+.sim-figure {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  max-height: 460px;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--kid-surface, #f6f3ff);
+  display: grid;
+  place-items: center;
+}
+.sim-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+.sim-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+.sim-spot {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  background: rgba(124, 92, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.45);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.sim-spot.is-new {
+  animation: sim-pulse 1.8s ease-in-out infinite;
+}
+.sim-spot.is-lit {
+  background: rgba(46, 204, 113, 0.3);
+  box-shadow:
+    0 0 0 4px #2ecc71,
+    0 0 24px 6px rgba(46, 204, 113, 0.55);
+}
+.sim-spot.is-nope,
+.sim-part.is-nope {
+  animation: sim-wiggle 0.5s ease-in-out;
+  box-shadow: 0 0 0 4px #ffb24a;
+}
+.sim-side {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.sim-count {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+.sim-card {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 18px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  animation: sim-pop 0.35s ease-out;
+}
+.sim-card strong {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+}
+.sim-card p {
+  margin: 4px 0 0;
+  font-size: 1.1rem;
+}
+.sim-example {
+  width: 112px;
+  height: 112px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+.sim-activities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.sim-activity {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  min-height: 64px;
+  padding: 8px;
+  border: 3px solid transparent;
+  border-radius: 18px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sim-activity img,
+.sim-activity .sim-fallback {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.sim-activity.is-on {
+  border-color: #7c5cff;
+}
+.sim-activity.is-done {
+  border-color: #2ecc71;
+}
+.sim-aha {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: #fff6d6;
+  font-size: 1.15rem;
+  font-weight: 700;
+  animation: sim-pop 0.4s ease-out;
+}
+.sim-done {
+  display: grid;
+  gap: 12px;
+}
+.sim-parts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px;
+}
+.sim-part {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  min-height: 96px;
+  padding: 8px;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background: var(--kid-card, #fff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font: inherit;
+  font-weight: 700;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.sim-part img,
+.sim-part .sim-fallback {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.sim-part.is-seen {
+  border-color: #c9bcff;
+}
+.sim-part.is-lit {
+  border-color: #2ecc71;
+  box-shadow: 0 0 16px 2px rgba(46, 204, 113, 0.45);
+}
+@keyframes sim-pulse {
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+@keyframes sim-wiggle {
+  25% {
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(6deg);
+  }
+}
+.sim-part.is-nope {
+  animation-name: sim-wiggle-card;
+}
+@keyframes sim-wiggle-card {
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes sim-pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sim-spot,
+  .sim-part,
+  .sim-card,
+  .sim-aha {
+    animation: none !important;
+    transition: none !important;
+  }
+}

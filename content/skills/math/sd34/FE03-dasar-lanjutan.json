@@ -1,0 +1,55 @@
+{
+  "id": "math.sd34.fe3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 3,
+  "title": "Tabel dan diagram — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 50],
+      "b": [10, 50],
+      "c": [10, 50],
+      "d": [10, 50],
+      "e": [10, 50]
+    },
+    "prompt": "Selisih pengunjung terbanyak dan tersedikit adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Pengunjung perpustakaan",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+        "values": ["=a", "=b", "=c", "=d", "=e"],
+        "unit": "orang"
+      }
+    ],
+    "answer": "max(a, b, c, d, e) - min(a, b, c, d, e)",
+    "unit": "orang",
+    "distractors": [
+      {
+        "expr": "max(a, b, c, d, e)",
+        "tag": "terbanyak"
+      },
+      {
+        "expr": "max(a, b, c, d, e) + min(a, b, c, d, e)",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "abs(a - e)",
+        "tag": "hari-pertama-terakhir"
+      }
+    ],
+    "choices": 4,
+    "explain": "Terbanyak {=max(a,b,c,d,e)}, tersedikit {=min(a,b,c,d,e)}. Selisihnya {answer}."
+  }
+}

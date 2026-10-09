@@ -707,6 +707,11 @@
   background: #fff;
   transform: rotateY(180deg);
   overflow: hidden;
+  container-type: inline-size;
+}
+.mem-front > * {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 .mem-front svg {
   max-width: 88%;
@@ -965,5 +970,581 @@
   .ws-board {
     width: calc(100% + 24px);
     margin-inline: -12px;
+  }
+}
+
+/* Kartu gambar pelajaran (D-079): ketuk → dibacakan; antrean; coba pilih/urut (tidak dinilai). */
+.picture-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+.picture-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: var(--kid-touch, 64px);
+  min-height: var(--kid-touch, 64px);
+  padding: 8px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  transition: transform 150ms;
+}
+.picture-card:hover {
+  transform: translateY(-3px);
+}
+.picture-card.is-on {
+  border-color: var(--kid-primary, #5b3fd6);
+  background: var(--kid-soft, #efe7ff);
+}
+.picture-card.is-right {
+  border-color: var(--kid-good, #2e9e5b);
+  background: #e9f7ef;
+  animation: mark-pop 420ms ease-out;
+}
+.picture-card.is-shake {
+  animation: soft-shake 360ms ease-in-out;
+}
+.picture-card:focus-visible {
+  outline: 4px solid var(--kid-sun, #f7c948);
+  outline-offset: 3px;
+}
+.picture-badge {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  height: 32px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+  background: var(--kid-sun, #f7c948);
+  font-weight: 900;
+  animation: mark-pop 420ms ease-out;
+}
+.queue-wrap {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+}
+.queue-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  color: var(--kid-ink, #1d1a2e);
+}
+.picture-cards.is-queue {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 6px;
+  padding-top: 12px;
+}
+.picture-cards.is-queue {
+  gap: 3px;
+}
+.picture-cards.is-queue .picture-card {
+  min-width: 64px;
+  min-height: 64px;
+  padding: 2px;
+  border-width: 3px;
+  border-radius: 16px;
+}
+/* Layar sempit: kartu pelajaran lebih rapat agar antrean 5 tetap satu baris dan ≥ 64 px. */
+@media (max-width: 420px) {
+  .lesson-card {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+/* Di bawah 380 px antrean boleh turun ke baris kedua (nomor urut tetap tampil). */
+@media (max-width: 379px) {
+  .picture-cards.is-queue {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .picture-card.is-right,
+  .picture-card.is-shake,
+  .picture-badge {
+    animation: none;
+  }
+}
+/* Soal pada "coba pilih/urut": baris kecil dalam panel lembut, dipisah dari kartu pilihan di bawahnya. */
+.picture-cards.is-stimulus {
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 10px 8px;
+  border: 3px dashed #c9c2e8;
+  border-radius: 20px;
+  background: var(--kid-soft, #efe7ff);
+  overflow-x: auto;
+}
+.picture-cards.is-stimulus .picture-card {
+  min-width: 64px;
+  min-height: 64px;
+  padding: 2px;
+  border-width: 3px;
+  box-shadow: none;
+}
+@media (max-width: 379px) {
+  .picture-cards.is-stimulus {
+    flex-wrap: wrap;
+  }
+}
+
+/* Lihat sekilas (P-MA-02, D-081): gambar soal ditutup kartu "?" setelah sebentar; "Lihat lagi" membukanya. */
+.item-stimulus.is-peek {
+  position: relative;
+}
+.item-stimulus.is-hidden .peek-content {
+  visibility: hidden;
+}
+.peek-cover {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  border: 4px dashed #c9c2e8;
+  border-radius: 20px;
+  background: var(--kid-soft, #efe7ff);
+  animation: peek-in 220ms ease-out;
+}
+.peek-mark {
+  font-size: 3.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--kid-primary, #5b3fd6);
+}
+.peek-again {
+  min-height: var(--kid-touch, 64px);
+}
+@keyframes peek-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .peek-cover {
+    animation: none;
+  }
+}
+
+/* Game "ketuk di wajah" pancaindra (D-089) */
+.face-pick {
+  position: relative;
+  width: min(100%, 360px);
+  margin: 0 auto;
+  aspect-ratio: 240 / 270;
+}
+.face-pick-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.face-spot {
+  position: absolute;
+  width: var(--spot, 64px);
+  height: var(--spot, 64px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 4px dashed rgba(91, 63, 214, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+.face-spot:hover:not(:disabled),
+.face-spot:focus-visible {
+  border-color: var(--kid-primary, #5b3fd6);
+  border-style: solid;
+  transform: translate(-50%, -50%) scale(1.06);
+  outline: none;
+}
+.face-spot.is-selected {
+  border-style: solid;
+  border-color: var(--kid-primary, #5b3fd6);
+}
+.face-spot.is-right,
+.face-spot.is-answer {
+  border: 5px solid var(--kid-good, #2e9e5b);
+  background: rgba(46, 158, 91, 0.16);
+}
+.face-spot.is-answer {
+  animation: face-spot-pulse 1.4s ease-in-out infinite;
+}
+.face-spot.is-wrong {
+  border: 5px solid #f3a64b;
+  background: rgba(243, 166, 75, 0.14);
+}
+.face-spot:disabled {
+  cursor: default;
+}
+@keyframes face-spot-pulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(91, 63, 214, 0.18);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .face-spot.is-answer {
+    animation: none;
+  }
+}
+
+/* Pelajaran interaktif (D-089): Video Momo, jelajah wajah, bacaan interaktif */
+.lesson-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.lesson-video {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.video-stage {
+  position: relative;
+  min-height: 300px;
+  border: 3px solid var(--kid-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 85% 18%, #fff6c4 0 34px, transparent 35px),
+    linear-gradient(#bfe7ff, #e9f7ff 62%, #c9efc0 62%, #a8e29b);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+}
+.video-art {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 18px 12px 6px;
+  flex-wrap: wrap;
+}
+.video-pic {
+  display: inline-flex;
+  filter: drop-shadow(0 6px 0 rgba(31, 26, 51, 0.12));
+}
+.move-muncul .video-pic {
+  animation: vid-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.move-zoom .video-pic {
+  animation: vid-zoom 5s ease-out both;
+}
+.move-goyang .video-pic {
+  animation:
+    vid-pop 0.5s ease-out both,
+    vid-wobble 1.6s ease-in-out 0.5s infinite;
+}
+.move-geser .video-pic {
+  animation: vid-slide 0.8s ease-out both;
+}
+.move-denyut .video-pic {
+  animation:
+    vid-pop 0.5s ease-out both,
+    vid-beat 1.2s ease-in-out 0.5s infinite;
+}
+.video-stage:not(.is-playing) .video-pic {
+  animation-play-state: paused;
+}
+.video-caption {
+  margin: 0;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 3px solid var(--kid-line);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  text-align: center;
+  animation: vid-caption 0.4s ease-out both;
+}
+.video-end {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  animation: vid-pop 0.6s ease-out both;
+}
+.video-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.video-controls .video-btn {
+  min-width: 64px;
+  min-height: 64px;
+  flex: 0 1 96px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 10px;
+}
+.video-controls .video-play {
+  flex-basis: 120px;
+}
+.video-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.video-dots button {
+  width: 34px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid var(--kid-line);
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+.video-dots button::before {
+  content: '';
+  position: absolute;
+  inset: -16px -2px;
+}
+.video-dots button.is-past {
+  background: #b9a8f5;
+}
+.video-dots button.is-on {
+  background: var(--kid-primary);
+}
+@keyframes vid-pop {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+@keyframes vid-zoom {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+@keyframes vid-wobble {
+  50% {
+    transform: rotate(-6deg) translateY(-6px);
+  }
+}
+@keyframes vid-slide {
+  from {
+    transform: translateX(-60px);
+    opacity: 0;
+  }
+}
+@keyframes vid-beat {
+  50% {
+    transform: scale(1.08);
+  }
+}
+@keyframes vid-caption {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+.lesson-explore {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) {
+  .lesson-explore {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+.face-spot.is-new {
+  animation: face-spot-pulse 1.8s ease-in-out infinite;
+}
+.face-spot.is-seen {
+  border-style: solid;
+  border-color: rgba(46, 158, 91, 0.75);
+}
+.explore-count {
+  margin: 0;
+  font-weight: 800;
+}
+.explore-chips {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+.explore-chips span {
+  border: 2px solid #d9d3ea;
+  border-radius: 14px;
+  padding: 4px;
+  opacity: 0.45;
+  background: #fff;
+}
+.explore-chips span.is-on {
+  opacity: 1;
+  border-color: var(--kid-good);
+}
+.explore-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  border: 3px solid var(--kid-line);
+  border-radius: 20px;
+  background: #fff;
+  padding: 12px;
+  animation: vid-pop 0.4s ease-out both;
+}
+.explore-card strong {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+}
+.explore-card p {
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+.explore-examples {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.explore-example {
+  min-width: 72px;
+  min-height: 72px;
+  border: 2px solid #d9d3ea;
+  border-radius: 16px;
+  background: #fffaf0;
+  cursor: pointer;
+}
+.explore-hint {
+  font-weight: 700;
+  color: #5d567a;
+}
+
+.lesson-read {
+  display: grid;
+  gap: 10px;
+}
+.read-all {
+  justify-self: start;
+  min-height: 56px;
+}
+.read-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.read-line {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  border: 3px solid #d9d3ea;
+  border-radius: 18px;
+  background: #fff;
+  padding: 8px 12px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  cursor: pointer;
+  color: inherit;
+}
+.read-line.is-on {
+  border-color: var(--kid-primary);
+  background: #f3efff;
+  box-shadow: 0 4px 0 var(--kid-primary);
+}
+.read-pic {
+  flex: none;
+  display: inline-flex;
+}
+@media (prefers-reduced-motion: reduce) {
+  .video-pic,
+  .video-caption,
+  .video-end,
+  .explore-card,
+  .face-spot.is-new {
+    animation: none !important;
+  }
+}
+
+/* Video Momo: adegan contoh soal (D-090) — soal asli, tidak bisa diketuk, jawaban disorot setelah dibacakan. */
+.video-stage.has-example {
+  background: linear-gradient(#f3efff, #fffaf0);
+  overflow: visible;
+}
+.video-example {
+  position: relative;
+  padding: 40px 10px 10px;
+  min-width: 0;
+  animation: vid-pop 0.5s ease-out both;
+}
+.video-example .item-prompt {
+  display: none;
+}
+.video-example .item {
+  pointer-events: none;
+}
+.video-badge {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 14px;
+  border-radius: 999px;
+  background: var(--kid-primary);
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.video-example.is-revealed .video-badge {
+  background: var(--kid-good);
+}
+.lesson-try {
+  min-width: 0;
+}
+
+/* Isi kartu pelajaran tidak boleh lebih lebar dari kartunya (pilihan soal turun baris, D-090). */
+.lesson-card > * {
+  max-width: 100%;
+  min-width: 0;
+}
+.lesson-card > .lesson-video,
+.lesson-card > .lesson-try,
+.lesson-card > .lesson-explore,
+.lesson-card > .lesson-read {
+  width: 100%;
+}
+.lesson-try .item,
+.video-example .item {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 420px) {
+  .video-example {
+    padding: 40px 2px 8px;
   }
 }

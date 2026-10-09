@@ -1,0 +1,45 @@
+{
+  "id": "math.sd56.fg3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 3,
+  "title": "Perbandingan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": {
+        "values": [100000, 200000, 250000, 500000, 1000000, 1500000, 2000000]
+      },
+      "j": [2, 15]
+    },
+    "prompt": "Skala peta 1 : {s}. Jarak dua kota pada peta {j} cm. Jarak sebenarnya adalah … km.",
+    "answer": "j * s / 100000",
+    "unit": "km",
+    "distractors": [
+      {
+        "expr": "j * s / 10000",
+        "tag": "konversi-kurang"
+      },
+      {
+        "expr": "j * s / 1000",
+        "tag": "cm-ke-m"
+      },
+      {
+        "expr": "j * s / 1000000",
+        "tag": "konversi-lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "{j} × {s} = {=j*s} cm. 1 km = 100.000 cm, jadi {answer}."
+  }
+}

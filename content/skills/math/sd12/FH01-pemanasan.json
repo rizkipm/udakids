@@ -1,0 +1,50 @@
+{
+  "id": "math.sd12.fh1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 1,
+  "title": "Aritmetika sosial — Level 1 — Pemanasan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [5, 45],
+      "y": [5, 45]
+    },
+    "derived": {
+      "hx": "x * 100",
+      "hy": "y * 100"
+    },
+    "words": {
+      "b1": ["pensil", "penghapus", "rautan", "permen jahe"],
+      "b2": ["buku tulis", "penggaris", "spidol", "kerupuk"]
+    },
+    "prompt": "Harga {b1} Rp{hx} dan harga {b2} Rp{hy}. Jumlah harga keduanya Rp …",
+    "answer": "hx + hy",
+    "distractors": [
+      {
+        "expr": "hx + hy + 100",
+        "tag": "lebih-100"
+      },
+      {
+        "expr": "hx + hy - 100",
+        "tag": "kurang-100"
+      },
+      {
+        "expr": "hx + hy + 1000",
+        "tag": "lebih-1000"
+      }
+    ],
+    "choices": 4,
+    "explain": "Rp{hx} + Rp{hy} = Rp{answer}."
+  }
+}

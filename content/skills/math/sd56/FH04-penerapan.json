@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fh4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 4,
+  "title": "Statistika sederhana — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "f1": [1, 4],
+      "f2": [1, 4],
+      "f3": [1, 4]
+    },
+    "derived": {
+      "f4": "10 - f1 - f2 - f3"
+    },
+    "constraint": "f4 >= 1",
+    "prompt": "Tabel menunjukkan nilai tes 10 siswa. Rata-rata nilai mereka adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Nilai", "60", "70", "80", "90"],
+        "rows": [["Frekuensi", "=f1", "=f2", "=f3", "=f4"]]
+      }
+    ],
+    "answer": "6 * f1 + 7 * f2 + 8 * f3 + 9 * f4",
+    "distractors": [
+      {
+        "expr": "75",
+        "tag": "rata-rata-nilai-saja"
+      },
+      {
+        "expr": "(60 * f1 + 70 * f2 + 80 * f3 + 90 * f4) / 4",
+        "tag": "bagi-4"
+      },
+      {
+        "expr": "60 * f1 + 70 * f2 + 80 * f3 + 90 * f4",
+        "tag": "jumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah nilai 60 × {f1} + 70 × {f2} + 80 × {f3} + 90 × {f4} = {=60*f1+70*f2+80*f3+90*f4}. Dibagi 10 siswa: {answer}."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "math.sd34.fb3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 3,
+  "title": "Pecahan sederhana — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 8],
+      "b": [2, 9],
+      "c": [1, 8],
+      "d": [2, 9]
+    },
+    "constraint": "a < b && c < d && b != d && gcd(a, b) == 1 && gcd(c, d) == 1",
+    "prompt": "Tanda yang tepat untuk {a}/{b} … {c}/{d} adalah …",
+    "answer": "(a * d > c * b) * 1 + (a * d < c * b) * 2 + (a * d == c * b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "distractors": [],
+    "explain": "Kali silang: {a} × {d} = {=a*d} dan {c} × {b} = {=c*b}. Jadi {a}/{b} {answer} {c}/{d}."
+  }
+}

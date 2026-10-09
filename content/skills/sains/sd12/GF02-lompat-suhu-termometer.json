@@ -1,0 +1,57 @@
+{
+  "id": "sains.sd12.gf2.lompat-suhu-termometer",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd12",
+  "category": "GF",
+  "order": 2,
+  "title": "Game Final KMSI — Level 2 — Lompat suhu termometer naik dan turun",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "game": "lompat",
+    "olimpiade": "game",
+    "kognitif": "applying",
+    "kisi-kisi": "Pengukuran dan suhu"
+  },
+  "family": "hop-game",
+  "params": {
+    "style": "steps",
+    "mode": "add",
+    "board": [20, 40],
+    "boardStep": 1,
+    "start": [20, 30],
+    "hops": [2, 6],
+    "prompt": "Termometer menunjukkan {start} °C. Suhunya naik {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+    "say": "Termometer menunjukkan {start} derajat Celsius. Suhunya naik {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+    "reteach": "Naik {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+  },
+  "bands": [
+    {
+      "mode": "add",
+      "board": [20, 35],
+      "start": [20, 30],
+      "hops": [2, 4]
+    },
+    {
+      "mode": "sub",
+      "board": [20, 40],
+      "start": [28, 40],
+      "hops": [3, 6],
+      "prompt": "Termometer menunjukkan {start} °C. Suhunya turun {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+      "say": "Termometer menunjukkan {start} derajat Celsius. Suhunya turun {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+      "reteach": "Turun {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+    },
+    {
+      "mode": "skip",
+      "board": [0, 40],
+      "boardStep": 2,
+      "step": 2,
+      "start": [10, 26],
+      "hops": [3, 5],
+      "prompt": "Termometer menunjukkan {start} °C. Suhunya naik {step} °C setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+      "say": "Termometer menunjukkan {start} derajat Celsius. Suhunya naik {step} derajat setiap menit. Ketuk suhunya pada {n} menit berikutnya.",
+      "reteach": "Naik {step} derajat tiap menit: {list}. Suhu akhirnya {end} derajat Celsius."
+    }
+  ]
+}

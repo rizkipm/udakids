@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fg8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FG",
+  "order": 8,
+  "title": "Pola dan deret bilangan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [6, 12],
+      "a": [1, 20],
+      "d": [2, 6]
+    },
+    "prompt": "Hasil {a} + {=a+d} + {=a+2*d} + … + {=a+(n-1)*d} adalah …",
+    "answer": "n * (2 * a + (n - 1) * d) / 2",
+    "distractors": [
+      {
+        "expr": "a + (n - 1) * d",
+        "tag": "suku-terakhir"
+      },
+      {
+        "expr": "(n - 1) * (2 * a + (n - 2) * d) / 2",
+        "tag": "kurang-satu-suku"
+      },
+      {
+        "expr": "n * (2 * a + (n - 1) * d)",
+        "tag": "lupa-dibagi-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "Ada ({=a+(n-1)*d} − {a}) : {d} + 1 = {n} suku. Pasangkan awal dan akhir: {=2*a+(n-1)*d} × {n} : 2 = {answer}."
+  }
+}

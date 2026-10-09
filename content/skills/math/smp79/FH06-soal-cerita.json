@@ -1,0 +1,54 @@
+{
+  "id": "math.smp79.fh6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 6,
+  "title": "Statistika dan peluang — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [3, 9],
+      "b": [2, 9]
+    },
+    "prompt": "Kantong berisi {m} kelereng merah dan {b} kelereng biru. Diambil 2 kelereng sekaligus secara acak. Peluang keduanya merah adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "m * (m - 1)",
+      "den": "(m + b) * (m + b - 1)"
+    },
+    "distractors": [
+      {
+        "num": "(m * m) / gcd(m * m, (m + b) * (m + b))",
+        "den": "((m + b) * (m + b)) / gcd(m * m, (m + b) * (m + b))",
+        "tag": "dikembalikan"
+      },
+      {
+        "num": "(m) / gcd(m, m + b)",
+        "den": "(m + b) / gcd(m, m + b)",
+        "tag": "sekali-ambil"
+      },
+      {
+        "num": "(m * (m - 1)) / gcd(m * (m - 1), (m + b) * (m + b))",
+        "den": "((m + b) * (m + b)) / gcd(m * (m - 1), (m + b) * (m + b))",
+        "tag": "penyebut-tetap"
+      },
+      {
+        "num": "(2) / gcd(2, m + b)",
+        "den": "(m + b) / gcd(2, m + b)",
+        "tag": "dua-dari-semua"
+      }
+    ],
+    "choices": 4,
+    "explain": "Cara mengambil 2 merah = {=m*(m-1)/2}. Semua cara mengambil 2 kelereng = {=(m+b)*(m+b-1)/2}. Peluang = {answer}."
+  }
+}

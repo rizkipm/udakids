@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.fg4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 4,
+  "title": "Perbandingan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [6, 30],
+      "h": [10, 40],
+      "k": [2, 10]
+    },
+    "constraint": "h > k + 2 && (a * h) % (h - k) == 0",
+    "prompt": "Sebuah pekerjaan dapat diselesaikan {a} pekerja dalam {h} hari. Agar selesai {k} hari lebih cepat, banyak pekerja tambahan yang diperlukan …",
+    "answer": "a * h / (h - k) - a",
+    "distractors": [
+      {
+        "expr": "a * h / (h - k)",
+        "tag": "total-pekerja"
+      },
+      {
+        "expr": "k",
+        "tag": "sama-dengan-hari"
+      },
+      {
+        "expr": "a * (h + k) / h - a",
+        "tag": "senilai"
+      }
+    ],
+    "choices": 4,
+    "explain": "Pekerjaan = {a} × {h} = {=a*h} pekerja-hari. Dalam {=h-k} hari perlu {=a*h} : {=h-k} = {=a*h/(h-k)} pekerja. Tambahannya {answer}."
+  }
+}

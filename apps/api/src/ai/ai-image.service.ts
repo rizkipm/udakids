@@ -15,8 +15,10 @@ import {
   AI_STYLE_GUIDE,
   AI_STYLE_VERSION,
   composeImagePrompt,
+  aiStyleGuideFor,
   estimateImageCost,
   textCost,
+  claudeCost,
   type AiImageRequest,
   type AiImageSettings,
   type AiImageStatus,
@@ -30,9 +32,19 @@ import { MailService } from '../mail/mail.service.js';
 import { aiNotice } from '../mail/templates.js';
 import { SettingsService } from '../settings/settings.service.js';
 import { IMAGE_PROVIDER, OpenAiImages, type ImageProviderFactory } from './openai.provider.js';
+import {
+  ClaudePromptWriter,
+  PROMPT_WRITER,
+  safeClaudeError,
+  type PromptWriterFactory,
+} from './claude.provider.js';
 
 /** Baris app_settings untuk API key OpenAI (terenkripsi AES-256-GCM, D-043/D-068). */
 export const AI_KEY_SETTING = 'ai_key';
+/** Kunci Claude untuk penulis prompt (D-092), terenkripsi seperti kunci OpenAI. */
+export const CLAUDE_KEY_SETTING = 'ai_claude_key';
+const MOMO_SENTENCE =
+  'Include Momo, the small friendly robot from the reference image, unchanged in shape and colors.';
 /** Subjek karakter Momo — gambar referensinya dipakai ulang untuk semua adegan bersama Momo. */
 export const MOMO_SUBJECT = 'momo';
 
@@ -78,7 +90,123 @@ export class AiImageService {
     private readonly settings: SettingsService,
     private readonly mail: MailService,
     @Optional() @Inject(IMAGE_PROVIDER) private readonly factory: ImageProviderFactory | null,
+    @Optional()
+    @Inject(PROMPT_WRITER)
+    private readonly writerFactory: PromptWriterFactory | null = null,
   ) {}
+
+  // ------------------------------------------------------------------ kunci Claude (D-092)
+
+  private cachedClaude?: { at: number; key: string | null; info: Sealed | null };
+
+  private async loadClaudeKey() {
+    if (this.cachedClaude && Date.now() - this.cachedClaude.at < 30_000) return this.cachedClaude;
+    const [row] = await this.db
+      .select()
+      .from(appSettings)
+      .where(eq(appSettings.key, CLAUDE_KEY_SETTING));
+    const info = (row?.value as Sealed | undefined) ?? null;
+    this.cachedClaude = { at: Date.now(), key: open(info), info };
+    return this.cachedClaude;
+  }
+
+  /** Kunci Claude aktif: `.env` (ANTHROPIC_API_KEY) lebih dulu, lalu kunci dari admin. */
+  private async claudeKey(): Promise<string | null> {
+    const env = process.env.ANTHROPIC_API_KEY?.trim();
+    if (env) return env;
+    return (await this.loadClaudeKey()).key;
+  }
+
+  private async promptWriter() {
+    const key = await this.claudeKey();
+    if (!key) return null;
+    return this.writerFactory ? this.writerFactory(key) : new ClaudePromptWriter(key);
+  }
+
+  async claudeKeyInfo() {
+    if (process.env.ANTHROPIC_API_KEY?.trim())
+      return { source: 'env' as const, last4: null, updatedAt: null, unreadable: false };
+    const { key, info } = await this.loadClaudeKey();
+    if (key && info)
+      return {
+        source: 'admin' as const,
+        last4: info.last4,
+        updatedAt: info.updatedAt,
+        unreadable: false,
+      };
+    return { source: null, last4: null, updatedAt: null, unreadable: !!info && !key };
+  }
+
+  async setClaudeKey(apiKey: string, userId: string) {
+    const value = seal(apiKey);
+    await this.db
+      .insert(appSettings)
+      .values({ key: CLAUDE_KEY_SETTING, value, updatedBy: userId })
+      .onConflictDoUpdate({
+        target: appSettings.key,
+        set: { value, updatedBy: userId, updatedAt: new Date() },
+      });
+    this.cachedClaude = undefined;
+    await this.audit('claude-key-set', userId, { detail: `…${value.last4}` });
+    await this.notify('kunci Claude diganti', userId, `Kunci baru berakhiran …${value.last4}.`);
+  }
+
+  async clearClaudeKey(userId: string) {
+    await this.db.delete(appSettings).where(eq(appSettings.key, CLAUDE_KEY_SETTING));
+    this.cachedClaude = undefined;
+    await this.audit('claude-key-clear', userId);
+    await this.notify(
+      'kunci Claude dihapus',
+      userId,
+      'Prompt gambar kembali memakai prompt bawaan.',
+    );
+  }
+
+  async testClaudeKey(): Promise<{ ok: boolean; message: string }> {
+    const writer = await this.promptWriter();
+    if (!writer) return { ok: false, message: 'Belum ada API key Claude' };
+    const s = await this.settings.get('ai_image');
+    try {
+      return { ok: true, message: await writer.test(s.claudeModel) };
+    } catch (err) {
+      return { ok: false, message: safeClaudeError(err) };
+    }
+  }
+
+  /**
+   * Prompt gambar: ditulis Claude bila diaktifkan (D-092), selain itu prompt bawaan. Bila Claude gagal atau
+   * menolak, prompt bawaan tetap dipakai (gambar tetap bisa dibuat) dan kegagalannya dicatat.
+   */
+  private async imagePrompt(r: AiImageRequest, s: AiImageSettings, userId: string) {
+    const base = composeImagePrompt(r);
+    if (s.promptWriter !== 'claude') return { prompt: base, claudeUsd: 0 };
+    const writer = await this.promptWriter();
+    if (!writer) return { prompt: base, claudeUsd: 0 };
+    try {
+      const out = await writer.write(r, aiStyleGuideFor(r), s.claudeModel);
+      const usd = claudeCost(s, out.usage);
+      await this.audit('prompt', userId, {
+        model: s.claudeModel,
+        costUsd: usd,
+        inputTokens: out.usage.input + out.usage.cachedRead + out.usage.cacheWrite,
+        cachedTokens: out.usage.cachedRead,
+        outputTokens: out.usage.output,
+        detail: `${r.kind}:${r.subject}#${r.variant}`,
+      });
+      return { prompt: r.withMomo ? `${out.prompt} ${MOMO_SENTENCE}` : out.prompt, claudeUsd: usd };
+    } catch (err) {
+      const message = safeClaudeError(err);
+      this.log.warn(`prompt Claude ${r.subject} gagal, pakai prompt bawaan: ${message}`);
+      await this.db.insert(aiUsage).values({
+        action: 'prompt',
+        ok: false,
+        createdBy: userId,
+        model: s.claudeModel,
+        detail: message,
+      });
+      return { prompt: base, claudeUsd: 0 };
+    }
+  }
 
   // ------------------------------------------------------------------ kunci
 
@@ -260,6 +388,9 @@ export class AiImageService {
       estimate: estimateImageCost(settings),
       images: Object.fromEntries(counts.map((c) => [c.status, c.n])),
       momoReady: !!momo,
+      // Penulis prompt Claude (D-092): info kunci (tanpa kunci itu sendiri) & siap dipakai.
+      claudeKey: await this.claudeKeyInfo(),
+      claudeReady: !!(await this.claudeKey()),
       styleGuide: AI_STYLE_GUIDE,
       recent: recent.map((r) => ({ ...r, createdAt: r.createdAt.toISOString() })),
     };
@@ -302,7 +433,11 @@ export class AiImageService {
     return row ?? null;
   }
 
-  /** Sidik jari: semua hal yang memengaruhi hasil gambar. Permintaan sama = gambar sama (dipakai ulang). */
+  /**
+   * Sidik jari: semua hal yang memengaruhi hasil gambar. Permintaan sama = gambar sama (dipakai ulang dari
+   * database tanpa memanggil Claude maupun OpenAI). Penulis prompt (Claude/bawaan, D-092) sengaja TIDAK ikut,
+   * supaya mengaktifkan Claude tidak membuat ulang gambar yang sudah ada.
+   */
   static fingerprint(r: AiImageRequest, s: AiImageSettings, referenceFp: string | null) {
     const model = s.mode === 'responses' ? `${s.textModel}+${s.imageModel}` : s.imageModel;
     return createHash('sha256')
@@ -316,6 +451,8 @@ export class AiImageService {
           r.theme ?? '',
           r.note ?? '',
           r.variant,
+          // Gaya foto (D-088) ikut sidik jari; gaya ilustrasi tidak ditambahkan agar sidik jari lama tetap.
+          ...(r.style === 'foto' ? ['foto'] : []),
           s.mode,
           model,
           s.quality,
@@ -368,12 +505,13 @@ export class AiImageService {
     if (!provider) throw new ServiceUnavailableException('API key OpenAI belum diisi');
     const estimate = estimateImageCost(s);
     await this.assertBudget(s, estimate);
-    const prompt = composeImagePrompt(r);
+    const { prompt, claudeUsd } = await this.imagePrompt(r, s, userId);
     const model = s.mode === 'responses' ? `${s.textModel}+${s.imageModel}` : s.imageModel;
     let out;
     try {
       out = await provider.generate({
         prompt,
+        styleGuide: aiStyleGuideFor(r),
         settings: s,
         ...(ref && { reference: { mime: ref.mime, data: ref.data } }),
       });
@@ -389,6 +527,7 @@ export class AiImageService {
         : s.quality === 'medium'
           ? s.price.imageMedium
           : s.price.imageHigh;
+    // Biaya prompt Claude dicatat di baris audit "prompt"; biaya gambar = gambar + teks OpenAI.
     const cost = imagePrice + (out.usage ? textCost(s, out.usage) : 0);
     const row = {
       fingerprint: fp,
@@ -425,7 +564,7 @@ export class AiImageService {
       outputTokens: out.usage?.output ?? null,
       detail: `${r.kind}:${r.subject}#${r.variant}`,
     });
-    return { reused: false, costUsd: cost, image: imageView(saved!) };
+    return { reused: false, costUsd: cost + claudeUsd, image: imageView(saved!) };
   }
 
   async list(q: { status?: AiImageStatus; subject?: string; page: number }) {

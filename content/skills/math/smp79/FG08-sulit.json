@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.fg8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 8,
+  "title": "Perbandingan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [6, 24],
+      "b": [4, 24],
+      "x": [1, 5]
+    },
+    "constraint": "a != b && (a * x) % b == 0 && a - x - a * x / b > 0",
+    "prompt": "Bak mandi dapat diisi penuh oleh keran A dalam {a} jam atau oleh keran B dalam {b} jam. Mula-mula kedua keran dibuka bersama selama {x} jam, lalu keran B ditutup. Sisa bak dipenuhi keran A dalam … jam.",
+    "answer": "a - x - a * x / b",
+    "distractors": [
+      {
+        "expr": "a - x",
+        "tag": "lupa-keran-b"
+      },
+      {
+        "expr": "a - a * x / b",
+        "tag": "lupa-keran-a"
+      },
+      {
+        "expr": "a * b / (a + b)",
+        "tag": "waktu-bersama"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dalam {x} jam terisi {x}/{a} + {x}/{b} bagian. Sisanya diisi A: {a} × (1 − {x}/{a} − {x}/{b}) = {a} − {x} − {=a*x/b} = {answer} jam."
+  }
+}

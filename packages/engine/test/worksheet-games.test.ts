@@ -11,9 +11,6 @@ import {
   GLYPHS,
   isLetterGlyph,
   lessonScreenSchema,
-  groupStartCodes,
-  levelStatuses,
-  standaloneCodes,
   LETTER_GLYPH_IDS,
   mazeDeadEnds,
   mazeMove,
@@ -359,45 +356,9 @@ describe('pelajaran huruf (P-BT-04/05)', () => {
       }),
     ).toBe(false);
     expect(ok({ jenis: 'coba', mode: 'tebal', huruf: ['a', 'I'] })).toBe(true);
-    expect(ok({ jenis: 'coba', mode: 'tebal', huruf: ['b'] })).toBe(false);
+    expect(ok({ jenis: 'coba', mode: 'tebal', huruf: ['b', 'Z'] })).toBe(true);
     expect(ok({ jenis: 'coba', mode: 'cari', huruf: ['u'] })).toBe(true);
     expect(ok({ jenis: 'coba', mode: 'cari', angka: [1] })).toBe(false);
     expect(ok({ jenis: 'coba', mode: 'hitung', huruf: ['a'], gambar: ['ayam'] })).toBe(false);
-  });
-});
-
-describe('bagian (group) memulai rantai kunci baru', () => {
-  const cats = [
-    { code: 'A', group: 'Berhitung' },
-    { code: 'B', group: 'Berhitung', standalone: true },
-    { code: 'C', group: 'Baca Tulis' },
-    { code: 'D', group: 'Baca Tulis' },
-    { code: 'E', group: 'Baca Tulis', standalone: true },
-  ];
-  const nodes = cats.flatMap((c) =>
-    [1, 2].map((order) => ({ id: `${c.code}${order}`, category: c.code, order })),
-  );
-  it('Baca Tulis terbuka sejak awal; D tetap menunggu Level 1 C', () => {
-    expect([...groupStartCodes(cats)]).toEqual(['C']);
-    const st = levelStatuses(
-      cats.map((c) => c.code),
-      nodes,
-      {},
-      standaloneCodes(cats),
-      groupStartCodes(cats),
-    );
-    expect(st).toMatchObject({
-      A1: 'open',
-      A2: 'locked',
-      B1: 'open',
-      C1: 'open',
-      D1: 'locked',
-      E1: 'open',
-    });
-    // Tanpa bagian: perilaku lama (C menunggu A).
-    expect(levelStatuses(['A', 'C'], nodes, {}).C1).toBe('locked');
-    expect(groupStartCodes([{ code: 'A' }, { code: 'B', group: 'X', standalone: true }]).size).toBe(
-      0,
-    );
   });
 });

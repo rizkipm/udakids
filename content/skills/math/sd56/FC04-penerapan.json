@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fc4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 4,
+  "title": "Aritmetika sosial — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "range": [1000000, 10000000],
+        "step": 500000
+      },
+      "r": {
+        "values": [6, 8, 9, 10, 12, 15, 18]
+      },
+      "n": {
+        "values": [3, 4, 6, 8, 9, 10]
+      }
+    },
+    "words": {
+      "nama": ["Raka", "Sinta", "Bima", "Ayu", "Dimas", "Nadia", "Fajar", "Laras", "Yusuf", "Wulan"]
+    },
+    "constraint": "(m * r * n) % 1200 == 0",
+    "prompt": "{nama} menabung Rp{m} di bank dengan bunga tunggal {r}% per tahun. Bunga yang diterima setelah {n} bulan adalah Rp…",
+    "answer": "m * r * n / 1200",
+    "distractors": [
+      {
+        "expr": "m * r / 100",
+        "tag": "bunga-setahun"
+      },
+      {
+        "expr": "m * r * n / 100",
+        "tag": "bulan-jadi-tahun"
+      },
+      {
+        "expr": "m + m * r * n / 1200",
+        "tag": "saldo-akhir"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bunga setahun {r}% × Rp{m} = Rp{=m*r/100}. Untuk {n} bulan: {n}/12 × Rp{=m*r/100} = Rp{answer}."
+  }
+}

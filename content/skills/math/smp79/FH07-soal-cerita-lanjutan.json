@@ -1,0 +1,60 @@
+{
+  "id": "math.smp79.fh7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 7,
+  "title": "Statistika dan peluang — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [10, 34],
+      "r": [60, 80],
+      "k": [2, 6],
+      "j": [1, 3]
+    },
+    "derived": {
+      "qq": "r + j * (n + k) / k"
+    },
+    "constraint": "(j * (n + k)) % k == 0 && qq <= 100",
+    "prompt": "Tabel menunjukkan rata-rata nilai kelas sebelum dan sesudah siswa baru bergabung. Rata-rata nilai siswa baru adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Rata-rata nilai kelas",
+        "headers": ["Kelompok", "Banyak siswa", "Rata-rata"],
+        "rows": [
+          ["Kelas awal", "=n", "=r"],
+          ["Siswa baru", "=k", "?"],
+          ["Gabungan", "=n+k", "=r+j"]
+        ]
+      }
+    ],
+    "answer": "qq",
+    "distractors": [
+      {
+        "expr": "r + j",
+        "tag": "rata-gabungan"
+      },
+      {
+        "expr": "r + 2 * j",
+        "tag": "rata-dua"
+      },
+      {
+        "expr": "qq - j",
+        "tag": "kurang-j"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah nilai gabungan {=n+k} × {=r+j} = {=(n+k)*(r+j)}. Jumlah nilai awal {n} × {r} = {=n*r}. Siswa baru: ({=(n+k)*(r+j)} − {=n*r}) : {k} = {answer}."
+  }
+}

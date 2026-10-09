@@ -2,6 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { AiImageSettings } from '@little-coder/engine';
 import type { ImageProvider } from '../src/ai/openai.provider.js';
 import { safeError } from '../src/ai/openai.provider.js';
+import type { PromptWriter } from '../src/ai/claude.provider.js';
 import { dbAvailable, startApp } from './e2e-setup.js';
 
 /** AI Gambar di admin (D-068) dengan penyedia palsu — tidak ada panggilan OpenAI berbayar. */
@@ -29,6 +30,24 @@ const fakeFactory = (key: string): ImageProvider => ({
   },
 });
 
+/** Penulis prompt Claude palsu (D-092) — tidak ada panggilan Claude berbayar. */
+const CLAUDE_KEY = 'sk-ant-api03-TESTKEY1234567890abcdCLDE';
+const writes: { subject: string; style: string; guide: string; model: string; key: string }[] = [];
+let claudeFails = false;
+const fakeWriter = (key: string): PromptWriter => ({
+  async write(r, styleGuide, model) {
+    if (claudeFails) throw new Error(`Claude down ${key}`);
+    writes.push({ subject: r.subject, style: r.style, guide: styleGuide, model, key });
+    return {
+      prompt: `A realistic photo of a ripe Indonesian ${r.label}, plain light background.`,
+      usage: { input: 300, cachedRead: 1500, cacheWrite: 0, output: 900 },
+    };
+  },
+  async test(model) {
+    return `Berhasil: ${model}`;
+  },
+});
+
 describe.skipIf(!up)('AI Gambar (e2e)', () => {
   let ctx: Awaited<ReturnType<typeof startApp>>;
   const http = () => ctx.http();
@@ -37,7 +56,8 @@ describe.skipIf(!up)('AI Gambar (e2e)', () => {
 
   beforeAll(async () => {
     delete process.env.OPENAI_API_KEY;
-    ctx = await startApp(URL, { image: fakeFactory });
+    delete process.env.ANTHROPIC_API_KEY;
+    ctx = await startApp(URL, { image: fakeFactory, promptWriter: fakeWriter });
   }, 120_000);
   afterAll(async () => {
     await ctx?.close();
@@ -114,6 +134,9 @@ describe.skipIf(!up)('AI Gambar (e2e)', () => {
 
   it('gambar belum disetujui tidak dilayani publik; setelah disetujui dicache permanen', async () => {
     const [img] = (await http().get('/admin/ai/images?subject=apel').set(admin()).expect(200)).body;
+    // Halaman admin menambah penanda muat ulang `r`; kunci lain tetap ditolak.
+    await http().get('/admin/ai/images?status=review&r=3').set(admin()).expect(200);
+    await http().get('/admin/ai/images?status=review&x=1').set(admin()).expect(400);
     await http().get(`/pictures/${img.id}`).expect(404);
     const f = await http().get(`/admin/ai/images/${img.id}/file`).set(admin()).expect(200);
     expect(f.headers['cache-control']).toBe('private, no-store');
@@ -157,6 +180,93 @@ describe.skipIf(!up)('AI Gambar (e2e)', () => {
     const rows = await ctx.pool.query('select detail from ai_usage where not ok');
     expect(rows.rows[0].detail).not.toContain(KEY);
     expect(rows.rows[0].detail).toContain('sk-…');
+  });
+
+  it('Claude menulis prompt, OpenAI menggambar (D-092); gagal → prompt bawaan', async () => {
+    // Kunci Claude: format sk-ant-, sandi admin wajib, tidak pernah dikirim balik.
+    await http()
+      .put('/admin/ai/claude-key')
+      .set(admin())
+      .send({ apiKey: KEY, password: 'admin12345' })
+      .expect(400);
+    await http()
+      .put('/admin/ai/claude-key')
+      .set(admin())
+      .send({ apiKey: CLAUDE_KEY, password: 'keliru' })
+      .expect(403);
+    const k = await http()
+      .put('/admin/ai/claude-key')
+      .set(admin())
+      .send({ apiKey: CLAUDE_KEY, password: 'admin12345' })
+      .expect(200);
+    expect(k.body).toMatchObject({ source: 'admin', last4: 'CLDE' });
+    expect(JSON.stringify(k.body)).not.toContain('TESTKEY');
+    expect((await http().post('/admin/ai/claude-key/test').set(admin()).expect(200)).body).toEqual({
+      ok: true,
+      message: 'Berhasil: claude-opus-5-5',
+    });
+    // Aktifkan penulis prompt Claude.
+    const o = (await http().get('/admin/ai').set(admin()).expect(200)).body;
+    // Bawaan: Claude menulis prompt (D-092).
+    expect(o).toMatchObject({ claudeReady: true, settings: { promptWriter: 'claude' } });
+    await http()
+      .put('/admin/ai/settings')
+      .set(admin())
+      .send({ settings: { ...o.settings, promptWriter: 'claude' }, password: 'admin12345' })
+      .expect(200);
+    const foto = { kind: 'object', subject: 'foto-contoh-apel', label: 'apel', style: 'foto' };
+    const made = await http().post('/admin/ai/images').set(admin()).send(foto).expect(200);
+    expect(made.body.reused).toBe(false);
+    expect(writes.at(-1)).toMatchObject({
+      subject: 'foto-contoh-apel',
+      style: 'foto',
+      model: 'claude-opus-5-5',
+      key: CLAUDE_KEY,
+    });
+    expect(writes.at(-1)!.guide).toMatch(/realistic photo/);
+    // Permintaan yang sama: gambar diambil dari database — Claude & OpenAI tidak dipanggil lagi, tanpa biaya.
+    const nWrites = writes.length;
+    const nCalls = calls.length;
+    const again = await http().post('/admin/ai/images').set(admin()).send(foto).expect(200);
+    expect(again.body).toMatchObject({
+      reused: true,
+      costUsd: 0,
+      image: { id: made.body.image.id },
+    });
+    expect([writes.length, calls.length]).toEqual([nWrites, nCalls]);
+    // Gambar yang sudah ada sebelum Claude aktif juga dipakai ulang (penulis prompt tidak ikut sidik jari).
+    const old = await http().post('/admin/ai/images').set(admin()).send(apel).expect(200);
+    expect(old.body.reused).toBe(true);
+    expect(writes.length).toBe(nWrites);
+    // OpenAI menerima prompt tulisan Claude; prompt tersimpan untuk review admin.
+    expect(calls.at(-1)!.prompt).toBe(
+      'A realistic photo of a ripe Indonesian apel, plain light background.',
+    );
+    // Biaya Claude dicatat di audit "prompt" dan ikut dijumlahkan.
+    const usage = await ctx.pool.query(
+      "select model, cost_usd, cached_tokens from ai_usage where action = 'prompt' order by created_at desc limit 1",
+    );
+    expect(usage.rows[0]).toMatchObject({ model: 'claude-opus-5-5', cached_tokens: 1500 });
+    expect(Number(usage.rows[0].cost_usd)).toBeGreaterThan(0);
+    // Claude gagal → gambar tetap dibuat dengan prompt bawaan; kunci tidak bocor.
+    claudeFails = true;
+    await http()
+      .post('/admin/ai/images')
+      .set(admin())
+      .send({ ...foto, subject: 'foto-contoh-bola', label: 'bola' })
+      .expect(200);
+    claudeFails = false;
+    expect(calls.at(-1)!.prompt).toMatch(/realistic close-up photo of bola/);
+    const fail = await ctx.pool.query(
+      "select detail from ai_usage where action = 'prompt' and ok = false order by created_at desc limit 1",
+    );
+    expect(fail.rows[0].detail).not.toContain('TESTKEY');
+    // Kembali ke prompt bawaan untuk test berikutnya.
+    await http()
+      .put('/admin/ai/settings')
+      .set(admin())
+      .send({ settings: { ...o.settings, promptWriter: 'none' }, password: 'admin12345' })
+      .expect(200);
   });
 
   it('batas biaya harian ditegakkan; ubah pengaturan butuh sandi', async () => {

@@ -42,11 +42,26 @@ const keyBody = z.strictObject({
     .regex(/^sk-[A-Za-z0-9_-]+$/, 'API key OpenAI diawali "sk-" dan hanya huruf, angka, _ -'),
   password,
 });
+/** Kunci Claude: `sk-ant-…`, hanya karakter aman (D-092). */
+const claudeKeyBody = z.strictObject({
+  apiKey: z
+    .string()
+    .trim()
+    .min(20, 'API key terlalu pendek')
+    .max(300)
+    .regex(
+      /^sk-ant-[A-Za-z0-9_-]+$/,
+      'API key Claude diawali "sk-ant-" dan hanya huruf, angka, _ -',
+    ),
+  password,
+});
 const settingsBody = z.strictObject({ settings: aiImageSettingsSchema, password });
 const listQuery = z.strictObject({
   status: z.enum(AI_IMAGE_STATUSES).optional(),
   subject: aiSubjectSchema.optional(),
   page: z.coerce.number().int().min(0).max(1000).default(0),
+  /** Penanda muat ulang dari halaman admin (memutus cache setelah gambar dibuat/disetujui); diabaikan. */
+  r: z.coerce.number().int().min(0).optional(),
 });
 
 function sendImage(res: Response, img: { mime: string; data: Buffer }, cache: string) {
@@ -108,6 +123,30 @@ export class AdminAiController {
   @HttpCode(200)
   testKey() {
     return this.ai.testKey();
+  }
+
+  /** Kunci Claude untuk penulis prompt gambar (D-092): sandi admin wajib, sama seperti kunci OpenAI. */
+  @Put('claude-key')
+  @HttpCode(200)
+  async saveClaudeKey(
+    @Body(new ZodPipe(claudeKeyBody)) body: z.infer<typeof claudeKeyBody>,
+    @CurrentUser() user: SessionUser,
+  ) {
+    await this.confirm(user, body.password);
+    await this.ai.setClaudeKey(body.apiKey, user.id);
+    return this.ai.claudeKeyInfo();
+  }
+
+  @Delete('claude-key')
+  async deleteClaudeKey(@CurrentUser() user: SessionUser) {
+    await this.ai.clearClaudeKey(user.id);
+    return this.ai.claudeKeyInfo();
+  }
+
+  @Post('claude-key/test')
+  @HttpCode(200)
+  testClaudeKey() {
+    return this.ai.testClaudeKey();
   }
 
   @Put('settings')

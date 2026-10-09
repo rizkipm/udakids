@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.fa6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 6,
+  "title": "Operasi bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "b": [2, 4],
+      "h": [7, 9],
+      "c": [1, 3],
+      "d": [2, 5]
+    },
+    "prompt": "Suhu di puncak Gunung Semeru pukul 04.00 adalah −{a}°C. Suhu naik {b}°C setiap jam sampai pukul 0{h}.00, lalu turun {c}°C setiap jam selama {d} jam. Suhu akhirnya …",
+    "answer": "-a + b * (h - 4) - c * d",
+    "unit": "°C",
+    "distractors": [
+      {
+        "expr": "a + b * (h - 4) - c * d",
+        "tag": "tanda-awal"
+      },
+      {
+        "expr": "-a + b * h - c * d",
+        "tag": "jam-dari-nol"
+      },
+      {
+        "expr": "-a + b * (h - 4) + c * d",
+        "tag": "turun-ditambah"
+      }
+    ],
+    "choices": 4,
+    "allowNegative": true,
+    "explain": "Naik selama {=h-4} jam: −{a} + {b} × {=h-4} = {=-a+b*(h-4)}. Turun {c} × {d} = {=c*d}. Suhu akhir {answer}."
+  }
+}

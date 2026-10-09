@@ -1,0 +1,47 @@
+{
+  "id": "math.sd34.fh8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 8,
+  "title": "Teori bilangan sederhana — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "b": [4, 12],
+      "r": [1, 8]
+    },
+    "derived": {
+      "kpk": "lcm(a, b)"
+    },
+    "constraint": "a < b && r < a && b % a != 0",
+    "prompt": "Bilangan terkecil yang lebih dari 100, jika dibagi {a} bersisa {r} dan jika dibagi {b} juga bersisa {r}, adalah …",
+    "answer": "(floor((100 - r) / kpk) + 1) * kpk + r",
+    "distractors": [
+      {
+        "expr": "kpk + r",
+        "tag": "lupa-lebih-100"
+      },
+      {
+        "expr": "(floor((100 - r) / kpk) + 1) * kpk",
+        "tag": "lupa-sisa"
+      },
+      {
+        "expr": "(floor((100 - r) / kpk) + 2) * kpk + r",
+        "tag": "kelipatan-berikutnya"
+      }
+    ],
+    "choices": 4,
+    "explain": "KPK {a} dan {b} = {kpk}. Bilangannya kelipatan {kpk} ditambah {r}. Yang pertama lebih dari 100 adalah {answer}."
+  }
+}

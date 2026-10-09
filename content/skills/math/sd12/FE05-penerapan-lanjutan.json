@@ -1,0 +1,57 @@
+{
+  "id": "math.sd12.fe5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FE",
+  "order": 5,
+  "title": "Bangun ruang — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 5],
+      "l": [2, 4],
+      "t": [2, 5]
+    },
+    "prompt": "Balok dari kubus satuan berukuran panjang {p}, lebar {l}, dan tinggi {t} kubus. Satu lapis paling atas diambil. Sisa kubus satuan ada …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "kubus",
+        "cubes": true
+      }
+    ],
+    "answer": "p * l * (t - 1)",
+    "distractors": [
+      {
+        "expr": "p * l * t",
+        "tag": "lupa-diambil"
+      },
+      {
+        "expr": "p * l",
+        "tag": "yang-diambil"
+      },
+      {
+        "expr": "p * l * t - 1",
+        "tag": "ambil-satu"
+      },
+      {
+        "expr": "p * l * t - p",
+        "tag": "ambil-baris"
+      }
+    ],
+    "choices": 4,
+    "explain": "Satu lapis = {p} × {l} = {=p*l} kubus. Tersisa {=t-1} lapis: {=p*l} × {=t-1} = {answer} kubus."
+  }
+}

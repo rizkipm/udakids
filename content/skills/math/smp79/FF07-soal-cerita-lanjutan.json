@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.ff7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 7,
+  "title": "Persamaan dan pertidaksamaan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": {
+        "range": [400, 1000],
+        "step": 50
+      },
+      "o": [50, 85],
+      "k": [15, 40]
+    },
+    "constraint": "(w - o) % k != 0",
+    "prompt": "Lift sebuah gedung di Surabaya mampu membawa beban paling banyak {w} kg. Petugas lift ({o} kg) akan mengangkut kotak yang masing-masing {k} kg. Dalam sekali angkut, kotak yang dapat dibawa paling banyak …",
+    "answer": "floor((w - o) / k)",
+    "distractors": [
+      {
+        "expr": "ceil((w - o) / k)",
+        "tag": "dibulatkan-ke-atas"
+      },
+      {
+        "expr": "floor(w / k)",
+        "tag": "lupa-petugas"
+      },
+      {
+        "expr": "floor((w + o) / k)",
+        "tag": "petugas-ditambah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{o} + {k}n ≤ {w}, jadi n ≤ {=(w-o)/k}. Banyak kotak harus bulat, jadi paling banyak {answer}."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.sd56.fd3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 3,
+  "title": "Pola, baris, dan deret — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 12],
+      "r": {
+        "values": [2, 3]
+      }
+    },
+    "prompt": "Barisan {a}, {=a*r}, {=a*r*r}, {=a*r*r*r}, … Suku ke-6 adalah …",
+    "answer": "a * r * r * r * r * r",
+    "distractors": [
+      {
+        "expr": "a * r * r * r * r",
+        "tag": "suku-ke-5"
+      },
+      {
+        "expr": "a * r * r * r * r * r * r",
+        "tag": "suku-ke-7"
+      },
+      {
+        "expr": "a + 5 * (a * r - a)",
+        "tag": "beda-tetap"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setiap suku dikali {r}. Suku ke-5 = {=a*r*r*r*r}, suku ke-6 = {=a*r*r*r*r} × {r} = {answer}."
+  }
+}

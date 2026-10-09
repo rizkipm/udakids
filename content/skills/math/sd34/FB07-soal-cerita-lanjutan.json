@@ -1,0 +1,65 @@
+{
+  "id": "math.sd34.fb7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 7,
+  "title": "Pecahan sederhana — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": [5, 10],
+      "a": [1, 8],
+      "c": [1, 8],
+      "m": [5, 20]
+    },
+    "derived": {
+      "n": "b * m"
+    },
+    "words": {
+      "nama": [
+        "Alya",
+        "Raka",
+        "Dimas",
+        "Sari",
+        "Bayu",
+        "Putri",
+        "Nina",
+        "Adit",
+        "Tegar",
+        "Wulan",
+        "Fajar",
+        "Laras"
+      ]
+    },
+    "constraint": "a + c < b && a != c",
+    "prompt": "Pita {nama} panjangnya {n} cm. Sebanyak {a}/{b} bagian dipakai untuk bunga dan {c}/{b} bagian untuk hiasan kado. Sisa pita adalah …",
+    "answer": "n - (a + c) * m",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "(a + c) * m",
+        "tag": "yang-dipakai"
+      },
+      {
+        "expr": "n - a * m",
+        "tag": "satu-pemakaian"
+      },
+      {
+        "expr": "n - (a + c)",
+        "tag": "pembilang-dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dipakai ({a} + {c})/{b} = {=a+c}/{b} bagian = {=(a+c)*m} cm. Sisa {n} − {=(a+c)*m} = {answer}."
+  }
+}

@@ -6,7 +6,7 @@ import {
   type AiImageStatus,
 } from '@little-coder/engine';
 import { useApiCall, useFetch } from '../../auth/useApi';
-import { t } from '../../i18n';
+import { t, type MessageKey } from '../../i18n';
 import {
   Badge,
   Button,
@@ -35,6 +35,9 @@ type Overview = {
   estimate: number;
   images: Partial<Record<AiImageStatus, number>>;
   momoReady: boolean;
+  /** Penulis prompt Claude (D-092). */
+  claudeKey: KeyInfo;
+  claudeReady: boolean;
   styleGuide: string;
   recent: {
     action: string;
@@ -109,6 +112,7 @@ export function AiImagesPage() {
                 />
               </div>
               <KeyCard info={d.key} onChanged={reload} />
+              <KeyCard info={d.claudeKey} onChanged={reload} provider="claude" />
               <GenerateCard overview={d} onMade={reload} />
               <ImageGrid rev={listRev} onChanged={reload} />
               <SettingsCard
@@ -125,7 +129,23 @@ export function AiImagesPage() {
   );
 }
 
-function KeyCard({ info, onChanged }: { info: KeyInfo; onChanged: () => void }) {
+/** Kunci OpenAI (pembuat gambar) atau Claude (penulis prompt, D-092) — perilakunya sama. */
+const KEY_UI = {
+  openai: { path: '/admin/ai/key', prefix: 'admin.ai.key', placeholder: 'sk-proj-…' },
+  claude: { path: '/admin/ai/claude-key', prefix: 'admin.ai.claudeKey', placeholder: 'sk-ant-…' },
+} as const;
+
+function KeyCard({
+  info,
+  onChanged,
+  provider = 'openai',
+}: {
+  info: KeyInfo;
+  onChanged: () => void;
+  provider?: keyof typeof KEY_UI;
+}) {
+  const ui = KEY_UI[provider];
+  const k = (name: string) => `${ui.prefix}${name}` as MessageKey;
   const call = useApiCall('staff');
   const action = useAction();
   const [apiKey, setApiKey] = useState('');
@@ -136,11 +156,11 @@ function KeyCard({ info, onChanged }: { info: KeyInfo; onChanged: () => void }) 
     e.preventDefault();
     const ok = await action.run(
       () =>
-        call('/admin/ai/key', {
+        call(ui.path, {
           method: 'PUT',
           body: { apiKey: apiKey.trim(), password },
         }).then(() => true),
-      t('admin.ai.keySaved'),
+      t(k('Saved')),
     );
     // Kunci & sandi tidak disimpan di memori halaman lebih lama dari perlu.
     setApiKey('');
@@ -151,31 +171,31 @@ function KeyCard({ info, onChanged }: { info: KeyInfo; onChanged: () => void }) 
     }
   }
   async function remove() {
-    if (!window.confirm(t('admin.ai.keyDeleteConfirm'))) return;
+    if (!window.confirm(t(k('DeleteConfirm')))) return;
     const ok = await action.run(
-      () => call('/admin/ai/key', { method: 'DELETE' }).then(() => true),
-      t('admin.ai.keyRemoved'),
+      () => call(ui.path, { method: 'DELETE' }).then(() => true),
+      t(k('Removed')),
     );
     if (ok) onChanged();
   }
   async function runTest() {
     setTest(undefined);
     const out = await action.run(() =>
-      call<{ ok: boolean; message: string }>('/admin/ai/key/test', { method: 'POST', body: {} }),
+      call<{ ok: boolean; message: string }>(`${ui.path}/test`, { method: 'POST', body: {} }),
     );
     if (out) setTest(out);
   }
 
   return (
-    <Card title={t('admin.ai.keyTitle')}>
-      <p className="ui-muted">{t('admin.ai.keyHint')}</p>
+    <Card title={t(k('Title'))}>
+      <p className="ui-muted">{t(k('Hint'))}</p>
       <div className="ui-row" style={{ marginBottom: 10 }}>
         {info.source === 'admin' ? (
-          <Badge tone="success">{t('admin.ai.keyAdmin', { last4: info.last4 ?? '' })}</Badge>
+          <Badge tone="success">{t(k('Admin'), { last4: info.last4 ?? '' })}</Badge>
         ) : info.source === 'env' ? (
-          <Badge tone="success">{t('admin.ai.keyEnv')}</Badge>
+          <Badge tone="success">{t(k('Env'))}</Badge>
         ) : (
-          <Badge tone="warning">{t('admin.ai.keyNone')}</Badge>
+          <Badge tone="warning">{t(k('None'))}</Badge>
         )}
         {info.unreadable && <Badge tone="warning">{t('admin.ai.keyUnreadable')}</Badge>}
       </div>
@@ -185,12 +205,12 @@ function KeyCard({ info, onChanged }: { info: KeyInfo; onChanged: () => void }) 
         <form onSubmit={save} className="adm-key-form" autoComplete="off">
           <div className="adm-fields">
             <TextField
-              label={t('admin.ai.keyLabel')}
+              label={t(k('Label'))}
               type="password"
               autoComplete="off"
               spellCheck={false}
               maxLength={300}
-              placeholder={info.source === 'admin' ? `••••${info.last4 ?? ''}` : 'sk-proj-…'}
+              placeholder={info.source === 'admin' ? `••••${info.last4 ?? ''}` : ui.placeholder}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
             />
@@ -236,6 +256,9 @@ function GenerateCard({ overview, onMade }: { overview: Overview; onMade: () => 
   const [note, setNote] = useState('');
   const [variant, setVariant] = useState(1);
   const [withMomo, setWithMomo] = useState(false);
+  // Gaya foto realistis untuk simulasi (D-088).
+  // Bawaan: foto realistis (permintaan pemilik produk, D-092).
+  const [style, setStyle] = useState<'ilustrasi' | 'foto'>('foto');
   const [last, setLast] = useState<{ reused: boolean; costUsd: number; image: ImageRow }>();
 
   async function submit(e: FormEvent) {
@@ -252,6 +275,7 @@ function GenerateCard({ overview, onMade }: { overview: Overview; onMade: () => 
           ...(note.trim() && { note: note.trim() }),
           variant,
           withMomo,
+          style,
         },
       }),
     );
@@ -288,6 +312,16 @@ function GenerateCard({ overview, onMade }: { overview: Overview; onMade: () => 
               }
             }}
             options={AI_IMAGE_KINDS.map((k) => ({ value: k, label: t(`admin.ai.kind.${k}`) }))}
+          />
+          <SelectField
+            label={t('admin.ai.style')}
+            hint={t('admin.ai.styleHint')}
+            value={style}
+            onChange={(e) => setStyle(e.target.value as 'ilustrasi' | 'foto')}
+            options={[
+              { value: 'ilustrasi', label: t('admin.ai.style.ilustrasi') },
+              { value: 'foto', label: t('admin.ai.style.foto') },
+            ]}
           />
           <TextField
             label={t('admin.ai.subject')}
@@ -504,6 +538,22 @@ function SettingsCard({ initial, onSaved }: { initial: AiImageSettings; onSaved:
             required
             value={form.imageModel}
             onChange={(e) => set('imageModel', e.target.value.trim())}
+          />
+          <SelectField
+            label={t('admin.ai.promptWriter')}
+            hint={t('admin.ai.promptWriterHint')}
+            value={form.promptWriter}
+            onChange={(e) => set('promptWriter', e.target.value as AiImageSettings['promptWriter'])}
+            options={[
+              { value: 'none', label: t('admin.ai.promptWriter.none') },
+              { value: 'claude', label: t('admin.ai.promptWriter.claude') },
+            ]}
+          />
+          <TextField
+            label={t('admin.ai.claudeModel')}
+            required
+            value={form.claudeModel}
+            onChange={(e) => set('claudeModel', e.target.value.trim())}
           />
           <SelectField
             label={t('admin.ai.quality')}

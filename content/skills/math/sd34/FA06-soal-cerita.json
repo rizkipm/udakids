@@ -1,0 +1,47 @@
+{
+  "id": "math.sd34.fa6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FA",
+  "order": 6,
+  "title": "Operasi bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [6, 15],
+      "n": [24, 48],
+      "p": {
+        "values": [4, 5, 6]
+      },
+      "r": [3, 20]
+    },
+    "constraint": "(k * n - r) % p == 0",
+    "prompt": "Toko buah di Malang menerima {k} kardus apel. Setiap kardus berisi {n} apel. Sebanyak {r} apel busuk dibuang, sisanya dikemas dalam plastik berisi {p} apel. Banyak plastik yang diperlukan adalah …",
+    "answer": "(k * n - r) / p",
+    "distractors": [
+      {
+        "expr": "(k * n + r) / p",
+        "tag": "busuk-ditambah"
+      },
+      {
+        "expr": "k * n - r",
+        "tag": "lupa-dibagi"
+      },
+      {
+        "expr": "floor(k * n / p)",
+        "tag": "lupa-busuk"
+      }
+    ],
+    "choices": 4,
+    "explain": "Semua apel {k} × {n} = {=k*n}. Dikurangi {r} menjadi {=k*n-r}. Dibagi {p}: {answer} plastik."
+  }
+}

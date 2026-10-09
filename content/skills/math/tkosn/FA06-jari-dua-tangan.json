@@ -1,0 +1,54 @@
+{
+  "id": "math.tkosn.fa6.jari-dua-tangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FA",
+  "order": 6,
+  "title": "Tambah dan kurang dengan gambar — Level 6 — Jari dua tangan",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 5],
+      "b": [1, 5]
+    },
+    "prompt": "Tangan kiri mengangkat {a} jari, tangan kanan {b} jari. Berapa jari semuanya?",
+    "say": "Tangan kiri mengangkat {a} jari, tangan kanan {b} jari. Berapa jari semuanya?",
+    "stimulus": [
+      {
+        "kind": "fingers",
+        "count": "=a",
+        "mirror": true
+      },
+      {
+        "kind": "fingers",
+        "count": "=b"
+      }
+    ],
+    "answer": "a + b",
+    "distractors": [
+      {
+        "expr": "a + b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a + b - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "max(a, b)",
+        "tag": "hanya-satu-tangan"
+      }
+    ],
+    "choices": 3,
+    "explain": "Hitung jari kiri lalu lanjutkan jari kanan. {a} tambah {b} sama dengan {answer}."
+  }
+}

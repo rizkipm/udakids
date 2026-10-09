@@ -7,7 +7,6 @@ import {
   levelStatuses,
   skippedStandalone,
   standaloneCodes,
-  groupStartCodes,
   totalPoints,
   withAccess,
   type Color,
@@ -106,8 +105,6 @@ export function Library({ momoColor }: { momoColor: Color }) {
           shelves.map((s) => s.category.code),
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
-          standaloneCodes(shelves.map((s) => s.category)),
-          groupStartCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data?.access ?? FREE_ACCESS,
@@ -204,8 +201,6 @@ export function Library({ momoColor }: { momoColor: Color }) {
         inBook.map((s) => s.category.code),
         inBook.flatMap((s) => s.skills),
         progress.quizzes,
-        standaloneCodes(inBook.map((s) => s.category)),
-        groupStartCodes(inBook.map((s) => s.category)),
       ),
       inBook.flatMap((s) => s.skills),
       data.access ?? FREE_ACCESS,
@@ -471,8 +466,9 @@ function TopicCard({
       className={`topic-card ${state}${mock ? ' is-mock' : ''}`}
       aria-label={`${shelf.category.title}. ${
         locked ? t('play.home.lockedTopic') : t('play.home.progress', { passed, total })
-      }`}
+      }${state === 'is-next' ? `. ${t('play.home.suggested')}` : ''}`}
     >
+      {state === 'is-next' && <span className="topic-tag">{t('play.home.suggested')}</span>}
       <span className="topic-num">{mock ? <TrophyIcon size={20} /> : n}</span>
       <span className="topic-title">{shelf.category.title}</span>
       <span className="topic-foot">

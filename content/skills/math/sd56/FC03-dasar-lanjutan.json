@@ -1,0 +1,52 @@
+{
+  "id": "math.sd56.fc3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 3,
+  "title": "Aritmetika sosial — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "range": [20000, 200000],
+        "step": 5000
+      },
+      "p": {
+        "values": [5, 10, 15, 20, 25, 30, 40, 50]
+      }
+    },
+    "derived": {
+      "j": "b * (100 + p) / 100"
+    },
+    "constraint": "j == floor(j)",
+    "prompt": "Pedagang membeli barang seharga Rp{b} dan menjualnya Rp{j}. Persentase keuntungannya adalah …",
+    "answer": "p",
+    "unit": "%",
+    "distractors": [
+      {
+        "expr": "(j - b) * 100 / j",
+        "tag": "dibagi-harga-jual"
+      },
+      {
+        "expr": "100 + p",
+        "tag": "harga-jual-persen"
+      },
+      {
+        "expr": "(j - b) / 1000",
+        "tag": "selisih-ribu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Untung Rp{j} − Rp{b} = Rp{=j-b}. Persen untung = {=j-b} : {b} × 100% = {answer}."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "math.sd56.fa6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FA",
+  "order": 6,
+  "title": "Operasi bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [8000, 15000],
+        "step": 500
+      },
+      "k": {
+        "range": [3000, 6000],
+        "step": 500
+      },
+      "a": [2, 5],
+      "b": [2, 5],
+      "u": {
+        "values": [50000, 100000]
+      }
+    },
+    "words": {
+      "nama": ["Raka", "Sinta", "Bima", "Ayu", "Dimas", "Nadia", "Fajar", "Laras", "Yusuf", "Wulan"]
+    },
+    "constraint": "u - a * h - b * k > 0",
+    "prompt": "{nama} membeli {a} bungkus pecel seharga Rp{h} per bungkus dan {b} gelas es dawet seharga Rp{k} per gelas. Ia membayar dengan uang Rp{u}. Uang kembaliannya Rp…",
+    "answer": "u - a * h - b * k",
+    "distractors": [
+      {
+        "expr": "u - h - k",
+        "tag": "lupa-banyaknya"
+      },
+      {
+        "expr": "a * h + b * k",
+        "tag": "total-belanja"
+      },
+      {
+        "expr": "u - a * h",
+        "tag": "lupa-minuman"
+      }
+    ],
+    "choices": 4,
+    "explain": "Belanja: {a} × Rp{h} + {b} × Rp{k} = Rp{=a*h+b*k}. Kembalian: Rp{u} − Rp{=a*h+b*k} = Rp{answer}."
+  }
+}

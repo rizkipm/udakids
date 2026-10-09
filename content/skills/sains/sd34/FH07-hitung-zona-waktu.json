@@ -1,0 +1,47 @@
+{
+  "id": "sains.sd34.fh7.hitung-zona-waktu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 7,
+  "title": "Bumi dan antariksa — Level 7 — Hitung: zona waktu Indonesia",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bumi dan antariksa"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [5, 12],
+      "t": [2, 6]
+    },
+    "constraint": "h + t + 2 <= 20",
+    "prompt": "Pesawat berangkat dari Surabaya pukul {h}.00 WIB dan terbang selama {t} jam ke Jayapura. Saat tiba, jam di Jayapura menunjukkan pukul berapa WIT? (pilih angka jamnya)",
+    "answer": "h + t + 2",
+    "distractors": [
+      {
+        "expr": "h + t",
+        "tag": "lupa-zona"
+      },
+      {
+        "expr": "h + t + 1",
+        "tag": "pakai-wita"
+      },
+      {
+        "expr": "h + t - 2",
+        "tag": "zona-terbalik"
+      },
+      {
+        "expr": "h + 2",
+        "tag": "lupa-terbang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Di Surabaya saat tiba pukul {h} + {t} = {=h+t}.00 WIB. WIT lebih cepat 2 jam, jadi pukul {answer}.00 WIT."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "math.sd12.fb8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FB",
+  "order": 8,
+  "title": "Nilai tempat dan lambang bilangan — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": [1, 9],
+      "p": [0, 9],
+      "s": [0, 9]
+    },
+    "derived": {
+      "n": "r * 100 + p * 10 + s",
+      "m": "r * 100 + s * 10 + p"
+    },
+    "constraint": "p != s",
+    "prompt": "Angka puluhan dan angka satuan bilangan {n} ditukar letaknya. Selisih bilangan lama dan bilangan baru adalah …",
+    "answer": "abs(p - s) * 9",
+    "distractors": [
+      {
+        "expr": "abs(p - s) * 10",
+        "tag": "kali-10"
+      },
+      {
+        "expr": "abs(p - s)",
+        "tag": "selisih-angka"
+      },
+      {
+        "expr": "abs(p - s) * 11",
+        "tag": "kali-11"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bilangan baru {m}. Selisih {n} dan {m} adalah {answer}."
+  }
+}

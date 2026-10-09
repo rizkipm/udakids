@@ -1,0 +1,56 @@
+{
+  "id": "math.smp79.fb4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 4,
+  "title": "Geometri — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [1, 6],
+      "s": {
+        "values": [30, 45, 60, 72, 90, 120, 135, 150, 180, 210, 240, 270, 300]
+      }
+    },
+    "derived": {
+      "r": "7 * k"
+    },
+    "constraint": "(154 * k * k * s) % 360 == 0",
+    "prompt": "Juring lingkaran berjari-jari {r} cm dengan sudut pusat {s}°. Luas juring … cm². (π = 22/7)",
+    "stimulus": [
+      {
+        "kind": "angle",
+        "degrees": "=s",
+        "showValue": true
+      }
+    ],
+    "answer": "154 * k * k * s / 360",
+    "unit": "cm²",
+    "distractors": [
+      {
+        "expr": "44 * k * s / 360",
+        "tag": "panjang-busur"
+      },
+      {
+        "expr": "154 * k * k",
+        "tag": "luas-lingkaran"
+      },
+      {
+        "expr": "154 * k * k * s / 180",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Luas juring = {s}/360 × 22/7 × {r} × {r} = {answer}."
+  }
+}

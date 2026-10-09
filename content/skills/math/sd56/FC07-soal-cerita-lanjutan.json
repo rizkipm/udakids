@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fc7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 7,
+  "title": "Aritmetika sosial — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [20, 60],
+      "s": [2, 8],
+      "b": {
+        "range": [5000, 15000],
+        "step": 1000
+      },
+      "e": {
+        "range": [2000, 8000],
+        "step": 1000
+      }
+    },
+    "derived": {
+      "j": "b + e"
+    },
+    "constraint": "(k - s) * j - k * b > 0",
+    "prompt": "Pedagang buah di Malang membeli {k} kg apel seharga Rp{b} per kg. Ternyata {s} kg busuk dan dibuang. Sisanya dijual Rp{j} per kg. Keuntungan pedagang adalah Rp…",
+    "answer": "(k - s) * j - k * b",
+    "distractors": [
+      {
+        "expr": "k * j - k * b",
+        "tag": "lupa-busuk"
+      },
+      {
+        "expr": "(k - s) * (j - b)",
+        "tag": "modal-sisa"
+      },
+      {
+        "expr": "(k - s) * j",
+        "tag": "hasil-jual"
+      }
+    ],
+    "choices": 4,
+    "explain": "Modal {k} × Rp{b} = Rp{=k*b}. Hasil jual {=k-s} × Rp{j} = Rp{=(k-s)*j}. Untung Rp{answer}."
+  }
+}

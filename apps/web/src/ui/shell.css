@@ -35,7 +35,10 @@
   flex-direction: column;
   gap: 14px;
   height: 100vh;
+  /* Tinggi layar yang benar-benar terlihat di HP (tanpa bilah alamat/navigasi), supaya tombol Keluar terlihat. */
+  height: 100dvh;
   padding: 16px 12px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -250,6 +253,9 @@
   .shell-side {
     position: fixed;
     inset: 0 auto 0 0;
+    height: auto;
+    max-height: 100dvh;
+    overscroll-behavior: contain;
     z-index: 40;
     width: min(300px, 86vw);
     transform: translateX(-100%);

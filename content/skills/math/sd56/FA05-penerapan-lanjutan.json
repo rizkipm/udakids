@@ -1,0 +1,58 @@
+{
+  "id": "math.sd56.fa5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FA",
+  "order": 5,
+  "title": "Operasi bilangan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [11, 19],
+      "q": [21, 29],
+      "k": [2, 6]
+    },
+    "derived": {
+      "r": "q + 2"
+    },
+    "prompt": "Gunakan tabel kuadrat. Nilai √{=p*p} + {k} × √{=q*q} = …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Bilangan", "Kuadrat"],
+        "rows": [
+          ["=p", "=p*p"],
+          ["=q", "=q*q"],
+          ["=r", "=r*r"]
+        ],
+        "caption": "Tabel bilangan kuadrat"
+      }
+    ],
+    "answer": "p + k * q",
+    "distractors": [
+      {
+        "expr": "(p + k) * q",
+        "tag": "urutan"
+      },
+      {
+        "expr": "p * p + k * q",
+        "tag": "lupa-akar"
+      },
+      {
+        "expr": "p + q",
+        "tag": "lupa-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dari tabel: √{=p*p} = {p} dan √{=q*q} = {q}. Kali dulu: {k} × {q} = {=k*q}. Jadi {p} + {=k*q} = {answer}."
+  }
+}

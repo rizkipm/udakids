@@ -1,0 +1,565 @@
+{
+  "id": "math.smp79.fb10.tantangan-final-geometri",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 10,
+  "title": "Geometri — Level 10 — Tantangan final geometri",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 6],
+            "s": {
+              "values": [30, 45, 60, 72, 90, 120, 135, 150, 180, 210, 240, 270, 300]
+            }
+          },
+          "derived": {
+            "r": "7 * k"
+          },
+          "constraint": "(154 * k * k * s) % 360 == 0",
+          "prompt": "Juring lingkaran berjari-jari {r} cm dengan sudut pusat {s}°. Luas juring … cm². (π = 22/7)",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=s",
+              "showValue": true
+            }
+          ],
+          "answer": "154 * k * k * s / 360",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "44 * k * s / 360",
+              "tag": "panjang-busur"
+            },
+            {
+              "expr": "154 * k * k",
+              "tag": "luas-lingkaran"
+            },
+            {
+              "expr": "154 * k * k * s / 180",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Luas juring = {s}/360 × 22/7 × {r} × {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "i": {
+              "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            },
+            "k": [1, 3]
+          },
+          "derived": {
+            "s": "2 * k * ((i == 0) * 3 + (i == 1) * 4 + (i == 2) * 5 + (i == 3) * 12 + (i == 4) * 8 + (i == 5) * 15 + (i == 6) * 6 + (i == 7) * 8 + (i == 8) * 9 + (i == 9) * 12 + (i == 10) * 7)",
+            "t": "k * ((i == 0) * 4 + (i == 1) * 3 + (i == 2) * 12 + (i == 3) * 5 + (i == 4) * 15 + (i == 5) * 8 + (i == 6) * 8 + (i == 7) * 6 + (i == 8) * 12 + (i == 9) * 9 + (i == 10) * 24)",
+            "h": "k * ((i == 0) * 5 + (i == 1) * 5 + (i == 2) * 13 + (i == 3) * 13 + (i == 4) * 17 + (i == 5) * 17 + (i == 6) * 10 + (i == 7) * 10 + (i == 8) * 15 + (i == 9) * 15 + (i == 10) * 25)"
+          },
+          "prompt": "Limas persegi memiliki panjang rusuk alas {s} cm dan tinggi limas {t} cm. Luas permukaan limas … cm².",
+          "answer": "s * s + 2 * s * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * s * h",
+              "tag": "tanpa-alas"
+            },
+            {
+              "expr": "s * s + 2 * s * t",
+              "tag": "pakai-tinggi-limas"
+            },
+            {
+              "expr": "s * s + 4 * s * h",
+              "tag": "lupa-setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Tinggi sisi tegak = √({t}² + {=s/2}²) = {h}. Luas = {s} × {s} + 4 × ½ × {s} × {h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "i": {
+              "values": [0, 1, 2, 3, 4, 5, 6, 7]
+            },
+            "k": [1, 3],
+            "c": [2, 15]
+          },
+          "derived": {
+            "x": "k * ((i == 0) * 3 + (i == 1) * 4 + (i == 2) * 5 + (i == 3) * 12 + (i == 4) * 8 + (i == 5) * 15 + (i == 6) * 6 + (i == 7) * 8)",
+            "b": "k * ((i == 0) * 4 + (i == 1) * 3 + (i == 2) * 12 + (i == 3) * 5 + (i == 4) * 15 + (i == 5) * 8 + (i == 6) * 8 + (i == 7) * 6)",
+            "z": "k * ((i == 0) * 5 + (i == 1) * 5 + (i == 2) * 13 + (i == 3) * 13 + (i == 4) * 17 + (i == 5) * 17 + (i == 6) * 10 + (i == 7) * 10)",
+            "a": "x + c"
+          },
+          "prompt": "Sebuah kapal berangkat dari Pelabuhan Tanjung Perak, berlayar {a} km ke timur, {b} km ke utara, lalu {c} km ke barat. Jarak kapal dari pelabuhan sekarang … km.",
+          "answer": "z",
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "jarak-tempuh"
+            },
+            {
+              "expr": "x + b",
+              "tag": "jumlah-sisi"
+            },
+            {
+              "expr": "a + b - c",
+              "tag": "tanpa-akar"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ke timur bersih {a} − {c} = {x} km dan ke utara {b} km. Jarak = √({x}² + {b}²) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "i": {
+              "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            "k": [1, 2],
+            "r": [2, 10]
+          },
+          "derived": {
+            "x": "k * ((i == 0) * 3 + (i == 1) * 4 + (i == 2) * 5 + (i == 3) * 12 + (i == 4) * 8 + (i == 5) * 15 + (i == 6) * 6 + (i == 7) * 8 + (i == 8) * 7)",
+            "g": "k * ((i == 0) * 4 + (i == 1) * 3 + (i == 2) * 12 + (i == 3) * 5 + (i == 4) * 15 + (i == 5) * 8 + (i == 6) * 8 + (i == 7) * 6 + (i == 8) * 24)",
+            "d": "k * ((i == 0) * 5 + (i == 1) * 5 + (i == 2) * 13 + (i == 3) * 13 + (i == 4) * 17 + (i == 5) * 17 + (i == 6) * 10 + (i == 7) * 10 + (i == 8) * 25)",
+            "big": "r + x"
+          },
+          "constraint": "d > big + r",
+          "prompt": "Dua lingkaran berjari-jari {big} cm dan {r} cm. Jarak kedua pusatnya {d} cm. Panjang garis singgung persekutuan luarnya … cm.",
+          "answer": "g",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "d - big + r",
+              "tag": "dikurang-langsung"
+            },
+            {
+              "expr": "d",
+              "tag": "jarak-pusat"
+            },
+            {
+              "expr": "big + r",
+              "tag": "jumlah-jari"
+            }
+          ],
+          "choices": 4,
+          "explain": "Garis singgung luar = √({d}² − ({big} − {r})²) = √({=d*d} − {=(big-r)*(big-r)}) = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Pada segitiga ABC, ∠A : ∠B : ∠C = 2 : 3 : 7. Besar ∠C adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "105°"
+                  },
+                  "say": "105°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "70°"
+                  },
+                  "say": "70°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90°"
+                  },
+                  "say": "90°"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "120°"
+                  },
+                  "say": "120°"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah perbandingan 2 + 3 + 7 = 12. ∠C = 7/12 × 180° = 105°."
+            },
+            {
+              "prompt": "Besar sudut dalam dan sudut luar sebuah segi-n beraturan berbanding 7 : 2. Nilai n adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sudut dalam + sudut luar = 180°, jadi sudut luar = 2/9 × 180° = 40°. n = 360 : 40 = 9."
+            },
+            {
+              "prompt": "Diagonal ruang sebuah kubus 6√3 cm. Volume kubus itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "216 cm³"
+                  },
+                  "say": "216 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "72 cm³"
+                  },
+                  "say": "72 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "108 cm³"
+                  },
+                  "say": "108 cm³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36√3 cm³"
+                  },
+                  "say": "36√3 cm³"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Diagonal ruang kubus = s√3, jadi s = 6 cm. Volume = 6 × 6 × 6 = 216 cm³."
+            },
+            {
+              "prompt": "Tabung berjari-jari 7 cm dan tinggi 10 cm. Luas permukaannya adalah … (π = 22/7)",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "748 cm²"
+                  },
+                  "say": "748 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "440 cm²"
+                  },
+                  "say": "440 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "594 cm²"
+                  },
+                  "say": "594 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.540 cm²"
+                  },
+                  "say": "1.540 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Luas = 2πr(r + t) = 2 × 22/7 × 7 × 17 = 748 cm². Selimut saja 440 cm²."
+            },
+            {
+              "prompt": "Kerucut berjari-jari alas 6 cm dan tinggi 8 cm. Luas selimutnya adalah … (π = 3,14)",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "188,4 cm²"
+                  },
+                  "say": "188,4 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "301,44 cm²"
+                  },
+                  "say": "301,44 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "150,72 cm²"
+                  },
+                  "say": "150,72 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "113,04 cm²"
+                  },
+                  "say": "113,04 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Garis pelukis s = √(6² + 8²) = 10 cm. Luas selimut = πrs = 3,14 × 6 × 10 = 188,4 cm²."
+            },
+            {
+              "prompt": "Sebuah bola dimasukkan ke tabung sehingga menyinggung alas, tutup, dan selimut tabung. Perbandingan volume bola dan volume tabung adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 3"
+                  },
+                  "say": "2 : 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 2"
+                  },
+                  "say": "1 : 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 : 4"
+                  },
+                  "say": "3 : 4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 : 3"
+                  },
+                  "say": "1 : 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tinggi tabung = 2r. Volume bola 4/3 πr³ dan volume tabung πr² × 2r = 2πr³. Perbandingannya 4/3 : 2 = 2 : 3."
+            },
+            {
+              "prompt": "Persegi ABCD bersisi 10 cm. E titik tengah AB dan F titik tengah BC. Luas segitiga DEF adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37,5 cm²"
+                  },
+                  "say": "37,5 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50 cm²"
+                  },
+                  "say": "50 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25 cm²"
+                  },
+                  "say": "25 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30 cm²"
+                  },
+                  "say": "30 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Luas persegi 100 dikurangi tiga segitiga pojok: ADE = 25, EBF = 12,5, FCD = 25. Sisa 100 − 62,5 = 37,5 cm²."
+            },
+            {
+              "prompt": "Banyak rusuk prisma segi-8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Prisma segi-n punya 3n rusuk: 8 di alas, 8 di tutup, 8 tegak. Jadi 24."
+            },
+            {
+              "prompt": "Segitiga dengan panjang sisi 13 cm, 14 cm, dan 15 cm mempunyai luas …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "84 cm²"
+                  },
+                  "say": "84 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "91 cm²"
+                  },
+                  "say": "91 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "105 cm²"
+                  },
+                  "say": "105 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42 cm²"
+                  },
+                  "say": "42 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tarik tinggi ke sisi 14: terbagi 5 dan 9, tingginya 12 (5-12-13 dan 9-12-15). Luas = ½ × 14 × 12 = 84 cm²."
+            },
+            {
+              "prompt": "Segi empat ABCD terletak pada lingkaran (segi empat tali busur). ∠A = 3x° dan ∠C = (x + 40)°. Nilai x adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "say": "35"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sudut yang berhadapan pada segi empat tali busur berjumlah 180°: 3x + x + 40 = 180, jadi x = 35."
+            },
+            {
+              "prompt": "Luas daerah di antara dua lingkaran sepusat berjari-jari 14 cm dan 7 cm adalah … (π = 22/7)",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "462 cm²"
+                  },
+                  "say": "462 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "616 cm²"
+                  },
+                  "say": "616 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "154 cm²"
+                  },
+                  "say": "154 cm²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "770 cm²"
+                  },
+                  "say": "770 cm²"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Luas = 22/7 × (14² − 7²) = 22/7 × 147 = 462 cm²."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

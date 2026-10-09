@@ -1,0 +1,49 @@
+{
+  "id": "math.sd12.fb5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FB",
+  "order": 5,
+  "title": "Nilai tempat dan lambang bilangan — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "b": [1, 9],
+      "c": [1, 9]
+    },
+    "derived": {
+      "hi": "max(a, b, c)",
+      "lo": "min(a, b, c)",
+      "mi": "a + b + c - hi - lo"
+    },
+    "constraint": "a != b && b != c && a != c",
+    "prompt": "Dari kartu angka {a}, {b}, {c}, dan 0 dibuat bilangan tiga angka. Setiap kartu dipakai paling banyak sekali. Bilangan terkecil yang dapat dibuat adalah …",
+    "answer": "lo * 100 + mi",
+    "distractors": [
+      {
+        "expr": "lo * 10 + mi",
+        "tag": "nol-di-depan"
+      },
+      {
+        "expr": "lo * 100 + mi * 10",
+        "tag": "nol-di-belakang"
+      },
+      {
+        "expr": "lo * 100 + mi * 10 + hi",
+        "tag": "tanpa-nol"
+      }
+    ],
+    "choices": 4,
+    "explain": "Angka 0 tidak boleh di depan. Pakai angka terkecil {lo} di ratusan, 0 di puluhan, lalu {mi}: {answer}."
+  }
+}

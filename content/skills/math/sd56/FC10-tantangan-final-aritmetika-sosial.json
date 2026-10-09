@@ -1,0 +1,543 @@
+{
+  "id": "math.sd56.fc10.tantangan-final-aritmetika-sosial",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 10,
+  "title": "Aritmetika sosial — Level 10 — Tantangan final aritmetika sosial",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "range": [1000000, 10000000],
+              "step": 500000
+            },
+            "r": {
+              "values": [6, 8, 9, 10, 12, 15, 18]
+            },
+            "n": {
+              "values": [3, 4, 6, 8, 9, 10]
+            }
+          },
+          "words": {
+            "nama": [
+              "Raka",
+              "Sinta",
+              "Bima",
+              "Ayu",
+              "Dimas",
+              "Nadia",
+              "Fajar",
+              "Laras",
+              "Yusuf",
+              "Wulan"
+            ]
+          },
+          "constraint": "(m * r * n) % 1200 == 0",
+          "prompt": "{nama} menabung Rp{m} di bank dengan bunga tunggal {r}% per tahun. Bunga yang diterima setelah {n} bulan adalah Rp…",
+          "answer": "m * r * n / 1200",
+          "distractors": [
+            {
+              "expr": "m * r / 100",
+              "tag": "bunga-setahun"
+            },
+            {
+              "expr": "m * r * n / 100",
+              "tag": "bulan-jadi-tahun"
+            },
+            {
+              "expr": "m + m * r * n / 1200",
+              "tag": "saldo-akhir"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bunga setahun {r}% × Rp{m} = Rp{=m*r/100}. Untuk {n} bulan: {n}/12 × Rp{=m*r/100} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": {
+              "range": [4500000, 9000000],
+              "step": 250000
+            },
+            "b": {
+              "values": [2000000, 3000000, 4000000]
+            },
+            "p": {
+              "values": [5, 10, 15]
+            }
+          },
+          "words": {
+            "nama": ["Budi", "Hasan", "Joko", "Slamet", "Agus"]
+          },
+          "constraint": "g > b",
+          "prompt": "Gaji Pak {nama} Rp{g} sebulan. Bagian gaji di atas Rp{b} dikenai pajak {p}%. Gaji bersih yang diterima Pak {nama} adalah Rp…",
+          "answer": "g - (g - b) * p / 100",
+          "distractors": [
+            {
+              "expr": "g - g * p / 100",
+              "tag": "pajak-seluruh-gaji"
+            },
+            {
+              "expr": "(g - b) * p / 100",
+              "tag": "besar-pajak"
+            },
+            {
+              "expr": "g - b * p / 100",
+              "tag": "pajak-batas"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kena pajak Rp{g} − Rp{b} = Rp{=g-b}. Pajak {p}% × Rp{=g-b} = Rp{=(g-b)*p/100}. Bersih Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [20, 60],
+            "s": [2, 8],
+            "b": {
+              "range": [5000, 15000],
+              "step": 1000
+            },
+            "e": {
+              "range": [2000, 8000],
+              "step": 1000
+            }
+          },
+          "derived": {
+            "j": "b + e"
+          },
+          "constraint": "(k - s) * j - k * b > 0",
+          "prompt": "Pedagang buah di Malang membeli {k} kg apel seharga Rp{b} per kg. Ternyata {s} kg busuk dan dibuang. Sisanya dijual Rp{j} per kg. Keuntungan pedagang adalah Rp…",
+          "answer": "(k - s) * j - k * b",
+          "distractors": [
+            {
+              "expr": "k * j - k * b",
+              "tag": "lupa-busuk"
+            },
+            {
+              "expr": "(k - s) * (j - b)",
+              "tag": "modal-sisa"
+            },
+            {
+              "expr": "(k - s) * j",
+              "tag": "hasil-jual"
+            }
+          ],
+          "choices": 4,
+          "explain": "Modal {k} × Rp{b} = Rp{=k*b}. Hasil jual {=k-s} × Rp{j} = Rp{=(k-s)*j}. Untung Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [100000, 1000000],
+              "step": 20000
+            },
+            "d": {
+              "values": [10, 20, 25, 30]
+            },
+            "p": {
+              "values": [5, 10, 11]
+            }
+          },
+          "constraint": "(h * (100 - d) * (100 + p)) % 10000 == 0",
+          "prompt": "Harga sebuah barang Rp{h}. Toko memberi diskon {d}%, lalu harga setelah diskon dikenai pajak {p}%. Harga yang dibayar adalah Rp…",
+          "answer": "h * (100 - d) * (100 + p) / 10000",
+          "distractors": [
+            {
+              "expr": "h * (100 - d + p) / 100",
+              "tag": "persen-digabung"
+            },
+            {
+              "expr": "h * (100 - d) / 100",
+              "tag": "lupa-pajak"
+            },
+            {
+              "expr": "h * (100 - d - p) / 100",
+              "tag": "pajak-dikurangi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setelah diskon: Rp{=h*(100-d)/100}. Pajak {p}% dari harga itu: Rp{=h*(100-d)*p/10000}. Bayar Rp{answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Harga baju naik 20%, kemudian turun 20% dari harga yang baru. Dibanding harga awal, harga akhirnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun 4%"
+                  },
+                  "say": "turun 4%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "sama saja"
+                  },
+                  "say": "sama saja"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "naik 4%"
+                  },
+                  "say": "naik 4%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "turun 2%"
+                  },
+                  "say": "turun 2%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Misal harga 100. Naik 20% jadi 120. Turun 20% dari 120 = 24, jadi 96. Turun 4%."
+            },
+            {
+              "prompt": "Pedagang menjual barang seharga Rp120.000 dan mendapat untung 20%. Harga belinya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp100.000"
+                  },
+                  "say": "Rp100.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp96.000"
+                  },
+                  "say": "Rp96.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp144.000"
+                  },
+                  "say": "Rp144.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp110.000"
+                  },
+                  "say": "Rp110.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Harga jual = 120% harga beli. 120.000 : 120 × 100 = 100.000."
+            },
+            {
+              "prompt": "Tabungan Rp2.000.000 mendapat bunga tunggal 6% per tahun. Setelah 1,5 tahun, tabungan menjadi …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.180.000"
+                  },
+                  "say": "Rp2.180.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.120.000"
+                  },
+                  "say": "Rp2.120.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.060.000"
+                  },
+                  "say": "Rp2.060.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp2.240.000"
+                  },
+                  "say": "Rp2.240.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga setahun 6% × 2.000.000 = 120.000. Untuk 1,5 tahun: 180.000. Jadi 2.180.000."
+            },
+            {
+              "prompt": "Diskon 25% membuat harga sepatu turun Rp45.000. Harga sepatu setelah diskon adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp135.000"
+                  },
+                  "say": "Rp135.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp180.000"
+                  },
+                  "say": "Rp180.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp225.000"
+                  },
+                  "say": "Rp225.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp112.500"
+                  },
+                  "say": "Rp112.500"
+                }
+              ],
+              "answer": 0,
+              "reteach": "25% = 45.000, maka harga awal 4 × 45.000 = 180.000. Setelah diskon 180.000 − 45.000 = 135.000."
+            },
+            {
+              "prompt": "Bu Ani membeli 3 lusin pensil seharga Rp108.000, lalu menjualnya Rp3.500 per batang. Keuntungannya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp18.000"
+                  },
+                  "say": "Rp18.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp6.000"
+                  },
+                  "say": "Rp6.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp10.500"
+                  },
+                  "say": "Rp10.500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp24.000"
+                  },
+                  "say": "Rp24.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 lusin = 36 batang. Hasil jual 36 × 3.500 = 126.000. Untung 126.000 − 108.000 = 18.000."
+            },
+            {
+              "prompt": "Harga barang Rp200.000 dikenai pajak 10%, lalu diberi diskon 10% dari harga setelah pajak. Yang dibayar adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp198.000"
+                  },
+                  "say": "Rp198.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp200.000"
+                  },
+                  "say": "Rp200.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp202.000"
+                  },
+                  "say": "Rp202.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp180.000"
+                  },
+                  "say": "Rp180.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setelah pajak: 220.000. Diskon 10% dari 220.000 = 22.000. Bayar 198.000."
+            },
+            {
+              "prompt": "Uang Rp500.000 ditabung. Setelah 8 bulan menjadi Rp540.000. Persentase bunga per tahunnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12%"
+                  },
+                  "say": "12%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8%"
+                  },
+                  "say": "8%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10%"
+                  },
+                  "say": "10%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15%"
+                  },
+                  "say": "15%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bunga 8 bulan = 40.000, sebulan 5.000, setahun 60.000. 60.000 : 500.000 × 100% = 12%."
+            },
+            {
+              "prompt": "Pak Hasan membeli 50 kg jeruk seharga Rp8.000 per kg. Sebanyak 10 kg busuk, sisanya dijual Rp12.000 per kg. Pak Hasan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp80.000"
+                  },
+                  "say": "untung Rp80.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "rugi Rp80.000"
+                  },
+                  "say": "rugi Rp80.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp200.000"
+                  },
+                  "say": "untung Rp200.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "untung Rp120.000"
+                  },
+                  "say": "untung Rp120.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Modal 50 × 8.000 = 400.000. Hasil jual 40 × 12.000 = 480.000. Untung 80.000."
+            },
+            {
+              "prompt": "Sebuah barang dijual Rp90.000 dan pedagang rugi 10%. Harga belinya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp100.000"
+                  },
+                  "say": "Rp100.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp81.000"
+                  },
+                  "say": "Rp81.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp99.000"
+                  },
+                  "say": "Rp99.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp110.000"
+                  },
+                  "say": "Rp110.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Harga jual = 90% harga beli. 90.000 : 90 × 100 = 100.000."
+            },
+            {
+              "prompt": "Gaji Pak Budi Rp5.000.000. Bagian gaji di atas Rp4.500.000 dikenai pajak 5%. Gaji bersihnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.975.000"
+                  },
+                  "say": "Rp4.975.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.750.000"
+                  },
+                  "say": "Rp4.750.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.950.000"
+                  },
+                  "say": "Rp4.950.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp4.775.000"
+                  },
+                  "say": "Rp4.775.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kena pajak 500.000. Pajak 5% × 500.000 = 25.000. Bersih 5.000.000 − 25.000 = 4.975.000."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

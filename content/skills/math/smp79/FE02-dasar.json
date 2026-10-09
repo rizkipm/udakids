@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.fe2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 2,
+  "title": "Teori bilangan lanjutan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [101, 999],
+      "b": [101, 999],
+      "c": [10, 99],
+      "m": [7, 13]
+    },
+    "prompt": "Sisa pembagian {a} × {b} + {c} oleh {m} adalah …",
+    "answer": "(a * b + c) % m",
+    "distractors": [
+      {
+        "expr": "(a + b + c) % m",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "(a * b) % m",
+        "tag": "lupa-c"
+      },
+      {
+        "expr": "(a % m) * (b % m) + c % m",
+        "tag": "lupa-sisa-akhir"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a} bersisa {=a%m}, {b} bersisa {=b%m}, {c} bersisa {=c%m} jika dibagi {m}. {=a%m} × {=b%m} + {=c%m} = {=(a%m)*(b%m)+c%m}, sisanya {answer}."
+  }
+}

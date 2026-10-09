@@ -1,0 +1,47 @@
+{
+  "id": "sains.smp79.fd7.hitung-dinamika-populasi",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 7,
+  "title": "Tumbuhan dan ekologi — Level 7 — Hitung: dinamika populasi",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tumbuhan dan ekologi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [80, 400],
+      "b": [20, 90],
+      "c": [10, 60],
+      "d": [5, 40],
+      "e": [5, 40]
+    },
+    "constraint": "d != e",
+    "prompt": "Populasi burung kuntul di hutan mangrove Wonorejo mula-mula {a} ekor. Selama setahun lahir {b} ekor, mati {c} ekor, datang {d} ekor, dan pergi {e} ekor. Populasi akhirnya … ekor.",
+    "answer": "a + b - c + d - e",
+    "unit": "ekor",
+    "distractors": [
+      {
+        "expr": "a + b - c",
+        "tag": "lupa-migrasi"
+      },
+      {
+        "expr": "a + b - c - d + e",
+        "tag": "migrasi-tertukar"
+      },
+      {
+        "expr": "a + b + c + d + e",
+        "tag": "semua-ditambah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Populasi akhir = awal + kelahiran − kematian + imigrasi − emigrasi = {a} + {b} − {c} + {d} − {e} = {answer} ekor."
+  }
+}

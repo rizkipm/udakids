@@ -1,0 +1,59 @@
+{
+  "id": "math.sd56.fh7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 7,
+  "title": "Statistika sederhana — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": {
+        "values": [20, 25, 50]
+      },
+      "a": [2, 12],
+      "b": [2, 12],
+      "c": [2, 12]
+    },
+    "derived": {
+      "d": "n - a - b - c"
+    },
+    "constraint": "d >= 1",
+    "prompt": "Diagram batang menunjukkan cara {n} siswa berangkat ke sekolah. Persentase siswa yang bersepeda adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "labels": ["Sepeda", "Jalan kaki", "Motor", "Angkot"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "unit": "siswa"
+      }
+    ],
+    "answer": "a * 100 / n",
+    "unit": "%",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "banyak-siswa"
+      },
+      {
+        "expr": "100 - a * 100 / n",
+        "tag": "sisanya"
+      },
+      {
+        "expr": "a * 100 / (n - a)",
+        "tag": "dibagi-sisa"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bersepeda {a} dari {n} siswa. {a} : {n} × 100% = {answer}."
+  }
+}

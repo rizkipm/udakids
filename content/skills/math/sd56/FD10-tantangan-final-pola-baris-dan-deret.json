@@ -1,0 +1,543 @@
+{
+  "id": "math.sd56.fd10.tantangan-final-pola-baris-dan-deret",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 10,
+  "title": "Pola, baris, dan deret — Level 10 — Tantangan final pola, baris, dan deret",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 30],
+            "b": [3, 12],
+            "k": [8, 40]
+          },
+          "derived": {
+            "t": "a + (k - 1) * b"
+          },
+          "prompt": "Barisan {a}, {=a+b}, {=a+2*b}, {=a+3*b}, … Bilangan {t} adalah suku ke-…",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "k - 1",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "t / b",
+              "tag": "dibagi-beda"
+            }
+          ],
+          "choices": 4,
+          "explain": "({t} − {a}) : {b} = {=k-1}. Ditambah 1 karena dihitung dari suku pertama: suku ke-{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 20],
+            "b": [2, 6],
+            "n": [8, 20]
+          },
+          "prompt": "{a} + {=a+b} + {=a+2*b} + … + {=a+(n-1)*b} = … (ada {n} suku)",
+          "answer": "n * (2 * a + (n - 1) * b) / 2",
+          "distractors": [
+            {
+              "expr": "n * (2 * a + (n - 1) * b)",
+              "tag": "lupa-bagi-2"
+            },
+            {
+              "expr": "(n - 1) * (2 * a + (n - 1) * b) / 2",
+              "tag": "kurang-satu-suku"
+            },
+            {
+              "expr": "n * (a + (n - 1) * b)",
+              "tag": "suku-akhir-kali-n"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah = banyak suku × (suku awal + suku akhir) : 2 = {n} × ({a} + {=a+(n-1)*b}) : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [2, 3, 4, 5]
+            },
+            "n": [10, 50]
+          },
+          "prompt": "Tabel menunjukkan banyak batang korek api yang dipakai untuk membuat pola bangun berjajar. Pola ke-{n} memakai … batang.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Pola ke-", "1", "2", "3", "4"],
+              "rows": [["Batang korek", "=k+1", "=2*k+1", "=3*k+1", "=4*k+1"]]
+            }
+          ],
+          "answer": "k * n + 1",
+          "distractors": [
+            {
+              "expr": "k * n",
+              "tag": "lupa-batang-awal"
+            },
+            {
+              "expr": "(k + 1) * n",
+              "tag": "pola-1-dikali"
+            },
+            {
+              "expr": "k * n + k",
+              "tag": "tambah-beda"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap pola bertambah {k} batang, awalnya 1 batang. Pola ke-{n} = {k} × {n} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": [1, 30],
+            "n": [8, 25]
+          },
+          "prompt": "Barisan {=1+c}, {=4+c}, {=9+c}, {=16+c}, {=25+c}, … Suku ke-{n} adalah …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Suku ke-", "1", "2", "3", "4", "5"],
+              "rows": [["Nilai", "=1+c", "=4+c", "=9+c", "=16+c", "=25+c"]]
+            }
+          ],
+          "answer": "n * n + c",
+          "distractors": [
+            {
+              "expr": "25 + c + (n - 5) * 9",
+              "tag": "beda-tetap"
+            },
+            {
+              "expr": "n * n",
+              "tag": "tanpa-tambahan"
+            },
+            {
+              "expr": "(n + 1) * (n + 1) + c",
+              "tag": "bergeser"
+            }
+          ],
+          "choices": 4,
+          "explain": "Suku ke-n = n × n + {c} (1 + {c}, 4 + {c}, 9 + {c}, …). Suku ke-{n} = {=n*n} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Barisan 3, 7, 11, 15, … Suku ke-50 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "199"
+                  },
+                  "say": "199"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "200"
+                  },
+                  "say": "200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "203"
+                  },
+                  "say": "203"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "195"
+                  },
+                  "say": "195"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Beda 4. Suku ke-50 = 3 + 49 × 4 = 199."
+            },
+            {
+              "prompt": "1 + 2 + 3 + … + 100 = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5.050"
+                  },
+                  "say": "5.050"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5.000"
+                  },
+                  "say": "5.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5.100"
+                  },
+                  "say": "5.100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10.100"
+                  },
+                  "say": "10.100"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pasangkan 1 + 100, 2 + 99, …: ada 50 pasang, masing-masing 101. 50 × 101 = 5.050."
+            },
+            {
+              "prompt": "Barisan 2, 6, 18, 54, … Suku ke-6 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "486"
+                  },
+                  "say": "486"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "162"
+                  },
+                  "say": "162"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.458"
+                  },
+                  "say": "1.458"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "216"
+                  },
+                  "say": "216"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setiap suku dikali 3: 2, 6, 18, 54, 162, 486."
+            },
+            {
+              "prompt": "Barisan 1, 1, 2, 3, 5, 8, … (setiap suku = jumlah dua suku sebelumnya). Suku ke-10 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "say": "55"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "34"
+                  },
+                  "say": "34"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "89"
+                  },
+                  "say": "89"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "say": "45"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lanjutkan: 13, 21, 34, 55. Suku ke-10 = 55."
+            },
+            {
+              "prompt": "Pola huruf K, M, S, I, K, M, S, I, … berulang terus. Huruf ke-2026 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "M"
+                  },
+                  "say": "M"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "K"
+                  },
+                  "say": "K"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "S"
+                  },
+                  "say": "S"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "I"
+                  },
+                  "say": "I"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pola berulang setiap 4 huruf. 2026 : 4 = 506 sisa 2. Huruf ke-2 adalah M."
+            },
+            {
+              "prompt": "Pola persegi kecil: pola ke-1 ada 1, pola ke-2 ada 4, pola ke-3 ada 9, pola ke-4 ada 16. Pola ke-15 ada …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "225"
+                  },
+                  "say": "225"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "196"
+                  },
+                  "say": "196"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "256"
+                  },
+                  "say": "256"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pola ke-n berisi n × n persegi. 15 × 15 = 225."
+            },
+            {
+              "prompt": "Jumlah semua bilangan genap dari 2 sampai 50 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "650"
+                  },
+                  "say": "650"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "625"
+                  },
+                  "say": "625"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.300"
+                  },
+                  "say": "1.300"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "600"
+                  },
+                  "say": "600"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 25 bilangan genap. Jumlah = 25 × (2 + 50) : 2 = 650."
+            },
+            {
+              "prompt": "Barisan 4, 7, 12, 19, 28, … Suku berikutnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "39"
+                  },
+                  "say": "39"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37"
+                  },
+                  "say": "37"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "38"
+                  },
+                  "say": "38"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisihnya 3, 5, 7, 9, lalu 11. 28 + 11 = 39."
+            },
+            {
+              "prompt": "Rumus suku ke-n barisan 5, 8, 11, 14, … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3n + 2"
+                  },
+                  "say": "3n + 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3n + 5"
+                  },
+                  "say": "3n + 5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5n + 3"
+                  },
+                  "say": "5n + 3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "n + 3"
+                  },
+                  "say": "n + 3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Beda 3, jadi 3n + …. Untuk n = 1: 3 + 2 = 5. Rumusnya 3n + 2."
+            },
+            {
+              "prompt": "Di antara 7 dan 43 disisipkan 5 bilangan sehingga membentuk barisan aritmetika. Beda barisan itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sekarang ada 7 suku, jadi 6 lompatan. (43 − 7) : 6 = 6."
+            },
+            {
+              "prompt": "Baris pertama aula berisi 10 kursi, setiap baris berikutnya bertambah 2 kursi. Baris yang berisi 40 kursi adalah baris ke-…",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17"
+                  },
+                  "say": "17"
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 + (n − 1) × 2 = 40, maka n − 1 = 15 dan n = 16."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

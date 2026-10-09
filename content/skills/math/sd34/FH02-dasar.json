@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fh2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 2,
+  "title": "Teori bilangan sederhana — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [12, 90],
+      "y": [12, 90]
+    },
+    "constraint": "x < y && gcd(x, y) > 2 && gcd(x, y) < x",
+    "prompt": "FPB dari {x} dan {y} adalah …",
+    "answer": "gcd(x, y)",
+    "distractors": [
+      {
+        "expr": "lcm(x, y)",
+        "tag": "kpk"
+      },
+      {
+        "expr": "y - x",
+        "tag": "selisih"
+      },
+      {
+        "expr": "gcd(x, y) / 2",
+        "tag": "faktor-lebih-kecil"
+      }
+    ],
+    "choices": 4,
+    "explain": "Cari faktor terbesar yang membagi {x} dan {y} tanpa sisa: {answer}."
+  }
+}

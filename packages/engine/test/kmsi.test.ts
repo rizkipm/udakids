@@ -1,8 +1,10 @@
+import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   EN_WORDS,
   KMSI_POINTS,
   PASS_SCORE,
+  catalogSchema,
   checkAnswer,
   enWordsOf,
   generateItem,
@@ -171,4 +173,67 @@ describe('English: topik transport (D-074)', () => {
       for (const x of transportOnly) expect(said).not.toContain(`"${x.word}"`);
     }
   });
+});
+
+// Level 1–4: Matematika 8 materi FA–FH (D-080), Sains 9 materi FA–FI (D-084), English 10 materi FA–FJ (D-085).
+// Level A (TK, `tkosn`): 4 materi FA–FD per mapel (D-086).
+const LEVEL_1_4 = ['sd12', 'sd34', 'sd56', 'smp79'];
+const TK = ['FA', 'FB', 'FC', 'FD'];
+const FINAL_BOOKS = [
+  ['math', ['FA', 'FB', 'FC', 'FD', 'FE', 'FF', 'FG', 'FH'], LEVEL_1_4],
+  ['sains', ['FA', 'FB', 'FC', 'FD', 'FE', 'FF', 'FG', 'FH', 'FI'], LEVEL_1_4],
+  ['english', ['FA', 'FB', 'FC', 'FD', 'FE', 'FF', 'FG', 'FH', 'FI', 'FJ'], LEVEL_1_4],
+  ['math', TK, ['tkosn']],
+  ['sains', TK, ['tkosn']],
+  ['english', TK, ['tkosn']],
+] as const;
+
+describe.each(FINAL_BOOKS)('KMSI Final Provinsi Jatim 2026: %s %j', (domain, FINAL, grades) => {
+  const root = new URL(`../../../content/skills/${domain}/`, import.meta.url);
+  const GROUP = 'KMSI · Kompetensi Matematika Sains dan Bahasa Inggris — Final Provinsi Jatim 2026';
+  for (const grade of grades) {
+    const dir = new URL(`${grade}/`, root);
+    const book = readdirSync(dir)
+      .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+      .map((f) => skillTemplateSchema.parse(JSON.parse(readFileSync(new URL(f, dir), 'utf8'))));
+    const catalog = catalogSchema.parse(
+      JSON.parse(readFileSync(new URL('_catalog.json', dir), 'utf8')),
+    );
+
+    it(`${grade}: ${FINAL.length} materi × 10 level + game GF + 3 mock, satu bagian Final, mock paling akhir`, () => {
+      for (const code of [...FINAL, 'GF']) {
+        expect(
+          book
+            .filter((t) => t.category === code)
+            .map((t) => t.order)
+            .sort((a, b) => a - b),
+        ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      }
+      for (const code of [...FINAL, 'GF', 'FY']) {
+        const c = catalog.categories.find((x) => x.code === code);
+        expect(c?.group, `${grade}/${code}`).toBe(GROUP);
+        expect(c?.standalone, `${grade}/${code}`).toBe(true);
+      }
+      expect(catalog.categories.at(-1)?.code).toBe('FY');
+      expect(catalog.categories.find((x) => x.code === 'FY')?.mock).toBe(true);
+    });
+
+    it(`${grade}: mock Final 25 soal 9/8/8 hanya dari materi Final, benar 4 / salah 0, tanpa KKM`, () => {
+      const mocks = book.filter((t) => t.category === 'FY');
+      expect(mocks).toHaveLength(3);
+      for (const m of mocks) {
+        const c = mockConfigSchema.parse(m.params);
+        expect(c.questions).toBe(25);
+        expect(c.plan).toEqual({ easy: 9, medium: 8, hard: 8 });
+        expect(c.points).toEqual(KMSI_POINTS);
+        expect(c.passPoints).toBeUndefined();
+        expect(c.categories).toEqual(FINAL);
+        for (let seed = 1; seed <= 5; seed++) {
+          const round = generateMockRound(m, book, { seed });
+          expect(round).toHaveLength(25);
+          for (const q of round) expect(FINAL).toContain(q.category);
+        }
+      }
+    });
+  }
 });

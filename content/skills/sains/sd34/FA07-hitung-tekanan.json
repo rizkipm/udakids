@@ -1,0 +1,56 @@
+{
+  "id": "sains.sd34.fa7.hitung-tekanan",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd34",
+  "category": "FA",
+  "order": 7,
+  "title": "Gaya, tekanan, energi — Level 7 — Hitung: tekanan pada lantai",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Gaya, tekanan, dan energi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "range": [20, 200],
+        "step": 10
+      },
+      "a": [2, 9]
+    },
+    "derived": {
+      "f": "p * a"
+    },
+    "words": {
+      "benda": ["lemari", "peti kayu", "meja batu", "akuarium", "karung beras"]
+    },
+    "prompt": "Sebuah {benda} beratnya {f} N diletakkan di lantai. Luas alasnya {a} m². Tekanan {benda} pada lantai adalah …",
+    "answer": "p",
+    "unit": "N/m²",
+    "distractors": [
+      {
+        "expr": "f * a",
+        "tag": "dikali"
+      },
+      {
+        "expr": "f - a",
+        "tag": "dikurang"
+      },
+      {
+        "expr": "f + a",
+        "tag": "ditambah"
+      },
+      {
+        "expr": "p * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Tekanan = gaya : luas bidang tekan = {f} : {a} = {answer}."
+  }
+}

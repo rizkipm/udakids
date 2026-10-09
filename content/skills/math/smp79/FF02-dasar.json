@@ -1,0 +1,55 @@
+{
+  "id": "math.smp79.ff2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 2,
+  "title": "Persamaan dan pertidaksamaan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [5, 40],
+      "u": [2, 9],
+      "v": [1, 8],
+      "p": {
+        "values": [2, 3, 4, 5, 6]
+      },
+      "q": {
+        "values": [2, 3, 4, 5, 6]
+      }
+    },
+    "derived": {
+      "a": "p * u - x",
+      "b": "x - q * v",
+      "c": "u - v"
+    },
+    "constraint": "p != q && a > 0 && b > 0 && u > v",
+    "prompt": "Nilai x yang memenuhi (x + {a})/{p} − (x − {b})/{q} = {c} adalah …",
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "(p * q * c - q * a + p * b) / (q - p)",
+        "tag": "tanda-minus"
+      },
+      {
+        "expr": "p * q * c + b - a",
+        "tag": "lupa-kali-silang"
+      },
+      {
+        "expr": "(c * p * q - a - b) / (q - p)",
+        "tag": "lupa-kali-penyebut"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kalikan {=p*q}: {q}(x + {a}) − {p}(x − {b}) = {=p*q*c}. Jadi {=q-p}x + {=q*a+p*b} = {=p*q*c} dan x = {answer}."
+  }
+}

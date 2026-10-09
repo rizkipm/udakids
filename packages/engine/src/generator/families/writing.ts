@@ -15,11 +15,17 @@ export const numeralTrace = defineFamily({
     'Tebalkan angka 0–10 mengikuti goresan bernomor (bisa dengan gambar benda untuk dihitung).',
   params: z.strictObject({
     values: range(0, 10).default([1, 3]),
-    guide: z.enum(['solid', 'dotted']).default('solid'),
+    /** `mixed` = kadang garis tebal, kadang titik-titik (D-083). */
+    guide: z.enum(['solid', 'dotted', 'mixed']).default('solid'),
     /** `name` = angkanya disebut; `count` = hitung bendanya dulu, lalu tebalkan angkanya. */
     ask: z.enum(['name', 'count']).default('name'),
     /** Tampilkan sekumpulan benda sebanyak angkanya (menghubungkan lambang dengan banyak benda). */
     showCount: z.boolean().default(true),
+    /**
+     * Gambar hitungan: benda (bawaan), jari tangan (P-MA-04, D-079), mata dadu (1–6) / bingkai sepuluh / titik
+     * (D-083), atau `mixed` = berganti-ganti supaya latihan menulis angka tidak monoton.
+     */
+    countWith: z.enum(['objects', 'fingers', 'die', 'frame', 'dots', 'mixed']).default('objects'),
     tolerance: z.number().int().min(6).max(24).default(16),
     maxSlips: z.number().int().min(0).max(9).default(3),
   }),
@@ -28,22 +34,53 @@ export const numeralTrace = defineFamily({
     if (p.ask === 'count' && n === 0) reject('hitung butuh paling sedikit 1 benda');
     const object = pickObject(rng, COUNTABLE_OBJECTS);
     const word = numberWord(n);
-    const stimulus: Visual[] =
-      p.showCount && n > 0
-        ? [{ kind: 'objects', object, count: n, layout: n <= 5 ? 'row' : 'rows' }]
-        : [];
+    const kinds = ['objects', 'fingers', 'frame', 'dots', ...(n <= 6 ? (['die'] as const) : [])];
+    const how = p.countWith === 'mixed' ? rng.pick(kinds) : p.countWith;
+    if (how === 'die' && n > 6) reject('dadu hanya sampai 6');
+    const fingers = how === 'fingers';
+    const counter = (): Visual => {
+      switch (how) {
+        case 'fingers':
+          return {
+            kind: 'fingers',
+            count: n,
+            tone: rng.int(0, 2),
+            ...(n > 5 ? { split: rng.int(n - 5, 5) } : rng.int(0, 1) === 1 ? { mirror: true } : {}),
+          };
+        case 'die':
+          return { kind: 'die', value: n };
+        case 'frame':
+          return { kind: 'frame', filled: n, size: 10 };
+        case 'dots':
+          return { kind: 'dots', count: n, layout: rng.pick(['row', 'ring', 'grid'] as const) };
+        default:
+          return { kind: 'objects', object, count: n, layout: n <= 5 ? 'row' : 'rows' };
+      }
+    };
+    const stimulus: Visual[] = p.showCount && n > 0 ? [counter()] : [];
     const counted = stimulus.length > 0;
+    // Jari/dadu/bingkai/titik: kata bendanya sesuai gambar (bukan nama benda acak).
+    const thing = fingers
+      ? 'jari'
+      : how === 'die'
+        ? 'mata dadu'
+        : how === 'frame'
+          ? 'kotak terisi'
+          : how === 'dots'
+            ? 'titik'
+            : noun(object);
+    const theThing = how === 'frame' ? 'kotak yang terisi' : `${thing}nya`;
     const prompt =
       p.ask === 'count'
-        ? `Hitung ${noun(object)}nya, lalu tebalkan angkanya.`
+        ? `Hitung ${theThing}, lalu tebalkan angkanya.`
         : counted
-          ? `Ada ${n} ${noun(object)}. Tebalkan angka ${n}.`
+          ? `Ada ${n} ${thing}. Tebalkan angka ${n}.`
           : `Tebalkan angka ${n}.`;
     const say =
       p.ask === 'count'
-        ? `Hitung ${noun(object)}nya. Lalu tebalkan angkanya, mulai dari titik nomor satu.`
+        ? `Hitung ${theThing}. Lalu tebalkan angkanya, mulai dari titik nomor satu.`
         : counted
-          ? `Ada ${word} ${noun(object)}. Ayo tebalkan angka ${word}, mulai dari titik nomor satu.`
+          ? `Ada ${word} ${thing}. Ayo tebalkan angka ${word}, mulai dari titik nomor satu.`
           : n === 0
             ? 'Ini angka nol. Nol artinya tidak ada. Ayo tebalkan, mulai dari titik nomor satu.'
             : `Ini angka ${word}. Ayo tebalkan, mulai dari titik nomor satu.`;
@@ -55,7 +92,7 @@ export const numeralTrace = defineFamily({
       interaction: {
         type: 'trace',
         glyph: glyphOf(n).id,
-        guide: p.guide,
+        guide: p.guide === 'mixed' ? (rng.chance(0.5) ? 'solid' : 'dotted') : p.guide,
         tolerance: p.tolerance,
         maxSlips: p.maxSlips,
       },

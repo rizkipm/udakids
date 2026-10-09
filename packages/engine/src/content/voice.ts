@@ -152,37 +152,93 @@ export type VoiceLang = 'id-ID' | 'en-GB';
  * - Buku English jenjang lain (belum ada): seluruhnya British English (D-059).
  * - Buku lain: Indonesia dengan gaya admin.
  */
-export type VoiceProfile = { lang: VoiceLang; style?: string };
+export type VoiceProfile = {
+  lang: VoiceLang;
+  style?: string;
+  /** Selisih kecepatan dari pengaturan admin (mis. −0,05 untuk TK), dibatasi 0,7–1,2. */
+  rateDelta?: number;
+};
+
+/**
+ * Arahan gaya bicara (D-087). Model Gemini-TTS mengikuti peran di arahan: menyebut "robot" membuat suara
+ * datar dan kaku, jadi arahan menggambarkan PEMBACA MANUSIA (kakak/guru) dengan intonasi wajar. Nama Momo
+ * tetap dipakai di aplikasi, tetapi suaranya suara manusia yang ramah. Satu gaya per jenjang supaya soal
+ * SMP tidak terdengar kekanak-kanakan.
+ */
+export const VOICE_STYLE_TK =
+  'Bacakan seperti kakak pengasuh perempuan yang ramah sedang membacakan soal untuk anak TK. Suara manusia yang hangat dan ceria, bicara santai seperti mengobrol, intonasi naik-turun yang wajar, jeda singkat di setiap koma dan titik, sedikit lebih pelan dari bicara biasa. Pertanyaan diucapkan dengan nada bertanya. Jangan terdengar seperti robot, mesin, atau penyiar.';
+export const VOICE_STYLE_SD =
+  'Bacakan seperti guru SD perempuan yang ramah dan bersemangat. Suara manusia yang natural dan hangat, kecepatan bicara biasa, intonasi hidup, jeda wajar di koma dan titik, nada bertanya pada pertanyaan. Ucapkan angka dan istilah dengan jelas. Jangan terdengar seperti robot, mesin, atau penyiar berita.';
+export const VOICE_STYLE_SMP =
+  'Bacakan seperti guru SMP perempuan yang ramah dan tenang. Suara manusia yang natural, kecepatan bicara biasa, intonasi wajar seperti menjelaskan di kelas, jeda wajar di koma dan titik. Ucapkan angka, satuan, dan istilah dengan jelas. Jangan terdengar seperti robot, mesin, atau kekanak-kanakan.';
+
+export type VoiceStage = 'tk' | 'sd' | 'smp';
+/** Jenjang dari id skill (`domain.grade.…`): PAUD/TK, SD, atau SMP. */
+export const voiceStageOf = (skillId: string): VoiceStage => {
+  const grade = skillId.split('.')[1] ?? '';
+  if (grade === 'smp79') return 'smp';
+  if (grade === 'prek' || grade === 'tk' || grade === 'tkosn') return 'tk';
+  return 'sd';
+};
+const STAGE_STYLE: Record<VoiceStage, string> = {
+  tk: VOICE_STYLE_TK,
+  sd: VOICE_STYLE_SD,
+  smp: VOICE_STYLE_SMP,
+};
+const stageRate = (stage: VoiceStage) => (stage === 'tk' ? -0.05 : 0);
 
 /** Narasi Indonesia dengan kata English yang dilafalkan jelas (English Pra-TK). */
 export const ID_EN_VOICE_STYLE =
-  'Kamu Momo, robot sahabat anak usia 3–6 tahun. Bicara dalam Bahasa Indonesia dengan suara perempuan yang ceria, lembut, dan hangat, pelan dan jelas seperti guru TK. Kata, huruf, dan kalimat bahasa Inggris di dalamnya ucapkan dengan lafal British English yang jelas dan pelan; huruf Inggris disebut dengan nama hurufnya dalam bahasa Inggris. Jangan pernah terdengar marah atau kecewa.';
+  'Bacakan seperti guru TK perempuan yang ramah: suara manusia yang hangat dan ceria, bicara santai dalam Bahasa Indonesia dengan intonasi wajar dan jeda singkat di koma dan titik. Kata, huruf, dan kalimat bahasa Inggris di dalamnya ucapkan dengan lafal British English yang jelas; huruf Inggris disebut dengan nama hurufnya dalam bahasa Inggris. Jangan terdengar seperti robot atau mesin, dan jangan pernah terdengar marah atau kecewa.';
 /** Kata/huruf English pada kartu pilihan: satu kata, sangat jelas. */
 export const ENGLISH_WORD_STYLE =
   'Say this English word or letter once, slowly and very clearly, in a warm, bright and friendly female voice, like a kind kindergarten teacher speaking to a 4-year-old. Use clear British English pronunciation. Do not add any other words.';
 /** Arahan gaya untuk soal yang seluruhnya English (buku English di atas Pra-TK). */
 export const ENGLISH_VOICE_STYLE =
-  'You are Momo, a cheerful and gentle robot friend for children aged 4 to 8. Speak clear, slow British English with careful pronunciation of letters, sounds, and words, in a warm female voice. Sound warm and encouraging, never disappointed. If a sentence is in Indonesian (written in brackets), say that sentence in natural Indonesian.';
+  'Read this like a friendly, warm female English teacher talking to her pupils: a natural human voice, conversational pace, lively intonation, short pauses at commas and full stops, a rising tone on questions. Use clear British English pronunciation. Never sound robotic, mechanical, or like a news reader, and never sound disappointed. If a sentence is in Indonesian (written in brackets), say that sentence in natural Indonesian.';
 
 export const voiceProfileOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceProfile => {
-  if (!skillId.startsWith('english.')) return { lang: 'id-ID' };
+  const stage = voiceStageOf(skillId);
+  const rateDelta = stageRate(stage);
+  // Buku selain English: Bahasa Indonesia dengan gaya per jenjang (D-087).
+  if (!skillId.startsWith('english.'))
+    return { lang: 'id-ID', style: STAGE_STYLE[stage], rateDelta };
   if (part === 'choice') return { lang: 'en-GB', style: ENGLISH_WORD_STYLE };
   // Pra-TK dan TK Olimpiade (D-062, D-071): perintah Bahasa Indonesia dengan kata English di dalamnya.
   if (skillId.startsWith('english.prek.') || skillId.startsWith('english.tkosn.'))
-    return { lang: 'id-ID', style: ID_EN_VOICE_STYLE };
+    return { lang: 'id-ID', style: ID_EN_VOICE_STYLE, rateDelta };
   return { lang: 'en-GB', style: ENGLISH_VOICE_STYLE };
 };
 export const voiceLangOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceLang =>
   voiceProfileOf(skillId, part).lang;
 
-/** Pengaturan suara untuk satu profil: model, nama suara, dan kecepatan dari admin; gaya mengikuti profil. */
+/**
+ * Pengaturan suara untuk satu profil: model, nama suara, dan kecepatan dari admin; gaya mengikuti profil,
+ * kecepatan digeser `rateDelta` (TK sedikit lebih pelan). Kalimat Momo umum (tanpa profil) memakai gaya admin.
+ */
 export const voiceSettingsFor = (s: VoiceSettings, p: VoiceProfile | VoiceLang): VoiceSettings => {
-  const profile =
+  const profile: VoiceProfile =
     typeof p === 'string' ? { lang: p, ...(p === 'en-GB' && { style: ENGLISH_VOICE_STYLE }) } : p;
-  return profile.style ? { ...s, style: profile.style } : s;
+  if (!profile.style && !profile.rateDelta) return s;
+  const rate = profile.rateDelta
+    ? Math.round(Math.min(1.2, Math.max(0.7, s.rate + profile.rateDelta)) * 100) / 100
+    : s.rate;
+  return { ...s, ...(profile.style && { style: profile.style }), rate };
 };
 
-/** Pengaturan suara Momo (admin). Model & nama suara Gemini-TTS di Google Cloud Text-to-Speech. */
+/**
+ * Model suara Google Cloud Text-to-Speech (D-087):
+ * - `chirp3-hd` — suara generasi baru yang natural (nama suara `id-ID-Chirp3-HD-<suara>`), cukup API key biasa;
+ *   TIDAK menerima arahan gaya (gaya per jenjang diabaikan, kecepatan & naskah ucapan tetap berlaku).
+ * - `gemini-2.5-flash-tts` / `gemini-2.5-pro-tts` — menerima arahan gaya, tetapi butuh Agent Platform API dan kunci
+ *   yang terikat service account.
+ */
+export const CHIRP3_HD_MODEL = 'chirp3-hd';
+/** Model yang bisa dipilih admin: hanya Chirp 3 HD (D-091 — semua suara aplikasi memakai Chirp 3 HD). */
+export const VOICE_MODELS = [CHIRP3_HD_MODEL] as const;
+export const isChirpModel = (model: string) => /^chirp/i.test(model.trim());
+
+/** Pengaturan suara Momo (admin). Model & nama suara Google Cloud Text-to-Speech. */
 export const voiceSettingsSchema = z.strictObject({
   enabled: z.boolean(),
   model: z.string().trim().min(3).max(60),
@@ -194,13 +250,34 @@ export const voiceSettingsSchema = z.strictObject({
 });
 export type VoiceSettings = z.infer<typeof voiceSettingsSchema>;
 
+/** Gaya bawaan lama (sebelum D-087); `upgradeVoiceSettings` menggantinya dengan gaya baru. */
+export const LEGACY_VOICE_STYLE =
+  'Kamu Momo, robot sahabat anak usia 5–8 tahun. Bicara dalam Bahasa Indonesia dengan nada ceria, lembut, dan hangat; pelan dan jelas; tersenyum saat bicara; tidak pernah terdengar marah atau kecewa.';
+
+/** Gaya kalimat Momo umum (perintah, pujian, skor) — dipakai semua jenjang. */
+export const VOICE_STYLE_DEFAULT =
+  'Bacakan seperti kakak perempuan yang ramah dan ceria berbicara kepada anak SD: suara manusia yang natural dan hangat, bicara santai seperti mengobrol, intonasi hidup, jeda wajar di koma dan titik, tersenyum saat bicara. Jangan terdengar seperti robot, mesin, atau penyiar, dan jangan pernah terdengar marah atau kecewa.';
+
 export const DEFAULT_VOICE_SETTINGS: VoiceSettings = {
   enabled: true,
-  model: 'gemini-2.5-flash-tts',
+  model: CHIRP3_HD_MODEL,
   voice: 'Leda',
-  style:
-    'Kamu Momo, robot sahabat anak usia 5–8 tahun. Bicara dalam Bahasa Indonesia dengan nada ceria, lembut, dan hangat; pelan dan jelas; tersenyum saat bicara; tidak pernah terdengar marah atau kecewa.',
-  rate: 0.95,
+  style: VOICE_STYLE_DEFAULT,
+  rate: 1,
+};
+
+/**
+ * Pengaturan admin yang masih memakai gaya bawaan lama ("robot", pelan) dinaikkan ke bawaan baru (D-087).
+ * Gaya yang sudah disunting admin tidak disentuh.
+ */
+export const upgradeVoiceSettings = (s: VoiceSettings): VoiceSettings => {
+  const styled =
+    s.style.trim() === LEGACY_VOICE_STYLE
+      ? { ...s, style: VOICE_STYLE_DEFAULT, rate: s.rate === 0.95 ? 1 : s.rate }
+      : s;
+  // D-091: semua suara memakai Chirp 3 HD. Pengaturan lama yang masih Gemini dipindah ke Chirp 3 HD; nama
+  // suara (Leda, Kore, …) sama di kedua model, jadi tetap dipakai.
+  return isChirpModel(styled.model) ? styled : { ...styled, model: CHIRP3_HD_MODEL };
 };
 
 export const voiceLinesUpdateSchema = z.strictObject({

@@ -107,3 +107,37 @@ describe('game worksheet', () => {
     expect(container.querySelectorAll('.choice-text.is-letter').length).toBeGreaterThan(1);
   });
 });
+
+describe('lihat sekilas, garis, uang kertas (D-081)', () => {
+  it('gambar soal ditutup setelah sebentar; "Lihat lagi" membukanya, tanpa batas waktu menjawab', () => {
+    vi.useFakeTimers();
+    const it = item('subitize', { mode: 'dots', values: [3, 3], peek: 1500 });
+    const onAnswer = vi.fn();
+    const { container } = render(<ItemPlayer item={it} onAnswer={onAnswer} />);
+    expect(container.querySelector('.peek-cover')).toBeNull();
+    act(() => {
+      vi.advanceTimersByTime(1600);
+    });
+    expect(container.querySelector('.item-stimulus.is-hidden')).not.toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Lihat lagi' }));
+    expect(container.querySelector('.item-stimulus.is-hidden')).toBeNull();
+    // Masih bisa menjawab kapan saja.
+    act(() => {
+      vi.advanceTimersByTime(60_000);
+    });
+    fireEvent.click(screen.getAllByRole('button', { name: /\b3\b|tiga/i })[0]!);
+    expect(onAnswer.mock.calls[0]![0].correct).toBe(true);
+  });
+
+  it('kartu garis dan uang kertas tergambar', () => {
+    const { container } = play('stroke-find', { strokes: ['tegak', 'datar', 'zigzag'] });
+    expect(container.querySelectorAll('.choice svg path').length).toBeGreaterThan(2);
+    const note = render(
+      <ItemPlayer
+        item={{ ...item('fingers', { mode: 'count' }), stimulus: [{ kind: 'note', value: 5000 }] }}
+        mode="preview"
+      />,
+    );
+    expect(note.container.textContent).toContain('Rp5.000');
+  });
+});

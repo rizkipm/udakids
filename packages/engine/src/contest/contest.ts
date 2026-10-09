@@ -3,6 +3,7 @@ import { z } from 'zod';
 import {
   checkAnswer,
   type AnswerValue,
+  type Arrangement,
   type Choice,
   type Interaction,
   type Item,
@@ -61,7 +62,7 @@ export const CONTEST_GRACE_MS = 5_000;
 
 export type PublicChoice = Omit<Choice, 'tag'>;
 export type PublicInteraction =
-  | { type: 'pick-one'; choices: PublicChoice[]; arrangement?: 'row' | 'column' | 'grid' }
+  | { type: 'pick-one'; choices: PublicChoice[]; arrangement?: Arrangement }
   | { type: 'tap-all'; choices: PublicChoice[]; style?: 'balloons' }
   | { type: 'order'; choices: PublicChoice[] }
   | { type: 'group'; groups: PublicChoice[]; items: PublicChoice[] }

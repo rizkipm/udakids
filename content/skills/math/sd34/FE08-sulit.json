@@ -1,0 +1,54 @@
+{
+  "id": "math.sd34.fe8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 8,
+  "title": "Tabel dan diagram — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 60],
+      "b": [10, 60],
+      "c": [10, 60]
+    },
+    "constraint": "(a + c) % 2 == 0",
+    "prompt": "Diagram menunjukkan kelereng Ani, Budi, dan Citra. Kelereng Dodi setengah dari jumlah kelereng Ani dan Citra. Jumlah kelereng keempat anak adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Kelereng",
+        "labels": ["Ani", "Budi", "Citra"],
+        "values": ["=a", "=b", "=c"],
+        "unit": "butir"
+      }
+    ],
+    "answer": "a + b + c + (a + c) / 2",
+    "unit": "butir",
+    "distractors": [
+      {
+        "expr": "a + b + c",
+        "tag": "tanpa-dodi"
+      },
+      {
+        "expr": "a + b + c + (a + c)",
+        "tag": "lupa-setengah"
+      },
+      {
+        "expr": "a + b + c + (a + b) / 2",
+        "tag": "salah-anak"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dodi = ({a} + {c}) : 2 = {=(a+c)/2}. Jumlah {a} + {b} + {c} + {=(a+c)/2} = {answer}."
+  }
+}

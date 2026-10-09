@@ -1,0 +1,47 @@
+{
+  "id": "math.sd12.fb7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FB",
+  "order": 7,
+  "title": "Nilai tempat dan lambang bilangan — Level 7 — Soal cerita lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": [1, 9],
+      "p": [0, 9],
+      "s": [1, 9]
+    },
+    "derived": {
+      "n": "r * 100 + p * 10 + s"
+    },
+    "constraint": "p != s",
+    "prompt": "Kakak menulis bilangan {n}. Adik menukar letak angka puluhan dan angka satuannya. Bilangan baru adalah …",
+    "answer": "r * 100 + s * 10 + p",
+    "distractors": [
+      {
+        "expr": "n",
+        "tag": "tidak-berubah"
+      },
+      {
+        "expr": "s * 100 + p * 10 + r",
+        "tag": "dibalik-semua"
+      },
+      {
+        "expr": "p * 100 + r * 10 + s",
+        "tag": "tukar-ratusan"
+      }
+    ],
+    "choices": 4,
+    "explain": "Angka ratusan {r} tetap. Puluhan menjadi {s}, satuan menjadi {p}: {answer}."
+  }
+}

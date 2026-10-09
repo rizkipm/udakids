@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fh3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 3,
+  "title": "Teori bilangan sederhana — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [4, 24],
+      "y": [4, 24]
+    },
+    "constraint": "x < y && gcd(x, y) > 1 && y % x != 0",
+    "prompt": "KPK dari {x} dan {y} adalah …",
+    "answer": "lcm(x, y)",
+    "distractors": [
+      {
+        "expr": "x * y",
+        "tag": "dikali"
+      },
+      {
+        "expr": "gcd(x, y)",
+        "tag": "fpb"
+      },
+      {
+        "expr": "lcm(x, y) * 2",
+        "tag": "kelipatan-lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Tulis kelipatan {y}: {y}, {=2*y}, {=3*y}, … Kelipatan pertama yang juga kelipatan {x} adalah {answer}."
+  }
+}

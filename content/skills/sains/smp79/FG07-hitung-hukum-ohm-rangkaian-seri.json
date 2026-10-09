@@ -1,0 +1,60 @@
+{
+  "id": "sains.smp79.fg7.hitung-hukum-ohm-rangkaian-seri",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 7,
+  "title": "Cahaya, listrik, dan kemagnetan — Level 7 — Hitung: hukum Ohm rangkaian seri",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Cahaya, listrik, dan kemagnetan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "i": [1, 6],
+      "r": [2, 20],
+      "q": [2, 20]
+    },
+    "derived": {
+      "v": "i * (r + q)"
+    },
+    "constraint": "r != q",
+    "prompt": "Dua hambatan {r} Ω dan {q} Ω disusun seri, lalu dihubungkan ke sumber tegangan {v} V. Kuat arus yang mengalir … A.",
+    "answer": "i",
+    "unit": "A",
+    "distractors": [
+      {
+        "expr": "v",
+        "tag": "tegangan"
+      },
+      {
+        "expr": "r + q",
+        "tag": "hambatan"
+      },
+      {
+        "expr": "i * 2",
+        "tag": "dua-kali"
+      },
+      {
+        "expr": "v / r",
+        "tag": "satu-hambatan"
+      },
+      {
+        "expr": "v / q",
+        "tag": "hambatan-lain"
+      },
+      {
+        "expr": "i * 3",
+        "tag": "tiga-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hambatan total = {r} + {q} = {=r+q} Ω. I = V : R = {v} : {=r+q} = {answer} A."
+  }
+}

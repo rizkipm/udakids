@@ -1,0 +1,55 @@
+{
+  "id": "math.smp79.ff6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 6,
+  "title": "Persamaan dan pertidaksamaan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": [16, 30],
+      "v": [4, 10],
+      "a": [1, 4],
+      "b": [1, 4],
+      "c": [1, 4],
+      "d": [1, 4],
+      "m": [2, 5],
+      "n": [2, 5]
+    },
+    "derived": {
+      "x": "500 * u",
+      "y": "500 * v",
+      "p": "a * x + b * y",
+      "q": "c * x + d * y"
+    },
+    "constraint": "a * d != b * c && (m != a || n != b) && (m != c || n != d)",
+    "prompt": "Di warung pecel Bu Sri, {a} porsi pecel dan {b} gelas es teh harganya Rp{p}, sedangkan {c} porsi pecel dan {d} gelas es teh harganya Rp{q}. Harga {m} porsi pecel dan {n} gelas es teh Rp …",
+    "answer": "m * x + n * y",
+    "distractors": [
+      {
+        "expr": "m * y + n * x",
+        "tag": "tertukar"
+      },
+      {
+        "expr": "p + q",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "x + y",
+        "tag": "satu-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dengan eliminasi: satu porsi pecel Rp{x} dan satu gelas es teh Rp{y}. {m} × {x} + {n} × {y} = {answer}."
+  }
+}

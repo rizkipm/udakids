@@ -1,0 +1,63 @@
+{
+  "id": "math.sd34.fc3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FC",
+  "order": 3,
+  "title": "Bangun datar — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Bangun datar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6],
+      "c": [1, 6]
+    },
+    "prompt": "Ada {a} segitiga, {b} persegi, dan {c} segi lima. Banyak sisi seluruhnya adalah …",
+    "stimulus": [
+      {
+        "kind": "shapes",
+        "items": [
+          {
+            "shape": "segitiga",
+            "color": "merah"
+          },
+          {
+            "shape": "persegi",
+            "color": "biru"
+          },
+          {
+            "shape": "segi-lima",
+            "color": "hijau"
+          }
+        ],
+        "layout": "row"
+      }
+    ],
+    "answer": "3 * a + 4 * b + 5 * c",
+    "distractors": [
+      {
+        "expr": "a + b + c",
+        "tag": "banyak-bangun"
+      },
+      {
+        "expr": "3 * a + 4 * b + 6 * c",
+        "tag": "segi-lima-enam-sisi"
+      },
+      {
+        "expr": "4 * (a + b + c)",
+        "tag": "semua-empat-sisi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Segitiga 3 sisi, persegi 4 sisi, segi lima 5 sisi: {=3*a} + {=4*b} + {=5*c} = {answer}."
+  }
+}

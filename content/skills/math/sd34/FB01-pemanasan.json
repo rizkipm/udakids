@@ -1,0 +1,67 @@
+{
+  "id": "math.sd34.fb1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 1,
+  "title": "Pecahan sederhana — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [3, 12],
+      "a": [1, 11]
+    },
+    "words": {
+      "m": ["bar", "circle"]
+    },
+    "constraint": "a < d - 1",
+    "prompt": "Bagian yang diarsir adalah …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=d",
+        "model": "{m}"
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "a",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "d - a",
+        "den": "d",
+        "tag": "bagian-tak-diarsir"
+      },
+      {
+        "num": "a",
+        "den": "d + 1",
+        "tag": "lebih-satu-bagian"
+      },
+      {
+        "num": "a + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      },
+      {
+        "num": "a",
+        "den": "d - 1",
+        "tag": "kurang-satu-bagian"
+      }
+    ],
+    "choices": 4,
+    "explain": "Ada {d} bagian sama besar dan {a} bagian diarsir, jadi pecahannya {answer}."
+  }
+}

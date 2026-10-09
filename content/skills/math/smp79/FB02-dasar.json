@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fb2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 2,
+  "title": "Geometri — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": {
+        "values": [0, 1, 2, 3, 4, 5]
+      },
+      "k": [1, 5]
+    },
+    "derived": {
+      "a": "k * ((t == 0) * 3 + (t == 1) * 5 + (t == 2) * 8 + (t == 3) * 7 + (t == 4) * 20 + (t == 5) * 9)",
+      "b": "k * ((t == 0) * 4 + (t == 1) * 12 + (t == 2) * 15 + (t == 3) * 24 + (t == 4) * 21 + (t == 5) * 40)",
+      "c": "k * ((t == 0) * 5 + (t == 1) * 13 + (t == 2) * 17 + (t == 3) * 25 + (t == 4) * 29 + (t == 5) * 41)"
+    },
+    "prompt": "Segitiga siku-siku memiliki sisi miring {c} cm dan salah satu sisi tegak {a} cm. Kelilingnya … cm.",
+    "answer": "a + b + c",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "a * b / 2",
+        "tag": "luas"
+      },
+      {
+        "expr": "2 * a + c",
+        "tag": "sisi-sama"
+      },
+      {
+        "expr": "2 * c",
+        "tag": "selisih-sisi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sisi tegak lain = √({c}² − {a}²) = {b}. Keliling = {a} + {b} + {c} = {answer}."
+  }
+}

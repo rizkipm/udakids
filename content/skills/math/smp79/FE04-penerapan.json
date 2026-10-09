@@ -1,0 +1,55 @@
+{
+  "id": "math.smp79.fe4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 4,
+  "title": "Teori bilangan lanjutan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 50],
+      "m": {
+        "values": [7, 9]
+      },
+      "n": [10, 200]
+    },
+    "derived": {
+      "r1": "a % m",
+      "r2": "(r1 * r1) % m",
+      "r3": "(r2 * r1) % m",
+      "r4": "(r3 * r1) % m",
+      "r5": "(r4 * r1) % m",
+      "r6": "(r5 * r1) % m",
+      "e": "n % 6"
+    },
+    "constraint": "gcd(a, m) == 1 && a % m != 1",
+    "prompt": "Sisa pembagian {a}^{n} oleh {m} adalah …",
+    "answer": "(e == 1) * r1 + (e == 2) * r2 + (e == 3) * r3 + (e == 4) * r4 + (e == 5) * r5 + (e == 0) * r6",
+    "distractors": [
+      {
+        "expr": "r1",
+        "tag": "sisa-basis"
+      },
+      {
+        "expr": "n % m",
+        "tag": "sisa-pangkat"
+      },
+      {
+        "expr": "(e == 1) * r2 + (e == 2) * r3 + (e == 3) * r4 + (e == 4) * r5 + (e == 5) * r6 + (e == 0) * r1",
+        "tag": "siklus-geser"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sisa {a}^1, {a}^2, … oleh {m}: {r1}, {r2}, {r3}, {r4}, {r5}, {r6}, lalu berulang tiap 6. {n} : 6 bersisa {e} (sisa 0 berarti urutan ke-6), jadi sisanya {answer}."
+  }
+}

@@ -3,7 +3,6 @@ import {
   levelStatuses,
   skippedStandalone,
   standaloneCodes,
-  groupStartCodes,
   passedLevels,
   totalPoints,
   totalTimeMs,
@@ -170,7 +169,7 @@ export function childInsights(input: {
     const order = book.categories.map((c) => c.code);
     const alone = standaloneCodes(book.categories);
     const statuses: Record<string, PlayStatus> = withAccess(
-      levelStatuses(order, inBook, results, alone, groupStartCodes(book.categories)),
+      levelStatuses(order, inBook, results),
       inBook,
       access,
     );

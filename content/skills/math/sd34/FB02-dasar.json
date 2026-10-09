@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.fb2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 2,
+  "title": "Pecahan sederhana — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 8],
+      "b": [2, 9],
+      "k": [2, 6]
+    },
+    "constraint": "a < b && gcd(a, b) == 1",
+    "prompt": "{a}/{b} = …/{=b*k}. Bilangan yang hilang adalah …",
+    "answer": "a * k",
+    "distractors": [
+      {
+        "expr": "a + k",
+        "tag": "ditambah"
+      },
+      {
+        "expr": "b * k - a",
+        "tag": "dikurangi"
+      },
+      {
+        "expr": "a + b * k - b",
+        "tag": "tambah-selisih-penyebut"
+      }
+    ],
+    "choices": 4,
+    "explain": "Penyebut dikali {k}, jadi pembilang juga dikali {k}: {a} × {k} = {answer}."
+  }
+}

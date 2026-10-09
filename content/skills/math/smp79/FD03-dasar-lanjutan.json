@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fd3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 3,
+  "title": "Pola, baris, dan deret bilangan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "r": {
+        "values": [2, 3]
+      },
+      "n": [5, 8]
+    },
+    "derived": {
+      "rpa": "(n == 3) * 4 + (n == 4) * 8 + (n == 5) * 16 + (n == 6) * 32 + (n == 7) * 64 + (n == 8) * 128 + (n == 9) * 256",
+      "rpb": "(n == 3) * 9 + (n == 4) * 27 + (n == 5) * 81 + (n == 6) * 243 + (n == 7) * 729 + (n == 8) * 2187 + (n == 9) * 6561",
+      "rp": "(r == 2) * rpa + (r == 3) * rpb"
+    },
+    "prompt": "Suku ke-{n} barisan geometri {a}, {=a*r}, {=a*r*r}, … adalah …",
+    "answer": "a * rp",
+    "distractors": [
+      {
+        "expr": "a * rp * r",
+        "tag": "pangkat-n"
+      },
+      {
+        "expr": "a * rp / r",
+        "tag": "pangkat-n-2"
+      },
+      {
+        "expr": "a + (n - 1) * (a * r - a)",
+        "tag": "dianggap-aritmetika"
+      }
+    ],
+    "choices": 4,
+    "explain": "Rasio = {r}. U{n} = {a} × {r}^{=n-1} = {a} × {rp} = {answer}."
+  }
+}

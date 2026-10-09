@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fg3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 3,
+  "title": "Perbandingan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d1": [2, 30],
+      "s1": {
+        "values": [200000, 250000, 400000, 500000, 1000000, 2000000]
+      },
+      "s2": {
+        "values": [200000, 250000, 400000, 500000, 1000000, 2000000]
+      }
+    },
+    "constraint": "s1 != s2 && (d1 * s1) % s2 == 0",
+    "prompt": "Jarak dua kota pada peta berskala 1 : {s1} adalah {d1} cm. Pada peta berskala 1 : {s2}, jarak kedua kota itu … cm.",
+    "answer": "d1 * s1 / s2",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "d1 * s2 / s1",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "d1",
+        "tag": "sama"
+      },
+      {
+        "expr": "d1 * s1 / 100000",
+        "tag": "jarak-km"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jarak sebenarnya {d1} × {s1} = {=d1*s1} cm. Pada peta kedua: {=d1*s1} : {s2} = {answer}."
+  }
+}

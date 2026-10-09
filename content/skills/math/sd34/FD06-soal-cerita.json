@@ -1,0 +1,76 @@
+{
+  "id": "math.sd34.fd6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FD",
+  "order": 6,
+  "title": "Bangun ruang — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "values": [20, 25, 30, 40, 50, 60]
+      },
+      "l": {
+        "values": [10, 20, 25, 30, 40]
+      },
+      "t": {
+        "values": [20, 30, 40, 50]
+      }
+    },
+    "words": {
+      "nama": [
+        "Alya",
+        "Raka",
+        "Dimas",
+        "Sari",
+        "Bayu",
+        "Putri",
+        "Nina",
+        "Adit",
+        "Tegar",
+        "Wulan",
+        "Fajar",
+        "Laras"
+      ]
+    },
+    "constraint": "(p * l * t) % 1000 == 0",
+    "prompt": "Akuarium di rumah {nama} berbentuk balok berukuran {p} cm × {l} cm × {t} cm. Akuarium diisi air sampai penuh. Volume airnya adalah …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "cm"
+      }
+    ],
+    "answer": "p * l * t / 1000",
+    "unit": "liter",
+    "distractors": [
+      {
+        "expr": "p * l * t",
+        "tag": "lupa-ubah-satuan"
+      },
+      {
+        "expr": "p * l * t / 100",
+        "tag": "dibagi-100"
+      },
+      {
+        "expr": "p * l * t / 10000",
+        "tag": "dibagi-10000"
+      }
+    ],
+    "choices": 4,
+    "explain": "Volume {p} × {l} × {t} = {=p*l*t} cm³. 1 liter = 1.000 cm³, jadi {answer}."
+  }
+}

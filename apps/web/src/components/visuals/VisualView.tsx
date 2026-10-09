@@ -4,6 +4,7 @@ import {
   BODY_PARTS,
   OBJECTS,
   SAY_COLOR,
+  SENSES,
   SHAPES,
   SOLIDS,
   type Color,
@@ -17,6 +18,9 @@ import { OBJECT_ART, STRETCH_ART, isStretchable, type StretchArt } from './objec
 import { FONT, OUTLINE, PALETTE, TOKENS, shade } from './palette';
 import { Coin, FlatShape, SolidShape } from './shapes';
 import { BodyFigure } from './objects-esc';
+import { Fingers, fingersSize } from './hands';
+import { Banknote, GlyphLines, glyphBox } from './notes';
+import { FACE_H, FACE_W, FaceFigure, SenseIcon } from './senses';
 
 export type VisualViewProps = {
   visual: Visual;
@@ -714,12 +718,32 @@ function build(v: Visual, countStep?: number): Built {
         label: `${SHAPES[v.shape].say} ${SAY_COLOR[v.color]} ${SIZE_WORD[v.size]}`,
         body: <FlatShape shape={v.shape} color={v.color} size={v.size} rotate={v.rotate} />,
       };
+    case 'sense':
+      return {
+        w: 100,
+        h: 100,
+        label: `${SENSES[v.sense].say}, ${SENSES[v.sense].indra}`,
+        body: <SenseIcon sense={v.sense} />,
+      };
+    case 'face':
+      return {
+        w: FACE_W,
+        h: FACE_H,
+        label: v.sense ? `wajah anak, ${SENSES[v.sense].say} ditandai` : 'wajah anak',
+        body: <FaceFigure sense={v.sense} />,
+      };
     case 'body':
       return {
         w: 120,
         h: 160,
         label: v.part ? `anak, ${BODY_PARTS[v.part]} ditandai` : 'anak berdiri',
         body: <BodyFigure part={v.part} />,
+      };
+    case 'fingers':
+      return {
+        ...fingersSize(v.count),
+        label: `${v.count} jari`,
+        body: <Fingers count={v.count} tone={v.tone} split={v.split} mirror={v.mirror} />,
       };
     case 'die': {
       const fill = v.color ? PALETTE[v.color].fill : '#ffffff';
@@ -753,6 +777,19 @@ function build(v: Visual, countStep?: number): Built {
         h: 100,
         label: `${SOLIDS[v.solid].say} ${SAY_COLOR[v.color]}`,
         body: <SolidShape solid={v.solid} color={v.color} />,
+      };
+    case 'note':
+      return {
+        w: 200,
+        h: 100,
+        label: `uang kertas ${v.value} rupiah`,
+        body: <Banknote value={v.value} />,
+      };
+    case 'glyph':
+      return {
+        ...glyphBox(v.glyph),
+        label: `garis ${v.glyph}`,
+        body: <GlyphLines glyph={v.glyph} />,
       };
     case 'coin':
       return { w: 100, h: 100, label: `koin ${v.value} rupiah`, body: <Coin value={v.value} /> };

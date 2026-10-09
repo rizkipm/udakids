@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.ff8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 8,
+  "title": "Aritmetika sosial — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "range": [3000, 9000],
+        "step": 500
+      },
+      "p": {
+        "range": [1000, 3000],
+        "step": 500
+      }
+    },
+    "derived": {
+      "x": "3 * b + 2 * p",
+      "y": "b + 2 * p"
+    },
+    "constraint": "b != p",
+    "prompt": "Harga 3 buku dan 2 pensil Rp{x}. Harga 1 buku dan 2 pensil Rp{y}. Harga 1 buku adalah Rp…",
+    "answer": "b",
+    "distractors": [
+      {
+        "expr": "p",
+        "tag": "harga-pensil"
+      },
+      {
+        "expr": "x - y",
+        "tag": "lupa-dibagi-dua"
+      },
+      {
+        "expr": "(x - y) / 3",
+        "tag": "dibagi-tiga"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisih kedua belanjaan adalah 2 buku: {x} − {y} = {=x-y}. Harga 1 buku = {=x-y} : 2 = {answer}."
+  }
+}

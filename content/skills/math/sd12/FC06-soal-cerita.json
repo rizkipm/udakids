@@ -1,0 +1,65 @@
+{
+  "id": "math.sd12.fc6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 6,
+  "title": "Waktu — Level 6 — Soal cerita",
+  "tier": "intermediate",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [6, 14],
+      "m": {
+        "values": [10, 15, 20, 25, 30, 35, 40]
+      },
+      "d": {
+        "range": [55, 150],
+        "step": 5
+      }
+    },
+    "derived": {
+      "b": "floor((a * 60 + m + d) / 60)",
+      "n": "(a * 60 + m + d) % 60"
+    },
+    "constraint": "n >= 10",
+    "prompt": "Bus dari Surabaya berangkat pukul {a}.{m} dan tiba di Malang pukul {b}.{n}. Lama perjalanan bus … menit.",
+    "stimulus": [
+      {
+        "kind": "digital",
+        "hour": "=a",
+        "minute": "=m"
+      },
+      {
+        "kind": "digital",
+        "hour": "=b",
+        "minute": "=n"
+      }
+    ],
+    "answer": "d",
+    "distractors": [
+      {
+        "expr": "(b - a) * 100 + n - m",
+        "tag": "jam-100"
+      },
+      {
+        "expr": "d + 10",
+        "tag": "lebih-10"
+      },
+      {
+        "expr": "d - 10",
+        "tag": "kurang-10"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hitung maju dari pukul {a}.{m}: sampai pukul {b}.{n} ada {answer} menit (1 jam = 60 menit)."
+  }
+}

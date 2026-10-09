@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.fd8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 8,
+  "title": "Pola, baris, dan deret — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "c": [1, 30],
+      "n": [8, 25]
+    },
+    "prompt": "Barisan {=1+c}, {=4+c}, {=9+c}, {=16+c}, {=25+c}, … Suku ke-{n} adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Suku ke-", "1", "2", "3", "4", "5"],
+        "rows": [["Nilai", "=1+c", "=4+c", "=9+c", "=16+c", "=25+c"]]
+      }
+    ],
+    "answer": "n * n + c",
+    "distractors": [
+      {
+        "expr": "25 + c + (n - 5) * 9",
+        "tag": "beda-tetap"
+      },
+      {
+        "expr": "n * n",
+        "tag": "tanpa-tambahan"
+      },
+      {
+        "expr": "(n + 1) * (n + 1) + c",
+        "tag": "bergeser"
+      }
+    ],
+    "choices": 4,
+    "explain": "Suku ke-n = n × n + {c} (1 + {c}, 4 + {c}, 9 + {c}, …). Suku ke-{n} = {=n*n} + {c} = {answer}."
+  }
+}

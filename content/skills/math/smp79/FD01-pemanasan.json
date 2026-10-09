@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fd1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 1,
+  "title": "Pola, baris, dan deret bilangan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 40],
+      "b": [2, 9],
+      "p": [2, 5],
+      "q": [7, 12],
+      "n": [15, 40]
+    },
+    "derived": {
+      "up": "a + (p - 1) * b",
+      "uq": "a + (q - 1) * b"
+    },
+    "prompt": "Pada barisan aritmetika, suku ke-{p} adalah {up} dan suku ke-{q} adalah {uq}. Suku ke-{n} adalah …",
+    "answer": "a + (n - 1) * b",
+    "distractors": [
+      {
+        "expr": "a + n * b",
+        "tag": "lupa-kurang-satu"
+      },
+      {
+        "expr": "b * (n - 1)",
+        "tag": "lupa-suku-pertama"
+      },
+      {
+        "expr": "up + uq",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Beda = ({uq} − {up}) : ({q} − {p}) = {b}. Suku pertama = {up} − {=p-1} × {b} = {a}. U{n} = {a} + {=n-1} × {b} = {answer}."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "math.sd56.fd5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 5,
+  "title": "Pola, baris, dan deret — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "b": [2, 6],
+      "n": [8, 20]
+    },
+    "prompt": "{a} + {=a+b} + {=a+2*b} + … + {=a+(n-1)*b} = … (ada {n} suku)",
+    "answer": "n * (2 * a + (n - 1) * b) / 2",
+    "distractors": [
+      {
+        "expr": "n * (2 * a + (n - 1) * b)",
+        "tag": "lupa-bagi-2"
+      },
+      {
+        "expr": "(n - 1) * (2 * a + (n - 1) * b) / 2",
+        "tag": "kurang-satu-suku"
+      },
+      {
+        "expr": "n * (a + (n - 1) * b)",
+        "tag": "suku-akhir-kali-n"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah = banyak suku × (suku awal + suku akhir) : 2 = {n} × ({a} + {=a+(n-1)*b}) : 2 = {answer}."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "math.sd56.fa7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FA",
+  "order": 7,
+  "title": "Operasi bilangan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "values": [3, 4, 5]
+      },
+      "d": {
+        "values": [2, 3, 4]
+      },
+      "a": [1, 4],
+      "c": [1, 3],
+      "m": [1, 5]
+    },
+    "derived": {
+      "t": "m * b * d"
+    },
+    "words": {
+      "nama": ["Siti", "Ani", "Rini", "Tutik", "Endang"]
+    },
+    "constraint": "a < b && c < d && gcd(a, b) == 1 && gcd(c, d) == 1",
+    "prompt": "Bu {nama} punya {t} kg beras. Sebanyak {a}/{b} bagian dimasak untuk hajatan, lalu {c}/{d} dari sisanya diberikan kepada tetangga. Sisa beras sekarang … kg.",
+    "answer": "t * (b - a) * (d - c) / (b * d)",
+    "distractors": [
+      {
+        "expr": "t - t * a / b - t * c / d",
+        "tag": "dari-semula"
+      },
+      {
+        "expr": "t * (b - a) / b",
+        "tag": "satu-langkah"
+      },
+      {
+        "expr": "t * a * c / (b * d)",
+        "tag": "bagian-diberikan"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dimasak {a}/{b} × {t} = {=t*a/b} kg, sisa {=t*(b-a)/b} kg. Diberikan {c}/{d} × {=t*(b-a)/b} = {=t*(b-a)*c/(b*d)} kg. Sisa {answer}."
+  }
+}

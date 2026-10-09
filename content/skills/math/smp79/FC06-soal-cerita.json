@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.fc6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 6,
+  "title": "Aritmetika sosial — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [5, 50],
+      "d": {
+        "values": [10, 15, 20, 25, 30, 40, 50]
+      }
+    },
+    "derived": {
+      "h": "10000 * m"
+    },
+    "prompt": "Harga sebuah jaket Rp{h}. Toko memberi diskon {d}%, lalu harga setelah diskon dikenai PPN 11%. Harga yang dibayar Rp …",
+    "answer": "m * (100 - d) * 111",
+    "distractors": [
+      {
+        "expr": "100 * m * (111 - d)",
+        "tag": "persen-dijumlah"
+      },
+      {
+        "expr": "100 * m * (100 - d)",
+        "tag": "lupa-pajak"
+      },
+      {
+        "expr": "m * (100 - d) * 89",
+        "tag": "pajak-dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Setelah diskon: {h} × {=100-d}% = {=100*m*(100-d)}. Ditambah PPN 11%: {=100*m*(100-d)} × 111% = {answer}."
+  }
+}

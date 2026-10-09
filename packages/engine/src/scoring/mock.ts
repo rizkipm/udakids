@@ -176,9 +176,11 @@ export type MockBoardRow = { id: string; points: number; timeMs: number; nicknam
 /**
  * Papan peringkat satu Mock Test (D-072), gaya olimpiade: percobaan terbaik tiap anak, urut poin tertinggi →
  * waktu tercepat. Poin & waktu sama → posisi sama (1, 2, 2, 4); urutan tampil lalu nama panggilan.
+ * `byName` (KMSI Final, D-080): poin & waktu sama → abjad nama yang menentukan, jadi posisi selalu berbeda.
  */
 export function rankMockBoard<T extends MockBoardRow>(
   rows: readonly T[],
+  opts: { byName?: boolean } = {},
 ): (T & { position: number })[] {
   const sorted = [...rows].sort(
     (a, b) =>
@@ -187,7 +189,8 @@ export function rankMockBoard<T extends MockBoardRow>(
   let position = 0;
   return sorted.map((r, i) => {
     const prev = sorted[i - 1];
-    if (!prev || prev.points !== r.points || prev.timeMs !== r.timeMs) position = i + 1;
+    if (opts.byName || !prev || prev.points !== r.points || prev.timeMs !== r.timeMs)
+      position = i + 1;
     return { ...r, position };
   });
 }

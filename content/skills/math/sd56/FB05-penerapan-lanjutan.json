@@ -1,0 +1,63 @@
+{
+  "id": "math.sd56.fb5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 5,
+  "title": "Geometri — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "range": [30, 100],
+        "step": 10
+      },
+      "l": {
+        "range": [20, 60],
+        "step": 10
+      },
+      "t": {
+        "range": [20, 50],
+        "step": 10
+      }
+    },
+    "constraint": "p >= l",
+    "prompt": "Akuarium berbentuk balok seperti gambar diisi air sampai penuh. Volume air di dalamnya … liter.",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "cm"
+      }
+    ],
+    "answer": "p * l * t / 1000",
+    "unit": "liter",
+    "distractors": [
+      {
+        "expr": "p * l * t / 100",
+        "tag": "konversi"
+      },
+      {
+        "expr": "p * l * t",
+        "tag": "belum-diubah"
+      },
+      {
+        "expr": "p * l * t / 10000",
+        "tag": "konversi-lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "V = {p} × {l} × {t} = {=p*l*t} cm³. 1 liter = 1.000 cm³, jadi {answer}."
+  }
+}

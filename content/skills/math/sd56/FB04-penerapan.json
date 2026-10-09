@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fb4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 4,
+  "title": "Geometri — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [5, 20],
+      "l": [3, 12],
+      "t": [2, 10]
+    },
+    "constraint": "p > l",
+    "prompt": "Luas permukaan balok pada gambar adalah …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "cm"
+      }
+    ],
+    "answer": "2 * (p * l + p * t + l * t)",
+    "unit": "cm²",
+    "distractors": [
+      {
+        "expr": "p * l * t",
+        "tag": "volume"
+      },
+      {
+        "expr": "p * l + p * t + l * t",
+        "tag": "lupa-kali-2"
+      },
+      {
+        "expr": "2 * (p * l + p * t)",
+        "tag": "kurang-satu-pasang"
+      }
+    ],
+    "choices": 4,
+    "explain": "LP = 2 × (pl + pt + lt) = 2 × ({=p*l} + {=p*t} + {=l*t}) = {answer}."
+  }
+}

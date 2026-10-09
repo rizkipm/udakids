@@ -34,6 +34,11 @@ description: Buat skill template Pustaka Latihan (content/skills/<domain>/*.json
   (group `Mock Test KMSI · …`) berisi 3 mock. Config mock memakai `categories` (hanya materi lomba itu),
   `points` lomba (KMSI: benar 4, salah 0, kosong 0), `passPoints` = KKM (Level A 40 dari 20 soal; Level 1–4 72 dari
   30 soal), dan `rule` yang menjelaskan penilaian. Cek: `generateMockRound` menghasilkan jumlah soal penuh.
+- **Babak lanjutan lomba yang sama (mis. KMSI Final Provinsi Jatim, D-080):** bagian baru dengan keterangan
+  `— Final Provinsi <provinsi> <tahun>` (dikenali sebagai lomba "<singkatan> Final" di papan peringkat), materi
+  baru `FA`… (satu kode per butir kisi-kisi: Matematika FA–FH, Sains FA–FI, English FA–FJ) × 10 level, setiap level
+  bentuk soal berbeda (D-084, D-085), game `GF` (10 jenis berbeda, D-078), mock `FY` (25 soal 9/8/8, `categories` = semua materi Final,
+  tanpa `passPoints` bila tidak ada KKM). Materi babak sebelumnya tidak diubah.
 
 ## Verifikasi
 

@@ -1,0 +1,56 @@
+{
+  "id": "math.smp79.fe7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 7,
+  "title": "Teori bilangan lanjutan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [1, 500],
+      "p": {
+        "values": [3, 4, 5, 7, 8, 9]
+      },
+      "q": {
+        "values": [5, 7, 9, 11, 13]
+      },
+      "nn": [100, 300]
+    },
+    "derived": {
+      "lc": "lcm(p, q)",
+      "x0": "x % lc",
+      "r": "x % p",
+      "s": "x % q",
+      "ans": "x0 + lc * floor((nn - 1 - x0) / lc)"
+    },
+    "constraint": "gcd(p, q) == 1 && p < q && x0 > 0 && 2 * lc < nn",
+    "prompt": "Banyak kelereng Dimas kurang dari {nn}. Jika dihitung per {p} bersisa {r}, dan jika dihitung per {q} bersisa {s}. Banyak kelereng Dimas paling banyak …",
+    "answer": "ans",
+    "distractors": [
+      {
+        "expr": "ans - lc",
+        "tag": "bukan-terbesar"
+      },
+      {
+        "expr": "x0",
+        "tag": "terkecil"
+      },
+      {
+        "expr": "ans - p",
+        "tag": "kurang-p"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bilangan yang memenuhi berulang setiap KPK({p}, {q}) = {lc}: {x0}, {=x0+lc}, {=x0+2*lc}, … Yang terbesar di bawah {nn} adalah {answer}."
+  }
+}

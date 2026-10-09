@@ -1,0 +1,58 @@
+{
+  "id": "math.sd12.ff8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 8,
+  "title": "Tabel dan diagram — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 12],
+      "b": [2, 12],
+      "c": [2, 12],
+      "d": [2, 12]
+    },
+    "derived": {
+      "hi": "max(a, b, c, d)",
+      "lo": "min(a, b, c, d)"
+    },
+    "constraint": "hi > lo",
+    "prompt": "Diagram batang menunjukkan roti yang terjual. Penjualan hari Jumat sama dengan selisih penjualan terbanyak dan tersedikit. Jumlah roti terjual dari Senin sampai Jumat …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Roti terjual",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+        "values": ["=a*5", "=b*5", "=c*5", "=d*5"],
+        "unit": "roti"
+      }
+    ],
+    "answer": "(a + b + c + d) * 5 + (hi - lo) * 5",
+    "distractors": [
+      {
+        "expr": "(a + b + c + d) * 5",
+        "tag": "lupa-jumat"
+      },
+      {
+        "expr": "(a + b + c + d) * 5 + hi * 5",
+        "tag": "jumat-terbanyak"
+      },
+      {
+        "expr": "(hi - lo) * 5",
+        "tag": "jumat-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Senin–Kamis {=(a+b+c+d)*5}. Jumat {=hi*5} − {=lo*5} = {=(hi-lo)*5}. Jumlahnya {answer}."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "id": "math.sd34.ff5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 5,
+  "title": "Aritmetika sosial — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "values": [40000, 50000, 60000, 80000, 90000, 120000]
+      },
+      "p": {
+        "values": [10, 20, 25, 50]
+      },
+      "u": {
+        "values": [100000, 150000, 200000]
+      }
+    },
+    "words": {
+      "nama": [
+        "Alya",
+        "Raka",
+        "Dimas",
+        "Sari",
+        "Bayu",
+        "Putri",
+        "Nina",
+        "Adit",
+        "Tegar",
+        "Wulan",
+        "Fajar",
+        "Laras"
+      ]
+    },
+    "constraint": "u > h - h * p / 100",
+    "prompt": "Tas seharga Rp{h} mendapat diskon {p}%. {nama} membayar dengan uang Rp{u}. Uang kembaliannya Rp…",
+    "answer": "u - h + h * p / 100",
+    "distractors": [
+      {
+        "expr": "u - h",
+        "tag": "lupa-diskon"
+      },
+      {
+        "expr": "h * p / 100",
+        "tag": "besar-diskon"
+      },
+      {
+        "expr": "u - h * p / 100",
+        "tag": "kurangi-diskon"
+      }
+    ],
+    "choices": 4,
+    "explain": "Diskon {p}% dari {h} = {=h*p/100}. Harga bayar {=h-h*p/100}. Kembalian {u} − {=h-h*p/100} = {answer}."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.ff5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 5,
+  "title": "Persamaan dan pertidaksamaan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [2, 6],
+      "b": [1, 15],
+      "a": [0, 20],
+      "w": [10, 60]
+    },
+    "derived": {
+      "c": "a + w"
+    },
+    "prompt": "Banyak bilangan bulat x yang memenuhi {a} < {k}x + {b} ≤ {c} adalah …",
+    "answer": "floor((c - b) / k) - floor((a - b) / k)",
+    "distractors": [
+      {
+        "expr": "floor((c - b) / k) - floor((a - b) / k) + 1",
+        "tag": "termasuk-batas"
+      },
+      {
+        "expr": "floor((c - a) / k)",
+        "tag": "tanpa-b"
+      },
+      {
+        "expr": "c - a",
+        "tag": "tanpa-bagi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kurangi {b}: {=a-b} < {k}x ≤ {=c-b}. Bagi {k}: {=(a-b)/k} < x ≤ {=(c-b)/k}. Bilangan bulatnya ada {answer}."
+  }
+}

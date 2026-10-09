@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
 import {
   checkAnswer,
   isRetryGame,
@@ -18,6 +18,7 @@ import {
 import {
   SPEECH_BLOCKED,
   SPEECH_TROUBLE,
+  pushVoiceItem,
   speak,
   speakChoice,
   speakItem,
@@ -32,6 +33,7 @@ import { MemoryGame } from './games/MemoryGame';
 import { TraceBoard } from './games/TraceBoard';
 import { WordSearch } from './games/WordSearch';
 import { CrosswordGame } from './games/Crossword';
+import { FacePick } from './games/FacePick';
 import { FeedCat } from './games/FeedCat';
 import { HopGame } from './games/HopGame';
 import { JigsawGame } from './games/Jigsaw';
@@ -95,8 +97,8 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
 export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
-  const lang = voiceLangOf(item.skillId);
-  if (!tier) return speak(item.say ?? item.prompt, { lang });
+  // Tanpa tingkat (contoh soal, pratinjau): kalimat soal lengkap, suara Chirp per soal (D-091).
+  if (!tier) return speakItem(item, item.say ?? item.prompt);
   const spoken = spokenPrompt(item, tier);
   if (spoken.kind === 'item') return speakItem(item, spoken.text);
   speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
@@ -150,6 +152,13 @@ export function ItemPlayer({
     };
   }, [item]);
   const audioOnly = isAudioOnlyItem(item);
+
+  // Konteks suara (D-091): kalimat soal, kartu, dan game di soal ini boleh dibuatkan suara Chirp. Layout effect
+  // supaya terpasang sebelum suara pertama diputar.
+  useLayoutEffect(
+    () => pushVoiceItem({ skillId: item.skillId, seed: item.seed, band: item.band }),
+    [item.skillId, item.seed, item.band],
+  );
 
   useEffect(() => {
     setLocked(false);
@@ -223,11 +232,11 @@ export function ItemPlayer({
         </div>
       )}
       {item.stimulus.length > 0 && (
-        <div className="item-stimulus">
+        <PeekStimulus item={item} active={mode === 'play' && !!item.peek}>
           {item.stimulus.map((v, i) => (
             <VisualView key={i} visual={v} size={stimulusSize(v)} />
           ))}
-        </div>
+        </PeekStimulus>
       )}
       <div
         className={`interaction${result && showMarks ? (result.correct ? ' is-right' : ' is-wrong') : ''}`}
@@ -545,8 +554,31 @@ function PickOne({
   result,
 }: ViewProps<Extract<Interaction, { type: 'pick-one' }>>) {
   const [chosen, setChosen] = useState<string>();
+  const voiceItem = useContext(ItemVoice);
   useEffect(() => setChosen(undefined), [it]);
   const textual = it.choices.every((c) => c.visual.kind === 'word' || c.visual.kind === 'text');
+  if (it.arrangement === 'face')
+    return (
+      <FacePick
+        choices={it.choices}
+        chosen={chosen}
+        disabled={disabled}
+        marks={(c) =>
+          chosen === c.id && result
+            ? result.correct
+              ? 'right'
+              : 'wrong'
+            : showAnswer && c.id === it.answer
+              ? 'answer'
+              : undefined
+        }
+        onPick={(c) => {
+          speakChoice(voiceItem, c);
+          setChosen(c.id);
+          onSubmit(c.id);
+        }}
+      />
+    );
   return (
     <div
       className={`choices arrange-${it.arrangement ?? 'grid'}${textual ? ' choices-words' : ''}`}
@@ -1036,5 +1068,52 @@ function NumberLine({
         onClick={() => sel !== undefined && onSubmit(sel)}
       />
     </>
+  );
+}
+
+/**
+ * Lihat sekilas (P-MA-02, D-081): gambar soal tampil `item.peek` ms lalu ditutup kartu "?". Tombol "Lihat lagi"
+ * membukanya lagi sebentar, berapa kali pun — tidak ada batas waktu menjawab.
+ */
+function PeekStimulus({
+  item,
+  active,
+  children,
+}: {
+  item: Item;
+  active: boolean;
+  children: ReactNode;
+}) {
+  const [hidden, setHidden] = useState(false);
+  const [round, setRound] = useState(0);
+  useEffect(() => {
+    setHidden(false);
+    if (!active) return;
+    const id = window.setTimeout(() => setHidden(true), item.peek);
+    return () => window.clearTimeout(id);
+  }, [item, active, round]);
+  return (
+    <div className={`item-stimulus${active ? ' is-peek' : ''}${hidden ? ' is-hidden' : ''}`}>
+      <div className="peek-content" aria-hidden={hidden}>
+        {children}
+      </div>
+      {hidden && (
+        <div className="peek-cover">
+          <span className="peek-mark" aria-hidden>
+            ?
+          </span>
+          <button
+            type="button"
+            className="kid-btn secondary peek-again"
+            onClick={() => {
+              speak(t('play.peek.again'));
+              setRound((r) => r + 1);
+            }}
+          >
+            {t('play.peek.button')}
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

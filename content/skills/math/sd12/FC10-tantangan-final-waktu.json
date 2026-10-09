@@ -1,0 +1,600 @@
+{
+  "id": "math.sd12.fc10.tantangan-final-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 10,
+  "title": "Waktu — Level 10 — Tantangan final waktu",
+  "tier": "intermediate",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 11],
+            "m": {
+              "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "values": [20, 25, 30, 35, 40, 45, 50]
+            }
+          },
+          "prompt": "Jam pada gambar menunjukkan saat Dina mulai membaca. Dina membaca selama {d} menit. Saat Dina selesai, jarum panjang menunjuk angka …",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": "=m"
+            }
+          ],
+          "answer": "((m + d + 55) % 60) / 5 + 1",
+          "distractors": [
+            {
+              "expr": "d / 5",
+              "tag": "lamanya"
+            },
+            {
+              "expr": "((m + 55) % 60) / 5 + 1",
+              "tag": "posisi-awal"
+            },
+            {
+              "expr": "((m + d) % 60) / 5 + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "((m + d + 50) % 60) / 5 + 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{d} menit = {=d/5} angka pada jam. Jarum panjang maju {=d/5} angka dan berhenti di angka {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "k": [1, 3]
+          },
+          "words": {
+            "hari": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
+          },
+          "constraint": "t + 7 * k <= 31",
+          "prompt": "Tanggal {t} Juli jatuh pada hari {hari}. Hari {hari} {k} minggu kemudian jatuh pada tanggal … Juli.",
+          "answer": "t + 7 * k",
+          "distractors": [
+            {
+              "expr": "t + k",
+              "tag": "tambah-minggu"
+            },
+            {
+              "expr": "t + 7 * k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "t + 7 * k + 7",
+              "tag": "lebih-seminggu"
+            }
+          ],
+          "choices": 4,
+          "explain": "{k} minggu = {k} × 7 = {=7*k} hari. Tanggal {t} + {=7*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [6, 9],
+            "d": [5, 6],
+            "w": [2, 5]
+          },
+          "prompt": "Ayah bekerja {h} jam setiap hari, {d} hari dalam seminggu. Dalam {w} minggu Ayah bekerja … jam.",
+          "answer": "h * d * w",
+          "distractors": [
+            {
+              "expr": "h * d",
+              "tag": "satu-minggu"
+            },
+            {
+              "expr": "h * 7 * w",
+              "tag": "tujuh-hari"
+            },
+            {
+              "expr": "h * d + w",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Seminggu {h} × {d} = {=h*d} jam. {w} minggu: {=h*d} × {w} = {answer} jam."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 7],
+            "n": [2, 6]
+          },
+          "constraint": "k * n <= 50",
+          "prompt": "Jam dinding Momo terlambat {k} menit setiap hari. Hari Senin pukul 07.00 jam itu dicocokkan sehingga tepat. {n} hari kemudian, saat waktu sebenarnya pukul 07.00, jam Momo menunjukkan pukul 6 lewat … menit.",
+          "answer": "60 - k * n",
+          "distractors": [
+            {
+              "expr": "k * n",
+              "tag": "lambatnya"
+            },
+            {
+              "expr": "60 - k * (n - 1)",
+              "tag": "kurang-sehari"
+            },
+            {
+              "expr": "60 - k - n",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam {n} hari jam terlambat {k} × {n} = {=k*n} menit. 60 − {=k*n} = {answer}, jadi pukul 6 lewat {answer} menit."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Jam pada gambar menunjukkan pukul …",
+              "stimulus": [
+                {
+                  "kind": "clock",
+                  "hour": 3,
+                  "minute": 45
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "03.45"
+                  },
+                  "say": "03.45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.15"
+                  },
+                  "say": "09.15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "04.45"
+                  },
+                  "say": "04.45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "03.09"
+                  },
+                  "say": "03.09"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jarum pendek di antara 3 dan 4, jarum panjang di 9 (45 menit). Pukul 03.45."
+            },
+            {
+              "prompt": "Sekarang pukul 08.40. 35 menit lagi pukul …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.15"
+                  },
+                  "say": "09.15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "08.75"
+                  },
+                  "say": "08.75"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.05"
+                  },
+                  "say": "09.05"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.35"
+                  },
+                  "say": "09.35"
+                }
+              ],
+              "answer": 0,
+              "reteach": "20 menit lagi pukul 09.00, sisa 15 menit lagi menjadi pukul 09.15."
+            },
+            {
+              "prompt": "Lomba dimulai pukul 13.30 dan selesai pukul 15.10. Lama lomba … menit.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80"
+                  },
+                  "say": "80"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "120"
+                  },
+                  "say": "120"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "140"
+                  },
+                  "say": "140"
+                }
+              ],
+              "answer": 0,
+              "reteach": "13.30 sampai 14.30 = 60 menit, 14.30 sampai 15.10 = 40 menit. Jumlahnya 100 menit."
+            },
+            {
+              "prompt": "Hari ini hari Kamis. 15 hari lagi adalah hari …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jumat"
+                  },
+                  "say": "Jumat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kamis"
+                  },
+                  "say": "Kamis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Sabtu"
+                  },
+                  "say": "Sabtu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rabu"
+                  },
+                  "say": "Rabu"
+                }
+              ],
+              "answer": 0,
+              "reteach": "14 hari lagi = 2 minggu, hari Kamis lagi. 1 hari sesudahnya hari Jumat."
+            },
+            {
+              "prompt": "Kemarin lusa adalah hari Senin. Besok adalah hari …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kamis"
+                  },
+                  "say": "Kamis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Selasa"
+                  },
+                  "say": "Selasa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rabu"
+                  },
+                  "say": "Rabu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jumat"
+                  },
+                  "say": "Jumat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kemarin lusa = 2 hari lalu. Hari ini Rabu, jadi besok Kamis."
+            },
+            {
+              "prompt": "2 jam 15 menit + 1 jam 50 menit = …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 jam 5 menit"
+                  },
+                  "say": "4 jam 5 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 jam 5 menit"
+                  },
+                  "say": "3 jam 5 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 jam 15 menit"
+                  },
+                  "say": "4 jam 15 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 jam 55 menit"
+                  },
+                  "say": "3 jam 55 menit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "3 jam 65 menit. 65 menit = 1 jam 5 menit, jadi 4 jam 5 menit."
+            },
+            {
+              "prompt": "Jam dinding berbunyi setiap tepat pukul satu, dua, dan seterusnya. Dari pukul 07.00 sampai pukul 12.00 (keduanya ikut dihitung), jam berbunyi … kali.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pukul 7, 8, 9, 10, 11, 12: ada 6 kali."
+            },
+            {
+              "prompt": "Jam menunjukkan pukul 06.00 seperti gambar. Berapa kali jarum panjang berputar penuh sampai pukul 10.00?",
+              "stimulus": [
+                {
+                  "kind": "clock",
+                  "hour": 6,
+                  "minute": 0
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Satu putaran jarum panjang = 1 jam. Dari pukul 6 sampai 10 ada 4 jam."
+            },
+            {
+              "prompt": "Rani lahir hari Selasa. Hari ini umur Rani tepat 100 hari. Hari ini hari …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Kamis"
+                  },
+                  "say": "Kamis"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Selasa"
+                  },
+                  "say": "Selasa"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rabu"
+                  },
+                  "say": "Rabu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Jumat"
+                  },
+                  "say": "Jumat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "100 hari = 14 minggu lebih 2 hari. Dari Selasa maju 2 hari: Kamis."
+            },
+            {
+              "prompt": "Jam digital menunjukkan waktu malam hari. Pada jam dinding (angka 1 sampai 12), waktu ini adalah pukul …",
+              "stimulus": [
+                {
+                  "kind": "digital",
+                  "hour": 21,
+                  "minute": 30
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.30 malam"
+                  },
+                  "say": "09.30 malam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11.30 malam"
+                  },
+                  "say": "11.30 malam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "08.30 malam"
+                  },
+                  "say": "08.30 malam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.30 pagi"
+                  },
+                  "say": "09.30 pagi"
+                }
+              ],
+              "answer": 0,
+              "reteach": "21 − 12 = 9. Pukul 21.30 sama dengan pukul 09.30 malam."
+            },
+            {
+              "prompt": "Satu minggu lebih 3 hari sama dengan … jam.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "240"
+                  },
+                  "say": "240"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "168"
+                  },
+                  "say": "168"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "230"
+                  },
+                  "say": "230"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 minggu 3 hari = 10 hari. 1 hari = 24 jam, jadi 10 × 24 = 240 jam."
+            },
+            {
+              "prompt": "Momo tidur pukul 20.30 dan bangun pukul 05.00. Lama Momo tidur …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 jam 30 menit"
+                  },
+                  "say": "8 jam 30 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9 jam 30 menit"
+                  },
+                  "say": "9 jam 30 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 jam 30 menit"
+                  },
+                  "say": "15 jam 30 menit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 jam"
+                  },
+                  "say": "8 jam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pukul 20.30 sampai 04.30 = 8 jam, sampai 05.00 tambah 30 menit: 8 jam 30 menit."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

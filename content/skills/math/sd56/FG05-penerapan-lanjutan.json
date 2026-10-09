@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.fg5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 5,
+  "title": "Perbandingan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 7],
+      "b": [2, 7],
+      "c": [2, 7],
+      "k": [3, 12]
+    },
+    "derived": {
+      "s": "k * abs(a - c)"
+    },
+    "constraint": "a != c",
+    "prompt": "Perbandingan kelereng Andi, Budi, dan Cici adalah {a} : {b} : {c}. Selisih kelereng Andi dan Cici {s} butir. Jumlah kelereng mereka bertiga adalah …",
+    "answer": "k * (a + b + c)",
+    "distractors": [
+      {
+        "expr": "s * (a + b + c)",
+        "tag": "selisih-dikali"
+      },
+      {
+        "expr": "k * (a + c)",
+        "tag": "lupa-budi"
+      },
+      {
+        "expr": "s + a + b + c",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisih {=abs(a-c)} bagian = {s}, jadi 1 bagian = {k}. Jumlah {=a+b+c} bagian × {k} = {answer}."
+  }
+}

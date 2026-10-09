@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.fc8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 8,
+  "title": "Aritmetika sosial — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [10, 50],
+      "d": {
+        "values": [10, 20, 25, 40, 50]
+      },
+      "u": {
+        "values": [10, 20, 25, 30, 50]
+      }
+    },
+    "derived": {
+      "b": "10 * w * (100 - d)",
+      "lb": "10 * w * (100 + u)"
+    },
+    "constraint": "(w * (100 - d) * (100 + u)) % 10 == 0",
+    "prompt": "Pedagang membeli barang Rp{b}. Ia ingin memberi diskon {d}% dari harga label dan tetap untung {u}%. Harga label harus Rp …",
+    "answer": "lb",
+    "distractors": [
+      {
+        "expr": "b * (100 + u + d) / 100",
+        "tag": "persen-dijumlah"
+      },
+      {
+        "expr": "b * (100 + u) / 100",
+        "tag": "lupa-diskon"
+      },
+      {
+        "expr": "b * (100 + u) * (100 + d) / 10000",
+        "tag": "diskon-ditambahkan"
+      }
+    ],
+    "choices": 4,
+    "explain": "Harga jual = {b} × {=100+u}% = {=b*(100+u)/100}. Harga jual itu {=100-d}% dari label, jadi label = {=b*(100+u)/100} : {=100-d}% = {answer}."
+  }
+}

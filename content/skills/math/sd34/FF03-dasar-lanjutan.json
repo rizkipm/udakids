@@ -1,0 +1,51 @@
+{
+  "id": "math.sd34.ff3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 3,
+  "title": "Aritmetika sosial — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": {
+        "range": [20000, 90000],
+        "step": 5000
+      },
+      "d": {
+        "range": [2000, 20000],
+        "step": 1000
+      }
+    },
+    "derived": {
+      "j": "b + d"
+    },
+    "prompt": "Pak Budi membeli sebuah kipas angin seharga Rp{b}, lalu menjualnya Rp{j}. Keuntungan Pak Budi adalah Rp…",
+    "answer": "d",
+    "distractors": [
+      {
+        "expr": "j + b",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "j",
+        "tag": "harga-jual"
+      },
+      {
+        "expr": "d + 1000",
+        "tag": "kurang-teliti"
+      }
+    ],
+    "choices": 4,
+    "explain": "Untung = harga jual − harga beli = {j} − {b} = {answer}."
+  }
+}

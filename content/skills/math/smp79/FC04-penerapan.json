@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fc4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 4,
+  "title": "Aritmetika sosial — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [5, 50],
+      "p": {
+        "values": [6, 8, 9, 10, 12, 15, 18]
+      },
+      "n": [3, 24]
+    },
+    "derived": {
+      "mo": "100000 * k"
+    },
+    "constraint": "(k * p * n) % 3 == 0",
+    "prompt": "Rina menabung Rp{mo} di koperasi sekolah dengan bunga tunggal {p}% per tahun. Setelah {n} bulan, jumlah tabungannya Rp …",
+    "answer": "mo + mo * p * n / 1200",
+    "distractors": [
+      {
+        "expr": "mo * p * n / 1200",
+        "tag": "bunganya-saja"
+      },
+      {
+        "expr": "mo + mo * p * n / 100",
+        "tag": "bulan-dianggap-tahun"
+      },
+      {
+        "expr": "mo + mo * p / 100",
+        "tag": "setahun"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bunga = {n}/12 × {p}% × {mo} = {=mo*p*n/1200}. Tabungan = {mo} + {=mo*p*n/1200} = {answer}."
+  }
+}

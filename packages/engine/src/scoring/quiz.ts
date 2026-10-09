@@ -119,40 +119,26 @@ export type LevelNode = {
 
 /**
  * Status tiap level dalam satu buku (katalog).
- * - Materi pertama selalu terbuka; materi berikutnya terbuka bila Level 1 materi sebelumnya lulus.
- * - Di dalam materi, Level 1 terbuka (bila materinya terbuka); level berikutnya terbuka bila
- *   level sebelumnya lulus.
+ * - Setiap topik terbuka sejak awal (D-082): anak boleh memilih topik mana saja, tidak harus berurutan. Topik
+ *   yang disarankan (topik terbuka pertama di urutan buku) ditandai di tampilan, bukan dikunci.
+ * - Di dalam topik, Level 1 terbuka; level berikutnya terbuka bila level sebelumnya lulus.
  */
 export function levelStatuses(
   categories: readonly string[],
   skills: readonly LevelNode[],
   results: Readonly<Record<string, QuizResult | undefined>>,
-  /** Kode topik mandiri (D-068): terbuka sejak awal dan tidak mengunci topik sesudahnya. */
-  standalone: ReadonlySet<string> = new Set(),
-  /**
-   * Topik pertama sebuah bagian (`group`, D-075): rantai kunci mulai lagi di sini, jadi bagian baru (mis.
-   * Baca Tulis setelah Berhitung) terbuka sejak awal tanpa menunggu bagian sebelumnya.
-   */
-  groupStarts: ReadonlySet<string> = new Set(),
 ): Record<string, LevelStatus> {
   const out: Record<string, LevelStatus> = {};
-  let categoryOpen = true;
   for (const code of categories) {
-    if (groupStarts.has(code)) categoryOpen = true;
     const levels = skills.filter((s) => s.category === code).sort((a, b) => a.order - b.order);
-    if (levels.length === 0) continue;
-    const alone = standalone.has(code);
-    let open = categoryOpen || alone;
-    const first = open;
+    let open = true;
     for (const lvl of levels) {
       const passed = results[lvl.id]?.passed === true;
-      // Mock test (D-072) tidak berurutan: semuanya terbuka bila topiknya terbuka (akses diatur paket).
-      const isOpen = lvl.family === 'mock' ? first : open;
-      out[lvl.id] = passed ? 'passed' : isOpen ? 'open' : 'locked';
+      // Mock test (D-072) tidak berurutan: semuanya terbuka (akses diatur paket).
+      out[lvl.id] = passed ? 'passed' : open || lvl.family === 'mock' ? 'open' : 'locked';
       // Level yang lulus tetap bisa diulang; level berikutnya terbuka hanya bila ini lulus.
       open = open && passed;
     }
-    if (!alone) categoryOpen = categoryOpen && results[levels[0]!.id]?.passed === true;
   }
   return out;
 }
@@ -170,27 +156,7 @@ export function skippedStandalone(
   return playedRegular ? standalone : new Set();
 }
 
-/**
- * Topik biasa (bukan mandiri) pertama di setiap bagian (`group`) setelah bagian pertama — rantai kunci
- * `levelStatuses` mulai lagi di topik ini (D-075).
- */
-export function groupStartCodes(
-  categories: readonly { code: string; group?: string; standalone?: boolean }[],
-): ReadonlySet<string> {
-  const out = new Set<string>();
-  const seen = new Set<string>();
-  let first: string | undefined;
-  for (const c of categories) {
-    const g = c.group ?? '';
-    first ??= g;
-    if (c.standalone || seen.has(g)) continue;
-    seen.add(g);
-    if (g !== first) out.add(c.code);
-  }
-  return out;
-}
-
-/** Kode topik mandiri di katalog (untuk `levelStatuses`). */
+/** Kode topik mandiri di katalog (untuk `skippedStandalone`). */
 export const standaloneCodes = (
   categories: readonly { code: string; standalone?: boolean }[],
 ): ReadonlySet<string> => new Set(categories.filter((c) => c.standalone).map((c) => c.code));

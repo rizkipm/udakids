@@ -1,0 +1,49 @@
+{
+  "id": "math.smp79.fc1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 1,
+  "title": "Aritmetika sosial — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [20, 200],
+      "p": {
+        "values": [5, 10, 12, 15, 20, 25, 30, 40]
+      }
+    },
+    "derived": {
+      "b": "1000 * m",
+      "j": "10 * m * (100 + p)"
+    },
+    "prompt": "Bu Siti membeli tas seharga Rp{b} lalu menjualnya Rp{j}. Persentase keuntungannya …",
+    "answer": "p",
+    "unit": "%",
+    "distractors": [
+      {
+        "expr": "(j - b) * 100 / j",
+        "tag": "dibagi-harga-jual"
+      },
+      {
+        "expr": "(j - b) / 1000",
+        "tag": "selisih-ribuan"
+      },
+      {
+        "expr": "100 + p",
+        "tag": "persen-harga-jual"
+      }
+    ],
+    "choices": 4,
+    "explain": "Untung = {j} − {b} = {=j-b}. Persentase = {=j-b} : {b} × 100% = {answer}."
+  }
+}

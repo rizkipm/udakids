@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.fd8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 8,
+  "title": "Pola, baris, dan deret bilangan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [3, 9],
+      "e": [2, 7],
+      "nn": [100, 300]
+    },
+    "derived": {
+      "m": "lcm(d, e)",
+      "f": "floor(nn / d)",
+      "g": "floor(nn / m)",
+      "h": "floor(nn / e)",
+      "s1": "d * f * (f + 1) / 2",
+      "s2": "m * g * (g + 1) / 2"
+    },
+    "constraint": "m != d && m <= 63",
+    "prompt": "Jumlah semua bilangan dari 1 sampai {nn} yang habis dibagi {d} tetapi tidak habis dibagi {e} adalah …",
+    "answer": "s1 - s2",
+    "distractors": [
+      {
+        "expr": "s1",
+        "tag": "lupa-dikurangi"
+      },
+      {
+        "expr": "s1 - e * h * (h + 1) / 2",
+        "tag": "kurangi-kelipatan-e"
+      },
+      {
+        "expr": "f - g",
+        "tag": "banyaknya"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kelipatan {d}: {d} + {=2*d} + … + {=d*f}, jumlahnya {s1}. Kelipatan {m} (KPK {d} dan {e}) jumlahnya {s2}. Jadi {s1} − {s2} = {answer}."
+  }
+}

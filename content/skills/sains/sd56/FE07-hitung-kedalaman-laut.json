@@ -1,0 +1,50 @@
+{
+  "id": "sains.sd56.fe7.hitung-kedalaman-laut",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FE",
+  "order": 7,
+  "title": "Cahaya dan bunyi — Level 7 — Hitung: kedalaman laut dengan sonar",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Cahaya dan bunyi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "values": [1400, 1500, 1600]
+      },
+      "t": {
+        "range": [0.4, 6],
+        "step": 0.2
+      }
+    },
+    "words": {
+      "kapal": ["Kapal penelitian", "Kapal nelayan", "Kapal patroli"]
+    },
+    "prompt": "{kapal} memancarkan bunyi ke dasar laut. Pantulannya diterima kembali {t} detik kemudian. Cepat rambat bunyi di air laut {v} m/s. Kedalaman laut di tempat itu adalah … m.",
+    "answer": "v * t / 2",
+    "distractors": [
+      {
+        "expr": "v * t",
+        "tag": "lupa-bagi-dua"
+      },
+      {
+        "expr": "v / t",
+        "tag": "dibagi-waktu"
+      },
+      {
+        "expr": "v * t / 4",
+        "tag": "dibagi-empat"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bunyi pergi ke dasar lalu kembali, jadi jaraknya dua kali kedalaman. Kedalaman = {v} × {t} : 2 = {answer} m."
+  }
+}

@@ -1,0 +1,592 @@
+{
+  "id": "math.smp79.fd10.tantangan-final-pola-dan-deret",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 10,
+  "title": "Pola, baris, dan deret bilangan — Level 10 — Tantangan final pola dan deret",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "r": {
+              "values": [2, 3]
+            },
+            "n": [4, 8]
+          },
+          "derived": {
+            "rna": "(n == 2) * 4 + (n == 3) * 8 + (n == 4) * 16 + (n == 5) * 32 + (n == 6) * 64 + (n == 7) * 128 + (n == 8) * 256",
+            "rnb": "(n == 2) * 9 + (n == 3) * 27 + (n == 4) * 81 + (n == 5) * 243 + (n == 6) * 729 + (n == 7) * 2187 + (n == 8) * 6561",
+            "rn": "(r == 2) * rna + (r == 3) * rnb"
+          },
+          "prompt": "Jumlah {n} suku pertama deret geometri {a} + {=a*r} + {=a*r*r} + … adalah …",
+          "answer": "a * (rn - 1) / (r - 1)",
+          "distractors": [
+            {
+              "expr": "a * rn",
+              "tag": "pakai-r-pangkat-n"
+            },
+            {
+              "expr": "a * (rn / r - 1) / (r - 1)",
+              "tag": "kurang-satu-suku"
+            },
+            {
+              "expr": "a * rn / r",
+              "tag": "suku-ke-n"
+            }
+          ],
+          "choices": 4,
+          "explain": "S{n} = {a} × ({r}^{n} − 1) : ({r} − 1) = {a} × {=rn-1} : {=r-1} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [1, 6],
+            "c": [1, 4],
+            "n": [8, 15]
+          },
+          "derived": {
+            "u2": "a + b",
+            "u3": "a + 2 * b + c",
+            "u4": "a + 3 * b + 3 * c",
+            "u5": "a + 4 * b + 6 * c"
+          },
+          "prompt": "Barisan {a}, {u2}, {u3}, {u4}, {u5}, … memiliki selisih antarsuku yang membentuk barisan aritmetika. Suku ke-{n} adalah …",
+          "answer": "a + (n - 1) * b + c * (n - 1) * (n - 2) / 2",
+          "distractors": [
+            {
+              "expr": "u5 + (n - 5) * (u5 - u4)",
+              "tag": "beda-tetap"
+            },
+            {
+              "expr": "a + (n - 1) * b + c * n * (n - 1) / 2",
+              "tag": "geser-indeks"
+            },
+            {
+              "expr": "a + (n - 2) * b + c * (n - 2) * (n - 3) / 2",
+              "tag": "suku-sebelumnya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Selisihnya {b}, {=b+c}, {=b+2*c}, … (naik {c}). U{n} = {a} + {=n-1} × {b} + {c} × {=(n-1)*(n-2)/2} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "m": {
+              "values": [10, 15, 20, 30]
+            },
+            "t": {
+              "values": [1, 2]
+            }
+          },
+          "derived": {
+            "k": "60 * t / m",
+            "p2": "(k == 2) * 4 + (k == 3) * 8 + (k == 4) * 16 + (k == 6) * 64 + (k == 8) * 256 + (k == 12) * 4096"
+          },
+          "prompt": "Bakteri di laboratorium membelah diri menjadi dua setiap {m} menit. Mula-mula ada {a} bakteri. Setelah {t} jam, banyak bakteri …",
+          "answer": "a * p2",
+          "distractors": [
+            {
+              "expr": "a * 2 * k",
+              "tag": "dikali-2k"
+            },
+            {
+              "expr": "a * p2 * 2",
+              "tag": "lebih-satu-kali"
+            },
+            {
+              "expr": "a * p2 / 2",
+              "tag": "kurang-satu-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "{t} jam = {=60*t} menit = {k} kali membelah. Banyak bakteri = {a} × 2^{k} = {a} × {p2} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 9],
+            "e": [2, 7],
+            "nn": [100, 300]
+          },
+          "derived": {
+            "m": "lcm(d, e)",
+            "f": "floor(nn / d)",
+            "g": "floor(nn / m)",
+            "h": "floor(nn / e)",
+            "s1": "d * f * (f + 1) / 2",
+            "s2": "m * g * (g + 1) / 2"
+          },
+          "constraint": "m != d && m <= 63",
+          "prompt": "Jumlah semua bilangan dari 1 sampai {nn} yang habis dibagi {d} tetapi tidak habis dibagi {e} adalah …",
+          "answer": "s1 - s2",
+          "distractors": [
+            {
+              "expr": "s1",
+              "tag": "lupa-dikurangi"
+            },
+            {
+              "expr": "s1 - e * h * (h + 1) / 2",
+              "tag": "kurangi-kelipatan-e"
+            },
+            {
+              "expr": "f - g",
+              "tag": "banyaknya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kelipatan {d}: {d} + {=2*d} + … + {=d*f}, jumlahnya {s1}. Kelipatan {m} (KPK {d} dan {e}) jumlahnya {s2}. Jadi {s1} − {s2} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Suku ke-20 dari barisan 2, 5, 10, 17, 26, … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "401"
+                  },
+                  "say": "401"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "400"
+                  },
+                  "say": "400"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "362"
+                  },
+                  "say": "362"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "441"
+                  },
+                  "say": "441"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pola suku ke-n = n² + 1. Suku ke-20 = 400 + 1 = 401."
+            },
+            {
+              "prompt": "Nilai 1 + 3 + 5 + … + 99 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.500"
+                  },
+                  "say": "2.500"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.450"
+                  },
+                  "say": "2.450"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5.000"
+                  },
+                  "say": "5.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.550"
+                  },
+                  "say": "2.550"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 50 bilangan ganjil. Jumlah n bilangan ganjil pertama = n², jadi 50² = 2.500."
+            },
+            {
+              "prompt": "Suku ke-n suatu barisan aritmetika adalah 7n − 3. Jumlah 20 suku pertamanya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.410"
+                  },
+                  "say": "1.410"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.470"
+                  },
+                  "say": "1.470"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2.820"
+                  },
+                  "say": "2.820"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.350"
+                  },
+                  "say": "1.350"
+                }
+              ],
+              "answer": 0,
+              "reteach": "U1 = 4 dan U20 = 137. S20 = 20/2 × (4 + 137) = 1.410."
+            },
+            {
+              "prompt": "Satu segitiga dari batang korek api memakai 3 batang, 2 segitiga berderet memakai 5 batang, 3 segitiga berderet memakai 7 batang. Untuk 50 segitiga berderet diperlukan … batang.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "101"
+                  },
+                  "say": "101"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "150"
+                  },
+                  "say": "150"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "103"
+                  },
+                  "say": "103"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setiap segitiga baru menambah 2 batang: 3, 5, 7, … = 2n + 1. Untuk n = 50: 101 batang."
+            },
+            {
+              "prompt": "Suku ke-3 barisan geometri adalah 12 dan suku ke-6 adalah 96. Suku pertamanya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "U6 : U3 = r³ = 8, jadi r = 2. U1 = 12 : 2² = 3."
+            },
+            {
+              "prompt": "Jumlah deret geometri tak hingga 16 + 8 + 4 + 2 + … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "say": "32"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "31"
+                  },
+                  "say": "31"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "64"
+                  },
+                  "say": "64"
+                }
+              ],
+              "answer": 0,
+              "reteach": "a = 16 dan r = 1/2. S = a : (1 − r) = 16 : 1/2 = 32."
+            },
+            {
+              "prompt": "Barisan 1, 1, 2, 3, 5, 8, … setiap sukunya jumlah dua suku sebelumnya. Suku ke-12 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "144"
+                  },
+                  "say": "144"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "89"
+                  },
+                  "say": "89"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "233"
+                  },
+                  "say": "233"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "121"
+                  },
+                  "say": "121"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Lanjutkan: 13, 21, 34, 55, 89, 144. Suku ke-12 adalah 144."
+            },
+            {
+              "prompt": "Kata KMSIJATIM ditulis berulang-ulang: KMSIJATIMKMSIJATIM… Huruf ke-2026 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "K"
+                  },
+                  "say": "K"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "M"
+                  },
+                  "say": "M"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "T"
+                  },
+                  "say": "T"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "A"
+                  },
+                  "say": "A"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Polanya 9 huruf. 2026 = 9 × 225 + 1, jadi huruf ke-2026 sama dengan huruf ke-1, yaitu K."
+            },
+            {
+              "prompt": "Jumlah 50 bilangan genap pertama dikurangi jumlah 50 bilangan ganjil pertama hasilnya …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "say": "25"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Setiap bilangan genap 1 lebih besar dari pasangan ganjilnya (2 − 1, 4 − 3, …). Ada 50 pasang, jadi 50."
+            },
+            {
+              "prompt": "Rumus suku ke-n barisan 3, 8, 15, 24, 35, … adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "n² + 2n"
+                  },
+                  "say": "n² + 2n"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "n² + 2"
+                  },
+                  "say": "n² + 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5n − 2"
+                  },
+                  "say": "5n − 2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "n² + 3n − 1"
+                  },
+                  "say": "n² + 3n − 1"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cek n = 1, 2, 3: 1 + 2 = 3, 4 + 4 = 8, 9 + 6 = 15. Cocok dengan n² + 2n = n(n + 2)."
+            },
+            {
+              "prompt": "Pada barisan aritmetika, U3 + U7 = 50 dan U5 + U9 = 70. Nilai U12 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "say": "55"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65"
+                  },
+                  "say": "65"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "70"
+                  },
+                  "say": "70"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(2a + 12b) − (2a + 8b) = 4b = 20, jadi b = 5 dan a = 5. U12 = 5 + 11 × 5 = 60."
+            },
+            {
+              "prompt": "Banyak suku pada barisan 7, 11, 15, …, 403 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "100"
+                  },
+                  "say": "100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "99"
+                  },
+                  "say": "99"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "101"
+                  },
+                  "say": "101"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "98"
+                  },
+                  "say": "98"
+                }
+              ],
+              "answer": 0,
+              "reteach": "n = (403 − 7) : 4 + 1 = 99 + 1 = 100."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

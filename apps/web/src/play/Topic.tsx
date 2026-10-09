@@ -6,8 +6,7 @@ import {
   generateItem,
   levelStatuses,
   isMockSkill,
-  standaloneCodes,
-  groupStartCodes,
+  lessonFor,
   withAccess,
   PASS_SCORE,
   QUIZ_LENGTH,
@@ -49,17 +48,18 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
     if (!data || !domain) return undefined;
     const shelves = shelvesOf(data).filter((s) => bookKey(s.catalog) === `${domain}/${grade}`);
     const index = shelves.findIndex((s) => s.category.code === code);
+    const here = shelves[index];
     return {
       shelves,
-      shelf: shelves[index],
+      shelf: here,
+      // Pelajaran manual, atau otomatis dari data topik (D-090): setiap topik punya "Belajar dulu".
+      lesson: here ? lessonFor(here.category, here.skills) : undefined,
       nextShelf: shelves[index + 1],
       statuses: withAccess(
         levelStatuses(
           shelves.map((s) => s.category.code),
           shelves.flatMap((s) => s.skills),
           progress.quizzes,
-          standaloneCodes(shelves.map((s) => s.category)),
-          groupStartCodes(shelves.map((s) => s.category)),
         ),
         shelves.flatMap((s) => s.skills),
         data.access ?? FREE_ACCESS,
@@ -84,7 +84,6 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   }
 
   const { category } = shelf;
-  const locked = shelf.skills.every((k) => book.statuses[k.id] === 'locked');
   const open = shelf.skills.find((k) => book.statuses[k.id] === 'open');
   const openNo = open ? shelf.skills.indexOf(open) + 1 : 0;
   const done = shelf.skills.every((k) => book.statuses[k.id] === 'passed');
@@ -123,10 +122,10 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           <h2 id="lesson-title">{t('play.topic.lesson')}</h2>
           <SpeakButton text={readAloud} label={t('play.topic.listen')} />
         </div>
-        {category.lesson && (
+        {book.lesson && (
           <Link className="kid-btn big-play lesson-open" to={`/play/belajar/${token}`}>
             <PlayIcon />
-            {t('play.lesson.open', { title: category.lesson.judul })}
+            {t('play.lesson.open', { title: book.lesson.judul })}
           </Link>
         )}
         <p className="lesson-intro">{intro}</p>
@@ -154,11 +153,6 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
             })}
           </p>
         </div>
-        {locked && (
-          <p className="kid-alert is-compact" role="note">
-            {t('play.library.lockedCat')}
-          </p>
-        )}
         {paidNext && <PremiumNotice access={data.access ?? FREE_ACCESS} />}
         <ol className="level-path">
           {shelf.skills.map((k, i) => (

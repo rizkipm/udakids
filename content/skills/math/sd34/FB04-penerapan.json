@@ -1,0 +1,58 @@
+{
+  "id": "math.sd34.fb4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 4,
+  "title": "Pecahan sederhana — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": [2, 5],
+      "k": [2, 4],
+      "a": [1, 4],
+      "c": [1, 19]
+    },
+    "constraint": "a < b && c < b * k && a * k + c < b * k && gcd(c, b * k) == 1",
+    "prompt": "{a}/{b} + {c}/{=b*k} = …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a * k + c",
+      "den": "b * k",
+      "simplify": true
+    },
+    "distractors": [
+      {
+        "num": "a + c",
+        "den": "b + b * k",
+        "tag": "penyebut-dijumlah"
+      },
+      {
+        "num": "a + c",
+        "den": "b * k",
+        "tag": "lupa-menyamakan"
+      },
+      {
+        "num": "a * k + c",
+        "den": "2 * b * k",
+        "tag": "penyebut-dobel"
+      },
+      {
+        "num": "a * k + c + 1",
+        "den": "b * k",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Samakan penyebut: {a}/{b} = {=a*k}/{=b*k}. Lalu {=a*k}/{=b*k} + {c}/{=b*k} = {answer}."
+  }
+}

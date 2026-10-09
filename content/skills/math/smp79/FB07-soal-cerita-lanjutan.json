@@ -1,0 +1,52 @@
+{
+  "id": "math.smp79.fb7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FB",
+  "order": 7,
+  "title": "Geometri — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "i": {
+        "values": [0, 1, 2, 3, 4, 5, 6, 7]
+      },
+      "k": [1, 3],
+      "c": [2, 15]
+    },
+    "derived": {
+      "x": "k * ((i == 0) * 3 + (i == 1) * 4 + (i == 2) * 5 + (i == 3) * 12 + (i == 4) * 8 + (i == 5) * 15 + (i == 6) * 6 + (i == 7) * 8)",
+      "b": "k * ((i == 0) * 4 + (i == 1) * 3 + (i == 2) * 12 + (i == 3) * 5 + (i == 4) * 15 + (i == 5) * 8 + (i == 6) * 8 + (i == 7) * 6)",
+      "z": "k * ((i == 0) * 5 + (i == 1) * 5 + (i == 2) * 13 + (i == 3) * 13 + (i == 4) * 17 + (i == 5) * 17 + (i == 6) * 10 + (i == 7) * 10)",
+      "a": "x + c"
+    },
+    "prompt": "Sebuah kapal berangkat dari Pelabuhan Tanjung Perak, berlayar {a} km ke timur, {b} km ke utara, lalu {c} km ke barat. Jarak kapal dari pelabuhan sekarang … km.",
+    "answer": "z",
+    "unit": "km",
+    "distractors": [
+      {
+        "expr": "a + b + c",
+        "tag": "jarak-tempuh"
+      },
+      {
+        "expr": "x + b",
+        "tag": "jumlah-sisi"
+      },
+      {
+        "expr": "a + b - c",
+        "tag": "tanpa-akar"
+      }
+    ],
+    "choices": 4,
+    "explain": "Ke timur bersih {a} − {c} = {x} km dan ke utara {b} km. Jarak = √({x}² + {b}²) = {answer}."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "math.tkosn.fa2.gambar-dicoret-berapa-sisanya",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FA",
+  "order": 2,
+  "title": "Tambah dan kurang dengan gambar — Level 2 — Gambar dicoret, berapa sisanya",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "knowing",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Penjumlahan dan pengurangan bilangan menggunakan gambar"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "b": [1, 5]
+    },
+    "constraint": "b < a",
+    "words": {
+      "benda": ["apel", "balon", "bintang", "kue", "bunga", "ikan", "mangga"]
+    },
+    "prompt": "Ada {a} {benda}. Yang dicoret {b}. Berapa {benda} yang tidak dicoret?",
+    "say": "Ada {a} {benda}. Yang dicoret {b}. Berapa {benda} yang tidak dicoret?",
+    "stimulus": [
+      {
+        "kind": "objects",
+        "object": "{benda}",
+        "count": "=a",
+        "layout": "rows",
+        "crossed": "=b"
+      }
+    ],
+    "answer": "a - b",
+    "distractors": [
+      {
+        "expr": "a",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "expr": "a - b + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "b",
+        "tag": "yang-dicoret"
+      }
+    ],
+    "choices": 3,
+    "explain": "Hitung yang tidak dicoret saja. {a} kurang {b} sama dengan {answer}."
+  }
+}

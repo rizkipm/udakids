@@ -1,0 +1,56 @@
+{
+  "id": "math.sd56.fb6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 6,
+  "title": "Geometri — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 12],
+      "m": {
+        "values": [0, 30]
+      }
+    },
+    "derived": {
+      "g": "abs(30 * (h % 12) - 11 * m / 2)"
+    },
+    "constraint": "g != 0",
+    "prompt": "Jam dinding di kelas menunjukkan waktu seperti gambar. Besar sudut terkecil antara jarum jam dan jarum menit adalah …",
+    "stimulus": [
+      {
+        "kind": "clock",
+        "hour": "=h",
+        "minute": "=m"
+      }
+    ],
+    "answer": "min(g, 360 - g)",
+    "unit": "°",
+    "distractors": [
+      {
+        "expr": "abs(30 * (h % 12) - 6 * m)",
+        "tag": "jarum-jam-diam"
+      },
+      {
+        "expr": "360 - min(g, 360 - g)",
+        "tag": "sudut-besar"
+      },
+      {
+        "expr": "30 * h",
+        "tag": "kali-30"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jarum menit bergeser 6° per menit, jarum jam 0,5° per menit (30° per jam). Selisihnya {=g}°, sudut terkecil {answer}."
+  }
+}

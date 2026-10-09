@@ -1,0 +1,58 @@
+{
+  "id": "math.smp79.fh4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 4,
+  "title": "Statistika dan peluang — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "f1": [1, 8],
+      "f2": [1, 8],
+      "x": [1, 10],
+      "f4": [1, 8]
+    },
+    "derived": {
+      "n": "f1 + f2 + x + f4",
+      "sm": "6 * f1 + 7 * f2 + 8 * x + 9 * f4",
+      "mean": "sm / n"
+    },
+    "constraint": "(sm * 100) % n == 0 && sm != 8 * n",
+    "prompt": "Tabel frekuensi nilai siswa di bawah memiliki rata-rata {mean}. Nilai x adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Nilai siswa",
+        "headers": ["Nilai", "6", "7", "8", "9"],
+        "rows": [["Frekuensi", "=f1", "=f2", "x", "=f4"]]
+      }
+    ],
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "x + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "x + 2",
+        "tag": "lebih-dua"
+      },
+      {
+        "expr": "f1 + f2 + f4",
+        "tag": "banyak-lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "({=6*f1+7*f2+9*f4} + 8x) : ({=f1+f2+f4} + x) = {mean}. Kalikan silang dan selesaikan: x = {answer}."
+  }
+}

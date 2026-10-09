@@ -1,0 +1,57 @@
+{
+  "id": "math.sd12.fc3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 3,
+  "title": "Waktu — Level 3 — Dasar lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [6, 15],
+      "k": [1, 4]
+    },
+    "derived": {
+      "b": "a + k"
+    },
+    "prompt": "Lama waktu dari pukul {a}.00 sampai pukul {b}.30 adalah … menit.",
+    "stimulus": [
+      {
+        "kind": "digital",
+        "hour": "=a",
+        "minute": 0
+      },
+      {
+        "kind": "digital",
+        "hour": "=b",
+        "minute": 30
+      }
+    ],
+    "answer": "k * 60 + 30",
+    "distractors": [
+      {
+        "expr": "k * 100 + 30",
+        "tag": "jam-100"
+      },
+      {
+        "expr": "k * 60",
+        "tag": "lupa-30"
+      },
+      {
+        "expr": "k + 30",
+        "tag": "jam-tidak-dikali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dari pukul {a}.00 sampai {b}.00 = {k} jam = {=k*60} menit, ditambah 30 menit = {answer} menit."
+  }
+}

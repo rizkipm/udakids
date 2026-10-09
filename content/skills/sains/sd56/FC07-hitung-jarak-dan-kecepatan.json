@@ -1,0 +1,50 @@
+{
+  "id": "sains.sd56.fc7.hitung-jarak-dan-kecepatan",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 7,
+  "title": "Gaya, gerak, dan energi — Level 7 — Hitung: jarak dan kecepatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Gaya, gerak, dan energi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "values": [36, 40, 45, 50, 54, 60, 72, 80]
+      },
+      "t": {
+        "values": [20, 30, 40, 45, 50, 75, 90, 100, 120, 150]
+      }
+    },
+    "words": {
+      "kend": ["Bus", "Mobil travel", "Truk", "Kereta api"]
+    },
+    "constraint": "(v * t) % 60 == 0",
+    "prompt": "{kend} melaju dengan kecepatan rata-rata {v} km/jam selama {t} menit. Jarak yang ditempuh adalah … km.",
+    "answer": "v * t / 60",
+    "distractors": [
+      {
+        "expr": "v * t",
+        "tag": "lupa-ubah-menit"
+      },
+      {
+        "expr": "v * t / 100",
+        "tag": "jam-100-menit"
+      },
+      {
+        "expr": "v + t",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "{t} menit = {t}/60 jam. Jarak = kecepatan × waktu = {v} × {t} : 60 = {answer} km."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "math.smp79.fa5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 5,
+  "title": "Operasi bilangan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "b": [2, 9],
+      "m": [3, 9],
+      "n": [2, 8]
+    },
+    "prompt": "Hasil ({a} × 10^{m}) × ({b} × 10^{n}) ditulis dalam notasi ilmiah c × 10^p dengan 1 ≤ c < 10. Nilai p adalah …",
+    "answer": "m + n + (a * b >= 10)",
+    "distractors": [
+      {
+        "expr": "m * n",
+        "tag": "pangkat-dikali"
+      },
+      {
+        "expr": "m + n + 1 - (a * b >= 10)",
+        "tag": "lupa-geser-koma"
+      },
+      {
+        "expr": "m + n + 2",
+        "tag": "geser-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a} × {b} = {=a*b}, jadi hasilnya {=a*b} × 10^{=m+n}. Ubah agar 1 ≤ c < 10, maka p = {answer}."
+  }
+}

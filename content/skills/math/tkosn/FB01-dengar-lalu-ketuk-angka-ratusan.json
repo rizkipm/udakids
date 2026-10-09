@@ -1,0 +1,48 @@
+{
+  "id": "math.tkosn.fb1.dengar-lalu-ketuk-angka-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FB",
+  "order": 1,
+  "title": "Mengurutkan bilangan ratusan — Level 1 — Dengar lalu ketuk angka ratusan",
+  "tier": "basic",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "knowing",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 9],
+      "t": [1, 9],
+      "o": [1, 9]
+    },
+    "derived": {
+      "a": "h * 100 + t * 10 + o"
+    },
+    "constraint": "h != t && t != o && h != o",
+    "prompt": "Dengarkan Momo, lalu ketuk angka yang dibacakan.",
+    "say": "Dengarkan baik-baik. Ketuk angka {a}.",
+    "answer": "a",
+    "distractors": [
+      {
+        "expr": "h * 100 + o * 10 + t",
+        "tag": "tukar-puluhan-satuan"
+      },
+      {
+        "expr": "t * 100 + h * 10 + o",
+        "tag": "tukar-ratusan-puluhan"
+      },
+      {
+        "expr": "o * 100 + t * 10 + h",
+        "tag": "terbalik"
+      }
+    ],
+    "choices": 4,
+    "explain": "Angka {a}: ratusannya {h}, puluhannya {t}, satuannya {o}."
+  }
+}

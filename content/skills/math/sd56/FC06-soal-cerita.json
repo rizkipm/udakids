@@ -1,0 +1,53 @@
+{
+  "id": "math.sd56.fc6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FC",
+  "order": 6,
+  "title": "Aritmetika sosial — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": {
+        "range": [40000, 400000],
+        "step": 10000
+      },
+      "p": {
+        "values": [10, 15, 20, 25, 30, 40]
+      }
+    },
+    "derived": {
+      "j": "h * (100 - p) / 100"
+    },
+    "words": {
+      "barang": ["tas", "sepatu", "seragam batik", "jam tangan", "setrika"]
+    },
+    "prompt": "Setelah mendapat diskon {p}%, harga {barang} menjadi Rp{j}. Harga {barang} sebelum diskon adalah Rp…",
+    "answer": "h",
+    "distractors": [
+      {
+        "expr": "j + j * p / 100",
+        "tag": "tambah-persen-harga-baru"
+      },
+      {
+        "expr": "j * (100 - p) / 100",
+        "tag": "diskon-lagi"
+      },
+      {
+        "expr": "j + p * 1000",
+        "tag": "persen-jadi-ribu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Rp{j} adalah {=100-p}% harga awal. Harga awal = {j} : {=100-p} × 100 = Rp{answer}."
+  }
+}

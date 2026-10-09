@@ -1,0 +1,125 @@
+{
+  "id": "math.tkosn.fc7.isi-titik-titik-supaya-tepat",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FC",
+  "order": 7,
+  "title": "Membandingkan dengan <, >, = — Level 7 — Isi titik-titik supaya tepat",
+  "tier": "basic",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu menggunakan tanda <, >, dan ="
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [2, 9],
+            "x": [0, 99],
+            "d": [1, 90],
+            "e": [1, 50]
+          },
+          "derived": {
+            "a": "h * 100 + x"
+          },
+          "prompt": "{a} > … . Angka mana yang cocok di titik-titik?",
+          "say": "{a} lebih dari berapa? Pilih angka yang cocok.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "text",
+                  "text": ">"
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "answer": "a - d",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "sama"
+            },
+            {
+              "expr": "a + e",
+              "tag": "lebih-besar"
+            },
+            {
+              "expr": "a + 100",
+              "tag": "ratusan-lebih"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} lebih dari {answer}, karena {answer} lebih kecil dari {a}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 8],
+            "x": [0, 99],
+            "d": [1, 90],
+            "e": [1, 50]
+          },
+          "derived": {
+            "a": "h * 100 + x"
+          },
+          "constraint": "a - e >= 100",
+          "prompt": "{a} < … . Angka mana yang cocok di titik-titik?",
+          "say": "{a} kurang dari berapa? Pilih angka yang cocok.",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "text",
+                  "text": "<"
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "answer": "a + d",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "sama"
+            },
+            {
+              "expr": "a - e",
+              "tag": "lebih-kecil"
+            },
+            {
+              "expr": "a - 100 + d",
+              "tag": "ratusan-kurang"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a} kurang dari {answer}, karena {answer} lebih besar dari {a}."
+        }
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import { isAudioOnlyItem } from '../content/voice.js';
 import type { Item } from '../generator/item.js';
 import { generateItem, type SkillTemplate } from '../generator/template.js';
 import { QUIZ_LENGTH, quizBand } from './quiz.js';
@@ -13,10 +14,18 @@ export const ROUND_ATTEMPTS = 40;
 export const RECENT_PER_SKILL = 30;
 
 /** Sidik jari soal: sama bila isi soal sama, walau urutan pilihan diacak berbeda. */
-export function itemFingerprint(item: Pick<Item, 'prompt' | 'stimulus' | 'interaction'>): string {
+export function itemFingerprint(
+  item: Pick<Item, 'prompt' | 'stimulus' | 'interaction'> & { say?: string },
+): string {
   // Soal "urutkan": urutan awal kartu adalah soalnya, jadi tidak diurutkan.
   const keepOrder = item.interaction.type === 'order';
-  return canonical({ p: item.prompt, s: item.stimulus, i: item.interaction }, false, keepOrder);
+  // Soal dengar (isinya hanya di suara, mis. "Dengarkan dua bunyi…", D-081): yang diucapkan ikut menentukan soal.
+  const heard = item.say !== undefined && isAudioOnlyItem({ prompt: item.prompt, say: item.say });
+  return canonical(
+    { p: item.prompt, s: item.stimulus, i: item.interaction, ...(heard && { v: item.say }) },
+    false,
+    keepOrder,
+  );
 }
 
 /** Hash 53-bit cyrb53 (deterministik, tanpa Web Crypto) → string base36 pendek. */
@@ -34,8 +43,9 @@ function cyrb53(str: string, seed = 0): string {
 }
 
 /** Kunci pendek soal (hash sidik jari) untuk disimpan sebagai riwayat di perangkat. */
-export const itemKey = (item: Pick<Item, 'prompt' | 'stimulus' | 'interaction'>) =>
-  cyrb53(itemFingerprint(item));
+export const itemKey = (
+  item: Pick<Item, 'prompt' | 'stimulus' | 'interaction'> & { say?: string },
+) => cyrb53(itemFingerprint(item));
 
 /** Riwayat baru: kunci ronde ini ditaruh paling belakang (terbaru), dibatasi `RECENT_PER_SKILL`. */
 export function rememberRound(prev: readonly string[] | undefined, round: readonly string[]) {

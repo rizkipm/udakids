@@ -1,0 +1,58 @@
+{
+  "id": "math.sd12.fc4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 4,
+  "title": "Waktu — Level 4 — Penerapan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "h": [1, 11],
+      "m": {
+        "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+      },
+      "d": {
+        "values": [20, 25, 30, 35, 40, 45, 50]
+      }
+    },
+    "prompt": "Jam pada gambar menunjukkan saat Dina mulai membaca. Dina membaca selama {d} menit. Saat Dina selesai, jarum panjang menunjuk angka …",
+    "stimulus": [
+      {
+        "kind": "clock",
+        "hour": "=h",
+        "minute": "=m"
+      }
+    ],
+    "answer": "((m + d + 55) % 60) / 5 + 1",
+    "distractors": [
+      {
+        "expr": "d / 5",
+        "tag": "lamanya"
+      },
+      {
+        "expr": "((m + 55) % 60) / 5 + 1",
+        "tag": "posisi-awal"
+      },
+      {
+        "expr": "((m + d) % 60) / 5 + 2",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "((m + d + 50) % 60) / 5 + 1",
+        "tag": "kurang-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "{d} menit = {=d/5} angka pada jam. Jarum panjang maju {=d/5} angka dan berhenti di angka {answer}."
+  }
+}

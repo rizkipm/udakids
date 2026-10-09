@@ -1,0 +1,57 @@
+{
+  "id": "math.sd12.fh5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 5,
+  "title": "Aritmetika sosial — Level 5 — Penerapan lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [2, 6],
+      "p": {
+        "range": [1000, 5000],
+        "step": 500
+      },
+      "u": {
+        "range": [500, 2000],
+        "step": 500
+      }
+    },
+    "derived": {
+      "b": "k * p",
+      "j": "p + u"
+    },
+    "prompt": "Bu Tini membeli {k} bungkus kerupuk seharga Rp{b} semuanya. Setiap bungkus dijual Rp{j}. Jika semua terjual, Bu Tini untung Rp …",
+    "answer": "k * u",
+    "distractors": [
+      {
+        "expr": "u",
+        "tag": "untung-satu"
+      },
+      {
+        "expr": "k * j",
+        "tag": "lupa-modal"
+      },
+      {
+        "expr": "k * u + 500",
+        "tag": "lebih-500"
+      },
+      {
+        "expr": "k * u - 500",
+        "tag": "kurang-500"
+      }
+    ],
+    "choices": 4,
+    "explain": "Hasil jual {k} × Rp{j} = Rp{=k*j}. Untung Rp{=k*j} − Rp{b} = Rp{answer}."
+  }
+}

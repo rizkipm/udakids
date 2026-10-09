@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.fb7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FB",
+  "order": 7,
+  "title": "Geometri — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [6, 12],
+      "l": [4, 10],
+      "t": [5, 10],
+      "d": {
+        "values": [2, 3, 4, 5, 6]
+      }
+    },
+    "constraint": "(p * l * t) % (2 * d) == 0",
+    "prompt": "Bak mandi berbentuk balok berukuran panjang {p} dm, lebar {l} dm, dan tinggi {t} dm. Bak berisi air setengah penuh. Air ditambah dari kran {d} liter per menit. Bak penuh setelah … menit.",
+    "answer": "p * l * t / (2 * d)",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "p * l * t / d",
+        "tag": "dari-kosong"
+      },
+      {
+        "expr": "p * l * t / 2",
+        "tag": "volume-setengah"
+      },
+      {
+        "expr": "p * l * t / (4 * d)",
+        "tag": "seperempat"
+      }
+    ],
+    "choices": 4,
+    "explain": "Volume bak {=p*l*t} dm³ = {=p*l*t} liter. Kurang setengahnya: {=p*l*t/2} liter. {=p*l*t/2} : {d} = {answer}."
+  }
+}

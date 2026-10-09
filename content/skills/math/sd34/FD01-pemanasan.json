@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.fd1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FD",
+  "order": 1,
+  "title": "Bangun ruang — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 6],
+      "l": [2, 5],
+      "t": [2, 5]
+    },
+    "prompt": "Balok di atas tersusun dari kubus satuan. Banyak kubus satuannya adalah …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "cm",
+        "cubes": true
+      }
+    ],
+    "answer": "p * l * t",
+    "distractors": [
+      {
+        "expr": "p + l + t",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "p * l",
+        "tag": "satu-lapis"
+      },
+      {
+        "expr": "p * l * t - p * l",
+        "tag": "kurang-satu-lapis"
+      }
+    ],
+    "choices": 4,
+    "explain": "Satu lapis {p} × {l} = {=p*l} kubus, ada {t} lapis: {=p*l} × {t} = {answer}."
+  }
+}

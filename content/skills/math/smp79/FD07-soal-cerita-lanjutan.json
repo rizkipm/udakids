@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.fd7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 7,
+  "title": "Pola, baris, dan deret bilangan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 9],
+      "m": {
+        "values": [10, 15, 20, 30]
+      },
+      "t": {
+        "values": [1, 2]
+      }
+    },
+    "derived": {
+      "k": "60 * t / m",
+      "p2": "(k == 2) * 4 + (k == 3) * 8 + (k == 4) * 16 + (k == 6) * 64 + (k == 8) * 256 + (k == 12) * 4096"
+    },
+    "prompt": "Bakteri di laboratorium membelah diri menjadi dua setiap {m} menit. Mula-mula ada {a} bakteri. Setelah {t} jam, banyak bakteri …",
+    "answer": "a * p2",
+    "distractors": [
+      {
+        "expr": "a * 2 * k",
+        "tag": "dikali-2k"
+      },
+      {
+        "expr": "a * p2 * 2",
+        "tag": "lebih-satu-kali"
+      },
+      {
+        "expr": "a * p2 / 2",
+        "tag": "kurang-satu-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "{t} jam = {=60*t} menit = {k} kali membelah. Banyak bakteri = {a} × 2^{k} = {a} × {p2} = {answer}."
+  }
+}

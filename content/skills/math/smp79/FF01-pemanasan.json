@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.ff1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 1,
+  "title": "Persamaan dan pertidaksamaan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [1, 20],
+      "a": [3, 9],
+      "d": [2, 8],
+      "b": [1, 9]
+    },
+    "derived": {
+      "e": "(a - d) * x + a * b"
+    },
+    "constraint": "d < a && a - d >= 2",
+    "prompt": "Penyelesaian persamaan {a}(x + {b}) = {d}x + {e} adalah x = …",
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "(e - b) / (a - d)",
+        "tag": "lupa-kali-kurung"
+      },
+      {
+        "expr": "(e + a * b) / (a - d)",
+        "tag": "pindah-ruas-tanda"
+      },
+      {
+        "expr": "(e - a * b) / (a + d)",
+        "tag": "tanda-x"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a}x + {=a*b} = {d}x + {e}, jadi {=a-d}x = {=e-a*b} dan x = {answer}."
+  }
+}

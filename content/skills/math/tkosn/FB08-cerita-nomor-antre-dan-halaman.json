@@ -1,0 +1,143 @@
+{
+  "id": "math.tkosn.fb8.cerita-nomor-antre-dan-halaman",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FB",
+  "order": 8,
+  "title": "Mengurutkan bilangan ratusan — Level 8 — Cerita nomor antre dan halaman",
+  "tier": "basic",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 998]
+          },
+          "words": {
+            "nama": ["Sekar", "Bagus", "Dimas", "Ayu", "Raka", "Wulan", "Bima", "Laras"]
+          },
+          "prompt": "{nama} antre di loket Stasiun Gubeng. Nomor antreannya {a}. Nomor antrean sesudahnya adalah …",
+          "say": "{nama} antre di loket Stasiun Gubeng. Nomor antreannya {a}. Nomor antrean sesudahnya berapa?",
+          "stimulus": [
+            {
+              "kind": "object",
+              "object": "kereta"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a"
+            }
+          ],
+          "answer": "a + 1",
+          "distractors": [
+            {
+              "expr": "a - 1",
+              "tag": "sebelum"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "loncat-sepuluh"
+            },
+            {
+              "expr": "a + 2",
+              "tag": "loncat-dua"
+            }
+          ],
+          "choices": 3,
+          "explain": "Sesudah berarti tambah satu. Sesudah {a} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [101, 999]
+          },
+          "words": {
+            "nama": ["Sekar", "Bagus", "Dimas", "Ayu", "Raka", "Wulan", "Bima", "Laras"]
+          },
+          "prompt": "{nama} membaca buku cerita sampai halaman {a}. Halaman sebelumnya nomor berapa?",
+          "say": "{nama} membaca buku cerita sampai halaman {a}. Halaman sebelumnya nomor berapa?",
+          "stimulus": [
+            {
+              "kind": "object",
+              "object": "buku"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a"
+            }
+          ],
+          "answer": "a - 1",
+          "distractors": [
+            {
+              "expr": "a + 1",
+              "tag": "sesudah"
+            },
+            {
+              "expr": "a - 10",
+              "tag": "loncat-sepuluh"
+            },
+            {
+              "expr": "a - 2",
+              "tag": "loncat-dua"
+            }
+          ],
+          "choices": 3,
+          "explain": "Sebelum berarti kurang satu. Sebelum {a} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 997]
+          },
+          "prompt": "Di Balai Pemuda Surabaya ada kursi nomor {a} dan {=a+2}. Kursi di antara keduanya bernomor berapa?",
+          "say": "Di Balai Pemuda Surabaya ada kursi nomor {a} dan {=a+2}. Kursi di antara keduanya bernomor berapa?",
+          "stimulus": [
+            {
+              "kind": "numeral",
+              "value": "=a"
+            },
+            {
+              "kind": "object",
+              "object": "kursi"
+            },
+            {
+              "kind": "numeral",
+              "value": "=a+2"
+            }
+          ],
+          "answer": "a + 1",
+          "distractors": [
+            {
+              "expr": "a + 3",
+              "tag": "sesudah"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "sebelum"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "loncat-sepuluh"
+            }
+          ],
+          "choices": 3,
+          "explain": "{a}, {answer}, {=a+2}. Kursi di tengah bernomor {answer}."
+        }
+      }
+    ]
+  }
+}

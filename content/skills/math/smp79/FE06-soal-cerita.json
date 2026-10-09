@@ -1,0 +1,48 @@
+{
+  "id": "math.smp79.fe6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 6,
+  "title": "Teori bilangan lanjutan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 12],
+      "b": [2, 12],
+      "c": [2, 12],
+      "mm": [5, 30]
+    },
+    "derived": {
+      "lc": "lcm(a, b, c)"
+    },
+    "constraint": "a < b && b < c && lc >= 12 && lc <= 120",
+    "prompt": "Tiga lampu hias di Alun-alun Malang berkedip setiap {a}, {b}, dan {c} detik. Pukul 19.00.00 ketiganya berkedip bersamaan. Dalam {mm} menit berikutnya (pukul 19.00.00 tidak dihitung), ketiganya berkedip bersamaan lagi sebanyak … kali.",
+    "answer": "floor(60 * mm / lc)",
+    "distractors": [
+      {
+        "expr": "floor(60 * mm / lc) + 1",
+        "tag": "termasuk-awal"
+      },
+      {
+        "expr": "floor(60 * mm / (a * b * c))",
+        "tag": "kali-semua"
+      },
+      {
+        "expr": "floor(60 * mm / c)",
+        "tag": "pakai-terbesar"
+      }
+    ],
+    "choices": 4,
+    "explain": "KPK({a}, {b}, {c}) = {lc} detik. {mm} menit = {=60*mm} detik. {=60*mm} : {lc} = {=60*mm/lc}, dibulatkan ke bawah menjadi {answer} kali."
+  }
+}

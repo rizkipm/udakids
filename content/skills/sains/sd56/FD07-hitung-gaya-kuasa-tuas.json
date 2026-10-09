@@ -1,0 +1,58 @@
+{
+  "id": "sains.sd56.fd7.hitung-gaya-kuasa-tuas",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FD",
+  "order": 7,
+  "title": "Pesawat sederhana — Level 7 — Hitung: gaya kuasa tuas",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pesawat sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": {
+        "range": [100, 900],
+        "step": 50
+      },
+      "lb": {
+        "values": [20, 25, 30, 40, 50]
+      },
+      "lk": {
+        "values": [50, 60, 75, 80, 100, 120, 150]
+      }
+    },
+    "words": {
+      "alat": ["linggis", "papan pengungkit", "tuas besi"]
+    },
+    "constraint": "(w * lb) % lk == 0 && lk > lb",
+    "prompt": "Sebuah batu seberat {w} N diungkit dengan {alat}. Jarak batu ke titik tumpu {lb} cm, dan tangan menekan pada jarak {lk} cm dari titik tumpu. Gaya kuasa yang diperlukan adalah … N.",
+    "answer": "w * lb / lk",
+    "distractors": [
+      {
+        "expr": "w * lk / lb",
+        "tag": "lengan-tertukar"
+      },
+      {
+        "expr": "w / 2",
+        "tag": "setengah"
+      },
+      {
+        "expr": "w * lb / (lk + lb)",
+        "tag": "jumlah-lengan"
+      },
+      {
+        "expr": "w - lk + lb",
+        "tag": "dikurangi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Beban × lengan beban = kuasa × lengan kuasa. {w} × {lb} = {=w*lb}. Kuasa = {=w*lb} : {lk} = {answer} N."
+  }
+}

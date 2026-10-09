@@ -1,0 +1,50 @@
+{
+  "id": "math.sd56.fg1.pemanasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 1,
+  "title": "Perbandingan — Level 1 — Pemanasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "q": {
+        "range": [2000, 10000],
+        "step": 500
+      },
+      "a": [2, 8],
+      "b": [3, 15]
+    },
+    "derived": {
+      "h": "a * q"
+    },
+    "constraint": "a != b",
+    "prompt": "Harga {a} buku tulis Rp{h}. Harga {b} buku tulis yang sama adalah Rp…",
+    "answer": "b * q",
+    "distractors": [
+      {
+        "expr": "h * b",
+        "tag": "lupa-bagi"
+      },
+      {
+        "expr": "h * a / b",
+        "tag": "terbalik"
+      },
+      {
+        "expr": "abs(b - a) * q",
+        "tag": "selisih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Harga 1 buku Rp{h} : {a} = Rp{q}. Harga {b} buku = {b} × Rp{q} = Rp{answer}."
+  }
+}

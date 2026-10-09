@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.fe4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FE",
+  "order": 4,
+  "title": "Teori bilangan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "i": [0, 4],
+      "j": [0, 2],
+      "k": [0, 1],
+      "l": [0, 1]
+    },
+    "derived": {
+      "n": "(1 + (i >= 1)) * (1 + (i >= 2)) * (1 + (i >= 3)) * (1 + (i >= 4)) * (1 + 2 * (j >= 1)) * (1 + 2 * (j >= 2)) * (1 + 4 * k) * (1 + 6 * l)"
+    },
+    "constraint": "n >= 12 && n <= 500 && i + j + k + l >= 3",
+    "prompt": "Banyak faktor dari {n} adalah …",
+    "answer": "(i + 1) * (j + 1) * (k + 1) * (l + 1)",
+    "distractors": [
+      {
+        "expr": "(i + 1) * (j + 1) * (k + 1) * (l + 1) - 2",
+        "tag": "tanpa-1-dan-dirinya"
+      },
+      {
+        "expr": "(i + 1) + (j + 1) + (k + 1) + (l + 1)",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "i + j + k + l",
+        "tag": "pangkat-saja"
+      }
+    ],
+    "choices": 4,
+    "explain": "Faktorkan {n} menjadi faktor prima, lalu kalikan (pangkat + 1) tiap faktor prima. Banyak faktor = {answer}."
+  }
+}

@@ -1,0 +1,583 @@
+{
+  "id": "math.smp79.fa10.tantangan-final-operasi-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 10,
+  "title": "Operasi bilangan — Level 10 — Tantangan final operasi bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": {
+              "values": [2, 3, 5, 6, 7]
+            },
+            "a": [2, 7],
+            "b": [2, 7],
+            "c": [1, 6]
+          },
+          "derived": {
+            "x": "a * a * r",
+            "y": "b * b * r",
+            "z": "c * c * r"
+          },
+          "constraint": "a + b - c > 0 && a != b && a != c && b != c",
+          "prompt": "Bentuk sederhana √{x} + √{y} − √{z} = …√{r}",
+          "answer": "a + b - c",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a * a + b * b - c * c",
+              "tag": "lupa-akar"
+            },
+            {
+              "expr": "a + b",
+              "tag": "lupa-kurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "√{x} = {a}√{r}, √{y} = {b}√{r}, √{z} = {c}√{r}. Jadi ({a} + {b} − {c})√{r} = {answer}√{r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "m": [3, 9],
+            "n": [2, 8]
+          },
+          "prompt": "Hasil ({a} × 10^{m}) × ({b} × 10^{n}) ditulis dalam notasi ilmiah c × 10^p dengan 1 ≤ c < 10. Nilai p adalah …",
+          "answer": "m + n + (a * b >= 10)",
+          "distractors": [
+            {
+              "expr": "m * n",
+              "tag": "pangkat-dikali"
+            },
+            {
+              "expr": "m + n + 1 - (a * b >= 10)",
+              "tag": "lupa-geser-koma"
+            },
+            {
+              "expr": "m + n + 2",
+              "tag": "geser-dua"
+            }
+          ],
+          "choices": 4,
+          "explain": "{a} × {b} = {=a*b}, jadi hasilnya {=a*b} × 10^{=m+n}. Ubah agar 1 ≤ c < 10, maka p = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 3],
+            "b": [3, 6],
+            "c": [1, 3],
+            "d": [3, 6],
+            "k": [10, 40]
+          },
+          "derived": {
+            "r": "k * (b - a) * (d - c)",
+            "t": "k * b * d"
+          },
+          "constraint": "a < b && c < d && gcd(a, b) == 1 && gcd(c, d) == 1",
+          "prompt": "Pak Darto memiliki sawah di Ngawi. Sebanyak {a}/{b} bagian ditanami padi, {c}/{d} dari sisanya ditanami jagung, dan sisanya seluas {r} m² dibuat kolam ikan. Luas seluruh sawah … m².",
+          "answer": "t",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "r * b / (b - a)",
+              "tag": "satu-tahap"
+            },
+            {
+              "expr": "r * d / (d - c)",
+              "tag": "satu-tahap-lain"
+            },
+            {
+              "expr": "r * b * d / (b * d - a * d - b * c)",
+              "tag": "dari-seluruh"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sisa setelah padi {=b-a}/{b}. Kolam = {=b-a}/{b} × {=d-c}/{d} = {=(b-a)*(d-c)}/{=b*d} bagian. Luas sawah = {r} × {=b*d} : {=(b-a)*(d-c)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [2, 3, 5, 6, 7, 10, 11, 13, 14, 15]
+            },
+            "b": {
+              "values": [2, 3, 5, 6, 7, 10, 11, 13, 14, 15]
+            }
+          },
+          "constraint": "a < b",
+          "prompt": "Jika (√{a} + √{b})² = p + √q dengan p dan q bilangan bulat, nilai p + q adalah …",
+          "answer": "a + b + 4 * a * b",
+          "distractors": [
+            {
+              "expr": "a + b + 2 * a * b",
+              "tag": "lupa-kuadrat-2"
+            },
+            {
+              "expr": "a + b + a * b",
+              "tag": "lupa-2"
+            },
+            {
+              "expr": "a * b + 2",
+              "tag": "kali-langsung"
+            }
+          ],
+          "choices": 4,
+          "explain": "(√{a} + √{b})² = {a} + {b} + 2√{=a*b} = {=a+b} + √{=4*a*b}. Jadi p + q = {=a+b} + {=4*a*b} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Nilai dari 1 − 2 + 3 − 4 + 5 − 6 + … + 99 − 100 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−50"
+                  },
+                  "say": "−50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−100"
+                  },
+                  "say": "−100"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Pasangkan: (1 − 2) + (3 − 4) + … ada 50 pasang, masing-masing −1. Jumlahnya −50."
+            },
+            {
+              "prompt": "Hasil dari (2^10 + 2^10) : 2^8 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "say": "16"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2^10 + 2^10 = 2 × 2^10 = 2^11. Lalu 2^11 : 2^8 = 2^3 = 8."
+            },
+            {
+              "prompt": "Hasil (4 × 10⁵) × (6 × 10⁻⁸) dalam notasi ilmiah adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2,4 × 10⁻²"
+                  },
+                  "say": "2,4 × 10⁻²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2,4 × 10⁻³"
+                  },
+                  "say": "2,4 × 10⁻³"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24 × 10⁻²"
+                  },
+                  "say": "24 × 10⁻²"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2,4 × 10⁻⁴⁰"
+                  },
+                  "say": "2,4 × 10⁻⁴⁰"
+                }
+              ],
+              "answer": 0,
+              "reteach": "4 × 6 = 24 dan 10⁵ × 10⁻⁸ = 10⁻³. 24 × 10⁻³ = 2,4 × 10⁻²."
+            },
+            {
+              "prompt": "Nilai √0,0144 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,12"
+                  },
+                  "say": "0,12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,012"
+                  },
+                  "say": "0,012"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1,2"
+                  },
+                  "say": "1,2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,0012"
+                  },
+                  "say": "0,0012"
+                }
+              ],
+              "answer": 0,
+              "reteach": "0,0144 = 144/10.000, akarnya 12/100 = 0,12. Cek: 0,12 × 0,12 = 0,0144."
+            },
+            {
+              "prompt": "Hasil 1/(1×2) + 1/(2×3) + 1/(3×4) + … + 1/(9×10) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9/10"
+                  },
+                  "say": "9/10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/10"
+                  },
+                  "say": "1/10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10/11"
+                  },
+                  "say": "10/11"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1/(n(n+1)) = 1/n − 1/(n+1). Suku tengah saling menghapus, sisa 1 − 1/10 = 9/10."
+            },
+            {
+              "prompt": "Diketahui a = 2^30, b = 3^20, dan c = 5^10. Urutan dari yang terkecil adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "c, a, b"
+                  },
+                  "say": "c, a, b"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "a, b, c"
+                  },
+                  "say": "a, b, c"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "c, b, a"
+                  },
+                  "say": "c, b, a"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "a, c, b"
+                  },
+                  "say": "a, c, b"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Samakan pangkat 10: a = (2³)^10 = 8^10, b = (3²)^10 = 9^10, c = 5^10. Jadi c < a < b."
+            },
+            {
+              "prompt": "Nilai x yang memenuhi 4^x = 8^(x − 1) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ubah ke basis 2: 2^(2x) = 2^(3x − 3). Jadi 2x = 3x − 3, x = 3."
+            },
+            {
+              "prompt": "Bentuk √(7 + √48) sama dengan …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 + √3"
+                  },
+                  "say": "2 + √3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 + √2"
+                  },
+                  "say": "3 + √2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1 + √6"
+                  },
+                  "say": "1 + √6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 + √3"
+                  },
+                  "say": "4 + √3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(2 + √3)² = 4 + 4√3 + 3 = 7 + √48. Jadi √(7 + √48) = 2 + √3."
+            },
+            {
+              "prompt": "Nilai (−3)² − 3² + (−2)³ adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−8"
+                  },
+                  "say": "−8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "−26"
+                  },
+                  "say": "−26"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(−3)² = 9, 3² = 9, (−2)³ = −8. Jadi 9 − 9 − 8 = −8."
+            },
+            {
+              "prompt": "Pecahan yang nilainya di antara 2/5 dan 3/7 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5/12"
+                  },
+                  "say": "5/12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3/8"
+                  },
+                  "say": "3/8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4/9"
+                  },
+                  "say": "4/9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2/5 = 0,4 dan 3/7 ≈ 0,429. 5/12 ≈ 0,417 ada di antaranya; 3/8 = 0,375 dan 4/9 ≈ 0,444 di luar."
+            },
+            {
+              "prompt": "Jika 0,363636… = p/q dalam bentuk paling sederhana, nilai p + q adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "135"
+                  },
+                  "say": "135"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "47"
+                  },
+                  "say": "47"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                }
+              ],
+              "answer": 0,
+              "reteach": "0,3636… = 36/99 = 4/11. Jadi p + q = 4 + 11 = 15."
+            },
+            {
+              "prompt": "Nilai (0,25)⁻² × 2⁻³ adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1/2"
+                  },
+                  "say": "1/2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                }
+              ],
+              "answer": 0,
+              "reteach": "(0,25)⁻² = (1/4)⁻² = 16 dan 2⁻³ = 1/8. Jadi 16 × 1/8 = 2."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

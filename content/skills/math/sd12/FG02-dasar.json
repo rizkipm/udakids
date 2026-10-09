@@ -1,0 +1,45 @@
+{
+  "id": "math.sd12.fg2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FG",
+  "order": 2,
+  "title": "Pola bilangan sederhana — Level 2 — Dasar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [300, 900],
+      "k": {
+        "values": [5, 10, 20, 25, 50, 100]
+      }
+    },
+    "constraint": "a - 5 * k >= 0",
+    "prompt": "{a}, {=a-k}, {=a-2*k}, {=a-3*k}, … Bilangan berikutnya adalah …",
+    "answer": "a - 4 * k",
+    "distractors": [
+      {
+        "expr": "a - 4 * k - 1",
+        "tag": "kurang-satu"
+      },
+      {
+        "expr": "a - 5 * k",
+        "tag": "lompat-dua"
+      },
+      {
+        "expr": "a - 4 * k + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Polanya selalu dikurangi {k}. {=a-3*k} − {k} = {answer}."
+  }
+}

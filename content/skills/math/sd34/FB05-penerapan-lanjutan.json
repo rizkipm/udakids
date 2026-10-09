@@ -1,0 +1,55 @@
+{
+  "id": "math.sd34.fb5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 5,
+  "title": "Pecahan sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": [3, 10],
+      "a": [2, 9],
+      "m": [3, 15]
+    },
+    "derived": {
+      "n": "b * m"
+    },
+    "constraint": "a < b && gcd(a, b) == 1",
+    "prompt": "{a}/{b} dari {n} adalah …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=b",
+        "model": "bar"
+      }
+    ],
+    "answer": "a * m",
+    "distractors": [
+      {
+        "expr": "m",
+        "tag": "satu-bagian"
+      },
+      {
+        "expr": "n - a * m",
+        "tag": "sisanya"
+      },
+      {
+        "expr": "a * m + m",
+        "tag": "lebih-satu-bagian"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} : {b} = {m}, lalu {m} × {a} = {answer}."
+  }
+}

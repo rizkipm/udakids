@@ -1,0 +1,46 @@
+{
+  "id": "math.smp79.fg2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FG",
+  "order": 2,
+  "title": "Perbandingan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 25],
+      "s": {
+        "values": [250000, 500000, 750000, 1000000, 1500000, 2000000]
+      }
+    },
+    "constraint": "(d * s) % 100000 == 0",
+    "prompt": "Pada peta berskala 1 : {s}, jarak dua kota {d} cm. Jarak sebenarnya … km.",
+    "answer": "d * s / 100000",
+    "unit": "km",
+    "distractors": [
+      {
+        "expr": "d * s / 1000",
+        "tag": "ke-meter"
+      },
+      {
+        "expr": "d * s / 10000",
+        "tag": "geser-satu"
+      },
+      {
+        "expr": "d * s / 1000000",
+        "tag": "geser-lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jarak sebenarnya {d} × {s} = {=d*s} cm. 1 km = 100.000 cm, jadi {answer}."
+  }
+}

@@ -17,10 +17,15 @@
     "migrate:prod": "node dist/cli/migrate.js",
     "seed:prod": "node dist/cli/seed.js",
     "voice:generate": "tsx --conditions=source src/cli/voice.ts",
+    "sim:photos": "tsx --conditions=source src/cli/sim-photos.ts",
     "voice:prod": "node dist/cli/voice.js",
-    "start:prod": "node dist/cli/migrate.js && node dist/main.js"
+    "start:prod": "node dist/cli/migrate.js && node dist/main.js",
+    "carry:export": "tsx --conditions=source src/cli/carry.ts export",
+    "carry:import": "tsx --conditions=source src/cli/carry.ts import",
+    "carry:prod": "node dist/cli/carry.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1",
     "@little-coder/engine": "workspace:*",
     "@nestjs/common": "^11.1.0",
     "@nestjs/core": "^11.1.0",

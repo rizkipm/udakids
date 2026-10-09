@@ -62,19 +62,34 @@ export async function mergeNewCategories(
   const stored = (row.categories as Catalog['categories']) ?? [];
   // Mock test pindah ke bagian lombanya (D-076): judul bagian & tanda `mock` mengikuti content/.
   let moved = false;
+  // Pelajaran "Belajar dulu" (D-079): materi lama mendapat pelajaran dari content/ bila belum punya atau versinya
+  // lebih lama. Isi materi lain yang disunting admin tidak disentuh.
+  let lessons = 0;
   const current = stored.map((x) => {
     const src = c.categories.find((y) => y.code === x.code);
-    if (!src?.mock || !isMockSection(x) || (x.mock && x.group === src.group)) return x;
+    let out = x;
+    if (src?.lesson && (!x.lesson || x.lesson.version < src.lesson.version)) {
+      out = { ...out, lesson: src.lesson };
+      lessons++;
+    }
+    if (!src?.mock || !isMockSection(out) || (out.mock && out.group === src.group)) return out;
     moved = true;
-    return { ...x, group: src.group, mock: true };
+    return { ...out, group: src.group, mock: true };
   });
   const have = new Set(current.map((x) => x.code));
   const added = c.categories.filter((x) => !have.has(x.code));
   // Penggantian nama resmi (bukan suntingan admin): "(OSN)" → "(Olimpiade)" (D-070), "Pra-TK" → "PAUD" (D-075).
   const renamed = row.title.replace('(OSN)', '(Olimpiade)').replace('Pra-TK', 'PAUD');
   const title = renamed === c.title ? c.title : row.title;
-  if (added.length === 0 && !moved && title === row.title) return;
-  const all = [...current, ...added];
+  if (added.length === 0 && !moved && lessons === 0 && title === row.title) return;
+  // Materi baru disisipkan di posisinya menurut content/ (setelah materi sebelumnya yang sudah ada), bukan di
+  // akhir: bagian (group) & rantai kunci tetap seperti content/ (D-079).
+  const all = [...current];
+  for (const x of added) {
+    const before = c.categories.slice(0, c.categories.indexOf(x)).map((y) => y.code);
+    const at = Math.max(-1, ...before.map((code) => all.findIndex((y) => y.code === code)));
+    all.splice(at + 1, 0, x);
+  }
   const categories = [...all.filter((x) => !isMockSection(x)), ...all.filter(isMockSection)];
   // updatedBy tetap (masih dianggap suntingan admin), hanya isinya yang dilengkapi.
   await db

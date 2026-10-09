@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { durationWords, formatClock, type AnswerValue, type Color } from '@little-coder/engine';
 import { ApiError } from '../../api/client';
+import { pushVoiceContest } from '../../audio/speech';
 import { useApiCall, useFetch } from '../../auth/useApi';
 import { Momo } from '../../components/Momo';
 import { t } from '../../i18n';
@@ -402,6 +403,11 @@ function ContestRun({
     () =>
       index >= 0 && session.items[index] ? toPlayable(session.items[index], index) : undefined,
     [index, session.items],
+  );
+  // Suara Chirp untuk soal lomba (D-091): server mencocokkan teks dengan soal peserta ini.
+  useLayoutEffect(
+    () => (index >= 0 ? pushVoiceContest({ entryId: session.entryId, index }) : undefined),
+    [session.entryId, index],
   );
 
   const finish = useCallback(

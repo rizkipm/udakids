@@ -1,0 +1,49 @@
+{
+  "id": "sains.sd34.fg7.hitung-perubahan-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd34",
+  "category": "FG",
+  "order": 7,
+  "title": "Materi dan campuran — Level 7 — Hitung: perubahan suhu saat dipanaskan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Materi, perubahan materi, dan campuran"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [20, 35],
+      "b": [3, 9],
+      "n": [2, 8]
+    },
+    "constraint": "a + b * n < 100",
+    "prompt": "Air bersuhu {a} °C dipanaskan. Suhunya naik {b} °C setiap menit. Suhu air setelah {n} menit adalah …",
+    "answer": "a + b * n",
+    "unit": "°C",
+    "distractors": [
+      {
+        "expr": "a + b",
+        "tag": "satu-menit"
+      },
+      {
+        "expr": "b * n",
+        "tag": "lupa-suhu-awal"
+      },
+      {
+        "expr": "a + b * n + b",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "a * n",
+        "tag": "awal-dikali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kenaikan suhu = {b} × {n} = {=b*n} °C. Suhu akhir = {a} + {=b*n} = {answer}."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "math.smp79.fa2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FA",
+  "order": 2,
+  "title": "Operasi bilangan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Operasi bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 4],
+      "b": [2, 9],
+      "c": [1, 5],
+      "d": [2, 9],
+      "e": [2, 6]
+    },
+    "constraint": "a < b && c < d && b != d && gcd(a, b) == 1 && gcd(c, d) == 1",
+    "prompt": "Hasil dari {a}/{b} + {c}/{d} × {e} dalam bentuk paling sederhana adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "a * d + b * c * e",
+      "den": "b * d"
+    },
+    "distractors": [
+      {
+        "num": "((a * d + b * c) * e) / gcd((a * d + b * c) * e, b * d)",
+        "den": "(b * d) / gcd((a * d + b * c) * e, b * d)",
+        "tag": "urutan-operasi"
+      },
+      {
+        "num": "(a + c * e) / gcd(a + c * e, b + d)",
+        "den": "(b + d) / gcd(a + c * e, b + d)",
+        "tag": "jumlah-langsung"
+      },
+      {
+        "num": "(a * d + c * e) / gcd(a * d + c * e, b * d)",
+        "den": "(b * d) / gcd(a * d + c * e, b * d)",
+        "tag": "lupa-kali-penyebut"
+      },
+      {
+        "num": "(a * d + b * c) / gcd(a * d + b * c, b * d * e)",
+        "den": "(b * d * e) / gcd(a * d + b * c, b * d * e)",
+        "tag": "bagi-bukan-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kali dulu: {c}/{d} × {e} = {=c*e}/{d}. Lalu {a}/{b} + {=c*e}/{d} = {answer}."
+  }
+}

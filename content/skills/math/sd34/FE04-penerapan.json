@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.fe4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 4,
+  "title": "Tabel dan diagram — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 15],
+      "b": [2, 15],
+      "c": [2, 15],
+      "d": [2, 15]
+    },
+    "prompt": "Diagram batang menunjukkan tabungan Nadia (dalam ribuan rupiah). Jumlah tabungan Nadia selama 4 hari adalah Rp…",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Tabungan Nadia",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "unit": "ribu rupiah"
+      }
+    ],
+    "answer": "(a + b + c + d) * 1000",
+    "distractors": [
+      {
+        "expr": "a + b + c + d",
+        "tag": "lupa-ribuan"
+      },
+      {
+        "expr": "(a + b + c + d) * 100",
+        "tag": "ratusan"
+      },
+      {
+        "expr": "(a + b + c) * 1000",
+        "tag": "tiga-hari"
+      }
+    ],
+    "choices": 4,
+    "explain": "{a} + {b} + {c} + {d} = {=a+b+c+d} ribu rupiah = Rp{answer}."
+  }
+}

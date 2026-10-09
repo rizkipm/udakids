@@ -179,6 +179,21 @@ describe('papan peringkat mock test', () => {
     ]);
     expect(rankMockBoard([])).toEqual([]);
   });
+  it('KMSI Final (D-080): poin & waktu sama → abjad nama, posisi tidak kembar', async () => {
+    const { rankMockBoard } = await import('../src/index.js');
+    const rows = [
+      { id: 'd', nickname: 'Dodi', points: 88, timeMs: 600_000 },
+      { id: 'b', nickname: 'Budi', points: 92, timeMs: 1_500_000 },
+      { id: 'c', nickname: 'Cici', points: 88, timeMs: 600_000 },
+      { id: 'a', nickname: 'Ayu', points: 88, timeMs: 900_000 },
+    ];
+    expect(rankMockBoard(rows, { byName: true }).map((r) => `${r.id}${r.position}`)).toEqual([
+      'b1',
+      'c2',
+      'd3',
+      'a4',
+    ]);
+  });
 });
 
 describe('mock test 1–3 tidak saling mengunci', () => {

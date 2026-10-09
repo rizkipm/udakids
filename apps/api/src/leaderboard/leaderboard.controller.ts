@@ -133,9 +133,14 @@ type MockBoard = {
 /**
  * Singkatan lomba dari judul bagian mock: "KMSI · Kompetensi …" / "EMC · Eduversal …" (D-076) → "KMSI" / "EMC";
  * judul lama "Mock Test KMSI · …" (D-074) → "KMSI"; "Mock Test · …" (D-072) → "Olimpiade".
+ * Babak final provinsi sebagai lomba sendiri (D-080): "KMSI · … — Final Provinsi Jatim 2026" → "KMSI Final",
+ * supaya mock test 1–3-nya tidak bercampur dengan mock penyisihan. ("Penyisihan Final Provinsi" EMC tetap EMC.)
  */
-export const competitionOf = (group: string | undefined) =>
-  /^(?:Mock Test )?([^\s·]{2,12}) ·/.exec(group ?? '')?.[1] ?? 'Olimpiade';
+export const competitionOf = (group: string | undefined) => {
+  const abbr = /^(?:Mock Test )?([^\s·]{2,12}) ·/.exec(group ?? '')?.[1];
+  if (!abbr) return 'Olimpiade';
+  return /— Final Provinsi\b/.test(group ?? '') ? `${abbr} Final` : abbr;
+};
 const mockQuery = z.object({
   page: z.coerce.number().int().min(1).max(10_000).default(1),
   pageSize: z.coerce.number().int().min(1).max(100).default(50),
@@ -785,6 +790,9 @@ export class LeaderboardController {
           timeMs: n(x.time_ms),
           attempts: n(x.attempts),
         }));
+      const competition = competitionOf(
+        book?.categories.find((x) => x.code === parsed.data.category)?.group,
+      );
       mocks.set(String(r.id), {
         skillId: String(r.id),
         domain: String(r.domain),
@@ -795,11 +803,10 @@ export class LeaderboardController {
         maxPoints: mockMaxPoints(c),
         questions: c.questions,
         order: parsed.data.order,
-        competition: competitionOf(
-          book?.categories.find((x) => x.code === parsed.data.category)?.group,
-        ),
+        competition,
         passPoints: c.passPoints ?? null,
-        rows: rankMockBoard(rows),
+        // KMSI Final (D-080): nilai → waktu pengumpulan → abjad nama, tanpa posisi kembar.
+        rows: rankMockBoard(rows, { byName: competition === 'KMSI Final' }),
       });
     }
     return { at: new Date(), books, boards, levels: levelCount, mocks };

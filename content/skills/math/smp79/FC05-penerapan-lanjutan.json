@@ -1,0 +1,51 @@
+{
+  "id": "math.smp79.fc5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FC",
+  "order": 5,
+  "title": "Aritmetika sosial — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [5, 50],
+      "p": {
+        "values": [6, 9, 12, 15, 18, 8, 10]
+      },
+      "n": [3, 30]
+    },
+    "derived": {
+      "mo": "100000 * k",
+      "tot": "mo + mo * p * n / 1200"
+    },
+    "constraint": "(k * p) % 3 == 0",
+    "prompt": "Modal Rp{mo} disimpan dengan bunga tunggal {p}% per tahun hingga menjadi Rp{tot}. Lama menyimpan … bulan.",
+    "answer": "n",
+    "unit": "bulan",
+    "distractors": [
+      {
+        "expr": "(tot - mo) * 100 / (mo * p)",
+        "tag": "dalam-tahun"
+      },
+      {
+        "expr": "n + 12",
+        "tag": "tambah-setahun"
+      },
+      {
+        "expr": "2 * n",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bunga = {tot} − {mo} = {=tot-mo}. Bunga sebulan = {p}% × {mo} : 12 = {=mo*p/1200}. Lama = {=tot-mo} : {=mo*p/1200} = {answer}."
+  }
+}

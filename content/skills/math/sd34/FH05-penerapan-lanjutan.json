@@ -1,0 +1,43 @@
+{
+  "id": "math.sd34.fh5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 5,
+  "title": "Teori bilangan sederhana — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "b": [0, 9],
+      "c": [0, 9]
+    },
+    "prompt": "Bilangan {a}{b}□{c} habis dibagi 9. Angka terkecil yang dapat mengisi □ adalah …",
+    "answer": "(9 - (a + b + c) % 9) % 9",
+    "distractors": [
+      {
+        "expr": "(a + b + c) % 9",
+        "tag": "sisa-jumlah"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "jumlah-angka"
+      },
+      {
+        "expr": "(3 - (a + b + c) % 3) % 3",
+        "tag": "aturan-bagi-3"
+      }
+    ],
+    "choices": 4,
+    "explain": "Habis dibagi 9 jika jumlah angkanya kelipatan 9. {a} + {b} + {c} = {=a+b+c}, perlu ditambah {answer}."
+  }
+}

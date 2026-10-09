@@ -1,0 +1,72 @@
+{
+  "id": "math.sd56.fh3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 3,
+  "title": "Statistika sederhana — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": [120, 135],
+      "d1": [1, 4],
+      "d2": [1, 4],
+      "d3": [1, 4],
+      "d4": [1, 4],
+      "d5": [1, 4],
+      "d6": [1, 4]
+    },
+    "derived": {
+      "x1": "s",
+      "x2": "s + d1",
+      "x3": "s + d1 + d2",
+      "x4": "s + d1 + d2 + d3",
+      "x5": "s + d1 + d2 + d3 + d4",
+      "x6": "s + d1 + d2 + d3 + d4 + d5",
+      "x7": "s + d1 + d2 + d3 + d4 + d5 + d6"
+    },
+    "prompt": "Tabel menunjukkan tinggi badan 7 anak. Median tinggi badan mereka adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Nama", "Tinggi (cm)"],
+        "rows": [
+          ["Ayu", "=x3"],
+          ["Bima", "=x6"],
+          ["Citra", "=x1"],
+          ["Dodi", "=x7"],
+          ["Eka", "=x4"],
+          ["Fajar", "=x2"],
+          ["Gita", "=x5"]
+        ]
+      }
+    ],
+    "answer": "x4",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "x7",
+        "tag": "tengah-tanpa-urut"
+      },
+      {
+        "expr": "x3",
+        "tag": "urutan-ke-3"
+      },
+      {
+        "expr": "x5",
+        "tag": "urutan-ke-5"
+      }
+    ],
+    "choices": 4,
+    "explain": "Urutkan: {x1}, {x2}, {x3}, {x4}, {x5}, {x6}, {x7}. Data ke-4 (tengah) adalah {answer}."
+  }
+}

@@ -419,8 +419,9 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'sd34' && c.domain === 'sains',
         ).categories,
-        // 10 materi OSN + 7 materi KMSI (K–Q) + Game seru (GM, D-078) + Mock Test KMSI (Y), D-074.
-      ).toHaveLength(19);
+        // 10 materi OSN + 7 materi KMSI (K–Q) + Game seru (GM, D-078) + Mock Test KMSI (Y), D-074,
+        // + 9 materi KMSI Final Jatim (FA–FI) + Game Final (GF) + Mock Final (FY), D-084.
+      ).toHaveLength(30);
       await http().get('/parent/children').set(auth(childToken)).expect(403);
       await http().get('/admin/skills').set(auth(childToken)).expect(403);
       await http().get('/levels').set(auth(childToken)).expect(200);
@@ -545,11 +546,33 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .expect(200);
       expect(batch.body.rejectedQuizzes).toEqual([]);
       expect(batch.body.quizzes[a3]).toMatchObject({ best: 70, passed: true });
+      // Topik bebas dipilih (D-082): Level 1 topik C sah walau topik B belum dimulai; Level 2-nya belum.
+      const c1 = 'math.prek.c1.kenali-angka-1-sampai-3';
+      const skip = await http()
+        .post('/practice/sync')
+        .set(auth(childToken))
+        .send({
+          answers: [],
+          states: [],
+          quizzes: [
+            { id: randomUUID(), skillId: c1, correct: 9, total: 10, ts: now + 3 },
+            {
+              id: randomUUID(),
+              skillId: 'math.prek.b2.belajar-membilang-sampai-3',
+              correct: 9,
+              total: 10,
+              ts: now + 4,
+            },
+          ],
+        })
+        .expect(200);
+      expect(skip.body.rejectedQuizzes).toHaveLength(1);
+      expect(skip.body.quizzes[c1]).toMatchObject({ passed: true });
       // Bersihkan agar test berikutnya (total skor, riwayat) tetap sama.
-      await pool.query('delete from quiz_results where skill_id = any($1)', [[a2, a3]]);
+      await pool.query('delete from quiz_results where skill_id = any($1)', [[a2, a3, c1]]);
       await pool.query(
         "delete from events where type = 'quiz_result' and payload->>'skillId' = any($1)",
-        [[a2, a3]],
+        [[a2, a3, c1]],
       );
     });
 
@@ -975,12 +998,19 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(row.updated_by).not.toBeNull();
       expect(row.categories[0]!.title).toBe('Bilangan (disunting admin)');
       expect(row.categories.map((c) => c.code)).toEqual(content.categories.map((c) => c.code));
-      // Mock test pindah ke bagian lombanya (D-076), tetap di akhir.
-      expect(row.categories.at(-1)).toMatchObject({ code: 'Y', mock: true, group: mockY.group });
-      expect(row.categories.filter((c) => c.group?.startsWith('KMSI') && !c.mock)).toHaveLength(7);
+      // Mock test pindah ke bagian lombanya (D-076), tetap di akhir: Y (Penyisihan) lalu FY (Final Jatim, D-080).
+      expect(row.categories.at(-2)).toMatchObject({ code: 'Y', mock: true, group: mockY.group });
+      expect(row.categories.at(-1)).toMatchObject({ code: 'FY', mock: true });
+      expect(
+        row.categories.filter((c) => c.group?.endsWith('Penyisihan 2026') && !c.mock),
+      ).toHaveLength(7);
+      // Materi Final (FA–FH + game GF) disisipkan sebelum GM (D-079, D-080).
+      expect(
+        row.categories.filter((c) => c.group?.endsWith('Final Provinsi Jatim 2026') && !c.mock),
+      ).toHaveLength(9);
     });
 
-    it('Worksheet lama disunting admin → judul jadi PAUD, materi baru B–E ditambahkan (D-075)', async () => {
+    it('Worksheet lama disunting admin → judul PAUD, materi baru di posisinya, pelajaran masuk (D-075, D-079)', async () => {
       const content = catalogSchema.parse(
         JSON.parse(
           readFileSync(
@@ -999,11 +1029,9 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
           ),
         ),
       );
-      const a = {
-        ...content.categories[0]!,
-        title: 'Angka 1–10 (disunting admin)',
-        group: undefined,
-      };
+      // Materi A disunting admin dan belum punya pelajaran (seperti katalog sebelum D-068).
+      const { lesson: _lesson, ...a0 } = content.categories[0]!;
+      const a = { ...a0, title: 'Angka 1–10 (disunting admin)', group: undefined };
       await pool.query(
         `update skill_catalogs set title = 'Worksheet Pra-TK', categories = $1,
            updated_by = (select id from staff_users where role = 'admin' limit 1)
@@ -1017,8 +1045,11 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         )
       ).rows[0] as { title: string; categories: { code: string; title: string }[] };
       expect(row.title).toBe('Worksheet PAUD');
-      expect(row.categories.map((c) => c.code)).toEqual(['A', 'B', 'C', 'D', 'E']);
+      // Materi baru di posisinya menurut content/ (F, G, H langsung setelah A di bagian Numerasi, D-079).
+      expect(row.categories.map((c) => c.code)).toEqual(content.categories.map((c) => c.code));
       expect(row.categories[0]!.title).toBe('Angka 1–10 (disunting admin)');
+      // Pelajaran dari content/ ditambahkan ke materi lama yang belum punya.
+      expect((row.categories[0] as { lesson?: { kode: string } }).lesson?.kode).toBe('P-MA-01');
     });
   });
 
@@ -1459,7 +1490,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .expect(404);
     });
 
-    it('soal Basic dibuatkan suara on-demand; soal kelas 1+ tidak (hanya perintah)', async () => {
+    it('soal semua jenjang dibuatkan suara Chirp on-demand, dipakai ulang (D-091)', async () => {
       const basic = await http()
         .get('/voice/item/math.prek.a1.kenali-angka-1-sampai-2?seed=5&band=0')
         .expect(200);
@@ -1469,8 +1500,40 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         .get('/voice/item/math.prek.a1.kenali-angka-1-sampai-2?seed=5&band=0')
         .expect(200);
       expect(ttsCalls.length).toBe(n);
-      const [g1] = (await pool.query("select id from skills where grade = 'sd1' limit 1")).rows;
-      await http().get(`/voice/item/${g1.id}?seed=5&band=0`).expect(404);
+      // Kelas 1+ kini juga memakai suara Chirp (sebelumnya hanya perintah umum, D-043).
+      const [g1] = (
+        await pool.query("select id from skills where grade = 'sd1' and status = 'active' limit 1")
+      ).rows;
+      await http().get(`/voice/item/${g1.id}?seed=5&band=0`).expect(200);
+      // Soal yang tidak ada → 404.
+      await http().get('/voice/item/math.prek.zz9.tidak-ada?seed=5&band=0').expect(404);
+    });
+
+    it('/voice/say: teks aplikasi + konteks dibuatkan suara; teks bebas ditolak (D-091)', async () => {
+      const say = (t: string, q: Record<string, string> = {}) =>
+        http()
+          .get('/voice/say')
+          .query({ t, ...q });
+      // Teks antarmuka (i18n), dengan isian nama.
+      await say('Tepat!').expect(200);
+      await say('Aimar. Ketuk tiga gambar rahasiamu.').expect(200);
+      // Kosakata aplikasi: huruf, angka, nama benda.
+      await say('Huruf b besar. tujuh, gajah.').expect(200);
+      // Teks bebas & template yang disalahgunakan → ditolak.
+      await say('Ayo beli saham murah sekarang juga di toko online kami').expect(404);
+      // Kalimat soal hanya boleh dengan konteks soal itu (diturunkan ulang dari skill + seed).
+      const [sk] = (
+        await pool.query(
+          "select id, template from skills where id = 'math.prek.a1.kenali-angka-1-sampai-2'",
+        )
+      ).rows;
+      const it = generateItem(skillTemplateSchema.parse(sk.template), { seed: 9, band: 1 });
+      const text = it.reteach.say;
+      await say(text, { i: `${sk.id}~9~1` }).expect(200);
+      // Kalimat pelajaran otomatis (D-090) dengan konteks topik.
+      await say('Ayo coba satu soal. Tidak dinilai, kok!', { s: 'math~prek~A' }).expect(200);
+      // Konteks tidak sah → 400.
+      await say('Tepat!', { s: 'math~prek~a' }).expect(400);
     });
 
     it('English PAUD: narasi Bahasa Indonesia, kartu kata dengan suara English (D-062)', async () => {
@@ -1502,11 +1565,26 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
       expect(ttsCalls.at(-1)).toBe(card.say);
       expect(ttsLangs.at(-1)).toBe('en-GB');
       expect(ttsStyles.at(-1)).toMatch(/female/);
-      // Kartu tanpa teks / id tidak ada → 404; kartu buku lain tidak dibuatkan suara.
+      // Kartu tanpa teks / id tidak ada → 404. Kartu buku lain kini juga bersuara Chirp (D-091).
       await http().get(`/voice/item/${en.id}?seed=7&band=0&part=choice&c=zz`).expect(404);
-      await http()
-        .get('/voice/item/math.prek.a1.kenali-angka-1-sampai-2?seed=5&band=0&part=choice&c=c0')
-        .expect(404);
+    });
+
+    it('suara pelajaran & simulasi (D-088): teks hanya dari pelajaran di katalog, naskah ucapan', async () => {
+      // Topik H Sains TK (Olimpiade): layar 0 = simulasi; kunci bagian "mata".
+      let n = ttsCalls.length;
+      const r = await http().get('/voice/lesson/sains/tkosn/H?k=0.b.mata').expect(200);
+      expect(r.headers['content-type']).toBe('audio/mpeg');
+      expect(ttsCalls.length).toBe(n + 1);
+      expect(ttsCalls.at(-1)).toBe('Ini mata. Mata untuk melihat.');
+      // Dibuat sekali, lalu dipakai ulang.
+      n = ttsCalls.length;
+      await http().get('/voice/lesson/sains/tkosn/H?k=0.b.mata').expect(200);
+      expect(ttsCalls.length).toBe(n);
+      await http().get('/voice/lesson/sains/tkosn/H?k=0.k.makan-apel.ok').expect(200);
+      // Kunci yang tidak ada, topik tanpa pelajaran, dan kunci bebas ditolak.
+      await http().get('/voice/lesson/sains/tkosn/H?k=0.b.ekor').expect(404);
+      await http().get('/voice/lesson/math/sd34/FA?k=0').expect(404);
+      await http().get('/voice/lesson/sains/tkosn/H?k=Halo%20dunia').expect(400);
     });
 
     it('admin: ubah kalimat & pengaturan suara; bukan admin ditolak', async () => {

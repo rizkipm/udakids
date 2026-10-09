@@ -1,0 +1,50 @@
+{
+  "id": "math.sd34.fe2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 2,
+  "title": "Tabel dan diagram — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 60],
+      "b": [10, 60],
+      "c": [10, 60],
+      "d": [10, 60]
+    },
+    "constraint": "a != b && a != c && a != d && b != c && b != d && c != d",
+    "prompt": "Kelompok yang mengumpulkan sampah plastik paling banyak adalah …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Sampah plastik terkumpul",
+        "headers": ["Kelompok", "Sampah (kg)"],
+        "rows": [
+          ["Merpati", "=a"],
+          ["Elang", "=b"],
+          ["Kenari", "=c"],
+          ["Jalak", "=d"]
+        ]
+      }
+    ],
+    "answer": "(a > b && a > c && a > d) * 1 + (b > a && b > c && b > d) * 2 + (c > a && c > b && c > d) * 3 + (d > a && d > b && d > c) * 4",
+    "labels": {
+      "1": "Merpati",
+      "2": "Elang",
+      "3": "Kenari",
+      "4": "Jalak"
+    },
+    "distractors": [],
+    "explain": "Bandingkan semua angka di tabel: {a}, {b}, {c}, {d}. Yang terbesar milik kelompok {answer}."
+  }
+}

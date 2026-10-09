@@ -1,0 +1,41 @@
+{
+  "id": "math.sd12.fe8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FE",
+  "order": 8,
+  "title": "Bangun ruang — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [2, 25]
+    },
+    "prompt": "{n} kubus disusun berjajar lurus. Setiap dua kubus yang bersebelahan saling menempel pada satu sisi. Banyak sisi kubus yang tidak menempel (termasuk sisi bawah) adalah …",
+    "answer": "4 * n + 2",
+    "distractors": [
+      {
+        "expr": "6 * n",
+        "tag": "semua-sisi"
+      },
+      {
+        "expr": "4 * n",
+        "tag": "lupa-ujung"
+      },
+      {
+        "expr": "6 * n - (n - 1)",
+        "tag": "kurang-sekali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Semua sisi {n} × 6 = {=6*n}. Ada {=n-1} tempelan, setiap tempelan menutup 2 sisi: {=6*n} − {=2*(n-1)} = {answer}."
+  }
+}

@@ -1,13 +1,18 @@
 import { z } from 'zod';
 import {
   COINS,
+  NOTES,
   OBJECTS,
   SHAPES,
+  SENSES,
+  SENSE_IDS,
   SOLIDS,
   SOLID_IDS,
   type ObjectId,
+  type SenseId,
   type SolidId,
 } from '../assets.js';
+import { STROKE_GLYPH_IDS, STROKE_NAMES } from '../glyphs.js';
 import { buildWordSearch, carveMaze, mazeDeadEnds, mazePath } from '../games.js';
 import type { Choice, Visual } from '../item.js';
 import { buildCrossword, fewestTokens } from '../play.js';
@@ -46,6 +51,21 @@ export const specSchema = z
     word: z.string().trim().min(1).max(14).optional(),
     coin: coinSchema.optional(),
     die: z.number().int().min(1).max(6).optional(),
+    /** Garis/pola pramenulis (P-BT-02/03, D-081). */
+    glyph: z.enum(STROKE_GLYPH_IDS).optional(),
+    /** Uang kertas Rupiah (D-081). */
+    note: z.literal([...NOTES]).optional(),
+    /** Alat indra (D-089). */
+    sense: z.enum(SENSE_IDS as [SenseId, ...SenseId[]]).optional(),
+    /** Wajah anak; alat indra yang disorot, atau `semua` = tanpa sorotan (D-089). */
+    face: z.union([z.enum(SENSE_IDS as [SenseId, ...SenseId[]]), z.literal('semua')]).optional(),
+    /** Tangan dengan n jari terangkat (1–10), P-MA-04 (D-079). */
+    fingers: z.number().int().min(1).max(10).optional(),
+    /** Dengan `object`: ukuran relatif (besar–kecil, panjang–pendek), P-MA-10. */
+    scale: z.number().min(0.4).max(1.6).optional(),
+    /** Gambar posisi: `object` (subjek) di atas/bawah/dalam/… benda `of` (P-MA-08). */
+    at: z.enum(['in-front', 'behind', 'inside', 'outside', 'above', 'below', 'beside']).optional(),
+    of: objectIdSchema.optional(),
     /** Jam analog "07:30" (materi Waktu). */
     clock: z
       .string()
@@ -56,14 +76,44 @@ export const specSchema = z
   })
   .refine(
     (s) =>
-      [s.object, s.shape, s.solid, s.numeral, s.word, s.coin, s.die, s.clock].filter(
-        (x) => x !== undefined,
-      ).length === 1,
-    'isi tepat satu: object, shape, solid, numeral, word, coin, die, atau clock',
+      [
+        s.object,
+        s.shape,
+        s.solid,
+        s.numeral,
+        s.word,
+        s.coin,
+        s.die,
+        s.clock,
+        s.fingers,
+        s.glyph,
+        s.note,
+        s.sense,
+        s.face,
+      ].filter((x) => x !== undefined).length === 1,
+    'isi tepat satu: object, shape, solid, numeral, word, coin, die, clock, fingers, glyph, note, sense, atau face',
+  )
+  .refine(
+    (s) => (s.at === undefined) === (s.of === undefined),
+    'posisi butuh `at` dan `of` bersama',
+  )
+  .refine(
+    (s) => (s.at === undefined && s.scale === undefined) || s.object !== undefined,
+    '`at`/`scale` hanya untuk `object`',
   );
 export type Spec = z.infer<typeof specSchema>;
 
 export function specVisual(s: Spec): Visual {
+  if (s.sense !== undefined) return { kind: 'sense', sense: s.sense };
+  if (s.face !== undefined)
+    return s.face === 'semua' ? { kind: 'face' } : { kind: 'face', sense: s.face };
+  if (s.fingers !== undefined) return { kind: 'fingers', count: s.fingers };
+  if (s.glyph !== undefined) return { kind: 'glyph', glyph: s.glyph };
+  if (s.note !== undefined) return { kind: 'note', value: s.note };
+  if (s.object !== undefined && s.at !== undefined)
+    return { kind: 'scene', relation: s.at, subject: s.object, reference: s.of! };
+  if (s.object !== undefined && s.scale !== undefined)
+    return { kind: 'object', object: s.object, scaleX: s.scale, scaleY: s.scale };
   if (s.object !== undefined)
     return s.count !== undefined
       ? { kind: 'objects', object: s.object, count: s.count, layout: s.count <= 5 ? 'row' : 'rows' }
@@ -90,6 +140,12 @@ export function clockSay(clock: string): string {
 
 export function specSay(s: Spec): string {
   if (s.say) return s.say;
+  if (s.sense !== undefined) return SENSES[s.sense].say;
+  if (s.face !== undefined)
+    return s.face === 'semua' ? 'wajah' : `${SENSES[s.face].say}, ${SENSES[s.face].indra}`;
+  if (s.fingers !== undefined) return `${numberWord(s.fingers)} jari`;
+  if (s.glyph !== undefined) return STROKE_NAMES[s.glyph];
+  if (s.note !== undefined) return rupiahWord(s.note);
   if (s.object !== undefined)
     return s.count !== undefined
       ? `${numberWord(s.count)} ${OBJECTS[s.object].say}`
@@ -245,6 +301,14 @@ export const hopGame = defineFamily({
     /** Besar satu lompatan (mode skip). */
     step: z.number().int().min(1).max(100).default(1),
     maxSlips: slipsSchema(4),
+    /**
+     * Kalimat sendiri untuk tema non-kodok (D-084), mis. termometer: "Suhu air {start} °C, naik {step} °C tiap
+     * menit. Ketuk suhunya {n} menit berikutnya." Isian: {start} {n} {step} {end} {list}; di `say`/`reteach`
+     * angka dibacakan sebagai kata. Tanpa ini: kalimat kodok/langkah bawaan.
+     */
+    prompt: textSchema.optional(),
+    say: textSchema.optional(),
+    reteach: textSchema.optional(),
   }),
   generate(p, rng) {
     const stones = seq(p.board[0], p.board[1], p.boardStep);
@@ -280,6 +344,20 @@ export const hopGame = defineFamily({
       prompt = `${who} di ${start}. ${who} ${move} ${n} kali. Ketuk batunya satu per satu.`;
       say = `${who} ada di ${signedWord(start)}. Hitung bersama: ${who.toLowerCase()} ${move} ${signedWord(n)} kali. Ketuk batunya satu per satu.`;
       reteach = `Hitung setiap ${move === 'lompat' ? 'lompatan' : 'langkah'}: ${list}. ${who} berhenti di ${signedWord(end)}.`;
+    }
+    if (p.prompt || p.say || p.reteach) {
+      const nums = { start, n, step, end, list: answer.join(', ') };
+      const words = {
+        start: signedWord(start),
+        n: signedWord(n),
+        step: signedWord(step),
+        end: signedWord(end),
+        list: answer.map(signedWord).join(', '),
+      };
+      // Persamaan "start + n" hanya cocok untuk kodok berhitung; tema lain (n = menit/detik) tanpa persamaan.
+      if (p.prompt) [prompt, stimulus] = [fill(p.prompt, nums), []];
+      say = fill(p.say ?? p.prompt ?? say, p.say || p.prompt ? words : {});
+      if (p.reteach) reteach = fill(p.reteach, words);
     }
     return {
       prompt,

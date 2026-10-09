@@ -1,0 +1,47 @@
+{
+  "id": "math.smp79.fh3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 3,
+  "title": "Statistika dan peluang — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "s": [2, 11],
+      "k": [2, 20]
+    },
+    "derived": {
+      "cnt": "(s == 2) * 35 + (s == 3) * 33 + (s == 4) * 30 + (s == 5) * 26 + (s == 6) * 21 + (s == 7) * 15 + (s == 8) * 10 + (s == 9) * 6 + (s == 10) * 3 + (s == 11) * 1",
+      "nn": "36 * k"
+    },
+    "prompt": "Dua dadu dilempar bersamaan sebanyak {nn} kali. Frekuensi harapan muncul jumlah mata dadu lebih dari {s} adalah …",
+    "stimulus": [],
+    "answer": "k * cnt",
+    "distractors": [
+      {
+        "expr": "k * (36 - cnt)",
+        "tag": "komplemen"
+      },
+      {
+        "expr": "k * (6 - abs(s - 7))",
+        "tag": "tepat-s"
+      },
+      {
+        "expr": "k * cnt * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Pasangan mata dadu berjumlah lebih dari {s} ada {cnt} dari 36. Frekuensi harapan = {cnt}/36 × {nn} = {answer}."
+  }
+}

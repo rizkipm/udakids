@@ -1,0 +1,43 @@
+{
+  "id": "math.smp79.fd2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 2,
+  "title": "Pola, baris, dan deret bilangan — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [10, 30],
+      "a": [1, 20],
+      "b": [2, 9]
+    },
+    "prompt": "Jumlah {n} suku pertama deret {a} + {=a+b} + {=a+2*b} + … adalah …",
+    "answer": "n * (2 * a + (n - 1) * b) / 2",
+    "distractors": [
+      {
+        "expr": "n * (2 * a + n * b) / 2",
+        "tag": "suku-lebih"
+      },
+      {
+        "expr": "a + (n - 1) * b",
+        "tag": "suku-ke-n"
+      },
+      {
+        "expr": "n * (2 * a + (n - 1) * b)",
+        "tag": "lupa-bagi-2"
+      }
+    ],
+    "choices": 4,
+    "explain": "U{n} = {a} + {=n-1} × {b} = {=a+(n-1)*b}. S{n} = {n}/2 × ({a} + {=a+(n-1)*b}) = {answer}."
+  }
+}

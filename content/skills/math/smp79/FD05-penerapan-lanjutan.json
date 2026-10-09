@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fd5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 5,
+  "title": "Pola, baris, dan deret bilangan — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 10],
+      "b": [1, 6],
+      "c": [1, 4],
+      "n": [8, 15]
+    },
+    "derived": {
+      "u2": "a + b",
+      "u3": "a + 2 * b + c",
+      "u4": "a + 3 * b + 3 * c",
+      "u5": "a + 4 * b + 6 * c"
+    },
+    "prompt": "Barisan {a}, {u2}, {u3}, {u4}, {u5}, … memiliki selisih antarsuku yang membentuk barisan aritmetika. Suku ke-{n} adalah …",
+    "answer": "a + (n - 1) * b + c * (n - 1) * (n - 2) / 2",
+    "distractors": [
+      {
+        "expr": "u5 + (n - 5) * (u5 - u4)",
+        "tag": "beda-tetap"
+      },
+      {
+        "expr": "a + (n - 1) * b + c * n * (n - 1) / 2",
+        "tag": "geser-indeks"
+      },
+      {
+        "expr": "a + (n - 2) * b + c * (n - 2) * (n - 3) / 2",
+        "tag": "suku-sebelumnya"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisihnya {b}, {=b+c}, {=b+2*c}, … (naik {c}). U{n} = {a} + {=n-1} × {b} + {c} × {=(n-1)*(n-2)/2} = {answer}."
+  }
+}

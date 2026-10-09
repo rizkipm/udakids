@@ -1,0 +1,45 @@
+{
+  "id": "math.sd56.fg6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 6,
+  "title": "Perbandingan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [6, 20],
+      "d": [10, 40],
+      "x": [2, 9],
+      "b": [2, 10]
+    },
+    "constraint": "x < d && (a * (d - x)) % (a + b) == 0",
+    "prompt": "Proyek jalan desa direncanakan selesai dalam {d} hari oleh {a} pekerja. Setelah {x} hari bekerja, ditambah {b} pekerja. Sisa pekerjaan selesai dalam … hari.",
+    "answer": "a * (d - x) / (a + b)",
+    "distractors": [
+      {
+        "expr": "d - x",
+        "tag": "tanpa-tambahan"
+      },
+      {
+        "expr": "a * d / (a + b)",
+        "tag": "dari-awal"
+      },
+      {
+        "expr": "(d - x) * (a + b) / a",
+        "tag": "senilai"
+      }
+    ],
+    "choices": 4,
+    "explain": "Sisa pekerjaan {a} × {=d-x} = {=a*(d-x)} hari-pekerja. Dikerjakan {=a+b} pekerja: {=a*(d-x)} : {=a+b} = {answer}."
+  }
+}

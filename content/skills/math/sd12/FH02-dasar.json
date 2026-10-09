@@ -1,0 +1,62 @@
+{
+  "id": "math.sd12.fh2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FH",
+  "order": 2,
+  "title": "Aritmetika sosial — Level 2 — Dasar",
+  "tier": "intermediate",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "x": [15, 95],
+      "u": {
+        "values": [5000, 10000, 20000]
+      }
+    },
+    "derived": {
+      "h": "x * 100"
+    },
+    "words": {
+      "nama": [
+        "Dimas",
+        "Sari",
+        "Rina",
+        "Bagus",
+        "Laras",
+        "Fajar",
+        "Nadia",
+        "Rizal",
+        "Wulan",
+        "Arif"
+      ]
+    },
+    "constraint": "h < u",
+    "prompt": "{nama} membeli tahu tek seharga Rp{h} dan membayar dengan uang Rp{u}. Uang kembaliannya Rp …",
+    "answer": "u - h",
+    "distractors": [
+      {
+        "expr": "u - h + 100",
+        "tag": "lebih-100"
+      },
+      {
+        "expr": "u - h - 100",
+        "tag": "kurang-100"
+      },
+      {
+        "expr": "u - h + 1000",
+        "tag": "lebih-1000"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kembalian = Rp{u} − Rp{h} = Rp{answer}."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "math.sd56.fg4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 4,
+  "title": "Perbandingan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "values": [40, 45, 48, 50, 54, 60, 72, 75, 80]
+      },
+      "t": {
+        "values": [30, 40, 45, 50, 60, 75, 80, 90, 100, 120]
+      }
+    },
+    "derived": {
+      "d": "v * t / 60"
+    },
+    "constraint": "(v * t) % 60 == 0",
+    "prompt": "Bus dari Surabaya menempuh jarak {d} km dalam {t} menit. Kecepatan rata-rata bus adalah …",
+    "answer": "v",
+    "unit": "km/jam",
+    "distractors": [
+      {
+        "expr": "d",
+        "tag": "jarak"
+      },
+      {
+        "expr": "d * t / 60",
+        "tag": "dikali-waktu"
+      },
+      {
+        "expr": "d * 60 / t / 2",
+        "tag": "setengah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Bus menempuh {d} km dalam {t} menit. Dalam 60 menit (1 jam): {d} × 60 : {t} = {answer}."
+  }
+}

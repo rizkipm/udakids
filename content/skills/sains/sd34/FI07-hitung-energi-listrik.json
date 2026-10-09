@@ -1,0 +1,53 @@
+{
+  "id": "sains.sd34.fi7.hitung-energi-listrik",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd34",
+  "category": "FI",
+  "order": 7,
+  "title": "Energi dan teknologi — Level 7 — Hitung: energi listrik",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Energi dan teknologi"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "values": [5, 10, 15, 20, 25, 40, 50]
+      },
+      "t": [2, 8],
+      "d": [2, 7]
+    },
+    "words": {
+      "alat": ["lampu", "kipas angin kecil", "pompa akuarium", "radio", "lampu belajar"]
+    },
+    "prompt": "Sebuah {alat} berdaya {p} watt dinyalakan {t} jam setiap hari. Energi listrik yang dipakai dalam {d} hari adalah …",
+    "answer": "p * t * d",
+    "unit": "watt-jam",
+    "distractors": [
+      {
+        "expr": "p * t",
+        "tag": "satu-hari"
+      },
+      {
+        "expr": "p * d",
+        "tag": "lupa-jam"
+      },
+      {
+        "expr": "p + t + d",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "p * t * d * 2",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Energi = daya × waktu. Sehari {p} × {t} = {=p*t} watt-jam. Dalam {d} hari: {=p*t} × {d} = {answer}."
+  }
+}

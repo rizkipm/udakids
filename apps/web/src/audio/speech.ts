@@ -1,10 +1,11 @@
-import { voiceLangOf, type Item, type VoiceLang } from '@little-coder/engine';
+import { speechText, voiceLangOf, type Item, type VoiceLang } from '@little-coder/engine';
 import { API_URL } from '../config/app';
 
 /**
- * Suara Momo & soal. Perintah soal & respons jawaban memakai klip suara Momo (D-035, di bawah);
- * selebihnya dan sebagai cadangan: TTS browser id-ID (PRD A3). Aman bila speechSynthesis/Audio tidak
- * ada (mis. jsdom / browser lama): diam saja.
+ * Suara Momo & soal. SEMUA kalimat memakai klip suara server Chirp 3 HD (D-091): kalimat Momo, soal,
+ * pembahasan, kartu, pelajaran, dan teks antarmuka (`speak` → `/voice/say`). Suara browser (TTS id-ID) hanya
+ * cadangan terakhir: offline untuk kalimat yang belum pernah diputar, server/kunci suara tidak ada, atau klip
+ * gagal. Aman bila speechSynthesis/Audio tidak ada (mis. jsdom / browser lama): diam saja.
  */
 let enabled = true;
 
@@ -122,11 +123,27 @@ let seq = 0;
 /** Bila ucapan tidak mulai dalam waktu ini, coba ulang dengan suara bawaan perangkat. */
 const START_TIMEOUT_MS = 1800;
 
-/** Ucapkan teks; memanggil `onEnd` saat selesai (atau segera bila suara tidak tersedia). */
-export function speak(
-  text: string,
-  opts: { onEnd?: () => void; rate?: number; lang?: VoiceLang } = {},
-) {
+type SpeakOpts = { onEnd?: () => void; rate?: number; lang?: VoiceLang };
+
+/**
+ * Ucapkan teks dengan suara Chirp dari server (D-091); memanggil `onEnd` saat selesai (atau segera bila suara
+ * tidak tersedia). Konteks soal/pelajaran yang sedang tampil ikut dikirim supaya server bisa memastikan teksnya
+ * berasal dari aplikasi.
+ */
+export function speak(text: string, opts: SpeakOpts = {}) {
+  if (!enabled || !text) {
+    opts.onEnd?.();
+    return;
+  }
+  if (serverVoiceOn()) {
+    playClip(sayUrl(text, opts.lang ?? 'id-ID'), text, opts.onEnd, opts.lang);
+    return;
+  }
+  browserSpeak(text, opts);
+}
+
+/** Suara browser (cadangan terakhir, D-091). */
+function browserSpeak(text: string, opts: SpeakOpts = {}) {
   stopAudio();
   const s = synth();
   if (!enabled || !text) {
@@ -141,7 +158,8 @@ export function speak(
   const token = ++seq;
   const busy = s.speaking || s.pending;
   s.cancel();
-  const chunks = speechChunks(text);
+  // Naskah ucapan (D-087): simbol, titik-titik, Rp, satuan → kata, sama seperti suara server.
+  const chunks = speechChunks(speechText(text, opts.lang ?? 'id-ID'));
   let finished = false;
   const finish = () => {
     if (finished) return;
@@ -299,8 +317,11 @@ type VoiceManifest = {
 };
 
 const MANIFEST_KEY = 'lc.voice';
-/** Bila klip belum mulai terdengar dalam waktu ini (mis. sedang dibuat), pakai suara browser. */
-const CLIP_START_MS = 2500;
+/**
+ * Bila klip belum mulai terdengar dalam waktu ini, pakai suara browser. Klip yang belum pernah dibuat perlu
+ * dibuat server dulu (±1–3 detik), jadi waktunya cukup longgar (D-091).
+ */
+const CLIP_START_MS = 6000;
 
 function readManifest(): VoiceManifest | undefined {
   try {
@@ -360,7 +381,7 @@ function playClip(url: string, fallbackText: string, onEnd?: () => void, lang?: 
     if (done || audio !== a) return;
     done = true;
     stopAudio();
-    speak(fallbackText, { onEnd, lang });
+    browserSpeak(fallbackText, { onEnd, lang });
   };
   const timer = setTimeout(() => !started && fallback(), CLIP_START_MS);
   a.onplaying = () => {
@@ -417,8 +438,29 @@ export function speakItem(
   speak(text, { ...opts, lang });
 }
 
-/** Kartu English diucapkan suara Momo dari server (kata Inggris yang jelas, D-062); lainnya suara perangkat. */
-const usesCardClips = (skillId: string) => skillId.startsWith('english.');
+/** Pelajaran di katalog (D-088): buku + kode topik; kalimatnya diminta lewat kunci `lessonVoiceLines`. */
+export type LessonVoiceRef = { domain: string; grade: string; code: string };
+
+/** URL suara Chirp untuk satu kalimat pelajaran (teks diambil server dari pelajaran, bukan dari perangkat). */
+export const lessonVoiceUrl = (ref: LessonVoiceRef, key: string) =>
+  `${API_URL}/voice/lesson/${ref.domain}/${ref.grade}/${ref.code}?k=${encodeURIComponent(key)}&v=${manifest?.rev ?? '0'}`;
+
+/**
+ * Ucapkan kalimat pelajaran dengan suara Chirp (D-088, D-091). Lewat `speak` dengan konteks pelajaran yang sedang
+ * dibuka: server mengenali semua kalimat pelajaran manual maupun otomatis (D-090), jadi tidak bergantung pada
+ * nomor layar. `ref`/`key` tetap diterima untuk pemanggil lama.
+ */
+export function speakLesson(
+  _ref: LessonVoiceRef | undefined,
+  _key: string | undefined,
+  text: string,
+  opts: { onEnd?: () => void } = {},
+) {
+  speak(text, opts);
+}
+
+/** Kartu semua mata pelajaran diucapkan suara Chirp dari server (D-091; English sejak D-062). */
+const usesCardClips = (_skillId: string) => true;
 
 /** Ucapkan kata pada kartu pilihan saat diketuk. */
 export function speakChoice(
@@ -427,11 +469,19 @@ export function speakChoice(
 ) {
   if (!choice.say) return;
   const lang = item ? voiceLangOf(item.skillId, 'choice') : 'id-ID';
-  if (item && usesCardClips(item.skillId) && enabled && manifest?.enabled && canPlayAudio()) {
+  // Soal lomba ('contest') tidak punya skill/seed di perangkat: lewat `speak` dengan konteks lomba.
+  if (
+    item &&
+    item.skillId !== 'contest' &&
+    usesCardClips(item.skillId) &&
+    enabled &&
+    manifest?.enabled &&
+    canPlayAudio()
+  ) {
     playClip(itemVoiceUrl(item, 'choice', choice.id), choice.say, undefined, lang);
     return;
   }
-  // Kata Inggris dari suara perangkat: sedikit lebih pelan supaya ejaannya jelas.
+  // Tanpa id soal (mis. pratinjau): lewat `speak` (Chirp dengan konteks; cadangan suara perangkat lebih pelan).
   speak(choice.say, { lang, ...(lang === 'en-GB' && { rate: 0.8 }) });
 }
 
@@ -464,7 +514,52 @@ export function prefetchItemVoice(
   const get = (url: string) =>
     void fetch(url, { priority: 'low' } as RequestInit).catch(() => undefined);
   get(itemVoiceUrl(item));
-  // Kartu English juga disiapkan, supaya kata langsung terdengar saat diketuk.
-  if (usesCardClips(item.skillId))
-    for (const c of voicedCards(item)) get(itemVoiceUrl(item, 'choice', c.id));
+  // Kartu juga disiapkan (maks. 6), supaya kata langsung terdengar saat diketuk.
+  const cards = voicedCards(item);
+  if (usesCardClips(item.skillId) && cards.length <= 6)
+    for (const c of cards) get(itemVoiceUrl(item, 'choice', c.id));
+}
+
+// ---------------------------------------------------------------- semua teks lewat Chirp (D-091)
+
+type ItemRef = { skillId: string; seed: number; band: number };
+const itemStack: ItemRef[] = [];
+const lessonStack: LessonVoiceRef[] = [];
+type ContestRef = { entryId: string; index: number };
+const contestStack: ContestRef[] = [];
+
+const pushTo = <T>(stack: T[], ref: T) => {
+  stack.push(ref);
+  return () => {
+    const i = stack.lastIndexOf(ref);
+    if (i >= 0) stack.splice(i, 1);
+  };
+};
+
+/** Soal yang sedang tampil (ItemPlayer): kalimat soal/kartu/game boleh dibuatkan suara. Kembalikan "lepas". */
+export const pushVoiceItem = (ref: ItemRef) => pushTo(itemStack, ref);
+/** Pelajaran yang sedang dibuka (D-090): kalimat pelajaran manual/otomatis boleh dibuatkan suara. */
+export const pushVoiceLesson = (ref: LessonVoiceRef) => pushTo(lessonStack, ref);
+
+/** Soal lomba live yang sedang tampil (tanpa skill/seed di perangkat): server mencocokkan dari soal peserta. */
+export const pushVoiceContest = (ref: ContestRef) => pushTo(contestStack, ref);
+
+/** URL klip Chirp untuk teks dari aplikasi + konteks yang sedang aktif. */
+export function sayUrl(text: string, lang: VoiceLang = 'id-ID') {
+  const item = itemStack.at(-1);
+  const lesson = lessonStack.at(-1);
+  const q = new URLSearchParams({ t: text.replace(/\s+/g, ' ').trim().slice(0, 600) });
+  if (lang !== 'id-ID') q.set('l', lang);
+  if (item) q.set('i', `${item.skillId}~${item.seed}~${item.band}`);
+  if (lesson) q.set('s', `${lesson.domain}~${lesson.grade}~${lesson.code}`);
+  const contest = contestStack.at(-1);
+  if (contest) q.set('c', `${contest.entryId}~${contest.index}`);
+  q.set('v', manifest?.rev ?? '0');
+  return `${API_URL}/voice/say?${q.toString()}`;
+}
+
+/** Suara server bisa dipakai sekarang? (kunci suara aktif, perangkat bisa memutar audio, dan online). */
+function serverVoiceOn() {
+  const online = typeof navigator === 'undefined' || navigator.onLine !== false;
+  return !!manifest?.enabled && canPlayAudio() && online;
 }

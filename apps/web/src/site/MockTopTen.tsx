@@ -51,8 +51,11 @@ const label = (key: string, fallback: string) => {
   return v === key ? fallback : v;
 };
 
-/** Urutan & label tab lomba (D-076): KMSI lebih dulu, lalu EMC, ESC, EEC; lainnya sesudahnya. */
-const COMPS = ['KMSI', 'EMC', 'ESC', 'EEC'] as const;
+/**
+ * Urutan & label tab lomba (D-076): KMSI lebih dulu, lalu KMSI Final Jatim (D-080), EMC, ESC, EEC; lainnya
+ * sesudahnya.
+ */
+const COMPS = ['KMSI', 'KMSI Final', 'EMC', 'ESC', 'EEC'] as const;
 const compRank = (c: string) => {
   const i = COMPS.indexOf(c as (typeof COMPS)[number]);
   return i < 0 ? COMPS.length : i;
@@ -60,13 +63,15 @@ const compRank = (c: string) => {
 const compLabel = (c: string) =>
   c === 'KMSI'
     ? t('site.mock.kmsi')
-    : c === 'EMC'
-      ? t('site.mock.emc')
-      : c === 'ESC'
-        ? t('site.mock.esc')
-        : c === 'EEC'
-          ? t('site.mock.eec')
-          : t('site.mock.olympiad');
+    : c === 'KMSI Final'
+      ? t('site.mock.kmsiFinal')
+      : c === 'EMC'
+        ? t('site.mock.emc')
+        : c === 'ESC'
+          ? t('site.mock.esc')
+          : c === 'EEC'
+            ? t('site.mock.eec')
+            : t('site.mock.olympiad');
 
 /**
  * Bagian landing (D-074): peringkat Mock Test olimpiade per lomba (KMSI, olimpiade gaya EMC), jenjang, mata
@@ -236,7 +241,10 @@ export function MockTopTenSection() {
                 max: current.maxPoints,
                 kkm: current.passPoints,
               })
-            : t('site.mock.ruleEmc', { q: current.questions, max: current.maxPoints })}
+            : current.competition.startsWith('KMSI')
+              ? // KMSI Final (D-080): tanpa KKM, juara dari poin lalu waktu.
+                t('site.mock.ruleKmsi', { q: current.questions, max: current.maxPoints })
+              : t('site.mock.ruleEmc', { q: current.questions, max: current.maxPoints })}
         </p>
 
         {!top ? (

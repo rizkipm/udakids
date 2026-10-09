@@ -1,0 +1,49 @@
+{
+  "id": "math.sd56.fh6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 6,
+  "title": "Statistika sederhana — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 30],
+      "b": [5, 30],
+      "c": [5, 30],
+      "d": [5, 30],
+      "e": [5, 30]
+    },
+    "derived": {
+      "t": "a + b + c + d + e"
+    },
+    "constraint": "t % 5 == 0 && max(a, b, c, d, e) != min(a, b, c, d, e)",
+    "prompt": "Diagram menunjukkan banyak bibit mangrove yang ditanam lima kelompok di pantai Surabaya. Banyak kelompok yang menanam lebih banyak daripada rata-rata adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "labels": ["A", "B", "C", "D", "E"],
+        "values": ["=a", "=b", "=c", "=d", "=e"],
+        "unit": "bibit"
+      }
+    ],
+    "answer": "(5 * a > t) + (5 * b > t) + (5 * c > t) + (5 * d > t) + (5 * e > t)",
+    "distractors": [
+      {
+        "expr": "5 - (5 * a > t) - (5 * b > t) - (5 * c > t) - (5 * d > t) - (5 * e > t)",
+        "tag": "tidak-lebih"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah {t} bibit, rata-rata {t} : 5 = {=t/5}. Hitung batang yang lebih tinggi dari {=t/5}: ada {answer} kelompok."
+  }
+}

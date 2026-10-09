@@ -1,0 +1,48 @@
+{
+  "id": "math.sd56.fg8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 8,
+  "title": "Perbandingan — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [2, 7],
+      "c": [3, 9],
+      "k": [2, 10]
+    },
+    "derived": {
+      "x": "(c - a) * k"
+    },
+    "constraint": "c > a && gcd(a, b) == 1 && gcd(c, b) == 1",
+    "prompt": "Perbandingan kelereng Ani dan Budi {a} : {b}. Setelah Ani mendapat {x} kelereng lagi, perbandingannya menjadi {c} : {b}. Banyak kelereng Budi adalah …",
+    "answer": "b * k",
+    "distractors": [
+      {
+        "expr": "a * k",
+        "tag": "kelereng-ani"
+      },
+      {
+        "expr": "c * k",
+        "tag": "ani-akhir"
+      },
+      {
+        "expr": "x * b",
+        "tag": "tambahan-dikali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Budi tetap {b} bagian. Ani bertambah {c} − {a} = {=c-a} bagian = {x}, jadi 1 bagian = {k}. Budi = {b} × {k} = {answer}."
+  }
+}

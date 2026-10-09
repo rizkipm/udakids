@@ -1,0 +1,59 @@
+{
+  "id": "math.sd34.fe5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 5,
+  "title": "Tabel dan diagram — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [12, 20],
+      "b": [12, 20],
+      "c": [12, 20],
+      "d": [12, 20],
+      "e": [12, 20],
+      "f": [12, 20]
+    },
+    "constraint": "a + c + e > b + d + f",
+    "prompt": "Siswa putra lebih banyak … orang daripada siswa putri.",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Siswa kelas 4",
+        "headers": ["Kelas", "Putra", "Putri"],
+        "rows": [
+          ["4A", "=a", "=b"],
+          ["4B", "=c", "=d"],
+          ["4C", "=e", "=f"]
+        ]
+      }
+    ],
+    "answer": "(a + c + e) - (b + d + f)",
+    "distractors": [
+      {
+        "expr": "a + c + e",
+        "tag": "jumlah-putra"
+      },
+      {
+        "expr": "abs(a - b)",
+        "tag": "satu-kelas"
+      },
+      {
+        "expr": "(a + c + e) + (b + d + f)",
+        "tag": "semua-siswa"
+      }
+    ],
+    "choices": 4,
+    "explain": "Putra {a} + {c} + {e} = {=a+c+e}. Putri {b} + {d} + {f} = {=b+d+f}. Selisih {answer}."
+  }
+}

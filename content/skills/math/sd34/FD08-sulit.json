@@ -1,0 +1,48 @@
+{
+  "id": "math.sd34.fd8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FD",
+  "order": 8,
+  "title": "Bangun ruang — Level 8 — Sulit",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [20, 60],
+      "l": [15, 40],
+      "h": [10, 30],
+      "d": [2, 9]
+    },
+    "derived": {
+      "h2": "h + d"
+    },
+    "prompt": "Bak berbentuk balok dengan alas {p} cm × {l} cm berisi air setinggi {h} cm. Sebuah batu dimasukkan sampai tenggelam, air naik menjadi {h2} cm. Volume batu adalah …",
+    "answer": "p * l * d",
+    "unit": "cm³",
+    "distractors": [
+      {
+        "expr": "p * l * h2",
+        "tag": "volume-air-baru"
+      },
+      {
+        "expr": "p * l * h",
+        "tag": "volume-air-lama"
+      },
+      {
+        "expr": "(p + l) * d",
+        "tag": "keliling-kali-naik"
+      }
+    ],
+    "choices": 4,
+    "explain": "Air naik {h2} − {h} = {d} cm. Volume batu = {p} × {l} × {d} = {answer}."
+  }
+}

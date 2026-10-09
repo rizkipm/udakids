@@ -729,6 +729,10 @@ sendiri — jadi premium untuk akses semua kelas, dan ini tidak masuk catatan ar
   - cari, filter status / jenis anak / akun aktif, urutan (terbaru, terlama, nama, terakhir aktif);
   - paging di server (10/20/50 per halaman); filter tersimpan di URL;
   - aksi lama tetap ada: laporan, ganti sandi gambar, aktif/nonaktif, atur password orang tua.
+- Catatan (2026-10-08): Premium keluarga lama dari admin (sudah dipecah per anak lalu diakhiri, migrasi 0008) tidak
+  dihitung lagi di `accessForChild`. Anak yang ditambahkan sesudahnya tidak lagi melihat "masa paket sudah berakhir";
+  ia melihat pemberitahuan biasa "Khusus Premium" sampai admin memberinya Premium per anak. Katalog di perangkat
+  diperbarui tiap 15 detik (ETag/304), jadi Premium baru dari admin cepat terlihat.
 
 ## D-042 — Peringkat rata-rata & per buku, materi per jenjang, lomba live, banner & galeri
 
@@ -2022,3 +2026,495 @@ salah.
   - Saat belum tepat, benda hanya bergoyang dan Momo mengajak mencoba lagi; tidak ada kata "salah"/"gagal" dan
     tidak ada merah besar.
   - Gerak dikurangi bila `prefers-reduced-motion`.
+
+## D-079 — Berhitung PAUD P-MA-04…14: jari, urutan, pagi-siang-malam, dan pelajaran untuk topik yang sudah ada
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: lanjutkan P-MA-04 sampai P-MA-14 "comply dengan worksheet mengenal
+angka 1–10", interaktif (angka diketuk → bersuara, menebalkan mengikuti titik sampai pola selesai baru benar), ada
+game, dan "jangan berulang".
+
+- **Unit BARU masuk Worksheet PAUD, bagian Numerasi · Berhitung** (sama seperti P-MA-01, D-068), setelah materi A:
+  - **F Jari tangan dan angka (P-MA-04)**: family `fingers` (hitung jari, tunjukkan jari, tarik garis jari ↔ angka,
+    lebih banyak/sedikit, gabung dua tangan, ketuk semua), menebalkan angka dengan hitungan jari
+    (`numeral-trace` `countWith: "fingers"`), kartu pasangan jari ↔ angka, tantangan.
+  - **G Pertama sampai kelima (P-MA-05)**: family `queue`, antrean hewan/kendaraan dibaca dari kiri (paling depan,
+    ketuk urutan ke-n, ke berapa, dua urutan, di depan/di belakang, berapa di depannya, susun antrean), bianglala
+    urutan, tantangan.
+  - **H Pagi, siang, dan malam (P-MA-14)**: family `day-time` (kapan kegiatan, kegiatan di waktu itu, benda langit,
+    urutkan waktu, sesudah/sebelum, rutinitas pagi & malam, urutan sehari), game sortir siang/malam dan tempel kata,
+    tantangan. Hanya kegiatan yang waktunya jelas (bangun tidur = pagi, tidur = malam), supaya tidak ada jawaban
+    ganda.
+  - Satu level = satu bentuk soal; game hanya family game yang sudah ada (pasangan, sortir, tempel kata, bianglala,
+    tangkap di tantangan), jadi otomatis tidak dipakai mock test maupun lomba (D-078).
+  - Setiap level ≥ 16 soal unik per tingkat kesulitan (sebagian besar > 100). Gambar jari memakai tiga warna kulit,
+    tangan kiri/kanan, dan pembagian dua tangan yang berbeda (7 = 5 + 2, 4 + 3, …), sekaligus mengenalkan susunan
+    bilangan.
+- **Unit "soal sudah ada" (P-MA-06…13)**: pelajaran "Belajar dulu" menempel di topik Math PAUD yang sudah ada,
+  tanpa soal baru: K Membandingkan kelompok (P-MA-06), M Pola (P-MA-07), N Kata posisi (P-MA-08), P Bangun datar
+  (P-MA-09), T Ukuran (P-MA-10), O Sama, beda, dan mengelompokkan (P-MA-11), V Penjumlahan sampai 5 (P-MA-12), U Uang
+  Rupiah (P-MA-13).
+- **Pelajaran lebih interaktif (skema `lesson` diperluas):** `kartuGambar` (kartu gambar bebas yang diketuk →
+  dibacakan; memakai format `spec` game: benda, jumlah benda, bentuk, bangun ruang, koin, jari, posisi, ukuran),
+  `antrean` (bendera "Depan", nomor urut muncul saat diketuk), `jari` (strip angka 1–10 dengan jari), `coba` mode
+  `pilih` dan `urut` (tidak dinilai: tepat → pujian; belum tepat → kartu bergoyang + ajakan melihat lagi), dan kartu
+  kata tanpa angka/huruf (mis. pa-gi). Pada "coba pilih/urut", kartu soal tampil kecil dalam panel, terpisah dari
+  kartu pilihan.
+- **Gambar baru (buatan sendiri):** tangan dengan jari (`fingers`), suasana pagi, siang, malam, anak bangun tidur,
+  anak berangkat sekolah. `spec` mendapat `fingers`, `scale` (besar–kecil, panjang–pendek), dan `at`/`of` (posisi).
+- **Seed untuk katalog yang pernah disunting admin:** pelajaran dari `content/` dimasukkan ke materi lama yang belum
+  punya pelajaran (atau versinya lebih lama), dan materi baru disisipkan di posisinya menurut `content/` (bukan di
+  akhir), supaya bagian dan rantai kunci sama. Isi suntingan admin lainnya tidak disentuh.
+- P-MA-02, P-MA-03, dan uang kertas dilengkapi di D-081.
+
+## D-080 — KMSI Final Provinsi Jatim 2026: Matematika Level 1–4 (materi Final, game Final, mock 25 soal)
+
+Tanggal: 2026-10-08. Disetujui pemilik produk (jawaban: "Materi baru khusus Final", "1 topik game Final per buku",
+"3 mock × 25 soal, tanpa KKM", "Tab terpisah KMSI Final Jatim 2026").
+
+- **Ketentuan lomba:** Final Provinsi KMSI Jatim 2026, 25 soal; benar +4, salah 0, kosong 0 (maks. 100). Juara:
+  nilai tertinggi → waktu pengumpulan tercepat → abjad nama peserta. Kisi-kisi Matematika:
+  - **Level 1 (`sd12`)**: operasi bilangan, nilai tempat & lambang bilangan, waktu, bangun datar, bangun ruang,
+    tabel & diagram, pola bilangan sederhana, aritmetika sosial.
+  - **Level 2 (`sd34`)**: operasi bilangan, pecahan sederhana, bangun datar, bangun ruang, tabel & diagram,
+    aritmetika sosial, pola & deret bilangan, teori bilangan sederhana.
+  - **Level 3 (`sd56`)**: operasi bilangan, geometri, aritmetika sosial, pola–baris–deret, teori bilangan,
+    persamaan, perbandingan, statistika sederhana.
+  - **Level 4 (`smp79`)**: operasi bilangan, geometri, aritmetika sosial, pola–baris–deret, teori bilangan lanjutan,
+    persamaan & pertidaksamaan, perbandingan, statistika & peluang.
+  - Ejaan kisi-kisi dibakukan: "Aritmatika" → aritmetika, "Statiska" → statistika.
+- **Materi baru, bukan memakai ulang Penyisihan (D-074):** bagian (`group`) **"KMSI · Kompetensi Matematika Sains
+  dan Bahasa Inggris — Final Provinsi Jatim 2026"**, materi **FA–FH** (urut kisi-kisi) × 10 level, semua
+  `standalone`. Pola level sama dengan Penyisihan (1–3 konsep, 4–7 penerapan & soal cerita, 8 sulit, 9 teka-teki
+  Final KMSI (bank soal), 10 tantangan campuran), tingkat soal final. Tabel & diagram dan statistika memakai
+  gambar `table` / `bar-chart`; waktu memakai jam. Materi Penyisihan, GM, dan Y tidak berubah.
+- **Game Final (`GF`, "Game Final KMSI matematika")** di bagian Final, 10 level = 10 jenis game berbeda (aturan
+  D-078: isi, lompat, urut, kereta, sortir, kartu, silang, labirin, tangkap, label), isinya dari materi Final (setiap
+  FA–FH minimal sekali). Seperti GM: tidak masuk mock test maupun lomba live; test `play.test.ts` kini juga
+  memeriksa topik `GF`.
+- **Mock test Final (`FY`)**: 3 mock per buku, 25 soal (9 mudah / 8 sedang / 8 sulit dari level 1–3 / 4–7 / 8–10),
+  `categories` FA–FH, `points` `KMSI_POINTS`, **tanpa `passPoints`** (Final tidak memakai KKM; status selesai memakai
+  batas skor biasa seperti mock EMC). Akses sama dengan D-073 (Mock 1 gratis sekali, Mock 2–3 & mengulang
+  Premium). Stopwatch tanpa batas; acuan 60 menit hanya informasi (lama lomba Final belum diberikan).
+- **Papan peringkat:** `competitionOf` mengenali keterangan bagian "— Final Provinsi …" → lomba **"KMSI Final"**
+  (tab sendiri di landing, label "KMSI Final Jatim 2026", setelah "KMSI 2026"), jadi chip Mock test 1–3 tidak
+  kembar dengan mock Penyisihan. "Penyisihan Final Provinsi" (EMC/ESC) tetap EMC/ESC. Baris aturan KMSI tanpa KKM:
+  "25 soal · benar 4, salah 0, kosong 0 · poin maksimal 100 · juara: poin tertinggi, lalu waktu tercepat".
+  `rankMockBoard(rows, { byName: true })` dipakai untuk KMSI Final: poin & waktu sama → abjad nama panggilan yang
+  menentukan, tanpa posisi kembar (lomba lain tetap posisi sama).
+- **Kode materi:** `FA`–`FH` materi, `GF` game, `FY` mock (bukan `FG` untuk game, karena `FG` = materi ke-7).
+  Katalog yang pernah disunting admin mendapat materi baru di posisinya lewat `mergeNewCategories` (D-079); mock
+  tetap paling akhir.
+- **Belum dikerjakan:** Sains dan English Final Jatim (kisi-kisinya belum diberikan), dan Level A (TK) bila ada.
+- Contoh soal lomba hanya acuan bentuk; semua soal, kalimat, dan gambar dibuat sendiri (PRD A17).
+
+## D-081 — Melengkapi PAUD: lihat sekilas, Bilangan 6–10, uang kertas, dengar bunyi, dan garis pramenulis
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: "lengkapi semua yang tadi diminta sampai selesai" — sisa P-MA-02,
+P-MA-03, uang kertas, dan tahap Baca Tulis yang ditunda di D-075 (P-BT-01 sampai 03).
+
+- **Worksheet PAUD** (urutan materi kini mengikuti nomor unit):
+  - Numerasi · Berhitung: A (P-MA-01), **I Lihat sekilas 1 sampai 5 (P-MA-02)**, F, G, H, B (game).
+  - Literasi · Baca Tulis: **J Dengar bunyi di sekitarku (P-BT-01)**, **K Garis tegak dan mendatar (P-BT-02)**,
+    **L Garis lengkung, lingkaran, dan zig-zag (P-BT-03)**, C, D, E (game).
+  - Setiap materi baru punya pelajaran "Belajar dulu" dan 10 level (≥ 16 soal unik per tingkat kesulitan).
+- **Lihat sekilas (P-MA-02)**, family `subitize`: titik dengan berbagai susunan, mata dadu berwarna, dan bingkai lima
+  tampil sebentar (`peek`, mis. 2 detik), lalu ditutup kartu "?". Tombol "Lihat lagi" membukanya kembali berapa kali
+  pun, jadi tidak ada batas waktu menjawab (PRD A17). Ada juga lebih banyak, cocokkan titik ↔ angka, ketuk semua,
+  game kartu pasangan dadu ↔ angka, dan tangkap dadu.
+- **Dengar bunyi (P-BT-01)**, family `sound`: bunyi ditirukan suara Momo (onomatope Indonesia: kukuruyuk, tin tin,
+  dung dung). Ada tebak hewan/kendaraan/benda, cocokkan gambar ↔ bunyi, sama atau beda, mana yang berbunyi, game
+  sortir bunyi, dan tangkap kendaraan. Soal dengar tetap punya petunjuk tertulis untuk orang dewasa (D-047).
+- **Garis pramenulis (P-BT-02/03)**: 11 goresan baru di `glyphs.ts` (tegak, mendatar, miring, tambah, pagar, tangga,
+  lengkung, lingkaran, zig-zag, gelombang, spiral; arah seperti buku menulis PAUD). Family `stroke-trace` (tebalkan;
+  benar setelah polanya selesai) dan `stroke-find` (mana garisnya / benda ini seperti garis apa). Level tebal dibuat
+  "tebalkan dan kenali": sebagian besar menebalkan garis target, diselingi mengenali, supaya ronde tidak monoton.
+  Gambar contoh hanya yang jelas bentuknya (hujan = tegak, gunung = zig-zag, ombak = gelombang, siput = spiral).
+  Game: sortir tegak/mendatar, sortir lurus/lengkung, kartu pasangan gambar ↔ garis.
+- **Pelajaran Math PAUD:** P-MA-03 "Bilangan 6 sampai 10" di topik E. Pelajaran Uang Rupiah (P-MA-13) versi 2 menambah
+  layar **uang kertas** Rp2.000, Rp5.000, dan Rp10.000. Visual `note` digambar sendiri (warna per nilai + nominal),
+  bukan salinan desain uang asli.
+- Visual baru `glyph` (gambar garis) dan `note` (uang kertas). `spec` mendapat `glyph` dan `note`, pelajaran mendapat
+  `garis` (coba tebal garis), dan layar `bunyi` boleh memakai kartu gambar.
+- **Soal dengar:** sidik jari soal (`itemKey`) untuk soal yang isinya hanya lewat suara kini ikut menghitung kalimat
+  yang diucapkan. Sebelumnya "sama atau beda bunyinya" dianggap satu soal yang sama.
+- 5 level huruf vokal D-075 (C01, C04, C06, D01, D04) versi 2: tingkat mudah lebih bervariasi (huruf besar/kecil,
+  2–3 pilihan).
+
+## D-082 — Topik bebas dipilih (tidak harus berurutan)
+
+**Tanggal:** 2026-10-08 · **Status:** Disetujui (pemilik produk)
+
+- **Masalah:** anak yang membuka topik ke-2 sebelum topik ke-1 melihat semua levelnya terkunci, dan pesan yang
+  tampil malah "Level 4 ke atas khusus akun Premium". Pesan itu keliru, karena yang mengunci adalah urutan topik.
+- **Keputusan:** di semua buku, Level 1 setiap topik terbuka sejak awal. Anak boleh memilih topik mana saja dan
+  mengerjakan beberapa topik bersamaan. Di dalam topik, level tetap berurutan: Level n+1 terbuka setelah Level n
+  lulus. Mock test (D-072) tetap tidak saling mengunci, dan level berbayar tetap diatur paket (D-036/D-041).
+- **Saran tanpa mengunci:** topik terbuka pertama di urutan buku diberi label **"Disarankan"** di beranda. Topik
+  mandiri (D-068) tetap dilewati untuk anak yang sudah bermain di topik biasa. "Langkah berikutnya" di laporan
+  orang tua memakai aturan yang sama.
+- **Server:** kunci level di `/practice/sync` memakai aturan yang sama. Level 1 topik mana pun diterima, sedangkan
+  Level 2+ yang belum dibuka tetap ditolak.
+- Aturan rantai antar-topik (D-026/D-068/D-075, `groupStartCodes`) dihapus. Pesan "Terkunci — lulus Level 1
+  materi sebelumnya dulu" juga tidak dipakai lagi.
+
+## D-083 — Latihan menulis angka 1–10 dan huruf a–z (Worksheet PAUD)
+
+**Tanggal:** 2026-10-08 · **Status:** Disetujui (pemilik produk: "semuanya, angka 1–10 serta huruf a–z secara
+berkala")
+
+- **7 topik baru**, masing-masing 10 level dan pelajaran "Belajar dulu". Semua level Basic, tanpa teks yang wajib
+  dibaca, dan setiap level punya paling sedikit 10 soal berbeda.
+  - Numerasi: **M** Menulis angka 1 sampai 5 (P-MA-15) dan **N** Menulis angka 6 sampai 10 (P-MA-16).
+  - Literasi: **O** Menulis huruf vokal besar dan kecil (P-BT-12), lalu huruf berurutan abjad: **P** b, c, d, f, g
+    (P-BT-13) · **Q** h, j, k, l, m (P-BT-14) · **R** n, p, q, r, s (P-BT-15) · **S** t, v, w, x, y, z (P-BT-16).
+  - Unit rencana P-BT-09 "Huruf bibir b, m, p" sudah tercakup di P/Q/R. Barisnya dibiarkan di blueprint sampai
+    diputuskan digabung.
+- **Pola level:** tebalkan dengan garis tebal → titik-titik → tanpa gambar; dengar lalu ketuk; huruf depan gambar;
+  huruf besar; pasangan besar-kecil; balon; game tangkap huruf & kartu pasangan; tantangan di Level 10. Untuk
+  angka, gambar hitungan bergantian: benda, jari, mata dadu (≤ 6), bingkai sepuluh, dan titik.
+- **Engine:**
+  - Goresan bernomor untuk 21 konsonan kecil & besar (total 52 huruf). Huruf berekor (g j p q y) badannya dinaikkan
+    supaya ekornya muat di kotak 140.
+  - `letter-trace`, `letter-find`, `letter-tap-all`, `memory-pairs`, dan `catch-items` menerima huruf a–z.
+  - `guide: 'mixed'` untuk huruf & angka, dan `countWith` baru di `numeral-trace`: `die`, `frame`, `dots`, `mixed`.
+- **Kata bergambar** konsonan (`CONSONANT_WORDS`) memakai gambar yang sudah ada. Huruf **f, q, v** belum punya
+  gambar, jadi ditebalkan dan dikenali tanpa gambar. Usulan gambar ada di `docs/blueprint/gambar-kurang.csv`.
+- **Perbaikan:** di game tangkap huruf, pengisi b/m/s tidak lagi bisa sama dengan huruf yang dicari.
+- **Kalimat soal:** "Tebalkan huruf b, seperti bebek." Huruf tidak lagi diletakkan di awal kalimat, karena tampilan
+  mengubah awal kalimat menjadi huruf besar ("B untuk bebek").
+
+## D-084 — KMSI Final Provinsi Jatim 2026: Sains Level 1–4 (soal & game bervariasi)
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: lanjutan Final Jatim untuk Sains Level 1–4, "soal per topik hingga
+level 10, mock test dan game … game yang berbeda-beda sesuai topik, jangan yang itu-itu saja, begitupun soalnya".
+Pola mengikuti D-080 (materi baru, 1 topik game Final per buku, 3 mock × 25 soal tanpa KKM, tab "KMSI Final").
+
+- **Kisi-kisi (9 materi per jenjang, kode FA–FI):**
+  - **Level 1 (`sd12`)**: makhluk hidup; hewan, tumbuhan, dan adaptasi; tubuh dan kesehatan; benda dan perubahan
+    wujud; pengukuran dan suhu; gaya, gerak, energi, dan pemanfaatannya; bunyi dan cahaya; lingkungan, cuaca, dan
+    sumber daya alam; bumi dan tata surya. Daftar asli memuat "Bunyi dan cahaya" dua kali dan baris salinan
+    "Lingkungan, gerak, energi dan pemanfaatannya"; dirapikan menjadi 9 materi (sama banyak dengan Level 2–4).
+  - **Level 2 (`sd34`)**: gaya, tekanan, dan energi; cahaya, bunyi, dan gelombang; sel dan sistem kehidupan; struktur
+    dan proses kehidupan tumbuhan; keanekaragaman, klasifikasi, dan perkembangbiakan; ekosistem dan lingkungan; materi,
+    perubahan materi, dan campuran; bumi dan antariksa ("antartika" di daftar asli = salah ketik); energi dan teknologi.
+  - **Level 3 (`sd56`)**: makhluk hidup & sistem kehidupan; ekosistem & lingkungan; gaya, gerak & energi; pesawat
+    sederhana; cahaya dan bunyi; materi dan perubahannya; bumi dan antariksa; tekanan, massa jenis, dan fluida; energi
+    alternatif.
+  - **Level 4 (`smp79`)**: makhluk hidup & sistem kehidupan; genetika & bioteknologi; mikrobiologi; tumbuhan & ekologi;
+    mekanika & gerak; suhu, kalor & gelombang; cahaya, listrik & kemagnetan; materi & atom; bumi & antariksa.
+- **Soal tidak itu-itu saja:** Penyisihan Sains memakai `facts` di hampir semua level. Di Final, setiap level dalam
+  satu materi punya bentuk soal dan sub-topik berbeda: 1 fakta (tanya nilai), 2 fakta (tanya nama, tabel lain),
+  3 "ketuk semua yang benar", 4 fenomena sehari-hari berkonteks Jawa Timur (Bromo, Semeru, Kenjeran, garam Madura,
+  Lumpur Sidoarjo, Paiton, …), 5 benar/salah atau mana yang berbeda (tabel ketiga), 6 membaca data tabel/diagram
+  batang, 7 hitungan (`expr`: suhu, kecepatan, tekanan, massa jenis, kalor, Ohm, …) atau merancang percobaan,
+  8 sebab-akibat, 9 teka-teki Final KMSI, 10 tantangan campuran. Soal tidak mengulang soal Penyisihan, dan skrip cek
+  menolak kalimat soal kembar antar-level dalam satu buku.
+- **Game berbeda per jenjang & sesuai topik:** tiap buku 10 jenis berbeda (aturan D-078), dengan kombinasi jenis yang
+  berbeda antar-jenjang (Kelas 1–2 tanpa kereta & cari kata, Kelas 3–4 tanpa urut & puzzle, Kelas 5–6 tanpa isi &
+  silang, SMP tanpa lompat & label) dan tema yang berbeda dari GM buku itu maupun game Final Matematika. Contoh: beri
+  makan hewan, termometer naik/turun, terapung–tenggelam, induk–anak hewan, planet dari Matahari (Kelas 1–2);
+  rantai makanan, kelompok hewan, jalan cahaya periskop (Kelas 3–4); massa jenis, pesawat sederhana, rantai energi
+  pembangkit (Kelas 5–6); resultan gaya, tingkat genetik, jalan udara pernapasan, unsur logam (SMP).
+- **Engine:** `hop-game` mendapat `prompt`/`say`/`reteach` opsional (isian `{start} {n} {step} {end} {list}`; di
+  suara angka dibacakan sebagai kata). Dengan kalimat tema, gambar persamaan "start + n" tidak ditampilkan (n = menit/
+  detik, bukan angka yang dijumlah). Dipakai game termometer & jarak per detik; game kodok lama tidak berubah.
+- **Mock:** 3 × 25 soal per buku dari FA–FI, benar 4 / salah 0, tanpa KKM; masuk tab "KMSI Final" (D-080). Soal
+  "ketuk semua" (level 3) boleh muncul di mock sebagai soal mudah.
+- Kebenaran fakta diperiksa per contoh soal; fakta yang ambigu sengaja dihindari (mis. jumlah satelit planet,
+  kelas tuas stapler, "bulu" kelinci — dibedakan "bulu unggas" dan "rambut (mamalia)"). Data percobaan/pengamatan di
+  level 6 adalah data rekaan. Soal & kalimat dibuat sendiri (PRD A17).
+- Belum: English Final Jatim (kisi-kisi belum diberikan), Level A (TK).
+
+## D-085 — KMSI Final Provinsi Jatim 2026: English Level 1–4
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: lanjutan Final Jatim untuk English Level 1–4 dengan aturan yang sama
+seperti Sains (D-084): 10 level per topik, mock test, game yang berbeda-beda sesuai topik, soal tidak itu-itu saja.
+Pola D-080 (materi baru, 1 topik game Final per buku, 3 mock × 25 soal tanpa KKM, tab "KMSI Final").
+
+- **Kisi-kisi (10 materi per jenjang, kode FA–FJ, judul English seperti kisi-kisi; "dan" dibakukan "and"):**
+  - **Level 1 (`sd12`)**: Numbers and Math; Animals and Family; Vocabulary and Synonym; Daily Activities and Habits;
+    Simple Present Tense; Present Continuous Tense; Prepositions and Places; Sentence Arrangement and Grammar; Reading
+    Comprehension; Stories, Fables, Legends, and Proverbs.
+  - **Level 2 (`sd34`)**: Vocabulary; Noun, Pronoun, Adjective, and Adverb; Animals, Family, Places, and Things; Daily
+    Activities and Expressions; Simple Present, Simple Past, and Present Continuous; Future Activities; Sentence
+    Arrangement and Grammar; Reading Comprehension; Descriptive and Biography Text; Notice, Table, and Data Reading.
+  - **Level 3 (`sd56`)**: Vocabulary; Noun, Pronoun, and Parts of Speech; Grammar and Sentence Structure; Tenses; Modal
+    and Expression; Descriptive and Recount Text; Narrative Text; Reading Comprehension; Functional Text and Dialogue;
+    Sentence Arrangement and Language Use.
+  - **Level 4 (`smp79`)**: Vocabulary and Word Meaning; Synonym, Antonym, Idiom, and Proverbs; Parts of Speech and Word
+    Formation; Grammar and Sentence Structure; Tenses and Verb Patterns; Passive Voice, Relative Pronoun, and
+    Conjunction; Gerund, Infinitive, and Conditional Sentence; Reading Comprehension and Text Interpretation;
+    Conversation and Speaking Expressions; Data Reading and General Knowledge.
+- **Soal tidak itu-itu saja:** Penyisihan English mengulang bentuk (bahkan soal yang sama di level 1 dan 2). Di Final
+  setiap level satu bentuk: 1 pemanasan (sebagian bergambar), 2 kalimat rumpang, 3 "ketuk semua", 4 kata/kalimat yang
+  kurang tepat, 5 makna & relasi kata, 6 membaca notice/tabel/diagram/teks (jenis pertanyaan bervariasi), 7 dialog
+  berkonteks Jawa Timur, 8 susun/ubah kalimat, 9 teka-teki Final KMSI, 10 tantangan campuran. Materi bacaan memakai
+  jenis teks berbeda di tiap level. Tidak ada kalimat soal kembar antar-level maupun dengan Penyisihan. Narasi dibaca
+  suara Indonesia, kartu pilihan suara English (D-062).
+- **Game:** 10 jenis per buku, satu jenis per materi, dan pasangan jenis–materi berbeda di tiap jenjang. Game
+  berbasis materi Final (grammar, tenses, ungkapan, bacaan), bukan kosakata hewan/warna seperti GM English. Contoh:
+  label number words (Kelas 1–2), sortir noun/adjective/adverb dan labirin kata kerja lampau (Kelas 3–4), tangkap
+  past participle dan kereta kata penghubung recount (Kelas 5–6), kartu idiom ↔ makna dan tangkap verb + gerund
+  (SMP). Jenis isi & lompat tidak dipakai di English karena kalimatnya berbahasa Indonesia dan tidak melatih English.
+- **Game urut kalimat** (`wheel-game` sequence) selalu memakai SEMUA potongan kalimat (`count` = jumlah potongan),
+  karena mode sequence mengambil sebagian item; untuk cerita, sebagian peristiwa tetap urut.
+- Mock: 3 × 25 soal per buku dari FA–FJ, benar 4 / salah 0, tanpa KKM. Teks bacaan, cerita, dan biografi rekaan
+  dibuat sendiri; fabel/legenda domain publik diceritakan ulang (PRD A17).
+
+## D-086 — KMSI Final Provinsi Jatim 2026: Level A (TK) — Matematika, Sains, English
+
+Tanggal: 2026-10-08. Permintaan pemilik produk: Final Jatim untuk TK, "comply dengan yang sudah ada", 10 level, mock
+test, dan game sesuai topik. Pola D-080/D-084/D-085 di buku `tkosn` (TK (Olimpiade)), tier `basic`.
+
+- **Kisi-kisi Level A (4 materi per mapel, kode FA–FD):**
+  - **Matematika**: tambah & kurang dengan gambar; mengurutkan bilangan ratusan; membandingkan bilangan ratusan dan
+    jumlah mata dadu dengan <, >, = (tanda dibacakan "lebih dari / kurang dari / sama dengan"); bentuk bangun datar.
+  - **Sains**: transportasi, alat kebersihan, dan benda alam; berkembang biak, makanan, dan gerak hewan; bagian tubuh
+    dan fungsinya; manfaat api dan air.
+  - **English**: animals, weather, body, fruits & vegetables; classroom, bathroom & everyday things; shapes; he/she/it
+    & daily conversation (instruksi Bahasa Indonesia, kata English dibacakan suara English — D-062/D-071).
+- **Aturan TK:** setiap soal dibacakan, pilihan bergambar/angka/tanda singkat dengan suara, maks 4 pilihan. Bentuk soal
+  per level berbeda: kenali (dengar–ketuk), sebutkan, ketuk semua, pasangkan, mana yang berbeda, hitung/bandingkan,
+  urutkan/lengkapi huruf, soal cerita bergambar berlatar Jawa Timur, teka-teki Final, tantangan campuran. Tidak ada
+  kalimat soal yang sama dengan materi lain di buku `tkosn` (Penyisihan, OSN, EMC/ESC/EEC).
+- **Game GF** (10 jenis berbeda, setiap materi ≥ 2 game, tema beda dari GM tkosn), mis. Matematika: beri makan
+  (tambah), turun tangga (kurang), roket ratusan, labirin ratusan, sortir lebih/kurang dari 500, tangkap dadu, kartu
+  dadu ↔ benda, silang banyak sisi, tempel nama bentuk ke benda nyata, puzzle benda berbentuk bangun. Sains: sortir
+  alami/buatan, tangkap benda alam, cari kata kendaraan, kartu hewan ↔ cara bergerak, labirin hewan bertelur, daur hidup,
+  label & kereta bagian tubuh, silang api & air, lompat liter air di ember. English: tangkap vegetables, kartu weather,
+  puzzle hewan, cari kata classroom, kereta benda toilet, silang benda rumah, labirin & urut shapes, sortir he/she/it,
+  label keluarga. Sambung titik tidak dipakai di Matematika karena gambarnya bawaan (layangan, rumah) dan tidak melatih
+  bangun datar; diganti tempel nama bentuk ke benda nyata (jam dinding/piring → lingkaran, roti lapis → segitiga,
+  jendela → persegi; label maks 12 huruf, jadi "persegi panjang"/"belah ketupat" tidak dipakai di game ini). Tomat
+  tidak dipakai di soal/game kelompok sayur–buah (ambigu).
+- **Mock FY:** 3 × **25 soal** (ketentuan Final: 25 soal; Penyisihan Level A 20 soal), 9/8/8 dari FA–FD, benar 4 /
+  salah 0, tanpa KKM, tab "KMSI Final".
+
+## D-089 — Pelajaran interaktif (Video Momo, jelajah, bacaan), game "ketuk di wajah", dan game lama Worksheet PAUD dikembalikan
+
+**Tanggal:** 2026-10-08 · **Status:** Disetujui (pemilik produk; contoh pertama di Sains TK Olimpiade "Tubuhku dan
+pancaindra")
+
+- **Game lama Worksheet PAUD dikembalikan.** D-078 mengganti 12 level di "Game angka" (B) dan "Game huruf" (E)
+  lalu menjadikan id lamanya draft. Pemilik produk masih membutuhkannya, jadi kedua topik versi sebelum D-078
+  dikembalikan utuh (10 level masing-masing) sebagai topik mandiri baru, di samping topik B/E yang sekarang:
+  - **T** "Labirin dan kartu angka", tepat setelah B;
+  - **U** "Labirin dan kartu huruf", tepat setelah E.
+    Id-nya baru (`worksheet.prek.t…`/`u…`), jadi id lama tetap draft. Aturan D-078 "satu jenis game sekali per topik"
+    tetap berlaku untuk topik B/E; T/U sengaja memakai labirin, kartu, dan tangkap berulang seperti dulu.
+- **Layar pelajaran baru** (`lessonSchema`), semuanya dari data dan gambar sendiri, jadi tetap offline:
+  - `tonton` — **Video Momo**: 2–8 adegan. Tiap adegan berisi gambar bergerak (muncul/zoom/goyang/geser/denyut),
+    teks besar, dan narasi Momo, lalu pindah otomatis setelah narasi. Ada tombol putar/jeda/ulang,
+    sebelum/berikutnya, dan titik adegan. Video MP4/YouTube dari luar **tidak** dipakai di area anak
+    (iklan/rekomendasi, kuota, offline).
+  - `jelajah` — gambar wajah besar. Anak mengetuk mata, telinga, hidung, lidah, dan tangan/kulit; bagian itu disorot
+    dan dibacakan, contoh bendanya muncul, dan ada hitungan "n dari 5 sudah kamu jelajahi".
+  - `baca` — bacaan interaktif: kalimat bergambar diketuk untuk didengar; "Bacakan semua" menyorot kalimat satu per
+    satu.
+- **Visual baru:** `sense` (ikon alat indra) dan `face` (wajah anak + tangan, alat indra disorot). Di spec gambar
+  JSON: `{ "sense": "mata" }` dan `{ "face": "hidung" | "semua" }`.
+- **Game visual baru `sense-tap` ("ketuk di wajah"):** alat indra diketuk langsung pada gambar wajah besar.
+  - Mode: kegiatan bergambar → indranya, nama alat indra, atau kegunaannya.
+  - Interaksinya tetap `pick-one` dengan susunan baru `face`, jadi penilaian, lomba (`publicItem`), dan laporan
+    tidak berubah.
+  - Target sentuh 64–72 px dan tidak saling menimpa. Keliru ditandai oranye lembut, bukan merah besar.
+- **Contoh pertama — Sains TK (Olimpiade), topik A "Tubuhku dan pancaindra" (unit K-SA-12):**
+  - Pelajaran 6 layar: Video Momo 7 adegan → jelajah wajah → bacaan 6 kalimat → 2 coba pilih → ingat.
+  - Level 1 dan Level 10 (versi 4) kini juga berisi game ketuk di wajah.
+- Ilustrasi contoh dari pemilik produk (buku pelajaran, lembar kerja merek lain) hanya dipakai sebagai gaya
+  rujukan. Gambar, kalimat, dan soalnya dibuat sendiri (PRD A17).
+- **Rencana game visual berikutnya** (belum dibuat, menunggu prioritas):
+  - tebalkan garis pada gambar (rambut, hujan, ubur-ubur, siput);
+  - pasangkan dengan garis (bangun datar ↔ benda);
+  - koordinat pada kotak-kotak;
+  - hitung sisi & sudut.
+
+## D-090 — Setiap topik punya penjelasan "Belajar dulu" dengan Video Momo (pelajaran otomatis)
+
+**Tanggal:** 2026-10-08 · **Status:** Disetujui (pemilik produk: "implementasi untuk semua topik … semua mempunyai
+penjelasan dengan video")
+
+- Sebelumnya hanya 27 dari 222 topik PAUD/TK/TK Olimpiade yang punya pelajaran. Menulis 195 pelajaran manual tidak
+  realistis dan cepat basi saat level disunting. Karena itu pelajaran dibuat **otomatis dari data topik** (fungsi
+  murni `lessonFor`/`autoLesson` di engine, seed tetap). Hasilnya selalu sesuai isi level dan ikut berubah bila
+  admin menyunting.
+- **Isi pelajaran otomatis:**
+  - **Video Momo**, berisi:
+    - pembuka: judul dan intro topik;
+    - **2–3 contoh soal dari level topik itu, dari mudah ke sulit.** Soal asli tampil tanpa bisa diketuk dan
+      dibacakan, lalu jawabannya disorot ("Ini jawabannya") dan dijelaskan dengan penjelasan soal (`reteach`).
+      Game, labirin, dan tebalkan tampil sebagai "cara bermain" dengan papan aslinya;
+    - tips topik, lalu penutup.
+  - **Bacaan interaktif:** kalimat intro + tips.
+  - **Coba satu soal tanpa nilai:** Momo menjelaskan bila keliru; ada tombol "soal lain".
+  - **Ingat:** ringkasan tips.
+- **Pelajaran manual tetap dipakai.** Bila belum punya video, Video Momo otomatis ditambahkan di depannya.
+  Topik Mock Test tidak berpelajaran.
+- **Berlaku untuk semua buku.** Fungsinya umum, jadi buku SD juga mendapat "Belajar dulu" otomatis.
+- **Skema:** adegan video boleh berisi `contoh` ({level, seed}) atau `visual`, atau tanpa gambar (Momo tampil
+  besar). Layar `coba` mendapat mode `soal`.
+- **Pemeriksaan rutin:** `validate:content` (CI) kini memeriksa setiap topik punya pelajaran dengan Video Momo,
+  semua layarnya valid, dan ≥ 2 contoh soal yang bisa dibuat. Hasilnya 725 topik di semua buku lolos.
+- **Responsif:**
+  - Kartu "Lanjutkan permainan" boleh melipat, sehingga teks tidak terjepit satu kata per baris di iPad.
+  - Kontrol video tidak melebar di HP.
+  - Nama anak di header boleh dua baris sebelum dipotong.
+  - Audit otomatis membuka setiap topik dan setiap layar pelajaran di lebar 390 (HP) dan 810 (iPad) untuk mencari
+    elemen yang keluar layar, terpotong, atau terjepit.
+
+## D-087 — Suara Momo lebih natural: gaya bicara manusia per jenjang & naskah ucapan
+
+Tanggal: 2026-10-08. Permintaan pemilik produk setelah audit suara: "agar audionya terasa lebih natural, seperti suara
+manusia normal, bukan robot dan kaku" — dikerjakan butir 2 (gaya & kecepatan) dan 3 (naskah ucapan).
+
+- **Gaya bicara (Gemini-TTS):** arahan lama "Kamu Momo, **robot** sahabat anak…" membuat model meniru suara robot.
+  Arahan baru menggambarkan pembaca manusia (kakak/guru perempuan yang ramah, santai seperti mengobrol, intonasi
+  wajar, jeda di koma/titik, nada bertanya pada pertanyaan, "jangan terdengar seperti robot/mesin/penyiar"). Nama
+  Momo tetap di aplikasi.
+  - Satu gaya per jenjang dari id skill (`voiceStageOf`): **TK** (PAUD/TK/TK Olimpiade, sedikit lebih pelan:
+    kecepatan admin − 0,05), **SD**, **SMP** (tidak kekanak-kanakan). English: gaya guru English yang natural;
+    English Pra-TK/TK: narasi Indonesia + lafal British English (tanpa "robot").
+  - Kalimat Momo umum (perintah, pujian, skor) memakai gaya admin; bawaan baru `VOICE_STYLE_DEFAULT`, kecepatan
+    bawaan **1,0** (sebelumnya 0,95 + "pelan" ganda → terseret).
+  - Pengaturan tersimpan yang masih memakai gaya bawaan lama dinaikkan otomatis saat dibaca
+    (`upgradeVoiceSettings` di `SettingsService`); gaya yang sudah disunting admin tidak disentuh.
+- **Naskah ucapan (`speechText`, engine):** teks soal ditulis untuk dibaca, dan ±9,5% kalimat yang dibacakan berisi
+  simbol (…, _**, +, =, Rp12.500, 3/4, °C, cm², (lambat)) yang dibaca kaku/dilewati mesin suara. Sebelum dikirim ke
+  TTS (dan ke suara cadangan browser), teks diubah menjadi kalimat lisan: "10 + 9 = …" → "10 ditambah 9 sama dengan
+  titik-titik", "Rp5.500.000" → "lima juta lima ratus ribu rupiah", "64 cm²" → "64 sentimeter persegi", "pukul 07.00" →
+  "pukul tujuh", "(−7)" → "negatif 7", "slow (lambat)" → "slow, lambat", "tanda >" → "tanda lebih dari", English
+  "**_" → "blank". Angka biasa tetap angka. Hasil: 0 dari 18.421 kalimat yang dibacakan masih bersimbol.
+- **Klip:** kunci klip dihitung dari naskah ucapan + gaya + kecepatan, jadi semua klip dibuat ulang otomatis saat
+  pertama diputar (atau `pnpm voice:generate`); teks asli tetap disimpan di `voice_clips.text`.
+- **Model bawaan: Chirp 3 HD** (`chirp3-hd`, disetujui pemilik produk setelah mendengar contoh). Gemini-TTS lewat
+  Text-to-Speech API butuh Agent Platform API **dan** kunci yang terikat service account (kunci biasa ditolak:
+  `aiplatform.endpoints.predict` denied), sedangkan Chirp 3 HD jalan dengan API key biasa dan terdengar natural
+  (30 suara id-ID, termasuk Leda). Permintaan Chirp: nama suara `id-ID-Chirp3-HD-<suara>` / `en-GB-…` tanpa
+  `modelName` dan tanpa `prompt` (Google menolak arahan gaya untuk Chirp: "Prompt is only supported for Gemini
+  TTS"), jadi gaya per jenjang hanya berlaku bila admin memilih model Gemini; kecepatan per jenjang & naskah ucapan
+  tetap berlaku. Admin bisa memilih model dari daftar (`VOICE_MODELS`). Pengaturan admin tersimpan yang masih
+  memakai model Gemini tidak diubah otomatis — ganti modelnya di Admin → Suara Momo.
+- Belum: uji A/B beberapa suara Chirp, nada suara browser (pitch 1,1), dan polesan audio.
+
+## D-088 — Simulasi interaktif bergambar foto realistis, suara Chirp untuk pelajaran
+
+Tanggal: 2026-10-08. Disetujui pemilik produk (rancangan "Tubuhku bekerja", foto realistis buatan AI, suara Chirp).
+Skill simulasi dari pemilik produk (`simulasi/<slug>/index.html` + `narrator.js`) ditulis untuk proyek HTML statis;
+di proyek ini disesuaikan agar comply: layar pelajaran, data di katalog (PostgreSQL), teks antarmuka di i18n, suara
+server, tanpa drag wajib.
+
+- **Layar pelajaran baru `simulasi`** (`lessonSimSchema`): foto utama + bagian (titik sentuh dalam persen + foto
+  close-up + contoh benda nyata) + kegiatan (foto, bagian yang dipakai, kalimat selesai) + momen "aha" + penutup.
+  Alur: pembuka → jelajah (ketuk semua bagian) → kegiatan (ketuk semua bagian yang dipakai; bagian lain hanya
+  bergoyang, tanpa kata "salah") → aha (kegiatan pertama yang memakai > 1 bagian) → penutup → ulangi. Kuis memakai
+  layar `coba pilih` (tidak dinilai). Validator menolak kegiatan dengan bagian yang tidak ada dan simulasi tanpa aha.
+- **Contoh pertama:** Sains TK (Olimpiade) topik H "Tubuhku: bagian dan fungsinya", pelajaran K-SA-12 "Tubuhku
+  bekerja" (simulasi 6 bagian × 4 kegiatan, 2 kuis indra, ingat).
+- **Foto realistis:** AI Gambar mendapat gaya `foto` (`AI_PHOTO_STYLE_GUIDE`: foto natural, latar polos, anak rekaan
+  berpakaian sopan, tanpa teks/logo); gaya bawaan tetap ilustrasi, sidik jari gambar lama tidak berubah. Pilihan
+  "Gaya" ada di Admin → AI Gambar. `pnpm sim:photos -- <domain> <grade> <kode>` meminta semua foto simulasi satu
+  topik (17 untuk topik H) lewat layanan yang sama (batas biaya, audit, dipakai ulang); hasilnya berstatus review dan
+  tampil di simulasi setelah disetujui (`/pictures/subject/:subject`). Selama belum ada atau offline: gambar SVG yang
+  sudah ada, dan titik sentuh di gambar disembunyikan (posisinya untuk foto) — kartu bagian tetap bisa diketuk.
+  Posisi titik (`x`, `y`) perlu disetel setelah foto utama disetujui.
+- **Suara Chirp untuk pelajaran:** `GET /voice/lesson/:domain/:grade/:code?k=<kunci>` membuat/memutar klip untuk
+  kalimat pelajaran di katalog (`lessonVoiceLines`: narasi layar, adegan, titik, kalimat, dan semua kalimat simulasi).
+  Teks diambil server dari pelajaran, bukan dari perangkat; batas per IP sama dengan suara soal; naskah ucapan &
+  gaya per jenjang (D-087) berlaku. Perangkat memakai suara browser bila tidak ada kunci (pelajaran otomatis D-090,
+  kalimat buatan perangkat seperti nama huruf/angka) atau suara server tidak tersedia. Video Momo otomatis di depan
+  pelajaran manual tidak ada di server, jadi nomor layar disesuaikan.
+- Belum: foto (butuh API key OpenAI di Admin → AI Gambar), penyetelan titik di foto, simulasi untuk topik lain.
+
+## D-091 — Semua suara aplikasi memakai Chirp 3 HD (suara browser hanya cadangan terakhir)
+
+**Tanggal:** 2026-10-08 · **Status:** Disetujui (pemilik produk: "pastikan sudah menggunakan yang chirp3-hd bukan lagi
+suara bawaan dari browser … replace semua, tanpa terkecuali")
+
+- **Sebelumnya** hanya sebagian yang memakai suara server: kalimat Momo (`vo_*`), soal Basic, kartu English, dan
+  pelajaran di katalog (D-035/D-043/D-062/D-088). Teks antarmuka, game, soal Kelas 1+, kartu mapel lain, nama
+  huruf/angka, dan pelajaran otomatis (D-090) masih memakai suara browser. Baru 23 klip yang ada.
+- **Sekarang semua kalimat memakai klip Chirp 3 HD dari server:**
+  - `speak()` di web memutar klip dari `GET /voice/say?t=…`, dengan konteks yang sedang tampil:
+    - `i` = soal (skill~seed~band);
+    - `s` = pelajaran (domain~jenjang~kode);
+    - `c` = soal lomba live (id peserta~nomor).
+  - Konteks dipasang oleh ItemPlayer, LessonPage, dan halaman lomba (`pushVoiceItem/Lesson/Contest`, layout
+    effect).
+  - `speakLesson` lewat jalur yang sama, jadi tidak bergantung pada nomor layar.
+  - Batasan lama dibuka: soal semua jenjang (prompt, pembahasan, kartu), dan kartu semua mata pelajaran.
+- **Tetap bukan teks bebas (keamanan biaya):** server hanya membuat suara bila teks berasal dari aplikasi
+  (`voiceTextAllowed`, engine). Sumbernya:
+  - template i18n web (dibaca dari `apps/web/src/i18n/id`; bisa diganti lewat `I18N_DIR`);
+  - teks katalog dan judul level, serta dialog Momo;
+  - kalimat soal yang diturunkan ulang dari skill + seed, atau dari soal peserta lomba;
+  - kalimat pelajaran manual/otomatis beserta soal contohnya;
+  - kosakata aplikasi: angka 0–1000, urutan, huruf, nama benda/bentuk/warna, alat indra, kata English.
+
+  Teks boleh berupa gabungan kalimat-kalimat itu, dengan dua aturan tambahan:
+  - "Label: teks" diperiksa per bagian;
+  - tanda baca akhir diabaikan.
+
+  Template ber-isian hanya cocok bila hurufnya ≥ 3, setiap isian ≤ 40 huruf, dan huruf tetap ≥ 30% kalimat (atau
+  ≥ 20 huruf). Jadi "{name}" dan "Halo, {name}" tidak bisa dipakai untuk mengucapkan kalimat bebas. Teks lain
+  ditolak (404, dicatat di log).
+
+- **Model dikunci Chirp 3 HD.** `VOICE_MODELS` hanya `chirp3-hd`. Pengaturan tersimpan yang masih Gemini dibaca
+  sebagai Chirp 3 HD (`upgradeVoiceSettings`); nama suara (Leda, …) sama di kedua model.
+- **Batas:**
+  - 2000 permintaan dan 200 klip baru per 10 menit per IP (satu kelas sering berbagi IP Wi-Fi);
+  - batas harian `TTS_DAILY_LIMIT` tetap ada.
+  - Klip dibuat sekali, disimpan di PostgreSQL, dan di-cache browser selamanya.
+  - Waktu tunggu klip pertama 6 detik, karena klip baru perlu dibuat dulu.
+- **Suara browser hanya cadangan terakhir:**
+  - offline untuk kalimat yang belum pernah diputar;
+  - kunci suara tidak ada atau suara dimatikan admin;
+  - klip gagal, ditolak, atau melewati batas.
+- **Buat lebih dulu:** `pnpm voice:generate -- --all --dry-run` menghitung kalimat yang belum bersuara.
+  - Hasil 8 Okt 2026: 9.879 kalimat, ±1 juta huruf.
+  - `--all [--max=N]` membuat klip untuk teks antarmuka anak, tombol "Dengarkan" topik, dan semua kalimat
+    pelajaran.
+  - Soal tetap dibuat saat diputar dan disiapkan lebih dulu oleh perangkat.
+  - Biaya Google ditanggung pemilik kunci, jadi perintah ini dijalankan pemilik produk, bukan otomatis.
+- **Audit:** di browser, untuk beranda, topik, pelajaran, soal, peringkat, profil, dan login, 0 kalimat yang jatuh
+  ke suara browser selama klip tersedia.
+- **Bawa ke server tanpa diisi/dibayar dua kali (`carry`):** `pnpm carry:export -- <file>` di laptop, lalu
+  `node dist/cli/carry.js import <file>` di server.
+  - Yang dibawa: API key admin (`voice_key`, `ai_key`, `ai_claude_key`), pengaturan `voice` & `ai_image`, semua
+    `voice_clips`, dan gambar AI yang sudah dibuat (`ai_images`; pembuat/peninjau dikosongkan).
+  - Kunci dibuka dengan `JWT_SECRET` laptop, dikunci dengan kata sandi sementara (`CARRY_PASSPHRASE`, scrypt +
+    AES-256-GCM), lalu di server dikunci lagi dengan `JWT_SECRET` server. File tidak pernah memuat kunci terbaca dan
+    disimpan di `backups/` (tidak masuk git).
+  - Impor idempoten (klip yang ada dilewati). Pengaturan suara ikut dibawa, supaya kunci klip di server sama
+    persis.
+  - Langkahnya ada di `docs/deploy-contabo.md`.
+
+## D-092 — AI Gambar: Claude menulis prompt, OpenAI menggambar
+
+Tanggal: 2026-10-08. Pemilik produk ingin AI Gambar memakai Claude API. Claude tidak bisa membuat gambar (keluarannya
+teks), jadi pilihan yang disetujui: **Claude menulis prompt, OpenAI menggambar** (D-068 tetap berlaku untuk
+pembuatan gambar).
+
+- **Pengaturan** (Admin → AI Gambar): "Penulis prompt" `none` (bawaan) / `claude`, "Model Claude" (bawaan
+  `claude-opus-5-5`), harga token Claude (Opus 5.5: US$4 masuk, US$0,20 cache, US$20 keluar per 1 juta). Field baru
+  ber-default, jadi pengaturan tersimpan yang lama tetap valid.
+- **Kunci Claude** (`sk-ant-…`): `.env ANTHROPIC_API_KEY` lebih dulu, lalu kunci admin terenkripsi
+  (`app_settings.ai_claude_key`, AES-256-GCM seperti kunci OpenAI); sandi admin wajib untuk mengganti, email ke
+  direksi saat diganti/dihapus, tombol uji (membaca info model, tanpa biaya token), error disensor (`sk-ant-…`).
+- **Alur:** permintaan kamus admin → Claude (SDK resmi `@anthropic-ai/sdk`, `beta.messages.create`, effort `low`,
+  keluaran JSON terstruktur `{prompt}`, instruksi sistem tetap + cache, `fallbacks: "default"` bila Claude menolak) →
+  prompt 60–140 kata bahasa Inggris sesuai gaya (foto/ilustrasi) → OpenAI membuat gambar dengan panduan gaya yang
+  sama. Prompt tersimpan di gambar (bisa dilihat saat review). Claude gagal/menolak → prompt bawaan, gambar tetap
+  dibuat, kegagalan dicatat (`ai_usage` action `prompt`, ok=false). Biaya Claude dicatat di audit `prompt` dan masuk
+  batas biaya harian/bulanan; perkiraan biaya per gambar ikut naik saat Claude aktif.
+- **Bawaan (lanjutan, permintaan pemilik produk):** Penulis prompt = **Claude** (tanpa kunci Claude → prompt bawaan),
+  dan form "Buat gambar" memakai gaya **Foto realistis**. Gaya bawaan di API tetap ilustrasi, supaya sidik jari
+  permintaan lama tidak berubah.
+- **Simpan sekali, pakai ulang (hemat biaya):** setiap gambar disimpan di PostgreSQL (`ai_images`) dengan sidik jari
+  permintaan (jenis, subjek, kata, tema, catatan, varian, gaya, model, kualitas, ukuran, latar, referensi). Permintaan
+  yang sama mengembalikan gambar yang sudah ada **sebelum** memanggil Claude atau OpenAI (biaya 0). Penulis prompt
+  sengaja tidak ikut sidik jari, jadi mengaktifkan Claude tidak membuat ulang gambar yang sudah ada. Membuat ulang
+  hanya terjadi bila admin menolak gambar lalu meminta lagi (Claude menulis prompt baru). Aplikasi menampilkan foto
+  lewat `/pictures/subject/:subject` → `/pictures/:id` (cache permanen). Suara: setiap klip disimpan di
+  `voice_clips` dengan kunci hash (naskah ucapan + pengaturan suara) dan hanya dibuat bila belum ada.
+- Hanya di panel admin; yang dikirim ke Claude hanya kata kamus, catatan admin, dan panduan gaya — tidak pernah data
+  anak. Area anak tetap tanpa AI (PRD A17).

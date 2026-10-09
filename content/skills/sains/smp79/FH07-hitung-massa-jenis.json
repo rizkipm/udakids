@@ -1,0 +1,53 @@
+{
+  "id": "sains.smp79.fh7.hitung-massa-jenis",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 7,
+  "title": "Materi dan atom — Level 7 — Hitung: massa jenis",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Materi dan atom"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "r": {
+        "values": [2, 3, 4, 5, 7, 8, 9, 11]
+      },
+      "a": {
+        "range": [20, 60],
+        "step": 5
+      },
+      "v": [4, 30]
+    },
+    "derived": {
+      "b": "a + v",
+      "m": "r * v"
+    },
+    "prompt": "Batu bermassa {m} g dimasukkan ke gelas ukur. Permukaan air naik dari {a} mL menjadi {b} mL. Massa jenis batu itu … g/cm³.",
+    "answer": "r",
+    "unit": "g/cm³",
+    "distractors": [
+      {
+        "expr": "v",
+        "tag": "volume"
+      },
+      {
+        "expr": "m - v",
+        "tag": "dikurang"
+      },
+      {
+        "expr": "m / b",
+        "tag": "bagi-volume-akhir"
+      }
+    ],
+    "choices": 4,
+    "explain": "Volume batu = {b} − {a} = {v} cm³. Massa jenis = {m} : {v} = {answer} g/cm³."
+  }
+}

@@ -14,6 +14,13 @@ describe('competitionOf (D-074, D-076)', () => {
     ).toBe('ESC');
     expect(competitionOf('EEC · Eduversal English Competition — Final 2026')).toBe('EEC');
   });
+  it('babak final provinsi menjadi lomba sendiri (D-080)', () => {
+    expect(
+      competitionOf(
+        'KMSI · Kompetensi Matematika Sains dan Bahasa Inggris — Final Provinsi Jatim 2026',
+      ),
+    ).toBe('KMSI Final');
+  });
   it('judul bagian lama tetap dikenali', () => {
     expect(competitionOf('Mock Test KMSI · Simulasi penyisihan 30 soal — benar 4, KKM 72')).toBe(
       'KMSI',

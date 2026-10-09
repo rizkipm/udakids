@@ -1,0 +1,54 @@
+{
+  "id": "math.sd56.fg7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 7,
+  "title": "Perbandingan — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "values": [40, 45, 50, 60]
+      },
+      "w": {
+        "values": [30, 35, 40, 50, 60, 70]
+      },
+      "m": {
+        "values": [30, 40, 45, 60, 72, 75, 90, 120]
+      }
+    },
+    "derived": {
+      "d": "(v + w) * m / 60"
+    },
+    "constraint": "d == floor(d) && v != w",
+    "prompt": "Jarak kota P dan kota Q {d} km. Pukul 07.00, Andi berangkat dari P ke Q dengan kecepatan {v} km/jam dan Budi berangkat dari Q ke P dengan kecepatan {w} km/jam. Mereka berpapasan setelah … menit.",
+    "answer": "m",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "d * 60 / v",
+        "tag": "andi-saja"
+      },
+      {
+        "expr": "d * 60 / abs(v - w)",
+        "tag": "kecepatan-dikurangi"
+      },
+      {
+        "expr": "d * 60 / (v + w) / 2",
+        "tag": "dibagi-dua"
+      }
+    ],
+    "choices": 4,
+    "explain": "Saat berpapasan, jarak ditempuh berdua: {d} : ({v} + {w}) = {=d/(v+w)} jam = {answer}."
+  }
+}

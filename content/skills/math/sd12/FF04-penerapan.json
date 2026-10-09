@@ -1,0 +1,63 @@
+{
+  "id": "math.sd12.ff4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 4,
+  "title": "Tabel dan diagram — Level 4 — Penerapan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 10],
+      "b": [2, 10],
+      "c": [2, 10],
+      "d": [2, 10]
+    },
+    "derived": {
+      "x1": "a * 500",
+      "x2": "b * 500",
+      "x3": "c * 500",
+      "x4": "d * 500"
+    },
+    "prompt": "Tabel menunjukkan tabungan Laras selama 4 minggu. Jumlah tabungan Laras Rp …",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Tabungan Laras",
+        "headers": ["Minggu", "Tabungan"],
+        "rows": [
+          ["Ke-1", "Rp{x1}"],
+          ["Ke-2", "Rp{x2}"],
+          ["Ke-3", "Rp{x3}"],
+          ["Ke-4", "Rp{x4}"]
+        ]
+      }
+    ],
+    "answer": "(a + b + c + d) * 500",
+    "distractors": [
+      {
+        "expr": "(a + b + c + d) * 500 - 500",
+        "tag": "kurang-500"
+      },
+      {
+        "expr": "(a + b + c) * 500",
+        "tag": "lupa-satu-minggu"
+      },
+      {
+        "expr": "(a + b + c + d) * 500 + 1000",
+        "tag": "lebih-1000"
+      }
+    ],
+    "choices": 4,
+    "explain": "Rp{x1} + Rp{x2} + Rp{x3} + Rp{x4} = Rp{answer}."
+  }
+}

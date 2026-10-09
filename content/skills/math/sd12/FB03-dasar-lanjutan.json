@@ -1,0 +1,53 @@
+{
+  "id": "math.sd12.fb3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FB",
+  "order": 3,
+  "title": "Nilai tempat dan lambang bilangan — Level 3 — Dasar lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Nilai tempat dan lambang bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "b": [1, 9],
+      "c": [1, 9]
+    },
+    "derived": {
+      "hi": "max(a, b, c)",
+      "lo": "min(a, b, c)",
+      "mi": "a + b + c - hi - lo"
+    },
+    "constraint": "a != b && b != c && a != c",
+    "prompt": "Bilangan tiga angka terbesar yang dapat disusun dari angka {a}, {b}, dan {c} (setiap angka dipakai sekali) adalah …",
+    "answer": "hi * 100 + mi * 10 + lo",
+    "distractors": [
+      {
+        "expr": "lo * 100 + mi * 10 + hi",
+        "tag": "terkecil"
+      },
+      {
+        "expr": "a * 100 + b * 10 + c",
+        "tag": "urut-tulisan"
+      },
+      {
+        "expr": "hi * 100 + lo * 10 + mi",
+        "tag": "tengah-tertukar"
+      },
+      {
+        "expr": "mi * 100 + hi * 10 + lo",
+        "tag": "ratusan-tertukar"
+      }
+    ],
+    "choices": 4,
+    "explain": "Taruh angka terbesar di ratusan, lalu yang sedang di puluhan: {answer}."
+  }
+}

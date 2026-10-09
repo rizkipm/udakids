@@ -1,4 +1,14 @@
-import type { BodyPart, Color, CoinValue, ObjectId, ShapeId, Size, SolidId } from './assets.js';
+import type {
+  BodyPart,
+  SenseId,
+  Color,
+  CoinValue,
+  NoteValue,
+  ObjectId,
+  ShapeId,
+  Size,
+  SolidId,
+} from './assets.js';
 import type { DotPictureId } from './dot-pictures.js';
 import { catchReplay, mazeReplay, memoryReplay, wordSearchReplay } from './games.js';
 import {
@@ -30,8 +40,19 @@ export type Visual =
   | { kind: 'dots'; count: number; layout: Layout; countAlong?: boolean }
   /** Satu muka dadu dengan pola mata 1–6 (D-069). */
   | { kind: 'die'; value: number; color?: Color }
+  /** Tangan dengan jari terangkat (1–10; 6–10 = dua tangan), P-MA-04 (D-079). */
+  /** `tone` = warna kulit (0–2); `split` = banyak jari di tangan pertama bila dua tangan (mis. 7 = 4 + 3). */
+  | { kind: 'fingers'; count: number; tone?: number; split?: number; mirror?: boolean }
+  /** Gambar garis/pola pramenulis (P-BT-02/03, D-081). */
+  | { kind: 'glyph'; glyph: GlyphId }
+  /** Uang kertas Rupiah (gambar sendiri, bukan salinan desain asli), P-MA-13 (D-081). */
+  | { kind: 'note'; value: NoteValue }
   /** Anak berdiri; bagian tubuh `part` ditandai lingkaran + panah (D-070). */
   | { kind: 'body'; part?: BodyPart }
+  /** Alat indra (mata, telinga, hidung, lidah, kulit/tangan), D-089. */
+  | { kind: 'sense'; sense: SenseId }
+  /** Wajah anak dengan tangan; alat indra `sense` disorot (D-089). */
+  | { kind: 'face'; sense?: SenseId }
   | {
       kind: 'cubes';
       counts: number[];
@@ -141,8 +162,14 @@ export type Choice = {
   tag?: string;
 };
 
+/**
+ * Susunan pilihan `pick-one`. `face` (D-089): pilihan berupa alat indra (`sense`) yang tampil sebagai bagian
+ * yang bisa diketuk pada gambar wajah besar.
+ */
+export type Arrangement = 'row' | 'column' | 'grid' | 'face';
+
 export type Interaction =
-  | { type: 'pick-one'; choices: Choice[]; answer: string; arrangement?: 'row' | 'column' | 'grid' }
+  | { type: 'pick-one'; choices: Choice[]; answer: string; arrangement?: Arrangement }
   /** `style: 'balloons'` = permainan pecahkan balon (kartu melayang, pecah saat diketuk). */
   | { type: 'tap-all'; choices: Choice[]; answer: string[]; style?: 'balloons' }
   /** `style` (D-078): `ferris` = kabin bianglala, `rocket` = panel hitung mundur roket. Penilaian sama. */
@@ -342,6 +369,11 @@ export type Reteach = { say: string; show?: Visual[] };
 export type ItemCore = {
   /** Teks soal (untuk orang dewasa / anak yang sudah bisa membaca). */
   prompt: string;
+  /**
+   * Lihat sekilas (P-MA-02, D-081): gambar soal tampil `peek` ms lalu ditutup; anak boleh membuka lagi kapan saja
+   * ("Lihat lagi"), jadi bukan batas waktu menjawab.
+   */
+  peek?: number;
   /** Kalimat yang dibacakan; default = prompt. Boleh berbeda agar jawaban tidak terlihat di teks. */
   say?: string;
   stimulus: Visual[];

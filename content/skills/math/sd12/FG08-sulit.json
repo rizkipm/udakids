@@ -1,0 +1,46 @@
+{
+  "id": "math.sd12.fg8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FG",
+  "order": 8,
+  "title": "Pola bilangan sederhana — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 20],
+      "n": [6, 12]
+    },
+    "prompt": "Pola: {a}, {=a+1}, {=a+3}, {=a+6}, {=a+10}, … Bilangan ke-{n} dari pola itu adalah …",
+    "answer": "a + n * (n - 1) / 2",
+    "distractors": [
+      {
+        "expr": "a + n * (n + 1) / 2",
+        "tag": "lebih-satu-suku"
+      },
+      {
+        "expr": "a + (n - 1) * (n - 2) / 2",
+        "tag": "kurang-satu-suku"
+      },
+      {
+        "expr": "a + 4 * (n - 1)",
+        "tag": "tambah-tetap"
+      },
+      {
+        "expr": "a + n * (n - 1) / 2 + 1",
+        "tag": "lebih-satu"
+      }
+    ],
+    "choices": 4,
+    "explain": "Selisihnya 1, 2, 3, 4, … Bilangan ke-{n} = {a} + (1 + 2 + … + {=n-1}) = {answer}."
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "id": "math.tkosn.fb6.lompat-sepuluh-dan-seratus",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FB",
+  "order": 6,
+  "title": "Mengurutkan bilangan ratusan — Level 6 — Lompat sepuluh dan seratus",
+  "tier": "basic",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "applying",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 699]
+          },
+          "prompt": "Lompat seratus-seratus: {a}, {=a+100}, …, {=a+300}. Angka berapa yang hilang?",
+          "say": "Lompat seratus-seratus. {a}, {=a+100}, berapa, {=a+300}?",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+100"
+                },
+                {
+                  "kind": "blank"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+300"
+                }
+              ]
+            }
+          ],
+          "answer": "a + 200",
+          "distractors": [
+            {
+              "expr": "a + 101",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 110",
+              "tag": "tambah-sepuluh"
+            },
+            {
+              "expr": "a + 250",
+              "tag": "tengah-tengah"
+            }
+          ],
+          "choices": 3,
+          "explain": "Setiap lompatan tambah seratus. {=a+100} tambah seratus adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 960]
+          },
+          "prompt": "Lompat sepuluh-sepuluh: {a}, {=a+10}, {=a+20}, …",
+          "say": "Lompat sepuluh-sepuluh. {a}, {=a+10}, {=a+20}, lalu berapa?",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+10"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a+20"
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "answer": "a + 30",
+          "distractors": [
+            {
+              "expr": "a + 21",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "a + 120",
+              "tag": "tambah-seratus"
+            },
+            {
+              "expr": "a + 40",
+              "tag": "kelewatan"
+            }
+          ],
+          "choices": 3,
+          "explain": "Setiap lompatan tambah sepuluh. Sesudah {=a+20} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [400, 999]
+          },
+          "prompt": "Mundur seratus-seratus: {a}, {=a-100}, {=a-200}, …",
+          "say": "Mundur seratus-seratus. {a}, {=a-100}, {=a-200}, lalu berapa?",
+          "stimulus": [
+            {
+              "kind": "row",
+              "items": [
+                {
+                  "kind": "numeral",
+                  "value": "=a"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a-100"
+                },
+                {
+                  "kind": "numeral",
+                  "value": "=a-200"
+                },
+                {
+                  "kind": "blank"
+                }
+              ]
+            }
+          ],
+          "answer": "a - 300",
+          "distractors": [
+            {
+              "expr": "a - 201",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a - 210",
+              "tag": "kurang-sepuluh"
+            },
+            {
+              "expr": "a - 100",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 3,
+          "explain": "Setiap langkah kurang seratus. Sesudah {=a-200} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

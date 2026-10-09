@@ -114,6 +114,8 @@ describe('suara Momo (D-035)', () => {
     expect(voiceProfileOf('english.prek.a1.huruf-a')).toEqual({
       lang: 'id-ID',
       style: ID_EN_VOICE_STYLE,
+      // TK sedikit lebih pelan (D-087).
+      rateDelta: -0.05,
     });
     expect(voiceProfileOf('english.prek.a1.huruf-a', 'reteach').lang).toBe('id-ID');
     // Kartu pilihan: British English, satu kata, suara perempuan yang jelas.
@@ -125,7 +127,11 @@ describe('suara Momo (D-035)', () => {
     // Buku English jenjang lain (kelak) tetap seluruhnya British English (D-059).
     expect(voiceLangOf('english.tk.a1.x')).toBe('en-GB');
     expect(voiceLangOf('math.prek.a1.kenali-angka-1-sampai-2')).toBe('id-ID');
-    expect(voiceProfileOf('sains.tk.a1.ketuk-bentuknya', 'choice')).toEqual({ lang: 'id-ID' });
+    // Buku selain English: Bahasa Indonesia dengan gaya jenjang (D-087).
+    expect(voiceProfileOf('sains.tk.a1.ketuk-bentuknya', 'choice')).toMatchObject({
+      lang: 'id-ID',
+      rateDelta: -0.05,
+    });
     // Nama suara, model, dan kecepatan tetap dari admin; hanya gaya yang mengikuti profil.
     const mix = voiceSettingsFor(DEFAULT_VOICE_SETTINGS, voiceProfileOf('english.prek.a1.huruf-a'));
     expect(mix).toMatchObject({ voice: DEFAULT_VOICE_SETTINGS.voice, style: ID_EN_VOICE_STYLE });

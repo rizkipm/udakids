@@ -288,11 +288,16 @@ export class BillingService {
       );
     const access = accessFrom(
       s,
-      rows.map((e) => ({
-        scope: e.scope as 'all' | 'books',
-        books: e.books as Book[],
-        endsAt: iso(e.endsAt),
-      })),
+      // Premium keluarga dari admin adalah data lama: sejak D-041 (revisi) dipecah menjadi Premium per anak lalu
+      // diakhiri. Jangan dihitung lagi, supaya anak yang ditambahkan sesudahnya tidak diberi tahu "paket sudah
+      // berakhir" padahal ia belum pernah Premium.
+      rows
+        .filter((e) => !(e.source === 'admin' && e.parentId && !e.childId))
+        .map((e) => ({
+          scope: e.scope as 'all' | 'books',
+          books: e.books as Book[],
+          endsAt: iso(e.endsAt),
+        })),
       now,
     );
     // Anak tanpa akun orang tua: pesan "buka Premium" mengarahkan orang tua daftar & menautkan dulu.

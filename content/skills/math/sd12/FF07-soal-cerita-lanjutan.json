@@ -1,0 +1,63 @@
+{
+  "id": "math.sd12.ff7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FF",
+  "order": 7,
+  "title": "Tabel dan diagram — Level 7 — Soal cerita lanjutan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [10, 20],
+      "b": [8, 18],
+      "c": [10, 20],
+      "d": [8, 18],
+      "e": [10, 20],
+      "f": [8, 18]
+    },
+    "constraint": "a + c + e > b + d + f",
+    "prompt": "Berapa selisih banyak siswa laki-laki seluruhnya dan siswa perempuan seluruhnya?",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Peserta lomba mewarnai",
+        "headers": ["Kelas", "Laki-laki", "Perempuan"],
+        "rows": [
+          ["1A", "=a", "=b"],
+          ["1B", "=c", "=d"],
+          ["2A", "=e", "=f"]
+        ]
+      }
+    ],
+    "answer": "(a + c + e) - (b + d + f)",
+    "distractors": [
+      {
+        "expr": "a + c + e",
+        "tag": "laki-laki-saja"
+      },
+      {
+        "expr": "a - b",
+        "tag": "satu-kelas"
+      },
+      {
+        "expr": "(a + c + e) - (b + d + f) + 2",
+        "tag": "lebih-2"
+      },
+      {
+        "expr": "(a + c + e) + (b + d + f)",
+        "tag": "semua-siswa"
+      }
+    ],
+    "choices": 4,
+    "explain": "Laki-laki {a} + {c} + {e} = {=a+c+e}. Perempuan {b} + {d} + {f} = {=b+d+f}. Selisih {answer}."
+  }
+}

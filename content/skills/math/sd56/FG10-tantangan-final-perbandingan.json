@@ -1,0 +1,555 @@
+{
+  "id": "math.sd56.fg10.tantangan-final-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FG",
+  "order": 10,
+  "title": "Perbandingan — Level 10 — Tantangan final perbandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Perbandingan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [40, 45, 48, 50, 54, 60, 72, 75, 80]
+            },
+            "t": {
+              "values": [30, 40, 45, 50, 60, 75, 80, 90, 100, 120]
+            }
+          },
+          "derived": {
+            "d": "v * t / 60"
+          },
+          "constraint": "(v * t) % 60 == 0",
+          "prompt": "Bus dari Surabaya menempuh jarak {d} km dalam {t} menit. Kecepatan rata-rata bus adalah …",
+          "answer": "v",
+          "unit": "km/jam",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "jarak"
+            },
+            {
+              "expr": "d * t / 60",
+              "tag": "dikali-waktu"
+            },
+            {
+              "expr": "d * 60 / t / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bus menempuh {d} km dalam {t} menit. Dalam 60 menit (1 jam): {d} × 60 : {t} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 7],
+            "b": [2, 7],
+            "c": [2, 7],
+            "k": [3, 12]
+          },
+          "derived": {
+            "s": "k * abs(a - c)"
+          },
+          "constraint": "a != c",
+          "prompt": "Perbandingan kelereng Andi, Budi, dan Cici adalah {a} : {b} : {c}. Selisih kelereng Andi dan Cici {s} butir. Jumlah kelereng mereka bertiga adalah …",
+          "answer": "k * (a + b + c)",
+          "distractors": [
+            {
+              "expr": "s * (a + b + c)",
+              "tag": "selisih-dikali"
+            },
+            {
+              "expr": "k * (a + c)",
+              "tag": "lupa-budi"
+            },
+            {
+              "expr": "s + a + b + c",
+              "tag": "dijumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Selisih {=abs(a-c)} bagian = {s}, jadi 1 bagian = {k}. Jumlah {=a+b+c} bagian × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [40, 45, 50, 60]
+            },
+            "w": {
+              "values": [30, 35, 40, 50, 60, 70]
+            },
+            "m": {
+              "values": [30, 40, 45, 60, 72, 75, 90, 120]
+            }
+          },
+          "derived": {
+            "d": "(v + w) * m / 60"
+          },
+          "constraint": "d == floor(d) && v != w",
+          "prompt": "Jarak kota P dan kota Q {d} km. Pukul 07.00, Andi berangkat dari P ke Q dengan kecepatan {v} km/jam dan Budi berangkat dari Q ke P dengan kecepatan {w} km/jam. Mereka berpapasan setelah … menit.",
+          "answer": "m",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "d * 60 / v",
+              "tag": "andi-saja"
+            },
+            {
+              "expr": "d * 60 / abs(v - w)",
+              "tag": "kecepatan-dikurangi"
+            },
+            {
+              "expr": "d * 60 / (v + w) / 2",
+              "tag": "dibagi-dua"
+            }
+          ],
+          "choices": 4,
+          "explain": "Saat berpapasan, jarak ditempuh berdua: {d} : ({v} + {w}) = {=d/(v+w)} jam = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 7],
+            "c": [3, 9],
+            "k": [2, 10]
+          },
+          "derived": {
+            "x": "(c - a) * k"
+          },
+          "constraint": "c > a && gcd(a, b) == 1 && gcd(c, b) == 1",
+          "prompt": "Perbandingan kelereng Ani dan Budi {a} : {b}. Setelah Ani mendapat {x} kelereng lagi, perbandingannya menjadi {c} : {b}. Banyak kelereng Budi adalah …",
+          "answer": "b * k",
+          "distractors": [
+            {
+              "expr": "a * k",
+              "tag": "kelereng-ani"
+            },
+            {
+              "expr": "c * k",
+              "tag": "ani-akhir"
+            },
+            {
+              "expr": "x * b",
+              "tag": "tambahan-dikali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Budi tetap {b} bagian. Ani bertambah {c} − {a} = {=c-a} bagian = {x}, jadi 1 bagian = {k}. Budi = {b} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Perbandingan A : B = 2 : 3 dan B : C = 4 : 5. Perbandingan A : C adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 : 15"
+                  },
+                  "say": "8 : 15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 : 5"
+                  },
+                  "say": "2 : 5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 : 5"
+                  },
+                  "say": "6 : 5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 : 12"
+                  },
+                  "say": "10 : 12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Samakan B: A : B = 8 : 12 dan B : C = 12 : 15. Jadi A : C = 8 : 15."
+            },
+            {
+              "prompt": "Skala peta 1 : 250.000. Jarak sebenarnya dua kota 20 km. Jarak kedua kota pada peta adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8 cm"
+                  },
+                  "say": "8 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80 cm"
+                  },
+                  "say": "80 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,8 cm"
+                  },
+                  "say": "0,8 cm"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 cm"
+                  },
+                  "say": "5 cm"
+                }
+              ],
+              "answer": 0,
+              "reteach": "20 km = 2.000.000 cm. 2.000.000 : 250.000 = 8 cm."
+            },
+            {
+              "prompt": "Pekerjaan selesai dalam 15 hari oleh 8 pekerja. Agar selesai dalam 10 hari, perlu tambahan … pekerja.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                }
+              ],
+              "answer": 0,
+              "reteach": "8 × 15 = 120. 120 : 10 = 12 pekerja. Tambahan 12 − 8 = 4."
+            },
+            {
+              "prompt": "Mobil melaju 60 km/jam menempuh jarak 150 km. Jika berangkat pukul 07.15, mobil tiba pukul …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.45"
+                  },
+                  "say": "09.45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.30"
+                  },
+                  "say": "09.30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10.15"
+                  },
+                  "say": "10.15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.15"
+                  },
+                  "say": "09.15"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Waktu = 150 : 60 = 2,5 jam = 2 jam 30 menit. 07.15 + 2.30 = 09.45."
+            },
+            {
+              "prompt": "Jarak Surabaya–Malang 90 km. Pukul 07.00 Ali berangkat dari Surabaya dengan kecepatan 40 km/jam, dan Budi berangkat dari Malang dengan kecepatan 50 km/jam. Mereka berpapasan pukul …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "08.00"
+                  },
+                  "say": "08.00"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "08.30"
+                  },
+                  "say": "08.30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "07.45"
+                  },
+                  "say": "07.45"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "09.00"
+                  },
+                  "say": "09.00"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Kecepatan gabungan 90 km/jam. Waktu 90 : 90 = 1 jam. Pukul 08.00."
+            },
+            {
+              "prompt": "Perbandingan uang Rani dan Sinta 3 : 5. Jumlah uang mereka Rp96.000. Selisih uang mereka adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp24.000"
+                  },
+                  "say": "Rp24.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp36.000"
+                  },
+                  "say": "Rp36.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp60.000"
+                  },
+                  "say": "Rp60.000"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Rp12.000"
+                  },
+                  "say": "Rp12.000"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 bagian = 96.000 : 8 = 12.000. Selisih 2 bagian = 24.000."
+            },
+            {
+              "prompt": "Resep untuk 4 porsi rujak cingur memerlukan 300 g petis. Untuk 10 porsi diperlukan petis …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "750 g"
+                  },
+                  "say": "750 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.200 g"
+                  },
+                  "say": "1.200 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "600 g"
+                  },
+                  "say": "600 g"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3.000 g"
+                  },
+                  "say": "3.000 g"
+                }
+              ],
+              "answer": 0,
+              "reteach": "1 porsi = 75 g. 10 porsi = 750 g."
+            },
+            {
+              "prompt": "Persediaan pakan cukup untuk 30 ekor ayam selama 12 hari. Setelah 2 hari, 10 ayam dijual. Sisa pakan cukup untuk … hari lagi.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "say": "18"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Sisa pakan untuk 30 ayam × 10 hari = 300. Untuk 20 ayam: 300 : 20 = 15 hari."
+            },
+            {
+              "prompt": "Kecepatan 72 km/jam sama dengan … m/detik.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1.200"
+                  },
+                  "say": "1.200"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7,2"
+                  },
+                  "say": "7,2"
+                }
+              ],
+              "answer": 0,
+              "reteach": "72 km/jam = 72.000 m : 3.600 detik = 20 m/detik."
+            },
+            {
+              "prompt": "Denah rumah berskala 1 : 200. Panjang kamar pada denah 2,5 cm. Panjang kamar sebenarnya adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 m"
+                  },
+                  "say": "5 m"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50 m"
+                  },
+                  "say": "50 m"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0,5 m"
+                  },
+                  "say": "0,5 m"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2,5 m"
+                  },
+                  "say": "2,5 m"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2,5 × 200 = 500 cm = 5 m."
+            },
+            {
+              "prompt": "Perbandingan umur ayah dan anaknya 7 : 2. Selisih umur mereka 30 tahun. Umur ayah adalah … tahun.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42"
+                  },
+                  "say": "42"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "say": "35"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "49"
+                  },
+                  "say": "49"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Selisih 5 bagian = 30, 1 bagian = 6. Umur ayah 7 × 6 = 42."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

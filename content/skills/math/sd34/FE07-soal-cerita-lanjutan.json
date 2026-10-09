@@ -1,0 +1,58 @@
+{
+  "id": "math.sd34.fe7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 7,
+  "title": "Tabel dan diagram — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [20, 80],
+      "b": [20, 80],
+      "c": [20, 80],
+      "d": [20, 80],
+      "e": [20, 80],
+      "f": [20, 80],
+      "k": {
+        "values": [40, 45, 50, 55, 60]
+      }
+    },
+    "constraint": "a != k && b != k && c != k && d != k && e != k && f != k",
+    "prompt": "Berapa hari banyak pengunjung kolam renang lebih dari {k} orang?",
+    "stimulus": [
+      {
+        "kind": "table",
+        "caption": "Pengunjung kolam renang",
+        "headers": ["Hari", "Pengunjung"],
+        "rows": [
+          ["Senin", "=a"],
+          ["Selasa", "=b"],
+          ["Rabu", "=c"],
+          ["Kamis", "=d"],
+          ["Jumat", "=e"],
+          ["Sabtu", "=f"]
+        ]
+      }
+    ],
+    "answer": "(a > k) + (b > k) + (c > k) + (d > k) + (e > k) + (f > k)",
+    "unit": "hari",
+    "distractors": [
+      {
+        "expr": "6 - ((a > k) + (b > k) + (c > k) + (d > k) + (e > k) + (f > k))",
+        "tag": "kurang-dari"
+      }
+    ],
+    "choices": 4,
+    "explain": "Tandai angka yang lebih dari {k}, lalu hitung harinya: {answer} hari."
+  }
+}

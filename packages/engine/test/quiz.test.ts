@@ -59,7 +59,7 @@ describe('ronde level (D-021)', () => {
   });
 });
 
-describe('level terbuka berurutan', () => {
+describe('topik bebas dipilih, level berurutan (D-082)', () => {
   const skills = [
     { id: 'a1', category: 'A', order: 1 },
     { id: 'a3', category: 'A', order: 3 },
@@ -76,25 +76,25 @@ describe('level terbuka berurutan', () => {
     ts: 1,
   });
 
-  it('awal: hanya Level 1 materi pertama yang terbuka', () => {
+  it('awal: Level 1 setiap topik terbuka, level lain terkunci', () => {
     expect(levelStatuses(['A', 'B', 'C', 'Z'], skills, {})).toEqual({
       a1: 'open',
       a2: 'locked',
       a3: 'locked',
-      b1: 'locked',
+      b1: 'open',
       b2: 'locked',
-      c1: 'locked',
+      c1: 'open',
     });
   });
 
-  it('lulus A1 membuka A2 dan materi B', () => {
+  it('lulus A1 membuka A2', () => {
     expect(levelStatuses(['A', 'B', 'C'], skills, { a1: pass() })).toEqual({
       a1: 'passed',
       a2: 'open',
       a3: 'locked',
       b1: 'open',
       b2: 'locked',
-      c1: 'locked',
+      c1: 'open',
     });
   });
 
@@ -102,7 +102,12 @@ describe('level terbuka berurutan', () => {
     expect(levelStatuses(['A', 'B', 'C'], skills, { a1: pass(60) }).a2).toBe('locked');
   });
 
-  it('rantai materi: C terbuka hanya jika B1 lulus', () => {
+  it('topik boleh dikerjakan acak: B2 terbuka walau topik A belum dimulai', () => {
+    const r = levelStatuses(['A', 'B', 'C'], skills, { b1: pass() });
+    expect(r).toMatchObject({ a1: 'open', b1: 'passed', b2: 'open', c1: 'open' });
+  });
+
+  it('beberapa topik berjalan bersamaan', () => {
     const r = levelStatuses(['A', 'B', 'C'], skills, { a1: pass(), a2: pass(), b1: pass() });
     expect(r).toEqual({
       a1: 'passed',
@@ -116,7 +121,7 @@ describe('level terbuka berurutan', () => {
 
   it('lulus tanpa urutan (data lama) tetap tampil lulus, tapi tidak membuka yang terkunci', () => {
     const r = levelStatuses(['A', 'B'], skills, { a2: pass() });
-    expect(r).toMatchObject({ a1: 'open', a2: 'passed', a3: 'locked', b1: 'locked' });
+    expect(r).toMatchObject({ a1: 'open', a2: 'passed', a3: 'locked', b1: 'open' });
   });
 });
 

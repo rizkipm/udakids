@@ -1,0 +1,53 @@
+{
+  "id": "sains.smp79.ff7.hitung-kalor-untuk-menaikkan-suhu",
+  "version": 1,
+  "domain": "sains",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 7,
+  "title": "Suhu, kalor, dan gelombang — Level 7 — Hitung: kalor untuk menaikkan suhu",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Suhu, kalor, dan gelombang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": {
+        "range": [0.5, 5],
+        "step": 0.5
+      },
+      "a": {
+        "range": [20, 40],
+        "step": 5
+      },
+      "b": {
+        "range": [50, 100],
+        "step": 10
+      }
+    },
+    "prompt": "Air bermassa {m} kg dipanaskan dari {a} °C menjadi {b} °C. Kalor jenis air 4.200 J/kg °C. Kalor yang diperlukan … J.",
+    "answer": "m * 4200 * (b - a)",
+    "unit": "J",
+    "distractors": [
+      {
+        "expr": "m * 4200 * b",
+        "tag": "suhu-akhir"
+      },
+      {
+        "expr": "4200 * (b - a)",
+        "tag": "lupa-massa"
+      },
+      {
+        "expr": "m * 4200 * (b + a)",
+        "tag": "suhu-dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Q = m·c·ΔT = {m} × 4.200 × ({b} − {a}) = {answer} J."
+  }
+}

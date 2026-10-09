@@ -1,0 +1,45 @@
+{
+  "id": "math.smp79.ff3.dasar-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FF",
+  "order": 3,
+  "title": "Persamaan dan pertidaksamaan — Level 3 — Dasar lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Persamaan dan pertidaksamaan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 9],
+      "c": [2, 8],
+      "b": [1, 30],
+      "d": [1, 30]
+    },
+    "constraint": "a - c >= 2",
+    "prompt": "Bilangan bulat terbesar yang memenuhi {a}x − {b} < {c}x + {d} adalah …",
+    "answer": "ceil((b + d) / (a - c)) - 1",
+    "distractors": [
+      {
+        "expr": "floor((b + d) / (a - c))",
+        "tag": "batas-ikut"
+      },
+      {
+        "expr": "ceil((b + d) / (a - c))",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "floor((d - b) / (a - c))",
+        "tag": "tanda"
+      }
+    ],
+    "choices": 4,
+    "explain": "{=a-c}x < {=b+d}, jadi x < {=(b+d)/(a-c)}. Bilangan bulat terbesar yang kurang dari itu adalah {answer}."
+  }
+}

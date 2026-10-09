@@ -36,6 +36,13 @@ import {
 import { sizeCompare } from './size.js';
 import { connectDots, numeralTrace } from './writing.js';
 import { letterFind, letterTapAll, letterTrace } from './letters.js';
+import { dayTimeFamily } from './daytime.js';
+import { fingersFamily } from './fingers.js';
+import { queueFamily } from './queue.js';
+import { soundFamily } from './sounds.js';
+import { strokeFind, strokeTrace } from './strokes.js';
+import { subitizeFamily } from './subitize.js';
+import { senseTapFamily } from './senses.js';
 import { catchItemsFamily, mazePathFamily, memoryPairsFamily, wordSearchFamily } from './games.js';
 import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
 import { mockFamily } from './mock.js';
@@ -61,6 +68,14 @@ const BASE_FAMILIES = {
   'numeral-trace': numeralTrace,
   'connect-dots': connectDots,
   'letter-trace': letterTrace,
+  fingers: fingersFamily,
+  queue: queueFamily,
+  'day-time': dayTimeFamily,
+  'stroke-trace': strokeTrace,
+  'stroke-find': strokeFind,
+  sound: soundFamily,
+  subitize: subitizeFamily,
+  'sense-tap': senseTapFamily,
   'letter-find': letterFind,
   'letter-tap-all': letterTapAll,
   'maze-path': mazePathFamily,

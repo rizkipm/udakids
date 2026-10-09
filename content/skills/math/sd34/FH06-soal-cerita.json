@@ -1,0 +1,49 @@
+{
+  "id": "math.sd34.fh6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 6,
+  "title": "Teori bilangan sederhana — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "g": [4, 15],
+      "p": [2, 7],
+      "q": [2, 7]
+    },
+    "derived": {
+      "x": "g * p",
+      "y": "g * q"
+    },
+    "constraint": "gcd(p, q) == 1 && p < q",
+    "prompt": "Bu Guru punya {x} pensil dan {y} buku. Semua dibagikan kepada beberapa anak sehingga setiap anak mendapat pensil sama banyak dan buku sama banyak, tanpa sisa. Paling banyak anak yang menerima adalah …",
+    "answer": "gcd(x, y)",
+    "unit": "anak",
+    "distractors": [
+      {
+        "expr": "lcm(x, y)",
+        "tag": "kpk"
+      },
+      {
+        "expr": "p + q",
+        "tag": "isi-tiap-anak"
+      },
+      {
+        "expr": "gcd(x, y) / 2",
+        "tag": "faktor-lebih-kecil"
+      }
+    ],
+    "choices": 4,
+    "explain": "Banyak anak = FPB dari {x} dan {y} = {answer}. Setiap anak mendapat {p} pensil dan {q} buku."
+  }
+}

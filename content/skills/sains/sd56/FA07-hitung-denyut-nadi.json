@@ -1,0 +1,48 @@
+{
+  "id": "sains.sd56.fa7.hitung-denyut-nadi",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FA",
+  "order": 7,
+  "title": "Makhluk hidup — Level 7 — Hitung: denyut nadi",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Makhluk hidup dan sistem kehidupan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": {
+        "values": [10, 15, 20, 30]
+      },
+      "a": [10, 45]
+    },
+    "words": {
+      "nama": ["Raka", "Sinta", "Bima", "Ayu", "Dimas", "Nadia", "Fajar", "Laras"]
+    },
+    "constraint": "a * 60 / t >= 60 && a * 60 / t <= 140",
+    "prompt": "{nama} meraba nadi di pergelangan tangannya dan menghitung {a} denyutan dalam {t} detik. Denyut nadinya dalam 1 menit adalah … kali.",
+    "answer": "a * 60 / t",
+    "distractors": [
+      {
+        "expr": "a * t",
+        "tag": "kali-detik"
+      },
+      {
+        "expr": "a + 60",
+        "tag": "tambah-60"
+      },
+      {
+        "expr": "a * 60 / t - t",
+        "tag": "kurang-detik"
+      }
+    ],
+    "choices": 4,
+    "explain": "1 menit = 60 detik. 60 : {t} = {=60/t}. Jadi denyut per menit = {a} × {=60/t} = {answer} kali."
+  }
+}

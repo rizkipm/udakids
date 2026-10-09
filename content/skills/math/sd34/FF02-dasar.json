@@ -1,0 +1,51 @@
+{
+  "id": "math.sd34.ff2.dasar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FF",
+  "order": 2,
+  "title": "Aritmetika sosial — Level 2 — Dasar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "knowing",
+    "kisi-kisi": "Aritmetika sosial"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "range": [1500, 4500],
+        "step": 500
+      },
+      "b": {
+        "range": [1000, 3000],
+        "step": 500
+      },
+      "n": [2, 6],
+      "m": [2, 6]
+    },
+    "constraint": "n != m",
+    "prompt": "Harga 1 pensil Rp{a} dan 1 penghapus Rp{b}. Harga {n} pensil dan {m} penghapus adalah Rp…",
+    "answer": "n * a + m * b",
+    "distractors": [
+      {
+        "expr": "(n + m) * (a + b)",
+        "tag": "semua-dikali"
+      },
+      {
+        "expr": "n * a + b",
+        "tag": "lupa-kali-penghapus"
+      },
+      {
+        "expr": "(n + m) * a",
+        "tag": "harga-sama"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n} × {a} = {=n*a} dan {m} × {b} = {=m*b}. Jumlahnya {answer}."
+  }
+}

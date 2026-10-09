@@ -1,17 +1,18 @@
 import { z } from 'zod';
 import type { ObjectId } from '../assets.js';
-import { VOWELS, type LetterGlyphId, type Vowel } from '../glyphs.js';
+import { ALPHABET, VOWELS, type Letter, type LetterGlyphId, type Vowel } from '../glyphs.js';
 import type { Choice, Visual } from '../item.js';
 import type { Rng } from '../rng.js';
 import { defineFamily, range, reject } from './common.js';
 
 /**
- * Huruf vokal a i u e o untuk PAUD (D-075, unit P-BT-04 & P-BT-05): menebalkan huruf, mengenali huruf,
- * huruf depan kata bergambar, dan pecahkan balon huruf. Membaca lewat suku kata (a-yam, i-kan). Semua
- * kalimat dibacakan; pilihan maksimal 4.
+ * Huruf untuk PAUD: vokal a i u e o (D-075, unit P-BT-04 & P-BT-05) lalu konsonan b–z (D-083) — menebalkan
+ * huruf, mengenali huruf, huruf depan kata bergambar, dan pecahkan balon huruf. Membaca lewat suku kata
+ * (a-yam, bo-la). Semua kalimat dibacakan; pilihan maksimal 4.
  */
 
-export type VowelWord = { word: string; syl: string; object: ObjectId };
+export type LetterWord = { word: string; syl: string; object: ObjectId };
+export type VowelWord = LetterWord;
 
 /** Kata bergambar berawalan huruf vokal (gambar dibuat sendiri, D-055/D-075). */
 export const VOWEL_WORDS: Record<Vowel, readonly VowelWord[]> = {
@@ -47,18 +48,134 @@ export const VOWEL_WORDS: Record<Vowel, readonly VowelWord[]> = {
   ],
 };
 
-/** Huruf pengecoh yang sering tertukar dengan vokal (bentuk mirip), lalu konsonan yang akrab. */
-const LOOKALIKE: Record<Vowel, string[]> = {
+/**
+ * Kata bergambar berawalan konsonan (D-083), dari gambar yang sudah ada. Huruf f, q, v belum punya gambar:
+ * ditebalkan dan dikenali tanpa gambar.
+ */
+export const CONSONANT_WORDS: Record<Exclude<Letter, Vowel>, readonly LetterWord[]> = {
+  b: [
+    { word: 'bola', syl: 'bo-la', object: 'bola' },
+    { word: 'buku', syl: 'bu-ku', object: 'buku' },
+    { word: 'bebek', syl: 'be-bek', object: 'bebek' },
+    { word: 'balon', syl: 'ba-lon', object: 'balon' },
+  ],
+  c: [
+    { word: 'cangkir', syl: 'cang-kir', object: 'cangkir' },
+    { word: 'cermin', syl: 'cer-min', object: 'cermin' },
+    { word: 'ceri', syl: 'ce-ri', object: 'ceri' },
+  ],
+  d: [
+    { word: 'dadu', syl: 'da-du', object: 'dadu' },
+    { word: 'daun', syl: 'da-un', object: 'daun' },
+  ],
+  f: [],
+  g: [
+    { word: 'gajah', syl: 'ga-jah', object: 'gajah' },
+    { word: 'gelas', syl: 'ge-las', object: 'gelas' },
+    { word: 'gunung', syl: 'gu-nung', object: 'gunung' },
+    { word: 'gurita', syl: 'gu-ri-ta', object: 'gurita' },
+  ],
+  h: [
+    { word: 'hujan', syl: 'hu-jan', object: 'hujan' },
+    { word: 'harimau', syl: 'ha-ri-mau', object: 'harimau' },
+    { word: 'handuk', syl: 'han-duk', object: 'handuk' },
+  ],
+  j: [
+    { word: 'jeruk', syl: 'je-ruk', object: 'jeruk' },
+    { word: 'jagung', syl: 'ja-gung', object: 'jagung' },
+    { word: 'jerapah', syl: 'je-ra-pah', object: 'jerapah' },
+  ],
+  k: [
+    { word: 'kucing', syl: 'ku-cing', object: 'kucing' },
+    { word: 'kuda', syl: 'ku-da', object: 'kuda' },
+    { word: 'kapal', syl: 'ka-pal', object: 'kapal' },
+    { word: 'kue', syl: 'ku-e', object: 'kue' },
+  ],
+  l: [
+    { word: 'lebah', syl: 'le-bah', object: 'lebah' },
+    { word: 'lilin', syl: 'li-lin', object: 'lilin' },
+    { word: 'laut', syl: 'la-ut', object: 'laut' },
+  ],
+  m: [
+    { word: 'mobil', syl: 'mo-bil', object: 'mobil' },
+    { word: 'meja', syl: 'me-ja', object: 'meja' },
+    { word: 'madu', syl: 'ma-du', object: 'madu' },
+    { word: 'mangga', syl: 'mang-ga', object: 'mangga' },
+  ],
+  n: [
+    { word: 'nanas', syl: 'na-nas', object: 'nanas' },
+    { word: 'nenek', syl: 'ne-nek', object: 'nenek' },
+  ],
+  p: [
+    { word: 'pisang', syl: 'pi-sang', object: 'pisang' },
+    { word: 'pensil', syl: 'pen-sil', object: 'pensil' },
+    { word: 'payung', syl: 'pa-yung', object: 'payung' },
+    { word: 'pintu', syl: 'pin-tu', object: 'pintu' },
+  ],
+  q: [],
+  r: [
+    { word: 'rumah', syl: 'ru-mah', object: 'rumah' },
+    { word: 'robot', syl: 'ro-bot', object: 'robot' },
+    { word: 'roket', syl: 'ro-ket', object: 'roket' },
+  ],
+  s: [
+    { word: 'sapi', syl: 'sa-pi', object: 'sapi' },
+    { word: 'semut', syl: 'se-mut', object: 'semut' },
+    { word: 'sepeda', syl: 'se-pe-da', object: 'sepeda' },
+    { word: 'siput', syl: 'si-put', object: 'siput' },
+  ],
+  t: [
+    { word: 'topi', syl: 'to-pi', object: 'topi' },
+    { word: 'tomat', syl: 'to-mat', object: 'tomat' },
+    { word: 'telur', syl: 'te-lur', object: 'telur' },
+  ],
+  v: [],
+  w: [{ word: 'wortel', syl: 'wor-tel', object: 'wortel' }],
+  x: [{ word: 'xilofon', syl: 'xi-lo-fon', object: 'xilofon' }],
+  y: [{ word: 'yoyo', syl: 'yo-yo', object: 'yoyo' }],
+  z: [{ word: 'zebra', syl: 'ze-bra', object: 'zebra' }],
+};
+
+/** Kata bergambar untuk setiap huruf a–z. */
+export const LETTER_WORDS: Record<Letter, readonly LetterWord[]> = {
+  ...VOWEL_WORDS,
+  ...CONSONANT_WORDS,
+};
+
+/** Huruf pengecoh yang bentuknya mirip (sering tertukar). */
+const LOOKALIKE: Record<Letter, string[]> = {
   a: ['o', 'd', 'e'],
   i: ['l', 'j', 't'],
   u: ['n', 'v', 'o'],
   e: ['c', 'a', 'o'],
   o: ['a', 'c', 'u'],
+  b: ['d', 'p', 'h'],
+  c: ['e', 'o', 'a'],
+  d: ['b', 'p', 'q'],
+  f: ['t', 'l', 'j'],
+  g: ['q', 'y', 'p'],
+  h: ['n', 'b', 'k'],
+  j: ['i', 'g', 'y'],
+  k: ['h', 'x', 'l'],
+  l: ['i', 't', 'k'],
+  m: ['n', 'w', 'u'],
+  n: ['m', 'h', 'u'],
+  p: ['q', 'b', 'd'],
+  q: ['p', 'g', 'd'],
+  r: ['n', 'v', 't'],
+  s: ['z', 'c', 'e'],
+  t: ['f', 'l', 'i'],
+  v: ['w', 'y', 'u'],
+  w: ['m', 'v', 'u'],
+  x: ['k', 'y', 'z'],
+  y: ['v', 'g', 'j'],
+  z: ['s', 'x', 'n'],
 };
-const CONSONANTS = ['b', 'm', 's', 't', 'n', 'k', 'p', 'd', 'l'];
+/** Huruf yang sudah akrab untuk pengecoh terakhir. */
+const FAMILIAR = ['b', 'm', 's', 't', 'n', 'k', 'p', 'd', 'l', 'a', 'i', 'u', 'e', 'o'];
 
-const vowelSchema = z.enum(VOWELS);
-const lettersParam = z.array(vowelSchema).min(1).max(5);
+const letterSchema = z.enum(ALPHABET);
+const lettersParam = z.array(letterSchema).min(1).max(26);
 const caseSchema = z.enum(['lower', 'upper', 'both']);
 
 /** "a" → "huruf a"; huruf besar "A" → "huruf A besar". */
@@ -71,22 +188,22 @@ const letterChoice = (id: string, text: string, tag?: string): Choice => ({
   say: letterSay(text),
   ...(tag && { tag }),
 });
-const pictureChoice = (w: VowelWord, id: string, tag?: string): Choice => ({
+const pictureChoice = (w: LetterWord, id: string, tag?: string): Choice => ({
   id,
   visual: { kind: 'object', object: w.object },
   say: w.word,
   ...(tag && { tag }),
 });
 /** "a-yam" → "a, yam. ayam" (dibacakan per suku kata). */
-const sylSay = (w: VowelWord) => `${w.syl.split('-').join(', ')}. ${w.word}`;
+const sylSay = (w: LetterWord) => `${w.syl.split('-').join(', ')}. ${w.word}`;
 const caseOf = (rng: Rng, c: z.infer<typeof caseSchema>) =>
   c === 'both' ? (rng.chance(0.5) ? 'upper' : 'lower') : c;
-const shown = (v: Vowel, c: 'upper' | 'lower') => (c === 'upper' ? v.toUpperCase() : v);
+const shown = (v: Letter, c: 'upper' | 'lower') => (c === 'upper' ? v.toUpperCase() : v);
 
-/** Pengecoh huruf: vokal lain di `pool` dulu, lalu huruf yang mirip, lalu konsonan. */
+/** Pengecoh huruf: huruf lain di `pool` dulu, lalu huruf yang mirip, lalu huruf yang akrab. */
 function letterDistractors(
   rng: Rng,
-  target: Vowel,
+  target: Letter,
   pool: readonly string[],
   count: number,
 ): { text: string; tag: string }[] {
@@ -96,21 +213,22 @@ function letterDistractors(
       if (out.length < count && x !== target && !out.some((o) => o.text === x))
         out.push({ text: x, tag });
   };
-  add(pool, 'vokal-lain');
+  add(pool, (VOWELS as readonly string[]).includes(target) ? 'vokal-lain' : 'huruf-lain');
   add(LOOKALIKE[target], 'bentuk-mirip');
-  add(CONSONANTS, 'konsonan');
+  add(FAMILIAR, 'huruf-akrab');
   return out;
 }
 
 // ------------------------------------------------------------ tebalkan huruf
 
 export const letterTrace = defineFamily({
-  description: 'Tebalkan huruf vokal a i u e o (kecil/besar) mengikuti goresan bernomor.',
+  description: 'Tebalkan huruf a–z (kecil/besar) mengikuti goresan bernomor.',
   params: z.strictObject({
     letters: lettersParam.default(['a']),
     case: caseSchema.default('lower'),
-    guide: z.enum(['solid', 'dotted']).default('solid'),
-    /** Tampilkan gambar benda berawalan huruf itu (a → ayam). */
+    /** `mixed` = kadang garis tebal, kadang titik-titik (latihan berulang yang tidak monoton). */
+    guide: z.enum(['solid', 'dotted', 'mixed']).default('solid'),
+    /** Tampilkan gambar benda berawalan huruf itu (a → ayam); huruf tanpa gambar (f, q, v) tetap tanpa gambar. */
     picture: z.boolean().default(true),
     tolerance: z.number().int().min(6).max(24).default(16),
     maxSlips: z.number().int().min(0).max(9).default(3),
@@ -119,18 +237,19 @@ export const letterTrace = defineFamily({
     const v = rng.pick(p.letters);
     const c = caseOf(rng, p.case);
     const glyph = shown(v, c) as LetterGlyphId;
-    const w = rng.pick(VOWEL_WORDS[v]);
+    const words = LETTER_WORDS[v];
+    const w = p.picture && words.length ? rng.pick(words) : undefined;
     const name = letterSay(glyph);
     return {
-      prompt: p.picture ? `Tebalkan ${name}. ${glyph} untuk ${w.word}.` : `Tebalkan ${name}.`,
-      say: p.picture
+      prompt: w ? `Tebalkan ${name}, seperti ${w.word}.` : `Tebalkan ${name}.`,
+      say: w
         ? `Ini ${name}. ${v}, untuk ${sylSay(w)}. Ayo tebalkan, mulai dari titik nomor satu.`
         : `Ini ${name}. Ayo tebalkan, mulai dari titik nomor satu.`,
-      stimulus: p.picture ? [{ kind: 'object', object: w.object }] : [],
+      stimulus: w ? [{ kind: 'object', object: w.object }] : [],
       interaction: {
         type: 'trace',
         glyph,
-        guide: p.guide,
+        guide: p.guide === 'mixed' ? (rng.chance(0.5) ? 'solid' : 'dotted') : p.guide,
         tolerance: p.tolerance,
         maxSlips: p.maxSlips,
       },
@@ -146,7 +265,7 @@ export const letterTrace = defineFamily({
 
 export const letterFind = defineFamily({
   description:
-    'Kenali huruf vokal: dengar lalu ketuk hurufnya, huruf depan gambar, gambar berawalan huruf, atau pasangan huruf besar-kecil.',
+    'Kenali huruf a–z: dengar lalu ketuk hurufnya, huruf depan gambar, gambar berawalan huruf, atau pasangan huruf besar-kecil.',
   params: z.strictObject({
     letters: lettersParam.default(['a', 'i']),
     /**
@@ -154,8 +273,8 @@ export const letterFind = defineFamily({
      * gambar; `picture` = gambar yang berawalan huruf; `case` = huruf kecil dari huruf besar.
      */
     mode: z.enum(['listen', 'show', 'initial', 'picture', 'case']).default('show'),
-    /** Vokal yang boleh jadi pengecoh (yang sudah dikenal anak). */
-    pool: z.array(vowelSchema).max(5).default([]),
+    /** Huruf yang boleh jadi pengecoh (yang sudah dikenal anak). */
+    pool: z.array(letterSchema).max(10).default([]),
     case: caseSchema.default('lower'),
     choices: range(2, 4).default([3, 3]),
   }),
@@ -165,11 +284,12 @@ export const letterFind = defineFamily({
     const c = p.mode === 'case' ? 'lower' : caseOf(rng, p.case);
     switch (p.mode) {
       case 'picture': {
-        const w = rng.pick(VOWEL_WORDS[v]);
-        const others = VOWELS.filter((x) => x !== v && (p.pool.length === 0 || p.pool.includes(x)));
-        if (others.length === 0) reject('butuh vokal lain untuk gambar pengecoh');
+        if (!LETTER_WORDS[v].length) reject(`huruf ${v} belum punya gambar`);
+        const w = rng.pick(LETTER_WORDS[v]);
+        const others = (p.pool.length ? p.pool : VOWELS).filter((x) => x !== v);
+        if (others.length === 0) reject('butuh huruf lain untuk gambar pengecoh');
         const wrong = rng
-          .shuffle(others.flatMap((x) => VOWEL_WORDS[x]))
+          .shuffle(others.flatMap((x) => LETTER_WORDS[x]))
           .slice(0, k - 1)
           .map((x, i) => pictureChoice(x, `p${i}`, 'huruf-depan-lain'));
         if (wrong.length < k - 1) reject('gambar pengecoh kurang');
@@ -190,9 +310,10 @@ export const letterFind = defineFamily({
         };
       }
       case 'initial': {
-        const w = rng.pick(VOWEL_WORDS[v]);
+        if (!LETTER_WORDS[v].length) reject(`huruf ${v} belum punya gambar`);
+        const w = rng.pick(LETTER_WORDS[v]);
         const wrong = letterDistractors(rng, v, p.pool, k - 1).map((d, i) =>
-          letterChoice(`l${i}`, shown(d.text as Vowel, c), d.tag),
+          letterChoice(`l${i}`, shown(d.text as Letter, c), d.tag),
         );
         return {
           prompt: `Ini ${w.word}. Huruf depannya apa?`,
@@ -231,9 +352,10 @@ export const letterFind = defineFamily({
       default: {
         const target = shown(v, c);
         const wrong = letterDistractors(rng, v, p.pool, k - 1).map((d, i) =>
-          letterChoice(`l${i}`, shown(d.text as Vowel, c), d.tag),
+          letterChoice(`l${i}`, shown(d.text as Letter, c), d.tag),
         );
         const listen = p.mode === 'listen';
+        const like = LETTER_WORDS[v].length ? rng.pick(LETTER_WORDS[v]) : undefined;
         return {
           prompt: listen ? 'Dengarkan, lalu ketuk hurufnya.' : `Ketuk ${letterSay(target)}.`,
           say: `Ketuk ${letterSay(target)}.`,
@@ -244,7 +366,9 @@ export const letterFind = defineFamily({
             answer: 'ans',
           },
           reteach: {
-            say: `Ini ${letterSay(target)}. ${v}, seperti ${sylSay(rng.pick(VOWEL_WORDS[v]))}.`,
+            say: like
+              ? `Ini ${letterSay(target)}. ${v}, seperti ${sylSay(like)}.`
+              : `Ini ${letterSay(target)}. Lihat bentuknya baik-baik.`,
             show: [letterVisual(target)],
           },
         };
@@ -259,7 +383,7 @@ export const letterTapAll = defineFamily({
   description: 'Ketuk / pecahkan semua balon huruf tertentu (mencari huruf).',
   params: z.strictObject({
     letters: lettersParam.default(['a']),
-    pool: z.array(vowelSchema).max(5).default([]),
+    pool: z.array(letterSchema).max(10).default([]),
     case: caseSchema.default('lower'),
     tiles: range(4, 8).default([5, 6]),
     style: z.enum(['cards', 'balloons']).default('balloons'),
@@ -272,7 +396,7 @@ export const letterTapAll = defineFamily({
     const others = letterDistractors(rng, v, p.pool, 3).map((d) => d.text);
     const texts = rng.shuffle([
       ...Array.from({ length: hits }, () => shown(v, c)),
-      ...Array.from({ length: k - hits }, (_, i) => shown(others[i % others.length] as Vowel, c)),
+      ...Array.from({ length: k - hits }, (_, i) => shown(others[i % others.length] as Letter, c)),
     ]);
     const choices: Choice[] = texts.map((text, i) => ({
       id: `t${i}`,

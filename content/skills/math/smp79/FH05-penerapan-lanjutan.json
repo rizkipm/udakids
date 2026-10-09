@@ -1,0 +1,69 @@
+{
+  "id": "math.smp79.fh5.penerapan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FH",
+  "order": 5,
+  "title": "Statistika dan peluang — Level 5 — Penerapan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika dan peluang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 15],
+      "b": [2, 15],
+      "c": [2, 15],
+      "d": [2, 15],
+      "e": [2, 15]
+    },
+    "derived": {
+      "tt": "a + b + c + d + e"
+    },
+    "prompt": "Diagram batang menunjukkan banyak siswa di setiap ekstrakurikuler (setiap siswa ikut satu). Jika dipilih satu siswa secara acak, peluang ia anggota Robotik adalah …",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Anggota ekstrakurikuler",
+        "labels": ["Pramuka", "PMR", "Futsal", "Tari", "Robotik"],
+        "values": ["=a", "=b", "=c", "=d", "=e"],
+        "unit": "siswa"
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "e",
+      "den": "tt"
+    },
+    "distractors": [
+      {
+        "num": "(e) / gcd(e, tt - e)",
+        "den": "(tt - e) / gcd(e, tt - e)",
+        "tag": "dibanding-lain"
+      },
+      {
+        "num": "(tt - e) / gcd(tt - e, tt)",
+        "den": "(tt) / gcd(tt - e, tt)",
+        "tag": "komplemen"
+      },
+      {
+        "num": "(1) / gcd(1, 5)",
+        "den": "(5) / gcd(1, 5)",
+        "tag": "bagi-kategori"
+      },
+      {
+        "num": "(e) / gcd(e, 100)",
+        "den": "(100) / gcd(e, 100)",
+        "tag": "persen"
+      }
+    ],
+    "choices": 4,
+    "explain": "Total siswa {a} + {b} + {c} + {d} + {e} = {tt}. Anggota Robotik {e}. Peluang = {e}/{tt}, bentuk paling sederhananya {answer}."
+  }
+}

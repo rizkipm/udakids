@@ -1,0 +1,44 @@
+{
+  "id": "math.sd34.fh7.soal-cerita-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FH",
+  "order": 7,
+  "title": "Teori bilangan sederhana — Level 7 — Soal cerita lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 6],
+      "b": [3, 8],
+      "c": [4, 10]
+    },
+    "constraint": "a < b && b < c && lcm(a, b, c) <= 120 && lcm(a, b, c) != c",
+    "prompt": "Dika berenang setiap {a} hari, Eka setiap {b} hari, dan Fani setiap {c} hari. Hari ini mereka berenang bersama. Mereka akan berenang bersama lagi … hari lagi.",
+    "answer": "lcm(a, b, c)",
+    "distractors": [
+      {
+        "expr": "a * b * c",
+        "tag": "dikali"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "lcm(a, b)",
+        "tag": "dua-anak"
+      }
+    ],
+    "choices": 4,
+    "explain": "Cari KPK dari {a}, {b}, dan {c}: {answer}."
+  }
+}

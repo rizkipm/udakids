@@ -24,5 +24,11 @@ export function jwtSecret(): string {
 export const contentDir = () =>
   process.env.CONTENT_DIR ?? join(__dirname, '..', '..', '..', '..', 'content');
 
+/**
+ * Teks antarmuka anak (i18n web) — dibaca server untuk daftar teks yang boleh dibuatkan suara Chirp (D-091).
+ */
+export const i18nDir = () =>
+  process.env.I18N_DIR ?? join(__dirname, '..', '..', '..', 'web', 'src', 'i18n', 'id');
+
 /** Masa berlaku sesi. Orang tua 7 hari (perangkat sering dipakai bersama anak, audit M8). */
 export const TOKEN_TTL = { staff: '12h', parent: '7d', child: '12h' } as const;

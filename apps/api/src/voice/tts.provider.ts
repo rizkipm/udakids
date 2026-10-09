@@ -1,4 +1,4 @@
-import type { VoiceLang, VoiceSettings } from '@little-coder/engine';
+import { isChirpModel, type VoiceLang, type VoiceSettings } from '@little-coder/engine';
 
 /** Penyedia text-to-speech. Kunci API hanya di server — browser anak tidak pernah memanggilnya. */
 export type TtsProvider = {
@@ -13,7 +13,27 @@ export type TtsProvider = {
 export const TTS_PROVIDER = Symbol('TTS_PROVIDER');
 
 /**
- * Google Cloud Text-to-Speech dengan model Gemini-TTS (id-ID GA). Memakai Google Cloud — bukan
+ * Isi permintaan `text:synthesize` (D-087). Chirp 3 HD: suara dipilih lewat nama lengkap
+ * (`id-ID-Chirp3-HD-Leda`) tanpa `modelName` dan tanpa `prompt` (Google menolak arahan gaya untuk Chirp).
+ * Gemini-TTS: nama suara pendek + `modelName` + arahan gaya di `input.prompt`.
+ */
+export function ttsRequestBody(text: string, s: VoiceSettings, lang: VoiceLang) {
+  const audioConfig = { audioEncoding: 'MP3', speakingRate: s.rate };
+  if (isChirpModel(s.model))
+    return {
+      input: { text },
+      voice: { languageCode: lang, name: `${lang}-Chirp3-HD-${s.voice}` },
+      audioConfig,
+    };
+  return {
+    input: { text, ...(s.style && { prompt: s.style }) },
+    voice: { languageCode: lang, name: s.voice, modelName: s.model },
+    audioConfig,
+  };
+}
+
+/**
+ * Google Cloud Text-to-Speech: Chirp 3 HD (bawaan) atau Gemini-TTS. Memakai Google Cloud — bukan
  * kunci Google AI Studio, yang syaratnya melarang aplikasi untuk pengguna di bawah 18 tahun (D-035).
  */
 export class GoogleCloudTts implements TtsProvider {
@@ -27,11 +47,7 @@ export class GoogleCloudTts implements TtsProvider {
     const res = await this.fetchFn('https://texttospeech.googleapis.com/v1/text:synthesize', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': this.apiKey },
-      body: JSON.stringify({
-        input: { text, ...(s.style && { prompt: s.style }) },
-        voice: { languageCode: lang, name: s.voice, modelName: s.model },
-        audioConfig: { audioEncoding: 'MP3', speakingRate: s.rate },
-      }),
+      body: JSON.stringify(ttsRequestBody(text, s, lang)),
       signal: AbortSignal.timeout(30_000),
     });
     if (!res.ok) {

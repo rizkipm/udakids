@@ -1,0 +1,64 @@
+{
+  "id": "math.tkosn.fb2.lanjutkan-hitungan-ratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FB",
+  "order": 2,
+  "title": "Mengurutkan bilangan ratusan — Level 2 — Lanjutkan hitungan ratusan",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "knowing",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Mengurutkan bilangan ratusan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [100, 990]
+    },
+    "prompt": "Lanjutkan hitungan: {a}, {=a+1}, {=a+2}, …",
+    "say": "{a}, {=a+1}, {=a+2}, lalu berapa?",
+    "stimulus": [
+      {
+        "kind": "row",
+        "items": [
+          {
+            "kind": "numeral",
+            "value": "=a"
+          },
+          {
+            "kind": "numeral",
+            "value": "=a+1"
+          },
+          {
+            "kind": "numeral",
+            "value": "=a+2"
+          },
+          {
+            "kind": "blank"
+          }
+        ]
+      }
+    ],
+    "answer": "a + 3",
+    "distractors": [
+      {
+        "expr": "a + 2",
+        "tag": "mengulang"
+      },
+      {
+        "expr": "a + 4",
+        "tag": "kelewatan"
+      },
+      {
+        "expr": "a + 30",
+        "tag": "loncat-puluhan"
+      }
+    ],
+    "choices": 3,
+    "explain": "Setiap langkah tambah satu. Sesudah {=a+2} adalah {answer}."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "sains.sd56.fi7.hitung-energi-listrik",
+  "version": 1,
+  "domain": "sains",
+  "grade": "sd56",
+  "category": "FI",
+  "order": 7,
+  "title": "Energi alternatif — Level 7 — Hitung: energi listrik panel surya",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Energi alternatif"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": {
+        "range": [50, 500],
+        "step": 50
+      },
+      "t": {
+        "values": [4, 5, 6]
+      },
+      "d": [2, 7]
+    },
+    "words": {
+      "tempat": ["atap sekolah", "atap rumah", "pos ronda", "musala desa", "kandang ayam"]
+    },
+    "prompt": "Panel surya di {tempat} menghasilkan daya {p} watt selama {t} jam setiap hari. Energi listrik yang dihasilkan dalam {d} hari adalah … Wh (watt-jam).",
+    "answer": "p * t * d",
+    "distractors": [
+      {
+        "expr": "p * t",
+        "tag": "lupa-hari"
+      },
+      {
+        "expr": "p * d",
+        "tag": "lupa-jam"
+      },
+      {
+        "expr": "p + t + d",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "p * (t + d)",
+        "tag": "jam-tambah-hari"
+      }
+    ],
+    "choices": 4,
+    "explain": "Energi = daya × waktu. Sehari {p} × {t} = {=p*t} Wh. Selama {d} hari: {=p*t} × {d} = {answer} Wh."
+  }
+}

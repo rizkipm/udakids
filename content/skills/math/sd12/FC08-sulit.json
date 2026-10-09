@@ -1,0 +1,43 @@
+{
+  "id": "math.sd12.fc8.sulit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FC",
+  "order": 8,
+  "title": "Waktu — Level 8 — Sulit",
+  "tier": "intermediate",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Waktu"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "k": [2, 7],
+      "n": [2, 6]
+    },
+    "constraint": "k * n <= 50",
+    "prompt": "Jam dinding Momo terlambat {k} menit setiap hari. Hari Senin pukul 07.00 jam itu dicocokkan sehingga tepat. {n} hari kemudian, saat waktu sebenarnya pukul 07.00, jam Momo menunjukkan pukul 6 lewat … menit.",
+    "answer": "60 - k * n",
+    "distractors": [
+      {
+        "expr": "k * n",
+        "tag": "lambatnya"
+      },
+      {
+        "expr": "60 - k * (n - 1)",
+        "tag": "kurang-sehari"
+      },
+      {
+        "expr": "60 - k - n",
+        "tag": "dijumlah"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dalam {n} hari jam terlambat {k} × {n} = {=k*n} menit. 60 − {=k*n} = {answer}, jadi pukul 6 lewat {answer} menit."
+  }
+}

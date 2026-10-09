@@ -1,0 +1,72 @@
+{
+  "id": "math.sd34.fb6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FB",
+  "order": 6,
+  "title": "Pecahan sederhana — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pecahan sederhana"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "b": [3, 8],
+      "a": [1, 7],
+      "m": [4, 15]
+    },
+    "derived": {
+      "n": "b * m"
+    },
+    "words": {
+      "nama": [
+        "Alya",
+        "Raka",
+        "Dimas",
+        "Sari",
+        "Bayu",
+        "Putri",
+        "Nina",
+        "Adit",
+        "Tegar",
+        "Wulan",
+        "Fajar",
+        "Laras"
+      ]
+    },
+    "constraint": "a < b",
+    "prompt": "{nama} punya {n} kelereng. Sebanyak {a}/{b} bagian diberikan kepada adiknya. Sisa kelereng {nama} adalah …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=b",
+        "model": "bar"
+      }
+    ],
+    "answer": "n - a * m",
+    "unit": "butir",
+    "distractors": [
+      {
+        "expr": "a * m",
+        "tag": "yang-diberikan"
+      },
+      {
+        "expr": "n - m",
+        "tag": "satu-bagian"
+      },
+      {
+        "expr": "n - a",
+        "tag": "pembilang-dikurang"
+      }
+    ],
+    "choices": 4,
+    "explain": "Diberikan {a}/{b} × {n} = {=a*m}. Sisa {n} − {=a*m} = {answer}."
+  }
+}

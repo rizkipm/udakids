@@ -1,0 +1,54 @@
+{
+  "id": "math.tkosn.fc2.dadu-merah-dan-dadu-biru",
+  "version": 1,
+  "domain": "math",
+  "grade": "tkosn",
+  "category": "FC",
+  "order": 2,
+  "title": "Membandingkan dengan <, >, = — Level 2 — Dadu merah dan dadu biru",
+  "tier": "basic",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "Fondasi (PAUD)",
+    "kognitif": "knowing",
+    "osn": "KMSI Level A (TK) — Final Provinsi Jatim 2026",
+    "kisi-kisi": "Membandingkan bilangan ratusan dan jumlah mata dadu menggunakan tanda <, >, dan ="
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 6],
+      "b": [1, 6]
+    },
+    "prompt": "Hitung mata dadu merah dan dadu biru. Tanda apa yang cocok di tengah?",
+    "say": "Hitung mata dadu merah dan mata dadu biru. Tanda apa yang cocok di tengah?",
+    "stimulus": [
+      {
+        "kind": "die",
+        "value": "=a",
+        "color": "merah"
+      },
+      {
+        "kind": "text",
+        "text": "…"
+      },
+      {
+        "kind": "die",
+        "value": "=b",
+        "color": "biru"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Dadu merah bermata {a}, dadu biru bermata {b}. Jadi {a} {answer_say} {b}."
+  }
+}

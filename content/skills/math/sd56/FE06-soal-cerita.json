@@ -1,0 +1,51 @@
+{
+  "id": "math.sd56.fe6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FE",
+  "order": 6,
+  "title": "Teori bilangan — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Teori bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": {
+        "values": [10, 12, 15, 20, 30, 40, 45, 60]
+      },
+      "b": {
+        "values": [10, 12, 15, 20, 30, 40, 45, 60]
+      },
+      "c": {
+        "values": [10, 12, 15, 20, 30, 40, 45, 60]
+      }
+    },
+    "constraint": "a < b && b < c && lcm(lcm(a, b), c) <= 360 && lcm(lcm(a, b), c) != c",
+    "prompt": "Dari Terminal Bungurasih, bus A berangkat setiap {a} menit, bus B setiap {b} menit, dan bus C setiap {c} menit. Pukul 06.00 ketiganya berangkat bersama. Mereka berangkat bersama lagi untuk pertama kali setelah … menit.",
+    "answer": "lcm(lcm(a, b), c)",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "lcm(a, b)",
+        "tag": "dua-bus"
+      },
+      {
+        "expr": "a + b + c",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "gcd(gcd(a, b), c)",
+        "tag": "fpb"
+      }
+    ],
+    "choices": 4,
+    "explain": "Berangkat bersama lagi = KPK dari {a}, {b}, dan {c} = {answer}."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "math.sd12.fe4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd12",
+  "category": "FE",
+  "order": 4,
+  "title": "Bangun ruang — Level 4 — Penerapan",
+  "tier": "intermediate",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "A",
+    "osn": "KMSI Level 1 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Bangun ruang"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "p": [2, 5],
+      "l": [2, 4],
+      "t": [2, 4]
+    },
+    "prompt": "Balok pada gambar disusun dari kubus satuan: panjang {p}, lebar {l}, dan tinggi {t} kubus. Banyak kubus satuan seluruhnya …",
+    "stimulus": [
+      {
+        "kind": "cuboid",
+        "p": "=p",
+        "l": "=l",
+        "t": "=t",
+        "unit": "kubus",
+        "cubes": true
+      }
+    ],
+    "answer": "p * l * t",
+    "distractors": [
+      {
+        "expr": "p + l + t",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "p * l",
+        "tag": "satu-lapis"
+      },
+      {
+        "expr": "(p + l) * t",
+        "tag": "dinding"
+      }
+    ],
+    "choices": 4,
+    "explain": "Satu lapis {p} × {l} = {=p*l} kubus. Ada {t} lapis: {=p*l} × {t} = {answer} kubus."
+  }
+}

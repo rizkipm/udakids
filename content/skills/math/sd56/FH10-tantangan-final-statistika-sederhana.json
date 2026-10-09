@@ -1,0 +1,615 @@
+{
+  "id": "math.sd56.fh10.tantangan-final-statistika-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd56",
+  "category": "FH",
+  "order": 10,
+  "title": "Statistika sederhana — Level 10 — Tantangan final statistika sederhana",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "C",
+    "osn": "KMSI Level 3 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Statistika sederhana"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f1": [1, 4],
+            "f2": [1, 4],
+            "f3": [1, 4]
+          },
+          "derived": {
+            "f4": "10 - f1 - f2 - f3"
+          },
+          "constraint": "f4 >= 1",
+          "prompt": "Tabel menunjukkan nilai tes 10 siswa. Rata-rata nilai mereka adalah …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Nilai", "60", "70", "80", "90"],
+              "rows": [["Frekuensi", "=f1", "=f2", "=f3", "=f4"]]
+            }
+          ],
+          "answer": "6 * f1 + 7 * f2 + 8 * f3 + 9 * f4",
+          "distractors": [
+            {
+              "expr": "75",
+              "tag": "rata-rata-nilai-saja"
+            },
+            {
+              "expr": "(60 * f1 + 70 * f2 + 80 * f3 + 90 * f4) / 4",
+              "tag": "bagi-4"
+            },
+            {
+              "expr": "60 * f1 + 70 * f2 + 80 * f3 + 90 * f4",
+              "tag": "jumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah nilai 60 × {f1} + 70 × {f2} + 80 × {f3} + 90 × {f4} = {=60*f1+70*f2+80*f3+90*f4}. Dibagi 10 siswa: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [60, 95],
+            "b": [60, 95],
+            "c": [60, 95],
+            "d": [60, 95],
+            "e": [60, 100]
+          },
+          "derived": {
+            "r": "(a + b + c + d + e) / 5"
+          },
+          "constraint": "r == floor(r)",
+          "prompt": "Rata-rata nilai 5 anak pada tabel adalah {r}. Nilai Eka yang tertutup tanda tanya adalah …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Nama", "Nilai"],
+              "rows": [
+                ["Ayu", "=a"],
+                ["Bima", "=b"],
+                ["Citra", "=c"],
+                ["Dodi", "=d"],
+                ["Eka", "?"]
+              ]
+            }
+          ],
+          "answer": "5 * r - (a + b + c + d)",
+          "distractors": [
+            {
+              "expr": "5 * r",
+              "tag": "jumlah-lima-nilai"
+            },
+            {
+              "expr": "r",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "(a + b + c + d) / 4",
+              "tag": "rata-rata-empat"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah 5 nilai = 5 × {r} = {=5*r}. Empat nilai berjumlah {=a+b+c+d}. Nilai Eka = {=5*r} − {=a+b+c+d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [20, 25, 50]
+            },
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "derived": {
+            "d": "n - a - b - c"
+          },
+          "constraint": "d >= 1",
+          "prompt": "Diagram batang menunjukkan cara {n} siswa berangkat ke sekolah. Persentase siswa yang bersepeda adalah …",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Sepeda", "Jalan kaki", "Motor", "Angkot"],
+              "values": ["=a", "=b", "=c", "=d"],
+              "unit": "siswa"
+            }
+          ],
+          "answer": "a * 100 / n",
+          "unit": "%",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "banyak-siswa"
+            },
+            {
+              "expr": "100 - a * 100 / n",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "a * 100 / (n - a)",
+              "tag": "dibagi-sisa"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bersepeda {a} dari {n} siswa. {a} : {n} × 100% = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f1": [1, 6],
+            "f2": [1, 6],
+            "f3": [1, 6],
+            "f4": [1, 6],
+            "f5": [1, 6]
+          },
+          "derived": {
+            "n": "f1 + f2 + f3 + f4 + f5",
+            "p": "(f1 + f2 + f3 + f4 + f5 + 1) / 2"
+          },
+          "constraint": "n % 2 == 1",
+          "prompt": "Tabel menunjukkan nilai kuis sekelompok siswa. Median nilai kuis adalah …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Nilai", "6", "7", "8", "9", "10"],
+              "rows": [["Frekuensi", "=f1", "=f2", "=f3", "=f4", "=f5"]]
+            }
+          ],
+          "answer": "6 + (p > f1) + (p > f1 + f2) + (p > f1 + f2 + f3) + (p > f1 + f2 + f3 + f4)",
+          "distractors": [
+            {
+              "expr": "p",
+              "tag": "letak-median"
+            },
+            {
+              "expr": "8",
+              "tag": "nilai-tengah-tabel"
+            },
+            {
+              "expr": "max(f1, f2, f3, f4, f5)",
+              "tag": "frekuensi-terbesar"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ada {n} data, median adalah data ke-{p}. Jumlahkan frekuensi dari nilai 6 sampai melewati {p}. Median = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Data: 7, 8, 6, 9, 8, 7, 8, 5. Modus data itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Nilai 8 muncul 3 kali, paling sering."
+            },
+            {
+              "prompt": "Data: 7, 8, 6, 9, 8, 7, 8, 5. Median data itu adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7,5"
+                  },
+                  "say": "7,5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8,5"
+                  },
+                  "say": "8,5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Urutkan: 5, 6, 7, 7, 8, 8, 8, 9. Dua data tengah 7 dan 8, median (7 + 8) : 2 = 7,5."
+            },
+            {
+              "prompt": "Rata-rata lima bilangan adalah 12. Satu bilangan dibuang sehingga rata-ratanya menjadi 10. Bilangan yang dibuang adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22"
+                  },
+                  "say": "22"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah awal 5 × 12 = 60. Jumlah empat bilangan 4 × 10 = 40. Yang dibuang 60 − 40 = 20."
+            },
+            {
+              "prompt": "Rata-rata nilai 20 siswa adalah 75. Lalu datang 5 siswa baru dengan rata-rata nilai 80. Rata-rata nilai semua siswa adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "76"
+                  },
+                  "say": "76"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "77,5"
+                  },
+                  "say": "77,5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "78"
+                  },
+                  "say": "78"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75"
+                  },
+                  "say": "75"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah nilai 20 × 75 + 5 × 80 = 1.500 + 400 = 1.900. Dibagi 25 siswa: 76."
+            },
+            {
+              "prompt": "Tabel menunjukkan nilai ulangan 20 siswa. Banyak siswa yang nilainya di atas rata-rata adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Nilai", "5", "6", "7", "8", "9"],
+                  "rows": [["Frekuensi", 2, 4, 6, 5, 3]]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah nilai 10 + 24 + 42 + 40 + 27 = 143. Rata-rata 143 : 20 = 7,15. Di atas rata-rata: nilai 8 dan 9, ada 5 + 3 = 8 siswa."
+            },
+            {
+              "prompt": "Tabel menunjukkan nilai ulangan 20 siswa. Median nilai ulangan adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Nilai", "5", "6", "7", "8", "9"],
+                  "rows": [["Frekuensi", 2, 4, 6, 5, 3]]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "say": "7"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7,5"
+                  },
+                  "say": "7,5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ada 20 data, median rata-rata data ke-10 dan ke-11. Kumulatif: 2, 6, 12. Data ke-10 dan ke-11 bernilai 7."
+            },
+            {
+              "prompt": "Diagram batang menunjukkan buah kesukaan siswa. Persentase siswa yang menyukai jeruk adalah …",
+              "stimulus": [
+                {
+                  "kind": "bar-chart",
+                  "labels": ["Apel", "Jeruk", "Mangga", "Salak"],
+                  "values": [8, 12, 6, 4],
+                  "unit": "siswa"
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40%"
+                  },
+                  "say": "40%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12%"
+                  },
+                  "say": "12%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30%"
+                  },
+                  "say": "30%"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36%"
+                  },
+                  "say": "36%"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah siswa 8 + 12 + 6 + 4 = 30. Jeruk 12 : 30 × 100% = 40%."
+            },
+            {
+              "prompt": "Rata-rata nilai 4 ulangan Rina 82. Agar rata-rata 5 ulangan menjadi 84, nilai ulangan ke-5 harus …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "92"
+                  },
+                  "say": "92"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "84"
+                  },
+                  "say": "84"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "86"
+                  },
+                  "say": "86"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90"
+                  },
+                  "say": "90"
+                }
+              ],
+              "answer": 0,
+              "reteach": "5 × 84 − 4 × 82 = 420 − 328 = 92."
+            },
+            {
+              "prompt": "Lima bilangan bulat positif mempunyai modus 4 (satu-satunya), median 5, dan rata-rata 6. Bilangan terbesar yang mungkin adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "say": "13"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah kelima bilangan 30. Urutannya 4, 4, 5, d, e. Nilai d paling kecil 6 agar modus tetap 4, maka bilangan terbesar 30 − 4 − 4 − 5 − 6 = 11."
+            },
+            {
+              "prompt": "Jangkauan data 12, 15, 9, 20, 17, 11 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "say": "14"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jangkauan = data terbesar − data terkecil = 20 − 9 = 11."
+            },
+            {
+              "prompt": "Tabel menunjukkan pengunjung perpustakaan selama empat hari. Rata-rata pengunjung per hari adalah …",
+              "stimulus": [
+                {
+                  "kind": "table",
+                  "headers": ["Hari", "Senin", "Selasa", "Rabu", "Kamis"],
+                  "rows": [["Pengunjung", 120, 150, 90, 140]]
+                }
+              ],
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "125"
+                  },
+                  "say": "125"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "130"
+                  },
+                  "say": "130"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "120"
+                  },
+                  "say": "120"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "500"
+                  },
+                  "say": "500"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlah 120 + 150 + 90 + 140 = 500. Rata-rata 500 : 4 = 125."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

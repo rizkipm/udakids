@@ -1,0 +1,598 @@
+{
+  "id": "math.smp79.fe10.tantangan-final-teori-bilangan-lanjutan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FE",
+  "order": 10,
+  "title": "Teori bilangan lanjutan — Level 10 — Tantangan final teori bilangan lanjutan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Teori bilangan lanjutan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 50],
+            "m": {
+              "values": [7, 9]
+            },
+            "n": [10, 200]
+          },
+          "derived": {
+            "r1": "a % m",
+            "r2": "(r1 * r1) % m",
+            "r3": "(r2 * r1) % m",
+            "r4": "(r3 * r1) % m",
+            "r5": "(r4 * r1) % m",
+            "r6": "(r5 * r1) % m",
+            "e": "n % 6"
+          },
+          "constraint": "gcd(a, m) == 1 && a % m != 1",
+          "prompt": "Sisa pembagian {a}^{n} oleh {m} adalah …",
+          "answer": "(e == 1) * r1 + (e == 2) * r2 + (e == 3) * r3 + (e == 4) * r4 + (e == 5) * r5 + (e == 0) * r6",
+          "distractors": [
+            {
+              "expr": "r1",
+              "tag": "sisa-basis"
+            },
+            {
+              "expr": "n % m",
+              "tag": "sisa-pangkat"
+            },
+            {
+              "expr": "(e == 1) * r2 + (e == 2) * r3 + (e == 3) * r4 + (e == 4) * r5 + (e == 5) * r6 + (e == 0) * r1",
+              "tag": "siklus-geser"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sisa {a}^1, {a}^2, … oleh {m}: {r1}, {r2}, {r3}, {r4}, {r5}, {r6}, lalu berulang tiap 6. {n} : 6 bersisa {e} (sisa 0 berarti urutan ke-6), jadi sisanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 12],
+            "p": [2, 9],
+            "q": [2, 9]
+          },
+          "derived": {
+            "x": "g * p",
+            "y": "g * q",
+            "l": "g * p * q"
+          },
+          "constraint": "gcd(p, q) == 1 && p != q",
+          "prompt": "FPB dua bilangan adalah {g} dan KPK-nya {l}. Jika salah satu bilangan adalah {x}, bilangan yang lain adalah …",
+          "answer": "y",
+          "distractors": [
+            {
+              "expr": "l / x",
+              "tag": "lupa-fpb"
+            },
+            {
+              "expr": "g * l",
+              "tag": "fpb-kali-kpk"
+            },
+            {
+              "expr": "l - x",
+              "tag": "selisih"
+            }
+          ],
+          "choices": 4,
+          "explain": "FPB × KPK = hasil kali kedua bilangan: {g} × {l} = {x} × b. Jadi b = {=g*l} : {x} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 500],
+            "p": {
+              "values": [3, 4, 5, 7, 8, 9]
+            },
+            "q": {
+              "values": [5, 7, 9, 11, 13]
+            },
+            "nn": [100, 300]
+          },
+          "derived": {
+            "lc": "lcm(p, q)",
+            "x0": "x % lc",
+            "r": "x % p",
+            "s": "x % q",
+            "ans": "x0 + lc * floor((nn - 1 - x0) / lc)"
+          },
+          "constraint": "gcd(p, q) == 1 && p < q && x0 > 0 && 2 * lc < nn",
+          "prompt": "Banyak kelereng Dimas kurang dari {nn}. Jika dihitung per {p} bersisa {r}, dan jika dihitung per {q} bersisa {s}. Banyak kelereng Dimas paling banyak …",
+          "answer": "ans",
+          "distractors": [
+            {
+              "expr": "ans - lc",
+              "tag": "bukan-terbesar"
+            },
+            {
+              "expr": "x0",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "ans - p",
+              "tag": "kurang-p"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan yang memenuhi berulang setiap KPK({p}, {q}) = {lc}: {x0}, {=x0+lc}, {=x0+2*lc}, … Yang terbesar di bawah {nn} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [190, 2889]
+          },
+          "derived": {
+            "pos": "k - 189",
+            "num": "100 + floor((pos - 1) / 3)",
+            "idx": "(pos - 1) % 3",
+            "d0": "floor(num / 100)",
+            "d1": "floor(num / 10) % 10",
+            "d2": "num % 10"
+          },
+          "prompt": "Bilangan asli ditulis berderet tanpa spasi: 123456789101112131415… Angka ke-{k} pada deretan itu adalah …",
+          "answer": "(idx == 0) * d0 + (idx == 1) * d1 + (idx == 2) * d2",
+          "distractors": [
+            {
+              "expr": "(idx == 0) * d1 + (idx == 1) * d2 + (idx == 2) * floor((num + 1) / 100)",
+              "tag": "geser-satu"
+            },
+            {
+              "expr": "d2",
+              "tag": "angka-satuan"
+            },
+            {
+              "expr": "(num + 1) % 10",
+              "tag": "bilangan-berikutnya"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan 1–9 memakai 9 angka dan 10–99 memakai 180 angka. Sisa {=k-189} angka masuk ke bilangan tiga angka: bilangan {num}, angka ke-{=idx+1}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Angka satuan dari 3^2026 + 7^2026 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "say": "8"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Siklus 3: 3, 9, 7, 1 dan siklus 7: 7, 9, 3, 1. 2026 : 4 bersisa 2, jadi 9 + 9 = 18, angka satuannya 8."
+            },
+            {
+              "prompt": "Sisa pembagian 2^100 oleh 7 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                }
+              ],
+              "answer": 0,
+              "reteach": "2³ = 8 bersisa 1 jika dibagi 7. 2^100 = (2³)^33 × 2, jadi sisanya 1 × 2 = 2."
+            },
+            {
+              "prompt": "Banyak faktor positif dari 360 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                }
+              ],
+              "answer": 0,
+              "reteach": "360 = 2³ × 3² × 5. Banyak faktor = 4 × 3 × 2 = 24."
+            },
+            {
+              "prompt": "Bilangan asli terkecil yang jika dibagi 3 bersisa 2, dibagi 4 bersisa 3, dan dibagi 5 bersisa 4 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "59"
+                  },
+                  "say": "59"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "119"
+                  },
+                  "say": "119"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  },
+                  "say": "29"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "61"
+                  },
+                  "say": "61"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan + 1 habis dibagi 3, 4, dan 5, jadi kelipatan KPK = 60. Terkecil 60 − 1 = 59."
+            },
+            {
+              "prompt": "Banyak angka 0 berurutan di akhir bilangan 50! (50 faktorial) adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "say": "10"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "say": "11"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung faktor 5: 50 : 5 = 10 dan 50 : 25 = 2. Jumlahnya 12."
+            },
+            {
+              "prompt": "FPB dari 2⁵ × 3² × 7 dan 2³ × 3⁴ × 5 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "72"
+                  },
+                  "say": "72"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "say": "36"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "say": "24"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "144"
+                  },
+                  "say": "144"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Ambil faktor prima yang sama dengan pangkat terkecil: 2³ × 3² = 72."
+            },
+            {
+              "prompt": "Jumlah semua faktor positif dari 28 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "56"
+                  },
+                  "say": "56"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28"
+                  },
+                  "say": "28"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "42"
+                  },
+                  "say": "42"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "54"
+                  },
+                  "say": "54"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Faktor 28: 1, 2, 4, 7, 14, 28. Jumlahnya 56."
+            },
+            {
+              "prompt": "Bilangan empat angka 7a5b (a dan b angka) habis dibagi 72. Nilai a + b adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "say": "6"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "say": "12"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Habis dibagi 9: 7 + a + 5 + b kelipatan 9, jadi a + b = 6 atau 15. Habis dibagi 8: hanya 7056 yang cocok. Jadi a + b = 0 + 6 = 6."
+            },
+            {
+              "prompt": "Sisa pembagian 1 + 2 + 3 + … + 2026 oleh 9 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "say": "2"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "say": "4"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Jumlahnya 2026 × 2027 : 2 = 1013 × 2027. 1013 bersisa 5 dan 2027 bersisa 2 jika dibagi 9. 5 × 2 = 10 bersisa 1."
+            },
+            {
+              "prompt": "Banyak bilangan asli dari 1 sampai 100 yang FPB-nya dengan 100 sama dengan 1 adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "40"
+                  },
+                  "say": "40"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "say": "50"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60"
+                  },
+                  "say": "60"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                }
+              ],
+              "answer": 0,
+              "reteach": "100 = 2² × 5². Buang kelipatan 2 (50) dan kelipatan 5 (20), tambah kembali kelipatan 10 (10): 100 − 50 − 20 + 10 = 40."
+            },
+            {
+              "prompt": "Angka satuan dari 1! + 2! + 3! + … + 2026! adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "say": "3"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "0"
+                  },
+                  "say": "0"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "1"
+                  },
+                  "say": "1"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "say": "9"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Mulai 5! angka satuannya 0. 1 + 2 + 6 + 24 = 33, jadi angka satuannya 3."
+            },
+            {
+              "prompt": "FPB dari a dan 12 adalah 4, sedangkan KPK-nya 60. Nilai a adalah …",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "say": "20"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15"
+                  },
+                  "say": "15"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "say": "30"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "say": "5"
+                }
+              ],
+              "answer": 0,
+              "reteach": "a × 12 = FPB × KPK = 4 × 60 = 240, jadi a = 20."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "math.smp79.fd4.penerapan",
+  "version": 1,
+  "domain": "math",
+  "grade": "smp79",
+  "category": "FD",
+  "order": 4,
+  "title": "Pola, baris, dan deret bilangan — Level 4 — Penerapan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "D",
+    "osn": "KMSI Level 4 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Pola, baris, dan deret bilangan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [1, 9],
+      "r": {
+        "values": [2, 3]
+      },
+      "n": [4, 8]
+    },
+    "derived": {
+      "rna": "(n == 2) * 4 + (n == 3) * 8 + (n == 4) * 16 + (n == 5) * 32 + (n == 6) * 64 + (n == 7) * 128 + (n == 8) * 256",
+      "rnb": "(n == 2) * 9 + (n == 3) * 27 + (n == 4) * 81 + (n == 5) * 243 + (n == 6) * 729 + (n == 7) * 2187 + (n == 8) * 6561",
+      "rn": "(r == 2) * rna + (r == 3) * rnb"
+    },
+    "prompt": "Jumlah {n} suku pertama deret geometri {a} + {=a*r} + {=a*r*r} + … adalah …",
+    "answer": "a * (rn - 1) / (r - 1)",
+    "distractors": [
+      {
+        "expr": "a * rn",
+        "tag": "pakai-r-pangkat-n"
+      },
+      {
+        "expr": "a * (rn / r - 1) / (r - 1)",
+        "tag": "kurang-satu-suku"
+      },
+      {
+        "expr": "a * rn / r",
+        "tag": "suku-ke-n"
+      }
+    ],
+    "choices": 4,
+    "explain": "S{n} = {a} × ({r}^{n} − 1) : ({r} − 1) = {a} × {=rn-1} : {=r-1} = {answer}."
+  }
+}

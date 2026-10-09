@@ -1,0 +1,57 @@
+{
+  "id": "math.sd34.fe6.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "FE",
+  "order": 6,
+  "title": "Tabel dan diagram — Level 6 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "osn": "KMSI Level 2 — Final Provinsi Jatim 2026",
+    "kognitif": "applying",
+    "kisi-kisi": "Tabel dan diagram"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [3, 12],
+      "b": [3, 12],
+      "c": [3, 12],
+      "d": [3, 12],
+      "x": [5, 15]
+    },
+    "derived": {
+      "tg": "a + b + c + d + x"
+    },
+    "prompt": "Diagram menunjukkan buku yang dibaca Kelas 3 dari Senin sampai Kamis. Target 5 hari adalah {tg} buku. Agar target tercapai, pada hari Jumat harus dibaca … buku.",
+    "stimulus": [
+      {
+        "kind": "bar-chart",
+        "caption": "Buku dibaca Kelas 3",
+        "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+        "values": ["=a", "=b", "=c", "=d"],
+        "unit": "buku"
+      }
+    ],
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "tg - (a + b + c)",
+        "tag": "kurang-satu-hari"
+      },
+      {
+        "expr": "a + b + c + d",
+        "tag": "jumlah-4-hari"
+      },
+      {
+        "expr": "tg",
+        "tag": "target"
+      }
+    ],
+    "choices": 4,
+    "explain": "Senin–Kamis: {a} + {b} + {c} + {d} = {=a+b+c+d}. Jumat: {tg} − {=a+b+c+d} = {answer}."
+  }
+}

@@ -134,10 +134,14 @@
   display: grid;
   justify-items: center;
   width: min(100%, 420px);
+  min-width: 0;
+  /* Ruang untuk sudut piringan saat neraca miring (tidak keluar kartu, D-090). */
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 .balance-beam {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 10px;
   width: 100%;
   padding-bottom: 10px;
@@ -148,6 +152,7 @@
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .balance-pan {
+  min-width: 0;
   min-height: 112px;
   display: grid;
   place-items: end center;
@@ -290,6 +295,8 @@
 /* ------------------------------------------------------------ lompat kodok */
 
 .hop-pond {
+  box-sizing: border-box;
+  max-width: 100%;
   display: grid;
   gap: 12px;
   padding: 14px;
@@ -351,6 +358,7 @@
 /* ------------------------------------------------------------ sortir keranjang */
 
 .sort-belt {
+  box-sizing: border-box;
   display: grid;
   justify-items: center;
   gap: 6px;
@@ -691,7 +699,8 @@
 
 .ferris {
   position: relative;
-  width: min(300px, 86vw);
+  /* Ikut lebar wadahnya juga (kartu pelajaran lebih sempit dari layar, D-090). */
+  width: min(300px, 86vw, 100%);
   aspect-ratio: 1;
 }
 .ferris-art {
@@ -834,17 +843,18 @@
 }
 .mem-letter.is-word {
   padding: 0 4px;
-  font-size: 1.35rem;
+  font-size: min(1.35rem, 22cqi);
   line-height: 1.15;
   text-align: center;
-  overflow-wrap: normal;
-  word-break: keep-all;
+  /* Cadangan terakhir: kata yang tetap tidak muat boleh dipecah, daripada terpotong (D-090). */
+  overflow-wrap: anywhere;
 }
 .mem-letter.is-mid {
-  font-size: 1.05rem;
+  font-size: min(1.05rem, 19cqi);
 }
 .mem-letter.is-long {
-  font-size: 0.88rem;
+  /* Kata ≥ 8 huruf (strawberry) muat di kartu: ukuran mengikuti lebar kartu (D-090). */
+  font-size: min(0.88rem, 14.5cqi);
   letter-spacing: -0.01em;
 }
 .wheel-cabin .fun-word,
