@@ -96,10 +96,10 @@ function sendClip(res: Response, clip: { mime: string; data: Buffer }) {
 export class VoiceController {
   /**
    * Semua suara anak (D-091): 2000 permintaan / 10 menit per IP (satu kelas sering berbagi IP Wi-Fi sekolah);
-   * klip BARU (berbayar): 200 / 10 menit per IP, ditambah batas harian `TTS_DAILY_LIMIT`.
+   * klip BARU (berbayar): 600 / 10 menit per IP, ditambah batas harian `TTS_DAILY_LIMIT`.
    */
   private readonly limiter = new RateLimiter(2000, 10 * 60_000);
-  private readonly newClips = new RateLimiter(200, 10 * 60_000);
+  private readonly newClips = new RateLimiter(600, 10 * 60_000);
   private readonly log = new Logger('Voice');
 
   constructor(private readonly voice: VoiceService) {}
@@ -174,14 +174,7 @@ export class VoiceController {
     }
     // Profil mengikuti konteks: buku soal/pelajaran (jenjang & bahasa), kata English (kartu), atau umum.
     const base = item?.skillId ?? (lesson ? `${lesson[0]}.${lesson[1]}.pelajaran` : undefined);
-    const profile =
-      q.l === 'en-GB'
-        ? base?.startsWith('english.')
-          ? voiceProfileOf(base, 'choice')
-          : { lang: 'en-GB' as const }
-        : base
-          ? { ...voiceProfileOf(base, 'prompt'), lang: 'id-ID' as const }
-          : undefined;
+    const profile = VoiceService.sayProfile(q.l, base);
     if (!(await this.voice.hasClip(q.t, profile))) {
       this.newClips.check(ipKey);
       this.newClips.fail(ipKey);

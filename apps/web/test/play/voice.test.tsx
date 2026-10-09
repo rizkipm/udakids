@@ -98,11 +98,36 @@ describe('suara Momo (D-035)', () => {
     expect(spoken).toEqual([]);
   });
 
-  it('suara Momo mati / belum dimuat → semuanya suara browser', () => {
+  it('suara Momo dimatikan admin → suara browser (cadangan)', () => {
+    resetVoice({ enabled: false, rev: 'r0', lines: {} });
     speakLine('vo_cmd_pick_one', 'Pilih satu.');
     speakItem({ skillId: 'math.prek.a1.x', seed: 3, band: 0 }, 'Ketuk lingkaran.');
     expect(played).toEqual([]);
     expect(spoken).toEqual(['Pilih satu.', 'Ketuk lingkaran.']);
+  });
+
+  it('daftar suara belum dimuat → dimuat dulu, lalu klip server (D-091)', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ ok: true, json: async () => manifest })),
+    );
+    speak('Ayo mulai!');
+    expect(played).toEqual([]);
+    expect(spoken).toEqual([]);
+    await vi.waitFor(() => expect(played.at(-1)).toContain('/voice/say?t=Ayo+mulai%21'));
+    expect(spoken).toEqual([]);
+  });
+
+  it('daftar suara gagal dimuat (server mati) → suara browser setelah menunggu sebentar', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new Error('offline');
+      }),
+    );
+    speak('Ayo mulai!');
+    await vi.waitFor(() => expect(spoken).toEqual(['Ayo mulai!']), { timeout: 3000 });
+    expect(played).toEqual([]);
   });
 
   it('soal Basic: URL dari skill + seed + band (server menurunkan teksnya sendiri)', () => {

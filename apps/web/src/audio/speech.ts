@@ -135,6 +135,24 @@ export function speak(text: string, opts: SpeakOpts = {}) {
     opts.onEnd?.();
     return;
   }
+  // Daftar suara belum dimuat (kalimat pertama di halaman, atau halaman di luar area anak): muat dulu, tunggu
+  // sebentar, lalu putar suara server — bukan langsung suara browser (D-091).
+  if (!manifest && canPlayAudio() && isOnline()) {
+    const token = ++waitSeq;
+    void Promise.race([loadVoice(), new Promise((r) => setTimeout(r, VOICE_WAIT_MS))]).then(() => {
+      if (token === waitSeq) speakNow(text, opts);
+    });
+    return;
+  }
+  speakNow(text, opts);
+}
+
+/** Batas menunggu daftar suara dimuat sebelum kalimat pertama diucapkan. */
+const VOICE_WAIT_MS = 1500;
+let waitSeq = 0;
+const isOnline = () => typeof navigator === 'undefined' || navigator.onLine !== false;
+
+function speakNow(text: string, opts: SpeakOpts) {
   if (serverVoiceOn()) {
     playClip(sayUrl(text, opts.lang ?? 'id-ID'), text, opts.onEnd, opts.lang);
     return;
@@ -232,6 +250,7 @@ function browserSpeak(text: string, opts: SpeakOpts = {}) {
 }
 
 export function stopSpeaking() {
+  waitSeq++;
   seq++;
   keep.list = [];
   synth()?.cancel();
@@ -560,6 +579,5 @@ export function sayUrl(text: string, lang: VoiceLang = 'id-ID') {
 
 /** Suara server bisa dipakai sekarang? (kunci suara aktif, perangkat bisa memutar audio, dan online). */
 function serverVoiceOn() {
-  const online = typeof navigator === 'undefined' || navigator.onLine !== false;
-  return !!manifest?.enabled && canPlayAudio() && online;
+  return !!manifest?.enabled && canPlayAudio() && isOnline();
 }

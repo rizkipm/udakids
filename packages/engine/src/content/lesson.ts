@@ -10,6 +10,7 @@ import {
 import { specSchema } from '../generator/families/fun.js';
 import { LETTER_GLYPH_IDS, STROKE_GLYPH_IDS } from '../generator/glyphs.js';
 import { visualSchema } from '../generator/visual-schema.js';
+import { peragaSchema } from './peraga.js';
 
 /**
  * Pelajaran (Belajar) sebelum latihan, menempel di kategori katalog (D-068): 3–6 layar pendek, semua
@@ -30,6 +31,8 @@ export const LESSON_SCREENS = [
   'baca',
   // D-088: simulasi interaktif bergambar foto realistis (sentuh untuk menjelajah + kegiatan → bagian yang dipakai).
   'simulasi',
+  // D-093: simulasi SD — jelajah kartu foto, proses sebab-akibat, alat peraga matematika, kartu kata English.
+  'peraga',
 ] as const;
 export type LessonScreenKind = (typeof LESSON_SCREENS)[number];
 
@@ -230,6 +233,8 @@ export const lessonScreenSchema = z
     kalimat: z.array(lessonSentenceSchema).min(2).max(6).optional(),
     /** `simulasi`: data simulasi interaktif (D-088). */
     simulasi: lessonSimSchema.optional(),
+    /** `peraga`: simulasi SD (D-093). */
+    peraga: peragaSchema.optional(),
   })
   .superRefine((s, ctx) => {
     const need = (ok: boolean, message: string) => {
@@ -281,6 +286,8 @@ export const lessonScreenSchema = z
     }
     if (s.kalimat) need(s.jenis === 'baca', 'kalimat hanya untuk baca');
     if (s.jenis === 'simulasi') need(!!s.simulasi, 'butuh simulasi');
+    if (s.jenis === 'peraga') need(!!s.peraga, 'butuh peraga');
+    if (s.peraga) need(s.jenis === 'peraga', 'peraga hanya untuk layar peraga');
     if (s.simulasi) need(s.jenis === 'simulasi', 'simulasi hanya untuk layar simulasi');
     if (s.jenis === 'bunyi') {
       // Bunyi huruf (D-075) atau bunyi benda/hewan lewat kartu gambar (P-BT-01, D-081).
@@ -293,7 +300,8 @@ export type LessonScreen = z.infer<typeof lessonScreenSchema>;
 export const lessonSchema = z
   .strictObject({
     /** Kode unit Menu Belajar, mis. "P-MA-01" (docs/blueprint/menu-belajar.csv). */
-    kode: z.string().regex(/^[PK1]-[A-Z]{2}-\d{2}$/),
+    // P = PAUD, K = TK, 1–6 = kelas SD, 12/34/56 = buku Olimpiade SD (D-093).
+    kode: z.string().regex(/^(P|K|[1-6]|12|34|56)-[A-Z]{2}-\d{2,3}$/),
     version: z.number().int().positive(),
     judul: z.string().trim().min(3).max(60),
     layar: z.array(lessonScreenSchema).min(3).max(6),

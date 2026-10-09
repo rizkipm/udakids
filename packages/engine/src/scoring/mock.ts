@@ -22,7 +22,10 @@ export * from '../generator/mock-config.js';
 export const isMockSkill = (t: Pick<SkillTemplate, 'family'>) => t.family === 'mock';
 export const mockConfigOf = (t: SkillTemplate): MockConfig => mockConfigSchema.parse(t.params);
 
-/** Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan game, bukan versi terkunci/stub). */
+/**
+ * Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan game, bukan versi terkunci/stub).
+ * Tanpa paket, level berbayar tidak dipakai; soal diambil dari level gratis (D-094).
+ */
 export function mockSources(
   mock: SkillTemplate,
   book: readonly (SkillTemplate & { stub?: boolean })[],
@@ -43,6 +46,35 @@ export function mockSources(
   for (const d of MOCK_DIFFICULTIES) {
     const [a, b] = c.levels[d];
     out[d] = pool.filter((s) => s.order >= a && s.order <= b);
+  }
+  // Anak tanpa paket (D-094): level berbayar datang sebagai stub tanpa isi soal, jadi tingkat yang hanya berisi
+  // level berbayar kosong. Mock test 1 gratis lalu disusun dari level gratis saja: urutan level yang ada dibagi
+  // tiga (terendah = mudah, tengah = sedang, tertinggi = sulit).
+  const lockedOut = MOCK_DIFFICULTIES.some((d) => {
+    const [a, b] = c.levels[d];
+    return (
+      c.plan[d] > 0 &&
+      out[d].length === 0 &&
+      book.some(
+        (s) =>
+          s.stub &&
+          s.domain === mock.domain &&
+          s.grade === mock.grade &&
+          !isMockSkill(s) &&
+          s.order >= a &&
+          s.order <= b,
+      )
+    );
+  });
+  if (lockedOut && pool.length) {
+    const orders = [...new Set(pool.map((s) => s.order))].sort((x, y) => x - y);
+    const third = Math.ceil(orders.length / 3);
+    const easy = orders.slice(0, third);
+    const hard = orders.slice(Math.max(0, orders.length - third));
+    const mid = orders.slice(third, orders.length - third);
+    const medium = mid.length ? mid : orders;
+    const pick = (os: number[]) => pool.filter((s) => os.includes(s.order));
+    return { easy: pick(easy), medium: pick(medium), hard: pick(hard) };
   }
   return out;
 }

@@ -2487,6 +2487,19 @@ suara bawaan dari browser … replace semua, tanpa terkecuali")
   - Impor idempoten (klip yang ada dilewati). Pengaturan suara ikut dibawa, supaya kunci klip di server sama
     persis.
   - Langkahnya ada di `docs/deploy-contabo.md`.
+- **Audit menyeluruh 9 Okt 2026 (PAUD–SD + halaman sistem):** suara browser masih terdengar karena dua sebab, dan
+  keduanya sudah diperbaiki.
+  - **Batas harian 3.000 klip baru tercapai** (792 penolakan di log). Setelah batas itu, sisa hari jatuh ke suara
+    browser.
+    - Bawaan `TTS_DAILY_LIMIT` sekarang 20.000.
+    - Batas klip baru per IP sekarang 600 per 10 menit.
+  - **Daftar suara belum dimuat** pada ucapan pertama dan di luar area anak (mis. Momo Studio orang tua).
+    `speak()` sekarang memuatnya dulu dan menunggu maksimal 1,5 detik sebelum memilih Chirp atau cadangan.
+  - **Kalimat yang dibuat lebih dulu bertambah:**
+    - teks simulasi `peraga`: kartu, tahap, langkah alat, dan kata English dengan lafal British;
+    - kata bilangan 0–1000.
+    - Total ±14.700 kalimat.
+  - Setelah klip bertambah, buat file `carry` baru untuk server.
 
 ## D-092 — AI Gambar: Claude menulis prompt, OpenAI menggambar
 
@@ -2518,3 +2531,69 @@ pembuatan gambar).
   `voice_clips` dengan kunci hash (naskah ucapan + pengaturan suara) dan hanya dibuat bila belum ada.
 - Hanya di panel admin; yang dikirim ke Claude hanya kata kamus, catatan admin, dan panduan gaya — tidak pernah data
   anak. Area anak tetap tanpa AI (PRD A17).
+
+## D-093 — Pelajaran + simulasi untuk setiap topik SD (bertahap), foto realistis disetujui otomatis
+
+**Tanggal:** 2026-10-09 · **Status:** Disetujui pemilik produk:
+
+- simulasi sesuai mapel;
+- foto medium yang langsung tampil;
+- dikerjakan bertahap per jenjang, mulai Kelas 1.
+
+- **Tujuan:** setiap topik SD (Kelas 1–6 dan buku Olimpiade) punya penjelasan yang konkret dan lengkap, simulasi
+  interaktif dengan foto realistis (bukan kartun), dan suara Chirp (D-091).
+- **Layar baru `peraga`** (`content/peraga.ts`), semuanya data:
+  - `jelajah`: kartu foto nyata, lalu pertanyaan "ketuk yang …", lalu momen aha.
+  - `proses`: urutan sebab-akibat berfoto.
+  - `alat`: alat peraga matematika; setiap langkah punya target.
+    - Alatnya: garis bilangan, blok puluhan, benda tambah/kurang/hitung, uang Rupiah, jam, penggaris, timbangan,
+      bangun (hitung sisi/sudut), pecahan, dan pola.
+  - `kata`: kartu kata English berfoto, lafal British lalu arti, lalu "dengar lalu ketuk".
+- **Aturan tampilan:**
+  - Tanpa nilai dan tanpa kata "salah"; pilihan yang belum tepat bergoyang dan Momo memberi petunjuk.
+  - Setiap kartu wajib punya gambar SVG cadangan, supaya tetap bisa dimainkan sebelum foto ada atau saat offline.
+  - Titik sentuh tidak diletakkan di atas foto AI, karena posisinya tidak bisa dijamin; tiap bagian punya foto
+    kartunya sendiri.
+  - Foto tidak dipakai untuk menghitung jumlah benda.
+- **Susunan pelajaran per topik** (disimpan di katalog, `docs/content/peraga-sd.md`):
+  1. konsep;
+  2. 1–2 simulasi;
+  3. langkah/strategi;
+  4. coba satu soal;
+  5. ingat.
+
+  Video Momo otomatis (D-090) ditambahkan di depan. Kode pelajaran: `1-MA-05`, `12-SA-14`, …
+
+- **Foto realistis disimpan dan dipakai ulang:**
+  - `pnpm lesson:photos -- <domain> <grade> … [--dry-run]` meminta setiap foto ke AI Gambar (gaya `foto`, subjek dipakai
+    ulang lintas topik, batas biaya, audit).
+  - Foto disimpan di PostgreSQL (`ai_images`) dan ikut dibawa ke server lewat `carry`.
+- **Persetujuan otomatis (mengubah D-068 untuk foto simulasi):**
+  - Foto baru langsung disetujui lewat `setStatus` (tercatat di audit `review-approved`).
+  - Admin tetap bisa menolak atau mengganti di Admin → AI Gambar.
+  - Subjek yang pernah ditolak admin tidak disetujui ulang.
+  - Panduan gaya foto D-088 tetap berlaku: tanpa tulisan, anak rekaan, berpakaian sopan.
+- **Biaya:** sekitar US$0,05 per foto baru (OpenAI medium + prompt Claude). Tahap 1 sekitar 130 topik.
+  - Batas biaya harian/bulanan di Admin → AI Gambar perlu dinaikkan sebelum menjalankan `lesson:photos`.
+- **Tahap 1 (Kelas 1):** `math/sd1`, `sains/sd1`, `math/sd12`, `sains/sd12`, `english/sd12`.
+  - `validate:content` mewajibkan setiap topik (kecuali game/mock) di buku `PERAGA_BOOKS` punya pelajaran dengan
+    simulasi.
+  - Tahap berikutnya: Kelas 2–4, lalu Kelas 5–6.
+
+## D-094 — Mock test 1 gratis disusun dari level gratis
+
+Tanggal: 2026-10-09. Disetujui pemilik produk (jawaban: "Dari level gratis").
+
+- **Masalah (audit suara 9 Okt 2026):** semua 99 mock test tidak bisa dimainkan oleh anak tanpa paket ("Soal mock
+  test belum bisa dibuat"). Soal sulit mock diambil dari level 8–10, padahal level di atas `freeLevels` (5)
+  berbayar dan dikirim ke perangkat sebagai stub tanpa isi soal (audit M9). Akibatnya Mock test 1 yang gratis sekali
+  (D-073) gagal dibuat.
+- **Keputusan:** bila sebuah tingkat mock hanya berisi level berbayar yang terkunci, `mockSources` menyusun soal dari
+  level gratis saja.
+  - Urutan level yang tersedia dibagi tiga: terendah = mudah, tengah = sedang, tertinggi = sulit.
+  - Contoh 5 level gratis: level 1–2 mudah, level 3 sedang, level 4–5 sulit.
+  - Jumlah soal & rencana 9/8/8 tetap, poin EMC tetap per tingkat.
+  - Isi level berbayar tetap tidak dikirim ke perangkat.
+- Soalnya lebih mudah daripada lomba asli. Anak Premium dan anak kelas tetap mendapat soal dari level 8–10.
+- Test: `packages/engine/test/mock.test.ts` (TK & Kelas 1–2, semua mock). Audit browser: 15 mock PAUD–Kelas 1–2
+  bisa dimainkan dan suaranya Chirp.

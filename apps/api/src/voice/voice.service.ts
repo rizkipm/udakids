@@ -6,6 +6,7 @@ import {
   buildVoiceAllowList,
   collectTexts,
   exampleAnswerSay,
+  numberWord,
   voiceProfileOf,
   dialogFileSchema,
   generateItem,
@@ -50,7 +51,11 @@ export const VOICE_KEY_SETTING = 'voice_key';
 
 export const VOICE_LOCALE = 'id';
 /** Batas pembuatan klip BARU per hari (melindungi biaya bila endpoint disalahgunakan). */
-const dailyLimit = () => Number(process.env.TTS_DAILY_LIMIT ?? 3000);
+/**
+ * Batas pembuatan klip BARU per hari (melindungi biaya). D-091: semua suara memakai Chirp, jadi batas bawaan dinaikkan
+ * ke 20.000 — batas 3.000 membuat suara jatuh ke suara browser setelah klip massal dibuat.
+ */
+const dailyLimit = () => Number(process.env.TTS_DAILY_LIMIT ?? 20000);
 
 export type VoiceLine = { text: string; clip: string | null };
 
@@ -153,6 +158,16 @@ export class VoiceService {
         `${s.model}|${s.voice}|${s.style}|${s.rate}|${lang === 'id-ID' ? '' : `${lang}|`}${speechText(text, lang)}`,
       )
       .digest('hex');
+  }
+
+  /**
+   * Profil suara untuk `/voice/say` (D-091): mengikuti buku soal/pelajaran yang sedang tampil (jenjang & bahasa);
+   * kata English memakai profil kartu (lafal British). Dipakai juga saat membuat klip lebih dulu, supaya kuncinya sama.
+   */
+  static sayProfile(lang: VoiceLang, base?: string): VoiceProfile | undefined {
+    if (lang === 'en-GB')
+      return base?.startsWith('english.') ? voiceProfileOf(base, 'choice') : { lang: 'en-GB' };
+    return base ? { ...voiceProfileOf(base, 'prompt'), lang: 'id-ID' } : undefined;
   }
 
   /** Versi suara (berubah bila admin mengganti model/suara/gaya) — untuk memutus cache browser. */
@@ -479,10 +494,12 @@ export class VoiceService {
     };
     const dir = i18nDir();
     let tip = 'Ingat:';
+    let wordRight = 'Tepat! {word}.';
     for (const f of ['play.json', 'contest.json', 'rank.json']) {
       try {
         const dict = JSON.parse(readFileSync(join(dir, f), 'utf8')) as Record<string, string>;
         if (f === 'play.json' && dict['topic.tip']) tip = dict['topic.tip'];
+        if (f === 'play.json' && dict['peraga.wordRight']) wordRight = dict['peraga.wordRight'];
         for (const v of Object.values(dict)) if (!/\{\w+\}/.test(v)) add(v);
       } catch {
         /* folder i18n tidak ada: lewati */
@@ -548,8 +565,49 @@ export class VoiceService {
           }
           for (const k of screen.kalimat ?? []) add(k.suara ?? k.teks, profile);
           for (const p of screen.titik ?? []) add(p.suara, profile);
+          // Simulasi SD (D-093): semua kalimat yang dibacakan layar peraga.
+          const pg = screen.peraga;
+          if (pg) {
+            const base = `${cat.domain}.${cat.grade}.pelajaran`;
+            const en = VoiceService.sayProfile('en-GB', base);
+            add(`${pg.aha} ${pg.tutup}`, profile);
+            if (pg.tipe === 'jelajah') {
+              add(pg.jelajahSuara, profile);
+              for (const b of pg.bagian) {
+                add(b.suara, profile);
+                add(b.nama, profile);
+              }
+              for (const q of pg.tanya) {
+                add(q.suara, profile);
+                add(q.selesai, profile);
+              }
+            } else if (pg.tipe === 'proses') for (const t of pg.tahap) add(t.suara, profile);
+            else if (pg.tipe === 'alat') {
+              add(pg.pengantar, profile);
+              for (const l of pg.langkah as { suara?: string; selesai?: string }[]) {
+                add(l.suara, profile);
+                add(l.selesai, profile);
+              }
+            } else {
+              add(pg.pengantar, profile);
+              for (const k of pg.kata) {
+                add(k.en, en);
+                add(k.id, profile);
+                if (k.kalimat) add(k.kalimat, en);
+                add(wordRight.replace('{word}', k.en), profile);
+              }
+            }
+          }
         }
       }
+    }
+    // Angka yang diucapkan alat peraga & game (garis bilangan, blok puluhan, hitung): per jenjang (gaya/kecepatan).
+    for (const [base, max] of [
+      ['math.tk.pelajaran', 120],
+      ['math.sd1.pelajaran', 1000],
+    ] as const) {
+      const p = VoiceService.sayProfile('id-ID', base);
+      for (let n = 0; n <= max; n++) add(numberWord(n), p);
     }
     return [...out.values()];
   }

@@ -1,5 +1,6 @@
 import { lessonFor, pickExamples } from '../content/auto-lesson.js';
 import { lessonScreenSchema } from '../content/lesson.js';
+import { PERAGA_BOOKS } from '../content/peraga.js';
 import type { ContentFile } from '../levels/validate.js';
 import {
   catalogSchema,
@@ -74,6 +75,13 @@ export function validateSkillContent(input: {
         const r = lessonScreenSchema.safeParse(x);
         if (!r.success) errors.push(`${where}: layar ${i + 1} — ${r.error.issues[0]?.message}`);
       });
+      // D-093: buku SD tahap berjalan — setiap topik biasa punya pelajaran tersimpan dengan simulasi.
+      if (
+        PERAGA_BOOKS.includes(`${cat.domain}/${cat.grade}`) &&
+        !/^(GM|GF)$/.test(c.code) &&
+        !c.lesson?.layar.some((x) => x.jenis === 'peraga')
+      )
+        errors.push(`${where}: belum ada simulasi (peraga) — lihat docs/content/peraga-sd.md`);
       const want = Math.min(2, own.filter((k) => k.family !== 'mock').length);
       if (pickExamples(own, want).length < want)
         errors.push(`${where}: contoh soal untuk video < ${want}`);

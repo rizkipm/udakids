@@ -28,7 +28,7 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
-## Rilis berikutnya (D-079 … D-091): PAUD lengkap, Video Momo semua topik, semua suara Chirp 3 HD
+## Rilis berikutnya (D-079 … D-094): PAUD lengkap, Video Momo semua topik, simulasi Kelas 1, semua suara Chirp 3 HD
 
 **Isi rilis:**
 
@@ -40,23 +40,33 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
   wajah" (D-089).
 - Semua suara memakai Chirp 3 HD dari server (D-091); simulasi pelajaran & AI Gambar dari sesi lain (D-087, D-088,
   D-092).
+- Pelajaran + simulasi untuk semua topik Kelas 1 (`math/sd1`, `sains/sd1`, `math/sd12`, `sains/sd12`,
+  `english/sd12`, D-093). Foto realistis menyusul (`lesson:photos`); sampai saat itu tampil gambar cadangan.
+- Mock test 1 gratis bisa dimainkan lagi oleh anak tanpa paket, dengan soal dari level 1–5 (D-094).
 - **Tanpa migrasi baru** setelah 0019, tanpa dependensi atau env wajib baru. Bila rilis 2026-10-08 (D-073 … D-078) belum
   pernah di-deploy, langkah ini sekaligus membawanya: `migrate:prod` menjalankan 0018/0019 yang belum ada.
 - **Kunci API & suara tidak diisi dua kali:** file `carry` membawa dari laptop ke server:
   - API key Google TTS & Claude (dan OpenAI bila ada);
   - pengaturan suara & AI Gambar;
-  - ±10.000 klip Chirp dan gambar AI yang sudah dibayar.
+  - ±16.000 klip Chirp dan gambar AI yang sudah dibayar.
+- **Cek `.env` server:** bila ada `TTS_DAILY_LIMIT=3000`, ubah ke `20000` (atau hapus barisnya; bawaan 20000).
+  Batas 3000 membuat anak mendengar suara browser setelah batas tercapai (audit D-091, 9 Okt 2026).
+  Perintahnya ada di langkah 4.
+- **`GOOGLE_TTS_API_KEY` di `.env`:** `carry` membawa kunci yang diisi di **Admin → Suara Momo**, bukan isi `.env`.
+  Bila kunci di `.env` laptop diganti dan server juga memakai `.env`, salin kuncinya sendiri ke `.env` server
+  (jangan lewat chat/git). Kunci `.env` didahulukan daripada kunci admin. Klip yang sudah ada tetap dipakai walau
+  kuncinya diganti.
 
 ### 0. Laptop: siapkan file `carry` (kunci API + klip suara)
 
-Tunggu `pnpm voice:generate -- --all` selesai. Lalu buat file dengan kata sandi sementara (minimal 12 huruf, jangan
+Klip suara sudah lengkap (9 Okt 2026: 14.688 kalimat, 0 belum bersuara). Hentikan `pnpm dev`, lalu buat file dengan kata sandi sementara (minimal 12 huruf, jangan
 disimpan di file atau git):
 
 ```bash
 cd ~/Repo/udakids
 read -rs CARRY_PASSPHRASE && export CARRY_PASSPHRASE      # ketik kata sandi sementara, Enter
 pnpm carry:export -- $PWD/backups/carry-$(date +%F).ndjson.gz
-# "Diekspor: kunci voice_key, ai_claude_key; pengaturan voice; ±10000 klip suara (±200 MB) → …"
+# "Diekspor: kunci voice_key, ai_claude_key; pengaturan voice; ±16000 klip suara (±300 MB) → …"
 ```
 
 Isi file tidak berisi API key dalam bentuk terbaca: kunci dikunci dengan kata sandi tadi. Folder `backups/` tidak
@@ -75,7 +85,7 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
 git add -A
 git status --short | grep -E "\.env$|\.dump$|backups/|test-results|\.ndjson" || echo "aman"
 git diff --cached --stat -- apps/api/drizzle | tail -3    # kosong (tidak ada migrasi baru)
-git commit -m "PAUD lengkap, Video Momo semua topik, suara Chirp 3 HD, carry kunci & klip (D-079…D-092)"
+git commit -m "PAUD lengkap, Video Momo semua topik, simulasi Kelas 1, suara Chirp 3 HD, mock gratis (D-079…D-094)"
 git push origin main
 git log -1 --oneline                                      # catat hash ini
 ```
@@ -117,6 +127,8 @@ scp backups/carry-*.ndjson.gz root@169.58.177.74:/root/backups/
 cd /var/www/kids.eduskul.my.id
 git pull origin main
 git log -1 --oneline                                      # = hash dari langkah 1
+grep TTS_DAILY_LIMIT .env                                 # kosong atau 20000
+sed -i 's/^TTS_DAILY_LIMIT=.*/TTS_DAILY_LIMIT=20000/' .env  # bila tadi 3000
 pnpm install --frozen-lockfile
 pnpm build                                                # engine, api, web: Done
 systemctl stop little-coder-api
@@ -125,7 +137,7 @@ pnpm --filter @little-coder/api seed:prod                 # soal, buku, pelajara
 cd apps/api
 read -rs CARRY_PASSPHRASE && export CARRY_PASSPHRASE      # kata sandi yang sama dengan langkah 0
 node dist/cli/carry.js import /root/backups/carry-*.ndjson.gz
-# "Diimpor: kunci voice_key (…TN-U), ai_claude_key (…qgAA); pengaturan voice; ±10000 dari ±10000 klip baru …"
+# "Diimpor: kunci voice_key (…TN-U), ai_claude_key (…qgAA); pengaturan voice; ±16000 dari ±16000 klip baru …"
 unset CARRY_PASSPHRASE
 cd ../..
 systemctl start little-coder-api
@@ -134,6 +146,7 @@ systemctl start little-coder-api
 Keluaran `seed:prod` yang diharapkan:
 
 - `skill: … ditambahkan/diperbarui` lebih dari 0 (Worksheet PAUD, latihan menulis, pancaindra, KMSI);
+- buku Kelas 1 ikut diperbarui (pelajaran + simulasi D-093 tersimpan di katalog);
 - `skill lama … → draft` boleh muncul.
 
 Kunci API diimpor dengan `JWT_SECRET` server (dibaca dari `.env`), jadi Admin → Suara Momo dan Admin → AI Gambar
@@ -156,9 +169,11 @@ psql "$U" -tAc "select string_agg(c->>'code', ' ') from skill_catalogs, jsonb_ar
 psql "$U" -tAc "select c->'lesson'->>'kode' from skill_catalogs, jsonb_array_elements(categories) c
   where domain='sains' and grade='tkosn' and c->>'code'='A'"                                              # K-SA-12
 psql "$U" -tAc "select key, value->>'last4' from app_settings where key like '%key' order by key"
-# ai_claude_key | qgAA   ·   voice_key | TN-U
+# ai_claude_key | qgAA   ·   voice_key | TN-U   (4 huruf terakhir kunci Anda)
 psql "$U" -tAc "select value->>'model', value->>'voice' from app_settings where key='voice'"   # chirp3-hd | Leda
-psql "$U" -tAc "select count(*) from voice_clips"                      # ±10000
+psql "$U" -tAc "select count(*) from voice_clips"                      # ±16000
+psql "$U" -tAc "select count(*) from skill_catalogs, jsonb_array_elements(categories) c
+  where grade in ('sd1','sd12') and c->'lesson'->'layar' @> '[{\"jenis\":\"peraga\"}]'"  # 130
 curl -s -o /dev/null -w "%{http_code}\n" "http://127.0.0.1:7177/voice/say?t=Tepat%21"            # 200
 curl -s -o /dev/null -w "%{http_code}\n" "http://127.0.0.1:7177/voice/say?t=beli%20saham%20sekarang"  # 404
 cd apps/api && node dist/cli/voice.js --all --dry-run; cd ../..        # "… 0 belum bersuara" (atau sedikit)
@@ -171,7 +186,9 @@ psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from 
 - Buka topik apa saja → "Belajar dulu" → Video Momo memutar contoh soal ("Contoh soal" → "Ini jawabannya").
   Suaranya Chirp (suara manusia yang natural), bukan suara bawaan HP.
 - Sains TK (Olimpiade) → "Tubuhku dan pancaindra" → Video Momo, jelajah wajah, game ketuk di wajah (Level 1).
-- Admin → Suara Momo: model chirp3-hd, kunci …TN-U, jumlah klip ±10.000. Admin → AI Gambar: kunci Claude terisi.
+- Kelas 1 → Matematika → topik apa saja → "Belajar dulu": ada layar simulasi (alat peraga, gambar cadangan).
+- TK (Olimpiade) → Matematika → Mock Test, dengan akun anak tanpa paket: "Mulai mock test" → soal tampil (D-094).
+- Admin → Suara Momo: model chirp3-hd, kunci terisi, jumlah klip ±16.000. Admin → AI Gambar: kunci Claude terisi.
 
 ### 7. Bersihkan file `carry`
 

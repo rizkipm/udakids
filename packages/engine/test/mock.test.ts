@@ -98,6 +98,32 @@ describe('Mock Test olimpiade TK (D-072)', () => {
     expect(src.hard.every((s) => s.order >= 8 && s.order <= 10)).toBe(true);
     expect([...src.easy, ...src.medium, ...src.hard].some(isMockSkill)).toBe(false);
   });
+
+  it('tanpa paket (D-094): level 6–10 berbayar (stub) → Mock 1 tetap 25 soal dari level 1–5', () => {
+    for (const book of [
+      'math/tkosn',
+      'sains/tkosn',
+      'english/tkosn',
+      'math/sd12',
+      'english/sd12',
+    ]) {
+      const skills = load(book);
+      const free = skills.map((s) =>
+        !isMockSkill(s) && s.order > 5 ? { ...s, params: {}, stub: true } : s,
+      );
+      for (const mock of skills.filter(isMockSkill)) {
+        const src = mockSources(mock, free);
+        expect(src.easy.every((s) => s.order <= 2)).toBe(true);
+        expect(src.hard.every((s) => s.order >= 4 && s.order <= 5)).toBe(true);
+        const round = generateMockRound(mock, free, { seed: 7 });
+        expect(round).toHaveLength(mockConfigOf(mock).questions);
+        for (const q of round) {
+          expect(free.find((s) => s.id === q.item.skillId)?.order).toBeLessThanOrEqual(5);
+          expect(checkAnswer(q.item, right(q.item)).correct).toBe(true);
+        }
+      }
+    }
+  });
 });
 
 describe('penilaian gaya EMC', () => {

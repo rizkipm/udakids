@@ -1,0 +1,377 @@
+/* Simulasi pelajaran SD (D-093) */
+.peraga {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  justify-items: center;
+}
+.peraga-hero {
+  width: min(100%, 520px);
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 3px solid var(--kid-line, #2b2540);
+}
+.peraga-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.peraga-hero.peraga-photo {
+  aspect-ratio: 16 / 10;
+}
+.peraga-svg {
+  display: inline-grid;
+  place-items: center;
+}
+.peraga-hint {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.peraga-stepno {
+  color: var(--kid-primary, #5b3fd6);
+}
+.peraga-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(132px, 42%), 1fr));
+  gap: 10px;
+  width: 100%;
+}
+.peraga-card {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  align-content: start;
+  min-height: 140px;
+  padding: 8px;
+  border: 3px solid #d9d3ea;
+  border-radius: 18px;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  min-width: 0;
+}
+.peraga-card .peraga-photo,
+.peraga-card .peraga-svg {
+  width: 100%;
+  max-width: 140px;
+}
+.peraga-card.is-seen {
+  border-color: #b9a8f5;
+}
+.peraga-card.is-active {
+  border-color: var(--kid-primary, #5b3fd6);
+  box-shadow: 0 4px 0 var(--kid-primary, #5b3fd6);
+}
+.peraga-card.is-picked {
+  border-color: var(--kid-good, #2e9e5b);
+  background: #eef8f1;
+}
+.peraga-card-name {
+  font-weight: 900;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.peraga-card-sub {
+  font-weight: 700;
+  color: #5d567a;
+  font-size: 0.9rem;
+}
+.is-wiggle {
+  animation: peraga-wiggle 0.5s ease-in-out;
+}
+@keyframes peraga-wiggle {
+  25% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+.peraga-info {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: #f3efff;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+}
+.peraga-next {
+  min-height: 64px;
+}
+.peraga-end {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 3px solid var(--kid-good, #2e9e5b);
+  border-radius: 18px;
+  background: #eef8f1;
+  width: 100%;
+  box-sizing: border-box;
+}
+.peraga-end p {
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+.peraga-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.peraga-stages span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ebe6f5;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+.peraga-stages .is-past {
+  background: #d6f0de;
+}
+.peraga-stages .is-on {
+  background: var(--kid-primary, #5b3fd6);
+  color: #fff;
+}
+.peraga-stage {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  width: min(100%, 420px);
+  animation: vid-pop 0.4s ease-out both;
+}
+.peraga-stage .peraga-photo {
+  border: 3px solid var(--kid-line, #2b2540);
+}
+.peraga-stage p {
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+}
+.peraga-step,
+.peraga-tool {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  width: 100%;
+  min-width: 0;
+}
+.peraga-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.peraga-row.is-wrap {
+  flex-wrap: wrap;
+}
+.peraga-btn,
+.peraga-num,
+.peraga-choice,
+.peraga-money,
+.peraga-thing {
+  min-width: 64px;
+  min-height: 64px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: #fff;
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  padding: 4px 12px;
+}
+.peraga-btn:disabled,
+.peraga-num:disabled,
+.peraga-choice:disabled,
+.peraga-money:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.peraga-num.is-right {
+  background: var(--kid-good, #2e9e5b);
+  color: #fff;
+}
+.peraga-big {
+  margin: 0;
+  font-size: clamp(1.4rem, 1rem + 2vw, 2rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.peraga-note {
+  margin: 0;
+  font-weight: 700;
+  color: #5d567a;
+}
+.peraga-line {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+}
+.peraga-measured {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+.peraga-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+}
+.pb-flat {
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 5px, rgba(43, 37, 64, 0.25) 5px 6px),
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(43, 37, 64, 0.25) 5px 6px), #f7c948;
+}
+.peraga-things {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 560px;
+}
+.peraga-thing {
+  position: relative;
+  padding: 2px;
+}
+.peraga-thing.is-new {
+  animation: vid-pop 0.4s ease-out both;
+  border-color: var(--kid-good, #2e9e5b);
+}
+.peraga-thing.is-gone {
+  opacity: 0.35;
+  background: repeating-linear-gradient(45deg, #fff 0 8px, #f3efff 8px 16px);
+}
+.peraga-thing.is-counted {
+  border-color: var(--kid-primary, #5b3fd6);
+}
+.peraga-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--kid-primary, #5b3fd6);
+  color: #fff;
+  font-size: 0.85rem;
+  display: grid;
+  place-items: center;
+}
+.peraga-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  min-height: 72px;
+  width: 100%;
+  padding: 6px;
+  border: 3px dashed #d9d3ea;
+  border-radius: 18px;
+  box-sizing: border-box;
+}
+.peraga-money {
+  padding: 2px;
+}
+.peraga-money.is-paid {
+  box-shadow: none;
+}
+.peraga-balance {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(100%, 420px);
+  padding: 0 16px 10px;
+  box-sizing: border-box;
+  border-bottom: 8px solid var(--kid-line, #2b2540);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.5s ease;
+}
+.peraga-pan {
+  min-height: 110px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-top: 0;
+  border-radius: 0 0 50px 50px;
+  background: #fff4cf;
+  min-width: 0;
+}
+.peraga-shape {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.peraga-bar {
+  display: grid;
+  gap: 4px;
+  width: min(100%, 480px);
+  height: 72px;
+}
+.peraga-bar button {
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  min-width: 0;
+}
+.peraga-bar button.is-on,
+.peraga-pie path.is-on {
+  background: #f3a64b;
+  fill: #f3a64b;
+}
+.peraga-pie {
+  width: min(70vw, 240px);
+  height: auto;
+}
+.peraga-pie path {
+  fill: #fff;
+  stroke: var(--kid-line, #2b2540);
+  stroke-width: 3;
+  cursor: pointer;
+}
+.peraga-patt {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #d9d3ea;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+}
+.peraga-patt.is-blank {
+  border-style: dashed;
+  border-color: var(--kid-primary, #5b3fd6);
+}
+.peraga-replay {
+  min-height: 56px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-wiggle,
+  .peraga-stage,
+  .peraga-thing.is-new {
+    animation: none !important;
+  }
+  .peraga-balance {
+    transition: none;
+  }
+}

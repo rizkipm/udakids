@@ -20,6 +20,8 @@ type U = {
   onerror?: (e: { error: string }) => void;
 };
 
+const VOICE_OFF = { enabled: false, rev: 'r0', lines: {} };
+
 /** Mesin suara palsu yang bisa diatur perilakunya per test. */
 let spoken: U[];
 let behave: (u: U, n: number) => void;
@@ -62,7 +64,8 @@ beforeEach(() => {
       constructor(readonly text: string) {}
     },
   );
-  resetVoice();
+  // Mesin suara browser (cadangan, D-091) diuji dengan suara server mati.
+  resetVoice(VOICE_OFF);
 });
 afterEach(() => {
   stopSpeaking();
@@ -74,7 +77,7 @@ describe('suara perempuan lebih dulu (D-062)', () => {
   const voice = (name: string, lang: string, localService = true) => ({ name, lang, localService });
   const useVoices = (list: ReturnType<typeof voice>[]) => {
     (speechSynthesis as unknown as { getVoices: () => unknown[] }).getVoices = () => list;
-    resetVoice();
+    resetVoice(VOICE_OFF);
   };
 
   it('kata English memakai suara perempuan British, bukan "Daniel" yang berat', () => {

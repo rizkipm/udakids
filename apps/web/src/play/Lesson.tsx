@@ -36,6 +36,7 @@ import { TraceBoard } from './games/TraceBoard';
 import { SimulationScreen, type SimVoice } from './LessonSim';
 import { SpeakButton } from './ItemPlayer';
 import { ExploreScreen, LessonTry, ReadScreen, VideoScreen } from './LessonMedia';
+import { Peraga } from './peraga/Peraga';
 import { useLinks } from './links';
 import { MomoLoader } from './MomoLoader';
 import { PageHead } from './Profile';
@@ -256,6 +257,8 @@ function MainBody({
           }
         />
       );
+    case 'peraga':
+      return screen.peraga ? <Peraga data={screen.peraga} /> : null;
     case 'tonton':
       return screen.adegan ? <VideoScreen scenes={screen.adegan} skills={skills} /> : null;
     case 'jelajah':
