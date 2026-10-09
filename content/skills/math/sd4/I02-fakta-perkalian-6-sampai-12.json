@@ -1,0 +1,68 @@
+{
+  "id": "math.sd4.i2.fakta-perkalian-6-sampai-12",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 2,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 2 — Fakta perkalian 6 sampai 12",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [6, 7, 8, 9, 11, 12]
+            },
+            "b": [3, 12]
+          },
+          "prompt": "{a} × {b} = …",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * (b + 1)",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a * (b - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a * b + 2",
+              "tag": "hitung-meleset"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Kalau lupa, pakai fakta yang dekat: {a} × {=b-1} = {=a*(b-1)}, lalu tambah satu kelompok {a}. {=a*(b-1)} + {a} = {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": {
+              "values": [11, 12]
+            }
+          },
+          "prompt": "{a} × {b} = …",
+          "answer": "a * b",
+          "mode": "input",
+          "explain": "Pecah menjadi fakta mudah: {a} × {b} = {a} × 10 + {a} × {=b-10} = {=a*10} + {=a*(b-10)} = {answer}."
+        }
+      }
+    ]
+  }
+}

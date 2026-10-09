@@ -1,0 +1,137 @@
+{
+  "id": "math.sd4.f8.soal-cerita-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 8,
+  "title": "Pengurangan bilangan besar — Level 8 — Soal cerita pengurangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "range": [12500, 94500],
+              "step": 500
+            }
+          },
+          "derived": {
+            "u": "(x <= 50000) * 50000 + (x > 50000) * 100000"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ],
+            "barang": [
+              "sepatu",
+              "tas sekolah",
+              "buku gambar dan krayon",
+              "kaus olahraga",
+              "payung",
+              "bola sepak"
+            ]
+          },
+          "constraint": "x % 1000 != 0",
+          "prompt": "{nama} membeli {barang} seharga Rp{x}. Ia membayar dengan uang Rp{u}. Berapa uang kembaliannya?",
+          "answer": "u - x",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "u - x + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "u - x - 1000",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "u + x",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "u - x + 10000",
+              "tag": "lupa-pinjaman"
+            }
+          ],
+          "explain": "Kembalian = uang yang dibayar − harga: {u} − {x} = {answer}. Cek dengan menjumlah: harga + kembalian = {x} + {=u-x} = {u}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3000, 9999],
+            "b": [1000, 2999]
+          },
+          "constraint": "a % 10 < b % 10",
+          "prompt": "Sebuah toko punya {a} butir telur. Hari ini terjual {b} butir. Berapa butir telur yang tersisa?",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a - b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Terjual berarti berkurang: {a} − {b} = {answer} butir."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [25000, 59999],
+            "b": [10000, 24999]
+          },
+          "prompt": "Penduduk Desa Sukamaju {a} orang dan penduduk Desa Mekarsari {b} orang. Berapa selisih penduduk kedua desa?",
+          "answer": "a - b",
+          "mode": "input",
+          "explain": "Selisih = bilangan besar − bilangan kecil. {a} − {b} = {answer} orang."
+        }
+      }
+    ]
+  }
+}

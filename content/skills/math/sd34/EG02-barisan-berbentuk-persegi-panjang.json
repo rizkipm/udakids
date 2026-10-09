@@ -1,0 +1,110 @@
+{
+  "id": "math.sd34.eg2.barisan-berbentuk-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 2,
+  "title": "Kombinatorika & penalaran — Level 2 — Barisan berbentuk persegi panjang",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Menghitung banyak titik pada grid berjarak sama",
+    "emc-no": "14"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 12],
+            "q": [2, 9]
+          },
+          "constraint": "p != q",
+          "prompt": "Siswa berbaris membentuk persegi panjang untuk upacara. Jarak setiap siswa dengan siswa di depan, belakang, kanan, dan kirinya 1 m. Panjang barisan {p} m dan lebarnya {q} m, dan semua tempat terisi. Banyak siswa adalah …",
+          "answer": "(p + 1) * (q + 1)",
+          "distractors": [
+            {
+              "expr": "p * q",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "(p + 1) * q",
+              "tag": "satu-sisi"
+            },
+            {
+              "expr": "2 * (p + q)",
+              "tag": "keliling"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sepanjang {p} m ada {p} jarak, jadi {=p+1} siswa per baris. Sepanjang {q} m ada {=q+1} baris. Banyak siswa = {=p+1} × {=q+1} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 6]
+          },
+          "derived": {
+            "p": "2 * a",
+            "q": "2 * b"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "a != b",
+          "prompt": "Pak {nama} menanam bibit cabai di kebun persegi panjang berukuran {p} m × {q} m. Bibit ditanam setiap 2 m ke samping dan ke belakang, termasuk di tepi kebun. Banyak bibit adalah …",
+          "answer": "(a + 1) * (b + 1)",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "(p + 1) * (q + 1)",
+              "tag": "jarak-1-m"
+            },
+            {
+              "expr": "p * q / 2",
+              "tag": "luas-dibagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sepanjang {p} m ada {=p/2} jarak 2 m, jadi {=p/2+1} bibit per baris. Sepanjang {q} m ada {=q/2+1} baris. Banyak bibit = {=p/2+1} × {=q/2+1} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "math.sd4.j4.tiga-angka-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 4,
+  "title": "Perkalian dengan bilangan satu angka — Level 4 — Tiga angka dengan menyimpan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "s": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "constraint": "s * k >= 10 && n * k < 10000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "h * k * 100 + (t * k % 10) * 10 + s * k % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "n * k + 10",
+              "tag": "simpan-dua-kali"
+            },
+            {
+              "expr": "n * (k - 1)",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "Pecah per nilai tempat: {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan: {answer}. Pada cara bersusun, puluhan dari hasil kali disimpan ke tempat sebelah kiri."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "s": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "constraint": "s * k >= 10 && n * k < 10000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "mode": "input",
+          "explain": "Pecah per nilai tempat: {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan: {answer}. Pada cara bersusun, puluhan dari hasil kali disimpan ke tempat sebelah kiri."
+        }
+      }
+    ]
+  }
+}

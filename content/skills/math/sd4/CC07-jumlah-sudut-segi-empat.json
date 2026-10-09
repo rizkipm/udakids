@@ -1,0 +1,164 @@
+{
+  "id": "math.sd4.cc7.jumlah-sudut-segi-empat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 7,
+  "title": "Segitiga dan segi empat — Level 7 — Jumlah sudut segi empat",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "b": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "c": {
+              "range": [60, 120],
+              "step": 5
+            }
+          },
+          "constraint": "360 - a - b - c >= 40 && 360 - a - b - c <= 150",
+          "prompt": "Tiga sudut sebuah segi empat {a}°, {b}°, dan {c}°. Berapa derajat sudut keempat?",
+          "answer": "360 - a - b - c",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "a + b + c - 180",
+              "tag": "memakai-180"
+            },
+            {
+              "expr": "360 - a - b",
+              "tag": "satu-sudut-terlewat"
+            }
+          ],
+          "explain": "Jumlah sudut segi empat 360° (dua segitiga: 2 × 180°). 360° − {a}° − {b}° − {c}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 85],
+              "step": 5
+            }
+          },
+          "prompt": "Satu sudut jajar genjang {a}°. Sudut di sebelahnya (berdampingan) berapa derajat?",
+          "answer": "180 - a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "sudut-berhadapan"
+            },
+            {
+              "expr": "360 - a",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "90 - a",
+              "tag": "memakai-90"
+            }
+          ],
+          "explain": "Pada jajar genjang, dua sudut berdampingan jumlahnya 180°. 180° − {a}° = {answer}. Sudut berhadapan sama besar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [60, 140],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 100],
+              "step": 10
+            }
+          },
+          "constraint": "(360 - a - b) % 2 == 0 && 360 - a - b > 60 && a != b",
+          "prompt": "Pada layang-layang, sudut atas {a}° dan sudut bawah {b}°. Dua sudut sampingnya sama besar. Berapa derajat setiap sudut samping?",
+          "answer": "(360 - a - b) / 2",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "360 - a - b",
+              "tag": "lupa-dibagi-2"
+            },
+            {
+              "expr": "180 - a",
+              "tag": "memakai-180"
+            }
+          ],
+          "explain": "Sisa sudut = 360° − {a}° − {b}° = {=360-a-b}°. Dibagi dua sudut sama besar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": ["persegi panjang", "persegi"]
+          },
+          "prompt": "Berapa derajat jumlah keempat sudut sebuah {x}?",
+          "answer": "360",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "180",
+              "tag": "jumlah-segitiga"
+            },
+            {
+              "expr": "90",
+              "tag": "satu-sudut"
+            },
+            {
+              "expr": "270",
+              "tag": "tiga-sudut"
+            }
+          ],
+          "explain": "Keempat sudutnya siku-siku: 4 × 90° = 360°."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "b": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "c": {
+              "range": [60, 120],
+              "step": 5
+            }
+          },
+          "constraint": "360 - a - b - c >= 40 && 360 - a - b - c <= 150",
+          "prompt": "Tiga sudut sebuah segi empat {a}°, {b}°, dan {c}°. Berapa derajat sudut keempat?",
+          "answer": "360 - a - b - c",
+          "unit": "°",
+          "explain": "Jumlah sudut segi empat 360° (dua segitiga: 2 × 180°). 360° − {a}° − {b}° − {c}° = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

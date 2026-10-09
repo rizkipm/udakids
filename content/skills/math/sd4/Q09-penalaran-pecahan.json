@@ -1,0 +1,104 @@
+{
+  "id": "math.sd4.q9.penalaran-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 9,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 9 — Penalaran pecahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "k": [2, 4],
+            "a": [1, 5]
+          },
+          "derived": {
+            "e": "d * k"
+          },
+          "constraint": "a < d",
+          "prompt": "…/{e} < {a}/{d}. Berapa pembilang terbesar yang mungkin?",
+          "answer": "a * k - 1",
+          "mode": "input",
+          "explain": "Samakan penyebut: {a}/{d} = {=a*k}/{e}. Pembilang harus kurang dari {=a*k}, jadi yang terbesar adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 11],
+            "e": [4, 12]
+          },
+          "constraint": "d < e",
+          "prompt": "Mana yang lebih besar: {=d-1}/{d} atau {=e-1}/{e}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "e - 1",
+            "den": "e",
+            "simplify": false
+          },
+          "choices": 2,
+          "distractors": [
+            {
+              "num": "d - 1",
+              "den": "d",
+              "tag": "penyebut-kecil"
+            }
+          ],
+          "explain": "Keduanya kurang satu potong dari 1 utuh. Potongan 1/{e} lebih kecil daripada 1/{d}, jadi {answer} lebih dekat ke 1 dan lebih besar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 11],
+            "e": [4, 12]
+          },
+          "constraint": "d < e",
+          "prompt": "Mana yang lebih besar: {=e-1}/{e} atau {=d-1}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "e - 1",
+            "den": "e",
+            "simplify": false
+          },
+          "choices": 2,
+          "distractors": [
+            {
+              "num": "d - 1",
+              "den": "d",
+              "tag": "penyebut-kecil"
+            }
+          ],
+          "explain": "Keduanya kurang satu potong dari 1 utuh. Potongan 1/{e} lebih kecil daripada 1/{d}, jadi {answer} lebih dekat ke 1 dan lebih besar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 9]
+          },
+          "constraint": "d - a - 1 >= 2",
+          "prompt": "Ada berapa pecahan berpenyebut {d} yang lebih besar dari {a}/{d} tetapi kurang dari 1?",
+          "answer": "d - a - 1",
+          "mode": "input",
+          "explain": "Pembilangnya harus lebih dari {a} dan kurang dari {d}, yaitu {=a+1} sampai {=d-1}. Banyaknya {=d-1} − {a} = {answer} pecahan."
+        }
+      }
+    ]
+  }
+}

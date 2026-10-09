@@ -1,6 +1,6 @@
 ---
 name: db-change
-description: Ubah skema PostgreSQL Little Coder lewat Drizzle (apps/api/src/db/schema.ts) dan buat migrasi dengan drizzle-kit, sambil menjaga aturan privasi data anak. Pakai saat menambah tabel/kolom/index atau mengubah model data API.
+description: Ubah skema PostgreSQL UdaKids lewat Drizzle (apps/api/src/db/schema.ts) dan buat migrasi dengan drizzle-kit, sambil menjaga aturan privasi data anak. Pakai saat menambah tabel/kolom/index atau mengubah model data API.
 ---
 
 # Perubahan skema database

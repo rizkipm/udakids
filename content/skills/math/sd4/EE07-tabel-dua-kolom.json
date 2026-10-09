@@ -1,0 +1,269 @@
+{
+  "id": "math.sd4.ee7.tabel-dua-kolom",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 7,
+  "title": "Data: tabel dan diagram — Level 7 — Tabel dua kolom",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "l1": [10, 20],
+            "p1": [10, 20],
+            "l2": [10, 20],
+            "p2": [10, 20],
+            "l3": [10, 20],
+            "p3": [10, 20]
+          },
+          "prompt": "Berapa siswa kelas 4B seluruhnya?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Kelas", "Laki-laki", "Perempuan"],
+              "rows": [
+                ["4A", "=l1", "=p1"],
+                ["4B", "=l2", "=p2"],
+                ["4C", "=l3", "=p3"]
+              ],
+              "caption": "Banyak siswa kelas 4"
+            }
+          ],
+          "answer": "l2 + p2",
+          "distractors": [
+            {
+              "expr": "l2",
+              "tag": "satu-kolom"
+            },
+            {
+              "expr": "l1 + p1",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "l2 + p2 + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Baris 4B: laki-laki {l2} dan perempuan {p2}. {l2} + {p2} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "l1": [10, 20],
+            "p1": [10, 20],
+            "l2": [10, 20],
+            "p2": [10, 20],
+            "l3": [10, 20],
+            "p3": [10, 20]
+          },
+          "prompt": "Berapa siswa perempuan di ketiga kelas?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Kelas", "Laki-laki", "Perempuan"],
+              "rows": [
+                ["4A", "=l1", "=p1"],
+                ["4B", "=l2", "=p2"],
+                ["4C", "=l3", "=p3"]
+              ],
+              "caption": "Banyak siswa kelas 4"
+            }
+          ],
+          "answer": "p1 + p2 + p3",
+          "distractors": [
+            {
+              "expr": "l1 + l2 + l3",
+              "tag": "kolom-lain"
+            },
+            {
+              "expr": "p1 + p2",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "p1 + p2 + p3 + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jumlahkan kolom Perempuan: {p1} + {p2} + {p3} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "l1": [10, 20],
+            "p1": [10, 20],
+            "l2": [10, 20],
+            "p2": [10, 20],
+            "l3": [10, 20],
+            "p3": [10, 20]
+          },
+          "constraint": "l3 > p3",
+          "prompt": "Di kelas 4C, berapa siswa laki-laki lebih banyak daripada siswa perempuan?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Kelas", "Laki-laki", "Perempuan"],
+              "rows": [
+                ["4A", "=l1", "=p1"],
+                ["4B", "=l2", "=p2"],
+                ["4C", "=l3", "=p3"]
+              ],
+              "caption": "Banyak siswa kelas 4"
+            }
+          ],
+          "answer": "l3 - p3",
+          "distractors": [
+            {
+              "expr": "l3 + p3",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "l3",
+              "tag": "satu-kolom"
+            },
+            {
+              "expr": "l3 - p3 + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Baris 4C: {l3} − {p3} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d1": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k1": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "d2": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k2": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "d3": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k3": {
+              "range": [120, 480],
+              "step": 5
+            }
+          },
+          "prompt": "Berapa tiket terjual pada hari Sabtu?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Dewasa", "Anak-anak"],
+              "rows": [
+                ["Jumat", "=d1", "=k1"],
+                ["Sabtu", "=d2", "=k2"],
+                ["Minggu", "=d3", "=k3"]
+              ],
+              "caption": "Tiket museum terjual"
+            }
+          ],
+          "answer": "d2 + k2",
+          "unit": "tiket",
+          "distractors": [
+            {
+              "expr": "d2",
+              "tag": "satu-kolom"
+            },
+            {
+              "expr": "d3 + k3",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "d2 + k2 + 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Baris Sabtu: {d2} + {k2} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d1": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k1": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "d2": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k2": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "d3": {
+              "range": [120, 480],
+              "step": 5
+            },
+            "k3": {
+              "range": [120, 480],
+              "step": 5
+            }
+          },
+          "prompt": "Berapa tiket anak-anak terjual dalam tiga hari?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Dewasa", "Anak-anak"],
+              "rows": [
+                ["Jumat", "=d1", "=k1"],
+                ["Sabtu", "=d2", "=k2"],
+                ["Minggu", "=d3", "=k3"]
+              ],
+              "caption": "Tiket museum terjual"
+            }
+          ],
+          "answer": "k1 + k2 + k3",
+          "unit": "tiket",
+          "distractors": [
+            {
+              "expr": "d1 + d2 + d3",
+              "tag": "kolom-lain"
+            },
+            {
+              "expr": "k1 + k2",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k1 + k2 + k3 + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kolom Anak-anak: {k1} + {k2} + {k3} = {answer}."
+        }
+      }
+    ]
+  }
+}

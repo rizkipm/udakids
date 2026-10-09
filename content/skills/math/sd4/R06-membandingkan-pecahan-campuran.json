@@ -1,0 +1,70 @@
+{
+  "id": "math.sd4.r6.membandingkan-pecahan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "R",
+  "order": 6,
+  "title": "Pecahan campuran — Level 6 — Membandingkan pecahan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [1, 4],
+            "d": [2, 9],
+            "n": [1, 8],
+            "p": [3, 45]
+          },
+          "constraint": "n < d && p > d && abs(p - w * d - n) <= d",
+          "prompt": "{w} {n}/{d} … {p}/{d}",
+          "answer": "(w * d + n > p) * 1 + (w * d + n < p) * 2 + (w * d + n == p) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ubah {w} {n}/{d} menjadi pecahan biasa: {w} × {d} + {n} = {=w*d+n}, jadi {=w*d+n}/{d}. Bandingkan pembilang {=w*d+n} dan {p}. Jadi {w} {n}/{d} {answer} {p}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [1, 4],
+            "d": [2, 9],
+            "n": [1, 8],
+            "p": [3, 45]
+          },
+          "constraint": "n < d && p > d && abs(p - w * d - n) <= d",
+          "prompt": "{p}/{d} … {w} {n}/{d}",
+          "answer": "(p > w * d + n) * 1 + (p < w * d + n) * 2 + (w * d + n == p) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ubah {w} {n}/{d} menjadi pecahan biasa: {w} × {d} + {n} = {=w*d+n}, jadi {=w*d+n}/{d}. Bandingkan pembilang {p} dan {=w*d+n}. Jadi {p}/{d} {answer} {w} {n}/{d}."
+        }
+      }
+    ]
+  }
+}

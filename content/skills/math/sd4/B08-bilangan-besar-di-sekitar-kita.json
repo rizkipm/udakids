@@ -1,0 +1,131 @@
+{
+  "id": "math.sd4.b8.bilangan-besar-di-sekitar-kita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 8,
+  "title": "Membaca dan menulis bilangan besar — Level 8 — Bilangan besar di sekitar kita",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "t": [1, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + t * 10 + s"
+          },
+          "words": {
+            "hal": [
+              "penonton di stadion",
+              "pengunjung kebun binatang",
+              "buku di perpustakaan kota",
+              "pohon yang ditanam warga",
+              "peserta lomba lari",
+              "botol plastik yang dikumpulkan"
+            ]
+          },
+          "prompt": "Banyak {hal} adalah {w:n}. Tulis lambang bilangannya.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + t * 10 + s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + t * 100 + s * 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "a * 100000 + b * 1000 + t * 10 + s",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Kelompok ribu: {=floor(n/1000)} ribu. Kelompok kanan: {=n%1000}, ditulis tiga angka dengan 0 sebagai penanda. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9],
+            "h": [1, 9]
+          },
+          "derived": {
+            "n": "a * 100000 + c * 1000 + h * 100"
+          },
+          "words": {
+            "barang": [
+              "sepeda anak",
+              "kipas angin",
+              "lemari kecil",
+              "kompor gas",
+              "meja belajar",
+              "tenda kemah"
+            ]
+          },
+          "prompt": "Harga sebuah {barang} {w:n} rupiah. Tulis harganya dengan angka.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "a * 10000 + c * 1000 + h * 100",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 100000 + c * 10000 + h * 100",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "a * 100000 + c * 1000 + h * 10",
+              "tag": "geser"
+            }
+          ],
+          "explain": "Kelompok ribu: {=floor(n/1000)} ribu, ditulis tiga angka. Kelompok kanan: {h} ratus. Jadi Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 3],
+            "c": [1, 9],
+            "e": [1, 9]
+          },
+          "derived": {
+            "n": "m * 1000000 + c * 100000 + e * 1000"
+          },
+          "prompt": "Penduduk sebuah kota kecil ada {w:n} orang. Tulis lambang bilangannya.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "m * 1000000 + c * 100000 + e * 10000",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "m * 100000 + c * 10000 + e * 1000",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "m * 1000000 + c * 10000 + e * 1000",
+              "tag": "nol-pindah"
+            }
+          ],
+          "explain": "Kelompok juta: {m}. Kelompok ribu: {=floor(n/1000)%1000} ribu, ditulis tiga angka. Kelompok kanan: 000. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

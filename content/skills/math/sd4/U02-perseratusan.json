@@ -1,0 +1,118 @@
+{
+  "id": "math.sd4.u2.perseratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 2,
+  "title": "Desimal persepuluhan dan perseratusan — Level 2 — Perseratusan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99]
+          },
+          "prompt": "{a}/100 ditulis sebagai desimal adalah …",
+          "answer": "a / 100",
+          "explain": "Penyebut 100 berarti perseratus, jadi ada dua angka setelah koma. {a}/100 = {answer}. Bila pembilangnya hanya satu angka, tulis 0 dulu setelah koma, misalnya 7/100 = 0,07.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99]
+          },
+          "prompt": "Petak perseratus punya 100 kotak kecil yang sama besar. Ada {a} kotak yang diarsir. Bagian yang diarsir ditulis sebagai desimal adalah …",
+          "answer": "a / 100",
+          "explain": "{a} dari 100 kotak = {a}/100. Perseratusan ditulis dengan dua angka setelah koma: {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "(100 - a) / 100",
+              "tag": "bagian-kosong"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99]
+          },
+          "prompt": "{x} = … /100. Berapa pembilangnya?",
+          "answer": "a",
+          "explain": "Dua angka setelah koma menunjukkan perseratus. {x} = {a}/100.",
+          "derived": {
+            "x": "a / 100"
+          },
+          "constraint": "a % 10 != 0",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "a": [1, 99]
+          },
+          "prompt": "Pecahan campuran {b} {a}/100 ditulis sebagai desimal adalah …",
+          "answer": "b + a / 100",
+          "explain": "Bilangan utuh {b} ditulis di depan koma, lalu {a} perseratus memakai dua angka setelah koma: {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "b + a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "b + a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "b * 100 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

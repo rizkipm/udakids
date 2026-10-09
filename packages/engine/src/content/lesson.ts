@@ -10,7 +10,7 @@ import {
 import { specSchema } from '../generator/families/fun.js';
 import { LETTER_GLYPH_IDS, STROKE_GLYPH_IDS } from '../generator/glyphs.js';
 import { visualSchema } from '../generator/visual-schema.js';
-import { peragaSchema } from './peraga.js';
+import { peragaPhotoSchema, peragaPhotos, peragaSchema, type PeragaPhoto } from './peraga.js';
 
 /**
  * Pelajaran (Belajar) sebelum latihan, menempel di kategori katalog (D-068): 3–6 layar pendek, semua
@@ -33,6 +33,8 @@ export const LESSON_SCREENS = [
   'simulasi',
   // D-093: simulasi SD — jelajah kartu foto, proses sebab-akibat, alat peraga matematika, kartu kata English.
   'peraga',
+  // D-101: poster infografis (judul besar, poin bernomor bergambar, rumus, perbandingan, tips) untuk materi olimpiade.
+  'infografis',
 ] as const;
 export type LessonScreenKind = (typeof LESSON_SCREENS)[number];
 
@@ -187,6 +189,70 @@ export const lessonSimSchema = z
   });
 export type LessonSim = z.infer<typeof lessonSimSchema>;
 
+/**
+ * Infografis (D-101): satu poster pelajaran seperti lembar infografis — judul besar, foto/gambar utama, 2–4 poin
+ * bernomor (diketuk → dibacakan), lencana, panel rumus, panel perbandingan, tips (cara tepat / hati-hati), dan
+ * kalimat penutup. Gambar: foto Pexels (`foto`, dengan cadangan SVG) atau gambar SVG soal (`visual`, mis. `figure`).
+ */
+const infoTitle = z.string().trim().min(2).max(40);
+const infoSide = z.strictObject({
+  label: z.string().trim().min(1).max(30),
+  nilai: z.string().trim().min(1).max(30),
+  visual: visualSchema.optional(),
+  foto: peragaPhotoSchema.optional(),
+});
+export const infografisSchema = z.strictObject({
+  judul: infoTitle,
+  sub: shortText,
+  foto: peragaPhotoSchema.optional(),
+  visual: visualSchema.optional(),
+  poin: z
+    .array(
+      z.strictObject({
+        judul: infoTitle,
+        teks: shortText,
+        suara: sayText.optional(),
+        visual: visualSchema.optional(),
+        foto: peragaPhotoSchema.optional(),
+      }),
+    )
+    .min(2)
+    .max(4),
+  lencana: z.array(z.string().trim().min(2).max(24)).min(2).max(4).optional(),
+  rumus: z
+    .strictObject({
+      judul: infoTitle,
+      baris: z.array(z.string().trim().min(1).max(60)).min(1).max(4),
+      suara: sayText.optional(),
+      visual: visualSchema.optional(),
+    })
+    .optional(),
+  banding: z
+    .strictObject({
+      judul: infoTitle,
+      kiri: infoSide,
+      kanan: infoSide,
+      tanda: z.enum(['>', '<', '=', '≠', '→']),
+      catatan: shortText,
+    })
+    .optional(),
+  /** Tips: `tepat` = cara yang benar (centang), `false` = jebakan yang perlu dihindari (ikon hati-hati, bukan merah). */
+  tips: z
+    .array(z.strictObject({ teks: shortText, tepat: z.boolean() }))
+    .min(2)
+    .max(4)
+    .optional(),
+  kutipan: shortText.optional(),
+});
+export type Infografis = z.infer<typeof infografisSchema>;
+
+/** Semua foto di sebuah infografis (untuk dicari lebih dulu lewat `lesson:photos`). */
+export function infografisPhotos(g: Infografis): PeragaPhoto[] {
+  return [g.foto, ...g.poin.map((p) => p.foto), g.banding?.kiri.foto, g.banding?.kanan.foto].filter(
+    (f): f is PeragaPhoto => !!f,
+  );
+}
+
 export const lessonScreenSchema = z
   .strictObject({
     jenis: z.enum(LESSON_SCREENS),
@@ -235,6 +301,8 @@ export const lessonScreenSchema = z
     simulasi: lessonSimSchema.optional(),
     /** `peraga`: simulasi SD (D-093). */
     peraga: peragaSchema.optional(),
+    /** `infografis`: poster pelajaran (D-101). */
+    infografis: infografisSchema.optional(),
   })
   .superRefine((s, ctx) => {
     const need = (ok: boolean, message: string) => {
@@ -288,6 +356,8 @@ export const lessonScreenSchema = z
     if (s.jenis === 'simulasi') need(!!s.simulasi, 'butuh simulasi');
     if (s.jenis === 'peraga') need(!!s.peraga, 'butuh peraga');
     if (s.peraga) need(s.jenis === 'peraga', 'peraga hanya untuk layar peraga');
+    if (s.jenis === 'infografis') need(!!s.infografis, 'butuh infografis');
+    if (s.infografis) need(s.jenis === 'infografis', 'infografis hanya untuk layar infografis');
     if (s.simulasi) need(s.jenis === 'simulasi', 'simulasi hanya untuk layar simulasi');
     if (s.jenis === 'bunyi') {
       // Bunyi huruf (D-075) atau bunyi benda/hewan lewat kartu gambar (P-BT-01, D-081).
@@ -312,6 +382,19 @@ export const lessonSchema = z
   });
 export type Lesson = z.infer<typeof lessonSchema>;
 
+/** Semua foto yang dipakai sebuah pelajaran (simulasi `peraga` + infografis), tanpa kembar. */
+export function lessonPhotos(l: Lesson): PeragaPhoto[] {
+  const out = new Map<string, PeragaPhoto>();
+  for (const s of l.layar) {
+    const list = [
+      ...(s.peraga ? peragaPhotos(s.peraga) : []),
+      ...(s.infografis ? infografisPhotos(s.infografis) : []),
+    ];
+    for (const f of list) if (!out.has(f.id)) out.set(f.id, f);
+  }
+  return [...out.values()];
+}
+
 /**
  * Semua kalimat yang dibacakan dari satu pelajaran, dengan kunci stabil (D-088): server membuat suara Chirp
  * hanya untuk teks yang ada di sini (bukan teks bebas dari perangkat), perangkat meminta lewat kuncinya.
@@ -323,6 +406,7 @@ export function lessonVoiceLines(l: Lesson): Record<string, string> {
     s.adegan?.forEach((a, j) => (out[`${i}.a${j}`] = a.suara));
     s.titik?.forEach((t, j) => (out[`${i}.t${j}`] = t.suara));
     s.kalimat?.forEach((k, j) => (out[`${i}.k${j}`] = k.suara ?? k.teks));
+    s.infografis?.poin.forEach((p, j) => (out[`${i}.p${j}`] = p.suara ?? `${p.judul}. ${p.teks}`));
     const m = s.simulasi;
     if (m) {
       out[`${i}.sj`] = m.jelajahSuara;

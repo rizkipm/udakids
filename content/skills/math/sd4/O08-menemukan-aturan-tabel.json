@@ -1,0 +1,182 @@
+{
+  "id": "math.sd4.o8.menemukan-aturan-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 8,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 8 — Menemukan aturan tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [5, 60],
+            "d1": [3, 15],
+            "d2": [3, 15],
+            "d3": [3, 15],
+            "k": [6, 99]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "prompt": "Lihat tabel. Aturannya: keluaran = masukan + …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1+k"],
+                ["=x2", "=x2+k"],
+                ["=x3", "=x3+k"]
+              ]
+            }
+          ],
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "x1 + k",
+              "tag": "keluaran"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Hitung keluaran − masukan pada setiap baris: {=x1+k} − {x1} = {k}, {=x2+k} − {x2} = {k}. Aturannya tambah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [3, 12]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x1 > 1",
+          "prompt": "Lihat tabel. Aturannya: keluaran = masukan × …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1*k"],
+                ["=x2", "=x2*k"],
+                ["=x3", "=x3*k"]
+              ]
+            }
+          ],
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "x1 * k - x1",
+              "tag": "selisih"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Selisih tiap baris tidak sama, jadi bukan aturan tambah. {=x1*k} : {x1} = {k} dan {=x2*k} : {x2} = {k}. Aturannya kali {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 5],
+            "d1": [1, 4],
+            "d2": [1, 4],
+            "b": [1, 15]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2"
+          },
+          "prompt": "Lihat tabel. Aturannya: masukan dikali 2, lalu ditambah …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=2*x1+b"],
+                ["=x2", "=2*x2+b"],
+                ["=x3", "=2*x3+b"]
+              ]
+            }
+          ],
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "x1 + b",
+              "tag": "selisih-baris"
+            },
+            {
+              "expr": "b + 2",
+              "tag": "lebih-dua"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kali dulu masukannya dengan 2: {x1} × 2 = {=2*x1}. Keluarannya {=2*x1+b}, jadi tambahnya {=2*x1+b} − {=2*x1} = {answer}. Periksa baris lain."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "x": [6, 25],
+            "b": [1, 5]
+          },
+          "constraint": "x > b",
+          "prompt": "Aturan mesin bilangan: masukan dikali {m}, lalu dikurangi {b}. Berapa keluaran untuk masukan {x}?",
+          "answer": "m * x - b",
+          "distractors": [
+            {
+              "expr": "m * (x - b)",
+              "tag": "kurang-dulu"
+            },
+            {
+              "expr": "m * x + b",
+              "tag": "tanda"
+            },
+            {
+              "expr": "m * x",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Ikuti urutan aturannya. Kali dulu: {x} × {m} = {=m*x}. Lalu kurangi: {=m*x} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

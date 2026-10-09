@@ -131,4 +131,86 @@ describe('peraga', () => {
     fireEvent.click(screen.getByRole('button', { name: 'green, hijau' }));
     expect(screen.getByText('Warna di sekitar kita!')).toBeTruthy();
   });
+
+  it('alat Kelas 4 (D-096): luas, keliling, sudut, diagram, desimal, ribuan', () => {
+    const alat = (a: string, langkah: unknown[]) =>
+      peragaSchema.parse({
+        tipe: 'alat',
+        alat: a,
+        pengantar: 'Ayo',
+        langkah,
+        aha: 'Aha!',
+        tutup: 'Hebat.',
+      });
+    const start = () => fireEvent.click(screen.getByRole('button', { name: 'Mulai simulasi' }));
+    const done = () => expect(screen.getByRole('button', { name: 'Selesai' })).toBeTruthy();
+
+    let v = render(
+      <Peraga data={alat('luas', [{ ...step, panjang: 4, lebar: 2, hitung: 'luas' }])} />,
+    );
+    start();
+    fireEvent.click(screen.getByRole('button', { name: 'Isi satu baris' }));
+    expect(screen.queryByRole('button', { name: 'Selesai' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Isi satu baris' }));
+    done();
+    v.unmount();
+
+    v = render(
+      <Peraga data={alat('luas', [{ ...step, panjang: 4, lebar: 2, hitung: 'keliling' }])} />,
+    );
+    start();
+    for (const s of ['atas', 'kanan', 'bawah', 'kiri'])
+      fireEvent.click(screen.getByRole('button', { name: `Ukur sisi ${s}` }));
+    expect(screen.getByText('Keliling sejauh ini: 12 satuan')).toBeTruthy();
+    done();
+    v.unmount();
+
+    v = render(<Peraga data={alat('sudut', [{ ...step, target: 105 }])} />);
+    start();
+    fireEvent.click(screen.getByRole('button', { name: '+ 90°' }));
+    expect(screen.getByText('90° · sudut siku-siku')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: '+ 15°' }));
+    done();
+    v.unmount();
+
+    v = render(
+      <Peraga
+        data={alat('diagram', [
+          {
+            ...step,
+            satuan: 'anak',
+            skala: 5,
+            data: [
+              { nama: 'apel', nilai: 10 },
+              { nama: 'jeruk', nilai: 5 },
+            ],
+          },
+        ])}
+      />,
+    );
+    start();
+    const plus = screen.getAllByRole('button', { name: '+' });
+    fireEvent.click(plus[0]!);
+    fireEvent.click(plus[0]!);
+    fireEvent.click(plus[1]!);
+    done();
+    v.unmount();
+
+    v = render(<Peraga data={alat('desimal', [{ ...step, perseratus: 23 }])} />);
+    start();
+    fireEvent.click(screen.getByRole('button', { name: '+ 0,1' }));
+    fireEvent.click(screen.getByRole('button', { name: '+ 0,1' }));
+    for (let k = 0; k < 3; k++) fireEvent.click(screen.getByRole('button', { name: '+ 0,01' }));
+    expect(screen.getByText('0,23 = 23/100')).toBeTruthy();
+    done();
+    v.unmount();
+
+    render(<Peraga data={alat('blok-puluhan', [{ ...step, target: 2010 }])} />);
+    start();
+    fireEvent.click(screen.getByRole('button', { name: '+ Ribuan' }));
+    fireEvent.click(screen.getByRole('button', { name: '+ Ribuan' }));
+    fireEvent.click(screen.getByRole('button', { name: '+ Puluhan' }));
+    expect(screen.getByText('2.010')).toBeTruthy();
+    done();
+  });
 });

@@ -1,0 +1,81 @@
+{
+  "id": "math.sd4.p8.pecahan-senilai-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 8,
+  "title": "Pecahan senilai — Level 8 — Pecahan senilai dua langkah",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "a": [2, 4],
+            "b": [2, 5]
+          },
+          "constraint": "n < d && gcd(n, d) == 1 && a != b",
+          "prompt": "{=n*a}/{=d*a} = {=n*b}/…",
+          "answer": "d * b",
+          "distractors": [
+            {
+              "expr": "d * a",
+              "tag": "penyebut-awal"
+            },
+            {
+              "expr": "d * a + n * b - n * a",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "d * b + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Sederhanakan dulu: {=n*a}/{=d*a} dibagi {a} menjadi {n}/{d}. Lalu kalikan {n}/{d} dengan {b}: {n} × {b} = {=n*b} dan {d} × {b} = {answer}. Jadi penyebutnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "n": [1, 8],
+            "k": [2, 9]
+          },
+          "derived": {
+            "c": "n * k",
+            "e": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = {c}/{e}. Pembilang dan penyebut {n}/{d} dikali berapa?",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "e - d",
+              "tag": "selisih-penyebut"
+            },
+            {
+              "expr": "c - n",
+              "tag": "selisih-pembilang"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Lihat penyebut: {d} × … = {e}. Karena {e} : {d} = {k}, pengalinya {k}. Cek pembilang: {n} × {k} = {c}. Jadi dikali {answer}."
+        }
+      }
+    ]
+  }
+}

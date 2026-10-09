@@ -216,6 +216,48 @@ export class AdminFinanceController {
     };
   }
 
+  /**
+   * Komisi setahun per bulan (D-100): kas, laba bersih, dan bagian tiap owner. Bulan yang sudah ditutup memakai
+   * angka beku; bulan lain dihitung dari persen owner saat ini (perkiraan).
+   */
+  @Get('commission-year')
+  async commissionYear(@Query('year', new ZodPipe(yearSchema.optional())) year?: number) {
+    const y = year ?? Number(thisMonth().slice(0, 4));
+    const entries = await this.db
+      .select({ date: cashEntries.date, type: cashEntries.type, amount: cashEntries.amount })
+      .from(cashEntries)
+      .where(and(gte(cashEntries.date, `${y}-01-01`), lt(cashEntries.date, `${y + 1}-01-01`)));
+    const frozen = await this.db
+      .select()
+      .from(commissionPayouts)
+      .where(like(commissionPayouts.month, `${y}-%`));
+    const list = await this.db.select().from(owners).orderBy(asc(owners.createdAt));
+    const now = thisMonth();
+    const months = Array.from({ length: 12 }, (_, i) => {
+      const m = `${y}-${String(i + 1).padStart(2, '0')}`;
+      const summary = monthSummary(entries as never, m);
+      const closed = frozen.filter((f) => f.month === m);
+      const shares =
+        closed.length > 0
+          ? closed.map((f) => ({
+              ownerId: f.ownerId,
+              ownerName: f.ownerName,
+              percentBp: f.percentBp,
+              amount: f.amount,
+              paidAt: f.paidAt,
+            }))
+          : commissionShares(summary.net, list).map((s) => ({
+              ownerId: s.owner.id,
+              ownerName: s.owner.name,
+              percentBp: s.owner.percentBp,
+              amount: s.amount,
+              paidAt: null,
+            }));
+      return { ...summary, closed: closed.length > 0, future: m > now, shares };
+    });
+    return { year: y, months };
+  }
+
   private async summaryOf(m: string) {
     const entries = await this.db
       .select({ date: cashEntries.date, type: cashEntries.type, amount: cashEntries.amount })

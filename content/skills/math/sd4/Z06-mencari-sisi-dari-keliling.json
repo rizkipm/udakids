@@ -1,0 +1,112 @@
+{
+  "id": "math.sd4.z6.mencari-sisi-dari-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 6,
+  "title": "Keliling bangun datar — Level 6 — Mencari sisi dari keliling",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 25]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Keliling sebuah persegi {k} cm. Berapa cm panjang sisinya?",
+          "answer": "s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k / 2",
+              "tag": "dibagi-2"
+            },
+            {
+              "expr": "k - 4",
+              "tag": "dikurangi-4"
+            },
+            {
+              "expr": "s + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Keliling persegi = 4 × sisi. Jadi sisi = keliling : 4 = {k} : 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 25],
+            "l": [2, 15]
+          },
+          "constraint": "p > l",
+          "derived": {
+            "k": "2 * (p + l)"
+          },
+          "prompt": "Keliling persegi panjang {k} cm dan panjangnya {p} cm. Berapa cm lebarnya?",
+          "answer": "l",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k - p",
+              "tag": "lupa-dibagi-2"
+            },
+            {
+              "expr": "k / 2",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "k - 2 * p",
+              "tag": "lupa-dibagi-2"
+            }
+          ],
+          "explain": "Setengah keliling = panjang + lebar: {k} : 2 = {=k/2}. Lebar = {=k/2} − {p} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 15],
+            "b": [4, 15],
+            "c": [3, 15]
+          },
+          "constraint": "a + b > c && a + c > b && b + c > a && a != b",
+          "derived": {
+            "k": "a + b + c"
+          },
+          "prompt": "Keliling sebuah segitiga {k} cm. Dua sisinya {a} cm dan {b} cm. Berapa cm sisi ketiga?",
+          "answer": "c",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-dua-sisi"
+            },
+            {
+              "expr": "k - a",
+              "tag": "satu-sisi-dikurangi"
+            },
+            {
+              "expr": "k - b",
+              "tag": "satu-sisi-dikurangi"
+            }
+          ],
+          "explain": "Kurangi keliling dengan sisi yang sudah diketahui: {k} − {a} − {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "id": "math.sd34.eb10.tantangan-geometri-koordinat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 10,
+  "title": "Geometri koordinat — Level 10 — Tantangan geometri koordinat",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Gabungan semua indikator geometri koordinat"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 4],
+            "v": [1, 3],
+            "k": [1, 3],
+            "x1": [-6, 6],
+            "y1": [-6, 6],
+            "sx": {
+              "values": [1, -1]
+            },
+            "sy": {
+              "values": [1, -1]
+            }
+          },
+          "derived": {
+            "dx": "k * (u * u - v * v)",
+            "dy": "k * 2 * u * v",
+            "c": "k * (u * u + v * v)",
+            "x2": "x1 + sx * dx",
+            "y2": "y1 + sy * dy"
+          },
+          "constraint": "v < u && dx <= 16 && dy <= 16",
+          "prompt": "Seekor semut berjalan lurus dari titik ({x1}, {y1}) ke titik ({x2}, {y2}) pada kertas berpetak. Berapa satuan panjang lintasan semut itu?",
+          "answer": "c",
+          "unit": "satuan",
+          "distractors": [
+            {
+              "expr": "dx + dy",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "max(dx, dy)",
+              "tag": "satu-arah"
+            },
+            {
+              "expr": "c + 1",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Geser mendatar {dx} satuan dan tegak {dy} satuan. Jarak = √({dx}² + {dy}²) = √{=c*c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [-4, 3],
+            "b": [-4, 3],
+            "w": [2, 8],
+            "h": [2, 8]
+          },
+          "derived": {
+            "ls": "w * h / 2"
+          },
+          "constraint": "(w * h) % 2 == 0 && !(a == 1 && b == 1 && w == 3 && h == 4)",
+          "prompt": "Dua titik sudut sebuah segitiga siku-siku adalah ({a}, {b}) dan ({=a+w}, {b}). Titik sudut ketiganya ({=a+w}, Y) berada di atas titik ({=a+w}, {b}). Luas segitiga itu {ls} satuan persegi. Berapakah Y?",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "axes": {
+                "xMin": "=min(a,0)-1",
+                "xMax": "=max(a+w,0)+1",
+                "yMin": "=min(b,0)-1",
+                "yMax": "=max(b+h,0)+1"
+              },
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    ["=a", "=b"],
+                    ["=a+w", "=b"],
+                    ["=a+w", "=b+h"]
+                  ],
+                  "fill": "soft"
+                },
+                {
+                  "t": "point",
+                  "at": ["=a", "=b"]
+                },
+                {
+                  "t": "point",
+                  "at": ["=a+w", "=b"]
+                },
+                {
+                  "t": "point",
+                  "at": ["=a+w", "=b+h"],
+                  "name": "?",
+                  "pos": "e"
+                }
+              ]
+            }
+          ],
+          "answer": "b + h",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "lupa-titik-awal"
+            },
+            {
+              "expr": "b + 2 * h",
+              "tag": "lupa-setengah"
+            },
+            {
+              "expr": "b + h / 2",
+              "tag": "dibagi-dua"
+            }
+          ],
+          "choices": 4,
+          "allowNegative": true,
+          "explain": "Alas = {w}, tinggi = Y − {b}. Luas = {w} × (Y − {b}) : 2 = {ls}, jadi Y − {b} = {h} dan Y = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 4],
+            "v": [1, 3],
+            "k": [1, 3],
+            "x1": [-6, 6],
+            "y1": [-6, 6],
+            "sx": {
+              "values": [1, -1]
+            },
+            "sy": {
+              "values": [1, -1]
+            }
+          },
+          "derived": {
+            "dx": "k * (u * u - v * v)",
+            "dy": "k * 2 * u * v",
+            "c": "k * (u * u + v * v)",
+            "x2": "x1 + sx * dx",
+            "y2": "y1 + sy * dy"
+          },
+          "constraint": "v < u && dx <= 16 && dy <= 16",
+          "prompt": "Tiga patok kebun ditancapkan di titik ({x1}, {y1}), ({x1}, {y2}), dan ({x2}, {y1}). Seutas tali dibentangkan mengelilingi ketiga patok itu. Berapa satuan panjang tali?",
+          "answer": "dx + dy + c",
+          "unit": "satuan",
+          "explain": "Sisi tegak = {dy}, sisi mendatar = {dx}. Sisi miring = √({dx}² + {dy}²) = {c}. Keliling = {dx} + {dy} + {c} = {answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "dx + dy",
+              "tag": "lupa-miring"
+            },
+            {
+              "expr": "2 * (dx + dy)",
+              "tag": "persegi-panjang"
+            },
+            {
+              "expr": "dx + dy + c + 1",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "y1": [-6, -1],
+            "d": [4, 12],
+            "p": [1, 8],
+            "q": [1, 8],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "derived": {
+            "y2": "y1 + d",
+            "yr": "y1 + min(a, d - 1)",
+            "yl": "y1 + min(b, d - 1)"
+          },
+          "constraint": "(d * (p + q)) % 2 == 0",
+          "prompt": "Empat titik (0, {y1}), ({p}, {yr}), (0, {y2}), dan ({=-q}, {yl}) dihubungkan berurutan dan kembali ke titik pertama. Berapa satuan persegi luas bangun yang terbentuk?",
+          "answer": "d * (p + q) / 2",
+          "unit": "satuan²",
+          "explain": "Titik (0, {y1}) dan (0, {y2}) ada di sumbu-y; ruas itu panjangnya {d} dan membagi segiempat menjadi dua segitiga dengan tinggi {p} dan {q}. Luas = {d} × {p} : 2 + {d} × {q} : 2 = {answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "d * (p + q)",
+              "tag": "lupa-setengah"
+            },
+            {
+              "expr": "d * p / 2",
+              "tag": "satu-segitiga"
+            },
+            {
+              "expr": "(p + q) * d / 2 + d",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

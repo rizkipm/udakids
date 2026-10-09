@@ -1,0 +1,116 @@
+{
+  "id": "math.sd4.a8.membandingkan-nilai-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 8,
+  "title": "Nilai tempat sampai 100.000 — Level 8 — Membandingkan nilai angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 9],
+            "b": [0, 9],
+            "e": [0, 9],
+            "f": [0, 9]
+          },
+          "derived": {
+            "n": "x * 10000 + b * 1000 + x * 100 + e * 10 + f"
+          },
+          "constraint": "b != x && e != x && f != x",
+          "prompt": "Pada bilangan {n}, angka {x} muncul dua kali. Nilai angka {x} yang di kiri berapa kali nilai angka {x} yang di kanan?",
+          "answer": "100",
+          "distractors": [
+            {
+              "expr": "10",
+              "tag": "satu-tempat"
+            },
+            {
+              "expr": "1000",
+              "tag": "tiga-tempat"
+            },
+            {
+              "expr": "2",
+              "tag": "dua-tempat"
+            }
+          ],
+          "explain": "Angka {x} di kiri ada di tempat puluh ribuan, nilainya {=x*10000}. Angka {x} di kanan ada di tempat ratusan, nilainya {=x*100}. Setiap geser dua tempat ke kiri, nilainya 10 × 10 = 100 kali lipat."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 9],
+            "a": [1, 9],
+            "e": [0, 9],
+            "f": [0, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + x * 1000 + x * 100 + e * 10 + f"
+          },
+          "constraint": "a != x && e != x && f != x",
+          "prompt": "Pada bilangan {n}, angka {x} muncul dua kali. Nilai angka {x} yang di kiri berapa kali nilai angka {x} yang di kanan?",
+          "answer": "10",
+          "distractors": [
+            {
+              "expr": "100",
+              "tag": "dua-tempat"
+            },
+            {
+              "expr": "1000",
+              "tag": "tiga-tempat"
+            },
+            {
+              "expr": "1",
+              "tag": "sama"
+            }
+          ],
+          "explain": "Angka {x} di kiri ada di tempat ribuan ({=x*1000}), yang di kanan di tempat ratusan ({=x*100}). Bergeser satu tempat ke kiri, nilainya 10 kali lipat."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [1, 9],
+            "a": [1, 9],
+            "c": [0, 9],
+            "f": [0, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + x * 1000 + c * 100 + x * 10 + f"
+          },
+          "constraint": "a != x && c != x && f != x",
+          "prompt": "Pada bilangan {n}, berapa selisih nilai kedua angka {x}?",
+          "answer": "x * 1000 - x * 10",
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "angkanya-sama"
+            },
+            {
+              "expr": "x * 1000 - x * 100",
+              "tag": "tempat-salah"
+            },
+            {
+              "expr": "x * 1000 + x * 10",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Angka {x} pertama di tempat ribuan, nilainya {=x*1000}. Angka {x} kedua di tempat puluhan, nilainya {=x*10}. Selisihnya {=x*1000} − {=x*10} = {answer}."
+        }
+      }
+    ]
+  }
+}

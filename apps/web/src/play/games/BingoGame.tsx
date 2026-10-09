@@ -1,0 +1,112 @@
+import { useEffect, useRef, useState } from 'react';
+import { bingoReplay, gameOver, type Interaction } from '@little-coder/engine';
+import { speak } from '../../audio/speech';
+import { t } from '../../i18n';
+import { useSayChoice } from '../itemVoice';
+import './g4.css';
+
+type Bingo = Extract<Interaction, { type: 'bingo' }>;
+
+function Speaker() {
+  return (
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden>
+      <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" />
+      <path
+        d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Bingo Rupiah (D-096): kartu 3×3 berisi nominal Rupiah. Momo membacakan soal belanja satu per satu; anak
+ * mengetuk nominal yang pas sampai satu garis lengkap (BINGO). Ketukan keliru dihitung engine (`bingoReplay`).
+ */
+export function BingoGame({
+  interaction: it,
+  disabled,
+  showAnswer,
+  onDone,
+}: {
+  interaction: Bingo;
+  disabled: boolean;
+  showAnswer: boolean;
+  onDone: (taps: string[]) => void;
+}) {
+  const taps = useRef<string[]>([]);
+  const [, setTick] = useState(0);
+  const [wobble, setWobble] = useState<string>();
+  const sayChoice = useSayChoice();
+  useEffect(() => {
+    taps.current = [];
+    setTick((n) => n + 1);
+  }, [it]);
+  const r = bingoReplay(it.calls, taps.current);
+  const marked = new Set(
+    (showAnswer ? it.calls : it.calls.slice(0, r.marked)).map((c) => c.answer),
+  );
+  const call = it.calls[Math.min(r.marked, it.calls.length - 1)]!;
+  const sayCall = () => sayChoice({ id: call.id, say: call.say });
+
+  useEffect(() => {
+    if (!r.done && !disabled) sayCall();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [call.id]);
+
+  const tap = (id: string) => {
+    if (disabled || r.done || showAnswer || marked.has(id)) return;
+    taps.current = [...taps.current, id];
+    const next = bingoReplay(it.calls, taps.current);
+    setTick((n) => n + 1);
+    if (next.done) {
+      speak(t('play.bingo.done'));
+      return onDone(taps.current);
+    }
+    if (next.slips > r.slips) {
+      setWobble(id);
+      if (gameOver(it, taps.current)) return onDone(taps.current);
+      speak(t('play.bingo.again'));
+    }
+  };
+
+  return (
+    <div className="g4-board bingo-board">
+      <div className="bingo-call">
+        <span className="kid-note">
+          {t('play.bingo.call', {
+            n: Math.min(r.marked + 1, it.calls.length),
+            total: it.calls.length,
+          })}
+        </span>
+        <p aria-live="polite">{call.text}</p>
+        <button
+          type="button"
+          className="g4-step"
+          aria-label={t('play.bingo.listen')}
+          onClick={sayCall}
+        >
+          <Speaker />
+        </button>
+      </div>
+      <div className="bingo-card" role="group" aria-label={t('play.bingo.card')}>
+        {it.cells.map((c) => (
+          <button
+            key={c.id}
+            type="button"
+            className={`bingo-cell${marked.has(c.id) ? ' is-marked' : ''}${wobble === c.id ? ' is-wobble' : ''}`}
+            disabled={disabled || showAnswer || r.done}
+            aria-pressed={marked.has(c.id)}
+            aria-label={c.say}
+            onClick={() => tap(c.id)}
+          >
+            {c.visual.kind === 'word' ? c.visual.text : c.say}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

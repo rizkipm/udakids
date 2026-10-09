@@ -1,0 +1,87 @@
+{
+  "id": "math.sd4.bb4.jenis-sudut-dari-besarnya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 4,
+  "title": "Garis dan sudut — Level 4 — Jenis sudut dari besarnya",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "range": [5, 180],
+              "step": 5
+            }
+          },
+          "prompt": "Sebuah sudut besarnya {d}°. Sudut itu termasuk …",
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Bandingkan {d}° dengan 90° dan 180°. Kurang dari 90° lancip, 90° siku-siku, antara 90° dan 180° tumpul, 180° lurus. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6]
+          },
+          "prompt": "Pukul {h}.00, jarum jam dan jarum menit membentuk …",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": 0
+            }
+          ],
+          "answer": "1 + (h >= 3) + (h > 3) + (h >= 6)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Pukul 3.00 jarumnya siku-siku. Sebelum itu lebih sempit (lancip), sesudahnya lebih lebar (tumpul), dan pukul 6.00 jarumnya segaris (lurus). Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "pojok buku tulis",
+              "pojok papan tulis",
+              "pojok ubin lantai",
+              "pojok bingkai jendela",
+              "pojok layar televisi"
+            ]
+          },
+          "prompt": "Sudut pada {x} termasuk …",
+          "answer": "2",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Pojok benda berbentuk persegi atau persegi panjang selalu siku-siku, besarnya 90°."
+        }
+      }
+    ]
+  }
+}

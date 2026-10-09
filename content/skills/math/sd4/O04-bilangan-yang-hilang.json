@@ -1,0 +1,92 @@
+{
+  "id": "math.sd4.o4.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 4,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 4 — Bilangan yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 5000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "{a}, {=a+k}, …, {=a+3*k}, {=a+4*k}. Bilangan yang hilang adalah …",
+          "answer": "a + 2 * k",
+          "distractors": [
+            {
+              "expr": "a + 2 * k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + 2 * k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a + k + 10",
+              "tag": "tambah-10"
+            }
+          ],
+          "explain": "Aturannya tambah {k}, karena {=a+k} − {a} = {k}. Bilangan yang hilang: {=a+k} + {k} = {answer}. Periksa: {answer} + {k} = {=a+3*k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 5000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "…, {=a+k}, {=a+2*k}, {=a+3*k}. Bilangan pertama adalah …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "a + 2 * k",
+              "tag": "tambah"
+            },
+            {
+              "expr": "a - k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Aturannya tambah {k}. Untuk mencari bilangan sebelumnya, kerjakan kebalikannya: {=a+k} − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "constraint": "a - 3 * k > 0",
+          "prompt": "{a}, {=a-k}, …, {=a-3*k}. Bilangan yang hilang adalah …",
+          "answer": "a - 2 * k",
+          "mode": "input",
+          "explain": "Pola turun dengan aturan kurang {k}. {=a-k} − {k} = {answer}. Periksa: {answer} − {k} = {=a-3*k}."
+        }
+      }
+    ]
+  }
+}

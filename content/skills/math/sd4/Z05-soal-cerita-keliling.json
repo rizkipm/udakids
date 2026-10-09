@@ -1,0 +1,160 @@
+{
+  "id": "math.sd4.z5.soal-cerita-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 5,
+  "title": "Keliling bangun datar — Level 5 — Soal cerita keliling",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "range": [40, 100],
+              "step": 5
+            },
+            "l": {
+              "range": [20, 60],
+              "step": 5
+            }
+          },
+          "constraint": "p > l",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} berlari satu kali mengelilingi lapangan berbentuk persegi panjang {p} m × {l} m. Berapa meter jarak larinya?",
+          "answer": "2 * (p + l)",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "p + l",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "p * l",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * p + l",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Mengelilingi lapangan berarti menempuh kelilingnya. 2 × ({p} + {l}) = 2 × {=p+l} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [10, 40],
+            "l": [8, 30]
+          },
+          "constraint": "p > l",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": ["bingkai foto", "papan nama", "kartu ucapan", "cermin"]
+          },
+          "prompt": "{nama} menempel pita di sekeliling tepi {x} berukuran {p} cm × {l} cm. Berapa cm pita yang diperlukan?",
+          "answer": "2 * (p + l)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p + l",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "p * l",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * p + l",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Pita mengikuti tepi luar, jadi cari keliling: {p} + {l} + {p} + {l} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [4, 25]
+          },
+          "words": {
+            "x": ["Kebun sayur", "Kandang ayam", "Kolam ikan", "Taman bunga"]
+          },
+          "prompt": "{x} berbentuk persegi bersisi {s} m akan dipagari bambu di sekelilingnya. Berapa meter pagar yang diperlukan?",
+          "answer": "4 * s",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "s * s",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "3 * s",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Pagar mengelilingi semua sisi. Persegi punya 4 sisi sama: 4 × {s} = {answer}."
+        }
+      }
+    ]
+  }
+}

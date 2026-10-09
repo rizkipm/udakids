@@ -55,7 +55,7 @@ const order: OrderRow = {
     kind: 'bank',
     provider: 'BCA',
     accountNumber: '1234567890',
-    accountName: 'Little Coder',
+    accountName: 'UdaKids',
     instructions: '',
   },
   priceNormal: 50_000,

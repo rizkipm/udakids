@@ -21,6 +21,11 @@ import {
   jigsawSolution,
   sortSolution,
   sumSolution,
+  guessSolution,
+  linesCounts,
+  stackSolution,
+  chanceSolution,
+  coordSolution,
 } from '../src/index.js';
 
 const tpl = (
@@ -84,6 +89,24 @@ function correctAnswer(item: Item): AnswerValue {
       return crosswordSolution(it);
     case 'jigsaw':
       return jigsawSolution(it);
+    case 'guess':
+      return guessSolution(it);
+    case 'chart':
+      return Object.fromEntries(it.bars.map((b) => [b.id, String(b.value)]));
+    case 'magic':
+      return it.facts.map((f) => `${f.id}:${f.answer}`);
+    case 'stack':
+      return stackSolution(it.op, it.blocks, it.target, it.maxBlocks)!;
+    case 'lines': {
+      const c = linesCounts(it.a, it.b);
+      return { ratusan: String(c.ratusan), puluhan: String(c.puluhan), satuan: String(c.satuan) };
+    }
+    case 'bingo':
+      return it.calls.map((c) => c.answer);
+    case 'coord':
+      return coordSolution(it.steps);
+    case 'chance':
+      return chanceSolution(it.answer, it.fraction);
   }
 }
 
@@ -522,6 +545,42 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
         { family: 'clock', params: { minutes: [0] } },
         { family: 'compare-numbers', params: { max: 10, mode: 'larger' } },
       ],
+    },
+  ],
+  // Game Kelas 4 (D-096).
+  ['guess-game', {}],
+  ['guess-game', { range: [1000, 9999], hint: 'digit' }],
+  ['guess-game', { range: [100, 999], hint: 'digit' }],
+  ['chart-game', {}],
+  ['chart-game', { scale: 5, steps: [1, 9], title: 'Sampah plastik terkumpul', unit: 'kg' }],
+  ['magic-game', {}],
+  ['magic-game', { op: ':', tables: [6, 7, 8, 9], count: 8 }],
+  ['magic-game', { op: 'campur', tables: [11, 12], factor: [2, 12] }],
+  ['stack-game', {}],
+  ['stack-game', { values: [100, 5000], step: 100, pick: [3, 4], blocks: 8 }],
+  ['stack-game', { op: '×', values: [2, 12], pick: [2, 3] }],
+  ['lines-game', {}],
+  ['lines-game', { a: [2, 4], b: [11, 32] }],
+  ['bingo-game', {}],
+  ['bingo-game', { kinds: ['kembalian'], price: [500, 4500] }],
+  ['bingo-game', { kinds: ['kali', 'jumlah'], price: [5000, 25000], step: 1000 }],
+  ['coord-game', {}],
+  ['coord-game', { x: [-5, 5], y: [-5, 5], mode: 'move', steps: 3 }],
+  ['coord-game', { x: [-6, 6], y: [-4, 6], mode: 'rect', steps: 2 }],
+  ['coord-game', { mode: 'mix', steps: 5 }],
+  ['chance-game', { space: 'die', events: [{ text: 'matanya genap', test: 'a % 2 == 0' }] }],
+  ['chance-game', { space: 'dice2', events: [{ text: 'jumlah matanya 7', test: 's == 7' }] }],
+  [
+    'chance-game',
+    { space: 'coins3', events: [{ text: 'tepat 2 angka', test: 'h == 2' }], simplify: false },
+  ],
+  [
+    'chance-game',
+    {
+      space: 'bag',
+      bag: { merah: 2, hitam: 2 },
+      events: [{ text: 'warnanya berbeda', test: 'merah == 1' }],
+      simplify: false,
     },
   ],
 ];

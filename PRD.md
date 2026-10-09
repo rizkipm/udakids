@@ -1,4 +1,4 @@
-# Little Coder (Cleo Kids) — PRD + Build Brief untuk Claude Code
+# UdaKids (Cleo Kids) — PRD + Build Brief untuk Claude Code
 
 > Versi dokumen: PRD v0.5 + Build Brief v1.0 · 28 September 2026 · Pemilik: Rizki Syaputra (Silentmode Sdn Bhd)
 >
@@ -35,7 +35,7 @@ Mulai dari M0.
 
 ## A1. Ringkasan produk dalam 5 kalimat
 
-Little Coder adalah aplikasi web (PWA) untuk anak 5–8 tahun yang melatih logika & coding, spasial, matematika, literasi, dan sains. Anak "mengajari" robot bernama **Momo** dengan kartu gambar besar yang cukup diketuk (tanpa drag & drop blok kecil); urutan kartu itu adalah programnya (**Buku Catatan Momo**). Ada dua lapisan: **Petualangan Momo** (100 level cerita dalam 10 dunia, dimainkan di workshop) dan **Pustaka Latihan** (katalog skill ala IXL dengan soal yang di-generate, untuk latihan di rumah). Fasilitator workshop punya dashboard kelas realtime, dan orang tua menerima laporan + sertifikat lewat link. Aplikasi wajib tetap berjalan offline dan menyimpan data anak seminimal mungkin.
+UdaKids adalah aplikasi web (PWA) untuk anak 5–8 tahun yang melatih logika & coding, spasial, matematika, literasi, dan sains. Anak "mengajari" robot bernama **Momo** dengan kartu gambar besar yang cukup diketuk (tanpa drag & drop blok kecil); urutan kartu itu adalah programnya (**Buku Catatan Momo**). Ada dua lapisan: **Petualangan Momo** (100 level cerita dalam 10 dunia, dimainkan di workshop) dan **Pustaka Latihan** (katalog skill ala IXL dengan soal yang di-generate, untuk latihan di rumah). Fasilitator workshop punya dashboard kelas realtime, dan orang tua menerima laporan + sertifikat lewat link. Aplikasi wajib tetap berjalan offline dan menyimpan data anak seminimal mungkin.
 
 ## A2. Lingkup build pertama (MVP)
 
@@ -370,7 +370,7 @@ create table skill_mastery (child_id uuid references children, skill_id text, st
 
 | Pertanyaan | Default sementara |
 | --- | --- |
-| Nama produk & karakter (Little Coder/Little Thinkers, Momo/Riko) | Pakai konstanta `APP_NAME` dan `CHARACTER_NAME` di satu file config; default "Little Coder" dan "Momo" |
+| Nama produk & karakter (UdaKids, Momo; D-097) | Pakai konstanta `APP_NAME` dan `CHARACTER_NAME` di satu file config: "UdaKids" dan "Momo" |
 | Literasi: Bahasa Indonesia saja atau + Inggris | Bahasa Indonesia saja, struktur i18n siap Inggris |
 | Backend final | Supabase, di balik `SyncAdapter` sehingga bisa diganti |
 | Model bisnis Pustaka | Tidak ada paywall di MVP; siapkan flag `entitlement` per anak |
@@ -380,11 +380,11 @@ create table skill_mastery (child_id uuid references children, skill_id text, st
 
 # BAGIAN B — PRD LENGKAP
 
-## PRD — Platform & Silabus Little Coder (Cleo Kids)
+## PRD — Platform & Silabus UdaKids (Cleo Kids)
 
 28 September 2026 · Rizki Syaputra · Status: Draf v0.5
 
-### Kenapa Little Coder ada
+### Kenapa UdaKids ada
 
 Kami ingin anak 5–8 tahun belajar berpikir seperti programmer dengan cara yang terasa seperti bermain bersama teman, bukan seperti mengoperasikan software.
 
@@ -392,7 +392,7 @@ Di dalam platform yang sama, anak juga mengasah matematika (dengan acuan pendeka
 
 Sebagian besar platform coding anak, seperti Code.org, Blockly Games dan ScratchJr, memakai model menyusun blok. Model itu efektif, tapi bagi anak 5–6 tahun menarik-lepas blok kecil dengan mouse terasa seperti tugas. Semuanya juga berbahasa Inggris dan tidak bisa diatur mengikuti alur workshop Cleo Kids.
 
-Little Coder mengambil jalan lain. Anak berbicara, mencontohkan gerakan dan memakai kartu untuk memberi instruksi ke sebuah karakter bernama Momo. Logika yang dipelajari tetap sama (urutan, pengulangan, kondisi), tapi caranya lebih dekat dengan cara anak berinteraksi sehari-hari.
+UdaKids mengambil jalan lain. Anak berbicara, mencontohkan gerakan dan memakai kartu untuk memberi instruksi ke sebuah karakter bernama Momo. Logika yang dipelajari tetap sama (urutan, pengulangan, kondisi), tapi caranya lebih dekat dengan cara anak berinteraksi sehari-hari.
 
 Di Batam, kursus coding yang ada (Timedoor, OSEDU, Kalananti) kebanyakan berupa kelas rutin untuk anak yang lebih besar. Workshop event untuk usia 5–8 tahun dengan pendekatan seperti ini masih kosong.
 
@@ -802,7 +802,7 @@ Ada tiga koreksi:
 
 - **Pola warna bukan dasar logika kondisi.** Melanjutkan pola (merah, biru, merah, ...) melatih pengenalan pola, bukan logika jika-maka. Logika kondisi punya tempat sendiri di Dunia 8.
 - **Kartu kiri-kanan untuk anak 5 tahun perlu disesuaikan.** Riset perkembangan (Rigal, 1994) menunjukkan kiri-kanan dari sudut pandang orang lain baru lancar di usia 8–9 tahun. Karena itu belok relatif dipindah ke Dunia 6.
-- **100% tanpa layar memang paling kuat menurut riset, tapi Little Coder tetap memakai laptop.** Jalan tengahnya: setiap dunia dibuka dengan permainan tanpa layar, lalu laptop dipakai untuk konsep yang sama. Pola hybrid ini didukung studi del Olmo-Muñoz (2020).
+- **100% tanpa layar memang paling kuat menurut riset, tapi UdaKids tetap memakai laptop.** Jalan tengahnya: setiap dunia dibuka dengan permainan tanpa layar, lalu laptop dipakai untuk konsep yang sama. Pola hybrid ini didukung studi del Olmo-Muñoz (2020).
 
 ### Yang dibangun lebih dulu
 
@@ -846,7 +846,7 @@ Beberapa hal tidak boleh ditawar, karena kalau gagal di depan 20 anak dan orang 
 
 ### Di balik layar
 
-Secara teknis Little Coder adalah satu aplikasi web yang bisa dipasang di laptop dan berjalan offline, terhubung ke satu server yang bisa berada di cloud atau di laptop fasilitator.
+Secara teknis UdaKids adalah satu aplikasi web yang bisa dipasang di laptop dan berjalan offline, terhubung ke satu server yang bisa berada di cloud atau di laptop fasilitator.
 
 **Arsitektur:**
 
@@ -894,10 +894,10 @@ Risiko lainnya lebih umum. Karakter Momo harus benar-benar disukai anak, jadi de
 - [ ] Siapa yang mendesain karakter Momo dan mengisi suaranya?
 - [ ] Apakah anak bisa lanjut bermain di rumah secara gratis, atau berlangganan setelah event?
 - [ ] Berapa laptop yang realistis disediakan per event, dan berapa anak per sesi?
-- [ ] Apakah "Little Coder" dan "Momo" jadi brand tersendiri, atau tetap di bawah nama Cleo Kids?
+- [x] Apakah "Little Coder" dan "Momo" jadi brand tersendiri, atau tetap di bawah nama Cleo Kids? → Merek: **UdaKids** (D-097).
 - [ ] Apakah silabus perlu diselaraskan dengan materi koding di kurikulum sekolah supaya bisa ditawarkan ke sekolah?
 - [ ] Venue pilot pertama: restoran partner (cocok untuk Dunia 1 yang bertema dapur, atau Dunia 6: Momo Jadi Koki) atau mal/sekolah?
-- [ ] Nama produk dan karakter: Little Coder atau Little Thinkers? Momo atau Riko? ("Little Thinkers" mungkin lebih pas karena fokusnya logika, bukan menulis kode.)
+- [x] Nama produk dan karakter: Little Coder atau Little Thinkers? → **UdaKids** dan **Momo** (D-097). Momo atau Riko? ("Little Thinkers" mungkin lebih pas karena fokusnya logika, bukan menulis kode.)
 - [ ] Siapa yang menulis dan menguji 100 level, dan berapa level per bulan yang realistis?
 - [ ] Apakah isi matematika dan sains perlu ditinjau guru TK/SD berlatar matematika atau sains sebelum pilot?
 - [ ] Apakah klaim ke orang tua memakai kalimat "terinspirasi pendekatan Singapura"? (Bukti efektivitas kurikulum Singapore Math sebagai merek masih terbatas.)
@@ -921,7 +921,7 @@ Risiko lainnya lebih umum. Karakter Momo harus benar-benar disukai anak, jadi de
 
 # BAGIAN C — RINGKASAN RISET
 
-Riset lengkap ada di dokumen terpisah "Riset Pendukung Little Coder". Tabel ini merangkum temuan yang langsung memengaruhi desain dan kode.
+Riset lengkap ada di dokumen terpisah "Riset Pendukung Little Coder" (nama lama UdaKids). Tabel ini merangkum temuan yang langsung memengaruhi desain dan kode.
 
 | Temuan | Sumber | Keputusan di produk |
 | --- | --- | --- |

@@ -1,0 +1,63 @@
+{
+  "id": "math.sd4.o1.pola-bilangan-naik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 1,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 1 — Pola bilangan naik",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 5000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "{a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan berikutnya adalah …",
+          "answer": "a + 4 * k",
+          "distractors": [
+            {
+              "expr": "a + 5 * k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "a + 4 * k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + 3 * k + 10",
+              "tag": "tambah-10"
+            }
+          ],
+          "explain": "Cari selisih dua bilangan berdampingan: {=a+k} − {a} = {k}. Aturannya tambah {k}. {=a+3*k} + {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 5000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "Lanjutkan pola: {a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan kelima adalah …",
+          "answer": "a + 4 * k",
+          "mode": "input",
+          "explain": "Aturannya tambah {k}, karena {=a+k} − {a} = {k}. Bilangan kelima: {=a+3*k} + {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

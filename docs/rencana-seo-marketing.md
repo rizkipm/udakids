@@ -1,4 +1,4 @@
-# Rencana SEO dan Digital Marketing Udakids
+# Rencana SEO dan Digital Marketing UdaKids
 
 Status: **Usulan**, menunggu keputusan pemilik produk (bagian 9). Ditulis 2026-10-06.
 Pembaca: pemilik produk, tim marketing, dan tim pengembang.
@@ -32,7 +32,7 @@ mungkin dimenangkan adalah "game **edukasi** anak", "belajar … online", dan "l
 | Temuan                                                                      | Dampak                                                                                                                    | Prioritas |
 | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------- |
 | HTML halaman utama hanya ±1 KB berisi `<div id="root">` kosong (SPA)        | Google harus menjalankan JavaScript dulu, sedangkan Bing, WhatsApp, Facebook, dan AI search sering melihat halaman kosong | Tinggi    |
-| `<title>` = "Little Coder", sedangkan merek yang dipakai adalah **Udakids** | Pencarian "udakids" tidak cocok dengan judul halaman                                                                      | Tinggi    |
+| `<title>` = "Little Coder", sedangkan merek yang dipakai adalah **UdaKids** | Pencarian "udakids" tidak cocok dengan judul halaman                                                                      | Tinggi    |
 | Tidak ada meta description, Open Graph, atau gambar pratinjau               | Cuplikan di Google acak, dan link yang dibagikan di WA/IG tanpa gambar                                                    | Tinggi    |
 | `/robots.txt` dan `/sitemap.xml` menjawab **200 dengan halaman aplikasi**   | Mesin pencari tidak punya peta situs. Ini juga "soft 404"                                                                 | Tinggi    |
 | Semua alamat (termasuk yang tidak ada) menjawab 200                         | Halaman sampah bisa terindeks, `/play` dan `/admin` ikut dirayapi                                                         | Sedang    |
@@ -44,7 +44,7 @@ mungkin dimenangkan adalah "game **edukasi** anak", "belajar … online", dan "l
 
 | #   | Pekerjaan                                                                                                                                                     | Catatan kepatuhan                                 |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| 1   | **Merek konsisten:** nama produk di `apps/web/src/config/app.ts` (`APP_NAME`) dan judul halaman memakai "Udakids"                                             | Perlu keputusan (PRD A18: nama belum final)       |
+| 1   | **Merek konsisten:** nama produk di `apps/web/src/config/app.ts` (`APP_NAME`) dan judul halaman memakai "UdaKids"                                             | Perlu keputusan (PRD A18: nama belum final)       |
 | 2   | **Prerender halaman publik saat build:** landing, halaman mapel/jenjang, topik, artikel → HTML statis lengkap. Area `/play`, `/orang-tua`, `/admin` tetap SPA | Tanpa SSR server, tetap cocok dengan Nginx statis |
 | 3   | **Meta per halaman:** `title` (≤ 60 huruf), `description` (≤ 155), `canonical`, Open Graph dan Twitter Card, gambar pratinjau 1200×630                        | –                                                 |
 | 4   | **`robots.txt` asli:** izinkan halaman publik. `Disallow: /play /orang-tua /admin /fasilitator /laporan /api /r/`                                             | Area anak tidak diindeks                          |
@@ -94,10 +94,10 @@ mungkin dimenangkan adalah "game **edukasi** anak", "belajar … online", dan "l
 | Instagram, TikTok, YouTube Shorts | 3–5 konten per minggu: demo Momo, "tantangan soal hari ini", tips orang tua, carousel komunitas                                             | Tanpa wajah atau nama anak tanpa izin tertulis orang tua                                                            |
 | Komunitas WhatsApp                | Grup orang tua (link sudah bisa diatur di Admin → Kontak WhatsApp), info lomba, worksheet mingguan                                          | –                                                                                                                   |
 | Program afiliasi                  | Sudah ada (D-063). Dorong orang tua aktif membagikan link `/r/KODE`                                                                         | –                                                                                                                   |
-| Sekolah dan guru PAUD             | Kemitraan: sekolah memakai kelas gratis atau berbayar, lalu menautkan Udakids dari situs sekolah (backlink bernilai)                        | –                                                                                                                   |
+| Sekolah dan guru PAUD             | Kemitraan: sekolah memakai kelas gratis atau berbayar, lalu menautkan UdaKids dari situs sekolah (backlink bernilai)                        | –                                                                                                                   |
 | Lomba live                        | Lomba bulanan berhadiah sertifikat (`pdf-lib`), dengan halaman pengumuman publik. Sekolah dan media lokal menautkan                         | Hitung mundur hanya di lomba (D-042)                                                                                |
 | Media dan direktori               | Siaran pers ("platform belajar anak tanpa iklan, bisa offline"), pengajuan ulasan ke portal parenting, daftar di direktori aplikasi edukasi | –                                                                                                                   |
-| Situs induk                       | Tautan dari `eduskul.my.id` dan situs Udacoding ke Udakids                                                                                  | –                                                                                                                   |
+| Situs induk                       | Tautan dari `eduskul.my.id` dan situs Udacoding ke UdaKids                                                                                  | –                                                                                                                   |
 | Google Business Profile           | Bila ada alamat kantor atau tempat belajar resmi                                                                                            | –                                                                                                                   |
 | Iklan berbayar (opsional)         | Google Ads untuk kata kunci panjang, Meta Ads yang menyasar **orang tua** dengan anggaran kecil dan diuji                                   | Iklan tidak pernah tampil di area anak, dan tidak menyasar anak                                                     |
 | Play Store (perlu keputusan)      | PWA dibungkus **Trusted Web Activity** supaya muncul di pencarian Play Store "game edukasi anak". Aplikasinya tetap PWA yang sama           | CLAUDE.md: "app native" di luar lingkup MVP, jadi perlu persetujuan. Wajib mengikuti kebijakan Families Google Play |
@@ -134,7 +134,7 @@ Angka di atas adalah target awal dan perlu disesuaikan setelah data bulan pertam
 
 ## 9. Keputusan yang dibutuhkan
 
-1. **Nama merek di aplikasi:** ganti `APP_NAME` dari "Little Coder" menjadi **"Udakids"**?
+1. **Nama merek di aplikasi:** ganti `APP_NAME` dari "Little Coder" menjadi **"UdaKids"**? → Sudah (D-097).
 2. **Domain:** tetap `kids.eduskul.my.id`, atau memakai domain merek sendiri (misalnya `udakids.id` atau
    `udakids.com`) dengan pengalihan 301? Lebih baik diputuskan **sebelum** konten SEO dibangun, karena pindah
    domain belakangan berarti kehilangan sebagian peringkat.

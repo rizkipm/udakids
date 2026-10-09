@@ -1,0 +1,98 @@
+{
+  "id": "math.sd4.m5.memeriksa-pembagian-bersisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 5,
+  "title": "Pembagian bersisa dan soal cerita — Level 5 — Memeriksa pembagian bersisa",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [5, 120],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Sebuah bilangan dibagi {m}, hasilnya {q} sisa {r}. Bilangan itu adalah …",
+          "answer": "m * q + r",
+          "distractors": [
+            {
+              "expr": "m * q",
+              "tag": "lupa-sisa"
+            },
+            {
+              "expr": "m * q - r",
+              "tag": "sisa-dikurangi"
+            },
+            {
+              "expr": "m * (q + r)",
+              "tag": "sisa-dikali"
+            }
+          ],
+          "explain": "Bilangan = hasil bagi × pembagi + sisa. {q} × {m} = {=m*q}, lalu {=m*q} + {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [8, 90],
+            "r": [1, 8],
+            "k": {
+              "values": [0, 0, 1, 2]
+            }
+          },
+          "derived": {
+            "t": "m * q + r",
+            "qs": "q - (k == 2)",
+            "rs": "r + (k == 1) + m * (k == 2)"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < m",
+          "prompt": "{nama} menghitung {t} : {m} = {qs} sisa {rs}. Apakah jawabannya tepat?",
+          "answer": "1 - min(k, 1)",
+          "labels": {
+            "1": "Tepat",
+            "0": "Belum tepat"
+          },
+          "explain": "Periksa dua hal. Pertama, {qs} × {m} + {rs} = {=qs*m+rs}; hasilnya harus {t}. Kedua, sisa harus lebih kecil dari {m}. Jawaban yang tepat: {q} sisa {r}."
+        }
+      }
+    ]
+  }
+}

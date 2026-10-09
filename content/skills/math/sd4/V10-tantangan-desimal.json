@@ -1,0 +1,420 @@
+{
+  "id": "math.sd4.v10.tantangan-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 10,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 10 — Tantangan desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 99]
+          },
+          "prompt": "Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Samakan dulu banyak angka setelah koma: {x} = {x}0. Bandingkan {=a*10} perseratus dengan {b} perseratus. Jadi {x} {answer_say} {y}. Angka yang lebih panjang belum tentu lebih besar.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "constraint": "b % 10 != 0 && abs(a * 10 - b) < 25"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 99],
+            "c": [11, 99]
+          },
+          "prompt": "Mana desimal yang paling besar: {x}; {y}; atau {z}?",
+          "answer": "max(x, y, z)",
+          "explain": "Samakan banyak angka setelah koma: {x} = {=a*10}/100, {y} = {b}/100, {z} = {c}/100. Yang perseratusnya paling banyak adalah {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100",
+            "z": "c / 100"
+          },
+          "constraint": "a * 10 != b && a * 10 != c && b != c && b % 10 != 0 && c % 10 != 0",
+          "distractors": [
+            {
+              "expr": "x",
+              "tag": "bukan-ini"
+            },
+            {
+              "expr": "y",
+              "tag": "bukan-ini"
+            },
+            {
+              "expr": "z",
+              "tag": "bukan-ini"
+            }
+          ],
+          "choices": 3,
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "k": [1, 9]
+          },
+          "prompt": "Desimal manakah yang terletak di antara {lo} dan {hi}?",
+          "answer": "lo + k / 100",
+          "explain": "{lo} = {=a*10}/100 dan {hi} = {=a*10+10}/100. Desimal di antaranya punya perseratus lebih dari {=a*10} dan kurang dari {=a*10+10}, yaitu {answer}.",
+          "derived": {
+            "lo": "a / 10",
+            "hi": "(a + 1) / 10"
+          },
+          "distractors": [
+            {
+              "expr": "hi + k / 100",
+              "tag": "lebih-besar"
+            },
+            {
+              "expr": "lo - k / 100",
+              "tag": "lebih-kecil"
+            },
+            {
+              "expr": "k / 10 + a / 100",
+              "tag": "tertukar"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [0, 5],
+            "a": [1, 9],
+            "v": [0, 4],
+            "b": [1, 9]
+          },
+          "prompt": "{x} + {y} = …",
+          "answer": "x + y",
+          "explain": "Luruskan koma. Jumlahkan persepuluhan: {a} + {b} = {=a+b}. Bila 10 atau lebih, simpan 1 ke satuan. Lalu jumlahkan satuan: hasilnya {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "distractors": [
+            {
+              "expr": "u + v + ((a + b) % 10) / 10",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "x + y + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "u + v + (a + b) / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 89]
+          },
+          "prompt": "{x} + {y} = …",
+          "answer": "x + y",
+          "explain": "Luruskan koma: tulis {x} sebagai {x}0. Lalu {=a*10} perseratus + {b} perseratus = {=a*10+b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "constraint": "b % 10 != 0 && a * 10 + b < 100",
+          "distractors": [
+            {
+              "expr": "(a + b) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "(a + b) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "x + y + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [11, 89]
+          },
+          "prompt": "{x} − {y} = …",
+          "answer": "x - y",
+          "explain": "Luruskan koma: tulis {x} sebagai {x}0 = {=a*10} perseratus. {=a*10} − {b} = {=a*10-b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "constraint": "b % 10 != 0 && a * 10 > b",
+          "distractors": [
+            {
+              "expr": "(b - a) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x - y + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 5],
+            "a": [1, 9],
+            "b": [11, 99]
+          },
+          "prompt": "Pita {nama} panjangnya {x} m. Sebanyak {y} m dipakai untuk menghias kado. Berapa meter sisa pitanya?",
+          "answer": "x - y",
+          "explain": "Sisa = panjang awal − yang dipakai. Luruskan koma: {x} − {y} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "1 + b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "u - 1 + abs(a * 10 - b) / 100",
+              "tag": "kecil-dari-besar"
+            },
+            {
+              "expr": "x - y + 1",
+              "tag": "lupa-meminjam"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 4],
+            "a": [1, 9],
+            "v": [1, 3],
+            "b": [11, 99]
+          },
+          "prompt": "{nama} bersepeda {x} km pada pagi hari dan {y} km pada sore hari. Berapa kilometer jarak yang ditempuhnya seluruhnya?",
+          "answer": "x + y",
+          "explain": "Seluruhnya berarti dijumlah. Luruskan koma: {x} + {y} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "u + v + (a + b) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "x + y + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(x - y)",
+              "tag": "mengurangi"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89]
+          },
+          "prompt": "{x} + … = 1",
+          "answer": "1 - x",
+          "explain": "1 = 100 perseratus. {x} = {a} perseratus. Kurangnya 100 − {a} = {=100-a} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 100"
+          },
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "(10 - floor(a / 10)) / 10 + (10 - a % 10) / 100",
+              "tag": "pelengkap-tiap-angka"
+            },
+            {
+              "expr": "(100 - a) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "1 + x",
+              "tag": "menjumlah"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [11, 39],
+            "c": [20, 99]
+          },
+          "prompt": "Bandingkan: {x} + {y} … {z}",
+          "answer": "(s > z) + 2 * (s < z) + 3 * (s == z)",
+          "explain": "Hitung dulu jumlahnya: {x} + {y} = {s}. Lalu bandingkan {s} dengan {z}: {s} {answer_say} {z}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100",
+            "z": "c / 100",
+            "s": "a / 10 + b / 100"
+          },
+          "constraint": "b % 10 != 0 && abs(a * 10 + b - c) <= 12",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 9],
+            "a": [1, 9],
+            "v": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Taksir {x} + {y} dengan membulatkan setiap bilangan ke satuan terdekat. Hasil taksirannya adalah …",
+          "answer": "round(x) + round(y)",
+          "explain": "Bulatkan dulu: {x} menjadi {=round(x)} dan {y} menjadi {=round(y)} (persepuluhan 5 ke atas dibulatkan naik). Taksirannya {=round(x)} + {=round(y)} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "constraint": "a != 5 && b != 5 && round(x) + round(y) != floor(x) + floor(y)",
+          "distractors": [
+            {
+              "expr": "floor(x) + floor(y)",
+              "tag": "dibulatkan-ke-bawah"
+            },
+            {
+              "expr": "ceil(x) + ceil(y)",
+              "tag": "dibulatkan-ke-atas"
+            },
+            {
+              "expr": "round(x) + round(y) + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

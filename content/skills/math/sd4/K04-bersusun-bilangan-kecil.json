@@ -1,0 +1,68 @@
+{
+  "id": "math.sd4.k4.bersusun-bilangan-kecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 4,
+  "title": "Perkalian dua angka — Level 4 — Bersusun bilangan kecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 49],
+            "t": [1, 2],
+            "s": [1, 4]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "prompt": "Hitung bersusun: {a} × {b} = …",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * s + a * t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * (b - 1)",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "Bersusun dua baris. Baris pertama: {a} × {s} = {=a*s}. Baris kedua: {a} × {=t*10} = {=a*t*10} (tulis 0 di satuan dulu). Jumlahkan: {=a*s} + {=a*t*10} = {answer}."
+        },
+        "weight": 1.5
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 49],
+            "t": [1, 2],
+            "s": [1, 4]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "prompt": "{a} × {b} = …",
+          "answer": "a * b",
+          "mode": "input",
+          "explain": "Bersusun dua baris. Baris pertama: {a} × {s} = {=a*s}. Baris kedua: {a} × {=t*10} = {=a*t*10} (tulis 0 di satuan dulu). Jumlahkan: {=a*s} + {=a*t*10} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "id": "math.sd4.q8.soal-cerita-membandingkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 8,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 8 — Soal cerita membandingkan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "k": [2, 3],
+            "a": [1, 5],
+            "b": [1, 17]
+          },
+          "derived": {
+            "e": "d * k"
+          },
+          "constraint": "a < d && b < e",
+          "words": {
+            "makanan": ["pizza", "martabak", "kue bolu", "semangka", "roti bakar"]
+          },
+          "prompt": "Kakak makan {a}/{d} {makanan}. Adik makan {b}/{e} {makanan} yang sama besar. Siapa yang makan lebih banyak?",
+          "answer": "(a * k > b) * 1 + (a * k < b) * 2 + (a * k == b) * 3",
+          "labels": {
+            "1": "Kakak",
+            "2": "Adik",
+            "3": "Sama banyak"
+          },
+          "explain": "Samakan penyebut: {a}/{d} = {=a*k}/{e}. Bandingkan {=a*k}/{e} (Kakak) dengan {b}/{e} (Adik). Jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 3],
+            "a": [2, 10],
+            "b": [2, 10]
+          },
+          "constraint": "n < a && n < b && a != b",
+          "prompt": "Pita merah panjangnya {n}/{a} meter. Pita biru panjangnya {n}/{b} meter. Pita mana yang lebih panjang?",
+          "answer": "(a < b) * 1 + (a > b) * 2",
+          "labels": {
+            "1": "Pita merah",
+            "2": "Pita biru",
+            "3": "Sama panjang"
+          },
+          "explain": "Pembilangnya sama, yaitu {n}. Penyebut lebih kecil berarti setiap bagian lebih panjang. Bandingkan penyebut {a} dan {b}. Jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a < d && b < d && a != b",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Hari Senin {nama} membaca {a}/{d} buku cerita. Hari Selasa {nama} membaca {b}/{d} buku cerita yang sama. Kapan {nama} membaca lebih banyak?",
+          "answer": "(a > b) * 1 + (a < b) * 2",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Sama banyak"
+          },
+          "explain": "Penyebutnya sama, yaitu {d}. Bandingkan pembilang {a} dan {b}. Pembilang lebih besar berarti bagian lebih banyak. Jawabannya: {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.c7.soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 7,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 7 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 60000],
+            "k": [-900, 900]
+          },
+          "derived": {
+            "b": "a + k"
+          },
+          "constraint": "k != 0 && abs(k) >= 10",
+          "prompt": "Desa Sukamaju berpenduduk {a} orang. Desa Mekarsari berpenduduk {b} orang. Desa mana yang penduduknya lebih banyak?",
+          "answer": "(a > b) * 1 + (a < b) * 2",
+          "labels": {
+            "1": "Desa Sukamaju",
+            "2": "Desa Mekarsari"
+          },
+          "explain": "Bandingkan {a} dan {b} dari angka paling kiri sampai ada yang berbeda. Yang lebih besar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 50000],
+            "p": [1, 2],
+            "k": [1, 9],
+            "s": [0, 1]
+          },
+          "derived": {
+            "b": "a + (2 * s - 1) * k * ((p == 1) * 100 + (p == 2) * 1000)"
+          },
+          "prompt": "Tiket pertandingan terjual {a} lembar pada hari Sabtu dan {b} lembar pada hari Minggu. Pada hari apa tiket lebih sedikit terjual?",
+          "answer": "(a < b) * 1 + (a > b) * 2",
+          "labels": {
+            "1": "Sabtu",
+            "2": "Minggu"
+          },
+          "explain": "Lebih sedikit berarti bilangannya lebih kecil. Bandingkan {a} dan {b} dari kiri. Yang lebih kecil terjual pada hari {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            },
+            "b": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            },
+            "c": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Harga tiga sepeda di toko: Rp{a}, Rp{b}, dan Rp{c}. Berapa harga yang paling murah?",
+          "answer": "min(a, b, c)",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "harga-lain"
+            },
+            {
+              "expr": "b",
+              "tag": "harga-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "harga-lain"
+            }
+          ],
+          "choices": 3,
+          "explain": "Paling murah = bilangan terkecil. Semua 7 angka, jadi bandingkan dari kiri: jutaan, ratus ribuan, puluh ribuan. Yang terkecil {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "id": "math.sd4.o7.tabel-kali-dan-bagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 7,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 7 — Tabel kali dan bagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [2, 12]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x4 <= 12",
+          "prompt": "Lihat tabel. Berapa keluaran untuk masukan {x4}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1*k"],
+                ["=x2", "=x2*k"],
+                ["=x3", "=x3*k"],
+                ["=x4", "?"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4 * k",
+          "distractors": [
+            {
+              "expr": "x4 + x1 * k - x1",
+              "tag": "aturan-tambah"
+            },
+            {
+              "expr": "x4 * k + k",
+              "tag": "lebih-satu-kali"
+            },
+            {
+              "expr": "x3 * k",
+              "tag": "baris-atas"
+            }
+          ],
+          "explain": "Baris pertama {x1} menjadi {=x1*k}, baris kedua {x2} menjadi {=x2*k}. Selisihnya tidak sama, jadi aturannya kali {k}. {x4} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [2, 9]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x4 <= 12",
+          "prompt": "Lihat tabel. Berapa keluaran untuk masukan {=k*x4}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=k*x1", "=x1"],
+                ["=k*x2", "=x2"],
+                ["=k*x3", "=x3"],
+                ["=k*x4", "?"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4",
+          "distractors": [
+            {
+              "expr": "k * x4 - (k * x1 - x1)",
+              "tag": "aturan-kurang"
+            },
+            {
+              "expr": "x4 + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "x3",
+              "tag": "baris-atas"
+            }
+          ],
+          "explain": "Baris pertama {=k*x1} menjadi {x1}. Aturannya bagi {k}, karena {=k*x1} : {k} = {x1}. Periksa baris lain. {=k*x4} : {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [2, 12]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x4 <= 12",
+          "prompt": "Lihat tabel. Masukan berapa yang keluarannya {=x4*k}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1*k"],
+                ["=x2", "=x2*k"],
+                ["=x3", "=x3*k"],
+                ["?", "=x4*k"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4",
+          "mode": "input",
+          "explain": "Aturannya kali {k}. Untuk mencari masukan, kerjakan kebalikannya: {=x4*k} : {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

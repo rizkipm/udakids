@@ -1,0 +1,72 @@
+{
+  "id": "math.sd34.eb6.luas-segiempat-dari-koordinat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 6,
+  "title": "Geometri koordinat — Level 6 — Luas segiempat dari koordinat",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Menghitung luas segiempat sembarang dari koordinat titik sudut",
+    "emc-no": "32"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "y1": [-6, -1],
+            "d": [4, 12],
+            "p": [1, 8],
+            "q": [1, 8],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "derived": {
+            "y2": "y1 + d",
+            "yr": "y1 + min(a, d - 1)",
+            "yl": "y1 + min(b, d - 1)"
+          },
+          "constraint": "(d * (p + q)) % 2 == 0",
+          "prompt": "Empat titik (0, {y1}), ({p}, {yr}), (0, {y2}), dan ({=-q}, {yl}) dihubungkan berurutan dan kembali ke titik pertama. Berapa satuan persegi luas bangun yang terbentuk?",
+          "answer": "d * (p + q) / 2",
+          "unit": "satuan²",
+          "mode": "input",
+          "explain": "Titik (0, {y1}) dan (0, {y2}) ada di sumbu-y; ruas itu panjangnya {d} dan membagi segiempat menjadi dua segitiga dengan tinggi {p} dan {q}. Luas = {d} × {p} : 2 + {d} × {q} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [-6, -1],
+            "d": [4, 12],
+            "p": [1, 8],
+            "q": [1, 8],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "derived": {
+            "x2": "x1 + d",
+            "xt": "x1 + min(a, d - 1)",
+            "xb": "x1 + min(b, d - 1)"
+          },
+          "constraint": "(d * (p + q)) % 2 == 0",
+          "prompt": "Empat titik ({x1}, 0), ({xt}, {p}), ({x2}, 0), dan ({xb}, {=-q}) dihubungkan berurutan dan kembali ke titik pertama. Berapa satuan persegi luas bangun yang terbentuk?",
+          "answer": "d * (p + q) / 2",
+          "unit": "satuan²",
+          "mode": "input",
+          "explain": "Titik ({x1}, 0) dan ({x2}, 0) ada di sumbu-x; ruas itu panjangnya {d} dan membagi segiempat menjadi dua segitiga dengan tinggi {p} dan {q}. Luas = {d} × ({p} + {q}) : 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

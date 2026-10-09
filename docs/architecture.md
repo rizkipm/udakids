@@ -1,4 +1,4 @@
-# Arsitektur Little Coder
+# Arsitektur UdaKids
 
 Status: M1 + M3+ · Stack: Node.js + React + NestJS + PostgreSQL (lihat [decisions.md](decisions.md) D-001).
 

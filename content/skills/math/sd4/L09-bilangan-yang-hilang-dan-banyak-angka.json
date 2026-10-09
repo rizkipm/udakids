@@ -1,0 +1,104 @@
+{
+  "id": "math.sd4.l9.bilangan-yang-hilang-dan-banyak-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 9,
+  "title": "Pembagian bersusun — Level 9 — Bilangan yang hilang dan banyak angka hasil bagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [12, 250]
+          },
+          "constraint": "m * q < 2000",
+          "prompt": "… : {m} = {q}. Bilangan yang dibagi adalah …",
+          "answer": "m * q",
+          "distractors": [
+            {
+              "expr": "q + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "m * q + m",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * q - m",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "Bilangan yang dibagi = hasil bagi × pembagi. {q} × {m} = {answer}. Periksa: {answer} : {m} = {q}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [12, 250]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 2000",
+          "prompt": "{t} : … = {q}. Pembaginya adalah …",
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "m + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "m - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "m * 10",
+              "tag": "nol-lebih"
+            }
+          ],
+          "explain": "Cari bilangan yang jika dikali {q} hasilnya {t}. {q} × {answer} = {t}, jadi pembaginya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [15, 1999]
+          },
+          "derived": {
+            "t": "m * q",
+            "lead": "(t < 1000) * floor(t / 100) + (t >= 1000) * floor(t / 1000)"
+          },
+          "constraint": "t >= 100 && t <= 9999",
+          "prompt": "Tanpa menghitung sampai selesai, hasil {t} : {m} terdiri dari berapa angka?",
+          "answer": "3 + (t >= 1000) - (lead < m)",
+          "labels": {
+            "2": "2 angka",
+            "3": "3 angka",
+            "4": "4 angka"
+          },
+          "labelSay": {
+            "2": "dua angka",
+            "3": "tiga angka",
+            "4": "empat angka"
+          },
+          "explain": "Lihat angka paling kiri, yaitu {lead}. Jika angka itu lebih kecil dari {m}, kita mulai dari dua angka pertama, jadi hasil bagi punya satu angka lebih sedikit. Hasil bagi {=t/m} punya {answer_say}."
+        }
+      }
+    ]
+  }
+}

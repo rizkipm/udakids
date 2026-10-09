@@ -1,0 +1,107 @@
+{
+  "id": "math.sd4.f7.hitung-cepat-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 7,
+  "title": "Pengurangan bilangan besar — Level 7 — Hitung cepat pengurangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [30, 99],
+            "q": [11, 29]
+          },
+          "constraint": "p % 10 < q % 10",
+          "prompt": "{=p*1000} − {=q*1000} = …",
+          "answer": "(p - q) * 1000",
+          "distractors": [
+            {
+              "expr": "(p - q) * 100",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "(p - q) * 1000 + 10000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "(p - q) * 10000",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Hitung ribuannya saja: {p} ribu − {q} ribu = {=p-q} ribu. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 39999],
+            "k": [2, 9],
+            "j": [1, 3]
+          },
+          "derived": {
+            "b": "k * 1000 - j"
+          },
+          "prompt": "Hitung dengan cara cepat: {a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - k * 1000",
+              "tag": "lupa-tambah"
+            },
+            {
+              "expr": "a - k * 1000 - j",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{b} hampir {=k*1000}, kurang {j}. Kurangi {=k*1000} dulu: {a} − {=k*1000} = {=a-k*1000}. Karena terlalu banyak mengurangi {j}, tambahkan {j}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 9],
+            "b": [1100, 2900]
+          },
+          "derived": {
+            "a": "k * 1000"
+          },
+          "constraint": "b % 100 != 0",
+          "prompt": "Hitung dengan menghitung maju: {a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 100",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "ceil(b / 1000) * 1000 - b",
+              "tag": "lompatan-pertama"
+            }
+          ],
+          "explain": "Dari {b} maju ke ribuan bulat {=ceil(b/1000)*1000} (+{=ceil(b/1000)*1000-b}), lalu ke {a} (+{=a-ceil(b/1000)*1000}). Jumlah lompatannya {answer}."
+        }
+      }
+    ]
+  }
+}

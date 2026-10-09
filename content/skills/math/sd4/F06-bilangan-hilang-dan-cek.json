@@ -1,0 +1,114 @@
+{
+  "id": "math.sd4.f6.bilangan-hilang-dan-cek",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 6,
+  "title": "Pengurangan bilangan besar — Level 6 — Bilangan hilang dan cek",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 39999],
+            "c": [1000, 39999]
+          },
+          "derived": {
+            "a": "b + c"
+          },
+          "prompt": "{a} − … = {c}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Bilangan yang dikurangkan = bilangan awal − hasil. {a} − {c} = {answer}. Cek: {a} − {answer} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 39999],
+            "c": [1000, 39999]
+          },
+          "constraint": "b != c",
+          "prompt": "… − {b} = {c}",
+          "answer": "b + c",
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "b + c - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + c - 1000",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + c + 100",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Bilangan awal = hasil + pengurang. {c} + {b} = {answer}. Cek: {answer} − {b} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 49999],
+            "c": [1000, 49999]
+          },
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b != c",
+          "prompt": "{a} − {b} = {c}. Penjumlahan untuk memeriksanya: {c} + … = {a}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "bilangan-awal"
+            },
+            {
+              "expr": "c",
+              "tag": "hasil"
+            },
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pengurangan diperiksa dengan penjumlahan: hasil + pengurang = bilangan awal. Jadi {c} + {answer} = {a}."
+        }
+      }
+    ]
+  }
+}

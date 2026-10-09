@@ -1,0 +1,62 @@
+{
+  "id": "math.sd4.s2.mengurangi-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 2,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 2 — Mengurangi dengan gambar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [3, 10],
+      "a": [2, 10],
+      "b": [1, 9]
+    },
+    "constraint": "a <= d && b < a",
+    "prompt": "Lihat gambarnya. Dari {a}/{d}, ambil {b}/{d}. {a}/{d} − {b}/{d} = …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=d",
+        "model": "bar"
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "a - b",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "a",
+        "den": "d",
+        "tag": "tidak-dikurangi"
+      },
+      {
+        "num": "a + b",
+        "den": "d",
+        "tag": "menjumlah"
+      },
+      {
+        "num": "a - b + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      },
+      {
+        "num": "a - b",
+        "den": "d + d",
+        "tag": "penyebut-ganda"
+      }
+    ],
+    "explain": "Mulai dari {a} bagian yang diarsir, lalu ambil {b} bagian. Sisanya {a} − {b} = {=a-b} bagian dari {d}. Penyebut tetap {d}: {answer}."
+  }
+}

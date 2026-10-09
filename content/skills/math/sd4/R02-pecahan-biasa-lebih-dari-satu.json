@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.r2.pecahan-biasa-lebih-dari-satu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "R",
+  "order": 2,
+  "title": "Pecahan campuran — Level 2 — Pecahan biasa lebih dari 1",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "n": [1, 7]
+          },
+          "constraint": "n < d",
+          "prompt": "Setiap lingkaran dibagi {d} bagian sama besar. Tulis semua bagian yang diarsir sebagai pecahan berpenyebut {d}.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=d",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            },
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "circle",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "d + n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "hanya-sisa"
+            },
+            {
+              "num": "d + n",
+              "den": "2 * d",
+              "tag": "semua-bagian-jadi-penyebut"
+            },
+            {
+              "num": "1 + n",
+              "den": "d",
+              "tag": "utuh-dihitung-satu"
+            }
+          ],
+          "explain": "Lingkaran penuh berisi {d}/{d}. Ditambah {n}/{d}, jadi {d} + {n} = {=d+n} bagian. Pecahannya {answer}, sama dengan 1 {n}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5]
+          },
+          "constraint": "n < d",
+          "prompt": "Setiap batang dibagi {d} bagian sama besar. Tulis semua bagian yang diarsir sebagai pecahan berpenyebut {d}.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=d",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            },
+            {
+              "kind": "fraction",
+              "num": "=d",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            },
+            {
+              "kind": "fraction",
+              "num": "=n",
+              "den": "=d",
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "format": "fraction",
+          "fraction": {
+            "num": "2 * d + n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n",
+              "den": "d",
+              "tag": "hanya-sisa"
+            },
+            {
+              "num": "2 * d + n",
+              "den": "3 * d",
+              "tag": "semua-bagian-jadi-penyebut"
+            },
+            {
+              "num": "2 + n",
+              "den": "d",
+              "tag": "utuh-dihitung-satu"
+            }
+          ],
+          "explain": "Dua batang penuh berisi 2 × {d} = {=2*d} bagian. Ditambah {n} bagian, jadi {=2*d+n} bagian. Pecahannya {answer}, sama dengan 2 {n}/{d}."
+        }
+      }
+    ]
+  }
+}

@@ -12,6 +12,7 @@ import {
   speakLine,
   stopSpeaking,
 } from '../../src/audio/speech';
+import { langSegments, speechSegments } from '@little-coder/engine';
 
 /** Audio palsu: mencatat URL yang diputar. */
 const played: string[] = [];
@@ -118,7 +119,7 @@ describe('suara Momo (D-035)', () => {
     expect(spoken).toEqual([]);
   });
 
-  it('daftar suara gagal dimuat (server mati) → suara browser setelah menunggu sebentar', async () => {
+  it('daftar suara gagal dimuat (server mati) → tetap mencoba Chirp, tanpa suara browser (D-098)', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn(async () => {
@@ -126,8 +127,9 @@ describe('suara Momo (D-035)', () => {
       }),
     );
     speak('Ayo mulai!');
-    await vi.waitFor(() => expect(spoken).toEqual(['Ayo mulai!']), { timeout: 3000 });
-    expect(played).toEqual([]);
+    await vi.waitFor(() => expect(played).toHaveLength(1), { timeout: 3000 });
+    expect(played[0]).toContain('/voice/say?t=Ayo+mulai%21');
+    expect(spoken).toEqual([]);
   });
 
   it('soal Basic: URL dari skill + seed + band (server menurunkan teksnya sendiri)', () => {
@@ -141,20 +143,45 @@ describe('suara Momo (D-035)', () => {
     expect(itemVoiceUrl(item, 'reteach')).toContain('part=reteach');
   });
 
-  it('klip gagal diputar → jatuh ke suara browser', async () => {
+  it('klip gagal → dicoba ulang sekali; tetap gagal → teks bantuan, tanpa suara browser (D-098)', async () => {
     resetVoice(manifest);
+    const trouble = vi.fn();
+    window.addEventListener('lc:speech-trouble', trouble);
     vi.stubGlobal(
       'Audio',
       class extends FakeAudio {
         override play() {
-          return Promise.reject(new Error('blocked'));
+          played.push(this.src);
+          return Promise.reject(new Error('network'));
+        }
+      },
+    );
+    const onEnd = vi.fn();
+    speakLine('vo_cmd_pick_one', 'cadangan', { onEnd });
+    await vi.waitFor(() => expect(onEnd).toHaveBeenCalled());
+    expect(played).toHaveLength(2);
+    expect(played[1]).toMatch(/[?&]r=1$/);
+    expect(trouble).toHaveBeenCalledTimes(1);
+    expect(spoken).toEqual([]);
+    window.removeEventListener('lc:speech-trouble', trouble);
+  });
+
+  it('browser menolak audio sebelum ketukan → minta ketuk speaker, tanpa suara browser', async () => {
+    resetVoice(manifest);
+    const blocked = vi.fn();
+    window.addEventListener('lc:speech-blocked', blocked);
+    vi.stubGlobal(
+      'Audio',
+      class extends FakeAudio {
+        override play() {
+          return Promise.reject(Object.assign(new Error('x'), { name: 'NotAllowedError' }));
         }
       },
     );
     speakLine('vo_cmd_pick_one', 'cadangan');
-    await Promise.resolve();
-    await Promise.resolve();
-    expect(spoken).toEqual(['Pilih satu jawaban yang paling tepat, ya.']);
+    await vi.waitFor(() => expect(blocked).toHaveBeenCalled());
+    expect(spoken).toEqual([]);
+    window.removeEventListener('lc:speech-blocked', blocked);
   });
 
   it('manifest dimuat dari /voice/lines dan disimpan untuk offline', async () => {
@@ -165,5 +192,48 @@ describe('suara Momo (D-035)', () => {
     expect(JSON.parse(localStorage.getItem('lc.voice')!).rev).toBe('r1');
     speakLine('vo_cmd_pick_one', 'x');
     expect(played).toHaveLength(1);
+  });
+
+  it('teks campuran dibacakan per kalimat dengan suara sesuai bahasanya (D-098)', async () => {
+    resetVoice(manifest);
+    const text =
+      'Halo, teman! Hari ini kita belajar Prepositions. We use prepositions of time (in, on, at), place, and direction correctly. Ingat: at 7 a.m., on Monday, in July.';
+    expect(langSegments(text)).toEqual([
+      { text: 'Halo, teman! Hari ini kita belajar Prepositions.', lang: 'id-ID' },
+      {
+        text: 'We use prepositions of time (in, on, at), place, and direction correctly.',
+        lang: 'en-GB',
+      },
+      { text: 'Ingat:', lang: 'id-ID' },
+      { text: 'at 7 a.m., on Monday, in July.', lang: 'en-GB' },
+    ]);
+    const onEnd = vi.fn();
+    vi.stubGlobal(
+      'Audio',
+      class extends FakeAudio {
+        override play() {
+          played.push(this.src);
+          queueMicrotask(() => this.onended?.());
+          return Promise.resolve();
+        }
+      },
+    );
+    speak(text, { onEnd });
+    await vi.waitFor(() => expect(onEnd).toHaveBeenCalled());
+    expect(played).toHaveLength(4);
+    expect(played[1]).toContain('l=en-GB');
+    expect(played[0]).not.toContain('l=en-GB');
+    expect(spoken).toEqual([]);
+  });
+
+  it('teks panjang dipecah ≤ 400 huruf per klip', () => {
+    const long = Array.from(
+      { length: 12 },
+      (_, i) => `Kalimat panjang nomor ${i + 1} untuk diuji pemecahannya.`,
+    ).join(' ');
+    const parts = speechSegments(long);
+    expect(parts.length).toBeGreaterThan(1);
+    expect(parts.every((p) => p.length <= 400)).toBe(true);
+    expect(parts.join(' ')).toBe(long);
   });
 });

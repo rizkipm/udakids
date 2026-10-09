@@ -1,0 +1,53 @@
+{
+  "id": "math.sd34.eh4.waktu-berpapasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 4,
+  "title": "Kecepatan & kerja — Level 4 — Waktu berpapasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menentukan waktu berpapasan dua benda yang saling mendekat"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v1": [30, 70],
+      "v2": [20, 60],
+      "t": [1, 4]
+    },
+    "derived": {
+      "d": "(v1 + v2) * t"
+    },
+    "words": {
+      "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+      "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+    },
+    "constraint": "v1 != v2",
+    "prompt": "Kota P dan kota Q berjarak {d} km. {n1} naik motor dari P ke Q dengan kecepatan {v1} km/jam. Pada saat yang sama {n2} naik mobil dari Q ke P dengan kecepatan {v2} km/jam. Mereka berpapasan setelah … jam.",
+    "answer": "t",
+    "unit": "jam",
+    "distractors": [
+      {
+        "expr": "d / v1",
+        "tag": "satu-kendaraan"
+      },
+      {
+        "expr": "t + 1",
+        "tag": "lebih-satu"
+      },
+      {
+        "expr": "2 * t",
+        "tag": "dua-kali"
+      }
+    ],
+    "choices": 4,
+    "explain": "Saling mendekat berarti jarak berkurang {v1} + {v2} = {=v1+v2} km setiap jam. Waktu = {d} : {=v1+v2} = {answer} jam."
+  }
+}

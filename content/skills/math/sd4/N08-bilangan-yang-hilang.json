@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.n8.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 8,
+  "title": "Operasi hitung campuran — Level 8 — Bilangan yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [2, 12],
+            "c": [2, 9]
+          },
+          "derived": {
+            "r": "a + b * c"
+          },
+          "prompt": "{a} + … × {c} = {r}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "r - a",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Kerjakan mundur. {r} − {a} = {=r-a}, jadi … × {c} = {=r-a}. {=r-a} : {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30],
+            "c": [2, 9]
+          },
+          "derived": {
+            "r": "(a + b) * c"
+          },
+          "prompt": "(… + {b}) × {c} = {r}",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-kurang"
+            },
+            {
+              "expr": "r - b",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kerjakan mundur. {r} : {c} = {=a+b}, jadi … + {b} = {=a+b}. {=a+b} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [2, 12],
+            "a": [5, 50]
+          },
+          "derived": {
+            "t": "m * q",
+            "r": "q + a"
+          },
+          "prompt": "… : {m} + {a} = {r}",
+          "answer": "t",
+          "distractors": [
+            {
+              "expr": "q",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "r * m",
+              "tag": "lupa-kurang"
+            },
+            {
+              "expr": "t + m",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kerjakan mundur. {r} − {a} = {q}, jadi … : {m} = {q}. Bilangan itu {q} × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "d": [1, 50]
+          },
+          "derived": {
+            "r": "a * b - d"
+          },
+          "constraint": "a * b > d",
+          "prompt": "{a} × {b} − … = {r}",
+          "answer": "d",
+          "mode": "input",
+          "explain": "Kali dulu: {a} × {b} = {=a*b}. Lalu {=a*b} − … = {r}, jadi bilangan itu {=a*b} − {r} = {answer}."
+        }
+      }
+    ]
+  }
+}

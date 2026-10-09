@@ -1,0 +1,698 @@
+{
+  "id": "math.sd4.w10.tantangan-uang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 10,
+  "title": "Uang dan literasi keuangan — Level 10 — Tantangan uang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [50000, 100000]
+            },
+            "b": {
+              "values": [10000, 20000]
+            },
+            "k": [1, 4],
+            "c": {
+              "values": [5000, 2000, 1000]
+            }
+          },
+          "prompt": "Uang Rp{a} ditukar dengan {k} lembar Rp{b} dan sisanya lembar Rp{c}. Berapa lembar Rp{c} yang didapat?",
+          "answer": "(a - k * b) / c",
+          "explain": "{k} lembar Rp{b} = {=k*b}. Sisanya {a} − {=k*b} = {=a-k*b}. Lalu {=a-k*b} : {c} = {answer} lembar.",
+          "constraint": "k * b < a && (a - k * b) % c == 0 && (a - k * b) / c <= 20",
+          "distractors": [
+            {
+              "expr": "a / c",
+              "tag": "lupa-dikurangi"
+            },
+            {
+              "expr": "(a - k * b) / c + k",
+              "tag": "ikut-dihitung"
+            },
+            {
+              "expr": "(a - b) / c",
+              "tag": "satu-lembar"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [3000, 20000],
+              "step": 500
+            },
+            "b": {
+              "range": [2000, 8000],
+              "step": 500
+            },
+            "c": {
+              "range": [1000, 15000],
+              "step": 500
+            }
+          },
+          "prompt": "Di warung, Ibu membeli {x} Rp{a}, {y} Rp{b}, dan {z} Rp{c}. Berapa rupiah yang harus dibayar Ibu?",
+          "answer": "a + b + c",
+          "explain": "Jumlahkan satu per satu: {a} + {b} = {=a+b}, lalu {=a+b} + {c} = {answer}.",
+          "words": {
+            "x": ["roti", "nasi bungkus", "kue lapis", "pisang goreng", "bakso", "martabak manis"],
+            "y": ["susu kotak", "air mineral", "jus jeruk", "teh kotak", "es kelapa"],
+            "z": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-barang"
+            },
+            {
+              "expr": "a + b + c - 1000",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "a + b + c + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [5000, 25000],
+              "step": 500
+            },
+            "b": {
+              "range": [2000, 20000],
+              "step": 500
+            },
+            "p": {
+              "values": [50000, 100000]
+            }
+          },
+          "prompt": "Ayah membeli {x} Rp{a} dan {y} Rp{b}. Ayah membayar dengan uang Rp{p}. Berapa kembaliannya?",
+          "answer": "p - a - b",
+          "explain": "Hitung total dulu: {a} + {b} = {=a+b}. Kembalian = {p} − {=a+b} = {answer}.",
+          "constraint": "a + b < p",
+          "words": {
+            "x": ["roti", "nasi bungkus", "kue lapis", "pisang goreng", "bakso", "martabak manis"],
+            "y": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "p - a",
+              "tag": "lupa-satu-barang"
+            },
+            {
+              "expr": "a + b",
+              "tag": "total-saja"
+            },
+            {
+              "expr": "p - a - b + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [6, 10, 12]
+            },
+            "p": {
+              "range": [5000, 25000],
+              "step": 500
+            },
+            "k": [2, 4]
+          },
+          "prompt": "Satu pak berisi {n} {x} dan harganya Rp{p}. {nama} membeli {k} pak. Berapa yang harus dibayar?",
+          "answer": "k * p",
+          "explain": "Harga dihitung per pak, bukan per buah. {k} × {p} = {answer}.",
+          "words": {
+            "x": ["pensil", "spidol", "susu kotak", "roti"],
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "k * n * p",
+              "tag": "dikali-isi"
+            },
+            {
+              "expr": "(k - 1) * p",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(k + 1) * p",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(k * p) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(k * p) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(k * p) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20000, 40000],
+              "step": 5000
+            },
+            "b": {
+              "range": [5000, 20000],
+              "step": 5000
+            },
+            "c": {
+              "range": [5000, 15000],
+              "step": 500
+            },
+            "d": {
+              "range": [2000, 10000],
+              "step": 500
+            }
+          },
+          "prompt": "Lihat catatan keuangan {nama} minggu ini. Berapa sisa uangnya?",
+          "answer": "a + b - c - d",
+          "explain": "Jumlahkan pemasukan: {a} + {b} = {=a+b}. Jumlahkan pengeluaran: {c} + {d} = {=c+d}. Sisa = {=a+b} − {=c+d} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Catatan", "Pemasukan", "Pengeluaran"],
+              "rows": [
+                ["Uang saku", "Rp{a}", "-"],
+                ["Hadiah dari nenek", "Rp{b}", "-"],
+                ["Membeli buku", "-", "Rp{c}"],
+                ["Jajan", "-", "Rp{d}"]
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b + c + d",
+              "tag": "semua-dijumlah"
+            },
+            {
+              "expr": "a + b - c",
+              "tag": "lupa-satu-pengeluaran"
+            },
+            {
+              "expr": "a - c - d",
+              "tag": "lupa-satu-pemasukan"
+            },
+            {
+              "expr": "(a + b - c - d) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b - c - d) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b - c - d) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "j": {
+              "range": [60000, 150000],
+              "step": 5000
+            },
+            "m": {
+              "range": [30000, 55000],
+              "step": 2500
+            }
+          },
+          "prompt": "{nama} berjualan kue di bazar sekolah. Uang hasil penjualan Rp{j}. Modal untuk membeli bahan kue Rp{m}. Berapa keuntungannya?",
+          "answer": "j - m",
+          "explain": "Keuntungan = hasil penjualan − modal. {j} − {m} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "j + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "m",
+              "tag": "modal"
+            },
+            {
+              "expr": "j - m + 5000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [50000, 150000],
+              "step": 5000
+            },
+            "a": {
+              "range": [15000, 45000],
+              "step": 500
+            }
+          },
+          "prompt": "Tabungan {nama} sekarang Rp{a}. Ia ingin membeli {x} seharga Rp{h}. Berapa rupiah lagi yang harus ditabungnya?",
+          "answer": "h - a",
+          "explain": "Kekurangan = harga − tabungan. {h} − {a} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "h - a + 1000",
+              "tag": "lupa-meminjam"
+            },
+            {
+              "expr": "a",
+              "tag": "tabungan"
+            },
+            {
+              "expr": "(h - a) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(h - a) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(h - a) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [11, 99]
+          },
+          "prompt": "{nama} ingin membayar Rp{t} dengan uang kertas sesedikit mungkin (pecahan Rp50.000, Rp20.000, Rp10.000, Rp5.000, Rp2.000, Rp1.000). Berapa lembar paling sedikit?",
+          "answer": "n50 + n20 + n10 + n5 + n2 + n1",
+          "explain": "Mulai dari pecahan terbesar yang muat, lalu lanjut ke pecahan lebih kecil. 50.000: {n50}, 20.000: {n20}, 10.000: {n10}, 5.000: {n5}, 2.000: {n2}, 1.000: {n1}. Jumlahnya {answer} lembar.",
+          "derived": {
+            "t": "k * 1000",
+            "n50": "floor(t / 50000)",
+            "r1": "t % 50000",
+            "n20": "floor(r1 / 20000)",
+            "r2": "r1 % 20000",
+            "n10": "floor(r2 / 10000)",
+            "r3": "r2 % 10000",
+            "n5": "floor(r3 / 5000)",
+            "r4": "r3 % 5000",
+            "n2": "floor(r4 / 2000)",
+            "n1": "(r4 % 2000) / 1000"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "n50 + n20 + n10 + n5 + n2 + n1 + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(t / 10000) + (t % 10000) / 1000",
+              "tag": "pakai-10-ribu"
+            },
+            {
+              "expr": "n50 + n20 + n10 + n5 + n2 + n1 + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": {
+              "range": [1500, 4000],
+              "step": 500
+            },
+            "d": {
+              "values": [-3000, -2000, -1000, -500, 0, 500, 1000]
+            }
+          },
+          "prompt": "Pensil dijual Rp{b} per batang, atau Rp{a} untuk satu pak isi 6. Mana yang lebih hemat untuk membeli 6 pensil?",
+          "answer": "(a < 6 * b) + 2 * (a > 6 * b) + 3 * (a == 6 * b)",
+          "explain": "Hitung harga 6 pensil satuan: 6 × {b} = {=6*b}. Bandingkan dengan harga 1 pak {a}. Pilihan yang lebih hemat: {answer}.",
+          "derived": {
+            "a": "6 * b + d"
+          },
+          "labels": {
+            "1": "Beli 1 pak",
+            "2": "Beli satuan",
+            "3": "Sama saja"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "range": [10000, 50000],
+              "step": 5000
+            },
+            "h": {
+              "range": [2500, 7500],
+              "step": 500
+            }
+          },
+          "prompt": "{nama} punya Rp{u}. Harga satu {x} Rp{h}. Paling banyak berapa {x} yang bisa dibeli?",
+          "answer": "floor(u / h)",
+          "explain": "{u} : {h} = {=floor(u/h)} sisa {=u%h}. Sisanya tidak cukup untuk satu lagi, jadi paling banyak {answer}.",
+          "constraint": "u % h != 0 && u / h >= 2",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": ["susu kotak", "air mineral", "jus jeruk", "teh kotak", "es kelapa"]
+          },
+          "distractors": [
+            {
+              "expr": "floor(u / h) + 1",
+              "tag": "dibulatkan-ke-atas"
+            },
+            {
+              "expr": "floor(u / h) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "u % h / 500",
+              "tag": "sisa"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [5000, 10000, 20000]
+            },
+            "h": {
+              "range": [25000, 150000],
+              "step": 2500
+            }
+          },
+          "prompt": "{nama} menabung Rp{s} setiap minggu untuk membeli {x} seharga Rp{h}. Paling sedikit berapa minggu ia harus menabung?",
+          "answer": "ceil(h / s)",
+          "explain": "{h} : {s} = {=floor(h/s)} sisa {=h%s}. Masih kurang sedikit, jadi perlu 1 minggu lagi: {answer} minggu.",
+          "constraint": "h % s != 0 && h / s <= 15",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "floor(h / s)",
+              "tag": "dibulatkan-ke-bawah"
+            },
+            {
+              "expr": "ceil(h / s) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "ceil(h / s) * 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

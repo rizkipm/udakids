@@ -16,7 +16,7 @@
 import '../common/env.js';
 import {
   catalogSchema,
-  peragaPhotos,
+  lessonPhotos,
   type AiImageRequest,
   type PeragaPhoto,
 } from '@little-coder/engine';
@@ -105,9 +105,9 @@ async function main(
         title: row.title,
         categories: row.categories,
       });
+      // Foto simulasi `peraga` dan infografis (D-101).
       for (const c of cat.categories)
-        for (const s of c.lesson?.layar ?? [])
-          if (s.peraga) for (const f of peragaPhotos(s.peraga)) photos.set(f.id, f);
+        if (c.lesson) for (const f of lessonPhotos(c.lesson)) photos.set(f.id, f);
     }
     const [admin] = await db.select().from(staffUsers).where(eq(staffUsers.role, 'admin')).limit(1);
     if (!admin) throw new Error('Belum ada akun admin');

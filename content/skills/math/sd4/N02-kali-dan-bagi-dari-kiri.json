@@ -1,0 +1,95 @@
+{
+  "id": "math.sd4.n2.kali-dan-bagi-dari-kiri",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 2,
+  "title": "Operasi hitung campuran — Level 2 — Kali dan bagi dari kiri",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "k": [2, 5],
+            "s": [2, 8]
+          },
+          "derived": {
+            "t": "m * k * s"
+          },
+          "prompt": "{t} : {m} × {k} = …",
+          "answer": "t / m * k",
+          "distractors": [
+            {
+              "expr": "s",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "t / m + k",
+              "tag": "tanda"
+            },
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Kali dan bagi setingkat, jadi kerjakan dari kiri. {t} : {m} = {=t/m}. Lalu {=t/m} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "k": [2, 5],
+            "s": [2, 9]
+          },
+          "derived": {
+            "t": "m * k * s"
+          },
+          "prompt": "{t} : {m} : {k} = …",
+          "answer": "s",
+          "distractors": [
+            {
+              "expr": "t * k / m",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "s + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kerjakan dari kiri. {t} : {m} = {=t/m}. Lalu {=t/m} : {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 9]
+          },
+          "constraint": "(a * b) % c == 0 && a != c && b != c",
+          "prompt": "{a} × {b} : {c} = …",
+          "answer": "a * b / c",
+          "mode": "input",
+          "explain": "Kerjakan dari kiri. {a} × {b} = {=a*b}. Lalu {=a*b} : {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

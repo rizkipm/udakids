@@ -1,0 +1,94 @@
+{
+  "id": "math.sd34.eh5.jarak-saat-berpapasan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 5,
+  "title": "Kecepatan & kerja — Level 5 — Jarak saat berpapasan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menentukan jarak tempuh benda saat berpapasan dari perbandingan kecepatan",
+    "emc-no": "9"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5],
+            "u": [1, 12]
+          },
+          "derived": {
+            "d": "(k + 1) * u"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "prompt": "{n1} dan {n2} bersepeda saling mendekat dari dua tempat yang berjarak {d} km. Kecepatan {n1} {k} kali kecepatan {n2}. Saat berpapasan, {n2} sudah bersepeda sejauh … km.",
+          "answer": "u",
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "d / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "k * u",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "d / k",
+              "tag": "dibagi-k"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam waktu yang sama, jarak sebanding dengan kecepatan: {n1} : {n2} = {k} : 1. Jarak {d} km dibagi {=k+1} bagian, {n2} menempuh 1 bagian = {answer} km."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5],
+            "u": [1, 12]
+          },
+          "derived": {
+            "d": "(k + 1) * u"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "prompt": "{n1} dan {n2} berlari saling mendekat dari dua ujung lintasan yang panjangnya {=d*100} m. Kecepatan {n1} {k} kali kecepatan {n2}. Saat berpapasan, {n1} sudah berlari sejauh … m.",
+          "answer": "k * u * 100",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "u * 100",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "d * 50",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "d * 100 / k",
+              "tag": "dibagi-k"
+            }
+          ],
+          "choices": 4,
+          "explain": "Perbandingan jarak = perbandingan kecepatan = {k} : 1. Lintasan dibagi {=k+1} bagian, satu bagian {=u*100} m. {n1} menempuh {k} bagian = {answer} m."
+        }
+      }
+    ]
+  }
+}

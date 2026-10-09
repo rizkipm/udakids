@@ -1,0 +1,141 @@
+{
+  "id": "math.sd4.z8.soal-cerita-dua-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 8,
+  "title": "Keliling bangun datar — Level 8 — Soal cerita dua langkah",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 15],
+            "l": [3, 10],
+            "h": {
+              "values": [15000, 20000, 25000, 30000]
+            }
+          },
+          "constraint": "p > l",
+          "prompt": "Kebun berbentuk persegi panjang {p} m × {l} m akan dipagari. Harga pagar Rp{h} per meter. Berapa rupiah biaya pagarnya?",
+          "answer": "2 * (p + l) * h",
+          "distractors": [
+            {
+              "expr": "p * l * h",
+              "tag": "memakai-luas"
+            },
+            {
+              "expr": "(p + l) * h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * (p + l) * h + h",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Langkah 1: keliling = 2 × ({p} + {l}) = {=2*(p+l)} m. Langkah 2: {=2*(p+l)} × Rp{h} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [20, 90],
+              "step": 5
+            },
+            "n": [2, 5]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} bersepeda mengelilingi taman berbentuk persegi bersisi {s} m sebanyak {n} kali. Berapa meter jarak yang ditempuh?",
+          "answer": "4 * s * n",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "satu-putaran"
+            },
+            {
+              "expr": "s * n",
+              "tag": "satu-sisi"
+            },
+            {
+              "expr": "4 * s + n",
+              "tag": "ditambah-bukan-dikali"
+            }
+          ],
+          "explain": "Satu putaran = keliling = 4 × {s} = {=4*s} m. Untuk {n} putaran: {n} × {=4*s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "range": [40, 90],
+              "step": 10
+            },
+            "l": {
+              "range": [30, 70],
+              "step": 10
+            },
+            "t": {
+              "values": [400, 500, 600]
+            }
+          },
+          "constraint": "p > l && t > 2 * (p + l)",
+          "prompt": "Lampu hias sepanjang {t} cm dipasang di sekeliling jendela berukuran {p} cm × {l} cm. Berapa cm sisa lampu hiasnya?",
+          "answer": "t - 2 * (p + l)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "t - (p + l)",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * (p + l)",
+              "tag": "hanya-keliling"
+            },
+            {
+              "expr": "t - 2 * (p + l) + 10",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Keliling jendela = 2 × ({p} + {l}) = {=2*(p+l)} cm. Sisa = {t} − {=2*(p+l)} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "id": "math.sd4.gg6.soal-cerita-dari-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 6,
+  "title": "Soal cerita multi-langkah — Level 6 — Soal cerita dari tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h1": {
+              "values": [3000, 3500, 4000, 4500, 5000]
+            },
+            "h2": {
+              "values": [1500, 2000, 2500]
+            },
+            "h3": {
+              "values": [1000, 1500, 2000]
+            },
+            "n1": [2, 5],
+            "n2": [2, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "h2 != h3",
+          "prompt": "{nama} membeli {n1} buku tulis dan {n2} pensil. Berapa rupiah yang harus dibayar?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Barang", "Harga"],
+              "rows": [
+                ["Buku tulis", "Rp{h1}"],
+                ["Pensil", "Rp{h2}"],
+                ["Penghapus", "Rp{h3}"]
+              ],
+              "caption": "Daftar harga di koperasi sekolah"
+            }
+          ],
+          "answer": "n1 * h1 + n2 * h2",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h1 + h2",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "(n1 + n2) * h1",
+              "tag": "harga-sama"
+            },
+            {
+              "expr": "n1 * h1 + h2",
+              "tag": "lupa-kali-pensil"
+            }
+          ],
+          "explain": "Baca harga di tabel. Langkah 1: {n1} × {h1} = {=n1*h1}. Langkah 2: {n2} × {h2} = {=n2*h2}. Langkah 3: {=n1*h1} + {=n2*h2} = {=n1*h1+n2*h2}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h1": {
+              "values": [3000, 3500, 4000, 4500, 5000]
+            },
+            "h2": {
+              "values": [1500, 2000, 2500]
+            },
+            "h3": {
+              "values": [1000, 1500, 2000]
+            },
+            "n1": [2, 4],
+            "b": {
+              "values": [20000, 50000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "b > n1 * h1 + h3 && h2 != h3",
+          "prompt": "{nama} membeli {n1} buku tulis dan 1 penghapus. Ia membayar Rp{b}. Berapa kembaliannya?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Barang", "Harga"],
+              "rows": [
+                ["Buku tulis", "Rp{h1}"],
+                ["Pensil", "Rp{h2}"],
+                ["Penghapus", "Rp{h3}"]
+              ],
+              "caption": "Daftar harga di koperasi sekolah"
+            }
+          ],
+          "answer": "b - n1 * h1 - h3",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b - n1 * h1",
+              "tag": "lupa-penghapus"
+            },
+            {
+              "expr": "n1 * h1 + h3",
+              "tag": "lupa-kembalian"
+            },
+            {
+              "expr": "b - h1 - h3",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "b - n1 * h1 - h2",
+              "tag": "barang-lain"
+            }
+          ],
+          "explain": "Baca harga di tabel. Langkah 1: {n1} × {h1} = {=n1*h1}. Langkah 2: {=n1*h1} + {h3} = {=n1*h1+h3}. Langkah 3: {b} − {=n1*h1+h3} = {=b-n1*h1-h3}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 40],
+            "b": [12, 40],
+            "c": [12, 40],
+            "h": {
+              "values": [1000, 1500, 2000, 2500]
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Harga 1 roti Rp{h}. Berapa uang hasil penjualan roti pada hari Senin dan Selasa?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Roti terjual"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"]
+              ],
+              "caption": "Penjualan roti di kantin"
+            }
+          ],
+          "answer": "(a + b) * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a * h",
+              "tag": "satu-hari"
+            },
+            {
+              "expr": "(a + b + c) * h",
+              "tag": "semua-hari"
+            },
+            {
+              "expr": "(a + b) * h + h",
+              "tag": "lebih-satu-roti"
+            }
+          ],
+          "explain": "Langkah 1: roti terjual Senin dan Selasa {a} + {b} = {=a+b}. Langkah 2: {=a+b} × {h} = {=(a+b)*h}. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

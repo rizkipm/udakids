@@ -1,0 +1,77 @@
+{
+  "id": "math.sd4.bb2.jenis-sudut-dari-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 2,
+  "title": "Garis dan sudut — Level 2 — Jenis sudut dari gambar",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [
+                10, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 90, 90, 90, 100, 105,
+                110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 170, 180, 180
+              ]
+            }
+          },
+          "prompt": "Perhatikan sudut ini. Sudut ini termasuk …",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=d"
+            }
+          ],
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Bandingkan dengan pojok buku (90°). Lebih sempit = lancip, sama persis = siku-siku, lebih lebar = tumpul, segaris = lurus (180°). Sudut ini {d}°, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [
+                10, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 90, 90, 90, 100, 105,
+                110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 170, 180, 180
+              ]
+            }
+          },
+          "prompt": "Sudut ini besarnya {d}°. Termasuk sudut apa?",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=d",
+              "showValue": true
+            }
+          ],
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Lancip kurang dari 90°, siku-siku tepat 90°, tumpul antara 90° dan 180°, lurus tepat 180°. {d}° termasuk {answer}."
+        }
+      }
+    ]
+  }
+}

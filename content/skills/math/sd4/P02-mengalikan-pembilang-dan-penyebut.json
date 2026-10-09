@@ -1,0 +1,76 @@
+{
+  "id": "math.sd4.p2.mengalikan-pembilang-dan-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 2,
+  "title": "Pecahan senilai — Level 2 — Mengalikan pembilang dan penyebut",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [1, 9],
+            "k": [2, 5]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = …/{=d*k}",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n + d * k - d",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut {d} dikali {k} menjadi {=d*k}. Pembilang juga harus dikali {k}: {n} × {k} = {answer}. Jadi {n}/{d} = {answer}/{=d*k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [1, 9],
+            "k": [2, 5]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = {=n*k}/…",
+          "answer": "d * k",
+          "distractors": [
+            {
+              "expr": "d + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "d + n * k - n",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "d * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pembilang {n} dikali {k} menjadi {=n*k}. Penyebut juga harus dikali {k}: {d} × {k} = {answer}. Jadi {n}/{d} = {=n*k}/{answer}."
+        }
+      }
+    ]
+  }
+}

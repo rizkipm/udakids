@@ -1,0 +1,54 @@
+{
+  "id": "math.sd4.r4.pecahan-campuran-ke-biasa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "R",
+  "order": 4,
+  "title": "Pecahan campuran — Level 4 — Pecahan campuran ke biasa",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "w": [1, 5],
+      "d": [2, 9],
+      "n": [1, 8]
+    },
+    "constraint": "n < d",
+    "prompt": "Ubah {w} {n}/{d} menjadi pecahan biasa.",
+    "format": "fraction",
+    "fraction": {
+      "num": "w * d + n",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "w + n",
+        "den": "d",
+        "tag": "jumlah-saja"
+      },
+      {
+        "num": "w * n + d",
+        "den": "d",
+        "tag": "kali-tertukar"
+      },
+      {
+        "num": "w * d",
+        "den": "d",
+        "tag": "lupa-pembilang"
+      },
+      {
+        "num": "w * d + n",
+        "den": "w * d",
+        "tag": "penyebut-berubah"
+      }
+    ],
+    "explain": "Kalikan bilangan bulat dengan penyebut: {w} × {d} = {=w*d}. Tambahkan pembilang: {=w*d} + {n} = {=w*d+n}. Penyebut tetap {d}. Jadi {w} {n}/{d} = {answer}."
+  }
+}

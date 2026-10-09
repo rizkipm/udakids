@@ -1,0 +1,119 @@
+{
+  "id": "math.sd4.a2.nilai-angka-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 2,
+  "title": "Nilai tempat sampai 100.000 — Level 2 — Nilai angka ribuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999],
+            "p": [1, 3]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "pw": "(p == 1) * 10 + (p == 2) * 100 + (p == 3) * 1000",
+            "dg": "floor(n / pw) % 10"
+          },
+          "constraint": "(d0 == dg) + (d1 == dg) + (d2 == dg) + (d3 == dg) == 1 && dg > 0",
+          "prompt": "Berapa nilai angka {dg} pada bilangan {n}?",
+          "answer": "dg * pw",
+          "distractors": [
+            {
+              "expr": "dg",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "dg * pw * 10",
+              "tag": "tempat-kiri"
+            },
+            {
+              "expr": "dg * pw / 10",
+              "tag": "tempat-kanan"
+            }
+          ],
+          "explain": "Angka {dg} berada di tempat yang bernilai {pw}. Nilainya = angka × nilai tempat = {dg} × {pw} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "constraint": "r != h && r != t && r != s",
+          "prompt": "{n} = … ribuan + {h} ratusan + {t} puluhan + {s} satuan",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "r * 1000",
+              "tag": "nilai-bukan-banyak"
+            },
+            {
+              "expr": "h",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Angka paling kiri pada {n} ada di tempat ribuan. Jadi {n} punya {answer} ribuan, {h} ratusan, {t} puluhan, dan {s} satuan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10"
+          },
+          "constraint": "d0 != d1 && d0 != d2 && d0 != d3 && d1 != d2 && d1 != d3 && d2 != d3",
+          "prompt": "Pada bilangan {n}, angka manakah yang nilainya {=d3*1000}?",
+          "answer": "d3",
+          "distractors": [
+            {
+              "expr": "d2",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "d1",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "d0",
+              "tag": "satuan"
+            }
+          ],
+          "explain": "Nilai {=d3*1000} berarti {d3} ribuan. Angka di tempat ribuan pada {n} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

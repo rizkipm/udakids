@@ -1,0 +1,90 @@
+{
+  "id": "math.sd34.ed4.nilai-setelah-naik-persen",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 4,
+  "title": "Rasio & persen — Level 4 — Nilai setelah naik persen",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menentukan nilai akhir dari besar kenaikan persen",
+    "emc-no": "23"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [5, 10, 15, 20, 25, 30, 40, 50]
+            },
+            "a": [5, 60]
+          },
+          "derived": {
+            "awal": "a * 20",
+            "naik": "awal * p / 100"
+          },
+          "prompt": "Dalam setahun, banyak buku di perpustakaan sekolah bertambah {p}%. Pertambahannya {naik} buku. Banyak buku sekarang adalah … buku.",
+          "answer": "awal + naik",
+          "distractors": [
+            {
+              "expr": "awal",
+              "tag": "tahun-lalu"
+            },
+            {
+              "expr": "awal - naik",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "naik * p",
+              "tag": "dikali-persen"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p}% = {naik} buku, jadi 100% (buku tahun lalu) = {naik} × 100 : {p} = {awal}. Sekarang = {awal} + {naik} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "a": [5, 40]
+          },
+          "derived": {
+            "awal": "a * 100000",
+            "naik": "awal * p / 100"
+          },
+          "prompt": "Harga sebuah sepeda naik {p}%. Kenaikannya Rp{naik}. Harga sepeda setelah naik adalah Rp…",
+          "answer": "awal + naik",
+          "distractors": [
+            {
+              "expr": "awal",
+              "tag": "harga-lama"
+            },
+            {
+              "expr": "awal - naik",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "naik * 100 / p * 2",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p}% = Rp{naik}, jadi harga lama = {naik} × 100 : {p} = Rp{awal}. Harga baru = {awal} + {naik} = Rp{answer}."
+        }
+      }
+    ]
+  }
+}

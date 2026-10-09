@@ -1,0 +1,51 @@
+{
+  "id": "math.sd4.q3.pembilang-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 3,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 3 — Pembilang sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [1, 4],
+      "a": [2, 12],
+      "b": [2, 12]
+    },
+    "constraint": "n < a && n < b && a != b",
+    "prompt": "Lihat gambarnya. Bandingkan: {n}/{a} … {n}/{b}",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=a",
+        "model": "circle"
+      },
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=b",
+        "model": "circle"
+      }
+    ],
+    "answer": "(a < b) * 1 + (a > b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Pembilangnya sama, yaitu {n} potong. Lingkaran pertama dibagi {a} bagian dan lingkaran kedua dibagi {b} bagian. Makin besar penyebut, makin kecil setiap potongan. Jadi {n}/{a} {answer} {n}/{b}."
+  }
+}

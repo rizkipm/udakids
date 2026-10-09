@@ -1,0 +1,87 @@
+{
+  "id": "math.sd4.k1.mengali-dengan-puluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 1,
+  "title": "Perkalian dua angka — Level 1 — Mengali dengan puluhan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 99],
+            "b": [2, 9]
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {=b*10} = …",
+          "answer": "a * b * 10",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b * 100",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "a * 10 + b * 10",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Hitung {a} × {b} = {=a*b} dulu. Karena {=b*10} = {b} puluhan, tambahkan satu nol di belakang: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{=a*10} × {=b*10} = …",
+          "answer": "a * b * 100",
+          "distractors": [
+            {
+              "expr": "a * b * 10",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "a * b * 1000",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "(a + b) * 100",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Kalikan angka depannya: {a} × {b} = {=a*b}. Ada dua nol pada soal, jadi tambahkan dua nol: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 49],
+            "b": [2, 9]
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {=b*10} = …",
+          "answer": "a * b * 10",
+          "mode": "input",
+          "explain": "{a} × {=b*10} = {a} × {b} × 10. {a} × {b} = {=a*b}, lalu × 10 = {answer}."
+        }
+      }
+    ]
+  }
+}

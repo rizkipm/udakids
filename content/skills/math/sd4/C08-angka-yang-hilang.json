@@ -1,0 +1,109 @@
+{
+  "id": "math.sd4.c8.angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 8,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 8 — Angka yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "d": [0, 7],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{a}□.{h}{t}{s} > {a}{d}.{h}{t}{s}. Angka terkecil yang dapat mengisi □ adalah …",
+          "answer": "d + 1",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "sama-besar"
+            },
+            {
+              "expr": "d + 2",
+              "tag": "bukan-terkecil"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Angka lain sama persis, jadi □ harus lebih besar dari {d}. Angka terkecil yang lebih besar dari {d} adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "d": [1, 8],
+            "h": [1, 9],
+            "g": [0, 8],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "constraint": "g < h",
+          "prompt": "{a}□.{h}{t}{s} > {a}{d}.{g}{t}{s}. Angka terkecil yang dapat mengisi □ adalah …",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "d + 1",
+              "tag": "abaikan-ratusan"
+            },
+            {
+              "expr": "d - 1",
+              "tag": "terlalu-kecil"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Jika □ = {d}, ribuannya sama. Lalu ratusan {h} lebih dari {g}, jadi bilangan kiri sudah lebih besar. Angka terkecil adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "d": [2, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{a}□.{h}{t}{s} < {a}{d}.{h}{t}{s}. Angka terbesar yang dapat mengisi □ adalah …",
+          "answer": "d - 1",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "sama-besar"
+            },
+            {
+              "expr": "d - 2",
+              "tag": "bukan-terbesar"
+            },
+            {
+              "expr": "0",
+              "tag": "terkecil"
+            }
+          ],
+          "explain": "Angka lain sama persis, jadi □ harus lebih kecil dari {d}. Angka terbesar yang lebih kecil dari {d} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import { EN_COMMON, ID_COMMON } from './lang-words.js';
 import { z } from 'zod';
 import type { Choice, InteractionType, Item } from '../generator/item.js';
 import { QUIZ_LENGTH } from '../scoring/quiz.js';
@@ -33,6 +34,14 @@ export const COMMAND_KEYS = {
   sort: 'vo_cmd_sort',
   crossword: 'vo_cmd_crossword',
   jigsaw: 'vo_cmd_jigsaw',
+  guess: 'vo_cmd_guess',
+  chart: 'vo_cmd_chart',
+  magic: 'vo_cmd_magic',
+  stack: 'vo_cmd_stack',
+  lines: 'vo_cmd_lines',
+  bingo: 'vo_cmd_bingo',
+  coord: 'vo_cmd_coord',
+  chance: 'vo_cmd_chance',
 } as const satisfies Record<InteractionType, string>;
 
 export const RIGHT_KEYS = [
@@ -127,6 +136,19 @@ const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
       return it.tokens;
     case 'crossword':
       return it.letters;
+    case 'chart':
+      return it.bars;
+    case 'magic':
+      return it.facts.flatMap((f) => f.choices);
+    case 'stack':
+      return it.blocks;
+    case 'bingo':
+      return it.cells;
+    case 'chance':
+      return [...it.outcomes, ...it.fractions];
+    // Petunjuk tiap langkah Harta Karun Koordinat (D-101) dibacakan seperti kartu.
+    case 'coord':
+      return it.steps.map((st) => ({ id: st.id, visual: { kind: 'blank' }, say: st.say }));
     default:
       return [];
   }
@@ -211,6 +233,80 @@ export const voiceProfileOf = (skillId: string, part: VoiceItemPart = 'prompt'):
 };
 export const voiceLangOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceLang =>
   voiceProfileOf(skillId, part).lang;
+
+// Kata fungsi yang khas tiap bahasa (tidak ada di bahasa lain), untuk menebak bahasa satu kalimat (D-098).
+const ID_MARKERS = new Set(
+  (
+    ID_COMMON +
+    ' ' +
+    'yang dan adalah ini itu dengan untuk dari di ke tidak bukan karena jadi kalimat kata artinya berarti pilih ' +
+    'jawaban bahasa inggris sudah akan harus apa siapa berapa mana kamu kita ada atau juga pada dalam oleh saat ' +
+    'jika maka sama lebih paling setiap semua sebuah seorang ketuk benar tepat soal ayo bagus coba lagi teks ' +
+    'bacaan gambar menunjukkan bentuk kerja masa lalu sekarang sedang telah belum bisa dapat perlu menjadi ' +
+    'seperti agar supaya tetapi namun lalu kemudian sebelum sesudah setelah karena itulah yaitu yakni kalau ' +
+    'halo hai teman belajar hari kita ingat contoh'
+  ).split(' '),
+);
+const EN_MARKERS = new Set(
+  [
+    (
+      EN_COMMON +
+      ' ' +
+      'the is are was were a an of to and in on for with he she it they you we my your his her their our this ' +
+      'that these those have has had do does did not will can could would should be been being what which who ' +
+      'how why where when there here from at by as or but if than then so very about into over after before'
+    ).split(' '),
+  ]
+    .flat()
+    .filter((w) => !ID_MARKERS.has(w)),
+);
+
+/**
+ * Bahasa satu kalimat: `id` / `en` / tak pasti. Bagian dalam tanda kutip (contoh kata/kalimat English di dalam
+ * penjelasan Indonesia) tidak dihitung, jadi "\"No card, no lunch box\" berarti …" tetap Indonesia.
+ */
+export function textLanguage(text: string): 'id' | 'en' | undefined {
+  const bare = text.replace(/"[^"]*"|“[^”]*”|‘[^’]*’|'[^']{2,}'/g, ' ').toLowerCase();
+  let id = 0;
+  let en = 0;
+  for (const w of bare.match(/[a-z]+/g) ?? []) {
+    if (ID_MARKERS.has(w)) id++;
+    else if (EN_MARKERS.has(w)) en++;
+    // Imbuhan khas Indonesia: -kan, -nya, meng-, meny- (mis. menyembunyikan, sayangnya).
+    else if (w.length >= 5 && w !== 'kenya' && /(kan|nya)$|^(meng|meny)/.test(w)) id++;
+  }
+  if (id > en) return 'id';
+  if (en > id) return 'en';
+  return undefined;
+}
+
+/**
+ * Profil suara untuk satu teks soal (D-098): buku English memakai suara British hanya untuk kalimat English;
+ * penjelasan/perintah berbahasa Indonesia di buku English dibacakan suara Indonesia (sebelumnya terdengar seperti
+ * logat Malaysia karena dibacakan suara English). Buku lain tetap Bahasa Indonesia.
+ */
+export const voiceProfileFor = (
+  skillId: string,
+  part: VoiceItemPart,
+  text: string,
+): VoiceProfile => {
+  const base = voiceProfileOf(skillId, part);
+  if (!skillId.startsWith('english.')) return base;
+  // Kalimat tak pasti di pembahasan (mis. "Feel blue = merasa sedih") → suara Indonesia: suara English yang membaca
+  // kalimat Indonesia terdengar asing, sedangkan suara Indonesia membaca kata English masih wajar.
+  const lang = textLanguage(text) ?? (part === 'reteach' ? 'id' : undefined);
+  if (lang === 'id' && base.lang === 'en-GB')
+    return {
+      lang: 'id-ID',
+      style: ID_EN_VOICE_STYLE,
+      rateDelta: stageRate(voiceStageOf(skillId)),
+    };
+  if (lang === 'en' && base.lang === 'id-ID' && part !== 'prompt')
+    return { lang: 'en-GB', style: ENGLISH_VOICE_STYLE };
+  return base;
+};
+export const voiceLangFor = (skillId: string, part: VoiceItemPart, text: string): VoiceLang =>
+  voiceProfileFor(skillId, part, text).lang;
 
 /**
  * Pengaturan suara untuk satu profil: model, nama suara, dan kecepatan dari admin; gaya mengikuti profil,

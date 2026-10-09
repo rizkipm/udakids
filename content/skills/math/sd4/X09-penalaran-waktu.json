@@ -1,0 +1,196 @@
+{
+  "id": "math.sd4.x9.penalaran-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 9,
+  "title": "Waktu dan lama kegiatan — Level 9 — Penalaran waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [20, 22],
+            "b": [4, 6],
+            "m": {
+              "values": [10, 15, 20, 30, 40, 45]
+            }
+          },
+          "prompt": "{nama} tidur pukul {h}.00 malam dan bangun pukul 0{b}.{m} pagi. Berapa menit lama ia tidur?",
+          "answer": "(24 - h + b) * 60 + m",
+          "explain": "Dari {h}.00 sampai 24.00 = {=24-h} jam. Dari 24.00 sampai 0{b}.{m} = {b} jam {m} menit. Jumlahnya {=24-h+b} jam {m} menit = {answer} menit.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "(h - b) * 60 + m",
+              "tag": "dikurangi-langsung"
+            },
+            {
+              "expr": "(24 - h + b) * 100 + m",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "(24 - h + b) * 60",
+              "tag": "lupa-menit"
+            },
+            {
+              "expr": "(24 - h + b) * 60 + m + 60",
+              "tag": "lebih-satu-jam"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [10, 12, 15, 20]
+            },
+            "n": [3, 8]
+          },
+          "prompt": "Kereta pertama berangkat pukul 06.00, lalu ada kereta setiap {k} menit. Kereta ke-{n} berangkat berapa menit setelah pukul 06.00?",
+          "answer": "(n - 1) * k",
+          "explain": "Kereta pertama berangkat pada menit ke-0. Kereta ke-{n} berangkat setelah {=n-1} jarak waktu: {=n-1} × {k} = {answer} menit.",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "lupa-kereta-pertama"
+            },
+            {
+              "expr": "(n + 1) * k",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 2],
+            "b": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "c": {
+              "range": [60, 180],
+              "step": 5
+            }
+          },
+          "prompt": "Waktu lari {nama} {a} menit {b} detik. Waktu lari temannya {c} detik. Berapa detik selisih waktu mereka?",
+          "answer": "abs(a * 60 + b - c)",
+          "explain": "Ubah dulu ke detik: {a} menit {b} detik = {=a*60+b} detik. Selisihnya dengan {c} detik adalah {answer} detik.",
+          "constraint": "c != a * 60 + b && abs(a * 60 + b - c) < 60",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "detik",
+          "distractors": [
+            {
+              "expr": "abs(a * 100 + b - c)",
+              "tag": "menit-seperti-ratusan"
+            },
+            {
+              "expr": "a * 60 + b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(a * 60 + b - c) + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(a * 60 + b - c) + 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5],
+            "n": [3, 12]
+          },
+          "prompt": "Jam dinding di kelas terlambat {k} menit setiap hari. Setelah {n} hari, berapa menit jam itu terlambat?",
+          "answer": "k * n",
+          "explain": "Setiap hari terlambat {k} menit, jadi {n} hari: {n} × {k} = {answer} menit.",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "k + n",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "k * (n - 1)",
+              "tag": "kurang-satu-hari"
+            },
+            {
+              "expr": "k * n + k",
+              "tag": "lebih-satu-hari"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

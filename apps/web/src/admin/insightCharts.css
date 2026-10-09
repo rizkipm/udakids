@@ -1,0 +1,409 @@
+/* Grafik ringkasan admin (D-099). Garis bantu & sumbu tipis dan samar; data yang paling menonjol. */
+.ich {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.ich-plot {
+  position: relative;
+  min-width: 0;
+}
+.ich-plot svg {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+}
+.ich-empty {
+  position: absolute;
+  inset: 0 0 30px 58px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+.ich-axis line {
+  stroke: #ece8f5;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.ich-axis text {
+  font-size: 12px;
+  fill: var(--ui-muted);
+  font-variant-numeric: tabular-nums;
+}
+.ich-peak {
+  font-size: 12px;
+  font-weight: 800;
+  fill: var(--ui-ink);
+}
+.ich-hl {
+  fill: #f1edfb;
+}
+.ich-hit {
+  fill: transparent;
+  cursor: crosshair;
+}
+.ich-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.ich-cross {
+  stroke: #b9b2d6;
+  stroke-width: 1;
+}
+.ich-dot {
+  stroke: var(--ui-surface);
+  stroke-width: 2;
+}
+.ich-tip {
+  position: absolute;
+  top: 4px;
+  z-index: 2;
+  transform: translateX(-50%);
+  display: grid;
+  gap: 4px;
+  min-width: 160px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-line);
+  box-shadow: 0 8px 24px rgba(29, 26, 46, 0.14);
+  font-size: 13px;
+  pointer-events: none;
+}
+.ich-tip span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ui-muted);
+}
+.ich-tip b {
+  margin-left: auto;
+  padding-left: 12px;
+  color: var(--ui-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ich-tip i,
+.ich-legend i,
+.ich-donut-legend i {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+.ich-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--ui-muted);
+}
+.ich-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ich-legend b {
+  color: var(--ui-ink);
+}
+.ich-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ich-tabs .ins-chip {
+  min-height: 34px;
+  font-size: 13px;
+}
+
+/* Tabel padanan */
+.ich-table summary {
+  cursor: pointer;
+  color: var(--ui-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+.ich-table-scroll {
+  max-height: 260px;
+  overflow: auto;
+  margin-top: 8px;
+}
+.ich-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ich-table th,
+.ich-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--ui-line);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ich-table th:first-child,
+.ich-table td:first-child {
+  text-align: left;
+}
+
+/* Donat */
+.ich-donut {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+.ich-donut-ring {
+  position: relative;
+  width: 188px;
+  height: 188px;
+}
+.ich-donut-track,
+.ich-donut-seg {
+  fill: none;
+  stroke-width: 22;
+}
+.ich-donut-track {
+  stroke: #f1eef9;
+}
+.ich-donut-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+.ich-donut-center strong {
+  font-size: 26px;
+  line-height: 1.1;
+}
+.ich-donut-center small {
+  color: var(--ui-muted);
+  font-size: 12px;
+}
+.ich-donut-legend {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ich-donut-legend li {
+  display: grid;
+  grid-template-columns: auto 1fr auto 44px;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.ich-donut-legend b,
+.ich-donut-legend small {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ich-donut-legend small {
+  color: var(--ui-muted);
+}
+
+/* Peta panas */
+.ich-heat {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.ich-heat-grid {
+  display: grid;
+  grid-template-columns: 40px repeat(24, minmax(0, 1fr));
+  gap: 3px;
+}
+.ich-heat-row {
+  display: contents;
+}
+.ich-heat-cell {
+  aspect-ratio: 1;
+  min-height: 14px;
+  border-radius: 4px;
+}
+.ich-heat-day,
+.ich-heat-hour {
+  font-size: 12px;
+  color: var(--ui-muted);
+  align-self: center;
+}
+.ich-heat-hour {
+  text-align: left;
+}
+.ich-heat-scale {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--ui-muted);
+}
+.ich-heat-scale i {
+  width: 18px;
+  height: 10px;
+  border-radius: 3px;
+}
+.ich-heat-scale span {
+  margin: 0 4px;
+}
+
+/* Kohort */
+.ich-cohort {
+  overflow-x: auto;
+}
+.ich-cohort table {
+  width: auto;
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.ich-cohort th {
+  color: var(--ui-muted);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  padding: 4px 6px;
+}
+.ich-cohort td {
+  width: 72px;
+  min-width: 56px;
+  padding: 8px 6px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 700;
+}
+.ich-cohort td.is-future {
+  background: transparent;
+}
+
+/* Corong */
+.ich-funnel {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ich-funnel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: 5px;
+}
+.ich-funnel-head b {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.ich-funnel-head small {
+  color: var(--ui-muted);
+  min-width: 92px;
+  text-align: right;
+}
+.ich-funnel-track {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: #f1eef9;
+  overflow: hidden;
+}
+.ich-funnel-track span {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: #5b3fd6;
+}
+
+@media (max-width: 560px) {
+  .ich-donut {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .ich-donut-legend {
+    width: 100%;
+  }
+  .ich-heat-grid {
+    grid-template-columns: 30px repeat(24, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .ich-heat-cell {
+    min-height: 8px;
+    border-radius: 2px;
+  }
+}
+
+/* Gauge, treemap, sankey, corong meruncing (D-100) */
+.ich-gauge {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.ich-gauge p {
+  margin: 0;
+  color: var(--ui-muted);
+  font-size: 13px;
+  max-width: 280px;
+}
+.ich-gauge-track,
+.ich-gauge-fill {
+  fill: none;
+  stroke-width: 18;
+  stroke-linecap: round;
+}
+.ich-gauge-track {
+  stroke: #f1eef9;
+}
+.ich-gauge-value {
+  font-size: 30px;
+  font-weight: 800;
+  fill: var(--ui-ink);
+}
+.ich-axis-t {
+  font-size: 12px;
+  fill: var(--ui-muted);
+}
+.ich-tree-label {
+  font-size: 13px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.ich-tree-value {
+  font-size: 12px;
+  font-weight: 600;
+}
+.ich-sankey-label,
+.ich-sankey-value {
+  /* Tetap terbaca di atas pita. */
+  paint-order: stroke;
+  stroke: var(--ui-surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.ich-sankey-label {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ui-ink);
+}
+.ich-sankey-value {
+  font-size: 12px;
+  fill: var(--ui-muted);
+  font-variant-numeric: tabular-nums;
+}
+.ich-funnel-in {
+  font-size: 14px;
+  font-weight: 800;
+}
+.ich-empty.is-full {
+  inset: 0;
+}

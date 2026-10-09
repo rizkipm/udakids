@@ -1,0 +1,364 @@
+{
+  "id": "math.sd4.f10.tantangan-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 10,
+  "title": "Pengurangan bilangan besar — Level 10 — Tantangan pengurangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 8],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [0, 9],
+            "x3": [0, 9],
+            "a3": [3, 9]
+          },
+          "derived": {
+            "b0": "(a0 - 0 + 1) + floor(x0 * (9 - a0) / 10)",
+            "b1": "(a1 - 1 + 1) + floor(x1 * (10 - a1) / 10)",
+            "b2": "(a2 - 1 + 1) + floor(x2 * (10 - a2) / 10)",
+            "b3": "1 + floor(x3 * (a3 - 2) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "kb": "abs(a0 - b0) * 1 + abs(a1 - b1) * 10 + abs(a2 - b2) * 100 + abs(a3 - b3) * 1000"
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "kb",
+              "tag": "kurangi-kecil-dari-besar"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Susun ke bawah, kurangi mulai dari satuan. Satuan: {a0} kurang dari {b0}, pinjam 1 dari kiri → {=a0+10} − {b0} = {=a0+10-b0}. Puluhan: {=a1-1} kurang dari {b1}, pinjam 1 dari kiri → {=a1-1+10} − {b1} = {=a1-1+10-b1}. Ratusan: {=a2-1} kurang dari {b2}, pinjam 1 dari kiri → {=a2-1+10} − {b2} = {=a2-1+10-b2}. Ribuan: {=a3-1} − {b3} = {=a3-1-b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 9],
+            "b": [1001, 9999]
+          },
+          "derived": {
+            "a": "p * 10000"
+          },
+          "constraint": "b % 10 != 0",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 10000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} hanya punya puluh ribuan. Pinjam 1 puluh ribuan: {a} = {=p-1} puluh ribuan + 9 ribuan + 9 ratusan + 9 puluhan + 10 satuan. Lalu kurangi tiap tempat: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 8],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [1, 9],
+            "x3": [0, 9],
+            "a3": [0, 8],
+            "x4": [0, 9],
+            "a4": [3, 9]
+          },
+          "derived": {
+            "b0": "(a0 - 0 + 1) + floor(x0 * (9 - a0) / 10)",
+            "b1": "(a1 - 1 + 1) + floor(x1 * (10 - a1) / 10)",
+            "b2": "floor(x2 * (a2 + 0) / 10)",
+            "b3": "(a3 - 0 + 1) + floor(x3 * (9 - a3) / 10)",
+            "b4": "1 + floor(x4 * (a4 - 2) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000 + a4 * 10000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000 + b4 * 10000",
+            "kb": "abs(a0 - b0) * 1 + abs(a1 - b1) * 10 + abs(a2 - b2) * 100 + abs(a3 - b3) * 1000 + abs(a4 - b4) * 10000"
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "kb",
+              "tag": "kurangi-kecil-dari-besar"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 10000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Susun ke bawah, kurangi mulai dari satuan. Satuan: {a0} kurang dari {b0}, pinjam 1 dari kiri → {=a0+10} − {b0} = {=a0+10-b0}. Puluhan: {=a1-1} kurang dari {b1}, pinjam 1 dari kiri → {=a1-1+10} − {b1} = {=a1-1+10-b1}. Ratusan: {=a2-1} − {b2} = {=a2-1-b2}. Ribuan: {a3} kurang dari {b3}, pinjam 1 dari kiri → {=a3+10} − {b3} = {=a3+10-b3}. Puluh ribuan: {=a4-1} − {b4} = {=a4-1-b4}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 39999],
+            "c": [1000, 39999]
+          },
+          "constraint": "b != c",
+          "prompt": "… − {b} = {c}",
+          "answer": "b + c",
+          "distractors": [
+            {
+              "expr": "abs(c - b)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "b + c - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + c - 1000",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + c + 100",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Bilangan awal = hasil + pengurang. {c} + {b} = {answer}. Cek: {answer} − {b} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 39999],
+            "k": [2, 9],
+            "j": [1, 3]
+          },
+          "derived": {
+            "b": "k * 1000 - j"
+          },
+          "prompt": "Hitung dengan cara cepat: {a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - k * 1000",
+              "tag": "lupa-tambah"
+            },
+            {
+              "expr": "a - k * 1000 - j",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{b} hampir {=k*1000}, kurang {j}. Kurangi {=k*1000} dulu: {a} − {=k*1000} = {=a-k*1000}. Karena terlalu banyak mengurangi {j}, tambahkan {j}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": {
+              "range": [12500, 94500],
+              "step": 500
+            }
+          },
+          "derived": {
+            "u": "(x <= 50000) * 50000 + (x > 50000) * 100000"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ],
+            "barang": [
+              "sepatu",
+              "tas sekolah",
+              "buku gambar dan krayon",
+              "kaus olahraga",
+              "payung",
+              "bola sepak"
+            ]
+          },
+          "constraint": "x % 1000 != 0",
+          "prompt": "{nama} membeli {barang} seharga Rp{x}. Ia membayar dengan uang Rp{u}. Berapa uang kembaliannya?",
+          "answer": "u - x",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "u - x + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "u - x - 1000",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "u + x",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "u - x + 10000",
+              "tag": "lupa-pinjaman"
+            }
+          ],
+          "explain": "Kembalian = uang yang dibayar − harga: {u} − {x} = {answer}. Cek dengan menjumlah: harga + kembalian = {x} + {=u-x} = {u}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 39999],
+            "c": [1000, 39999]
+          },
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b != c",
+          "prompt": "Diketahui {a} − {b} = {c}. Berapa {a} − {c}?",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "hasil-lama"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-awal"
+            },
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pada pengurangan, bilangan awal = pengurang + hasil, jadi {a} = {b} + {c}. Maka {a} − {c} = {answer}. Tidak perlu menghitung ulang!"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 89999],
+            "b": [1000, 19999],
+            "k": {
+              "values": [10, 100, 1000, 500, 200]
+            }
+          },
+          "prompt": "{a} − {b} = {=a+k} − …",
+          "answer": "b + k",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tetap"
+            },
+            {
+              "expr": "b - k",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "b + 2 * k",
+              "tag": "dua-kali"
+            }
+          ],
+          "explain": "Jika bilangan awal ditambah {k}, pengurangnya juga harus ditambah {k} supaya selisihnya tetap. {b} + {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.z7.keliling-bangun-gabungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 7,
+  "title": "Keliling bangun datar — Level 7 — Keliling bangun gabungan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Dua persegi bersisi {s} cm diletakkan berdampingan sehingga menjadi persegi panjang. Berapa cm keliling bangun baru itu?",
+          "answer": "6 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "8 * s",
+              "tag": "sisi-dalam-ikut-dihitung"
+            },
+            {
+              "expr": "4 * s",
+              "tag": "satu-persegi-saja"
+            },
+            {
+              "expr": "5 * s",
+              "tag": "keliru-hitung-sisi"
+            }
+          ],
+          "explain": "Bangun barunya {=2*s} cm × {s} cm. Sisi yang menempel ada di dalam, tidak dihitung. 2 × ({=2*s} + {s}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "prompt": "Tiga persegi bersisi {s} cm dijajarkan dalam satu baris. Berapa cm keliling bangun yang terbentuk?",
+          "answer": "8 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "12 * s",
+              "tag": "sisi-dalam-ikut-dihitung"
+            },
+            {
+              "expr": "6 * s",
+              "tag": "dua-persegi"
+            },
+            {
+              "expr": "10 * s",
+              "tag": "keliru-hitung-sisi"
+            }
+          ],
+          "explain": "Bangunnya menjadi persegi panjang {=3*s} cm × {s} cm. Keliling = 2 × ({=3*s} + {s}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [8, 20],
+            "l": [6, 15],
+            "s": [2, 5]
+          },
+          "constraint": "s < l && p > l",
+          "prompt": "Sebuah persegi panjang {p} cm × {l} cm dipotong persegi kecil {s} cm × {s} cm di satu pojoknya, sehingga berbentuk huruf L. Berapa cm keliling bangun huruf L itu?",
+          "answer": "2 * (p + l)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) - 2 * s",
+              "tag": "dikurangi-potongan"
+            },
+            {
+              "expr": "2 * (p + l) + 2 * s",
+              "tag": "ditambah-potongan"
+            },
+            {
+              "expr": "p * l - s * s",
+              "tag": "luas"
+            }
+          ],
+          "explain": "Dua sisi yang hilang diganti dua sisi baru yang sama panjang (geser ke luar pojoknya). Jadi kelilingnya tetap 2 × ({p} + {l}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 15],
+            "l": [2, 8]
+          },
+          "constraint": "p > l",
+          "prompt": "Dua persegi panjang yang sama, masing-masing {p} cm × {l} cm, disambung pada sisi panjangnya. Berapa cm keliling bangun baru?",
+          "answer": "2 * (p + 2 * l)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "4 * (p + l)",
+              "tag": "sisi-dalam-ikut-dihitung"
+            },
+            {
+              "expr": "2 * (2 * p + l)",
+              "tag": "disambung-sisi-pendek"
+            },
+            {
+              "expr": "2 * (p + l)",
+              "tag": "satu-bangun-saja"
+            }
+          ],
+          "explain": "Disambung pada sisi panjang, bangun barunya {p} cm × {=2*l} cm. Keliling = 2 × ({p} + {=2*l}) = {answer}."
+        }
+      }
+    ]
+  }
+}

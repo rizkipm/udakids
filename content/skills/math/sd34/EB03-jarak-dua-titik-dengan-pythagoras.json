@@ -1,0 +1,62 @@
+{
+  "id": "math.sd34.eb3.jarak-dua-titik-dengan-pythagoras",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 3,
+  "title": "Geometri koordinat — Level 3 — Jarak dua titik dengan Pythagoras",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Menghitung jarak dua titik dengan teorema Pythagoras",
+    "emc-no": "17"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": [2, 4],
+      "v": [1, 3],
+      "k": [1, 3],
+      "x1": [-6, 6],
+      "y1": [-6, 6],
+      "sx": {
+        "values": [1, -1]
+      },
+      "sy": {
+        "values": [1, -1]
+      }
+    },
+    "derived": {
+      "dx": "k * (u * u - v * v)",
+      "dy": "k * 2 * u * v",
+      "c": "k * (u * u + v * v)",
+      "x2": "x1 + sx * dx",
+      "y2": "y1 + sy * dy"
+    },
+    "constraint": "v < u && dx <= 16 && dy <= 16",
+    "prompt": "Seekor semut berjalan lurus dari titik ({x1}, {y1}) ke titik ({x2}, {y2}) pada kertas berpetak. Berapa satuan panjang lintasan semut itu?",
+    "answer": "c",
+    "unit": "satuan",
+    "distractors": [
+      {
+        "expr": "dx + dy",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "max(dx, dy)",
+        "tag": "satu-arah"
+      },
+      {
+        "expr": "c + 1",
+        "tag": "lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Geser mendatar {dx} satuan dan tegak {dy} satuan. Jarak = √({dx}² + {dy}²) = √{=c*c} = {answer}."
+  }
+}

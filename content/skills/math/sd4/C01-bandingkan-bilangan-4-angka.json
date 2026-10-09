@@ -1,0 +1,69 @@
+{
+  "id": "math.sd4.c1.bandingkan-bilangan-4-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 1,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 1 — Bandingkan bilangan 4 angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999]
+          },
+          "constraint": "floor(a / 1000) != floor(b / 1000)",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Banyak angkanya sama, jadi bandingkan dari angka paling kiri (ribuan). Angka yang lebih besar di tempat itu menang. Jadi {a} {answer} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": [-99, 99]
+          },
+          "derived": {
+            "b": "a + k"
+          },
+          "constraint": "b >= 1000 && floor(a / 1000) == floor(b / 1000)",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ribuannya sama. Lanjutkan ke ratusan, lalu puluhan, lalu satuan, sampai ada angka yang berbeda. Jadi {a} {answer} {b}."
+        }
+      }
+    ]
+  }
+}

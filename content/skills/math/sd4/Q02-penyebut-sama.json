@@ -1,0 +1,77 @@
+{
+  "id": "math.sd4.q2.penyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 2,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 2 — Penyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 11],
+            "b": [1, 11]
+          },
+          "constraint": "a < d && b < d",
+          "prompt": "{a}/{d} … {b}/{d}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Penyebutnya sama, yaitu {d}, jadi ukuran potongannya sama. Bandingkan pembilangnya: {a} dan {b}. Jadi {a}/{d} {answer} {b}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 11],
+            "b": [1, 11],
+            "c": [1, 11]
+          },
+          "constraint": "a < d && b < d && c < d && a != b && b != c && a != c",
+          "prompt": "Mana yang paling besar: {a}/{d}, {b}/{d}, atau {c}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "max(a, b, c)",
+            "den": "d",
+            "simplify": false
+          },
+          "choices": 3,
+          "distractors": [
+            {
+              "num": "min(a, b, c)",
+              "den": "d",
+              "tag": "terkecil"
+            },
+            {
+              "num": "a + b + c - max(a, b, c) - min(a, b, c)",
+              "den": "d",
+              "tag": "tengah"
+            }
+          ],
+          "explain": "Penyebut ketiganya sama, yaitu {d}. Pecahan dengan pembilang terbesar adalah yang paling besar: {answer}."
+        }
+      }
+    ]
+  }
+}

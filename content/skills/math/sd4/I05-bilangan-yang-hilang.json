@@ -1,0 +1,97 @@
+{
+  "id": "math.sd4.i5.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 5,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 5 — Bilangan yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "… × {b} = {p}",
+          "answer": "a",
+          "mode": "input",
+          "explain": "Cari bilangan yang dikali {b} hasilnya {p}. Bagi: {p} : {b} = {answer}. Cek: {answer} × {b} = {p}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "constraint": "a != b",
+          "prompt": "{p} : … = {b}",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "p - b",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{p} dibagi berapa hasilnya {b}? Karena {b} × {a} = {p}, bilangan yang hilang adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [6, 7, 8, 9, 11, 12]
+            },
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{a} × … = {p}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "p - a",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Pikirkan: {a} dikali berapa sama dengan {p}? {p} : {a} = {answer}."
+        }
+      }
+    ]
+  }
+}

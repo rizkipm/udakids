@@ -7,7 +7,7 @@ interface SeoProps {
   noindex?: boolean;
 }
 
-const DEFAULT_TITLE = 'Udakids – Game Edukasi Anak: Matematika, Sains & English';
+const DEFAULT_TITLE = 'UdaKids – Game Edukasi Anak: Matematika, Sains & English';
 const DEFAULT_DESCRIPTION =
   'Latihan interaktif PAUD sampai SMP: matematika, sains, bahasa Inggris, dan logika bersama robot Momo. Soal dibacakan, tanpa iklan, bisa offline.';
 const BASE_URL = 'https://kids.eduskul.my.id';
@@ -15,7 +15,7 @@ const BASE_URL = 'https://kids.eduskul.my.id';
 export function Seo({ title, description, canonical, noindex = false }: SeoProps) {
   useEffect(() => {
     // 1. Update Title
-    const fullTitle = title ? `${title} | Udakids` : DEFAULT_TITLE;
+    const fullTitle = title ? `${title} | UdaKids` : DEFAULT_TITLE;
     document.title = fullTitle;
 
     // 2. Update or create Meta Description

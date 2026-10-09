@@ -1,0 +1,96 @@
+{
+  "id": "math.sd4.k6.menaksir-hasil-kali",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 6,
+  "title": "Perkalian dua angka — Level 6 — Menaksir hasil kali",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 98],
+            "b": [12, 98]
+          },
+          "constraint": "a % 10 != 0 && b % 10 != 0 && a % 10 != 5 && b % 10 != 5",
+          "prompt": "Taksir {a} × {b} dengan membulatkan kedua bilangan ke puluhan terdekat. Taksirannya …",
+          "answer": "round(a / 10) * 10 * round(b / 10) * 10",
+          "distractors": [
+            {
+              "expr": "floor(a / 10) * 10 * floor(b / 10) * 10",
+              "tag": "bulat-turun"
+            },
+            {
+              "expr": "ceil(a / 10) * 10 * ceil(b / 10) * 10",
+              "tag": "bulat-naik"
+            },
+            {
+              "expr": "a * b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "round(a / 10) * 10 * round(b / 10)",
+              "tag": "lupa-nol"
+            }
+          ],
+          "explain": "Bulatkan: {a} menjadi {=round(a/10)*10} dan {b} menjadi {=round(b/10)*10}. Kalikan: {=round(a/10)} × {=round(b/10)} = {=round(a/10)*round(b/10)}, lalu tambah dua nol: {answer}. Hasil tepatnya {=a*b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [21, 98],
+            "b": [21, 98],
+            "ok": [0, 1]
+          },
+          "derived": {
+            "r": "a * b * ok + (a * floor(b / 10) + a * (b % 10)) * (1 - ok)"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a % 10 != 0 && b % 10 != 0 && a % 10 != 5 && b % 10 != 5",
+          "prompt": "{nama} menghitung {a} × {b} dan mendapat {r}. Taksirlah: apakah jawabannya masuk akal?",
+          "answer": "ok",
+          "labels": {
+            "1": "Masuk akal",
+            "0": "Tidak masuk akal"
+          },
+          "explain": "Taksir: {a} kira-kira {=round(a/10)*10} dan {b} kira-kira {=round(b/10)*10}. Taksirannya {=round(a/10)*round(b/10)*100}. Hasil tepatnya {=a*b}. Bandingkan dengan {r}. Jadi: {answer}."
+        }
+      }
+    ]
+  }
+}

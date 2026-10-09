@@ -92,6 +92,25 @@ export const SAMPLE_VISUALS: { [K in Kind]: Extract<Visual, { kind: K }> } = {
     show: 'holed',
     index: 3,
   },
+  figure: {
+    kind: 'figure',
+    axes: { xMin: -2, xMax: 6, yMin: -1, yMax: 5 },
+    shapes: [
+      {
+        t: 'poly',
+        pts: [
+          [0, 0],
+          [4, 0],
+          [4, 3],
+        ],
+        fill: 'shade',
+      },
+      { t: 'right', at: [4, 0], a: [0, 0], b: [4, 3] },
+      { t: 'point', at: [0, 0], name: 'A', pos: 'sw' },
+      { t: 'point', at: [4, 3], name: 'C', coord: true, pos: 'ne' },
+      { t: 'seg', a: [0, 0], b: [4, 0], text: '4' },
+    ],
+  },
   measure: {
     kind: 'measure',
     object: 'pensil',

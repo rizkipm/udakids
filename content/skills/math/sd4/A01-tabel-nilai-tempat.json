@@ -1,0 +1,118 @@
+{
+  "id": "math.sd4.a1.tabel-nilai-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 1,
+  "title": "Nilai tempat sampai 100.000 — Level 1 — Tabel nilai tempat",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "constraint": "h != t || t != s",
+          "prompt": "Bilangan berapa yang ditunjukkan tabel nilai tempat ini?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [["=r", "=h", "=t", "=s"]]
+            }
+          ],
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "s * 1000 + t * 100 + h * 10 + r",
+              "tag": "terbalik"
+            },
+            {
+              "expr": "h * 1000 + r * 100 + t * 10 + s",
+              "tag": "kolom-tertukar"
+            },
+            {
+              "expr": "r * 1000 + h * 100 + s * 10 + t",
+              "tag": "kolom-tertukar"
+            }
+          ],
+          "explain": "Baca tabel dari kiri ke kanan: {r} ribuan, {h} ratusan, {t} puluhan, {s} satuan. Tulis angkanya berurutan tanpa melompati kolom, jadi bilangannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999],
+            "p": [0, 3]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "pw": "(p == 0) * 1 + (p == 1) * 10 + (p == 2) * 100 + (p == 3) * 1000",
+            "dg": "floor(n / pw) % 10"
+          },
+          "constraint": "(d0 == dg) + (d1 == dg) + (d2 == dg) + (d3 == dg) == 1",
+          "prompt": "Pada bilangan {n}, angka {dg} berada di tempat apa?",
+          "answer": "p",
+          "labels": {
+            "0": "satuan",
+            "1": "puluhan",
+            "2": "ratusan",
+            "3": "ribuan"
+          },
+          "explain": "Hitung tempatnya dari kanan: satuan, puluhan, ratusan, ribuan. Angka {dg} ada di tempat {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10"
+          },
+          "constraint": "d0 != d1 && d0 != d2 && d0 != d3 && d1 != d2 && d1 != d3 && d2 != d3",
+          "prompt": "Angka berapa yang berada di tempat ratusan pada bilangan {n}?",
+          "answer": "d2",
+          "distractors": [
+            {
+              "expr": "d1",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "d3",
+              "tag": "ribuan"
+            },
+            {
+              "expr": "d0",
+              "tag": "satuan"
+            }
+          ],
+          "explain": "Dari kanan: satuan {d0}, puluhan {d1}, ratusan {d2}, ribuan {d3}. Jadi angka di tempat ratusan adalah {answer}."
+        }
+      }
+    ]
+  }
+}

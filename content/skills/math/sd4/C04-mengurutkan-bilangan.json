@@ -1,0 +1,134 @@
+{
+  "id": "math.sd4.c4.mengurutkan-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 4,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 4 — Mengurutkan bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 79999],
+            "k1": [1, 9],
+            "k2": [1, 9],
+            "k3": [1, 9],
+            "q": [1, 4]
+          },
+          "derived": {
+            "b": "a + k1 * 10",
+            "c": "a + k2 * 1000",
+            "d": "c + k3 * 100",
+            "x1": "(q == 1) * c + (q == 2) * b + (q == 3) * d + (q == 4) * a",
+            "x2": "(q == 1) * a + (q == 2) * d + (q == 3) * b + (q == 4) * c",
+            "x3": "(q == 1) * d + (q == 2) * a + (q == 3) * c + (q == 4) * b",
+            "x4": "(q == 1) * b + (q == 2) * c + (q == 3) * a + (q == 4) * d"
+          },
+          "prompt": "Urutkan dari yang terkecil: {x1}, {x2}, {x3}, {x4}. Bilangan kedua adalah …",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "pertama"
+            },
+            {
+              "expr": "c",
+              "tag": "ketiga"
+            },
+            {
+              "expr": "d",
+              "tag": "terakhir"
+            }
+          ],
+          "explain": "Bandingkan dari angka paling kiri. Urutan dari yang terkecil: {a}, {b}, {c}, {d}. Bilangan kedua adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 79999],
+            "k1": [1, 9],
+            "k2": [1, 9],
+            "k3": [1, 9],
+            "q": [1, 4]
+          },
+          "derived": {
+            "b": "a + k1 * 10",
+            "c": "a + k2 * 1000",
+            "d": "c + k3 * 100",
+            "x1": "(q == 1) * c + (q == 2) * b + (q == 3) * d + (q == 4) * a",
+            "x2": "(q == 1) * a + (q == 2) * d + (q == 3) * b + (q == 4) * c",
+            "x3": "(q == 1) * d + (q == 2) * a + (q == 3) * c + (q == 4) * b",
+            "x4": "(q == 1) * b + (q == 2) * c + (q == 3) * a + (q == 4) * d"
+          },
+          "prompt": "Urutkan dari yang terbesar: {x1}, {x2}, {x3}, {x4}. Bilangan kedua adalah …",
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "pertama"
+            },
+            {
+              "expr": "b",
+              "tag": "ketiga"
+            },
+            {
+              "expr": "a",
+              "tag": "terkecil"
+            }
+          ],
+          "explain": "Dari yang terbesar: {d}, {c}, {b}, {a}. Bilangan kedua adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 79999],
+            "k1": [1, 9],
+            "k2": [1, 9],
+            "k3": [1, 9],
+            "q": [1, 4]
+          },
+          "derived": {
+            "b": "a + k1 * 10",
+            "c": "a + k2 * 1000",
+            "d": "c + k3 * 100",
+            "x1": "(q == 1) * c + (q == 2) * b + (q == 3) * d + (q == 4) * a",
+            "x2": "(q == 1) * a + (q == 2) * d + (q == 3) * b + (q == 4) * c",
+            "x3": "(q == 1) * d + (q == 2) * a + (q == 3) * c + (q == 4) * b",
+            "x4": "(q == 1) * b + (q == 2) * c + (q == 3) * a + (q == 4) * d"
+          },
+          "prompt": "Urutkan dari yang terkecil: {x1}, {x2}, {x3}, {x4}. Bilangan terakhir adalah …",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "c",
+              "tag": "ketiga"
+            },
+            {
+              "expr": "b",
+              "tag": "kedua"
+            }
+          ],
+          "explain": "Dari yang terkecil: {a}, {b}, {c}, {d}. Bilangan terakhir adalah yang terbesar, yaitu {answer}."
+        }
+      }
+    ]
+  }
+}

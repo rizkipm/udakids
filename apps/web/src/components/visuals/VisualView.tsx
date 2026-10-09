@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { buildExtra } from './extra';
+import { buildFigure } from './figure';
 import {
   BODY_PARTS,
   OBJECTS,
@@ -497,6 +498,8 @@ function build(v: Visual, countStep?: number): Built {
     case 'venn':
     case 'measure':
       return buildExtra(v);
+    case 'figure':
+      return buildFigure(v);
     case 'puzzle': {
       // Puzzle (D-078): gambar utuh dengan lubang kepingan, atau satu kepingan saja.
       if (v.picture.kind !== 'object') return build(v.picture, countStep);

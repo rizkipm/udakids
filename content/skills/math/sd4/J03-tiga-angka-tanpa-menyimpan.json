@@ -1,0 +1,72 @@
+{
+  "id": "math.sd4.j3.tiga-angka-tanpa-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 3,
+  "title": "Perkalian dengan bilangan satu angka — Level 3 — Tiga angka tanpa menyimpan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 4],
+            "t": [0, 4],
+            "s": [0, 4],
+            "k": [2, 4]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "constraint": "h * k < 10 && t * k < 10 && s * k < 10",
+          "prompt": "Hitung bersusun: {n} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n * k + 100",
+              "tag": "ratusan-meleset"
+            },
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "h * k * 100 + t * k + s * k * 10",
+              "tag": "tertukar-tempat"
+            }
+          ],
+          "explain": "Kalikan dari satuan: {s} × {k} = {=s*k}. Puluhan: {t} × {k} = {=t*k}. Ratusan: {h} × {k} = {=h*k}. Tulis di tempatnya masing-masing: {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 3],
+            "t": [0, 3],
+            "s": [0, 3],
+            "k": [2, 3]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "constraint": "h * k < 10 && t * k < 10 && s * k < 10",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "mode": "input",
+          "explain": "Kalikan setiap angka dengan {k}: ratusan {h} × {k} = {=h*k}, puluhan {t} × {k} = {=t*k}, satuan {s} × {k} = {=s*k}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "id": "math.sd34.ef2.peluang-mengambil-satu-benda",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 2,
+  "title": "Peluang — Level 2 — Peluang mengambil satu benda",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Peluang",
+    "indikator": "Menghitung peluang mengambil satu benda dari kantong"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [1, 8],
+      "b": [1, 8],
+      "h": [1, 8]
+    },
+    "words": {
+      "nama": [
+        "Ayu",
+        "Bima",
+        "Citra",
+        "Dimas",
+        "Eka",
+        "Fajar",
+        "Gita",
+        "Hasan",
+        "Intan",
+        "Joko",
+        "Kirana",
+        "Lukman",
+        "Made",
+        "Nyoman",
+        "Siti",
+        "Putu",
+        "Wulan",
+        "Yusuf",
+        "Tiara",
+        "Raka",
+        "Nadia",
+        "Ucok"
+      ]
+    },
+    "prompt": "Di dalam kantong ada {m} permen rasa stroberi, {b} rasa melon, dan {h} rasa jeruk. {nama} mengambil satu permen tanpa melihat. Peluang terambil permen rasa stroberi adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "m",
+      "den": "m + b + h"
+    },
+    "distractors": [
+      {
+        "num": "m",
+        "den": "b + h",
+        "tag": "banding-bukan-peluang"
+      },
+      {
+        "num": "b + h",
+        "den": "m + b + h",
+        "tag": "kebalikan"
+      },
+      {
+        "num": "1",
+        "den": "m + b + h",
+        "tag": "satu-permen"
+      },
+      {
+        "num": "m",
+        "den": "m + b + h + 1",
+        "tag": "lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Banyak semua permen = {m} + {b} + {h} = {=m+b+h}. Permen stroberi = {m}. Peluang = {m}/{=m+b+h}, paling sederhana {answer}."
+  }
+}

@@ -41,8 +41,9 @@ describe.skipIf(!up)('Mock Test olimpiade (e2e)', () => {
     );
     // Tiga mock test per buku olimpiade TK (Mock test 1 memakai id lama agar riwayat tidak hilang),
     // ditambah tiga mock KMSI per buku olimpiade TK–SMP (D-074): 3 × 3 TK + 3 × 3 × 4 jenjang lain,
-    // dan tiga mock KMSI Final Jatim per buku Matematika, Sains & English TK sampai SMP (D-080, D-084–D-086): 3 × 5 × 3.
-    expect(mocks).toHaveLength(99);
+    // dan tiga mock KMSI Final Jatim per buku Matematika, Sains & English TK sampai SMP (D-080, D-084–D-086): 3 × 5 × 3,
+    // ditambah tiga mock EMC Kelas 3–4 berkisi-kisi 40 soal (D-101).
+    expect(mocks).toHaveLength(102);
     expect(mocks.map((s) => s.id)).toContain('math.tkosn.y1.kmsi-mock-test-1');
     expect(mocks.map((s) => s.id)).toContain(MOCK);
     expect(mocks.map((s) => s.id)).toContain('english.tkosn.z3.mock-test-3');

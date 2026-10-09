@@ -1,0 +1,147 @@
+{
+  "id": "math.sd4.x1.satuan-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 1,
+  "title": "Waktu dan lama kegiatan — Level 1 — Satuan waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "{a} jam = … menit",
+          "answer": "a * 60",
+          "explain": "1 jam = 60 menit, jadi {a} jam = {a} × 60 = {answer} menit.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 60 + 60",
+              "tag": "lebih-satu-jam"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 15]
+          },
+          "prompt": "{a} menit = … detik",
+          "answer": "a * 60",
+          "explain": "1 menit = 60 detik, jadi {a} menit = {a} × 60 = {answer} detik.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 60 - 60",
+              "tag": "kurang-satu-menit"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 7]
+          },
+          "prompt": "{a} hari = … jam",
+          "answer": "a * 24",
+          "explain": "1 hari = 24 jam, jadi {a} hari = {a} × 24 = {answer} jam.",
+          "distractors": [
+            {
+              "expr": "a * 12",
+              "tag": "setengah-hari"
+            },
+            {
+              "expr": "a * 60",
+              "tag": "kali-60"
+            },
+            {
+              "expr": "a * 24 + 24",
+              "tag": "lebih-satu-hari"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "{a} minggu = … hari",
+          "answer": "a * 7",
+          "explain": "1 minggu = 7 hari, jadi {a} minggu = {a} × 7 = {answer} hari.",
+          "distractors": [
+            {
+              "expr": "a * 5",
+              "tag": "hari-sekolah"
+            },
+            {
+              "expr": "a + 7",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * 7 + 7",
+              "tag": "lebih-satu-minggu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "values": [120, 180, 240, 300, 360, 420, 480, 540, 600]
+            }
+          },
+          "prompt": "{t} menit = … jam",
+          "answer": "t / 60",
+          "explain": "60 menit = 1 jam. Bagi dengan 60: {t} : 60 = {answer} jam.",
+          "distractors": [
+            {
+              "expr": "t / 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "t / 10",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "t / 60 + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

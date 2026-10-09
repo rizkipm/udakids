@@ -1,0 +1,76 @@
+{
+  "id": "math.sd4.q4.patokan-setengah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 4,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 4 — Patokan setengah",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11]
+          },
+          "constraint": "a < d",
+          "prompt": "Bandingkan {a}/{d} dengan 1/2.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=a",
+              "den": "=d",
+              "model": "bar"
+            }
+          ],
+          "answer": "(2 * a > d) * 1 + (2 * a < d) * 2 + (2 * a == d) * 3",
+          "labels": {
+            "1": "Lebih dari 1/2",
+            "2": "Kurang dari 1/2",
+            "3": "Sama dengan 1/2"
+          },
+          "labelSay": {
+            "1": "lebih dari setengah",
+            "2": "kurang dari setengah",
+            "3": "sama dengan setengah"
+          },
+          "explain": "Setengah dari {d} adalah {=d/2}. Bandingkan pembilang {a} dengan {=d/2}: kalau lebih besar, pecahannya lebih dari 1/2; kalau sama, pecahannya sama dengan 1/2. Jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "e": [3, 12],
+            "a": [1, 11],
+            "b": [1, 11]
+          },
+          "constraint": "a < d && b < e && d != e && (2 * a - d) * (2 * b - e) < 0",
+          "prompt": "Pakai patokan 1/2. Bandingkan: {a}/{d} … {b}/{e}",
+          "answer": "(a * e > b * d) * 1 + (a * e < b * d) * 2 + (a * e == b * d) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Bandingkan setiap pecahan dengan 1/2. Setengah dari {d} adalah {=d/2} dan setengah dari {e} adalah {=e/2}. Satu pecahan lebih dari 1/2 dan yang lain kurang dari 1/2. Jadi {a}/{d} {answer} {b}/{e}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "math.sd4.g2.kelipatan-atau-bukan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 2,
+  "title": "Faktor dan kelipatan — Level 2 — Kelipatan atau bukan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [2, 12],
+            "y": [0, 1],
+            "r": [1, 11]
+          },
+          "derived": {
+            "m": "k * n + (1 - y) * r"
+          },
+          "constraint": "r < k",
+          "prompt": "Apakah {m} kelipatan {k}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Bukan"
+          },
+          "explain": "Bagi {m} dengan {k}. {m} : {k} = {=floor(m/k)} sisa {=m%k}. Sisa 0 artinya habis dibagi, jadi kelipatan. Ada sisa artinya bukan kelipatan. Jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [3, 12]
+          },
+          "prompt": "Manakah yang merupakan kelipatan {k}?",
+          "answer": "k * n",
+          "distractors": [
+            {
+              "expr": "k * n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k * n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k * n + 2",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "Kelipatan {k} habis dibagi {k}. {answer} = {n} × {k}. Bilangan lain bersisa jika dibagi {k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [3, 10],
+            "r": [1, 11]
+          },
+          "constraint": "r < k",
+          "prompt": "Manakah yang BUKAN kelipatan {k}?",
+          "answer": "k * n + r",
+          "distractors": [
+            {
+              "expr": "k * (n - 1)",
+              "tag": "kelipatan"
+            },
+            {
+              "expr": "k * (n + 1)",
+              "tag": "kelipatan"
+            },
+            {
+              "expr": "k * (n + 2)",
+              "tag": "kelipatan"
+            }
+          ],
+          "explain": "Coba bagi setiap bilangan dengan {k}. {answer} : {k} bersisa {r}, jadi {answer} bukan kelipatan {k}. Yang lain hasil kali {k}."
+        }
+      }
+    ]
+  }
+}

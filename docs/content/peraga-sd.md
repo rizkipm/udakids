@@ -83,18 +83,22 @@ ditambahkan aplikasi di depannya, jadi jangan menulis layar `tonton`. Semua kali
 
 1–5 langkah, dari mudah ke sulit. Parameter per alat:
 
-| alat             | parameter langkah                                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `garis-bilangan` | `min`, `max` (≤ 1000), `dari`, `ubah` (+ maju / − mundur), `loncat` (besar lompatan, bawaan 1; `ubah` kelipatan `loncat`) |
-| `blok-puluhan`   | `target` (1–999): susun dengan ratusan/puluhan/satuan                                                                     |
-| `benda`          | `benda` (id objek), `a`, `b` (0–20), `op`: `+` tambah b, `-` ambil b (b ≤ a), `=` hitung a satu per satu                  |
-| `uang`           | `target` rupiah, `pecahan` (koin 100/200/500/1000, kertas 1000…100000); target harus bisa dibayar pas                     |
-| `jam`            | `jam` (1–12), `menit` (kelipatan 5)                                                                                       |
-| `ukur`           | `benda`, `panjang` (1–15), `satuan`: `cm` / `kotak` / `klip`                                                              |
-| `timbangan`      | `kiri` & `kanan`: `{benda, jumlah 1–10, berat 1–100}`. Anak memilih sisi yang lebih berat (atau sama)                     |
-| `bangun`         | `bangun` (bangun datar atau ruang), `hitung`: `sisi` / `sudut` (bangun ruang: sisi = bidang, sudut = titik sudut)         |
-| `pecahan`        | `penyebut` 2–12, `pembilang` ≤ penyebut, `model`: `circle` / `bar`                                                        |
-| `pola`           | `urutan` (3–10 spec), `pilihan` (2–4 spec), `jawaban` (indeks)                                                            |
+| alat             | parameter langkah                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `garis-bilangan` | `min`, `max` (≤ 1.000.000), `dari`, `ubah` (+ maju / − mundur), `loncat` (bawaan 1; `ubah` kelipatan `loncat`; maks. 40 lompatan) |
+| `blok-puluhan`   | `target` (1–9.999): susun dengan ribuan/ratusan/puluhan/satuan                                                                    |
+| `benda`          | `benda` (id objek), `a`, `b` (0–20), `op`: `+` tambah b, `-` ambil b (b ≤ a), `=` hitung a satu per satu                          |
+| `uang`           | `target` rupiah, `pecahan` (koin 100/200/500/1000, kertas 1000…100000); target harus bisa dibayar pas                             |
+| `jam`            | `jam` (1–12), `menit` (kelipatan 5)                                                                                               |
+| `ukur`           | `benda`, `panjang` (1–15), `satuan`: `cm` / `kotak` / `klip`                                                                      |
+| `timbangan`      | `kiri` & `kanan`: `{benda, jumlah 1–10, berat 1–100}`. Anak memilih sisi yang lebih berat (atau sama)                             |
+| `bangun`         | `bangun` (bangun datar atau ruang), `hitung`: `sisi` / `sudut` (bangun ruang: sisi = bidang, sudut = titik sudut)                 |
+| `pecahan`        | `penyebut` 2–12, `pembilang` ≤ penyebut, `model`: `circle` / `bar`                                                                |
+| `pola`           | `urutan` (3–10 spec), `pilihan` (2–4 spec), `jawaban` (indeks)                                                                    |
+| `luas`           | Kelas 4: `panjang` 1–12, `lebar` 1–10, `hitung`: `luas` (isi baris; p×l ≤ 60) / `keliling` (ukur 4 sisi)                          |
+| `sudut`          | Kelas 4: `target` derajat, kelipatan 15 (15–360); tombol ±15° dan +90°, nama jenis sudut tampil                                   |
+| `diagram`        | Kelas 4: `satuan`, `skala`, `data` [{`nama`, `nilai`}] 2–5; nilai kelipatan skala, maks. 10 kotak                                 |
+| `desimal`        | Kelas 4: `perseratus` 1–100; petak perseratus, tombol ±0,1 dan ±0,01                                                              |
 
 Boleh dua layar `peraga` (mis. `benda` lalu `garis-bilangan`). Untuk topik data/diagram/Venn yang tidak cocok dengan
 alat di atas: pakai `jelajah` (kartu kategori) atau `pola`/`benda` untuk konsep dasarnya.

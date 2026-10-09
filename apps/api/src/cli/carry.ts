@@ -8,6 +8,10 @@
  *
  *   CARRY_PASSPHRASE=… pnpm carry:export -- backups/carry.ndjson.gz     (lokal)
  *   CARRY_PASSPHRASE=… node dist/cli/carry.js import backups/carry.ndjson.gz   (server, di apps/api)
+ *   pnpm carry:export -- backups/gambar.ndjson.gz --images-only   hanya gambar (mis. foto Pexels D-095): tanpa
+ *     kunci, pengaturan, dan klip suara — file kecil, tanpa kata sandi; server tidak berubah selain gambar baru.
+ *   pnpm carry:export -- backups/baru.ndjson.gz --since=2026-10-09   klip suara & gambar yang dibuat sejak tanggal
+ *     itu (WIB; boleh dengan jam: --since=2026-10-09T13:05), tanpa kunci/pengaturan, tanpa kata sandi.
  *
  * API key di file TIDAK pernah dalam bentuk terbaca: dibuka dengan JWT_SECRET lokal, dikunci ulang dengan kata sandi
  * sementara (scrypt + AES-256-GCM), lalu di server dikunci lagi dengan JWT_SECRET server. File di `backups/` (tidak
@@ -18,7 +22,7 @@ import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from 'node:
 import { createReadStream, createWriteStream } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { createGunzip, createGzip } from 'node:zlib';
-import { inArray, sql } from 'drizzle-orm';
+import { gte, inArray, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { DEFAULT_DATABASE_URL } from '../common/config.js';
@@ -95,15 +99,20 @@ type ClipLine = {
 export async function exportCarry(
   file: string,
   url = process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL,
+  opts: { imagesOnly?: boolean; since?: Date } = {},
 ) {
-  const pass = passphrase();
+  // Tanpa kunci & pengaturan (tanpa kata sandi): hanya gambar, atau hanya isi baru sejak tanggal tertentu.
+  const contentOnly = opts.imagesOnly || !!opts.since;
+  const pass = contentOnly ? '' : passphrase();
   const pool = new Pool({ connectionString: url });
   const db = drizzle(pool, { schema });
   try {
-    const rows = await db
-      .select()
-      .from(appSettings)
-      .where(inArray(appSettings.key, [...CARRY_SECRET_KEYS, ...CARRY_SETTING_KEYS]));
+    const rows = contentOnly
+      ? []
+      : await db
+          .select()
+          .from(appSettings)
+          .where(inArray(appSettings.key, [...CARRY_SECRET_KEYS, ...CARRY_SETTING_KEYS]));
     const secrets: Header['secrets'] = {};
     const settings: Header['settings'] = {};
     for (const r of rows) {
@@ -128,10 +137,11 @@ export async function exportCarry(
     let clips = 0;
     let bytes = 0;
     // Per halaman supaya memori tetap kecil walau ribuan klip.
-    for (let offset = 0; ; offset += 500) {
+    for (let offset = 0; !opts.imagesOnly; offset += 500) {
       const page = await db
         .select()
         .from(voiceClips)
+        .where(opts.since ? gte(voiceClips.createdAt, opts.since) : undefined)
         .orderBy(voiceClips.key)
         .limit(500)
         .offset(offset);
@@ -153,7 +163,13 @@ export async function exportCarry(
     }
     let images = 0;
     for (let offset = 0; ; offset += 50) {
-      const page = await db.select().from(aiImages).orderBy(aiImages.id).limit(50).offset(offset);
+      const page = await db
+        .select()
+        .from(aiImages)
+        .where(opts.since ? gte(aiImages.createdAt, opts.since) : undefined)
+        .orderBy(aiImages.id)
+        .limit(50)
+        .offset(offset);
       if (page.length === 0) break;
       for (const { data, createdBy: _c, reviewedBy: _r, ...rest } of page) {
         const line: ImageLine = {
@@ -177,7 +193,8 @@ export async function importCarry(
   file: string,
   url = process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL,
 ) {
-  const pass = passphrase();
+  // Kata sandi hanya perlu bila file membawa API key (file `--images-only` tidak).
+  let pass: string | undefined;
   const pool = new Pool({ connectionString: url });
   const db = drizzle(pool, { schema });
   try {
@@ -217,6 +234,7 @@ export async function importCarry(
         header = row;
         // API key: dibuka dengan kata sandi sementara, dikunci dengan JWT_SECRET server.
         for (const [k, l] of Object.entries(row.secrets)) {
+          pass ??= passphrase();
           const value = seal(unlock(l, pass));
           await db
             .insert(appSettings)
@@ -271,10 +289,21 @@ export async function importCarry(
 }
 
 if (require.main === module) {
-  const [cmd, file] = process.argv.slice(2).filter((a) => a !== '--');
+  const args = process.argv.slice(2).filter((a) => a !== '--');
+  const [cmd, file] = args.filter((a) => !a.startsWith('--'));
+  const since = args.find((a) => a.startsWith('--since='))?.slice(8);
+  if (since && !/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(since)) {
+    console.error('Format --since=YYYY-MM-DD atau YYYY-MM-DDTHH:MM (WIB)');
+    process.exit(1);
+  }
   const run =
     cmd === 'export' && file
-      ? exportCarry(file).then(
+      ? exportCarry(file, undefined, {
+          imagesOnly: args.includes('--images-only'),
+          ...(since && {
+            since: new Date(`${since.includes('T') ? since : `${since}T00:00`}:00+07:00`),
+          }),
+        }).then(
           (r) =>
             `Diekspor: kunci ${r.secrets.join(', ') || '-'}; pengaturan ${r.settings.join(', ') || '-'}; ` +
             `${r.clips} klip suara, ${r.images} gambar AI (${(r.bytes / 1e6).toFixed(1)} MB) → ${file}`,

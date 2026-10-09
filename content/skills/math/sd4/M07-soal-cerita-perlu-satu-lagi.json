@@ -1,0 +1,88 @@
+{
+  "id": "math.sd4.m7.soal-cerita-perlu-satu-lagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 7,
+  "title": "Pembagian bersisa dan soal cerita — Level 7 — Soal cerita: perlu satu lagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 8],
+            "t": [20, 90]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} siswa akan naik mobil. Setiap mobil memuat {m} siswa. Berapa mobil yang dibutuhkan agar semua siswa terangkut?",
+          "answer": "floor(t / m) + 1",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "abaikan-sisa"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "floor(t / m) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Sisa {=t%m} siswa juga harus ikut, jadi perlu 1 mobil lagi: {=floor(t/m)} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [6, 12],
+            "t": [40, 150]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "Satu kotak memuat {m} kue. Ibu punya {t} kue. Berapa kotak yang diperlukan agar semua kue masuk kotak?",
+          "answer": "floor(t / m) + 1",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "abaikan-sisa"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "floor(t / m) - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Kue sisa butuh satu kotak lagi walau tidak penuh. Jadi {answer} kotak."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 6],
+            "t": [25, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "Satu meja dipakai {m} anak. Ada {t} anak yang ikut lomba. Berapa meja paling sedikit yang disiapkan?",
+          "answer": "floor(t / m) + 1",
+          "mode": "input",
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. {=t%m} anak yang tersisa juga perlu meja, jadi {answer} meja."
+        }
+      }
+    ]
+  }
+}

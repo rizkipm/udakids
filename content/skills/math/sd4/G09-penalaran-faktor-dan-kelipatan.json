@@ -1,0 +1,1715 @@
+{
+  "id": "math.sd4.g9.penalaran-faktor-dan-kelipatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 9,
+  "title": "Faktor dan kelipatan — Level 9 — Penalaran faktor dan kelipatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "lo": [20, 150]
+          },
+          "constraint": "lo % k != 0",
+          "prompt": "Aku kelipatan {k}. Aku lebih dari {lo} dan kurang dari {=lo+k}. Siapa aku?",
+          "answer": "ceil(lo / k) * k",
+          "distractors": [
+            {
+              "expr": "ceil(lo / k) * k + k",
+              "tag": "lewat"
+            },
+            {
+              "expr": "ceil(lo / k) * k - k",
+              "tag": "kurang-dari"
+            },
+            {
+              "expr": "lo + 1",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "Di antara dua bilangan yang selisihnya {k}, hanya ada satu kelipatan {k}. {lo} : {k} = {=floor(lo/k)} sisa {=lo%k}, jadi kelipatan berikutnya {=ceil(lo/k)} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [5, 6, 10, 12, 15, 20, 30]
+            }
+          },
+          "prompt": "Bus kota lewat halte setiap {k} menit. Bus pertama lewat pukul 06.00. Berapa kali bus lewat dari pukul 06.00 sampai 07.00, termasuk keduanya?",
+          "answer": "60 / k + 1",
+          "distractors": [
+            {
+              "expr": "60 / k",
+              "tag": "lupa-pertama"
+            },
+            {
+              "expr": "60 / k + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "60 - k",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Menit bus lewat adalah 0 dan kelipatan {k} sampai 60. Ada 60 : {k} = {=60/k} kelipatan, ditambah bus pukul 06.00. Jadi {answer} kali."
+        },
+        "weight": 0.6
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Berapa banyak faktor 12?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 12: 1 × 12, 2 × 6, 3 × 4. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, dan 12. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 16?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 16: 1 × 16, 2 × 8, 4 × 4. Hitung setiap bilangan sekali saja: 1, 2, 4, 8, dan 16. Ada 5 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 18?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 18: 1 × 18, 2 × 9, 3 × 6. Hitung setiap bilangan sekali saja: 1, 2, 3, 6, 9, dan 18. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 20?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 20: 1 × 20, 2 × 10, 4 × 5. Hitung setiap bilangan sekali saja: 1, 2, 4, 5, 10, dan 20. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 24?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 24: 1 × 24, 2 × 12, 3 × 8, 4 × 6. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 8, 12, dan 24. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 28?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 28: 1 × 28, 2 × 14, 4 × 7. Hitung setiap bilangan sekali saja: 1, 2, 4, 7, 14, dan 28. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 30?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 30: 1 × 30, 2 × 15, 3 × 10, 5 × 6. Hitung setiap bilangan sekali saja: 1, 2, 3, 5, 6, 10, 15, dan 30. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 32?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 32: 1 × 32, 2 × 16, 4 × 8. Hitung setiap bilangan sekali saja: 1, 2, 4, 8, 16, dan 32. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 36?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 36: 1 × 36, 2 × 18, 3 × 12, 4 × 9, 6 × 6. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 9, 12, 18, dan 36. Ada 9 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 40?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 40: 1 × 40, 2 × 20, 4 × 10, 5 × 8. Hitung setiap bilangan sekali saja: 1, 2, 4, 5, 8, 10, 20, dan 40. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 42?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 42: 1 × 42, 2 × 21, 3 × 14, 6 × 7. Hitung setiap bilangan sekali saja: 1, 2, 3, 6, 7, 14, 21, dan 42. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 45?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Tulis pasangan faktor 45: 1 × 45, 3 × 15, 5 × 9. Hitung setiap bilangan sekali saja: 1, 3, 5, 9, 15, dan 45. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 48?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 48: 1 × 48, 2 × 24, 3 × 16, 4 × 12, 6 × 8. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 8, 12, 16, 24, dan 48. Ada 10 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 50?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 50: 1 × 50, 2 × 25, 5 × 10. Hitung setiap bilangan sekali saja: 1, 2, 5, 10, 25, dan 50. Ada 6 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 54?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 54: 1 × 54, 2 × 27, 3 × 18, 6 × 9. Hitung setiap bilangan sekali saja: 1, 2, 3, 6, 9, 18, 27, dan 54. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 56?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Tulis pasangan faktor 56: 1 × 56, 2 × 28, 4 × 14, 7 × 8. Hitung setiap bilangan sekali saja: 1, 2, 4, 7, 8, 14, 28, dan 56. Ada 8 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 60?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 60: 1 × 60, 2 × 30, 3 × 20, 4 × 15, 5 × 12, 6 × 10. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, dan 60. Ada 12 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 64?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 64: 1 × 64, 2 × 32, 4 × 16, 8 × 8. Hitung setiap bilangan sekali saja: 1, 2, 4, 8, 16, 32, dan 64. Ada 7 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 72?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 72: 1 × 72, 2 × 36, 3 × 24, 4 × 18, 6 × 12, 8 × 9. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, dan 72. Ada 12 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 80?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 80: 1 × 80, 2 × 40, 4 × 20, 5 × 16, 8 × 10. Hitung setiap bilangan sekali saja: 1, 2, 4, 5, 8, 10, 16, 20, 40, dan 80. Ada 10 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 84?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Tulis pasangan faktor 84: 1 × 84, 2 × 42, 3 × 28, 4 × 21, 6 × 14, 7 × 12. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, dan 84. Ada 12 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 90?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Tulis pasangan faktor 90: 1 × 90, 2 × 45, 3 × 30, 5 × 18, 6 × 15, 9 × 10. Hitung setiap bilangan sekali saja: 1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, dan 90. Ada 12 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 96?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Tulis pasangan faktor 96: 1 × 96, 2 × 48, 3 × 32, 4 × 24, 6 × 16, 8 × 12. Hitung setiap bilangan sekali saja: 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, dan 96. Ada 12 faktor."
+            },
+            {
+              "prompt": "Berapa banyak faktor 100?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "9"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "meleset-hitung"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "meleset-hitung"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Tulis pasangan faktor 100: 1 × 100, 2 × 50, 4 × 25, 5 × 20, 10 × 10. Hitung setiap bilangan sekali saja: 1, 2, 4, 5, 10, 20, 25, 50, dan 100. Ada 9 faktor."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 14, selain 14 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 14 : 2 = 7. Itulah faktor terbesar selain 14."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 22, selain 22 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 22 : 2 = 11. Itulah faktor terbesar selain 22."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 26, selain 26 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 26 : 2 = 13. Itulah faktor terbesar selain 26."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 33, selain 33 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 33 : 3 = 11. Itulah faktor terbesar selain 33."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 34, selain 34 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 34 : 2 = 17. Itulah faktor terbesar selain 34."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 35, selain 35 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 5. Pasangannya 35 : 5 = 7. Itulah faktor terbesar selain 35."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 38, selain 38 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 38 : 2 = 19. Itulah faktor terbesar selain 38."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 39, selain 39 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 39 : 3 = 13. Itulah faktor terbesar selain 39."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 46, selain 46 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "23"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 46 : 2 = 23. Itulah faktor terbesar selain 46."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 51, selain 51 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 51 : 3 = 17. Itulah faktor terbesar selain 51."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 55, selain 55 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 5. Pasangannya 55 : 5 = 11. Itulah faktor terbesar selain 55."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 57, selain 57 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 57 : 3 = 19. Itulah faktor terbesar selain 57."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 58, selain 58 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 58 : 2 = 29. Itulah faktor terbesar selain 58."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 62, selain 62 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "31"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 62 : 2 = 31. Itulah faktor terbesar selain 62."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 65, selain 65 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 5. Pasangannya 65 : 5 = 13. Itulah faktor terbesar selain 65."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 69, selain 69 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "23"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 69 : 3 = 23. Itulah faktor terbesar selain 69."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 74, selain 74 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "38"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 2. Pasangannya 74 : 2 = 37. Itulah faktor terbesar selain 74."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 77, selain 77 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "11"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 7. Pasangannya 77 : 7 = 11. Itulah faktor terbesar selain 77."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 85, selain 85 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "16"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "17"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 5. Pasangannya 85 : 5 = 17. Itulah faktor terbesar selain 85."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 91, selain 91 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 7. Pasangannya 91 : 7 = 13. Itulah faktor terbesar selain 91."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 95, selain 95 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "18"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "20"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "19"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 5. Pasangannya 95 : 5 = 19. Itulah faktor terbesar selain 95."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 87, selain 87 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "28"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 87 : 3 = 29. Itulah faktor terbesar selain 87."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 93, selain 93 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "31"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "30"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "tag": "bukan-terbesar"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 3. Pasangannya 93 : 3 = 31. Itulah faktor terbesar selain 93."
+            },
+            {
+              "prompt": "Berapa faktor terbesar dari 49, selain 49 sendiri?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "8"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48"
+                  },
+                  "tag": "bukan-terbesar"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "7"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Cari faktor terkecil selain 1, yaitu 7. Pasangannya 49 : 7 = 7. Itulah faktor terbesar selain 49."
+            }
+          ]
+        },
+        "weight": 1.4
+      }
+    ]
+  }
+}

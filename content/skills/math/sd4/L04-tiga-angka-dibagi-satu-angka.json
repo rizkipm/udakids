@@ -1,0 +1,97 @@
+{
+  "id": "math.sd4.l4.tiga-angka-dibagi-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 4,
+  "title": "Pembagian bersusun — Level 4 — Tiga angka dibagi satu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [101, 499]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 100",
+              "tag": "ratusan-salah"
+            }
+          ],
+          "explain": "Kerjakan bersusun dari ratusan: bagi, kali, kurang, turunkan. Ulangi untuk puluhan dan satuan. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [101, 450]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "Ada {t} buku dibagi sama banyak ke {m} rak. Berapa buku di setiap rak?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Hitung {t} : {m} bersusun: ratusan, puluhan, lalu satuan. Hasilnya {answer}. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [101, 499]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "mode": "input",
+          "explain": "Bagi ratusan, puluhan, lalu satuan. Periksa: {answer} × {m} = {t}."
+        }
+      }
+    ]
+  }
+}

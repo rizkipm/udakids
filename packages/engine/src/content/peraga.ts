@@ -10,6 +10,12 @@ import {
   type SolidId,
 } from '../generator/assets.js';
 import { specSchema } from '../generator/families/fun.js';
+import {
+  BALL_COLORS,
+  CHANCE_SPACES,
+  chanceFavorable,
+  chanceOutcomes,
+} from '../generator/play-emc.js';
 
 /**
  * Simulasi pelajaran SD (D-093): satu layar `peraga` dengan empat jenis, semuanya data (tanpa kode per topik):
@@ -114,14 +120,14 @@ export const PERAGA_ALAT = {
   /** Lompat dari `dari` sebanyak `ubah` (boleh negatif) pada garis bilangan min–max. */
   'garis-bilangan': z.strictObject({
     ...step,
-    min: n(0, 1000),
-    max: n(1, 1000),
-    dari: n(0, 1000),
-    ubah: n(-100, 100),
-    loncat: n(1, 100).default(1),
+    min: n(0, 1_000_000),
+    max: n(1, 1_000_000),
+    dari: n(0, 1_000_000),
+    ubah: n(-100_000, 100_000),
+    loncat: n(1, 100_000).default(1),
   }),
-  /** Susun bilangan dengan batang puluhan & kubus satuan (dan papan ratusan bila > 99). */
-  'blok-puluhan': z.strictObject({ ...step, target: n(1, 999) }),
+  /** Susun bilangan dengan batang puluhan & kubus satuan (papan ratusan bila > 99, kubus ribuan bila > 999). */
+  'blok-puluhan': z.strictObject({ ...step, target: n(1, 9999) }),
   /** Benda nyata: kumpulkan `a`, lalu tambah/ambil `b`. */
   benda: z.strictObject({
     ...step,
@@ -170,6 +176,59 @@ export const PERAGA_ALAT = {
     pembilang: n(0, 12),
     model: z.enum(['bar', 'circle']).default('circle'),
   }),
+  /**
+   * Kelas 4 (D-096): petak persegi panjang `panjang` × `lebar`. `luas`: isi baris demi baris sampai penuh;
+   * `keliling`: ukur keempat sisi.
+   */
+  luas: z.strictObject({
+    ...step,
+    panjang: n(1, 12),
+    lebar: n(1, 10),
+    hitung: z.enum(['luas', 'keliling']),
+  }),
+  /** Kelas 4 (D-096): putar sinar per 15° sampai sudut `target` derajat. */
+  sudut: z.strictObject({ ...step, target: n(15, 360).refine((d) => d % 15 === 0) }),
+  /** Kelas 4 (D-096): diagram batang dari tabel; satu kotak = `skala`. */
+  diagram: z.strictObject({
+    ...step,
+    satuan: z.string().trim().min(1).max(14),
+    skala: n(1, 1000),
+    data: z
+      .array(z.strictObject({ nama: z.string().trim().min(1).max(14), nilai: n(0, 10_000) }))
+      .min(2)
+      .max(5),
+  }),
+  /** Kelas 4 (D-096): petak perseratus; arsir sampai `perseratus` dari 100 (0,01 per kotak). */
+  desimal: z.strictObject({ ...step, perseratus: n(1, 100) }),
+  /**
+   * EMC Kelas 3–4 (D-101): tandai titik (x, y) pada bidang koordinat xMin..xMax × yMin..yMax; `titik` = titik
+   * bantu yang sudah tampil (mis. tiga sudut persegi panjang).
+   */
+  koordinat: z.strictObject({
+    ...step,
+    x: n(-10, 10),
+    y: n(-10, 10),
+    xMin: n(-10, 0),
+    xMax: n(2, 10),
+    yMin: n(-10, 0),
+    yMax: n(2, 10),
+    titik: z
+      .array(
+        z.strictObject({ x: n(-10, 10), y: n(-10, 10), nama: z.string().trim().min(1).max(3) }),
+      )
+      .max(4)
+      .optional(),
+  }),
+  /**
+   * EMC Kelas 3–4 (D-101): ruang sampel (dadu/koin/bola) tampil sebagai kartu; ketuk semua hasil yang memenuhi
+   * `syarat` (ekspresi aman, variabel seperti game Eksperimen Peluang).
+   */
+  peluang: z.strictObject({
+    ...step,
+    ruang: z.enum(CHANCE_SPACES),
+    kantong: z.partialRecord(z.enum(BALL_COLORS), n(1, 4)).optional(),
+    syarat: z.string().min(1).max(120),
+  }),
   /** Lanjutkan pola: pilih gambar berikutnya. `jawaban` = indeks di `pilihan`. */
   pola: z.strictObject({
     ...step,
@@ -204,11 +263,18 @@ export const peragaAlatSchema = z
         });
       else if (m.alat === 'garis-bilangan') {
         const g = r.data as unknown as { min: number; max: number; dari: number; ubah: number };
+        const gl = r.data as unknown as { loncat: number };
         if (g.dari < g.min || g.dari + g.ubah < g.min || g.dari + g.ubah > g.max || g.min >= g.max)
           ctx.addIssue({
             code: 'custom',
             path: ['langkah', i],
             message: 'garis bilangan di luar rentang',
+          });
+        else if ((g.max - g.min) / gl.loncat > 40 || g.ubah % gl.loncat !== 0)
+          ctx.addIssue({
+            code: 'custom',
+            path: ['langkah', i],
+            message: 'garis bilangan: maks. 40 lompatan dan ubah kelipatan loncat',
           });
       } else if (m.alat === 'pecahan') {
         const p = r.data as unknown as { penyebut: number; pembilang: number };
@@ -226,6 +292,60 @@ export const peragaAlatSchema = z
             path: ['langkah', i],
             message: 'target tidak bisa dibayar pas',
           });
+      } else if (m.alat === 'luas') {
+        const l = r.data as unknown as { panjang: number; lebar: number; hitung: string };
+        if (l.hitung === 'luas' && l.panjang * l.lebar > 60)
+          ctx.addIssue({ code: 'custom', path: ['langkah', i], message: 'luas: maks. 60 kotak' });
+      } else if (m.alat === 'diagram') {
+        const d = r.data as unknown as { skala: number; data: { nilai: number }[] };
+        if (d.data.some((x) => x.nilai % d.skala !== 0 || x.nilai / d.skala > 10))
+          ctx.addIssue({
+            code: 'custom',
+            path: ['langkah', i],
+            message: 'diagram: nilai kelipatan skala, maks. 10 kotak',
+          });
+      } else if (m.alat === 'koordinat') {
+        const k = r.data as unknown as {
+          x: number;
+          y: number;
+          xMin: number;
+          xMax: number;
+          yMin: number;
+          yMax: number;
+          titik?: { x: number; y: number }[];
+        };
+        const inside = (p: { x: number; y: number }) =>
+          p.x >= k.xMin && p.x <= k.xMax && p.y >= k.yMin && p.y <= k.yMax;
+        if (!inside(k) || (k.titik ?? []).some((t) => !inside(t)))
+          ctx.addIssue({
+            code: 'custom',
+            path: ['langkah', i],
+            message: 'koordinat di luar bidang',
+          });
+      } else if (m.alat === 'peluang') {
+        const q = r.data as unknown as {
+          ruang: (typeof CHANCE_SPACES)[number];
+          kantong?: Partial<Record<(typeof BALL_COLORS)[number], number>>;
+          syarat: string;
+        };
+        try {
+          const all = chanceOutcomes(q.ruang, q.kantong);
+          const fav = chanceFavorable(all, q.syarat);
+          if (q.ruang === 'bag' && all.length < 3)
+            ctx.addIssue({ code: 'custom', path: ['langkah', i], message: 'peluang: isi kantong' });
+          else if (!fav.length || fav.length === all.length)
+            ctx.addIssue({
+              code: 'custom',
+              path: ['langkah', i],
+              message: 'peluang: syarat harus cocok dengan sebagian hasil',
+            });
+        } catch (err) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['langkah', i],
+            message: `peluang: syarat tidak valid (${(err as Error).message})`,
+          });
+        }
       } else if (m.alat === 'pola') {
         const p = r.data as unknown as { pilihan: unknown[]; jawaban: number };
         if (p.jawaban >= p.pilihan.length)
@@ -297,4 +417,6 @@ export const PERAGA_BOOKS: readonly string[] = [
   'math/sd12',
   'sains/sd12',
   'english/sd12',
+  // Kelas 4 (D-096).
+  'math/sd4',
 ];

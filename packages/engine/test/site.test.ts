@@ -48,7 +48,7 @@ describe('video YouTube (D-073)', () => {
 
 describe('artikel', () => {
   it('slug dari judul', () => {
-    expect(slugify('Cara Daftar Anak di Udakids!')).toBe('cara-daftar-anak-di-udakids');
+    expect(slugify('Cara Daftar Anak di UdaKids!')).toBe('cara-daftar-anak-di-udakids');
     expect(slugify('Tips Belajar Calistung: 5 Langkah')).toBe('tips-belajar-calistung-5-langkah');
     expect(slugify('!!!')).toBe('artikel');
   });

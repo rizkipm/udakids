@@ -1,0 +1,157 @@
+{
+  "id": "math.sd34.ef5.peluang-mengambil-dua-bola",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 5,
+  "title": "Peluang — Level 5 — Peluang mengambil dua bola",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Peluang",
+    "indikator": "Menghitung peluang pengambilan dua bola sekaligus tanpa pengembalian",
+    "emc-no": "21"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 5],
+            "k": [2, 5]
+          },
+          "derived": {
+            "t": "r + k",
+            "pairs": "t * (t - 1) / 2"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "Sebuah kotak berisi {r} bola kuning dan {k} bola hijau. {nama} mengambil 2 bola sekaligus tanpa melihat. Peluang terambil 1 bola kuning dan 1 bola hijau adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "r * k",
+            "den": "pairs"
+          },
+          "distractors": [
+            {
+              "num": "r * k",
+              "den": "t * t",
+              "tag": "dengan-pengembalian"
+            },
+            {
+              "num": "r",
+              "den": "t",
+              "tag": "satu-bola"
+            },
+            {
+              "num": "r * k",
+              "den": "t * (t - 1)",
+              "tag": "berurutan"
+            },
+            {
+              "num": "1",
+              "den": "2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak cara memilih 2 bola dari {t} bola = {t} × {=t-1} : 2 = {pairs}. Pasangan kuning-hijau = {r} × {k} = {=r*k}. Peluang = {=r*k}/{pairs}, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 5],
+            "k": [2, 5]
+          },
+          "derived": {
+            "t": "r + k",
+            "pairs": "t * (t - 1) / 2"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "Sebuah kotak berisi {r} bola kuning dan {k} bola hijau. {nama} mengambil 2 bola sekaligus tanpa melihat. Peluang kedua bola berwarna kuning adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "r * (r - 1) / 2",
+            "den": "pairs"
+          },
+          "distractors": [
+            {
+              "num": "r * r",
+              "den": "t * t",
+              "tag": "dengan-pengembalian"
+            },
+            {
+              "num": "r",
+              "den": "t",
+              "tag": "satu-bola"
+            },
+            {
+              "num": "r * k",
+              "den": "pairs",
+              "tag": "beda-warna"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak cara memilih 2 bola = {pairs}. Cara memilih 2 bola kuning = {r} × {=r-1} : 2 = {=r*(r-1)/2}. Peluang = {=r*(r-1)/2}/{pairs}, paling sederhana {answer}."
+        }
+      }
+    ]
+  }
+}

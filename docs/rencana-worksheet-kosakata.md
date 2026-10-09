@@ -1,18 +1,18 @@
 # Rencana: Worksheet, Kamus Bergambar, dan Model Soal Pra-TK & TK (Math + English)
 
 Status: **Usulan**, menunggu keputusan pemilik produk (bagian 9). Ditulis 2026-10-05.
-Pembaca: pemilik produk, tim konten, dan tim pengembang Udakids.
+Pembaca: pemilik produk, tim konten, dan tim pengembang UdaKids.
 Melengkapi [rencana-studio-soal.md](rencana-studio-soal.md) (Studio Konten, pelajaran dulu baru latihan).
 
 > Pembaruan: sumber gambar dan Menu Belajar dirinci di
 > [rencana-gudang-gambar-menu-belajar.md](rencana-gudang-gambar-menu-belajar.md). Gambar dibuat sendiri dengan AI
-> dalam gaya Udakids, sehingga usulan Fluent Emoji di bagian 3.4 menjadi cadangan saja.
+> dalam gaya UdaKids, sehingga usulan Fluent Emoji di bagian 3.4 menjadi cadangan saja.
 
 ## 1. Ringkasan
 
 Tiga masalah yang ingin diselesaikan:
 
-1. **Gambar dan kosakata masih sedikit.** Udakids punya ±142 ilustrasi benda (112 + 30 dari D-062). Riset
+1. **Gambar dan kosakata masih sedikit.** UdaKids punya ±142 ilustrasi benda (112 + 30 dari D-062). Riset
    menunjukkan anak usia 5 tahun rata-rata mengenal ±2.300–4.700 kata dasar dan bertambah ±1.000 kata per tahun
    (Biemiller & Slonim). Pustaka gambar kita perlu tumbuh ke **ratusan lalu ribuan** kata.
 2. **Model soal kurang beragam.** Saat ini ada 9 jenis interaksi. Anak cepat bosan bila bentuknya itu-itu saja.
@@ -20,12 +20,12 @@ Tiga masalah yang ingin diselesaikan:
 
 Usulan intinya:
 
-- **Kamus Bergambar Udakids**: satu basis data kata (Indonesia + Inggris + gambar + suara) yang dipakai
+- **Kamus Bergambar UdaKids**: satu basis data kata (Indonesia + Inggris + gambar + suara) yang dipakai
   **otomatis** oleh semua generator soal dan pelajaran. Satu kata baru langsung memperkaya ratusan soal.
 - **24 model soal** (9 sudah ada, 15 baru) yang dipetakan ke topik.
 - **Peta topik Pra-TK & TK** untuk Math (memperkaya buku yang sudah ada) dan **English TK** (buku baru).
 - **Pengolah PDF tanpa API key** memakai alat gratis di server, ditambah Kamus Bergambar sebagai "penerjemah"
-  ke gaya Udakids (bagian 8).
+  ke gaya UdaKids (bagian 8).
 
 ## 2. Hasil riset: rujukan yang dipakai
 
@@ -43,9 +43,9 @@ Usulan intinya:
 | Kosakata anak            | Biemiller & Slonim; MacArthur-Bates CDI / Wordbank (ada adaptasi banyak bahasa)                                         | Target ukuran kosakata dan pemilihan kata yang dikenal anak lebih dulu                                     |
 
 Semua rujukan hanya dipakai sebagai acuan tujuan belajar. Soal, gambar, dan program bermerek (Jolly Phonics, Little
-Wandle, IXL, dll.) tidak disalin, sesuai aturan Udakids.
+Wandle, IXL, dll.) tidak disalin, sesuai aturan UdaKids.
 
-## 3. Kamus Bergambar Udakids
+## 3. Kamus Bergambar UdaKids
 
 ### 3.1 Isi satu entri kata
 
@@ -93,11 +93,11 @@ Gambar harus **satu gaya** supaya rapi. Pilihan yang berlisensi untuk produk kom
 | OpenMoji                            | CC BY-SA 4.0        | ±4.400             | **Share-alike**: turunan harus berlisensi sama. Kurang cocok untuk produk tertutup |
 | Openclipart                         | CC0 (domain publik) | ±180.000           | Bebas, tapi gayanya campur aduk. Perlu kurasi berat                                |
 | Kenney                              | CC0                 | ribuan (aset game) | Bagus untuk ikon dan objek game, kurang untuk kosakata sehari-hari                 |
-| ARASAAC, Sclera                     | CC BY-NC            | ribuan             | **Tidak boleh**: non-komersial, sementara Udakids berbayar                         |
-| Desainer / ilustrasi sendiri        | milik Udakids       | sesuai anggaran    | Wajib untuk benda khas Indonesia dan karakter Momo                                 |
+| ARASAAC, Sclera                     | CC BY-NC            | ribuan             | **Tidak boleh**: non-komersial, sementara UdaKids berbayar                         |
+| Desainer / ilustrasi sendiri        | milik UdaKids       | sesuai anggaran    | Wajib untuk benda khas Indonesia dan karakter Momo                                 |
 
 **Rekomendasi:** satu pustaka dasar berlisensi longgar (Fluent Emoji gaya Flat, MIT) untuk ±1.000 kata pertama,
-lalu diberi sentuhan gaya Udakids (garis tepi, palet warna). Ditambah ilustrasi sendiri untuk benda khas
+lalu diberi sentuhan gaya UdaKids (garis tepi, palet warna). Ditambah ilustrasi sendiri untuk benda khas
 Indonesia. Atribusi dan lisensi dicatat per gambar.
 
 > Catatan kepatuhan: aturan UX anak berbunyi "tanpa emoji (pakai SVG)". Memakai **gambar SVG** yang berasal dari
@@ -194,7 +194,7 @@ terbesar adalah **ilustrasi khas Indonesia** dan waktu kurasi.
 ## 8. Tanpa API key: bisakah PostgreSQL mengolah PDF dan gambar?
 
 **Jawaban singkat:** PostgreSQL sendiri **tidak bisa membaca** isi PDF atau memahami gambar. PostgreSQL adalah
-tempat menyimpan dan mencari data. Tetapi **tanpa API key berbayar**, server Udakids bisa mengolah PDF cukup jauh
+tempat menyimpan dan mencari data. Tetapi **tanpa API key berbayar**, server UdaKids bisa mengolah PDF cukup jauh
 memakai alat gratis, lalu PostgreSQL menyimpan dan mencocokkan hasilnya.
 
 ### 8.1 Yang bisa dilakukan tanpa AI berbayar
@@ -204,9 +204,9 @@ memakai alat gratis, lalu PostgreSQL menyimpan dan mencocokkan hasilnya.
 | Pecah PDF jadi halaman          | Poppler `pdftoppm` (gambar halaman), `pdfimages`, `pdftotext`                                                    | Gambar per halaman, gambar tertanam, teks bila PDF berteks                                              |
 | Baca teks dari gambar           | Tesseract OCR bahasa `ind` + `eng`                                                                               | Kata-kata di halaman ("Ayo cari huruf a", "apel", "ayam")                                               |
 | Simpan dan cari                 | PostgreSQL: tabel sumber, pencarian teks, pencocokan mirip (`pg_trgm`)                                           | Halaman bisa dicari, kata dicocokkan walau OCR sedikit meleset                                          |
-| **Terjemahkan ke gaya Udakids** | Kamus Bergambar + aturan pola                                                                                    | "apel, ayam, api, awan" dikenali sebagai kata di kamus → dibangun ulang dengan gambar dan suara Udakids |
+| **Terjemahkan ke gaya UdaKids** | Kamus Bergambar + aturan pola                                                                                    | "apel, ayam, api, awan" dikenali sebagai kata di kamus → dibangun ulang dengan gambar dan suara UdaKids |
 | Kenali pola lembar kerja        | Aturan kata kunci: "cocokkan" → `match`, "lingkari/cari" → `tap-all`, "hitung" → membilang, "tebalkan" → `trace` | Usulan model soal per halaman                                                                           |
-| Susun draf                      | Generator Udakids yang sudah ada                                                                                 | Draf pelajaran dan latihan, admin tinggal memeriksa                                                     |
+| Susun draf                      | Generator UdaKids yang sudah ada                                                                                 | Draf pelajaran dan latihan, admin tinggal memeriksa                                                     |
 
 Contoh nyata dengan lembar "huruf a" yang dikirim:
 
@@ -215,12 +215,12 @@ PDF ─▶ pdftoppm ─▶ OCR: "apel", "ayam", "api", "awan", huruf "a"
      ─▶ cocokkan ke Kamus Bergambar: apel ✓ ayam ✓ api ✓ awan ✓
      ─▶ usulan: Pelajaran "Huruf a" (layar kenalan + kata a-pel, a-yam, a-pi, a-wan)
                Latihan: cari huruf a (tap-all), huruf awal (match), tebalkan a (trace)
-     ─▶ semua gambar dan suara dari pustaka Udakids, bukan dari PDF
+     ─▶ semua gambar dan suara dari pustaka UdaKids, bukan dari PDF
      ─▶ admin cek ─▶ terbit
 ```
 
 Sisi bagusnya, gambar dari PDF **tidak pernah dipakai ulang**. Sistem hanya mengenali kata dan konsepnya, lalu
-membangun ulang dengan aset Udakids. Ini sekaligus menyelesaikan masalah hak cipta.
+membangun ulang dengan aset UdaKids. Ini sekaligus menyelesaikan masalah hak cipta.
 
 ### 8.2 Batasnya tanpa AI
 

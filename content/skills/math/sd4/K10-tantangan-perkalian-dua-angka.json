@@ -1,0 +1,311 @@
+{
+  "id": "math.sd4.k10.tantangan-perkalian-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 10,
+  "title": "Perkalian dua angka — Level 10 — Tantangan perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "prompt": "{=a*10} × {=b*10} = …",
+          "answer": "a * b * 100",
+          "distractors": [
+            {
+              "expr": "a * b * 10",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "a * b * 1000",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "(a + b) * 100",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Kalikan angka depannya: {a} × {b} = {=a*b}. Ada dua nol pada soal, jadi tambahkan dua nol: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 4],
+            "q": [1, 9],
+            "t": [1, 3],
+            "s": [1, 9]
+          },
+          "derived": {
+            "a": "p * 10 + q",
+            "b": "t * 10 + s"
+          },
+          "prompt": "Model luas {a} × {b} dipotong menjadi empat bagian: {=p*10} × {=t*10}, {=p*10} × {s}, {q} × {=t*10}, dan {q} × {s}. Berapa hasil {a} × {b}?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "p * t * 100 + q * s",
+              "tag": "dua-bagian"
+            },
+            {
+              "expr": "a * b + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * b - 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Hitung keempat bagian: {=p*t*100} + {=p*10*s} + {=q*t*10} + {=q*s} = {answer}. Model luas memecah perkalian sulit menjadi perkalian mudah."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 89],
+            "t": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {b} = {a} × {=t*10} + {a} × {s} = … + {=a*s}",
+          "answer": "a * t * 10",
+          "distractors": [
+            {
+              "expr": "a * t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * t * 100",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "a * s",
+              "tag": "bagian-lain"
+            }
+          ],
+          "explain": "Bagian yang hilang adalah {a} × {=t*10}. Hitung {a} × {t} = {=a*t}, lalu tambahkan nol: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [23, 99],
+            "t": [2, 9],
+            "s": [2, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "Hitung bersusun: {a} × {b} = …",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * s + a * t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b + 100",
+              "tag": "simpan-lebih"
+            },
+            {
+              "expr": "a * b - 10",
+              "tag": "lupa-simpan"
+            }
+          ],
+          "explain": "Bersusun dua baris. Baris pertama: {a} × {s} = {=a*s}. Baris kedua: {a} × {=t*10} = {=a*t*10} (tulis 0 di satuan dulu). Jumlahkan: {=a*s} + {=a*t*10} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 98],
+            "b": [12, 98]
+          },
+          "constraint": "a % 10 != 0 && b % 10 != 0 && a % 10 != 5 && b % 10 != 5",
+          "prompt": "Taksir {a} × {b} dengan membulatkan kedua bilangan ke puluhan terdekat. Taksirannya …",
+          "answer": "round(a / 10) * 10 * round(b / 10) * 10",
+          "distractors": [
+            {
+              "expr": "floor(a / 10) * 10 * floor(b / 10) * 10",
+              "tag": "bulat-turun"
+            },
+            {
+              "expr": "ceil(a / 10) * 10 * ceil(b / 10) * 10",
+              "tag": "bulat-naik"
+            },
+            {
+              "expr": "a * b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "round(a / 10) * 10 * round(b / 10)",
+              "tag": "lupa-nol"
+            }
+          ],
+          "explain": "Bulatkan: {a} menjadi {=round(a/10)*10} dan {b} menjadi {=round(b/10)*10}. Kalikan: {=round(a/10)} × {=round(b/10)} = {=round(a/10)*round(b/10)}, lalu tambah dua nol: {answer}. Hasil tepatnya {=a*b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [35, 95],
+            "b": [12, 24]
+          },
+          "prompt": "Harga satu kotak susu Rp{=h*100}. Bu Rina membeli {b} kotak. Berapa rupiah yang harus dibayar?",
+          "answer": "h * 100 * b",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * b",
+              "tag": "lupa-ratusan"
+            },
+            {
+              "expr": "h * 100 * (b - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "h * 100 + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Hitung {h} × {b} = {=h*b} dulu. Karena harganya {h} ratusan, hasilnya {=h*b} ratusan = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 49],
+            "b": [11, 30]
+          },
+          "derived": {
+            "r": "a * b"
+          },
+          "prompt": "{a} × {b} = {r}. Berapa {a} × {=b+1}?",
+          "answer": "r + a",
+          "distractors": [
+            {
+              "expr": "r + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "r + b",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "r + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{a} × {=b+1} adalah satu kelompok {a} lebih banyak. {r} + {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 24]
+          },
+          "prompt": "25 × 4 = 100. Berapa 25 × {=4*m}?",
+          "answer": "100 * m",
+          "distractors": [
+            {
+              "expr": "25 * m",
+              "tag": "lupa-empat"
+            },
+            {
+              "expr": "100 * m + 25",
+              "tag": "lain"
+            },
+            {
+              "expr": "100 * (m + 1)",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{=4*m} = 4 × {m}. Jadi 25 × {=4*m} = 25 × 4 × {m} = 100 × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 49],
+            "t": [1, 6],
+            "s": [1, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "Raka menghitung {a} × {b} begini: {a} × {t} + {a} × {s} = {=a*t+a*s}. Ia lupa bahwa {t} pada {b} bernilai {=t*10}. Berapa hasil yang tepat?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * t + a * s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * t * 10 + s",
+              "tag": "lupa-kali-satuan"
+            }
+          ],
+          "explain": "Angka {t} pada {b} bernilai {=t*10}. Jadi {a} × {b} = {a} × {=t*10} + {a} × {s} = {=a*t*10} + {=a*s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 36],
+            "b": [12, 18],
+            "c": [100, 250]
+          },
+          "constraint": "c < a * b",
+          "prompt": "Sekolah memesan {a} kotak nasi untuk setiap kelas. Ada {b} kelas. Sudah datang {c} kotak. Berapa kotak lagi yang belum datang?",
+          "answer": "a * b - c",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "a * b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * b - c - 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Dua langkah. Semua kotak: {a} × {b} = {=a*b}. Yang belum datang: {=a*b} - {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

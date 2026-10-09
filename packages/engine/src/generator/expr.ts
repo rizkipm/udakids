@@ -1,7 +1,8 @@
 /**
  * Evaluator ekspresi aman untuk konten (PRD A10) — TANPA eval / new Function.
  * Mendukung: angka, variabel, + - * / %, perbandingan (< <= > >= == !=), && || !, kurung,
- * dan fungsi min, max, abs, floor, ceil, round, gcd (FPB), lcm (KPK). Hasil: number atau boolean.
+ * dan fungsi min, max, abs, floor, ceil, round, gcd (FPB), lcm (KPK), sqrt, pow (EMC, D-101). Hasil: number atau
+ * boolean.
  */
 export type ExprValue = number | boolean;
 export type Vars = Readonly<Record<string, number>>;
@@ -44,6 +45,10 @@ const FUNCS: Record<string, (...xs: number[]) => number> = {
   gcd: (...xs: number[]) => xs.reduce(gcd2),
   /** KPK (kelipatan persekutuan terkecil) dari 2+ bilangan bulat. */
   lcm: (...xs: number[]) => xs.reduce(lcm2),
+  /** Akar kuadrat (Pythagoras, D-101); bilangan negatif → NaN (soal ditolak). */
+  sqrt: (x: number) => Math.sqrt(x),
+  /** Pangkat bilangan bulat kecil (0–12), mis. pow(2, 8) = 256. */
+  pow: (a: number, b: number) => (Number.isInteger(b) && b >= 0 && b <= 12 ? a ** b : Number.NaN),
 };
 
 function tokenize(src: string): Token[] {

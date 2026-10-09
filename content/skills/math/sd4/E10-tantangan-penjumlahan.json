@@ -1,0 +1,358 @@
+{
+  "id": "math.sd4.e10.tantangan-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 10,
+  "title": "Penjumlahan bilangan besar — Level 10 — Tantangan penjumlahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [2, 9],
+            "x1": [0, 9],
+            "a1": [2, 9],
+            "x2": [0, 9],
+            "a2": [2, 9],
+            "x3": [0, 9],
+            "a3": [1, 7]
+          },
+          "derived": {
+            "b0": "(10 - a0) + floor(x0 * (a0 + 0) / 10)",
+            "b1": "(9 - a1) + floor(x1 * (a1 + 1) / 10)",
+            "b2": "(9 - a2) + floor(x2 * (a2 + 1) / 10)",
+            "b3": "1 + floor(x3 * (8 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}, tulis {=(a0+b0)%10}, simpan 1. Puluhan: {a1} + {b1} + 1 = {=a1+b1+1}, tulis {=(a1+b1+1)%10}, simpan 1. Ratusan: {a2} + {b2} + 1 = {=a2+b2+1}, tulis {=(a2+b2+1)%10}, simpan 1. Ribuan: {a3} + {b3} + 1 = {=a3+b3+1}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [2, 9],
+            "x1": [0, 9],
+            "a1": [2, 9],
+            "x2": [0, 9],
+            "a2": [0, 8],
+            "x3": [0, 9],
+            "a3": [2, 9],
+            "x4": [0, 9],
+            "a4": [1, 7]
+          },
+          "derived": {
+            "b0": "(10 - a0) + floor(x0 * (a0 + 0) / 10)",
+            "b1": "(9 - a1) + floor(x1 * (a1 + 1) / 10)",
+            "b2": "floor(x2 * (9 - a2) / 10)",
+            "b3": "(10 - a3) + floor(x3 * (a3 + 0) / 10)",
+            "b4": "1 + floor(x4 * (8 - a4) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000 + a4 * 10000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000 + b4 * 10000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000 + ((a4 + b4) % 10) * 10000"
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b - 10000",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}, tulis {=(a0+b0)%10}, simpan 1. Puluhan: {a1} + {b1} + 1 = {=a1+b1+1}, tulis {=(a1+b1+1)%10}, simpan 1. Ratusan: {a2} + {b2} + 1 = {=a2+b2+1}. Ribuan: {a3} + {b3} = {=a3+b3}, tulis {=(a3+b3)%10}, simpan 1. Puluh ribuan: {a4} + {b4} + 1 = {=a4+b4+1}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": [2, 9],
+            "j": [1, 3]
+          },
+          "derived": {
+            "b": "k * 1000 - j"
+          },
+          "constraint": "a % 10 >= 3",
+          "prompt": "Hitung dengan cara cepat: {a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + k * 1000",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "a + k * 1000 + j",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{b} hampir {=k*1000}, kurang {j}. Tambahkan {=k*1000} dulu: {a} + {=k*1000} = {=a+k*1000}. Lalu kurangi {j}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 49999],
+            "b": [1000, 49999]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "… + {b} = {c}",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Bilangan yang hilang = hasil − bilangan yang diketahui. {c} − {b} = {answer}. Cek: {answer} + {b} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999],
+            "c": [1000, 9999]
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            },
+            {
+              "expr": "a + b + c - 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b + c - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b + c + 100",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Jumlahkan dua bilangan dulu: {a} + {b} = {=a+b}. Lalu tambah bilangan ketiga: {=a+b} + {c} = {answer}. Saat bersusun, jumlah satu kolom bisa lebih dari 19, jadi simpanannya bisa 2."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25000, 95000],
+              "step": 500
+            },
+            "b": {
+              "range": [12500, 48500],
+              "step": 500
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ]
+          },
+          "constraint": "a % 1000 != 0 || b % 1000 != 0",
+          "prompt": "{nama} punya tabungan Rp{a}. Bulan ini ia menabung lagi Rp{b}. Berapa tabungannya sekarang?",
+          "answer": "a + b",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b - 10000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a - b",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Menabung lagi berarti bertambah, jadi dijumlah: {a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 8999],
+            "b": [1000, 8999]
+          },
+          "constraint": "a + b < 10000",
+          "prompt": "Berapa kali kita menyimpan saat menghitung {a} + {b} bersusun?",
+          "answer": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000)",
+          "distractors": [
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "Periksa setiap tempat dari satuan, termasuk simpanan dari kanan. Setiap jumlah 10 atau lebih berarti menyimpan 1. Ada {answer} kali menyimpan. Hasilnya {=a+b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [45000, 99000],
+              "step": 500
+            },
+            "d": {
+              "range": [5000, 35000],
+              "step": 500
+            }
+          },
+          "prompt": "Harga sepatu Rp{a}. Harga tas Rp{d} lebih mahal daripada sepatu. Berapa harga sepatu dan tas seluruhnya?",
+          "answer": "a + a + d",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "hanya-tas"
+            },
+            {
+              "expr": "a + d + d",
+              "tag": "tambah-dua-kali"
+            },
+            {
+              "expr": "a + a",
+              "tag": "lupa-selisih"
+            }
+          ],
+          "explain": "Cari harga tas dulu: {a} + {d} = {=a+d}. Lalu jumlahkan dengan sepatu: {a} + {=a+d} = {answer}."
+        }
+      }
+    ]
+  }
+}

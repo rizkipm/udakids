@@ -1,0 +1,154 @@
+{
+  "id": "math.sd4.d8.soal-cerita-penaksiran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 8,
+  "title": "Pembulatan dan penaksiran — Level 8 — Soal cerita penaksiran",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [58100, 74900],
+              "step": 100
+            },
+            "b": {
+              "range": [15100, 39900],
+              "step": 100
+            }
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 1000 != 0 && (a + b) % 1000 != 0",
+          "prompt": "Ibu membeli beras seharga Rp{a} dan minyak goreng seharga Rp{b}. Taksir total belanjanya dengan membulatkan ke ribuan terdekat.",
+          "answer": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 1000) * 1000 + floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000 + ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            },
+            {
+              "expr": "round(a / 10000) * 10000 + round(b / 10000) * 10000",
+              "tag": "ke-puluh-ribuan"
+            }
+          ],
+          "explain": "Bulatkan harga: Rp{a} → Rp{=round(a/1000)*1000}, Rp{b} → Rp{=round(b/1000)*1000}. Jumlahkan: kira-kira {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [12001, 59999]
+          },
+          "constraint": "n % 1000 != 0",
+          "prompt": "Pertandingan sepak bola ditonton {n} orang. Seorang wartawan membulatkan banyak penonton ke ribuan terdekat. Berapa yang ia tulis?",
+          "answer": "round(n / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "floor(n / 1000) * 1000 + 1000 * (n % 1000 < 500)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "round(n / 10000) * 10000",
+              "tag": "ke-puluh-ribuan"
+            }
+          ],
+          "explain": "Lihat angka ratusan: {=floor(n/100)%10}. 0–4 turun, 5–9 naik. Jadi wartawan menulis kira-kira {answer} orang."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [15, 20],
+            "a": {
+              "range": [45100, 69900],
+              "step": 100
+            },
+            "b": {
+              "range": [55100, 89900],
+              "step": 100
+            }
+          },
+          "derived": {
+            "u": "k * 10000"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 1000 != 0 && b % 1000 != 0 && u - a - b >= 5000",
+          "prompt": "{nama} membawa uang Rp{u}. Ia membeli tas seharga Rp{a} dan sepatu seharga Rp{b}. Dengan membulatkan harga ke ribuan terdekat, kira-kira berapa sisa uangnya?",
+          "answer": "u - round(a / 1000) * 1000 - round(b / 1000) * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "u - a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "total-bukan-sisa"
+            },
+            {
+              "expr": "u - floor(a / 1000) * 1000 - floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "u - ceil(a / 1000) * 1000 - ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            }
+          ],
+          "explain": "Bulatkan harga: tas → Rp{=round(a/1000)*1000}, sepatu → Rp{=round(b/1000)*1000}. Total kira-kira Rp{=round(a/1000)*1000+round(b/1000)*1000}. Sisa: {u} − {=round(a/1000)*1000+round(b/1000)*1000} = {answer}."
+        }
+      }
+    ]
+  }
+}

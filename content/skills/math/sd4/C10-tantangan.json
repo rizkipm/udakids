@@ -1,0 +1,297 @@
+{
+  "id": "math.sd4.c10.tantangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 10,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 10 — Tantangan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 99999],
+            "p": [1, 3],
+            "k": [-9, 9]
+          },
+          "derived": {
+            "pw": "(p == 1) * 10 + (p == 2) * 100 + (p == 3) * 1000",
+            "b": "a + k * pw",
+            "da": "floor(a / pw) % 10"
+          },
+          "constraint": "k != 0 && da + k >= 0 && da + k <= 9",
+          "prompt": "{a} … {b}",
+          "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Bandingkan dari kiri: puluh ribuan, ribuan, ratusan, dan seterusnya. Berhenti di angka pertama yang berbeda, lalu bandingkan angka itu saja. Jadi {a} {answer} {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 9],
+            "q": [1, 9],
+            "r": [0, 9],
+            "s": [0, 9],
+            "t": [0, 9]
+          },
+          "derived": {
+            "x1": "p * 10000 + q * 1000 + r * 100 + s * 10 + t",
+            "x2": "p * 10000 + q * 1000 + r * 100 + t * 10 + s",
+            "x3": "p * 10000 + r * 1000 + q * 100 + s * 10 + t",
+            "x4": "q * 10000 + p * 1000 + r * 100 + s * 10 + t"
+          },
+          "constraint": "p != q && p != r && p != s && p != t && q != r && q != s && q != t && r != s && r != t && s != t",
+          "prompt": "Manakah bilangan yang terbesar?",
+          "answer": "max(x1, x2, x3, x4)",
+          "distractors": [
+            {
+              "expr": "x1",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x2",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x3",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x4",
+              "tag": "bilangan-lain"
+            }
+          ],
+          "explain": "Bandingkan angka paling kiri dulu. Jika sama, lihat angka berikutnya, dan seterusnya. Bilangan terbesar adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 79999],
+            "k1": [1, 9],
+            "k2": [1, 9],
+            "k3": [1, 9],
+            "q": [1, 4]
+          },
+          "derived": {
+            "b": "a + k1 * 10",
+            "c": "a + k2 * 1000",
+            "d": "c + k3 * 100",
+            "x1": "(q == 1) * c + (q == 2) * b + (q == 3) * d + (q == 4) * a",
+            "x2": "(q == 1) * a + (q == 2) * d + (q == 3) * b + (q == 4) * c",
+            "x3": "(q == 1) * d + (q == 2) * a + (q == 3) * c + (q == 4) * b",
+            "x4": "(q == 1) * b + (q == 2) * c + (q == 3) * a + (q == 4) * d"
+          },
+          "prompt": "Urutkan dari yang terbesar: {x1}, {x2}, {x3}, {x4}. Bilangan kedua adalah …",
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "d",
+              "tag": "pertama"
+            },
+            {
+              "expr": "b",
+              "tag": "ketiga"
+            },
+            {
+              "expr": "a",
+              "tag": "terkecil"
+            }
+          ],
+          "explain": "Dari yang terbesar: {d}, {c}, {b}, {a}. Bilangan kedua adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lo": [10000, 98000],
+            "g": [2, 9],
+            "u": [1, 99],
+            "v": [1, 9]
+          },
+          "derived": {
+            "gap": "g * 100",
+            "hi": "lo + gap",
+            "m": "lo + floor(u * gap / 100)"
+          },
+          "prompt": "Bilangan manakah yang terletak di antara {lo} dan {hi}?",
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "lo - floor(u * gap / 100)",
+              "tag": "kurang-dari-batas"
+            },
+            {
+              "expr": "hi + v * 10",
+              "tag": "lebih-dari-batas"
+            },
+            {
+              "expr": "lo - 1000 + floor(u * gap / 100)",
+              "tag": "ribuan-lain"
+            }
+          ],
+          "explain": "Bilangan di antara {lo} dan {hi} harus lebih besar dari {lo} dan lebih kecil dari {hi}. Yang memenuhi hanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [10000, 98000],
+            "q": [0, 6]
+          },
+          "derived": {
+            "n": "m + (q == 1) * 100 - (q == 2) * 100 + (q == 3) * 1000 - (q == 4) * 1000 + (q == 5) * 10"
+          },
+          "prompt": "Pilih tanda yang tepat: {w:m} … {n}",
+          "answer": "(m > n) * 1 + (m < n) * 2 + (m == n) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Tulis dulu lambang bilangan dari kata-katanya: {m}. Lalu bandingkan {m} dengan {n} dari kiri. Tandanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            },
+            "b": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            },
+            "c": {
+              "range": [1200000, 2400000],
+              "step": 25000
+            }
+          },
+          "constraint": "a != b && b != c && a != c",
+          "prompt": "Harga tiga sepeda di toko: Rp{a}, Rp{b}, dan Rp{c}. Berapa harga yang paling murah?",
+          "answer": "min(a, b, c)",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "harga-lain"
+            },
+            {
+              "expr": "b",
+              "tag": "harga-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "harga-lain"
+            }
+          ],
+          "choices": 3,
+          "explain": "Paling murah = bilangan terkecil. Semua 7 angka, jadi bandingkan dari kiri: jutaan, ratus ribuan, puluh ribuan. Yang terkecil {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "d": [1, 8],
+            "h": [1, 9],
+            "g": [0, 8],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "constraint": "g < h",
+          "prompt": "{a}□.{h}{t}{s} > {a}{d}.{g}{t}{s}. Angka terkecil yang dapat mengisi □ adalah …",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "d + 1",
+              "tag": "abaikan-ratusan"
+            },
+            {
+              "expr": "d - 1",
+              "tag": "terlalu-kecil"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Jika □ = {d}, ribuannya sama. Lalu ratusan {h} lebih dari {g}, jadi bilangan kiri sudah lebih besar. Angka terkecil adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [0, 0],
+            "k1": [1, 2],
+            "k2": [1, 2],
+            "k3": [1, 2],
+            "k4": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "d": "e + k1",
+            "c": "d + k2",
+            "b": "c + k3",
+            "a": "b + k4",
+            "y1": "(q == 1) * c + (q == 2) * d + (q == 3) * b",
+            "y2": "(q == 1) * a + (q == 2) * b + (q == 3) * e",
+            "y3": "(q == 1) * e + (q == 2) * a + (q == 3) * d",
+            "y4": "(q == 1) * b + (q == 2) * e + (q == 3) * c",
+            "y5": "(q == 1) * d + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a <= 9",
+          "prompt": "Ada kartu angka {y1}, {y2}, {y3}, {y4}, dan {y5}. Setiap kartu dipakai satu kali. Berapa bilangan 5 angka terkecil yang dapat dibuat?",
+          "answer": "d * 10000 + c * 100 + b * 10 + a",
+          "distractors": [
+            {
+              "expr": "d * 1000 + c * 100 + b * 10 + a",
+              "tag": "nol-di-depan"
+            },
+            {
+              "expr": "d * 10000 + c * 1000 + b * 10 + a",
+              "tag": "nol-bergeser"
+            },
+            {
+              "expr": "d * 10000 + c * 100 + a * 10 + b",
+              "tag": "dua-terakhir-tertukar"
+            }
+          ],
+          "explain": "Angka 0 tidak boleh di depan, karena bilangannya menjadi 4 angka. Taruh angka terkecil selain 0, yaitu {d}, di depan, lalu 0, lalu angka lain dari kecil ke besar: {answer}."
+        }
+      }
+    ]
+  }
+}

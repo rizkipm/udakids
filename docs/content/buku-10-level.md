@@ -18,6 +18,7 @@ Id skill: `{domain}.{grade}.{kode}{n}.{slug}`, judul: `Topik — Level n — Jud
 | Sains Grade 2          | `sains/sd2`  | 9 (A–I)         | 90    | intermediate |
 | Sains Grade 3          | `sains/sd3`  | 25 (A–Y)        | 250   | advanced     |
 | Sains Grade 4          | `sains/sd4`  | 26 (A–Z)        | 260   | advanced     |
+| Math Grade 4           | `math/sd4`   | 33 (A–GG) + GM  | 373   | advanced     |
 
 ## Pola level
 
@@ -35,6 +36,9 @@ lama (Dasar/Menengah/Olimpiade × band 0–2) dipecah menjadi 9 level, ditambah 
 | 10    | Tantangan: gabungan semua bentuk                                                           | reasoning      |
 
 Grade 1-2 memakai gambar benda (`pictures`) di level awal bagi anak yang belum lancar membaca.
+
+**Math Grade 4 (D-096):** setiap topik berisi 10 level soal ditambah **Level 11 game** yang sesuai materinya,
+plus topik GM (10 game). Level game tidak masuk mock test maupun lomba.
 
 ## Materi per topik (D-026)
 

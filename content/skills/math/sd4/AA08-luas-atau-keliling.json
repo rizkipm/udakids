@@ -1,0 +1,168 @@
+{
+  "id": "math.sd4.aa8.luas-atau-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 8,
+  "title": "Luas persegi dan persegi panjang — Level 8 — Luas atau keliling",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "menutup lantai dengan karpet",
+              "mengecat seluruh dinding",
+              "menanam rumput di halaman",
+              "menutup meja dengan taplak",
+              "memasang ubin di teras",
+              "melapisi buku dengan sampul"
+            ]
+          },
+          "prompt": "{nama} ingin {x}. Yang perlu dihitung luas atau keliling?",
+          "answer": "1",
+          "labels": {
+            "1": "Luas",
+            "2": "Keliling"
+          },
+          "explain": "Menutup seluruh permukaan berarti menghitung luas. Keliling hanya untuk tepi luarnya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "memasang pagar di sekeliling kebun",
+              "menempel pita di tepi bingkai",
+              "berlari mengelilingi lapangan",
+              "memasang lampu hias di tepi jendela",
+              "menjahit renda di tepi taplak",
+              "memasang lis di tepi papan"
+            ]
+          },
+          "prompt": "{nama} ingin {x}. Yang perlu dihitung luas atau keliling?",
+          "answer": "2",
+          "labels": {
+            "1": "Luas",
+            "2": "Keliling"
+          },
+          "explain": "Yang dipasang mengikuti tepi luar, jadi yang dihitung keliling. Luas untuk menutup permukaan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Keliling sebuah persegi {k} cm. Berapa cm² luasnya?",
+          "answer": "s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "keliling-saja"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "sisi-dikali-2"
+            },
+            {
+              "expr": "k * s",
+              "tag": "keliling-dikali-sisi"
+            }
+          ],
+          "explain": "Cari sisinya dulu: {k} : 4 = {s} cm. Lalu luas = {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "constraint": "w > h",
+          "derived": {
+            "l": "w * h"
+          },
+          "prompt": "Luas persegi panjang {l} cm² dan panjangnya {w} cm. Berapa cm kelilingnya?",
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Lebar = {l} : {w} = {h} cm. Keliling = 2 × ({w} + {h}) = {answer}."
+        }
+      }
+    ]
+  }
+}

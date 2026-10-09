@@ -1,0 +1,139 @@
+{
+  "id": "math.sd4.x3.aturan-12-jam-dan-24-jam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 3,
+  "title": "Waktu dan lama kegiatan — Level 3 — Aturan 12 jam dan 24 jam",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [3, 5],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "Pukul {h}.{m} sore ditulis dalam aturan 24 jam. Berapa angka jamnya?",
+          "answer": "h + 12",
+          "explain": "Setelah pukul 12.00 siang, jamnya ditambah 12. {h} + 12 = {answer}, jadi pukul {answer}.{m}.",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "tidak-ditambah"
+            },
+            {
+              "expr": "h + 10",
+              "tag": "tambah-10"
+            },
+            {
+              "expr": "h + 11",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 11],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "Pukul {h}.{m} malam ditulis dalam aturan 24 jam. Berapa angka jamnya?",
+          "answer": "h + 12",
+          "explain": "Malam hari sudah lewat pukul 12.00 siang, jadi jamnya ditambah 12. {h} + 12 = {answer}, jadi pukul {answer}.{m}.",
+          "distractors": [
+            {
+              "expr": "h",
+              "tag": "tidak-ditambah"
+            },
+            {
+              "expr": "h + 10",
+              "tag": "tambah-10"
+            },
+            {
+              "expr": "h + 11",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 23],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "Jam digital menunjukkan pukul {h}.{m}. Dalam aturan 12 jam, itu pukul … lewat {m} menit sore atau malam.",
+          "answer": "h - 12",
+          "explain": "Untuk jam 13 sampai 23, kurangi 12. {h} − 12 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "h - 10",
+              "tag": "kurang-10"
+            },
+            {
+              "expr": "h - 2",
+              "tag": "kurang-2"
+            },
+            {
+              "expr": "h - 11",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [5, 9],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "Pukul {h}.{m} pagi ditulis dalam aturan 24 jam. Berapa angka jamnya?",
+          "answer": "h",
+          "explain": "Pagi hari belum lewat pukul 12.00 siang, jadi jamnya tetap {answer}. Pukul {h}.{m} pagi = pukul 0{h}.{m}.",
+          "distractors": [
+            {
+              "expr": "h + 12",
+              "tag": "ditambah-12"
+            },
+            {
+              "expr": "h + 10",
+              "tag": "tambah-10"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

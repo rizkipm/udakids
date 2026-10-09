@@ -1,0 +1,142 @@
+{
+  "id": "math.sd4.aa4.satuan-luas-dan-soal-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 4,
+  "title": "Luas persegi dan persegi panjang — Level 4 — Satuan luas dan soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "sebuah perangko",
+              "sampul buku tulis",
+              "kartu nama",
+              "layar ponsel",
+              "selembar daun",
+              "sapu tangan"
+            ]
+          },
+          "prompt": "Satuan yang paling tepat untuk luas {x} adalah …",
+          "answer": "1",
+          "labels": {
+            "1": "cm²",
+            "2": "m²",
+            "3": "cm",
+            "4": "m"
+          },
+          "labelSay": {
+            "1": "sentimeter persegi",
+            "2": "meter persegi",
+            "3": "sentimeter",
+            "4": "meter"
+          },
+          "explain": "Benda kecil diukur luasnya dengan sentimeter persegi (cm²). cm dan m adalah satuan panjang, bukan luas."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "lapangan sepak bola",
+              "lantai ruang kelas",
+              "halaman rumah",
+              "kolam renang",
+              "atap rumah",
+              "kebun sayur"
+            ]
+          },
+          "prompt": "Satuan yang paling tepat untuk luas {x} adalah …",
+          "answer": "2",
+          "labels": {
+            "1": "cm²",
+            "2": "m²",
+            "3": "cm",
+            "4": "m"
+          },
+          "labelSay": {
+            "1": "sentimeter persegi",
+            "2": "meter persegi",
+            "3": "sentimeter",
+            "4": "meter"
+          },
+          "explain": "Permukaan yang luas diukur dengan meter persegi (m²). cm dan m adalah satuan panjang, bukan luas."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [3, 9]
+          },
+          "constraint": "p > l",
+          "words": {
+            "x": ["Lantai ruang kelas", "Lantai kamar", "Halaman belakang", "Lantai aula kecil"]
+          },
+          "prompt": "{x} berbentuk persegi panjang {p} m × {l} m. Berapa m² luasnya?",
+          "answer": "p * l",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "p + l",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "p * l + p",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Luas = panjang × lebar = {p} × {l} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [15, 30],
+            "l": [10, 21]
+          },
+          "constraint": "p > l",
+          "words": {
+            "x": ["Sampul buku", "Papan nama", "Bingkai foto", "Selembar kertas lipat"]
+          },
+          "prompt": "{x} berukuran {p} cm × {l} cm. Berapa cm² luasnya?",
+          "answer": "p * l",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "p + l",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "p * l - l",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Luas = {p} × {l} = {answer}. Satuannya cm² karena sisinya dalam cm."
+        }
+      }
+    ]
+  }
+}

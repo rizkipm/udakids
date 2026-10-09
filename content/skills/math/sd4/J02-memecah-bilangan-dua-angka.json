@@ -1,0 +1,118 @@
+{
+  "id": "math.sd4.j2.memecah-bilangan-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 2,
+  "title": "Perkalian dengan bilangan satu angka — Level 2 — Memecah bilangan dua angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "s": [1, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "t * 10 + s"
+          },
+          "prompt": "{n} × {k} = {=t*10} × {k} + {s} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "t * 10 * k + s",
+              "tag": "lupa-kali-satuan"
+            },
+            {
+              "expr": "t * 10 + s * k",
+              "tag": "lupa-kali-puluhan"
+            },
+            {
+              "expr": "t * k + s * k",
+              "tag": "lupa-nilai-tempat"
+            }
+          ],
+          "explain": "Pecah {n} menjadi {=t*10} + {s}. {=t*10} × {k} = {=t*10*k} dan {s} × {k} = {=s*k}. Jumlahkan: {=t*10*k} + {=s*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "s": [2, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "t * 10 + s"
+          },
+          "prompt": "{n} × {k} = {=t*10*k} + …",
+          "answer": "s * k",
+          "distractors": [
+            {
+              "expr": "s",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "s * k + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "s + k",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pecah {n} menjadi {=t*10} + {s}. Bagian pertama {=t*10} × {k} = {=t*10*k}. Bagian yang hilang adalah {s} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 4],
+            "s": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "n": "t * 10 + s"
+          },
+          "prompt": "Luas persegi panjang {n} × {k} petak dipecah menjadi {=t*10} × {k} dan {s} × {k}. Berapa luas seluruhnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=n",
+              "h": "=k",
+              "unit": ""
+            }
+          ],
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "t * 10 * k",
+              "tag": "satu-bagian"
+            },
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n * k + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Hitung dua bagian: {=t*10} × {k} = {=t*10*k} dan {s} × {k} = {=s*k}. Luas seluruhnya {=t*10*k} + {=s*k} = {answer} petak."
+        }
+      }
+    ]
+  }
+}

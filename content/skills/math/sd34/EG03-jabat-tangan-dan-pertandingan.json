@@ -1,0 +1,78 @@
+{
+  "id": "math.sd34.eg3.jabat-tangan-dan-pertandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 3,
+  "title": "Kombinatorika & penalaran — Level 3 — Jabat tangan dan pertandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Menghitung banyak pasangan dari n objek"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 25]
+          },
+          "prompt": "Dalam sebuah pertemuan ada {n} anak. Setiap anak berjabat tangan tepat satu kali dengan setiap anak lainnya. Banyak jabat tangan adalah …",
+          "answer": "n * (n - 1) / 2",
+          "distractors": [
+            {
+              "expr": "n * (n - 1)",
+              "tag": "terhitung-dua-kali"
+            },
+            {
+              "expr": "n * n / 2",
+              "tag": "setengah-kuadrat"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "satu-anak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap anak berjabat tangan dengan {=n-1} anak lain: {n} × {=n-1} = {=n*(n-1)}, tetapi setiap jabat tangan terhitung dua kali. Jadi {=n*(n-1)} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 16]
+          },
+          "derived": {
+            "t": "n * (n - 1) / 2"
+          },
+          "prompt": "Dalam turnamen catur, setiap pemain bertanding tepat satu kali melawan setiap pemain lain. Seluruhnya ada {t} pertandingan. Banyak pemain adalah …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "t / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak pertandingan = n × (n − 1) : 2. Cari n: {n} × {=n-1} : 2 = {t}. Jadi ada {answer} pemain."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "math.sd4.aa7.luas-bangun-gabungan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 7,
+  "title": "Luas persegi dan persegi panjang — Level 7 — Luas bangun gabungan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 10],
+            "b": [2, 6],
+            "c": [2, 6],
+            "e": [2, 5]
+          },
+          "constraint": "c < a",
+          "prompt": "Bangun huruf L tersusun dari persegi panjang {a} cm × {b} cm dan persegi panjang {c} cm × {e} cm. Berapa cm² luas seluruhnya?",
+          "answer": "a * b + c * e",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "satu-bagian"
+            },
+            {
+              "expr": "(a + c) * (b + e)",
+              "tag": "sisi-digabung"
+            },
+            {
+              "expr": "a * b + c + e",
+              "tag": "bagian-kedua-dijumlah"
+            }
+          ],
+          "explain": "Pecah menjadi dua persegi panjang. {a} × {b} = {=a*b} dan {c} × {e} = {=c*e}. Jumlahkan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [8, 15],
+            "h": [6, 10],
+            "s": [2, 4]
+          },
+          "prompt": "Dari kertas {w} cm × {h} cm, digunting persegi {s} cm × {s} cm di satu pojoknya. Berapa cm² luas kertas yang tersisa?",
+          "answer": "w * h - s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "lupa-dikurangi"
+            },
+            {
+              "expr": "w * h - 4 * s",
+              "tag": "mengurangi-keliling"
+            },
+            {
+              "expr": "w * h + s * s",
+              "tag": "ditambah"
+            }
+          ],
+          "explain": "Luas kertas utuh {w} × {h} = {=w*h}. Potongannya {s} × {s} = {=s*s}. Sisa = {=w*h} − {=s*s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 9],
+            "l": [2, 6],
+            "q": [2, 7]
+          },
+          "constraint": "p > l && q != p",
+          "prompt": "Sebuah kebun terdiri atas dua petak berdampingan: {p} m × {l} m dan {q} m × {l} m. Berapa m² luas kebun seluruhnya?",
+          "answer": "(p + q) * l",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "p * l",
+              "tag": "satu-petak"
+            },
+            {
+              "expr": "p * q * l",
+              "tag": "semua-dikali"
+            },
+            {
+              "expr": "2 * (p + q + l)",
+              "tag": "keliling"
+            }
+          ],
+          "explain": "{p} × {l} = {=p*l} dan {q} × {l} = {=q*l}. Jumlahnya {answer}. Bisa juga ({p} + {q}) × {l}."
+        }
+      }
+    ]
+  }
+}

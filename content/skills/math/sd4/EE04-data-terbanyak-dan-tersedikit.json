@@ -1,0 +1,242 @@
+{
+  "id": "math.sd4.ee4.data-terbanyak-dan-tersedikit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 4,
+  "title": "Data: tabel dan diagram — Level 4 — Data terbanyak dan tersedikit",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Pada hari apa buku paling banyak dipinjam?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "(a == max(a, b, c, e)) * 1 + (b == max(a, b, c, e)) * 2 + (c == max(a, b, c, e)) * 3 + (e == max(a, b, c, e)) * 4",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Rabu",
+            "4": "Kamis"
+          },
+          "explain": "Cari batang yang paling tinggi. Batang {answer} paling tinggi, jadi buku paling banyak dipinjam hari {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Pada hari apa buku paling sedikit dipinjam?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "(a == min(a, b, c, e)) * 1 + (b == min(a, b, c, e)) * 2 + (c == min(a, b, c, e)) * 3 + (e == min(a, b, c, e)) * 4",
+          "labels": {
+            "1": "Senin",
+            "2": "Selasa",
+            "3": "Rabu",
+            "4": "Kamis"
+          },
+          "explain": "Cari batang yang paling pendek: hari {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "b": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "c": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "e": {
+              "range": [50, 400],
+              "step": 25
+            }
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Olahraga apa yang paling disukai?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Sepak bola", "Renang", "Bulu tangkis", "Pencak silat"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Olahraga kesukaan siswa sekolah",
+              "unit": "siswa"
+            }
+          ],
+          "answer": "(a == max(a, b, c, e)) * 1 + (b == max(a, b, c, e)) * 2 + (c == max(a, b, c, e)) * 3 + (e == max(a, b, c, e)) * 4",
+          "labels": {
+            "1": "Sepak bola",
+            "2": "Renang",
+            "3": "Bulu tangkis",
+            "4": "Pencak silat"
+          },
+          "explain": "Batang paling tinggi menunjukkan data paling banyak: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 80],
+            "b": [12, 80],
+            "c": [12, 80],
+            "e": [12, 80]
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Sayur apa yang hasil panennya paling sedikit?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Sayur", "Hasil (kg)"],
+              "rows": [
+                ["Jagung", "=a"],
+                ["Cabai", "=b"],
+                ["Tomat", "=c"],
+                ["Terong", "=e"]
+              ],
+              "caption": "Hasil panen kebun sekolah"
+            }
+          ],
+          "answer": "(a == min(a, b, c, e)) * 1 + (b == min(a, b, c, e)) * 2 + (c == min(a, b, c, e)) * 3 + (e == min(a, b, c, e)) * 4",
+          "labels": {
+            "1": "Jagung",
+            "2": "Cabai",
+            "3": "Tomat",
+            "4": "Terong"
+          },
+          "explain": "Bandingkan semua angka di tabel. Angka terkecil ada di baris {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "constraint": "a != b && a != c && a != e && b != c && b != e && c != e",
+          "prompt": "Berapa buku dipinjam pada hari yang paling ramai?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "max(a, b, c, e)",
+          "distractors": [
+            {
+              "expr": "min(a, b, c, e)",
+              "tag": "paling-sedikit"
+            },
+            {
+              "expr": "max(a, b, c, e) - min(a, b, c, e)",
+              "tag": "selisih"
+            },
+            {
+              "expr": "a",
+              "tag": "batang-pertama"
+            }
+          ],
+          "explain": "Hari paling ramai punya batang paling tinggi, yaitu {answer} buku."
+        }
+      }
+    ]
+  }
+}

@@ -30,6 +30,9 @@ import {
   type VoiceLang,
   type VoiceProfile,
   type VoiceSettings,
+  langSegments,
+  speechSegments,
+  topicReadAloud,
 } from '@little-coder/engine';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DB, type Db } from '../db/db.module.js';
@@ -488,9 +491,25 @@ export class VoiceService {
    */
   async pregenTexts(): Promise<{ text: string; profile?: VoiceProfile }[]> {
     const out = new Map<string, { text: string; profile?: VoiceProfile }>();
-    const add = (text: string | undefined, profile?: VoiceProfile) => {
+    // Perangkat membacakan per potongan (D-098): kalimat English dengan suara British, teks panjang dipecah; klip
+    // dibuat untuk potongan yang sama persis dengan yang diminta perangkat.
+    const put = (t: string, profile?: VoiceProfile) =>
+      out.set(`${profile?.lang ?? ''}|${profile?.style ?? ''}|${t}`, { text: t, profile });
+    let curBase: string | undefined;
+    const add = (text: string | undefined, profile?: VoiceProfile, base = curBase) => {
       const t = text?.trim();
-      if (t && t.length <= 600) out.set(`${profile?.style ?? ''}|${t}`, { text: t, profile });
+      if (!t) return;
+      if (profile?.lang === 'en-GB') {
+        for (const x of speechSegments(t)) put(x, profile);
+        return;
+      }
+      for (const seg of langSegments(t))
+        put(
+          seg.text,
+          seg.lang === 'en-GB'
+            ? (VoiceService.sayProfile('en-GB', base) ?? { lang: 'en-GB' })
+            : profile,
+        );
     };
     const dir = i18nDir();
     let tip = 'Ingat:';
@@ -521,6 +540,7 @@ export class VoiceService {
       return p.success ? [p.data] : [];
     });
     for (const cat of catalogs) {
+      curBase = `${cat.domain}.${cat.grade}.pelajaran`;
       const profile: VoiceProfile = {
         ...voiceProfileOf(`${cat.domain}.${cat.grade}.pelajaran`, 'prompt'),
         lang: 'id-ID',
@@ -533,7 +553,7 @@ export class VoiceService {
         lesson?: unknown;
       }[]) {
         // Tombol "Dengarkan" di halaman topik (Topic.tsx: intro + "Ingat: tip").
-        if (c.intro) add([c.intro, ...(c.tips ?? []).map((x) => `${tip} ${x}`)].join(' '));
+        if (c.intro) add(topicReadAloud(c.intro, c.tips ?? [], tip));
         const levels = templates.filter(
           (t) => t.domain === cat.domain && t.grade === cat.grade && t.category === c.code,
         );
@@ -601,6 +621,7 @@ export class VoiceService {
         }
       }
     }
+    curBase = undefined;
     // Angka yang diucapkan alat peraga & game (garis bilangan, blok puluhan, hitung): per jenjang (gaya/kecepatan).
     for (const [base, max] of [
       ['math.tk.pelajaran', 120],

@@ -1,0 +1,163 @@
+{
+  "id": "math.sd4.w3.total-belanja",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 3,
+  "title": "Uang dan literasi keuangan — Level 3 — Total belanja",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [2000, 15000],
+              "step": 500
+            },
+            "b": {
+              "range": [2000, 9000],
+              "step": 500
+            }
+          },
+          "prompt": "{nama} membeli {x} seharga Rp{a} dan {y} seharga Rp{b}. Berapa total harganya?",
+          "answer": "a + b",
+          "explain": "Total harga = jumlah semua harga. {a} + {b} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ],
+            "y": ["susu kotak", "air mineral", "jus jeruk", "teh kotak", "es kelapa"]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "abs(a - b)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + b + 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [3000, 20000],
+              "step": 500
+            },
+            "b": {
+              "range": [2000, 8000],
+              "step": 500
+            },
+            "c": {
+              "range": [1000, 15000],
+              "step": 500
+            }
+          },
+          "prompt": "Di warung, Ibu membeli {x} Rp{a}, {y} Rp{b}, dan {z} Rp{c}. Berapa rupiah yang harus dibayar Ibu?",
+          "answer": "a + b + c",
+          "explain": "Jumlahkan satu per satu: {a} + {b} = {=a+b}, lalu {=a+b} + {c} = {answer}.",
+          "words": {
+            "x": ["roti", "nasi bungkus", "kue lapis", "pisang goreng", "bakso", "martabak manis"],
+            "y": ["susu kotak", "air mineral", "jus jeruk", "teh kotak", "es kelapa"],
+            "z": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-barang"
+            },
+            {
+              "expr": "a + b + c - 1000",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "a + b + c + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b + c) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

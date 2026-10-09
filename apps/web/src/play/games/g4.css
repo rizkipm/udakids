@@ -1,0 +1,367 @@
+/* Game Kelas 4 (D-096): Tebak Angka, Diagram Ajaib, Penyihir Hitung, Tumpuk Angka, Garis Perkalian, Bingo
+   Rupiah. Target sentuh ≥ 64 px; tanpa merah besar; tanpa hitung mundur; gerak dikurangi bila diminta. */
+
+.g4-board {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.g4-step {
+  min-width: 64px;
+  min-height: 64px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--kid-ink, #1d1a2e);
+  cursor: pointer;
+}
+.g4-step:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.g4-step:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--kid-line, #2b2540);
+}
+
+.g4-card {
+  min-width: 96px;
+  min-height: 84px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  cursor: pointer;
+}
+.g4-card.is-answer {
+  background: #d9f7e8;
+}
+
+.g4-hint.is-naik {
+  color: #1d7fd6;
+}
+.g4-hint.is-turun {
+  color: #b5651d;
+}
+.g4-hint.is-tepat {
+  color: #12805c;
+}
+
+/* ---------- Tebak Angka */
+.guess-dials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.guess-dial {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.guess-digit {
+  min-width: 64px;
+  padding: 6px 0;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+  background: #ffd166;
+  font-size: 2.4rem;
+  font-weight: 900;
+  text-align: center;
+}
+.guess-place {
+  font-weight: 800;
+  color: var(--kid-muted, #5b5670);
+}
+.guess-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  width: min(100%, 420px);
+}
+.guess-history li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 14px;
+  background: #fff;
+  font-size: 1.2rem;
+}
+.guess-hint-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+}
+.guess-hint-cell {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #f4f0ff;
+}
+
+/* ---------- Diagram Ajaib */
+.chart-table {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  background: #fff;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.chart-table th,
+.chart-table td {
+  padding: 6px 14px;
+  border-bottom: 2px solid #e8e4f4;
+  text-align: left;
+}
+.chart-area {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  max-width: 560px;
+}
+.chart-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 260px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--kid-muted, #5b5670);
+  text-align: right;
+  transform: translateY(8px);
+}
+.chart-bars {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  gap: 6px;
+  min-width: 0;
+}
+.chart-col {
+  flex: 1 1 0;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 96px;
+}
+.chart-track {
+  position: relative;
+  width: min(100%, 56px);
+  height: 260px;
+  border-left: 3px solid var(--kid-line, #2b2540);
+  border-bottom: 3px solid var(--kid-line, #2b2540);
+  background: repeating-linear-gradient(
+    to top,
+    #fff 0,
+    #fff calc(260px / var(--rows) - 2px),
+    #e8e4f4 calc(260px / var(--rows) - 2px),
+    #e8e4f4 calc(260px / var(--rows))
+  );
+}
+.chart-bar {
+  position: absolute;
+  inset: auto 6px 0;
+  border-radius: 8px 8px 0 0;
+  background: #7b5cff;
+  transition: height 0.2s ease;
+}
+.chart-ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chart-ctrl .g4-step {
+  min-width: 64px;
+  min-height: 56px;
+}
+.chart-label {
+  display: grid;
+  justify-items: center;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+/* ---------- Penyihir Hitung */
+.magic-stars {
+  display: flex;
+  gap: 6px;
+}
+.magic-star {
+  fill: #fff;
+}
+.magic-star.is-on {
+  fill: #ffd166;
+}
+.magic-fact {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  font-weight: 900;
+}
+.magic-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(96px, 1fr));
+  gap: 12px;
+}
+
+/* ---------- Tumpuk Angka */
+.stack-target {
+  margin: 0;
+  padding: 8px 18px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+  background: #ffd166;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+.stack-tower {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 96px;
+  justify-content: flex-end;
+}
+.stack-base {
+  width: 200px;
+  height: 10px;
+  border-radius: 6px;
+  background: var(--kid-line, #2b2540);
+}
+.stack-pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.stack-block {
+  min-width: 96px;
+  min-height: 64px;
+  padding: 0 14px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 12px;
+  background: #8fd3ff;
+  box-shadow: 0 4px 0 var(--kid-line, #2b2540);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+.stack-block.is-placed {
+  background: #b9f0d2;
+  box-shadow: none;
+  margin-top: -4px;
+}
+.stack-block:disabled:not(.is-placed) {
+  opacity: 0.4;
+}
+
+/* ---------- Garis Perkalian */
+.lines-svg {
+  width: min(100%, 320px);
+  height: auto;
+  background: #fffdf6;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 16px;
+}
+.lines-dot {
+  cursor: pointer;
+}
+.lines-counters {
+  display: grid;
+  gap: 8px;
+}
+.lines-counter {
+  display: grid;
+  grid-template-columns: 100px 64px 56px 64px;
+  align-items: center;
+  gap: 8px;
+}
+.lines-name {
+  font-weight: 900;
+  color: var(--g);
+}
+.lines-value {
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+/* ---------- Bingo Rupiah */
+.bingo-call {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 10px;
+  width: min(100%, 520px);
+  padding: 12px 14px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 18px;
+  background: #f4f0ff;
+}
+.bingo-call .kid-note {
+  grid-column: 1 / -1;
+}
+.bingo-call p {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.bingo-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, 420px);
+}
+.bingo-cell {
+  min-height: 72px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 14px;
+  background: #fff;
+  font: inherit;
+  padding: 0 4px;
+  font-size: clamp(0.8rem, 3.3vw, 1.15rem);
+  font-weight: 900;
+  /* Nominal Rupiah tidak dipatahkan di tengah angka. */
+  white-space: nowrap;
+  cursor: pointer;
+}
+.bingo-cell.is-marked {
+  background: #ffd166;
+}
+
+@media (max-width: 440px) {
+  .lines-counter {
+    grid-template-columns: 80px 64px 44px 64px;
+  }
+  .chart-ctrl .g4-step {
+    min-width: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-bar {
+    transition: none;
+  }
+}

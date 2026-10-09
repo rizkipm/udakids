@@ -1,0 +1,144 @@
+{
+  "id": "math.sd34.ec3.jumlah-dan-selisih-dua-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 3,
+  "title": "Bilangan & aljabar — Level 3 — Jumlah dan selisih dua bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menentukan hasil kali dua bilangan dari jumlah dan selisihnya",
+    "emc-no": "27"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 70],
+            "d": {
+              "values": [2, 4, 6, 8, 10, 12, 14]
+            }
+          },
+          "derived": {
+            "b": "a - d",
+            "s": "a + b"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "b > 1 && !(s == 42 && d == 2)",
+          "prompt": "{nama} memikirkan dua bilangan. Bila dijumlahkan hasilnya {s}, bila yang besar dikurangi yang kecil hasilnya {d}. Berapa hasil kali kedua bilangan itu?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "s * d",
+              "tag": "jumlah-kali-selisih"
+            },
+            {
+              "expr": "a * a",
+              "tag": "kuadrat"
+            },
+            {
+              "expr": "(s / 2) * (s / 2)",
+              "tag": "pakai-rata-rata"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan besar = ({s} + {d}) : 2 = {a}, bilangan kecil = ({s} − {d}) : 2 = {b}. Hasil kali = {a} × {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 70],
+            "d": {
+              "values": [2, 4, 6, 8, 10, 12, 14]
+            }
+          },
+          "derived": {
+            "b": "a - d",
+            "s": "a + b"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "b > 1",
+          "prompt": "{nama} punya kelereng merah dan biru, seluruhnya {s} butir. Kelereng merah {d} butir lebih banyak daripada kelereng biru. Banyak kelereng merah adalah … butir.",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "s - d",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "s / 2",
+              "tag": "dibagi-dua-saja"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kurangi dulu kelebihannya: {s} − {d} = {=s-d}, dibagi dua = {b} (biru). Merah = {b} + {d} = {answer}."
+        }
+      }
+    ]
+  }
+}

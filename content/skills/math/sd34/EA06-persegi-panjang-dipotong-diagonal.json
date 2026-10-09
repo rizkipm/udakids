@@ -1,0 +1,84 @@
+{
+  "id": "math.sd34.ea6.persegi-panjang-dipotong-diagonal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 6,
+  "title": "Geometri bidang & ruang — Level 6 — Persegi panjang dipotong diagonal",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menentukan keliling segitiga siku-siku hasil potongan diagonal",
+    "emc-no": "24"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": [2, 4],
+      "v": [1, 3],
+      "k": [1, 4]
+    },
+    "derived": {
+      "a": "k * (u * u - v * v)",
+      "b": "k * 2 * u * v",
+      "c": "k * (u * u + v * v)",
+      "luas": "a * b",
+      "kel": "2 * (a + b)"
+    },
+    "words": {
+      "nama": [
+        "Ayu",
+        "Bima",
+        "Citra",
+        "Dimas",
+        "Eka",
+        "Fajar",
+        "Gita",
+        "Hasan",
+        "Intan",
+        "Joko",
+        "Kirana",
+        "Lukman",
+        "Made",
+        "Nyoman",
+        "Siti",
+        "Putu",
+        "Wulan",
+        "Yusuf",
+        "Tiara",
+        "Raka",
+        "Nadia",
+        "Ucok"
+      ]
+    },
+    "constraint": "v < u && a + b <= 46 && a != b",
+    "prompt": "Pak {nama} punya papan persegi panjang dengan luas {luas} cm² dan keliling {kel} cm. Papan itu digergaji lurus dari satu pojok ke pojok seberangnya. Keliling salah satu potongan segitiganya adalah … cm.",
+    "answer": "a + b + c",
+    "unit": "cm",
+    "distractors": [
+      {
+        "expr": "kel",
+        "tag": "keliling-persegi-panjang"
+      },
+      {
+        "expr": "a + b",
+        "tag": "lupa-diagonal"
+      },
+      {
+        "expr": "kel + c",
+        "tag": "ditambah-diagonal"
+      },
+      {
+        "expr": "2 * c",
+        "tag": "dua-diagonal"
+      }
+    ],
+    "choices": 4,
+    "explain": "Panjang + lebar = {kel} : 2 = {=a+b}, dan panjang × lebar = {luas}. Bilangan yang cocok: {a} dan {b}. Diagonal = √({a}² + {b}²) = {c}. Keliling segitiga = {a} + {b} + {c} = {answer}."
+  }
+}

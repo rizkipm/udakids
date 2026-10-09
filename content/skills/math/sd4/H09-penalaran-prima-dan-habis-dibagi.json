@@ -1,0 +1,1197 @@
+{
+  "id": "math.sd4.h9.penalaran-prima-dan-habis-dibagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 9,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 9 — Penalaran bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [0, 9]
+          },
+          "constraint": "(a + c) % 9 != 0",
+          "prompt": "Agar bilangan {a}□{c} habis dibagi 9, angka di □ adalah …",
+          "answer": "9 - (a + c) % 9",
+          "distractors": [
+            {
+              "expr": "8 - (a + c) % 9",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(a + c) % 9",
+              "tag": "sisa"
+            },
+            {
+              "expr": "(10 - (a + c) % 9) % 10",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlah angkanya harus habis dibagi 9. {a} + {c} = {=a+c}. Tambahkan {answer} agar menjadi {=a+c+9-(a+c)%9}, yang habis dibagi 9. Jadi angka di □ adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [0, 9]
+          },
+          "prompt": "Agar bilangan {a}□{c} habis dibagi 3, angka terkecil di □ adalah …",
+          "answer": "(3 - (a + c) % 3) % 3",
+          "distractors": [
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 3",
+              "tag": "bukan-terkecil"
+            },
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jumlah angkanya harus habis dibagi 3. {a} + {c} = {=a+c}. Angka terkecil yang membuat jumlahnya habis dibagi 3 adalah {answer}. Angka {=(3-(a+c)%3)%3+3} juga bisa, tetapi bukan yang terkecil."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 20 dan kurang dari 26. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "23"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "21"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan di antaranya: 21, 22, 23, 24, dan 25. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 23."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 22 dan kurang dari 28. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "27"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "23"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Bilangan di antaranya: 23, 24, 25, 26, dan 27. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 23."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 24 dan kurang dari 30. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "26"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "25"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "29"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "27"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 25, 26, 27, 28, dan 29. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 29."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 30 dan kurang dari 36. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "31"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "33"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 31, 32, 33, 34, dan 35. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 31."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 32 dan kurang dari 38. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "33"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan di antaranya: 33, 34, 35, 36, dan 37. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 37."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 34 dan kurang dari 40. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "38"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "35"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "37"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "39"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 35, 36, 37, 38, dan 39. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 37."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 44 dan kurang dari 50. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "46"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "47"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "45"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "49"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 45, 46, 47, 48, dan 49. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 47."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 46 dan kurang dari 52. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "49"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "47"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "48"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 47, 48, 49, 50, dan 51. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 47."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 48 dan kurang dari 54. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "49"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "52"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "53"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "50"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 49, 50, 51, 52, dan 53. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 53."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 50 dan kurang dari 56. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "53"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "51"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "54"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 51, 52, 53, 54, dan 55. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 53."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 52 dan kurang dari 58. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "56"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "54"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "53"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Bilangan di antaranya: 53, 54, 55, 56, dan 57. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 53."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 54 dan kurang dari 60. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "55"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "56"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "59"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "57"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 55, 56, 57, 58, dan 59. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 59."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 60 dan kurang dari 66. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "64"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "61"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "62"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 61, 62, 63, 64, dan 65. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 61."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 62 dan kurang dari 68. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "63"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "67"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "66"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 63, 64, 65, 66, dan 67. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 67."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 64 dan kurang dari 70. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "67"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "66"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "69"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan di antaranya: 65, 66, 67, 68, dan 69. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 67."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 72 dan kurang dari 78. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "77"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "76"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "73"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Bilangan di antaranya: 73, 74, 75, 76, dan 77. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 73."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 74 dan kurang dari 80. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "76"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "79"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "78"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "75"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 75, 76, 77, 78, dan 79. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 79."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 76 dan kurang dari 82. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "80"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "77"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "81"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "79"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Bilangan di antaranya: 77, 78, 79, 80, dan 81. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 79."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 80 dan kurang dari 86. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "82"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "84"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "83"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "81"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 81, 82, 83, 84, dan 85. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 83."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 82 dan kurang dari 88. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "87"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "85"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "83"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "84"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 83, 84, 85, 86, dan 87. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 83."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 84 dan kurang dari 90. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "85"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "87"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "86"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "89"
+                  }
+                }
+              ],
+              "answer": 3,
+              "reteach": "Bilangan di antaranya: 85, 86, 87, 88, dan 89. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 89."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 86 dan kurang dari 92. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "88"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "89"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "87"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 87, 88, 89, 90, dan 91. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 89."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 88 dan kurang dari 94. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "93"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "89"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "90"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "92"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Bilangan di antaranya: 89, 90, 91, 92, dan 93. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 89."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 92 dan kurang dari 98. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "97"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "94"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "93"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "95"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan di antaranya: 93, 94, 95, 96, dan 97. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 97."
+            },
+            {
+              "prompt": "Aku bilangan prima. Aku lebih dari 94 dan kurang dari 100. Siapa aku?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "98"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "96"
+                  },
+                  "tag": "komposit"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "97"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "95"
+                  },
+                  "tag": "komposit"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Bilangan di antaranya: 95, 96, 97, 98, dan 99. Coret yang genap dan yang habis dibagi 3, 5, atau 7. Yang tersisa 97."
+            },
+            {
+              "prompt": "Benar atau tidak? 2 adalah satu-satunya bilangan prima yang genap.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan genap lain habis dibagi 2, jadi punya faktor 2. Hanya 2 yang faktornya 1 dan 2 saja."
+            },
+            {
+              "prompt": "Benar atau tidak? Semua bilangan ganjil adalah bilangan prima.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "Contohnya 9 = 3 × 3 dan 15 = 3 × 5. Keduanya ganjil tetapi komposit."
+            },
+            {
+              "prompt": "Benar atau tidak? 1 adalah bilangan prima.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "1 hanya punya satu faktor. Bilangan prima harus punya tepat dua faktor."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan yang habis dibagi 10 pasti habis dibagi 5.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "10 = 2 × 5. Jadi kelipatan 10 juga kelipatan 5."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan yang habis dibagi 5 pasti habis dibagi 10.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "Contohnya 15 habis dibagi 5, tetapi tidak habis dibagi 10."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan yang habis dibagi 9 pasti habis dibagi 3.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "9 = 3 × 3. Kalau jumlah angka habis dibagi 9, pasti juga habis dibagi 3."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan yang habis dibagi 3 pasti habis dibagi 9.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "Contohnya 12 habis dibagi 3, tetapi tidak habis dibagi 9."
+            },
+            {
+              "prompt": "Benar atau tidak? Setiap bilangan komposit punya lebih dari dua faktor.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "Itulah arti komposit. Contohnya 6 punya faktor 1, 2, 3, dan 6."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan prima tidak bisa disusun menjadi persegi panjang selain 1 baris.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "Faktornya hanya 1 dan dirinya, jadi petaknya hanya bisa dijajarkan dalam 1 baris."
+            },
+            {
+              "prompt": "Benar atau tidak? Jumlah dua bilangan prima selalu genap.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "Contohnya 2 + 3 = 5, hasilnya ganjil."
+            },
+            {
+              "prompt": "Benar atau tidak? 51 adalah bilangan prima.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "5 + 1 = 6, habis dibagi 3. Jadi 51 = 3 × 17, bilangan komposit."
+            },
+            {
+              "prompt": "Benar atau tidak? 91 adalah bilangan prima.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 1,
+              "reteach": "91 = 7 × 13. Jadi 91 bilangan komposit."
+            },
+            {
+              "prompt": "Benar atau tidak? Bilangan genap yang lebih dari 2 adalah komposit.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan genap habis dibagi 2, jadi punya faktor 2 selain 1 dan dirinya."
+            },
+            {
+              "prompt": "Benar atau tidak? Angka satuan bilangan prima yang lebih dari 5 tidak pernah 5.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Benar"
+                  }
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "Tidak benar"
+                  }
+                }
+              ],
+              "answer": 0,
+              "reteach": "Bilangan bersatuan 5 habis dibagi 5. Jadi selain 5, bilangan itu komposit."
+            }
+          ]
+        },
+        "weight": 1.5
+      }
+    ]
+  }
+}

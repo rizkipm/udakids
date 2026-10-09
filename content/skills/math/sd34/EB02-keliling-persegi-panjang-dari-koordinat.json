@@ -1,0 +1,109 @@
+{
+  "id": "math.sd34.eb2.keliling-persegi-panjang-dari-koordinat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 2,
+  "title": "Geometri koordinat — Level 2 — Keliling persegi panjang dari koordinat",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "understanding",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Menghitung keliling/luas persegi panjang dari koordinat titik sudut",
+    "emc-no": "28"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [-5, 3],
+            "y0": [-5, 3],
+            "w": [2, 9],
+            "h": [2, 8]
+          },
+          "constraint": "w != h",
+          "prompt": "Titik ({x0}, {y0}), ({=x0+w}, {y0}), ({=x0+w}, {=y0+h}), dan ({x0}, {=y0+h}) dihubungkan menjadi persegi panjang. Keliling persegi panjang itu adalah … satuan.",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "axes": {
+                "xMin": "=min(x0,0)-1",
+                "xMax": "=max(x0+w,0)+1",
+                "yMin": "=min(y0,0)-1",
+                "yMax": "=max(y0+h,0)+1"
+              },
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    ["=x0", "=y0"],
+                    ["=x0+w", "=y0"],
+                    ["=x0+w", "=y0+h"],
+                    ["=x0", "=y0+h"]
+                  ],
+                  "fill": "soft"
+                }
+              ]
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "satuan",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-lebar"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang = {=x0+w} − ({x0}) = {w}, lebar = {=y0+h} − ({y0}) = {h}. Keliling = 2 × ({w} + {h}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [-5, 3],
+            "y0": [-5, 3],
+            "w": [2, 9],
+            "h": [2, 8]
+          },
+          "constraint": "w != h",
+          "prompt": "Titik ({x0}, {y0}), ({=x0+w}, {y0}), ({=x0+w}, {=y0+h}), dan ({x0}, {=y0+h}) dihubungkan menjadi persegi panjang. Luas persegi panjang itu adalah … satuan persegi.",
+          "answer": "w * h",
+          "unit": "satuan²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "(w + 1) * (h + 1)",
+              "tag": "menghitung-titik"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang = {w}, lebar = {h}. Luas = {w} × {h} = {answer}."
+        }
+      }
+    ]
+  }
+}

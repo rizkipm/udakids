@@ -1,0 +1,85 @@
+{
+  "id": "math.sd4.r7.soal-cerita-pecahan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "R",
+  "order": 7,
+  "title": "Pecahan campuran — Level 7 — Soal cerita pecahan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 5],
+            "d": [4, 10],
+            "n": [1, 9]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "words": {
+            "kue": ["kue bolu", "kue lapis", "pizza", "martabak"]
+          },
+          "prompt": "Ibu membeli {w} loyang {kue} utuh dan {n}/{d} loyang lagi. Setiap loyang dipotong menjadi {d} potong sama besar. Berapa potong {kue} semuanya?",
+          "answer": "w * d + n",
+          "distractors": [
+            {
+              "expr": "w + n",
+              "tag": "jumlah-saja"
+            },
+            {
+              "expr": "w * d",
+              "tag": "lupa-sisa"
+            },
+            {
+              "expr": "w * n + d",
+              "tag": "kali-tertukar"
+            }
+          ],
+          "explain": "Loyang utuh: {w} × {d} = {=w*d} potong. Ditambah {n} potong, jadi {=w*d} + {n} = {answer} potong. Artinya {w} {n}/{d} = {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [2, 6],
+            "d": [4, 8],
+            "r": [1, 7]
+          },
+          "derived": {
+            "p": "q * d + r"
+          },
+          "constraint": "r < d",
+          "words": {
+            "kue": ["pizza", "martabak", "kue bolu"]
+          },
+          "prompt": "Di meja ada {p} potong {kue}. Satu {kue} utuh terdiri atas {d} potong. Berapa {kue} utuh yang bisa disusun?",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "dibulatkan-ke-atas"
+            },
+            {
+              "expr": "r",
+              "tag": "sisa"
+            },
+            {
+              "expr": "p - d",
+              "tag": "dikurangi"
+            }
+          ],
+          "explain": "{p} : {d} = {q} sisa {r}. Jadi ada {answer} {kue} utuh dan sisa {r} potong, atau {q} {r}/{d} {kue}."
+        }
+      }
+    ]
+  }
+}

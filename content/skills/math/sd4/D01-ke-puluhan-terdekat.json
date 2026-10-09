@@ -1,0 +1,72 @@
+{
+  "id": "math.sd4.d1.ke-puluhan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 1,
+  "title": "Pembulatan dan penaksiran — Level 1 — Ke puluhan terdekat",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 9999]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Bulatkan {n} ke puluhan terdekat.",
+          "answer": "round(n / 10) * 10",
+          "distractors": [
+            {
+              "expr": "floor(n / 10) * 10 + 10 * (n % 10 < 5)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 100) * 100, 100)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            },
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "Lihat angka satuan, yaitu {=floor(n/1)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 10) * 10} dan {=floor(n / 10) * 10+10}, jadi dibulatkan menjadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 9999]
+          },
+          "derived": {
+            "lo": "floor(n / 10) * 10"
+          },
+          "constraint": "n % 10 != 0 && n % 10 != 5",
+          "prompt": "Pada garis bilangan, {n} lebih dekat ke {lo} atau {=lo+10}?",
+          "answer": "round(n / 10) * 10",
+          "distractors": [
+            {
+              "expr": "lo + 10 * (n % 10 < 5)",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 2,
+          "explain": "Titik tengah {lo} dan {=lo+10} adalah {=lo+5}. {n} ada di sisi {answer}, jadi lebih dekat ke {answer}."
+        }
+      }
+    ]
+  }
+}

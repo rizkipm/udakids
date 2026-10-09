@@ -1,0 +1,1473 @@
+{
+  "id": "math.sd4.n10.tantangan-operasi-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 10,
+  "title": "Operasi hitung campuran — Level 10 — Tantangan operasi campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 999],
+            "b": [50, 299],
+            "c": [20, 299]
+          },
+          "constraint": "a - b - c > 0",
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - (b + c)",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a - b + c + 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Tambah dan kurang setingkat, jadi kerjakan dari kiri. {a} − {b} = {=a-b}. Lalu {=a-b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "k": [2, 5],
+            "s": [2, 8]
+          },
+          "derived": {
+            "t": "m * k * s"
+          },
+          "prompt": "{t} : {m} × {k} = …",
+          "answer": "t / m * k",
+          "distractors": [
+            {
+              "expr": "s",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "t / m + k",
+              "tag": "tanda"
+            },
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Kali dan bagi setingkat, jadi kerjakan dari kiri. {t} : {m} = {=t/m}. Lalu {=t/m} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "m": [2, 9],
+            "q": [2, 12]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{a} + {t} : {m} = …",
+          "answer": "a + q",
+          "distractors": [
+            {
+              "expr": "(a + t) / m",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a + t",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "a + q + m",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi lebih dulu daripada tambah. {t} : {m} = {q}. Lalu {a} + {q} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [2, 15],
+            "b": [5, 60]
+          },
+          "derived": {
+            "a": "m * q + b"
+          },
+          "prompt": "({a} − {b}) : {m} = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "a - b / m",
+              "tag": "lupa-kurung"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a - b",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Kerjakan isi kurung dulu: {a} − {b} = {=a-b}. Lalu {=a-b} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [50, 99],
+            "m": [2, 9],
+            "q": [2, 9]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{a} − {t} : {m}. Operasi mana yang dikerjakan pertama?",
+          "answer": "4",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Tidak ada kurung. Bagi lebih dulu daripada kurang, jadi {t} : {m} dikerjakan pertama."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 200],
+            "b": [2, 12],
+            "c": [2, 12],
+            "d": [5, 50]
+          },
+          "constraint": "a > d",
+          "prompt": "{a} + {b} × {c} − {d} = …",
+          "answer": "a + b * c - d",
+          "distractors": [
+            {
+              "expr": "(a + b) * c - d",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a + b * c + d",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a + b * (c - d)",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kali dulu: {b} × {c} = {=b*c}. Lalu dari kiri: {a} + {=b*c} = {=a+b*c}, dan {=a+b*c} − {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 200],
+            "m": [2, 9],
+            "q": [2, 12],
+            "d": [5, 50]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "a > t && a - q > d",
+          "prompt": "{a} − {t} : {m} + {d} = …",
+          "answer": "a - q + d",
+          "distractors": [
+            {
+              "expr": "(a - t) / m + d",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a - q - d",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "a - t + d",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Bagi dulu: {t} : {m} = {q}. Lalu dari kiri: {a} − {q} = {=a-q}, dan {=a-q} + {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [3, 30],
+            "g": [2, 9],
+            "k": [4, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {e} kue. Ia membeli {g} kotak kue, setiap kotak berisi {k} kue. Berapa kue {nama} sekarang?",
+          "answer": "e + g * k",
+          "distractors": [
+            {
+              "expr": "(e + g) * k",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "e + g + k",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Kalimat matematikanya {e} + {g} × {k}. Kali dulu: {g} × {k} = {=g*k}. Lalu {e} + {=g*k} = {answer} kue."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [2, 12],
+            "c": [2, 9]
+          },
+          "derived": {
+            "r": "a + b * c"
+          },
+          "prompt": "{a} + … × {c} = {r}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "r - a",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Kerjakan mundur. {r} − {a} = {=r-a}, jadi … × {c} = {=r-a}. {=r-a} : {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30],
+            "b": [2, 30],
+            "c": [2, 9]
+          },
+          "derived": {
+            "r": "(a + b) * c"
+          },
+          "prompt": "(… + {b}) × {c} = {r}",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-kurang"
+            },
+            {
+              "expr": "r - b",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kerjakan mundur. {r} : {c} = {=a+b}, jadi … + {b} = {=a+b}. {=a+b} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Kalimat mana yang hasilnya 32?",
+              "say": "Kalimat mana yang hasilnya tiga puluh dua? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 + 2 × 12 − 4"
+                  },
+                  "say": "dua tambah dua kali dua belas kurang empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(2 + 2) × 12 − 4"
+                  },
+                  "say": "kurung buka dua tambah dua kurung tutup kali dua belas kurang empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 + 2 × (12 − 4)"
+                  },
+                  "say": "dua tambah dua kali kurung buka dua belas kurang empat kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(2 + 2) × (12 − 4)"
+                  },
+                  "say": "kurung buka dua tambah dua kurung tutup kali kurung buka dua belas kurang empat kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kedua kurung dulu: 2 + 2 = 4 dan 12 − 4 = 8. Lalu 4 × 8 = 32. Jadi kalimatnya (2 + 2) × (12 − 4)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 282?",
+              "say": "Kalimat mana yang hasilnya dua ratus delapan puluh dua? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × 7 + 8 × 5"
+                  },
+                  "say": "enam kali tujuh tambah delapan kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (7 + 8) × 5"
+                  },
+                  "say": "enam kali kurung buka tujuh tambah delapan kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(6 × 7 + 8) × 5"
+                  },
+                  "say": "kurung buka enam kali tujuh tambah delapan kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (7 + 8 × 5)"
+                  },
+                  "say": "enam kali kurung buka tujuh tambah delapan kali lima kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Di dalam kurung, kali dulu: 8 × 5 = 40, lalu 7 + 40 = 47. Terakhir 6 × 47 = 282. Jadi kalimatnya 6 × (7 + 8 × 5)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 54? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya lima puluh empat? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60 − 24 : 4"
+                  },
+                  "say": "enam puluh kurang dua puluh empat dibagi empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(60 − 24) : 4"
+                  },
+                  "say": "kurung buka enam puluh kurang dua puluh empat kurung tutup dibagi empat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Bagi dulu: 24 : 4 = 6. Lalu 60 − 6 = 54. Jadi kalimatnya 60 − 24 : 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 75?",
+              "say": "Kalimat mana yang hasilnya tujuh puluh lima? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 + 9 × 11 − 3"
+                  },
+                  "say": "tiga tambah sembilan kali sebelas kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(3 + 9) × 11 − 3"
+                  },
+                  "say": "kurung buka tiga tambah sembilan kurung tutup kali sebelas kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 + 9 × (11 − 3)"
+                  },
+                  "say": "tiga tambah sembilan kali kurung buka sebelas kurang tiga kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(3 + 9) × (11 − 3)"
+                  },
+                  "say": "kurung buka tiga tambah sembilan kurung tutup kali kurung buka sebelas kurang tiga kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 11 − 3 = 8. Lalu 9 × 8 = 72, dan 3 + 72 = 75. Jadi kalimatnya 3 + 9 × (11 − 3)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 24?",
+              "say": "Kalimat mana yang hasilnya dua puluh empat? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 × 3 + 9 × 2"
+                  },
+                  "say": "dua kali tiga tambah sembilan kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 × (3 + 9) × 2"
+                  },
+                  "say": "dua kali kurung buka tiga tambah sembilan kurung tutup kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(2 × 3 + 9) × 2"
+                  },
+                  "say": "kurung buka dua kali tiga tambah sembilan kurung tutup kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 × (3 + 9 × 2)"
+                  },
+                  "say": "dua kali kurung buka tiga tambah sembilan kali dua kurung tutup"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kali dulu: 2 × 3 = 6 dan 9 × 2 = 18. Lalu 6 + 18 = 24. Jadi kalimatnya 2 × 3 + 9 × 2."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 8? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "51 − 27 : 3"
+                  },
+                  "say": "lima puluh satu kurang dua puluh tujuh dibagi tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(51 − 27) : 3"
+                  },
+                  "say": "kurung buka lima puluh satu kurang dua puluh tujuh kurung tutup dibagi tiga"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 51 − 27 = 24. Lalu 24 : 3 = 8. Jadi kalimatnya (51 − 27) : 3."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 162?",
+              "say": "Kalimat mana yang hasilnya seratus enam puluh dua? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 + 3 × 11 − 2"
+                  },
+                  "say": "lima belas tambah tiga kali sebelas kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(15 + 3) × 11 − 2"
+                  },
+                  "say": "kurung buka lima belas tambah tiga kurung tutup kali sebelas kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 + 3 × (11 − 2)"
+                  },
+                  "say": "lima belas tambah tiga kali kurung buka sebelas kurang dua kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(15 + 3) × (11 − 2)"
+                  },
+                  "say": "kurung buka lima belas tambah tiga kurung tutup kali kurung buka sebelas kurang dua kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kedua kurung dulu: 15 + 3 = 18 dan 11 − 2 = 9. Lalu 18 × 9 = 162. Jadi kalimatnya (15 + 3) × (11 − 2)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 195?",
+              "say": "Kalimat mana yang hasilnya seratus sembilan puluh lima? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × 8 + 5 × 5"
+                  },
+                  "say": "tiga kali delapan tambah lima kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (8 + 5) × 5"
+                  },
+                  "say": "tiga kali kurung buka delapan tambah lima kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(3 × 8 + 5) × 5"
+                  },
+                  "say": "kurung buka tiga kali delapan tambah lima kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (8 + 5 × 5)"
+                  },
+                  "say": "tiga kali kurung buka delapan tambah lima kali lima kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 8 + 5 = 13. Lalu dari kiri: 3 × 13 = 39, dan 39 × 5 = 195. Jadi kalimatnya 3 × (8 + 5) × 5."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 30? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya tiga puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "32 − 8 : 4"
+                  },
+                  "say": "tiga puluh dua kurang delapan dibagi empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(32 − 8) : 4"
+                  },
+                  "say": "kurung buka tiga puluh dua kurang delapan kurung tutup dibagi empat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Bagi dulu: 8 : 4 = 2. Lalu 32 − 2 = 30. Jadi kalimatnya 32 − 8 : 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 68?",
+              "say": "Kalimat mana yang hasilnya enam puluh delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 + 7 × 10 − 1"
+                  },
+                  "say": "lima tambah tujuh kali sepuluh kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(5 + 7) × 10 − 1"
+                  },
+                  "say": "kurung buka lima tambah tujuh kurung tutup kali sepuluh kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 + 7 × (10 − 1)"
+                  },
+                  "say": "lima tambah tujuh kali kurung buka sepuluh kurang satu kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(5 + 7) × (10 − 1)"
+                  },
+                  "say": "kurung buka lima tambah tujuh kurung tutup kali kurung buka sepuluh kurang satu kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 10 − 1 = 9. Lalu 7 × 9 = 63, dan 5 + 63 = 68. Jadi kalimatnya 5 + 7 × (10 − 1)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 29?",
+              "say": "Kalimat mana yang hasilnya dua puluh sembilan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × 3 + 5 × 4"
+                  },
+                  "say": "tiga kali tiga tambah lima kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (3 + 5) × 4"
+                  },
+                  "say": "tiga kali kurung buka tiga tambah lima kurung tutup kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(3 × 3 + 5) × 4"
+                  },
+                  "say": "kurung buka tiga kali tiga tambah lima kurung tutup kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (3 + 5 × 4)"
+                  },
+                  "say": "tiga kali kurung buka tiga tambah lima kali empat kurung tutup"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kali dulu: 3 × 3 = 9 dan 5 × 4 = 20. Lalu 9 + 20 = 29. Jadi kalimatnya 3 × 3 + 5 × 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 21? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya dua puluh satu? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "24 − 6 : 2"
+                  },
+                  "say": "dua puluh empat kurang enam dibagi dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(24 − 6) : 2"
+                  },
+                  "say": "kurung buka dua puluh empat kurang enam kurung tutup dibagi dua"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Bagi dulu: 6 : 2 = 3. Lalu 24 − 3 = 21. Jadi kalimatnya 24 − 6 : 2."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 80?",
+              "say": "Kalimat mana yang hasilnya delapan puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 + 6 × 6 − 1"
+                  },
+                  "say": "sepuluh tambah enam kali enam kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(10 + 6) × 6 − 1"
+                  },
+                  "say": "kurung buka sepuluh tambah enam kurung tutup kali enam kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 + 6 × (6 − 1)"
+                  },
+                  "say": "sepuluh tambah enam kali kurung buka enam kurang satu kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(10 + 6) × (6 − 1)"
+                  },
+                  "say": "kurung buka sepuluh tambah enam kurung tutup kali kurung buka enam kurang satu kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kedua kurung dulu: 10 + 6 = 16 dan 6 − 1 = 5. Lalu 16 × 5 = 80. Jadi kalimatnya (10 + 6) × (6 − 1)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 208?",
+              "say": "Kalimat mana yang hasilnya dua ratus delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × 9 + 4 × 4"
+                  },
+                  "say": "empat kali sembilan tambah empat kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (9 + 4) × 4"
+                  },
+                  "say": "empat kali kurung buka sembilan tambah empat kurung tutup kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(4 × 9 + 4) × 4"
+                  },
+                  "say": "kurung buka empat kali sembilan tambah empat kurung tutup kali empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (9 + 4 × 4)"
+                  },
+                  "say": "empat kali kurung buka sembilan tambah empat kali empat kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 9 + 4 = 13. Lalu dari kiri: 4 × 13 = 52, dan 52 × 4 = 208. Jadi kalimatnya 4 × (9 + 4) × 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 33? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya tiga puluh tiga? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36 − 18 : 6"
+                  },
+                  "say": "tiga puluh enam kurang delapan belas dibagi enam"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(36 − 18) : 6"
+                  },
+                  "say": "kurung buka tiga puluh enam kurang delapan belas kurung tutup dibagi enam"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Bagi dulu: 18 : 6 = 3. Lalu 36 − 3 = 33. Jadi kalimatnya 36 − 18 : 6."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 55?",
+              "say": "Kalimat mana yang hasilnya lima puluh lima? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 + 5 × 12 − 3"
+                  },
+                  "say": "sepuluh tambah lima kali dua belas kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(10 + 5) × 12 − 3"
+                  },
+                  "say": "kurung buka sepuluh tambah lima kurung tutup kali dua belas kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "10 + 5 × (12 − 3)"
+                  },
+                  "say": "sepuluh tambah lima kali kurung buka dua belas kurang tiga kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(10 + 5) × (12 − 3)"
+                  },
+                  "say": "kurung buka sepuluh tambah lima kurung tutup kali kurung buka dua belas kurang tiga kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 12 − 3 = 9. Lalu 5 × 9 = 45, dan 10 + 45 = 55. Jadi kalimatnya 10 + 5 × (12 − 3)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 160?",
+              "say": "Kalimat mana yang hasilnya seratus enam puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × 8 + 8 × 3"
+                  },
+                  "say": "lima kali delapan tambah delapan kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × (8 + 8) × 3"
+                  },
+                  "say": "lima kali kurung buka delapan tambah delapan kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(5 × 8 + 8) × 3"
+                  },
+                  "say": "kurung buka lima kali delapan tambah delapan kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × (8 + 8 × 3)"
+                  },
+                  "say": "lima kali kurung buka delapan tambah delapan kali tiga kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Di dalam kurung, kali dulu: 8 × 3 = 24, lalu 8 + 24 = 32. Terakhir 5 × 32 = 160. Jadi kalimatnya 5 × (8 + 8 × 3)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 5? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya lima? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "36 − 21 : 3"
+                  },
+                  "say": "tiga puluh enam kurang dua puluh satu dibagi tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(36 − 21) : 3"
+                  },
+                  "say": "kurung buka tiga puluh enam kurang dua puluh satu kurung tutup dibagi tiga"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 36 − 21 = 15. Lalu 15 : 3 = 5. Jadi kalimatnya (36 − 21) : 3."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 55?",
+              "say": "Kalimat mana yang hasilnya lima puluh lima? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 + 7 × 8 − 2"
+                  },
+                  "say": "tiga belas tambah tujuh kali delapan kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(13 + 7) × 8 − 2"
+                  },
+                  "say": "kurung buka tiga belas tambah tujuh kurung tutup kali delapan kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "13 + 7 × (8 − 2)"
+                  },
+                  "say": "tiga belas tambah tujuh kali kurung buka delapan kurang dua kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(13 + 7) × (8 − 2)"
+                  },
+                  "say": "kurung buka tiga belas tambah tujuh kurung tutup kali kurung buka delapan kurang dua kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 8 − 2 = 6. Lalu 7 × 6 = 42, dan 13 + 42 = 55. Jadi kalimatnya 13 + 7 × (8 − 2)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 60?",
+              "say": "Kalimat mana yang hasilnya enam puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × 6 + 7 × 2"
+                  },
+                  "say": "tiga kali enam tambah tujuh kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (6 + 7) × 2"
+                  },
+                  "say": "tiga kali kurung buka enam tambah tujuh kurung tutup kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(3 × 6 + 7) × 2"
+                  },
+                  "say": "kurung buka tiga kali enam tambah tujuh kurung tutup kali dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "3 × (6 + 7 × 2)"
+                  },
+                  "say": "tiga kali kurung buka enam tambah tujuh kali dua kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Di dalam kurung, kali dulu: 7 × 2 = 14, lalu 6 + 14 = 20. Terakhir 3 × 20 = 60. Jadi kalimatnya 3 × (6 + 7 × 2)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 7? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya tujuh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "26 − 12 : 2"
+                  },
+                  "say": "dua puluh enam kurang dua belas dibagi dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(26 − 12) : 2"
+                  },
+                  "say": "kurung buka dua puluh enam kurang dua belas kurung tutup dibagi dua"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 26 − 12 = 14. Lalu 14 : 2 = 7. Jadi kalimatnya (26 − 12) : 2."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 78?",
+              "say": "Kalimat mana yang hasilnya tujuh puluh delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 + 6 × 12 − 1"
+                  },
+                  "say": "dua belas tambah enam kali dua belas kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(12 + 6) × 12 − 1"
+                  },
+                  "say": "kurung buka dua belas tambah enam kurung tutup kali dua belas kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 + 6 × (12 − 1)"
+                  },
+                  "say": "dua belas tambah enam kali kurung buka dua belas kurang satu kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(12 + 6) × (12 − 1)"
+                  },
+                  "say": "kurung buka dua belas tambah enam kurung tutup kali kurung buka dua belas kurang satu kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 12 − 1 = 11. Lalu 6 × 11 = 66, dan 12 + 66 = 78. Jadi kalimatnya 12 + 6 × (12 − 1)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 180?",
+              "say": "Kalimat mana yang hasilnya seratus delapan puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × 3 + 3 × 5"
+                  },
+                  "say": "enam kali tiga tambah tiga kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (3 + 3) × 5"
+                  },
+                  "say": "enam kali kurung buka tiga tambah tiga kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(6 × 3 + 3) × 5"
+                  },
+                  "say": "kurung buka enam kali tiga tambah tiga kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (3 + 3 × 5)"
+                  },
+                  "say": "enam kali kurung buka tiga tambah tiga kali lima kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 3 + 3 = 6. Lalu dari kiri: 6 × 6 = 36, dan 36 × 5 = 180. Jadi kalimatnya 6 × (3 + 3) × 5."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 46? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya empat puluh enam? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "52 − 24 : 4"
+                  },
+                  "say": "lima puluh dua kurang dua puluh empat dibagi empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(52 − 24) : 4"
+                  },
+                  "say": "kurung buka lima puluh dua kurang dua puluh empat kurung tutup dibagi empat"
+                }
+              ],
+              "answer": 0,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Bagi dulu: 24 : 4 = 6. Lalu 52 − 6 = 46. Jadi kalimatnya 52 − 24 : 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 63?",
+              "say": "Kalimat mana yang hasilnya enam puluh tiga? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 + 7 × 11 − 4"
+                  },
+                  "say": "dua tambah tujuh kali sebelas kurang empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(2 + 7) × 11 − 4"
+                  },
+                  "say": "kurung buka dua tambah tujuh kurung tutup kali sebelas kurang empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "2 + 7 × (11 − 4)"
+                  },
+                  "say": "dua tambah tujuh kali kurung buka sebelas kurang empat kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(2 + 7) × (11 − 4)"
+                  },
+                  "say": "kurung buka dua tambah tujuh kurung tutup kali kurung buka sebelas kurang empat kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kedua kurung dulu: 2 + 7 = 9 dan 11 − 4 = 7. Lalu 9 × 7 = 63. Jadi kalimatnya (2 + 7) × (11 − 4)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 120?",
+              "say": "Kalimat mana yang hasilnya seratus dua puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × 7 + 3 × 3"
+                  },
+                  "say": "empat kali tujuh tambah tiga kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (7 + 3) × 3"
+                  },
+                  "say": "empat kali kurung buka tujuh tambah tiga kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(4 × 7 + 3) × 3"
+                  },
+                  "say": "kurung buka empat kali tujuh tambah tiga kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (7 + 3 × 3)"
+                  },
+                  "say": "empat kali kurung buka tujuh tambah tiga kali tiga kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 7 + 3 = 10. Lalu dari kiri: 4 × 10 = 40, dan 40 × 3 = 120. Jadi kalimatnya 4 × (7 + 3) × 3."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 7? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya tujuh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "60 − 32 : 4"
+                  },
+                  "say": "enam puluh kurang tiga puluh dua dibagi empat"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(60 − 32) : 4"
+                  },
+                  "say": "kurung buka enam puluh kurang tiga puluh dua kurung tutup dibagi empat"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 60 − 32 = 28. Lalu 28 : 4 = 7. Jadi kalimatnya (60 − 32) : 4."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 199?",
+              "say": "Kalimat mana yang hasilnya seratus sembilan puluh sembilan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 + 8 × 10 − 1"
+                  },
+                  "say": "dua belas tambah delapan kali sepuluh kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(12 + 8) × 10 − 1"
+                  },
+                  "say": "kurung buka dua belas tambah delapan kurung tutup kali sepuluh kurang satu"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "12 + 8 × (10 − 1)"
+                  },
+                  "say": "dua belas tambah delapan kali kurung buka sepuluh kurang satu kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(12 + 8) × (10 − 1)"
+                  },
+                  "say": "kurung buka dua belas tambah delapan kurung tutup kali kurung buka sepuluh kurang satu kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 12 + 8 = 20. Lalu 20 × 10 = 200, dan 200 − 1 = 199. Jadi kalimatnya (12 + 8) × 10 − 1."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 110?",
+              "say": "Kalimat mana yang hasilnya seratus sepuluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × 4 + 6 × 5"
+                  },
+                  "say": "empat kali empat tambah enam kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (4 + 6) × 5"
+                  },
+                  "say": "empat kali kurung buka empat tambah enam kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(4 × 4 + 6) × 5"
+                  },
+                  "say": "kurung buka empat kali empat tambah enam kurung tutup kali lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "4 × (4 + 6 × 5)"
+                  },
+                  "say": "empat kali kurung buka empat tambah enam kali lima kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Di dalam kurung, kali dulu: 4 × 4 = 16, lalu 16 + 6 = 22. Terakhir 22 × 5 = 110. Jadi kalimatnya (4 × 4 + 6) × 5."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 8? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "22 − 6 : 2"
+                  },
+                  "say": "dua puluh dua kurang enam dibagi dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(22 − 6) : 2"
+                  },
+                  "say": "kurung buka dua puluh dua kurang enam kurung tutup dibagi dua"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 22 − 6 = 16. Lalu 16 : 2 = 8. Jadi kalimatnya (22 − 6) : 2."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 57?",
+              "say": "Kalimat mana yang hasilnya lima puluh tujuh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 + 4 × 6 − 3"
+                  },
+                  "say": "lima belas tambah empat kali enam kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(15 + 4) × 6 − 3"
+                  },
+                  "say": "kurung buka lima belas tambah empat kurung tutup kali enam kurang tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "15 + 4 × (6 − 3)"
+                  },
+                  "say": "lima belas tambah empat kali kurung buka enam kurang tiga kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(15 + 4) × (6 − 3)"
+                  },
+                  "say": "kurung buka lima belas tambah empat kurung tutup kali kurung buka enam kurang tiga kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kedua kurung dulu: 15 + 4 = 19 dan 6 − 3 = 3. Lalu 19 × 3 = 57. Jadi kalimatnya (15 + 4) × (6 − 3)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 80?",
+              "say": "Kalimat mana yang hasilnya delapan puluh? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × 7 + 3 × 3"
+                  },
+                  "say": "lima kali tujuh tambah tiga kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × (7 + 3) × 3"
+                  },
+                  "say": "lima kali kurung buka tujuh tambah tiga kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(5 × 7 + 3) × 3"
+                  },
+                  "say": "kurung buka lima kali tujuh tambah tiga kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "5 × (7 + 3 × 3)"
+                  },
+                  "say": "lima kali kurung buka tujuh tambah tiga kali tiga kurung tutup"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Di dalam kurung, kali dulu: 3 × 3 = 9, lalu 7 + 9 = 16. Terakhir 5 × 16 = 80. Jadi kalimatnya 5 × (7 + 3 × 3)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 8? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "39 − 15 : 3"
+                  },
+                  "say": "tiga puluh sembilan kurang lima belas dibagi tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(39 − 15) : 3"
+                  },
+                  "say": "kurung buka tiga puluh sembilan kurang lima belas kurung tutup dibagi tiga"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 39 − 15 = 24. Lalu 24 : 3 = 8. Jadi kalimatnya (39 − 15) : 3."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 84?",
+              "say": "Kalimat mana yang hasilnya delapan puluh empat? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 + 7 × 12 − 2"
+                  },
+                  "say": "empat belas tambah tujuh kali dua belas kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(14 + 7) × 12 − 2"
+                  },
+                  "say": "kurung buka empat belas tambah tujuh kurung tutup kali dua belas kurang dua"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "14 + 7 × (12 − 2)"
+                  },
+                  "say": "empat belas tambah tujuh kali kurung buka dua belas kurang dua kurung tutup"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(14 + 7) × (12 − 2)"
+                  },
+                  "say": "kurung buka empat belas tambah tujuh kurung tutup kali kurung buka dua belas kurang dua kurung tutup"
+                }
+              ],
+              "answer": 2,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 12 − 2 = 10. Lalu 7 × 10 = 70, dan 14 + 70 = 84. Jadi kalimatnya 14 + 7 × (12 − 2)."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 198?",
+              "say": "Kalimat mana yang hasilnya seratus sembilan puluh delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × 7 + 4 × 3"
+                  },
+                  "say": "enam kali tujuh tambah empat kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (7 + 4) × 3"
+                  },
+                  "say": "enam kali kurung buka tujuh tambah empat kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(6 × 7 + 4) × 3"
+                  },
+                  "say": "kurung buka enam kali tujuh tambah empat kurung tutup kali tiga"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "6 × (7 + 4 × 3)"
+                  },
+                  "say": "enam kali kurung buka tujuh tambah empat kali tiga kurung tutup"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 7 + 4 = 11. Lalu dari kiri: 6 × 11 = 66, dan 66 × 3 = 198. Jadi kalimatnya 6 × (7 + 4) × 3."
+            },
+            {
+              "prompt": "Kalimat mana yang hasilnya 8? Perhatikan tanda kurungnya.",
+              "say": "Kalimat mana yang hasilnya delapan? Perhatikan tanda kurungnya.",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "65 − 25 : 5"
+                  },
+                  "say": "enam puluh lima kurang dua puluh lima dibagi lima"
+                },
+                {
+                  "visual": {
+                    "kind": "text",
+                    "text": "(65 − 25) : 5"
+                  },
+                  "say": "kurung buka enam puluh lima kurang dua puluh lima kurung tutup dibagi lima"
+                }
+              ],
+              "answer": 1,
+              "reteach": "Hitung setiap pilihan: kurung dulu, lalu kali dan bagi, lalu tambah dan kurang. Kurung dulu: 65 − 25 = 40. Lalu 40 : 5 = 8. Jadi kalimatnya (65 − 25) : 5."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

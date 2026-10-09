@@ -1,0 +1,344 @@
+{
+  "id": "math.sd4.e2.menyimpan-satu-kali",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 2,
+  "title": "Penjumlahan bilangan besar — Level 2 — Menyimpan satu kali",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [2, 9],
+            "x1": [0, 9],
+            "a1": [0, 8],
+            "x2": [0, 9],
+            "a2": [0, 9],
+            "x3": [0, 9],
+            "a3": [1, 8]
+          },
+          "derived": {
+            "b0": "(10 - a0) + floor(x0 * (a0 + 0) / 10)",
+            "b1": "floor(x1 * (9 - a1) / 10)",
+            "b2": "floor(x2 * (10 - a2) / 10)",
+            "b3": "1 + floor(x3 * (9 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "Jumlahkan bilangan pada tabel. Hasilnya …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=a3", "=a2", "=a1", "=a0"],
+                ["+", "=b3", "=b2", "=b1", "=b0"]
+              ]
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}, tulis {=(a0+b0)%10}, simpan 1. Puluhan: {a1} + {b1} + 1 = {=a1+b1+1}. Ratusan: {a2} + {b2} = {=a2+b2}. Ribuan: {a3} + {b3} = {=a3+b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [2, 9],
+            "x2": [0, 9],
+            "a2": [0, 8],
+            "x3": [0, 9],
+            "a3": [1, 8]
+          },
+          "derived": {
+            "b0": "floor(x0 * (10 - a0) / 10)",
+            "b1": "(10 - a1) + floor(x1 * (a1 + 0) / 10)",
+            "b2": "floor(x2 * (9 - a2) / 10)",
+            "b3": "1 + floor(x3 * (9 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}. Puluhan: {a1} + {b1} = {=a1+b1}, tulis {=(a1+b1)%10}, simpan 1. Ratusan: {a2} + {b2} + 1 = {=a2+b2+1}. Ribuan: {a3} + {b3} = {=a3+b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [2, 9],
+            "x3": [0, 9],
+            "a3": [1, 7]
+          },
+          "derived": {
+            "b0": "floor(x0 * (10 - a0) / 10)",
+            "b1": "floor(x1 * (10 - a1) / 10)",
+            "b2": "(10 - a2) + floor(x2 * (a2 + 0) / 10)",
+            "b3": "1 + floor(x3 * (8 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "Jumlahkan bilangan pada tabel. Hasilnya …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=a3", "=a2", "=a1", "=a0"],
+                ["+", "=b3", "=b2", "=b1", "=b0"]
+              ]
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}. Puluhan: {a1} + {b1} = {=a1+b1}. Ratusan: {a2} + {b2} = {=a2+b2}, tulis {=(a2+b2)%10}, simpan 1. Ribuan: {a3} + {b3} + 1 = {=a3+b3+1}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [2, 9],
+            "x1": [0, 9],
+            "a1": [0, 8],
+            "x2": [0, 9],
+            "a2": [0, 9],
+            "x3": [0, 9],
+            "a3": [1, 8]
+          },
+          "derived": {
+            "b0": "(10 - a0) + floor(x0 * (a0 + 0) / 10)",
+            "b1": "floor(x1 * (9 - a1) / 10)",
+            "b2": "floor(x2 * (10 - a2) / 10)",
+            "b3": "1 + floor(x3 * (9 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}, tulis {=(a0+b0)%10}, simpan 1. Puluhan: {a1} + {b1} + 1 = {=a1+b1+1}. Ratusan: {a2} + {b2} = {=a2+b2}. Ribuan: {a3} + {b3} = {=a3+b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [2, 9],
+            "x2": [0, 9],
+            "a2": [0, 8],
+            "x3": [0, 9],
+            "a3": [1, 8]
+          },
+          "derived": {
+            "b0": "floor(x0 * (10 - a0) / 10)",
+            "b1": "(10 - a1) + floor(x1 * (a1 + 0) / 10)",
+            "b2": "floor(x2 * (9 - a2) / 10)",
+            "b3": "1 + floor(x3 * (9 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "Jumlahkan bilangan pada tabel. Hasilnya …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=a3", "=a2", "=a1", "=a0"],
+                ["+", "=b3", "=b2", "=b1", "=b0"]
+              ]
+            }
+          ],
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}. Puluhan: {a1} + {b1} = {=a1+b1}, tulis {=(a1+b1)%10}, simpan 1. Ratusan: {a2} + {b2} + 1 = {=a2+b2+1}. Ribuan: {a3} + {b3} = {=a3+b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [2, 9],
+            "x3": [0, 9],
+            "a3": [1, 7]
+          },
+          "derived": {
+            "b0": "floor(x0 * (10 - a0) / 10)",
+            "b1": "floor(x1 * (10 - a1) / 10)",
+            "b2": "(10 - a2) + floor(x2 * (a2 + 0) / 10)",
+            "b3": "1 + floor(x3 * (8 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "{a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "ls",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan-sekali"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "simpan-berlebih"
+            },
+            {
+              "expr": "a + b - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Susun ke bawah, jumlahkan mulai dari satuan. Satuan: {a0} + {b0} = {=a0+b0}. Puluhan: {a1} + {b1} = {=a1+b1}. Ratusan: {a2} + {b2} = {=a2+b2}, tulis {=(a2+b2)%10}, simpan 1. Ribuan: {a3} + {b3} + 1 = {=a3+b3+1}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

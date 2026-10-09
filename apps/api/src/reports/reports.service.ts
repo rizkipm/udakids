@@ -2,6 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { jagoStateSchema, parentStatus, STAGE_NAMES, type JagoState } from '@little-coder/engine';
 import { and, count, desc, eq, gte, sql } from 'drizzle-orm';
 import { DB, type Db } from '../db/db.module.js';
+import { inRange, type Period } from './period.js';
 import {
   children,
   events,
@@ -175,7 +176,9 @@ export class ReportsService {
   }
 
   /** Analisis per skill: jumlah jawaban, ketepatan, anak, Jago, pengecoh terpopuler (miskonsepsi). */
-  async skillStats() {
+  async skillStats(period?: Period) {
+    // Jawaban & pengecoh mengikuti periode bila ada; jumlah Jago = posisi saat ini.
+    const within = period ? inRange(sql.raw('"events"."ts"'), period.from, period.to) : sql`true`;
     const answers = await this.db
       .select({
         skillId: sql<string>`${events.payload}->>'skillId'`,
@@ -184,7 +187,7 @@ export class ReportsService {
         learners: sql<number>`count(distinct ${events.childId})`,
       })
       .from(events)
-      .where(eq(events.type, 'item_answer'))
+      .where(and(eq(events.type, 'item_answer'), within))
       .groupBy(sql`${events.payload}->>'skillId'`);
     const distractors = await this.db
       .select({
@@ -193,7 +196,9 @@ export class ReportsService {
         n: count(),
       })
       .from(events)
-      .where(and(eq(events.type, 'item_answer'), sql`${events.payload} ? 'chosenDistractor'`))
+      .where(
+        and(eq(events.type, 'item_answer'), sql`${events.payload} ? 'chosenDistractor'`, within),
+      )
       .groupBy(sql`${events.payload}->>'skillId'`, sql`${events.payload}->>'chosenDistractor'`)
       .orderBy(desc(count()));
     const jago = await this.db

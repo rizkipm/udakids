@@ -1,0 +1,250 @@
+{
+  "id": "math.sd34.ec10.tantangan-bilangan-dan-aljabar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 10,
+  "title": "Bilangan & aljabar — Level 10 — Tantangan bilangan dan aljabar",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Gabungan semua indikator bilangan & aljabar"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 150],
+            "d": {
+              "values": [6, 10, 14, 18, 22, 26]
+            }
+          },
+          "derived": {
+            "b": "a - d",
+            "s": "a + b"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "b > 1 && !(s == 42 && d == 2)",
+          "prompt": "{nama} memikirkan dua bilangan. Bila dijumlahkan hasilnya {s}, bila yang besar dikurangi yang kecil hasilnya {d}. Berapa hasil kali kedua bilangan itu?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "s * d",
+              "tag": "jumlah-kali-selisih"
+            },
+            {
+              "expr": "a * a",
+              "tag": "kuadrat"
+            },
+            {
+              "expr": "(s / 2) * (s / 2)",
+              "tag": "pakai-rata-rata"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bilangan besar = ({s} + {d}) : 2 = {a}, bilangan kecil = ({s} − {d}) : 2 = {b}. Hasil kali = {a} × {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 9],
+            "lo": {
+              "values": [100, 200, 500, 1000]
+            },
+            "span": {
+              "values": [200, 300, 500, 1000]
+            }
+          },
+          "derived": {
+            "k": "lcm(a, b)",
+            "hi": "lo + span",
+            "first": "(floor(lo / k) + 1) * k",
+            "last": "floor(hi / k) * k"
+          },
+          "constraint": "a < b && b % a != 0 && lo % k != 0 && hi % k != 0 && k <= 40",
+          "prompt": "Berapa banyak bilangan yang lebih dari {lo} dan kurang dari {hi} yang habis dibagi {a} sekaligus habis dibagi {b}?",
+          "answer": "floor(hi / k) - floor(lo / k)",
+          "distractors": [
+            {
+              "expr": "floor(hi / (a * b)) - floor(lo / (a * b))",
+              "tag": "kali-bukan-kpk"
+            },
+            {
+              "expr": "floor(hi / k) - floor(lo / k) + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "floor(span / a)",
+              "tag": "hanya-a"
+            }
+          ],
+          "choices": 4,
+          "explain": "Habis dibagi {a} dan {b} berarti kelipatan KPK-nya, yaitu {k}. Kelipatan {k} pertama setelah {lo} = {first}, terakhir sebelum {hi} = {last}. Banyaknya = ({last} − {first}) : {k} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [1, 4],
+            "x": [2, 15],
+            "y": [2, 15]
+          },
+          "derived": {
+            "p": "(a * x + b * y) * 1000",
+            "q": "(b * x + a * y) * 1000"
+          },
+          "words": {
+            "alat1": ["pensil", "penghapus", "buku tulis", "spidol"],
+            "alat2": ["penggaris", "pulpen", "krayon", "map plastik"]
+          },
+          "constraint": "a != b && x != y",
+          "prompt": "Koperasi sekolah menjual paket A berisi {a} {alat1} dan {b} {alat2} seharga Rp{p}, serta paket B berisi {b} {alat1} dan {a} {alat2} seharga Rp{q}. Berapa rupiah harga 1 {alat1} ditambah 1 {alat2}?",
+          "answer": "(x + y) * 1000",
+          "distractors": [
+            {
+              "expr": "p + q",
+              "tag": "jumlah-total"
+            },
+            {
+              "expr": "(p + q) / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "(p + q) / (a + b) / 2",
+              "tag": "dibagi-lagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlahkan kedua belanjaan: {=a+b} {alat1} dan {=a+b} {alat2} = Rp{=p+q}. Jadi 1 {alat1} + 1 {alat2} = {=p+q} : {=a+b} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 40],
+            "h": [1, 15]
+          },
+          "derived": {
+            "s": "3 * m",
+            "d": "2 * h"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "m - h >= 1",
+          "prompt": "{nama} memikirkan tiga bilangan bulat yang jumlahnya {s}. Salah satunya tepat sama dengan rata-rata ketiga bilangan itu. Bilangan terbesar {d} lebih banyak daripada bilangan terkecil. Bilangan terkecil adalah …",
+          "answer": "m - h",
+          "explain": "Rata-rata = {s} : 3 = {m}, bilangan ini ada di tengah. Terbesar + terkecil = {s} − {m} = {=2*m} dan selisihnya {d}. Terkecil = ({=2*m} − {d}) : 2 = {answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "m",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "m - d",
+              "tag": "dikurang-selisih"
+            },
+            {
+              "expr": "s - d",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [1, 4]
+          },
+          "derived": {
+            "n": "pow(2, a) * pow(3, b)"
+          },
+          "constraint": "n <= 2000",
+          "prompt": "{n} buku akan disusun di rak, setiap baris berisi buku yang sama banyak tanpa sisa (boleh 1 buku per baris, boleh juga semua dalam satu baris). Ada berapa pilihan banyak buku per baris?",
+          "answer": "(a + 1) * (b + 1)",
+          "explain": "{n} = 2 pangkat {a} × 3 pangkat {b}. Setiap faktor memakai 2 pangkat 0 sampai {a} ({=a+1} pilihan) dan 3 pangkat 0 sampai {b} ({=b+1} pilihan): {=a+1} × {=b+1} = {answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "kali-pangkat"
+            },
+            {
+              "expr": "a + b + 1",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a + b + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

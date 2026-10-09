@@ -1,0 +1,127 @@
+{
+  "id": "math.sd4.k8.sifat-dan-cara-cepat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 8,
+  "title": "Perkalian dua angka — Level 8 — Sifat dan cara cepat",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 49],
+            "b": [11, 30]
+          },
+          "derived": {
+            "r": "a * b"
+          },
+          "prompt": "{a} × {b} = {r}. Berapa {a} × {=b+1}?",
+          "answer": "r + a",
+          "distractors": [
+            {
+              "expr": "r + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "r + b",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "r + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{a} × {=b+1} adalah satu kelompok {a} lebih banyak. {r} + {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 89]
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "Cara cepat: {a} × 11 = {a} × 10 + {a}. Berapa {a} × 11?",
+          "answer": "a * 11",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "lupa-tambah"
+            },
+            {
+              "expr": "a * 10 + 11",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "a + 11",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "{a} × 10 = {=a*10}. Tambah satu kelompok {a}: {=a*10} + {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 24]
+          },
+          "prompt": "25 × 4 = 100. Berapa 25 × {=4*m}?",
+          "answer": "100 * m",
+          "distractors": [
+            {
+              "expr": "25 * m",
+              "tag": "lupa-empat"
+            },
+            {
+              "expr": "100 * m + 25",
+              "tag": "lain"
+            },
+            {
+              "expr": "100 * (m + 1)",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{=4*m} = 4 × {m}. Jadi 25 × {=4*m} = 25 × 4 × {m} = 100 × {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 99],
+            "b": [12, 99]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} × {b} = {b} × …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "sama"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Urutan perkalian boleh ditukar, hasilnya tetap sama. {a} × {b} = {b} × {a}."
+        }
+      }
+    ]
+  }
+}

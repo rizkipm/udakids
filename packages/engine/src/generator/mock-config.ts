@@ -17,6 +17,22 @@ export const EMC_POINTS = {
   hard: { right: 40, wrong: -10 },
 } as const;
 
+/**
+ * Satu nomor soal di kisi-kisi lomba (D-101, EMC): soal nomor N selalu dari materi, level, tingkat, dan bentuk
+ * yang sama, jadi Mock 1/2/3 berbeda soal tetapi kisi-kisinya identik.
+ */
+export const mockSlotSchema = z.strictObject({
+  category: z.string().regex(/^[A-Z]{1,2}$/),
+  /** Level sumber di materi itu (mis. [3, 3] atau [8, 10]). */
+  levels: levelRange,
+  difficulty: z.enum(MOCK_DIFFICULTIES),
+  /** Bentuk soal lembar lomba: pilihan ganda atau isian singkat. */
+  form: z.enum(['choice', 'input']),
+  /** Subtopik/indikator kisi-kisi (untuk pembahasan & laporan, tidak tampil sebagai soal). */
+  topic: z.string().trim().min(2).max(80),
+});
+export type MockSlot = z.infer<typeof mockSlotSchema>;
+
 export const mockConfigSchema = z
   .strictObject({
     /** Banyak soal (lomba TK: 25). */
@@ -47,11 +63,25 @@ export const mockConfigSchema = z
      * bila poin ≥ KKM (bukan skor ≥ 70) dan hasil menampilkan lolos/belum lolos KKM.
      */
     passPoints: z.number().int().min(1).max(5000).optional(),
+    /**
+     * Kisi-kisi per nomor (D-101). Bila diisi, soal disusun mengikuti urutan nomor ini (bukan mudah → sulit) dan
+     * jumlah per tingkat harus sama dengan `plan`.
+     */
+    slots: z.array(mockSlotSchema).min(5).max(50).optional(),
   })
   .refine((c) => c.plan.easy + c.plan.medium + c.plan.hard === c.questions, {
     message: 'jumlah soal per tingkat harus sama dengan questions',
     path: ['plan'],
   })
+  .refine(
+    (c) =>
+      !c.slots ||
+      (c.slots.length === c.questions &&
+        MOCK_DIFFICULTIES.every(
+          (d) => c.slots!.filter((s) => s.difficulty === d).length === c.plan[d],
+        )),
+    { message: 'kisi-kisi (slots) harus sama dengan questions dan plan', path: ['slots'] },
+  )
   .refine(
     (c) =>
       c.passPoints === undefined ||

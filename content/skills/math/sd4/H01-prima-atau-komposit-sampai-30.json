@@ -1,0 +1,57 @@
+{
+  "id": "math.sd4.h1.prima-atau-komposit-sampai-30",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 1,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 1 — Prima atau komposit",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+            }
+          },
+          "prompt": "Apakah {n} bilangan prima atau komposit?",
+          "answer": "1",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit"
+          },
+          "explain": "Cari faktor {n}. Faktornya hanya 1 dan {n}, tepat dua faktor. Bilangan seperti ini disebut prima."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [2, 15]
+          },
+          "derived": {
+            "n": "a * b"
+          },
+          "constraint": "a <= b && a * b <= 30",
+          "prompt": "Apakah {n} bilangan prima atau komposit?",
+          "answer": "0",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit"
+          },
+          "explain": "{n} = {a} × {b}. Jadi {n} punya faktor lain selain 1 dan {n}, yaitu {a}. Bilangan dengan lebih dari dua faktor disebut komposit."
+        }
+      }
+    ]
+  }
+}

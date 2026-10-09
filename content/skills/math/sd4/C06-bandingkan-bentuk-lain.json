@@ -1,0 +1,72 @@
+{
+  "id": "math.sd4.c6.bandingkan-bentuk-lain",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 6,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 6 — Bandingkan bentuk lain",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9],
+            "q": [0, 6]
+          },
+          "derived": {
+            "e": "a * 10000 + c * 100",
+            "n": "e + (q == 1) * 100 - (q == 2) * 100 + (q == 3) * 1000 - (q == 4) * 1000 + (q == 5) * 10"
+          },
+          "prompt": "Pilih tanda yang tepat: {a} puluh ribuan + {c} ratusan … {n}",
+          "answer": "(e > n) * 1 + (e < n) * 2 + (e == n) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Ubah dulu ke lambang bilangan: {a} puluh ribuan + {c} ratusan = {e}. Lalu bandingkan {e} dengan {n} dari kiri. Tandanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [10000, 98000],
+            "q": [0, 6]
+          },
+          "derived": {
+            "n": "m + (q == 1) * 100 - (q == 2) * 100 + (q == 3) * 1000 - (q == 4) * 1000 + (q == 5) * 10"
+          },
+          "prompt": "Pilih tanda yang tepat: {w:m} … {n}",
+          "answer": "(m > n) * 1 + (m < n) * 2 + (m == n) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Tulis dulu lambang bilangan dari kata-katanya: {m}. Lalu bandingkan {m} dengan {n} dari kiri. Tandanya {answer}."
+        }
+      }
+    ]
+  }
+}

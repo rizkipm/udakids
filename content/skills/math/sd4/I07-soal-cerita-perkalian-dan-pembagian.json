@@ -1,0 +1,180 @@
+{
+  "id": "math.sd4.i7.soal-cerita-perkalian-dan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 7,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 7 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [6, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "benda": ["buku tulis", "pensil", "penghapus", "spidol", "krayon", "stiker"]
+          },
+          "prompt": "Satu pak berisi {b} {benda}. {nama} membeli {a} pak. Berapa {benda} semuanya?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * (b - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a * b + a",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Ada {a} pak, masing-masing {b}. Kalikan: {a} × {b} = {answer} {benda}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{p} permen dibagi rata kepada {a} anak. Berapa permen yang diterima setiap anak?",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "p - a",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Dibagi rata berarti pembagian: {p} : {a}. Karena {a} × {b} = {p}, setiap anak mendapat {answer} permen."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 9]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "Ada {p} siswa. Setiap kelompok berisi {b} siswa. Berapa kelompok yang terbentuk?",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "p - b",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Cari berapa kali {b} masuk ke {p}: {p} : {b} = {answer} kelompok. Cek: {answer} × {b} = {p}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6],
+            "a": [2, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Harga 1 kue Rp{=h*500}. {nama} membeli {a} kue. Berapa rupiah yang harus dibayar?",
+          "answer": "h * 500 * a",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * 500 * (a - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "h * 500 + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "h * 500 * a + 500",
+              "tag": "lebih"
+            }
+          ],
+          "explain": "Harga {a} kue = {a} × {=h*500}. Ingat, {=h*500} = {=h*5} ratusan. {a} × {=h*5} ratusan = {=a*h*5} ratusan = {answer}."
+        }
+      }
+    ]
+  }
+}

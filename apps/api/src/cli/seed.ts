@@ -44,6 +44,16 @@ const isMockSection = (x: { group?: string; mock?: boolean }) =>
  * lama dipertahankan; mock test tetap di akhir dan ikut pindah ke bagian lombanya (D-076). Judul "(OSN)" → "(Olimpiade)" dan "Pra-TK" →
  * "PAUD" ikut diganti bila hanya itu bedanya dengan content/.
  */
+/**
+ * Penggantian judul bagian resmi (bukan suntingan admin): katalog yang pernah disunting admin tetap mendapat judul
+ * bagian baru, supaya materi dan mock test satu lomba tidak terpecah ke dua bagian.
+ */
+export const GROUP_RENAMES: Readonly<Record<string, string>> = {
+  // D-101: keterangan versi soal.
+  'EMC · Eduversal Mathematics Competition — Penyisihan Kelas 3–4':
+    'EMC · Eduversal Mathematics Competition — Penyisihan Kelas 3–4 (soal versi 2022)',
+};
+
 export async function mergeNewCategories(
   db: ReturnType<typeof drizzle<typeof schema>>,
   c: Catalog,
@@ -65,9 +75,15 @@ export async function mergeNewCategories(
   // Pelajaran "Belajar dulu" (D-079): materi lama mendapat pelajaran dari content/ bila belum punya atau versinya
   // lebih lama. Isi materi lain yang disunting admin tidak disentuh.
   let lessons = 0;
+  let renamedGroups = 0;
   const current = stored.map((x) => {
     const src = c.categories.find((y) => y.code === x.code);
     let out = x;
+    const group = x.group && GROUP_RENAMES[x.group];
+    if (group) {
+      out = { ...out, group };
+      renamedGroups++;
+    }
     if (src?.lesson && (!x.lesson || x.lesson.version < src.lesson.version)) {
       out = { ...out, lesson: src.lesson };
       lessons++;
@@ -81,7 +97,8 @@ export async function mergeNewCategories(
   // Penggantian nama resmi (bukan suntingan admin): "(OSN)" → "(Olimpiade)" (D-070), "Pra-TK" → "PAUD" (D-075).
   const renamed = row.title.replace('(OSN)', '(Olimpiade)').replace('Pra-TK', 'PAUD');
   const title = renamed === c.title ? c.title : row.title;
-  if (added.length === 0 && !moved && lessons === 0 && title === row.title) return;
+  if (added.length === 0 && !moved && lessons === 0 && renamedGroups === 0 && title === row.title)
+    return;
   // Materi baru disisipkan di posisinya menurut content/ (setelah materi sebelumnya yang sudah ada), bukan di
   // akhir: bagian (group) & rantai kunci tetap seperti content/ (D-079).
   const all = [...current];

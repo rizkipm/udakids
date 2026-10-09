@@ -1,0 +1,97 @@
+{
+  "id": "math.sd4.h3.prima-dan-komposit-sampai-100",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 3,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 3 — Prima sampai 100",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+            }
+          },
+          "prompt": "{n} termasuk bilangan apa?",
+          "answer": "1",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "Coba bagi {n} dengan 2, 3, 5, dan 7. Tidak ada yang habis membagi, jadi faktor {n} hanya 1 dan {n}. {n} bilangan prima."
+        },
+        "weight": 1.2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [3, 7, 9, 11]
+            },
+            "b": [3, 31]
+          },
+          "derived": {
+            "n": "a * b"
+          },
+          "constraint": "a <= b && a * b > 30 && a * b < 100",
+          "prompt": "{n} termasuk bilangan apa?",
+          "answer": "0",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "{n} = {a} × {b}. Selain 1 dan {n}, ada faktor {a}. Jadi {n} bilangan komposit."
+        },
+        "weight": 1.2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [16, 49]
+          },
+          "derived": {
+            "n": "2 * m"
+          },
+          "prompt": "{n} termasuk bilangan apa?",
+          "answer": "0",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "{n} genap, jadi habis dibagi 2: {n} = 2 × {=n/2}. Jadi {n} bilangan komposit. Satu-satunya prima genap adalah 2."
+        },
+        "weight": 0.6
+      },
+      {
+        "family": "expr",
+        "params": {
+          "prompt": "Bilangan 1 termasuk bilangan apa?",
+          "answer": "2",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "Bilangan 1 hanya punya satu faktor, yaitu 1. Prima harus punya tepat dua faktor, komposit lebih dari dua. Jadi 1 bukan keduanya."
+        },
+        "weight": 0.2
+      }
+    ]
+  }
+}

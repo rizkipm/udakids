@@ -1,0 +1,105 @@
+{
+  "id": "math.sd4.e5.hitung-cepat-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 5,
+  "title": "Penjumlahan bilangan besar — Level 5 — Hitung cepat penjumlahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [11, 59],
+            "q": [11, 39]
+          },
+          "constraint": "p % 10 != 0 && q % 10 != 0",
+          "prompt": "{=p*1000} + {=q*1000} = …",
+          "answer": "(p + q) * 1000",
+          "distractors": [
+            {
+              "expr": "(p + q) * 100",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "(p + q) * 10000",
+              "tag": "tambah-nol"
+            },
+            {
+              "expr": "(p + q) * 1000 - 10000",
+              "tag": "lupa-simpan"
+            }
+          ],
+          "explain": "Hitung ribuannya saja: {p} ribu + {q} ribu = {=p+q} ribu. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [11, 89],
+            "q": [11, 89]
+          },
+          "constraint": "p % 10 + q % 10 >= 10",
+          "prompt": "{=p*100} + {=q*100} = …",
+          "answer": "(p + q) * 100",
+          "distractors": [
+            {
+              "expr": "(p + q) * 100 - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "(p + q) * 10",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "(p + q) * 1000",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Hitung ratusannya: {p} ratus + {q} ratus = {=p+q} ratus = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": [2, 9],
+            "j": [1, 3]
+          },
+          "derived": {
+            "b": "k * 1000 - j"
+          },
+          "constraint": "a % 10 >= 3",
+          "prompt": "Hitung dengan cara cepat: {a} + {b} = …",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + k * 1000",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "a + k * 1000 + j",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "a + b - 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{b} hampir {=k*1000}, kurang {j}. Tambahkan {=k*1000} dulu: {a} + {=k*1000} = {=a+k*1000}. Lalu kurangi {j}: {answer}."
+        }
+      }
+    ]
+  }
+}

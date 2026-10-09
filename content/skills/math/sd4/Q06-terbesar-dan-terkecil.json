@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.q6.terbesar-dan-terkecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 6,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 6 — Terbesar dan terkecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "a": [1, 5],
+            "i": [0, 5],
+            "j": [0, 5]
+          },
+          "derived": {
+            "e": "2 * d",
+            "b": "2 * i + 1",
+            "c": "2 * j + 1",
+            "mx": "max(2 * a, b, c)",
+            "mn": "min(2 * a, b, c)",
+            "md": "2 * a + b + c - max(2 * a, b, c) - min(2 * a, b, c)"
+          },
+          "constraint": "a < d && b < e && c < e && b != c && 2 * a != b && 2 * a != c && gcd(a, d) == 1 && gcd(b, e) == 1 && gcd(c, e) == 1",
+          "format": "fraction",
+          "choices": 3,
+          "prompt": "Mana yang paling besar: {a}/{d}, {b}/{e}, atau {c}/{e}?",
+          "fraction": {
+            "num": "mx",
+            "den": "e"
+          },
+          "distractors": [
+            {
+              "num": "mn / gcd(mn, e)",
+              "den": "e / gcd(mn, e)",
+              "tag": "terkecil"
+            },
+            {
+              "num": "md / gcd(md, e)",
+              "den": "e / gcd(md, e)",
+              "tag": "tengah"
+            }
+          ],
+          "explain": "Samakan penyebut menjadi {e}: {a}/{d} = {=2*a}/{e}. Bandingkan pembilang {=2*a}, {b}, dan {c}. Pembilang terbesar menunjukkan pecahan terbesar, yaitu {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "a": [1, 5],
+            "i": [0, 5],
+            "j": [0, 5]
+          },
+          "derived": {
+            "e": "2 * d",
+            "b": "2 * i + 1",
+            "c": "2 * j + 1",
+            "mx": "max(2 * a, b, c)",
+            "mn": "min(2 * a, b, c)",
+            "md": "2 * a + b + c - max(2 * a, b, c) - min(2 * a, b, c)"
+          },
+          "constraint": "a < d && b < e && c < e && b != c && 2 * a != b && 2 * a != c && gcd(a, d) == 1 && gcd(b, e) == 1 && gcd(c, e) == 1",
+          "format": "fraction",
+          "choices": 3,
+          "prompt": "Mana yang paling kecil: {b}/{e}, {a}/{d}, atau {c}/{e}?",
+          "fraction": {
+            "num": "mn",
+            "den": "e"
+          },
+          "distractors": [
+            {
+              "num": "mx / gcd(mx, e)",
+              "den": "e / gcd(mx, e)",
+              "tag": "terbesar"
+            },
+            {
+              "num": "md / gcd(md, e)",
+              "den": "e / gcd(md, e)",
+              "tag": "tengah"
+            }
+          ],
+          "explain": "Samakan penyebut menjadi {e}: {a}/{d} = {=2*a}/{e}. Bandingkan pembilang {b}, {=2*a}, dan {c}. Pembilang terkecil menunjukkan pecahan terkecil, yaitu {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "math.sd4.gg1.dua-langkah-tambah-dan-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 1,
+  "title": "Soal cerita multi-langkah — Level 1 — Dua langkah: tambah dan kurang",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1200, 5000],
+            "b": [100, 900],
+            "c": [100, 900]
+          },
+          "prompt": "Perpustakaan punya {a} buku. Datang {b} buku baru, lalu {c} buku dipinjam siswa. Berapa buku di perpustakaan sekarang?",
+          "answer": "a + b - c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a - b - c",
+              "tag": "kurang-semua"
+            }
+          ],
+          "explain": "Langkah 1: buku bertambah, {a} + {b} = {=a+b}. Langkah 2: buku dipinjam, {=a+b} − {c} = {answer}. Periksa: jawabannya lebih dari {=a-c}, masuk akal."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 45],
+            "b": [3, 15],
+            "c": [2, 15]
+          },
+          "constraint": "b != c",
+          "prompt": "Sebuah bus membawa {a} penumpang. Di halte, {b} orang turun dan {c} orang naik. Berapa penumpang bus sekarang?",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a - b - c",
+              "tag": "kurang-semua"
+            }
+          ],
+          "explain": "Langkah 1: yang turun mengurangi, {a} − {b} = {=a-b}. Langkah 2: yang naik menambah, {=a-b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 450],
+            "b": [100, 400],
+            "c": [150, 500]
+          },
+          "constraint": "c < a + b",
+          "prompt": "Toko kue membuat {a} kue pada pagi hari dan {b} kue pada siang hari. Sebanyak {c} kue terjual. Berapa kue yang belum terjual?",
+          "answer": "a + b - c",
+          "mode": "input",
+          "explain": "Langkah 1: semua kue {a} + {b} = {=a+b}. Langkah 2: {=a+b} − {c} = {answer} kue belum terjual."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "math.sd34.eb5.keliling-segitiga-dari-koordinat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 5,
+  "title": "Geometri koordinat — Level 5 — Keliling segitiga dari koordinat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Menghitung keliling segitiga siku-siku dari koordinat",
+    "emc-no": "36"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": [2, 4],
+      "v": [1, 3],
+      "k": [1, 3],
+      "x1": [-6, 6],
+      "y1": [-6, 6],
+      "sx": {
+        "values": [1, -1]
+      },
+      "sy": {
+        "values": [1, -1]
+      }
+    },
+    "derived": {
+      "dx": "k * (u * u - v * v)",
+      "dy": "k * 2 * u * v",
+      "c": "k * (u * u + v * v)",
+      "x2": "x1 + sx * dx",
+      "y2": "y1 + sy * dy"
+    },
+    "constraint": "v < u && dx <= 16 && dy <= 16",
+    "prompt": "Tiga patok kebun ditancapkan di titik ({x1}, {y1}), ({x1}, {y2}), dan ({x2}, {y1}). Seutas tali dibentangkan mengelilingi ketiga patok itu. Berapa satuan panjang tali?",
+    "answer": "dx + dy + c",
+    "unit": "satuan",
+    "mode": "input",
+    "explain": "Sisi tegak = {dy}, sisi mendatar = {dx}. Sisi miring = √({dx}² + {dy}²) = {c}. Keliling = {dx} + {dy} + {c} = {answer}."
+  }
+}

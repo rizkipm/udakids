@@ -1,0 +1,78 @@
+{
+  "id": "math.sd4.t9.penalaran-perkalian-pecahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 9,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 9 — Penalaran perkalian pecahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 6],
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "{k} × …/{d} = {=k*n}/{d}. Berapa pembilang yang hilang?",
+          "answer": "n",
+          "mode": "input",
+          "explain": "Pembilang dikali {k} menjadi {=k*n}. Jadi pembilang yang hilang {=k*n} : {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 9],
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "… × {n}/{d} = {=k*n}/{d}. Berapa bilangan cacah yang hilang?",
+          "answer": "k",
+          "mode": "input",
+          "explain": "Penyebut tetap {d}. Pembilang {n} dikali berapa supaya menjadi {=k*n}? {=k*n} : {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "q": [2, 12]
+          },
+          "prompt": "1/{d} dari sebuah bilangan adalah {q}. Berapa bilangan itu?",
+          "answer": "d * q",
+          "mode": "input",
+          "explain": "Bilangan itu dibagi {d} bagian sama besar, dan satu bagian = {q}. Semua bagian: {d} × {q} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 8],
+            "n": [2, 7],
+            "q": [2, 9]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari sebuah bilangan adalah {=n*q}. Berapa bilangan itu?",
+          "answer": "d * q",
+          "mode": "input",
+          "explain": "{n} bagian = {=n*q}, jadi 1 bagian = {=n*q} : {n} = {q}. Ada {d} bagian: {d} × {q} = {answer}."
+        }
+      }
+    ]
+  }
+}

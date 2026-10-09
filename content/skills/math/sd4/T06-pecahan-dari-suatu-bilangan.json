@@ -1,0 +1,82 @@
+{
+  "id": "math.sd4.t6.pecahan-dari-suatu-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 6,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 6 — Pecahan dari suatu bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [2, 9],
+            "q": [2, 10]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} dari {m} = …",
+          "answer": "n * q",
+          "distractors": [
+            {
+              "expr": "q",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "m - n * q",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "n * q + q",
+              "tag": "lebih-satu-bagian"
+            }
+          ],
+          "explain": "Bagi dulu dengan penyebut: {m} : {d} = {q}. Lalu kalikan dengan pembilang: {q} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [2, 9],
+            "q": [2, 10]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} × {m} = …",
+          "answer": "n * q",
+          "distractors": [
+            {
+              "expr": "q",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "n * m",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "n * q - q",
+              "tag": "kurang-satu-bagian"
+            }
+          ],
+          "explain": "{n}/{d} × {m} sama dengan {n}/{d} dari {m}. {m} : {d} = {q}, lalu {q} × {n} = {answer}."
+        }
+      }
+    ]
+  }
+}

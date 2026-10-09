@@ -1,0 +1,128 @@
+{
+  "id": "math.sd34.ec4.banyak-kelipatan-di-antara-dua-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 4,
+  "title": "Bilangan & aljabar — Level 4 — Banyak kelipatan di antara dua bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menghitung banyak kelipatan suatu bilangan di antara dua bilangan",
+    "emc-no": "15"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 13],
+            "lo": {
+              "values": [100, 200, 300, 500, 1000, 1500]
+            },
+            "span": {
+              "values": [100, 200, 300, 500, 1000]
+            }
+          },
+          "derived": {
+            "hi": "lo + span",
+            "first": "(floor(lo / k) + 1) * k",
+            "last": "floor(hi / k) * k"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "lo % k != 0 && hi % k != 0 && !(k == 6 && lo == 1000 && hi == 2000)",
+          "prompt": "{nama} menulis semua bilangan yang lebih dari {lo} dan kurang dari {hi} yang habis dibagi {k}. Berapa banyak bilangan yang ia tulis?",
+          "answer": "floor(hi / k) - floor(lo / k)",
+          "distractors": [
+            {
+              "expr": "floor(hi / k) - floor(lo / k) + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "floor(hi / k)",
+              "tag": "dari-nol"
+            },
+            {
+              "expr": "floor(span / k) - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kelipatan {k} pertama setelah {lo} adalah {first}, yang terakhir sebelum {hi} adalah {last}. Banyaknya = ({last} − {first}) : {k} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 9],
+            "lo": {
+              "values": [100, 200, 500, 1000]
+            },
+            "span": {
+              "values": [200, 300, 500, 1000]
+            }
+          },
+          "derived": {
+            "k": "lcm(a, b)",
+            "hi": "lo + span",
+            "first": "(floor(lo / k) + 1) * k",
+            "last": "floor(hi / k) * k"
+          },
+          "constraint": "a < b && b % a != 0 && lo % k != 0 && hi % k != 0 && k <= 40",
+          "prompt": "Berapa banyak bilangan yang lebih dari {lo} dan kurang dari {hi} yang habis dibagi {a} sekaligus habis dibagi {b}?",
+          "answer": "floor(hi / k) - floor(lo / k)",
+          "distractors": [
+            {
+              "expr": "floor(hi / (a * b)) - floor(lo / (a * b))",
+              "tag": "kali-bukan-kpk"
+            },
+            {
+              "expr": "floor(hi / k) - floor(lo / k) + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "floor(span / a)",
+              "tag": "hanya-a"
+            }
+          ],
+          "choices": 4,
+          "explain": "Habis dibagi {a} dan {b} berarti kelipatan KPK-nya, yaitu {k}. Kelipatan {k} pertama setelah {lo} = {first}, terakhir sebelum {hi} = {last}. Banyaknya = ({last} − {first}) : {k} + 1 = {answer}."
+        }
+      }
+    ]
+  }
+}

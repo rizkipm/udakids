@@ -1,0 +1,130 @@
+{
+  "id": "math.sd4.d9.penalaran-pembulatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 9,
+  "title": "Pembulatan dan penaksiran — Level 9 — Penalaran pembulatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [11, 99]
+          },
+          "derived": {
+            "r": "h * 100"
+          },
+          "prompt": "Berapa bilangan terkecil yang jika dibulatkan ke ratusan terdekat menjadi {r}?",
+          "answer": "r - 50",
+          "distractors": [
+            {
+              "expr": "r - 49",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r - 51",
+              "tag": "terlalu-kecil"
+            },
+            {
+              "expr": "r - 100",
+              "tag": "ratusan-sebelumnya"
+            }
+          ],
+          "explain": "Bilangan dibulatkan naik ke {r} jika puluhannya 5 atau lebih. Jadi yang terkecil adalah {=r-100} + 50 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 98]
+          },
+          "derived": {
+            "r": "k * 1000"
+          },
+          "prompt": "Berapa bilangan terbesar yang jika dibulatkan ke ribuan terdekat menjadi {r}?",
+          "answer": "r + 499",
+          "distractors": [
+            {
+              "expr": "r + 500",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + 999",
+              "tag": "ribuan-berikutnya"
+            },
+            {
+              "expr": "r + 400",
+              "tag": "bukan-terbesar"
+            }
+          ],
+          "explain": "Bilangan dibulatkan turun ke {r} jika ratusannya 0–4. Bilangan terbesar dengan ratusan 4 adalah {answer}. Bilangan {=r+500} sudah dibulatkan ke {=r+1000}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{r}.□{t}{s} dibulatkan ke ribuan terdekat menjadi {=r*1000}. Angka terbesar yang dapat mengisi □ adalah …",
+          "answer": "4",
+          "distractors": [
+            {
+              "expr": "5",
+              "tag": "batas-naik"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "0",
+              "tag": "terkecil"
+            }
+          ],
+          "explain": "Agar dibulatkan turun ke {=r*1000}, angka ratusan harus 0, 1, 2, 3, atau 4. Angka terbesar adalah 4."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 8],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{r}.□{t}{s} dibulatkan ke ribuan terdekat menjadi {=r*1000+1000}. Angka terkecil yang dapat mengisi □ adalah …",
+          "answer": "5",
+          "distractors": [
+            {
+              "expr": "4",
+              "tag": "batas-turun"
+            },
+            {
+              "expr": "0",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Agar dibulatkan naik ke {=r*1000+1000}, angka ratusan harus 5, 6, 7, 8, atau 9. Angka terkecil adalah 5."
+        }
+      }
+    ]
+  }
+}

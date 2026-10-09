@@ -42,7 +42,7 @@ export const aiImageSettingsSchema = z.strictObject({
     .trim()
     .regex(/^claude-[a-z0-9-]{2,60}$/, 'nama model Claude, mis. claude-opus-5-5')
     .default('claude-opus-5-5'),
-  /** Batas biaya yang ditegakkan Udakids sendiri (bukan hanya peringatan di OpenAI). */
+  /** Batas biaya yang ditegakkan UdaKids sendiri (bukan hanya peringatan di OpenAI). */
   dailyLimitUsd: usd,
   monthlyLimitUsd: usd,
   /** Tabel harga (perkiraan, ubah bila harga resmi berubah). */
@@ -154,7 +154,7 @@ export function claudeCost(
  * dikirim — tidak pernah data anak.
  */
 export const CLAUDE_PROMPT_WRITER_SYSTEM = [
-  'You write image-generation prompts for Udakids, a learning app for Indonesian children aged 3 to 14.',
+  'You write image-generation prompts for UdaKids, a learning app for Indonesian children aged 3 to 14.',
   'You receive one JSON request (kind, style, Indonesian label, optional English label, theme, note, variant)',
   'and the style guide the image model will also receive. Write ONE prompt in English, 60 to 140 words,',
   'that describes exactly what to show: the subject, its typical real-world appearance in Indonesia',
@@ -199,7 +199,7 @@ export function textCost(
   );
 }
 
-/** Versi gaya gambar Udakids. Naikkan bila panduan gaya berubah (sidik jari ikut berubah). */
+/** Versi gaya gambar UdaKids. Naikkan bila panduan gaya berubah (sidik jari ikut berubah). */
 export const AI_STYLE_VERSION = 'udakids-v1';
 
 /**
@@ -207,7 +207,7 @@ export const AI_STYLE_VERSION = 'udakids-v1';
  * hasilnya konsisten). Tanpa teks/angka di gambar: tulisan digambar aplikasi.
  */
 export const AI_STYLE_GUIDE = [
-  'You create one illustration asset for Udakids, a learning app for Indonesian children aged 3 to 8.',
+  'You create one illustration asset for UdaKids, a learning app for Indonesian children aged 3 to 8.',
   'Style: friendly flat vector illustration, thick clean dark outline, soft bright colors, gentle shading,',
   'rounded shapes, centered subject, generous empty margin, plain transparent or pure white background.',
   'Rules: absolutely no letters, numbers, words, logos, watermarks or brand marks anywhere in the image;',
@@ -221,7 +221,7 @@ export const AI_STYLE_GUIDE = [
  * rekaan (bukan orang sungguhan), berpakaian sopan, tanpa teks/logo, latar polos agar bendanya jelas.
  */
 export const AI_PHOTO_STYLE_GUIDE = [
-  'You create one realistic photograph asset for Udakids, a learning app for Indonesian children aged 3 to 8.',
+  'You create one realistic photograph asset for UdaKids, a learning app for Indonesian children aged 3 to 8.',
   'Style: natural realistic photo, soft even studio lighting, true-to-life colors and textures, sharp focus,',
   'centered subject, generous empty margin, plain light background. Not a cartoon, not an illustration, not 3D render.',
   'Rules: absolutely no letters, numbers, words, logos, watermarks or brand marks anywhere in the image;',

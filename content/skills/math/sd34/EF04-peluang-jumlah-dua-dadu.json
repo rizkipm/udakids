@@ -1,0 +1,94 @@
+{
+  "id": "math.sd34.ef4.peluang-jumlah-dua-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 4,
+  "title": "Peluang — Level 4 — Peluang jumlah dua dadu",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Peluang",
+    "indikator": "Menghitung peluang jumlah/selisih mata dua dadu"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 12]
+          },
+          "prompt": "Dua dadu dilempar bersamaan. Peluang jumlah kedua mata dadu sama dengan {t} adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "6 - abs(t - 7)",
+            "den": "36"
+          },
+          "distractors": [
+            {
+              "num": "1",
+              "den": "11",
+              "tag": "sebelas-jumlah"
+            },
+            {
+              "num": "6 - abs(t - 7)",
+              "den": "12",
+              "tag": "dua-belas"
+            },
+            {
+              "num": "1",
+              "den": "36",
+              "tag": "satu-pasangan"
+            },
+            {
+              "num": "t",
+              "den": "36",
+              "tag": "jumlah-sebagai-banyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ada 36 pasangan mata dadu. Pasangan berjumlah {t} ada {=6-abs(t-7)}. Peluang = {=6-abs(t-7)}/36, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [1, 5]
+          },
+          "prompt": "Dua dadu dilempar bersamaan. Peluang selisih kedua mata dadu sama dengan {d} adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "2 * (6 - d)",
+            "den": "36"
+          },
+          "distractors": [
+            {
+              "num": "6 - d",
+              "den": "36",
+              "tag": "lupa-dibalik"
+            },
+            {
+              "num": "1",
+              "den": "6",
+              "tag": "satu-per-enam"
+            },
+            {
+              "num": "d",
+              "den": "36",
+              "tag": "selisih-sebagai-banyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Pasangan dengan selisih {d}: ada {=6-d} pasangan (a, a + {d}) dan {=6-d} pasangan dibalik, jadi {=2*(6-d)}. Peluang = {=2*(6-d)}/36, paling sederhana {answer}."
+        }
+      }
+    ]
+  }
+}

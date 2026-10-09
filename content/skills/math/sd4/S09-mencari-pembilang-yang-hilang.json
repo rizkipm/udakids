@@ -1,0 +1,65 @@
+{
+  "id": "math.sd4.s9.mencari-pembilang-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 9,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 9 — Mencari pembilang yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 10],
+            "c": [2, 12]
+          },
+          "constraint": "a < c && c <= d",
+          "prompt": "{a}/{d} + …/{d} = {c}/{d}. Berapa pembilang yang hilang?",
+          "answer": "c - a",
+          "mode": "input",
+          "explain": "Penyebutnya sama, jadi cukup lihat pembilang: {a} + … = {c}. Bilangan yang hilang {c} − {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "b": [1, 10],
+            "c": [1, 10]
+          },
+          "constraint": "b + c <= d",
+          "prompt": "…/{d} − {b}/{d} = {c}/{d}. Berapa pembilang yang hilang?",
+          "answer": "b + c",
+          "mode": "input",
+          "explain": "Pengurangan dibalik menjadi penjumlahan: … = {c} + {b} = {answer}. Cek: {answer}/{d} − {b}/{d} = {c}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a + b < d",
+          "prompt": "{a}/{d} + {b}/{d} + …/{d} = 1. Berapa pembilang yang hilang?",
+          "answer": "d - a - b",
+          "mode": "input",
+          "explain": "1 utuh = {d}/{d}. Sudah ada {a} + {b} = {=a+b} bagian. Kurangnya {d} − {=a+b} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "id": "math.sd4.u10.tantangan-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 10,
+  "title": "Desimal persepuluhan dan perseratusan — Level 10 — Tantangan desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "a": [1, 9]
+          },
+          "prompt": "Pecahan campuran {b} {a}/10 ditulis sebagai desimal adalah …",
+          "answer": "b + a / 10",
+          "explain": "Bilangan utuh {b} ditulis di depan koma. {a} persepuluh ditulis tepat setelah koma. Jadi {b} {a}/10 = {answer}.",
+          "distractors": [
+            {
+              "expr": "b + a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a + b / 10",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "b * 10 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "a": [1, 99]
+          },
+          "prompt": "Pecahan campuran {b} {a}/100 ditulis sebagai desimal adalah …",
+          "answer": "b + a / 100",
+          "explain": "Bilangan utuh {b} ditulis di depan koma, lalu {a} perseratus memakai dua angka setelah koma: {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "b + a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "b + a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "b * 100 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3],
+            "s": [1, 9],
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "Pada bilangan {x}, angka {d} berada di tempat …",
+          "answer": "k",
+          "explain": "Angka sebelum koma ada di tempat satuan. Angka pertama setelah koma = persepuluhan, angka kedua setelah koma = perseratusan. Jadi angka {d} pada {x} ada di tempat {answer}.",
+          "constraint": "s != p && p != q && s != q",
+          "derived": {
+            "x": "s + p / 10 + q / 100",
+            "d": "s * (k == 1) + p * (k == 2) + q * (k == 3)"
+          },
+          "labels": {
+            "1": "satuan",
+            "2": "persepuluhan",
+            "3": "perseratusan"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 5, 20, 25, 50]
+            },
+            "n": [1, 49]
+          },
+          "prompt": "{n}/{d} ditulis sebagai desimal adalah …",
+          "answer": "n / d",
+          "explain": "Ubah penyebutnya menjadi 100: kalikan pembilang dan penyebut dengan {=100/d}. {n}/{d} = {=n*100/d}/100 = {answer}.",
+          "constraint": "n < d && gcd(n, d) == 1",
+          "distractors": [
+            {
+              "expr": "n / 10",
+              "tag": "pembilang-setelah-koma"
+            },
+            {
+              "expr": "n / d / 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "n / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 5, 20, 25, 50]
+            },
+            "n": [1, 49]
+          },
+          "derived": {
+            "x": "n / d"
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{x} ditulis sebagai pecahan paling sederhana adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "n * 100 / d",
+              "den": "10",
+              "tag": "geser"
+            },
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "komplemen"
+            },
+            {
+              "num": "n",
+              "den": "d * 10",
+              "tag": "kurang-nol"
+            },
+            {
+              "num": "n + 1",
+              "den": "d",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Tulis dulu sebagai perseratus: {x} = {=n*100/d}/100. Lalu bagi pembilang dan penyebut dengan bilangan yang sama sampai tidak bisa dibagi lagi: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9],
+            "a": [1, 99]
+          },
+          "prompt": "{m} m {a} cm = … m",
+          "answer": "m + a / 100",
+          "explain": "{a} cm = {=a/100} m. Jadi {m} m {a} cm = {m} + {=a/100} = {answer}.",
+          "constraint": "a % 10 != 0",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "m + a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "m + a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "m * 100 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "{x} = … perseratusan",
+          "answer": "p * 10 + q",
+          "explain": "{p} persepuluhan = {=p*10} perseratusan. Ditambah {q} perseratusan, jadi {x} = {answer} perseratusan.",
+          "derived": {
+            "x": "p / 10 + q / 100"
+          },
+          "distractors": [
+            {
+              "expr": "p + q",
+              "tag": "jumlah-angka"
+            },
+            {
+              "expr": "q",
+              "tag": "angka-terakhir"
+            },
+            {
+              "expr": "p * 100 + q",
+              "tag": "geser"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 8],
+            "a": [1, 9]
+          },
+          "prompt": "Garis bilangan dari {b} sampai {=b+1} dibagi menjadi 10 bagian sama besar. Titik Q ada di garis ke-{a} setelah {b}. Nilai Q adalah …",
+          "answer": "b + a / 10",
+          "explain": "Setiap bagian bernilai 0,1. Mulai dari {b}, maju {a} bagian: {b} + {=a/10} = {answer}.",
+          "distractors": [
+            {
+              "expr": "b + a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "b + 1 - a / 10",
+              "tag": "hitung-dari-kanan"
+            },
+            {
+              "expr": "a + b / 10",
+              "tag": "tertukar"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8]
+          },
+          "prompt": "Titik tepat di tengah-tengah antara {x} dan {y} pada garis bilangan adalah …",
+          "answer": "x + 0.05",
+          "explain": "{x} = {=a*10}/100 dan {y} = {=a*10+10}/100. Tengah-tengahnya {=a*10+5}/100 = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "(a + 1) / 10"
+          },
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "ujung"
+            },
+            {
+              "expr": "x + 0.5",
+              "tag": "tambah-setengah"
+            },
+            {
+              "expr": "x + 0.01",
+              "tag": "satu-perseratus"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 8],
+            "k": [1, 4]
+          },
+          "prompt": "Aku desimal yang kurang dari 1. Angka persepuluhanku {p}. Angka perseratusanku {k} lebih besar dari angka persepuluhanku. Siapa aku?",
+          "answer": "p / 10 + (p + k) / 100",
+          "explain": "Satuan 0, persepuluhan {p}, perseratusan {p} + {k} = {=p+k}. Jadi aku {answer}.",
+          "constraint": "p + k <= 9",
+          "distractors": [
+            {
+              "expr": "(p + k) / 10 + p / 100",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "p / 10 + k / 100",
+              "tag": "lupa-menambah"
+            },
+            {
+              "expr": "p + (p + k) / 10",
+              "tag": "geser"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 9],
+            "p": [0, 9],
+            "q": [1, 9]
+          },
+          "prompt": "{x} sama dengan berapa perseratusan?",
+          "answer": "s * 100 + p * 10 + q",
+          "explain": "1 satuan = 100 perseratusan dan 1 persepuluhan = 10 perseratusan. {s} × 100 + {p} × 10 + {q} = {answer} perseratusan.",
+          "derived": {
+            "x": "s + p / 10 + q / 100"
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.d5.ke-puluh-ribuan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 5,
+  "title": "Pembulatan dan penaksiran — Level 5 — Ke puluh ribuan terdekat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 94999]
+          },
+          "constraint": "n % 10000 != 0",
+          "prompt": "Bulatkan {n} ke puluh ribuan terdekat.",
+          "answer": "round(n / 10000) * 10000",
+          "distractors": [
+            {
+              "expr": "floor(n / 10000) * 10000 + 10000 * (n % 10000 < 5000)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 100000) * 100000, 100000)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "tempat-lebih-kecil"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Lihat angka ribuan, yaitu {=floor(n/1000)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 10000) * 10000} dan {=floor(n / 10000) * 10000+10000}, jadi dibulatkan menjadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 94999]
+          },
+          "derived": {
+            "lo": "floor(n / 10000) * 10000"
+          },
+          "constraint": "n % 10000 != 0 && n % 10000 != 5000",
+          "prompt": "Pada garis bilangan, {n} lebih dekat ke {lo} atau {=lo+10000}?",
+          "answer": "round(n / 10000) * 10000",
+          "distractors": [
+            {
+              "expr": "lo + 10000 * (n % 10000 < 5000)",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 2,
+          "explain": "Titik tengah {lo} dan {=lo+10000} adalah {=lo+5000}. {n} ada di sisi {answer}, jadi lebih dekat ke {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 99899]
+          },
+          "constraint": "n % 100 != 0",
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "floor(n / 100) * 100 + 100 * (n % 100 < 50)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 1000) * 1000, 1000)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "tempat-lebih-kecil"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Lihat angka puluhan, yaitu {=floor(n/10)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 100) * 100} dan {=floor(n / 100) * 100+100}, jadi dibulatkan menjadi {answer}."
+        }
+      }
+    ]
+  }
+}

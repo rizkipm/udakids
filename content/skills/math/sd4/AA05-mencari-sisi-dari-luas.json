@@ -1,0 +1,114 @@
+{
+  "id": "math.sd4.aa5.mencari-sisi-dari-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 5,
+  "title": "Luas persegi dan persegi panjang — Level 5 — Mencari sisi dari luas",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "constraint": "w > h",
+          "derived": {
+            "l": "w * h"
+          },
+          "prompt": "Luas persegi panjang {l} cm² dan panjangnya {w} cm. Berapa cm lebarnya?",
+          "answer": "l / w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l - w",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "dibagi-2"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Luas = panjang × lebar, jadi lebar = luas : panjang = {l} : {w} = {answer}. Cek: {w} × {answer} = {l}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [4, 12],
+            "h": [2, 8]
+          },
+          "constraint": "w > h",
+          "derived": {
+            "l": "w * h"
+          },
+          "words": {
+            "x": ["Karpet", "Taplak meja", "Papan tulis kecil", "Keset"]
+          },
+          "prompt": "{x} berbentuk persegi panjang dengan luas {l} m² dan lebar {h} m. Berapa meter panjangnya?",
+          "answer": "w",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "l - h",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "dibagi-2"
+            },
+            {
+              "expr": "w + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Panjang = luas : lebar = {l} : {h} = {answer}. Pikirkan: {h} × berapa = {l}?"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "l": "s * s"
+          },
+          "prompt": "Luas sebuah persegi {l} cm². Berapa cm panjang sisinya?",
+          "answer": "s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l / 2",
+              "tag": "dibagi-2"
+            },
+            {
+              "expr": "l / 4",
+              "tag": "dibagi-4"
+            },
+            {
+              "expr": "s + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Cari bilangan yang dikali dirinya sendiri hasilnya {l}: {s} × {s} = {l}. Jadi sisinya {answer}."
+        }
+      }
+    ]
+  }
+}

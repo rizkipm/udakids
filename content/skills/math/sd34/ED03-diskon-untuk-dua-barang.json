@@ -1,0 +1,57 @@
+{
+  "id": "math.sd34.ed3.diskon-untuk-dua-barang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 3,
+  "title": "Rasio & persen — Level 3 — Diskon untuk dua barang",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menentukan harga normal dari selisih harga setelah diskon",
+    "emc-no": "29"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": {
+        "values": [10, 20, 25, 30, 40]
+      },
+      "x": [2, 40]
+    },
+    "derived": {
+      "harga": "x * 1000",
+      "sel": "harga * (100 - 2 * d) / 100"
+    },
+    "words": {
+      "toko": ["Makmur", "Sentosa", "Ceria", "Pelangi"],
+      "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+      "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"],
+      "barang": ["buku cerita", "kotak pensil", "botol minum", "topi"]
+    },
+    "constraint": "(harga * (100 - 2 * d)) % 100 == 0",
+    "prompt": "Toko {toko} memberi diskon {d}% untuk pembelian 2 barang atau lebih. {n1} membeli 1 {barang}, sedangkan {n2} membeli 2 {barang} yang sama. {n2} membayar Rp{sel} lebih banyak daripada {n1}. Harga normal 1 {barang} adalah Rp…",
+    "answer": "harga",
+    "distractors": [
+      {
+        "expr": "sel",
+        "tag": "selisih"
+      },
+      {
+        "expr": "2 * sel",
+        "tag": "dikali-dua"
+      },
+      {
+        "expr": "harga * (100 - d) / 100",
+        "tag": "harga-diskon"
+      }
+    ],
+    "choices": 4,
+    "explain": "{n2} membayar 2 × {=100-d}% = {=2*(100-d)}% harga. {n1} membayar 100%. Selisihnya {=100-2*d}% harga = Rp{sel}. Jadi harga normal = {sel} × 100 : {=100-2*d} = Rp{answer}."
+  }
+}

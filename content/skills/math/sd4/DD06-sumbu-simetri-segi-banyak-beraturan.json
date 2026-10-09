@@ -1,0 +1,124 @@
+{
+  "id": "math.sd4.dd6.sumbu-simetri-segi-banyak-beraturan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "DD",
+  "order": 6,
+  "title": "Simetri lipat — Level 6 — Sumbu simetri segi banyak beraturan",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 12]
+          },
+          "prompt": "Sebuah segi {n} beraturan punya sisi yang sama panjang dan sudut yang sama besar. Berapa banyak sumbu simetrinya?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Pada segi banyak beraturan, banyak sumbu simetri sama dengan banyak sisinya. Segi {n} beraturan punya {n} sisi, jadi ada {answer} sumbu simetri."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 12]
+          },
+          "prompt": "Sebuah segi banyak beraturan punya {n} sumbu simetri. Berapa banyak sisinya?",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n - 2",
+              "tag": "kurang"
+            }
+          ],
+          "explain": "Segi banyak beraturan punya sumbu simetri sebanyak sisinya. Jadi {n} sumbu simetri berarti {answer} sisi."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 8],
+            "b": [3, 8]
+          },
+          "constraint": "a != b",
+          "prompt": "Ubin A berbentuk segi {a} beraturan dan ubin B berbentuk segi {b} beraturan. Berapa jumlah sumbu simetri kedua ubin itu?",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "dikali"
+            },
+            {
+              "expr": "a + b + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "max(a, b)",
+              "tag": "satu-ubin"
+            }
+          ],
+          "explain": "Ubin A punya {a} sumbu simetri dan ubin B punya {b}. Jadi {a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [4, 6, 8, 10, 12]
+            }
+          },
+          "prompt": "Segi {n} beraturan punya {n} sumbu simetri. Separuhnya melewati dua titik sudut, separuhnya melewati tengah dua sisi. Berapa sumbu yang melewati titik sudut?",
+          "answer": "n / 2",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "semua-sumbu"
+            },
+            {
+              "expr": "n / 2 + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "n - 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Banyak sisinya genap, jadi sumbu simetri terbagi sama banyak: {n} : 2 = {answer} sumbu melewati titik sudut."
+        }
+      }
+    ]
+  }
+}

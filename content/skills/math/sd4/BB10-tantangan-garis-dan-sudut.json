@@ -1,0 +1,273 @@
+{
+  "id": "math.sd4.bb10.tantangan-garis-dan-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 10,
+  "title": "Garis dan sudut — Level 10 — Tantangan garis dan sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "tiang bendera dan tanah datar",
+              "kaki meja dan lantai",
+              "tepi kiri dan tepi bawah pintu",
+              "dua garis tanda tambah",
+              "garis pada kertas berpetak",
+              "jalan di perempatan lurus"
+            ]
+          },
+          "prompt": "{nama} mengamati {x}. Kedua garisnya bertemu membentuk pojok seperti pojok buku. Kedua garis itu …",
+          "answer": "2",
+          "labels": {
+            "1": "Sejajar",
+            "2": "Tegak lurus",
+            "3": "Berpotongan miring"
+          },
+          "labelSay": {
+            "1": "sejajar",
+            "2": "tegak lurus",
+            "3": "berpotongan miring, tidak siku-siku"
+          },
+          "explain": "Dua garis yang berpotongan membentuk sudut siku-siku (90°) disebut garis tegak lurus."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [
+                10, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 90, 90, 90, 100, 105,
+                110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 170, 180, 180
+              ]
+            }
+          },
+          "prompt": "Perhatikan sudut ini. Sudut ini termasuk …",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=d"
+            }
+          ],
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Bandingkan dengan pojok buku (90°). Lebih sempit = lancip, sama persis = siku-siku, lebih lebar = tumpul, segaris = lurus (180°). Sudut ini {d}°, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 110, 120, 130, 140, 150, 160, 170]
+            }
+          },
+          "prompt": "Baca busur derajat ini. Mulai dari 0° di garis yang mendatar. Berapa besar sudutnya?",
+          "stimulus": [
+            {
+              "kind": "angle",
+              "degrees": "=d",
+              "protractor": true
+            }
+          ],
+          "answer": "d",
+          "unit": "°",
+          "explain": "Letakkan titik tengah busur di titik sudut dan 0° di garis mendatar. Ikuti skala yang mulai dari 0 itu sampai sinar kedua: {answer}. Angka {=180-d}° berasal dari skala yang lain.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 6]
+          },
+          "prompt": "Pukul {h}.00, jarum jam dan jarum menit membentuk …",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": 0
+            }
+          ],
+          "answer": "1 + (h >= 3) + (h > 3) + (h >= 6)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Pukul 3.00 jarumnya siku-siku. Sebelum itu lebih sempit (lancip), sesudahnya lebih lebar (tumpul), dan pukul 6.00 jarumnya segaris (lurus). Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 11]
+          },
+          "prompt": "Pukul {h}.00. Berapa derajat sudut terkecil antara jarum jam dan jarum menit?",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": 0
+            }
+          ],
+          "answer": "30 * min(h, 12 - h)",
+          "unit": "°",
+          "explain": "Satu putaran 360° dibagi 12 angka, jadi antar angka 30°. Dari angka 12, jalan terpendek ke jarum jam ada {=min(h,12-h)} angka. {=min(h,12-h)} × 30° = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 160],
+              "step": 5
+            }
+          },
+          "constraint": "a != 90",
+          "prompt": "Di atas sebuah garis lurus ada dua sudut yang berdampingan. Satu sudut {a}°. Berapa derajat sudut yang lain?",
+          "answer": "180 - a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "90 - a",
+              "tag": "memakai-90"
+            },
+            {
+              "expr": "360 - a",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "a",
+              "tag": "sama-besar"
+            }
+          ],
+          "explain": "Sudut lurus besarnya 180°. Sudut yang lain = 180° − {a}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 15, 20, 30, 36, 45, 60]
+            }
+          },
+          "prompt": "Berapa sudut kecil berukuran {a}° yang diperlukan untuk membentuk sudut lurus?",
+          "answer": "180 / a",
+          "explain": "Sudut lurus 180°. 180 : {a} = {answer} sudut kecil.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "range": [5, 60],
+              "step": 5
+            }
+          },
+          "prompt": "Jarum menit bergerak selama {m} menit. Berapa derajat jarum menit berputar?",
+          "answer": "6 * m",
+          "unit": "°",
+          "explain": "Satu putaran 360° ditempuh dalam 60 menit, jadi 1 menit = 6°. {m} × 6° = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15, 120],
+              "step": 5
+            },
+            "b": {
+              "range": [15, 120],
+              "step": 5
+            }
+          },
+          "derived": {
+            "d": "a + b"
+          },
+          "constraint": "a + b <= 180",
+          "prompt": "Sudut {a}° dan sudut {b}° diletakkan berdampingan menjadi satu sudut besar. Sudut besar itu termasuk …",
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Jumlahkan dulu: {a}° + {b}° = {d}°. Lalu bandingkan dengan 90° dan 180°: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 80],
+              "step": 5
+            },
+            "b": {
+              "range": [20, 80],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 170",
+          "prompt": "Tiga sudut berdampingan mengisi tepat satu garis lurus. Dua sudutnya {a}° dan {b}°. Berapa derajat sudut ketiga?",
+          "answer": "180 - a - b",
+          "unit": "°",
+          "explain": "Satu garis lurus = 180°. Sudut ketiga = 180° − {a}° − {b}° = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

@@ -23,7 +23,7 @@ hanya dipakai untuk mengisi database pertama kali (seed).
 
 - VPS minimal **1 vCPU, 1–2 GB RAM, 20 GB disk**. Anda perlu akses `ssh` sebagai user dengan `sudo`.
 - Domain, misalnya `app.contoh.id`, dengan **A record** yang mengarah ke IP VPS.
-- Repo Little Coder di Git (GitHub/GitLab).
+- Repo UdaKids di Git (GitHub/GitLab).
 
 ## Langkah 1 — Pasang software di server
 
@@ -93,7 +93,7 @@ TTS_DAILY_LIMIT=3000
 # Email (D-044): langkah Gmail di docs/email.md
 SMTP_USER=project.udacoding@gmail.com
 SMTP_PASS=<App Password 16 huruf>
-MAIL_FROM="Udakids <project.udacoding@gmail.com>"
+MAIL_FROM="UdaKids <project.udacoding@gmail.com>"
 MAIL_DIRECTOR=udacodingofficial@gmail.com
 APP_PUBLIC_URL=https://app.contoh.id
 # AI Gambar (D-068): biarkan KOSONG. Isi kunci OpenAI lewat Admin → AI Gambar (terenkripsi, butuh sandi admin).

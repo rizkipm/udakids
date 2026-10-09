@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.c3.terbesar-dan-terkecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 3,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 3 — Terbesar dan terkecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 9],
+            "q": [1, 9],
+            "r": [0, 9],
+            "s": [0, 9],
+            "t": [0, 9]
+          },
+          "derived": {
+            "x1": "p * 10000 + q * 1000 + r * 100 + s * 10 + t",
+            "x2": "p * 10000 + q * 1000 + r * 100 + t * 10 + s",
+            "x3": "p * 10000 + r * 1000 + q * 100 + s * 10 + t",
+            "x4": "q * 10000 + p * 1000 + r * 100 + s * 10 + t"
+          },
+          "constraint": "p != q && p != r && p != s && p != t && q != r && q != s && q != t && r != s && r != t && s != t",
+          "prompt": "Manakah bilangan yang terbesar?",
+          "answer": "max(x1, x2, x3, x4)",
+          "distractors": [
+            {
+              "expr": "x1",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x2",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x3",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x4",
+              "tag": "bilangan-lain"
+            }
+          ],
+          "explain": "Bandingkan angka paling kiri dulu. Jika sama, lihat angka berikutnya, dan seterusnya. Bilangan terbesar adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 9],
+            "q": [1, 9],
+            "r": [0, 9],
+            "s": [0, 9],
+            "t": [0, 9]
+          },
+          "derived": {
+            "x1": "p * 10000 + q * 1000 + r * 100 + s * 10 + t",
+            "x2": "p * 10000 + q * 1000 + r * 100 + t * 10 + s",
+            "x3": "p * 10000 + r * 1000 + q * 100 + s * 10 + t",
+            "x4": "q * 10000 + p * 1000 + r * 100 + s * 10 + t"
+          },
+          "constraint": "p != q && p != r && p != s && p != t && q != r && q != s && q != t && r != s && r != t && s != t",
+          "prompt": "Manakah bilangan yang terkecil?",
+          "answer": "min(x1, x2, x3, x4)",
+          "distractors": [
+            {
+              "expr": "x1",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x2",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x3",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "x4",
+              "tag": "bilangan-lain"
+            }
+          ],
+          "explain": "Bandingkan angka paling kiri dulu. Jika sama, lihat angka berikutnya. Bilangan terkecil adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [8000, 9999],
+            "y": [10000, 19999],
+            "z": [10000, 29999],
+            "v": [10000, 19999]
+          },
+          "constraint": "y != z && y != v && z != v",
+          "prompt": "Manakah bilangan yang terkecil?",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "angka-depan-kecil"
+            },
+            {
+              "expr": "z",
+              "tag": "angka-depan-kecil"
+            },
+            {
+              "expr": "v",
+              "tag": "angka-depan-kecil"
+            }
+          ],
+          "explain": "Hitung banyak angkanya dulu. {x} hanya punya 4 angka, sedangkan yang lain 5 angka. Jadi {answer} paling kecil, walaupun angka depannya besar."
+        }
+      }
+    ]
+  }
+}

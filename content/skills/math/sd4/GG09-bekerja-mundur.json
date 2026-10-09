@@ -1,0 +1,188 @@
+{
+  "id": "math.sd4.gg9.bekerja-mundur",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 9,
+  "title": "Soal cerita multi-langkah — Level 9 — Bekerja mundur",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [20, 90],
+            "b": [5, 30],
+            "c": [5, 30]
+          },
+          "derived": {
+            "r": "x - b + c"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "x > b && b != c",
+          "prompt": "{nama} punya beberapa kelereng. Ia memberi {b} kelereng kepada teman, lalu membeli {c} kelereng. Sekarang kelerengnya {r}. Berapa kelereng {nama} mula-mula?",
+          "answer": "r - c + b",
+          "distractors": [
+            {
+              "expr": "r + c - b",
+              "tag": "tanda-terbalik"
+            },
+            {
+              "expr": "r + b + c",
+              "tag": "tambah-semua"
+            },
+            {
+              "expr": "r - b - c",
+              "tag": "kurang-semua"
+            }
+          ],
+          "explain": "Kerjakan mundur dengan operasi kebalikan. Membeli {c} dibalik menjadi kurang: {r} − {c} = {=r-c}. Memberi {b} dibalik menjadi tambah: {=r-c} + {b} = {answer}. Periksa: {answer} − {b} + {c} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 50],
+            "m": [2, 9],
+            "b": [2, 30]
+          },
+          "derived": {
+            "r": "x * m + b"
+          },
+          "prompt": "Sebuah bilangan dikali {m}, lalu ditambah {b}. Hasilnya {r}. Berapa bilangan itu?",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "(r + b) / m",
+              "tag": "tanda-terbalik"
+            },
+            {
+              "expr": "r / m - b",
+              "tag": "urutan-terbalik"
+            },
+            {
+              "expr": "r - b",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Kerjakan mundur. Kebalikan tambah {b} adalah kurang {b}: {r} − {b} = {=r-b}. Kebalikan kali {m} adalah bagi {m}: {=r-b} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 4],
+            "h": {
+              "values": [3000, 3500, 4000, 5000, 6000]
+            },
+            "s": {
+              "values": [1000, 2000, 2500, 5000, 7500]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Uang {nama} dipakai membeli {n} buku seharga Rp{h} per buku. Sisa uangnya Rp{s}. Berapa uang {nama} mula-mula?",
+          "answer": "n * h + s",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + s",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "n * h - s",
+              "tag": "tanda-terbalik"
+            },
+            {
+              "expr": "n * h",
+              "tag": "lupa-sisa"
+            },
+            {
+              "expr": "(n + 1) * h + s",
+              "tag": "lebih-satu-buku"
+            },
+            {
+              "expr": "n * h + s + 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kerjakan mundur. Uang yang dipakai {n} × {h} = {=n*h}. Uang mula-mula = uang dipakai + sisa: {=n*h} + {s} = {=n*h+s}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 5],
+            "p": {
+              "values": [3000, 4000, 5000, 6000]
+            },
+            "s": {
+              "values": [2000, 2500, 5000, 7000]
+            }
+          },
+          "prompt": "Ayah membagi uang sama banyak kepada {m} anak. Setiap anak lalu membelanjakan Rp{p} dan masih punya Rp{s}. Berapa uang yang dibagi ayah?",
+          "answer": "m * (p + s)",
+          "unit": "rupiah",
+          "mode": "input",
+          "explain": "Kerjakan mundur. Uang setiap anak mula-mula {p} + {s} = {=p+s}. Ada {m} anak, jadi {m} × {=p+s} = {=m*(p+s)}. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

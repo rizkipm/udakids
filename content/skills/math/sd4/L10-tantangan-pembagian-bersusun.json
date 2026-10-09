@@ -1,0 +1,312 @@
+{
+  "id": "math.sd4.l10.tantangan-pembagian-bersusun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 10,
+  "title": "Pembagian bersusun — Level 10 — Tantangan pembagian bersusun",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*1000} : {m} = …",
+          "answer": "n * 1000",
+          "distractors": [
+            {
+              "expr": "n * 100",
+              "tag": "nol-kurang"
+            },
+            {
+              "expr": "n * 10000",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "n * 1000 + 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Fakta dasarnya {=m*n} : {m} = {n}. Bilangan {=m*n*1000} adalah {=m*n} ribuan, jadi hasilnya {n} ribuan = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} kelereng dibagi sama banyak ke dalam {m} kantong. Berapa kelereng di setiap kantong?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Bagi puluhan dulu: {=floor(t/10)} : {m} = {=floor(floor(t/10)/m)} sisa {=floor(t/10)%m}. Turunkan angka satuan sehingga menjadi {=(floor(t/10)%m)*10+t%10}. {=(floor(t/10)%m)*10+t%10} : {m} = {=((floor(t/10)%m)*10+t%10)/m}. Jadi hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [101, 499]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 100",
+              "tag": "ratusan-salah"
+            }
+          ],
+          "explain": "Kerjakan bersusun dari ratusan: bagi, kali, kurang, turunkan. Ulangi untuk puluhan dan satuan. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 4],
+            "a": [1, 3],
+            "b": [1, 9]
+          },
+          "derived": {
+            "q": "100 * a + b",
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "10 * a + b",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Ratusan: {=floor(t/100)} : {m} = {a}. Puluhan: {=floor(t/10)%10} lebih kecil dari {m}, jadi tulis 0 di tempat puluhan hasil bagi, lalu turunkan satuan: {=t%100} : {m} = {b}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [112, 4999]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 1000 && t <= 9999",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 100",
+              "tag": "ratusan-salah"
+            },
+            {
+              "expr": "q - 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Mulai dari ribuan. Jika angka ribuan lebih kecil dari {m}, mulai dari dua angka pertama. Ulangi bagi, kali, kurang, turunkan sampai satuan. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [21, 199],
+            "d": {
+              "values": [0, 0, 0, 1, -1, 10, -10]
+            }
+          },
+          "derived": {
+            "t": "m * q",
+            "s": "q + d"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "t < 1000",
+          "prompt": "{nama} menghitung {t} : {m} = {s}. Periksa dengan perkalian {s} × {m}. Apakah jawaban {nama} tepat?",
+          "answer": "1 - min(abs(d), 1)",
+          "labels": {
+            "1": "Tepat",
+            "0": "Belum tepat"
+          },
+          "explain": "Hitung {s} × {m} = {=s*m}. Jawaban tepat jika hasil kali sama dengan {t}. Hasil bagi yang tepat adalah {q}, karena {q} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [12, 250]
+          },
+          "constraint": "m * q < 2000",
+          "prompt": "… : {m} = {q}. Bilangan yang dibagi adalah …",
+          "answer": "m * q",
+          "distractors": [
+            {
+              "expr": "q + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "m * q + m",
+              "tag": "lebih-satu-kelompok"
+            },
+            {
+              "expr": "m * q - m",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "Bilangan yang dibagi = hasil bagi × pembagi. {q} × {m} = {answer}. Periksa: {answer} : {m} = {q}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [15, 1999]
+          },
+          "derived": {
+            "t": "m * q",
+            "lead": "(t < 1000) * floor(t / 100) + (t >= 1000) * floor(t / 1000)"
+          },
+          "constraint": "t >= 100 && t <= 9999",
+          "prompt": "Tanpa menghitung sampai selesai, hasil {t} : {m} terdiri dari berapa angka?",
+          "answer": "3 + (t >= 1000) - (lead < m)",
+          "labels": {
+            "2": "2 angka",
+            "3": "3 angka",
+            "4": "4 angka"
+          },
+          "labelSay": {
+            "2": "dua angka",
+            "3": "tiga angka",
+            "4": "empat angka"
+          },
+          "explain": "Lihat angka paling kiri, yaitu {lead}. Jika angka itu lebih kecil dari {m}, kita mulai dari dua angka pertama, jadi hasil bagi punya satu angka lebih sedikit. Hasil bagi {=t/m} punya {answer_say}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 4],
+            "h": [12, 120]
+          },
+          "derived": {
+            "q": "2 * h",
+            "t": "m * q"
+          },
+          "prompt": "Hasil {t} : {m} adalah {q}. Berapa hasil {t} : {=2*m}?",
+          "answer": "q / 2",
+          "distractors": [
+            {
+              "expr": "q * 2",
+              "tag": "dikali-dua"
+            },
+            {
+              "expr": "q - 2",
+              "tag": "kurang-dua"
+            },
+            {
+              "expr": "q - m",
+              "tag": "kurang-pembagi"
+            }
+          ],
+          "explain": "Jika pembaginya dua kali lebih besar, setiap bagian menjadi setengahnya. {q} : 2 = {answer}. Periksa: {answer} × {=2*m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9]
+          },
+          "prompt": "Bilangan 3 angka terbesar yang habis dibagi {m} adalah …",
+          "answer": "floor(999 / m) * m",
+          "mode": "input",
+          "explain": "999 : {m} = {=floor(999/m)} sisa {=999%m}. Kurangi sisanya: 999 − {=999%m} = {answer}. Periksa: {=floor(999/m)} × {m} = {answer}."
+        }
+      }
+    ]
+  }
+}

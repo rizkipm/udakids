@@ -1,0 +1,84 @@
+{
+  "id": "math.sd4.p3.membagi-pembilang-dan-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 3,
+  "title": "Pecahan senilai — Level 3 — Membagi pembilang dan penyebut",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "n": [1, 7],
+            "k": [2, 6]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{=n*k}/{=d*k} = …/{d}",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "tidak-dibagi"
+            },
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut {=d*k} dibagi {k} menjadi {d}. Pembilang juga dibagi {k}: {=n*k} : {k} = {answer}. Jadi {=n*k}/{=d*k} = {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "n": [1, 7],
+            "k": [2, 6]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{=n*k}/{=d*k} = {n}/…",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "d * k",
+              "tag": "tidak-dibagi"
+            },
+            {
+              "expr": "d * k - n * k + n",
+              "tag": "mengurangi-selisih"
+            },
+            {
+              "expr": "d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "d + k",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pembilang {=n*k} dibagi {k} menjadi {n}. Penyebut juga dibagi {k}: {=d*k} : {k} = {answer}. Jadi {=n*k}/{=d*k} = {n}/{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "math.sd4.b9.penalaran-bilangan-besar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 9,
+  "title": "Membaca dan menulis bilangan besar — Level 9 — Penalaran bilangan besar",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9],
+            "t": [1, 9]
+          },
+          "prompt": "Lambang bilangan dari {a} ratus ribuan, {c} ribuan, dan {t} puluhan adalah …",
+          "answer": "a * 100000 + c * 1000 + t * 10",
+          "distractors": [
+            {
+              "expr": "a * 100 + c * 10 + t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 100000 + c * 10000 + t * 100",
+              "tag": "geser"
+            },
+            {
+              "expr": "a * 10000 + c * 1000 + t * 10",
+              "tag": "kurang-nol"
+            }
+          ],
+          "explain": "Buat enam tempat: ratus ribuan {a}, puluh ribuan 0, ribuan {c}, ratusan 0, puluhan {t}, satuan 0. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [100000, 999999]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "d4": "floor(n / 10000) % 10",
+            "d5": "floor(n / 100000) % 10"
+          },
+          "constraint": "d3 != d4 && d3 != d5 && d3 != d2 && d4 != d5 && d2 != d4 && d2 != d5",
+          "prompt": "Angka berapa yang berada di tempat ribuan pada bilangan {w:n}?",
+          "answer": "d3",
+          "distractors": [
+            {
+              "expr": "d4",
+              "tag": "puluh-ribuan"
+            },
+            {
+              "expr": "d5",
+              "tag": "ratus-ribuan"
+            },
+            {
+              "expr": "d2",
+              "tag": "ratusan"
+            }
+          ],
+          "explain": "Tulis lambangnya dulu: {n}. Dari kanan: satuan, puluhan, ratusan, ribuan. Angka ribuannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [100000, 998999]
+          },
+          "constraint": "floor(n / 1000) % 10 != 9 && n % 100 != 0",
+          "prompt": "Bilangan {w:n} ditambah seribu menjadi …",
+          "answer": "n + 1000",
+          "distractors": [
+            {
+              "expr": "n + 100",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "n + 10000",
+              "tag": "puluh-ribuan"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "satuan"
+            }
+          ],
+          "explain": "Tulis lambangnya: {n}. Tambah seribu artinya angka ribuan naik 1: {answer}."
+        }
+      }
+    ]
+  }
+}

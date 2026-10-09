@@ -28,6 +28,151 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
+## Rilis berikutnya (D-096 … D-101): Kelas 4, UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3–4
+
+**Isi rilis** (semua belum di-deploy setelah commit `9628db2`, D-095):
+
+- **D-096 — Matematika Kelas 4** (`math/sd4`):
+  - 33 topik × (10 level soal + Level 11 game) + topik "Game seru" (10 game), total 373 level;
+  - pelajaran + simulasi di setiap topik; alat peraga Kelas 4 (ribuan, luas/keliling, sudut, diagram, desimal);
+  - 6 game baru: Tebak Angka Momo, Diagram Ajaib, Penyihir Hitung, Tumpuk Angka, Garis Perkalian, Bingo Rupiah.
+- **D-097 — merek seragam UdaKids** di seluruh tampilan, email, dan SEO.
+- **D-098 — audio hanya Chirp 3 HD:**
+  - tanpa suara browser/Melayu;
+  - bahasa suara mengikuti kalimat (penjelasan Indonesia di buku English tidak lagi dibacakan suara British);
+  - teks campuran diputar per kalimat.
+- **D-099/D-100 — ringkasan admin:** grafik lebih analitis, filter bulan/tahun, section Afiliasi & Komisi owner.
+- **D-101 — EMC Kelas 3–4:** 8 materi kisi-kisi + mock 40 soal + game, 101 level di `math/sd34`.
+
+**Yang perlu di server:**
+
+- **Migrasi baru `0020`** (index `events(type, ts)`): `migrate:prod` wajib.
+- **`seed:prod` wajib:** Kelas 4 dan EMC.
+- **File `baru-2026-10-09.ndjson.gz`** (±97 MB, sudah disiapkan di laptop): 3.809 klip suara Chirp + 129 foto.
+  Tanpa kunci, tanpa kata sandi. Klip/foto yang sudah ada di server dilewati.
+- **Cek `.env` server:**
+  - `TTS_DAILY_LIMIT=20000` (atau baris dihapus);
+  - `PEXELS_API_KEY` terisi (untuk foto yang masih kurang).
+
+### 1. Laptop: cek akhir, commit, push, kirim file
+
+Hentikan `pnpm dev` dulu (Ctrl+C). Jalankan satu baris demi satu baris:
+
+```bash
+cd ~/Repo/udakids
+pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
+git add -A
+git status --short | grep -E "\.env$|\.dump$|backups/|\.ndjson" || echo "aman"
+git commit -m "Kelas 4 + 6 game, merek UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3-4 (D-096…D-101)"
+git push origin main
+git log -1 --oneline
+scp backups/baru-2026-10-09.ndjson.gz root@169.58.177.74:/root/backups/
+```
+
+- Cek hasilnya: semua cek hijau; `validate:content` → "7823 skill valid — 0 error".
+- Baris `grep` harus `aman`.
+- Catat hash dari `git log -1 --oneline`.
+
+### 2. Server: cadangkan, ambil kode, build
+
+```bash
+ssh root@169.58.177.74
+cd /var/www/kids.eduskul.my.id
+PREV=$(git rev-parse --short HEAD); echo $PREV
+U=$(grep "^DATABASE_URL=" .env | cut -d= -f2- | tr -d '"')
+pg_dump "$U" -Fc -f /root/backups/sebelum-deploy-$(date +%F-%H%M).dump && ls -lh /root/backups | tail -2
+psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from children) anak"
+git pull origin main
+git log -1 --oneline
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+- `echo $PREV`: catat untuk rollback.
+- Angka `ortu` dan `anak`: catat, harus sama setelah deploy.
+- `git log -1 --oneline`: harus sama dengan hash di langkah 1.
+- `pnpm build`: engine, api, web harus "Done". Bila gagal, berhenti dan kirim error-nya; layanan lama masih
+  berjalan.
+
+### 3. Server: `.env`, migrasi, seed, impor, nyalakan
+
+```bash
+grep -E "^TTS_DAILY_LIMIT|^PEXELS_API_KEY=." .env | sed 's/=.*/=…/'
+systemctl stop little-coder-api
+pnpm --filter @little-coder/api migrate:prod
+pnpm --filter @little-coder/api seed:prod
+cd apps/api
+node dist/cli/carry.js import /root/backups/baru-2026-10-09.ndjson.gz
+cd ../..
+systemctl start little-coder-api
+```
+
+- `grep … .env`: harus ada `TTS_DAILY_LIMIT=…` (20000) dan `PEXELS_API_KEY=…`. Bila kurang, ubah dengan
+  `nano .env`.
+- `migrate:prod` → "Migrasi database selesai."
+- `seed:prod` → `skill: … ditambahkan/diperbarui`, lebih dari 400.
+- Impor → "Diimpor: kunci -; pengaturan -; … klip baru …; … gambar AI baru."
+
+### 4. Server: periksa
+
+```bash
+sleep 5; systemctl is-active little-coder-api; curl -s http://127.0.0.1:7177/health; echo
+psql "$U" -tAc "select count(*) from drizzle.__drizzle_migrations"
+psql "$U" -tAc "select count(*) from skills where domain='math' and grade='sd4' and status='active'"
+psql "$U" -tAc "select count(*) from skills where domain='math' and grade='sd34' and status='active' and template->>'category' ~ '^(E[A-H]|EY|GE)$'"
+psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from children) anak"
+cd apps/api
+node dist/cli/voice.js --all --dry-run
+node dist/cli/voice.js --all
+node dist/cli/lesson-photos.js math sd4 math sd34
+cd ../..
+rm /root/backups/baru-2026-10-09.ndjson.gz
+```
+
+Hasil yang diharapkan:
+
+| Perintah                   | Hasil                                              |
+| -------------------------- | -------------------------------------------------- |
+| `is-active` / `health`     | `active` / `"status":"ok"`                         |
+| jumlah migrasi             | 21                                                 |
+| skill Kelas 4              | 373                                                |
+| skill EMC Kelas 3–4        | 101                                                |
+| ortu, anak                 | sama dengan langkah 2                              |
+| `voice.js --all --dry-run` | sedikit atau 0 belum bersuara                      |
+| `voice.js --all`           | membuat sisanya (hanya bila ada)                   |
+| `lesson-photos.js`         | mencari foto yang masih kurang, gratis dari Pexels |
+
+### 5. Cek di browser (jendela penyamaran)
+
+- **Landing:** header & footer bertuliskan **UdaKids**.
+- **Kelas 4 → Matematika:** 33 topik + "Game seru matematika"; Game seru Level 1 "Tebak angka Momo" bisa dimainkan.
+- **Kelas 3–4 (Olimpiade):** bagian EMC tampil.
+- **SMP Kelas 7–9 → English → topik apa saja:**
+  - tombol "Dengarkan": kalimat Indonesia bersuara Indonesia, kalimat English bersuara British, tanpa suara robot HP;
+  - jawab satu soal keliru: pembahasan berbahasa Indonesia dibacakan suara Indonesia.
+- **Admin → Ringkasan:** grafik baru dan filter bulan/tahun tampil.
+
+Bila ada kalimat yang diam (tanpa suara), tunggu sebentar lalu ketuk speaker lagi: klip baru sedang dibuat.
+
+### 6. Bersihkan laptop
+
+```bash
+rm ~/Repo/udakids/backups/baru-2026-10-09.ndjson.gz
+```
+
+### Rollback
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl restart little-coder-api
+```
+
+- Migrasi 0020 hanya menambah index, jadi aman untuk versi lama.
+- Soal Kelas 4 & EMC tetap ada di database dan tampil di versi lama, tetapi 6 game Kelas 4 tidak bisa dimainkan di
+  sana. Bila rollback lebih dari sebentar, pulihkan cadangan `pg_dump` dari langkah 2.
+
+---
+
 ## Rilis berikutnya (D-095): foto simulasi dari Pexels, kredit foto, galeri admin
 
 **Isi rilis:** `lesson:photos` mencari foto gratis di Pexels lalu disaring Claude (D-095), `--max=N`, berhenti
@@ -35,7 +180,8 @@ sendiri setelah 3 gagal beruntun, kredit fotografer di Admin → AI Gambar, bari
 galeri AI Gambar menampilkan "Disetujui" lebih dulu.
 
 **Tanpa migrasi, tanpa perubahan `content/`** → `migrate:prod`/`seed:prod` tidak wajib (aman bila dijalankan).
-**Tanpa `carry`.** Env baru: `PEXELS_API_KEY` (wajib untuk `lesson:photos`).
+Env baru: `PEXELS_API_KEY` (wajib untuk `lesson:photos`). 62 foto Pexels dari laptop dibawa dengan file
+`carry --images-only` (±4 MB, tanpa kunci/pengaturan/klip, tanpa kata sandi), jadi tidak dicari ulang di server.
 
 ### 1. Laptop: cek, commit, push
 
@@ -72,6 +218,28 @@ grep -c "^PEXELS_API_KEY=." .env                          # 1
 ```
 
 Kunci Claude sudah ada di server (dibawa `carry`). Cek di Admin → AI Gambar: "Kunci Claude" terisi.
+
+### 3b. Bawa 62 foto Pexels dari laptop
+
+Laptop (terminal biasa, bukan ssh):
+
+```bash
+cd ~/Repo/udakids
+pnpm carry:export -- $PWD/backups/gambar-$(date +%F).ndjson.gz --images-only
+# "Diekspor: kunci -; pengaturan -; 0 klip suara, 62 gambar AI (4.2 MB) → …"
+scp backups/gambar-*.ndjson.gz root@169.58.177.74:/root/backups/
+```
+
+Server (sesudah langkah 2, karena butuh kode baru):
+
+```bash
+cd /var/www/kids.eduskul.my.id/apps/api
+node dist/cli/carry.js import /root/backups/gambar-*.ndjson.gz
+# "Diimpor: kunci -; pengaturan -; 0 dari 0 klip baru …; 62 dari 62 gambar AI baru."
+rm /root/backups/gambar-*.ndjson.gz
+```
+
+Gambar yang sudah ada di server tidak ditimpa; kunci, pengaturan, dan klip suara server tidak disentuh.
 
 ### 4. Server: foto simulasi Kelas 1
 

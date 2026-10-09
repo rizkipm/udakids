@@ -1,0 +1,104 @@
+{
+  "id": "math.sd34.ed7.persen-bertingkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 7,
+  "title": "Rasio & persen — Level 7 — Persen bertingkat",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menghitung nilai setelah kenaikan persen berulang",
+    "emc-no": "34"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3],
+            "k": [1, 9],
+            "p": {
+              "values": [25]
+            }
+          },
+          "derived": {
+            "s": "k * pow(4, n) * 1000"
+          },
+          "constraint": "s <= 2000000",
+          "prompt": "Uang kas kelas mula-mula Rp{s}. Setiap akhir bulan, uang kas bertambah {p}% dari jumlah pada awal bulan itu. Setelah {n} bulan, uang kas menjadi Rp… (tulis angkanya saja, tanpa titik)",
+          "answer": "s * pow(100 + p, n) / pow(100, n)",
+          "mode": "input",
+          "explain": "Hitung bulan demi bulan, setiap kali dikali (100 + {p})/100. Naik 25% sama dengan dikali 5/4. Hasilnya Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3],
+            "k": [1, 9],
+            "p": {
+              "values": [50]
+            }
+          },
+          "derived": {
+            "s": "k * pow(2, n) * 1000"
+          },
+          "constraint": "s <= 2000000",
+          "prompt": "Uang kas kelas mula-mula Rp{s}. Setiap akhir bulan, uang kas bertambah {p}% dari jumlah pada awal bulan itu. Setelah {n} bulan, uang kas menjadi Rp… (tulis angkanya saja, tanpa titik)",
+          "answer": "s * pow(100 + p, n) / pow(100, n)",
+          "mode": "input",
+          "explain": "Hitung bulan demi bulan, setiap kali dikali (100 + {p})/100. Naik 50% sama dengan dikali 3/2. Hasilnya Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3],
+            "k": [1, 9],
+            "p": {
+              "values": [20]
+            }
+          },
+          "derived": {
+            "s": "k * pow(5, n) * 1000"
+          },
+          "constraint": "s <= 2000000",
+          "prompt": "Uang kas kelas mula-mula Rp{s}. Setiap akhir bulan, uang kas bertambah {p}% dari jumlah pada awal bulan itu. Setelah {n} bulan, uang kas menjadi Rp… (tulis angkanya saja, tanpa titik)",
+          "answer": "s * pow(100 + p, n) / pow(100, n)",
+          "mode": "input",
+          "explain": "Hitung bulan demi bulan, setiap kali dikali (100 + {p})/100. Naik 20% sama dengan dikali 6/5. Hasilnya Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3],
+            "k": [1, 9],
+            "p": {
+              "values": [10]
+            }
+          },
+          "derived": {
+            "s": "k * pow(10, n) * 1000"
+          },
+          "constraint": "s <= 2000000",
+          "prompt": "Uang kas kelas mula-mula Rp{s}. Setiap akhir bulan, uang kas bertambah {p}% dari jumlah pada awal bulan itu. Setelah {n} bulan, uang kas menjadi Rp… (tulis angkanya saja, tanpa titik)",
+          "answer": "s * pow(100 + p, n) / pow(100, n)",
+          "mode": "input",
+          "explain": "Hitung bulan demi bulan, setiap kali dikali (100 + {p})/100. Naik 10% sama dengan dikali 11/10. Hasilnya Rp{answer}."
+        }
+      }
+    ]
+  }
+}

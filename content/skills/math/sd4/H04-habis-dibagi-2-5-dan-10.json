@@ -1,0 +1,94 @@
+{
+  "id": "math.sd4.h4.habis-dibagi-2-5-dan-10",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 4,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 4 — Habis dibagi 2, 5, dan 10",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 5, 10]
+            },
+            "m": [10, 999],
+            "y": [0, 1],
+            "r": [1, 9]
+          },
+          "derived": {
+            "n": "d * m + (1 - y) * r"
+          },
+          "constraint": "r < d",
+          "prompt": "Apakah {n} habis dibagi {d}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Tidak"
+          },
+          "explain": "Lihat angka satuan. Habis dibagi 2: satuannya genap. Habis dibagi 5: satuannya 0 atau 5. Habis dibagi 10: satuannya 0. Satuan {n} adalah {=n%10}, jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [10, 999]
+          },
+          "prompt": "Manakah yang habis dibagi 10?",
+          "answer": "10 * m",
+          "distractors": [
+            {
+              "expr": "10 * m + 5",
+              "tag": "satuan-5"
+            },
+            {
+              "expr": "10 * m + 2",
+              "tag": "genap"
+            },
+            {
+              "expr": "10 * m + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bilangan yang habis dibagi 10 angka satuannya 0. Hanya {answer} yang satuannya 0."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [21, 1999]
+          },
+          "prompt": "Manakah yang habis dibagi 5?",
+          "answer": "5 * m",
+          "distractors": [
+            {
+              "expr": "5 * m + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "5 * m + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "5 * m + 3",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bilangan yang habis dibagi 5 angka satuannya 0 atau 5. Lihat satuan setiap pilihan. Hanya {answer} yang satuannya 0 atau 5."
+        }
+      }
+    ]
+  }
+}

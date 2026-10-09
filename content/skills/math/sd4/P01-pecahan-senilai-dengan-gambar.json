@@ -1,0 +1,56 @@
+{
+  "id": "math.sd4.p1.pecahan-senilai-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 1,
+  "title": "Pecahan senilai — Level 1 — Pecahan senilai dengan gambar",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 6],
+      "n": [1, 5],
+      "k": [2, 3]
+    },
+    "constraint": "n < d",
+    "prompt": "Kedua batang sama panjang dan arsirannya sama besar. {n}/{d} = …/{=d*k}",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=n",
+        "den": "=d",
+        "model": "bar"
+      },
+      {
+        "kind": "fraction",
+        "num": "=n*k",
+        "den": "=d*k",
+        "model": "bar",
+        "hideNumber": true
+      }
+    ],
+    "answer": "n * k",
+    "distractors": [
+      {
+        "expr": "n + k",
+        "tag": "menjumlah"
+      },
+      {
+        "expr": "n",
+        "tag": "tidak-dikali"
+      },
+      {
+        "expr": "d * k - n * k",
+        "tag": "yang-tidak-diarsir"
+      }
+    ],
+    "explain": "Batang kedua dipotong menjadi {=d*k} bagian, yaitu {k} kali lebih banyak. Setiap bagian lama menjadi {k} bagian kecil, jadi yang diarsir {n} × {k} = {answer} bagian. {n}/{d} = {answer}/{=d*k}."
+  }
+}

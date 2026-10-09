@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  chanceFavorable,
+  chanceOutcomes,
+  dotted,
   numberWord,
   OBJECTS,
   peragaSteps,
@@ -19,6 +22,7 @@ import { VisualView } from '../../components/visuals';
 import { t } from '../../i18n';
 import { PeragaEnd } from './Peraga';
 import { PeragaPicture } from './photo';
+import { CoordBoard, OutcomeGrid } from '../games/EmcGames';
 
 /**
  * Alat peraga matematika (D-093): setiap langkah punya target; anak mencapainya dengan mengetuk (tanpa seret).
@@ -105,6 +109,18 @@ function Tool({ alat, ...p }: { alat: PeragaAlat } & ToolProps<Record<string, un
       return <ShapeCount {...props} />;
     case 'pecahan':
       return <FractionTool {...props} />;
+    case 'luas':
+      return <AreaTool {...props} />;
+    case 'sudut':
+      return <AngleTool {...props} />;
+    case 'diagram':
+      return <ChartTool {...props} />;
+    case 'desimal':
+      return <DecimalTool {...props} />;
+    case 'koordinat':
+      return <CoordTool {...props} />;
+    case 'peluang':
+      return <ChanceTool {...props} />;
     default:
       return <PatternTool {...props} />;
   }
@@ -138,7 +154,9 @@ function NumberLine({
   const target = step.dari + step.ubah;
   const span = step.max - step.min;
   // Tanda setiap `loncat`; label paling banyak ±11 supaya tetap terbaca di HP.
-  const every = Math.max(step.loncat, Math.ceil(span / 10 / step.loncat) * step.loncat);
+  // Bilangan besar (Kelas 4, D-096): label lebih sedikit agar "100.000" tidak bertumpuk.
+  const labels = step.max >= 10000 ? 5 : 10;
+  const every = Math.max(step.loncat, Math.ceil(span / labels / step.loncat) * step.loncat);
   const ticks: number[] = [];
   for (let v = step.min; v <= step.max; v += step.loncat) ticks.push(v);
   const x = (v: number) => 20 + ((v - step.min) / span) * 560;
@@ -173,11 +191,11 @@ function NumberLine({
                 x={x(v)}
                 y={106}
                 textAnchor="middle"
-                fontSize={18}
+                fontSize={step.max >= 10000 ? 15 : 18}
                 fontWeight={800}
                 fill={v === target && solved ? '#2e9e5b' : '#2b2540'}
               >
-                {v}
+                {dotted(v)}
               </text>
             ) : null}
           </g>
@@ -185,15 +203,30 @@ function NumberLine({
         <circle cx={x(step.dari)} cy={70} r={7} fill="#f7c948" />
         <g style={{ transform: `translateX(${x(at)}px)`, transition: 'transform 0.35s ease' }}>
           <circle cx={0} cy={36} r={16} fill={solved ? '#2e9e5b' : '#5b3fd6'} />
-          <text x={0} y={42} textAnchor="middle" fontSize={16} fontWeight={900} fill="#fff">
-            {at}
+          <text
+            x={0}
+            y={42}
+            textAnchor="middle"
+            fontSize={at >= 10000 ? 11 : 16}
+            fontWeight={900}
+            fill="#fff"
+          >
+            {dotted(at)}
           </text>
         </g>
       </svg>
       <div className="peraga-row">
-        <Btn label={`− ${step.loncat}`} onClick={() => move(-step.loncat)} disabled={solved} />
-        <span className="peraga-big">{at}</span>
-        <Btn label={`+ ${step.loncat}`} onClick={() => move(step.loncat)} disabled={solved} />
+        <Btn
+          label={`− ${dotted(step.loncat)}`}
+          onClick={() => move(-step.loncat)}
+          disabled={solved}
+        />
+        <span className="peraga-big">{dotted(at)}</span>
+        <Btn
+          label={`+ ${dotted(step.loncat)}`}
+          onClick={() => move(step.loncat)}
+          disabled={solved}
+        />
       </div>
     </div>
   );
@@ -202,31 +235,55 @@ function NumberLine({
 // ------------------------------------------------------------ blok puluhan
 
 function Blocks({ step, solved, onSolved }: ToolProps<{ target: number }>) {
+  const [th, setTh] = useState(0);
   const [h, setH] = useState(0);
   const [tens, setTens] = useState(0);
   const [ones, setOnes] = useState(0);
-  const value = h * 100 + tens * 10 + ones;
-  const change = (nh: number, nt: number, no: number) => {
+  const value = th * 1000 + h * 100 + tens * 10 + ones;
+  const change = (nh: number, nt: number, no: number, nth = th) => {
+    setTh(nth);
     setH(nh);
     setTens(nt);
     setOnes(no);
-    const v = nh * 100 + nt * 10 + no;
+    const v = nth * 1000 + nh * 100 + nt * 10 + no;
     speak(numberWord(v));
     if (v === step.target) onSolved();
   };
   return (
     <div className="peraga-tool">
-      <div className="peraga-blocks" aria-label={`${h} ratusan, ${tens} puluhan, ${ones} satuan`}>
+      <div
+        className="peraga-blocks"
+        aria-label={`${th} ribuan, ${h} ratusan, ${tens} puluhan, ${ones} satuan`}
+      >
+        {Array.from({ length: th }, (_, k) => (
+          <span key={`th${k}`} className="pb-cube" />
+        ))}
         {Array.from({ length: h }, (_, k) => (
           <span key={`h${k}`} className="pb-flat" />
         ))}
-        <VisualView
-          visual={{ kind: 'tens', tens: Math.min(tens, 10), ones: Math.min(ones, 19) }}
-          size={160}
-        />
+        {(tens > 0 || ones > 0 || (th === 0 && h === 0)) && (
+          <VisualView
+            visual={{ kind: 'tens', tens: Math.min(tens, 10), ones: Math.min(ones, 19) }}
+            size={160}
+          />
+        )}
       </div>
-      <p className="peraga-big">{value}</p>
+      <p className="peraga-big">{dotted(value)}</p>
       <div className="peraga-row is-wrap">
+        {step.target > 999 && (
+          <>
+            <Btn
+              label={t('play.peraga.addThousand')}
+              onClick={() => change(h, tens, ones, th + 1)}
+              disabled={solved || th >= 9}
+            />
+            <Btn
+              label={t('play.peraga.removeThousand')}
+              onClick={() => change(h, tens, ones, th - 1)}
+              disabled={solved || th === 0}
+            />
+          </>
+        )}
         {step.target > 99 && (
           <>
             <Btn
@@ -715,6 +772,421 @@ function PatternTool({
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------ Kelas 4 (D-096): luas & keliling
+
+function AreaTool({
+  step,
+  solved,
+  onSolved,
+}: ToolProps<{ panjang: number; lebar: number; hitung: 'luas' | 'keliling' }>) {
+  const { panjang: p, lebar: l } = step;
+  const [rows, setRows] = useState(0);
+  const [sides, setSides] = useState<number[]>([]);
+  const cell = Math.min(36, Math.floor(300 / Math.max(p, l)));
+  const W = p * cell;
+  const H = l * cell;
+  const lengths = [p, l, p, l];
+  const perim = sides.reduce((a, i) => a + lengths[i]!, 0);
+  const fill = (d: number) => {
+    const n = Math.max(0, Math.min(l, rows + d));
+    setRows(n);
+    speak(numberWord(n * p));
+    if (n === l) onSolved();
+  };
+  const measure = (i: number) => {
+    if (sides.includes(i)) return;
+    const next = [...sides, i];
+    setSides(next);
+    speak(numberWord(lengths[i]!));
+    if (next.length === 4) onSolved();
+  };
+  const sideLine = (i: number) => {
+    const [x1, y1, x2, y2] = [
+      [0, 0, W, 0],
+      [W, 0, W, H],
+      [0, H, W, H],
+      [0, 0, 0, H],
+    ][i]!;
+    return (
+      <line
+        key={i}
+        x1={x1! + 10}
+        y1={y1! + 10}
+        x2={x2! + 10}
+        y2={y2! + 10}
+        stroke={sides.includes(i) ? '#ff8a3d' : '#2b2540'}
+        strokeWidth={sides.includes(i) ? 8 : 4}
+        strokeLinecap="round"
+      />
+    );
+  };
+  return (
+    <div className="peraga-tool">
+      <svg
+        viewBox={`0 0 ${W + 20} ${H + 20}`}
+        className="peraga-area"
+        role="img"
+        aria-label={`persegi panjang ${p} kali ${l} satuan`}
+      >
+        {Array.from({ length: l }, (_, r) =>
+          Array.from({ length: p }, (_, c) => (
+            <rect
+              key={`${r}-${c}`}
+              x={10 + c * cell}
+              y={10 + r * cell}
+              width={cell}
+              height={cell}
+              fill={step.hitung === 'luas' && r < rows ? '#8fd3ff' : '#fff'}
+              stroke="#c9c3dd"
+              strokeWidth={1.5}
+            />
+          )),
+        )}
+        {[0, 1, 2, 3].map(sideLine)}
+      </svg>
+      {step.hitung === 'luas' ? (
+        <>
+          <p className="peraga-big">{t('play.peraga.areaNow', { n: rows * p })}</p>
+          <div className="peraga-row is-wrap">
+            <Btn
+              label={t('play.peraga.fillRow')}
+              onClick={() => fill(1)}
+              disabled={solved || rows >= l}
+            />
+            <Btn
+              label={t('play.peraga.clearRow')}
+              onClick={() => fill(-1)}
+              disabled={solved || rows === 0}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="peraga-big">{t('play.peraga.perimeterNow', { n: perim })}</p>
+          <div className="peraga-row is-wrap">
+            {[0, 1, 2, 3].map((i) => (
+              <Btn
+                key={i}
+                label={t(`play.peraga.side${i}` as 'play.peraga.side0')}
+                onClick={() => measure(i)}
+                disabled={solved || sides.includes(i)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ------------------------------------------------------------ Kelas 4: sudut
+
+const angleKind = (d: number) =>
+  d < 90
+    ? 'play.peraga.angleLancip'
+    : d === 90
+      ? 'play.peraga.angleSiku'
+      : d < 180
+        ? 'play.peraga.angleTumpul'
+        : d === 180
+          ? 'play.peraga.angleLurus'
+          : d < 360
+            ? 'play.peraga.angleRefleks'
+            : 'play.peraga.anglePenuh';
+
+function AngleTool({ step, solved, onSolved }: ToolProps<{ target: number }>) {
+  const [deg, setDeg] = useState(0);
+  const R = 110;
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const end = (d: number) => [130 + R * Math.cos(rad(d)), 130 - R * Math.sin(rad(d))] as const;
+  const [ex, ey] = end(deg);
+  const turn = (d: number) => {
+    const n = Math.max(0, Math.min(360, deg + d));
+    setDeg(n);
+    speak(`${numberWord(n)} derajat`);
+    if (n === step.target) onSolved();
+  };
+  const arc =
+    deg === 0
+      ? ''
+      : deg >= 360
+        ? `M 170 130 A 40 40 0 1 0 90 130 A 40 40 0 1 0 170 130`
+        : `M 170 130 A 40 40 0 ${deg > 180 ? 1 : 0} 0 ${130 + 40 * Math.cos(rad(deg))} ${130 - 40 * Math.sin(rad(deg))}`;
+  return (
+    <div className="peraga-tool">
+      <svg
+        viewBox="0 0 260 260"
+        className="peraga-angle"
+        role="img"
+        aria-label={`sudut ${deg} derajat`}
+      >
+        <circle cx={130} cy={130} r={R} fill="#fffdf6" stroke="#e1dbef" strokeWidth={2} />
+        {Array.from({ length: 24 }, (_, k) => {
+          const [x1, y1] = [
+            130 + (R - 8) * Math.cos(rad(k * 15)),
+            130 - (R - 8) * Math.sin(rad(k * 15)),
+          ];
+          const [x2, y2] = end(k * 15);
+          return (
+            <line
+              key={k}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="#c9c3dd"
+              strokeWidth={k % 6 ? 1.5 : 3}
+            />
+          );
+        })}
+        {arc && <path d={arc} fill="none" stroke="#ff8a3d" strokeWidth={5} />}
+        <line
+          x1={130}
+          y1={130}
+          x2={130 + R}
+          y2={130}
+          stroke="#2b2540"
+          strokeWidth={6}
+          strokeLinecap="round"
+        />
+        <line
+          x1={130}
+          y1={130}
+          x2={ex}
+          y2={ey}
+          stroke={solved ? '#2e9e5b' : '#5b3fd6'}
+          strokeWidth={6}
+          strokeLinecap="round"
+        />
+        <circle cx={130} cy={130} r={7} fill="#2b2540" />
+      </svg>
+      <p className="peraga-big">
+        {deg}° · {t(angleKind(deg))}
+      </p>
+      <div className="peraga-row is-wrap">
+        <Btn
+          label={t('play.peraga.angleMinus')}
+          onClick={() => turn(-15)}
+          disabled={solved || deg === 0}
+        />
+        <Btn
+          label={t('play.peraga.anglePlus')}
+          onClick={() => turn(15)}
+          disabled={solved || deg >= 360}
+        />
+        <Btn
+          label={t('play.peraga.angleRight')}
+          onClick={() => turn(90)}
+          disabled={solved || deg > 270}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------ Kelas 4: diagram batang
+
+function ChartTool({
+  step,
+  solved,
+  onSolved,
+}: ToolProps<{ satuan: string; skala: number; data: { nama: string; nilai: number }[] }>) {
+  const [h, setH] = useState<number[]>(() => step.data.map(() => 0));
+  const max = Math.max(5, ...step.data.map((d) => d.nilai / step.skala));
+  const bump = (i: number, d: number) => {
+    const next = h.map((x, k) => (k === i ? Math.max(0, Math.min(max, x + d)) : x));
+    setH(next);
+    speak(numberWord(next[i]! * step.skala));
+    if (next.every((x, k) => x * step.skala === step.data[k]!.nilai)) onSolved();
+  };
+  return (
+    <div className="peraga-tool">
+      <table className="peraga-table">
+        <tbody>
+          {step.data.map((d) => (
+            <tr key={d.nama}>
+              <th scope="row">{d.nama}</th>
+              <td>
+                {dotted(d.nilai)} {step.satuan}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {step.skala !== 1 && (
+        <p className="peraga-hint">
+          {t('play.chart.scale', { n: dotted(step.skala), unit: step.satuan })}
+        </p>
+      )}
+      <div className="peraga-chart">
+        {step.data.map((d, i) => (
+          <div key={d.nama} className="peraga-chart-col">
+            <div className="peraga-chart-track">
+              <div className="peraga-chart-bar" style={{ height: `${(h[i]! / max) * 100}%` }} />
+            </div>
+            <strong>{dotted(h[i]! * step.skala)}</strong>
+            <div className="peraga-row">
+              <Btn label="+" onClick={() => bump(i, 1)} disabled={solved || h[i]! >= max} />
+              <Btn label="−" onClick={() => bump(i, -1)} disabled={solved || h[i] === 0} />
+            </div>
+            <span className="peraga-chart-name">{d.nama}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------ Kelas 4: desimal (petak perseratus)
+
+const decimalText = (n: number) =>
+  n === 0
+    ? '0'
+    : n === 100
+      ? '1'
+      : n % 10 === 0
+        ? `0,${n / 10}`
+        : `0,${String(n).padStart(2, '0')}`;
+
+function DecimalTool({ step, solved, onSolved }: ToolProps<{ perseratus: number }>) {
+  const [n, setN] = useState(0);
+  const change = (d: number) => {
+    const v = Math.max(0, Math.min(100, n + d));
+    setN(v);
+    speak(`${numberWord(v)} perseratus`);
+    if (v === step.perseratus) onSolved();
+  };
+  return (
+    <div className="peraga-tool">
+      <div className="peraga-hundred" role="img" aria-label={`${n} dari 100 kotak diarsir`}>
+        {Array.from({ length: 100 }, (_, k) => {
+          // Diarsir per kolom (persepuluhan) dari kiri ke kanan.
+          const col = k % 10;
+          const row = Math.floor(k / 10);
+          const idx = col * 10 + row;
+          return <span key={k} className={idx < n ? 'is-on' : ''} />;
+        })}
+      </div>
+      <p className="peraga-big">
+        {decimalText(n)} = {n}/100
+      </p>
+      <div className="peraga-row is-wrap">
+        <Btn
+          label={t('play.peraga.tenthPlus')}
+          onClick={() => change(10)}
+          disabled={solved || n > 90}
+        />
+        <Btn
+          label={t('play.peraga.tenthMinus')}
+          onClick={() => change(-10)}
+          disabled={solved || n < 10}
+        />
+        <Btn
+          label={t('play.peraga.hundredthPlus')}
+          onClick={() => change(1)}
+          disabled={solved || n >= 100}
+        />
+        <Btn
+          label={t('play.peraga.hundredthMinus')}
+          onClick={() => change(-1)}
+          disabled={solved || n === 0}
+        />
+      </div>
+    </div>
+  );
+}
+
+/** EMC (D-101): tandai titik (x, y); ketukan di tempat lain → bidang bergoyang + petunjuk, tanpa nilai. */
+function CoordTool({
+  step,
+  solved,
+  onSolved,
+}: ToolProps<{
+  x: number;
+  y: number;
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+  titik?: { x: number; y: number; nama: string }[];
+}>) {
+  const [wobble, setWobble] = useState(false);
+  const marks = [
+    ...(step.titik ?? []).map((p) => ({ x: p.x, y: p.y, name: p.nama })),
+    ...(solved ? [{ x: step.x, y: step.y, name: '★', tone: 'found' as const }] : []),
+  ];
+  return (
+    <CoordBoard
+      xMin={step.xMin}
+      xMax={step.xMax}
+      yMin={step.yMin}
+      yMax={step.yMax}
+      marks={marks}
+      wobble={wobble}
+      disabled={solved}
+      onPlace={(x, y) => {
+        if (x === step.x && y === step.y) return onSolved();
+        setWobble(true);
+        window.setTimeout(() => setWobble(false), 450);
+        speak(t('play.coord.again'));
+      }}
+    />
+  );
+}
+
+/** EMC (D-101): ketuk semua hasil percobaan yang memenuhi syarat; selesai bila semuanya tertandai. */
+function ChanceTool({
+  step,
+  solved,
+  onSolved,
+}: ToolProps<{
+  ruang: Parameters<typeof chanceOutcomes>[0];
+  kantong?: Parameters<typeof chanceOutcomes>[1];
+  syarat: string;
+}>) {
+  const all = useMemo(() => chanceOutcomes(step.ruang, step.kantong), [step]);
+  const want = useMemo(() => new Set(chanceFavorable(all, step.syarat)), [all, step.syarat]);
+  const [marked, setMarked] = useState<Set<string>>(new Set());
+  const [wobble, setWobble] = useState<string>();
+  useEffect(() => setMarked(new Set()), [step]);
+  const cards = all.map((o) => ({
+    id: o.id,
+    say: o.say,
+    visual: o.dice
+      ? o.dice.length === 1
+        ? ({ kind: 'die', value: o.dice[0]! } as const)
+        : ({ kind: 'row', items: o.dice.map((v) => ({ kind: 'die', value: v }) as const) } as const)
+      : ({ kind: 'text', text: o.label } as const),
+  }));
+  return (
+    <div className="g4-board">
+      <span className="kid-note">
+        {t('play.chance.found', { n: marked.size, total: all.length })}
+      </span>
+      <OutcomeGrid
+        outcomes={cards}
+        marked={solved ? want : marked}
+        wobble={wobble}
+        disabled={solved}
+        onTap={(id) => {
+          if (marked.has(id)) return;
+          const o = all.find((x) => x.id === id);
+          if (!want.has(id)) {
+            setWobble(id);
+            window.setTimeout(() => setWobble(undefined), 450);
+            speak(t('play.chance.again'));
+            return;
+          }
+          const next = new Set(marked).add(id);
+          setMarked(next);
+          if (next.size === want.size) onSolved();
+          else if (o) speak(o.say);
+        }}
+      />
     </div>
   );
 }

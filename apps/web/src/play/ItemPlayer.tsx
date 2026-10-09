@@ -6,7 +6,7 @@ import {
   MAX_MISTAKES,
   isAudioOnlyItem,
   spokenPrompt,
-  voiceLangOf,
+  voiceLangFor,
   type InteractionType,
   type AnswerResult,
   type AnswerValue,
@@ -42,6 +42,13 @@ import { SortGame } from './games/SortGame';
 import { SumGame } from './games/SumGame';
 import { TrainSpell } from './games/Train';
 import { WheelGame } from './games/Wheel';
+import { ChanceGame, CoordGame } from './games/EmcGames';
+import { BingoGame } from './games/BingoGame';
+import { ChartGame } from './games/ChartGame';
+import { GuessGame } from './games/GuessGame';
+import { LinesGame } from './games/LinesGame';
+import { MagicGame } from './games/MagicGame';
+import { StackGame } from './games/StackGame';
 import { t, type MessageKey } from '../i18n';
 import { ItemVoice } from './itemVoice';
 import './play.css';
@@ -93,6 +100,14 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   sort: 'play.cmd.sort',
   crossword: 'play.cmd.crossword',
   jigsaw: 'play.cmd.jigsaw',
+  guess: 'play.cmd.guess',
+  chart: 'play.cmd.chart',
+  magic: 'play.cmd.magic',
+  stack: 'play.cmd.stack',
+  lines: 'play.cmd.lines',
+  bingo: 'play.cmd.bingo',
+  coord: 'play.cmd.coord',
+  chance: 'play.cmd.chance',
 };
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
@@ -107,7 +122,9 @@ export function speakPrompt(item: Item, tier: ItemPlayerProps['tier']) {
 /** Seperti `speakPrompt`, tetapi tanpa klip suara per soal (soal lomba tidak membawa id/seed). */
 function speakPlain(item: Item, tier: ItemPlayerProps['tier']) {
   if (!tier || tier === 'basic')
-    return speak(item.say ?? item.prompt, { lang: voiceLangOf(item.skillId) });
+    return speak(item.say ?? item.prompt, {
+      lang: voiceLangFor(item.skillId, 'prompt', item.say ?? item.prompt),
+    });
   const spoken = spokenPrompt(item, tier);
   if (spoken.kind === 'line') speakLine(spoken.key, t(COMMAND_TEXT[item.interaction.type]));
 }
@@ -461,6 +478,24 @@ function InteractionView(props: ViewProps<Interaction>) {
       return <CrosswordGame {...props} interaction={it} onDone={props.onSubmit} />;
     case 'jigsaw':
       return <JigsawGame {...props} interaction={it} onDone={props.onSubmit} />;
+    // Game Kelas 4 (D-096).
+    case 'guess':
+      return <GuessGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'chart':
+      return <ChartGame {...props} interaction={it} />;
+    case 'magic':
+      return <MagicGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'stack':
+      return <StackGame {...props} interaction={it} />;
+    case 'lines':
+      return <LinesGame {...props} interaction={it} />;
+    case 'bingo':
+      return <BingoGame {...props} interaction={it} onDone={props.onSubmit} />;
+    // Game EMC Kelas 3–4 (D-101).
+    case 'coord':
+      return <CoordGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'chance':
+      return <ChanceGame {...props} interaction={it} onDone={props.onSubmit} />;
   }
 }
 

@@ -1,0 +1,92 @@
+{
+  "id": "math.sd4.a5.menyusun-dari-nilai-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 5,
+  "title": "Nilai tempat sampai 100.000 — Level 5 — Menyusun dari nilai tempat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9],
+            "f": [1, 9]
+          },
+          "prompt": "{a} puluh ribuan + {b} ribuan + {c} ratusan + {f} satuan = …",
+          "answer": "a * 10000 + b * 1000 + c * 100 + f",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + c * 10 + f",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + c * 100 + f * 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + c * 10 + f",
+              "tag": "tempat-tertukar"
+            }
+          ],
+          "explain": "Tulis setiap angka di tempatnya. Puluhan tidak disebut, jadi isi 0: {a} | {b} | {c} | 0 | {f}. Bilangannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9],
+            "e": [1, 9],
+            "f": [1, 9]
+          },
+          "constraint": "a != f",
+          "prompt": "{f} satuan + {c} ratusan + {a} puluh ribuan + {e} puluhan + {b} ribuan = …",
+          "answer": "a * 10000 + b * 1000 + c * 100 + e * 10 + f",
+          "distractors": [
+            {
+              "expr": "f * 10000 + c * 1000 + a * 100 + e * 10 + b",
+              "tag": "urut-ditulis"
+            },
+            {
+              "expr": "a * 10000 + c * 1000 + b * 100 + e * 10 + f",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + c * 100 + f * 10 + e",
+              "tag": "tertukar"
+            }
+          ],
+          "explain": "Urutannya diacak. Susun dari tempat terbesar: puluh ribuan {a}, ribuan {b}, ratusan {c}, puluhan {e}, satuan {f}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9],
+            "e": [1, 9]
+          },
+          "prompt": "{a} puluh ribuan + {c} ratusan + {e} puluhan = …",
+          "answer": "a * 10000 + c * 100 + e * 10",
+          "mode": "input",
+          "explain": "Ribuan dan satuan tidak disebut, jadi keduanya 0: {a} | 0 | {c} | {e} | 0. Bilangannya {answer}."
+        }
+      }
+    ]
+  }
+}

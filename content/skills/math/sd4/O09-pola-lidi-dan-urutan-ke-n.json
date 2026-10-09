@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.o9.pola-lidi-dan-urutan-ke-n",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 9,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 9 — Pola lidi dan urutan ke-n",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 30],
+            "k": [2, 12],
+            "n": [6, 15]
+          },
+          "prompt": "Pola: {a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan ke-{n} adalah …",
+          "answer": "a + (n - 1) * k",
+          "distractors": [
+            {
+              "expr": "a + n * k",
+              "tag": "lebih-satu-loncatan"
+            },
+            {
+              "expr": "n * k",
+              "tag": "lupa-awal"
+            },
+            {
+              "expr": "a + (n - 2) * k",
+              "tag": "kurang-satu-loncatan"
+            }
+          ],
+          "explain": "Dari bilangan pertama ke bilangan ke-{n} ada {=n-1} loncatan, masing-masing {k}. {a} + {=n-1} × {k} = {a} + {=(n-1)*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 25]
+          },
+          "prompt": "Persegi dari lidi disusun berjajar. 1 persegi perlu 4 lidi, 2 persegi perlu 7 lidi, 3 persegi perlu 10 lidi. Berapa lidi untuk {n} persegi?",
+          "answer": "3 * n + 1",
+          "distractors": [
+            {
+              "expr": "4 * n",
+              "tag": "tidak-berbagi"
+            },
+            {
+              "expr": "3 * n",
+              "tag": "lupa-lidi-awal"
+            },
+            {
+              "expr": "3 * n + 4",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Persegi pertama perlu 4 lidi. Setiap persegi baru memakai 1 lidi bersama, jadi hanya perlu 3 lidi lagi. 4 + {=n-1} × 3 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 30]
+          },
+          "prompt": "Segitiga dari lidi disusun berjajar bergantian naik dan turun. 1 segitiga perlu 3 lidi, 2 segitiga 5 lidi, 3 segitiga 7 lidi. Berapa lidi untuk {n} segitiga?",
+          "answer": "2 * n + 1",
+          "distractors": [
+            {
+              "expr": "3 * n",
+              "tag": "tidak-berbagi"
+            },
+            {
+              "expr": "2 * n",
+              "tag": "lupa-lidi-awal"
+            },
+            {
+              "expr": "2 * n + 3",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Segitiga pertama perlu 3 lidi. Setiap segitiga baru hanya perlu 2 lidi lagi. 3 + {=n-1} × 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 30],
+            "k": [2, 12],
+            "n": [6, 20]
+          },
+          "prompt": "Pola: {a}, {=a+k}, {=a+2*k}, … Bilangan {=a+(n-1)*k} ada di urutan ke berapa?",
+          "answer": "n",
+          "mode": "input",
+          "explain": "{=a+(n-1)*k} − {a} = {=(n-1)*k}. Itu sama dengan {=n-1} loncatan dari {k}. Ditambah bilangan pertama, urutannya ke-{answer}."
+        }
+      }
+    ]
+  }
+}

@@ -10,6 +10,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import {
   activeToggleSchema,
@@ -29,6 +30,7 @@ import { ZodPipe } from '../common/zod.pipe.js';
 import { DB, type Db } from '../db/db.module.js';
 import { children, parents, staffUsers } from '../db/schema.js';
 import { AffiliateService } from '../affiliate/affiliate.service.js';
+import { periodQuerySchema, resolvePeriod, type PeriodQuery } from '../reports/period.js';
 import { ReportsService } from '../reports/reports.service.js';
 
 const staffPublic = {
@@ -234,8 +236,10 @@ export class AdminUsersController {
     return this.reports.overview();
   }
 
+  /** Tanpa query = sepanjang waktu; dengan `days` / `year` (+ `month`) = periode ringkasan (D-100). */
   @Get('reports/skills')
-  skillStats() {
-    return this.reports.skillStats();
+  skillStats(@Query(new ZodPipe(periodQuerySchema)) q: PeriodQuery) {
+    const hasPeriod = q.days !== undefined || q.year !== undefined;
+    return this.reports.skillStats(hasPeriod ? resolvePeriod(q) : undefined);
   }
 }

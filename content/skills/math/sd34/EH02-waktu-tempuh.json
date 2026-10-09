@@ -1,0 +1,52 @@
+{
+  "id": "math.sd34.eh2.waktu-tempuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 2,
+  "title": "Kecepatan & kerja — Level 2 — Waktu tempuh",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menghitung waktu tempuh dari jarak dan kecepatan"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "v": {
+        "values": [30, 40, 48, 60, 72, 80]
+      },
+      "t": {
+        "values": [30, 45, 75, 90, 105, 120, 150]
+      }
+    },
+    "derived": {
+      "d": "v * t / 60"
+    },
+    "constraint": "(v * t) % 60 == 0",
+    "prompt": "Jarak rumah Nenek {d} km. Ayah mengendarai mobil dengan kecepatan tetap {v} km/jam. Lama perjalanan Ayah adalah … menit.",
+    "answer": "t",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "d * v / 60",
+        "tag": "dikali"
+      },
+      {
+        "expr": "t + 15",
+        "tag": "lain"
+      },
+      {
+        "expr": "t - 15",
+        "tag": "lain-2"
+      }
+    ],
+    "choices": 4,
+    "explain": "Waktu = jarak : kecepatan = {d} : {v} jam. Dalam menit: {d} × 60 : {v} = {answer} menit."
+  }
+}

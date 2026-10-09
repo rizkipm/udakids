@@ -2,7 +2,7 @@
 
 Status: **Usulan**, menunggu keputusan pemilik produk (lihat bagian 8). Ditulis 2026-10-05, diperbarui hari yang
 sama: materi calistung menjadi **pelajaran dulu, latihan kemudian** (bagian 2A) dan penempatan jenjang (bagian 2B).
-Pembaca: pemilik produk, tim konten, dan tim pengembang Udakids.
+Pembaca: pemilik produk, tim konten, dan tim pengembang UdaKids.
 
 ## 1. Ringkasan
 
@@ -14,10 +14,10 @@ Usulannya adalah **Studio Soal** di panel admin, dengan dua pintu masuk:
 1. **Dari formulir.** Admin memilih mata pelajaran, grade, topik, jumlah level, dan tingkat. Sistem membuat
    satu topik lengkap (10 level, pola D-023) sebagai **draft**.
 2. **Dari sumber PDF.** Admin mengunggah PDF materi calistung. Sistem membaca tiap halaman, mengenali tujuan
-   belajar dan bentuk latihannya, lalu mengusulkan topik dan level Udakids yang setara sebagai draft, lengkap
+   belajar dan bentuk latihannya, lalu mengusulkan topik dan level UdaKids yang setara sebagai draft, lengkap
    dengan catatan halaman sumbernya.
 
-Prinsip utamanya: **AI hanya menulis draf template skill. Yang menjamin mutu tetap sistem Udakids** (skema Zod,
+Prinsip utamanya: **AI hanya menulis draf template skill. Yang menjamin mutu tetap sistem UdaKids** (skema Zod,
 validator 200 soal, generator yang menghitung jawaban) **dan admin yang menyetujui.** Tidak ada soal yang tayang
 ke anak tanpa lolos validator dan disetujui manusia.
 
@@ -33,9 +33,9 @@ Kabar baiknya, fondasinya sudah ada sehingga pekerjaan ini lebih kecil dari keli
 
 ## 2. Analisa contoh lembar kerja
 
-Sembilan contoh yang dikirim dipetakan ke kemampuan Udakids saat ini:
+Sembilan contoh yang dikirim dipetakan ke kemampuan UdaKids saat ini:
 
-| #   | Contoh                                    | Bentuk di Udakids                              | Status                                                  |
+| #   | Contoh                                    | Bentuk di UdaKids                              | Status                                                  |
 | --- | ----------------------------------------- | ---------------------------------------------- | ------------------------------------------------------- |
 | 1   | Kartu huruf "a, apel" + menebalkan huruf  | Materi pengenalan huruf + **menebalkan huruf** | Materi bisa; **menebalkan belum ada** (interaksi baru)  |
 | 2   | Cari huruf "a" di antara lingkaran        | `tap-all` dengan pilihan huruf                 | Bisa sekarang                                           |
@@ -93,7 +93,7 @@ dan anak yang mulai bisa membaca terbantu oleh sorotan teks.
   laporan orang tua.
 - Tidak menyimpan rekaman suara anak atau gambar tulisan anak.
 - Animasi menghormati pengaturan "kurangi gerakan" di perangkat, dan pelajaran tetap bisa dibuka offline.
-- Pelajaran bisa dilewati. Latihan tidak dikunci menunggu pelajaran selesai, tapi Udakids menyarankannya.
+- Pelajaran bisa dilewati. Latihan tidak dikunci menunggu pelajaran selesai, tapi UdaKids menyarankannya.
 
 **Dari PDF:** Studio membaca PDF lalu menghasilkan **dua draf terpisah**: draf pelajaran (layar-layar di atas)
 dan draf latihan (template soal). Keduanya direview admin. Halaman kartu huruf di PDF menjadi pelajaran, sedangkan
@@ -104,7 +104,7 @@ halaman "cari huruf" atau "cocokkan" menjadi latihan.
 **Rujukan:** Kurikulum Merdeka PAUD menempatkan calistung sebagai **fondasi literasi dan numerasi awal lewat
 bermain**, bukan latihan menghafal. Gerakan Transisi PAUD ke SD yang Menyenangkan (Kemendikbudristek, 2023)
 juga menegaskan bahwa calistung tidak menjadi syarat masuk SD. Membaca dan menulis secara formal baru dimulai di
-Kelas 1 SD (Fase A). Metode membaca bahasa Indonesia memakai suku kata, sesuai aturan Udakids.
+Kelas 1 SD (Fase A). Metode membaca bahasa Indonesia memakai suku kata, sesuai aturan UdaKids.
 
 **Rekomendasi:** satu buku **Baca Tulis** per jenjang, memakai grade yang sudah ada, dan berhitung **tidak dibuat
 buku baru**:
@@ -134,7 +134,7 @@ ketiganya bisa dikelompokkan dalam rak **Calistung** bersama buku Math yang sesu
 
 | Aturan                                                                               | Dampak pada rencana                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hak cipta sumber** (CLAUDE.md: dilarang menyalin soal/aset)                        | Beberapa contoh bertanda "worksheet by @naashare", artinya milik pihak lain. PDF hanya boleh dipakai sebagai **acuan tujuan belajar dan bentuk latihan**. Kalimat, gambar, dan tata letaknya tidak disalin. Soal Udakids ditulis ulang dan memakai ilustrasi sendiri. PDF milik sendiri atau berlisensi boleh diadaptasi lebih dekat. Setiap PDF wajib diberi status lisensi saat diunggah. |
+| **Hak cipta sumber** (CLAUDE.md: dilarang menyalin soal/aset)                        | Beberapa contoh bertanda "worksheet by @naashare", artinya milik pihak lain. PDF hanya boleh dipakai sebagai **acuan tujuan belajar dan bentuk latihan**. Kalimat, gambar, dan tata letaknya tidak disalin. Soal UdaKids ditulis ulang dan memakai ilustrasi sendiri. PDF milik sendiri atau berlisensi boleh diadaptasi lebih dekat. Setiap PDF wajib diberi status lisensi saat diunggah. |
 | **AI dilarang di area anak** (PRD A17)                                               | AI hanya ada di panel admin. Anak tidak pernah berinteraksi dengan AI, dan soal yang tayang adalah template statis hasil review.                                                                                                                                                                                                                                                            |
 | **Data anak minimal**                                                                | Tidak ada data anak, nama, atau skor yang dikirim ke penyedia AI. Yang dikirim hanya parameter topik dan isi PDF.                                                                                                                                                                                                                                                                           |
 | **Engine deterministik, tanpa `eval`**                                               | AI menulis JSON template yang divalidasi Zod. Jawaban soal matematika dihitung generator, bukan ditulis AI.                                                                                                                                                                                                                                                                                 |
@@ -162,7 +162,7 @@ Admin ──────┤                                                  ├
                                content:export ─▶ commit (tetap tercatat di git dan CI)
 ```
 
-**Standar Udakids** yang dipakai AI berasal dari repo, bukan dari ingatan prompt: skema template, daftar family
+**Standar UdaKids** yang dipakai AI berasal dari repo, bukan dari ingatan prompt: skema template, daftar family
 dan aset yang tersedia, pola 10 level (D-023), pola sains TIMSS, aturan UX anak, dan 2–3 skill contoh terbaik
 dari topik serupa. Dengan begitu, hasilnya konsisten dengan 3.971 skill yang sudah ada.
 
@@ -193,7 +193,7 @@ Setiap fase bisa dirilis sendiri dan langsung memberi manfaat.
 - Unggah PDF (hanya admin, maks mis. 50 halaman/20 MB, disimpan privat di server, tidak tampil ke anak atau
   orang tua) dengan status lisensi wajib: milik sendiri / berlisensi / acuan saja.
 - Sistem membaca tiap halaman (teks + gambar halaman) dan menghasilkan **kartu sumber**: tujuan belajar, bentuk
-  latihan, perkiraan grade, dan usulan pemetaan ke topik Udakids yang sudah ada atau topik baru.
+  latihan, perkiraan grade, dan usulan pemetaan ke topik UdaKids yang sudah ada atau topik baru.
 - Admin memilih halaman atau kartu yang mau dijadikan pelajaran atau latihan, lalu alurnya masuk ke Fase 1
   (latihan) atau Fase 3 (pelajaran).
 - Cek cakupan: halaman mana yang sudah punya skill dan mana yang belum, supaya tumpukan PDF bisa dicicil rapi.
@@ -233,7 +233,7 @@ Setiap fase bisa dirilis sendiri dan langsung memberi manfaat.
 | Biaya AI membengkak                  | Batas harian, cache hasil per PDF, dan model hemat untuk tahap baca halaman.                               |
 | Soal kembar dengan yang sudah ada    | Cek sidik jari soal dan kemiripan judul atau tujuan sebelum draft dibuat.                                  |
 | Gambar yang dibutuhkan belum ada     | Antrean aset. Draft tidak bisa disetujui sebelum gambarnya tersedia.                                       |
-| Ketergantungan pada satu penyedia AI | Lapisan adaptor penyedia, seperti `SyncAdapter`. Format keluaran tetap template Udakids.                   |
+| Ketergantungan pada satu penyedia AI | Lapisan adaptor penyedia, seperti `SyncAdapter`. Format keluaran tetap template UdaKids.                   |
 
 ## 7. Yang tidak berubah
 

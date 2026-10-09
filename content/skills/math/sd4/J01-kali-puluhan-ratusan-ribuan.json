@@ -1,0 +1,76 @@
+{
+  "id": "math.sd4.j1.kali-puluhan-ratusan-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 1,
+  "title": "Perkalian dengan bilangan satu angka — Level 1 — Kali puluhan, ratusan, ribuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 9],
+            "d": [2, 9],
+            "z": {
+              "values": [10, 100, 1000]
+            }
+          },
+          "prompt": "{k} × {=d*z} = …",
+          "answer": "k * d * z",
+          "distractors": [
+            {
+              "expr": "k * d * z * 10",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "k * d * z / 10",
+              "tag": "nol-kurang"
+            },
+            {
+              "expr": "(k + d) * z",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Kalikan angka depannya dulu: {k} × {d} = {=k*d}. Lalu tambahkan nol sebanyak nol pada {=d*z}. Jadi {k} × {=d*z} = {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 9],
+            "d": [2, 9]
+          },
+          "prompt": "{k} × {=d*100} = …",
+          "answer": "k * d * 100",
+          "mode": "input",
+          "explain": "{=d*100} = {d} ratusan. {k} × {d} ratusan = {=k*d} ratusan = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 9],
+            "d": [2, 9]
+          },
+          "prompt": "{k} × {=d*1000} = …",
+          "answer": "k * d * 1000",
+          "mode": "input",
+          "explain": "{=d*1000} = {d} ribuan. {k} × {d} ribuan = {=k*d} ribuan = {answer}."
+        }
+      }
+    ]
+  }
+}

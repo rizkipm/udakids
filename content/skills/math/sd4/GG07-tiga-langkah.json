@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.gg7.tiga-langkah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 7,
+  "title": "Soal cerita multi-langkah — Level 7 — Tiga langkah",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 8],
+            "k": {
+              "values": [12, 24, 48]
+            },
+            "m": [2, 6],
+            "e": [2, 20]
+          },
+          "constraint": "(g * k - e) % m == 0 && g * k > e",
+          "prompt": "Sekolah membeli {g} kardus air mineral. Setiap kardus berisi {k} botol. Sebanyak {e} botol diminum, sisanya dibagi sama banyak ke {m} kelas. Berapa botol untuk setiap kelas?",
+          "answer": "(g * k - e) / m",
+          "distractors": [
+            {
+              "expr": "g * k / m",
+              "tag": "lupa-kurang"
+            },
+            {
+              "expr": "g * k - e",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "(g * k - e) / m + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Langkah 1: semua botol {g} × {k} = {=g*k}. Langkah 2: sisa {=g*k} − {e} = {=g*k-e}. Langkah 3: {=g*k-e} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "values": [20000, 30000, 50000]
+            },
+            "n": [2, 6],
+            "h": {
+              "values": [2000, 2500, 3000, 3500, 4000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "u > n * h && (u - n * h) % 1000 == 0",
+          "prompt": "{nama} punya uang Rp{u}. Ia membeli {n} roti seharga Rp{h} per roti. Sisa uangnya dibagi dua sama banyak dengan adiknya. Berapa rupiah yang diterima adik?",
+          "answer": "(u - n * h) / 2",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "u - n * h",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "u / 2",
+              "tag": "lupa-belanja"
+            },
+            {
+              "expr": "(u - n * h) / 2 + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(u - n * h) / 2 + 500",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: harga roti {n} × {h} = {=n*h}. Langkah 2: sisa uang {u} − {=n*h} = {=u-n*h}. Langkah 3: dibagi dua, {=u-n*h} : 2 = {=(u-n*h)/2}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 8],
+            "k": [5, 12],
+            "j": [3, 9],
+            "e": [20, 99]
+          },
+          "constraint": "g * k * j > e",
+          "prompt": "Sebuah kebun punya {g} baris pohon jeruk. Setiap baris ada {k} pohon. Setiap pohon menghasilkan {j} kg jeruk. Sebanyak {e} kg jeruk dijual. Berapa kg jeruk yang tersisa?",
+          "answer": "g * k * j - e",
+          "unit": "kg",
+          "mode": "input",
+          "explain": "Langkah 1: banyak pohon {g} × {k} = {=g*k}. Langkah 2: semua jeruk {=g*k} × {j} = {=g*k*j} kg. Langkah 3: {=g*k*j} − {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

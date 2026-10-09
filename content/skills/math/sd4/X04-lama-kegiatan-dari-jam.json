@@ -1,0 +1,134 @@
+{
+  "id": "math.sd4.x4.lama-kegiatan-dari-jam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 4,
+  "title": "Waktu dan lama kegiatan — Level 4 — Lama kegiatan dari jam",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [6, 9],
+            "m": {
+              "values": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "range": [20, 170],
+              "step": 5
+            }
+          },
+          "prompt": "Jam pertama menunjukkan waktu mulai membersihkan kelas. Jam kedua menunjukkan waktu selesai, pada pagi yang sama. Berapa menit lamanya?",
+          "answer": "d",
+          "explain": "Hitung dari waktu mulai sampai jam bulat berikutnya, lalu tambahkan jam penuh dan menit sisanya. Dari jam pertama sampai jam kedua lamanya {answer}.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "h2 <= 11 && m2 != m",
+          "unit": "menit",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": "=m"
+            },
+            {
+              "kind": "clock",
+              "hour": "=h2",
+              "minute": "=m2"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "(h2 * 100 + m2) - (h * 100 + m)",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "d + 60",
+              "tag": "lebih-satu-jam"
+            },
+            {
+              "expr": "abs(d - 60)",
+              "tag": "kurang-satu-jam"
+            },
+            {
+              "expr": "d - 5",
+              "tag": "lain"
+            },
+            {
+              "expr": "d + 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 17],
+            "m": {
+              "values": [0, 10, 15, 20, 30, 40, 45, 50]
+            },
+            "d": {
+              "range": [25, 150],
+              "step": 5
+            }
+          },
+          "prompt": "Jam digital pertama menunjukkan waktu mulai bermain bola. Jam kedua menunjukkan waktu selesai. Berapa menit lamanya?",
+          "answer": "d",
+          "explain": "Hitung sampai jam bulat berikutnya, lalu tambahkan sisanya. Ingat 1 jam = 60 menit, bukan 100 menit. Lamanya {answer}.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 != m",
+          "unit": "menit",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            },
+            {
+              "kind": "digital",
+              "hour": "=h2",
+              "minute": "=m2"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "(h2 * 100 + m2) - (h * 100 + m)",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "d + 60",
+              "tag": "lebih-satu-jam"
+            },
+            {
+              "expr": "d + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "d - 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

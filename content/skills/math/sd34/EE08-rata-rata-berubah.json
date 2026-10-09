@@ -1,0 +1,89 @@
+{
+  "id": "math.sd34.ee8.rata-rata-berubah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 8,
+  "title": "Statistika — Level 8 — Rata-rata berubah",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Statistika",
+    "indikator": "Menentukan data yang diambil/ditambah dari perubahan rata-rata"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 10],
+            "m": [5, 20],
+            "m2": [4, 21]
+          },
+          "derived": {
+            "w": "n * m - (n - 1) * m2"
+          },
+          "constraint": "w >= 1 && w <= 60 && m2 != m",
+          "prompt": "Rata-rata berat {n} kotak adalah {m} kg. Setelah satu kotak diambil, rata-rata berat {=n-1} kotak sisanya {m2} kg. Berat kotak yang diambil adalah … kg.",
+          "answer": "w",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "m - m2",
+              "tag": "selisih-rata-rata"
+            },
+            {
+              "expr": "m",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "w + m2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Berat semua kotak = {n} × {m} = {=n*m}. Berat sisanya = {=n-1} × {m2} = {=(n-1)*m2}. Kotak yang diambil = {=n*m} − {=(n-1)*m2} = {answer} kg."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 9],
+            "m": [140, 165],
+            "dm": [1, 4]
+          },
+          "derived": {
+            "m2": "m + dm",
+            "w": "(n + 1) * m2 - n * m"
+          },
+          "prompt": "Rata-rata tinggi {n} pemain basket {m} cm. Seorang pemain baru bergabung sehingga rata-rata tinggi mereka menjadi {m2} cm. Tinggi pemain baru adalah … cm.",
+          "answer": "w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "m2",
+              "tag": "rata-rata-baru"
+            },
+            {
+              "expr": "m + dm * n",
+              "tag": "lain"
+            },
+            {
+              "expr": "w - dm",
+              "tag": "lain-2"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah tinggi awal = {n} × {m} = {=n*m}. Jumlah sesudahnya = {=n+1} × {m2} = {=(n+1)*m2}. Tinggi pemain baru = {answer} cm."
+        }
+      }
+    ]
+  }
+}

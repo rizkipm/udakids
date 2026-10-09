@@ -1,0 +1,146 @@
+{
+  "id": "math.sd4.l7.memeriksa-dengan-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 7,
+  "title": "Pembagian bersusun — Level 7 — Memeriksa dengan perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [21, 199],
+            "d": {
+              "values": [0, 0, 0, 1, -1, 10, -10]
+            }
+          },
+          "derived": {
+            "t": "m * q",
+            "s": "q + d"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "t < 1000",
+          "prompt": "{nama} menghitung {t} : {m} = {s}. Periksa dengan perkalian {s} × {m}. Apakah jawaban {nama} tepat?",
+          "answer": "1 - min(abs(d), 1)",
+          "labels": {
+            "1": "Tepat",
+            "0": "Belum tepat"
+          },
+          "explain": "Hitung {s} × {m} = {=s*m}. Jawaban tepat jika hasil kali sama dengan {t}. Hasil bagi yang tepat adalah {q}, karena {q} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [21, 999]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 10000",
+          "prompt": "Jika {t} : {m} = {q}, maka {q} × {m} = …",
+          "answer": "t",
+          "distractors": [
+            {
+              "expr": "t + m",
+              "tag": "lebih-pembagi"
+            },
+            {
+              "expr": "t - m",
+              "tag": "kurang-pembagi"
+            },
+            {
+              "expr": "q + m",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pembagian dan perkalian saling berkebalikan. Hasil bagi × pembagi = bilangan yang dibagi, jadi {q} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [112, 999],
+            "d": {
+              "values": [0, 0, 0, 1, -1, 10, 100]
+            }
+          },
+          "derived": {
+            "t": "m * q",
+            "s": "q + d"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "t >= 1000 && t < 10000",
+          "prompt": "{nama} menghitung {t} : {m} = {s}. Periksa dengan perkalian {s} × {m}. Apakah jawaban {nama} tepat?",
+          "answer": "1 - min(abs(d), 1)",
+          "labels": {
+            "1": "Tepat",
+            "0": "Belum tepat"
+          },
+          "explain": "Hitung {s} × {m} = {=s*m}. Jawaban tepat jika hasil kalinya {t}. Hasil bagi yang tepat adalah {q}."
+        }
+      }
+    ]
+  }
+}

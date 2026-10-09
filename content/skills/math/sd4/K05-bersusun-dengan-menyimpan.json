@@ -1,0 +1,70 @@
+{
+  "id": "math.sd4.k5.bersusun-dengan-menyimpan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 5,
+  "title": "Perkalian dua angka — Level 5 — Bersusun dengan menyimpan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [23, 99],
+            "t": [2, 9],
+            "s": [2, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "Hitung bersusun: {a} × {b} = …",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * s + a * t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b + 100",
+              "tag": "simpan-lebih"
+            },
+            {
+              "expr": "a * b - 10",
+              "tag": "lupa-simpan"
+            }
+          ],
+          "explain": "Bersusun dua baris. Baris pertama: {a} × {s} = {=a*s}. Baris kedua: {a} × {=t*10} = {=a*t*10} (tulis 0 di satuan dulu). Jumlahkan: {=a*s} + {=a*t*10} = {answer}."
+        },
+        "weight": 1.5
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [23, 99],
+            "t": [2, 9],
+            "s": [2, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {b} = …",
+          "answer": "a * b",
+          "mode": "input",
+          "explain": "Bersusun dua baris. Baris pertama: {a} × {s} = {=a*s}. Baris kedua: {a} × {=t*10} = {=a*t*10} (tulis 0 di satuan dulu). Jumlahkan: {=a*s} + {=a*t*10} = {answer}."
+        }
+      }
+    ]
+  }
+}

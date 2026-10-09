@@ -21,6 +21,7 @@ export * from './content/speech-text.js';
 export * from './content/lesson.js';
 export * from './content/auto-lesson.js';
 export * from './content/voice-allow.js';
+export * from './content/voice-split.js';
 export * from './content/peraga.js';
 export * from './content/ai-image.js';
 export * from './content/site.js';

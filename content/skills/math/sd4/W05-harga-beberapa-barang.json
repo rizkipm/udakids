@@ -1,0 +1,192 @@
+{
+  "id": "math.sd4.w5.harga-beberapa-barang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 5,
+  "title": "Uang dan literasi keuangan — Level 5 — Harga beberapa barang",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [1500, 12500],
+              "step": 500
+            },
+            "n": [2, 9]
+          },
+          "prompt": "Harga 1 {x} Rp{h}. Berapa harga {n} {x}?",
+          "answer": "n * h",
+          "explain": "Barang yang sama: kalikan harganya. {n} × {h} = {answer}.",
+          "words": {
+            "x": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "n * h - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(n - 1) * h",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n * h + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(n * h) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(n * h) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(n * h) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [1000, 15000],
+              "step": 500
+            },
+            "n": [2, 8]
+          },
+          "prompt": "Harga {n} {x} Rp{t}. Semua {x} harganya sama. Berapa harga 1 {x}?",
+          "answer": "t / n",
+          "explain": "Bagi harga semua barang dengan banyak barang. {t} : {n} = {answer}. Periksa: {n} × {answer} = {t}.",
+          "derived": {
+            "t": "h * n"
+          },
+          "words": {
+            "x": ["roti", "nasi bungkus", "kue lapis", "pisang goreng", "bakso", "martabak manis"]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "t / n - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "t / n + 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "t * n",
+              "tag": "mengali"
+            },
+            {
+              "expr": "(t / n) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(t / n) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(t / n) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [6, 10, 12]
+            },
+            "p": {
+              "range": [5000, 25000],
+              "step": 500
+            },
+            "k": [2, 4]
+          },
+          "prompt": "Satu pak berisi {n} {x} dan harganya Rp{p}. {nama} membeli {k} pak. Berapa yang harus dibayar?",
+          "answer": "k * p",
+          "explain": "Harga dihitung per pak, bukan per buah. {k} × {p} = {answer}.",
+          "words": {
+            "x": ["pensil", "spidol", "susu kotak", "roti"],
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "k * n * p",
+              "tag": "dikali-isi"
+            },
+            {
+              "expr": "(k - 1) * p",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(k + 1) * p",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(k * p) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(k * p) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(k * p) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

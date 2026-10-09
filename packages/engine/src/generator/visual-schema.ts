@@ -16,13 +16,51 @@ import {
   type SolidId,
 } from './assets.js';
 import { GLYPH_IDS } from './glyphs.js';
-import type { Visual } from './item.js';
+import type { FigureShape, Visual } from './item.js';
 
 const objectId = z.enum(OBJECT_IDS as [ObjectId, ...ObjectId[]]);
 const color = z.enum(COLORS);
 const senseId = z.enum(SENSE_IDS as [SenseId, ...SenseId[]]);
 const count = z.number().int().min(0).max(30);
 const layout = z.enum(['row', 'rows', 'scatter', 'ring', 'grid']);
+
+/** Koordinat gambar `figure` (D-101). */
+const coord = z.number().min(-1000).max(1000);
+const pt = z.tuple([coord, coord]);
+const fill = z.enum(['shade', 'soft']).optional();
+const figureShape: z.ZodType<FigureShape> = z.discriminatedUnion('t', [
+  z.strictObject({
+    t: z.literal('poly'),
+    pts: z.array(pt).min(2).max(12),
+    fill,
+    open: z.boolean().optional(),
+    dashed: z.boolean().optional(),
+  }),
+  z.strictObject({
+    t: z.literal('seg'),
+    a: pt,
+    b: pt,
+    dashed: z.boolean().optional(),
+    text: z.string().min(1).max(16).optional(),
+    ticks: z.number().int().min(1).max(3).optional(),
+  }),
+  z.strictObject({
+    t: z.literal('point'),
+    at: pt,
+    name: z.string().min(1).max(3).optional(),
+    coord: z.boolean().optional(),
+    pos: z.enum(['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw']).optional(),
+  }),
+  z.strictObject({
+    t: z.literal('circle'),
+    c: pt,
+    r: z.number().positive().max(1000),
+    fill,
+    center: z.boolean().optional(),
+  }),
+  z.strictObject({ t: z.literal('right'), at: pt, a: pt, b: pt }),
+  z.strictObject({ t: z.literal('label'), at: pt, text: z.string().min(1).max(16) }),
+]);
 
 /** Skema Zod untuk Visual — dipakai memvalidasi soal manual dari admin. */
 export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
@@ -223,6 +261,22 @@ export const visualSchema: z.ZodType<Visual> = z.lazy(() =>
       rows: z.number().int().min(2).max(3),
       show: z.enum(['holed', 'piece']),
       index: z.number().int().min(0).max(8),
+    }),
+    z.strictObject({
+      kind: z.literal('figure'),
+      axes: z
+        .strictObject({
+          xMin: coord,
+          xMax: coord,
+          yMin: coord,
+          yMax: coord,
+        })
+        .refine((a) => a.xMin < a.xMax && a.yMin < a.yMax, 'rentang sumbu terbalik')
+        .refine((a) => a.xMax - a.xMin <= 30 && a.yMax - a.yMin <= 30, 'sumbu maks. 30 petak')
+        .optional(),
+      grid: z.boolean().optional(),
+      shapes: z.array(figureShape).min(1).max(16),
+      caption: z.string().max(80).optional(),
     }),
     z.strictObject({
       kind: z.literal('measure'),

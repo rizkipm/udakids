@@ -1,0 +1,96 @@
+{
+  "id": "math.sd4.m1.membagi-benda-dan-sisanya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 1,
+  "title": "Pembagian bersisa dan soal cerita — Level 1 — Membagi benda dan sisanya",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "t": [7, 30]
+          },
+          "words": {
+            "benda": ["apel", "jeruk", "kue", "permen"]
+          },
+          "constraint": "t % m != 0 && t >= 2 * m",
+          "prompt": "Ada {t} {benda} dibagi sama banyak ke {m} piring. Berapa {benda} yang tersisa?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{benda}",
+              "count": "=t",
+              "layout": "grid"
+            }
+          ],
+          "answer": "t % m",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            },
+            {
+              "expr": "m - t % m",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "t % m + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Isi setiap piring satu per satu sampai tidak cukup lagi. {m} × {=floor(t/m)} = {=m*floor(t/m)}. Yang tersisa {t} − {=m*floor(t/m)} = {answer}. Sisa {answer} lebih kecil dari {m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "t": [7, 30]
+          },
+          "words": {
+            "benda": ["apel", "jeruk", "kue", "permen"]
+          },
+          "constraint": "t % m != 0 && t >= 2 * m",
+          "prompt": "Ada {t} {benda} dibagi sama banyak ke {m} piring. Berapa {benda} di setiap piring?",
+          "stimulus": [
+            {
+              "kind": "objects",
+              "object": "{benda}",
+              "count": "=t",
+              "layout": "grid"
+            }
+          ],
+          "answer": "floor(t / m)",
+          "distractors": [
+            {
+              "expr": "floor(t / m) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "{m} × {answer} = {=m*floor(t/m)}, masih kurang dari {t}. Sisa {=t%m} {benda} tidak cukup untuk satu putaran lagi. Jadi setiap piring {answer}, sisa {=t%m}."
+        }
+      }
+    ]
+  }
+}

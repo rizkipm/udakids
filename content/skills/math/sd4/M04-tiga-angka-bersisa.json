@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.m4.tiga-angka-bersisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 4,
+  "title": "Pembagian bersisa dan soal cerita — Level 4 — Tiga angka dibagi bersisa",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [15, 199],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t >= 100 && t < 1000",
+          "prompt": "{t} : {m} = … sisa {r}",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Bagi bersusun: bagi, kali, kurang, turunkan. Yang tidak bisa dibagi lagi adalah sisa. {t} : {m} = {q} sisa {r}. Periksa: {q} × {m} + {r} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [15, 199],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t >= 100 && t < 1000",
+          "prompt": "{t} : {m} = {q} sisa …",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "m - r",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + m",
+              "tag": "sisa-terlalu-besar"
+            }
+          ],
+          "explain": "Bagi bersusun: bagi, kali, kurang, turunkan. Yang tidak bisa dibagi lagi adalah sisa. {t} : {m} = {q} sisa {r}. Periksa: {q} × {m} + {r} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [15, 199],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t >= 100 && t < 1000",
+          "prompt": "Berapa sisa dari {t} : {m}?",
+          "answer": "r",
+          "mode": "input",
+          "explain": "Bagi bersusun: bagi, kali, kurang, turunkan. Yang tidak bisa dibagi lagi adalah sisa. {t} : {m} = {q} sisa {r}. Periksa: {q} × {m} + {r} = {t}."
+        }
+      }
+    ]
+  }
+}

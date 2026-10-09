@@ -1,0 +1,103 @@
+{
+  "id": "math.sd4.s3.penjumlahan-penyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 3,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 3 — Penjumlahan penyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "constraint": "a + b <= d",
+          "prompt": "{a}/{d} + {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a + b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a + b - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            },
+            {
+              "num": "a * b",
+              "den": "d",
+              "tag": "dikali"
+            }
+          ],
+          "explain": "Penyebutnya sama, jadi jumlahkan pembilangnya saja: {a} + {b} = {=a+b}. Penyebut tetap {d}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [6, 12],
+            "a": [1, 6],
+            "b": [1, 6],
+            "c": [1, 6]
+          },
+          "constraint": "a + b + c <= d",
+          "prompt": "{a}/{d} + {b}/{d} + {c}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b + c",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b + c",
+              "den": "3 * d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a + b + c - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            },
+            {
+              "num": "a + b + c + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "lupa-satu-suku"
+            }
+          ],
+          "explain": "Penyebutnya sama, jadi jumlahkan semua pembilang: {a} + {b} + {c} = {=a+b+c}. Penyebut tetap {d}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

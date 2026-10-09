@@ -1,0 +1,136 @@
+{
+  "id": "math.sd4.u5.desimal-dalam-ukuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 5,
+  "title": "Desimal persepuluhan dan perseratusan — Level 5 — Desimal dalam ukuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99]
+          },
+          "prompt": "{a} cm = … m",
+          "answer": "a / 100",
+          "explain": "1 m = 100 cm, jadi 1 cm = 1/100 m. {a} cm = {a}/100 m = {answer}.",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9],
+            "a": [1, 99]
+          },
+          "prompt": "{m} m {a} cm = … m",
+          "answer": "m + a / 100",
+          "explain": "{a} cm = {=a/100} m. Jadi {m} m {a} cm = {m} + {=a/100} = {answer}.",
+          "constraint": "a % 10 != 0",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "m + a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "m + a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "m * 100 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": {
+              "range": [100, 900],
+              "step": 100
+            }
+          },
+          "prompt": "{g} g = … kg",
+          "answer": "g / 1000",
+          "explain": "1 kg = 1.000 g, jadi 100 g = 0,1 kg. {g} g = {=g/100} × 0,1 kg = {answer}.",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "g / 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "g / 10000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "g / 1000 + 1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "range": [100, 900],
+              "step": 100
+            }
+          },
+          "prompt": "{v} mL = … liter",
+          "answer": "v / 1000",
+          "explain": "1 liter = 1.000 mL, jadi 100 mL = 0,1 liter. {v} mL = {answer}.",
+          "unit": "liter",
+          "distractors": [
+            {
+              "expr": "v / 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "v / 10000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "v / 1000 + 1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

@@ -1,318 +1,255 @@
+import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
-  ALL_SHAPE_IDS,
-  SHAPE_IDS,
   catalogSchema,
+  chanceFavorable,
+  chanceOutcomes,
+  chanceReplay,
+  chanceSolution,
   checkAnswer,
+  coordReplay,
+  coordSolution,
+  evalNumber,
   generateItem,
-  itemProblems,
+  generateMockRound,
+  isMockSkill,
+  itemKey,
+  lessonPhotos,
+  lessonSchema,
+  mockConfigOf,
+  mockConfigSchema,
+  mockMaxPoints,
+  mockPointsRange,
+  peragaSchema,
   skillTemplateSchema,
-  validateTemplate,
+  usesGameFamily,
   visualSchema,
-  type Item,
+  type SkillTemplate,
 } from '../src/index.js';
 
-const tpl = (family: string, params: Record<string, unknown>, id = 'math.tkosn.f1.uji') =>
-  skillTemplateSchema.parse({
-    id,
-    version: 1,
-    domain: 'math',
-    grade: 'tkosn',
-    category: 'F',
-    order: 1,
-    title: 'Uji EMC',
-    tier: 'basic',
-    family,
-    params,
+const BOOK = new URL('../../../content/skills/math/sd34/', import.meta.url);
+const skills: SkillTemplate[] = readdirSync(BOOK)
+  .filter((f) => f.endsWith('.json') && !f.startsWith('_'))
+  .map((f) => skillTemplateSchema.parse(JSON.parse(readFileSync(new URL(f, BOOK), 'utf8'))));
+const catalog = catalogSchema.parse(
+  JSON.parse(readFileSync(new URL('_catalog.json', BOOK), 'utf8')),
+);
+const TOPICS = ['EA', 'EB', 'EC', 'ED', 'EE', 'EF', 'EG', 'EH'];
+const GROUP = 'EMC · Eduversal Mathematics Competition — Penyisihan Kelas 3–4 (soal versi 2022)';
+
+describe('evaluator: sqrt & pow (D-101)', () => {
+  it('menghitung akar dan pangkat kecil', () => {
+    expect(evalNumber('sqrt(a * a + b * b)', { a: 5, b: 12 })).toBe(13);
+    expect(evalNumber('pow(2, 8)', {})).toBe(256);
+    expect(evalNumber('pow(3, 0)', {})).toBe(1);
   });
-
-const items = (t: ReturnType<typeof tpl>, n = 60) =>
-  Array.from({ length: n }, (_, seed) => generateItem(t, { seed, band: seed % 3 }));
-
-const nums = (ids: string[]) => ids.map((id) => Number(id.slice(1)));
-
-describe('EMC TK (D-069): aset baru', () => {
-  it('belah ketupat bisa digambar tetapi bukan bentuk bawaan generator', () => {
-    expect(ALL_SHAPE_IDS).toContain('belah-ketupat');
-    expect(SHAPE_IDS).not.toContain('belah-ketupat');
-    expect(SHAPE_IDS).toHaveLength(6);
-  });
-
-  it('visual dadu hanya bermata 1–6', () => {
-    expect(visualSchema.safeParse({ kind: 'die', value: 6 }).success).toBe(true);
-    expect(visualSchema.safeParse({ kind: 'die', value: 3, color: 'merah' }).success).toBe(true);
-    expect(visualSchema.safeParse({ kind: 'die', value: 0 }).success).toBe(false);
-    expect(visualSchema.safeParse({ kind: 'die', value: 7 }).success).toBe(false);
-  });
-
-  it('kategori katalog boleh punya `group`', () => {
-    const base = { domain: 'math', grade: 'tkosn', title: 'Math TK (OSN)' };
-    const ok = catalogSchema.safeParse({
-      ...base,
-      categories: [{ code: 'F', title: 'Pasar buah', group: 'EMC', standalone: true }],
-    });
-    expect(ok.success).toBe(true);
-    const bad = catalogSchema.safeParse({
-      ...base,
-      categories: [{ code: 'F', title: 'Pasar buah', group: 'x' }],
-    });
-    expect(bad.success).toBe(false);
+  it('pangkat di luar 0–12 dan akar negatif bukan bilangan', () => {
+    expect(evalNumber('pow(2, 13)', {})).toBeNaN();
+    expect(evalNumber('pow(2, 1.5)', {})).toBeNaN();
+    expect(evalNumber('sqrt(0 - 4)', {})).toBeNaN();
   });
 });
 
-describe('number-order: ratusan, kelipatan, dan urutan menurun', () => {
-  it('ratusan bulat dari yang terkecil', () => {
-    const t = tpl('number-order', {
-      min: 100,
-      max: 900,
-      step: 100,
-      length: [3, 4],
-      consecutive: false,
+describe('visual figure (D-101)', () => {
+  it('menerima bidang koordinat dengan bangun, titik, siku-siku, dan label', () => {
+    const r = visualSchema.safeParse({
+      kind: 'figure',
+      axes: { xMin: -3, xMax: 6, yMin: -2, yMax: 5 },
+      shapes: [
+        {
+          t: 'poly',
+          pts: [
+            [0, 0],
+            [4, 0],
+            [4, 3],
+          ],
+          fill: 'shade',
+        },
+        { t: 'seg', a: [0, 0], b: [4, 0], text: '4 cm', ticks: 1 },
+        { t: 'point', at: [4, 3], name: 'C', coord: true, pos: 'ne' },
+        { t: 'right', at: [4, 0], a: [0, 0], b: [4, 3] },
+        { t: 'circle', c: [1, 1], r: 1, center: true },
+        { t: 'label', at: [2, 2], text: '12 cm²' },
+      ],
     });
-    for (const it of items(t)) {
-      const i = it.interaction;
-      if (i.type !== 'order') throw new Error(i.type);
-      const v = nums(i.answer);
-      expect(v.every((n) => n % 100 === 0 && n >= 100 && n <= 900)).toBe(true);
-      expect([...v].sort((a, b) => a - b)).toEqual(v);
-      expect(checkAnswer(it, i.answer).correct).toBe(true);
-    }
+    expect(r.success).toBe(true);
   });
-
-  it('dari yang terbesar', () => {
-    const t = tpl('number-order', {
-      min: 100,
-      max: 999,
-      length: [3, 4],
-      consecutive: false,
-      direction: 'desc',
-    });
-    for (const it of items(t)) {
-      const i = it.interaction;
-      if (i.type !== 'order') throw new Error(i.type);
-      const v = nums(i.answer);
-      expect([...v].sort((a, b) => b - a)).toEqual(v);
-      expect(v.every((n) => n >= 100)).toBe(true);
-      expect(it.prompt).toContain('paling besar');
-    }
-  });
-
-  it('berurutan dengan step mengikuti kelipatannya', () => {
-    const t = tpl('number-order', { min: 10, max: 90, step: 10, length: [3, 3] });
-    for (const it of items(t)) {
-      const i = it.interaction;
-      if (i.type !== 'order') throw new Error(i.type);
-      const [a, b, c] = nums(i.answer);
-      expect([b! - a!, c! - b!]).toEqual([10, 10]);
-    }
-  });
-
-  it('min ≥ max ditolak saat membuat soal', () => {
-    const t = tpl('number-order', { min: 50, max: 40 });
-    expect(validateTemplate(t, 3).join()).toMatch(/min harus lebih kecil/);
-  });
-
-  it('nilai bawaan tetap sama seperti sebelumnya (1..max, menaik)', () => {
-    const t = tpl('number-order', { max: 10, length: [3, 3] });
-    for (const it of items(t)) {
-      const i = it.interaction;
-      if (i.type !== 'order') throw new Error(i.type);
-      const v = nums(i.answer);
-      expect(v[1]! - v[0]!).toBe(1);
-      expect(v[0]).toBeGreaterThanOrEqual(1);
-      expect(it.reteach.say).toMatch(/^Kita hitung/);
-    }
+  it('menolak sumbu terbalik, bidang terlalu lebar, dan bangun kosong', () => {
+    const base = { kind: 'figure', shapes: [{ t: 'point', at: [0, 0] }] };
+    expect(
+      visualSchema.safeParse({ ...base, axes: { xMin: 3, xMax: 1, yMin: 0, yMax: 2 } }).success,
+    ).toBe(false);
+    expect(
+      visualSchema.safeParse({ ...base, axes: { xMin: -20, xMax: 20, yMin: 0, yMax: 2 } }).success,
+    ).toBe(false);
+    expect(visualSchema.safeParse({ kind: 'figure', shapes: [] }).success).toBe(false);
   });
 });
 
-describe('expr: labelSay untuk tanda <, >, =', () => {
-  const params = {
-    vars: { a: [1, 6], b: [1, 6] },
-    prompt: 'Tanda yang tepat: {a} … {b}',
-    stimulus: [
-      { kind: 'die', value: '=a' },
-      { kind: 'text', text: '…' },
-      { kind: 'die', value: '=b' },
-    ],
-    answer: '(a > b) * 1 + (a < b) * 2 + (a == b) * 3',
-    labels: { '1': '>', '2': '<', '3': '=' },
-    labelSay: { '1': 'lebih dari', '2': 'kurang dari', '3': 'sama dengan' },
-    explain: '{a} {answer_say} {b}.',
-  };
-
-  it('pilihan dibacakan dengan kata, pembahasan memakai {answer_say}', () => {
-    for (const it of items(tpl('expr', params))) {
-      const i = it.interaction;
-      if (i.type !== 'pick-one') throw new Error(i.type);
-      expect(i.choices.map((c) => c.say).sort()).toEqual([
-        'kurang dari',
-        'lebih dari',
-        'sama dengan',
-      ]);
-      const [a, b] = it.stimulus
-        .filter((v) => v.kind === 'die')
-        .map((v) => (v as { value: number }).value);
-      const word = a! > b! ? 'lebih dari' : a! < b! ? 'kurang dari' : 'sama dengan';
-      expect(it.reteach.say).toBe(`${a} ${word} ${b}.`);
-      expect(i.choices.find((c) => c.id === i.answer)?.say).toBe(word);
-    }
+describe('Harta Karun Koordinat (D-101)', () => {
+  const steps = [
+    { x: 1, y: 2 },
+    { x: -3, y: 0 },
+  ];
+  it('langkah berurutan; ketukan di titik lain = kekeliruan', () => {
+    expect(coordReplay(steps, coordSolution(steps))).toEqual({ found: 2, slips: 0, done: true });
+    expect(coordReplay(steps, ['2,1', '1,2', '-3,0'])).toEqual({ found: 2, slips: 1, done: true });
+    expect(coordReplay(steps, ['-3,0'])).toEqual({ found: 0, slips: 1, done: false });
   });
-
-  it('labelSay untuk kunci yang tidak ada di labels ditolak', () => {
-    expect(() => tpl('expr', { ...params, labelSay: { '9': 'apa' } })).toThrow(/labelSay/);
-  });
-});
-
-describe('match-pairs (tarik garis)', () => {
-  const pair = (n: number, shape: string) => ({
-    left: { visual: { kind: 'numeral', value: n }, say: String(n) },
-    right: { visual: { kind: 'shape', shape, color: 'biru', size: 'm' } },
-  });
-  const t = tpl('match-pairs', {
-    items: [
-      {
-        prompt: 'Pasangkan.',
-        pairs: [pair(1, 'lingkaran'), pair(2, 'segitiga'), pair(3, 'belah-ketupat')],
-      },
-      { prompt: 'Pasangkan lagi.', pairs: [pair(4, 'persegi'), pair(5, 'segi-lima')] },
-    ],
-  });
-
-  it('menghasilkan soal match yang valid dan jawaban kunci diterima', () => {
-    const seen = new Set<string>();
-    for (const it of items(t, 20) as Item[]) {
-      const i = it.interaction;
-      if (i.type !== 'match') throw new Error(i.type);
-      seen.add(it.prompt);
-      expect(itemProblems(it)).toEqual([]);
-      expect(i.right).toHaveLength(i.left.length);
-      expect(checkAnswer(it, i.answer).correct).toBe(true);
-      const wrong = { ...i.answer, l0: i.answer.l1!, l1: i.answer.l0! };
-      expect(checkAnswer(it, wrong).correct).toBe(false);
-    }
-    expect(seen.size).toBe(2);
-  });
-
-  it('butuh minimal 2 pasangan', () => {
-    expect(() =>
-      tpl('match-pairs', { items: [{ prompt: 'x', pairs: [pair(1, 'lingkaran')] }] }),
-    ).toThrow();
-  });
-});
-
-describe('bangun datar dengan belah ketupat', () => {
-  const pool = ['lingkaran', 'segitiga', 'persegi', 'persegi-panjang', 'belah-ketupat'];
-
-  it('real-world-shape memakai pool, termasuk ketupat → belah ketupat', () => {
-    const t = tpl('real-world-shape', { kind: 'flat', pool, choices: 3 });
-    const objects = new Set<string>();
-    for (const it of items(t, 120)) {
-      const obj = it.stimulus[0] as { object: string };
-      objects.add(obj.object);
-      const i = it.interaction;
-      if (i.type !== 'pick-one') throw new Error(i.type);
-      for (const c of i.choices) expect(pool).toContain((c.visual as { shape: string }).shape);
-      if (obj.object === 'ketupat') expect(i.answer).toBe('s-belah-ketupat');
-    }
-    expect(objects.has('ketupat')).toBe(true);
-  });
-
-  it('tanpa pool, ketupat dan belah ketupat tidak muncul (soal lama tidak berubah)', () => {
-    const t = tpl('real-world-shape', { kind: 'flat', choices: 3 });
-    for (const it of items(t, 120)) {
-      expect((it.stimulus[0] as { object: string }).object).not.toBe('ketupat');
-      const i = it.interaction;
-      if (i.type !== 'pick-one') throw new Error(i.type);
-      expect(i.answer).not.toBe('s-belah-ketupat');
-    }
-  });
-
-  it('persegi tidak pernah diputar 45° (tidak tertukar dengan belah ketupat)', () => {
-    const t = tpl('shape-tap', { kind: 'flat', pool, tiles: [6, 8] });
-    for (const it of items(t, 120)) {
-      const i = it.interaction;
-      if (i.type !== 'tap-all') throw new Error(i.type);
-      for (const c of i.choices) {
-        const v = c.visual as { shape: string; rotate?: number };
-        if (v.shape === 'persegi') expect(v.rotate).not.toBe(45);
-      }
-    }
-  });
-
-  it('shape-name mengenal belah ketupat bila ada di pool', () => {
-    const t = tpl('shape-name', { kind: 'flat', pool, choices: 3 });
-    const answers = new Set(
-      items(t, 120).map((it) => (it.interaction as { answer: string }).answer),
+  it('kekeliruan ke-2 mengakhiri soal sebagai belum tepat', () => {
+    const item = generateItem(
+      skills.find((s) => s.category === 'EB' && s.order === 11)!,
+      { seed: 3, band: 0 },
     );
-    expect(answers.has('w-belah-ketupat')).toBe(true);
+    expect(item.interaction.type).toBe('coord');
+    const it = item.interaction as Extract<typeof item.interaction, { type: 'coord' }>;
+    expect(checkAnswer(item, coordSolution(it.steps)).correct).toBe(true);
+    const off = `${it.xMax + 1},${it.yMax + 1}`;
+    expect(checkAnswer(item, [off, ...coordSolution(it.steps)]).points).toBe(5);
+    expect(checkAnswer(item, [off, off, ...coordSolution(it.steps)]).correct).toBe(false);
   });
 });
 
-describe('ESC Sains TK (D-070): lengkapi nama & tubuh', () => {
-  const t = tpl('spell-word', {
-    items: [
-      {
-        prompt: 'Lengkapi.',
-        stimulus: [{ kind: 'object', object: 'gurita' }],
-        word: 'GURITA',
-        show: 'G_R_T_',
-      },
-    ],
+describe('Eksperimen Peluang (D-101)', () => {
+  it('ruang sampel: dadu 6, dua dadu 36, n koin 2ⁿ, kantong = pasangan tak berurutan', () => {
+    expect(chanceOutcomes('die')).toHaveLength(6);
+    expect(chanceOutcomes('dice2')).toHaveLength(36);
+    expect(chanceOutcomes('coins3')).toHaveLength(8);
+    expect(chanceOutcomes('coins4')).toHaveLength(16);
+    expect(chanceOutcomes('bag', { merah: 2, hitam: 2 })).toHaveLength(6);
+  });
+  it('kejadian dihitung dengan evaluator aman', () => {
+    expect(chanceFavorable(chanceOutcomes('dice2'), 's == 7')).toHaveLength(6);
+    expect(chanceFavorable(chanceOutcomes('coins4'), 'h == 3 || g == 3')).toHaveLength(8);
+    expect(
+      chanceFavorable(chanceOutcomes('bag', { merah: 2, hitam: 2 }), 'merah == 1'),
+    ).toHaveLength(4);
+  });
+  it('tahap 1 ketuk hasil yang cocok, tahap 2 pilih peluang; ketukan ulang tidak dihitung', () => {
+    const ans = ['a', 'b'];
+    expect(chanceReplay(ans, 'f1', chanceSolution(ans, 'f1'))).toMatchObject({
+      done: true,
+      slips: 0,
+    });
+    expect(chanceReplay(ans, 'f1', ['a', 'a', 'x', 'b', 'p:f1'])).toMatchObject({
+      done: true,
+      slips: 1,
+    });
+    expect(chanceReplay(ans, 'f1', ['a', 'p:f1'])).toMatchObject({ done: false, slips: 1 });
+    expect(chanceReplay(ans, 'f1', ['a', 'b', 'p:f2'])).toMatchObject({ done: false, slips: 1 });
+  });
+});
+
+describe('Buku EMC Kelas 3–4 (math/sd34, D-101)', () => {
+  const emc = catalog.categories.filter((c) => c.group === GROUP);
+
+  it('8 materi kisi-kisi × 11 level (10 soal + 1 game), game GE 10 level, 3 mock', () => {
+    expect(emc.map((c) => c.code)).toEqual([...TOPICS, 'GE', 'EY']);
+    for (const code of TOPICS) {
+      const lv = skills.filter((s) => s.category === code).sort((a, b) => a.order - b.order);
+      expect(lv.map((s) => s.order)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+      expect(usesGameFamily(lv[10]!)).toBe(true);
+      expect(lv.slice(0, 10).some(usesGameFamily)).toBe(false);
+    }
+    const ge = skills.filter((s) => s.category === 'GE');
+    expect(ge).toHaveLength(10);
+    expect(ge.every(usesGameFamily)).toBe(true);
+    // 10 level game = 10 jenis game berbeda (D-078).
+    const kind = (s: SkillTemplate) =>
+      s.family === 'mix'
+        ? (s.params as { parts: { family: string }[] }).parts[0]!.family
+        : s.family;
+    expect(new Set(ge.map(kind)).size).toBe(10);
+    expect(skills.filter((s) => s.category === 'EY' && isMockSkill(s))).toHaveLength(3);
   });
 
-  it('kotak kosong sesuai pola, kartu = huruf hilang + pengecoh', () => {
-    for (const it of items(t, 30)) {
-      const i = it.interaction;
-      if (i.type !== 'spell') throw new Error(i.type);
-      expect(i.slots).toEqual(['G', null, 'R', null, 'T', null]);
-      expect(i.answer).toEqual(['U', 'I', 'A']);
-      expect(i.letters).toHaveLength(5);
-      const extra = i.letters
-        .map((c) => (c.visual as { text: string }).text)
-        .filter((x) => !['U', 'I', 'A'].includes(x));
-      expect(extra.every((x) => !'GURITA'.includes(x))).toBe(true);
-      expect(itemProblems(it)).toEqual([]);
-      expect(checkAnswer(it, ['u', 'i', 'a']).correct).toBe(true);
-      expect(checkAnswer(it, ['I', 'U', 'A']).correct).toBe(false);
-      expect(checkAnswer(it, ['U', 'I']).correct).toBe(false);
+  it('game level 11 berbeda jenis di setiap materi', () => {
+    const kind = (s: SkillTemplate) =>
+      s.family === 'mix'
+        ? (s.params as { parts: { family: string }[] }).parts[0]!.family
+        : s.family;
+    const games = TOPICS.map((c) => kind(skills.find((s) => s.category === c && s.order === 11)!));
+    expect(new Set(games).size).toBe(8);
+  });
+
+  it('setiap materi punya pelajaran infografis + simulasi, foto dengan cadangan SVG', () => {
+    for (const code of TOPICS) {
+      const c = emc.find((x) => x.code === code)!;
+      const lesson = lessonSchema.parse(c.lesson);
+      expect(lesson.layar.map((l) => l.jenis)).toEqual([
+        'infografis',
+        'peraga',
+        'baca',
+        'coba',
+        'ingat',
+      ]);
+      expect(peragaSchema.safeParse(lesson.layar[1]!.peraga).success).toBe(true);
+      expect(lessonPhotos(lesson).length).toBeGreaterThanOrEqual(2);
+      expect(c.intro && c.tips?.length).toBeTruthy();
     }
   });
 
-  it('pola bawaan: huruf pertama tampil lalu berselang-seling', () => {
-    const d = tpl('spell-word', { items: [{ prompt: 'x', word: 'MATA' }] });
-    const i = generateItem(d, { seed: 1, band: 0 }).interaction;
-    if (i.type !== 'spell') throw new Error(i.type);
-    expect(i.slots).toEqual(['M', null, 'T', null]);
-    expect(i.answer).toEqual(['A', 'A']);
+  it('kisi-kisi mock: 40 nomor (30 PG + 10 isian), 10/10/20, poin maks 1080', () => {
+    for (const mock of skills.filter((s) => s.category === 'EY')) {
+      const c = mockConfigOf(mock);
+      expect(c.questions).toBe(40);
+      expect(c.plan).toEqual({ easy: 10, medium: 10, hard: 20 });
+      expect(c.slots).toHaveLength(40);
+      expect(c.slots!.slice(0, 30).every((s) => s.form === 'choice')).toBe(true);
+      expect(c.slots!.slice(30).every((s) => s.form === 'input')).toBe(true);
+      expect(mockMaxPoints(c)).toBe(1080);
+      expect(mockPointsRange(c)).toEqual([-270, 1080]);
+      expect(c.referenceMinutes).toBe(120);
+      // Sebaran topik persis kisi-kisi EMC 2022.
+      const per = Object.fromEntries(
+        TOPICS.map((t) => [t, c.slots!.filter((s) => s.category === t).length]),
+      );
+      expect(per).toEqual({ EA: 8, EB: 8, EC: 7, ED: 5, EE: 4, EF: 3, EG: 3, EH: 2 });
+    }
   });
 
-  it('pola yang tidak cocok dengan kata ditolak', () => {
-    expect(() =>
-      tpl('spell-word', { items: [{ prompt: 'x', word: 'PAUS', show: 'X___' }] }),
-    ).toThrow();
-    expect(() =>
-      tpl('spell-word', { items: [{ prompt: 'x', word: 'PAUS', show: 'PAUS' }] }),
-    ).toThrow();
-    expect(() =>
-      tpl('spell-word', { items: [{ prompt: 'x', word: 'PAU', show: 'P___' }] }),
-    ).toThrow();
-    expect(() => tpl('spell-word', { items: [{ prompt: 'x', word: 'paus' }] })).toThrow();
+  it('Mock 1, 2, 3: urutan nomor & bentuk sesuai kisi-kisi, soal berbeda, jawaban benar diterima', () => {
+    const mocks = skills.filter((s) => s.category === 'EY').sort((a, b) => a.order - b.order);
+    const rounds = mocks.map((m, i) => generateMockRound(m, skills, { seed: 100 + i }));
+    for (const [i, round] of rounds.entries()) {
+      const slots = mockConfigOf(mocks[i]!).slots!;
+      expect(round).toHaveLength(40);
+      round.forEach((q, n) => {
+        expect(q.category).toBe(slots[n]!.category);
+        expect(q.difficulty).toBe(slots[n]!.difficulty);
+        expect(q.item.skillId).toBe(
+          skills.find((s) => s.category === slots[n]!.category && s.order === slots[n]!.levels[0])!
+            .id,
+        );
+        expect(q.item.interaction.type).toBe(
+          slots[n]!.form === 'input' ? 'number-input' : 'pick-one',
+        );
+        const it = q.item.interaction as { answer: string | number };
+        expect(checkAnswer(q.item, it.answer).correct).toBe(true);
+      });
+      expect(new Set(round.map((q) => itemKey(q.item))).size).toBe(40);
+    }
+    const a = new Set(rounds[0]!.map((q) => itemKey(q.item)));
+    expect(rounds[1]!.filter((q) => a.has(itemKey(q.item))).length).toBeLessThan(10);
   });
 
-  it('visual tubuh hanya menerima bagian yang dikenal', () => {
-    expect(visualSchema.safeParse({ kind: 'body', part: 'telinga' }).success).toBe(true);
-    expect(visualSchema.safeParse({ kind: 'body' }).success).toBe(true);
-    expect(visualSchema.safeParse({ kind: 'body', part: 'sayap' }).success).toBe(false);
+  it('anak tanpa paket: nomor dari level berbayar memakai level gratis tertinggi di materi yang sama', () => {
+    const mock = skills.find((s) => s.category === 'EY' && s.order === 1)!;
+    const free = skills.map((s) => (s.order > 5 && !isMockSkill(s) ? { ...s, stub: true } : s));
+    const round = generateMockRound(mock, free, { seed: 7 });
+    const slots = mockConfigOf(mock).slots!;
+    expect(round).toHaveLength(40);
+    round.forEach((q, n) => {
+      const src = skills.find((s) => s.id === q.item.skillId)!;
+      expect(src.category).toBe(slots[n]!.category);
+      expect(src.order).toBeLessThanOrEqual(5);
+    });
   });
 
-  it('bank soal manual menerima sampai 10 gambar (silang semua)', () => {
-    const choices = Array.from({ length: 10 }, (_, k) => ({
-      visual: { kind: 'numeral', value: k },
-    }));
-    expect(() =>
-      tpl('manual', { items: [{ prompt: 'x', choices, answer: [0, 1] }] }),
-    ).not.toThrow();
-    const eleven = [...choices, { visual: { kind: 'numeral', value: 10 } }];
-    expect(() => tpl('manual', { items: [{ prompt: 'x', choices: eleven, answer: 0 }] })).toThrow();
+  it('kisi-kisi yang tidak cocok dengan plan ditolak', () => {
+    const c = mockConfigOf(skills.find((s) => s.category === 'EY')!);
+    expect(mockConfigSchema.safeParse({ ...c, slots: c.slots!.slice(1) }).success).toBe(false);
+    const swapped = c.slots!.map((s, i) => (i === 0 ? { ...s, difficulty: 'hard' as const } : s));
+    expect(mockConfigSchema.safeParse({ ...c, slots: swapped }).success).toBe(false);
   });
 });

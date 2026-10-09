@@ -51,6 +51,7 @@ import {
   affiliatePayoutRequested,
 } from '../mail/templates.js';
 import { SettingsService } from '../settings/settings.service.js';
+import { inRange, monthEnd, monthsEnding, type Period } from '../reports/period.js';
 import { findReferrer, fingerprint } from './referral.js';
 
 type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
@@ -792,61 +793,70 @@ export class AffiliateService implements OnModuleInit, OnModuleDestroy {
    * Insight admin: tren 12 bulan (WIB), corong konversi, afiliator teratas, dan biaya program dibanding pendapatan
    * dari anggota referal.
    */
-  async adminAnalytics(now = new Date()) {
-    const months: string[] = [];
-    const d = new Date(`${jakartaDate(now).slice(0, 7)}-01T00:00:00Z`);
-    for (let i = 11; i >= 0; i--)
-      months.push(
-        new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() - i, 1)).toISOString().slice(0, 7),
-      );
+  async adminAnalytics(now = new Date(), period?: Period) {
+    const months = monthsEnding(period?.to ?? jakartaDate(now));
     const since = `${months[0]}-01`;
     const monthStart = `${months[11]}-01`;
+    const until = monthEnd(`${months[11]}-01`);
+    // Tanpa periode: corong & afiliator teratas sepanjang waktu (perilaku lama halaman Afiliasi).
+    const inP = (col: string) =>
+      period ? inRange(sql.raw(col), period.from, period.to) : sql`true`;
     const wib = (col: string) => sql.raw(`to_char(${col} at time zone 'Asia/Jakarta', 'YYYY-MM')`);
-    const [signups, subs, earn, paid, revenue, funnel, top, flagged, cost] = await Promise.all([
-      this.db.execute(sql`select ${wib('referred_at')} as m, count(*)::int as n from parents
-        where referred_by is not null and referred_at >= ${since}::date group by 1`),
-      this.db.execute(sql`select ${wib('first_paid')} as m, count(*)::int as n from (
+    const [signups, subs, earn, paid, revenue, funnel, top, flagged, cost, memberRevenue] =
+      await Promise.all([
+        this.db.execute(sql`select ${wib('referred_at')} as m, count(*)::int as n from parents
+        where referred_by is not null and ${inRange(sql.raw('referred_at'), since, until)} group by 1`),
+        this.db.execute(sql`select ${wib('first_paid')} as m, count(*)::int as n from (
           select min(o.reviewed_at) as first_paid from orders o join parents p on p.id = o.parent_id
           where p.referred_by is not null and o.status = 'paid' group by o.parent_id) x
-        where first_paid >= ${since}::date group by 1`),
-      this.db.execute(sql`select ${wib('created_at')} as m,
+        where ${inRange(sql.raw('first_paid'), since, until)} group by 1`),
+        this.db.execute(sql`select ${wib('created_at')} as m,
           coalesce(sum(amount) filter (where type = 'commission'), 0)::int as commission,
           coalesce(sum(amount) filter (where type = 'signup_bonus'), 0)::int as bonus
         from affiliate_ledger where state <> 'void' and type in ('signup_bonus','commission')
-          and created_at >= ${since}::date group by 1`),
-      this.db
-        .execute(sql`select ${wib('paid_at')} as m, sum(amount)::int as n from affiliate_payouts
-        where status = 'paid' and paid_at >= ${since}::date group by 1`),
-      this.db.execute(sql`
+          and ${inRange(sql.raw('created_at'), since, until)} group by 1`),
+        this.db
+          .execute(sql`select ${wib('paid_at')} as m, sum(amount)::int as n from affiliate_payouts
+        where status = 'paid' and ${inRange(sql.raw('paid_at'), since, until)} group by 1`),
+        this.db.execute(sql`
         select coalesce(sum(o.amount - o.unique_code), 0)::int as revenue,
           coalesce(sum(o.amount - o.unique_code) filter (
-            where to_char(o.reviewed_at at time zone 'Asia/Jakarta', 'YYYY-MM-DD') >= ${monthStart}), 0)::int as revenue_month
+            where to_char(o.reviewed_at at time zone 'Asia/Jakarta', 'YYYY-MM-DD') >= ${monthStart}), 0)::int as revenue_month,
+          coalesce(sum(o.amount - o.unique_code) filter (where ${inP('o.reviewed_at')}), 0)::int as revenue_period
         from orders o join parents p on p.id = o.parent_id
         where p.referred_by is not null and o.status = 'paid'`),
-      this.db.execute(sql`
-        select (select coalesce(sum(clicks), 0) from affiliate_click_days)::int as clicks,
+        this.db.execute(sql`
+        select (select coalesce(sum(clicks), 0) from affiliate_click_days
+            where ${period ? sql`day between ${period.from} and ${period.to}` : sql`true`})::int as clicks,
           count(*)::int as signups,
           count(*) filter (where p.email_verified_at is not null)::int as verified,
           count(*) filter (where exists (select 1 from affiliate_ledger l where l.referee_id = p.id
             and l.type = 'signup_bonus' and l.state = 'available'))::int as active,
           count(*) filter (where exists (select 1 from orders o
             where o.parent_id = p.id and o.status = 'paid'))::int as subscribers
-        from parents p where p.referred_by is not null`),
-      this.db.execute(sql`
+        from parents p where p.referred_by is not null and ${inP('p.referred_at')}`),
+        this.db.execute(sql`
         select p.id, p.name, p.referral_code,
           (select count(*) from parents m where m.referred_by = p.id)::int as members,
           (select count(*) from parents m where m.referred_by = p.id
             and exists (select 1 from orders o where o.parent_id = m.id and o.status = 'paid'))::int as subscribers,
           coalesce(sum(l.amount), 0)::int as earned
         from parents p join affiliate_ledger l on l.parent_id = p.id
-        where l.state <> 'void' and l.type in ('signup_bonus','commission')
-        group by p.id order by earned desc limit 5`),
-      this.db.execute(sql`select distinct parent_id from affiliate_accounts a
+        where l.state <> 'void' and l.type in ('signup_bonus','commission') and ${inP('l.created_at')}
+        group by p.id order by earned desc limit 8`),
+        this.db.execute(sql`select distinct parent_id from affiliate_accounts a
         where a.name_match = false or exists (select 1 from affiliate_accounts b
           where b.account_hash = a.account_hash and b.parent_id <> a.parent_id)`),
-      this.db.execute(sql`select coalesce(sum(amount), 0)::int as n from affiliate_ledger
-        where state <> 'void' and type in ('signup_bonus','commission')`),
-    ]);
+        this.db.execute(sql`select coalesce(sum(amount), 0)::int as n,
+          coalesce(sum(amount) filter (where ${inP('created_at')}), 0)::int as period
+        from affiliate_ledger where state <> 'void' and type in ('signup_bonus','commission')`),
+        this.db
+          .execute(sql`select to_char(o.reviewed_at at time zone 'Asia/Jakarta', 'YYYY-MM') as m,
+          sum(o.amount - o.unique_code)::int as n
+        from orders o join parents p on p.id = o.parent_id
+        where p.referred_by is not null and o.status = 'paid'
+          and ${inRange(sql.raw('o.reviewed_at'), since, until)} group by 1`),
+      ]);
     const map = (rows: Record<string, unknown>[], key = 'n') =>
       new Map(rows.map((r) => [String(r.m), Number(r[key])]));
     const sg = map(signups.rows);
@@ -854,6 +864,7 @@ export class AffiliateService implements OnModuleInit, OnModuleDestroy {
     const cm = map(earn.rows, 'commission');
     const bn = map(earn.rows, 'bonus');
     const pd = map(paid.rows);
+    const mr = map(memberRevenue.rows);
     const f = funnel.rows[0] ?? {};
     const rv = revenue.rows[0] ?? {};
     return {
@@ -864,6 +875,8 @@ export class AffiliateService implements OnModuleInit, OnModuleDestroy {
         commission: cm.get(m) ?? 0,
         bonus: bn.get(m) ?? 0,
         paid: pd.get(m) ?? 0,
+        /** Pendapatan dari anggota referal (tanpa kode unik) di bulan itu. */
+        revenue: mr.get(m) ?? 0,
       })),
       funnel: {
         clicks: Number(f.clicks ?? 0),
@@ -872,8 +885,14 @@ export class AffiliateService implements OnModuleInit, OnModuleDestroy {
         active: Number(f.active ?? 0),
         subscribers: Number(f.subscribers ?? 0),
       },
-      revenue: { total: Number(rv.revenue ?? 0), month: Number(rv.revenue_month ?? 0) },
+      revenue: {
+        total: Number(rv.revenue ?? 0),
+        month: Number(rv.revenue_month ?? 0),
+        period: Number(rv.revenue_period ?? 0),
+      },
       cost: Number(cost.rows[0]?.n ?? 0),
+      costPeriod: Number(cost.rows[0]?.period ?? 0),
+      period: period ?? null,
       flaggedAccounts: flagged.rows.length,
       top: top.rows.map((r) => ({
         id: String(r.id),

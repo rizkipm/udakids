@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.b4.menulis-bilangan-ratusan-ribu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 4,
+  "title": "Membaca dan menulis bilangan besar — Level 4 — Menulis bilangan ratusan ribu",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [1, 9],
+            "h": [1, 9]
+          },
+          "derived": {
+            "n": "a * 100000 + c * 1000 + h * 100"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "a * 10000 + c * 1000 + h * 100",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 100000 + c * 10000 + h * 100",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "a * 1000000 + c * 1000 + h * 100",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Kelompok ribu: {a} ratus {c} ribu. Puluh ribuan tidak disebut, jadi ditulis {a}0{c}. Kelompok kanan: {h} ratus, ditulis {h}00. Gabungkan dengan titik: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "t": [1, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + t * 10"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + t * 10",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + t * 100",
+              "tag": "geser"
+            },
+            {
+              "expr": "a * 100000 + b * 1000 + t * 10",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Kelompok ribu: {=a*10+b} ribu. Kelompok kanan: {=t*10}, ditulis 3 angka 0{t}0. Gabungkan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "n": "a * 100000 + b * 10000 + c * 1000 + s"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "a * 100000 + b * 10000 + c * 1000 + s * 100",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "a * 100000 + b * 10000 + c * 1000 + s * 10",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + c * 100 + s",
+              "tag": "lupa-nol"
+            }
+          ],
+          "explain": "Kelompok ribu: {=floor(n/1000)} ribu. Kelompok kanan hanya {s}, jadi ditulis 00{s}. Gabungkan: {answer}."
+        }
+      }
+    ]
+  }
+}

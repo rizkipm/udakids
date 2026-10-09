@@ -1,0 +1,161 @@
+{
+  "id": "math.sd4.o6.tabel-tambah-dan-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 6,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 6 — Tabel tambah dan kurang",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [5, 60],
+            "d1": [3, 15],
+            "d2": [3, 15],
+            "d3": [3, 15],
+            "k": [11, 250]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "prompt": "Lihat tabel. Berapa keluaran untuk masukan {x4}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1+k"],
+                ["=x2", "=x2+k"],
+                ["=x3", "=x3+k"],
+                ["=x4", "?"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4 + k",
+          "distractors": [
+            {
+              "expr": "x3 + k",
+              "tag": "baris-atas"
+            },
+            {
+              "expr": "x4 + k + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "x4 + k - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Bandingkan baris pertama: {x1} menjadi {=x1+k}, bertambah {k}. Periksa baris lain, juga bertambah {k}. Aturannya tambah {k}: {x4} + {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [100, 400],
+            "d1": [5, 40],
+            "d2": [5, 40],
+            "d3": [5, 40],
+            "k": [11, 95]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "prompt": "Lihat tabel. Berapa keluaran untuk masukan {x4}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1-k"],
+                ["=x2", "=x2-k"],
+                ["=x3", "=x3-k"],
+                ["=x4", "?"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4 - k",
+          "distractors": [
+            {
+              "expr": "x4 + k",
+              "tag": "tambah"
+            },
+            {
+              "expr": "x3 - k",
+              "tag": "baris-atas"
+            },
+            {
+              "expr": "x4 - k + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Baris pertama: {x1} menjadi {=x1-k}, berkurang {k}. Baris lain juga berkurang {k}. Aturannya kurang {k}: {x4} − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [5, 60],
+            "d1": [3, 15],
+            "d2": [3, 15],
+            "d3": [3, 15],
+            "k": [11, 250]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "prompt": "Lihat tabel. Masukan berapa yang keluarannya {=x4+k}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1+k"],
+                ["=x2", "=x2+k"],
+                ["=x3", "=x3+k"],
+                ["?", "=x4+k"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4",
+          "distractors": [
+            {
+              "expr": "x4 + 2 * k",
+              "tag": "aturan-terbalik"
+            },
+            {
+              "expr": "x4 + k",
+              "tag": "keluaran"
+            },
+            {
+              "expr": "x4 - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Aturannya tambah {k}. Untuk mencari masukan, kerjakan kebalikannya: {=x4+k} − {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

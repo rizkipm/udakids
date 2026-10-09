@@ -1,0 +1,86 @@
+{
+  "id": "math.sd4.e7.menjumlah-tiga-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 7,
+  "title": "Penjumlahan bilangan besar — Level 7 — Menjumlah tiga bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999],
+            "c": [1000, 9999]
+          },
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satu-bilangan"
+            },
+            {
+              "expr": "a + b + c - 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b + c - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b + c + 100",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Jumlahkan dua bilangan dulu: {a} + {b} = {=a+b}. Lalu tambah bilangan ketiga: {=a+b} + {c} = {answer}. Saat bersusun, jumlah satu kolom bisa lebih dari 19, jadi simpanannya bisa 2."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1100, 8900],
+            "b": [1000, 9999],
+            "k": [2, 9]
+          },
+          "derived": {
+            "c": "k * 1000 - a % 1000 + 1000 * (a % 1000 == 0)"
+          },
+          "constraint": "a % 100 != 0 && c >= 1000",
+          "prompt": "{a} + {b} + {c} = …",
+          "answer": "a + b + c",
+          "distractors": [
+            {
+              "expr": "a + b + c - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + c",
+              "tag": "lupa-satu-bilangan"
+            },
+            {
+              "expr": "a + b + c + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b + c - 100",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Cari pasangan yang mudah: {a} + {c} = {=a+c}, hasilnya ribuan bulat. Lalu tambah {b}: {=a+c} + {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

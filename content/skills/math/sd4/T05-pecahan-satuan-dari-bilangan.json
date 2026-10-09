@@ -1,0 +1,110 @@
+{
+  "id": "math.sd4.t5.pecahan-satuan-dari-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 5,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 5 — Pecahan satuan dari bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "q": [2, 12]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "prompt": "1/{d} dari {m} = …",
+          "answer": "q",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": 1,
+              "den": "=d",
+              "model": "bar"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "m - d",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "m * d",
+              "tag": "dikali"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "1/{d} dari {m} artinya {m} dibagi menjadi {d} bagian sama banyak, lalu diambil 1 bagian. {m} : {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "q": [2, 9]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {m} kelereng. Sebanyak 1/{d} dari kelereng itu diberikan kepada adiknya. Berapa kelereng yang diberikan?",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "m - q",
+              "tag": "sisa"
+            },
+            {
+              "expr": "m - d",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "1/{d} dari {m} = {m} : {d} = {answer}. Jadi adiknya mendapat {answer} kelereng."
+        }
+      }
+    ]
+  }
+}

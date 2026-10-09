@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.u6.desimal-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 6,
+  "title": "Desimal persepuluhan dan perseratusan — Level 6 — Desimal senilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{x} = … /100",
+          "answer": "a * 10",
+          "explain": "{x} = {a}/10. Kalikan pembilang dan penyebut dengan 10: {a}/10 = {answer}/100. Jadi {x} sama dengan {x}0.",
+          "derived": {
+            "x": "a / 10"
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{=a*10}/100 = … /10",
+          "answer": "a",
+          "explain": "Bagi pembilang dan penyebut dengan 10: {=a*10}/100 = {a}/10. Keduanya sama dengan {=a/10}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "{x} = … perseratusan",
+          "answer": "p * 10 + q",
+          "explain": "{p} persepuluhan = {=p*10} perseratusan. Ditambah {q} perseratusan, jadi {x} = {answer} perseratusan.",
+          "derived": {
+            "x": "p / 10 + q / 100"
+          },
+          "distractors": [
+            {
+              "expr": "p + q",
+              "tag": "jumlah-angka"
+            },
+            {
+              "expr": "q",
+              "tag": "angka-terakhir"
+            },
+            {
+              "expr": "p * 100 + q",
+              "tag": "geser"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Desimal yang senilai dengan {=a*10}/100 adalah …",
+          "answer": "a / 10",
+          "explain": "{=a*10}/100 = {a}/10 = {answer}. Angka 0 di belakang desimal boleh dihapus: {answer}0 = {answer}.",
+          "distractors": [
+            {
+              "expr": "a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "pembilang"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

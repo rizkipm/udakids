@@ -1,0 +1,229 @@
+{
+  "id": "math.sd4.w7.menabung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 7,
+  "title": "Uang dan literasi keuangan — Level 7 — Menabung dan merencanakan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [2500, 5000, 10000]
+            },
+            "k": [3, 12]
+          },
+          "prompt": "{nama} ingin membeli {x} seharga Rp{h}. Ia menabung Rp{s} setiap minggu. Berapa minggu ia harus menabung?",
+          "answer": "k",
+          "explain": "Bagi harga barang dengan tabungan per minggu. {h} : {s} = {answer} minggu.",
+          "derived": {
+            "h": "s * k"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k * 2",
+              "tag": "dua-kali"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [50000, 150000],
+              "step": 5000
+            },
+            "a": {
+              "range": [15000, 45000],
+              "step": 500
+            }
+          },
+          "prompt": "Tabungan {nama} sekarang Rp{a}. Ia ingin membeli {x} seharga Rp{h}. Berapa rupiah lagi yang harus ditabungnya?",
+          "answer": "h - a",
+          "explain": "Kekurangan = harga − tabungan. {h} − {a} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "h - a + 1000",
+              "tag": "lupa-meminjam"
+            },
+            {
+              "expr": "a",
+              "tag": "tabungan"
+            },
+            {
+              "expr": "(h - a) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(h - a) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(h - a) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [500, 1000, 1500, 2000, 2500]
+            },
+            "d": [5, 30]
+          },
+          "prompt": "Setiap hari {nama} menyisihkan Rp{s} dari uang sakunya untuk ditabung. Berapa tabungannya setelah {d} hari?",
+          "answer": "s * d",
+          "explain": "Tabungan sama setiap hari, jadi kalikan: {d} × {s} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "s * (d + 1)",
+              "tag": "lebih-satu-hari"
+            },
+            {
+              "expr": "s * (d - 1)",
+              "tag": "kurang-satu-hari"
+            },
+            {
+              "expr": "s * d * 10",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "(s * d) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(s * d) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(s * d) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

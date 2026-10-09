@@ -1,0 +1,108 @@
+{
+  "id": "math.sd34.ef11.game-eksperimen-peluang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 11,
+  "title": "Peluang — Level 11 — Game eksperimen peluang",
+  "tier": "advanced",
+  "tags": {
+    "level": "11",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Peluang",
+    "indikator": "Game: mendaftar ruang sampel lalu menghitung peluang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "dice2",
+          "events": [
+            {
+              "text": "jumlah matanya 7",
+              "test": "s == 7"
+            },
+            {
+              "text": "jumlah matanya 9",
+              "test": "s == 9"
+            },
+            {
+              "text": "kedua matanya sama",
+              "test": "a == b"
+            },
+            {
+              "text": "jumlah matanya lebih dari 9",
+              "test": "s > 9"
+            },
+            {
+              "text": "selisih matanya 2",
+              "test": "abs(a - b) == 2"
+            }
+          ]
+        }
+      },
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "coins3",
+          "events": [
+            {
+              "text": "muncul tepat 2 angka",
+              "test": "h == 2"
+            },
+            {
+              "text": "muncul paling sedikit 2 gambar",
+              "test": "g >= 2"
+            },
+            {
+              "text": "koin pertama angka",
+              "test": "c1 == 1"
+            }
+          ]
+        }
+      },
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "coins4",
+          "events": [
+            {
+              "text": "tiga koin sama dan satu berbeda",
+              "test": "h == 3 || g == 3"
+            },
+            {
+              "text": "angka dan gambar sama banyak",
+              "test": "h == 2"
+            }
+          ]
+        }
+      },
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "bag",
+          "bag": {
+            "merah": 2,
+            "biru": 3
+          },
+          "simplify": false,
+          "events": [
+            {
+              "text": "warnanya berbeda",
+              "test": "merah == 1"
+            },
+            {
+              "text": "keduanya biru",
+              "test": "biru == 2"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

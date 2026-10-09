@@ -22,16 +22,10 @@ export * from '../generator/mock-config.js';
 export const isMockSkill = (t: Pick<SkillTemplate, 'family'>) => t.family === 'mock';
 export const mockConfigOf = (t: SkillTemplate): MockConfig => mockConfigSchema.parse(t.params);
 
-/**
- * Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan game, bukan versi terkunci/stub).
- * Tanpa paket, level berbayar tidak dipakai; soal diambil dari level gratis (D-094).
- */
-export function mockSources(
-  mock: SkillTemplate,
-  book: readonly (SkillTemplate & { stub?: boolean })[],
-): Record<MockDifficulty, SkillTemplate[]> {
+/** Level di buku yang boleh menjadi sumber soal mock (bukan mock, bukan game, bukan stub, aktif, materi lomba). */
+function mockPool(mock: SkillTemplate, book: readonly (SkillTemplate & { stub?: boolean })[]) {
   const c = mockConfigOf(mock);
-  const pool = book.filter(
+  return book.filter(
     (s) =>
       s.domain === mock.domain &&
       s.grade === mock.grade &&
@@ -42,6 +36,18 @@ export function mockSources(
       s.status === 'active' &&
       (!c.categories || c.categories.includes(s.category)),
   );
+}
+
+/**
+ * Level sumber per tingkat: semua skill di buku yang sama (bukan mock, bukan game, bukan versi terkunci/stub).
+ * Tanpa paket, level berbayar tidak dipakai; soal diambil dari level gratis (D-094).
+ */
+export function mockSources(
+  mock: SkillTemplate,
+  book: readonly (SkillTemplate & { stub?: boolean })[],
+): Record<MockDifficulty, SkillTemplate[]> {
+  const c = mockConfigOf(mock);
+  const pool = mockPool(mock, book);
   const out = { easy: [], medium: [], hard: [] } as Record<MockDifficulty, SkillTemplate[]>;
   for (const d of MOCK_DIFFICULTIES) {
     const [a, b] = c.levels[d];
@@ -94,11 +100,54 @@ export function generateMockRound(
   opts: { seed: number; avoid?: readonly string[] },
 ): MockQuestion[] {
   const c = mockConfigOf(mock);
-  const sources = mockSources(mock, book);
   const rng = createRng(`${mock.id}@${mock.version}#mock/${opts.seed}`);
   const avoid = new Set(opts.avoid ?? []);
   const used = new Set<string>();
   const out: MockQuestion[] = [];
+  /** Satu soal dari daftar level sumber: tanpa kembar, sebisa mungkin tanpa soal ronde sebelumnya. */
+  const draw = (list: readonly SkillTemplate[], d: MockDifficulty, what: string) => {
+    let pick: Item | undefined;
+    let fallback: Item | undefined;
+    for (let attempt = 0; attempt < 30 && !pick; attempt++) {
+      const src = rng.pick(list);
+      const seed = rng.int(1, 2_147_483_646);
+      let item: Item;
+      try {
+        item = generateItem(src, { seed, band: mockBand(d) });
+      } catch {
+        continue;
+      }
+      const key = itemKey(item);
+      if (used.has(key)) continue;
+      fallback ??= item;
+      if (!avoid.has(key)) pick = item;
+    }
+    const item = pick ?? fallback;
+    if (!item) throw new Error(`${mock.id}: gagal membuat soal ${d} dari ${what}`);
+    used.add(itemKey(item));
+    return item;
+  };
+  if (c.slots) {
+    // Kisi-kisi per nomor (D-101): urutan nomor tetap seperti lembar lomba.
+    const pool = mockPool(mock, book);
+    c.slots.forEach((slot, n) => {
+      const inCat = pool.filter((s) => s.category === slot.category);
+      let list = inCat.filter((s) => s.order >= slot.levels[0] && s.order <= slot.levels[1]);
+      // Anak tanpa paket (D-094): level berbayar berupa stub; pakai level gratis tertinggi di materi yang sama.
+      if (!list.length && inCat.length) {
+        const top = Math.max(...inCat.map((s) => s.order).filter((o) => o <= slot.levels[1]), 0);
+        list = inCat.filter((s) => s.order === (top || Math.min(...inCat.map((x) => x.order))));
+      }
+      if (!list.length) throw new Error(`${mock.id}: nomor ${n + 1} tanpa level sumber`);
+      out.push({
+        item: draw(list, slot.difficulty, `nomor ${n + 1}`),
+        difficulty: slot.difficulty,
+        category: slot.category,
+      });
+    });
+    return out;
+  }
+  const sources = mockSources(mock, book);
   for (const d of MOCK_DIFFICULTIES) {
     const list = sources[d];
     if (c.plan[d] > 0 && list.length === 0)
@@ -108,26 +157,7 @@ export function generateMockRound(
     for (let k = 0; k < c.plan[d]; k++) {
       const cat = cats[k % cats.length]!;
       const inCat = list.filter((s) => s.category === cat);
-      let pick: Item | undefined;
-      let fallback: Item | undefined;
-      for (let attempt = 0; attempt < 30 && !pick; attempt++) {
-        const src = rng.pick(inCat);
-        const seed = rng.int(1, 2_147_483_646);
-        let item: Item;
-        try {
-          item = generateItem(src, { seed, band: mockBand(d) });
-        } catch {
-          continue;
-        }
-        const key = itemKey(item);
-        if (used.has(key)) continue;
-        fallback ??= item;
-        if (!avoid.has(key)) pick = item;
-      }
-      const item = pick ?? fallback;
-      if (!item) throw new Error(`${mock.id}: gagal membuat soal ${d} dari materi ${cat}`);
-      used.add(itemKey(item));
-      out.push({ item, difficulty: d, category: cat });
+      out.push({ item: draw(inCat, d, `materi ${cat}`), difficulty: d, category: cat });
     }
   }
   return out;

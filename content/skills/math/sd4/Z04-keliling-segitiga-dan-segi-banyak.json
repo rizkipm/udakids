@@ -1,0 +1,150 @@
+{
+  "id": "math.sd4.z4.keliling-segitiga-dan-segi-banyak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 4,
+  "title": "Keliling bangun datar — Level 4 — Keliling segitiga dan segi banyak",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 30]
+          },
+          "prompt": "Ketiga sisi sebuah segitiga sama sisi panjangnya {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "shape",
+              "shape": "segitiga",
+              "color": "hijau",
+              "size": "m"
+            }
+          ],
+          "answer": "3 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "dianggap-empat-sisi"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "s + 3",
+              "tag": "ditambah-3"
+            }
+          ],
+          "explain": "Segitiga sama sisi punya 3 sisi sama panjang. Keliling = 3 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 20]
+          },
+          "prompt": "Kelima sisi segi lima ini sama panjang, masing-masing {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "shape",
+              "shape": "segi-lima",
+              "color": "biru",
+              "size": "m"
+            }
+          ],
+          "answer": "5 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "6 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "s + 5",
+              "tag": "ditambah-5"
+            }
+          ],
+          "explain": "Hitung sisinya dulu: ada 5. Semua sama, jadi keliling = 5 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 20]
+          },
+          "prompt": "Keenam sisi segi enam ini sama panjang, masing-masing {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "shape",
+              "shape": "segi-enam",
+              "color": "ungu",
+              "size": "m"
+            }
+          ],
+          "answer": "6 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "5 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "4 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "s + 6",
+              "tag": "ditambah-6"
+            }
+          ],
+          "explain": "Segi enam punya 6 sisi. Semua {s} cm, jadi keliling = 6 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 20],
+            "a": [3, 20]
+          },
+          "constraint": "a < 2 * k && a != k",
+          "prompt": "Segitiga sama kaki punya dua kaki yang masing-masing {k} cm dan alas {a} cm. Berapa cm kelilingnya?",
+          "answer": "2 * k + a",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k + a",
+              "tag": "kaki-dihitung-sekali"
+            },
+            {
+              "expr": "2 * a + k",
+              "tag": "kaki-dan-alas-tertukar"
+            },
+            {
+              "expr": "3 * k",
+              "tag": "dianggap-sama-sisi"
+            }
+          ],
+          "explain": "Kakinya ada dua yang sama panjang: {k} + {k} = {=2*k}. Tambah alasnya: {=2*k} + {a} = {answer}."
+        }
+      }
+    ]
+  }
+}

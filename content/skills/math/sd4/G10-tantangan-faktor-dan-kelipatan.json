@@ -1,0 +1,255 @@
+{
+  "id": "math.sd4.g10.tantangan-faktor-dan-kelipatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 10,
+  "title": "Faktor dan kelipatan — Level 10 — Tantangan faktor dan kelipatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [3, 10],
+            "r": [1, 11]
+          },
+          "constraint": "r < k",
+          "prompt": "Manakah yang BUKAN kelipatan {k}?",
+          "answer": "k * n + r",
+          "distractors": [
+            {
+              "expr": "k * (n - 1)",
+              "tag": "kelipatan"
+            },
+            {
+              "expr": "k * (n + 1)",
+              "tag": "kelipatan"
+            },
+            {
+              "expr": "k * (n + 2)",
+              "tag": "kelipatan"
+            }
+          ],
+          "explain": "Coba bagi setiap bilangan dengan {k}. {answer} : {k} bersisa {r}, jadi {answer} bukan kelipatan {k}. Yang lain hasil kali {k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [2, 9],
+            "q": [2, 12],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "p": "f * q + (1 - y) * r"
+          },
+          "constraint": "r < f",
+          "prompt": "Apakah {f} faktor dari {p}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Bukan"
+          },
+          "explain": "Faktor membagi habis tanpa sisa. {p} : {f} = {=floor(p/f)} sisa {=p%f}. Sisa 0 artinya {f} faktor dari {p}. Ada sisa artinya bukan faktor. Jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 12],
+            "n": [20, 100]
+          },
+          "prompt": "Berapa banyak kelipatan {k} dari 1 sampai {n}?",
+          "answer": "floor(n / k)",
+          "distractors": [
+            {
+              "expr": "floor(n / k) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(n / k) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k",
+              "tag": "bilangannya"
+            }
+          ],
+          "explain": "Cari kelipatan {k} terbesar yang tidak lebih dari {n}, yaitu {=floor(n/k)*k} = {answer} × {k}. Jadi ada {answer} kelipatan {k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [25, 150]
+          },
+          "constraint": "n % k != 0",
+          "prompt": "Kelipatan {k} terkecil yang lebih dari {n} adalah …",
+          "answer": "(floor(n / k) + 1) * k",
+          "distractors": [
+            {
+              "expr": "floor(n / k) * k",
+              "tag": "kurang-dari"
+            },
+            {
+              "expr": "(floor(n / k) + 2) * k",
+              "tag": "lewat"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}. Kelipatan berikutnya: {=floor(n/k)+1} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 10],
+            "n": [30, 120]
+          },
+          "prompt": "Tiket antrean diberikan berurutan. Setiap pengunjung ke-{k} mendapat hadiah. Berapa pengunjung yang mendapat hadiah dari {n} pengunjung pertama?",
+          "answer": "floor(n / k)",
+          "distractors": [
+            {
+              "expr": "floor(n / k) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(n / k) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n - k",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Yang mendapat hadiah adalah pengunjung kelipatan {k}. {n} : {k} = {=floor(n/k)} sisa {=n%k}. Jadi ada {answer} pengunjung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 9],
+            "m": [1, 3]
+          },
+          "constraint": "a < b && b % a != 0 && lcm(a, b) <= 60",
+          "prompt": "Manakah yang merupakan kelipatan {a} dan juga kelipatan {b}?",
+          "answer": "lcm(a, b) * m",
+          "distractors": [
+            {
+              "expr": "lcm(a, b) * m + a",
+              "tag": "kelipatan-satu-saja"
+            },
+            {
+              "expr": "lcm(a, b) * m + b",
+              "tag": "kelipatan-satu-saja"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Bilangan itu harus habis dibagi {a} dan habis dibagi {b}. Kelipatan sama yang pertama adalah {=lcm(a,b)}. {answer} = {m} × {=lcm(a,b)}, jadi habis dibagi keduanya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 10]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "a < b && b % a != 0",
+          "prompt": "{nama} berenang setiap {a} hari. Kakaknya berenang setiap {b} hari. Hari ini mereka berenang bersama. Berapa hari lagi mereka berenang bersama lagi?",
+          "answer": "lcm(a, b)",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b - a",
+              "tag": "selisih"
+            },
+            {
+              "expr": "a * b",
+              "tag": "kali-langsung"
+            }
+          ],
+          "explain": "Tulis kelipatan {a} dan kelipatan {b} berurutan sampai ada bilangan yang sama. Kelipatan sama yang pertama adalah {answer}. Jadi {answer} hari lagi."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "lo": [20, 150]
+          },
+          "constraint": "lo % k != 0",
+          "prompt": "Aku kelipatan {k}. Aku lebih dari {lo} dan kurang dari {=lo+k}. Siapa aku?",
+          "answer": "ceil(lo / k) * k",
+          "distractors": [
+            {
+              "expr": "ceil(lo / k) * k + k",
+              "tag": "lewat"
+            },
+            {
+              "expr": "ceil(lo / k) * k - k",
+              "tag": "kurang-dari"
+            },
+            {
+              "expr": "lo + 1",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "Di antara dua bilangan yang selisihnya {k}, hanya ada satu kelipatan {k}. {lo} : {k} = {=floor(lo/k)} sisa {=lo%k}, jadi kelipatan berikutnya {=ceil(lo/k)} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "math.sd4.gg2.dua-langkah-kali-lalu-tambah-kurang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 2,
+  "title": "Soal cerita multi-langkah — Level 2 — Dua langkah: kali lalu tambah/kurang",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [5, 12],
+            "e": [2, 15]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "g * k > e",
+          "prompt": "{nama} membeli {g} pak buku tulis. Setiap pak berisi {k} buku. Ia memberikan {e} buku kepada adiknya. Berapa buku yang tersisa?",
+          "answer": "g * k - e",
+          "distractors": [
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "g * k + e",
+              "tag": "tanda"
+            },
+            {
+              "expr": "(g - 1) * k",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: banyak buku {g} × {k} = {=g*k}. Langkah 2: dikurangi yang diberikan, {=g*k} − {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": [12, 40],
+            "e": [3, 20]
+          },
+          "prompt": "Satu rak memuat {k} buku. Ada {g} rak penuh dan {e} buku di meja. Berapa buku semuanya?",
+          "answer": "g * k + e",
+          "distractors": [
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "(g + e) * k",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "g + k + e",
+              "tag": "menjumlah-semua"
+            }
+          ],
+          "explain": "Langkah 1: buku di rak {g} × {k} = {=g*k}. Langkah 2: ditambah buku di meja, {=g*k} + {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [5, 15],
+            "k": [4, 10],
+            "e": [10, 60]
+          },
+          "constraint": "g * k > e",
+          "prompt": "Panitia menyiapkan {g} meja. Setiap meja diberi {k} kursi. Sebanyak {e} tamu sudah duduk. Berapa kursi yang masih kosong?",
+          "answer": "g * k - e",
+          "mode": "input",
+          "explain": "Langkah 1: semua kursi {g} × {k} = {=g*k}. Langkah 2: kursi kosong {=g*k} − {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

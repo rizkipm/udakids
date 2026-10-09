@@ -1,0 +1,68 @@
+{
+  "id": "math.sd4.s1.menjumlah-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 1,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 1 — Menjumlah dengan gambar",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [3, 8],
+      "a": [1, 6],
+      "b": [1, 6]
+    },
+    "constraint": "a + b <= d",
+    "prompt": "Lihat gambarnya. {a}/{d} + {b}/{d} = …",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=d",
+        "model": "bar"
+      },
+      {
+        "kind": "fraction",
+        "num": "=b",
+        "den": "=d",
+        "model": "bar"
+      }
+    ],
+    "format": "fraction",
+    "fraction": {
+      "num": "a + b",
+      "den": "d",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "a + b",
+        "den": "d + d",
+        "tag": "penyebut-dijumlah"
+      },
+      {
+        "num": "a + b + 1",
+        "den": "d",
+        "tag": "lebih-satu"
+      },
+      {
+        "num": "a + b - 1",
+        "den": "d",
+        "tag": "kurang-satu"
+      },
+      {
+        "num": "a * b",
+        "den": "d",
+        "tag": "dikali"
+      }
+    ],
+    "explain": "Kedua batang dipotong {d} bagian sama besar. Arsiran {a} bagian dan {b} bagian digabung menjadi {=a+b} bagian. Ukuran potongannya tidak berubah, jadi penyebut tetap {d}: {answer}."
+  }
+}

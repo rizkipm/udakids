@@ -1,0 +1,48 @@
+{
+  "id": "math.sd4.p4.bentuk-paling-sederhana",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 4,
+  "title": "Pecahan senilai — Level 4 — Bentuk paling sederhana",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 9],
+      "n": [1, 8],
+      "k": [2, 6]
+    },
+    "constraint": "n < d && gcd(n, d) == 1 && d * k <= 60",
+    "prompt": "Sederhanakan {=n*k}/{=d*k}. Bentuk paling sederhananya adalah …",
+    "format": "fraction",
+    "fraction": {
+      "num": "n * k",
+      "den": "d * k"
+    },
+    "distractors": [
+      {
+        "num": "n * k - 1",
+        "den": "d * k - 1",
+        "tag": "kurangi-satu"
+      },
+      {
+        "num": "n",
+        "den": "d * k",
+        "tag": "penyebut-tidak-dibagi"
+      },
+      {
+        "num": "n * k",
+        "den": "d",
+        "tag": "pembilang-tidak-dibagi"
+      }
+    ],
+    "explain": "Cari FPB dari {=n*k} dan {=d*k}, yaitu {k}. Bagi pembilang dan penyebut dengan {k}: {=n*k} : {k} = {n} dan {=d*k} : {k} = {d}. Jadi bentuk paling sederhananya {answer}."
+  }
+}

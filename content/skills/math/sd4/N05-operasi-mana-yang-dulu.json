@@ -1,0 +1,227 @@
+{
+  "id": "math.sd4.n5.operasi-mana-yang-dulu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 5,
+  "title": "Operasi hitung campuran — Level 5 — Operasi mana yang dikerjakan dulu?",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "{a} + {b} × {c}. Operasi mana yang dikerjakan pertama?",
+          "answer": "3",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Tidak ada kurung. Kali dan bagi lebih dulu daripada tambah dan kurang, jadi {b} × {c} dikerjakan pertama."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "({a} + {b}) × {c}. Operasi mana yang dikerjakan pertama?",
+          "answer": "1",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Isi tanda kurung selalu dikerjakan pertama, jadi {a} + {b} dulu, baru dikali {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [50, 99],
+            "m": [2, 9],
+            "q": [2, 9]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{a} − {t} : {m}. Operasi mana yang dikerjakan pertama?",
+          "answer": "4",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Tidak ada kurung. Bagi lebih dulu daripada kurang, jadi {t} : {m} dikerjakan pertama."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [50, 99],
+            "b": [2, 40],
+            "c": [2, 40]
+          },
+          "prompt": "{a} − {b} + {c}. Operasi mana yang dikerjakan pertama?",
+          "answer": "2",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Tambah dan kurang setingkat, jadi dikerjakan dari kiri. Yang paling kiri adalah {a} − {b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [2, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} : {m} × {k}. Operasi mana yang dikerjakan pertama?",
+          "answer": "4",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Kali dan bagi setingkat, jadi dikerjakan dari kiri. Yang paling kiri adalah {t} : {m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [20, 60],
+            "c": [2, 19]
+          },
+          "prompt": "{a} × ({b} − {c}). Operasi mana yang dikerjakan pertama?",
+          "answer": "2",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Isi tanda kurung dikerjakan pertama, jadi {b} − {c} dulu, baru hasilnya dikali {a}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "{a} + {b} × {c}. Operasi mana yang dikerjakan terakhir?",
+          "answer": "1",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Kali dikerjakan dulu: {b} × {c} = {=b*c}. Tambah dikerjakan terakhir: {a} + {=b*c} = {=a+b*c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [1, 20]
+          },
+          "constraint": "a * b > c",
+          "prompt": "{a} × {b} − {c}. Operasi mana yang dikerjakan terakhir?",
+          "answer": "2",
+          "labels": {
+            "1": "+",
+            "2": "−",
+            "3": "×",
+            "4": ":"
+          },
+          "labelSay": {
+            "1": "tambah",
+            "2": "kurang",
+            "3": "kali",
+            "4": "bagi"
+          },
+          "explain": "Kali dikerjakan dulu: {a} × {b} = {=a*b}. Kurang dikerjakan terakhir: {=a*b} − {c} = {=a*b-c}."
+        }
+      }
+    ]
+  }
+}

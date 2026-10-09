@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.k3.bagian-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 3,
+  "title": "Perkalian dua angka — Level 3 — Bagian yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 89],
+            "t": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {b} = {a} × {=t*10} + {a} × {s} = … + {=a*s}",
+          "answer": "a * t * 10",
+          "distractors": [
+            {
+              "expr": "a * t",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * t * 100",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "a * s",
+              "tag": "bagian-lain"
+            }
+          ],
+          "explain": "Bagian yang hilang adalah {a} × {=t*10}. Hitung {a} × {t} = {=a*t}, lalu tambahkan nol: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 89],
+            "t": [1, 9],
+            "s": [2, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {b} = {=a*t*10} + …",
+          "answer": "a * s",
+          "mode": "input",
+          "explain": "Pecah {b} menjadi {=t*10} + {s}. {a} × {=t*10} = {=a*t*10}. Bagian yang hilang adalah {a} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 49],
+            "t": [1, 4],
+            "s": [1, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "{a} × {b} sama dengan …",
+          "answer": "a * t * 10 + a * s",
+          "distractors": [
+            {
+              "expr": "a * t + a * s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * t * 10 + s",
+              "tag": "lupa-kali-satuan"
+            },
+            {
+              "expr": "a * b + a",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Pecah bilangan kedua: {b} = {=t*10} + {s}. Jadi {a} × {b} = {a} × {=t*10} + {a} × {s} = {=a*t*10} + {=a*s} = {answer}."
+        }
+      }
+    ]
+  }
+}

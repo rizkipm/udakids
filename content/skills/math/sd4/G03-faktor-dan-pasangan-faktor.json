@@ -1,0 +1,101 @@
+{
+  "id": "math.sd4.g3.faktor-dan-pasangan-faktor",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 3,
+  "title": "Faktor dan kelipatan — Level 3 — Faktor dan pasangan faktor",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{p} petak disusun menjadi {a} baris sama panjang. Isi kalimatnya: {a} × … = {p}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "p - a",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Cari bilangan yang dikali {a} hasilnya {p}: {p} : {a} = {answer}. Jadi {a} dan {answer} adalah pasangan faktor {p}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [2, 9],
+            "q": [2, 12],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "p": "f * q + (1 - y) * r"
+          },
+          "constraint": "r < f",
+          "prompt": "Apakah {f} faktor dari {p}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Bukan"
+          },
+          "explain": "Faktor membagi habis tanpa sisa. {p} : {f} = {=floor(p/f)} sisa {=p%f}. Sisa 0 artinya {f} faktor dari {p}. Ada sisa artinya bukan faktor. Jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "constraint": "a < b",
+          "prompt": "{a} × {b} = {p}. Manakah yang merupakan faktor dari {p}?",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "p * 2",
+              "tag": "kelipatan"
+            },
+            {
+              "expr": "p + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Dari {a} × {b} = {p}, bilangan {a} dan {b} adalah faktor {p}. Bilangan {p} dan kelipatannya bukan faktor yang dicari."
+        }
+      }
+    ]
+  }
+}

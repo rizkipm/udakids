@@ -14,6 +14,7 @@ import {
   type Color,
   type PlayStatus,
   type SkillTemplate,
+  topicReadAloud,
 } from '@little-coder/engine';
 import { speak } from '../audio/speech';
 import { useSession } from '../auth/session';
@@ -93,7 +94,7 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   const tips = category.tips ?? [];
   // Mock Test olimpiade (D-072): aturan & tombolnya berbeda dari level biasa.
   const mockSkill = shelf.skills[0] && isMockSkill(shelf.skills[0]) ? shelf.skills[0] : undefined;
-  const readAloud = [intro, ...tips.map((x) => `${t('play.topic.tip')} ${x}`)].join(' ');
+  const readAloud = topicReadAloud(intro, tips, t('play.topic.tip'));
 
   if (mockSkill) {
     return (

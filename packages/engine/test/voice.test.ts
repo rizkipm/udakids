@@ -93,7 +93,8 @@ describe('suara Momo (D-035)', () => {
         readFileSync(new URL('../../../content/dialog/momo.id.json', import.meta.url), 'utf8'),
       ),
     );
-    expect(Object.keys(COMMAND_KEYS)).toHaveLength(20);
+    // +2 game EMC Kelas 3–4: koordinat & peluang (D-101).
+    expect(Object.keys(COMMAND_KEYS)).toHaveLength(28);
     for (const k of VOICE_LINE_KEYS) {
       expect(dialog.lines[k], k).toBeDefined();
       expect(dialog.lines[k]!.text).not.toMatch(/\b(salah|gagal)\b/i);

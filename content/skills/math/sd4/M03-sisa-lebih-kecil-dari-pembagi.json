@@ -1,0 +1,127 @@
+{
+  "id": "math.sd4.m3.sisa-lebih-kecil-dari-pembagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 3,
+  "title": "Pembagian bersisa dan soal cerita — Level 3 — Sisa lebih kecil dari pembagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 12]
+          },
+          "prompt": "Pada pembagian dengan {m}, sisa terbesar yang mungkin adalah …",
+          "answer": "m - 1",
+          "distractors": [
+            {
+              "expr": "m",
+              "tag": "sama-pembagi"
+            },
+            {
+              "expr": "m + 1",
+              "tag": "lebih-pembagi"
+            },
+            {
+              "expr": "m - 2",
+              "tag": "kurang-dua"
+            }
+          ],
+          "explain": "Sisa harus lebih kecil dari pembagi. Kalau sisanya {m}, masih bisa dibuat satu kelompok lagi. Jadi sisa terbesar adalah {m} − 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [3, 15],
+            "r": [0, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < m",
+          "prompt": "{nama} menulis {t} : {m} = {=q-1} sisa {=r+m}. Sisa itu tidak lebih kecil dari {m}. Berapa hasil bagi yang tepat?",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q - 1",
+              "tag": "tetap"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + m",
+              "tag": "sisa"
+            }
+          ],
+          "explain": "Sisa {=r+m} masih cukup untuk satu kelompok {m} lagi. Hasil bagi bertambah satu: {=q-1} + 1 = {answer}, dan sisanya {=r+m} − {m} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Manakah yang bisa menjadi sisa pembagian dengan {m}?",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "m",
+              "tag": "sama-pembagi"
+            },
+            {
+              "expr": "m + 1",
+              "tag": "lebih-pembagi"
+            },
+            {
+              "expr": "m + 3",
+              "tag": "lebih-pembagi"
+            }
+          ],
+          "explain": "Sisa selalu lebih kecil dari pembagi {m}. Hanya {answer} yang lebih kecil dari {m}."
+        }
+      }
+    ]
+  }
+}

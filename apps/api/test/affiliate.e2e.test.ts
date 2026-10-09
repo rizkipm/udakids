@@ -84,7 +84,7 @@ describe.skipIf(!hasDb)('afiliasi orang tua (D-063)', () => {
           kind: 'bank',
           provider: 'BCA',
           accountNumber: '1234567890',
-          accountName: 'Udakids',
+          accountName: 'UdaKids',
         })
         .expect(201)
     ).body.id;

@@ -1,4 +1,11 @@
-import { speechText, voiceLangOf, type Item, type VoiceLang } from '@little-coder/engine';
+import {
+  langSegments,
+  speechSegments,
+  speechText,
+  voiceLangFor,
+  type Item,
+  type VoiceLang,
+} from '@little-coder/engine';
 import { API_URL } from '../config/app';
 
 /**
@@ -47,8 +54,9 @@ const voiceRank = (v: SpeechSynthesisVoice) => genderRank(v) * 2 + (v.localServi
 const isGB = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase() === 'en-gb';
 
 /**
- * Suara Indonesia, lalu Melayu yang mirip; untuk kata English: perempuan dulu, lalu British (D-059). Di setiap
- * bahasa dipilih suara perempuan lebih dulu (D-062). undefined = suara bawaan perangkat.
+ * Suara Indonesia; untuk kata English: perempuan dulu, lalu British (D-059). Di setiap bahasa dipilih suara
+ * perempuan lebih dulu (D-062). undefined = suara bawaan perangkat. Suara Melayu tidak dipakai lagi (D-098):
+ * terdengar "bahasa Malaysia" bagi anak.
  */
 function pickVoice(lang: VoiceLang = 'id-ID'): SpeechSynthesisVoice | undefined {
   if (voices.length === 0) refreshVoices();
@@ -66,8 +74,7 @@ function pickVoice(lang: VoiceLang = 'id-ID'): SpeechSynthesisVoice | undefined 
       )[0];
   return (
     by((v) => v.lang.replace('_', '-').toLowerCase() === 'id-id') ??
-    by((v) => v.lang.toLowerCase().startsWith('id')) ??
-    by((v) => v.lang.toLowerCase().startsWith('ms'))
+    by((v) => v.lang.toLowerCase().startsWith('id'))
   );
 }
 
@@ -123,7 +130,14 @@ let seq = 0;
 /** Bila ucapan tidak mulai dalam waktu ini, coba ulang dengan suara bawaan perangkat. */
 const START_TIMEOUT_MS = 1800;
 
-type SpeakOpts = { onEnd?: () => void; rate?: number; lang?: VoiceLang };
+type SpeakOpts = {
+  onEnd?: () => void;
+  rate?: number;
+  /** Satu bahasa untuk seluruh teks. */
+  lang?: VoiceLang;
+  /** Tanpa `lang`: bahasa untuk kalimat yang bahasanya tak pasti (D-098). */
+  baseLang?: VoiceLang;
+};
 
 /**
  * Ucapkan teks dengan suara Chirp dari server (D-091); memanggil `onEnd` saat selesai (atau segera bila suara
@@ -153,12 +167,27 @@ let waitSeq = 0;
 const isOnline = () => typeof navigator === 'undefined' || navigator.onLine !== false;
 
 function speakNow(text: string, opts: SpeakOpts) {
-  if (serverVoiceOn()) {
-    playClip(sayUrl(text, opts.lang ?? 'id-ID'), text, opts.onEnd, opts.lang);
+  if (!chirpOn()) {
+    browserSpeak(text, { ...opts, lang: opts.lang ?? 'id-ID' });
     return;
   }
-  browserSpeak(text, opts);
+  // D-098: kalimat demi kalimat dengan suara sesuai bahasanya (teks campuran seperti "Hari ini kita belajar
+  // Prepositions. We use …" tidak dibacakan satu suara), dan teks panjang dipecah agar tetap ≤ batas server.
+  const parts = opts.lang
+    ? speechSegments(text).map((t) => ({ text: t, lang: opts.lang! }))
+    : langSegments(text, opts.baseLang);
+  const token = ++chainSeq;
+  const play = (k: number) => {
+    if (token !== chainSeq) return;
+    const p = parts[k];
+    if (!p) return opts.onEnd?.();
+    playClip(sayUrl(p.text, p.lang), p.text, () => play(k + 1), p.lang);
+  };
+  play(0);
 }
+
+/** Rangkaian kalimat yang sedang diputar; dinaikkan saat berhenti agar sisa rangkaian tidak lanjut. */
+let chainSeq = 0;
 
 /** Suara browser (cadangan terakhir, D-091). */
 function browserSpeak(text: string, opts: SpeakOpts = {}) {
@@ -249,8 +278,9 @@ function browserSpeak(text: string, opts: SpeakOpts = {}) {
   else start(0);
 }
 
-export function stopSpeaking() {
+export function stopSpeaking(keepChain = false) {
   waitSeq++;
+  if (keepChain !== true) chainSeq++;
   seq++;
   keep.list = [];
   synth()?.cancel();
@@ -341,6 +371,8 @@ const MANIFEST_KEY = 'lc.voice';
  * dibuat server dulu (±1–3 detik), jadi waktunya cukup longgar (D-091).
  */
 const CLIP_START_MS = 6000;
+/** Percobaan kedua menunggu lebih lama (jaringan lambat). */
+const CLIP_RETRY_MS = 12000;
 
 function readManifest(): VoiceManifest | undefined {
   try {
@@ -390,19 +422,37 @@ function stopAudio() {
   audio = undefined;
 }
 
-function playClip(url: string, fallbackText: string, onEnd?: () => void, lang?: VoiceLang) {
-  stopSpeaking();
+function playClip(
+  url: string,
+  fallbackText: string,
+  onEnd?: () => void,
+  lang?: VoiceLang,
+  retry = true,
+) {
+  // Klip berikutnya dalam rangkaian kalimat (D-098) tidak memutus rangkaiannya sendiri.
+  stopSpeaking(true);
   const a = new Audio(url);
   audio = a;
   let started = false;
   let done = false;
-  const fallback = () => {
+  const fallback = (blocked = false) => {
     if (done || audio !== a) return;
     done = true;
     stopAudio();
-    browserSpeak(fallbackText, { onEnd, lang });
+    // D-098: hanya Chirp. Coba ulang sekali (klip baru bisa butuh waktu dibuat); bila tetap gagal, Momo diam dan
+    // layar soal menampilkan teksnya — tanpa suara browser (yang di sebagian HP bersuara Melayu/English).
+    if (blocked) {
+      reportBlocked(fallbackText);
+      onEnd?.();
+    } else if (retry)
+      playClip(`${url}${url.includes('?') ? '&' : '?'}r=1`, fallbackText, onEnd, lang, false);
+    else if (manifest?.enabled === false) browserSpeak(fallbackText, { onEnd, lang });
+    else {
+      reportTrouble(fallbackText);
+      onEnd?.();
+    }
   };
-  const timer = setTimeout(() => !started && fallback(), CLIP_START_MS);
+  const timer = setTimeout(() => !started && fallback(), retry ? CLIP_START_MS : CLIP_RETRY_MS);
   a.onplaying = () => {
     started = true;
     clearTimeout(timer);
@@ -417,9 +467,10 @@ function playClip(url: string, fallbackText: string, onEnd?: () => void, lang?: 
     clearTimeout(timer);
     fallback();
   };
-  void a.play()?.catch(() => {
+  void a.play()?.catch((e: unknown) => {
     clearTimeout(timer);
-    fallback();
+    // Browser menolak audio sebelum ada ketukan: minta anak mengetuk speaker, bukan ganti suara.
+    fallback((e as { name?: string } | undefined)?.name === 'NotAllowedError');
   });
 }
 
@@ -449,8 +500,14 @@ export function speakItem(
   part: 'prompt' | 'reteach' = 'prompt',
   opts: { onEnd?: () => void } = {},
 ) {
-  const lang = voiceLangOf(item.skillId, part);
-  if (enabled && manifest?.enabled && canPlayAudio()) {
+  // Bahasa mengikuti kalimatnya (D-098): penjelasan Indonesia di buku English tidak dibacakan suara English.
+  const lang = voiceLangFor(item.skillId, part, text);
+  // Buku English: per kalimat dengan suara sesuai bahasanya (soal/pembahasan sering campur Indonesia & English).
+  if (enabled && chirpOn() && item.skillId.startsWith('english.')) {
+    speak(text, { ...opts, baseLang: lang });
+    return;
+  }
+  if (enabled && chirpOn()) {
     playClip(itemVoiceUrl(item, part), text, opts.onEnd, lang);
     return;
   }
@@ -487,20 +544,13 @@ export function speakChoice(
   choice: { id: string; say?: string },
 ) {
   if (!choice.say) return;
-  const lang = item ? voiceLangOf(item.skillId, 'choice') : 'id-ID';
+  const lang = item ? voiceLangFor(item.skillId, 'choice', choice.say) : 'id-ID';
   // Soal lomba ('contest') tidak punya skill/seed di perangkat: lewat `speak` dengan konteks lomba.
-  if (
-    item &&
-    item.skillId !== 'contest' &&
-    usesCardClips(item.skillId) &&
-    enabled &&
-    manifest?.enabled &&
-    canPlayAudio()
-  ) {
+  if (item && item.skillId !== 'contest' && usesCardClips(item.skillId) && enabled && chirpOn()) {
     playClip(itemVoiceUrl(item, 'choice', choice.id), choice.say, undefined, lang);
     return;
   }
-  // Tanpa id soal (mis. pratinjau): lewat `speak` (Chirp dengan konteks; cadangan suara perangkat lebih pelan).
+  // Tanpa id soal (mis. pratinjau, lomba): lewat `speak` (Chirp dengan konteks).
   speak(choice.say, { lang, ...(lang === 'en-GB' && { rate: 0.8 }) });
 }
 
@@ -521,7 +571,23 @@ const voicedCards = (item: Partial<Pick<Item, 'interaction'>>) => {
               ? it.tokens
               : it.type === 'crossword'
                 ? it.letters
-                : [];
+                : it.type === 'chart'
+                  ? it.bars
+                  : it.type === 'magic'
+                    ? it.facts.flatMap((f) => f.choices)
+                    : it.type === 'stack'
+                      ? it.blocks
+                      : it.type === 'bingo'
+                        ? it.cells
+                        : it.type === 'chance'
+                          ? [...it.outcomes, ...it.fractions]
+                          : it.type === 'coord'
+                            ? it.steps.map((st) => ({
+                                id: st.id,
+                                visual: { kind: 'blank' as const },
+                                say: st.say,
+                              }))
+                            : [];
   return cards.filter((c) => c.say);
 };
 
@@ -577,7 +643,11 @@ export function sayUrl(text: string, lang: VoiceLang = 'id-ID') {
   return `${API_URL}/voice/say?${q.toString()}`;
 }
 
-/** Suara server bisa dipakai sekarang? (kunci suara aktif, perangkat bisa memutar audio, dan online). */
-function serverVoiceOn() {
-  return !!manifest?.enabled && canPlayAudio() && isOnline();
+/**
+ * Pakai suara Chirp dari server? (D-098) Ya, kecuali server memang tanpa suara Chirp (`enabled: false`, mis.
+ * pengembangan tanpa kunci) atau perangkat tidak bisa memutar audio. Juga saat offline: klip yang pernah diputar
+ * ada di cache browser. Suara browser TIDAK dipakai sebagai cadangan selama Chirp aktif.
+ */
+function chirpOn() {
+  return manifest?.enabled !== false && canPlayAudio();
 }

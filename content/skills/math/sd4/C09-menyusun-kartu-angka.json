@@ -1,0 +1,146 @@
+{
+  "id": "math.sd4.c9.menyusun-kartu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 9,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 9 — Menyusun kartu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [0, 4],
+            "k1": [1, 2],
+            "k2": [1, 2],
+            "k3": [1, 2],
+            "k4": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "d": "e + k1",
+            "c": "d + k2",
+            "b": "c + k3",
+            "a": "b + k4",
+            "y1": "(q == 1) * c + (q == 2) * d + (q == 3) * b",
+            "y2": "(q == 1) * a + (q == 2) * b + (q == 3) * e",
+            "y3": "(q == 1) * e + (q == 2) * a + (q == 3) * d",
+            "y4": "(q == 1) * b + (q == 2) * e + (q == 3) * c",
+            "y5": "(q == 1) * d + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a <= 9",
+          "prompt": "Ada kartu angka {y1}, {y2}, {y3}, {y4}, dan {y5}. Setiap kartu dipakai satu kali. Berapa bilangan 5 angka terbesar yang dapat dibuat?",
+          "answer": "a * 10000 + b * 1000 + c * 100 + d * 10 + e",
+          "distractors": [
+            {
+              "expr": "a * 10000 + b * 1000 + c * 100 + e * 10 + d",
+              "tag": "dua-terakhir-tertukar"
+            },
+            {
+              "expr": "b * 10000 + a * 1000 + c * 100 + d * 10 + e",
+              "tag": "dua-pertama-tertukar"
+            },
+            {
+              "expr": "a * 10000 + c * 1000 + b * 100 + d * 10 + e",
+              "tag": "tengah-tertukar"
+            }
+          ],
+          "explain": "Supaya terbesar, taruh angka terbesar di tempat paling kiri, lalu angka berikutnya dari besar ke kecil: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [1, 4],
+            "k1": [1, 2],
+            "k2": [1, 2],
+            "k3": [1, 2],
+            "k4": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "d": "e + k1",
+            "c": "d + k2",
+            "b": "c + k3",
+            "a": "b + k4",
+            "y1": "(q == 1) * c + (q == 2) * d + (q == 3) * b",
+            "y2": "(q == 1) * a + (q == 2) * b + (q == 3) * e",
+            "y3": "(q == 1) * e + (q == 2) * a + (q == 3) * d",
+            "y4": "(q == 1) * b + (q == 2) * e + (q == 3) * c",
+            "y5": "(q == 1) * d + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a <= 9",
+          "prompt": "Ada kartu angka {y1}, {y2}, {y3}, {y4}, dan {y5}. Setiap kartu dipakai satu kali. Berapa bilangan 5 angka terkecil yang dapat dibuat?",
+          "answer": "e * 10000 + d * 1000 + c * 100 + b * 10 + a",
+          "distractors": [
+            {
+              "expr": "e * 10000 + d * 1000 + c * 100 + a * 10 + b",
+              "tag": "dua-terakhir-tertukar"
+            },
+            {
+              "expr": "d * 10000 + e * 1000 + c * 100 + b * 10 + a",
+              "tag": "dua-pertama-tertukar"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + c * 100 + d * 10 + e",
+              "tag": "terbesar"
+            }
+          ],
+          "explain": "Supaya terkecil, taruh angka terkecil di tempat paling kiri, lalu angka berikutnya dari kecil ke besar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [0, 0],
+            "k1": [1, 2],
+            "k2": [1, 2],
+            "k3": [1, 2],
+            "k4": [1, 2],
+            "q": [1, 3]
+          },
+          "derived": {
+            "d": "e + k1",
+            "c": "d + k2",
+            "b": "c + k3",
+            "a": "b + k4",
+            "y1": "(q == 1) * c + (q == 2) * d + (q == 3) * b",
+            "y2": "(q == 1) * a + (q == 2) * b + (q == 3) * e",
+            "y3": "(q == 1) * e + (q == 2) * a + (q == 3) * d",
+            "y4": "(q == 1) * b + (q == 2) * e + (q == 3) * c",
+            "y5": "(q == 1) * d + (q == 2) * c + (q == 3) * a"
+          },
+          "constraint": "a <= 9",
+          "prompt": "Ada kartu angka {y1}, {y2}, {y3}, {y4}, dan {y5}. Setiap kartu dipakai satu kali. Berapa bilangan 5 angka terkecil yang dapat dibuat?",
+          "answer": "d * 10000 + c * 100 + b * 10 + a",
+          "distractors": [
+            {
+              "expr": "d * 1000 + c * 100 + b * 10 + a",
+              "tag": "nol-di-depan"
+            },
+            {
+              "expr": "d * 10000 + c * 1000 + b * 10 + a",
+              "tag": "nol-bergeser"
+            },
+            {
+              "expr": "d * 10000 + c * 100 + a * 10 + b",
+              "tag": "dua-terakhir-tertukar"
+            }
+          ],
+          "explain": "Angka 0 tidak boleh di depan, karena bilangannya menjadi 4 angka. Taruh angka terkecil selain 0, yaitu {d}, di depan, lalu 0, lalu angka lain dari kecil ke besar: {answer}."
+        }
+      }
+    ]
+  }
+}

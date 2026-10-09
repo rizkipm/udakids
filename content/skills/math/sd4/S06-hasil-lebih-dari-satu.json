@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.s6.hasil-lebih-dari-satu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 6,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 6 — Hasil lebih dari 1",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a < d && b < d && a + b > d",
+          "prompt": "{a}/{d} + {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a + b - d",
+              "den": "d",
+              "tag": "lupa-satu-utuh"
+            },
+            {
+              "num": "a + b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlahkan pembilang: {a} + {b} = {=a+b}, penyebut tetap {d}. Hasilnya {answer}. Karena {=a+b} lebih dari {d}, hasilnya lebih dari 1, yaitu 1 {=a+b-d}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a < d && b < d && a + b > d",
+          "prompt": "{a}/{d} + {b}/{d} = 1 …/{d}",
+          "answer": "a + b - d",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "tanpa-mengubah"
+            },
+            {
+              "expr": "d - a",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + b - d + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{a}/{d} + {b}/{d} = {=a+b}/{d}. Ambil {d}/{d} sebagai 1 utuh. Sisanya {=a+b} − {d} = {answer}. Jadi hasilnya 1 {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9]
+          },
+          "constraint": "a < d",
+          "prompt": "2 − {a}/{d} = 1 …/{d}",
+          "answer": "d - a",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tetap"
+            },
+            {
+              "expr": "2 * d - a",
+              "tag": "tanpa-mengubah"
+            },
+            {
+              "expr": "d - a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Pecah 2 menjadi 1 + {d}/{d}. Lalu {d}/{d} − {a}/{d} = {answer}/{d}. Jadi 2 − {a}/{d} = 1 {answer}/{d}."
+        }
+      }
+    ]
+  }
+}

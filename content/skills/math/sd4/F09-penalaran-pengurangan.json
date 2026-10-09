@@ -1,0 +1,113 @@
+{
+  "id": "math.sd4.f9.penalaran-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 9,
+  "title": "Pengurangan bilangan besar — Level 9 — Penalaran pengurangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 39999],
+            "c": [1000, 39999]
+          },
+          "derived": {
+            "a": "b + c"
+          },
+          "constraint": "b != c",
+          "prompt": "Diketahui {a} − {b} = {c}. Berapa {a} − {c}?",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "hasil-lama"
+            },
+            {
+              "expr": "a",
+              "tag": "bilangan-awal"
+            },
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pada pengurangan, bilangan awal = pengurang + hasil, jadi {a} = {b} + {c}. Maka {a} − {c} = {answer}. Tidak perlu menghitung ulang!"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1000, 49999],
+            "c": [1000, 49999]
+          },
+          "prompt": "Aku sebuah bilangan. Jika aku dikurangi {b}, hasilnya {c}. Siapa aku?",
+          "answer": "b + c",
+          "mode": "input",
+          "explain": "Kebalikan dari mengurangi adalah menjumlah. {c} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 89999],
+            "b": [1000, 19999],
+            "k": {
+              "values": [10, 100, 1000, 500, 200]
+            }
+          },
+          "prompt": "{a} − {b} = {=a+k} − …",
+          "answer": "b + k",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tetap"
+            },
+            {
+              "expr": "b - k",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "b + 2 * k",
+              "tag": "dua-kali"
+            }
+          ],
+          "explain": "Jika bilangan awal ditambah {k}, pengurangnya juga harus ditambah {k} supaya selisihnya tetap. {b} + {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [50000, 99999],
+            "b": [10000, 49999],
+            "k": [1, 9],
+            "s": [0, 1]
+          },
+          "derived": {
+            "c": "b + (2 * s - 1) * k * 100"
+          },
+          "prompt": "Mana yang hasilnya lebih besar: {a} − {b} atau {a} − {c}?",
+          "answer": "(b < c) * 1 + (b > c) * 2",
+          "labels": {
+            "1": "yang pertama",
+            "2": "yang kedua"
+          },
+          "explain": "Bilangan awalnya sama, yaitu {a}. Semakin kecil bilangan yang dikurangkan, semakin besar sisanya. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

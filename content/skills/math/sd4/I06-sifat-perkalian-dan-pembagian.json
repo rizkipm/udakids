@@ -1,0 +1,173 @@
+{
+  "id": "math.sd4.i6.sifat-perkalian-dan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 6,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 6 — Sifat 0, 1, dan pertukaran",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} × {b} = {b} × …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "sama"
+            },
+            {
+              "expr": "a * b",
+              "tag": "hasil-kali"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Urutan perkalian boleh ditukar, hasilnya tetap sama. {a} × {b} = {b} × {a} = {=a*b}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 999]
+          },
+          "prompt": "{n} × 0 = …",
+          "answer": "0",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "bilangan-itu"
+            },
+            {
+              "expr": "1",
+              "tag": "satu"
+            },
+            {
+              "expr": "n * 10",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Bilangan apa pun dikali 0 hasilnya 0. {n} kelompok yang masing-masing kosong tetap kosong."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 999]
+          },
+          "prompt": "{n} × 1 = …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "1",
+              "tag": "satu"
+            },
+            {
+              "expr": "0",
+              "tag": "nol"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Bilangan apa pun dikali 1 hasilnya bilangan itu sendiri. {n} × 1 = {n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 999]
+          },
+          "prompt": "0 : {n} = …",
+          "answer": "0",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "bilangan-itu"
+            },
+            {
+              "expr": "1",
+              "tag": "satu"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "0 dibagi bilangan berapa pun hasilnya 0. Tidak ada yang bisa dibagikan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 999]
+          },
+          "prompt": "{n} : {n} = …",
+          "answer": "1",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "bilangan-itu"
+            },
+            {
+              "expr": "0",
+              "tag": "nol"
+            },
+            {
+              "expr": "n * n",
+              "tag": "mengalikan"
+            }
+          ],
+          "explain": "Bilangan dibagi dirinya sendiri hasilnya 1, karena {n} × 1 = {n}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 999]
+          },
+          "prompt": "{n} : 1 = …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "1",
+              "tag": "satu"
+            },
+            {
+              "expr": "0",
+              "tag": "nol"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Bilangan dibagi 1 hasilnya bilangan itu sendiri, karena 1 × {n} = {n}."
+        }
+      }
+    ]
+  }
+}

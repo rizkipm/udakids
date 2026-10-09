@@ -1,0 +1,130 @@
+{
+  "id": "math.sd4.f4.meminjam-melewati-nol",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 4,
+  "title": "Pengurangan bilangan besar — Level 4 — Meminjam melewati nol",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [3, 9],
+            "s": [0, 8],
+            "q": [1, 9],
+            "h": [0, 9],
+            "t": [0, 9],
+            "x": [0, 9]
+          },
+          "derived": {
+            "a": "r * 1000 + s",
+            "u": "s + 1 + floor(x * (9 - s) / 10)",
+            "b": "q * 1000 + h * 100 + t * 10 + u",
+            "kb": "abs(floor(a / 1) % 10 - floor(b / 1) % 10) * 1 + abs(floor(a / 10) % 10 - floor(b / 10) % 10) * 10 + abs(floor(a / 100) % 10 - floor(b / 100) % 10) * 100 + abs(floor(a / 1000) % 10 - floor(b / 1000) % 10) * 1000"
+          },
+          "constraint": "q < r",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "kb",
+              "tag": "kurangi-kecil-dari-besar"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "lupa-pinjaman"
+            }
+          ],
+          "explain": "{a} tidak punya ratusan dan puluhan. Pinjam 1 ribuan: {a} = {=r-1} ribuan + 9 ratusan + 9 puluhan + {=s+10} satuan. Sekarang kurangi tiap tempat: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 9],
+            "b": [1001, 9999]
+          },
+          "derived": {
+            "a": "p * 10000"
+          },
+          "constraint": "b % 10 != 0",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 10000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "{a} hanya punya puluh ribuan. Pinjam 1 puluh ribuan: {a} = {=p-1} puluh ribuan + 9 ribuan + 9 ratusan + 9 puluhan + 10 satuan. Lalu kurangi tiap tempat: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 9],
+            "h": [1, 9],
+            "b": [101, 999]
+          },
+          "derived": {
+            "a": "r * 1000 + h * 100"
+          },
+          "constraint": "b % 100 > 0 && b % 10 > 0",
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "a - b + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "lupa-pinjaman"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Angka 0 tidak bisa langsung dikurangi. Pinjam dari tempat terdekat yang bukan 0, lalu setiap 0 yang dilewati menjadi 9. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

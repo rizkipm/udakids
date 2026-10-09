@@ -1,0 +1,138 @@
+{
+  "id": "math.sd34.ee7.data-terurut-dengan-rata-rata",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 7,
+  "title": "Statistika — Level 7 — Data terurut dengan rata-rata",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Statistika",
+    "indikator": "Menentukan data yang hilang pada data terurut dengan rata-rata diketahui",
+    "emc-no": "31"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lv": [4, 9],
+            "j": {
+              "values": [0, 1, 2]
+            },
+            "r1": [0, 2],
+            "r2": [0, 2],
+            "r3": [0, 2],
+            "e2": [0, 3]
+          },
+          "derived": {
+            "a3": "lv - r3",
+            "a2": "a3 - r2",
+            "a1": "a2 - r1",
+            "x": "lv + floor(j / 2)",
+            "y": "lv + ceil(j / 2)",
+            "b1": "lv + 1",
+            "b2": "lv + 1 + e2",
+            "tot": "a1 + a2 + a3 + lv + x + y + b1 + b2",
+            "m": "tot / 8"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "tot % 8 == 0 && a1 >= 1",
+          "prompt": "{nama} mencatat skor 8 kali latihan memanah, diurutkan dari yang terkecil: {a1}, {a2}, {a3}, {lv}, X, Y, {b1}, {b2}. Semua skor bilangan bulat dan rata-ratanya {m}. Berapa skor X?",
+          "answer": "x",
+          "mode": "input",
+          "explain": "Jumlah semua data = 8 × {m} = {tot}. Jumlah data yang diketahui = {=tot-x-y}, jadi X + Y = {=x+y}. Karena urut, {lv} ≤ X ≤ Y ≤ {b1}. Satu-satunya pasangan: X = {x} dan Y = {y}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lv": [4, 9],
+            "j": {
+              "values": [0, 1, 2]
+            },
+            "r1": [0, 2],
+            "r2": [0, 2],
+            "r3": [0, 2],
+            "e2": [0, 3]
+          },
+          "derived": {
+            "a3": "lv - r3",
+            "a2": "a3 - r2",
+            "a1": "a2 - r1",
+            "x": "lv + floor(j / 2)",
+            "y": "lv + ceil(j / 2)",
+            "b1": "lv + 1",
+            "b2": "lv + 1 + e2",
+            "tot": "a1 + a2 + a3 + lv + x + y + b1 + b2",
+            "m": "tot / 8"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "tot % 8 == 0 && a1 >= 1",
+          "prompt": "{nama} mencatat skor 8 kali latihan memanah, diurutkan dari yang terkecil: {a1}, {a2}, {a3}, {lv}, X, Y, {b1}, {b2}. Semua skor bilangan bulat dan rata-ratanya {m}. Berapa skor Y?",
+          "answer": "y",
+          "mode": "input",
+          "explain": "Jumlah semua data = 8 × {m} = {tot}. Jumlah data yang diketahui = {=tot-x-y}, jadi X + Y = {=x+y}. Karena urut, {lv} ≤ X ≤ Y ≤ {b1}. Satu-satunya pasangan: X = {x} dan Y = {y}."
+        }
+      }
+    ]
+  }
+}

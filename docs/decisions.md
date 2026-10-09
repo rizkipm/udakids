@@ -2626,3 +2626,246 @@ setiap kandidat disaring).
 - **Batas Pexels:** 200 permintaan/jam, 20.000/bulan. Klien menunggu sendiri bila jatah per jam habis.
 - **Uji coba 9 Okt 2026 (laptop, english/sd12):** 62 foto lolos dari 128 kandidat yang dilihat, biaya Claude US$0,36.
   Penolakan yang benar, mis. foto bertulisan besar "Wash your hands!".
+
+## D-096 — Buku Matematika Kelas 4 (`math/sd4`): ±32 topik, game per topik, 6 game baru
+
+Tanggal: 2026-10-09. Disetujui pemilik produk (jawaban: "Lebih lengkap, ±30 topik", "Topik Game khusus + game di
+topik", keenam game baru, "Sekaligus").
+
+- **Topik** disusun sendiri dari **CP Matematika Fase B (BSKAP 046/H/KR/2025)** dan buku Matematika Kelas IV
+  Kemendikbudristek. Topik di atas CP (bilangan sampai 1.000.000, modus–median, operasi pecahan berpenyebut sama)
+  ditandai `fase-merdeka: "B (pengayaan)"`. Daftar keterampilan IXL Grade 4 hanya pembanding cakupan; tidak ada
+  soal, kalimat, atau aset yang disalin (PRD A17).
+- **Struktur:** setiap topik reguler = 10 level soal (Level 10 tantangan gabungan, D-023) + **Level 11 game** yang
+  sesuai materinya. Ditambah topik **GM "Game seru matematika"** berisi 10 level game.
+  - Level game tidak masuk mock test (`usesGameFamily`) dan mengikuti kunci berbayar seperti level lain.
+- **Pelajaran** setiap topik (D-090/D-093): Video Momo otomatis, layar `baca` konsep yang utuh (definisi, contoh
+  nyata Indonesia, cara menulis/membaca, langkah), simulasi `peraga`, contoh soal, dan `ingat`. Foto realistis lewat
+  Pexels + saringan Claude (D-095). `math/sd4` masuk `PERAGA_BOOKS`.
+- **Alat peraga baru untuk Kelas 4:**
+  - `blok-puluhan` sampai ribuan (≤ 9.999);
+  - garis bilangan sampai 1.000.000 (paling banyak 40 lompatan);
+  - `luas` (petak persegi panjang: luas/keliling);
+  - `sudut` (putar sinar ke besar sudut);
+  - `diagram` (diagram batang dari tabel);
+  - `desimal` (petak perseratus).
+- **6 game baru** (versi sendiri, nama Indonesia, tanpa hitung mundur, nyawa, atau streak; PRD A14/A17):
+  - **Tebak Angka Momo:** tebak bilangan rahasia dengan petunjuk "lebih besar/lebih kecil" dan rentang garis
+    bilangan yang menyempit.
+  - **Diagram Ajaib:** atur tinggi batang sesuai tabel, lalu jawab pertanyaan dari diagram.
+  - **Penyihir Hitung:** rangkaian fakta perkalian/pembagian. Tanpa hitung mundur (stopwatch ronde biasa saja);
+    tiap 3 jawaban tepat (bisa diatur), satu bintang mantra menyala.
+  - **Tumpuk Angka:** pilih balok bilangan yang ditumpuk sampai jumlah/hasil kali sama dengan target.
+  - **Garis Perkalian:** perkalian cara garis berpotongan; hitung titik potong per kelompok lalu jumlahkan.
+  - **Bingo Rupiah:** Momo menyebut belanja/kembalian, anak menandai nominal Rupiah yang pas di kartu bingo 3×3.
+  - Penilaian semua game dihitung ulang di engine dari ketukan/isian (`play-g4.ts`):
+    - Tebak Angka, Penyihir, dan Bingo adalah game ketuk: kekeliruan ke-2 mengakhiri soal.
+    - Diagram, Tumpuk, dan Garis memakai tombol Selesai dengan satu kesempatan membetulkan.
+    - Keenam game tidak dipakai di lomba live (kunci jawaban ada di perangkat).
+- **Suara:** `numberWord` kini sampai ratusan juta, dan teks yang berupa kata bilangan sah selalu boleh dibuatkan suara
+  Chirp (alat peraga & game Kelas 4 menyebut bilangan besar). Kata `derajat`, `perseratus`, `persepuluh`, `koma`, dan
+  `kotak` masuk kosakata suara.
+
+## D-097 — Nama merek seragam: UdaKids
+
+Tanggal: 2026-10-09. Permintaan pemilik produk ("kita ingin buat konsisten ke UdaKids aja").
+
+- **Semua nama yang terlihat pengguna** memakai **UdaKids** (U dan K besar):
+  - `APP_NAME` (header landing, halaman masuk, footer, teks `{app}`);
+  - judul halaman/SEO, `apple-mobile-web-app-title`, data terstruktur;
+  - nama pengirim & isi email, teks admin/orang tua;
+  - prompt gaya AI Gambar, dan dokumen (CLAUDE.md, PRD, docs, skill).
+  - Ejaan lama "Udakids" dan nama lama "Little Coder" tidak dipakai lagi. Catatan keputusan lama di file ini dibiarkan
+    apa adanya (riwayat).
+- **Tetap (identitas teknis, bukan merek):**
+  - paket `@little-coder/*`;
+  - database & role `littlecoder`, service `little-coder-api`, berkas `deploy/littlecoder-api.service`;
+  - email admin dev `admin@littlecoder.local`, kunci penyimpanan perangkat `lc.*`;
+  - domain dan slug huruf kecil `udakids`.
+  - Mengganti identitas teknis ini berisiko memutus server, database, sesi, dan data offline anak, tanpa terlihat oleh
+    pengguna.
+- Data yang diisi admin di database (mis. judul video panduan) dan riwayat email terkirim tidak diubah otomatis; admin
+  menyuntingnya lewat panel bila perlu.
+
+## D-098 — Hanya Chirp 3 HD (tanpa suara browser), bahasa suara mengikuti kalimat
+
+Tanggal: 2026-10-09. Dari keluhan pengguna (audio SMP terdengar "bahasa Malaysia" dan campur English) dan permintaan
+pemilik produk: "semua tanpa terkecuali pakai chirp3-hd".
+
+- **Temuan QA:** teks SMP sudah bahasa Indonesia baku (tanpa kata Melayu). Suara "Malaysia" berasal dari dua hal.
+  - Di buku English, seluruh soal **dan pembahasan berbahasa Indonesia** dibacakan suara British. Suara English yang
+    membaca kalimat Indonesia terdengar seperti logat Malaysia/campur.
+  - Suara cadangan browser memilih suara **Melayu (ms)** bila HP tidak punya suara Indonesia.
+- **Bahasa suara mengikuti kalimatnya** (`textLanguage`, `voiceProfileFor`):
+  - kata penanda khas tiap bahasa (dibuat dari konten, `lang-words.ts`) dan imbuhan -kan/-nya/meng-;
+  - bagian dalam tanda kutip tidak dihitung ("\"Break a leg\" = semoga sukses" tetap Indonesia).
+  - Buku English:
+    - kalimat English → suara British;
+    - penjelasan/perintah Indonesia → suara Indonesia;
+    - kalimat tak pasti di pembahasan → suara Indonesia (suara Indonesia membaca kata English masih wajar,
+      kebalikannya tidak).
+  - Buku lain tetap Indonesia.
+- **Teks campuran dibacakan per kalimat** (`langSegments`):
+  - Kalimat berbahasa sama digabung, lalu diputar berurutan sebagai beberapa klip Chirp.
+  - Label pendek beda bahasa dipisah ("Ingat:" Indonesia, isinya English).
+  - Teks panjang dipecah ≤ 400 huruf, sehingga "Dengarkan" topik yang panjang tidak ditolak server.
+  - Server mengenali setiap potongan karena memakai pemecah yang sama.
+- **Tanpa suara browser selama Chirp aktif:**
+  - Klip gagal → dicoba ulang sekali (12 detik). Tetap gagal → Momo diam dan layar soal menampilkan teksnya.
+  - Browser menolak audio sebelum ketukan → anak diminta mengetuk speaker.
+  - Offline → klip yang pernah diputar tetap dari cache browser.
+  - Suara browser hanya dipakai bila server memang tanpa Chirp (pengembangan tanpa kunci), dan tidak pernah memilih
+    suara Melayu.
+- Klip lama yang salah bahasa tidak dipakai lagi (kuncinya berbeda); klip baru dibuat saat pertama diputar.
+
+## D-099 — Ringkasan admin lebih analitis: grafik beragam & perbaikan angka
+
+Tanggal: 2026-10-09. Permintaan pemilik produk: "audit lagi secara menyeluruh … sebagai data analyst, chart lebih
+bervariatif, section chart lebih besar, dan analisa apa yang sebaiknya di-improve" (memperluas D-039).
+
+- **Perbaikan angka (`GET /admin/insights`):**
+  - Pendapatan "bulan ini" dibandingkan dengan bulan lalu **s.d. tanggal yang sama** (`revenuePrevMonthToDate`).
+    Sebelumnya bulan berjalan (mis. tgl 1–9) dibanding sebulan penuh, sehingga awal bulan selalu terlihat "turun".
+  - Bulan lalu dihitung dari bulan kalender (`prevMonthOf`), bukan dari tanggal UTC. Sebelumnya keliru di jam
+    00.00–07.00 WIB tanggal 1.
+  - "Anak aktif" hanya menghitung anak yang masih aktif. Sebelumnya bisa > 100% dari jumlah anak.
+  - "Keluarga membeli" hanya menghitung orang tua aktif, sama dengan penyebutnya.
+  - Batas lulus memakai `PASS_SCORE` dari engine (bukan angka 70 tertulis).
+  - Menit belajar: satu ronde dihitung paling lama 30 menit. Tujuannya agar tab yang ditinggal terbuka tidak
+    menggelembungkan angka.
+  - Seri harian: satu agregasi per tabel lalu digabung, bukan subquery per hari (90 hari = ratusan scan).
+- **Data baru (semua agregat, tanpa data pribadi anak):**
+  - seri harian: lunas, lulus, anak belajar, orang tua baru, anak baru;
+  - tren 12 bulan: pendapatan, keluarga baru, anak belajar, ronde, kas masuk/keluar;
+  - corong keluarga: daftar → verifikasi email → punya profil anak → anak belajar → membeli;
+  - retensi: anak periode lalu yang kembali belajar;
+  - per mata pelajaran, sebaran skor per 10 poin, dan peta hari × jam (WIB).
+- **Tampilan (`apps/web/src/admin/insightCharts.tsx`, SVG tanpa pustaka):**
+  - Jenis grafik: kolom (tunggal/bertumpuk/berkelompok), garis, donat, peta panas, corong, dan tab metrik.
+  - Panel grafik besar dan lebar penuh, dikelompokkan per seksi: Penjualan, Pengguna & corong, Belajar,
+    Kualitas soal.
+  - Aksesibilitas: setiap grafik punya tooltip, legenda (≥ 2 seri), dan "Lihat tabel" sebagai padanan.
+  - Warna: palet kategori yang lolos cek buta warna; warna status hanya untuk status pesanan.
+  - Tidak ada grafik dua sumbu. Metrik berbeda skala ditampilkan lewat tab, bukan ditumpuk.
+- **Catatan otomatis baru:**
+  - keluarga belum verifikasi email;
+  - kebocoran terbesar di corong;
+  - retensi rendah;
+  - jam belajar paling ramai.
+- **Tambahan (disetujui "lakukan yang comply"):**
+  - Index `events_type_ts_idx (type, ts)`, migrasi `0020_events_type_ts`. Semua laporan menyaring
+    `type = 'quiz_result'` + rentang waktu.
+  - Layanan verifikasi:
+    - median dan p90 jam dari unggah bukti sampai diputuskan;
+    - bukti tertua yang masih menunggu;
+    - catatan merah bila sudah ≥ 24 jam.
+  - Kode unik transfer ditampilkan terpisah, tetapi **tetap termasuk** pendapatan. Alasannya, kode unik adalah
+    uang yang benar-benar masuk dan sama dengan buku kas.
+  - Retensi per kohort mingguan (8 minggu terakhir, minggu mulai Senin WIB):
+    - dihitung dari minggu ronde pertama anak;
+    - hanya agregat, tanpa nama anak.
+  - Tidak dikerjakan karena butuh keputusan terpisah:
+    - pelacakan kunjungan halaman (analytics);
+    - perubahan alur onboarding profil anak;
+    - perubahan tingkat kesulitan adaptive.
+
+## D-100 — Filter bulan & tahun di ringkasan admin; section Afiliasi dan Komisi owner terpisah
+
+Tanggal: 2026-10-09. Permintaan pemilik produk:
+
+- section Afiliasi & komisi dibuat satu section luas, tidak dibagi dua;
+- grafiknya insightful dan bukan batang;
+- Komisi owner punya section sendiri;
+- filter per bulan & tahun di paling atas, dan semua data mengikuti filter.
+
+- **Filter periode** (`apps/web/src/admin/period.ts`, `apps/api/src/reports/period.ts`):
+  - Pilihan: 7/30/90 hari terakhir, satu bulan (`year` + `month`), atau satu tahun (`year`).
+  - Pilihan disimpan di URL (`/admin?periode=30h|2026-10|2026`). Bar filter menempel di atas saat digulir.
+  - Pembanding = periode sebelumnya yang sama panjang. Bulan/tahun berjalan dibanding bulan/tahun lalu s.d.
+    tanggal yang sama; bulan/tahun yang sudah selesai dibanding periode penuh sebelumnya.
+  - Seri: per hari bila ≤ 92 hari, per bulan untuk satu tahun.
+- **Yang mengikuti filter:**
+  - pendapatan, transaksi, status pesanan, paket terlaris, transaksi terbaru, waktu verifikasi, kode unik;
+  - pendaftar, corong keluarga (keluarga yang daftar di periode itu);
+  - semua angka belajar, retensi, sebaran skor, peta jam, mata pelajaran;
+  - kohort (8 minggu s.d. akhir periode), tren 12 bulan (s.d. bulan akhir periode), buku kas;
+  - afiliasi (`/admin/affiliate/analytics?…`), komisi (bulan terpilih / setahun);
+  - kualitas soal (`/admin/reports/skills?…`).
+- **Sengaja tetap "saat ini"** (diberi label):
+  - antrean verifikasi/bayar;
+  - saldo & antrean pencairan afiliasi;
+  - kelas, staf;
+  - anak aktif 7 hari;
+  - jumlah Jago;
+  - pendaftar terbaru (notifikasi 30 hari).
+    Alasannya, angka-angka ini adalah posisi saat ini, bukan kejadian dalam periode.
+- **Section Afiliasi:** satu panel lebar penuh berisi:
+  - corong meruncing (klik → berlangganan);
+  - gauge biaya vs pendapatan referal ("setiap Rp1 biaya menghasilkan RpX");
+  - donat posisi uang (siap cair/menunggu/dibayar);
+  - garis pendaftar vs pelanggan;
+  - area bertumpuk komisi + bonus;
+  - garis pendapatan referal vs biaya;
+  - treemap afiliator teratas.
+- **Section Komisi owner:**
+  - Sankey aliran uang: pemasukan → pengeluaran/laba bersih → tiap owner/sisa perusahaan;
+  - garis laba bersih vs komisi setahun, hanya s.d. bulan berjalan;
+  - donat porsi owner;
+  - grid status per owner × bulan (dibayar/belum dibayar/perkiraan).
+  - Data dari endpoint baru `GET /admin/finance/commission-year?year=`. Mode tahun menjumlah 12 bulan; komisi
+    tetap dihitung per bulan (bulan rugi = 0).
+- Tanpa query, `/admin/affiliate/analytics` dan `/admin/reports/skills` tetap sepanjang waktu, sehingga halaman
+  Afiliasi dan Laporan tidak berubah.
+
+## D-101 — EMC Kelas 3–4 (Olimpiade): 8 materi kisi-kisi EMC 2022, mock 40 soal berkisi-kisi, infografis, 2 game baru
+
+Tanggal: 2026-10-09. Disetujui pemilik produk (jawaban: "New EMC section in sd34", "40-item blueprint", "New
+infographic screen + figures", game per topik + 2 game baru + topik GE + ambil foto Pexels sekarang).
+
+- **Penempatan:** buku Math Grade 3-4 (Olimpiade) `math/sd34`, bagian baru **"EMC · Eduversal Mathematics
+  Competition — Penyisihan Kelas 3–4 (soal versi 2022)"**. Materi urut kisi-kisi EMC 2022 Penyisihan Kelas 4 (40 soal): **EA**
+  Geometri bidang & ruang (8), **EB** Geometri koordinat (8), **EC** Bilangan & aljabar (7), **ED** Rasio, persen &
+  aritmetika sosial (5), **EE** Statistika (4), **EF** Peluang (3), **EG** Kombinatorika & penalaran (3), **EH**
+  Kecepatan & kerja (2). Semua `standalone`, tingkat `fase-merdeka: B (pengayaan)` (materi di atas kurikulum
+  kelas 4 adalah ciri olimpiade: Pythagoras, Kartesius, peluang, persen).
+- **Setiap materi = 11 level:** level 1–8 masing-masing **satu indikator kisi-kisi** (bentuk PG/isian sama dengan
+  nomor aslinya; indikator tambahan bila materi punya < 8 nomor), level 9 teka-teki gaya EMC (bank soal), level
+  10 tantangan campuran, level 11 game (8 jenis berbeda: pasangan, koordinat, tangkap, bingo, diagram, peluang,
+  tebak angka, lompat). Ditambah **GE "Game seru EMC"**: 10 level = 10 jenis game berbeda (D-078).
+- **Mock test EY 1–3 (40 soal, kisi-kisi identik):** konfigurasi mock baru **`slots`** — satu entri per nomor
+  (materi, level sumber, tingkat, bentuk `choice`/`input`, indikator). Soal disusun **mengikuti urutan nomor**
+  lembar lomba (bukan mudah → sulit); setiap percobaan memakai seed baru, jadi Mock 1/2/3 berbeda soal tetapi
+  kisi-kisinya sama persis: 30 PG + 10 isian, 10 mudah / 10 sedang / 20 sulit, sebaran topik 8/8/7/5/4/3/3/2.
+  Penilaian EMC +8/+20/+40, −2/−5/−10, kosong 0, poin maks **1080**, acuan 120 menit (stopwatch, tanpa hitung
+  mundur). `slots` harus cocok dengan `questions` dan `plan` (divalidasi). Anak tanpa paket (D-094): nomor yang
+  levelnya berbayar memakai level gratis tertinggi di materi yang sama. Akses Mock 1 gratis sekali, Mock 2–3 &
+  mengulang Premium (D-073).
+- **Komponen engine/web baru:**
+  - Visual **`figure`**: bidang koordinat (sumbu + petak, maks. 30 petak) atau gambar bebas berkoordinat, berisi
+    segi banyak (arsir abu-abu/lembut), ruas berlabel + tanda sama panjang, titik bernama/berkoordinat, lingkaran,
+    tanda siku-siku, dan teks. Koordinat boleh `"=ekspresi"` di `expr`, jadi gambar ikut berubah dengan angka soal.
+  - Evaluator ekspresi: **`sqrt`** dan **`pow`** (pangkat bulat 0–12), tetap tanpa `eval`.
+  - Layar pelajaran **`infografis`**: poster seperti lembar infografis — judul besar, foto/gambar utama, 2–4 poin
+    bernomor (diketuk → dibacakan), lencana, panel rumus, panel perbandingan, tips "cara tepat" (centang hijau) /
+    "hati-hati" (ikon kuning, bukan silang merah, PRD A14), dan kalimat penutup. Foto dari `lesson:photos`
+    (Pexels + saringan Claude, D-095), cadangan SVG selama foto belum ada.
+  - Game **Harta Karun Koordinat** (`coord-game`, interaksi `coord`): tandai titik dari koordinat, dari pergeseran,
+    atau sudut ke-4 persegi panjang. Ketukan di mana saja memindahkan penanda ke titik kisi terdekat, panah 64 px
+    menggeser satu petak, lalu **Pasang** — target sentuh tetap besar walau petaknya kecil.
+  - Game **Eksperimen Peluang** (`chance-game`, interaksi `chance`): ruang sampel (dadu, dua dadu, 2–4 koin, dua
+    bola dari kantong) tampil sebagai kartu; ketuk semua hasil yang memenuhi kejadian, lalu pilih peluangnya.
+    Kejadian ditulis sebagai ekspresi aman (`s == 7`, `h == 2`, `merah == 1`).
+  - Keduanya game ketuk (kekeliruan ke-2 mengakhiri soal), dinilai ulang di engine (`play-emc.ts`), tidak dipakai
+    di mock maupun lomba live. Alat peraga baru **`koordinat`** dan **`peluang`** memakai papan yang sama.
+- **Pelajaran tiap materi** (kode `34-MA-101…108`): infografis → simulasi peraga → cara cepat (baca) → coba satu
+  soal → ingat, ditambah Video Momo otomatis (D-090). 30 subjek foto Pexels; gambar geometri selalu SVG.
+- **Konten dibuat dengan pembangkit** `docs/blueprint/emc_sd34/` (`python3 docs/blueprint/emc_sd34/build.py`):
+  level `expr` dihitung engine (`validate:content`, 200 soal per level); bank soal manual (gambar segitiga, segi
+  banyak koordinat, peluang dadu/koin, dsb.) dihitung dan di-`assert` di Python — mis. banyak segitiga dihitung
+  brute force dari titik potong garis. Test `packages/engine/test/emc.test.ts`.
+- **Tidak menyalin soal EMC (PRD A17):** kisi-kisi (topik, indikator, bentuk, bobot) dipakai sebagai acuan; kalimat,
+  konteks, angka, dan gambar dibuat sendiri. Pemeriksaan kemiripan teks (difflib) seluruh soal hasil generator vs 40
+  soal asli: lihat `docs/content/emc-sd34.md`.
+- **Urutan bagian di buku:** bagian EMC berada di antara bagian olimpiade lain (setelah KMSI Final), bukan sesudah
+  "Game · Game Seru Momo". Daftar materi di area anak kini selalu menaruh bagian `Game · …` paling akhir (sesuai
+  D-078), sehingga katalog yang pernah disunting admin (urutan disimpan di server) juga tampil benar tanpa migrasi.

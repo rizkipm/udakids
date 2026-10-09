@@ -1,0 +1,107 @@
+{
+  "id": "math.sd4.bb5.sudut-pada-jarum-jam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 5,
+  "title": "Garis dan sudut — Level 5 — Sudut pada jarum jam",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 11]
+          },
+          "prompt": "Pukul {h}.00. Berapa derajat sudut terkecil antara jarum jam dan jarum menit?",
+          "stimulus": [
+            {
+              "kind": "clock",
+              "hour": "=h",
+              "minute": 0
+            }
+          ],
+          "answer": "30 * min(h, 12 - h)",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "15 * min(h, 12 - h)",
+              "tag": "15-per-angka"
+            },
+            {
+              "expr": "6 * min(h, 12 - h)",
+              "tag": "satuan-menit"
+            },
+            {
+              "expr": "360 - 30 * min(h, 12 - h)",
+              "tag": "sudut-luar"
+            }
+          ],
+          "explain": "Satu putaran 360° dibagi 12 angka, jadi antar angka 30°. Dari angka 12, jalan terpendek ke jarum jam ada {=min(h,12-h)} angka. {=min(h,12-h)} × 30° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 11]
+          },
+          "prompt": "Jarum menit berputar dari angka 12 ke angka {m} searah jarum jam. Berapa derajat ia berputar?",
+          "answer": "30 * m",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "15 * m",
+              "tag": "15-per-angka"
+            },
+            {
+              "expr": "6 * m",
+              "tag": "satuan-menit"
+            },
+            {
+              "expr": "30 * m + 30",
+              "tag": "lebih-satu-angka"
+            }
+          ],
+          "explain": "Dari satu angka ke angka berikutnya 30°, karena 360° : 12 = 30°. Ada {m} langkah angka: {m} × 30° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 10],
+            "b": [2, 12]
+          },
+          "constraint": "a < b",
+          "prompt": "Jarum menit bergerak searah jarum jam dari angka {a} ke angka {b}. Berapa derajat ia berputar?",
+          "answer": "30 * (b - a)",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "30 * b",
+              "tag": "mulai-dari-12"
+            },
+            {
+              "expr": "6 * (b - a)",
+              "tag": "satuan-menit"
+            },
+            {
+              "expr": "30 * (b - a + 1)",
+              "tag": "lebih-satu-angka"
+            }
+          ],
+          "explain": "Hitung langkah angkanya: dari {a} ke {b} ada {=b-a} langkah. Setiap langkah 30°, jadi {=b-a} × 30° = {answer}."
+        }
+      }
+    ]
+  }
+}

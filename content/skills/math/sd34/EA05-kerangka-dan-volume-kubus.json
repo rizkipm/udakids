@@ -1,0 +1,99 @@
+{
+  "id": "math.sd34.ea5.kerangka-dan-volume-kubus",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 5,
+  "title": "Geometri bidang & ruang — Level 5 — Kerangka dan volume kubus",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menentukan volume/luas kubus dari panjang total rusuk",
+    "emc-no": "38"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "kw": "12 * s"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "s != 4",
+          "prompt": "{nama} memakai kawat {kw} cm sampai habis untuk membuat kerangka sebuah kubus. Berapa cm³ volume kubus itu?",
+          "answer": "s * s * s",
+          "unit": "cm³",
+          "mode": "input",
+          "explain": "Kubus punya 12 rusuk yang sama panjang. Rusuk = {kw} : 12 = {s} cm. Volume = {s} × {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 12]
+          },
+          "derived": {
+            "kw": "12 * s"
+          },
+          "prompt": "Kerangka sebuah kubus dibuat dari lidi yang panjang totalnya {kw} cm. Luas seluruh permukaan kubus itu adalah … cm².",
+          "answer": "6 * s * s",
+          "unit": "cm²",
+          "mode": "input",
+          "explain": "Rusuk = {kw} : 12 = {s} cm. Kubus punya 6 sisi persegi: 6 × {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 20],
+            "l": [3, 12],
+            "t": [2, 10]
+          },
+          "constraint": "l < p",
+          "prompt": "Kerangka balok berukuran {p} cm × {l} cm × {t} cm dibuat dari kawat. Panjang kawat yang diperlukan adalah … cm.",
+          "answer": "4 * (p + l + t)",
+          "unit": "cm",
+          "mode": "input",
+          "explain": "Balok punya 4 rusuk panjang, 4 rusuk lebar, dan 4 rusuk tinggi: 4 × ({p} + {l} + {t}) = {answer}."
+        }
+      }
+    ]
+  }
+}

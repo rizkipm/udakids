@@ -1,0 +1,97 @@
+{
+  "id": "math.sd34.ed5.perbandingan-dua-besaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 5,
+  "title": "Rasio & persen — Level 5 — Perbandingan dua besaran",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menentukan besaran dari perbandingan dan jumlah/selisihnya"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 7],
+            "b": [1, 6],
+            "k": [2, 15]
+          },
+          "derived": {
+            "x": "a * k",
+            "y": "b * k"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "constraint": "a != b && gcd(a, b) == 1",
+          "prompt": "Perbandingan kelereng {n1} dan {n2} adalah {a} : {b}. Jumlah kelereng mereka {=x+y} butir. Banyak kelereng {n1} adalah … butir.",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "(x + y) / a",
+              "tag": "dibagi-bagian"
+            },
+            {
+              "expr": "a * (x + y) / b",
+              "tag": "salah-bagian"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah bagian = {a} + {b} = {=a+b}. Satu bagian = {=x+y} : {=a+b} = {k}. Kelereng {n1} = {a} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 7],
+            "b": [1, 6],
+            "k": [2, 15]
+          },
+          "derived": {
+            "x": "a * k",
+            "y": "b * k"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "constraint": "a > b && gcd(a, b) == 1",
+          "prompt": "Perbandingan uang {n1} dan {n2} adalah {a} : {b}. Uang {n1} Rp{=(x-y)*1000} lebih banyak daripada uang {n2}. Uang {n2} adalah Rp…",
+          "answer": "y * 1000",
+          "distractors": [
+            {
+              "expr": "x * 1000",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "(x - y) * 1000 * b",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "(x + y) * 1000",
+              "tag": "jumlah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Selisih bagian = {a} − {b} = {=a-b}. Satu bagian = Rp{=(x-y)*1000} : {=a-b} = Rp{=k*1000}. Uang {n2} = {b} × {=k*1000} = Rp{answer}."
+        }
+      }
+    ]
+  }
+}

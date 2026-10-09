@@ -1,0 +1,142 @@
+{
+  "id": "math.sd4.gg3.dua-langkah-dengan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 3,
+  "title": "Soal cerita multi-langkah — Level 3 — Dua langkah dengan pembagian",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "q": [6, 25],
+            "e": [2, 12]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{t} kelereng dibagi sama banyak untuk {m} anak. Lalu {nama} mendapat {e} kelereng lagi dari kakak. Berapa kelereng {nama} sekarang?",
+          "answer": "t / m + e",
+          "distractors": [
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "t + e",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "(t + e) / m",
+              "tag": "kiri-dulu"
+            }
+          ],
+          "explain": "Langkah 1: bagian setiap anak {t} : {m} = {=t/m}. Langkah 2: {=t/m} + {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "q": [8, 20],
+            "e": [1, 6]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "Ibu membuat {t} kue dan memasukkannya sama banyak ke {m} kotak. Dari satu kotak, {e} kue dimakan. Berapa kue di kotak itu sekarang?",
+          "answer": "t / m - e",
+          "distractors": [
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "t - e",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "t / m + e",
+              "tag": "tanda"
+            }
+          ],
+          "explain": "Langkah 1: isi satu kotak {t} : {m} = {=t/m}. Langkah 2: {=t/m} − {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 5],
+            "h": {
+              "values": [8000, 10000, 12000, 15000, 18000, 20000]
+            },
+            "n": [2, 6]
+          },
+          "derived": {
+            "t": "m * h"
+          },
+          "constraint": "n != m",
+          "prompt": "Harga {m} kg jeruk Rp{t}. Berapa harga {n} kg jeruk?",
+          "answer": "t / m * n",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "t * n",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "t / m * (n + 1)",
+              "tag": "lebih-satu-kg"
+            },
+            {
+              "expr": "t / m * (n - 1)",
+              "tag": "kurang-satu-kg"
+            }
+          ],
+          "explain": "Langkah 1: harga 1 kg {t} : {m} = {=t/m}. Langkah 2: harga {n} kg {n} × {=t/m} = {=t/m*n}. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

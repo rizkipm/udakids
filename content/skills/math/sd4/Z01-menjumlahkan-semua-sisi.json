@@ -1,0 +1,116 @@
+{
+  "id": "math.sd4.z1.menjumlahkan-semua-sisi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 1,
+  "title": "Keliling bangun datar — Level 1 — Menjumlahkan semua sisi",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 8],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Setiap petak bersisi 1 cm. Berapa cm keliling bangun ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": true
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "menghitung-petak-dalam"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Keliling adalah panjang tepi luar. Telusuri tepinya: {w} + {h} + {w} + {h} = {answer}. Petak di dalam tidak dihitung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 15],
+            "b": [3, 15],
+            "c": [3, 15]
+          },
+          "constraint": "a + b > c && a + c > b && b + c > a && a != b && b != c",
+          "prompt": "Sisi-sisi sebuah segitiga panjangnya {a} cm, {b} cm, dan {c} cm. Berapa cm kelilingnya?",
+          "answer": "a + b + c",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "satu-sisi-terlewat"
+            },
+            {
+              "expr": "a + b + c + c",
+              "tag": "sisi-dihitung-dua-kali"
+            },
+            {
+              "expr": "2 * (a + b)",
+              "tag": "rumus-persegi-panjang"
+            }
+          ],
+          "explain": "Keliling = jumlah semua sisi. Segitiga punya 3 sisi: {a} + {b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 18],
+            "b": [3, 18],
+            "c": [3, 18],
+            "e": [3, 18]
+          },
+          "constraint": "a != b && c != e && a + b + c > e && a + b + e > c",
+          "prompt": "Sebuah segi empat sisinya {a} cm, {b} cm, {c} cm, dan {e} cm. Berapa cm kelilingnya?",
+          "answer": "a + b + c + e",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "satu-sisi-terlewat"
+            },
+            {
+              "expr": "2 * (a + b)",
+              "tag": "rumus-persegi-panjang"
+            },
+            {
+              "expr": "a + b + c + e + 10",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Jumlahkan keempat sisi satu per satu: {a} + {b} + {c} + {e} = {answer}."
+        }
+      }
+    ]
+  }
+}

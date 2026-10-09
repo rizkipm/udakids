@@ -1,0 +1,483 @@
+{
+  "id": "math.sd4.x10.tantangan-waktu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 10,
+  "title": "Waktu dan lama kegiatan — Level 10 — Tantangan waktu",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "{a} jam {b} menit = … menit",
+          "answer": "a * 60 + b",
+          "explain": "{a} jam = {=a*60} menit. Ditambah {b} menit: {=a*60} + {b} = {answer} menit.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 60",
+              "tag": "lupa-menit"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "range": [65, 295],
+              "step": 5
+            }
+          },
+          "prompt": "{t} menit = {=floor(t/60)} jam … menit",
+          "answer": "t % 60",
+          "explain": "Ambil kelipatan 60 sebanyak-banyaknya: {=floor(t/60)} × 60 = {=floor(t/60)*60}. Sisanya {t} − {=floor(t/60)*60} = {answer} menit.",
+          "constraint": "t % 60 != 0 && t % 100 != t % 60",
+          "distractors": [
+            {
+              "expr": "t % 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "t - 60",
+              "tag": "kurang-60-sekali"
+            },
+            {
+              "expr": "60 - t % 60",
+              "tag": "pelengkap"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 23],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "Jam digital menunjukkan pukul {h}.{m}. Dalam aturan 12 jam, itu pukul … lewat {m} menit sore atau malam.",
+          "answer": "h - 12",
+          "explain": "Untuk jam 13 sampai 23, kurangi 12. {h} − 12 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "h - 10",
+              "tag": "kurang-10"
+            },
+            {
+              "expr": "h - 2",
+              "tag": "kurang-2"
+            },
+            {
+              "expr": "h - 11",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [13, 17],
+            "m": {
+              "values": [0, 10, 15, 20, 30, 40, 45, 50]
+            },
+            "d": {
+              "range": [25, 150],
+              "step": 5
+            }
+          },
+          "prompt": "Jam digital pertama menunjukkan waktu mulai bermain bola. Jam kedua menunjukkan waktu selesai. Berapa menit lamanya?",
+          "answer": "d",
+          "explain": "Hitung sampai jam bulat berikutnya, lalu tambahkan sisanya. Ingat 1 jam = 60 menit, bukan 100 menit. Lamanya {answer}.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 != m",
+          "unit": "menit",
+          "stimulus": [
+            {
+              "kind": "digital",
+              "hour": "=h",
+              "minute": "=m"
+            },
+            {
+              "kind": "digital",
+              "hour": "=h2",
+              "minute": "=m2"
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "(h2 * 100 + m2) - (h * 100 + m)",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "d + 60",
+              "tag": "lebih-satu-jam"
+            },
+            {
+              "expr": "d + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "d - 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "range": [70, 230],
+              "step": 5
+            }
+          },
+          "prompt": "Les {x} mulai pukul {h}.{m} dan selesai pukul {h2}.{m2}. Lamanya {=floor(d/60)} jam … menit.",
+          "answer": "d % 60",
+          "explain": "Dari {h}.{m} sampai {=h+floor(d/60)}.{m} = {=floor(d/60)} jam. Sisanya dari {=h+floor(d/60)}.{m} sampai {h2}.{m2}. Jadi lamanya {=floor(d/60)} jam {answer} menit.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 >= 10 && d % 60 != 0 && m2 != m && d % 60 >= 5",
+          "words": {
+            "x": ["menari", "renang", "musik", "melukis", "silat", "mengaji"]
+          },
+          "distractors": [
+            {
+              "expr": "(m2 + 100 - m) % 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "60 - d % 60",
+              "tag": "pelengkap"
+            },
+            {
+              "expr": "abs(m2 - m)",
+              "tag": "selisih-menit"
+            },
+            {
+              "expr": "d % 60 + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(d % 60 - 10)",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "range": [70, 230],
+              "step": 5
+            }
+          },
+          "prompt": "Kereta berangkat pukul {h}.{m} dan tiba pukul {h2}.{m2}. Berapa menit lama perjalanannya?",
+          "answer": "d",
+          "explain": "Hitung jam penuhnya dulu, lalu menit sisanya, kemudian ubah semua ke menit (1 jam = 60 menit). Lamanya {=floor(d/60)} jam {=d%60} menit = {answer}.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 >= 10 && m2 != m",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "(h2 * 100 + m2) - (h * 100 + m)",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "d - 60",
+              "tag": "kurang-satu-jam"
+            },
+            {
+              "expr": "floor(d / 60) + d % 60",
+              "tag": "jam-dihitung-1"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [15, 69]
+          },
+          "prompt": "{t} hari = … minggu {=t%7} hari. Berapa minggunya?",
+          "answer": "floor(t / 7)",
+          "explain": "Bagi dengan 7 karena 1 minggu = 7 hari. {t} : 7 = {answer} sisa {=t%7}. Jadi {answer} minggu {=t%7} hari.",
+          "constraint": "t % 7 != 0",
+          "distractors": [
+            {
+              "expr": "floor(t / 10)",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "floor(t / 7) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "t % 7",
+              "tag": "sisanya"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 20],
+            "k": [3, 10]
+          },
+          "prompt": "Liburan {nama} dari tanggal {t} sampai tanggal {t2} di bulan yang sama. Kedua tanggal itu ikut libur. Berapa hari liburannya?",
+          "answer": "t2 - t + 1",
+          "explain": "Selisih tanggal {t2} − {t} = {=t2-t}. Tanggal pertama juga ikut dihitung, jadi tambah 1: {answer} hari.",
+          "derived": {
+            "t2": "t + k"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "t2 - t",
+              "tag": "lupa-hari-pertama"
+            },
+            {
+              "expr": "t2 - t + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "t2 + t",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [20, 22],
+            "b": [4, 6],
+            "m": {
+              "values": [10, 15, 20, 30, 40, 45]
+            }
+          },
+          "prompt": "{nama} tidur pukul {h}.00 malam dan bangun pukul 0{b}.{m} pagi. Berapa menit lama ia tidur?",
+          "answer": "(24 - h + b) * 60 + m",
+          "explain": "Dari {h}.00 sampai 24.00 = {=24-h} jam. Dari 24.00 sampai 0{b}.{m} = {b} jam {m} menit. Jumlahnya {=24-h+b} jam {m} menit = {answer} menit.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "(h - b) * 60 + m",
+              "tag": "dikurangi-langsung"
+            },
+            {
+              "expr": "(24 - h + b) * 100 + m",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "(24 - h + b) * 60",
+              "tag": "lupa-menit"
+            },
+            {
+              "expr": "(24 - h + b) * 60 + m + 60",
+              "tag": "lebih-satu-jam"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": {
+              "values": [10, 12, 15, 20]
+            },
+            "n": [3, 8]
+          },
+          "prompt": "Kereta pertama berangkat pukul 06.00, lalu ada kereta setiap {k} menit. Kereta ke-{n} berangkat berapa menit setelah pukul 06.00?",
+          "answer": "(n - 1) * k",
+          "explain": "Kereta pertama berangkat pada menit ke-0. Kereta ke-{n} berangkat setelah {=n-1} jarak waktu: {=n-1} × {k} = {answer} menit.",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "lupa-kereta-pertama"
+            },
+            {
+              "expr": "(n + 1) * k",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 2],
+            "b": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "c": {
+              "range": [60, 180],
+              "step": 5
+            }
+          },
+          "prompt": "Waktu lari {nama} {a} menit {b} detik. Waktu lari temannya {c} detik. Berapa detik selisih waktu mereka?",
+          "answer": "abs(a * 60 + b - c)",
+          "explain": "Ubah dulu ke detik: {a} menit {b} detik = {=a*60+b} detik. Selisihnya dengan {c} detik adalah {answer} detik.",
+          "constraint": "c != a * 60 + b && abs(a * 60 + b - c) < 60",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "detik",
+          "distractors": [
+            {
+              "expr": "abs(a * 100 + b - c)",
+              "tag": "menit-seperti-ratusan"
+            },
+            {
+              "expr": "a * 60 + b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(a * 60 + b - c) + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(a * 60 + b - c) + 5",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

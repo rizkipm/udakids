@@ -1,0 +1,89 @@
+{
+  "id": "math.sd34.ed8.diskon-bertingkat-dan-untung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 8,
+  "title": "Rasio & persen — Level 8 — Diskon bertingkat dan untung",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menghitung harga setelah dua kali diskon dan harga jual dengan untung"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [5, 40],
+            "d1": {
+              "values": [10, 20, 25, 50]
+            },
+            "d2": {
+              "values": [10, 20, 50]
+            }
+          },
+          "derived": {
+            "h": "x * 10000"
+          },
+          "prompt": "Harga sebuah tas Rp{h}. Tas itu didiskon {d1}%, lalu harga setelah diskon didiskon lagi {d2}%. Harga akhir tas adalah Rp…",
+          "answer": "h * (100 - d1) * (100 - d2) / 10000",
+          "distractors": [
+            {
+              "expr": "h * (100 - d1 - d2) / 100",
+              "tag": "diskon-dijumlah"
+            },
+            {
+              "expr": "h * (100 - d1) / 100",
+              "tag": "satu-diskon"
+            },
+            {
+              "expr": "h * d1 * d2 / 10000",
+              "tag": "besar-diskon"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setelah diskon pertama: {h} × {=100-d1}% = Rp{=h*(100-d1)/100}. Setelah diskon kedua: × {=100-d2}% = Rp{answer}. Diskon bertingkat tidak boleh dijumlahkan langsung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 30],
+            "b": [80, 250],
+            "p": {
+              "values": [10, 20, 25, 30, 50]
+            }
+          },
+          "constraint": "(b * p) % 10 == 0",
+          "prompt": "Pedagang membeli {n} kg jeruk seharga Rp{=n*b*100}. Ia ingin untung {p}% dari modalnya. Harga jual 1 kg jeruk adalah Rp…",
+          "answer": "b * (100 + p)",
+          "distractors": [
+            {
+              "expr": "b * 100",
+              "tag": "modal"
+            },
+            {
+              "expr": "b * p",
+              "tag": "untung-saja"
+            },
+            {
+              "expr": "n * b * (100 + p)",
+              "tag": "semua-kg"
+            }
+          ],
+          "choices": 4,
+          "explain": "Modal per kg = Rp{=b*100}. Untung {p}% = {=b*100} × {p}/100 = Rp{=b*p}. Harga jual per kg = {=b*100} + {=b*p} = Rp{answer}."
+        }
+      }
+    ]
+  }
+}

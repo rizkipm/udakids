@@ -1,4 +1,4 @@
-# Claude Code Skills — Little Coder
+# Claude Code Skills — UdaKids
 
 Skill proyek ada di `.claude/skills/<nama>/SKILL.md` dan otomatis tersedia saat `claude` dijalankan di repo
 ini. Panggil dengan `/<nama>` atau biarkan Claude memilih berdasarkan deskripsinya.

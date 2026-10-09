@@ -1,0 +1,180 @@
+{
+  "id": "math.sd4.ee2.membaca-piktogram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 2,
+  "title": "Data: tabel dan diagram — Level 2 — Membaca piktogram",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "e": [2, 8],
+            "k": {
+              "values": [2, 4, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan Kelas 4B?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas 4A", "Kelas 4B", "Kelas 4C", "Kelas 4D"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "b * k",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "jumlah-gambar"
+            },
+            {
+              "expr": "(b + 1) * k",
+              "tag": "lebih-satu-gambar"
+            },
+            {
+              "expr": "a * k",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Kelas 4B punya {b} gambar. Satu gambar = {k} botol, jadi {b} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "e": [2, 8],
+            "k": {
+              "values": [2, 4, 5, 10]
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan Kelas 4D?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas 4A", "Kelas 4B", "Kelas 4C", "Kelas 4D"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "e * k",
+          "distractors": [
+            {
+              "expr": "e",
+              "tag": "jumlah-gambar"
+            },
+            {
+              "expr": "e * k + k",
+              "tag": "lebih-satu-gambar"
+            },
+            {
+              "expr": "c * k",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Kelas 4D punya {e} gambar. {e} × {k} = {answer} botol."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "e": [2, 8],
+            "k": {
+              "values": [2, 4, 5, 10]
+            }
+          },
+          "prompt": "Berapa buku yang dibaca Dewi?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Andi", "Sari", "Dewi", "Rudi"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Buku yang dibaca bulan ini (1 gambar = {k} buku)",
+              "pictogram": "buku"
+            }
+          ],
+          "answer": "c * k",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "jumlah-gambar"
+            },
+            {
+              "expr": "c * k - k",
+              "tag": "kurang-satu-gambar"
+            },
+            {
+              "expr": "b * k",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Dewi punya {c} gambar buku. Satu gambar = {k} buku, jadi {c} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "e": [2, 8],
+            "k": {
+              "values": [2, 4, 5, 10]
+            }
+          },
+          "prompt": "Berapa apel terjual pada hari Senin dan Selasa?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu"],
+              "values": ["=a", "=b", "=c"],
+              "caption": "Apel terjual di kantin (1 gambar = {k} apel)",
+              "pictogram": "apel"
+            }
+          ],
+          "answer": "(a + b) * k",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "jumlah-gambar"
+            },
+            {
+              "expr": "(a + b + c) * k",
+              "tag": "semua-hari"
+            },
+            {
+              "expr": "a * k",
+              "tag": "satu-hari"
+            }
+          ],
+          "explain": "Senin dan Selasa ada {a} + {b} = {=a+b} gambar. {=a+b} × {k} = {answer} apel."
+        }
+      }
+    ]
+  }
+}

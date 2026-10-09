@@ -1,0 +1,298 @@
+{
+  "id": "math.sd4.cc10.tantangan-segitiga-dan-segi-empat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 10,
+  "title": "Segitiga dan segi empat — Level 10 — Tantangan segitiga dan segi empat",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 7],
+            "b": [2, 7]
+          },
+          "prompt": "Ada {a} segitiga dan {b} segi empat. Berapa banyak titik sudut semuanya?",
+          "answer": "3 * a + 4 * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menghitung-bangun"
+            },
+            {
+              "expr": "4 * a + 3 * b",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "3 * a + 4 * b + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Banyak titik sudut sama dengan banyak sisi. {a} × 3 + {b} × 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [4, 15],
+            "a": [3, 20]
+          },
+          "constraint": "a != k && a < 2 * k",
+          "prompt": "Sisi-sisi sebuah segitiga {k} cm, {a} cm, dan {k} cm. Segitiga apakah itu?",
+          "answer": "2",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Tepat dua sisi sama panjang ({k} cm), sisi ketiga {a} cm. Itu segitiga sama kaki."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "range": [95, 150],
+              "step": 5
+            },
+            "a": {
+              "range": [10, 70],
+              "step": 5
+            }
+          },
+          "derived": {
+            "b": "180 - a - c"
+          },
+          "constraint": "b > 0 && b < 90",
+          "prompt": "Sudut-sudut sebuah segitiga {a}°, {b}°, dan {c}°. Segitiga ini termasuk …",
+          "answer": "3",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Ada satu sudut lebih dari 90° ({c}°), jadi segitiga tumpul."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25, 95],
+              "step": 5
+            },
+            "b": {
+              "range": [25, 95],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 165",
+          "prompt": "Dua sudut sebuah segitiga {a}° dan {b}°. Berapa derajat sudut ketiga?",
+          "answer": "180 - a - b",
+          "unit": "°",
+          "explain": "Jumlah sudut segitiga selalu 180°. Sudut ketiga = 180° − {a}° − {b}° = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} menggambar segi empat yang hanya punya satu pasang sisi sejajar. Bangun apa itu?",
+          "answer": "2",
+          "labels": {
+            "1": "Jajar genjang",
+            "2": "Trapesium",
+            "3": "Persegi",
+            "4": "Layang-layang"
+          },
+          "explain": "Segi empat dengan tepat satu pasang sisi sejajar disebut trapesium."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 20],
+            "l": [3, 12]
+          },
+          "constraint": "p > l",
+          "words": {
+            "x": ["persegi panjang", "jajar genjang"]
+          },
+          "prompt": "Pada sebuah {x} ABCD, sisi AB = {p} cm dan sisi BC = {l} cm. Berapa cm panjang sisi CD (yang berhadapan dengan AB)?",
+          "answer": "p",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l",
+              "tag": "sisi-berdampingan"
+            },
+            {
+              "expr": "p + l",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "2 * p",
+              "tag": "dikali-2"
+            }
+          ],
+          "explain": "Pada {x}, sisi yang berhadapan sama panjang. CD berhadapan dengan AB, jadi CD = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "b": {
+              "range": [60, 120],
+              "step": 5
+            },
+            "c": {
+              "range": [60, 120],
+              "step": 5
+            }
+          },
+          "constraint": "360 - a - b - c >= 40 && 360 - a - b - c <= 150",
+          "prompt": "Tiga sudut sebuah segi empat {a}°, {b}°, dan {c}°. Berapa derajat sudut keempat?",
+          "answer": "360 - a - b - c",
+          "unit": "°",
+          "explain": "Jumlah sudut segi empat 360° (dua segitiga: 2 × 180°). 360° − {a}° − {b}° − {c}° = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [4, 12],
+            "k": [3, 10]
+          },
+          "constraint": "a > b && 2 * k > a - b",
+          "prompt": "Trapesium sama kaki punya sisi sejajar {a} cm dan {b} cm, serta dua kaki yang masing-masing {k} cm. Berapa cm kelilingnya?",
+          "answer": "a + b + 2 * k",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b + k",
+              "tag": "kaki-dihitung-sekali"
+            },
+            {
+              "expr": "2 * (a + b)",
+              "tag": "sejajar-dua-kali"
+            },
+            {
+              "expr": "a + 2 * k",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Trapesium punya 4 sisi: {a} + {b} + {k} + {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 140],
+              "step": 10
+            }
+          },
+          "prompt": "Sudut puncak segitiga sama kaki {a}°. Kedua sudut alasnya sama besar. Berapa derajat setiap sudut alas?",
+          "answer": "(180 - a) / 2",
+          "unit": "°",
+          "explain": "Sisa sudut = 180° − {a}° = {=180-a}°. Dibagi dua sudut alas yang sama: {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 85],
+              "step": 5
+            },
+            "b": {
+              "range": [20, 85],
+              "step": 5
+            }
+          },
+          "derived": {
+            "c": "180 - a - b"
+          },
+          "constraint": "c > 0",
+          "prompt": "Dua sudut sebuah segitiga {a}° dan {b}°. Segitiga itu termasuk …",
+          "answer": "1 + (c >= 90) + (c > 90)",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Cari sudut ketiga dulu: 180° − {a}° − {b}° = {c}°. Lalu lihat sudut terbesar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "dua sudut siku-siku",
+              "dua sudut tumpul",
+              "sudut 100° dan sudut 90°",
+              "tiga sudut 70°"
+            ]
+          },
+          "prompt": "Mungkinkah sebuah segitiga punya {x}?",
+          "answer": "2",
+          "labels": {
+            "1": "Mungkin",
+            "2": "Tidak mungkin"
+          },
+          "explain": "Jumlah ketiga sudut segitiga harus tepat 180°. Kalau dua sudutnya saja sudah 180° atau lebih (atau jumlahnya bukan 180°), segitiga tidak bisa terbentuk."
+        }
+      }
+    ]
+  }
+}

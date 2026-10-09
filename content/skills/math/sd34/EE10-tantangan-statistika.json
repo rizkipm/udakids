@@ -1,0 +1,241 @@
+{
+  "id": "math.sd34.ee10.tantangan-statistika",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 10,
+  "title": "Statistika — Level 10 — Tantangan statistika",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Statistika",
+    "indikator": "Gabungan semua indikator statistika"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t1": [20, 34],
+            "t2": [35, 44],
+            "t3": [45, 54],
+            "t4": [55, 70],
+            "f1": [1, 9],
+            "f2": [1, 9],
+            "f3": [1, 9],
+            "f4": [1, 9]
+          },
+          "derived": {
+            "n": "f1 + f2 + f3 + f4",
+            "s10": "t1 * f1 + t2 * f2 + t3 * f3 + t4 * f4"
+          },
+          "words": {
+            "nama": ["Ani", "Sri", "Tuti", "Wati", "Rina"]
+          },
+          "constraint": "(s10 * 10) % n == 0 && n >= 10",
+          "prompt": "Tabel menunjukkan berat semangka di kios Bu {nama}. Rata-rata berat semangka itu adalah … kg.",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Berat (kg)", "Banyak semangka"],
+              "rows": [
+                ["{=t1/10}", "{f1}"],
+                ["{=t2/10}", "{f2}"],
+                ["{=t3/10}", "{f3}"],
+                ["{=t4/10}", "{f4}"]
+              ],
+              "caption": "Semangka di kios Bu {nama}"
+            }
+          ],
+          "format": "decimal",
+          "answer": "s10 / (10 * n)",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "(t1 + t2 + t3 + t4) / 40",
+              "tag": "tanpa-frekuensi"
+            },
+            {
+              "expr": "s10 / (10 * n) + 0.2",
+              "tag": "lain"
+            },
+            {
+              "expr": "s10 / (10 * n) - 0.3",
+              "tag": "lain-2"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kalikan setiap berat dengan banyaknya, lalu jumlahkan: {=s10/10} kg. Banyak semangka = {n}. Rata-rata = {=s10/10} : {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 8],
+            "m": [4, 9],
+            "h": [1, 10]
+          },
+          "derived": {
+            "x": "(n * m - h) / (n - 1)"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "(n * m - h) % (n - 1) == 0 && x >= 1 && x != h && x != m && x <= 10",
+          "prompt": "Ada {n} anak mengikuti kuis. Semua anak mendapat nilai yang sama, kecuali {nama} yang mendapat {h}. Rata-rata nilai mereka {m}. Nilai setiap anak lainnya adalah …",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "m",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "(n * m - h) / n",
+              "tag": "dibagi-semua"
+            },
+            {
+              "expr": "n * m - h",
+              "tag": "lupa-dibagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlah semua nilai = {n} × {m} = {=n*m}. Tanpa {nama}: {=n*m} − {h} = {=n*m-h}, dibagi {=n-1} anak = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [5, 10],
+            "m": [5, 20],
+            "m2": [4, 21]
+          },
+          "derived": {
+            "w": "n * m - (n - 1) * m2"
+          },
+          "constraint": "w >= 1 && w <= 60 && m2 != m",
+          "prompt": "Rata-rata berat {n} kotak adalah {m} kg. Setelah satu kotak diambil, rata-rata berat {=n-1} kotak sisanya {m2} kg. Berat kotak yang diambil adalah … kg.",
+          "answer": "w",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "m - m2",
+              "tag": "selisih-rata-rata"
+            },
+            {
+              "expr": "m",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "w + m2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Berat semua kotak = {n} × {m} = {=n*m}. Berat sisanya = {=n-1} × {m2} = {=(n-1)*m2}. Kotak yang diambil = {=n*m} − {=(n-1)*m2} = {answer} kg."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lv": [4, 9],
+            "j": {
+              "values": [0, 1, 2]
+            },
+            "r1": [0, 2],
+            "r2": [0, 2],
+            "r3": [0, 2],
+            "e2": [0, 3]
+          },
+          "derived": {
+            "a3": "lv - r3",
+            "a2": "a3 - r2",
+            "a1": "a2 - r1",
+            "x": "lv + floor(j / 2)",
+            "y": "lv + ceil(j / 2)",
+            "b1": "lv + 1",
+            "b2": "lv + 1 + e2",
+            "tot": "a1 + a2 + a3 + lv + x + y + b1 + b2",
+            "m": "tot / 8"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "tot % 8 == 0 && a1 >= 1",
+          "prompt": "{nama} mencatat skor 8 kali latihan memanah, diurutkan dari yang terkecil: {a1}, {a2}, {a3}, {lv}, X, Y, {b1}, {b2}. Semua skor bilangan bulat dan rata-ratanya {m}. Berapa skor X?",
+          "answer": "x",
+          "explain": "Jumlah semua data = 8 × {m} = {tot}. Jumlah data yang diketahui = {=tot-x-y}, jadi X + Y = {=x+y}. Karena urut, {lv} ≤ X ≤ Y ≤ {b1}. Satu-satunya pasangan: X = {x} dan Y = {y}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "m",
+              "tag": "rata-rata"
+            },
+            {
+              "expr": "x + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

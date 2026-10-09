@@ -22,6 +22,7 @@ import type { Request } from 'express';
 import { z } from 'zod';
 import { CurrentUser, Public, Roles } from '../auth/decorators.js';
 import { clientIp } from '../common/rate-limit.js';
+import { periodQuerySchema, resolvePeriod, type PeriodQuery } from '../reports/period.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { mailConfig } from '../mail/mail.service.js';
 import { SettingsService } from '../settings/settings.service.js';
@@ -153,9 +154,11 @@ export class AdminAffiliateController {
     return this.affiliate.adminOverview();
   }
 
+  /** Tanpa query = sepanjang waktu; `days` / `year` (+ `month`) = periode filter ringkasan admin (D-100). */
   @Get('analytics')
-  analytics() {
-    return this.affiliate.adminAnalytics();
+  analytics(@Query(new ZodPipe(periodQuerySchema)) q: PeriodQuery) {
+    const hasPeriod = q.days !== undefined || q.year !== undefined;
+    return this.affiliate.adminAnalytics(new Date(), hasPeriod ? resolvePeriod(q) : undefined);
   }
 
   @Get('settings')

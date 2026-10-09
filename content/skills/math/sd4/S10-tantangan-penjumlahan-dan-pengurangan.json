@@ -1,0 +1,454 @@
+{
+  "id": "math.sd4.s10.tantangan-penjumlahan-dan-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 10,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 10 — Tantangan hitung pecahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [6, 12],
+            "a": [1, 6],
+            "b": [1, 6],
+            "c": [1, 6]
+          },
+          "constraint": "a + b + c <= d",
+          "prompt": "{a}/{d} + {b}/{d} + {c}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b + c",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b + c",
+              "den": "3 * d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "a + b + c - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            },
+            {
+              "num": "a + b + c + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "lupa-satu-suku"
+            }
+          ],
+          "explain": "Penyebutnya sama, jadi jumlahkan semua pembilang: {a} + {b} + {c} = {=a+b+c}. Penyebut tetap {d}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "constraint": "a < d && b < a",
+          "prompt": "{a}/{d} − {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "a - b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a - b",
+              "den": "d + d",
+              "tag": "penyebut-ganda"
+            }
+          ],
+          "explain": "Penyebutnya sama, jadi kurangi pembilangnya saja: {a} − {b} = {=a-b}. Penyebut tetap {d}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11]
+          },
+          "constraint": "a < d",
+          "prompt": "1 − {a}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - a",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tetap"
+            },
+            {
+              "num": "d - a + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "d - a",
+              "den": "a",
+              "tag": "penyebut-diganti"
+            },
+            {
+              "num": "d - a - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Tulis 1 utuh sebagai {d}/{d}. Lalu {d}/{d} − {a}/{d} = {=d-a}/{d}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "derived": {
+            "g": "gcd(a + b, d)"
+          },
+          "constraint": "a + b < d && g > 1",
+          "prompt": "{a}/{d} + {b}/{d} = … (tulis dalam bentuk paling sederhana)",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d / g",
+              "tag": "pembilang-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / g",
+              "den": "d",
+              "tag": "penyebut-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / g",
+              "den": "2 * d / g",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "(a + b) / g + 1",
+              "den": "d / g",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlahkan pembilang: {a} + {b} = {=a+b}, jadi {=a+b}/{d}. FPB dari {=a+b} dan {d} adalah {g}. Bagi pembilang dan penyebut dengan {g}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "derived": {
+            "g": "gcd(a - b, d)"
+          },
+          "constraint": "a < d && b < a && g > 1",
+          "prompt": "{a}/{d} − {b}/{d} = … (tulis dalam bentuk paling sederhana)",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "a - b",
+              "den": "d / g",
+              "tag": "pembilang-tidak-dibagi"
+            },
+            {
+              "num": "(a - b) / g",
+              "den": "d",
+              "tag": "penyebut-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / gcd(a + b, d)",
+              "den": "d / gcd(a + b, d)",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "(a - b) / g + 1",
+              "den": "d / g",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kurangi pembilang: {a} − {b} = {=a-b}, jadi {=a-b}/{d}. FPB dari {=a-b} dan {d} adalah {g}. Bagi pembilang dan penyebut dengan {g}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a < d && b < d && a + b > d",
+          "prompt": "{a}/{d} + {b}/{d} = 1 …/{d}",
+          "answer": "a + b - d",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "tanpa-mengubah"
+            },
+            {
+              "expr": "d - a",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + b - d + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{a}/{d} + {b}/{d} = {=a+b}/{d}. Ambil {d}/{d} sebagai 1 utuh. Sisanya {=a+b} − {d} = {answer}. Jadi hasilnya 1 {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "a": [1, 9]
+          },
+          "constraint": "a < d",
+          "prompt": "2 − {a}/{d} = 1 …/{d}",
+          "answer": "d - a",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "tetap"
+            },
+            {
+              "expr": "2 * d - a",
+              "tag": "tanpa-mengubah"
+            },
+            {
+              "expr": "d - a + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Pecah 2 menjadi 1 + {d}/{d}. Lalu {d}/{d} − {a}/{d} = {answer}/{d}. Jadi 2 − {a}/{d} = 1 {answer}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a + b <= d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d + d",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "d - a - b",
+              "den": "d",
+              "tag": "sisa"
+            },
+            {
+              "num": "a + b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a + b - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            }
+          ],
+          "prompt": "{nama} mengecat {a}/{d} pagar pada hari Sabtu dan {b}/{d} pagar pada hari Minggu. Berapa bagian pagar yang sudah dicat?",
+          "explain": "Gabungkan kedua bagian: {a}/{d} + {b}/{d}. Penyebut sama, jumlahkan pembilang: {a} + {b} = {=a+b}. Pagar yang sudah dicat {answer} bagian."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "constraint": "a <= d && b < a",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "a - b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "d - b",
+              "den": "d",
+              "tag": "dari-satu-utuh"
+            }
+          ],
+          "prompt": "Kakak membaca {a}/{d} buku cerita. Adik membaca {b}/{d} buku cerita yang sama. Berapa bagian lebih banyak yang dibaca Kakak?",
+          "explain": "Selisihnya {a}/{d} − {b}/{d}. Penyebut sama, kurangi pembilang: {a} − {b} = {=a-b}. Kakak membaca {answer} bagian lebih banyak."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 10],
+            "c": [2, 12]
+          },
+          "constraint": "a < c && c <= d",
+          "prompt": "{a}/{d} + …/{d} = {c}/{d}. Berapa pembilang yang hilang?",
+          "answer": "c - a",
+          "mode": "input",
+          "explain": "Penyebutnya sama, jadi cukup lihat pembilang: {a} + … = {c}. Bilangan yang hilang {c} − {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "b": [1, 10],
+            "c": [1, 10]
+          },
+          "constraint": "b + c <= d",
+          "prompt": "…/{d} − {b}/{d} = {c}/{d}. Berapa pembilang yang hilang?",
+          "answer": "b + c",
+          "mode": "input",
+          "explain": "Pengurangan dibalik menjadi penjumlahan: … = {c} + {b} = {answer}. Cek: {answer}/{d} − {b}/{d} = {c}/{d}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "constraint": "a + b < d",
+          "prompt": "{a}/{d} + {b}/{d} + …/{d} = 1. Berapa pembilang yang hilang?",
+          "answer": "d - a - b",
+          "mode": "input",
+          "explain": "1 utuh = {d}/{d}. Sudah ada {a} + {b} = {=a+b} bagian. Kurangnya {d} − {=a+b} = {answer}."
+        }
+      }
+    ]
+  }
+}

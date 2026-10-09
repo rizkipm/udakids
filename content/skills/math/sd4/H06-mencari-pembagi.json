@@ -1,0 +1,55 @@
+{
+  "id": "math.sd4.h6.mencari-pembagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 6,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 6 — Mencari pembagi",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [11, 999]
+          },
+          "constraint": "(n % 2 == 0) + (n % 3 == 0) + (n % 5 == 0) == 1",
+          "prompt": "Bilangan {n} habis dibagi oleh satu bilangan di bawah ini. Yang mana?",
+          "answer": "2 * (n % 2 == 0) + 3 * (n % 3 == 0) + 5 * (n % 5 == 0)",
+          "labels": {
+            "2": "2",
+            "3": "3",
+            "5": "5"
+          },
+          "explain": "Cek satu per satu. Habis dibagi 2: satuan genap. Habis dibagi 3: jumlah angkanya habis dibagi 3. Habis dibagi 5: satuan 0 atau 5. {n} habis dibagi {answer}."
+        },
+        "weight": 1.5
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [100, 9999]
+          },
+          "constraint": "(n % 9 == 0) + (n % 10 == 0) + (n % 4 == 0) == 1",
+          "prompt": "Bilangan {n} habis dibagi oleh satu bilangan di bawah ini. Yang mana?",
+          "answer": "9 * (n % 9 == 0) + 10 * (n % 10 == 0) + 4 * (n % 4 == 0)",
+          "labels": {
+            "4": "4",
+            "9": "9",
+            "10": "10"
+          },
+          "explain": "Habis dibagi 10: satuannya 0. Habis dibagi 9: jumlah angkanya habis dibagi 9. Habis dibagi 4: dua angka terakhir habis dibagi 4. {n} habis dibagi {answer}."
+        }
+      }
+    ]
+  }
+}

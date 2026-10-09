@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.m2.hasil-bagi-dan-sisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 2,
+  "title": "Pembagian bersisa dan soal cerita — Level 2 — Hasil bagi dan sisa",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [4, 30],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t < 100",
+          "prompt": "{t} : {m} = … sisa {r}",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r",
+              "tag": "sisa"
+            }
+          ],
+          "explain": "Cari kelipatan {m} terbesar yang tidak lebih dari {t}: {m} × {q} = {=m*q}. Sisanya {t} − {=m*q} = {r}. Jadi {t} : {m} = {q} sisa {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [4, 30],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t < 100",
+          "prompt": "{t} : {m} = {q} sisa …",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "m - r",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "r + m",
+              "tag": "sisa-terlalu-besar"
+            },
+            {
+              "expr": "q",
+              "tag": "hasil-bagi"
+            }
+          ],
+          "explain": "Cari kelipatan {m} terbesar yang tidak lebih dari {t}: {m} × {q} = {=m*q}. Sisanya {t} − {=m*q} = {r}. Jadi {t} : {m} = {q} sisa {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [4, 30],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t < 100",
+          "prompt": "Berapa sisa dari {t} : {m}?",
+          "answer": "r",
+          "mode": "input",
+          "explain": "Cari kelipatan {m} terbesar yang tidak lebih dari {t}: {m} × {q} = {=m*q}. Sisanya {t} − {=m*q} = {r}. Jadi {t} : {m} = {q} sisa {r}."
+        }
+      }
+    ]
+  }
+}

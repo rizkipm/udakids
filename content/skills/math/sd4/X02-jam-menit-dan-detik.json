@@ -1,0 +1,138 @@
+{
+  "id": "math.sd4.x2.jam-menit-dan-detik",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 2,
+  "title": "Waktu dan lama kegiatan — Level 2 — Jam, menit, dan detik",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "{a} jam {b} menit = … menit",
+          "answer": "a * 60 + b",
+          "explain": "{a} jam = {=a*60} menit. Ditambah {b} menit: {=a*60} + {b} = {answer} menit.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 60",
+              "tag": "lupa-menit"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            }
+          },
+          "prompt": "{a} menit {b} detik = … detik",
+          "answer": "a * 60 + b",
+          "explain": "{a} menit = {=a*60} detik. Ditambah {b} detik: {=a*60} + {b} = {answer} detik.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "menit-seperti-ratusan"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 60",
+              "tag": "lupa-detik"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "range": [65, 295],
+              "step": 5
+            }
+          },
+          "prompt": "{t} menit = {=floor(t/60)} jam … menit",
+          "answer": "t % 60",
+          "explain": "Ambil kelipatan 60 sebanyak-banyaknya: {=floor(t/60)} × 60 = {=floor(t/60)*60}. Sisanya {t} − {=floor(t/60)*60} = {answer} menit.",
+          "constraint": "t % 60 != 0 && t % 100 != t % 60",
+          "distractors": [
+            {
+              "expr": "t % 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "t - 60",
+              "tag": "kurang-60-sekali"
+            },
+            {
+              "expr": "60 - t % 60",
+              "tag": "pelengkap"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "range": [65, 355],
+              "step": 5
+            }
+          },
+          "prompt": "{t} detik = {=floor(t/60)} menit … detik",
+          "answer": "t % 60",
+          "explain": "{=floor(t/60)} menit = {=floor(t/60)*60} detik. Sisanya {t} − {=floor(t/60)*60} = {answer} detik.",
+          "constraint": "t % 60 != 0 && t % 100 != t % 60",
+          "distractors": [
+            {
+              "expr": "t % 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "60 - t % 60",
+              "tag": "pelengkap"
+            },
+            {
+              "expr": "t % 60 + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(t % 60 - 10)",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

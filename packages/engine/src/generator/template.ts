@@ -5,6 +5,7 @@ import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/inde
 import { allVisuals, type Choice, type Item, type ItemCore } from './item.js';
 import { countWord, mazePath } from './games.js';
 import { crosswordLetters, fewestTokens, sumOf } from './play.js';
+import { BINGO_LINES, guessSolution, linesCounts, stackSolution } from './play-g4.js';
 import { GLYPHS } from './glyphs.js';
 import { createRng } from './rng.js';
 
@@ -322,6 +323,92 @@ export function itemProblems(item: ItemCore): string[] {
         out.push('sum: target tidak bisa dicapai dalam batas token');
       if (it.maxTokens > 12) out.push('sum: maks. 12 token');
       if (sumOf(it.tokens, []) !== 0) out.push('sum: token tidak valid');
+      break;
+    }
+    case 'guess': {
+      if (it.secret < it.min || it.secret > it.max) out.push('guess: rahasia di luar rentang');
+      if (guessSolution(it).length > it.maxGuesses)
+        out.push('guess: tidak bisa ditebak dalam batas');
+      break;
+    }
+    case 'chart': {
+      checkChoices(it.bars, 'chart');
+      if (it.bars.length < 3 || it.bars.length > 5) out.push('chart: 3–5 batang');
+      if (it.bars.some((b) => b.value % it.scale !== 0 || b.value / it.scale > it.steps))
+        out.push('chart: nilai batang tidak sesuai skala');
+      if (it.steps > 10) out.push('chart: maks. 10 kotak');
+      break;
+    }
+    case 'magic': {
+      if (it.facts.length < 3) out.push('magic: minimal 3 fakta');
+      for (const f of it.facts) {
+        const ids = checkChoices(f.choices, 'magic');
+        if (!ids.has(f.answer)) out.push('magic: jawaban tidak ada di pilihan');
+      }
+      if (new Set(it.facts.map((f) => f.text)).size !== it.facts.length)
+        out.push('magic: fakta kembar');
+      break;
+    }
+    case 'stack': {
+      checkChoices(it.blocks, 'stack');
+      if (!stackSolution(it.op, it.blocks, it.target, it.maxBlocks))
+        out.push('stack: target tidak bisa dicapai');
+      break;
+    }
+    case 'lines': {
+      const c = linesCounts(it.a, it.b);
+      if (c.ratusan > 9 || c.puluhan > 9 || c.satuan > 9) out.push('lines: ada kelompok ≥ 10');
+      if (c.ratusan * 100 + c.puluhan * 10 + c.satuan !== it.a * it.b)
+        out.push('lines: hasil tidak cocok');
+      break;
+    }
+    case 'bingo': {
+      checkChoices(it.cells, 'bingo');
+      if (it.cells.length !== 9) out.push('bingo: kartu harus 3×3');
+      if (new Set(it.cells.map((c) => c.value)).size !== it.cells.length)
+        out.push('bingo: nominal kembar');
+      const idx = it.calls.map((c) => it.cells.findIndex((x) => x.id === c.answer));
+      if (idx.some((i) => i < 0)) out.push('bingo: jawaban tidak ada di kartu');
+      const sorted = [...idx].sort((a, b) => a - b).join(',');
+      if (!BINGO_LINES.some((l) => [...l].sort((a, b) => a - b).join(',') === sorted))
+        out.push('bingo: jawaban bukan satu garis');
+      break;
+    }
+    case 'coord': {
+      const keys = it.steps.map((st) => `${st.x},${st.y}`);
+      if (new Set(keys).size !== keys.length) out.push('coord: titik target kembar');
+      if (
+        it.steps.some(
+          (st) =>
+            st.x < it.xMin ||
+            st.x > it.xMax ||
+            st.y < it.yMin ||
+            st.y > it.yMax ||
+            st.marks.some((m) => m.x < it.xMin || m.x > it.xMax || m.y < it.yMin || m.y > it.yMax),
+        )
+      )
+        out.push('coord: titik di luar bidang');
+      if (it.xMax - it.xMin > 20 || it.yMax - it.yMin > 20)
+        out.push('coord: bidang maks. 20 petak');
+      break;
+    }
+    case 'chance': {
+      const ids = checkChoices(it.outcomes, 'chance');
+      const fr = checkChoices(it.fractions, 'chance');
+      if (!it.answer.length || it.answer.length === it.outcomes.length)
+        out.push('chance: kejadian kosong / semua hasil');
+      if (it.answer.some((a) => !ids.has(a))) out.push('chance: jawaban bukan hasil percobaan');
+      if (!fr.has(it.fraction)) out.push('chance: peluang tidak ada di pilihan');
+      const f = it.fractions.find((c) => c.id === it.fraction)?.visual;
+      if (
+        f?.kind !== 'fraction' ||
+        Math.abs(f.num / f.den - it.answer.length / it.outcomes.length) > 1e-9
+      )
+        out.push('chance: pecahan peluang tidak cocok');
+      const values = it.fractions.map((c) =>
+        c.visual.kind === 'fraction' ? c.visual.num / c.visual.den : NaN,
+      );
+      if (new Set(values).size !== values.length) out.push('chance: pilihan peluang bernilai sama');
       break;
     }
     case 'hop': {

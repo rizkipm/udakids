@@ -1,0 +1,137 @@
+{
+  "id": "math.sd4.h7.soal-cerita-prima-dan-habis-dibagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 7,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 7 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 3, 5, 9, 10]
+            },
+            "m": [12, 110],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "n": "d * m + (1 - y) * r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < d",
+          "prompt": "{nama} punya {n} kelereng. Bisakah kelereng itu dibagi rata ke {d} kantong tanpa sisa?",
+          "answer": "y",
+          "labels": {
+            "1": "Bisa",
+            "0": "Tidak bisa"
+          },
+          "explain": "Pakai ciri habis dibagi {d}. Untuk 2, 5, 10 lihat satuannya. Untuk 3 dan 9 jumlahkan angkanya. {n} : {d} = {=floor(n/d)} sisa {=n%d}. Jadi jawabannya: {answer}."
+        },
+        "weight": 1.2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [3, 12]
+          },
+          "derived": {
+            "n": "a * b"
+          },
+          "constraint": "a < b",
+          "prompt": "Ada {n} siswa. Bu guru ingin membuat beberapa kelompok sama besar. Setiap kelompok lebih dari 1 siswa, dan banyak kelompok lebih dari 1. Bisakah?",
+          "answer": "1",
+          "labels": {
+            "1": "Bisa",
+            "0": "Tidak bisa"
+          },
+          "explain": "{n} = {a} × {b}, jadi bisa dibuat {a} kelompok berisi {b} siswa. Ini bisa karena {n} bilangan komposit."
+        },
+        "weight": 0.6
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [11, 13, 17, 19, 23, 29, 31, 37]
+            }
+          },
+          "prompt": "Ada {n} siswa. Bu guru ingin membuat beberapa kelompok sama besar. Setiap kelompok lebih dari 1 siswa, dan banyak kelompok lebih dari 1. Bisakah?",
+          "answer": "0",
+          "labels": {
+            "1": "Bisa",
+            "0": "Tidak bisa"
+          },
+          "explain": "{n} bilangan prima. Faktornya hanya 1 dan {n}, jadi hanya bisa 1 kelompok berisi {n} atau {n} kelompok berisi 1. Jadi tidak bisa."
+        },
+        "weight": 0.6
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 5, 6, 9, 10]
+            },
+            "n": [20, 99]
+          },
+          "constraint": "n % d != 0",
+          "prompt": "Ada {n} kue. Kue dikemas dalam kotak berisi {d}. Paling sedikit berapa kue harus ditambah agar semua kotak penuh tanpa sisa?",
+          "answer": "d - n % d",
+          "distractors": [
+            {
+              "expr": "n % d",
+              "tag": "sisa"
+            },
+            {
+              "expr": "d",
+              "tag": "satu-kotak"
+            },
+            {
+              "expr": "d - n % d + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{n} : {d} = {=floor(n/d)} sisa {=n%d}. Kotak terakhir baru berisi {=n%d} kue. Agar penuh perlu {d} - {=n%d} = {answer} kue lagi."
+        }
+      }
+    ]
+  }
+}

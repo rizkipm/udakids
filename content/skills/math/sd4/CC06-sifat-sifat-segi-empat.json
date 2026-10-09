@@ -1,0 +1,122 @@
+{
+  "id": "math.sd4.cc6.sifat-sifat-segi-empat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 6,
+  "title": "Segitiga dan segi empat — Level 6 — Sifat-sifat segi empat",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "persegi punya 4 sudut siku-siku",
+              "jajar genjang punya sisi sejajar",
+              "trapesium punya sepasang sisi sejajar",
+              "sisi berhadapan persegi panjang sama",
+              "keempat sisi belah ketupat sama panjang",
+              "persegi juga termasuk persegi panjang",
+              "sisi berhadapan jajar genjang sama"
+            ]
+          },
+          "prompt": "Benar atau tidak: \"{x}\"?",
+          "answer": "1",
+          "labels": {
+            "1": "Benar",
+            "2": "Tidak benar"
+          },
+          "explain": "Pernyataan itu sesuai dengan ciri bangunnya. Ingat ciri tiap segi empat: sisi, sisi sejajar, dan sudutnya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "trapesium punya 2 pasang sisi sejajar",
+              "segitiga punya 4 titik sudut",
+              "persegi panjang punya sudut tumpul",
+              "jajar genjang tidak punya sisi sejajar",
+              "semua sisi persegi panjang pasti sama",
+              "segi empat punya 5 sisi",
+              "belah ketupat punya 3 sisi"
+            ]
+          },
+          "prompt": "Benar atau tidak: \"{x}\"?",
+          "answer": "2",
+          "labels": {
+            "1": "Benar",
+            "2": "Tidak benar"
+          },
+          "explain": "Pernyataan itu tidak sesuai dengan ciri bangunnya. Periksa banyak sisi, sisi sejajar, dan sudutnya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 20],
+            "l": [3, 12]
+          },
+          "constraint": "p > l",
+          "words": {
+            "x": ["persegi panjang", "jajar genjang"]
+          },
+          "prompt": "Pada sebuah {x} ABCD, sisi AB = {p} cm dan sisi BC = {l} cm. Berapa cm panjang sisi CD (yang berhadapan dengan AB)?",
+          "answer": "p",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l",
+              "tag": "sisi-berdampingan"
+            },
+            {
+              "expr": "p + l",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "2 * p",
+              "tag": "dikali-2"
+            }
+          ],
+          "explain": "Pada {x}, sisi yang berhadapan sama panjang. CD berhadapan dengan AB, jadi CD = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 3]
+          },
+          "prompt": "Segi empat nomor 1 trapesium, nomor 2 jajar genjang, nomor 3 persegi panjang. Berapa pasang sisi sejajar yang dimiliki bangun nomor {n}?",
+          "answer": "1 + (n > 1)",
+          "distractors": [
+            {
+              "expr": "0",
+              "tag": "tidak-ada"
+            },
+            {
+              "expr": "4",
+              "tag": "dihitung-per-sisi"
+            },
+            {
+              "expr": "3",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Trapesium punya 1 pasang sisi sejajar. Jajar genjang dan persegi panjang punya 2 pasang."
+        }
+      }
+    ]
+  }
+}

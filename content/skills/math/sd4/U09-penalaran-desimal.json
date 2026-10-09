@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.u9.penalaran-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 9,
+  "title": "Desimal persepuluhan dan perseratusan — Level 9 — Penalaran desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [1, 8],
+            "k": [1, 4]
+          },
+          "prompt": "Aku desimal yang kurang dari 1. Angka persepuluhanku {p}. Angka perseratusanku {k} lebih besar dari angka persepuluhanku. Siapa aku?",
+          "answer": "p / 10 + (p + k) / 100",
+          "explain": "Satuan 0, persepuluhan {p}, perseratusan {p} + {k} = {=p+k}. Jadi aku {answer}.",
+          "constraint": "p + k <= 9",
+          "distractors": [
+            {
+              "expr": "(p + k) / 10 + p / 100",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "p / 10 + k / 100",
+              "tag": "lupa-menambah"
+            },
+            {
+              "expr": "p + (p + k) / 10",
+              "tag": "geser"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Rani berkata, \"{x}0 lebih besar daripada {x} karena angkanya lebih banyak.\" Apakah Rani benar?",
+          "answer": "0",
+          "explain": "{x} = {a}/10 = {=a*10}/100, dan {x}0 juga {=a*10}/100. Menambah angka 0 di ujung kanan desimal tidak mengubah nilainya, jadi keduanya sama besar.",
+          "derived": {
+            "x": "a / 10"
+          },
+          "labels": {
+            "0": "Tidak, sama besar",
+            "1": "Ya, lebih besar"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 9],
+            "p": [0, 9],
+            "q": [1, 9]
+          },
+          "prompt": "{x} sama dengan berapa perseratusan?",
+          "answer": "s * 100 + p * 10 + q",
+          "explain": "1 satuan = 100 perseratusan dan 1 persepuluhan = 10 perseratusan. {s} × 100 + {p} × 10 + {q} = {answer} perseratusan.",
+          "derived": {
+            "x": "s + p / 10 + q / 100"
+          },
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [1, 9]
+          },
+          "prompt": "Pada bilangan {x}, angka {d} muncul dua kali. Nilai angka {d} yang pertama (persepuluhan) berapa kali nilai angka {d} yang kedua (perseratusan)?",
+          "answer": "10",
+          "explain": "Angka {d} yang pertama bernilai {=d/10} = {=d*10}/100. Angka {d} yang kedua bernilai {=d/100}. {=d*10} : {d} = 10, jadi 10 kali.",
+          "derived": {
+            "x": "d / 10 + d / 100"
+          },
+          "distractors": [
+            {
+              "expr": "100",
+              "tag": "seratus-kali"
+            },
+            {
+              "expr": "1",
+              "tag": "sama"
+            },
+            {
+              "expr": "2",
+              "tag": "dua-angka"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

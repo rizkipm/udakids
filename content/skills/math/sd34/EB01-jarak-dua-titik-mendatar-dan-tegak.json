@@ -1,0 +1,150 @@
+{
+  "id": "math.sd34.eb1.jarak-dua-titik-mendatar-dan-tegak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EB",
+  "order": 1,
+  "title": "Geometri koordinat — Level 1 — Jarak dua titik mendatar dan tegak",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "understanding",
+    "kisi-kisi": "Geometri Koordinat",
+    "indikator": "Menentukan jarak dua titik dengan ordinat/absis sama",
+    "emc-no": "8"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [-8, 6],
+            "x2": [-6, 9],
+            "y": [-6, 7]
+          },
+          "constraint": "x1 < x2 && x2 - x1 >= 2 && max(x2,0) - min(x1,0) <= 16",
+          "prompt": "Titik P({x1}, {y}) dan Q({x2}, {y}) terletak pada satu garis mendatar. Berapa satuan panjang ruas PQ?",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "axes": {
+                "xMin": "=min(x1,0)-1",
+                "xMax": "=max(x2,0)+1",
+                "yMin": "=min(y,0)-1",
+                "yMax": "=max(y,0)+1"
+              },
+              "shapes": [
+                {
+                  "t": "seg",
+                  "a": ["=x1", "=y"],
+                  "b": ["=x2", "=y"],
+                  "dashed": true
+                },
+                {
+                  "t": "point",
+                  "at": ["=x1", "=y"],
+                  "name": "P",
+                  "coord": true,
+                  "pos": "n"
+                },
+                {
+                  "t": "point",
+                  "at": ["=x2", "=y"],
+                  "name": "Q",
+                  "coord": true,
+                  "pos": "n"
+                }
+              ]
+            }
+          ],
+          "answer": "x2 - x1",
+          "unit": "satuan",
+          "distractors": [
+            {
+              "expr": "abs(x2 + x1)",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "x2 - x1 + 1",
+              "tag": "menghitung-titik"
+            },
+            {
+              "expr": "abs(x2)",
+              "tag": "satu-titik"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ordinatnya sama ({y}), jadi cukup hitung selisih absis: {x2} − ({x1}) = {answer} satuan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [-6, 7],
+            "y1": [-8, 5],
+            "y2": [-5, 9]
+          },
+          "constraint": "y1 < y2 && y2 - y1 >= 2 && max(y2,0) - min(y1,0) <= 16",
+          "prompt": "Titik P({x}, {y1}) dan Q({x}, {y2}) terletak pada satu garis tegak. Berapa satuan panjang ruas PQ?",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "axes": {
+                "xMin": "=min(x,0)-1",
+                "xMax": "=max(x,0)+1",
+                "yMin": "=min(y1,0)-1",
+                "yMax": "=max(y2,0)+1"
+              },
+              "shapes": [
+                {
+                  "t": "seg",
+                  "a": ["=x", "=y1"],
+                  "b": ["=x", "=y2"],
+                  "dashed": true
+                },
+                {
+                  "t": "point",
+                  "at": ["=x", "=y1"],
+                  "name": "P",
+                  "coord": true,
+                  "pos": "e"
+                },
+                {
+                  "t": "point",
+                  "at": ["=x", "=y2"],
+                  "name": "Q",
+                  "coord": true,
+                  "pos": "e"
+                }
+              ]
+            }
+          ],
+          "answer": "y2 - y1",
+          "unit": "satuan",
+          "distractors": [
+            {
+              "expr": "abs(y2 + y1)",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "y2 - y1 + 1",
+              "tag": "menghitung-titik"
+            },
+            {
+              "expr": "abs(y2)",
+              "tag": "satu-titik"
+            }
+          ],
+          "choices": 4,
+          "explain": "Absisnya sama ({x}), jadi cukup hitung selisih ordinat: {y2} − ({y1}) = {answer} satuan."
+        }
+      }
+    ]
+  }
+}

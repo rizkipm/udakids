@@ -16,7 +16,7 @@ Sheet di Excel: **Petunjuk**, **Menu Belajar** (tabel utama), **Ringkasan** (pro
 
 ## Cara A: generate dengan Claude Code (disarankan)
 
-1. Buka proyek Udakids di VS Code, lalu buka panel Claude Code.
+1. Buka proyek UdaKids di VS Code, lalu buka panel Claude Code.
 2. Pilih satu baris di sheet **Menu Belajar**, lalu salin kolom **Perintah Claude Code**, misalnya:
 
    ```text
@@ -24,7 +24,7 @@ Sheet di Excel: **Petunjuk**, **Menu Belajar** (tabel utama), **Ringkasan** (pro
    ```
 
 3. Claude Code akan:
-   - membaca baris itu dan aturan Udakids;
+   - membaca baris itu dan aturan UdaKids;
    - membuat **draf pelajaran** (`content/lessons/<jenjang>/<kode>.json`);
    - membuat **10 level soal** bila kolom Tantangan berisi "BARU 10 level";
    - mencatat **gambar yang kurang** di `gambar-kurang.csv`;

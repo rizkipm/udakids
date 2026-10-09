@@ -1,0 +1,112 @@
+{
+  "id": "math.sd4.m6.soal-cerita-berapa-sisanya",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 6,
+  "title": "Pembagian bersisa dan soal cerita — Level 6 — Soal cerita: berapa sisanya?",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} permen dibagi sama banyak kepada {m} anak. Berapa permen yang tersisa?",
+          "answer": "t % m",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            },
+            {
+              "expr": "m - t % m",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "t % m + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Yang ditanya adalah sisa. {t} : {m} = {=floor(t/m)} sisa {answer}. Setiap anak mendapat {=floor(t/m)} permen, dan {answer} permen tersisa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "t": [100, 500]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} buku dibagikan sama banyak ke {m} kelas. Berapa buku yang diterima setiap kelas?",
+          "answer": "floor(t / m)",
+          "distractors": [
+            {
+              "expr": "floor(t / m) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "floor(t / m) - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Yang ditanya bagian setiap kelas, jadi jawabannya hasil bagi. {t} : {m} = {answer} sisa {=t%m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 9],
+            "t": [30, 150]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{nama} punya {t} kelereng. Ia membagi sama banyak ke {m} kantong. Berapa kelereng yang tidak masuk kantong?",
+          "answer": "t % m",
+          "mode": "input",
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {answer}. Kelereng yang tersisa adalah sisanya: {answer}."
+        }
+      }
+    ]
+  }
+}

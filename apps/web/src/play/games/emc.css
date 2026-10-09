@@ -1,0 +1,184 @@
+/* Game EMC Kelas 3–4 (D-101): Harta Karun Koordinat & Eksperimen Peluang. Target sentuh ≥ 64 px, tanpa merah. */
+.coord-wrap {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+.coord-board {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  touch-action: manipulation;
+  cursor: crosshair;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 20px;
+  background: #f4fbff;
+}
+.coord-grid {
+  stroke: #cfdbe8;
+  stroke-width: 1.5;
+}
+.coord-axis {
+  stroke: #3d4260;
+  stroke-width: 3;
+}
+.coord-num {
+  font-size: 14px;
+  font-weight: 800;
+  fill: #3d4260;
+  text-anchor: middle;
+}
+.coord-name {
+  font-size: 18px;
+  font-weight: 900;
+  font-style: italic;
+  fill: #1d1a2e;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4px;
+}
+.coord-mark circle {
+  stroke: #1d1a2e;
+  stroke-width: 2;
+}
+.coord-mark.is-hint circle {
+  fill: #8a6cf0;
+}
+.coord-mark.is-found circle {
+  fill: #2f9e44;
+}
+.coord-mark.is-answer circle {
+  fill: #f2a900;
+}
+.coord-cursor circle {
+  fill: rgba(91, 63, 214, 0.18);
+  stroke: #5b3fd6;
+  stroke-width: 3;
+}
+.coord-cursor path {
+  stroke: #5b3fd6;
+  stroke-width: 2;
+}
+.coord-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.coord-readout {
+  font-weight: 900;
+  font-size: 1.2rem;
+  min-width: 12ch;
+  text-align: center;
+}
+.coord-pad {
+  display: flex;
+  gap: 8px;
+}
+.coord-place {
+  min-height: 64px;
+  min-width: 120px;
+}
+.chance-event {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  font-weight: 900;
+  font-size: 1.15rem;
+  text-align: center;
+}
+.chance-count {
+  font-weight: 700;
+  color: #4b4f68;
+}
+.chance-grid {
+  width: 100%;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+}
+.chance-cell {
+  min-height: 64px;
+  min-width: 64px;
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  border: 3px solid #d9d3ea;
+  border-radius: 14px;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.chance-cell.is-marked {
+  border-color: #2f9e44;
+  background: #e3f6e8;
+  box-shadow: 0 3px 0 #2f9e44;
+}
+.chance-cell:disabled {
+  cursor: default;
+}
+.chance-coins {
+  display: flex;
+  gap: 2px;
+}
+.chance-coin {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  border: 2px solid #8a6a00;
+}
+.chance-coin.is-A {
+  background: #ffd84d;
+}
+.chance-coin.is-G {
+  background: #f1e3b0;
+}
+.chance-text {
+  font-weight: 800;
+  font-size: 0.8rem;
+  line-height: 1.15;
+  text-align: center;
+}
+.chance-fracs {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.chance-frac-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.coord-board.is-wobble,
+.chance-cell.is-wobble,
+.g4-card.is-wobble {
+  animation: emc-wobble 0.4s ease-in-out;
+}
+@keyframes emc-wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coord-board.is-wobble,
+  .chance-cell.is-wobble,
+  .g4-card.is-wobble {
+    animation: none;
+  }
+}

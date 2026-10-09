@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.l3.langkah-bagi-kali-kurang-turunkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 3,
+  "title": "Pembagian bersusun — Level 3 — Langkah bagi, kali, kurang, turunkan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [100, 499]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "Kerjakan {t} : {m} bersusun. Langkah pertama: bagi angka ratusan, {=floor(t/100)} : {m}. Berapa angka ratusan hasil baginya?",
+          "answer": "floor(floor(t / 100) / m)",
+          "distractors": [
+            {
+              "expr": "floor(floor(t / 100) / m) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(t / 100)",
+              "tag": "tidak-dibagi"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            }
+          ],
+          "explain": "Cari bilangan terbesar yang jika dikali {m} tidak lebih dari {=floor(t/100)}. {answer} × {m} = {=floor(floor(t/100)/m)*m}, jadi angka ratusan hasil baginya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [100, 499]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "Pada {t} : {m} bersusun, angka ratusan {=floor(t/100)} dibagi {m} hasilnya {=floor(floor(t/100)/m)}. Berapa sisanya setelah langkah kali dan kurang?",
+          "answer": "floor(t / 100) % m",
+          "distractors": [
+            {
+              "expr": "floor(floor(t / 100) / m) * m",
+              "tag": "hasil-kali"
+            },
+            {
+              "expr": "floor(t / 100) % m + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(t / 100)",
+              "tag": "tidak-dikurangi"
+            }
+          ],
+          "explain": "Kali: {=floor(floor(t/100)/m)} × {m} = {=floor(floor(t/100)/m)*m}. Kurang: {=floor(t/100)} − {=floor(floor(t/100)/m)*m} = {answer}. Sisa ini selalu lebih kecil dari {m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [100, 333]
+          },
+          "derived": {
+            "t": "m * q",
+            "r": "floor(t / 100) % m"
+          },
+          "constraint": "t < 1000 && r > 0",
+          "prompt": "Pada {t} : {m} bersusun, sisa dari ratusan adalah {r}. Setelah angka puluhan diturunkan, bilangan yang dibagi berikutnya adalah …",
+          "answer": "r * 10 + floor(t / 10) % 10",
+          "distractors": [
+            {
+              "expr": "floor(t / 10) % 10",
+              "tag": "lupa-sisa"
+            },
+            {
+              "expr": "r + floor(t / 10) % 10",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "floor(t / 10)",
+              "tag": "dua-angka-awal"
+            }
+          ],
+          "explain": "Turunkan angka puluhan {=floor(t/10)%10} ke sebelah kanan sisa {r}. Sisa {r} ratusan sama dengan {=r*10} puluhan, ditambah {=floor(t/10)%10} puluhan menjadi {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "id": "math.sd4.x8.hari-minggu-bulan-dan-tahun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 8,
+  "title": "Waktu dan lama kegiatan — Level 8 — Hari, minggu, bulan, dan tahun",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": [1, 6]
+          },
+          "prompt": "{a} minggu {b} hari = … hari",
+          "answer": "a * 7 + b",
+          "explain": "{a} minggu = {a} × 7 = {=a*7} hari. Ditambah {b} hari: {answer} hari.",
+          "distractors": [
+            {
+              "expr": "a * 10 + b",
+              "tag": "seperti-puluhan"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 7",
+              "tag": "lupa-hari"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10]
+          },
+          "prompt": "{a} tahun = … bulan",
+          "answer": "a * 12",
+          "explain": "1 tahun = 12 bulan, jadi {a} × 12 = {answer} bulan.",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 52",
+              "tag": "minggu"
+            },
+            {
+              "expr": "a * 12 + 12",
+              "tag": "lebih-satu-tahun"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [15, 69]
+          },
+          "prompt": "{t} hari = … minggu {=t%7} hari. Berapa minggunya?",
+          "answer": "floor(t / 7)",
+          "explain": "Bagi dengan 7 karena 1 minggu = 7 hari. {t} : 7 = {answer} sisa {=t%7}. Jadi {answer} minggu {=t%7} hari.",
+          "constraint": "t % 7 != 0",
+          "distractors": [
+            {
+              "expr": "floor(t / 10)",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "floor(t / 7) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "t % 7",
+              "tag": "sisanya"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "1 windu = 8 tahun. {a} windu = … tahun",
+          "answer": "a * 8",
+          "explain": "{a} × 8 = {answer} tahun.",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "seperti-dasawarsa"
+            },
+            {
+              "expr": "a + 8",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * 8 + 8",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "1 dasawarsa = 10 tahun dan 1 abad = 100 tahun. {a} dasawarsa = … tahun",
+          "answer": "a * 10",
+          "explain": "{a} × 10 = {answer} tahun.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "seperti-abad"
+            },
+            {
+              "expr": "a * 8",
+              "tag": "seperti-windu"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 20],
+            "k": [3, 10]
+          },
+          "prompt": "Liburan {nama} dari tanggal {t} sampai tanggal {t2} di bulan yang sama. Kedua tanggal itu ikut libur. Berapa hari liburannya?",
+          "answer": "t2 - t + 1",
+          "explain": "Selisih tanggal {t2} − {t} = {=t2-t}. Tanggal pertama juga ikut dihitung, jadi tambah 1: {answer} hari.",
+          "derived": {
+            "t2": "t + k"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "t2 - t",
+              "tag": "lupa-hari-pertama"
+            },
+            {
+              "expr": "t2 - t + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "t2 + t",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "math.sd34.ec2.selisih-harga-dari-dua-pernyataan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 2,
+  "title": "Bilangan & aljabar — Level 2 — Selisih harga dari dua pernyataan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menentukan selisih harga dari dua pernyataan harga",
+    "emc-no": "5"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "m": [8, 25],
+      "a": [2, 8],
+      "b": [3, 12],
+      "c": {
+        "values": [2, 3, 4]
+      }
+    },
+    "derived": {
+      "p1": "(m + c * a) * 1000",
+      "p2": "(m + c * b) * 1000"
+    },
+    "words": {
+      "makan": ["bakso", "mi ayam", "soto", "nasi goreng", "gado-gado", "pecel", "nasi uduk"],
+      "minum1": ["es teh", "teh hangat", "air mineral"],
+      "minum2": ["es jeruk", "jus alpukat", "es cokelat", "jus mangga"]
+    },
+    "constraint": "b > a",
+    "prompt": "Harga 1 porsi {makan} dan {c} gelas {minum1} adalah Rp{p1}. Harga 1 porsi {makan} dan {c} gelas {minum2} adalah Rp{p2}. Satu gelas {minum2} lebih mahal Rp… daripada satu gelas {minum1}.",
+    "answer": "(b - a) * 1000",
+    "distractors": [
+      {
+        "expr": "c * (b - a) * 1000",
+        "tag": "lupa-dibagi"
+      },
+      {
+        "expr": "(b - a) * 500",
+        "tag": "dibagi-dua"
+      },
+      {
+        "expr": "b * 1000",
+        "tag": "harga-minuman"
+      },
+      {
+        "expr": "(b - a + 1) * 1000",
+        "tag": "lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kedua belanjaan sama-sama berisi 1 porsi {makan}. Selisih totalnya Rp{=p2-p1} berasal dari {c} gelas minuman, jadi selisih per gelas = {=p2-p1} : {c} = Rp{answer}."
+  }
+}

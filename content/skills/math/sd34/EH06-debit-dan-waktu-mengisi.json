@@ -1,0 +1,85 @@
+{
+  "id": "math.sd34.eh6.debit-dan-waktu-mengisi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 6,
+  "title": "Kecepatan & kerja — Level 6 — Debit dan waktu mengisi",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menghitung volume, debit, atau waktu mengisi"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [2, 20],
+            "t": [5, 30]
+          },
+          "derived": {
+            "vol": "q * t"
+          },
+          "prompt": "Sebuah keran mengalirkan air {q} liter setiap menit. Untuk mengisi penuh bak berisi {vol} liter diperlukan waktu … menit.",
+          "answer": "t",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "vol * q",
+              "tag": "dikali"
+            },
+            {
+              "expr": "vol - q",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "t + 5",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Waktu = volume : debit = {vol} : {q} = {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [3, 25],
+            "t": [5, 40]
+          },
+          "derived": {
+            "vol": "q * t"
+          },
+          "prompt": "Sebuah pompa mengisi kolam {vol} liter dalam {t} menit. Debit pompa itu adalah … liter/menit.",
+          "answer": "q",
+          "unit": "liter/menit",
+          "distractors": [
+            {
+              "expr": "vol * t",
+              "tag": "dikali"
+            },
+            {
+              "expr": "vol - t",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "q + 2",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Debit = volume : waktu = {vol} : {t} = {answer} liter/menit."
+        }
+      }
+    ]
+  }
+}

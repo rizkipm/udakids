@@ -1,0 +1,139 @@
+{
+  "id": "math.sd4.i9.penalaran-fakta-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 9,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 9 — Penalaran fakta perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 11],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b",
+            "s": "a + b"
+          },
+          "constraint": "a < b",
+          "prompt": "Hasil kali dua bilangan adalah {p}. Jumlah kedua bilangan itu {s}. Berapa bilangan yang lebih besar?",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "yang-kecil"
+            },
+            {
+              "expr": "s",
+              "tag": "jumlahnya"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Cari pasangan faktor {p}, lalu pilih yang jumlahnya {s}. {a} × {b} = {p} dan {a} + {b} = {s}. Jadi bilangan yang lebih besar adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [2, 12],
+            "a": [3, 9],
+            "c": [1, 9]
+          },
+          "derived": {
+            "r": "x * a + c"
+          },
+          "prompt": "Aku sebuah bilangan. Aku dikali {a}, lalu ditambah {c}, hasilnya {r}. Siapa aku?",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "r - c",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "x + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "x - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Kerjakan mundur. Kurangi dulu: {r} - {c} = {=r-c}. Lalu bagi: {=r-c} : {a} = {answer}. Cek: {answer} × {a} + {c} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [6, 12],
+            "b": [4, 11]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{a} × {b} = {p}. Berapa {a} × {=b+1}?",
+          "answer": "p + a",
+          "distractors": [
+            {
+              "expr": "p + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "p + b",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "p + a + a",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{a} × {=b+1} adalah satu kelompok {a} lebih banyak daripada {a} × {b}. Jadi {p} + {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{a} × {b} = {p}. Berapa {=a*2} × {b}?",
+          "answer": "p * 2",
+          "distractors": [
+            {
+              "expr": "p + 2",
+              "tag": "tambah-dua"
+            },
+            {
+              "expr": "p + b",
+              "tag": "tambah-satu-kelompok"
+            },
+            {
+              "expr": "p * 4",
+              "tag": "empat-kali"
+            }
+          ],
+          "explain": "Jika satu bilangan dikali 2, hasilnya juga dua kali lipat. {p} × 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

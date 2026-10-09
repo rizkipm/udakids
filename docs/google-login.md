@@ -6,16 +6,16 @@ area orang tua; area anak tidak berubah.
 
 ## 1. Buat Client ID di Google Cloud (sekali saja)
 
-1. Buka <https://console.cloud.google.com/> dan pilih atau buat project, misalnya `Udakids`.
+1. Buka <https://console.cloud.google.com/> dan pilih atau buat project, misalnya `UdaKids`.
 2. **APIs & Services → OAuth consent screen** (Google Auth Platform → Branding):
    - User type: **External**;
-   - App name: `Udakids`, user support email, logo (opsional);
+   - App name: `UdaKids`, user support email, logo (opsional);
    - Authorized domain: `eduskul.my.id`;
    - Developer contact: email pengelola;
    - Scopes cukup bawaan: `openid`, `email`, `profile` (tidak perlu verifikasi Google);
    - **Publish app** (status "In production"), supaya semua orang tua bisa masuk, bukan hanya akun uji.
 3. **APIs & Services → Credentials → Create credentials → OAuth client ID**:
-   - Application type: **Web application**, nama: `Udakids Web`;
+   - Application type: **Web application**, nama: `UdaKids Web`;
    - **Authorized JavaScript origins**:
      - `https://kids.eduskul.my.id`
      - `http://localhost:6006` (untuk dev)

@@ -1,0 +1,149 @@
+{
+  "id": "math.sd4.y3.satuan-berat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 3,
+  "title": "Satuan panjang, berat, dan volume — Level 3 — Satuan berat",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 30]
+          },
+          "prompt": "{a} kg = … g",
+          "answer": "a * 1000",
+          "explain": "1 kg = 1.000 g, jadi {a} kg = {a} × 1.000 = {answer} g.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 10000",
+              "tag": "kebanyakan-nol"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 25]
+          },
+          "prompt": "{=b*1000} g = … kg",
+          "answer": "b",
+          "explain": "1.000 g = 1 kg. Bagi dengan 1.000: {=b*1000} : 1.000 = {answer} kg.",
+          "distractors": [
+            {
+              "expr": "b * 10",
+              "tag": "bagi-100"
+            },
+            {
+              "expr": "b * 100",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "b * 1000",
+              "tag": "tidak-dibagi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": {
+              "range": [50, 950],
+              "step": 50
+            }
+          },
+          "prompt": "{a} kg {b} g = … g",
+          "answer": "a * 1000 + b",
+          "explain": "{a} kg = {=a*1000} g. Ditambah {b} g: {=a*1000} + {b} = {answer} g.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "lupa-gram"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 20]
+          },
+          "prompt": "1 kg = 10 ons dan 1 ons = 100 g. {a} kg = … ons",
+          "answer": "a * 10",
+          "explain": "1 kg = 10 ons, jadi {a} kg = {a} × 10 = {answer} ons.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "kali-1000"
+            },
+            {
+              "expr": "a",
+              "tag": "sama"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "1 ons = 100 g. {a} ons = … g",
+          "answer": "a * 100",
+          "explain": "1 ons = 100 g, jadi {a} ons = {a} × 100 = {answer} g.",
+          "distractors": [
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "kali-1000"
+            },
+            {
+              "expr": "a + 100",
+              "tag": "menjumlah"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

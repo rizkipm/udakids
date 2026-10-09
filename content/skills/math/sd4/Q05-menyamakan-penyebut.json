@@ -1,0 +1,76 @@
+{
+  "id": "math.sd4.q5.menyamakan-penyebut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 5,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 5 — Menyamakan penyebut",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "k": [2, 3],
+            "a": [1, 5],
+            "b": [1, 17]
+          },
+          "derived": {
+            "e": "d * k"
+          },
+          "constraint": "a < d && b < e",
+          "prompt": "{a}/{d} … {b}/{e}",
+          "answer": "(a * k > b) * 1 + (a * k < b) * 2 + (a * k == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Samakan penyebutnya: {a}/{d} = {=a*k}/{e} (atas dan bawah dikali {k}). Lalu bandingkan {=a*k}/{e} dengan {b}/{e}. Jadi {a}/{d} {answer} {b}/{e}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "k": [2, 3],
+            "a": [1, 5],
+            "b": [1, 17]
+          },
+          "derived": {
+            "e": "d * k"
+          },
+          "constraint": "a < d && b < e",
+          "prompt": "{b}/{e} … {a}/{d}",
+          "answer": "(b > a * k) * 1 + (b < a * k) * 2 + (a * k == b) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Samakan penyebutnya: {a}/{d} = {=a*k}/{e} (atas dan bawah dikali {k}). Lalu bandingkan {b}/{e} dengan {=a*k}/{e}. Jadi {b}/{e} {answer} {a}/{d}."
+        }
+      }
+    ]
+  }
+}

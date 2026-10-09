@@ -1,0 +1,225 @@
+{
+  "id": "math.sd4.ee3.membaca-diagram-batang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 3,
+  "title": "Data: tabel dan diagram — Level 3 — Membaca diagram batang",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "prompt": "Lihat diagram batang. Berapa buku dipinjam pada hari Selasa?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "b + 10",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Ikuti puncak batang Selasa ke angka di sisi kiri: {answer} buku."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "prompt": "Lihat diagram batang. Berapa buku dipinjam pada hari Kamis?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "e",
+          "distractors": [
+            {
+              "expr": "c",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "f",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "e - 10",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Ikuti puncak batang Kamis ke angka di sisi kiri: {answer} buku."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "b": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "c": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "e": {
+              "range": [50, 400],
+              "step": 25
+            }
+          },
+          "prompt": "Berapa botol yang dikumpulkan Kelas 4C?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas 4A", "Kelas 4B", "Kelas 4C", "Kelas 4D"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Tabungan sampah plastik (botol)",
+              "unit": "botol"
+            }
+          ],
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "e",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "c + 25",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Batang Kelas 4C berhenti di {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "b": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "c": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "e": {
+              "range": [50, 400],
+              "step": 25
+            }
+          },
+          "prompt": "Berapa siswa yang suka renang?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Sepak bola", "Renang", "Bulu tangkis", "Pencak silat"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Olahraga kesukaan siswa sekolah",
+              "unit": "siswa"
+            }
+          ],
+          "answer": "b",
+          "unit": "siswa",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "b - 25",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Batang Renang berhenti di {answer}."
+        }
+      }
+    ]
+  }
+}

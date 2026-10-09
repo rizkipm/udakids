@@ -3,7 +3,7 @@ import type { BodyPart, ObjectId, ShapeId } from './assets.js';
 /**
  * Kosakata English TK (Olimpiade), D-071 — kisi-kisi: hewan, cuaca, bagian tubuh, buah & sayur; benda di kelas,
  * kamar mandi, dan benda umum; bangun datar; he/she/it & percakapan. Setiap kata punya gambar sendiri (SVG
- * Udakids, bukan salinan lembar soal mana pun). Kata ditulis huruf kecil; kartu menampilkannya huruf besar
+ * UdaKids, bukan salinan lembar soal mana pun). Kata ditulis huruf kecil; kartu menampilkannya huruf besar
  * seperti lembar olimpiade.
  */
 export const EN_TOPICS = [

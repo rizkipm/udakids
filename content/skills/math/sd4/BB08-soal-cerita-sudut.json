@@ -1,0 +1,130 @@
+{
+  "id": "math.sd4.bb8.soal-cerita-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 8,
+  "title": "Garis dan sudut — Level 8 — Soal cerita sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 90],
+              "step": 5
+            },
+            "b": {
+              "range": [10, 60],
+              "step": 5
+            }
+          },
+          "constraint": "a + b <= 175",
+          "words": {
+            "x": ["Pintu kelas", "Pintu lemari", "Jendela kamar", "Pintu pagar"]
+          },
+          "prompt": "{x} terbuka {a}°. Lalu didorong lagi sehingga terbuka {b}° lebih lebar. Berapa derajat bukaannya sekarang?",
+          "answer": "a + b",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "180 - a - b",
+              "tag": "sisa-sudut-lurus"
+            },
+            {
+              "expr": "a + b + 10",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Bukaan bertambah, jadi dijumlahkan: {a}° + {b}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": {
+              "range": [5, 60],
+              "step": 5
+            }
+          },
+          "prompt": "Jarum menit bergerak selama {m} menit. Berapa derajat jarum menit berputar?",
+          "answer": "6 * m",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "30 * m",
+              "tag": "memakai-30"
+            },
+            {
+              "expr": "m",
+              "tag": "menit-dianggap-derajat"
+            },
+            {
+              "expr": "6 * m + 30",
+              "tag": "lebih-satu-angka"
+            }
+          ],
+          "explain": "Satu putaran 360° ditempuh dalam 60 menit, jadi 1 menit = 6°. {m} × 6° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [30, 45, 60, 75, 90, 90, 105, 120, 135, 150, 180]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": ["kipas lipat", "buku", "laptop", "gunting"]
+          },
+          "prompt": "{nama} membuka {x} sampai membentuk sudut {d}°. Bukaan itu termasuk …",
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Bukaan {d}°. Kurang dari 90° lancip, tepat 90° siku-siku, antara 90° dan 180° tumpul, tepat 180° lurus. Jadi bukaan itu {answer}."
+        }
+      }
+    ]
+  }
+}

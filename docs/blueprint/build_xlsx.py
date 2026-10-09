@@ -49,12 +49,12 @@ def gpt_prompt(r):
     else:
         bagian_soal = (
             f'BAGIAN B (soal): buat 10 file skill JSON (Level 1–10, mudah ke sulit, Level 10 tantangan gabungan) '
-            f'format Udakids: id "{dom}.{grade}.<kode><n>.<slug>", domain "{dom}", grade "{grade}", '
+            f'format UdaKids: id "{dom}.{grade}.<kode><n>.<slug>", domain "{dom}", grade "{grade}", '
             f'family "manual" (atau family lain yang sudah ada), tier "basic" untuk PAUD/TK. '
             f'Setiap level minimal 24 soal unik, 3–4 pilihan, satu jawaban benar, pengecoh dari miskonsepsi umum, '
             f'setiap soal punya "say" (dibacakan), "reteach", dan "source". Gunakan hanya interaksi yang sudah ada '
             f'(pick-one, tap-all, order, group, match, build, number-line, number-input).')
-    return f"""Kamu penulis konten Udakids (aplikasi belajar anak 4–7 tahun, Indonesia).
+    return f"""Kamu penulis konten UdaKids (aplikasi belajar anak 4–7 tahun, Indonesia).
 UNIT {kode} · {r['grade']} · {r['mapel']} · {r['unit']}
 Tujuan: {r['tujuan']}. Rujukan: {r['rujukan']}.
 Tema kosakata: {r['tema']}. Model latihan: {r['berlatih']}. Layar pelajaran: {r['belajar']}.
@@ -96,7 +96,7 @@ ws = wb.active
 ws.title = 'Petunjuk'
 ws.column_dimensions['A'].width = 110
 lines = [
-    ('Menu Belajar Udakids: PAUD, TK, Kelas 1', True),
+    ('Menu Belajar UdaKids: PAUD, TK, Kelas 1', True),
     ('Sumber: docs/rencana-gudang-gambar-menu-belajar.md · data: docs/blueprint/menu-belajar.csv · petunjuk lengkap: docs/blueprint/PETUNJUK-GENERATE.md', False),
     ('', False),
     ('CARA MEMAKAI FILE INI', True),
@@ -194,7 +194,7 @@ for s in SCREENS:
 ws = wb.create_sheet('Prompt Gambar')
 header(ws, ['Bagian', 'Isi'], [22, 110])
 for k, v in [
-    ('Gaya Udakids v1', STYLE),
+    ('Gaya UdaKids v1', STYLE),
     ('Template satu gambar', '{GAYA} Objek: {kata Indonesia} ({kata Inggris}), {varian}.'),
     ('Template grid 2×2 (hemat 75%)', '{GAYA} Empat objek terpisah dalam grid 2×2 dengan jarak putih lebar, masing-masing di tengah selnya: '
      '1) {kata1}, 2) {kata2}, 3) {kata3}, 4) {kata4}. Semua objek ukuran serupa dan tidak saling menyentuh.'),

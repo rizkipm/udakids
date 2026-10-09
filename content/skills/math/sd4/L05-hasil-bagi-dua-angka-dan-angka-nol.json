@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.l5.hasil-bagi-dua-angka-dan-angka-nol",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 5,
+  "title": "Pembagian bersusun — Level 5 — Hasil bagi dua angka dan angka nol",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [12, 99]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 100 && floor(t / 100) < m",
+          "prompt": "{t} : {m} = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q * 10",
+              "tag": "tambah-nol"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Angka ratusan {=floor(t/100)} lebih kecil dari {m}, jadi mulai dari dua angka pertama: {=floor(t/10)} : {m}. Hasil bagi hanya punya dua angka: {answer}. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 4],
+            "a": [1, 3],
+            "b": [1, 9]
+          },
+          "derived": {
+            "q": "100 * a + b",
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "10 * a + b",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Ratusan: {=floor(t/100)} : {m} = {a}. Puluhan: {=floor(t/10)%10} lebih kecil dari {m}, jadi tulis 0 di tempat puluhan hasil bagi, lalu turunkan satuan: {=t%100} : {m} = {b}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [5, 9],
+            "b": [1, 9]
+          },
+          "derived": {
+            "q": "100 + b",
+            "t": "m * q"
+          },
+          "constraint": "t < 1000",
+          "prompt": "{t} : {m} = …",
+          "answer": "q",
+          "mode": "input",
+          "explain": "Ratusan: {=floor(t/100)} : {m} = 1. Puluhan {=floor(t/10)%10} lebih kecil dari {m}, jadi tulis 0 lalu turunkan satuan: {=t%100} : {m} = {b}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

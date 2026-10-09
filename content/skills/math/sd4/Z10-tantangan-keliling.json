@@ -1,0 +1,277 @@
+{
+  "id": "math.sd4.z10.tantangan-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 10,
+  "title": "Keliling bangun datar — Level 10 — Tantangan keliling",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 8],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Setiap petak bersisi 1 cm. Berapa cm keliling bangun ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": true
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "menghitung-petak-dalam"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Keliling adalah panjang tepi luar. Telusuri tepinya: {w} + {h} + {w} + {h} = {answer}. Petak di dalam tidak dihitung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 20],
+            "h": [2, 12]
+          },
+          "constraint": "w > h",
+          "prompt": "Panjang persegi panjang ini {w} cm dan lebarnya {h} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "explain": "Persegi panjang punya 2 sisi panjang dan 2 sisi lebar. Keliling = 2 × (panjang + lebar) = 2 × ({w} + {h}) = 2 × {=w+h} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 20]
+          },
+          "prompt": "Keenam sisi segi enam ini sama panjang, masing-masing {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "shape",
+              "shape": "segi-enam",
+              "color": "ungu",
+              "size": "m"
+            }
+          ],
+          "answer": "6 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "5 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "4 * s",
+              "tag": "banyak-sisi-keliru"
+            },
+            {
+              "expr": "s + 6",
+              "tag": "ditambah-6"
+            }
+          ],
+          "explain": "Segi enam punya 6 sisi. Semua {s} cm, jadi keliling = 6 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 20],
+            "a": [3, 20]
+          },
+          "constraint": "a < 2 * k && a != k",
+          "prompt": "Segitiga sama kaki punya dua kaki yang masing-masing {k} cm dan alas {a} cm. Berapa cm kelilingnya?",
+          "answer": "2 * k + a",
+          "unit": "cm",
+          "explain": "Kakinya ada dua yang sama panjang: {k} + {k} = {=2*k}. Tambah alasnya: {=2*k} + {a} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [6, 25],
+            "l": [2, 15]
+          },
+          "constraint": "p > l",
+          "derived": {
+            "k": "2 * (p + l)"
+          },
+          "prompt": "Keliling persegi panjang {k} cm dan panjangnya {p} cm. Berapa cm lebarnya?",
+          "answer": "l",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k - p",
+              "tag": "lupa-dibagi-2"
+            },
+            {
+              "expr": "k / 2",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "k - 2 * p",
+              "tag": "lupa-dibagi-2"
+            }
+          ],
+          "explain": "Setengah keliling = panjang + lebar: {k} : 2 = {=k/2}. Lebar = {=k/2} − {p} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Dua persegi bersisi {s} cm diletakkan berdampingan sehingga menjadi persegi panjang. Berapa cm keliling bangun baru itu?",
+          "answer": "6 * s",
+          "unit": "cm",
+          "explain": "Bangun barunya {=2*s} cm × {s} cm. Sisi yang menempel ada di dalam, tidak dihitung. 2 × ({=2*s} + {s}) = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [8, 20],
+            "l": [6, 15],
+            "s": [2, 5]
+          },
+          "constraint": "s < l && p > l",
+          "prompt": "Sebuah persegi panjang {p} cm × {l} cm dipotong persegi kecil {s} cm × {s} cm di satu pojoknya, sehingga berbentuk huruf L. Berapa cm keliling bangun huruf L itu?",
+          "answer": "2 * (p + l)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) - 2 * s",
+              "tag": "dikurangi-potongan"
+            },
+            {
+              "expr": "2 * (p + l) + 2 * s",
+              "tag": "ditambah-potongan"
+            },
+            {
+              "expr": "p * l - s * s",
+              "tag": "luas"
+            }
+          ],
+          "explain": "Dua sisi yang hilang diganti dua sisi baru yang sama panjang (geser ke luar pojoknya). Jadi kelilingnya tetap 2 × ({p} + {l}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 15],
+            "l": [3, 10],
+            "h": {
+              "values": [15000, 20000, 25000, 30000]
+            }
+          },
+          "constraint": "p > l",
+          "prompt": "Kebun berbentuk persegi panjang {p} m × {l} m akan dipagari. Harga pagar Rp{h} per meter. Berapa rupiah biaya pagarnya?",
+          "answer": "2 * (p + l) * h",
+          "distractors": [
+            {
+              "expr": "p * l * h",
+              "tag": "memakai-luas"
+            },
+            {
+              "expr": "(p + l) * h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * (p + l) * h + h",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Langkah 1: keliling = 2 × ({p} + {l}) = {=2*(p+l)} m. Langkah 2: {=2*(p+l)} × Rp{h} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 20],
+            "l": [3, 15]
+          },
+          "constraint": "p > l && (p + l) % 2 == 0",
+          "prompt": "Seutas kawat dibentuk persegi panjang {p} cm × {l} cm. Kawat itu dibuka, lalu dibentuk menjadi persegi. Berapa cm sisi persegi itu?",
+          "answer": "(p + l) / 2",
+          "unit": "cm",
+          "explain": "Panjang kawat tetap = keliling = 2 × ({p} + {l}) = {=2*(p+l)} cm. Sisi persegi = {=2*(p+l)} : 4 = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15],
+            "n": [2, 4]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Keliling sebuah persegi {k} cm. Sisinya dibuat {n} kali lebih panjang. Berapa cm keliling persegi yang baru?",
+          "answer": "k * n",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k + n",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "k * n * n",
+              "tag": "seperti-luas"
+            },
+            {
+              "expr": "k + 4 * n",
+              "tag": "ditambah-tiap-sisi"
+            }
+          ],
+          "explain": "Sisi baru = {n} × {s} = {=n*s} cm. Keliling baru = 4 × {=n*s} = {answer}, yaitu {n} kali keliling semula."
+        }
+      }
+    ]
+  }
+}

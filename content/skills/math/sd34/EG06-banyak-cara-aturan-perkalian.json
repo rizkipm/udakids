@@ -1,0 +1,129 @@
+{
+  "id": "math.sd34.eg6.banyak-cara-aturan-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 6,
+  "title": "Kombinatorika & penalaran — Level 6 — Banyak cara dengan aturan perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Menghitung banyak susunan dengan aturan perkalian"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 5],
+            "c": [2, 4]
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "{nama} punya {a} kaus, {b} celana, dan {c} topi. Banyak pasangan pakaian (1 kaus, 1 celana, 1 topi) yang berbeda adalah …",
+          "answer": "a * b * c",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "a * b + c",
+              "tag": "campur"
+            },
+            {
+              "expr": "a * b",
+              "tag": "lupa-topi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Untuk setiap kaus ada {b} pilihan celana dan {c} pilihan topi: {a} × {b} × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 9]
+          },
+          "prompt": "Kode gembok terdiri atas 3 angka. Setiap angka boleh dipilih dari 1 sampai {n} dan boleh berulang. Banyak kode yang mungkin adalah …",
+          "answer": "n * n * n",
+          "distractors": [
+            {
+              "expr": "3 * n",
+              "tag": "tiga-kali-n"
+            },
+            {
+              "expr": "n * (n - 1) * (n - 2)",
+              "tag": "tak-berulang"
+            },
+            {
+              "expr": "n * n",
+              "tag": "dua-tempat"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap tempat punya {n} pilihan: {n} × {n} × {n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 9]
+          },
+          "prompt": "Dari angka 1 sampai {n} akan dibuat bilangan dua angka dengan angka yang berbeda. Banyak bilangan yang dapat dibuat adalah …",
+          "answer": "n * (n - 1)",
+          "distractors": [
+            {
+              "expr": "n * n",
+              "tag": "boleh-berulang"
+            },
+            {
+              "expr": "n * (n - 1) / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali-n"
+            }
+          ],
+          "choices": 4,
+          "explain": "Angka puluhan: {n} pilihan. Angka satuan harus berbeda: {=n-1} pilihan. Jadi {n} × {=n-1} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.eh7.kerja-bersama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 7,
+  "title": "Kecepatan & kerja — Level 7 — Kerja bersama",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menentukan waktu kerja bersama dari waktu kerja masing-masing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [2, 12],
+      "b": [2, 12]
+    },
+    "constraint": "a < b && (a * b * 60) % (a + b) == 0",
+    "prompt": "Keran A dapat mengisi penuh sebuah kolam dalam {a} jam, sedangkan keran B dalam {b} jam. Jika kedua keran dibuka bersamaan, kolam penuh dalam … menit.",
+    "answer": "a * b * 60 / (a + b)",
+    "unit": "menit",
+    "distractors": [
+      {
+        "expr": "(a + b) * 30",
+        "tag": "rata-rata-waktu"
+      },
+      {
+        "expr": "(a + b) * 60",
+        "tag": "dijumlah"
+      },
+      {
+        "expr": "(b - a) * 60",
+        "tag": "dikurangi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Dalam 1 jam, A mengisi 1/{a} kolam dan B mengisi 1/{b} kolam, bersama {=a+b}/{=a*b} kolam. Waktu = {=a*b}/{=a+b} jam = {=a*b} × 60 : {=a+b} = {answer} menit."
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "id": "math.sd4.y8.soal-cerita-berat-dan-volume",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 8,
+  "title": "Satuan panjang, berat, dan volume — Level 8 — Soal cerita berat dan volume",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": {
+              "range": [100, 900],
+              "step": 50
+            }
+          },
+          "prompt": "Ibu membeli {a} kg gula dan {b} g tepung. Berapa gram berat belanjaan Ibu semuanya?",
+          "answer": "a * 1000 + b",
+          "explain": "Samakan satuan dulu: {a} kg = {=a*1000} g. Jumlahnya {=a*1000} + {b} = {answer} g.",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "lupa-satuan"
+            },
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 1000 + b + 100",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "b": {
+              "values": [250, 500]
+            }
+          },
+          "prompt": "Ember berisi {a} liter air. Air itu dituang ke botol-botol yang masing-masing berisi {b} mL sampai habis. Berapa botol yang terisi?",
+          "answer": "a * 1000 / b",
+          "explain": "Samakan satuan: {a} liter = {=a*1000} mL. Lalu {=a*1000} : {b} = {answer} botol.",
+          "distractors": [
+            {
+              "expr": "a * 100 / b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 1000 / b + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * 2",
+              "tag": "setengah-saja"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": {
+              "values": [100, 125, 200, 250, 500]
+            },
+            "n": [2, 40]
+          },
+          "prompt": "Satu kotak teh beratnya {g} g. Berapa kilogram berat {n} kotak teh?",
+          "answer": "g * n / 1000",
+          "explain": "Berat semua kotak = {n} × {g} = {=g*n} g. Karena 1.000 g = 1 kg, {=g*n} g = {answer} kg.",
+          "constraint": "(g * n) % 1000 == 0 && g * n <= 10000",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "g * n / 100",
+              "tag": "bagi-100"
+            },
+            {
+              "expr": "g * n",
+              "tag": "lupa-mengubah"
+            },
+            {
+              "expr": "g * n / 1000 + 1",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [600, 750, 1000, 1500]
+            },
+            "b": {
+              "range": [150, 550],
+              "step": 50
+            }
+          },
+          "prompt": "Botol minum {nama} berisi {a} mL air. Ia meminum {b} mL. Berapa mL air yang tersisa?",
+          "answer": "a - b",
+          "explain": "Sisa = isi awal − yang diminum. {a} − {b} = {answer} mL.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "mL",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "a - b - 50",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

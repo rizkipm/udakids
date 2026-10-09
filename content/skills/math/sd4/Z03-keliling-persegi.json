@@ -1,0 +1,137 @@
+{
+  "id": "math.sd4.z3.keliling-persegi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 3,
+  "title": "Keliling bangun datar — Level 3 — Keliling persegi",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Persegi ini bersisi {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=s",
+              "h": "=s",
+              "unit": "cm"
+            }
+          ],
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "s * s",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "s + 4",
+              "tag": "ditambah-4"
+            }
+          ],
+          "explain": "Keempat sisi persegi sama panjang. Keliling = 4 × sisi = 4 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [20, 60],
+              "step": 5
+            }
+          },
+          "prompt": "Sebuah ubin berbentuk persegi dengan sisi {s} cm. Berapa cm keliling ubin itu?",
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "3 * s",
+              "tag": "satu-sisi-terlewat"
+            },
+            {
+              "expr": "s + 4",
+              "tag": "ditambah-4"
+            }
+          ],
+          "explain": "Persegi punya 4 sisi yang sama: {s} + {s} + {s} + {s} = 4 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [20, 80],
+              "step": 5
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": ["sapu tangan", "taplak meja kecil", "sarung bantal", "kain hiasan dinding"]
+          },
+          "prompt": "{nama} menjahit renda di seluruh tepi {x} berbentuk persegi bersisi {s} cm. Berapa cm renda yang diperlukan?",
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "3 * s",
+              "tag": "satu-sisi-terlewat"
+            },
+            {
+              "expr": "s * 4 + 4",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Renda dipasang di seluruh tepi, jadi yang dicari keliling. Keliling persegi = 4 × {s} = {answer}."
+        }
+      }
+    ]
+  }
+}

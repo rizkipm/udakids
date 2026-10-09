@@ -1,0 +1,106 @@
+{
+  "id": "math.sd4.s5.menyederhanakan-hasil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 5,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 5 — Menyederhanakan hasil",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [1, 10],
+            "b": [1, 10]
+          },
+          "derived": {
+            "g": "gcd(a + b, d)"
+          },
+          "constraint": "a + b < d && g > 1",
+          "prompt": "{a}/{d} + {b}/{d} = … (tulis dalam bentuk paling sederhana)",
+          "format": "fraction",
+          "fraction": {
+            "num": "a + b",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "a + b",
+              "den": "d / g",
+              "tag": "pembilang-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / g",
+              "den": "d",
+              "tag": "penyebut-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / g",
+              "den": "2 * d / g",
+              "tag": "penyebut-dijumlah"
+            },
+            {
+              "num": "(a + b) / g + 1",
+              "den": "d / g",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlahkan pembilang: {a} + {b} = {=a+b}, jadi {=a+b}/{d}. FPB dari {=a+b} dan {d} adalah {g}. Bagi pembilang dan penyebut dengan {g}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "derived": {
+            "g": "gcd(a - b, d)"
+          },
+          "constraint": "a < d && b < a && g > 1",
+          "prompt": "{a}/{d} − {b}/{d} = … (tulis dalam bentuk paling sederhana)",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "a - b",
+              "den": "d / g",
+              "tag": "pembilang-tidak-dibagi"
+            },
+            {
+              "num": "(a - b) / g",
+              "den": "d",
+              "tag": "penyebut-tidak-dibagi"
+            },
+            {
+              "num": "(a + b) / gcd(a + b, d)",
+              "den": "d / gcd(a + b, d)",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "(a - b) / g + 1",
+              "den": "d / g",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kurangi pembilang: {a} − {b} = {=a-b}, jadi {=a-b}/{d}. FPB dari {=a-b} dan {d} adalah {g}. Bagi pembilang dan penyebut dengan {g}: {answer}."
+        }
+      }
+    ]
+  }
+}

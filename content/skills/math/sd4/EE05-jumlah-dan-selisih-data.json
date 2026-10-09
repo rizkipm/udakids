@@ -1,0 +1,273 @@
+{
+  "id": "math.sd4.ee5.jumlah-dan-selisih-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 5,
+  "title": "Data: tabel dan diagram — Level 5 — Jumlah dan selisih data",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "prompt": "Berapa buku dipinjam dari Senin sampai Jumat?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "a + b + c + e + f",
+          "distractors": [
+            {
+              "expr": "a + b + c + e",
+              "tag": "kurang-satu-hari"
+            },
+            {
+              "expr": "a + b + c + e + f + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + b + c + e + f - 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jumlahkan semua batang: {a} + {b} + {c} + {e} + {f} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 200],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 200],
+              "step": 10
+            }
+          },
+          "constraint": "a > c",
+          "prompt": "Berapa buku lebih banyak dipinjam pada hari Senin daripada hari Rabu?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "a - c",
+          "distractors": [
+            {
+              "expr": "a + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a - c + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "a",
+              "tag": "satu-data"
+            }
+          ],
+          "explain": "Selisih = {a} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "b": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "c": {
+              "range": [50, 400],
+              "step": 25
+            },
+            "e": {
+              "range": [50, 400],
+              "step": 25
+            }
+          },
+          "constraint": "a != e",
+          "prompt": "Berapa selisih botol yang dikumpulkan Kelas 4A dan Kelas 4D?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas 4A", "Kelas 4B", "Kelas 4C", "Kelas 4D"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Tabungan sampah plastik (botol)",
+              "unit": "botol"
+            }
+          ],
+          "answer": "abs(a - e)",
+          "distractors": [
+            {
+              "expr": "a + e",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(a - e) + 25",
+              "tag": "baca-skala"
+            },
+            {
+              "expr": "max(a, e)",
+              "tag": "satu-data"
+            }
+          ],
+          "explain": "Kurangkan yang besar dengan yang kecil: {=max(a,e)} − {=min(a,e)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 80],
+            "b": [12, 80],
+            "c": [12, 80],
+            "e": [12, 80]
+          },
+          "prompt": "Berapa kg seluruh hasil panen kebun sekolah?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Sayur", "Hasil (kg)"],
+              "rows": [
+                ["Jagung", "=a"],
+                ["Cabai", "=b"],
+                ["Tomat", "=c"],
+                ["Terong", "=e"]
+              ],
+              "caption": "Hasil panen kebun sekolah"
+            }
+          ],
+          "answer": "a + b + c + e",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "a + b + c",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a + b + c + e + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "a + b + c + e - 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "{a} + {b} + {c} + {e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "b": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "c": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "e": {
+              "range": [250, 990],
+              "step": 10
+            }
+          },
+          "prompt": "Berapa selisih pengunjung terbanyak dan tersedikit?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Kamis", "=a"],
+                ["Jumat", "=b"],
+                ["Sabtu", "=c"],
+                ["Minggu", "=e"]
+              ],
+              "caption": "Pengunjung taman kota"
+            }
+          ],
+          "answer": "max(a, b, c, e) - min(a, b, c, e)",
+          "unit": "orang",
+          "distractors": [
+            {
+              "expr": "max(a, b, c, e)",
+              "tag": "terbanyak"
+            },
+            {
+              "expr": "max(a, b, c, e) + min(a, b, c, e)",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(a - e)",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Terbanyak {=max(a,b,c,e)}, tersedikit {=min(a,b,c,e)}. Selisihnya {answer}."
+        }
+      }
+    ]
+  }
+}

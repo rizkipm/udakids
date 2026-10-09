@@ -1,0 +1,293 @@
+{
+  "id": "math.sd34.ef10.tantangan-peluang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 10,
+  "title": "Peluang — Level 10 — Tantangan peluang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Peluang",
+    "indikator": "Gabungan semua indikator peluang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 12]
+          },
+          "prompt": "Dua dadu dilempar bersamaan. Peluang jumlah kedua mata dadu sama dengan {t} adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "6 - abs(t - 7)",
+            "den": "36"
+          },
+          "distractors": [
+            {
+              "num": "1",
+              "den": "11",
+              "tag": "sebelas-jumlah"
+            },
+            {
+              "num": "6 - abs(t - 7)",
+              "den": "12",
+              "tag": "dua-belas"
+            },
+            {
+              "num": "1",
+              "den": "36",
+              "tag": "satu-pasangan"
+            },
+            {
+              "num": "t",
+              "den": "36",
+              "tag": "jumlah-sebagai-banyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ada 36 pasangan mata dadu. Pasangan berjumlah {t} ada {=6-abs(t-7)}. Peluang = {=6-abs(t-7)}/36, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [1, 5]
+          },
+          "prompt": "Dua dadu dilempar bersamaan. Peluang selisih kedua mata dadu sama dengan {d} adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "2 * (6 - d)",
+            "den": "36"
+          },
+          "distractors": [
+            {
+              "num": "6 - d",
+              "den": "36",
+              "tag": "lupa-dibalik"
+            },
+            {
+              "num": "1",
+              "den": "6",
+              "tag": "satu-per-enam"
+            },
+            {
+              "num": "d",
+              "den": "36",
+              "tag": "selisih-sebagai-banyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Pasangan dengan selisih {d}: ada {=6-d} pasangan (a, a + {d}) dan {=6-d} pasangan dibalik, jadi {=2*(6-d)}. Peluang = {=2*(6-d)}/36, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 5],
+            "k": [2, 5]
+          },
+          "derived": {
+            "t": "r + k",
+            "pairs": "t * (t - 1) / 2"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "Sebuah kotak berisi {r} bola kuning dan {k} bola hijau. {nama} mengambil 2 bola sekaligus tanpa melihat. Peluang terambil 1 bola kuning dan 1 bola hijau adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "r * k",
+            "den": "pairs"
+          },
+          "distractors": [
+            {
+              "num": "r * k",
+              "den": "t * t",
+              "tag": "dengan-pengembalian"
+            },
+            {
+              "num": "r",
+              "den": "t",
+              "tag": "satu-bola"
+            },
+            {
+              "num": "r * k",
+              "den": "t * (t - 1)",
+              "tag": "berurutan"
+            },
+            {
+              "num": "1",
+              "den": "2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak cara memilih 2 bola dari {t} bola = {t} × {=t-1} : 2 = {pairs}. Pasangan kuning-hijau = {r} × {k} = {=r*k}. Peluang = {=r*k}/{pairs}, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 5],
+            "k": [2, 5]
+          },
+          "derived": {
+            "t": "r + k",
+            "pairs": "t * (t - 1) / 2"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "Sebuah kotak berisi {r} bola kuning dan {k} bola hijau. {nama} mengambil 2 bola sekaligus tanpa melihat. Peluang kedua bola berwarna kuning adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "r * (r - 1) / 2",
+            "den": "pairs"
+          },
+          "distractors": [
+            {
+              "num": "r * r",
+              "den": "t * t",
+              "tag": "dengan-pengembalian"
+            },
+            {
+              "num": "r",
+              "den": "t",
+              "tag": "satu-bola"
+            },
+            {
+              "num": "r * k",
+              "den": "pairs",
+              "tag": "beda-warna"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak cara memilih 2 bola = {pairs}. Cara memilih 2 bola kuning = {r} × {=r-1} : 2 = {=r*(r-1)/2}. Peluang = {=r*(r-1)/2}/{pairs}, paling sederhana {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 12],
+            "b": [2, 12],
+            "h": [2, 12]
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "Di dalam kantong ada {m} permen rasa stroberi, {b} rasa melon, dan {h} rasa jeruk. {nama} mengambil satu permen tanpa melihat. Peluang terambil permen rasa stroberi adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "m",
+            "den": "m + b + h"
+          },
+          "distractors": [
+            {
+              "num": "m",
+              "den": "b + h",
+              "tag": "banding-bukan-peluang"
+            },
+            {
+              "num": "b + h",
+              "den": "m + b + h",
+              "tag": "kebalikan"
+            },
+            {
+              "num": "1",
+              "den": "m + b + h",
+              "tag": "satu-permen"
+            },
+            {
+              "num": "m",
+              "den": "m + b + h + 1",
+              "tag": "lain"
+            }
+          ],
+          "choices": 4,
+          "explain": "Banyak semua permen = {m} + {b} + {h} = {=m+b+h}. Permen stroberi = {m}. Peluang = {m}/{=m+b+h}, paling sederhana {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "id": "math.sd4.a3.mengenal-puluh-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 3,
+  "title": "Nilai tempat sampai 100.000 — Level 3 — Mengenal puluh ribuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [0, 9],
+            "c": [0, 9],
+            "e": [0, 9],
+            "f": [1, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + c * 100 + e * 10 + f"
+          },
+          "constraint": "a != b",
+          "prompt": "Bilangan berapa yang ditunjukkan tabel nilai tempat ini?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Puluh ribuan", "Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [["=a", "=b", "=c", "=e", "=f"]]
+            }
+          ],
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "b * 10000 + a * 1000 + c * 100 + e * 10 + f",
+              "tag": "kolom-tertukar"
+            },
+            {
+              "expr": "a * 1000 + b * 100 + c * 10 + e",
+              "tag": "kurang-satu-tempat"
+            },
+            {
+              "expr": "f * 10000 + e * 1000 + c * 100 + b * 10 + a",
+              "tag": "terbalik"
+            }
+          ],
+          "explain": "Ada lima kolom. Baca dari kiri: {a} puluh ribuan, {b} ribuan, {c} ratusan, {e} puluhan, {f} satuan. Bilangannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 99999],
+            "p": [1, 4]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "d4": "floor(n / 10000) % 10",
+            "pw": "(p == 1) * 10 + (p == 2) * 100 + (p == 3) * 1000 + (p == 4) * 10000",
+            "dg": "floor(n / pw) % 10"
+          },
+          "constraint": "(d0 == dg) + (d1 == dg) + (d2 == dg) + (d3 == dg) + (d4 == dg) == 1",
+          "prompt": "Pada bilangan {n}, angka {dg} berada di tempat apa?",
+          "answer": "p",
+          "labels": {
+            "1": "puluhan",
+            "2": "ratusan",
+            "3": "ribuan",
+            "4": "puluh ribuan"
+          },
+          "explain": "Hitung dari kanan: satuan, puluhan, ratusan, ribuan, puluh ribuan. Angka {dg} ada di tempat {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10000, 99999],
+            "p": [2, 4]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "d4": "floor(n / 10000) % 10",
+            "pw": "(p == 2) * 100 + (p == 3) * 1000 + (p == 4) * 10000",
+            "dg": "floor(n / pw) % 10"
+          },
+          "constraint": "(d0 == dg) + (d1 == dg) + (d2 == dg) + (d3 == dg) + (d4 == dg) == 1 && dg > 0",
+          "prompt": "Berapa nilai angka {dg} pada bilangan {n}?",
+          "answer": "dg * pw",
+          "distractors": [
+            {
+              "expr": "dg",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "dg * pw * 10",
+              "tag": "tempat-kiri"
+            },
+            {
+              "expr": "dg * pw / 10",
+              "tag": "tempat-kanan"
+            }
+          ],
+          "explain": "Angka {dg} berada di tempat yang bernilai {pw}. Nilainya {dg} × {pw} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "math.sd34.ed6.perbandingan-berantai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 6,
+  "title": "Rasio & persen — Level 6 — Perbandingan berantai",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menentukan kesetaraan harga melalui perbandingan berantai",
+    "emc-no": "35"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "u": [1, 6],
+      "v": [1, 6],
+      "w": [1, 6],
+      "f": [1, 3]
+    },
+    "derived": {
+      "a": "v / gcd(u, v)",
+      "b": "u / gcd(u, v)",
+      "c": "w / gcd(v, w)",
+      "d": "v / gcd(v, w)",
+      "e": "f * u / gcd(u, w)"
+    },
+    "words": {
+      "x1": ["anggur", "apel", "jeruk"],
+      "y1": ["mangga", "salak", "pir"],
+      "z1": ["manggis", "kelengkeng", "stroberi"]
+    },
+    "constraint": "u != v && v != w && u != w && e * w / u <= 60",
+    "prompt": "Di toko buah, uang untuk membeli {a} kg {x1} pas untuk membeli {b} kg {y1}, dan uang untuk {c} kg {y1} pas untuk {d} kg {z1}. Uang untuk {e} kg {z1} pas untuk membeli berapa kg {x1}?",
+    "answer": "e * w / u",
+    "mode": "input",
+    "explain": "Misalkan 1 kg {x1} = {u} bagian, maka 1 kg {y1} = {v} bagian (karena {a} × {u} = {b} × {v}) dan 1 kg {z1} = {w} bagian (karena {c} × {v} = {d} × {w}). {e} kg {z1} = {=e*w} bagian = {=e*w} : {u} = {answer} kg {x1}."
+  }
+}

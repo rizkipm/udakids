@@ -1,0 +1,142 @@
+{
+  "id": "math.sd4.cc8.keliling-segitiga-dan-segi-empat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 8,
+  "title": "Segitiga dan segi empat — Level 8 — Keliling segitiga dan segi empat",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [5, 20],
+            "a": [3, 20]
+          },
+          "constraint": "a != k && a < 2 * k",
+          "prompt": "Segitiga sama kaki dengan kaki {k} cm dan alas {a} cm. Berapa cm kelilingnya?",
+          "answer": "2 * k + a",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k + a",
+              "tag": "kaki-dihitung-sekali"
+            },
+            {
+              "expr": "2 * a + k",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "3 * k",
+              "tag": "dianggap-sama-sisi"
+            }
+          ],
+          "explain": "Dua kaki sama panjang: 2 × {k} = {=2*k}. Ditambah alas {a}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 25]
+          },
+          "prompt": "Sisi sebuah belah ketupat {s} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "shape",
+              "shape": "belah-ketupat",
+              "color": "oranye",
+              "size": "m"
+            }
+          ],
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "s * s",
+              "tag": "luas"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            },
+            {
+              "expr": "3 * s",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Keempat sisi belah ketupat sama panjang, sama seperti persegi: 4 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 20],
+            "b": [3, 15]
+          },
+          "constraint": "a > b",
+          "words": {
+            "x": ["jajar genjang", "layang-layang"]
+          },
+          "prompt": "Sebuah {x} punya dua sisi {a} cm dan dua sisi {b} cm. Berapa cm kelilingnya?",
+          "answer": "2 * (a + b)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "a * b",
+              "tag": "dikali"
+            },
+            {
+              "expr": "4 * a",
+              "tag": "dianggap-sama"
+            }
+          ],
+          "explain": "Jumlahkan semua sisi: {a} + {a} + {b} + {b} = 2 × ({a} + {b}) = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [8, 20],
+            "b": [4, 12],
+            "k": [3, 10]
+          },
+          "constraint": "a > b && 2 * k > a - b",
+          "prompt": "Trapesium sama kaki punya sisi sejajar {a} cm dan {b} cm, serta dua kaki yang masing-masing {k} cm. Berapa cm kelilingnya?",
+          "answer": "a + b + 2 * k",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a + b + k",
+              "tag": "kaki-dihitung-sekali"
+            },
+            {
+              "expr": "2 * (a + b)",
+              "tag": "sejajar-dua-kali"
+            },
+            {
+              "expr": "a + 2 * k",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Trapesium punya 4 sisi: {a} + {b} + {k} + {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

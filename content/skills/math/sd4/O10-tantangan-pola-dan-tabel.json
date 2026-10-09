@@ -1,0 +1,352 @@
+{
+  "id": "math.sd4.o10.tantangan-pola-dan-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 10,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 10 — Tantangan pola dan tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 99999],
+            "k": {
+              "values": [500, 1000, 2000, 2500, 5000, 10000]
+            }
+          },
+          "prompt": "{a}, {=a-k}, {=a-2*k}, {=a-3*k}, … Bilangan berikutnya adalah …",
+          "answer": "a - 4 * k",
+          "distractors": [
+            {
+              "expr": "a - 5 * k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "a - 2 * k",
+              "tag": "naik"
+            },
+            {
+              "expr": "a - 4 * k - 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pola turun. Selisihnya {a} − {=a-k} = {k}, jadi aturannya kurang {k}. {=a-3*k} − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "r": {
+              "values": [2, 3, 4, 5, 10]
+            }
+          },
+          "constraint": "a * r * r * r <= 99999",
+          "prompt": "Pola: {a}, {=a*r}, {=a*r*r}, {=a*r*r*r}. Aturannya kali …",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "a * r - a",
+              "tag": "selisih"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r * 2",
+              "tag": "dua-kali"
+            }
+          ],
+          "explain": "Selisihnya tidak sama, jadi coba perkalian. {a} × {r} = {=a*r}, {=a*r} × {r} = {=a*r*r}. Aturannya kali {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 5000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "{a}, {=a+k}, …, {=a+3*k}, {=a+4*k}. Bilangan yang hilang adalah …",
+          "answer": "a + 2 * k",
+          "distractors": [
+            {
+              "expr": "a + 2 * k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a + 2 * k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a + k + 10",
+              "tag": "tambah-10"
+            }
+          ],
+          "explain": "Aturannya tambah {k}, karena {=a+k} − {a} = {k}. Bilangan yang hilang: {=a+k} + {k} = {answer}. Periksa: {answer} + {k} = {=a+3*k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 50],
+            "d": [1, 6]
+          },
+          "prompt": "{a}, {=a+d}, {=a+3*d}, {=a+6*d}, {=a+10*d}, … Bilangan berikutnya adalah …",
+          "answer": "a + 15 * d",
+          "distractors": [
+            {
+              "expr": "a + 14 * d",
+              "tag": "selisih-tetap"
+            },
+            {
+              "expr": "a + 16 * d",
+              "tag": "lebih-satu-langkah"
+            },
+            {
+              "expr": "a + 20 * d",
+              "tag": "dua-kali-lipat"
+            }
+          ],
+          "explain": "Selisihnya {d}, {=2*d}, {=3*d}, {=4*d}: selisih itu bertambah {d} setiap langkah. Berikutnya tambah {=5*d}: {=a+10*d} + {=5*d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [5, 60],
+            "d1": [3, 15],
+            "d2": [3, 15],
+            "d3": [3, 15],
+            "k": [11, 250]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "prompt": "Lihat tabel. Masukan berapa yang keluarannya {=x4+k}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1+k"],
+                ["=x2", "=x2+k"],
+                ["=x3", "=x3+k"],
+                ["?", "=x4+k"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4",
+          "distractors": [
+            {
+              "expr": "x4 + 2 * k",
+              "tag": "aturan-terbalik"
+            },
+            {
+              "expr": "x4 + k",
+              "tag": "keluaran"
+            },
+            {
+              "expr": "x4 - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Aturannya tambah {k}. Untuk mencari masukan, kerjakan kebalikannya: {=x4+k} − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [2, 12]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x4 <= 12",
+          "prompt": "Lihat tabel. Berapa keluaran untuk masukan {x4}?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1*k"],
+                ["=x2", "=x2*k"],
+                ["=x3", "=x3*k"],
+                ["=x4", "?"]
+              ],
+              "caption": "Aturannya sama untuk setiap baris"
+            }
+          ],
+          "answer": "x4 * k",
+          "distractors": [
+            {
+              "expr": "x4 + x1 * k - x1",
+              "tag": "aturan-tambah"
+            },
+            {
+              "expr": "x4 * k + k",
+              "tag": "lebih-satu-kali"
+            },
+            {
+              "expr": "x3 * k",
+              "tag": "baris-atas"
+            }
+          ],
+          "explain": "Baris pertama {x1} menjadi {=x1*k}, baris kedua {x2} menjadi {=x2*k}. Selisihnya tidak sama, jadi aturannya kali {k}. {x4} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x1": [1, 4],
+            "d1": [1, 3],
+            "d2": [1, 3],
+            "d3": [1, 3],
+            "k": [3, 12]
+          },
+          "derived": {
+            "x2": "x1 + d1",
+            "x3": "x2 + d2",
+            "x4": "x3 + d3"
+          },
+          "constraint": "x1 > 1",
+          "prompt": "Lihat tabel. Aturannya: keluaran = masukan × …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Masukan", "Keluaran"],
+              "rows": [
+                ["=x1", "=x1*k"],
+                ["=x2", "=x2*k"],
+                ["=x3", "=x3*k"]
+              ]
+            }
+          ],
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "x1 * k - x1",
+              "tag": "selisih"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Selisih tiap baris tidak sama, jadi bukan aturan tambah. {=x1*k} : {x1} = {k} dan {=x2*k} : {x2} = {k}. Aturannya kali {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "x": [6, 25],
+            "b": [1, 5]
+          },
+          "constraint": "x > b",
+          "prompt": "Aturan mesin bilangan: masukan dikali {m}, lalu dikurangi {b}. Berapa keluaran untuk masukan {x}?",
+          "answer": "m * x - b",
+          "distractors": [
+            {
+              "expr": "m * (x - b)",
+              "tag": "kurang-dulu"
+            },
+            {
+              "expr": "m * x + b",
+              "tag": "tanda"
+            },
+            {
+              "expr": "m * x",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Ikuti urutan aturannya. Kali dulu: {x} × {m} = {=m*x}. Lalu kurangi: {=m*x} − {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 30],
+            "k": [2, 12],
+            "n": [6, 15]
+          },
+          "prompt": "Pola: {a}, {=a+k}, {=a+2*k}, {=a+3*k}, … Bilangan ke-{n} adalah …",
+          "answer": "a + (n - 1) * k",
+          "distractors": [
+            {
+              "expr": "a + n * k",
+              "tag": "lebih-satu-loncatan"
+            },
+            {
+              "expr": "n * k",
+              "tag": "lupa-awal"
+            },
+            {
+              "expr": "a + (n - 2) * k",
+              "tag": "kurang-satu-loncatan"
+            }
+          ],
+          "explain": "Dari bilangan pertama ke bilangan ke-{n} ada {=n-1} loncatan, masing-masing {k}. {a} + {=n-1} × {k} = {a} + {=(n-1)*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 25]
+          },
+          "prompt": "Persegi dari lidi disusun berjajar. 1 persegi perlu 4 lidi, 2 persegi perlu 7 lidi, 3 persegi perlu 10 lidi. Berapa lidi untuk {n} persegi?",
+          "answer": "3 * n + 1",
+          "distractors": [
+            {
+              "expr": "4 * n",
+              "tag": "tidak-berbagi"
+            },
+            {
+              "expr": "3 * n",
+              "tag": "lupa-lidi-awal"
+            },
+            {
+              "expr": "3 * n + 4",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Persegi pertama perlu 4 lidi. Setiap persegi baru memakai 1 lidi bersama, jadi hanya perlu 3 lidi lagi. 4 + {=n-1} × 3 = {answer}."
+        }
+      }
+    ]
+  }
+}

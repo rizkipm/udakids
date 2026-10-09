@@ -1,0 +1,101 @@
+{
+  "id": "math.sd34.ef3.banyak-hasil-yang-mungkin",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EF",
+  "order": 3,
+  "title": "Peluang — Level 3 — Banyak hasil yang mungkin",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "understanding",
+    "kisi-kisi": "Peluang",
+    "indikator": "Menentukan banyak anggota ruang sampel"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 6]
+          },
+          "prompt": "{n} koin dilempar bersamaan. Banyak hasil yang mungkin (ruang sampel) adalah …",
+          "answer": "pow(2, n)",
+          "distractors": [
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali-n"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "banyak-angka"
+            },
+            {
+              "expr": "n * n",
+              "tag": "kuadrat"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap koin punya 2 kemungkinan (angka atau gambar). {n} koin: 2 dikali sebanyak {n} kali = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1, 4]
+          },
+          "prompt": "Sebuah dadu dan {n} koin dilempar bersamaan. Banyak hasil yang mungkin adalah …",
+          "answer": "6 * pow(2, n)",
+          "distractors": [
+            {
+              "expr": "6 + 2 * n",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "6 * 2 * n",
+              "tag": "dua-kali-n"
+            },
+            {
+              "expr": "pow(2, n)",
+              "tag": "lupa-dadu"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dadu punya 6 kemungkinan dan setiap koin 2 kemungkinan: 6 × {=pow(2,n)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3]
+          },
+          "prompt": "{n} dadu dilempar bersamaan. Banyak hasil yang mungkin adalah …",
+          "answer": "pow(6, n)",
+          "distractors": [
+            {
+              "expr": "6 * n",
+              "tag": "enam-kali-n"
+            },
+            {
+              "expr": "6 + n",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "pow(6, n) / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap dadu punya 6 kemungkinan: 6 dikali sebanyak {n} kali = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "id": "math.sd4.aa9.penalaran-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 9,
+  "title": "Luas persegi dan persegi panjang — Level 9 — Penalaran luas",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 10],
+            "n": {
+              "values": [2, 3]
+            }
+          },
+          "derived": {
+            "l": "s * s"
+          },
+          "prompt": "Luas sebuah persegi {l} cm². Sisinya dibuat {n} kali lebih panjang. Berapa cm² luas persegi yang baru?",
+          "answer": "l * n * n",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "l * n",
+              "tag": "dikali-sekali"
+            },
+            {
+              "expr": "l + n",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "l * 2 * n",
+              "tag": "dikali-2n"
+            }
+          ],
+          "explain": "Sisi lama {s} cm, sisi baru {n} × {s} = {=n*s} cm. Luas baru = {=n*s} × {=n*s} = {answer}, yaitu {=n*n} kali luas lama."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [2, 9],
+            "s": [3, 10]
+          },
+          "constraint": "p > l && p * l != s * s",
+          "prompt": "Persegi panjang A berukuran {p} cm × {l} cm. Persegi B bersisi {s} cm. Berapa cm² selisih luas keduanya?",
+          "answer": "abs(p * l - s * s)",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "p * l + s * s",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "abs(2 * (p + l) - 4 * s)",
+              "tag": "memakai-keliling"
+            },
+            {
+              "expr": "abs(p * l - 4 * s)",
+              "tag": "sisi-dikali-4"
+            }
+          ],
+          "explain": "Luas A = {p} × {l} = {=p*l}. Luas B = {s} × {s} = {=s*s}. Selisih = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 6],
+            "l": [2, 5],
+            "h": {
+              "values": [25000, 30000, 40000, 50000]
+            }
+          },
+          "constraint": "p > l",
+          "prompt": "Lantai kamar {p} m × {l} m ditutup karpet. Harga karpet Rp{h} per m². Berapa rupiah harga karpet seluruhnya?",
+          "answer": "p * l * h",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) * h",
+              "tag": "memakai-keliling"
+            },
+            {
+              "expr": "(p + l) * h",
+              "tag": "menjumlah-sisi"
+            },
+            {
+              "expr": "p * l * h + h",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Langkah 1: luas = {p} × {l} = {=p*l} m². Langkah 2: {=p*l} × Rp{h} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [2, 6],
+            "q": [2, 12]
+          },
+          "constraint": "p > l && (p * l) % q == 0 && q != l && q != p && q < p * l / q",
+          "prompt": "Persegi panjang A berukuran {p} cm × {l} cm. Persegi panjang B luasnya sama dengan A, lebarnya {q} cm. Berapa cm panjang B?",
+          "answer": "p * l / q",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p * l - q",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "p",
+              "tag": "sama-dengan-a"
+            },
+            {
+              "expr": "p * l / q + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Luas A = {p} × {l} = {=p*l} cm². Panjang B = {=p*l} : {q} = {answer}."
+        }
+      }
+    ]
+  }
+}

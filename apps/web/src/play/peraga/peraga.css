@@ -375,3 +375,89 @@
     transition: none;
   }
 }
+
+/* ---------- Kelas 4 (D-096): ribuan, luas, sudut, diagram, desimal */
+.pb-cube {
+  width: 70px;
+  height: 70px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0 30%, transparent 30%),
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(43, 37, 64, 0.25) 6px 7px),
+    repeating-linear-gradient(0deg, transparent 0 6px, rgba(43, 37, 64, 0.25) 6px 7px), #ff9f5a;
+  box-shadow: 6px -6px 0 #e07a32;
+}
+.peraga-area,
+.peraga-angle {
+  width: min(100%, 340px);
+  height: auto;
+}
+.peraga-table {
+  border-collapse: collapse;
+  background: #fff;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.peraga-table th,
+.peraga-table td {
+  padding: 6px 14px;
+  border-bottom: 2px solid #e8e4f4;
+  text-align: left;
+}
+.peraga-chart {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+.peraga-chart-col {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.peraga-chart-track {
+  position: relative;
+  width: 56px;
+  height: 200px;
+  border-left: 3px solid var(--kid-line, #2b2540);
+  border-bottom: 3px solid var(--kid-line, #2b2540);
+  background: repeating-linear-gradient(to top, #fff 0 19px, #e8e4f4 19px 20px);
+}
+.peraga-chart-bar {
+  position: absolute;
+  inset: auto 6px 0;
+  border-radius: 8px 8px 0 0;
+  background: #7b5cff;
+  transition: height 0.2s ease;
+}
+.peraga-chart-name {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.peraga-hundred {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  width: min(100%, 300px);
+  aspect-ratio: 1;
+  padding: 4px;
+  border: 3px solid var(--kid-line, #2b2540);
+  border-radius: 8px;
+  background: #e8e4f4;
+}
+.peraga-hundred span {
+  background: #fff;
+  border-radius: 2px;
+}
+.peraga-hundred span.is-on {
+  background: #1aa37a;
+}
+@media (prefers-reduced-motion: reduce) {
+  .peraga-chart-bar {
+    transition: none;
+  }
+}

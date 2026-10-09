@@ -1,0 +1,84 @@
+{
+  "id": "math.sd4.t4.hasil-bilangan-bulat-dan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 4,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 4 — Hasil bulat dan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 12],
+            "d": [2, 6],
+            "n": [1, 5]
+          },
+          "constraint": "n < d && (k * n) % d == 0",
+          "prompt": "{k} × {n}/{d} = …",
+          "answer": "k * n / d",
+          "distractors": [
+            {
+              "expr": "k * n",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "k * n / d + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n",
+              "tag": "pembilang"
+            },
+            {
+              "expr": "k",
+              "tag": "bilangan-cacah"
+            },
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            }
+          ],
+          "explain": "{k} × {n} = {=k*n}, jadi {k} × {n}/{d} = {=k*n}/{d}. Pembilang habis dibagi penyebut: {=k*n} : {d} = {answer}. Hasilnya bilangan bulat {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5],
+            "d": [3, 9],
+            "n": [1, 8]
+          },
+          "constraint": "n < d && k * n > d && k * n < 2 * d",
+          "prompt": "{k} × {n}/{d} = 1 …/{d}",
+          "answer": "k * n - d",
+          "distractors": [
+            {
+              "expr": "k * n",
+              "tag": "lupa-satu-utuh"
+            },
+            {
+              "expr": "k * n - d + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k + n",
+              "tag": "dijumlah"
+            }
+          ],
+          "explain": "{k} × {n}/{d} = {=k*n}/{d}. Ambil {d}/{d} sebagai 1 utuh. Sisanya {=k*n} − {d} = {answer}. Jadi hasilnya 1 {answer}/{d}."
+        }
+      }
+    ]
+  }
+}

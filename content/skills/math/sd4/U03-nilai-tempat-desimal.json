@@ -1,0 +1,137 @@
+{
+  "id": "math.sd4.u3.nilai-tempat-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 3,
+  "title": "Desimal persepuluhan dan perseratusan — Level 3 — Nilai tempat desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3],
+            "s": [1, 9],
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "Pada bilangan {x}, angka {d} berada di tempat …",
+          "answer": "k",
+          "explain": "Angka sebelum koma ada di tempat satuan. Angka pertama setelah koma = persepuluhan, angka kedua setelah koma = perseratusan. Jadi angka {d} pada {x} ada di tempat {answer}.",
+          "constraint": "s != p && p != q && s != q",
+          "derived": {
+            "x": "s + p / 10 + q / 100",
+            "d": "s * (k == 1) + p * (k == 2) + q * (k == 3)"
+          },
+          "labels": {
+            "1": "satuan",
+            "2": "persepuluhan",
+            "3": "perseratusan"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 9],
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "Pada bilangan {x}, angka {p} bernilai …",
+          "answer": "p / 10",
+          "explain": "Angka {p} ada di tempat persepuluhan (angka pertama setelah koma), jadi nilainya {p}/10 = {answer}.",
+          "constraint": "s != p && p != q && s != q",
+          "derived": {
+            "x": "s + p / 10 + q / 100"
+          },
+          "distractors": [
+            {
+              "expr": "p / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "p",
+              "tag": "nilai-satuan"
+            },
+            {
+              "expr": "s + p / 10",
+              "tag": "ikut-satuan"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 9],
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "Pada bilangan {x}, angka {q} bernilai …",
+          "answer": "q / 100",
+          "explain": "Angka {q} ada di tempat perseratusan (angka kedua setelah koma), jadi nilainya {q}/100 = {answer}.",
+          "constraint": "s != p && p != q && s != q",
+          "derived": {
+            "x": "s + p / 10 + q / 100"
+          },
+          "distractors": [
+            {
+              "expr": "q / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "q",
+              "tag": "nilai-satuan"
+            },
+            {
+              "expr": "p / 10 + q / 100",
+              "tag": "ikut-persepuluhan"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 9],
+            "p": [1, 9],
+            "q": [1, 9]
+          },
+          "prompt": "{s} + {=p/10} + {=q/100} = …",
+          "answer": "s + p / 10 + q / 100",
+          "explain": "Satuan {s} di depan koma, persepuluhan {p} di angka pertama setelah koma, perseratusan {q} di angka kedua: {answer}.",
+          "constraint": "s != p && p != q && s != q",
+          "distractors": [
+            {
+              "expr": "s + q / 10 + p / 100",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "p + s / 10 + q / 100",
+              "tag": "geser"
+            },
+            {
+              "expr": "s + p + q",
+              "tag": "jumlah-angka"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

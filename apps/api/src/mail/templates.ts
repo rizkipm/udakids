@@ -1,9 +1,9 @@
 import { MOMO_LOGO_CID } from './logo.js';
 
 /**
- * Template email Udakids (D-044): hangat, profesional, ramah anak. Tata letak tabel + gaya inline agar
+ * Template email UdaKids (D-044): hangat, profesional, ramah anak. Tata letak tabel + gaya inline agar
  * tampil baik di Gmail/Outlook/HP. Semua teks dari pengguna di-escape. Setiap email punya versi teks biasa.
- * Footer: "Momo From Udakids".
+ * Footer: "Momo From UdaKids".
  */
 
 export type MailContent = { subject: string; html: string; text: string };
@@ -115,7 +115,7 @@ ${note ? `<div style="font-size:13px;color:${C.muted};margin-top:8px">${esc(note
 </td></tr></table>`;
 };
 
-/** Kerangka email: kepala ungu dengan Momo, isi kartu putih, footer "Momo From Udakids". */
+/** Kerangka email: kepala ungu dengan Momo, isi kartu putih, footer "Momo From UdaKids". */
 function layout(
   ctx: MailContext,
   opts: { title: string; preheader: string; tone?: Tone; body: string; unsubscribe?: string },

@@ -1,0 +1,72 @@
+{
+  "id": "math.sd4.d2.ke-ratusan-terdekat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 2,
+  "title": "Pembulatan dan penaksiran — Level 2 — Ke ratusan terdekat",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 9999]
+          },
+          "constraint": "n % 100 != 0",
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "floor(n / 100) * 100 + 100 * (n % 100 < 50)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 1000) * 1000, 1000)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "tempat-lebih-kecil"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Lihat angka puluhan, yaitu {=floor(n/10)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 100) * 100} dan {=floor(n / 100) * 100+100}, jadi dibulatkan menjadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1001, 9999]
+          },
+          "derived": {
+            "lo": "floor(n / 100) * 100"
+          },
+          "constraint": "n % 100 != 0 && n % 100 != 50",
+          "prompt": "Pada garis bilangan, {n} lebih dekat ke {lo} atau {=lo+100}?",
+          "answer": "round(n / 100) * 100",
+          "distractors": [
+            {
+              "expr": "lo + 100 * (n % 100 < 50)",
+              "tag": "arah-terbalik"
+            }
+          ],
+          "choices": 2,
+          "explain": "Titik tengah {lo} dan {=lo+100} adalah {=lo+50}. {n} ada di sisi {answer}, jadi lebih dekat ke {answer}."
+        }
+      }
+    ]
+  }
+}

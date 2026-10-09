@@ -1,0 +1,97 @@
+{
+  "id": "math.sd4.l2.dua-angka-dibagi-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 2,
+  "title": "Pembagian bersusun — Level 2 — Dua angka dibagi satu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Bagi puluhan dulu: {=floor(t/10)} : {m} = {=floor(floor(t/10)/m)} sisa {=floor(t/10)%m}. Turunkan angka satuan sehingga menjadi {=(floor(t/10)%m)*10+t%10}. {=(floor(t/10)%m)*10+t%10} : {m} = {=((floor(t/10)%m)*10+t%10)/m}. Jadi hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} kelereng dibagi sama banyak ke dalam {m} kantong. Berapa kelereng di setiap kantong?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Bagi puluhan dulu: {=floor(t/10)} : {m} = {=floor(floor(t/10)/m)} sisa {=floor(t/10)%m}. Turunkan angka satuan sehingga menjadi {=(floor(t/10)%m)*10+t%10}. {=(floor(t/10)%m)*10+t%10} : {m} = {=((floor(t/10)%m)*10+t%10)/m}. Jadi hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [11, 49]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t < 100",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "mode": "input",
+          "explain": "Bagi puluhan dulu: {=floor(t/10)} : {m} = {=floor(floor(t/10)/m)} sisa {=floor(t/10)%m}. Turunkan angka satuan sehingga menjadi {=(floor(t/10)%m)*10+t%10}. {=(floor(t/10)%m)*10+t%10} : {m} = {=((floor(t/10)%m)*10+t%10)/m}. Jadi hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

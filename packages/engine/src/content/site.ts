@@ -50,7 +50,7 @@ export const videoInputSchema = z.strictObject({
 });
 export type VideoInput = z.infer<typeof videoInputSchema>;
 
-/** "Cara Daftar Anak di Udakids!" → "cara-daftar-anak-di-udakids". */
+/** "Cara Daftar Anak di UdaKids!" → "cara-daftar-anak-di-udakids". */
 export function slugify(title: string): string {
   const s = title
     .normalize('NFKD')

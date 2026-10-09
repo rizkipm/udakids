@@ -1,0 +1,108 @@
+{
+  "id": "math.sd4.g1.mengenal-kelipatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 1,
+  "title": "Faktor dan kelipatan — Level 1 — Mengenal kelipatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 12],
+            "n": [3, 10]
+          },
+          "prompt": "Lanjutkan kelipatan {k}: {=(n-2)*k}, {=(n-1)*k}, {=n*k}, … Bilangan berikutnya adalah …",
+          "answer": "(n + 1) * k",
+          "distractors": [
+            {
+              "expr": "(n + 2) * k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "(n + 1) * k + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kelipatan {k} selalu bertambah {k}. {=n*k} + {k} = {answer}. Kelipatan {k} juga bisa dicari dengan perkalian: {=n+1} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 12],
+            "n": [2, 10]
+          },
+          "constraint": "n != k",
+          "prompt": "Kelipatan ke-{n} dari {k} adalah …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "(n + 1) * k",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(n - 1) * k",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Kelipatan {k}: {k}, {=2*k}, {=3*k}, dan seterusnya. Kelipatan ke-{n} dari {k} = {n} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 10],
+            "n": [2, 8]
+          },
+          "prompt": "Setiap baris berisi {k} petak. Ada {n} baris. Banyak petak adalah kelipatan {k}. Berapa petak semuanya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=k",
+              "h": "=n",
+              "unit": "",
+              "grid": true
+            }
+          ],
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "(n + 1) * k",
+              "tag": "lebih-satu-baris"
+            },
+            {
+              "expr": "(n - 1) * k",
+              "tag": "kurang-satu-baris"
+            }
+          ],
+          "explain": "Hitung loncat {k}-{k} sebanyak {n} baris: {n} × {k} = {answer}. Jadi {answer} adalah kelipatan {k}."
+        }
+      }
+    ]
+  }
+}

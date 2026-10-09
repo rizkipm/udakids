@@ -1,0 +1,134 @@
+{
+  "id": "math.sd4.bb9.penalaran-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 9,
+  "title": "Garis dan sudut — Level 9 — Penalaran sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15, 120],
+              "step": 5
+            },
+            "b": {
+              "range": [15, 120],
+              "step": 5
+            }
+          },
+          "derived": {
+            "d": "a + b"
+          },
+          "constraint": "a + b <= 180",
+          "prompt": "Sudut {a}° dan sudut {b}° diletakkan berdampingan menjadi satu sudut besar. Sudut besar itu termasuk …",
+          "answer": "1 + (d >= 90) + (d > 90) + (d >= 180)",
+          "labels": {
+            "1": "sudut lancip",
+            "2": "sudut siku-siku",
+            "3": "sudut tumpul",
+            "4": "sudut lurus"
+          },
+          "explain": "Jumlahkan dulu: {a}° + {b}° = {d}°. Lalu bandingkan dengan 90° dan 180°: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [10, 170],
+              "step": 5
+            }
+          },
+          "constraint": "a != 90",
+          "prompt": "Berapa derajat selisih sudut {a}° dengan sudut siku-siku?",
+          "answer": "abs(90 - a)",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "180 - a",
+              "tag": "memakai-180"
+            },
+            {
+              "expr": "90 + a",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "abs(90 - a) + 10",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Sudut siku-siku 90°. Kurangi yang besar dengan yang kecil: selisih {a}° dan 90° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 5]
+          },
+          "prompt": "Pukul {h}.00, jarum menit menunjuk angka 12. Jarum jam harus bergeser berapa derajat lagi agar kedua jarum membentuk sudut lurus?",
+          "answer": "180 - 30 * h",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "30 * h",
+              "tag": "sudut-sekarang"
+            },
+            {
+              "expr": "360 - 30 * h",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "210 - 30 * h",
+              "tag": "lebih-satu-angka"
+            }
+          ],
+          "explain": "Sekarang sudutnya {h} × 30° = {=30*h}°. Sudut lurus 180°. Kurangnya 180° − {=30*h}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 80],
+              "step": 5
+            },
+            "b": {
+              "range": [20, 80],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 170",
+          "prompt": "Tiga sudut berdampingan mengisi tepat satu garis lurus. Dua sudutnya {a}° dan {b}°. Berapa derajat sudut ketiga?",
+          "answer": "180 - a - b",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "360 - a - b",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-saja"
+            }
+          ],
+          "explain": "Satu garis lurus = 180°. Sudut ketiga = 180° − {a}° − {b}° = {answer}."
+        }
+      }
+    ]
+  }
+}

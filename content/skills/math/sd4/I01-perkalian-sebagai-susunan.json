@@ -1,0 +1,131 @@
+{
+  "id": "math.sd4.i1.perkalian-sebagai-susunan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 1,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 1 — Perkalian sebagai susunan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 10],
+            "b": [2, 12]
+          },
+          "prompt": "Ada {a} baris kursi. Setiap baris berisi {b} kursi. Berapa kursi semuanya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=b",
+              "h": "=a",
+              "unit": "",
+              "grid": true
+            }
+          ],
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "(a - 1) * b",
+              "tag": "kurang-satu-baris"
+            },
+            {
+              "expr": "(a + 1) * b",
+              "tag": "lebih-satu-baris"
+            }
+          ],
+          "explain": "Susunan {a} baris, masing-masing {b}, ditulis {a} × {b}. Hitung loncat {b}-{b} sebanyak {a} kali: {a} × {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {a} kotak pensil. Setiap kotak berisi {b} pensil. Kalimat perkaliannya {a} × {b}. Berapa pensil semuanya?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * (b - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a * b + b",
+              "tag": "lebih-satu-kelompok"
+            }
+          ],
+          "explain": "{a} kelompok berisi {b} sama dengan {b} ditambah sebanyak {a} kali. {a} × {b} = {answer} pensil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 9],
+            "b": [6, 12]
+          },
+          "prompt": "{b} + {b} + {b} + … ditulis {a} kali. Kalimat perkaliannya {a} × {b}. Hasilnya …",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b * 3",
+              "tag": "tiga-kali"
+            },
+            {
+              "expr": "a * b - b",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Penjumlahan berulang {a} kali dari {b} sama dengan {a} × {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

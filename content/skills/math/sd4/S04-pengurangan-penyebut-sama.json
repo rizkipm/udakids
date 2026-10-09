@@ -1,0 +1,101 @@
+{
+  "id": "math.sd4.s4.pengurangan-penyebut-sama",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "S",
+  "order": 4,
+  "title": "Penjumlahan dan pengurangan pecahan — Level 4 — Pengurangan penyebut sama",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [5, 12],
+            "a": [2, 11],
+            "b": [1, 10]
+          },
+          "constraint": "a < d && b < a",
+          "prompt": "{a}/{d} − {b}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "a - b",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tidak-dikurangi"
+            },
+            {
+              "num": "a + b",
+              "den": "d",
+              "tag": "menjumlah"
+            },
+            {
+              "num": "a - b + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "a - b",
+              "den": "d + d",
+              "tag": "penyebut-ganda"
+            }
+          ],
+          "explain": "Penyebutnya sama, jadi kurangi pembilangnya saja: {a} − {b} = {=a-b}. Penyebut tetap {d}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 12],
+            "a": [1, 11]
+          },
+          "constraint": "a < d",
+          "prompt": "1 − {a}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "d - a",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "a",
+              "den": "d",
+              "tag": "tetap"
+            },
+            {
+              "num": "d - a + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "d - a",
+              "den": "a",
+              "tag": "penyebut-diganti"
+            },
+            {
+              "num": "d - a - 1",
+              "den": "d",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Tulis 1 utuh sebagai {d}/{d}. Lalu {d}/{d} − {a}/{d} = {=d-a}/{d}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

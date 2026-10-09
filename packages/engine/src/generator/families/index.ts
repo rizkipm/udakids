@@ -61,6 +61,8 @@ import {
   wheelGame,
   wordHunt,
 } from './fun.js';
+import { bingoGame, chartGame, guessGame, linesGame, magicGame, stackGame } from './kelas4.js';
+import { chanceGame, coordGame } from './emc.js';
 
 const BASE_FAMILIES = {
   'numeral-tap-all': numeralTapAll,
@@ -129,6 +131,16 @@ const BASE_FAMILIES = {
   'feed-game': feedGame,
   'maze-game': mazeGame,
   'word-hunt': wordHunt,
+  // Game Kelas 4 (D-096).
+  'guess-game': guessGame,
+  'chart-game': chartGame,
+  'magic-game': magicGame,
+  'stack-game': stackGame,
+  'lines-game': linesGame,
+  'bingo-game': bingoGame,
+  // Game EMC Kelas 3–4 (D-101).
+  'coord-game': coordGame,
+  'chance-game': chanceGame,
 } satisfies Record<string, Family>;
 
 type BaseName = keyof typeof BASE_FAMILIES;
@@ -211,6 +223,14 @@ export const GAME_FAMILIES: ReadonlySet<string> = new Set([
   'feed-game',
   'maze-game',
   'word-hunt',
+  'guess-game',
+  'chart-game',
+  'magic-game',
+  'stack-game',
+  'lines-game',
+  'bingo-game',
+  'coord-game',
+  'chance-game',
 ]);
 
 /** Level memakai family game (langsung atau sebagai bagian `mix`)? */

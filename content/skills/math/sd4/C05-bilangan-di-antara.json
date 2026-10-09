@@ -1,0 +1,113 @@
+{
+  "id": "math.sd4.c5.bilangan-di-antara",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "C",
+  "order": 5,
+  "title": "Membandingkan dan mengurutkan bilangan — Level 5 — Bilangan di antara",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "lo": [10000, 98000],
+            "g": [2, 9],
+            "u": [1, 99],
+            "v": [1, 9]
+          },
+          "derived": {
+            "gap": "g * 100",
+            "hi": "lo + gap",
+            "m": "lo + floor(u * gap / 100)"
+          },
+          "prompt": "Bilangan manakah yang terletak di antara {lo} dan {hi}?",
+          "answer": "m",
+          "distractors": [
+            {
+              "expr": "lo - floor(u * gap / 100)",
+              "tag": "kurang-dari-batas"
+            },
+            {
+              "expr": "hi + v * 10",
+              "tag": "lebih-dari-batas"
+            },
+            {
+              "expr": "lo - 1000 + floor(u * gap / 100)",
+              "tag": "ribuan-lain"
+            }
+          ],
+          "explain": "Bilangan di antara {lo} dan {hi} harus lebih besar dari {lo} dan lebih kecil dari {hi}. Yang memenuhi hanya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [10, 95],
+            "j": [1, 4]
+          },
+          "derived": {
+            "a": "k * 1000",
+            "b": "a + j * 2000"
+          },
+          "prompt": "Pada garis bilangan, bilangan apa yang tepat di tengah-tengah {a} dan {b}?",
+          "answer": "a + j * 1000",
+          "distractors": [
+            {
+              "expr": "a + j * 500",
+              "tag": "seperempat"
+            },
+            {
+              "expr": "b + j * 1000",
+              "tag": "lewat-ujung"
+            },
+            {
+              "expr": "a - j * 1000",
+              "tag": "sebelum-ujung"
+            },
+            {
+              "expr": "b - j * 500",
+              "tag": "tiga-perempat"
+            }
+          ],
+          "explain": "Jarak {a} ke {b} adalah {=b-a}. Setengahnya {=j*1000}. Mulai dari {a}, maju {=j*1000}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 98999]
+          },
+          "constraint": "n % 1000 != 0",
+          "prompt": "Bilangan ribuan bulat berapa yang tepat setelah {n} pada garis bilangan?",
+          "answer": "floor(n / 1000) * 1000 + 1000",
+          "distractors": [
+            {
+              "expr": "floor(n / 1000) * 1000",
+              "tag": "sebelumnya"
+            },
+            {
+              "expr": "floor(n / 100) * 100 + 100",
+              "tag": "ratusan"
+            },
+            {
+              "expr": "floor(n / 10000) * 10000 + 10000",
+              "tag": "puluh-ribuan"
+            }
+          ],
+          "explain": "Ribuan bulat berakhiran 000. {n} ada di antara {=floor(n/1000)*1000} dan {answer}. Yang setelahnya adalah {answer}."
+        }
+      }
+    ]
+  }
+}

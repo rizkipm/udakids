@@ -3,7 +3,14 @@ import { EN_NUMBERS, EN_WORDS } from '../generator/english-vocab.js';
 import { ALPHABET, STROKE_NAMES } from '../generator/glyphs.js';
 import { generateItem, type SkillTemplate } from '../generator/template.js';
 import type { Item } from '../generator/item.js';
-import { numberWord, ordinalWord } from '../generator/words.js';
+import { numberWord, ordinalWord, parseNumberWord } from '../generator/words.js';
+import {
+  cutLong,
+  langSegments,
+  SEGMENT_MAX,
+  speechSegments,
+  splitSentences,
+} from './voice-split.js';
 import { exampleAnswerSay } from './auto-lesson.js';
 import type { Lesson } from './lesson.js';
 
@@ -97,6 +104,19 @@ export function buildVoiceAllowList(input: {
     if (!t || typeof t !== 'string') return;
     exact.add(key(t));
     for (const s of voiceSentences(t)) exact.add(key(s));
+    // Potongan yang dibacakan perangkat per bahasa/panjang (D-098).
+    for (const base of ['id-ID', 'en-GB'] as const)
+      for (const s of langSegments(t, base)) exact.add(key(s.text));
+    for (const s of speechSegments(t)) exact.add(key(s));
+    for (const s of splitSentences(t)) {
+      for (const piece of cutLong(s, SEGMENT_MAX)) exact.add(key(piece));
+      // Label pendek ("Contoh:", "Ingat:") yang dibacakan terpisah dari isinya.
+      const m = /^([^:]{1,24}):\s+(.+)$/.exec(s);
+      if (m && m[1]!.split(' ').length <= 3) {
+        exact.add(key(`${m[1]}:`));
+        exact.add(key(m[2]!));
+      }
+    }
   };
   for (const t of input.texts ?? []) addText(t);
   for (const tpl of input.templates ?? []) {
@@ -154,11 +174,17 @@ export function voiceTextAllowed(text: string, lists: readonly VoiceAllowList[])
   const n = normalizeVoiceText(text);
   if (!n || n.length > VOICE_TEXT_MAX) return false;
   const k = n.toLowerCase();
+  // Kata bilangan apa pun (mis. alat peraga Kelas 4 sampai jutaan, D-096) aman diucapkan.
+  if (parseNumberWord(k.replace(/[.!?,]+$/, '')) !== undefined) return true;
   for (const l of lists) {
     if (l.exact.has(k)) return true;
     if (l.patterns.some((p) => matchesPattern(p, n))) return true;
   }
-  return voiceSentences(n).every((s) => sentenceAllowed(s, lists));
+  // Juga dengan pemecah kalimat perangkat (D-098): rangkaian kalimat yang digabung per bahasa.
+  return (
+    voiceSentences(n).every((s) => sentenceAllowed(s, lists)) ||
+    splitSentences(n).every((s) => sentenceAllowed(s, lists))
+  );
 }
 
 /** Semua teks (string) di dalam sebuah objek: soal, pelajaran, katalog. */
@@ -213,6 +239,12 @@ export function voiceVocabulary(): string[] {
     'rupiah',
     'ribu',
     'juta',
+    // Alat peraga Kelas 4 (D-096): "sembilan puluh derajat", "tiga puluh tujuh perseratus".
+    'derajat',
+    'perseratus',
+    'persepuluh',
+    'koma',
+    'kotak',
   );
   out.push(...Object.values(OBJECTS).map((o) => o.say));
   out.push(...Object.values(SHAPES).map((o) => o.say));

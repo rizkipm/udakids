@@ -1,0 +1,122 @@
+{
+  "id": "math.sd4.b2.menulis-lambang-bilangan-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 2,
+  "title": "Membaca dan menulis bilangan besar — Level 2 — Menulis lambang bilangan ribuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "t": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + t * 10 + s"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "r * 100 + t * 10 + s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "r * 1000 + t * 100 + s * 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "r * 10000 + t * 10 + s",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "Ada {r} ribu, tidak ada ratusan, lalu {=t*10+s}. Tempat ratusan diisi 0: {r} | 0 | {t} | {s}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + s"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "r * 100 + h * 10 + s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "r * 1000 + h * 100 + s * 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "r * 1000 + h * 10 + s",
+              "tag": "nol-pindah"
+            }
+          ],
+          "explain": "Ada {r} ribu, {h} ratus, tidak ada puluhan, lalu {s}. Tempat puluhan diisi 0: {r} | {h} | 0 | {s}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + s"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "r * 1000 + s * 100",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "r * 1000 + s * 10",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "r * 10 + s",
+              "tag": "lupa-nol"
+            }
+          ],
+          "explain": "Setelah {r} ribu, ratusan dan puluhan tidak disebut, jadi keduanya 0: {r} | 0 | 0 | {s}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "constraint": "n % 10 != 0",
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "mode": "input",
+          "explain": "Tulis per tempat: ribuan, ratusan, puluhan, satuan. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

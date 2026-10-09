@@ -1,0 +1,103 @@
+{
+  "id": "math.sd4.a9.teka-teki-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 9,
+  "title": "Nilai tempat sampai 100.000 — Level 9 — Teka-teki bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8],
+            "k": [1, 8],
+            "t": [1, 9]
+          },
+          "constraint": "a + k <= 9",
+          "prompt": "Aku bilangan 5 angka. Angka puluh ribuanku {a}. Angka ribuanku {k} lebih dari angka puluh ribuan. Angka ratusanku 0. Angka puluhanku {t}. Angka satuanku sama dengan angka ribuan. Siapa aku?",
+          "answer": "a * 10000 + (a + k) * 1000 + t * 10 + a + k",
+          "mode": "input",
+          "explain": "Isi tabel satu per satu: puluh ribuan {a}, ribuan {a} + {k} = {=a+k}, ratusan 0, puluhan {t}, satuan {=a+k}. Aku adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [10, 98],
+            "h": [0, 9],
+            "t": [0, 9],
+            "s": [1, 9]
+          },
+          "derived": {
+            "lo": "q * 1000"
+          },
+          "prompt": "Aku bilangan 5 angka di antara {lo} dan {=lo+1000}. Angka ratusanku {h}, angka puluhanku {t}, dan angka satuanku {s}. Siapa aku?",
+          "answer": "lo + h * 100 + t * 10 + s",
+          "mode": "input",
+          "explain": "Bilangan di antara {lo} dan {=lo+1000} punya puluh ribuan dan ribuan yang sama dengan {lo}. Tinggal isi ratusan {h}, puluhan {t}, satuan {s}: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [0, 9]
+          },
+          "prompt": "Berapa bilangan 5 angka terkecil yang angka ribuannya {r}?",
+          "answer": "10000 + r * 1000",
+          "distractors": [
+            {
+              "expr": "r * 1000",
+              "tag": "bukan-5-angka"
+            },
+            {
+              "expr": "10000 + r * 1000 + 1",
+              "tag": "satuan-1"
+            },
+            {
+              "expr": "r * 10000",
+              "tag": "tempat-salah"
+            }
+          ],
+          "explain": "Supaya terkecil, puluh ribuan harus 1 (tidak boleh 0) dan tempat lain sekecil mungkin, yaitu 0. Ribuannya {r}, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [0, 8]
+          },
+          "prompt": "Berapa bilangan 5 angka terbesar yang angka ratusannya {h}?",
+          "answer": "99099 + h * 100",
+          "distractors": [
+            {
+              "expr": "99999",
+              "tag": "abaikan-syarat"
+            },
+            {
+              "expr": "90000 + h * 100",
+              "tag": "nol-sisanya"
+            },
+            {
+              "expr": "99009 + h * 10",
+              "tag": "tempat-salah"
+            }
+          ],
+          "explain": "Supaya terbesar, isi tempat lain dengan 9. Ratusannya {h}: 9 | 9 | {h} | 9 | 9 = {answer}."
+        }
+      }
+    ]
+  }
+}

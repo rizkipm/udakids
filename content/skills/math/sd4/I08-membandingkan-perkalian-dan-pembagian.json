@@ -1,0 +1,106 @@
+{
+  "id": "math.sd4.i8.membandingkan-perkalian-dan-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 8,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 8 — Membandingkan hasil",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 12],
+            "c": [3, 12],
+            "e": [3, 12]
+          },
+          "constraint": "a != c && a != e && abs(a * b - c * e) <= 12",
+          "prompt": "Pilih tanda yang tepat: {a} × {b} … {c} × {e}",
+          "answer": "(a * b > c * e) * 1 + (a * b < c * e) * 2 + (a * b == c * e) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Hitung kedua sisi dulu. {a} × {b} = {=a*b} dan {c} × {e} = {=c*e}. Jadi tandanya {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 6],
+            "b": [2, 6],
+            "k": {
+              "values": [2, 3]
+            }
+          },
+          "derived": {
+            "c": "a * k",
+            "e": "b"
+          },
+          "prompt": "Pilih tanda yang tepat: {a} × {=b*k} … {c} × {e}",
+          "answer": "3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Hitung kedua sisi. {a} × {=b*k} = {=a*b*k} dan {c} × {e} = {=c*e}. Hasilnya sama, jadi tandanya =."
+        },
+        "weight": 0.8
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [3, 12],
+            "c": [3, 12],
+            "e": [3, 12]
+          },
+          "derived": {
+            "p": "a * b",
+            "q": "c * e"
+          },
+          "constraint": "a != c && abs(b - e) <= 2",
+          "prompt": "Pilih tanda yang tepat: {p} : {a} … {q} : {c}",
+          "answer": "(b > e) * 1 + (b < e) * 2 + (b == e) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Hitung kedua pembagian. {p} : {a} = {b} dan {q} : {c} = {e}. Jadi tandanya {answer}."
+        },
+        "weight": 1.2
+      }
+    ]
+  }
+}

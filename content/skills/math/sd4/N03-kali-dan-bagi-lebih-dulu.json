@@ -1,0 +1,150 @@
+{
+  "id": "math.sd4.n3.kali-dan-bagi-lebih-dulu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 3,
+  "title": "Operasi hitung campuran — Level 3 — Kali dan bagi lebih dulu",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 200],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "{a} + {b} × {c} = …",
+          "answer": "a + b * c",
+          "distractors": [
+            {
+              "expr": "(a + b) * c",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "a * b + c",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kali lebih dulu daripada tambah. {b} × {c} = {=b*c}. Lalu {a} + {=b*c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [60, 300],
+            "b": [2, 12],
+            "c": [2, 9]
+          },
+          "constraint": "a > b * c",
+          "prompt": "{a} − {b} × {c} = …",
+          "answer": "a - b * c",
+          "distractors": [
+            {
+              "expr": "(a - b) * c",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a - b - c",
+              "tag": "kurang-semua"
+            },
+            {
+              "expr": "a - b * c + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kali lebih dulu daripada kurang. {b} × {c} = {=b*c}. Lalu {a} − {=b*c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 99],
+            "m": [2, 9],
+            "q": [2, 12]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{a} + {t} : {m} = …",
+          "answer": "a + q",
+          "distractors": [
+            {
+              "expr": "(a + t) / m",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a + t",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "a + q + m",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi lebih dulu daripada tambah. {t} : {m} = {q}. Lalu {a} + {q} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [50, 200],
+            "m": [2, 9],
+            "q": [2, 12]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "a > t",
+          "prompt": "{a} − {t} : {m} = …",
+          "answer": "a - q",
+          "distractors": [
+            {
+              "expr": "(a - t) / m",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a - t",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "a - q - m",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi lebih dulu daripada kurang. {t} : {m} = {q}. Lalu {a} − {q} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 200],
+            "b": [2, 12],
+            "c": [2, 12]
+          },
+          "prompt": "{b} × {c} + {a} = …",
+          "answer": "b * c + a",
+          "mode": "input",
+          "explain": "Kali dulu: {b} × {c} = {=b*c}. Lalu {=b*c} + {a} = {answer}."
+        }
+      }
+    ]
+  }
+}

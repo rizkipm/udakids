@@ -21,6 +21,8 @@ import {
   sumOf,
 } from './play.js';
 import type { GlyphId } from './glyphs.js';
+import { bingoReplay, guessReplay, linesCounts, magicReplay, stackValue } from './play-g4.js';
+import { chanceReplay, coordReplay } from './play-emc.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
 export type Relation = 'in-front' | 'behind' | 'inside' | 'outside' | 'above' | 'below' | 'beside';
@@ -144,6 +146,18 @@ export type Visual =
       show: 'holed' | 'piece';
       index: number;
     }
+  /**
+   * Gambar geometri olimpiade (EMC, D-101): bidang koordinat (`axes`) atau gambar bebas berkoordinat (y ke atas),
+   * berisi segi banyak (boleh diarsir), ruas garis berlabel, titik bernama, lingkaran, tanda siku-siku, dan teks.
+   */
+  | {
+      kind: 'figure';
+      axes?: { xMin: number; xMax: number; yMin: number; yMax: number };
+      /** Petak bantu tanpa sumbu (gambar bebas). */
+      grid?: boolean;
+      shapes: FigureShape[];
+      caption?: string;
+    }
   /** Benda diukur dengan kubus satuan (panjang/tinggi). */
   | {
       kind: 'measure';
@@ -152,6 +166,26 @@ export type Visual =
       direction: 'horizontal' | 'vertical';
       showCubes: boolean;
     };
+
+/** Satu bagian gambar `figure` (koordinat dalam satuan gambar, y ke atas). */
+export type FigurePoint = [number, number];
+export type FigureShape =
+  /** Segi banyak; `fill`: `shade` = arsiran abu-abu, `soft` = warna lembut. `open` = garis patah (tidak ditutup). */
+  | { t: 'poly'; pts: FigurePoint[]; fill?: 'shade' | 'soft'; open?: boolean; dashed?: boolean }
+  /** Ruas garis; `text` = label di tengah (mis. "5 cm"), `ticks` = tanda sama panjang (1–3). */
+  | { t: 'seg'; a: FigurePoint; b: FigurePoint; dashed?: boolean; text?: string; ticks?: number }
+  /** Titik; `name` = nama (A, B, …), `coord` = tulis koordinatnya. */
+  | {
+      t: 'point';
+      at: FigurePoint;
+      name?: string;
+      coord?: boolean;
+      pos?: 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
+    }
+  | { t: 'circle'; c: FigurePoint; r: number; fill?: 'shade' | 'soft'; center?: boolean }
+  /** Tanda siku-siku di titik `at`, di antara arah ke `a` dan `b`. */
+  | { t: 'right'; at: FigurePoint; a: FigurePoint; b: FigurePoint }
+  | { t: 'label'; at: FigurePoint; text: string };
 
 export type Choice = {
   id: string;
@@ -359,6 +393,98 @@ export type Interaction =
       pieces: string[];
       fixed: number[];
       maxSlips: number;
+    }
+  /**
+   * Tebak Angka Momo (D-096): anak memutar angka per nilai tempat lalu menebak; Momo memberi petunjuk lebih
+   * besar/lebih kecil (bilangan utuh) atau per nilai tempat. Nilai jawaban = daftar tebakan; tebakan yang
+   * mengabaikan petunjuk atau melebihi `maxGuesses` dihitung keliru.
+   */
+  | {
+      type: 'guess';
+      min: number;
+      max: number;
+      secret: number;
+      hint: 'number' | 'digit';
+      digits: number;
+      maxGuesses: number;
+    }
+  /**
+   * Diagram Ajaib (D-096): atur tinggi setiap batang sesuai tabel. Satu kotak = `scale`. Nilai jawaban =
+   * { id batang: nilai }; benar bila semua batang tepat.
+   */
+  | {
+      type: 'chart';
+      title: string;
+      unit: string;
+      scale: number;
+      steps: number;
+      bars: (Choice & { value: number; label: string })[];
+    }
+  /**
+   * Penyihir Hitung (D-096): rangkaian fakta hitung; ketuk jawaban tiap fakta. Ketukan `"<fakta>:<pilihan>"`.
+   * Setiap `starEvery` jawaban tepat, satu bintang mantra menyala. Tanpa batas waktu.
+   */
+  | {
+      type: 'magic';
+      facts: { id: string; text: string; say: string; answer: string; choices: Choice[] }[];
+      starEvery: number;
+    }
+  /** Tumpuk Angka (D-096): pilih balok (masing-masing sekali) sampai jumlah/hasil kali = `target`. */
+  | {
+      type: 'stack';
+      op: '+' | '×';
+      target: number;
+      blocks: (Choice & { value: number })[];
+      maxBlocks: number;
+    }
+  /**
+   * Garis Perkalian (D-096): a × b digambar sebagai garis berpotongan; anak mengisi banyak titik potong
+   * ratusan, puluhan, satuan. Nilai jawaban = { ratusan, puluhan, satuan }.
+   */
+  | { type: 'lines'; a: number; b: number }
+  /**
+   * Bingo Rupiah (D-096): kartu 3×3 berisi nominal; Momo membacakan soal belanja satu per satu, anak mengetuk
+   * nominal yang pas. Jawaban semua panggilan membentuk satu garis bingo. Nilai jawaban = ketukan sel.
+   */
+  | {
+      type: 'bingo';
+      cells: (Choice & { value: number })[];
+      calls: { id: string; text: string; say: string; answer: string }[];
+    }
+  /**
+   * Harta Karun Koordinat (D-101): bidang koordinat xMin..xMax × yMin..yMax; setiap langkah meminta satu titik
+   * (koordinat, geser dari titik lain, atau sudut ke-4 persegi panjang). Ketukan `"x,y"`, berurutan.
+   */
+  | {
+      type: 'coord';
+      xMin: number;
+      xMax: number;
+      yMin: number;
+      yMax: number;
+      /** Setiap langkah: titik target + titik bantu yang tampil selama langkah itu (mis. titik awal). */
+      steps: {
+        id: string;
+        text: string;
+        say: string;
+        x: number;
+        y: number;
+        name: string;
+        marks: { x: number; y: number; name: string }[];
+      }[];
+    }
+  /**
+   * Eksperimen Peluang (D-101): semua hasil percobaan (ruang sampel) tampil sebagai kartu; anak mengetuk semua
+   * hasil yang memenuhi kejadian, lalu memilih peluangnya (`"p:<id pecahan>"`).
+   */
+  | {
+      type: 'chance';
+      space: 'die' | 'dice2' | 'coins2' | 'coins3' | 'coins4' | 'bag';
+      event: string;
+      eventSay: string;
+      outcomes: Choice[];
+      answer: string[];
+      fractions: Choice[];
+      fraction: string;
     };
 
 export type InteractionType = Interaction['type'];
@@ -405,6 +531,11 @@ export const TAP_GAMES: ReadonlySet<InteractionType> = new Set([
   'crossword',
   'jigsaw',
   'connect',
+  'guess',
+  'magic',
+  'bingo',
+  'coord',
+  'chance',
 ]);
 
 /**
@@ -417,7 +548,10 @@ export function isRetryGame(it: Interaction): boolean {
     (it.type === 'build' && it.style === 'feed') ||
     (it.type === 'spell' && it.style === 'train') ||
     (it.type === 'order' && it.style !== undefined) ||
-    (it.type === 'match' && it.style === 'labels')
+    (it.type === 'match' && it.style === 'labels') ||
+    it.type === 'chart' ||
+    it.type === 'stack' ||
+    it.type === 'lines'
   );
 }
 
@@ -475,6 +609,26 @@ export function gameMistakes(
         else wrong++;
       }
       return { mistakes: wrong, done: k === it.answer.length };
+    }
+    case 'guess': {
+      const r = guessReplay(it, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'magic': {
+      const r = magicReplay(it.facts, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'bingo': {
+      const r = bingoReplay(it.calls, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'coord': {
+      const r = coordReplay(it.steps, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'chance': {
+      const r = chanceReplay(it.answer, it.fraction, taps);
+      return { mistakes: r.slips, done: r.done };
     }
     default:
       return undefined;
@@ -599,6 +753,39 @@ function checkBasic(item: Pick<Item, 'interaction'>, value: AnswerValue): Answer
       const r = jigsawReplay(it, value);
       return { correct: r.done && r.slips <= it.maxSlips };
     }
+    case 'guess':
+    case 'magic':
+    case 'bingo':
+    case 'coord':
+    case 'chance': {
+      const g = Array.isArray(value) ? gameMistakes(it, value) : undefined;
+      return { correct: !!g && g.done && g.mistakes < MAX_MISTAKES };
+    }
+    case 'chart': {
+      if (typeof value !== 'object' || Array.isArray(value)) return { correct: false };
+      return {
+        correct:
+          Object.keys(value).length === it.bars.length &&
+          it.bars.every((b) => Number(value[b.id]) === b.value),
+      };
+    }
+    case 'stack':
+      return {
+        correct:
+          Array.isArray(value) &&
+          value.length <= it.maxBlocks &&
+          stackValue(it.op, it.blocks, value) === it.target,
+      };
+    case 'lines': {
+      if (typeof value !== 'object' || Array.isArray(value)) return { correct: false };
+      const c = linesCounts(it.a, it.b);
+      return {
+        correct:
+          Number(value.ratusan) === c.ratusan &&
+          Number(value.puluhan) === c.puluhan &&
+          Number(value.satuan) === c.satuan,
+      };
+    }
   }
 }
 
@@ -639,11 +826,21 @@ export function allVisuals(item: ItemCore): Visual[] {
                 ? [...it.tokens, { id: 'show', visual: it.show }]
                 : it.type === 'sort'
                   ? [...it.bins, ...it.items]
-                  : it.type === 'jigsaw'
-                    ? [{ id: 'picture', visual: it.picture }]
-                    : 'choices' in it
-                      ? it.choices
-                      : [];
+                  : it.type === 'chart'
+                    ? it.bars
+                    : it.type === 'magic'
+                      ? it.facts.flatMap((f) => f.choices)
+                      : it.type === 'stack'
+                        ? it.blocks
+                        : it.type === 'bingo'
+                          ? it.cells
+                          : it.type === 'chance'
+                            ? [...it.outcomes, ...it.fractions]
+                            : it.type === 'jigsaw'
+                              ? [{ id: 'picture', visual: it.picture }]
+                              : 'choices' in it
+                                ? it.choices
+                                : [];
   choices.forEach((c) => push(c.visual));
   if (it.type === 'maze') it.marks.forEach((m) => m.visual && push(m.visual));
   if (it.type === 'maze' && it.goalVisual) push(it.goalVisual);

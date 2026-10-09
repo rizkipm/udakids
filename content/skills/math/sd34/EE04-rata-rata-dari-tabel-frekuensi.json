@@ -1,0 +1,73 @@
+{
+  "id": "math.sd34.ee4.rata-rata-dari-tabel-frekuensi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 4,
+  "title": "Statistika — Level 4 — Rata-rata dari tabel frekuensi",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika",
+    "indikator": "Menghitung rata-rata dari tabel frekuensi",
+    "emc-no": "10"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t1": [20, 34],
+      "t2": [35, 44],
+      "t3": [45, 54],
+      "t4": [55, 70],
+      "f1": [1, 9],
+      "f2": [1, 9],
+      "f3": [1, 9],
+      "f4": [1, 9]
+    },
+    "derived": {
+      "n": "f1 + f2 + f3 + f4",
+      "s10": "t1 * f1 + t2 * f2 + t3 * f3 + t4 * f4"
+    },
+    "words": {
+      "nama": ["Ani", "Sri", "Tuti", "Wati", "Rina"]
+    },
+    "constraint": "(s10 * 10) % n == 0 && n >= 10",
+    "prompt": "Tabel menunjukkan berat semangka di kios Bu {nama}. Rata-rata berat semangka itu adalah … kg.",
+    "stimulus": [
+      {
+        "kind": "table",
+        "headers": ["Berat (kg)", "Banyak semangka"],
+        "rows": [
+          ["{=t1/10}", "{f1}"],
+          ["{=t2/10}", "{f2}"],
+          ["{=t3/10}", "{f3}"],
+          ["{=t4/10}", "{f4}"]
+        ],
+        "caption": "Semangka di kios Bu {nama}"
+      }
+    ],
+    "format": "decimal",
+    "answer": "s10 / (10 * n)",
+    "unit": "kg",
+    "distractors": [
+      {
+        "expr": "(t1 + t2 + t3 + t4) / 40",
+        "tag": "tanpa-frekuensi"
+      },
+      {
+        "expr": "s10 / (10 * n) + 0.2",
+        "tag": "lain"
+      },
+      {
+        "expr": "s10 / (10 * n) - 0.3",
+        "tag": "lain-2"
+      }
+    ],
+    "choices": 4,
+    "explain": "Kalikan setiap berat dengan banyaknya, lalu jumlahkan: {=s10/10} kg. Banyak semangka = {n}. Rata-rata = {=s10/10} : {n} = {answer}."
+  }
+}

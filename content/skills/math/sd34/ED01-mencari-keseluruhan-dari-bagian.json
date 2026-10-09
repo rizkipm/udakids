@@ -1,0 +1,118 @@
+{
+  "id": "math.sd34.ed1.mencari-keseluruhan-dari-bagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 1,
+  "title": "Rasio & persen — Level 1 — Mencari keseluruhan dari bagian",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menentukan total dari bagian pecahan yang diketahui",
+    "emc-no": "7"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [3, 8],
+            "a": [1, 7],
+            "k": [2, 20]
+          },
+          "derived": {
+            "total": "b * k",
+            "sisa": "(b - a) * k"
+          },
+          "constraint": "a < b && gcd(a, b) == 1",
+          "prompt": "Sebanyak {a}/{b} peserta lomba balap karung belum sampai di garis finis. Peserta yang sudah sampai ada {sisa} anak. Banyak seluruh peserta adalah … anak.",
+          "say": "Sebanyak {a} per {b} peserta lomba balap karung belum sampai di garis finis. Peserta yang sudah sampai ada {sisa} anak. Berapa banyak seluruh peserta?",
+          "answer": "total",
+          "distractors": [
+            {
+              "expr": "sisa * b",
+              "tag": "pakai-penyebut"
+            },
+            {
+              "expr": "a * k",
+              "tag": "bagian-lain"
+            },
+            {
+              "expr": "sisa + a",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Yang sudah sampai = 1 − {a}/{b} = {=b-a}/{b} bagian = {sisa} anak. Satu bagian = {sisa} : {=b-a} = {k} anak. Seluruh peserta = {b} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [3, 8],
+            "a": [1, 7],
+            "k": [2, 20]
+          },
+          "derived": {
+            "total": "b * k",
+            "sisa": "(b - a) * k"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "a < b && gcd(a, b) == 1",
+          "prompt": "{nama} memakai {a}/{b} uang sakunya untuk membeli buku. Sisa uangnya Rp{=sisa*1000}. Uang saku {nama} mula-mula adalah Rp…",
+          "say": "{nama} memakai {a} per {b} uang sakunya untuk membeli buku. Sisa uangnya {=sisa*1000} rupiah. Berapa uang saku mula-mula?",
+          "answer": "total * 1000",
+          "distractors": [
+            {
+              "expr": "sisa * b * 1000",
+              "tag": "pakai-penyebut"
+            },
+            {
+              "expr": "a * k * 1000",
+              "tag": "bagian-dipakai"
+            },
+            {
+              "expr": "(sisa + a) * 1000",
+              "tag": "ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sisa = {=b-a}/{b} bagian = Rp{=sisa*1000}. Satu bagian = Rp{=k*1000}. Uang mula-mula = {b} × {=k*1000} = Rp{answer}."
+        }
+      }
+    ]
+  }
+}

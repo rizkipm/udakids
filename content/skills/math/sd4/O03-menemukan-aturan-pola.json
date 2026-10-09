@@ -1,0 +1,106 @@
+{
+  "id": "math.sd4.o3.menemukan-aturan-pola",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 3,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 3 — Menemukan aturan pola",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 9000],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "prompt": "Pola: {a}, {=a+k}, {=a+2*k}, {=a+3*k}. Aturannya tambah …",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "2 * k",
+              "tag": "dua-loncatan"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "3 * k",
+              "tag": "tiga-loncatan"
+            }
+          ],
+          "explain": "Hitung selisih dua bilangan berdampingan: {=a+k} − {a} = {k}. Periksa: {=a+2*k} − {=a+k} = {k}. Aturannya tambah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "constraint": "a - 3 * k > 0",
+          "prompt": "Pola: {a}, {=a-k}, {=a-2*k}, {=a-3*k}. Aturannya kurang …",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "2 * k",
+              "tag": "dua-loncatan"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "3 * k",
+              "tag": "tiga-loncatan"
+            }
+          ],
+          "explain": "Hitung selisihnya: {a} − {=a-k} = {k}. Periksa pada pasangan lain juga {k}. Aturannya kurang {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "r": {
+              "values": [2, 3, 4, 5, 10]
+            }
+          },
+          "constraint": "a * r * r * r <= 99999",
+          "prompt": "Pola: {a}, {=a*r}, {=a*r*r}, {=a*r*r*r}. Aturannya kali …",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "a * r - a",
+              "tag": "selisih"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r * 2",
+              "tag": "dua-kali"
+            }
+          ],
+          "explain": "Selisihnya tidak sama, jadi coba perkalian. {a} × {r} = {=a*r}, {=a*r} × {r} = {=a*r*r}. Aturannya kali {answer}."
+        }
+      }
+    ]
+  }
+}

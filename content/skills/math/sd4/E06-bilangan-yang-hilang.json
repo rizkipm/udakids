@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.e6.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 6,
+  "title": "Penjumlahan bilangan besar — Level 6 — Bilangan yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 49999],
+            "b": [1000, 49999]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "… + {b} = {c}",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "c + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Bilangan yang hilang = hasil − bilangan yang diketahui. {c} − {b} = {answer}. Cek: {answer} + {b} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 49999],
+            "b": [1000, 49999]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "{a} + … = {c}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "c + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b - 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Cari bilangan yang ditambahkan: {c} − {a} = {answer}. Cek: {a} + {answer} = {c}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "b": [1000, 9999]
+          },
+          "derived": {
+            "c": "a + b"
+          },
+          "prompt": "{a} + … = {c}",
+          "answer": "b",
+          "mode": "input",
+          "explain": "Hitung {c} − {a} = {answer}. Cek dengan menjumlah: {a} + {answer} = {c}."
+        }
+      }
+    ]
+  }
+}

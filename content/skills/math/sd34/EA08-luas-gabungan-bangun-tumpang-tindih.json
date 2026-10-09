@@ -1,0 +1,170 @@
+{
+  "id": "math.sd34.ea8.luas-gabungan-bangun-tumpang-tindih",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 8,
+  "title": "Geometri bidang & ruang — Level 8 — Luas gabungan bangun yang tumpang tindih",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menghitung luas gabungan dua bangun yang tumpang tindih",
+    "emc-no": "25"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7]
+          },
+          "derived": {
+            "s": "2 * h",
+            "lp": "s * s"
+          },
+          "prompt": "Dua persegi sama besar, luas masing-masing {lp} cm². Satu titik sudut persegi kedua tepat di titik pusat O persegi pertama dan sisi-sisinya sejajar (lihat gambar). Luas seluruh daerah arsir adalah … cm².",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    ["=s", 0],
+                    ["=s", "=s"],
+                    [0, "=s"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "poly",
+                  "pts": [
+                    ["=h", "=h"],
+                    ["=h+s", "=h"],
+                    ["=h+s", "=h+s"],
+                    ["=h", "=h+s"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "point",
+                  "at": ["=h", "=h"],
+                  "name": "O",
+                  "pos": "sw"
+                }
+              ]
+            }
+          ],
+          "answer": "2 * lp - lp / 4",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * lp",
+              "tag": "lupa-irisan"
+            },
+            {
+              "expr": "2 * lp - lp / 2",
+              "tag": "irisan-setengah"
+            },
+            {
+              "expr": "lp + lp / 4",
+              "tag": "salah-tanda"
+            }
+          ],
+          "choices": 4,
+          "explain": "Bagian yang tumpang tindih adalah persegi kecil bersisi setengah sisi persegi, luasnya {lp} : 4 = {=lp/4}. Luas gabungan = {lp} + {lp} − {=lp/4} = {answer} cm²."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7]
+          },
+          "derived": {
+            "s": "2 * h",
+            "lp": "s * s",
+            "lt": "lp / 2"
+          },
+          "prompt": "Pada gambar, persegi dan segitiga siku-siku sama kaki OPQ tumpang tindih. Titik siku-siku O adalah pusat persegi, dan OP = OQ = sisi persegi. Luas segitiga OPQ {lt} cm². Luas seluruh daerah arsir adalah … cm².",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    ["=s", 0],
+                    ["=s", "=s"],
+                    [0, "=s"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "poly",
+                  "pts": [
+                    ["=h", "=h"],
+                    ["=3*h", "=h"],
+                    ["=h", "=3*h"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "right",
+                  "at": ["=h", "=h"],
+                  "a": ["=3*h", "=h"],
+                  "b": ["=h", "=3*h"]
+                },
+                {
+                  "t": "point",
+                  "at": ["=h", "=h"],
+                  "name": "O",
+                  "pos": "sw"
+                },
+                {
+                  "t": "point",
+                  "at": ["=3*h", "=h"],
+                  "name": "P",
+                  "pos": "e"
+                },
+                {
+                  "t": "point",
+                  "at": ["=h", "=3*h"],
+                  "name": "Q",
+                  "pos": "n"
+                }
+              ]
+            }
+          ],
+          "answer": "lp + lt - lp / 4",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "lp + lt",
+              "tag": "lupa-irisan"
+            },
+            {
+              "expr": "lp + lt - lp / 2",
+              "tag": "irisan-setengah"
+            },
+            {
+              "expr": "lp",
+              "tag": "hanya-persegi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Luas segitiga = sisi × sisi : 2, jadi luas persegi = 2 × {lt} = {lp} cm². Bagian yang tumpang tindih = seperempat persegi = {=lp/4}. Luas gabungan = {lp} + {lt} − {=lp/4} = {answer} cm²."
+        }
+      }
+    ]
+  }
+}

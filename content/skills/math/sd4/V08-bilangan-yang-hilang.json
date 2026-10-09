@@ -1,0 +1,116 @@
+{
+  "id": "math.sd4.v8.bilangan-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 8,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 8 — Bilangan yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 5],
+            "a": [1, 9],
+            "b": [11, 89]
+          },
+          "prompt": "{x} + … = {z}",
+          "answer": "y",
+          "explain": "Bilangan yang hilang = {z} − {x} = {answer}. Periksa: {x} + {answer} = {z}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "b / 100",
+            "z": "u + a / 10 + b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "distractors": [
+            {
+              "expr": "z + x",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "y + 0.1",
+              "tag": "lain"
+            },
+            {
+              "expr": "b / 10",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 5],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "… − {y} = {z}",
+          "answer": "z + y",
+          "explain": "Bilangan awal = hasil + yang dikurangi: {z} + {y} = {answer}. Periksa: {answer} − {y} = {z}.",
+          "derived": {
+            "y": "b / 10",
+            "z": "u + a / 10"
+          },
+          "distractors": [
+            {
+              "expr": "abs(z - y)",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "z + y + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "u + (a + b) / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89]
+          },
+          "prompt": "{x} + … = 1",
+          "answer": "1 - x",
+          "explain": "1 = 100 perseratus. {x} = {a} perseratus. Kurangnya 100 − {a} = {=100-a} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 100"
+          },
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "(10 - floor(a / 10)) / 10 + (10 - a % 10) / 100",
+              "tag": "pelengkap-tiap-angka"
+            },
+            {
+              "expr": "(100 - a) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "1 + x",
+              "tag": "menjumlah"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

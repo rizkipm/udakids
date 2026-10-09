@@ -1,6 +1,6 @@
 ---
 name: milestone
-description: Kerjakan satu milestone Little Coder (M0–M7) dari docs/plan.md — rencanakan, implementasi, jalankan semua cek, lalu laporkan kriteria penerimaan. Pakai saat user bilang "lanjut ke M<n>", "kerjakan M<n>", atau /milestone M<n>.
+description: Kerjakan satu milestone UdaKids (M0–M7) dari docs/plan.md — rencanakan, implementasi, jalankan semua cek, lalu laporkan kriteria penerimaan. Pakai saat user bilang "lanjut ke M<n>", "kerjakan M<n>", atau /milestone M<n>.
 ---
 
 # Menjalankan satu milestone

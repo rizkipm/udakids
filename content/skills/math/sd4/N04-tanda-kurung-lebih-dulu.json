@@ -1,0 +1,149 @@
+{
+  "id": "math.sd4.n4.tanda-kurung-lebih-dulu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 4,
+  "title": "Operasi hitung campuran — Level 4 — Tanda kurung lebih dulu",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 40],
+            "b": [5, 40],
+            "c": [2, 9]
+          },
+          "prompt": "({a} + {b}) × {c} = …",
+          "answer": "(a + b) * c",
+          "distractors": [
+            {
+              "expr": "a + b * c",
+              "tag": "lupa-kurung"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "(a + b) * c + c",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kerjakan isi kurung dulu: {a} + {b} = {=a+b}. Lalu {=a+b} × {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [10, 50],
+            "c": [2, 9]
+          },
+          "constraint": "a * b > c",
+          "prompt": "{a} × ({b} − {c}) = …",
+          "answer": "a * (b - c)",
+          "distractors": [
+            {
+              "expr": "a * b - c",
+              "tag": "lupa-kurung"
+            },
+            {
+              "expr": "a * b",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "a * (b - c) + a",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kerjakan isi kurung dulu: {b} − {c} = {=b-c}. Lalu {a} × {=b-c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [2, 15],
+            "b": [5, 60]
+          },
+          "derived": {
+            "a": "m * q + b"
+          },
+          "prompt": "({a} − {b}) : {m} = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "a - b / m",
+              "tag": "lupa-kurung"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a - b",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Kerjakan isi kurung dulu: {a} − {b} = {=a-b}. Lalu {=a-b} : {m} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 5],
+            "k": [2, 5],
+            "q": [2, 12]
+          },
+          "derived": {
+            "t": "(m + k) * q"
+          },
+          "prompt": "{t} : ({m} + {k}) = …",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "t / m + k",
+              "tag": "lupa-kurung"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Kerjakan isi kurung dulu: {m} + {k} = {=m+k}. Lalu {t} : {=m+k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 500],
+            "b": [50, 99],
+            "c": [10, 49]
+          },
+          "prompt": "{a} − ({b} − {c}) = …",
+          "answer": "a - (b - c)",
+          "mode": "input",
+          "explain": "Kerjakan isi kurung dulu: {b} − {c} = {=b-c}. Lalu {a} − {=b-c} = {answer}."
+        }
+      }
+    ]
+  }
+}

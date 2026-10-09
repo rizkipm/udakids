@@ -1,0 +1,117 @@
+{
+  "id": "math.sd34.ea3.persegi-panjang-dari-kawat-dan-perbandingan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 3,
+  "title": "Geometri bidang & ruang — Level 3 — Persegi panjang dari kawat dan perbandingan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menentukan luas dari keliling dan perbandingan sisi",
+    "emc-no": "18"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [1, 4],
+            "k": [1, 8]
+          },
+          "derived": {
+            "p": "a * k",
+            "l": "b * k",
+            "kel": "2 * (p + l)"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "b < a && gcd(a, b) == 1 && !(a == 3 && b == 2 && k == 4)",
+          "prompt": "{nama} menekuk seutas pita {kel} cm sampai membentuk bingkai persegi panjang. Panjang bingkai banding lebarnya {a} : {b}. Berapa cm² luas daerah di dalam bingkai?",
+          "answer": "p * l",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "kel",
+              "tag": "keliling"
+            },
+            {
+              "expr": "a * b * k",
+              "tag": "lupa-kali-k"
+            },
+            {
+              "expr": "p * l * 2",
+              "tag": "dikali-dua"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang + lebar = {kel} : 2 = {=p+l} cm, dibagi {=a+b} bagian, satu bagian = {k} cm. Panjang = {p} cm, lebar = {l} cm. Luas = {p} × {l} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "l": [2, 12]
+          },
+          "derived": {
+            "p": "a * l",
+            "kel": "2 * (p + l)"
+          },
+          "prompt": "Keliling sebuah taman persegi panjang {kel} m. Panjangnya {a} kali lebarnya. Luas taman itu adalah … m².",
+          "answer": "p * l",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "kel",
+              "tag": "keliling"
+            },
+            {
+              "expr": "(p + l) * l",
+              "tag": "salah-panjang"
+            },
+            {
+              "expr": "p * p",
+              "tag": "persegi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang + lebar = {=p+l} m = {=a+1} bagian, satu bagian = {l} m. Panjang = {p} m. Luas = {p} × {l} = {answer}."
+        }
+      }
+    ]
+  }
+}

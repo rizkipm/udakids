@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.a4.bentuk-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 4,
+  "title": "Nilai tempat sampai 100.000 — Level 4 — Bentuk panjang",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9],
+            "e": [1, 9],
+            "f": [1, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + c * 100 + e * 10 + f"
+          },
+          "prompt": "{n} = {=a*10000} + … + {=c*100} + {=e*10} + {f}",
+          "answer": "b * 1000",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "b * 100",
+              "tag": "tempat-kanan"
+            },
+            {
+              "expr": "b * 10000",
+              "tag": "tempat-kiri"
+            }
+          ],
+          "explain": "Bentuk panjang menulis nilai setiap angka. Yang belum ada adalah angka ribuan {b}, nilainya {b} × 1.000 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "c": [1, 9],
+            "f": [1, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + c * 100 + f"
+          },
+          "prompt": "{n} = {=a*10000} + {=b*1000} + … + {f}",
+          "answer": "c * 100",
+          "distractors": [
+            {
+              "expr": "c * 10",
+              "tag": "tempat-kanan"
+            },
+            {
+              "expr": "c",
+              "tag": "angka-saja"
+            },
+            {
+              "expr": "c * 1000",
+              "tag": "tempat-kiri"
+            }
+          ],
+          "explain": "Angka puluhan pada {n} adalah 0, jadi tidak ditulis. Yang kurang adalah ratusan: {c} × 100 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9],
+            "e": [1, 9],
+            "f": [1, 9]
+          },
+          "prompt": "{=a*10000} + {=b*1000} + {=e*10} + {f} = …",
+          "answer": "a * 10000 + b * 1000 + e * 10 + f",
+          "distractors": [
+            {
+              "expr": "a * 1000 + b * 100 + e * 10 + f",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * 10000 + b * 1000 + e * 100 + f * 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "a * 10000 + b * 100 + e * 10 + f",
+              "tag": "ribuan-bergeser"
+            }
+          ],
+          "explain": "Tidak ada ratusan, jadi tulis 0 di tempat ratusan sebagai penanda: {a} puluh ribuan, {b} ribuan, 0 ratusan, {e} puluhan, {f} satuan = {answer}."
+        }
+      }
+    ]
+  }
+}

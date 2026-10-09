@@ -1,0 +1,99 @@
+{
+  "id": "math.sd4.j7.soal-cerita-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 7,
+  "title": "Perkalian dengan bilangan satu angka — Level 7 — Soal cerita perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [1500, 9500],
+              "step": 500
+            },
+            "k": [2, 9]
+          },
+          "words": {
+            "barang": [
+              "buku cerita",
+              "kotak pensil",
+              "botol minum",
+              "tas kain",
+              "mainan robot",
+              "payung"
+            ]
+          },
+          "prompt": "Harga satu {barang} Rp{h}. Bu Sari membeli {k} buah. Berapa rupiah yang harus dibayar?",
+          "answer": "h * k",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * (k - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "h + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "h * k + 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Beli {k} barang yang harganya sama berarti perkalian: {k} × {h}. Pecah {h} per nilai tempat, kalikan dengan {k}, lalu jumlahkan. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [105, 480],
+            "k": [3, 9]
+          },
+          "prompt": "Satu truk mengangkut {n} karung beras. Ada {k} truk yang sama. Berapa karung semuanya?",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n * (k + 1)",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(n / 100) * 100 * k + n % 100",
+              "tag": "lupa-kali"
+            }
+          ],
+          "explain": "{k} truk masing-masing {n} karung: {n} × {k}. Pecah: {=floor(n/100)*100} × {k} = {=floor(n/100)*100*k} dan {=n%100} × {k} = {=(n%100)*k}. Jumlahnya {answer} karung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [120, 350],
+            "k": [4, 9]
+          },
+          "prompt": "Sebuah buku cerita tebalnya {n} halaman. Perpustakaan punya {k} buku yang sama. Berapa halaman semuanya?",
+          "answer": "n * k",
+          "mode": "input",
+          "explain": "Kalikan {n} × {k}. Pecah {n} per nilai tempat: ratusan, puluhan, dan satuan masing-masing dikali {k}, lalu dijumlahkan. Hasilnya {answer} halaman."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "id": "math.sd4.n6.tiga-operasi-tanpa-kurung",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 6,
+  "title": "Operasi hitung campuran — Level 6 — Tiga operasi tanpa kurung",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 200],
+            "b": [2, 12],
+            "c": [2, 12],
+            "d": [5, 50]
+          },
+          "constraint": "a > d",
+          "prompt": "{a} + {b} × {c} − {d} = …",
+          "answer": "a + b * c - d",
+          "distractors": [
+            {
+              "expr": "(a + b) * c - d",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a + b * c + d",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a + b * (c - d)",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kali dulu: {b} × {c} = {=b*c}. Lalu dari kiri: {a} + {=b*c} = {=a+b*c}, dan {=a+b*c} − {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 200],
+            "m": [2, 9],
+            "q": [2, 12],
+            "d": [5, 50]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "a > t && a - q > d",
+          "prompt": "{a} − {t} : {m} + {d} = …",
+          "answer": "a - q + d",
+          "distractors": [
+            {
+              "expr": "(a - t) / m + d",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a - q - d",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "a - t + d",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Bagi dulu: {t} : {m} = {q}. Lalu dari kiri: {a} − {q} = {=a-q}, dan {=a-q} + {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12],
+            "c": [2, 12],
+            "d": [2, 12]
+          },
+          "prompt": "{a} × {b} + {c} × {d} = …",
+          "answer": "a * b + c * d",
+          "distractors": [
+            {
+              "expr": "(a * b + c) * d",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "a * (b + c) * d",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * b + c + d",
+              "tag": "lupa-kali"
+            }
+          ],
+          "explain": "Kali dulu, dua-duanya: {a} × {b} = {=a*b} dan {c} × {d} = {=c*d}. Lalu {=a*b} + {=c*d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [2, 12],
+            "a": [2, 9],
+            "b": [2, 9]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} : {m} + {a} × {b} = …",
+          "answer": "q + a * b",
+          "distractors": [
+            {
+              "expr": "(q + a) * b",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "q + a + b",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "t + a * b",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Bagi dan kali dulu: {t} : {m} = {q} dan {a} × {b} = {=a*b}. Lalu {q} + {=a*b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 300],
+            "b": [2, 12],
+            "c": [2, 9],
+            "d": [5, 60]
+          },
+          "constraint": "a > b * c",
+          "prompt": "{a} − {b} × {c} + {d} = …",
+          "answer": "a - b * c + d",
+          "mode": "input",
+          "explain": "Kali dulu: {b} × {c} = {=b*c}. Lalu dari kiri: {a} − {=b*c} = {=a-b*c}, dan {=a-b*c} + {d} = {answer}."
+        }
+      }
+    ]
+  }
+}

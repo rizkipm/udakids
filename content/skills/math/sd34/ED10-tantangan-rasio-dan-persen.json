@@ -1,0 +1,207 @@
+{
+  "id": "math.sd34.ed10.tantangan-rasio-dan-persen",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 10,
+  "title": "Rasio & persen — Level 10 — Tantangan rasio dan persen",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Gabungan semua indikator rasio, persen, & aritmetika sosial"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [10, 20, 25, 30, 40]
+            },
+            "x": [2, 40]
+          },
+          "derived": {
+            "harga": "x * 1000",
+            "sel": "harga * (100 - 2 * d) / 100"
+          },
+          "words": {
+            "toko": ["Makmur", "Sentosa", "Ceria", "Pelangi"],
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"],
+            "barang": ["buku cerita", "kotak pensil", "botol minum", "topi"]
+          },
+          "constraint": "(harga * (100 - 2 * d)) % 100 == 0",
+          "prompt": "Toko {toko} memberi diskon {d}% untuk pembelian 2 barang atau lebih. {n1} membeli 1 {barang}, sedangkan {n2} membeli 2 {barang} yang sama. {n2} membayar Rp{sel} lebih banyak daripada {n1}. Harga normal 1 {barang} adalah Rp…",
+          "answer": "harga",
+          "distractors": [
+            {
+              "expr": "sel",
+              "tag": "selisih"
+            },
+            {
+              "expr": "2 * sel",
+              "tag": "dikali-dua"
+            },
+            {
+              "expr": "harga * (100 - d) / 100",
+              "tag": "harga-diskon"
+            }
+          ],
+          "choices": 4,
+          "explain": "{n2} membayar 2 × {=100-d}% = {=2*(100-d)}% harga. {n1} membayar 100%. Selisihnya {=100-2*d}% harga = Rp{sel}. Jadi harga normal = {sel} × 100 : {=100-2*d} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [5, 10, 15, 20, 25]
+            },
+            "a": [5, 40]
+          },
+          "derived": {
+            "awal": "a * 100000",
+            "naik": "awal * p / 100"
+          },
+          "prompt": "Harga sebuah sepeda naik {p}%. Kenaikannya Rp{naik}. Harga sepeda setelah naik adalah Rp…",
+          "answer": "awal + naik",
+          "distractors": [
+            {
+              "expr": "awal",
+              "tag": "harga-lama"
+            },
+            {
+              "expr": "awal - naik",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "naik * 100 / p * 2",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p}% = Rp{naik}, jadi harga lama = {naik} × 100 : {p} = Rp{awal}. Harga baru = {awal} + {naik} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [5, 40],
+            "d1": {
+              "values": [10, 20, 25, 50]
+            },
+            "d2": {
+              "values": [10, 20, 50]
+            }
+          },
+          "derived": {
+            "h": "x * 10000"
+          },
+          "prompt": "Harga sebuah tas Rp{h}. Tas itu didiskon {d1}%, lalu harga setelah diskon didiskon lagi {d2}%. Harga akhir tas adalah Rp…",
+          "answer": "h * (100 - d1) * (100 - d2) / 10000",
+          "distractors": [
+            {
+              "expr": "h * (100 - d1 - d2) / 100",
+              "tag": "diskon-dijumlah"
+            },
+            {
+              "expr": "h * (100 - d1) / 100",
+              "tag": "satu-diskon"
+            },
+            {
+              "expr": "h * d1 * d2 / 10000",
+              "tag": "besar-diskon"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setelah diskon pertama: {h} × {=100-d1}% = Rp{=h*(100-d1)/100}. Setelah diskon kedua: × {=100-d2}% = Rp{answer}. Diskon bertingkat tidak boleh dijumlahkan langsung."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 6],
+            "v": [1, 6],
+            "w": [1, 6],
+            "f": [1, 3]
+          },
+          "derived": {
+            "a": "v / gcd(u, v)",
+            "b": "u / gcd(u, v)",
+            "c": "w / gcd(v, w)",
+            "d": "v / gcd(v, w)",
+            "e": "f * u / gcd(u, w)"
+          },
+          "words": {
+            "x1": ["anggur", "apel", "jeruk"],
+            "y1": ["mangga", "salak", "pir"],
+            "z1": ["manggis", "kelengkeng", "stroberi"]
+          },
+          "constraint": "u != v && v != w && u != w && e * w / u <= 60",
+          "prompt": "Di toko buah, uang untuk membeli {a} kg {x1} pas untuk membeli {b} kg {y1}, dan uang untuk {c} kg {y1} pas untuk {d} kg {z1}. Uang untuk {e} kg {z1} pas untuk membeli berapa kg {x1}?",
+          "answer": "e * w / u",
+          "explain": "Misalkan 1 kg {x1} = {u} bagian, maka 1 kg {y1} = {v} bagian (karena {a} × {u} = {b} × {v}) dan 1 kg {z1} = {w} bagian (karena {c} × {v} = {d} × {w}). {e} kg {z1} = {=e*w} bagian = {=e*w} : {u} = {answer} kg {x1}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "e * u / w",
+              "tag": "terbalik"
+            },
+            {
+              "expr": "e * w",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "e * w / u + 1",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 3],
+            "k": [1, 9],
+            "p": {
+              "values": [25]
+            }
+          },
+          "derived": {
+            "s": "k * pow(4, n) * 1000"
+          },
+          "constraint": "s <= 2000000",
+          "prompt": "Uang kas kelas mula-mula Rp{s}. Setiap akhir bulan, uang kas bertambah {p}% dari jumlah pada awal bulan itu. Setelah {n} bulan, uang kas menjadi Rp… (tulis angkanya saja, tanpa titik)",
+          "answer": "s * pow(100 + p, n) / pow(100, n)",
+          "explain": "Hitung bulan demi bulan, setiap kali dikali (100 + {p})/100. Naik 25% sama dengan dikali 5/4. Hasilnya Rp{answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "s * (100 + p * n) / 100",
+              "tag": "persen-dijumlah"
+            },
+            {
+              "expr": "s * (100 + p) / 100",
+              "tag": "sekali-naik"
+            },
+            {
+              "expr": "s * p * n / 100",
+              "tag": "kenaikan-saja"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

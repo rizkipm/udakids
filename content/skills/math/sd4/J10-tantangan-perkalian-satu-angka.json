@@ -1,0 +1,325 @@
+{
+  "id": "math.sd4.j10.tantangan-perkalian-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 10,
+  "title": "Perkalian dengan bilangan satu angka — Level 10 — Tantangan perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 9],
+            "d": [2, 9],
+            "z": {
+              "values": [10, 100, 1000]
+            }
+          },
+          "prompt": "{k} × {=d*z} = …",
+          "answer": "k * d * z",
+          "distractors": [
+            {
+              "expr": "k * d * z * 10",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "k * d * z / 10",
+              "tag": "nol-kurang"
+            },
+            {
+              "expr": "(k + d) * z",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Kalikan angka depannya dulu: {k} × {d} = {=k*d}. Lalu tambahkan nol sebanyak nol pada {=d*z}. Jadi {k} × {=d*z} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [1, 9],
+            "s": [1, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "t * 10 + s"
+          },
+          "prompt": "{n} × {k} = {=t*10} × {k} + {s} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "t * 10 * k + s",
+              "tag": "lupa-kali-satuan"
+            },
+            {
+              "expr": "t * 10 + s * k",
+              "tag": "lupa-kali-puluhan"
+            },
+            {
+              "expr": "t * k + s * k",
+              "tag": "lupa-nilai-tempat"
+            }
+          ],
+          "explain": "Pecah {n} menjadi {=t*10} + {s}. {=t*10} × {k} = {=t*10*k} dan {s} × {k} = {=s*k}. Jumlahkan: {=t*10*k} + {=s*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 9],
+            "t": [0, 9],
+            "s": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "n": "h * 100 + t * 10 + s"
+          },
+          "constraint": "s * k >= 10 && n * k < 10000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "h * k * 100 + (t * k % 10) * 10 + s * k % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "n * k + 10",
+              "tag": "simpan-dua-kali"
+            },
+            {
+              "expr": "n * (k - 1)",
+              "tag": "kurang-satu-kelompok"
+            }
+          ],
+          "explain": "Pecah per nilai tempat: {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan: {answer}. Pada cara bersusun, puluhan dari hasil kali disimpan ke tempat sebelah kiri."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [1, 9],
+            "t": [1, 9],
+            "s": [1, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "constraint": "n * k < 100000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "r * k * 1000 + (h * k % 10) * 100 + (t * k % 10) * 10 + s * k % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "n * k + 1000",
+              "tag": "ribuan-meleset"
+            },
+            {
+              "expr": "n * k - 100",
+              "tag": "ratusan-meleset"
+            }
+          ],
+          "explain": "Pecah per nilai tempat: {=r*1000} × {k} = {=r*1000*k}, {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan semuanya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [110, 990],
+            "k": [2, 9]
+          },
+          "constraint": "n % 100 != 0 && n % 100 != 50",
+          "prompt": "Taksir {n} × {k} dengan membulatkan {n} ke ratusan terdekat. Taksirannya …",
+          "answer": "round(n / 100) * 100 * k",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "(round(n / 100) * 100 + 100) * k",
+              "tag": "bulat-naik"
+            },
+            {
+              "expr": "(round(n / 100) * 100 - 100) * k",
+              "tag": "bulat-turun"
+            }
+          ],
+          "explain": "Bulatkan {n} ke ratusan terdekat: {=round(n/100)*100}. Lalu kalikan: {=round(n/100)*100} × {k} = {answer}. Hasil tepatnya {=n*k}, dekat dengan taksiran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "x": [0, 9],
+            "c": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "r": "(a * 100 + x * 10 + c) * k"
+          },
+          "prompt": "Angka berapa yang hilang? {a}□{c} × {k} = {r}",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "(x + 1) % 10",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(x + 9) % 10",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(x + 5) % 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi hasilnya dengan {k}: {r} : {k} = {=a*100+x*10+c}. Jadi angka puluhan yang hilang adalah {answer}. Cek: {=a*100+x*10+c} × {k} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [2500, 9500],
+              "step": 500
+            },
+            "k": [2, 9],
+            "pay": {
+              "values": [50000, 100000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "barang": [
+              "buku cerita",
+              "kotak pensil",
+              "botol minum",
+              "tas kain",
+              "mainan robot",
+              "payung"
+            ]
+          },
+          "constraint": "h * k < pay && (pay == 50000 || h * k > 50000)",
+          "prompt": "{nama} membeli {k} {barang} seharga Rp{h} per buah. Ia membayar dengan uang Rp{pay}. Berapa kembaliannya?",
+          "answer": "pay - h * k",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * k",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "pay - h",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "pay - h * k - 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Dua langkah. Pertama, harga semuanya: {k} × {h} = {=h*k}. Kedua, kembalian: {pay} - {=h*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [120, 999],
+            "k": [3, 8]
+          },
+          "derived": {
+            "r": "n * k"
+          },
+          "prompt": "{n} × {k} = {r}. Berapa {n} × {=k+1}?",
+          "answer": "r + n",
+          "distractors": [
+            {
+              "expr": "r + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "r + k",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "r + 2 * n",
+              "tag": "lebih-satu-kelompok"
+            }
+          ],
+          "explain": "{n} × {=k+1} berarti satu kelompok {n} lebih banyak. Tambahkan {n} ke {r}: {r} + {n} = {answer}. Tidak perlu menghitung dari awal."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [24, 125],
+            "k": [3, 9],
+            "m": [10, 99]
+          },
+          "constraint": "m < n * k",
+          "prompt": "Pak Budi menanam {k} baris pohon. Setiap baris ada {n} pohon. Ia sudah menyiram {m} pohon. Berapa pohon yang belum disiram?",
+          "answer": "n * k - m",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "n * k + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n - m",
+              "tag": "lupa-kali"
+            }
+          ],
+          "explain": "Dua langkah. Semua pohon: {n} × {k} = {=n*k}. Yang belum disiram: {=n*k} - {m} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "math.sd4.d7.menaksir-pengurangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 7,
+  "title": "Pembulatan dan penaksiran — Level 7 — Menaksir pengurangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5100, 9900],
+            "b": [1100, 4900]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 100 != 0 && b % 100 != 0",
+          "prompt": "Taksir hasil {a} − {b} dengan membulatkan setiap bilangan ke ribuan terdekat.",
+          "answer": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 1000) * 1000 - floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000 - ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            }
+          ],
+          "explain": "Bulatkan dulu: {a} → {=round(a/1000)*1000} dan {b} → {=round(b/1000)*1000}. Lalu kurangkan: {answer}. Hasil sebenarnya {=a-b}, dekat dengan taksiran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40100, 89900],
+            "b": [10100, 38900]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 100 != 0",
+          "prompt": "Taksir hasil {a} − {b} dengan membulatkan setiap bilangan ke ribuan terdekat.",
+          "answer": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 1000) * 1000 - floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 - round(b / 1000) * 1000 + 1000",
+              "tag": "meleset-seribu"
+            },
+            {
+              "expr": "round(a / 10000) * 10000 - round(b / 10000) * 10000",
+              "tag": "ke-puluh-ribuan"
+            }
+          ],
+          "explain": "Bulatkan: {a} → {=round(a/1000)*1000}, {b} → {=round(b/1000)*1000}. Kurangkan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3010, 9990],
+            "b": [110, 2990]
+          },
+          "constraint": "a % 100 != 50 && b % 100 != 50 && a % 10 != 0",
+          "prompt": "Taksir hasil {a} − {b} dengan membulatkan setiap bilangan ke ratusan terdekat.",
+          "answer": "round(a / 100) * 100 - round(b / 100) * 100",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 100) * 100 - floor(b / 100) * 100",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "round(a / 100) * 100 + round(b / 100) * 100",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+              "tag": "ke-ribuan"
+            }
+          ],
+          "explain": "Bulatkan: {a} → {=round(a/100)*100}, {b} → {=round(b/100)*100}. Kurangkan: {answer}."
+        }
+      }
+    ]
+  }
+}

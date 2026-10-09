@@ -1,0 +1,148 @@
+{
+  "id": "math.sd4.v6.mengurangi-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 6,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 6 — Mengurangi desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 9],
+            "a": [0, 9],
+            "v": [0, 5],
+            "b": [1, 9]
+          },
+          "prompt": "{x} − {y} = …",
+          "answer": "x - y",
+          "explain": "Luruskan koma. Jika persepuluhan atas lebih kecil, pinjam 1 satuan = 10 persepuluhan. Hasilnya {answer}. Periksa: {answer} + {y} = {x}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "constraint": "u > v && a < b",
+          "distractors": [
+            {
+              "expr": "u - v + (b - a) / 10",
+              "tag": "kecil-dari-besar"
+            },
+            {
+              "expr": "x - y + 1",
+              "tag": "lupa-meminjam"
+            },
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [30, 99],
+            "b": [11, 79]
+          },
+          "prompt": "{x} − {y} = …",
+          "answer": "x - y",
+          "explain": "Luruskan koma: {a} perseratus − {b} perseratus = {=a-b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 100",
+            "y": "b / 100"
+          },
+          "constraint": "a > b + 5 && a % 10 != 0 && b % 10 != 0",
+          "distractors": [
+            {
+              "expr": "(a - b) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x - y + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [11, 89]
+          },
+          "prompt": "{x} − {y} = …",
+          "answer": "x - y",
+          "explain": "Luruskan koma: tulis {x} sebagai {x}0 = {=a*10} perseratus. {=a*10} − {b} = {=a*10-b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "constraint": "b % 10 != 0 && a * 10 > b",
+          "distractors": [
+            {
+              "expr": "(b - a) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x - y + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89]
+          },
+          "prompt": "1 − {x} = …",
+          "answer": "1 - x",
+          "explain": "1 = 100 perseratus. 100 − {a} = {=100-a} perseratus = {answer}. Periksa: {x} + {answer} = 1.",
+          "derived": {
+            "x": "a / 100"
+          },
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "(10 - floor(a / 10)) / 10 + (10 - a % 10) / 100",
+              "tag": "pelengkap-tiap-angka"
+            },
+            {
+              "expr": "(100 - a) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "1 + x",
+              "tag": "menjumlah"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

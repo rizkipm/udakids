@@ -1,0 +1,261 @@
+{
+  "id": "math.sd4.ee8.soal-cerita-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 8,
+  "title": "Data: tabel dan diagram — Level 8 — Soal cerita data",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 30],
+            "b": [5, 30],
+            "c": [5, 30],
+            "e": [5, 30],
+            "h": {
+              "values": [12000, 15000, 18000, 20000, 25000]
+            }
+          },
+          "prompt": "Harga 1 kg jeruk Rp{h}. Berapa rupiah hasil penjualan jeruk hari ini?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Buah", "Terjual (kg)"],
+              "rows": [
+                ["Mangga", "=a"],
+                ["Jeruk", "=b"],
+                ["Salak", "=c"],
+                ["Pisang", "=e"]
+              ],
+              "caption": "Penjualan buah hari ini"
+            }
+          ],
+          "answer": "b * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b * h - h",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "a * h",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "b * h + h",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{b} kg × Rp{h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "b": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "c": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "e": {
+              "range": [15000, 60000],
+              "step": 2500
+            }
+          },
+          "prompt": "Berapa rupiah tabungan Dina dan Eko jika digabung?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Dina", "Eko", "Fajar", "Gita"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Uang tabungan bulan ini (rupiah)"
+            }
+          ],
+          "answer": "a + b",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "abs(a - b)",
+              "tag": "selisih"
+            },
+            {
+              "expr": "a + c",
+              "tag": "batang-lain"
+            },
+            {
+              "expr": "a + b + 2500",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Rp{a} + Rp{b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "b": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "c": {
+              "range": [15000, 60000],
+              "step": 2500
+            },
+            "e": {
+              "range": [15000, 60000],
+              "step": 2500
+            }
+          },
+          "prompt": "Gita ingin tabungannya menjadi Rp100.000. Berapa rupiah lagi yang harus ditabung Gita?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Dina", "Eko", "Fajar", "Gita"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Uang tabungan bulan ini (rupiah)"
+            }
+          ],
+          "answer": "100000 - e",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "100000 + e",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "e",
+              "tag": "satu-data"
+            },
+            {
+              "expr": "100000 - e - 2500",
+              "tag": "baca-skala"
+            }
+          ],
+          "explain": "Rp100.000 − Rp{e} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 110],
+              "step": 10
+            },
+            "b": {
+              "range": [40, 110],
+              "step": 10
+            },
+            "c": {
+              "range": [40, 110],
+              "step": 10
+            },
+            "e": {
+              "range": [40, 110],
+              "step": 10
+            },
+            "f": {
+              "range": [40, 110],
+              "step": 10
+            }
+          },
+          "constraint": "a + b + c + e + f < 600",
+          "prompt": "Perpustakaan menargetkan 600 buku dipinjam dalam 5 hari. Berapa buku lagi untuk mencapai target?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"],
+              "values": ["=a", "=b", "=c", "=e", "=f"],
+              "caption": "Buku dipinjam di perpustakaan",
+              "unit": "buku"
+            }
+          ],
+          "answer": "600 - (a + b + c + e + f)",
+          "distractors": [
+            {
+              "expr": "a + b + c + e + f",
+              "tag": "total"
+            },
+            {
+              "expr": "600 - (a + b + c + e)",
+              "tag": "kurang-satu-hari"
+            },
+            {
+              "expr": "610 - (a + b + c + e + f)",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Total minggu ini {=a+b+c+e+f} buku. 600 − {=a+b+c+e+f} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 8],
+            "b": [2, 8],
+            "c": [2, 8],
+            "e": [2, 8],
+            "k": {
+              "values": [5, 10]
+            },
+            "h": {
+              "values": [100, 200, 500]
+            }
+          },
+          "prompt": "Botol plastik dijual ke bank sampah Rp{h} per botol. Berapa rupiah yang didapat Kelas 4B?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["Kelas 4A", "Kelas 4B", "Kelas 4C", "Kelas 4D"],
+              "values": ["=a", "=b", "=c", "=e"],
+              "caption": "Botol plastik terkumpul (1 gambar = {k} botol)",
+              "pictogram": "botol"
+            }
+          ],
+          "answer": "b * k * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b * h",
+              "tag": "lupa-skala"
+            },
+            {
+              "expr": "b * k",
+              "tag": "jumlah-botol"
+            },
+            {
+              "expr": "(b + 1) * k * h",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kelas 4B: {b} gambar × {k} = {=b*k} botol. {=b*k} × Rp{h} = {answer}."
+        }
+      }
+    ]
+  }
+}

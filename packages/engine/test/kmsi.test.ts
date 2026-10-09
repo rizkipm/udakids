@@ -214,7 +214,11 @@ describe.each(FINAL_BOOKS)('KMSI Final Provinsi Jatim 2026: %s %j', (domain, FIN
         expect(c?.group, `${grade}/${code}`).toBe(GROUP);
         expect(c?.standalone, `${grade}/${code}`).toBe(true);
       }
-      expect(catalog.categories.at(-1)?.code).toBe('FY');
+      // Mock tetap paling akhir; di sd34 bagian EMC (D-101) ditambahkan sesudah Final, jadi mock EY yang terakhir.
+      expect(catalog.categories.at(-1)?.code).toBe(
+        grade === 'sd34' && domain === 'math' ? 'EY' : 'FY',
+      );
+      expect(catalog.categories.at(-1)?.mock).toBe(true);
       expect(catalog.categories.find((x) => x.code === 'FY')?.mock).toBe(true);
     });
 

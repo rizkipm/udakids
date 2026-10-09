@@ -1,0 +1,74 @@
+{
+  "id": "math.sd4.j5.empat-angka-kali-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 5,
+  "title": "Perkalian dengan bilangan satu angka — Level 5 — Empat angka kali satu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [1, 9],
+            "t": [1, 9],
+            "s": [1, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "constraint": "n * k < 100000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "r * k * 1000 + (h * k % 10) * 100 + (t * k % 10) * 10 + s * k % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "n * k + 1000",
+              "tag": "ribuan-meleset"
+            },
+            {
+              "expr": "n * k - 100",
+              "tag": "ratusan-meleset"
+            }
+          ],
+          "explain": "Pecah per nilai tempat: {=r*1000} × {k} = {=r*1000*k}, {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan semuanya: {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "h": [1, 9],
+            "t": [1, 9],
+            "s": [1, 9],
+            "k": [2, 9]
+          },
+          "derived": {
+            "n": "r * 1000 + h * 100 + t * 10 + s"
+          },
+          "constraint": "n * k < 100000",
+          "prompt": "{n} × {k} = …",
+          "answer": "n * k",
+          "mode": "input",
+          "explain": "Pecah per nilai tempat: {=r*1000} × {k} = {=r*1000*k}, {=h*100} × {k} = {=h*100*k}, {=t*10} × {k} = {=t*10*k}, {s} × {k} = {=s*k}. Jumlahkan semuanya: {answer}."
+        }
+      }
+    ]
+  }
+}

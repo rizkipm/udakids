@@ -1,0 +1,120 @@
+{
+  "id": "math.sd4.b6.mengenal-bilangan-juta",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 6,
+  "title": "Membaca dan menulis bilangan besar — Level 6 — Mengenal bilangan juta",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "{k} juta = … ribu",
+          "answer": "k * 1000",
+          "distractors": [
+            {
+              "expr": "k * 100",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "k * 10000",
+              "tag": "lebih-nol"
+            },
+            {
+              "expr": "k * 10",
+              "tag": "kurang-nol"
+            }
+          ],
+          "explain": "1 juta = 1.000 ribu (1.000.000 punya enam angka nol). Jadi {k} juta = {answer} ribu."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9],
+            "c": [1, 9]
+          },
+          "derived": {
+            "n": "m * 1000000 + c * 100000"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "m * 1000000 + c * 10000",
+              "tag": "nol-pindah"
+            },
+            {
+              "expr": "m * 100000 + c * 10000",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "m * 10000000 + c * 100000",
+              "tag": "tambah-nol"
+            }
+          ],
+          "explain": "{m} juta ditulis {m} lalu enam angka di belakangnya. {c} ratus ribu ada di tempat ratus ribuan: {m}.{c}00.000. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9],
+            "t": [1, 9],
+            "h": [1, 9]
+          },
+          "derived": {
+            "n": "m * 1000000 + t * 10000 + h * 1000"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "m * 1000000 + t * 100000 + h * 10000",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "m * 100000 + t * 10000 + h * 1000",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "m * 1000000 + t * 10 + h",
+              "tag": "ribu-hilang"
+            }
+          ],
+          "explain": "Kelompok juta: {m}. Kelompok ribu: {=t*10+h} ribu, ditulis 0{t}{h}. Kelompok kanan: 000. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 9],
+            "q": [1, 999]
+          },
+          "derived": {
+            "n": "m * 1000000 + q * 1000"
+          },
+          "prompt": "Tulis lambang bilangan dari: {w:n}.",
+          "answer": "n",
+          "mode": "input",
+          "explain": "Tulis per kelompok tiga angka: juta, ribu, lalu sisanya. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "id": "math.sd4.d10.tantangan-pembulatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 10,
+  "title": "Pembulatan dan penaksiran — Level 10 — Tantangan pembulatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 99999]
+          },
+          "constraint": "n % 1000 != 0",
+          "prompt": "Bulatkan {n} ke ribuan terdekat.",
+          "answer": "round(n / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "floor(n / 1000) * 1000 + 1000 * (n % 1000 < 500)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 10000) * 10000, 10000)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "tempat-lebih-kecil"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Lihat angka ratusan, yaitu {=floor(n/100)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 1000) * 1000} dan {=floor(n / 1000) * 1000+1000}, jadi dibulatkan menjadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 98],
+            "u": [50, 99]
+          },
+          "derived": {
+            "n": "r * 1000 + 900 + u"
+          },
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "(r + 1) * 1000",
+          "distractors": [
+            {
+              "expr": "r * 1000 + 900",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "r * 1000",
+              "tag": "ribuan-turun"
+            }
+          ],
+          "explain": "Angka puluhan {=floor(n/10)%10} → bulatkan naik. Ratusan 9 naik menjadi 10 ratusan = 1 ribuan, jadi ribuannya bertambah: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10001, 94999]
+          },
+          "constraint": "n % 10000 != 0",
+          "prompt": "Bulatkan {n} ke puluh ribuan terdekat.",
+          "answer": "round(n / 10000) * 10000",
+          "distractors": [
+            {
+              "expr": "floor(n / 10000) * 10000 + 10000 * (n % 10000 < 5000)",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "max(round(n / 100000) * 100000, 100000)",
+              "tag": "tempat-lebih-besar"
+            },
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "tempat-lebih-kecil"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Lihat angka ribuan, yaitu {=floor(n/1000)%10}. Angka 0–4 dibulatkan turun, 5–9 dibulatkan naik. {n} ada di antara {=floor(n / 10000) * 10000} dan {=floor(n / 10000) * 10000+10000}, jadi dibulatkan menjadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10100, 59900],
+            "b": [10100, 39900]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 100 != 0",
+          "prompt": "Taksir hasil {a} + {b} dengan membulatkan setiap bilangan ke ribuan terdekat.",
+          "answer": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 1000) * 1000 + floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000 + ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            },
+            {
+              "expr": "round(a / 10000) * 10000 + round(b / 10000) * 10000",
+              "tag": "ke-puluh-ribuan"
+            }
+          ],
+          "explain": "Bulatkan: {a} → {=round(a/1000)*1000}, {b} → {=round(b/1000)*1000}. Jumlahkan ribuan bulat itu: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5100, 9900],
+            "b": [1100, 4900]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 100 != 0 && b % 100 != 0",
+          "prompt": "Taksir hasil {a} − {b} dengan membulatkan setiap bilangan ke ribuan terdekat.",
+          "answer": "round(a / 1000) * 1000 - round(b / 1000) * 1000",
+          "distractors": [
+            {
+              "expr": "a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "floor(a / 1000) * 1000 - floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "ceil(a / 1000) * 1000 - ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            }
+          ],
+          "explain": "Bulatkan dulu: {a} → {=round(a/1000)*1000} dan {b} → {=round(b/1000)*1000}. Lalu kurangkan: {answer}. Hasil sebenarnya {=a-b}, dekat dengan taksiran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [15, 20],
+            "a": {
+              "range": [45100, 69900],
+              "step": 100
+            },
+            "b": {
+              "range": [55100, 89900],
+              "step": 100
+            }
+          },
+          "derived": {
+            "u": "k * 10000"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ]
+          },
+          "constraint": "a % 1000 != 500 && b % 1000 != 500 && a % 1000 != 0 && b % 1000 != 0 && u - a - b >= 5000",
+          "prompt": "{nama} membawa uang Rp{u}. Ia membeli tas seharga Rp{a} dan sepatu seharga Rp{b}. Dengan membulatkan harga ke ribuan terdekat, kira-kira berapa sisa uangnya?",
+          "answer": "u - round(a / 1000) * 1000 - round(b / 1000) * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "u - a - b",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "round(a / 1000) * 1000 + round(b / 1000) * 1000",
+              "tag": "total-bukan-sisa"
+            },
+            {
+              "expr": "u - floor(a / 1000) * 1000 - floor(b / 1000) * 1000",
+              "tag": "selalu-turun"
+            },
+            {
+              "expr": "u - ceil(a / 1000) * 1000 - ceil(b / 1000) * 1000",
+              "tag": "selalu-naik"
+            }
+          ],
+          "explain": "Bulatkan harga: tas → Rp{=round(a/1000)*1000}, sepatu → Rp{=round(b/1000)*1000}. Total kira-kira Rp{=round(a/1000)*1000+round(b/1000)*1000}. Sisa: {u} − {=round(a/1000)*1000+round(b/1000)*1000} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 98]
+          },
+          "derived": {
+            "r": "k * 1000"
+          },
+          "prompt": "Berapa bilangan terbesar yang jika dibulatkan ke ribuan terdekat menjadi {r}?",
+          "answer": "r + 499",
+          "distractors": [
+            {
+              "expr": "r + 500",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + 999",
+              "tag": "ribuan-berikutnya"
+            },
+            {
+              "expr": "r + 400",
+              "tag": "bukan-terbesar"
+            }
+          ],
+          "explain": "Bilangan dibulatkan turun ke {r} jika ratusannya 0–4. Bilangan terbesar dengan ratusan 4 adalah {answer}. Bilangan {=r+500} sudah dibulatkan ke {=r+1000}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 9],
+            "t": [0, 9],
+            "s": [0, 9]
+          },
+          "prompt": "{r}.□{t}{s} dibulatkan ke ribuan terdekat menjadi {=r*1000}. Angka terbesar yang dapat mengisi □ adalah …",
+          "answer": "4",
+          "distractors": [
+            {
+              "expr": "5",
+              "tag": "batas-naik"
+            },
+            {
+              "expr": "9",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "0",
+              "tag": "terkecil"
+            }
+          ],
+          "explain": "Agar dibulatkan turun ke {=r*1000}, angka ratusan harus 0, 1, 2, 3, atau 4. Angka terbesar adalah 4."
+        }
+      }
+    ]
+  }
+}

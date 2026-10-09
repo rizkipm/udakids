@@ -1,0 +1,107 @@
+{
+  "id": "math.sd34.eg5.ambil-paling-sedikit-agar-pasti",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 5,
+  "title": "Kombinatorika & penalaran — Level 5 — Ambil paling sedikit agar pasti",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Menentukan banyak pengambilan agar suatu kejadian pasti terjadi"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Dalam laci gelap ada {a} kaus kaki merah, {b} biru, dan {c} hijau. Paling sedikit berapa kaus kaki yang harus diambil agar pasti mendapat 2 kaus kaki merah?",
+          "answer": "b + c + 2",
+          "distractors": [
+            {
+              "expr": "2",
+              "tag": "dua-saja"
+            },
+            {
+              "expr": "4",
+              "tag": "sepasang-sewarna"
+            },
+            {
+              "expr": "a + 2",
+              "tag": "salah-warna"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kemungkinan terburuk: semua biru dan hijau terambil dulu ({=b+c}), lalu 2 merah. Jadi {=b+c} + 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Dalam laci gelap ada {a} kaus kaki merah, {b} biru, dan {c} hijau. Paling sedikit berapa kaus kaki yang harus diambil agar pasti mendapat sepasang kaus kaki yang warnanya sama?",
+          "answer": "4",
+          "distractors": [
+            {
+              "expr": "2",
+              "tag": "dua-saja"
+            },
+            {
+              "expr": "3",
+              "tag": "tiga-warna"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ada 3 warna. Kemungkinan terburuk: 3 kaus kaki pertama berbeda warna semua. Kaus kaki ke-4 pasti sewarna dengan salah satunya. Jadi 4."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Dalam kotak ada {a} bola merah, {b} biru, dan {c} hijau. Paling sedikit berapa bola yang harus diambil tanpa melihat agar pasti mendapat ketiga warna?",
+          "answer": "a + b + c - min(a, min(b, c)) + 1",
+          "distractors": [
+            {
+              "expr": "3",
+              "tag": "tiga-saja"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua"
+            },
+            {
+              "expr": "max(a, max(b, c)) + 2",
+              "tag": "satu-warna-terbanyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kemungkinan terburuk: semua bola dari dua warna terbanyak terambil dulu ({=a+b+c-min(a,min(b,c))}), lalu satu bola warna ketiga. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

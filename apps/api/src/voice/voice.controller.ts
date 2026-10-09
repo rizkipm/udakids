@@ -21,7 +21,7 @@ import {
   GRADES,
   VOICE_ITEM_PARTS,
   VOICE_LINE_KEYS,
-  voiceProfileOf,
+  voiceProfileFor,
   voiceLinesUpdateSchema,
   voiceSettingsSchema,
   skillIdSchema,
@@ -52,12 +52,16 @@ const itemQuery = z.strictObject({
     .regex(/^[a-zA-Z0-9_-]{1,40}$/)
     .optional(),
   v: z.string().max(20).optional(),
+  /** Percobaan ulang klip dari perangkat (D-098); tidak memengaruhi isi. */
+  r: z.literal('1').optional(),
 });
 
 /** Kunci kalimat pelajaran (D-088), mis. "2", "3.b.mata", "3.k.makan-apel.ok". */
 const lessonQuery = z.strictObject({
   k: z.string().regex(/^\d{1,2}(\.[a-z0-9-]{1,40}){0,3}$/),
   v: z.string().max(20).optional(),
+  /** Percobaan ulang klip dari perangkat (D-098); tidak memengaruhi isi. */
+  r: z.literal('1').optional(),
 });
 
 /**
@@ -81,6 +85,8 @@ const sayQuery = z.strictObject({
     .regex(/^[0-9a-f-]{36}~\d{1,3}$/)
     .optional(),
   v: z.string().max(20).optional(),
+  /** Percobaan ulang klip dari perangkat (D-098); tidak memengaruhi isi. */
+  r: z.literal('1').optional(),
 });
 
 function sendClip(res: Response, clip: { mime: string; data: Buffer }) {
@@ -140,8 +146,9 @@ export class VoiceController {
     this.limiter.fail(ipKey);
     const text = await this.voice.lessonText(domain, grade, code, q.k);
     if (!text) throw new NotFoundException('Kalimat pelajaran tidak ditemukan');
-    // Profil suara mengikuti buku: jenjang (gaya & kecepatan) dan bahasa narasi.
-    const profile = voiceProfileOf(`${domain}.${grade}.pelajaran`, 'prompt');
+    // Profil suara mengikuti buku (jenjang: gaya & kecepatan) dan bahasa kalimatnya (D-098): narasi Indonesia di
+    // pelajaran buku English dibacakan suara Indonesia.
+    const profile = voiceProfileFor(`${domain}.${grade}.pelajaran`, 'reteach', text);
     if (!(await this.voice.hasClip(text, profile))) {
       this.newClips.check(ipKey);
       this.newClips.fail(ipKey);
@@ -198,7 +205,8 @@ export class VoiceController {
     this.limiter.fail(ipKey);
     const text = await this.voice.itemText(skillId, q.seed, q.band, q.part, q.c);
     if (!text) throw new NotFoundException('Soal ini tidak memakai suara Momo');
-    const profile = voiceProfileOf(skillId, q.part);
+    // Bahasa suara mengikuti kalimatnya (D-098), bukan hanya bukunya.
+    const profile = voiceProfileFor(skillId, q.part, text);
     if (!(await this.voice.hasClip(text, profile))) {
       this.newClips.check(ipKey);
       this.newClips.fail(ipKey);

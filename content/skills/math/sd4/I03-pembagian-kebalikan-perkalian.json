@@ -1,0 +1,68 @@
+{
+  "id": "math.sd4.i3.pembagian-kebalikan-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "I",
+  "order": 3,
+  "title": "Fakta perkalian dan pembagian sampai 12 — Level 3 — Pembagian dari perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{p} : {a} = …",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "p - a",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Pembagian adalah kebalikan perkalian. Tanyakan: {a} × berapa = {p}? Karena {a} × {b} = {p}, maka {p} : {a} = {answer}."
+        },
+        "weight": 2
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [6, 7, 8, 9, 11, 12]
+            },
+            "b": [2, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "{p} : {a} = …",
+          "answer": "b",
+          "mode": "input",
+          "explain": "Ingat fakta perkalian {a}: {a} × {b} = {p}. Jadi {p} : {a} = {answer}."
+        }
+      }
+    ]
+  }
+}

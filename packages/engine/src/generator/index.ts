@@ -3,6 +3,8 @@ export * from './dot-pictures.js';
 export * from './english-vocab.js';
 export * from './games.js';
 export * from './play.js';
+export * from './play-g4.js';
+export * from './play-emc.js';
 export * from './glyphs.js';
 export * from './expr.js';
 export * from './item.js';
@@ -21,6 +23,7 @@ export {
   type MatchItem,
 } from './families/index.js';
 export { specSay, specSchema, specVisual, type Spec } from './families/fun.js';
+export { dotted } from './families/kelas4.js';
 export { ACTIVITIES, ROUTINES, TIMES, type TimeOfDay } from './families/daytime.js';
 export { QUEUE_THEMES } from './families/queue.js';
 export { SOUND_MAKERS, SOUND_GROUPS } from './families/sounds.js';

@@ -1,0 +1,75 @@
+{
+  "id": "math.sd34.ee6.nilai-yang-sama-dari-rata-rata",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 6,
+  "title": "Statistika — Level 6 — Nilai yang sama dari rata-rata",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika",
+    "indikator": "Menentukan nilai data yang sama dari rata-rata keseluruhan",
+    "emc-no": "11"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "n": [4, 8],
+      "m": [4, 9],
+      "h": [1, 10]
+    },
+    "derived": {
+      "x": "(n * m - h) / (n - 1)"
+    },
+    "words": {
+      "nama": [
+        "Ayu",
+        "Bima",
+        "Citra",
+        "Dimas",
+        "Eka",
+        "Fajar",
+        "Gita",
+        "Hasan",
+        "Intan",
+        "Joko",
+        "Kirana",
+        "Lukman",
+        "Made",
+        "Nyoman",
+        "Siti",
+        "Putu",
+        "Wulan",
+        "Yusuf",
+        "Tiara",
+        "Raka",
+        "Nadia",
+        "Ucok"
+      ]
+    },
+    "constraint": "(n * m - h) % (n - 1) == 0 && x >= 1 && x != h && x != m && x <= 10",
+    "prompt": "Ada {n} anak mengikuti kuis. Semua anak mendapat nilai yang sama, kecuali {nama} yang mendapat {h}. Rata-rata nilai mereka {m}. Nilai setiap anak lainnya adalah …",
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "m",
+        "tag": "rata-rata"
+      },
+      {
+        "expr": "(n * m - h) / n",
+        "tag": "dibagi-semua"
+      },
+      {
+        "expr": "n * m - h",
+        "tag": "lupa-dibagi"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah semua nilai = {n} × {m} = {=n*m}. Tanpa {nama}: {=n*m} − {h} = {=n*m-h}, dibagi {=n-1} anak = {answer}."
+  }
+}

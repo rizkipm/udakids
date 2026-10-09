@@ -1,0 +1,116 @@
+{
+  "id": "math.sd4.m8.soal-cerita-hanya-yang-penuh",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 8,
+  "title": "Pembagian bersisa dan soal cerita — Level 8 — Soal cerita: hanya yang penuh",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [6, 12],
+            "t": [30, 150]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} telur dimasukkan ke dalam kotak. Setiap kotak berisi {m} telur. Berapa kotak yang terisi penuh?",
+          "answer": "floor(t / m)",
+          "distractors": [
+            {
+              "expr": "floor(t / m) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "floor(t / m) - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Yang ditanya kotak yang penuh, jadi sisa tidak dihitung. {t} : {m} = {answer} sisa {=t%m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "values": [10000, 15000, 20000, 25000, 30000]
+            },
+            "h": {
+              "values": [1500, 2500, 3000, 3500, 4000, 4500]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "u % h != 0",
+          "prompt": "Uang {nama} Rp{u}. Harga satu pensil Rp{h}. Paling banyak berapa pensil yang bisa dibeli?",
+          "answer": "floor(u / h)",
+          "distractors": [
+            {
+              "expr": "floor(u / h) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "floor(u / h) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "floor(u / 1000)",
+              "tag": "ribuan"
+            }
+          ],
+          "explain": "{u} : {h} = {answer} sisa {=u%h}. Sisa uang Rp{=u%h} tidak cukup untuk membeli satu pensil lagi. Jadi paling banyak {answer} pensil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [6, 15],
+            "t": [50, 200]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "Pita sepanjang {t} cm dipotong-potong, setiap potong {m} cm. Berapa potong utuh yang didapat?",
+          "answer": "floor(t / m)",
+          "mode": "input",
+          "explain": "{t} : {m} = {answer} sisa {=t%m}. Sisa {=t%m} cm terlalu pendek untuk satu potong. Jadi {answer} potong utuh."
+        }
+      }
+    ]
+  }
+}

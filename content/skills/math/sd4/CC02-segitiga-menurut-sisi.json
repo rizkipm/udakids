@@ -1,0 +1,126 @@
+{
+  "id": "math.sd4.cc2.segitiga-menurut-sisi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 2,
+  "title": "Segitiga dan segi empat — Level 2 — Segitiga menurut panjang sisi",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 20]
+          },
+          "prompt": "Sisi-sisi sebuah segitiga {s} cm, {s} cm, dan {s} cm. Segitiga apakah itu?",
+          "answer": "1",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Ketiga sisinya sama panjang ({s} cm), jadi segitiga sama sisi."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [4, 15],
+            "a": [3, 20]
+          },
+          "constraint": "a != k && a < 2 * k",
+          "prompt": "Sisi-sisi sebuah segitiga {k} cm, {a} cm, dan {k} cm. Segitiga apakah itu?",
+          "answer": "2",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Tepat dua sisi sama panjang ({k} cm), sisi ketiga {a} cm. Itu segitiga sama kaki."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [4, 14],
+            "c": [5, 18]
+          },
+          "constraint": "a < b && b < c && a + b > c",
+          "prompt": "Sisi-sisi sebuah segitiga {b} cm, {c} cm, dan {a} cm. Segitiga apakah itu?",
+          "answer": "3",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Ketiga sisinya berbeda panjang ({a}, {b}, {c}), jadi segitiga sembarang."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [4, 15],
+            "a": [3, 20]
+          },
+          "constraint": "a != k && a < 2 * k",
+          "prompt": "Sisi-sisi sebuah segitiga {k} cm, {a} cm, dan {k} cm. Segitiga apakah itu?",
+          "answer": "2",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Tepat dua sisi sama panjang ({k} cm), sisi ketiga {a} cm. Itu segitiga sama kaki."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 12],
+            "b": [4, 14],
+            "c": [5, 18]
+          },
+          "constraint": "a < b && b < c && a + b > c",
+          "prompt": "Sisi-sisi sebuah segitiga {b} cm, {c} cm, dan {a} cm. Segitiga apakah itu?",
+          "answer": "3",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Ketiga sisinya berbeda panjang ({a}, {b}, {c}), jadi segitiga sembarang."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 3]
+          },
+          "prompt": "Segitiga A: tiga sisi sama panjang. Segitiga B: tepat dua sisi sama panjang. Segitiga C: semua sisi berbeda. Kalau A = 1, B = 2, C = 3, segitiga nomor {k} disebut …",
+          "answer": "k",
+          "labels": {
+            "1": "segitiga sama sisi",
+            "2": "segitiga sama kaki",
+            "3": "segitiga sembarang"
+          },
+          "explain": "Tiga sisi sama = sama sisi. Dua sisi sama = sama kaki. Semua berbeda = sembarang."
+        }
+      }
+    ]
+  }
+}

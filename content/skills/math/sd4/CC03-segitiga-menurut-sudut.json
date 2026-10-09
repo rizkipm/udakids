@@ -1,0 +1,145 @@
+{
+  "id": "math.sd4.cc3.segitiga-menurut-sudut",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 3,
+  "title": "Segitiga dan segi empat — Level 3 — Segitiga menurut besar sudut",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [40, 85],
+              "step": 5
+            },
+            "b": {
+              "range": [40, 85],
+              "step": 5
+            }
+          },
+          "derived": {
+            "c": "180 - a - b"
+          },
+          "constraint": "c < 90 && c > 0",
+          "prompt": "Sudut-sudut sebuah segitiga {a}°, {b}°, dan {c}°. Segitiga ini termasuk …",
+          "answer": "1",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Lihat sudut terbesarnya. Semua sudut kurang dari 90°, jadi segitiga lancip."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15, 75],
+              "step": 5
+            }
+          },
+          "derived": {
+            "b": "90 - a"
+          },
+          "prompt": "Sudut-sudut sebuah segitiga {a}°, 90°, dan {b}°. Segitiga ini termasuk …",
+          "answer": "2",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Ada satu sudut tepat 90°, jadi segitiga siku-siku."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "range": [95, 150],
+              "step": 5
+            },
+            "a": {
+              "range": [10, 70],
+              "step": 5
+            }
+          },
+          "derived": {
+            "b": "180 - a - c"
+          },
+          "constraint": "b > 0 && b < 90",
+          "prompt": "Sudut-sudut sebuah segitiga {a}°, {b}°, dan {c}°. Segitiga ini termasuk …",
+          "answer": "3",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Ada satu sudut lebih dari 90° ({c}°), jadi segitiga tumpul."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "c": {
+              "range": [95, 150],
+              "step": 5
+            },
+            "a": {
+              "range": [10, 70],
+              "step": 5
+            }
+          },
+          "derived": {
+            "b": "180 - a - c"
+          },
+          "constraint": "b > 0 && b < 90",
+          "prompt": "Sebuah segitiga punya sudut {c}°, {a}°, dan {b}°. Termasuk segitiga apa?",
+          "answer": "3",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Sudut {c}° lebih dari 90° (tumpul), jadi segitiga tumpul."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15, 75],
+              "step": 5
+            }
+          },
+          "derived": {
+            "b": "90 - a"
+          },
+          "prompt": "Sebuah segitiga punya sudut {a}°, {b}°, dan 90°. Termasuk segitiga apa?",
+          "answer": "2",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Salah satu sudutnya 90° (siku-siku), jadi segitiga siku-siku."
+        }
+      }
+    ]
+  }
+}

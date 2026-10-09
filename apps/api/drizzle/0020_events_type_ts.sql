@@ -1,0 +1,1 @@
+CREATE INDEX "events_type_ts_idx" ON "events" USING btree ("type","ts");

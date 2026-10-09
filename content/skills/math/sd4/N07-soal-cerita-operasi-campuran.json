@@ -1,0 +1,148 @@
+{
+  "id": "math.sd4.n7.soal-cerita-operasi-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 7,
+  "title": "Operasi hitung campuran — Level 7 — Soal cerita operasi campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "e": [3, 30],
+            "g": [2, 9],
+            "k": [4, 12]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {e} kue. Ia membeli {g} kotak kue, setiap kotak berisi {k} kue. Berapa kue {nama} sekarang?",
+          "answer": "e + g * k",
+          "distractors": [
+            {
+              "expr": "(e + g) * k",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "e + g + k",
+              "tag": "menjumlah-semua"
+            },
+            {
+              "expr": "g * k",
+              "tag": "satu-langkah"
+            }
+          ],
+          "explain": "Kalimat matematikanya {e} + {g} × {k}. Kali dulu: {g} × {k} = {=g*k}. Lalu {e} + {=g*k} = {answer} kue."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 8],
+            "q": [5, 30],
+            "e": [2, 9]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} jeruk dibagi sama banyak ke {m} keranjang. Lalu ke satu keranjang ditambahkan {e} jeruk. Berapa jeruk di keranjang itu sekarang?",
+          "answer": "t / m + e",
+          "distractors": [
+            {
+              "expr": "(t + e) / m",
+              "tag": "kiri-dulu"
+            },
+            {
+              "expr": "t / m",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "t + e",
+              "tag": "lupa-bagi"
+            }
+          ],
+          "explain": "Kalimat matematikanya {t} : {m} + {e}. Bagi dulu: {t} : {m} = {=t/m}. Lalu {=t/m} + {e} = {answer} jeruk."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [3000, 3500, 4000, 4500, 5000, 6000]
+            },
+            "p": {
+              "values": [1500, 2000, 2500, 3000]
+            },
+            "n": [2, 5]
+          },
+          "prompt": "Harga 1 buku Rp{h} dan harga 1 pensil Rp{p}. Berapa harga {n} buku dan 1 pensil?",
+          "answer": "n * h + p",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "n * (h + p)",
+              "tag": "kurung-tambahan"
+            },
+            {
+              "expr": "h + p",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "n * h",
+              "tag": "lupa-pensil"
+            }
+          ],
+          "explain": "Kalimat matematikanya {n} × {h} + {p}. Kali dulu: {n} × {h} = {=n*h}. Lalu {=n*h} + {p} = {=n*h+p}. Jadi harganya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [40, 150],
+            "g": [2, 8],
+            "k": [5, 12],
+            "d": [10, 39]
+          },
+          "prompt": "Di aula ada {a} kursi. Panitia menambah {g} tumpuk kursi, setiap tumpuk {k} kursi. Lalu {d} kursi dipindah ke kelas. Berapa kursi di aula sekarang?",
+          "answer": "a + g * k - d",
+          "mode": "input",
+          "explain": "Kalimat matematikanya {a} + {g} × {k} − {d}. Kali dulu: {g} × {k} = {=g*k}. Lalu {a} + {=g*k} = {=a+g*k}, dan {=a+g*k} − {d} = {answer}."
+        }
+      }
+    ]
+  }
+}

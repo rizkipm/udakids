@@ -1,0 +1,87 @@
+{
+  "id": "math.sd4.o5.pola-kali-dan-bertingkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 5,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 5 — Pola kali dan bertingkat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "r": {
+              "values": [2, 3, 10]
+            }
+          },
+          "constraint": "a * r * r * r * r <= 100000",
+          "prompt": "{a}, {=a*r}, {=a*r*r}, {=a*r*r*r}, … Bilangan berikutnya adalah …",
+          "answer": "a * r * r * r * r",
+          "distractors": [
+            {
+              "expr": "a * r * r * r + (a * r * r * r - a * r * r)",
+              "tag": "tambah-selisih"
+            },
+            {
+              "expr": "a * r * r * r + a",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * r * r * r * (r + 1)",
+              "tag": "kali-lebih"
+            }
+          ],
+          "explain": "Setiap bilangan dikali {r}: {a} × {r} = {=a*r}. Bilangan berikutnya {=a*r*r*r} × {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 50],
+            "d": [1, 6]
+          },
+          "prompt": "{a}, {=a+d}, {=a+3*d}, {=a+6*d}, {=a+10*d}, … Bilangan berikutnya adalah …",
+          "answer": "a + 15 * d",
+          "distractors": [
+            {
+              "expr": "a + 14 * d",
+              "tag": "selisih-tetap"
+            },
+            {
+              "expr": "a + 16 * d",
+              "tag": "lebih-satu-langkah"
+            },
+            {
+              "expr": "a + 20 * d",
+              "tag": "dua-kali-lipat"
+            }
+          ],
+          "explain": "Selisihnya {d}, {=2*d}, {=3*d}, {=4*d}: selisih itu bertambah {d} setiap langkah. Berikutnya tambah {=5*d}: {=a+10*d} + {=5*d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 60]
+          },
+          "prompt": "Pola kali 2: {a}, {=2*a}, {=4*a}, … Bilangan kelima adalah …",
+          "answer": "16 * a",
+          "mode": "input",
+          "explain": "Setiap bilangan dikali 2. Bilangan keempat {=4*a} × 2 = {=8*a}, bilangan kelima {=8*a} × 2 = {answer}."
+        }
+      }
+    ]
+  }
+}

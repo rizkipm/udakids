@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.v2.membandingkan-perseratusan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 2,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 2 — Bandingkan perseratusan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99],
+            "b": [1, 99]
+          },
+          "prompt": "Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Kedua bilangan punya dua angka setelah koma. Bandingkan dari kiri: persepuluhan dulu, lalu perseratusan. {x} = {a}/100 dan {y} = {b}/100, jadi {x} {answer_say} {y}.",
+          "derived": {
+            "x": "a / 100",
+            "y": "b / 100"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "constraint": "a % 10 != 0 && b % 10 != 0 && abs(a - b) < 30"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 99]
+          },
+          "prompt": "Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Samakan dulu banyak angka setelah koma: {x} = {x}0. Bandingkan {=a*10} perseratus dengan {b} perseratus. Jadi {x} {answer_say} {y}. Angka yang lebih panjang belum tentu lebih besar.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "constraint": "b % 10 != 0 && abs(a * 10 - b) < 25"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 9],
+            "a": [1, 9],
+            "b": [10, 99]
+          },
+          "prompt": "Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Angka di depan koma sama-sama {u}. Samakan angka setelah koma: {x} punya {=a*10} perseratus, {y} punya {b} perseratus. Jadi {x} {answer_say} {y}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "u + b / 100"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "constraint": "abs(a * 10 - b) < 25"
+        }
+      }
+    ]
+  }
+}

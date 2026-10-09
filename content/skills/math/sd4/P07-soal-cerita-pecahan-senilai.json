@@ -1,0 +1,132 @@
+{
+  "id": "math.sd4.p7.soal-cerita-pecahan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 7,
+  "title": "Pecahan senilai — Level 7 — Soal cerita pecahan senilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "k": [2, 3]
+          },
+          "constraint": "n < d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "makanan": ["martabak", "pizza", "kue bolu", "kue lapis", "roti bakar"]
+          },
+          "prompt": "{nama} memotong {makanan} menjadi {d} potong sama besar, lalu makan {n} potong. Kakak memotong {makanan} yang sama besarnya menjadi {=d*k} potong. Berapa potong yang harus dimakan Kakak supaya bagiannya sama banyak?",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "sama-potong"
+            },
+            {
+              "expr": "n + d * k - d",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagian {nama} {n}/{d}. Potongan Kakak {k} kali lebih banyak, jadi {n}/{d} = …/{=d*k}. Pembilang dikali {k}: {n} × {k} = {answer}. Kakak makan {answer} potong."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "n": [1, 5],
+            "k": [2, 4]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Sebatang coklat milik {nama} terdiri atas {=d*k} kotak kecil. {nama} memberikan {=n*k} kotak kepada adiknya. Berapa bagian coklat yang diberikan, dalam bentuk paling sederhana?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n * k",
+            "den": "d * k"
+          },
+          "distractors": [
+            {
+              "num": "d * k - n * k",
+              "den": "d * k",
+              "tag": "sisa"
+            },
+            {
+              "num": "n * k",
+              "den": "d * k - n * k",
+              "tag": "bagian-per-sisa"
+            },
+            {
+              "num": "n",
+              "den": "d * k",
+              "tag": "penyebut-tidak-dibagi"
+            }
+          ],
+          "explain": "Bagian yang diberikan {=n*k}/{=d*k}. FPB dari {=n*k} dan {=d*k} adalah {k}. Bagi atas dan bawah dengan {k}, hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

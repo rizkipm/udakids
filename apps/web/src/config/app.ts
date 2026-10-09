@@ -1,5 +1,5 @@
-// PRD A18 — nama produk & karakter belum final; ubah hanya di sini.
-export const APP_NAME = 'Little Coder';
+// PRD A18 — nama produk & karakter; ubah hanya di sini. Merek: UdaKids (D-097).
+export const APP_NAME = 'UdaKids';
 export const CHARACTER_NAME = 'Momo';
 
 export const FEATURE_VOICE = import.meta.env.VITE_FEATURE_VOICE === 'true';

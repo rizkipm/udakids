@@ -1,0 +1,136 @@
+{
+  "id": "math.sd4.z9.penalaran-keliling",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 9,
+  "title": "Keliling bangun datar — Level 9 — Penalaran keliling",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 15],
+            "l": [2, 10],
+            "s": [3, 12]
+          },
+          "constraint": "p > l && 2 * (p + l) != 4 * s",
+          "prompt": "Persegi panjang A berukuran {p} cm × {l} cm. Persegi B bersisi {s} cm. Berapa cm selisih keliling keduanya?",
+          "answer": "abs(2 * (p + l) - 4 * s)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "abs(p + l - s)",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * (p + l) + 4 * s",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "abs(p * l - s * s)",
+              "tag": "memakai-luas"
+            }
+          ],
+          "explain": "Keliling A = 2 × ({p} + {l}) = {=2*(p+l)}. Keliling B = 4 × {s} = {=4*s}. Selisihnya = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 20],
+            "l": [3, 15]
+          },
+          "constraint": "p > l && (p + l) % 2 == 0",
+          "prompt": "Seutas kawat dibentuk persegi panjang {p} cm × {l} cm. Kawat itu dibuka, lalu dibentuk menjadi persegi. Berapa cm sisi persegi itu?",
+          "answer": "(p + l) / 2",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p + l",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "p - l",
+              "tag": "selisih-sisi"
+            }
+          ],
+          "explain": "Panjang kawat tetap = keliling = 2 × ({p} + {l}) = {=2*(p+l)} cm. Sisi persegi = {=2*(p+l)} : 4 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 15],
+            "l": [2, 10],
+            "n": [1, 6]
+          },
+          "constraint": "p > l",
+          "prompt": "Persegi panjang {p} cm × {l} cm. Panjang dan lebarnya masing-masing ditambah {n} cm. Berapa cm keliling barunya?",
+          "answer": "2 * (p + l) + 4 * n",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) + 2 * n",
+              "tag": "hanya-dua-sisi"
+            },
+            {
+              "expr": "2 * (p + l) + n",
+              "tag": "ditambah-sekali"
+            },
+            {
+              "expr": "2 * (p + l)",
+              "tag": "tidak-berubah"
+            }
+          ],
+          "explain": "Keempat sisi masing-masing bertambah {n} cm, jadi keliling bertambah 4 × {n} = {=4*n}. {=2*(p+l)} + {=4*n} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15],
+            "n": [2, 4]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Keliling sebuah persegi {k} cm. Sisinya dibuat {n} kali lebih panjang. Berapa cm keliling persegi yang baru?",
+          "answer": "k * n",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k + n",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "k * n * n",
+              "tag": "seperti-luas"
+            },
+            {
+              "expr": "k + 4 * n",
+              "tag": "ditambah-tiap-sisi"
+            }
+          ],
+          "explain": "Sisi baru = {n} × {s} = {=n*s} cm. Keliling baru = 4 × {=n*s} = {answer}, yaitu {n} kali keliling semula."
+        }
+      }
+    ]
+  }
+}

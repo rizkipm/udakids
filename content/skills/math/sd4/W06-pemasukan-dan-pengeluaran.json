@@ -1,0 +1,247 @@
+{
+  "id": "math.sd4.w6.pemasukan-dan-pengeluaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 6,
+  "title": "Uang dan literasi keuangan — Level 6 — Pemasukan dan pengeluaran",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20000, 50000],
+              "step": 5000
+            },
+            "b": {
+              "range": [6000, 19500],
+              "step": 500
+            }
+          },
+          "prompt": "Minggu ini {nama} menerima uang saku Rp{a}. Pengeluarannya untuk jajan dan alat tulis Rp{b}. Berapa sisa uangnya?",
+          "answer": "a - b",
+          "explain": "Pemasukan − pengeluaran = sisa uang. {a} − {b} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a - b + 1000",
+              "tag": "lupa-meminjam"
+            },
+            {
+              "expr": "b",
+              "tag": "pengeluaran"
+            },
+            {
+              "expr": "(a - b) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a - b) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a - b) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20000, 40000],
+              "step": 5000
+            },
+            "b": {
+              "range": [5000, 20000],
+              "step": 5000
+            },
+            "c": {
+              "range": [5000, 15000],
+              "step": 500
+            },
+            "d": {
+              "range": [2000, 10000],
+              "step": 500
+            }
+          },
+          "prompt": "Lihat catatan keuangan {nama} minggu ini. Berapa sisa uangnya?",
+          "answer": "a + b - c - d",
+          "explain": "Jumlahkan pemasukan: {a} + {b} = {=a+b}. Jumlahkan pengeluaran: {c} + {d} = {=c+d}. Sisa = {=a+b} − {=c+d} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Catatan", "Pemasukan", "Pengeluaran"],
+              "rows": [
+                ["Uang saku", "Rp{a}", "-"],
+                ["Hadiah dari nenek", "Rp{b}", "-"],
+                ["Membeli buku", "-", "Rp{c}"],
+                ["Jajan", "-", "Rp{d}"]
+              ]
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a + b + c + d",
+              "tag": "semua-dijumlah"
+            },
+            {
+              "expr": "a + b - c",
+              "tag": "lupa-satu-pengeluaran"
+            },
+            {
+              "expr": "a - c - d",
+              "tag": "lupa-satu-pemasukan"
+            },
+            {
+              "expr": "(a + b - c - d) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b - c - d) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(a + b - c - d) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "j": {
+              "range": [60000, 150000],
+              "step": 5000
+            },
+            "m": {
+              "range": [30000, 55000],
+              "step": 2500
+            }
+          },
+          "prompt": "{nama} berjualan kue di bazar sekolah. Uang hasil penjualan Rp{j}. Modal untuk membeli bahan kue Rp{m}. Berapa keuntungannya?",
+          "answer": "j - m",
+          "explain": "Keuntungan = hasil penjualan − modal. {j} − {m} = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "j + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "m",
+              "tag": "modal"
+            },
+            {
+              "expr": "j - m + 5000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(j - m) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

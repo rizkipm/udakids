@@ -1,0 +1,248 @@
+{
+  "id": "math.sd4.ee1.membaca-tabel",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 1,
+  "title": "Data: tabel dan diagram — Level 1 — Membaca tabel",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95],
+            "b": [20, 95],
+            "c": [20, 95],
+            "e": [20, 95],
+            "f": [20, 95]
+          },
+          "prompt": "Lihat tabel. Berapa buku dipinjam pada hari Rabu?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Banyak buku"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"],
+                ["Kamis", "=e"],
+                ["Jumat", "=f"]
+              ],
+              "caption": "Buku dipinjam di perpustakaan minggu ini"
+            }
+          ],
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "b",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "e",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "f",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Cari baris Rabu, lalu baca angka di kolom Banyak buku: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95],
+            "b": [20, 95],
+            "c": [20, 95],
+            "e": [20, 95],
+            "f": [20, 95]
+          },
+          "prompt": "Lihat tabel. Berapa buku dipinjam pada hari Jumat?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Banyak buku"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "=c"],
+                ["Kamis", "=e"],
+                ["Jumat", "=f"]
+              ],
+              "caption": "Buku dipinjam di perpustakaan minggu ini"
+            }
+          ],
+          "answer": "f",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "e",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Cari baris Jumat di kolom Hari, lalu baca angka di sebelahnya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 80],
+            "b": [12, 80],
+            "c": [12, 80],
+            "e": [12, 80]
+          },
+          "prompt": "Berapa kg tomat yang dipanen?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Sayur", "Hasil (kg)"],
+              "rows": [
+                ["Jagung", "=a"],
+                ["Cabai", "=b"],
+                ["Tomat", "=c"],
+                ["Terong", "=e"]
+              ],
+              "caption": "Hasil panen kebun sekolah"
+            }
+          ],
+          "answer": "c",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "b",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "e",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Cari baris Tomat, lalu baca kolom Hasil (kg): {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 80],
+            "b": [12, 80],
+            "c": [12, 80],
+            "e": [12, 80]
+          },
+          "prompt": "Berapa kg cabai yang dipanen?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Sayur", "Hasil (kg)"],
+              "rows": [
+                ["Jagung", "=a"],
+                ["Cabai", "=b"],
+                ["Tomat", "=c"],
+                ["Terong", "=e"]
+              ],
+              "caption": "Hasil panen kebun sekolah"
+            }
+          ],
+          "answer": "b",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "e",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Cari baris Cabai, lalu baca kolom Hasil (kg): {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "b": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "c": {
+              "range": [250, 990],
+              "step": 10
+            },
+            "e": {
+              "range": [250, 990],
+              "step": 10
+            }
+          },
+          "prompt": "Berapa pengunjung taman kota pada hari Minggu?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Pengunjung"],
+              "rows": [
+                ["Kamis", "=a"],
+                ["Jumat", "=b"],
+                ["Sabtu", "=c"],
+                ["Minggu", "=e"]
+              ],
+              "caption": "Pengunjung taman kota"
+            }
+          ],
+          "answer": "e",
+          "unit": "orang",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "b",
+              "tag": "baris-lain"
+            },
+            {
+              "expr": "c",
+              "tag": "baris-lain"
+            }
+          ],
+          "explain": "Cari baris Minggu, lalu baca kolom Pengunjung: {answer}."
+        }
+      }
+    ]
+  }
+}

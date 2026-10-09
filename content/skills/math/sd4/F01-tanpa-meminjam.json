@@ -1,0 +1,120 @@
+{
+  "id": "math.sd4.f1.tanpa-meminjam",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "F",
+  "order": 1,
+  "title": "Pengurangan bilangan besar — Level 1 — Tanpa meminjam",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [0, 9],
+            "x3": [0, 9],
+            "a3": [2, 9]
+          },
+          "derived": {
+            "b0": "floor(x0 * (a0 + 1) / 10)",
+            "b1": "floor(x1 * (a1 + 1) / 10)",
+            "b2": "floor(x2 * (a2 + 1) / 10)",
+            "b3": "1 + floor(x3 * (a3 - 1) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "kb": "abs(a0 - b0) * 1 + abs(a1 - b1) * 10 + abs(a2 - b2) * 100 + abs(a3 - b3) * 1000"
+          },
+          "prompt": "Kurangi bilangan atas dengan bilangan bawah pada tabel. Hasilnya …",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["", "Ribuan", "Ratusan", "Puluhan", "Satuan"],
+              "rows": [
+                ["", "=a3", "=a2", "=a1", "=a0"],
+                ["−", "=b3", "=b2", "=b1", "=b0"]
+              ]
+            }
+          ],
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "kb",
+              "tag": "kurangi-kecil-dari-besar"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Susun ke bawah, kurangi mulai dari satuan. Satuan: {a0} − {b0} = {=a0-b0}. Puluhan: {a1} − {b1} = {=a1-b1}. Ratusan: {a2} − {b2} = {=a2-b2}. Ribuan: {a3} − {b3} = {=a3-b3}. Hasilnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [0, 9],
+            "x1": [0, 9],
+            "a1": [0, 9],
+            "x2": [0, 9],
+            "a2": [0, 9],
+            "x3": [0, 9],
+            "a3": [2, 9]
+          },
+          "derived": {
+            "b0": "floor(x0 * (a0 + 1) / 10)",
+            "b1": "floor(x1 * (a1 + 1) / 10)",
+            "b2": "floor(x2 * (a2 + 1) / 10)",
+            "b3": "1 + floor(x3 * (a3 - 1) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "kb": "abs(a0 - b0) * 1 + abs(a1 - b1) * 10 + abs(a2 - b2) * 100 + abs(a3 - b3) * 1000"
+          },
+          "prompt": "{a} − {b} = …",
+          "answer": "a - b",
+          "distractors": [
+            {
+              "expr": "kb",
+              "tag": "kurangi-kecil-dari-besar"
+            },
+            {
+              "expr": "a - b - 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Susun ke bawah, kurangi mulai dari satuan. Satuan: {a0} − {b0} = {=a0-b0}. Puluhan: {a1} − {b1} = {=a1-b1}. Ratusan: {a2} − {b2} = {=a2-b2}. Ribuan: {a3} − {b3} = {=a3-b3}. Hasilnya {answer}."
+        }
+      }
+    ]
+  }
+}

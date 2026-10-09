@@ -1,0 +1,117 @@
+{
+  "id": "math.sd4.v5.menjumlahkan-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 5,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 5 — Menjumlahkan desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [0, 5],
+            "a": [1, 9],
+            "v": [0, 4],
+            "b": [1, 9]
+          },
+          "prompt": "{x} + {y} = …",
+          "answer": "x + y",
+          "explain": "Luruskan koma. Jumlahkan persepuluhan: {a} + {b} = {=a+b}. Bila 10 atau lebih, simpan 1 ke satuan. Lalu jumlahkan satuan: hasilnya {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "distractors": [
+            {
+              "expr": "u + v + ((a + b) % 10) / 10",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "x + y + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "u + v + (a + b) / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 89],
+            "b": [11, 89]
+          },
+          "prompt": "{x} + {y} = …",
+          "answer": "x + y",
+          "explain": "Luruskan koma, lalu jumlahkan seperti bilangan bulat: {a} perseratus + {b} perseratus = {=a+b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 100",
+            "y": "b / 100"
+          },
+          "constraint": "a + b < 100 && (a + b) % 10 != 0",
+          "distractors": [
+            {
+              "expr": "(a + b) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "x + y + 0.1",
+              "tag": "lebih-sepersepuluh"
+            },
+            {
+              "expr": "x + y - 0.01",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 89]
+          },
+          "prompt": "{x} + {y} = …",
+          "answer": "x + y",
+          "explain": "Luruskan koma: tulis {x} sebagai {x}0. Lalu {=a*10} perseratus + {b} perseratus = {=a*10+b} perseratus = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100"
+          },
+          "constraint": "b % 10 != 0 && a * 10 + b < 100",
+          "distractors": [
+            {
+              "expr": "(a + b) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "(a + b) / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "x + y + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

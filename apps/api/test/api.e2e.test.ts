@@ -131,6 +131,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'Math Grade 2',
         'Math Grade 1-2 (Olimpiade)',
         'Math Grade 3',
+        'Math Grade 4',
         'Math Grade 3-4 (Olimpiade)',
         'Math Grade 5-6 (Olimpiade)',
         'Math SMP Kelas 7-9 (Olimpiade)',
@@ -174,7 +175,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         (await q('select count(*) n from children where active')) +
         (await q('select count(*) n from staff_users where active'));
       expect(res.body).toMatchObject({
-        books: 27,
+        books: 28,
         totalLevels: SKILL_COUNT,
         users,
         rounds: await q("select count(*) n from events where type = 'quiz_result'"),
@@ -1468,17 +1469,18 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('manifest kalimat → admin membuat klip sekali → klip di-cache selamanya', async () => {
       const before = await http().get('/voice/lines').expect(200);
       expect(before.body.enabled).toBe(true);
-      expect(Object.keys(before.body.lines)).toHaveLength(44);
+      // +2 perintah game EMC Kelas 3–4: koordinat & peluang (D-101).
+      expect(Object.keys(before.body.lines)).toHaveLength(52);
       expect(before.body.lines.vo_cmd_pick_one).toMatchObject({ clip: null });
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 44, created: 44, failed: 0, skipped: 0 });
+        .expect(200, { total: 52, created: 52, failed: 0, skipped: 0 });
       const calls = ttsCalls.length;
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 44, created: 0, failed: 0, skipped: 44 });
+        .expect(200, { total: 52, created: 0, failed: 0, skipped: 52 });
       expect(ttsCalls.length).toBe(calls); // tidak dibuat ulang
       const after = await http().get('/voice/lines').expect(200);
       const key = after.body.lines.vo_cmd_pick_one.clip;

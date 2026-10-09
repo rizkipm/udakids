@@ -1,0 +1,158 @@
+{
+  "id": "math.sd4.bb7.menyusun-sudut-dari-sudut-kecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 7,
+  "title": "Garis dan sudut — Level 7 — Menyusun sudut dari sudut kecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 15, 20, 30]
+            },
+            "n": [2, 9]
+          },
+          "constraint": "n * a <= 180",
+          "prompt": "Sebuah sudut tersusun dari {n} sudut kecil yang sama, masing-masing {a}°. Berapa derajat besar sudut itu?",
+          "answer": "n * a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "n + a",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "n * a + a",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "n * a - a",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Sudut kecil yang sama dijumlahkan berulang: {n} × {a}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 15, 18, 30, 45]
+            }
+          },
+          "prompt": "Berapa sudut kecil berukuran {a}° yang diperlukan untuk mengisi tepat satu sudut siku-siku?",
+          "answer": "90 / a",
+          "distractors": [
+            {
+              "expr": "180 / a",
+              "tag": "memakai-180"
+            },
+            {
+              "expr": "90 / a + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "90 - a",
+              "tag": "dikurangi"
+            }
+          ],
+          "explain": "Sudut siku-siku 90°. Bagi dengan ukuran sudut kecil: 90 : {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [10, 15, 20, 30, 36, 45, 60]
+            }
+          },
+          "prompt": "Berapa sudut kecil berukuran {a}° yang diperlukan untuk membentuk sudut lurus?",
+          "answer": "180 / a",
+          "distractors": [
+            {
+              "expr": "90 / a",
+              "tag": "memakai-90"
+            },
+            {
+              "expr": "360 / a",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "180 - a",
+              "tag": "dikurangi"
+            }
+          ],
+          "explain": "Sudut lurus 180°. 180 : {a} = {answer} sudut kecil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 12],
+            "a": {
+              "values": [10, 15]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "n * a <= 180",
+          "prompt": "{nama} membuka kipas lipat. Kipas itu punya {n} lipatan yang sama, setiap lipatan membuka {a}°. Berapa derajat bukaan kipas seluruhnya?",
+          "answer": "n * a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "n + a",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "(n - 1) * a",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(n + 1) * a",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlahkan semua lipatan: {n} × {a}° = {answer}."
+        }
+      }
+    ]
+  }
+}

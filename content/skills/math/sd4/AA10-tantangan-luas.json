@@ -1,0 +1,303 @@
+{
+  "id": "math.sd4.aa10.tantangan-luas",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 10,
+  "title": "Luas persegi dan persegi panjang — Level 10 — Tantangan luas",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 9],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Setiap petak luasnya 1 cm². Berapa cm² luas bangun ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": true
+            }
+          ],
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "w * h - w",
+              "tag": "kurang-satu-baris"
+            }
+          ],
+          "explain": "Hitung per baris: ada {h} baris, setiap baris {w} petak. {h} × {w} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [11, 25],
+            "h": [3, 9]
+          },
+          "prompt": "Sebuah persegi panjang berukuran {w} cm × {h} cm. Berapa cm² luasnya?",
+          "answer": "w * h",
+          "unit": "cm²",
+          "explain": "Kalikan panjang dengan lebar: {w} × {h} = {answer}. Pecah bila perlu: {=w-w%10} × {h} + {=w%10} × {h}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Persegi ini bersisi {s} cm. Berapa cm² luasnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=s",
+              "h": "=s",
+              "unit": "cm"
+            }
+          ],
+          "answer": "s * s",
+          "unit": "cm²",
+          "explain": "Luas persegi = sisi × sisi = {s} × {s} = {answer}. Bukan 4 × {s}, karena itu kelilingnya.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "lapangan sepak bola",
+              "lantai ruang kelas",
+              "halaman rumah",
+              "kolam renang",
+              "atap rumah",
+              "kebun sayur"
+            ]
+          },
+          "prompt": "Satuan yang paling tepat untuk luas {x} adalah …",
+          "answer": "2",
+          "labels": {
+            "1": "cm²",
+            "2": "m²",
+            "3": "cm",
+            "4": "m"
+          },
+          "labelSay": {
+            "1": "sentimeter persegi",
+            "2": "meter persegi",
+            "3": "sentimeter",
+            "4": "meter"
+          },
+          "explain": "Permukaan yang luas diukur dengan meter persegi (m²). cm dan m adalah satuan panjang, bukan luas."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "constraint": "w > h",
+          "derived": {
+            "l": "w * h"
+          },
+          "prompt": "Luas persegi panjang {l} cm² dan panjangnya {w} cm. Berapa cm lebarnya?",
+          "answer": "l / w",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "l - w",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "l / 2",
+              "tag": "dibagi-2"
+            },
+            {
+              "expr": "h + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Luas = panjang × lebar, jadi lebar = luas : panjang = {l} : {w} = {answer}. Cek: {w} × {answer} = {l}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [3, 10],
+            "k": {
+              "values": [4, 5, 6, 8, 10]
+            }
+          },
+          "constraint": "p > l && (p * l) % k == 0",
+          "prompt": "Lantai {p} m × {l} m ditutup ubin 1 m × 1 m. Satu dus berisi {k} ubin. Berapa dus ubin yang perlu dibeli?",
+          "answer": "p * l / k",
+          "explain": "Langkah 1: banyak ubin = {p} × {l} = {=p*l}. Langkah 2: {=p*l} : {k} = {answer} dus.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [4, 10],
+            "b": [2, 6],
+            "c": [2, 6],
+            "e": [2, 5]
+          },
+          "constraint": "c < a",
+          "prompt": "Bangun huruf L tersusun dari persegi panjang {a} cm × {b} cm dan persegi panjang {c} cm × {e} cm. Berapa cm² luas seluruhnya?",
+          "answer": "a * b + c * e",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "satu-bagian"
+            },
+            {
+              "expr": "(a + c) * (b + e)",
+              "tag": "sisi-digabung"
+            },
+            {
+              "expr": "a * b + c + e",
+              "tag": "bagian-kedua-dijumlah"
+            }
+          ],
+          "explain": "Pecah menjadi dua persegi panjang. {a} × {b} = {=a*b} dan {c} × {e} = {=c*e}. Jumlahkan: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [8, 15],
+            "h": [6, 10],
+            "s": [2, 4]
+          },
+          "prompt": "Dari kertas {w} cm × {h} cm, digunting persegi {s} cm × {s} cm di satu pojoknya. Berapa cm² luas kertas yang tersisa?",
+          "answer": "w * h - s * s",
+          "unit": "cm²",
+          "explain": "Luas kertas utuh {w} × {h} = {=w*h}. Potongannya {s} × {s} = {=s*s}. Sisa = {=w*h} − {=s*s} = {answer}.",
+          "mode": "input"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "derived": {
+            "k": "4 * s"
+          },
+          "prompt": "Keliling sebuah persegi {k} cm. Berapa cm² luasnya?",
+          "answer": "s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "keliling-saja"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "sisi-dikali-2"
+            },
+            {
+              "expr": "k * s",
+              "tag": "keliling-dikali-sisi"
+            }
+          ],
+          "explain": "Cari sisinya dulu: {k} : 4 = {s} cm. Lalu luas = {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [2, 6],
+            "l": [2, 5],
+            "h": {
+              "values": [25000, 30000, 40000, 50000]
+            }
+          },
+          "constraint": "p > l",
+          "prompt": "Lantai kamar {p} m × {l} m ditutup karpet. Harga karpet Rp{h} per m². Berapa rupiah harga karpet seluruhnya?",
+          "answer": "p * l * h",
+          "distractors": [
+            {
+              "expr": "2 * (p + l) * h",
+              "tag": "memakai-keliling"
+            },
+            {
+              "expr": "(p + l) * h",
+              "tag": "menjumlah-sisi"
+            },
+            {
+              "expr": "p * l * h + h",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Langkah 1: luas = {p} × {l} = {=p*l} m². Langkah 2: {=p*l} × Rp{h} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [2, 6],
+            "q": [2, 12]
+          },
+          "constraint": "p > l && (p * l) % q == 0 && q != l && q != p && q < p * l / q",
+          "prompt": "Persegi panjang A berukuran {p} cm × {l} cm. Persegi panjang B luasnya sama dengan A, lebarnya {q} cm. Berapa cm panjang B?",
+          "answer": "p * l / q",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "p * l - q",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "p",
+              "tag": "sama-dengan-a"
+            },
+            {
+              "expr": "p * l / q + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Luas A = {p} × {l} = {=p*l} cm². Panjang B = {=p*l} : {q} = {answer}."
+        }
+      }
+    ]
+  }
+}

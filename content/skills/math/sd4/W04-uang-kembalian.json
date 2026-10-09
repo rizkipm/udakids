@@ -1,0 +1,240 @@
+{
+  "id": "math.sd4.w4.uang-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "W",
+  "order": 4,
+  "title": "Uang dan literasi keuangan — Level 4 — Uang kembalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [12500, 97500],
+              "step": 500
+            }
+          },
+          "prompt": "{nama} membeli {x} seharga Rp{h} dan membayar dengan uang Rp{p}. Berapa uang kembaliannya?",
+          "answer": "p - h",
+          "explain": "Kembalian = uang yang dibayar − harga. {p} − {h} = {answer}.",
+          "derived": {
+            "p": "50000 + 50000 * (h > 50000)"
+          },
+          "constraint": "h % 50000 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "p + h",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "p - h + 1000",
+              "tag": "lupa-meminjam"
+            },
+            {
+              "expr": "p - h - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - h) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - h) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - h) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [5000, 25000],
+              "step": 500
+            },
+            "b": {
+              "range": [2000, 20000],
+              "step": 500
+            },
+            "p": {
+              "values": [50000, 100000]
+            }
+          },
+          "prompt": "Ayah membeli {x} Rp{a} dan {y} Rp{b}. Ayah membayar dengan uang Rp{p}. Berapa kembaliannya?",
+          "answer": "p - a - b",
+          "explain": "Hitung total dulu: {a} + {b} = {=a+b}. Kembalian = {p} − {=a+b} = {answer}.",
+          "constraint": "a + b < p",
+          "words": {
+            "x": ["roti", "nasi bungkus", "kue lapis", "pisang goreng", "bakso", "martabak manis"],
+            "y": [
+              "buku tulis",
+              "pensil warna",
+              "penggaris",
+              "spidol",
+              "buku gambar",
+              "penghapus",
+              "kotak pensil",
+              "lem kertas"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "p - a",
+              "tag": "lupa-satu-barang"
+            },
+            {
+              "expr": "a + b",
+              "tag": "total-saja"
+            },
+            {
+              "expr": "p - a - b + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - a - b) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [20000, 50000, 100000]
+            },
+            "k": {
+              "range": [500, 19500],
+              "step": 500
+            }
+          },
+          "prompt": "{nama} membayar Rp{p} untuk membeli {x}. Ia menerima kembalian Rp{k}. Berapa harga {x}?",
+          "answer": "p - k",
+          "explain": "Harga = uang yang dibayar − kembalian. {p} − {k} = {answer}. Periksa: {answer} + {k} = {p}.",
+          "constraint": "k < p",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "x": [
+              "sepatu sekolah",
+              "tas sekolah",
+              "sepeda",
+              "bola sepak",
+              "jam tangan",
+              "kamus",
+              "raket",
+              "seragam olahraga"
+            ]
+          },
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "p + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "k",
+              "tag": "kembalian"
+            },
+            {
+              "expr": "p - k + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - k) + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - k) - 500",
+              "tag": "lain"
+            },
+            {
+              "expr": "(p - k) + 500",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

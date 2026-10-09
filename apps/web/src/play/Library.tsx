@@ -437,8 +437,15 @@ function sectionsOf(shelves: Shelf[]): { group?: string; shelves: Shelf[] }[] {
     if (sec) sec.shelves.push(s);
     else out.push({ group: g, shelves: [s] });
   }
-  return out;
+  // Bagian "Game · …" selalu di akhir buku (D-078), walau katalog di server menyimpan bagian lomba yang lebih baru
+  // sesudahnya (mis. EMC Kelas 3–4, D-101), supaya semua bagian olimpiade tampil berdampingan.
+  return [
+    ...out.filter((x) => !isGameSection(x.group)),
+    ...out.filter((x) => isGameSection(x.group)),
+  ];
 }
+
+const isGameSection = (group?: string) => !!group && /^Game · /.test(group);
 
 function TopicCard({
   links,

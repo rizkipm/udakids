@@ -1,0 +1,91 @@
+{
+  "id": "math.sd4.v1.membandingkan-persepuluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 1,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 1 — Bandingkan persepuluhan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [0, 4],
+            "v": [0, 4],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Bandingkan dulu angka di depan koma: {u} dan {v}. Jika sama, bandingkan angka persepuluhan: {a} dan {b}. Jadi {x} {answer_say} {y}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "constraint": "abs(u - v) <= 1"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Batang atas menunjukkan {x}, batang bawah menunjukkan {y}. Bandingkan: {x} … {y}",
+          "answer": "(x > y) + 2 * (x < y) + 3 * (x == y)",
+          "explain": "Batang atas diarsir {a} dari 10 bagian, batang bawah {b} dari 10 bagian. Arsiran yang lebih panjang menunjukkan desimal yang lebih besar. Jadi {x} {answer_say} {y}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 10"
+          },
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=a",
+              "den": 10,
+              "model": "bar",
+              "hideNumber": true
+            },
+            {
+              "kind": "fraction",
+              "num": "=b",
+              "den": 10,
+              "model": "bar",
+              "hideNumber": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "id": "math.sd34.ea1.keliling-lingkaran-dan-jari-jari",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 1,
+  "title": "Geometri bidang & ruang — Level 1 — Keliling lingkaran dan jari-jari",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menentukan jari-jari dari keliling lingkaran (dalam π)",
+    "emc-no": "3"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [3, 14]
+          },
+          "derived": {
+            "k": "2 * r"
+          },
+          "words": {
+            "benda": [
+              "tutup toples",
+              "jam dinding",
+              "piring",
+              "roda mainan",
+              "hiasan bundar",
+              "tampah",
+              "kolam bundar",
+              "taman bundar"
+            ]
+          },
+          "prompt": "Tali yang dililitkan tepat satu putaran di tepi {benda} bundar panjangnya {k}π cm. Berapa cm jari-jari {benda} itu?",
+          "say": "Tali yang dililitkan tepat satu putaran di tepi {benda} bundar panjangnya {k} pi sentimeter. Berapa sentimeter jari-jarinya?",
+          "answer": "r",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "diameter"
+            },
+            {
+              "expr": "k * 2",
+              "tag": "dikali-dua"
+            },
+            {
+              "expr": "r * 4",
+              "tag": "keliling-4r"
+            }
+          ],
+          "choices": 4,
+          "explain": "Keliling = 2 × π × jari-jari. Jadi 2 × r = {k}, sehingga r = {k} : 2 = {r} cm."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 15]
+          },
+          "words": {
+            "benda": [
+              "tutup toples",
+              "jam dinding",
+              "piring",
+              "roda mainan",
+              "hiasan bundar",
+              "tampah",
+              "kolam bundar",
+              "taman bundar"
+            ]
+          },
+          "prompt": "Jari-jari sebuah {benda} adalah {r} cm. Keliling {benda} itu adalah …",
+          "say": "Jari-jari sebuah {benda} adalah {r} sentimeter. Berapa kelilingnya, dalam pi sentimeter?",
+          "answer": "2 * r",
+          "unit": "π cm",
+          "distractors": [
+            {
+              "expr": "r",
+              "tag": "lupa-dikali-2"
+            },
+            {
+              "expr": "r * r",
+              "tag": "rumus-luas"
+            },
+            {
+              "expr": "4 * r",
+              "tag": "dikali-4"
+            }
+          ],
+          "choices": 4,
+          "explain": "Keliling = 2 × π × r = 2 × {r} × π = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [4, 30]
+          },
+          "words": {
+            "benda": [
+              "tutup toples",
+              "jam dinding",
+              "piring",
+              "roda mainan",
+              "hiasan bundar",
+              "tampah",
+              "kolam bundar",
+              "taman bundar"
+            ]
+          },
+          "prompt": "Diameter sebuah {benda} {d} cm. Keliling {benda} itu adalah …",
+          "say": "Diameter sebuah {benda} adalah {d} sentimeter. Berapa kelilingnya, dalam pi sentimeter?",
+          "answer": "d",
+          "unit": "π cm",
+          "distractors": [
+            {
+              "expr": "2 * d",
+              "tag": "diameter-dikali-2"
+            },
+            {
+              "expr": "d / 2",
+              "tag": "jari-jari"
+            },
+            {
+              "expr": "d * d / 4",
+              "tag": "rumus-luas"
+            }
+          ],
+          "choices": 4,
+          "explain": "Diameter = 2 × jari-jari, jadi keliling = π × diameter = {answer}."
+        }
+      }
+    ]
+  }
+}

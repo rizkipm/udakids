@@ -1,0 +1,209 @@
+{
+  "id": "math.sd4.y7.soal-cerita-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 7,
+  "title": "Satuan panjang, berat, dan volume — Level 7 — Soal cerita panjang",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": {
+              "range": [15, 95],
+              "step": 5
+            }
+          },
+          "prompt": "{nama} punya pita sepanjang {a} m. Pita itu dipotong {b} cm untuk membuat bunga. Berapa cm sisa pitanya?",
+          "answer": "a * 100 - b",
+          "explain": "Samakan satuan dulu: {a} m = {=a*100} cm. Sisa = {=a*100} − {b} = {answer} cm.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(a * 10 - b)",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 100 - b - 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 1],
+            "b": [55, 80],
+            "c": [120, 145]
+          },
+          "prompt": "Tinggi {nama} {c} cm. Tinggi ayahnya {a} m {b} cm. Berapa cm selisih tinggi mereka?",
+          "answer": "a * 100 + b - c",
+          "explain": "Ubah tinggi ayah ke cm: {a} m {b} cm = {=a*100+b} cm. Selisih = {=a*100+b} − {c} = {answer} cm.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a * 100 + b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "abs(b - c)",
+              "tag": "lupa-meter"
+            },
+            {
+              "expr": "a * 100 + b - c + 10",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [150, 900],
+              "step": 50
+            },
+            "n": [2, 6]
+          },
+          "prompt": "Jarak rumah {nama} ke sekolah {a} m. Setiap hari ia berangkat dan pulang dengan berjalan kaki. Berapa meter yang ia tempuh dalam {n} hari sekolah?",
+          "answer": "a * 2 * n",
+          "explain": "Sehari ia berjalan pergi dan pulang: 2 × {a} = {=2*a} m. Dalam {n} hari: {n} × {=2*a} = {answer} m.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a * n",
+              "tag": "lupa-pulang"
+            },
+            {
+              "expr": "a * 2",
+              "tag": "satu-hari"
+            },
+            {
+              "expr": "a * 2 * n + a",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": {
+              "values": [10, 20, 25, 50]
+            }
+          },
+          "prompt": "Tali sepanjang {a} m dipotong-potong sama panjang. Setiap potong {b} cm. Berapa potong tali yang didapat?",
+          "answer": "a * 100 / b",
+          "explain": "Samakan satuan: {a} m = {=a*100} cm. Lalu {=a*100} : {b} = {answer} potong.",
+          "constraint": "a * 100 / b <= 30",
+          "distractors": [
+            {
+              "expr": "a * 10 / b",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 100 / b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "a * 100 - b",
+              "tag": "mengurangi"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

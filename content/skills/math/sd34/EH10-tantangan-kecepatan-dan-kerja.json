@@ -1,0 +1,161 @@
+{
+  "id": "math.sd34.eh10.tantangan-kecepatan-dan-kerja",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 10,
+  "title": "Kecepatan & kerja — Level 10 — Tantangan kecepatan dan kerja",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Gabungan semua indikator kecepatan & kerja"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v1": [30, 70],
+            "v2": [20, 60],
+            "t": [1, 4]
+          },
+          "derived": {
+            "d": "(v1 + v2) * t"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "constraint": "v1 != v2",
+          "prompt": "Kota P dan kota Q berjarak {d} km. {n1} naik motor dari P ke Q dengan kecepatan {v1} km/jam. Pada saat yang sama {n2} naik mobil dari Q ke P dengan kecepatan {v2} km/jam. Mereka berpapasan setelah … jam.",
+          "answer": "t",
+          "unit": "jam",
+          "distractors": [
+            {
+              "expr": "d / v1",
+              "tag": "satu-kendaraan"
+            },
+            {
+              "expr": "t + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "2 * t",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Saling mendekat berarti jarak berkurang {v1} + {v2} = {=v1+v2} km setiap jam. Waktu = {d} : {=v1+v2} = {answer} jam."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 5],
+            "u": [1, 12]
+          },
+          "derived": {
+            "d": "(k + 1) * u"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "prompt": "{n1} dan {n2} bersepeda saling mendekat dari dua tempat yang berjarak {d} km. Kecepatan {n1} {k} kali kecepatan {n2}. Saat berpapasan, {n2} sudah bersepeda sejauh … km.",
+          "answer": "u",
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "d / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "k * u",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "d / k",
+              "tag": "dibagi-k"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam waktu yang sama, jarak sebanding dengan kecepatan: {n1} : {n2} = {k} : 1. Jarak {d} km dibagi {=k+1} bagian, {n2} menempuh 1 bagian = {answer} km."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12],
+            "b": [2, 12]
+          },
+          "constraint": "a < b && (a * b * 60) % (a + b) == 0",
+          "prompt": "Keran A dapat mengisi penuh sebuah kolam dalam {a} jam, sedangkan keran B dalam {b} jam. Jika kedua keran dibuka bersamaan, kolam penuh dalam … menit.",
+          "answer": "a * b * 60 / (a + b)",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "(a + b) * 30",
+              "tag": "rata-rata-waktu"
+            },
+            {
+              "expr": "(a + b) * 60",
+              "tag": "dijumlah"
+            },
+            {
+              "expr": "(b - a) * 60",
+              "tag": "dikurangi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam 1 jam, A mengisi 1/{a} kolam dan B mengisi 1/{b} kolam, bersama {=a+b}/{=a*b} kolam. Waktu = {=a*b}/{=a+b} jam = {=a*b} × 60 : {=a+b} = {answer} menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [2, 12],
+            "x": [1, 36]
+          },
+          "derived": {
+            "a": "t + x",
+            "b": "t + t * t / x"
+          },
+          "words": {
+            "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+            "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+          },
+          "constraint": "(t * t) % x == 0 && x != t && b <= 72",
+          "prompt": "{n1} dan {n2} bersama-sama dapat menyelesaikan sebuah mozaik dalam {t} jam. Jika {n1} bekerja sendiri, mozaik itu selesai dalam {a} jam. Jika {n2} bekerja sendiri, mozaik itu selesai dalam … jam.",
+          "answer": "b",
+          "unit": "jam",
+          "explain": "Bersama: 1/{t} mozaik per jam. {n1}: 1/{a} mozaik per jam. {n2} = 1/{t} − 1/{a} = 1/{answer} mozaik per jam, jadi {n2} butuh {answer} jam.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "waktu-sendiri"
+            },
+            {
+              "expr": "a - t",
+              "tag": "dikurangi"
+            },
+            {
+              "expr": "a * t",
+              "tag": "dikali"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

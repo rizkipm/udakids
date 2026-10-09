@@ -1,0 +1,226 @@
+{
+  "id": "math.sd4.t8.pecahan-dari-banyak-benda",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 8,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 8 — Pecahan dari banyak benda",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 8],
+            "n": [2, 7],
+            "q": [2, 8]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "constraint": "n < d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {m} kelereng. Sebanyak {n}/{d} dari kelereng itu berwarna biru. Berapa kelereng yang berwarna biru?",
+          "answer": "n * q",
+          "distractors": [
+            {
+              "expr": "q",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "m - n * q",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "n * q + q",
+              "tag": "lebih-satu-bagian"
+            }
+          ],
+          "explain": "{m} : {d} = {q} kelereng untuk setiap bagian. Ada {n} bagian biru: {q} × {n} = {answer} kelereng."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 5]
+            },
+            "n": [2, 4],
+            "q": [2, 10]
+          },
+          "derived": {
+            "m": "d * q * 1000"
+          },
+          "constraint": "n < d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "Uang saku {nama} seminggu Rp{m}. {nama} menabung {n}/{d} dari uang sakunya. Berapa rupiah yang ditabung?",
+          "answer": "n * q * 1000",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "q * 1000",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "m - n * q * 1000",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "n * q * 1000 + 1000",
+              "tag": "lain"
+            },
+            {
+              "expr": "n * q * 1000 - 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi dulu: Rp{m} : {d} = Rp{=q*1000}. Lalu kali {n}: Rp{=q*1000} × {n} = Rp{=n*q*1000}. Jadi yang ditabung {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "q": [3, 7]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "constraint": "n < d",
+          "words": {
+            "olahraga": ["sepak bola", "bulu tangkis", "berenang", "bersepeda"]
+          },
+          "prompt": "Di kelas ada {m} murid. Sebanyak {n}/{d} dari mereka suka {olahraga}. Berapa murid yang suka {olahraga}?",
+          "answer": "n * q",
+          "distractors": [
+            {
+              "expr": "q",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "m - n * q",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "n * q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{m} : {d} = {q} murid untuk setiap bagian. {n} bagian = {q} × {n} = {answer} murid."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 6],
+            "n": [1, 5],
+            "q": [2, 6]
+          },
+          "derived": {
+            "m": "d * q"
+          },
+          "constraint": "n < d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} punya {m} permen. Sebanyak {n}/{d} dari permen itu dibagikan kepada teman. Berapa permen yang masih dimiliki {nama}?",
+          "answer": "m - n * q",
+          "distractors": [
+            {
+              "expr": "n * q",
+              "tag": "yang-dibagikan"
+            },
+            {
+              "expr": "q",
+              "tag": "hanya-dibagi"
+            },
+            {
+              "expr": "m - q",
+              "tag": "satu-bagian"
+            }
+          ],
+          "explain": "Permen yang dibagikan: {m} : {d} × {n} = {=n*q}. Sisanya {m} − {=n*q} = {answer} permen."
+        }
+      }
+    ]
+  }
+}

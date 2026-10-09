@@ -1,0 +1,342 @@
+{
+  "id": "math.sd34.ea10.tantangan-geometri-bidang-dan-ruang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 10,
+  "title": "Geometri bidang & ruang — Level 10 — Tantangan geometri bidang dan ruang",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Gabungan semua indikator geometri bidang & ruang"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [3, 7],
+            "b": [1, 6],
+            "k": [2, 10]
+          },
+          "derived": {
+            "p": "a * k",
+            "l": "b * k",
+            "kel": "2 * (p + l)"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "b < a && gcd(a, b) == 1 && !(a == 3 && b == 2 && k == 4)",
+          "prompt": "{nama} menekuk seutas pita {kel} cm sampai membentuk bingkai persegi panjang. Panjang bingkai banding lebarnya {a} : {b}. Berapa cm² luas daerah di dalam bingkai?",
+          "answer": "p * l",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "kel",
+              "tag": "keliling"
+            },
+            {
+              "expr": "a * b * k",
+              "tag": "lupa-kali-k"
+            },
+            {
+              "expr": "p * l * 2",
+              "tag": "dikali-dua"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang + lebar = {kel} : 2 = {=p+l} cm, dibagi {=a+b} bagian, satu bagian = {k} cm. Panjang = {p} cm, lebar = {l} cm. Luas = {p} × {l} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 5],
+            "v": [1, 4],
+            "k": [1, 3]
+          },
+          "derived": {
+            "a": "k * (u * u - v * v)",
+            "b": "k * 2 * u * v",
+            "c": "k * (u * u + v * v)",
+            "luas": "a * b",
+            "kel": "2 * (a + b)"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "v < u && a + b <= 70 && a != b",
+          "prompt": "Pak {nama} punya papan persegi panjang dengan luas {luas} cm² dan keliling {kel} cm. Papan itu digergaji lurus dari satu pojok ke pojok seberangnya. Keliling salah satu potongan segitiganya adalah … cm.",
+          "answer": "a + b + c",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "kel",
+              "tag": "keliling-persegi-panjang"
+            },
+            {
+              "expr": "a + b",
+              "tag": "lupa-diagonal"
+            },
+            {
+              "expr": "kel + c",
+              "tag": "ditambah-diagonal"
+            },
+            {
+              "expr": "2 * c",
+              "tag": "dua-diagonal"
+            }
+          ],
+          "choices": 4,
+          "explain": "Panjang + lebar = {kel} : 2 = {=a+b}, dan panjang × lebar = {luas}. Bilangan yang cocok: {a} dan {b}. Diagonal = √({a}² + {b}²) = {c}. Keliling segitiga = {a} + {b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [1, 3],
+            "n": [1, 3],
+            "k": [1, 6]
+          },
+          "derived": {
+            "lt": "2 * (m + n) * k"
+          },
+          "constraint": "gcd(m, n) == 1",
+          "prompt": "Pada gambar, D titik tengah AC dan titik F pada BD dengan DF : FB = {m} : {n}. Luas segitiga ABC {lt} cm². Luas segitiga AFB (daerah arsir) adalah … cm².",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    [8, 0],
+                    [3, 6]
+                  ]
+                },
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    ["=4 - m / (m + n)", "=6 * m / (m + n)"],
+                    [3, 6]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "seg",
+                  "a": [3, 6],
+                  "b": [4, 0]
+                },
+                {
+                  "t": "seg",
+                  "a": [0, 0],
+                  "b": ["=4 - m / (m + n)", "=6 * m / (m + n)"]
+                },
+                {
+                  "t": "seg",
+                  "a": [0, 0],
+                  "b": [4, 0],
+                  "ticks": 1
+                },
+                {
+                  "t": "seg",
+                  "a": [4, 0],
+                  "b": [8, 0],
+                  "ticks": 1
+                },
+                {
+                  "t": "point",
+                  "at": [0, 0],
+                  "name": "A",
+                  "pos": "sw"
+                },
+                {
+                  "t": "point",
+                  "at": [3, 6],
+                  "name": "B",
+                  "pos": "n"
+                },
+                {
+                  "t": "point",
+                  "at": [8, 0],
+                  "name": "C",
+                  "pos": "se"
+                },
+                {
+                  "t": "point",
+                  "at": [4, 0],
+                  "name": "D",
+                  "pos": "s"
+                },
+                {
+                  "t": "point",
+                  "at": ["=4 - m / (m + n)", "=6 * m / (m + n)"],
+                  "name": "F",
+                  "pos": "e"
+                }
+              ]
+            }
+          ],
+          "answer": "n * k",
+          "unit": "cm²",
+          "explain": "Karena AD = DC, luas ABD = setengah luas ABC = {=lt/2} cm². Segitiga AFD dan AFB sama-sama berpuncak di A dengan alas DF dan FB pada satu garis, jadi luasnya sebanding DF : FB = {m} : {n}. Luas AFB = {n}/{=m+n} × {=lt/2} = {answer}.",
+          "choices": 4,
+          "distractors": [
+            {
+              "expr": "m * k",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "lt / 2",
+              "tag": "setengah"
+            },
+            {
+              "expr": "(m + n) * k",
+              "tag": "luas-abd"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [1, 7]
+          },
+          "derived": {
+            "s": "2 * h",
+            "lp": "s * s",
+            "lt": "lp / 2"
+          },
+          "prompt": "Pada gambar, persegi dan segitiga siku-siku sama kaki OPQ tumpang tindih. Titik siku-siku O adalah pusat persegi, dan OP = OQ = sisi persegi. Luas segitiga OPQ {lt} cm². Luas seluruh daerah arsir adalah … cm².",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    ["=s", 0],
+                    ["=s", "=s"],
+                    [0, "=s"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "poly",
+                  "pts": [
+                    ["=h", "=h"],
+                    ["=3*h", "=h"],
+                    ["=h", "=3*h"]
+                  ],
+                  "fill": "shade"
+                },
+                {
+                  "t": "right",
+                  "at": ["=h", "=h"],
+                  "a": ["=3*h", "=h"],
+                  "b": ["=h", "=3*h"]
+                },
+                {
+                  "t": "point",
+                  "at": ["=h", "=h"],
+                  "name": "O",
+                  "pos": "sw"
+                },
+                {
+                  "t": "point",
+                  "at": ["=3*h", "=h"],
+                  "name": "P",
+                  "pos": "e"
+                },
+                {
+                  "t": "point",
+                  "at": ["=h", "=3*h"],
+                  "name": "Q",
+                  "pos": "n"
+                }
+              ]
+            }
+          ],
+          "answer": "lp + lt - lp / 4",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "lp + lt",
+              "tag": "lupa-irisan"
+            },
+            {
+              "expr": "lp + lt - lp / 2",
+              "tag": "irisan-setengah"
+            },
+            {
+              "expr": "lp",
+              "tag": "hanya-persegi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Luas segitiga = sisi × sisi : 2, jadi luas persegi = 2 × {lt} = {lp} cm². Bagian yang tumpang tindih = seperempat persegi = {=lp/4}. Luas gabungan = {lp} + {lt} − {=lp/4} = {answer} cm²."
+        }
+      }
+    ]
+  }
+}

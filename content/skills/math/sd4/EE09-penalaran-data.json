@@ -1,0 +1,183 @@
+{
+  "id": "math.sd4.ee9.penalaran-data",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "EE",
+  "order": 9,
+  "title": "Data: tabel dan diagram — Level 9 — Penalaran data",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20, 95],
+            "b": [20, 95],
+            "c": [20, 95],
+            "e": [20, 95],
+            "f": [20, 95]
+          },
+          "derived": {
+            "t": "a + b + c + e + f"
+          },
+          "prompt": "Total buku dipinjam dari Senin sampai Jumat adalah {t}. Berapa buku dipinjam pada hari Rabu?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Hari", "Banyak buku"],
+              "rows": [
+                ["Senin", "=a"],
+                ["Selasa", "=b"],
+                ["Rabu", "?"],
+                ["Kamis", "=e"],
+                ["Jumat", "=f"]
+              ],
+              "caption": "Buku dipinjam minggu ini"
+            }
+          ],
+          "answer": "c",
+          "distractors": [
+            {
+              "expr": "t - (a + b)",
+              "tag": "kurang-lengkap"
+            },
+            {
+              "expr": "c + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "t - (a + b + e)",
+              "tag": "kurang-lengkap"
+            }
+          ],
+          "explain": "Jumlahkan hari yang diketahui: {a} + {b} + {e} + {f} = {=a+b+e+f}. Rabu = {t} − {=a+b+e+f} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [3, 9],
+            "k": {
+              "values": [4, 5, 10, 20]
+            }
+          },
+          "derived": {
+            "n": "g * k"
+          },
+          "prompt": "Pada piktogram, 1 gambar = {k} botol. Kelas 4E mengumpulkan {n} botol. Berapa gambar yang harus digambar?",
+          "answer": "n / k",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "banyak-botol"
+            },
+            {
+              "expr": "g + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "n - k",
+              "tag": "dikurang"
+            }
+          ],
+          "explain": "Bagi banyak botol dengan nilai satu gambar: {n} : {k} = {answer} gambar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "g": [2, 9]
+          },
+          "derived": {
+            "n": "g * 10 + 5"
+          },
+          "prompt": "Pada piktogram, 1 gambar = 10 buku. Rak C berisi {n} buku. Berapa gambar untuk rak C?",
+          "answer": "n / 10",
+          "format": "decimal",
+          "distractors": [
+            {
+              "expr": "floor(n / 10)",
+              "tag": "buang-setengah"
+            },
+            {
+              "expr": "floor(n / 10) + 1",
+              "tag": "bulatkan-naik"
+            },
+            {
+              "expr": "n / 5",
+              "tag": "skala-lain"
+            }
+          ],
+          "explain": "{n} : 10 = {answer}. Artinya {=floor(n/10)} gambar utuh dan setengah gambar."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [5, 10],
+            "y": [1, 6],
+            "k": {
+              "values": [2, 5, 10]
+            }
+          },
+          "constraint": "x > y",
+          "prompt": "Pada diagram batang, 1 kotak = {k} siswa. Batang Renang setinggi {x} kotak dan batang Senam setinggi {y} kotak. Berapa siswa lebih banyak yang suka renang?",
+          "answer": "(x - y) * k",
+          "distractors": [
+            {
+              "expr": "x - y",
+              "tag": "jumlah-kotak"
+            },
+            {
+              "expr": "(x + y) * k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x * k",
+              "tag": "satu-batang"
+            }
+          ],
+          "explain": "Selisihnya {x} − {y} = {=x-y} kotak. {=x-y} × {k} = {answer} siswa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [20, 40],
+            "t": [5, 18],
+            "m": [2, 6]
+          },
+          "prompt": "Ada {s} siswa yang suka renang dan {t} siswa yang suka senam. Lalu {m} siswa pindah dari renang ke senam. Berapa selisih kedua kelompok sekarang?",
+          "answer": "abs((s - m) - (t + m))",
+          "distractors": [
+            {
+              "expr": "s - t",
+              "tag": "sebelum-pindah"
+            },
+            {
+              "expr": "s - t - m",
+              "tag": "satu-kali"
+            },
+            {
+              "expr": "(s - m) + (t + m)",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Renang menjadi {s} − {m} = {=s-m}, senam menjadi {t} + {m} = {=t+m}. Selisihnya {answer}."
+        }
+      }
+    ]
+  }
+}

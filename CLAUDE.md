@@ -1,4 +1,4 @@
-# CLAUDE.md — Little Coder (Cleo Kids)
+# CLAUDE.md — UdaKids (Cleo Kids)
 
 PWA untuk anak 5–8 tahun: anak "mengajari" robot **Momo** dengan kartu gambar besar yang diketuk;
 urutan kartu = program (**Buku Catatan Momo**). Dua lapisan: **Petualangan Momo** (level cerita, workshop)

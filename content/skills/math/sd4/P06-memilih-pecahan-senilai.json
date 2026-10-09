@@ -1,0 +1,54 @@
+{
+  "id": "math.sd4.p6.memilih-pecahan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 6,
+  "title": "Pecahan senilai — Level 6 — Memilih pecahan senilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 9],
+      "n": [1, 8],
+      "k": [2, 5]
+    },
+    "constraint": "n < d && gcd(n, d) == 1",
+    "prompt": "Pecahan mana yang senilai dengan {n}/{d}?",
+    "format": "fraction",
+    "fraction": {
+      "num": "n * k",
+      "den": "d * k",
+      "simplify": false
+    },
+    "distractors": [
+      {
+        "num": "n + k",
+        "den": "d + k",
+        "tag": "menambah-sama"
+      },
+      {
+        "num": "n * k",
+        "den": "d + k",
+        "tag": "hanya-pembilang-dikali"
+      },
+      {
+        "num": "n * k + 1",
+        "den": "d * k",
+        "tag": "lebih-satu"
+      },
+      {
+        "num": "n",
+        "den": "d * k",
+        "tag": "hanya-penyebut-dikali"
+      }
+    ],
+    "explain": "Kalikan pembilang dan penyebut {n}/{d} dengan bilangan yang sama, yaitu {k}: {n} × {k} = {=n*k} dan {d} × {k} = {=d*k}. Jadi {n}/{d} = {answer}."
+  }
+}

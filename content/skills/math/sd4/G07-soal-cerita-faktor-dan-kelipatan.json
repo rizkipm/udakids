@@ -1,0 +1,147 @@
+{
+  "id": "math.sd4.g7.soal-cerita-faktor-dan-kelipatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 7,
+  "title": "Faktor dan kelipatan — Level 7 — Soal cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [4, 12]
+          },
+          "prompt": "Lampu mercusuar berkedip setiap {k} detik. Kedipan pertama pada detik ke-{k}. Pada detik ke berapa kedipan ke-{n}?",
+          "answer": "k * n",
+          "distractors": [
+            {
+              "expr": "k + n",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "k * (n - 1)",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k * (n + 1)",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Waktu kedipan adalah kelipatan {k}: {k}, {=2*k}, {=3*k}, dan seterusnya. Kedipan ke-{n} = {n} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [3, 12]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "prompt": "Bu guru menyusun {p} kursi dalam {a} baris sama panjang tanpa sisa. Berapa kursi di setiap baris?",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "p - a",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "{a} × … = {p}. Karena {a} × {b} = {p}, setiap baris berisi {answer} kursi. {a} dan {b} adalah pasangan faktor {p}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f": [2, 9],
+            "q": [3, 12],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "p": "f * q + (1 - y) * r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < f",
+          "prompt": "{nama} punya {p} kelereng. Ia ingin membaginya sama banyak ke {f} kantong tanpa sisa. Bisakah?",
+          "answer": "y",
+          "labels": {
+            "1": "Bisa",
+            "0": "Tidak bisa"
+          },
+          "explain": "Bisa jika {f} adalah faktor {p}. {p} : {f} = {=floor(p/f)} sisa {=p%f}. Jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 10],
+            "n": [30, 120]
+          },
+          "prompt": "Tiket antrean diberikan berurutan. Setiap pengunjung ke-{k} mendapat hadiah. Berapa pengunjung yang mendapat hadiah dari {n} pengunjung pertama?",
+          "answer": "floor(n / k)",
+          "distractors": [
+            {
+              "expr": "floor(n / k) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(n / k) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n - k",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Yang mendapat hadiah adalah pengunjung kelipatan {k}. {n} : {k} = {=floor(n/k)} sisa {=n%k}. Jadi ada {answer} pengunjung."
+        }
+      }
+    ]
+  }
+}

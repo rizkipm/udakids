@@ -1,0 +1,88 @@
+{
+  "id": "math.sd34.ed2.persen-dari-suatu-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "ED",
+  "order": 2,
+  "title": "Rasio & persen — Level 2 — Persen dari suatu bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Rasio, Persen & Aritmetika Sosial",
+    "indikator": "Menghitung persen dari suatu bilangan dan sebaliknya"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [5, 10, 15, 20, 25, 30, 40, 50, 60, 75]
+            },
+            "n": [2, 40]
+          },
+          "derived": {
+            "base": "20 * n"
+          },
+          "prompt": "{p}% dari {base} adalah …",
+          "answer": "base * p / 100",
+          "distractors": [
+            {
+              "expr": "base / p",
+              "tag": "dibagi-persen"
+            },
+            {
+              "expr": "base - base * p / 100",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "base * p / 10",
+              "tag": "dibagi-10"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p}% = {p}/100. Jadi {p}/100 × {base} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [10, 20, 25, 40, 50, 75]
+            },
+            "t": [2, 8]
+          },
+          "derived": {
+            "total": "20 * t",
+            "x": "total * p / 100"
+          },
+          "prompt": "Sebanyak {p}% dari siswa kelas 4 membawa bekal. Jika yang membawa bekal {x} siswa, banyak siswa kelas 4 adalah …",
+          "answer": "total",
+          "distractors": [
+            {
+              "expr": "x * p / 100",
+              "tag": "persen-dari"
+            },
+            {
+              "expr": "x + p",
+              "tag": "ditambah"
+            },
+            {
+              "expr": "x * 100 / p / 2",
+              "tag": "setengah"
+            }
+          ],
+          "choices": 4,
+          "explain": "{p}% = {x} siswa, jadi 1% = {x} : {p}, dan 100% = {x} × 100 : {p} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "math.sd4.p5.senilai-atau-tidak",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 5,
+  "title": "Pecahan senilai — Level 5 — Senilai atau tidak?",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [2, 8],
+      "n": [1, 7],
+      "k": [2, 5],
+      "f": [0, 1]
+    },
+    "derived": {
+      "c": "f * n * k + (1 - f) * (n + k)",
+      "e": "f * d * k + (1 - f) * (d + k)"
+    },
+    "constraint": "n < d",
+    "prompt": "Apakah {n}/{d} dan {c}/{e} senilai?",
+    "answer": "f",
+    "labels": {
+      "1": "Senilai",
+      "0": "Tidak senilai"
+    },
+    "explain": "Cek dengan perkalian: {n} × {k} = {=n*k} dan {d} × {k} = {=d*k}, jadi {n}/{d} = {=n*k}/{=d*k}. Bandingkan dengan {c}/{e}. Pecahan senilai dibuat dengan mengali atau membagi atas dan bawah dengan bilangan yang sama, bukan dengan menambah. Jawabannya: {answer}."
+  }
+}

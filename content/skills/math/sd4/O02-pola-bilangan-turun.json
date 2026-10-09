@@ -1,0 +1,77 @@
+{
+  "id": "math.sd4.o2.pola-bilangan-turun",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "O",
+  "order": 2,
+  "title": "Pola bilangan dan tabel masukan-keluaran — Level 2 — Pola bilangan turun",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 9999],
+            "k": {
+              "values": [3, 4, 6, 7, 8, 9, 12, 15, 25, 50, 75, 100, 250, 500]
+            }
+          },
+          "constraint": "a - 5 * k > 0",
+          "prompt": "{a}, {=a-k}, {=a-2*k}, {=a-3*k}, … Bilangan berikutnya adalah …",
+          "answer": "a - 4 * k",
+          "distractors": [
+            {
+              "expr": "a - 5 * k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "a - 3 * k + k",
+              "tag": "naik"
+            },
+            {
+              "expr": "a - 4 * k - 1",
+              "tag": "kurang-satu"
+            }
+          ],
+          "explain": "Pola turun. Selisihnya {a} − {=a-k} = {k}, jadi aturannya kurang {k}. {=a-3*k} − {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [20000, 99999],
+            "k": {
+              "values": [500, 1000, 2000, 2500, 5000, 10000]
+            }
+          },
+          "prompt": "{a}, {=a-k}, {=a-2*k}, {=a-3*k}, … Bilangan berikutnya adalah …",
+          "answer": "a - 4 * k",
+          "distractors": [
+            {
+              "expr": "a - 5 * k",
+              "tag": "lewat-satu"
+            },
+            {
+              "expr": "a - 2 * k",
+              "tag": "naik"
+            },
+            {
+              "expr": "a - 4 * k - 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Pola turun. Selisihnya {a} − {=a-k} = {k}, jadi aturannya kurang {k}. {=a-3*k} − {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

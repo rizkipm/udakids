@@ -1,0 +1,108 @@
+{
+  "id": "math.sd4.x5.lama-kegiatan-jam-dan-menit",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "X",
+  "order": 5,
+  "title": "Waktu dan lama kegiatan — Level 5 — Lama kegiatan dalam jam dan menit",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "range": [70, 230],
+              "step": 5
+            }
+          },
+          "prompt": "Les {x} mulai pukul {h}.{m} dan selesai pukul {h2}.{m2}. Lamanya {=floor(d/60)} jam … menit.",
+          "answer": "d % 60",
+          "explain": "Dari {h}.{m} sampai {=h+floor(d/60)}.{m} = {=floor(d/60)} jam. Sisanya dari {=h+floor(d/60)}.{m} sampai {h2}.{m2}. Jadi lamanya {=floor(d/60)} jam {answer} menit.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 >= 10 && d % 60 != 0 && m2 != m && d % 60 >= 5",
+          "words": {
+            "x": ["menari", "renang", "musik", "melukis", "silat", "mengaji"]
+          },
+          "distractors": [
+            {
+              "expr": "(m2 + 100 - m) % 100",
+              "tag": "seperti-ratusan"
+            },
+            {
+              "expr": "60 - d % 60",
+              "tag": "pelengkap"
+            },
+            {
+              "expr": "abs(m2 - m)",
+              "tag": "selisih-menit"
+            },
+            {
+              "expr": "d % 60 + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(d % 60 - 10)",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [7, 16],
+            "m": {
+              "values": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+            },
+            "d": {
+              "range": [70, 230],
+              "step": 5
+            }
+          },
+          "prompt": "Kereta berangkat pukul {h}.{m} dan tiba pukul {h2}.{m2}. Berapa menit lama perjalanannya?",
+          "answer": "d",
+          "explain": "Hitung jam penuhnya dulu, lalu menit sisanya, kemudian ubah semua ke menit (1 jam = 60 menit). Lamanya {=floor(d/60)} jam {=d%60} menit = {answer}.",
+          "derived": {
+            "t": "h * 60 + m + d",
+            "h2": "floor(t / 60)",
+            "m2": "t % 60"
+          },
+          "constraint": "m2 >= 10 && m2 != m",
+          "unit": "menit",
+          "distractors": [
+            {
+              "expr": "(h2 * 100 + m2) - (h * 100 + m)",
+              "tag": "jam-seperti-ratusan"
+            },
+            {
+              "expr": "d - 60",
+              "tag": "kurang-satu-jam"
+            },
+            {
+              "expr": "floor(d / 60) + d % 60",
+              "tag": "jam-dihitung-1"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

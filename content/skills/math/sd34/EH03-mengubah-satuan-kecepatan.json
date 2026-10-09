@@ -1,0 +1,84 @@
+{
+  "id": "math.sd34.eh3.mengubah-satuan-kecepatan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 3,
+  "title": "Kecepatan & kerja — Level 3 — Mengubah satuan kecepatan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Mengubah km/jam menjadi m/menit dan sebaliknya"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 72, 90]
+            }
+          },
+          "prompt": "Kecepatan {v} km/jam sama dengan … m/menit.",
+          "answer": "v * 50 / 3",
+          "unit": "m/menit",
+          "distractors": [
+            {
+              "expr": "v * 1000",
+              "tag": "lupa-dibagi-60"
+            },
+            {
+              "expr": "v * 60",
+              "tag": "dikali-60"
+            },
+            {
+              "expr": "v * 100 / 6",
+              "tag": "salah-nol"
+            }
+          ],
+          "choices": 4,
+          "explain": "{v} km = {=v*1000} m dan 1 jam = 60 menit. Jadi {=v*1000} : 60 = {answer} m/menit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "v": {
+              "values": [6, 12, 18, 24, 30, 36, 48, 60]
+            }
+          },
+          "derived": {
+            "w": "v * 50 / 3"
+          },
+          "prompt": "Kecepatan {w} m/menit sama dengan … km/jam.",
+          "answer": "v",
+          "unit": "km/jam",
+          "distractors": [
+            {
+              "expr": "w * 60",
+              "tag": "lupa-dibagi-1000"
+            },
+            {
+              "expr": "w / 60",
+              "tag": "dibagi-60"
+            },
+            {
+              "expr": "v * 10",
+              "tag": "salah-nol"
+            }
+          ],
+          "choices": 4,
+          "explain": "Dalam 1 jam (60 menit): {w} × 60 = {=w*60} m = {answer} km. Jadi {answer} km/jam."
+        }
+      }
+    ]
+  }
+}

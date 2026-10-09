@@ -1,0 +1,1812 @@
+{
+  "id": "math.sd4.p10.tantangan-pecahan-senilai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "P",
+  "order": 10,
+  "title": "Pecahan senilai — Level 10 — Tantangan pecahan senilai",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [3, 10],
+            "n": [1, 9],
+            "k": [2, 5]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = …/{=d*k}",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n + k",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n + d * k - d",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Penyebut {d} dikali {k} menjadi {=d*k}. Pembilang juga harus dikali {k}: {n} × {k} = {answer}. Jadi {n}/{d} = {answer}/{=d*k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "n": [1, 7],
+            "k": [2, 6]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{=n*k}/{=d*k} = {n}/…",
+          "answer": "d",
+          "distractors": [
+            {
+              "expr": "d * k",
+              "tag": "tidak-dibagi"
+            },
+            {
+              "expr": "d * k - n * k + n",
+              "tag": "mengurangi-selisih"
+            },
+            {
+              "expr": "d + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "d + k",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Pembilang {=n*k} dibagi {k} menjadi {n}. Penyebut juga dibagi {k}: {=d*k} : {k} = {answer}. Jadi {=n*k}/{=d*k} = {n}/{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "n": [1, 8],
+            "k": [2, 6]
+          },
+          "constraint": "n < d && gcd(n, d) == 1 && d * k <= 60",
+          "prompt": "Sederhanakan {=n*k}/{=d*k}. Bentuk paling sederhananya adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "n * k",
+            "den": "d * k"
+          },
+          "distractors": [
+            {
+              "num": "n * k - 1",
+              "den": "d * k - 1",
+              "tag": "kurangi-satu"
+            },
+            {
+              "num": "n",
+              "den": "d * k",
+              "tag": "penyebut-tidak-dibagi"
+            },
+            {
+              "num": "n * k",
+              "den": "d",
+              "tag": "pembilang-tidak-dibagi"
+            }
+          ],
+          "explain": "Cari FPB dari {=n*k} dan {=d*k}, yaitu {k}. Bagi pembilang dan penyebut dengan {k}: {=n*k} : {k} = {n} dan {=d*k} : {k} = {d}. Jadi bentuk paling sederhananya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 8],
+            "n": [1, 7],
+            "k": [2, 5],
+            "f": [0, 1]
+          },
+          "derived": {
+            "c": "f * n * k + (1 - f) * (n + k)",
+            "e": "f * d * k + (1 - f) * (d + k)"
+          },
+          "constraint": "n < d",
+          "prompt": "Apakah {n}/{d} dan {c}/{e} senilai?",
+          "answer": "f",
+          "labels": {
+            "1": "Senilai",
+            "0": "Tidak senilai"
+          },
+          "explain": "Cek dengan perkalian: {n} × {k} = {=n*k} dan {d} × {k} = {=d*k}, jadi {n}/{d} = {=n*k}/{=d*k}. Bandingkan dengan {c}/{e}. Pecahan senilai dibuat dengan mengali atau membagi atas dan bawah dengan bilangan yang sama, bukan dengan menambah. Jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "n": [1, 8],
+            "k": [2, 5]
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "Pecahan mana yang senilai dengan {n}/{d}?",
+          "format": "fraction",
+          "fraction": {
+            "num": "n * k",
+            "den": "d * k",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "n + k",
+              "den": "d + k",
+              "tag": "menambah-sama"
+            },
+            {
+              "num": "n * k",
+              "den": "d + k",
+              "tag": "hanya-pembilang-dikali"
+            },
+            {
+              "num": "n * k + 1",
+              "den": "d * k",
+              "tag": "lebih-satu"
+            },
+            {
+              "num": "n",
+              "den": "d * k",
+              "tag": "hanya-penyebut-dikali"
+            }
+          ],
+          "explain": "Kalikan pembilang dan penyebut {n}/{d} dengan bilangan yang sama, yaitu {k}: {n} × {k} = {=n*k} dan {d} × {k} = {=d*k}. Jadi {n}/{d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "k": [2, 3]
+          },
+          "constraint": "n < d",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "makanan": ["martabak", "pizza", "kue bolu", "kue lapis", "roti bakar"]
+          },
+          "prompt": "{nama} memotong {makanan} menjadi {d} potong sama besar, lalu makan {n} potong. Kakak memotong {makanan} yang sama besarnya menjadi {=d*k} potong. Berapa potong yang harus dimakan Kakak supaya bagiannya sama banyak?",
+          "answer": "n * k",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "sama-potong"
+            },
+            {
+              "expr": "n + d * k - d",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "n * k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagian {nama} {n}/{d}. Potongan Kakak {k} kali lebih banyak, jadi {n}/{d} = …/{=d*k}. Pembilang dikali {k}: {n} × {k} = {answer}. Kakak makan {answer} potong."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 6],
+            "n": [1, 5],
+            "a": [2, 4],
+            "b": [2, 5]
+          },
+          "constraint": "n < d && gcd(n, d) == 1 && a != b",
+          "prompt": "{=n*a}/{=d*a} = {=n*b}/…",
+          "answer": "d * b",
+          "distractors": [
+            {
+              "expr": "d * a",
+              "tag": "penyebut-awal"
+            },
+            {
+              "expr": "d * a + n * b - n * a",
+              "tag": "menambah-selisih"
+            },
+            {
+              "expr": "d * b + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Sederhanakan dulu: {=n*a}/{=d*a} dibagi {a} menjadi {n}/{d}. Lalu kalikan {n}/{d} dengan {b}: {n} × {b} = {=n*b} dan {d} × {b} = {answer}. Jadi penyebutnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 9],
+            "n": [1, 8],
+            "k": [2, 9]
+          },
+          "derived": {
+            "c": "n * k",
+            "e": "d * k"
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} = {c}/{e}. Pembilang dan penyebut {n}/{d} dikali berapa?",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "e - d",
+              "tag": "selisih-penyebut"
+            },
+            {
+              "expr": "c - n",
+              "tag": "selisih-pembilang"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Lihat penyebut: {d} × … = {e}. Karena {e} : {d} = {k}, pengalinya {k}. Cek pembilang: {n} × {k} = {c}. Jadi dikali {answer}."
+        }
+      },
+      {
+        "family": "manual",
+        "params": {
+          "items": [
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/4. Mana yang TIDAK senilai dengan 3/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 8
+                  },
+                  "say": "enam per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 16
+                  },
+                  "say": "dua belas per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 20
+                  },
+                  "say": "lima belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 17
+                  },
+                  "say": "dua belas per tujuh belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/8, 12/16, 15/20 semuanya menjadi 3/4. Pecahan 12/17 tidak bisa menjadi 3/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 15
+                  },
+                  "say": "enam per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 21
+                  },
+                  "say": "delapan per dua puluh satu"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 6/15, 8/20 semuanya menjadi 2/5. Pecahan 8/21 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 15
+                  },
+                  "say": "enam per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 8
+                  },
+                  "say": "lima per delapan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 6/15, 10/25 semuanya menjadi 2/5. Pecahan 5/8 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/5. Mana yang TIDAK senilai dengan 3/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 15
+                  },
+                  "say": "sembilan per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 20
+                  },
+                  "say": "dua belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 25
+                  },
+                  "say": "lima belas per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 15
+                  },
+                  "say": "sepuluh per lima belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 9/15, 12/20, 15/25 semuanya menjadi 3/5. Pecahan 10/15 tidak bisa menjadi 3/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 5/6. Mana yang TIDAK senilai dengan 5/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 12
+                  },
+                  "say": "sepuluh per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 18
+                  },
+                  "say": "lima belas per delapan belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 20,
+                    "den": 24
+                  },
+                  "say": "dua puluh per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 11,
+                    "den": 12
+                  },
+                  "say": "sebelas per dua belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 10/12, 15/18, 20/24 semuanya menjadi 5/6. Pecahan 11/12 tidak bisa menjadi 5/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/5. Mana yang TIDAK senilai dengan 1/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 10
+                  },
+                  "say": "dua per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 20
+                  },
+                  "say": "empat per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 25
+                  },
+                  "say": "lima per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 21
+                  },
+                  "say": "empat per dua puluh satu"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/10, 4/20, 5/25 semuanya menjadi 1/5. Pecahan 4/21 tidak bisa menjadi 1/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 5/6. Mana yang TIDAK senilai dengan 5/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 12
+                  },
+                  "say": "sepuluh per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 20,
+                    "den": 24
+                  },
+                  "say": "dua puluh per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 25,
+                    "den": 30
+                  },
+                  "say": "dua puluh lima per tiga puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 10
+                  },
+                  "say": "sembilan per sepuluh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 10/12, 20/24, 25/30 semuanya menjadi 5/6. Pecahan 9/10 tidak bisa menjadi 5/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/5. Mana yang TIDAK senilai dengan 1/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 15
+                  },
+                  "say": "tiga per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 20
+                  },
+                  "say": "empat per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 25
+                  },
+                  "say": "lima per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 9
+                  },
+                  "say": "lima per sembilan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/15, 4/20, 5/25 semuanya menjadi 1/5. Pecahan 5/9 tidak bisa menjadi 1/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/3. Mana yang TIDAK senilai dengan 2/3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 9
+                  },
+                  "say": "enam per sembilan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 12
+                  },
+                  "say": "delapan per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 15
+                  },
+                  "say": "sepuluh per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 10
+                  },
+                  "say": "enam per sepuluh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/9, 8/12, 10/15 semuanya menjadi 2/3. Pecahan 6/10 tidak bisa menjadi 2/3, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 20
+                  },
+                  "say": "sembilan per dua puluh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 8/20, 10/25 semuanya menjadi 2/5. Pecahan 9/20 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/4. Mana yang TIDAK senilai dengan 3/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 8
+                  },
+                  "say": "enam per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 16
+                  },
+                  "say": "dua belas per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 20
+                  },
+                  "say": "lima belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 13,
+                    "den": 16
+                  },
+                  "say": "tiga belas per enam belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/8, 12/16, 15/20 semuanya menjadi 3/4. Pecahan 13/16 tidak bisa menjadi 3/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 4/5. Mana yang TIDAK senilai dengan 4/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 15
+                  },
+                  "say": "dua belas per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 16,
+                    "den": 20
+                  },
+                  "say": "enam belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 20,
+                    "den": 25
+                  },
+                  "say": "dua puluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 16
+                  },
+                  "say": "dua belas per enam belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 12/15, 16/20, 20/25 semuanya menjadi 4/5. Pecahan 12/16 tidak bisa menjadi 4/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/2. Mana yang TIDAK senilai dengan 1/2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 4
+                  },
+                  "say": "dua per empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 6
+                  },
+                  "say": "tiga per enam",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 8
+                  },
+                  "say": "empat per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 4
+                  },
+                  "say": "tiga per empat"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/4, 3/6, 4/8 semuanya menjadi 1/2. Pecahan 3/4 tidak bisa menjadi 1/2, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/6. Mana yang TIDAK senilai dengan 1/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 12
+                  },
+                  "say": "dua per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 24
+                  },
+                  "say": "empat per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 30
+                  },
+                  "say": "lima per tiga puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 9
+                  },
+                  "say": "empat per sembilan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/12, 4/24, 5/30 semuanya menjadi 1/6. Pecahan 4/9 tidak bisa menjadi 1/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 15
+                  },
+                  "say": "enam per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 7
+                  },
+                  "say": "empat per tujuh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/15, 8/20, 10/25 semuanya menjadi 2/5. Pecahan 4/7 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/5. Mana yang TIDAK senilai dengan 3/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 10
+                  },
+                  "say": "enam per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 15
+                  },
+                  "say": "sembilan per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 20
+                  },
+                  "say": "dua belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 21
+                  },
+                  "say": "dua belas per dua puluh satu"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/10, 9/15, 12/20 semuanya menjadi 3/5. Pecahan 12/21 tidak bisa menjadi 3/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/2. Mana yang TIDAK senilai dengan 1/2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 4
+                  },
+                  "say": "dua per empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 6
+                  },
+                  "say": "tiga per enam",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 8
+                  },
+                  "say": "empat per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 5
+                  },
+                  "say": "dua per lima"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/4, 3/6, 4/8 semuanya menjadi 1/2. Pecahan 2/5 tidak bisa menjadi 1/2, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/4. Mana yang TIDAK senilai dengan 1/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 8
+                  },
+                  "say": "dua per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 12
+                  },
+                  "say": "tiga per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 16
+                  },
+                  "say": "empat per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 6
+                  },
+                  "say": "tiga per enam"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/8, 3/12, 4/16 semuanya menjadi 1/4. Pecahan 3/6 tidak bisa menjadi 1/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/3. Mana yang TIDAK senilai dengan 1/3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 9
+                  },
+                  "say": "tiga per sembilan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 12
+                  },
+                  "say": "empat per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 15
+                  },
+                  "say": "lima per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 7
+                  },
+                  "say": "lima per tujuh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/9, 4/12, 5/15 semuanya menjadi 1/3. Pecahan 5/7 tidak bisa menjadi 1/3, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/6. Mana yang TIDAK senilai dengan 1/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 12
+                  },
+                  "say": "dua per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 18
+                  },
+                  "say": "tiga per delapan belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 24
+                  },
+                  "say": "empat per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 8
+                  },
+                  "say": "tiga per delapan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/12, 3/18, 4/24 semuanya menjadi 1/6. Pecahan 3/8 tidak bisa menjadi 1/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/4. Mana yang TIDAK senilai dengan 3/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 12
+                  },
+                  "say": "sembilan per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 16
+                  },
+                  "say": "dua belas per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 20
+                  },
+                  "say": "lima belas per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 7
+                  },
+                  "say": "enam per tujuh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 9/12, 12/16, 15/20 semuanya menjadi 3/4. Pecahan 6/7 tidak bisa menjadi 3/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 15
+                  },
+                  "say": "enam per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 11
+                  },
+                  "say": "empat per sebelas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/15, 8/20, 10/25 semuanya menjadi 2/5. Pecahan 4/11 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/5. Mana yang TIDAK senilai dengan 3/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 10
+                  },
+                  "say": "enam per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 15
+                  },
+                  "say": "sembilan per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 25
+                  },
+                  "say": "lima belas per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 15
+                  },
+                  "say": "sepuluh per lima belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/10, 9/15, 15/25 semuanya menjadi 3/5. Pecahan 10/15 tidak bisa menjadi 3/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 7
+                  },
+                  "say": "empat per tujuh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 8/20, 10/25 semuanya menjadi 2/5. Pecahan 4/7 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/6. Mana yang TIDAK senilai dengan 1/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 18
+                  },
+                  "say": "tiga per delapan belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 24
+                  },
+                  "say": "empat per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 30
+                  },
+                  "say": "lima per tiga puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 18
+                  },
+                  "say": "empat per delapan belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/18, 4/24, 5/30 semuanya menjadi 1/6. Pecahan 4/18 tidak bisa menjadi 1/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/6. Mana yang TIDAK senilai dengan 1/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 12
+                  },
+                  "say": "dua per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 18
+                  },
+                  "say": "tiga per delapan belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 24
+                  },
+                  "say": "empat per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 9
+                  },
+                  "say": "empat per sembilan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/12, 3/18, 4/24 semuanya menjadi 1/6. Pecahan 4/9 tidak bisa menjadi 1/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 15
+                  },
+                  "say": "enam per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 16
+                  },
+                  "say": "enam per enam belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 6/15, 10/25 semuanya menjadi 2/5. Pecahan 6/16 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/5. Mana yang TIDAK senilai dengan 1/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 10
+                  },
+                  "say": "dua per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 15
+                  },
+                  "say": "tiga per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 20
+                  },
+                  "say": "empat per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 21
+                  },
+                  "say": "empat per dua puluh satu"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/10, 3/15, 4/20 semuanya menjadi 1/5. Pecahan 4/21 tidak bisa menjadi 1/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/5. Mana yang TIDAK senilai dengan 1/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 10
+                  },
+                  "say": "dua per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 15
+                  },
+                  "say": "tiga per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 20
+                  },
+                  "say": "empat per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 9
+                  },
+                  "say": "lima per sembilan"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/10, 3/15, 4/20 semuanya menjadi 1/5. Pecahan 5/9 tidak bisa menjadi 1/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/3. Mana yang TIDAK senilai dengan 1/3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 9
+                  },
+                  "say": "tiga per sembilan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 12
+                  },
+                  "say": "empat per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 15
+                  },
+                  "say": "lima per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 6
+                  },
+                  "say": "empat per enam"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/9, 4/12, 5/15 semuanya menjadi 1/3. Pecahan 4/6 tidak bisa menjadi 1/3, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 5/6. Mana yang TIDAK senilai dengan 5/6?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 12
+                  },
+                  "say": "sepuluh per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 15,
+                    "den": 18
+                  },
+                  "say": "lima belas per delapan belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 20,
+                    "den": 24
+                  },
+                  "say": "dua puluh per dua puluh empat",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 10
+                  },
+                  "say": "sembilan per sepuluh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 10/12, 15/18, 20/24 semuanya menjadi 5/6. Pecahan 9/10 tidak bisa menjadi 5/6, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/4. Mana yang TIDAK senilai dengan 1/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 8
+                  },
+                  "say": "dua per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 16
+                  },
+                  "say": "empat per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 20
+                  },
+                  "say": "lima per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 16
+                  },
+                  "say": "lima per enam belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 2/8, 4/16, 5/20 semuanya menjadi 1/4. Pecahan 5/16 tidak bisa menjadi 1/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 3/4. Mana yang TIDAK senilai dengan 3/4?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 6,
+                    "den": 8
+                  },
+                  "say": "enam per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 12
+                  },
+                  "say": "sembilan per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 12,
+                    "den": 16
+                  },
+                  "say": "dua belas per enam belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 9,
+                    "den": 13
+                  },
+                  "say": "sembilan per tiga belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 6/8, 9/12, 12/16 semuanya menjadi 3/4. Pecahan 9/13 tidak bisa menjadi 3/4, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 2/5. Mana yang TIDAK senilai dengan 2/5?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 10
+                  },
+                  "say": "empat per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 8,
+                    "den": 20
+                  },
+                  "say": "delapan per dua puluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 10,
+                    "den": 25
+                  },
+                  "say": "sepuluh per dua puluh lima",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 7,
+                    "den": 15
+                  },
+                  "say": "tujuh per lima belas"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 4/10, 8/20, 10/25 semuanya menjadi 2/5. Pecahan 7/15 tidak bisa menjadi 2/5, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/3. Mana yang TIDAK senilai dengan 1/3?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 9
+                  },
+                  "say": "tiga per sembilan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 12
+                  },
+                  "say": "empat per dua belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 15
+                  },
+                  "say": "lima per lima belas",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 2,
+                    "den": 7
+                  },
+                  "say": "dua per tujuh"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/9, 4/12, 5/15 semuanya menjadi 1/3. Pecahan 2/7 tidak bisa menjadi 1/3, jadi itu yang tidak senilai."
+            },
+            {
+              "prompt": "Tiga pecahan di bawah ini senilai dengan 1/2. Mana yang TIDAK senilai dengan 1/2?",
+              "choices": [
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 3,
+                    "den": 6
+                  },
+                  "say": "tiga per enam",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 4,
+                    "den": 8
+                  },
+                  "say": "empat per delapan",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 10
+                  },
+                  "say": "lima per sepuluh",
+                  "tag": "senilai"
+                },
+                {
+                  "visual": {
+                    "kind": "fraction",
+                    "num": 5,
+                    "den": 6
+                  },
+                  "say": "lima per enam"
+                }
+              ],
+              "answer": 3,
+              "reteach": "Sederhanakan setiap pecahan: bagi pembilang dan penyebut dengan bilangan yang sama. 3/6, 4/8, 5/10 semuanya menjadi 1/2. Pecahan 5/6 tidak bisa menjadi 1/2, jadi itu yang tidak senilai."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

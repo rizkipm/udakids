@@ -1,0 +1,40 @@
+{
+  "id": "math.sd34.eh8.waktu-kerja-sendiri",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EH",
+  "order": 8,
+  "title": "Kecepatan & kerja — Level 8 — Waktu kerja sendiri",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Kecepatan & Kerja",
+    "indikator": "Menentukan waktu kerja sendiri dari waktu kerja bersama",
+    "emc-no": "33"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "t": [2, 12],
+      "x": [1, 36]
+    },
+    "derived": {
+      "a": "t + x",
+      "b": "t + t * t / x"
+    },
+    "words": {
+      "n1": ["Ayu", "Bima", "Citra", "Dimas", "Eka", "Fajar"],
+      "n2": ["Gita", "Hasan", "Intan", "Joko", "Kirana", "Lukman"]
+    },
+    "constraint": "(t * t) % x == 0 && x != t && b <= 72",
+    "prompt": "{n1} dan {n2} bersama-sama dapat menyelesaikan sebuah mozaik dalam {t} jam. Jika {n1} bekerja sendiri, mozaik itu selesai dalam {a} jam. Jika {n2} bekerja sendiri, mozaik itu selesai dalam … jam.",
+    "answer": "b",
+    "unit": "jam",
+    "mode": "input",
+    "explain": "Bersama: 1/{t} mozaik per jam. {n1}: 1/{a} mozaik per jam. {n2} = 1/{t} − 1/{a} = 1/{answer} mozaik per jam, jadi {n2} butuh {answer} jam."
+  }
+}

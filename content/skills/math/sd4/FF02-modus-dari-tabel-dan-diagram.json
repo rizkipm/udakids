@@ -1,0 +1,189 @@
+{
+  "id": "math.sd4.ff2.modus-dari-tabel-dan-diagram",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "FF",
+  "order": 2,
+  "title": "Modus, median, dan jangkauan — Level 2 — Modus dari tabel dan diagram",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [28, 34],
+            "f1": [1, 9],
+            "f2": [1, 9],
+            "f3": [1, 9],
+            "f4": [1, 9]
+          },
+          "constraint": "(f1 > max(f2, f3, f4)) + (f2 > max(f1, f3, f4)) + (f3 > max(f1, f2, f4)) + (f4 > max(f1, f2, f3)) == 1",
+          "prompt": "Diagram menunjukkan ukuran sepatu siswa kelas 4. Berapa modus ukuran sepatunya?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["{b}", "{=b+1}", "{=b+2}", "{=b+3}"],
+              "values": ["=f1", "=f2", "=f3", "=f4"],
+              "unit": "anak",
+              "caption": "Ukuran sepatu siswa kelas 4"
+            }
+          ],
+          "answer": "b + (f2 > max(f1, f3, f4)) * 1 + (f3 > max(f1, f2, f4)) * 2 + (f4 > max(f1, f2, f3)) * 3",
+          "distractors": [
+            {
+              "expr": "max(f1, f2, f3, f4)",
+              "tag": "banyak-anak"
+            },
+            {
+              "expr": "b",
+              "tag": "ukuran-lain"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "ukuran-lain"
+            },
+            {
+              "expr": "b + 2",
+              "tag": "ukuran-lain"
+            },
+            {
+              "expr": "b + 3",
+              "tag": "ukuran-lain"
+            }
+          ],
+          "explain": "Modus adalah data yang paling sering muncul. Batang paling tinggi ada di ukuran {answer}, jadi modusnya {answer}, bukan banyak anaknya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f1": [1, 9],
+            "f2": [1, 9],
+            "f3": [1, 9],
+            "f4": [1, 9],
+            "f5": [1, 9]
+          },
+          "constraint": "(f1 > max(f2, f3, f4, f5)) + (f2 > max(f1, f3, f4, f5)) + (f3 > max(f1, f2, f4, f5)) + (f4 > max(f1, f2, f3, f5)) + (f5 > max(f1, f2, f3, f4)) == 1",
+          "prompt": "Tabel menunjukkan nilai ulangan siswa. Berapa modus nilainya?",
+          "stimulus": [
+            {
+              "kind": "table",
+              "headers": ["Nilai", "Banyak siswa"],
+              "rows": [
+                ["70", "=f1"],
+                ["75", "=f2"],
+                ["80", "=f3"],
+                ["85", "=f4"],
+                ["90", "=f5"]
+              ],
+              "caption": "Nilai ulangan IPAS kelas 4"
+            }
+          ],
+          "answer": "70 + (f2 > max(f1, f3, f4, f5)) * 5 + (f3 > max(f1, f2, f4, f5)) * 10 + (f4 > max(f1, f2, f3, f5)) * 15 + (f5 > max(f1, f2, f3, f4)) * 20",
+          "distractors": [
+            {
+              "expr": "max(f1, f2, f3, f4, f5)",
+              "tag": "banyak-siswa"
+            },
+            {
+              "expr": "80",
+              "tag": "nilai-tengah"
+            },
+            {
+              "expr": "70",
+              "tag": "nilai-lain"
+            },
+            {
+              "expr": "90",
+              "tag": "nilai-lain"
+            },
+            {
+              "expr": "85",
+              "tag": "nilai-lain"
+            }
+          ],
+          "explain": "Cari banyak siswa yang paling besar di tabel. Nilai {answer} paling sering muncul, jadi modusnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "f1": [1, 9],
+            "f2": [1, 9],
+            "f3": [1, 9],
+            "f4": [1, 9]
+          },
+          "constraint": "(f1 > max(f2, f3, f4)) + (f2 > max(f1, f3, f4)) + (f3 > max(f1, f2, f4)) + (f4 > max(f1, f2, f3)) == 1",
+          "prompt": "Apa modus warna kesukaan siswa kelas 4?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["merah", "biru", "hijau", "kuning"],
+              "values": ["=f1", "=f2", "=f3", "=f4"],
+              "unit": "anak",
+              "caption": "Warna kesukaan siswa kelas 4"
+            }
+          ],
+          "answer": "(f1 > max(f2, f3, f4)) * 1 + (f2 > max(f1, f3, f4)) * 2 + (f3 > max(f1, f2, f4)) * 3 + (f4 > max(f1, f2, f3)) * 4",
+          "labels": {
+            "1": "merah",
+            "2": "biru",
+            "3": "hijau",
+            "4": "kuning"
+          },
+          "explain": "Modus juga bisa berupa kategori. Batang paling tinggi adalah {answer}, jadi modusnya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [28, 34],
+            "f1": [1, 9],
+            "f2": [1, 9],
+            "f3": [1, 9],
+            "f4": [1, 9]
+          },
+          "constraint": "(f1 > max(f2, f3, f4)) + (f2 > max(f1, f3, f4)) + (f3 > max(f1, f2, f4)) + (f4 > max(f1, f2, f3)) == 1",
+          "prompt": "Diagram menunjukkan ukuran sepatu siswa kelas 4. Berapa anak yang memakai ukuran modus?",
+          "stimulus": [
+            {
+              "kind": "bar-chart",
+              "labels": ["{b}", "{=b+1}", "{=b+2}", "{=b+3}"],
+              "values": ["=f1", "=f2", "=f3", "=f4"],
+              "unit": "anak",
+              "caption": "Ukuran sepatu siswa kelas 4"
+            }
+          ],
+          "answer": "max(f1, f2, f3, f4)",
+          "unit": "anak",
+          "distractors": [
+            {
+              "expr": "f1 + f2 + f3 + f4",
+              "tag": "semua-anak"
+            },
+            {
+              "expr": "min(f1, f2, f3, f4)",
+              "tag": "paling-sedikit"
+            },
+            {
+              "expr": "max(f1, f2, f3, f4) - 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Ukuran modus punya batang paling tinggi. Tinggi batangnya {answer}, jadi ada {answer} anak."
+        }
+      }
+    ]
+  }
+}

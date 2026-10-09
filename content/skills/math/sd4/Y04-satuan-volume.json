@@ -1,0 +1,124 @@
+{
+  "id": "math.sd4.y4.satuan-volume",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 4,
+  "title": "Satuan panjang, berat, dan volume — Level 4 — Satuan volume",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 20]
+          },
+          "prompt": "{a} liter = … mL",
+          "answer": "a * 1000",
+          "explain": "1 liter = 1.000 mL, jadi {a} liter = {a} × 1.000 = {answer} mL.",
+          "distractors": [
+            {
+              "expr": "a * 100",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a * 10",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a * 10000",
+              "tag": "kebanyakan-nol"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [2, 20]
+          },
+          "prompt": "{=b*1000} mL = … liter",
+          "answer": "b",
+          "explain": "1.000 mL = 1 liter. Bagi dengan 1.000: {=b*1000} : 1.000 = {answer} liter.",
+          "distractors": [
+            {
+              "expr": "b * 10",
+              "tag": "bagi-100"
+            },
+            {
+              "expr": "b * 100",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "b * 1000",
+              "tag": "tidak-dibagi"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": {
+              "range": [50, 950],
+              "step": 50
+            }
+          },
+          "prompt": "{a} liter {b} mL = … mL",
+          "answer": "a * 1000 + b",
+          "explain": "{a} liter = {=a*1000} mL. Ditambah {b} mL: {answer} mL.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "lupa-mL"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9]
+          },
+          "prompt": "Satu botol berisi setengah liter air. Berapa mL air dalam {a} botol?",
+          "answer": "a * 500",
+          "explain": "Setengah liter = 1.000 : 2 = 500 mL. {a} botol: {a} × 500 = {answer} mL.",
+          "distractors": [
+            {
+              "expr": "a * 50",
+              "tag": "kurang-nol"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "satu-liter"
+            },
+            {
+              "expr": "a * 250",
+              "tag": "seperempat"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

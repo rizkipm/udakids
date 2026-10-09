@@ -1,0 +1,379 @@
+{
+  "id": "math.sd4.m10.tantangan-pembagian-bersisa",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 10,
+  "title": "Pembagian bersisa dan soal cerita — Level 10 — Tantangan pembagian bersisa",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [4, 30],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t < 100",
+          "prompt": "{t} : {m} = … sisa {r}",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "r",
+              "tag": "sisa"
+            }
+          ],
+          "explain": "Cari kelipatan {m} terbesar yang tidak lebih dari {t}: {m} × {q} = {=m*q}. Sisanya {t} − {=m*q} = {r}. Jadi {t} : {m} = {q} sisa {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [3, 15],
+            "r": [0, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < m",
+          "prompt": "{nama} menulis {t} : {m} = {=q-1} sisa {=r+m}. Sisa itu tidak lebih kecil dari {m}. Berapa hasil bagi yang tepat?",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "q - 1",
+              "tag": "tetap"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + m",
+              "tag": "sisa"
+            }
+          ],
+          "explain": "Sisa {=r+m} masih cukup untuk satu kelompok {m} lagi. Hasil bagi bertambah satu: {=q-1} + 1 = {answer}, dan sisanya {=r+m} − {m} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [15, 199],
+            "r": [1, 8]
+          },
+          "derived": {
+            "t": "m * q + r"
+          },
+          "constraint": "r < m && t >= 100 && t < 1000",
+          "prompt": "{t} : {m} = {q} sisa …",
+          "answer": "r",
+          "distractors": [
+            {
+              "expr": "m - r",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "r + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "r + m",
+              "tag": "sisa-terlalu-besar"
+            }
+          ],
+          "explain": "Bagi bersusun: bagi, kali, kurang, turunkan. Yang tidak bisa dibagi lagi adalah sisa. {t} : {m} = {q} sisa {r}. Periksa: {q} × {m} + {r} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [5, 120],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Sebuah bilangan dibagi {m}, hasilnya {q} sisa {r}. Bilangan itu adalah …",
+          "answer": "m * q + r",
+          "distractors": [
+            {
+              "expr": "m * q",
+              "tag": "lupa-sisa"
+            },
+            {
+              "expr": "m * q - r",
+              "tag": "sisa-dikurangi"
+            },
+            {
+              "expr": "m * (q + r)",
+              "tag": "sisa-dikali"
+            }
+          ],
+          "explain": "Bilangan = hasil bagi × pembagi + sisa. {q} × {m} = {=m*q}, lalu {=m*q} + {r} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [8, 90],
+            "r": [1, 8],
+            "k": {
+              "values": [0, 0, 1, 2]
+            }
+          },
+          "derived": {
+            "t": "m * q + r",
+            "qs": "q - (k == 2)",
+            "rs": "r + (k == 1) + m * (k == 2)"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "r < m",
+          "prompt": "{nama} menghitung {t} : {m} = {qs} sisa {rs}. Apakah jawabannya tepat?",
+          "answer": "1 - min(k, 1)",
+          "labels": {
+            "1": "Tepat",
+            "0": "Belum tepat"
+          },
+          "explain": "Periksa dua hal. Pertama, {qs} × {m} + {rs} = {=qs*m+rs}; hasilnya harus {t}. Kedua, sisa harus lebih kecil dari {m}. Jawaban yang tepat: {q} sisa {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} permen dibagi sama banyak kepada {m} anak. Berapa permen yang tersisa?",
+          "answer": "t % m",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            },
+            {
+              "expr": "m - t % m",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "t % m + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Yang ditanya adalah sisa. {t} : {m} = {=floor(t/m)} sisa {answer}. Setiap anak mendapat {=floor(t/m)} permen, dan {answer} permen tersisa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [4, 8],
+            "t": [20, 90]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} siswa akan naik mobil. Setiap mobil memuat {m} siswa. Berapa mobil yang dibutuhkan agar semua siswa terangkut?",
+          "answer": "floor(t / m) + 1",
+          "distractors": [
+            {
+              "expr": "floor(t / m)",
+              "tag": "abaikan-sisa"
+            },
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "floor(t / m) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Sisa {=t%m} siswa juga harus ikut, jadi perlu 1 mobil lagi: {=floor(t/m)} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": {
+              "values": [10000, 15000, 20000, 25000, 30000]
+            },
+            "h": {
+              "values": [1500, 2500, 3000, 3500, 4000, 4500]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "u % h != 0",
+          "prompt": "Uang {nama} Rp{u}. Harga satu pensil Rp{h}. Paling banyak berapa pensil yang bisa dibeli?",
+          "answer": "floor(u / h)",
+          "distractors": [
+            {
+              "expr": "floor(u / h) + 1",
+              "tag": "bulatkan-atas"
+            },
+            {
+              "expr": "floor(u / h) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "floor(u / 1000)",
+              "tag": "ribuan"
+            }
+          ],
+          "explain": "{u} : {h} = {answer} sisa {=u%h}. Sisa uang Rp{=u%h} tidak cukup untuk membeli satu pensil lagi. Jadi paling banyak {answer} pensil."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} kue dibagi sama banyak untuk {m} anak. Berapa kue lagi paling sedikit yang perlu ditambah agar tidak ada sisa?",
+          "answer": "m - t % m",
+          "distractors": [
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            },
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Agar sisa itu cukup untuk satu putaran lagi ({m} kue), perlu tambahan {m} − {=t%m} = {answer} kue."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "a": [20, 80],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Bilangan terkecil yang lebih dari {a} dan bersisa {r} jika dibagi {m} adalah …",
+          "answer": "(floor(a / m) + (a % m >= r)) * m + r",
+          "distractors": [
+            {
+              "expr": "(floor(a / m) + (a % m >= r)) * m + r + m",
+              "tag": "lebih-pembagi"
+            },
+            {
+              "expr": "a + r",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "(floor(a / m) + 1) * m",
+              "tag": "kelipatan"
+            }
+          ],
+          "explain": "Kelipatan {m} terdekat di bawah atau sama dengan {a} adalah {=floor(a/m)*m}. Bilangan bersisa {r} berbentuk kelipatan {m} ditambah {r}. Yang pertama lebih dari {a} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

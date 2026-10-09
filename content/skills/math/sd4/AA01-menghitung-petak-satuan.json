@@ -1,0 +1,109 @@
+{
+  "id": "math.sd4.aa1.menghitung-petak-satuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 1,
+  "title": "Luas persegi dan persegi panjang — Level 1 — Menghitung petak satuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [2, 9],
+            "h": [2, 6]
+          },
+          "constraint": "w != h",
+          "prompt": "Setiap petak luasnya 1 cm². Berapa cm² luas bangun ini?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm",
+              "grid": true
+            }
+          ],
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "w * h - w",
+              "tag": "kurang-satu-baris"
+            }
+          ],
+          "explain": "Hitung per baris: ada {h} baris, setiap baris {w} petak. {h} × {w} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 12],
+            "h": [2, 9]
+          },
+          "constraint": "w != h",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} menutup sebuah persegi panjang dengan petak 1 cm². Ada {h} baris, setiap baris {w} petak. Berapa cm² luasnya?",
+          "answer": "w * h",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "w + h",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "2 * (w + h)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "w * h + w",
+              "tag": "lebih-satu-baris"
+            }
+          ],
+          "explain": "Banyak petak = baris × isi tiap baris = {h} × {w} = {answer}. Itulah luasnya."
+        }
+      }
+    ]
+  }
+}

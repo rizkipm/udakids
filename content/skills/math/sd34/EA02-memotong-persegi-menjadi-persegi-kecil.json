@@ -1,0 +1,174 @@
+{
+  "id": "math.sd34.ea2.memotong-persegi-menjadi-persegi-kecil",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EA",
+  "order": 2,
+  "title": "Geometri bidang & ruang — Level 2 — Memotong persegi menjadi persegi kecil",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Geometri Bidang & Ruang",
+    "indikator": "Menentukan keliling persegi kecil hasil pemotongan",
+    "emc-no": "6"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 7],
+            "m": {
+              "values": [2, 3]
+            }
+          },
+          "derived": {
+            "big": "s * m",
+            "luas": "big * big",
+            "n": "m * m",
+            "q": "6 / m",
+            "q2": "12 / m"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "constraint": "!(s == 2 && m == 2)",
+          "prompt": "{nama} menggunting kertas origami seluas {luas} cm² menjadi {n} kotak kecil berbentuk persegi yang ukurannya sama. Berapa cm keliling setiap kotak kecil?",
+          "stimulus": [
+            {
+              "kind": "figure",
+              "shapes": [
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    [6, 0],
+                    [6, 6],
+                    [0, 6]
+                  ]
+                },
+                {
+                  "t": "poly",
+                  "pts": [
+                    [0, 0],
+                    ["=q", 0],
+                    ["=q", "=q"],
+                    [0, "=q"]
+                  ],
+                  "fill": "soft"
+                },
+                {
+                  "t": "seg",
+                  "a": ["=q", 0],
+                  "b": ["=q", 6],
+                  "dashed": true
+                },
+                {
+                  "t": "seg",
+                  "a": ["=q2", 0],
+                  "b": ["=q2", 6],
+                  "dashed": true
+                },
+                {
+                  "t": "seg",
+                  "a": [0, "=q"],
+                  "b": [6, "=q"],
+                  "dashed": true
+                },
+                {
+                  "t": "seg",
+                  "a": [0, "=q2"],
+                  "b": [6, "=q2"],
+                  "dashed": true
+                }
+              ],
+              "caption": "luas kertas {luas} cm²"
+            }
+          ],
+          "answer": "4 * s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "4 * big",
+              "tag": "keliling-kertas-besar"
+            },
+            {
+              "expr": "s * s",
+              "tag": "luas-kecil"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "dua-sisi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sisi kertas besar = {big} cm karena {big} × {big} = {luas}. Dipotong {m} × {m}, jadi sisi kecil = {big} : {m} = {s} cm. Keliling = 4 × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [1, 7],
+            "m": {
+              "values": [2, 3]
+            }
+          },
+          "derived": {
+            "big": "s * m",
+            "kb": "4 * big",
+            "n": "m * m"
+          },
+          "prompt": "Bingkai foto persegi kelilingnya {kb} cm dibagi dengan garis-garis menjadi {n} kotak persegi yang ukurannya sama. Berapa cm² luas setiap kotak?",
+          "answer": "s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "big * big",
+              "tag": "luas-besar"
+            },
+            {
+              "expr": "4 * s",
+              "tag": "keliling-kecil"
+            },
+            {
+              "expr": "kb / n",
+              "tag": "keliling-dibagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sisi kertas besar = {kb} : 4 = {big} cm. Sisi kecil = {big} : {m} = {s} cm. Luas = {s} × {s} = {answer}."
+        }
+      }
+    ]
+  }
+}

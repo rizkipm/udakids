@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.t3.mengalikan-pembilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "T",
+  "order": 3,
+  "title": "Perkalian pecahan dengan bilangan cacah — Level 3 — Mengalikan pembilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 6],
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "{k} × {n}/{d} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "k * n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "k * n",
+              "den": "k * d",
+              "tag": "penyebut-ikut-dikali"
+            },
+            {
+              "num": "k + n",
+              "den": "d",
+              "tag": "dijumlah"
+            },
+            {
+              "num": "n",
+              "den": "k * d",
+              "tag": "penyebut-dikali-saja"
+            },
+            {
+              "num": "k * n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Kalikan bilangan cacah dengan pembilang: {k} × {n} = {=k*n}. Penyebut tetap {d}. Jadi {k} × {n}/{d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 6],
+            "d": [3, 12],
+            "n": [1, 11]
+          },
+          "constraint": "n < d",
+          "prompt": "{n}/{d} × {k} = …",
+          "format": "fraction",
+          "fraction": {
+            "num": "k * n",
+            "den": "d",
+            "simplify": false
+          },
+          "distractors": [
+            {
+              "num": "k * n",
+              "den": "k * d",
+              "tag": "penyebut-ikut-dikali"
+            },
+            {
+              "num": "k + n",
+              "den": "d",
+              "tag": "dijumlah"
+            },
+            {
+              "num": "n",
+              "den": "k * d",
+              "tag": "penyebut-dikali-saja"
+            },
+            {
+              "num": "k * n + 1",
+              "den": "d",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Urutan perkalian boleh ditukar. Kalikan pembilang dengan {k}: {n} × {k} = {=k*n}. Penyebut tetap {d}. Jadi {answer}."
+        }
+      }
+    ]
+  }
+}

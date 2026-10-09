@@ -1,0 +1,156 @@
+{
+  "id": "math.sd4.dd7.bayangan-pada-sumbu-simetri",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "DD",
+  "order": 7,
+  "title": "Simetri lipat — Level 7 — Bayangan pada sumbu simetri",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "Pada kertas berpetak, titik A berada {a} kotak di kiri sumbu simetri tegak. Gambar dicerminkan pada sumbu itu. Bayangan titik A berada berapa kotak di kanan sumbu?",
+          "answer": "a",
+          "unit": "kotak",
+          "distractors": [
+            {
+              "expr": "2 * a",
+              "tag": "jarak-ke-bayangan"
+            },
+            {
+              "expr": "a + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "a - 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bayangan cermin selalu sama jauh dari sumbu simetri. A berjarak {a} kotak di kiri, jadi bayangannya {answer} kotak di kanan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 12]
+          },
+          "prompt": "Titik B berada {a} kotak di atas sumbu simetri mendatar. Berapa kotak jarak titik B ke bayangannya?",
+          "answer": "2 * a",
+          "unit": "kotak",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu-sisi"
+            },
+            {
+              "expr": "a + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "2 * a + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "B berjarak {a} kotak ke sumbu, dan bayangannya juga {a} kotak di bawah sumbu. Jaraknya {a} + {a} = {answer} kotak."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [10, 60],
+            "d": [2, 9]
+          },
+          "derived": {
+            "p": "m - d"
+          },
+          "prompt": "Pada garis bilangan, sumbu simetri berada di angka {m}. Berapa bayangan angka {p}?",
+          "answer": "m + d",
+          "distractors": [
+            {
+              "expr": "m + 2 * d",
+              "tag": "loncat-dua-kali"
+            },
+            {
+              "expr": "p",
+              "tag": "titik-asal"
+            },
+            {
+              "expr": "m + d + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Angka {p} berada {d} langkah di kiri {m}. Bayangannya {d} langkah di kanan {m}: {m} + {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [10, 80],
+            "g": [2, 10]
+          },
+          "derived": {
+            "q": "p + 2 * g"
+          },
+          "prompt": "Pada garis bilangan, angka {p} dan {q} saling bercermin. Di angka berapa sumbu simetrinya?",
+          "answer": "(p + q) / 2",
+          "distractors": [
+            {
+              "expr": "q - p",
+              "tag": "jarak"
+            },
+            {
+              "expr": "(p + q) / 2 + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "p + q",
+              "tag": "dijumlah"
+            }
+          ],
+          "explain": "Sumbu simetri berada tepat di tengah. Jarak {p} ke {q} adalah {=q-p}, separuhnya {=(q-p)/2}. Jadi sumbunya di {p} + {=(q-p)/2} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 25]
+          },
+          "prompt": "Gambar rumah ini simetri dengan sumbu tegak di tengah pintu. Jendela kiri berjarak {a} cm dari sumbu. Berapa cm jarak jendela kiri ke jendela kanan?",
+          "answer": "2 * a",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "a",
+              "tag": "hanya-satu-sisi"
+            },
+            {
+              "expr": "a + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "2 * a + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jendela kanan juga berjarak {a} cm dari sumbu. Jaraknya {a} + {a} = {answer}."
+        }
+      }
+    ]
+  }
+}

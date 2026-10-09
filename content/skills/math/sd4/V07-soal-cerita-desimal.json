@@ -1,0 +1,227 @@
+{
+  "id": "math.sd4.v7.soal-cerita-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 7,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 7 — Soal cerita desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 5],
+            "a": [1, 9],
+            "b": [11, 99]
+          },
+          "prompt": "Pita {nama} panjangnya {x} m. Sebanyak {y} m dipakai untuk menghias kado. Berapa meter sisa pitanya?",
+          "answer": "x - y",
+          "explain": "Sisa = panjang awal − yang dipakai. Luruskan koma: {x} − {y} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "1 + b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "u - 1 + abs(a * 10 - b) / 100",
+              "tag": "kecil-dari-besar"
+            },
+            {
+              "expr": "x - y + 1",
+              "tag": "lupa-meminjam"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 5],
+            "a": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Ibu membeli {x} kg beras dan {y} kg gula. Berapa kilogram berat belanjaan Ibu semuanya?",
+          "answer": "x + y",
+          "explain": "Semuanya berarti dijumlah. Luruskan koma: {x} + {y} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "b / 10"
+          },
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "u + (a + b) / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "u + ((a + b) % 10) / 10",
+              "tag": "lupa-menyimpan"
+            },
+            {
+              "expr": "x - y",
+              "tag": "mengurangi"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [5, 9],
+            "b": [11, 49]
+          },
+          "prompt": "Botol minum {nama} berisi {x} liter air. Ia meminum {y} liter. Berapa liter air yang tersisa?",
+          "answer": "x - y",
+          "explain": "Sisa = isi awal − yang diminum. Tulis {x} sebagai {x}0, lalu kurangi: {answer}.",
+          "derived": {
+            "x": "1 + a / 10",
+            "y": "b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "liter",
+          "distractors": [
+            {
+              "expr": "x + y",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x - y + 0.1",
+              "tag": "lain"
+            },
+            {
+              "expr": "x - y - 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 4],
+            "a": [1, 9],
+            "v": [1, 3],
+            "b": [11, 99]
+          },
+          "prompt": "{nama} bersepeda {x} km pada pagi hari dan {y} km pada sore hari. Berapa kilometer jarak yang ditempuhnya seluruhnya?",
+          "answer": "x + y",
+          "explain": "Seluruhnya berarti dijumlah. Luruskan koma: {x} + {y} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "km",
+          "distractors": [
+            {
+              "expr": "u + v + (a + b) / 100",
+              "tag": "koma-tidak-lurus"
+            },
+            {
+              "expr": "x + y + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(x - y)",
+              "tag": "mengurangi"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

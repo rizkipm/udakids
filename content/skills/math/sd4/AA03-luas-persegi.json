@@ -1,0 +1,112 @@
+{
+  "id": "math.sd4.aa3.luas-persegi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 3,
+  "title": "Luas persegi dan persegi panjang — Level 3 — Luas persegi",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [2, 15]
+          },
+          "prompt": "Persegi ini bersisi {s} cm. Berapa cm² luasnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=s",
+              "h": "=s",
+              "unit": "cm"
+            }
+          ],
+          "answer": "s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "keliling"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "sisi-dikali-2"
+            },
+            {
+              "expr": "s * s + s",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Luas persegi = sisi × sisi = {s} × {s} = {answer}. Bukan 4 × {s}, karena itu kelilingnya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "range": [10, 30],
+              "step": 5
+            }
+          },
+          "prompt": "Sebuah ubin berbentuk persegi dengan sisi {s} cm. Berapa cm² luas permukaan ubin itu?",
+          "answer": "s * s",
+          "unit": "cm²",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "keliling"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "sisi-dikali-2"
+            },
+            {
+              "expr": "s * s - s",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Sisi × sisi = {s} × {s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 12]
+          },
+          "words": {
+            "x": ["Kolam ikan", "Kebun bunga", "Lantai teras", "Petak sawah kecil"]
+          },
+          "prompt": "{x} berbentuk persegi dengan sisi {s} m. Berapa m² luasnya?",
+          "answer": "s * s",
+          "unit": "m²",
+          "distractors": [
+            {
+              "expr": "4 * s",
+              "tag": "keliling"
+            },
+            {
+              "expr": "2 * s",
+              "tag": "sisi-dikali-2"
+            },
+            {
+              "expr": "s * s + s",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Luas persegi = {s} × {s} = {answer}."
+        }
+      }
+    ]
+  }
+}

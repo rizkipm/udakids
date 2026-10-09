@@ -114,6 +114,26 @@ describe('peraga: alat matematika', () => {
       ),
     ).toBe(false);
   });
+  it('alat Kelas 4 (D-096): ribuan, garis besar, luas, sudut, diagram, desimal', () => {
+    expect(ok(alat('blok-puluhan', [{ ...step, target: 4725 }]))).toBe(true);
+    expect(ok(alat('blok-puluhan', [{ ...step, target: 10000 }]))).toBe(false);
+    const big = { ...step, min: 0, max: 100000, dari: 20000, ubah: 30000, loncat: 10000 };
+    expect(ok(alat('garis-bilangan', [big]))).toBe(true);
+    expect(ok(alat('garis-bilangan', [{ ...big, loncat: 1000, ubah: 3000 }]))).toBe(false);
+    expect(ok(alat('garis-bilangan', [{ ...big, ubah: 25000 }]))).toBe(false);
+    expect(ok(alat('luas', [{ ...step, panjang: 6, lebar: 4, hitung: 'luas' }]))).toBe(true);
+    expect(ok(alat('luas', [{ ...step, panjang: 12, lebar: 10, hitung: 'luas' }]))).toBe(false);
+    expect(ok(alat('luas', [{ ...step, panjang: 12, lebar: 10, hitung: 'keliling' }]))).toBe(true);
+    expect(ok(alat('sudut', [{ ...step, target: 90 }]))).toBe(true);
+    expect(ok(alat('sudut', [{ ...step, target: 100 }]))).toBe(false);
+    const data = [
+      { nama: 'apel', nilai: 10 },
+      { nama: 'jeruk', nilai: 25 },
+    ];
+    expect(ok(alat('diagram', [{ ...step, satuan: 'anak', skala: 5, data }]))).toBe(true);
+    expect(ok(alat('diagram', [{ ...step, satuan: 'anak', skala: 2, data }]))).toBe(false);
+    expect(ok(alat('desimal', [{ ...step, perseratus: 37 }]))).toBe(true);
+  });
   it('langkah dibaca dengan nilai bawaan', () => {
     const [s] = peragaSteps('garis-bilangan', [{ ...step, min: 0, max: 20, dari: 0, ubah: 10 }]);
     expect(s!.loncat).toBe(1);

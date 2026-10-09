@@ -53,8 +53,8 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     await flushed();
     const m = lastTo(email);
     expect(m.subject).toMatch(/^\d{6} adalah kode verifikasi/);
-    expect(m.html).toContain('Momo From Udakids');
-    expect(m.text).toContain('Momo From Udakids');
+    expect(m.html).toContain('Momo From UdaKids');
+    expect(m.text).toContain('Momo From UdaKids');
     // Nama dari pengguna di-escape di HTML.
     expect(m.html).toContain('Ibu &lt;b&gt;Baru&lt;/b&gt;');
     expect(m.html).not.toContain('<b>Baru</b>');
@@ -139,7 +139,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const m = await http()
       .post('/admin/payment-methods')
       .set(auth(adminToken))
-      .send({ kind: 'bank', provider: 'BCA', accountNumber: '1234567890', accountName: 'Udakids' })
+      .send({ kind: 'bank', provider: 'BCA', accountNumber: '1234567890', accountName: 'UdaKids' })
       .expect(201);
     const order = await http()
       .post('/parent/orders')
@@ -168,7 +168,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const paidMail = outbox.filter((x) => x.to === email).at(-1)!;
     // Email transaksi juga membawa List-Unsubscribe (mailto ke alamat pengirim).
     expect(paidMail.headers?.['List-Unsubscribe']).toMatch(/^<mailto:[^>]+\?subject=[^>]+>$/);
-    expect(paidMail.html).toContain('Momo From Udakids');
+    expect(paidMail.html).toContain('Momo From UdaKids');
     expect(outbox.some((x) => x.to === director)).toBe(true);
   });
 
@@ -184,7 +184,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     const m = await http()
       .post('/admin/payment-methods')
       .set(auth(adminToken))
-      .send({ kind: 'bank', provider: 'BRI', accountNumber: '5550001112', accountName: 'Udakids' })
+      .send({ kind: 'bank', provider: 'BRI', accountNumber: '5550001112', accountName: 'UdaKids' })
       .expect(201);
     const order = await http()
       .post('/parent/orders')
@@ -273,7 +273,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       .send({ to: 'uji@contoh.id' })
       .expect(200);
     expect(t.body.to).toBe('uji@contoh.id');
-    expect(lastTo('uji@contoh.id').html).toContain('Momo From Udakids');
+    expect(lastTo('uji@contoh.id').html).toContain('Momo From UdaKids');
     const [p] = (
       await pool.query<{ id: string }>("select id from parents where email = 'kedua@contoh.id'")
     ).rows;
@@ -288,14 +288,14 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       .set(auth(adminToken))
       .send({
         adminWhatsapp: '0812-3456-7890',
-        adminMessage: 'Halo admin Udakids',
+        adminMessage: 'Halo admin UdaKids',
         groupWhatsapp: 'https://chat.whatsapp.com/GrupOrtu123',
       })
       .expect(200);
     expect(saved.body.adminWhatsapp).toBe('https://wa.me/6281234567890');
     const pub = await http().get('/public/contact').expect(200);
     expect(pub.body).toEqual({
-      adminWhatsapp: 'https://wa.me/6281234567890?text=Halo+admin+Udakids',
+      adminWhatsapp: 'https://wa.me/6281234567890?text=Halo+admin+UdaKids',
     });
     expect(JSON.stringify(pub.body)).not.toContain('chat.whatsapp.com');
     await http().put('/admin/contact').send({}).expect(401);
@@ -536,7 +536,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
     // Catatan kecil tidak tampil sebagai tag HTML mentah; logo ditempel (CID).
     expect(toParent.html).not.toContain('&lt;span');
     expect(toParent.html).toContain('cid:momo-logo@udakids');
-    expect(toParent.html).toContain('Momo From Udakids');
+    expect(toParent.html).toContain('Momo From UdaKids');
     expect(mails.some((m) => m.to === 'udacodingofficial@gmail.com')).toBe(true);
     // Sudah diumumkan → tidak dikirim lagi.
     expect((await news.maybeSend(new Date(), true)).sent).toBe(false);
@@ -699,7 +699,7 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
   });
 
   it('template: escape & footer', () => {
-    const ctxMail = { appUrl: 'https://udakids.id', brand: 'Udakids' };
+    const ctxMail = { appUrl: 'https://udakids.id', brand: 'UdaKids' };
     const v = verifyEmail(ctxMail, { name: '<script>x</script>', code: '123456', minutes: 15 });
     expect(v.html).not.toContain('<script>x');
     expect(v.html).toContain('123456');
@@ -712,12 +712,12 @@ describe.skipIf(!hasDb)('email: verifikasi pendaftaran & notifikasi transaksi', 
       discount: 0,
       uniqueCode: 123,
       amount: 50_123,
-      method: { provider: 'BCA', accountNumber: '1', accountName: 'Udakids' },
+      method: { provider: 'BCA', accountNumber: '1', accountName: 'UdaKids' },
       expiresAt: new Date('2026-10-02T03:00:00Z'),
       orderId: '00000000-0000-0000-0000-000000000000',
     });
     expect(o.html).toContain('A &amp; B');
-    expect(o.html).toContain('Momo From Udakids');
+    expect(o.html).toContain('Momo From UdaKids');
     expect(o.text).toContain('50.123');
     // Penutup mengajak membalas (balasan menaikkan kepercayaan Gmail), bukan "mohon tidak membalas".
     for (const m of [v, o]) {

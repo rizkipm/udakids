@@ -1,0 +1,131 @@
+{
+  "id": "math.sd4.aa6.banyak-ubin-untuk-lantai",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "AA",
+  "order": 6,
+  "title": "Luas persegi dan persegi panjang — Level 6 — Banyak ubin untuk lantai",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 10],
+            "l": [2, 8]
+          },
+          "constraint": "p > l",
+          "words": {
+            "x": ["Lantai dapur", "Lantai kamar mandi", "Teras rumah", "Lantai gudang"]
+          },
+          "prompt": "{x} berukuran {p} m × {l} m akan ditutup ubin persegi 1 m × 1 m. Berapa ubin yang diperlukan?",
+          "answer": "p * l",
+          "distractors": [
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "p + l",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "p * l + l",
+              "tag": "meleset-hitung"
+            }
+          ],
+          "explain": "Satu ubin menutup 1 m². Banyak ubin = luas lantai = {p} × {l} = {answer} ubin."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [5, 12],
+            "l": [3, 9]
+          },
+          "constraint": "p > l",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} menutup papan {p} cm × {l} cm dengan stiker persegi bersisi 1 cm tanpa celah. Berapa stiker yang dipakai?",
+          "answer": "p * l",
+          "distractors": [
+            {
+              "expr": "2 * (p + l)",
+              "tag": "keliling"
+            },
+            {
+              "expr": "p + l",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "p * l - p",
+              "tag": "kurang-satu-baris"
+            }
+          ],
+          "explain": "Ada {l} baris stiker, setiap baris {p} stiker. {l} × {p} = {answer} stiker."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [4, 12],
+            "l": [3, 10],
+            "k": {
+              "values": [4, 5, 6, 8, 10]
+            }
+          },
+          "constraint": "p > l && (p * l) % k == 0",
+          "prompt": "Lantai {p} m × {l} m ditutup ubin 1 m × 1 m. Satu dus berisi {k} ubin. Berapa dus ubin yang perlu dibeli?",
+          "answer": "p * l / k",
+          "distractors": [
+            {
+              "expr": "p * l",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "2 * (p + l) / k",
+              "tag": "memakai-keliling"
+            },
+            {
+              "expr": "p * l / k + 1",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: banyak ubin = {p} × {l} = {=p*l}. Langkah 2: {=p*l} : {k} = {answer} dus."
+        }
+      }
+    ]
+  }
+}

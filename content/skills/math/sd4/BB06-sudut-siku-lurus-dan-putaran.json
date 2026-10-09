@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.bb6.sudut-siku-lurus-dan-putaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "BB",
+  "order": 6,
+  "title": "Garis dan sudut — Level 6 — Sudut siku-siku, lurus, dan putaran",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [10, 80],
+              "step": 5
+            }
+          },
+          "prompt": "Sebuah sudut siku-siku dibagi dua oleh satu garis. Satu bagiannya {a}°. Berapa derajat bagian yang lain?",
+          "answer": "90 - a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "180 - a",
+              "tag": "memakai-180"
+            },
+            {
+              "expr": "a",
+              "tag": "sama-besar"
+            },
+            {
+              "expr": "90 + a",
+              "tag": "ditambah"
+            }
+          ],
+          "explain": "Sudut siku-siku besarnya 90°. Bagian lain = 90° − {a}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 160],
+              "step": 5
+            }
+          },
+          "constraint": "a != 90",
+          "prompt": "Di atas sebuah garis lurus ada dua sudut yang berdampingan. Satu sudut {a}°. Berapa derajat sudut yang lain?",
+          "answer": "180 - a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "90 - a",
+              "tag": "memakai-90"
+            },
+            {
+              "expr": "360 - a",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "a",
+              "tag": "sama-besar"
+            }
+          ],
+          "explain": "Sudut lurus besarnya 180°. Sudut yang lain = 180° − {a}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} berdiri menghadap papan tulis, lalu berputar ke kanan {k} kali. Setiap kali ia berputar sebesar sudut siku-siku. Berapa derajat ia berputar seluruhnya?",
+          "answer": "90 * k",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "45 * k",
+              "tag": "setengah-siku"
+            },
+            {
+              "expr": "180 * k",
+              "tag": "sudut-lurus"
+            },
+            {
+              "expr": "90 * k + 90",
+              "tag": "lebih-satu-putaran-siku"
+            }
+          ],
+          "explain": "Satu putaran siku-siku = 90°. {k} kali: {k} × 90° = {answer}. Empat kali siku-siku = 360°, kembali menghadap papan tulis."
+        }
+      }
+    ]
+  }
+}

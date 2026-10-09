@@ -1,0 +1,129 @@
+{
+  "id": "math.sd4.u8.desimal-pada-garis-bilangan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 8,
+  "title": "Desimal persepuluhan dan perseratusan — Level 8 — Desimal pada garis bilangan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Garis bilangan dari 0 sampai 1 dibagi menjadi 10 bagian sama besar. Titik P ada di garis ke-{a} dari 0. Nilai P adalah …",
+          "answer": "a / 10",
+          "explain": "Setiap bagian bernilai 1/10 = 0,1. Garis ke-{a} dari 0 bernilai {a} × 0,1 = {answer}.",
+          "distractors": [
+            {
+              "expr": "a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "(10 - a) / 10",
+              "tag": "hitung-dari-1"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 8],
+            "a": [1, 9]
+          },
+          "prompt": "Garis bilangan dari {b} sampai {=b+1} dibagi menjadi 10 bagian sama besar. Titik Q ada di garis ke-{a} setelah {b}. Nilai Q adalah …",
+          "answer": "b + a / 10",
+          "explain": "Setiap bagian bernilai 0,1. Mulai dari {b}, maju {a} bagian: {b} + {=a/10} = {answer}.",
+          "distractors": [
+            {
+              "expr": "b + a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "b + 1 - a / 10",
+              "tag": "hitung-dari-kanan"
+            },
+            {
+              "expr": "a + b / 10",
+              "tag": "tertukar"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Garis bilangan dari 0 sampai 0,1 dibagi menjadi 10 bagian sama besar. Titik R ada di garis ke-{a} dari 0. Nilai R adalah …",
+          "answer": "a / 100",
+          "explain": "0,1 = 10/100, jadi setiap bagian bernilai 1/100 = 0,01. Garis ke-{a} bernilai {a}/100 = {answer}.",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 8]
+          },
+          "prompt": "Titik tepat di tengah-tengah antara {x} dan {y} pada garis bilangan adalah …",
+          "answer": "x + 0.05",
+          "explain": "{x} = {=a*10}/100 dan {y} = {=a*10+10}/100. Tengah-tengahnya {=a*10+5}/100 = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "(a + 1) / 10"
+          },
+          "distractors": [
+            {
+              "expr": "y",
+              "tag": "ujung"
+            },
+            {
+              "expr": "x + 0.5",
+              "tag": "tambah-setengah"
+            },
+            {
+              "expr": "x + 0.01",
+              "tag": "satu-perseratus"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

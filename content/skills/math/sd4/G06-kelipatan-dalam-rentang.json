@@ -1,0 +1,100 @@
+{
+  "id": "math.sd4.g6.kelipatan-dalam-rentang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "G",
+  "order": 6,
+  "title": "Faktor dan kelipatan — Level 6 — Kelipatan dalam rentang",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 12],
+            "n": [20, 100]
+          },
+          "prompt": "Berapa banyak kelipatan {k} dari 1 sampai {n}?",
+          "answer": "floor(n / k)",
+          "distractors": [
+            {
+              "expr": "floor(n / k) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor(n / k) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k",
+              "tag": "bilangannya"
+            }
+          ],
+          "explain": "Cari kelipatan {k} terbesar yang tidak lebih dari {n}, yaitu {=floor(n/k)*k} = {answer} × {k}. Jadi ada {answer} kelipatan {k}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [25, 150]
+          },
+          "constraint": "n % k != 0",
+          "prompt": "Kelipatan {k} terbesar yang kurang dari {n} adalah …",
+          "answer": "floor(n / k) * k",
+          "distractors": [
+            {
+              "expr": "floor(n / k) * k + k",
+              "tag": "lewat"
+            },
+            {
+              "expr": "floor(n / k) * k - k",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}. Jadi kelipatan {k} terbesar sebelum {n} adalah {=floor(n/k)} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [3, 12],
+            "n": [25, 150]
+          },
+          "constraint": "n % k != 0",
+          "prompt": "Kelipatan {k} terkecil yang lebih dari {n} adalah …",
+          "answer": "(floor(n / k) + 1) * k",
+          "distractors": [
+            {
+              "expr": "floor(n / k) * k",
+              "tag": "kurang-dari"
+            },
+            {
+              "expr": "(floor(n / k) + 2) * k",
+              "tag": "lewat"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "bukan-kelipatan"
+            }
+          ],
+          "explain": "{n} : {k} = {=floor(n/k)} sisa {=n%k}. Kelipatan berikutnya: {=floor(n/k)+1} × {k} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "id": "math.sd34.eg10.tantangan-kombinatorika-dan-penalaran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 10,
+  "title": "Kombinatorika & penalaran — Level 10 — Tantangan kombinatorika dan penalaran",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "reasoning",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Gabungan semua indikator kombinatorika & penalaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": [3, 12],
+            "q": [2, 9]
+          },
+          "constraint": "p != q",
+          "prompt": "Siswa berbaris membentuk persegi panjang untuk upacara. Jarak setiap siswa dengan siswa di depan, belakang, kanan, dan kirinya 1 m. Panjang barisan {p} m dan lebarnya {q} m, dan semua tempat terisi. Banyak siswa adalah …",
+          "answer": "(p + 1) * (q + 1)",
+          "distractors": [
+            {
+              "expr": "p * q",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "(p + 1) * q",
+              "tag": "satu-sisi"
+            },
+            {
+              "expr": "2 * (p + q)",
+              "tag": "keliling"
+            }
+          ],
+          "choices": 4,
+          "explain": "Sepanjang {p} m ada {p} jarak, jadi {=p+1} siswa per baris. Sepanjang {q} m ada {=q+1} baris. Banyak siswa = {=p+1} × {=q+1} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [4, 25]
+          },
+          "prompt": "Dalam sebuah pertemuan ada {n} anak. Setiap anak berjabat tangan tepat satu kali dengan setiap anak lainnya. Banyak jabat tangan adalah …",
+          "answer": "n * (n - 1) / 2",
+          "distractors": [
+            {
+              "expr": "n * (n - 1)",
+              "tag": "terhitung-dua-kali"
+            },
+            {
+              "expr": "n * n / 2",
+              "tag": "setengah-kuadrat"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "satu-anak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Setiap anak berjabat tangan dengan {=n-1} anak lain: {n} × {=n-1} = {=n*(n-1)}, tetapi setiap jabat tangan terhitung dua kali. Jadi {=n*(n-1)} : 2 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [10, 30],
+            "mn": [1, 4]
+          },
+          "constraint": "n - 3 * mn > mn",
+          "prompt": "Sebuah kotak berisi {n} bola berwarna merah, kuning, biru, dan hijau. Setiap warna ada paling sedikit {mn} bola. Bola merah paling banyak ada … bola.",
+          "answer": "n - 3 * mn",
+          "distractors": [
+            {
+              "expr": "n - mn",
+              "tag": "satu-warna"
+            },
+            {
+              "expr": "n / 4",
+              "tag": "dibagi-rata"
+            },
+            {
+              "expr": "n - 4 * mn",
+              "tag": "empat-warna"
+            }
+          ],
+          "choices": 4,
+          "explain": "Warna lain dibuat sesedikit mungkin: 3 warna × {mn} = {=3*mn}. Merah = {n} − {=3*mn} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9]
+          },
+          "prompt": "Dalam kotak ada {a} bola merah, {b} biru, dan {c} hijau. Paling sedikit berapa bola yang harus diambil tanpa melihat agar pasti mendapat ketiga warna?",
+          "answer": "a + b + c - min(a, min(b, c)) + 1",
+          "distractors": [
+            {
+              "expr": "3",
+              "tag": "tiga-saja"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "semua"
+            },
+            {
+              "expr": "max(a, max(b, c)) + 2",
+              "tag": "satu-warna-terbanyak"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kemungkinan terburuk: semua bola dari dua warna terbanyak terambil dulu ({=a+b+c-min(a,min(b,c))}), lalu satu bola warna ketiga. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [3, 9]
+          },
+          "prompt": "Dari angka 1 sampai {n} akan dibuat bilangan dua angka dengan angka yang berbeda. Banyak bilangan yang dapat dibuat adalah …",
+          "answer": "n * (n - 1)",
+          "distractors": [
+            {
+              "expr": "n * n",
+              "tag": "boleh-berulang"
+            },
+            {
+              "expr": "n * (n - 1) / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali-n"
+            }
+          ],
+          "choices": 4,
+          "explain": "Angka puluhan: {n} pilihan. Angka satuan harus berbeda: {=n-1} pilihan. Jadi {n} × {=n-1} = {answer}."
+        }
+      }
+    ]
+  }
+}

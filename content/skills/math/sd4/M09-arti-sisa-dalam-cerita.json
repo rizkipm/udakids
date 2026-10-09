@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.m9.arti-sisa-dalam-cerita",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "M",
+  "order": 9,
+  "title": "Pembagian bersisa dan soal cerita — Level 9 — Arti sisa dalam cerita",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "{t} kue dibagi sama banyak untuk {m} anak. Berapa kue lagi paling sedikit yang perlu ditambah agar tidak ada sisa?",
+          "answer": "m - t % m",
+          "distractors": [
+            {
+              "expr": "t % m",
+              "tag": "sisa"
+            },
+            {
+              "expr": "m",
+              "tag": "pembagi"
+            },
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {=t%m}. Agar sisa itu cukup untuk satu putaran lagi ({m} kue), perlu tambahan {m} − {=t%m} = {answer} kue."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "t": [20, 99]
+          },
+          "constraint": "t % m != 0",
+          "prompt": "Ada {t} kelereng untuk {m} anak. Berapa kelereng paling sedikit yang harus disimpan agar sisanya habis dibagi sama banyak?",
+          "answer": "t % m",
+          "distractors": [
+            {
+              "expr": "m - t % m",
+              "tag": "sisa-terbalik"
+            },
+            {
+              "expr": "floor(t / m)",
+              "tag": "hasil-bagi"
+            },
+            {
+              "expr": "t % m + m",
+              "tag": "lebih-pembagi"
+            }
+          ],
+          "explain": "{t} : {m} = {=floor(t/m)} sisa {answer}. Jika {answer} kelereng disimpan, {=t-t%m} kelereng habis dibagi {m}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "a": [20, 80],
+            "r": [1, 8]
+          },
+          "constraint": "r < m",
+          "prompt": "Bilangan terkecil yang lebih dari {a} dan bersisa {r} jika dibagi {m} adalah …",
+          "answer": "(floor(a / m) + (a % m >= r)) * m + r",
+          "distractors": [
+            {
+              "expr": "(floor(a / m) + (a % m >= r)) * m + r + m",
+              "tag": "lebih-pembagi"
+            },
+            {
+              "expr": "a + r",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "(floor(a / m) + 1) * m",
+              "tag": "kelipatan"
+            }
+          ],
+          "explain": "Kelipatan {m} terdekat di bawah atau sama dengan {a} adalah {=floor(a/m)*m}. Bilangan bersisa {r} berbentuk kelipatan {m} ditambah {r}. Yang pertama lebih dari {a} adalah {answer}."
+        }
+      }
+    ]
+  }
+}

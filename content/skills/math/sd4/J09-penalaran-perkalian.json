@@ -1,0 +1,172 @@
+{
+  "id": "math.sd4.j9.penalaran-perkalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 9,
+  "title": "Perkalian dengan bilangan satu angka — Level 9 — Penalaran perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "range": [2500, 9500],
+              "step": 500
+            },
+            "k": [2, 9],
+            "pay": {
+              "values": [50000, 100000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ],
+            "barang": [
+              "buku cerita",
+              "kotak pensil",
+              "botol minum",
+              "tas kain",
+              "mainan robot",
+              "payung"
+            ]
+          },
+          "constraint": "h * k < pay && (pay == 50000 || h * k > 50000)",
+          "prompt": "{nama} membeli {k} {barang} seharga Rp{h} per buah. Ia membayar dengan uang Rp{pay}. Berapa kembaliannya?",
+          "answer": "pay - h * k",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "h * k",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "pay - h",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "pay - h * k - 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Dua langkah. Pertama, harga semuanya: {k} × {h} = {=h*k}. Kedua, kembalian: {pay} - {=h*k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [120, 999],
+            "k": [3, 8]
+          },
+          "derived": {
+            "r": "n * k"
+          },
+          "prompt": "{n} × {k} = {r}. Berapa {n} × {=k+1}?",
+          "answer": "r + n",
+          "distractors": [
+            {
+              "expr": "r + 1",
+              "tag": "tambah-satu"
+            },
+            {
+              "expr": "r + k",
+              "tag": "tambah-keliru"
+            },
+            {
+              "expr": "r + 2 * n",
+              "tag": "lebih-satu-kelompok"
+            }
+          ],
+          "explain": "{n} × {=k+1} berarti satu kelompok {n} lebih banyak. Tambahkan {n} ke {r}: {r} + {n} = {answer}. Tidak perlu menghitung dari awal."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [51, 999]
+          },
+          "derived": {
+            "n": "m * 2"
+          },
+          "constraint": "n < 2000",
+          "prompt": "Cara cepat: {n} × 5 = {n} × 10 : 2. Berapa {n} × 5?",
+          "answer": "n * 5",
+          "distractors": [
+            {
+              "expr": "n * 10",
+              "tag": "lupa-bagi"
+            },
+            {
+              "expr": "n * 5 + 10",
+              "tag": "lain"
+            },
+            {
+              "expr": "n / 2",
+              "tag": "hanya-bagi"
+            }
+          ],
+          "explain": "{n} × 10 = {=n*10}. Lalu bagi dua: {=n*10} : 2 = {answer}. Ini cepat karena 5 adalah setengah dari 10."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [24, 125],
+            "k": [3, 9],
+            "m": [10, 99]
+          },
+          "constraint": "m < n * k",
+          "prompt": "Pak Budi menanam {k} baris pohon. Setiap baris ada {n} pohon. Ia sudah menyiram {m} pohon. Berapa pohon yang belum disiram?",
+          "answer": "n * k - m",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "n * k + m",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "n - m",
+              "tag": "lupa-kali"
+            }
+          ],
+          "explain": "Dua langkah. Semua pohon: {n} × {k} = {=n*k}. Yang belum disiram: {=n*k} - {m} = {answer}."
+        }
+      }
+    ]
+  }
+}

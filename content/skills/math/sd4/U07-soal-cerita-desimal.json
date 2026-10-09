@@ -1,0 +1,199 @@
+{
+  "id": "math.sd4.u7.soal-cerita-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 7,
+  "title": "Desimal persepuluhan dan perseratusan — Level 7 — Soal cerita desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Kue lapis dipotong menjadi 10 bagian sama besar. {nama} memakan {a} potong. Bagian kue yang dimakan, ditulis sebagai desimal, adalah …",
+          "answer": "a / 10",
+          "explain": "{a} dari 10 potong = {a}/10 = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "(10 - a) / 10",
+              "tag": "bagian-sisa"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 99]
+          },
+          "prompt": "Di aula ada 100 kursi. {a} kursi berwarna biru. Bagian kursi biru, ditulis sebagai desimal, adalah …",
+          "answer": "a / 100",
+          "explain": "{a} dari 100 kursi = {a}/100 = {answer}.",
+          "constraint": "a % 10 != 0",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "(100 - a) / 100",
+              "tag": "bagian-sisa"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 99]
+          },
+          "prompt": "Panjang pita {nama} {a} cm. Berapa meter panjang pita itu?",
+          "answer": "a / 100",
+          "explain": "1 m = 100 cm. {a} cm = {a}/100 m = {answer}.",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a / 1000",
+              "tag": "kebanyakan-nol"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Sebatang cokelat punya 10 kotak sama besar. {nama} memberikan {a} kotak kepada adiknya. Sisa cokelatnya, ditulis sebagai desimal, adalah …",
+          "answer": "(10 - a) / 10",
+          "explain": "Sisa kotak = 10 − {a} = {=10-a}. Jadi sisanya {=10-a}/10 = {answer}.",
+          "constraint": "a != 5",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "a / 10",
+              "tag": "yang-diberikan"
+            },
+            {
+              "expr": "(10 - a) / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "10 - a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

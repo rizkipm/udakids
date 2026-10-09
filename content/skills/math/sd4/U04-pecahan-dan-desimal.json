@@ -1,0 +1,124 @@
+{
+  "id": "math.sd4.u4.pecahan-dan-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 4,
+  "title": "Desimal persepuluhan dan perseratusan — Level 4 — Pecahan dan desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 5, 20, 25, 50]
+            },
+            "n": [1, 49]
+          },
+          "prompt": "{n}/{d} ditulis sebagai desimal adalah …",
+          "answer": "n / d",
+          "explain": "Ubah penyebutnya menjadi 100: kalikan pembilang dan penyebut dengan {=100/d}. {n}/{d} = {=n*100/d}/100 = {answer}.",
+          "constraint": "n < d && gcd(n, d) == 1",
+          "distractors": [
+            {
+              "expr": "n / 10",
+              "tag": "pembilang-setelah-koma"
+            },
+            {
+              "expr": "n / d / 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "n / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 5, 20, 25, 50]
+            },
+            "n": [1, 49]
+          },
+          "prompt": "{n}/{d} ditulis sebagai desimal adalah …",
+          "answer": "n / d",
+          "explain": "Ubah penyebutnya menjadi 100: kalikan pembilang dan penyebut dengan {=100/d}. {n}/{d} = {=n*100/d}/100 = {answer}.",
+          "constraint": "n < d && gcd(n, d) == 1",
+          "distractors": [
+            {
+              "expr": "n / 10",
+              "tag": "pembilang-setelah-koma"
+            },
+            {
+              "expr": "n / d / 10",
+              "tag": "geser"
+            },
+            {
+              "expr": "n / 100",
+              "tag": "salah-tempat"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [2, 4, 5, 20, 25, 50]
+            },
+            "n": [1, 49]
+          },
+          "derived": {
+            "x": "n / d"
+          },
+          "constraint": "n < d && gcd(n, d) == 1",
+          "prompt": "{x} ditulis sebagai pecahan paling sederhana adalah …",
+          "format": "fraction",
+          "fraction": {
+            "num": "n",
+            "den": "d"
+          },
+          "distractors": [
+            {
+              "num": "n * 100 / d",
+              "den": "10",
+              "tag": "geser"
+            },
+            {
+              "num": "d - n",
+              "den": "d",
+              "tag": "komplemen"
+            },
+            {
+              "num": "n",
+              "den": "d * 10",
+              "tag": "kurang-nol"
+            },
+            {
+              "num": "n + 1",
+              "den": "d",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Tulis dulu sebagai perseratus: {x} = {=n*100/d}/100. Lalu bagi pembilang dan penyebut dengan bilangan yang sama sampai tidak bisa dibagi lagi: {answer}."
+        }
+      }
+    ]
+  }
+}

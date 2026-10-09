@@ -1,0 +1,169 @@
+{
+  "id": "math.sd4.gg4.belanja-dan-uang-kembalian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 4,
+  "title": "Soal cerita multi-langkah — Level 4 — Belanja dan uang kembalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [3000, 3500, 4000, 4500, 5000]
+            },
+            "p": {
+              "values": [2000, 2500, 3000]
+            },
+            "n": [2, 4],
+            "b": {
+              "values": [20000, 50000]
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "b > n * h + p",
+          "prompt": "{nama} membeli {n} buku tulis seharga Rp{h} per buku dan 1 pulpen seharga Rp{p}. Ia membayar Rp{b}. Berapa kembaliannya?",
+          "answer": "b - (n * h + p)",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "b - n * h",
+              "tag": "lupa-pulpen"
+            },
+            {
+              "expr": "n * h + p",
+              "tag": "lupa-kembalian"
+            },
+            {
+              "expr": "b - h - p",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "b - (n * h + p) + 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: harga buku {n} × {h} = {=n*h}. Langkah 2: semua belanja {=n*h} + {p} = {=n*h+p}. Langkah 3: kembalian {b} − {=n*h+p} = {=b-n*h-p}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [12000, 13000, 14000, 15000, 16000]
+            },
+            "n": [2, 6],
+            "b": {
+              "values": [100000]
+            }
+          },
+          "constraint": "b > n * h",
+          "prompt": "Harga 1 kg beras Rp{h}. Ibu membeli {n} kg dan membayar Rp{b}. Berapa kembaliannya?",
+          "answer": "b - n * h",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "n * h",
+              "tag": "lupa-kembalian"
+            },
+            {
+              "expr": "b - h",
+              "tag": "lupa-kali"
+            },
+            {
+              "expr": "b - n * h - h",
+              "tag": "lain"
+            },
+            {
+              "expr": "b - (n - 1) * h",
+              "tag": "kurang-satu-kg"
+            },
+            {
+              "expr": "b - n * h + 1000",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: harga beras {n} × {h} = {=n*h}. Langkah 2: kembalian {b} − {=n*h} = {=b-n*h}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": {
+              "values": [2500, 3000, 3500, 4000]
+            },
+            "p": {
+              "values": [4000, 4500, 5000, 6000]
+            },
+            "n": [2, 5],
+            "s": [2, 4]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} membeli {n} roti seharga Rp{h} per roti dan {s} susu kotak seharga Rp{p} per kotak. Berapa rupiah yang harus dibayar?",
+          "answer": "n * h + s * p",
+          "unit": "rupiah",
+          "mode": "input",
+          "explain": "Langkah 1: harga roti {n} × {h} = {=n*h}. Langkah 2: harga susu {s} × {p} = {=s*p}. Langkah 3: {=n*h} + {=s*p} = {=n*h+s*p}."
+        }
+      }
+    ]
+  }
+}

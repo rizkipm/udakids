@@ -1,0 +1,134 @@
+{
+  "id": "math.sd4.k9.penalaran-perkalian-dua-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "K",
+  "order": 9,
+  "title": "Perkalian dua angka — Level 9 — Penalaran perkalian",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 49],
+            "t": [1, 6],
+            "s": [1, 9]
+          },
+          "derived": {
+            "b": "t * 10 + s"
+          },
+          "constraint": "a % 10 != 0",
+          "prompt": "Raka menghitung {a} × {b} begini: {a} × {t} + {a} × {s} = {=a*t+a*s}. Ia lupa bahwa {t} pada {b} bernilai {=t*10}. Berapa hasil yang tepat?",
+          "answer": "a * b",
+          "distractors": [
+            {
+              "expr": "a * t + a * s",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "a * b + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "a * t * 10 + s",
+              "tag": "lupa-kali-satuan"
+            }
+          ],
+          "explain": "Angka {t} pada {b} bernilai {=t*10}. Jadi {a} × {b} = {a} × {=t*10} + {a} × {s} = {=a*t*10} + {=a*s} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12, 25],
+            "b": [11, 39]
+          },
+          "derived": {
+            "p": "a * b"
+          },
+          "constraint": "b % 10 != 0",
+          "prompt": "{a} × … = {p}",
+          "answer": "b",
+          "distractors": [
+            {
+              "expr": "b + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "b - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "b + 10",
+              "tag": "puluhan-meleset"
+            }
+          ],
+          "explain": "Pakai taksiran: {a} × {=round(b/10)*10} = {=a*round(b/10)*10}, dekat dengan {p}. Lalu coba bilangan di dekatnya. {a} × {answer} = {p}, jadi bilangan yang hilang {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 36],
+            "b": [12, 18],
+            "c": [100, 250]
+          },
+          "constraint": "c < a * b",
+          "prompt": "Sekolah memesan {a} kotak nasi untuk setiap kelas. Ada {b} kelas. Sudah datang {c} kotak. Berapa kotak lagi yang belum datang?",
+          "answer": "a * b - c",
+          "distractors": [
+            {
+              "expr": "a * b",
+              "tag": "lupa-kurangi"
+            },
+            {
+              "expr": "a * b + c",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * b - c - 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Dua langkah. Semua kotak: {a} × {b} = {=a*b}. Yang belum datang: {=a*b} - {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [11, 40],
+            "b": [11, 40],
+            "c": [11, 40],
+            "e": [11, 40]
+          },
+          "constraint": "a != c && a != e && abs(a * b - c * e) <= 40",
+          "prompt": "Pilih tanda yang tepat: {a} × {b} … {c} × {e}",
+          "answer": "(a * b > c * e) * 1 + (a * b < c * e) * 2 + (a * b == c * e) * 3",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          },
+          "explain": "Hitung kedua sisi: {a} × {b} = {=a*b} dan {c} × {e} = {=c*e}. Jadi tandanya {answer}."
+        }
+      }
+    ]
+  }
+}

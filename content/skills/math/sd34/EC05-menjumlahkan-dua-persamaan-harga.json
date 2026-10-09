@@ -1,0 +1,100 @@
+{
+  "id": "math.sd34.ec5.menjumlahkan-dua-persamaan-harga",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 5,
+  "title": "Bilangan & aljabar — Level 5 — Menjumlahkan dua persamaan harga",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menentukan jumlah/selisih harga satuan dari dua persamaan",
+    "emc-no": "22"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [1, 4],
+            "x": [2, 15],
+            "y": [2, 15]
+          },
+          "derived": {
+            "p": "(a * x + b * y) * 1000",
+            "q": "(b * x + a * y) * 1000"
+          },
+          "words": {
+            "alat1": ["pensil", "penghapus", "buku tulis", "spidol"],
+            "alat2": ["penggaris", "pulpen", "krayon", "map plastik"]
+          },
+          "constraint": "a != b && x != y",
+          "prompt": "Koperasi sekolah menjual paket A berisi {a} {alat1} dan {b} {alat2} seharga Rp{p}, serta paket B berisi {b} {alat1} dan {a} {alat2} seharga Rp{q}. Berapa rupiah harga 1 {alat1} ditambah 1 {alat2}?",
+          "answer": "(x + y) * 1000",
+          "distractors": [
+            {
+              "expr": "p + q",
+              "tag": "jumlah-total"
+            },
+            {
+              "expr": "(p + q) / 2",
+              "tag": "dibagi-dua"
+            },
+            {
+              "expr": "(p + q) / (a + b) / 2",
+              "tag": "dibagi-lagi"
+            }
+          ],
+          "choices": 4,
+          "explain": "Jumlahkan kedua belanjaan: {=a+b} {alat1} dan {=a+b} {alat2} = Rp{=p+q}. Jadi 1 {alat1} + 1 {alat2} = {=p+q} : {=a+b} = Rp{answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 5],
+            "b": [1, 4],
+            "x": [2, 15],
+            "y": [2, 15]
+          },
+          "derived": {
+            "p": "(a * x + b * y) * 1000",
+            "q": "(b * x + a * y) * 1000"
+          },
+          "words": {
+            "alat1": ["pensil", "penghapus", "buku tulis", "spidol"],
+            "alat2": ["penggaris", "pulpen", "krayon", "map plastik"]
+          },
+          "constraint": "a > b && y > x",
+          "prompt": "Koperasi sekolah menjual paket A berisi {a} {alat1} dan {b} {alat2} seharga Rp{p}, serta paket B berisi {b} {alat1} dan {a} {alat2} seharga Rp{q}. Berapa rupiah 1 {alat2} lebih mahal daripada 1 {alat1}?",
+          "answer": "(y - x) * 1000",
+          "distractors": [
+            {
+              "expr": "q - p",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "(q - p) / (a + b)",
+              "tag": "dibagi-jumlah"
+            },
+            {
+              "expr": "y * 1000",
+              "tag": "harga-satuan"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kurangkan kedua belanjaan: selisihnya Rp{=q-p} berasal dari {=a-b} {alat2} lebih banyak dan {=a-b} {alat1} lebih sedikit. Jadi selisih harga satuan = {=q-p} : {=a-b} = Rp{answer}."
+        }
+      }
+    ]
+  }
+}

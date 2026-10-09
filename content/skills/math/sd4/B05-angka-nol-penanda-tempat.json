@@ -1,0 +1,120 @@
+{
+  "id": "math.sd4.b5.angka-nol-penanda-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "B",
+  "order": 5,
+  "title": "Membaca dan menulis bilangan besar — Level 5 — Angka nol penanda tempat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [100000, 999999]
+          },
+          "derived": {
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10",
+            "d4": "floor(n / 10000) % 10",
+            "d5": "floor(n / 100000) % 10"
+          },
+          "constraint": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + (d4 == 0) >= 1",
+          "prompt": "Berapa banyak angka 0 pada lambang bilangan {w:n}?",
+          "answer": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + (d4 == 0)",
+          "distractors": [
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + (d4 == 0) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + (d4 == 0) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + (d4 == 0) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "Tulis dulu lambangnya: {n}. Hitung angka 0 sebagai penanda tempat yang kosong. Ada {answer} angka 0."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [0, 9],
+            "c": [0, 9],
+            "e": [0, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + c * 100 + e",
+            "d0": "floor(n / 1) % 10",
+            "d1": "floor(n / 10) % 10",
+            "d2": "floor(n / 100) % 10",
+            "d3": "floor(n / 1000) % 10"
+          },
+          "prompt": "Berapa banyak angka 0 pada lambang bilangan {w:n}?",
+          "answer": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0)",
+          "distractors": [
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(d0 == 0) + (d1 == 0) + (d2 == 0) + (d3 == 0) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "Lambangnya {n}. Setiap tempat yang tidak disebut diisi 0. Ada {answer} angka 0."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [4, 7],
+            "u": [0, 999],
+            "l": [1, 9]
+          },
+          "derived": {
+            "pw": "(k == 4) * 1000 + (k == 5) * 10000 + (k == 6) * 100000 + (k == 7) * 1000000",
+            "n": "l * pw + floor(u * 9 / 1000) * pw / 10 + (u % 10) * pw / 1000"
+          },
+          "prompt": "Lambang bilangan {w:n} terdiri dari berapa angka?",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "Tulis lambangnya: {n}. Hitung semua angkanya, termasuk angka 0. Ada {answer} angka."
+        }
+      }
+    ]
+  }
+}

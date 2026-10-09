@@ -1,0 +1,71 @@
+{
+  "id": "math.sd34.ge2.eksperimen-dua-dadu",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "GE",
+  "order": 2,
+  "title": "Game seru EMC — Level 2 — Eksperimen dua dadu",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Game",
+    "indikator": "Game: ruang sampel dua dadu dan koin"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "dice2",
+          "events": [
+            {
+              "text": "hasil kali matanya 6",
+              "test": "a * b == 6"
+            },
+            {
+              "text": "jumlah matanya kelipatan 5",
+              "test": "s % 5 == 0"
+            },
+            {
+              "text": "mata dadu pertama lebih besar",
+              "test": "a > b"
+            }
+          ]
+        }
+      },
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "coins2",
+          "events": [
+            {
+              "text": "kedua koin berbeda",
+              "test": "h == 1"
+            }
+          ]
+        }
+      },
+      {
+        "family": "chance-game",
+        "params": {
+          "space": "die",
+          "events": [
+            {
+              "text": "matanya bilangan prima",
+              "test": "a == 2 || a == 3 || a == 5"
+            },
+            {
+              "text": "matanya lebih dari 4",
+              "test": "a > 4"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

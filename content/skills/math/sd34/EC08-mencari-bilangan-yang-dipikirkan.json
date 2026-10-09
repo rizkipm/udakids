@@ -1,0 +1,108 @@
+{
+  "id": "math.sd34.ec8.mencari-bilangan-yang-dipikirkan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 8,
+  "title": "Bilangan & aljabar — Level 8 — Mencari bilangan yang dipikirkan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "analyzing",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menyelesaikan persamaan dua langkah dengan operasi kebalikan"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x": [3, 40],
+            "a": [2, 9],
+            "b": [2, 30]
+          },
+          "derived": {
+            "c": "a * x + b"
+          },
+          "words": {
+            "nama": [
+              "Ayu",
+              "Bima",
+              "Citra",
+              "Dimas",
+              "Eka",
+              "Fajar",
+              "Gita",
+              "Hasan",
+              "Intan",
+              "Joko",
+              "Kirana",
+              "Lukman",
+              "Made",
+              "Nyoman",
+              "Siti",
+              "Putu",
+              "Wulan",
+              "Yusuf",
+              "Tiara",
+              "Raka",
+              "Nadia",
+              "Ucok"
+            ]
+          },
+          "prompt": "{nama} memikirkan sebuah bilangan. Bilangan itu dikali {a}, lalu ditambah {b}, hasilnya {c}. Bilangan yang dipikirkan {nama} adalah …",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "c - b",
+              "tag": "lupa-dibagi"
+            },
+            {
+              "expr": "(c + b) / a",
+              "tag": "salah-kebalikan"
+            },
+            {
+              "expr": "c / a",
+              "tag": "lupa-dikurang"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kerjakan mundur dengan operasi kebalikan: {c} − {b} = {=c-b}, lalu {=c-b} : {a} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [2, 25],
+            "a": [2, 9],
+            "b": [2, 30]
+          },
+          "prompt": "Sebuah bilangan dikurangi {b}, lalu hasilnya dibagi {a}, ternyata hasilnya {r}. Bilangan itu adalah …",
+          "answer": "r * a + b",
+          "distractors": [
+            {
+              "expr": "r * a - b",
+              "tag": "salah-kebalikan"
+            },
+            {
+              "expr": "(r + b) * a",
+              "tag": "urutan-terbalik"
+            },
+            {
+              "expr": "r * a",
+              "tag": "lupa-ditambah"
+            }
+          ],
+          "choices": 4,
+          "explain": "Kerjakan mundur: {r} × {a} = {=r*a}, lalu {=r*a} + {b} = {answer}."
+        }
+      }
+    ]
+  }
+}

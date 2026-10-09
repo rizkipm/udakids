@@ -1,0 +1,104 @@
+{
+  "id": "math.sd4.h5.habis-dibagi-3-dan-9",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 5,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 5 — Habis dibagi 3 dan 9",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 9]
+            },
+            "m": [12, 1100],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "n": "d * m + (1 - y) * r",
+            "s": "floor(n / 1000) % 10 + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10"
+          },
+          "constraint": "r < d && n < 10000",
+          "prompt": "Apakah {n} habis dibagi {d}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Tidak"
+          },
+          "explain": "Jumlahkan angka-angkanya: jumlahnya {s}. {s} : {d} sisa {=s%d}. Jika jumlah angka habis dibagi {d}, bilangannya juga habis dibagi {d}. Jadi jawabannya: {answer}."
+        },
+        "weight": 1.4
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [40, 3000]
+          },
+          "derived": {
+            "n": "3 * m",
+            "s": "floor(n / 1000) % 10 + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10"
+          },
+          "prompt": "Manakah yang habis dibagi 3?",
+          "answer": "3 * m",
+          "distractors": [
+            {
+              "expr": "3 * m + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "3 * m + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "3 * m + 4",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jumlahkan angka setiap pilihan. Jumlah angka {answer} adalah {s}, dan {s} habis dibagi 3. Jadi {answer} habis dibagi 3."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1000, 9999]
+          },
+          "derived": {
+            "s": "floor(n / 1000) % 10 + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10"
+          },
+          "prompt": "Jumlah angka-angka {n} adalah …",
+          "answer": "s",
+          "distractors": [
+            {
+              "expr": "s + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "s - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "s + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Tambahkan setiap angka: {=floor(n/1000)%10} + {=floor(n/100)%10} + {=floor(n/10)%10} + {=n%10} = {answer}. Jumlah ini dipakai untuk mengecek habis dibagi 3 atau 9."
+        },
+        "weight": 0.6
+      }
+    ]
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "math.sd4.e8.soal-cerita-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 8,
+  "title": "Penjumlahan bilangan besar — Level 8 — Soal cerita penjumlahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25000, 95000],
+              "step": 500
+            },
+            "b": {
+              "range": [12500, 48500],
+              "step": 500
+            }
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan",
+              "Made",
+              "Ketut",
+              "Ucok",
+              "Lina",
+              "Asep"
+            ]
+          },
+          "constraint": "a % 1000 != 0 || b % 1000 != 0",
+          "prompt": "{nama} punya tabungan Rp{a}. Bulan ini ia menabung lagi Rp{b}. Berapa tabungannya sekarang?",
+          "answer": "a + b",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + b - 10000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a - b",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "a + b + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Menabung lagi berarti bertambah, jadi dijumlah: {a} + {b} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [12000, 38999],
+            "b": [12000, 38999]
+          },
+          "constraint": "a % 10 + b % 10 >= 10",
+          "prompt": "Pengunjung kebun raya pada hari Sabtu {a} orang dan pada hari Minggu {b} orang. Berapa pengunjung selama dua hari itu?",
+          "answer": "a + b",
+          "distractors": [
+            {
+              "expr": "a + b - 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b - 1000",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "a + b + 100",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "a - b",
+              "tag": "mengurangi"
+            }
+          ],
+          "explain": "Selama dua hari berarti digabung: {a} + {b} = {answer} orang."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1200, 5999],
+            "b": [1200, 3999]
+          },
+          "prompt": "Perpustakaan sekolah punya {a} buku cerita dan {b} buku pelajaran. Berapa buku semuanya?",
+          "answer": "a + b",
+          "mode": "input",
+          "explain": "Semuanya berarti dijumlah. Susun bersusun lalu jumlahkan dari satuan: {a} + {b} = {answer} buku."
+        }
+      }
+    ]
+  }
+}

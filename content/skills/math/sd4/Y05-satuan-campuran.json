@@ -1,0 +1,138 @@
+{
+  "id": "math.sd4.y5.satuan-campuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 5,
+  "title": "Satuan panjang, berat, dan volume — Level 5 — Satuan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [1, 99]
+          },
+          "prompt": "{a} m {b} cm = … cm",
+          "answer": "a * 100 + b",
+          "explain": "{a} m = {=a*100} cm. Ditambah {b} cm: {answer} cm.",
+          "distractors": [
+            {
+              "expr": "a * 10 + b",
+              "tag": "kali-10"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 1000 + b",
+              "tag": "kali-1000"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": {
+              "range": [50, 950],
+              "step": 50
+            }
+          },
+          "prompt": "{a} km {b} m = … m",
+          "answer": "a * 1000 + b",
+          "explain": "{a} km = {=a*1000} m. Ditambah {b} m: {answer} m.",
+          "distractors": [
+            {
+              "expr": "a * 100 + b",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-angka"
+            },
+            {
+              "expr": "a * 1000",
+              "tag": "lupa-meter"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": [120, 980]
+          },
+          "prompt": "{t} cm = … m {=t%100} cm. Berapa meternya?",
+          "answer": "floor(t / 100)",
+          "explain": "100 cm = 1 m. {t} : 100 = {answer} sisa {=t%100}. Jadi {t} cm = {answer} m {=t%100} cm.",
+          "constraint": "t % 100 != 0",
+          "distractors": [
+            {
+              "expr": "floor(t / 10)",
+              "tag": "bagi-10"
+            },
+            {
+              "expr": "t % 100",
+              "tag": "sisanya"
+            },
+            {
+              "expr": "floor(t / 100) + 1",
+              "tag": "lebih-satu"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "t": {
+              "range": [1050, 9950],
+              "step": 50
+            }
+          },
+          "prompt": "{t} g = {=floor(t/1000)} kg … g",
+          "answer": "t % 1000",
+          "explain": "1 kg = 1.000 g. {t} g = {=floor(t/1000)} × 1.000 + {=t%1000}. Jadi {=floor(t/1000)} kg {answer} g.",
+          "constraint": "t % 1000 != 0",
+          "distractors": [
+            {
+              "expr": "t % 100",
+              "tag": "bagi-100"
+            },
+            {
+              "expr": "1000 - t % 1000",
+              "tag": "pelengkap"
+            },
+            {
+              "expr": "t % 1000 + 100",
+              "tag": "lain"
+            },
+            {
+              "expr": "abs(t % 1000 - 100)",
+              "tag": "lain"
+            },
+            {
+              "expr": "floor(t / 100)",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

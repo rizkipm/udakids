@@ -1,0 +1,148 @@
+{
+  "id": "math.sd4.e9.penalaran-penjumlahan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "E",
+  "order": 9,
+  "title": "Penjumlahan bilangan besar — Level 9 — Penalaran penjumlahan",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1000, 8999],
+            "b": [1000, 8999]
+          },
+          "constraint": "a + b < 10000",
+          "prompt": "Berapa kali kita menyimpan saat menghitung {a} + {b} bersusun?",
+          "answer": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000)",
+          "distractors": [
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "floor((a % 10 + b % 10) / 10) + floor((a % 100 + b % 100) / 100) + floor((a % 1000 + b % 1000) / 1000) + floor((a % 10000 + b % 10000) / 10000) + 2",
+              "tag": "lebih-dua"
+            }
+          ],
+          "explain": "Periksa setiap tempat dari satuan, termasuk simpanan dari kanan. Setiap jumlah 10 atau lebih berarti menyimpan 1. Ada {answer} kali menyimpan. Hasilnya {=a+b}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "x0": [0, 9],
+            "a0": [2, 9],
+            "x1": [0, 9],
+            "a1": [2, 9],
+            "x2": [0, 9],
+            "a2": [0, 8],
+            "x3": [0, 9],
+            "a3": [1, 8]
+          },
+          "derived": {
+            "b0": "(10 - a0) + floor(x0 * (a0 + 0) / 10)",
+            "b1": "(9 - a1) + floor(x1 * (a1 + 1) / 10)",
+            "b2": "floor(x2 * (9 - a2) / 10)",
+            "b3": "1 + floor(x3 * (9 - a3) / 10)",
+            "a": "a0 * 1 + a1 * 10 + a2 * 100 + a3 * 1000",
+            "b": "b0 * 1 + b1 * 10 + b2 * 100 + b3 * 1000",
+            "ls": "((a0 + b0) % 10) * 1 + ((a1 + b1) % 10) * 10 + ((a2 + b2) % 10) * 100 + ((a3 + b3) % 10) * 1000"
+          },
+          "prompt": "{a3}.{a2}□{a0} + {b} = {=a+b}. Angka berapa yang mengisi □?",
+          "answer": "a1",
+          "distractors": [
+            {
+              "expr": "(a1 + 1) % 10",
+              "tag": "lupa-simpan"
+            },
+            {
+              "expr": "(a1 + 9) % 10",
+              "tag": "salah-hitung"
+            },
+            {
+              "expr": "b1",
+              "tag": "angka-lain"
+            }
+          ],
+          "explain": "Lihat satuan: {a0} + {b0} = {=a0+b0}, tulis {=(a0+b0)%10}, simpan 1. Di puluhan: □ + {b1} + 1 harus berakhir dengan angka {=floor((a+b)/10)%10}. Jadi □ = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [45000, 99000],
+              "step": 500
+            },
+            "d": {
+              "range": [5000, 35000],
+              "step": 500
+            }
+          },
+          "prompt": "Harga sepatu Rp{a}. Harga tas Rp{d} lebih mahal daripada sepatu. Berapa harga sepatu dan tas seluruhnya?",
+          "answer": "a + a + d",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "hanya-tas"
+            },
+            {
+              "expr": "a + d + d",
+              "tag": "tambah-dua-kali"
+            },
+            {
+              "expr": "a + a",
+              "tag": "lupa-selisih"
+            }
+          ],
+          "explain": "Cari harga tas dulu: {a} + {d} = {=a+d}. Lalu jumlahkan dengan sepatu: {a} + {=a+d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10000, 99999],
+            "b": [10000, 99999]
+          },
+          "constraint": "a != b",
+          "prompt": "{a} + {b} = {b} + …",
+          "answer": "a",
+          "distractors": [
+            {
+              "expr": "a + b",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "b",
+              "tag": "bilangan-lain"
+            },
+            {
+              "expr": "a + 1000",
+              "tag": "salah-hitung"
+            }
+          ],
+          "explain": "Penjumlahan boleh ditukar urutannya, hasilnya tetap sama. Jadi bilangan yang hilang adalah {answer}. Tidak perlu menghitung!"
+        }
+      }
+    ]
+  }
+}

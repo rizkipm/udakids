@@ -1,0 +1,111 @@
+{
+  "id": "math.sd4.d4.pembulatan-yang-melewati",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "D",
+  "order": 4,
+  "title": "Pembulatan dan penaksiran — Level 4 — Pembulatan yang melewati",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "r": [1, 98],
+            "u": [50, 99]
+          },
+          "derived": {
+            "n": "r * 1000 + 900 + u"
+          },
+          "prompt": "Bulatkan {n} ke ratusan terdekat.",
+          "answer": "(r + 1) * 1000",
+          "distractors": [
+            {
+              "expr": "r * 1000 + 900",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "round(n / 10) * 10",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "r * 1000",
+              "tag": "ribuan-turun"
+            }
+          ],
+          "explain": "Angka puluhan {=floor(n/10)%10} → bulatkan naik. Ratusan 9 naik menjadi 10 ratusan = 1 ribuan, jadi ribuannya bertambah: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [1, 8],
+            "u": [500, 999]
+          },
+          "derived": {
+            "n": "q * 10000 + 9000 + u"
+          },
+          "prompt": "Bulatkan {n} ke ribuan terdekat.",
+          "answer": "(q + 1) * 10000",
+          "distractors": [
+            {
+              "expr": "q * 10000 + 9000",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "round(n / 100) * 100",
+              "tag": "ke-ratusan"
+            },
+            {
+              "expr": "q * 10000",
+              "tag": "puluh-ribuan-turun"
+            }
+          ],
+          "explain": "Angka ratusan {=floor(n/100)%10} → bulatkan naik. Ribuan 9 naik menjadi 10 ribuan = 1 puluh ribuan, jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "h": [10, 999],
+            "s": [5, 9]
+          },
+          "derived": {
+            "n": "h * 100 + 90 + s"
+          },
+          "prompt": "Bulatkan {n} ke puluhan terdekat.",
+          "answer": "n - n % 100 + 100",
+          "distractors": [
+            {
+              "expr": "h * 100 + 90",
+              "tag": "arah-terbalik"
+            },
+            {
+              "expr": "round(n / 1000) * 1000",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "h * 100",
+              "tag": "ratusan-turun"
+            },
+            {
+              "expr": "n",
+              "tag": "tidak-dibulatkan"
+            }
+          ],
+          "explain": "Angka satuan {=n%10} → bulatkan naik. Puluhan 9 naik menjadi 10 puluhan = 1 ratusan, jadi {answer}."
+        }
+      }
+    ]
+  }
+}

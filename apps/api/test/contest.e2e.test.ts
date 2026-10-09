@@ -46,7 +46,15 @@ function rightAnswer(item: ContestItem): AnswerValue {
     case 'sort':
     case 'crossword':
     case 'jigsaw':
-      // Tidak dipakai di lomba (D-075, D-078).
+    case 'guess':
+    case 'chart':
+    case 'magic':
+    case 'stack':
+    case 'lines':
+    case 'bingo':
+    case 'coord':
+    case 'chance':
+      // Tidak dipakai di lomba (D-075, D-078, D-096, D-101).
       throw new Error(`${it.type} tidak dipakai di lomba`);
   }
 }

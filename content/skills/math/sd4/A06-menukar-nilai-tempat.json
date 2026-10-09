@@ -1,0 +1,126 @@
+{
+  "id": "math.sd4.a6.menukar-nilai-tempat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "A",
+  "order": 6,
+  "title": "Nilai tempat sampai 100.000 — Level 6 — Menukar nilai tempat",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [2, 99]
+          },
+          "prompt": "{k} ribuan = … ratusan",
+          "answer": "k * 10",
+          "distractors": [
+            {
+              "expr": "k",
+              "tag": "sama"
+            },
+            {
+              "expr": "k * 100",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "k * 1000",
+              "tag": "ke-satuan"
+            }
+          ],
+          "explain": "1 ribuan = 10 ratusan. Jadi {k} ribuan = {k} × 10 = {answer} ratusan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [11, 99]
+          },
+          "constraint": "m % 10 != 0",
+          "prompt": "{m} ratusan = …",
+          "answer": "m * 100",
+          "distractors": [
+            {
+              "expr": "m * 10",
+              "tag": "puluhan"
+            },
+            {
+              "expr": "m * 1000",
+              "tag": "ribuan"
+            },
+            {
+              "expr": "m + 100",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Setiap ratusan bernilai 100. Jadi {m} ratusan = {m} × 100 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "k": [1, 9]
+          },
+          "prompt": "{k} puluh ribuan = … ratusan",
+          "answer": "k * 100",
+          "distractors": [
+            {
+              "expr": "k * 10",
+              "tag": "ke-ribuan"
+            },
+            {
+              "expr": "k * 1000",
+              "tag": "ke-puluhan"
+            },
+            {
+              "expr": "k",
+              "tag": "sama"
+            }
+          ],
+          "explain": "1 puluh ribuan = 10 ribuan = 100 ratusan. Jadi {k} puluh ribuan = {answer} ratusan."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [0, 9],
+            "c": [1, 9]
+          },
+          "derived": {
+            "n": "a * 10000 + b * 1000 + c * 100"
+          },
+          "prompt": "{n} = {=a-1} puluh ribuan + … ribuan + {c} ratusan",
+          "answer": "b + 10",
+          "distractors": [
+            {
+              "expr": "b",
+              "tag": "tanpa-tukar"
+            },
+            {
+              "expr": "b + 1",
+              "tag": "tukar-satu"
+            },
+            {
+              "expr": "b + 100",
+              "tag": "tukar-ke-ratusan"
+            }
+          ],
+          "explain": "Satu puluh ribuan ditukar menjadi 10 ribuan. Ribuannya menjadi {b} + 10 = {answer}. Cek: {=a-1} × 10.000 + {answer} × 1.000 + {c} × 100 = {n}."
+        }
+      }
+    ]
+  }
+}

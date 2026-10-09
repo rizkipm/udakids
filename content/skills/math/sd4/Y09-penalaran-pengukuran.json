@@ -1,0 +1,150 @@
+{
+  "id": "math.sd4.y9.penalaran-pengukuran",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Y",
+  "order": 9,
+  "title": "Satuan panjang, berat, dan volume — Level 9 — Penalaran pengukuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 8],
+            "a": {
+              "values": [250, 300, 500, 600]
+            },
+            "b": [1, 3]
+          },
+          "prompt": "Mana yang isinya lebih banyak: {n} botol kecil masing-masing {a} mL, atau 1 botol besar {b} liter?",
+          "answer": "(n * a > b * 1000) + 2 * (n * a < b * 1000) + 3 * (n * a == b * 1000)",
+          "explain": "Hitung isi botol kecil: {n} × {a} = {=n*a} mL. Botol besar {b} liter = {=b*1000} mL. Bandingkan {=n*a} mL dengan {=b*1000} mL: {answer}.",
+          "constraint": "abs(n * a - b * 1000) <= 600",
+          "labels": {
+            "1": "Botol-botol kecil",
+            "2": "Botol besar",
+            "3": "Sama banyak"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": {
+              "values": [25, 40, 50]
+            },
+            "m": [2, 20]
+          },
+          "prompt": "Panjang satu langkah {nama} {s} cm. Berapa langkah yang ia perlukan untuk berjalan sejauh {m} m?",
+          "answer": "m * 100 / s",
+          "explain": "Samakan satuan: {m} m = {=m*100} cm. Lalu {=m*100} : {s} = {answer} langkah.",
+          "constraint": "(m * 100) % s == 0",
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "distractors": [
+            {
+              "expr": "m * s",
+              "tag": "dikali"
+            },
+            {
+              "expr": "m * 100 / s * 2",
+              "tag": "dua-kali"
+            },
+            {
+              "expr": "m * 100 / s + 2",
+              "tag": "lebih"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [100, 125, 200, 250]
+            },
+            "k": [1, 3]
+          },
+          "prompt": "Satu buah apel beratnya kira-kira {a} g. Kira-kira berapa buah apel yang beratnya {k} kg?",
+          "answer": "k * 1000 / a",
+          "explain": "{k} kg = {=k*1000} g. Lalu {=k*1000} : {a} = {answer} buah.",
+          "distractors": [
+            {
+              "expr": "k * 100 / a",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "k * 1000 / a + 2",
+              "tag": "lain"
+            },
+            {
+              "expr": "k * a",
+              "tag": "dikali"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [2, 8],
+            "t": [1, 6]
+          },
+          "prompt": "Ada {n} kotak yang beratnya sama. Jika ditimbang bersama, beratnya {t} kg. Berapa gram berat 1 kotak?",
+          "answer": "t * 1000 / n",
+          "explain": "Ubah dulu ke gram: {t} kg = {=t*1000} g. Satu kotak = {=t*1000} : {n} = {answer} g.",
+          "constraint": "(t * 1000) % n == 0 && t * 1000 / n % 50 == 0",
+          "unit": "g",
+          "distractors": [
+            {
+              "expr": "t * 100 / n",
+              "tag": "kali-100"
+            },
+            {
+              "expr": "t * 1000 * n",
+              "tag": "dikali"
+            },
+            {
+              "expr": "t * 1000 / n + 100",
+              "tag": "lain"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

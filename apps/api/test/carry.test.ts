@@ -84,4 +84,33 @@ describe.skipIf(!hasDb)('carry: kunci API & klip suara', () => {
     await expect(importCarry(file, URL)).rejects.toThrow(/Kata sandi file salah/);
     delete process.env.CARRY_PASSPHRASE;
   });
+
+  it('--images-only: hanya gambar, tanpa kata sandi; kunci, pengaturan, dan klip server tidak disentuh', async () => {
+    delete process.env.CARRY_PASSPHRASE;
+    const imgFile = join(dir, 'gambar.ndjson.gz');
+    const out = await exportCarry(imgFile, URL, { imagesOnly: true });
+    expect(out).toMatchObject({ secrets: [], settings: [], clips: 0, images: 1 });
+
+    // Server punya kunci & klip sendiri; gambar belum ada.
+    await pool.query(
+      "delete from ai_images; update app_settings set value = '{\"x\":1}' where key = 'voice'",
+    );
+    const before = await pool.query('select key, value from app_settings order by key');
+    const r = await importCarry(imgFile, URL);
+    expect(r).toMatchObject({ secrets: [], settings: [], clips: 0, images: 1, imagesAdded: 1 });
+    expect((await pool.query('select key, value from app_settings order by key')).rows).toEqual(
+      before.rows,
+    );
+    expect((await pool.query('select count(*)::int n from voice_clips')).rows[0].n).toBe(3);
+    // Gambar yang sudah ada di server tidak ditimpa.
+    expect(await importCarry(imgFile, URL)).toMatchObject({ imagesAdded: 0 });
+  });
+
+  it('--since: hanya klip & gambar baru sejak tanggal itu, tanpa kunci', async () => {
+    const f = join(dir, 'baru.ndjson.gz');
+    await pool.query("update voice_clips set created_at = now() - interval '10 days'");
+    await pool.query("update voice_clips set created_at = now() where text = 'teks 2'");
+    const out = await exportCarry(f, URL, { since: new Date(Date.now() - 86_400_000) });
+    expect(out).toMatchObject({ secrets: [], settings: [], clips: 1 });
+  });
 });

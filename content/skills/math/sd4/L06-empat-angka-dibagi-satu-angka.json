@@ -1,0 +1,101 @@
+{
+  "id": "math.sd4.l6.empat-angka-dibagi-satu-angka",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 6,
+  "title": "Pembagian bersusun — Level 6 — Empat angka dibagi satu angka",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [112, 4999]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 1000 && t <= 9999",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "q + 100",
+              "tag": "ratusan-salah"
+            },
+            {
+              "expr": "q - 10",
+              "tag": "puluhan-salah"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Mulai dari ribuan. Jika angka ribuan lebih kecil dari {m}, mulai dari dua angka pertama. Ulangi bagi, kali, kurang, turunkan sampai satuan. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "q": {
+              "range": [1500, 9000],
+              "step": 500
+            }
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t <= 50000",
+          "prompt": "Uang Rp{t} dibagi sama banyak kepada {m} anak. Berapa rupiah yang diterima setiap anak?",
+          "answer": "t / m",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "q + 500",
+              "tag": "lebih-500"
+            },
+            {
+              "expr": "q - 500",
+              "tag": "kurang-500"
+            },
+            {
+              "expr": "q + 1000",
+              "tag": "lebih-seribu"
+            }
+          ],
+          "explain": "Hitung {t} : {m} = {=t/m}. Periksa: {=t/m} × {m} = {t}. Setiap anak menerima {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "q": [112, 4999]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "constraint": "t >= 1000 && t <= 9999",
+          "prompt": "{t} : {m} = …",
+          "answer": "t / m",
+          "mode": "input",
+          "explain": "Bagi mulai dari kiri, lalu ulangi bagi, kali, kurang, turunkan. Periksa: {answer} × {m} = {t}."
+        }
+      }
+    ]
+  }
+}

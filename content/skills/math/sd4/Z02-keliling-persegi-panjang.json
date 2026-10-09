@@ -1,0 +1,113 @@
+{
+  "id": "math.sd4.z2.keliling-persegi-panjang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Z",
+  "order": 2,
+  "title": "Keliling bangun datar — Level 2 — Keliling persegi panjang",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 20],
+            "h": [2, 12]
+          },
+          "constraint": "w > h",
+          "prompt": "Panjang persegi panjang ini {w} cm dan lebarnya {h} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "w * h",
+              "tag": "luas"
+            },
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-sisi-terlewat"
+            }
+          ],
+          "explain": "Persegi panjang punya 2 sisi panjang dan 2 sisi lebar. Keliling = 2 × (panjang + lebar) = 2 × ({w} + {h}) = 2 × {=w+h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": {
+              "range": [12, 60],
+              "step": 2
+            },
+            "h": {
+              "range": [6, 40],
+              "step": 2
+            }
+          },
+          "constraint": "w > h",
+          "prompt": "Halaman sekolah berbentuk persegi panjang dengan panjang {w} m dan lebar {h} m. Berapa meter kelilingnya?",
+          "answer": "2 * (w + h)",
+          "unit": "m",
+          "distractors": [
+            {
+              "expr": "w + h",
+              "tag": "setengah-keliling"
+            },
+            {
+              "expr": "2 * w + h",
+              "tag": "satu-sisi-terlewat"
+            },
+            {
+              "expr": "4 * w",
+              "tag": "dianggap-persegi"
+            }
+          ],
+          "explain": "Jumlahkan panjang dan lebar dulu: {w} + {h} = {=w+h}. Ada dua pasang, jadi 2 × {=w+h} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "w": [3, 20],
+            "h": [2, 12]
+          },
+          "constraint": "w > h",
+          "prompt": "Panjang persegi panjang ini {w} cm dan lebarnya {h} cm. Berapa cm kelilingnya?",
+          "stimulus": [
+            {
+              "kind": "rect",
+              "w": "=w",
+              "h": "=h",
+              "unit": "cm"
+            }
+          ],
+          "answer": "2 * (w + h)",
+          "unit": "cm",
+          "explain": "Persegi panjang punya 2 sisi panjang dan 2 sisi lebar. Keliling = 2 × (panjang + lebar) = 2 × ({w} + {h}) = 2 × {=w+h} = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

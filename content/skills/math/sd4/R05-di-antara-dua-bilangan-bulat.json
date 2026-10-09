@@ -1,0 +1,90 @@
+{
+  "id": "math.sd4.r5.di-antara-dua-bilangan-bulat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "R",
+  "order": 5,
+  "title": "Pecahan campuran — Level 5 — Di antara dua bilangan bulat",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [1, 6],
+            "d": [2, 9],
+            "r": [1, 8]
+          },
+          "derived": {
+            "p": "q * d + r"
+          },
+          "constraint": "r < d",
+          "prompt": "{p}/{d} terletak di antara bilangan bulat … dan {=q+1}.",
+          "answer": "q",
+          "distractors": [
+            {
+              "expr": "r",
+              "tag": "sisa"
+            },
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "p - d",
+              "tag": "dikurangi"
+            }
+          ],
+          "explain": "{p} : {d} = {q} sisa {r}, jadi {p}/{d} = {q} {r}/{d}. Pecahan ini lebih dari {q} tetapi kurang dari {=q+1}. Jawabannya {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "q": [1, 6],
+            "d": [2, 9],
+            "r": [1, 8]
+          },
+          "derived": {
+            "p": "q * d + r"
+          },
+          "constraint": "r < d",
+          "prompt": "{p}/{d} terletak di antara bilangan bulat {q} dan … .",
+          "answer": "q + 1",
+          "distractors": [
+            {
+              "expr": "r",
+              "tag": "sisa"
+            },
+            {
+              "expr": "d",
+              "tag": "penyebut"
+            },
+            {
+              "expr": "q + 2",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "p",
+              "tag": "pembilang"
+            }
+          ],
+          "explain": "{p} : {d} = {q} sisa {r}, jadi {p}/{d} = {q} {r}/{d}. Pecahan ini lebih dari {q} tetapi kurang dari {answer}."
+        }
+      }
+    ]
+  }
+}

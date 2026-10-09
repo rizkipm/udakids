@@ -1,0 +1,146 @@
+{
+  "id": "math.sd4.cc9.penalaran-segitiga-dan-segi-empat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 9,
+  "title": "Segitiga dan segi empat — Level 9 — Penalaran segitiga dan segi empat",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 140],
+              "step": 10
+            }
+          },
+          "prompt": "Sudut puncak segitiga sama kaki {a}°. Kedua sudut alasnya sama besar. Berapa derajat setiap sudut alas?",
+          "answer": "(180 - a) / 2",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "180 - a",
+              "tag": "lupa-dibagi-2"
+            },
+            {
+              "expr": "a",
+              "tag": "sama-dengan-puncak"
+            },
+            {
+              "expr": "(360 - a) / 2",
+              "tag": "memakai-360"
+            }
+          ],
+          "explain": "Sisa sudut = 180° − {a}° = {=180-a}°. Dibagi dua sudut alas yang sama: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [20, 85],
+              "step": 5
+            },
+            "b": {
+              "range": [20, 85],
+              "step": 5
+            }
+          },
+          "derived": {
+            "c": "180 - a - b"
+          },
+          "constraint": "c > 0",
+          "prompt": "Dua sudut sebuah segitiga {a}° dan {b}°. Segitiga itu termasuk …",
+          "answer": "1 + (c >= 90) + (c > 90)",
+          "labels": {
+            "1": "segitiga lancip",
+            "2": "segitiga siku-siku",
+            "3": "segitiga tumpul"
+          },
+          "explain": "Cari sudut ketiga dulu: 180° − {a}° − {b}° = {c}°. Lalu lihat sudut terbesar: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 20]
+          },
+          "derived": {
+            "k": "3 * s"
+          },
+          "prompt": "Keliling segitiga sama sisi {k} cm. Berapa cm panjang setiap sisinya?",
+          "answer": "s",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "k / 4",
+              "tag": "dibagi-4"
+            },
+            {
+              "expr": "k - 3",
+              "tag": "dikurangi-3"
+            },
+            {
+              "expr": "k / 2",
+              "tag": "dibagi-2"
+            }
+          ],
+          "explain": "Tiga sisi sama panjang, jadi sisi = {k} : 3 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "dua sudut siku-siku",
+              "dua sudut tumpul",
+              "sudut 100° dan sudut 90°",
+              "tiga sudut 70°"
+            ]
+          },
+          "prompt": "Mungkinkah sebuah segitiga punya {x}?",
+          "answer": "2",
+          "labels": {
+            "1": "Mungkin",
+            "2": "Tidak mungkin"
+          },
+          "explain": "Jumlah ketiga sudut segitiga harus tepat 180°. Kalau dua sudutnya saja sudah 180° atau lebih (atau jumlahnya bukan 180°), segitiga tidak bisa terbentuk."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "words": {
+            "x": [
+              "satu sudut siku-siku",
+              "satu sudut tumpul",
+              "tiga sudut 60°",
+              "dua sudut 45°",
+              "tiga sudut lancip"
+            ]
+          },
+          "prompt": "Mungkinkah sebuah segitiga punya {x}?",
+          "answer": "1",
+          "labels": {
+            "1": "Mungkin",
+            "2": "Tidak mungkin"
+          },
+          "explain": "Mungkin, karena ketiga sudutnya masih bisa berjumlah tepat 180°."
+        }
+      }
+    ]
+  }
+}

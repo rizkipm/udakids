@@ -1,0 +1,122 @@
+{
+  "id": "math.sd4.j6.menaksir-hasil-kali",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 6,
+  "title": "Perkalian dengan bilangan satu angka — Level 6 — Menaksir hasil kali",
+  "tier": "advanced",
+  "tags": {
+    "level": "6",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [110, 990],
+            "k": [2, 9]
+          },
+          "constraint": "n % 100 != 0 && n % 100 != 50",
+          "prompt": "Taksir {n} × {k} dengan membulatkan {n} ke ratusan terdekat. Taksirannya …",
+          "answer": "round(n / 100) * 100 * k",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "(round(n / 100) * 100 + 100) * k",
+              "tag": "bulat-naik"
+            },
+            {
+              "expr": "(round(n / 100) * 100 - 100) * k",
+              "tag": "bulat-turun"
+            }
+          ],
+          "explain": "Bulatkan {n} ke ratusan terdekat: {=round(n/100)*100}. Lalu kalikan: {=round(n/100)*100} × {k} = {answer}. Hasil tepatnya {=n*k}, dekat dengan taksiran."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [1100, 9800],
+            "k": [2, 9]
+          },
+          "constraint": "n % 1000 > 100 && n % 1000 < 900 && n % 1000 != 500",
+          "prompt": "Taksir {n} × {k} dengan membulatkan {n} ke ribuan terdekat. Taksirannya …",
+          "answer": "round(n / 1000) * 1000 * k",
+          "distractors": [
+            {
+              "expr": "n * k",
+              "tag": "hitung-tepat"
+            },
+            {
+              "expr": "(round(n / 1000) * 1000 + 1000) * k",
+              "tag": "bulat-naik"
+            },
+            {
+              "expr": "(round(n / 1000) * 1000 - 1000) * k",
+              "tag": "bulat-turun"
+            }
+          ],
+          "explain": "Bulatkan {n} ke ribuan terdekat: {=round(n/1000)*1000}. Lalu kalikan: {=round(n/1000)*1000} × {k} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [210, 980],
+            "k": [3, 9],
+            "ok": [0, 1],
+            "f": {
+              "values": [10, 100]
+            }
+          },
+          "derived": {
+            "r": "n * k * ok + (n * k * f) * (1 - ok)"
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "constraint": "n % 100 != 50",
+          "prompt": "{nama} menghitung {n} × {k} dan mendapat {r}. Taksirlah: apakah jawabannya masuk akal?",
+          "answer": "ok",
+          "labels": {
+            "1": "Masuk akal",
+            "0": "Tidak masuk akal"
+          },
+          "explain": "Taksir dulu: {n} kira-kira {=round(n/100)*100}, dan {=round(n/100)*100} × {k} = {=round(n/100)*100*k}. Hasil tepatnya {=n*k}. Bandingkan dengan {r}. Jadi: {answer}."
+        }
+      }
+    ]
+  }
+}

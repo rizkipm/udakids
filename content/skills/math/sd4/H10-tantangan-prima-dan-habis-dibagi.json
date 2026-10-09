@@ -1,0 +1,219 @@
+{
+  "id": "math.sd4.h10.tantangan-prima-dan-habis-dibagi",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "H",
+  "order": 10,
+  "title": "Bilangan prima, komposit, dan habis dibagi — Level 10 — Tantangan campuran",
+  "tier": "advanced",
+  "tags": {
+    "level": "10",
+    "fase-merdeka": "B",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+            }
+          },
+          "prompt": "{n} termasuk bilangan apa?",
+          "answer": "1",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "Coba bagi {n} dengan 2, 3, 5, dan 7. Tidak ada yang habis membagi, jadi faktor {n} hanya 1 dan {n}. {n} bilangan prima."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [3, 7, 9, 11]
+            },
+            "b": [3, 31]
+          },
+          "derived": {
+            "n": "a * b"
+          },
+          "constraint": "a <= b && a * b > 30 && a * b < 100",
+          "prompt": "{n} termasuk bilangan apa?",
+          "answer": "0",
+          "labels": {
+            "1": "Prima",
+            "0": "Komposit",
+            "2": "Bukan keduanya"
+          },
+          "explain": "{n} = {a} × {b}. Selain 1 dan {n}, ada faktor {a}. Jadi {n} bilangan komposit."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 9]
+            },
+            "m": [12, 1100],
+            "y": [0, 1],
+            "r": [1, 8]
+          },
+          "derived": {
+            "n": "d * m + (1 - y) * r",
+            "s": "floor(n / 1000) % 10 + floor(n / 100) % 10 + floor(n / 10) % 10 + n % 10"
+          },
+          "constraint": "r < d && n < 10000",
+          "prompt": "Apakah {n} habis dibagi {d}?",
+          "answer": "y",
+          "labels": {
+            "1": "Ya",
+            "0": "Tidak"
+          },
+          "explain": "Jumlahkan angka-angkanya: jumlahnya {s}. {s} : {d} sisa {=s%d}. Jika jumlah angka habis dibagi {d}, bilangannya juga habis dibagi {d}. Jadi jawabannya: {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [11, 999]
+          },
+          "constraint": "(n % 2 == 0) + (n % 3 == 0) + (n % 5 == 0) == 1",
+          "prompt": "Bilangan {n} habis dibagi oleh satu bilangan di bawah ini. Yang mana?",
+          "answer": "2 * (n % 2 == 0) + 3 * (n % 3 == 0) + 5 * (n % 5 == 0)",
+          "labels": {
+            "2": "2",
+            "3": "3",
+            "5": "5"
+          },
+          "explain": "Cek satu per satu. Habis dibagi 2: satuan genap. Habis dibagi 3: jumlah angkanya habis dibagi 3. Habis dibagi 5: satuan 0 atau 5. {n} habis dibagi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [100, 9999]
+          },
+          "constraint": "(n % 9 == 0) + (n % 10 == 0) + (n % 4 == 0) == 1",
+          "prompt": "Bilangan {n} habis dibagi oleh satu bilangan di bawah ini. Yang mana?",
+          "answer": "9 * (n % 9 == 0) + 10 * (n % 10 == 0) + 4 * (n % 4 == 0)",
+          "labels": {
+            "4": "4",
+            "9": "9",
+            "10": "10"
+          },
+          "explain": "Habis dibagi 10: satuannya 0. Habis dibagi 9: jumlah angkanya habis dibagi 9. Habis dibagi 4: dua angka terakhir habis dibagi 4. {n} habis dibagi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": {
+              "values": [11, 13, 17, 19, 23, 29, 31, 37]
+            }
+          },
+          "prompt": "Ada {n} siswa. Bu guru ingin membuat beberapa kelompok sama besar. Setiap kelompok lebih dari 1 siswa, dan banyak kelompok lebih dari 1. Bisakah?",
+          "answer": "0",
+          "labels": {
+            "1": "Bisa",
+            "0": "Tidak bisa"
+          },
+          "explain": "{n} bilangan prima. Faktornya hanya 1 dan {n}, jadi hanya bisa 1 kelompok berisi {n} atau {n} kelompok berisi 1. Jadi tidak bisa."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": {
+              "values": [3, 4, 5, 6, 9, 10]
+            },
+            "n": [20, 99]
+          },
+          "constraint": "n % d != 0",
+          "prompt": "Ada {n} kue. Kue dikemas dalam kotak berisi {d}. Paling sedikit berapa kue harus ditambah agar semua kotak penuh tanpa sisa?",
+          "answer": "d - n % d",
+          "distractors": [
+            {
+              "expr": "n % d",
+              "tag": "sisa"
+            },
+            {
+              "expr": "d",
+              "tag": "satu-kotak"
+            },
+            {
+              "expr": "d - n % d + 1",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "{n} : {d} = {=floor(n/d)} sisa {=n%d}. Kotak terakhir baru berisi {=n%d} kue. Agar penuh perlu {d} - {=n%d} = {answer} kue lagi."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [0, 9]
+          },
+          "constraint": "(a + c) % 9 != 0",
+          "prompt": "Agar bilangan {a}□{c} habis dibagi 9, angka di □ adalah …",
+          "answer": "9 - (a + c) % 9",
+          "distractors": [
+            {
+              "expr": "8 - (a + c) % 9",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(a + c) % 9",
+              "tag": "sisa"
+            },
+            {
+              "expr": "(10 - (a + c) % 9) % 10",
+              "tag": "lebih-satu"
+            }
+          ],
+          "explain": "Jumlah angkanya harus habis dibagi 9. {a} + {c} = {=a+c}. Tambahkan {answer} agar menjadi {=a+c+9-(a+c)%9}, yang habis dibagi 9. Jadi angka di □ adalah {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "c": [0, 9]
+          },
+          "prompt": "Agar bilangan {a}□{c} habis dibagi 3, angka terkecil di □ adalah …",
+          "answer": "(3 - (a + c) % 3) % 3",
+          "distractors": [
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 3",
+              "tag": "bukan-terkecil"
+            },
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 1",
+              "tag": "lain"
+            },
+            {
+              "expr": "(3 - (a + c) % 3) % 3 + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Jumlah angkanya harus habis dibagi 3. {a} + {c} = {=a+c}. Angka terkecil yang membuat jumlahnya habis dibagi 3 adalah {answer}. Angka {=(3-(a+c)%3)%3+3} juga bisa, tetapi bukan yang terkecil."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "math.sd4.n1.tambah-dan-kurang-dari-kiri",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "N",
+  "order": 1,
+  "title": "Operasi hitung campuran — Level 1 — Tambah dan kurang dari kiri",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 999],
+            "b": [50, 299],
+            "c": [20, 299]
+          },
+          "constraint": "a - b - c > 0",
+          "prompt": "{a} − {b} + {c} = …",
+          "answer": "a - b + c",
+          "distractors": [
+            {
+              "expr": "a - (b + c)",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "a + b + c",
+              "tag": "tanda"
+            },
+            {
+              "expr": "a - b + c + 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Tambah dan kurang setingkat, jadi kerjakan dari kiri. {a} − {b} = {=a-b}. Lalu {=a-b} + {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [300, 999],
+            "b": [50, 299],
+            "c": [20, 199]
+          },
+          "constraint": "a - b - c > 0 && b > c",
+          "prompt": "{a} − {b} − {c} = …",
+          "answer": "a - b - c",
+          "distractors": [
+            {
+              "expr": "a - (b - c)",
+              "tag": "kanan-dulu"
+            },
+            {
+              "expr": "a - b",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "a - b - c + 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Kerjakan dari kiri. {a} − {b} = {=a-b}. Lalu {=a-b} − {c} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [100, 999],
+            "b": [50, 500],
+            "c": [20, 400]
+          },
+          "constraint": "c < a + b",
+          "prompt": "{a} + {b} − {c} = …",
+          "answer": "a + b - c",
+          "mode": "input",
+          "explain": "Kerjakan dari kiri. {a} + {b} = {=a+b}. Lalu {=a+b} − {c} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "id": "math.sd4.u1.persepuluhan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "U",
+  "order": 1,
+  "title": "Desimal persepuluhan dan perseratusan — Level 1 — Persepuluhan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "Satu batang dibagi menjadi 10 bagian sama besar. Bagian yang diarsir ditulis sebagai desimal adalah …",
+          "answer": "a / 10",
+          "explain": "Ada {a} dari 10 bagian yang diarsir, jadi pecahannya {a}/10. Persepuluhan ditulis dengan satu angka setelah koma: {a}/10 = {answer}.",
+          "stimulus": [
+            {
+              "kind": "fraction",
+              "num": "=a",
+              "den": 10,
+              "model": "bar",
+              "hideNumber": true
+            }
+          ],
+          "distractors": [
+            {
+              "expr": "a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "(10 - a) / 10",
+              "tag": "bagian-kosong"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{a}/10 ditulis sebagai desimal adalah …",
+          "answer": "a / 10",
+          "explain": "Penyebut 10 berarti persepuluh. Tulis 0, lalu koma, lalu pembilangnya: {a}/10 = {answer}.",
+          "distractors": [
+            {
+              "expr": "a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a",
+              "tag": "tanpa-koma"
+            },
+            {
+              "expr": "a / 10 + 1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "b": [1, 9],
+            "a": [1, 9]
+          },
+          "prompt": "Pecahan campuran {b} {a}/10 ditulis sebagai desimal adalah …",
+          "answer": "b + a / 10",
+          "explain": "Bilangan utuh {b} ditulis di depan koma. {a} persepuluh ditulis tepat setelah koma. Jadi {b} {a}/10 = {answer}.",
+          "distractors": [
+            {
+              "expr": "b + a / 100",
+              "tag": "salah-tempat"
+            },
+            {
+              "expr": "a + b / 10",
+              "tag": "tertukar"
+            },
+            {
+              "expr": "b * 10 + a",
+              "tag": "tanpa-koma"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9]
+          },
+          "prompt": "{x} = … /10. Berapa pembilangnya?",
+          "answer": "a",
+          "explain": "{x} dibaca nol koma {w:a}. Angka {a} ada di tempat persepuluhan, jadi {x} = {a}/10.",
+          "derived": {
+            "x": "a / 10"
+          },
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

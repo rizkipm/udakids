@@ -1,0 +1,150 @@
+{
+  "id": "math.sd4.cc4.jumlah-sudut-segitiga",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "CC",
+  "order": 4,
+  "title": "Segitiga dan segi empat — Level 4 — Jumlah sudut segitiga",
+  "tier": "advanced",
+  "tags": {
+    "level": "4",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25, 95],
+              "step": 5
+            },
+            "b": {
+              "range": [25, 95],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 165",
+          "prompt": "Dua sudut sebuah segitiga {a}° dan {b}°. Berapa derajat sudut ketiga?",
+          "answer": "180 - a - b",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "360 - a - b",
+              "tag": "memakai-360"
+            },
+            {
+              "expr": "a + b",
+              "tag": "menjumlah-saja"
+            }
+          ],
+          "explain": "Jumlah sudut segitiga selalu 180°. Sudut ketiga = 180° − {a}° − {b}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [15, 75],
+              "step": 5
+            }
+          },
+          "prompt": "Sebuah segitiga siku-siku punya satu sudut lancip {a}°. Berapa derajat sudut lancip yang lain?",
+          "answer": "90 - a",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "180 - a",
+              "tag": "lupa-sudut-siku"
+            },
+            {
+              "expr": "a",
+              "tag": "sama-besar"
+            },
+            {
+              "expr": "90 + a",
+              "tag": "ditambah"
+            }
+          ],
+          "explain": "Sudut siku-siku sudah 90°. Sisanya 180° − 90° = 90° untuk dua sudut lancip. 90° − {a}° = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "s": [3, 20]
+          },
+          "words": {
+            "nama": [
+              "Alya",
+              "Raka",
+              "Dimas",
+              "Sari",
+              "Budi",
+              "Putri",
+              "Nina",
+              "Adit",
+              "Tegar",
+              "Wulan",
+              "Bayu",
+              "Citra",
+              "Fajar",
+              "Intan",
+              "Joko",
+              "Lestari",
+              "Rina",
+              "Yusuf",
+              "Dewi",
+              "Hasan"
+            ]
+          },
+          "prompt": "{nama} menggambar segitiga sama sisi dengan sisi {s} cm. Berapa derajat setiap sudutnya?",
+          "answer": "60",
+          "unit": "°",
+          "distractors": [
+            {
+              "expr": "90",
+              "tag": "siku-siku"
+            },
+            {
+              "expr": "180",
+              "tag": "jumlah-semua"
+            },
+            {
+              "expr": "3 * s",
+              "tag": "keliling"
+            }
+          ],
+          "explain": "Segitiga sama sisi punya 3 sudut sama besar. 180° : 3 = 60°, berapa pun panjang sisinya."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [25, 95],
+              "step": 5
+            },
+            "b": {
+              "range": [25, 95],
+              "step": 5
+            }
+          },
+          "constraint": "a + b < 165",
+          "prompt": "Dua sudut sebuah segitiga {a}° dan {b}°. Berapa derajat sudut ketiga?",
+          "answer": "180 - a - b",
+          "unit": "°",
+          "explain": "Jumlah sudut segitiga selalu 180°. Sudut ketiga = 180° − {a}° − {b}° = {answer}.",
+          "mode": "input"
+        }
+      }
+    ]
+  }
+}

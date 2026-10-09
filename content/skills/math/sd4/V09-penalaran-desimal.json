@@ -1,0 +1,150 @@
+{
+  "id": "math.sd4.v9.penalaran-desimal",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "V",
+  "order": 9,
+  "title": "Membandingkan dan menjumlahkan desimal — Level 9 — Penalaran desimal",
+  "tier": "advanced",
+  "tags": {
+    "level": "9",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "reasoning"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 6],
+            "b": [11, 39],
+            "c": [20, 99]
+          },
+          "prompt": "Bandingkan: {x} + {y} … {z}",
+          "answer": "(s > z) + 2 * (s < z) + 3 * (s == z)",
+          "explain": "Hitung dulu jumlahnya: {x} + {y} = {s}. Lalu bandingkan {s} dengan {z}: {s} {answer_say} {z}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100",
+            "z": "c / 100",
+            "s": "a / 10 + b / 100"
+          },
+          "constraint": "b % 10 != 0 && abs(a * 10 + b - c) <= 12",
+          "labels": {
+            "1": ">",
+            "2": "<",
+            "3": "="
+          },
+          "labelSay": {
+            "1": "lebih dari",
+            "2": "kurang dari",
+            "3": "sama dengan"
+          }
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "b": [11, 99],
+            "c": [11, 99]
+          },
+          "prompt": "Dari {x}; {y}; dan {z}, berapa selisih bilangan yang terbesar dan yang terkecil?",
+          "answer": "max(x, y, z) - min(x, y, z)",
+          "explain": "Cari dulu yang terbesar ({=max(x,y,z)}) dan yang terkecil ({=min(x,y,z)}). Selisihnya {=max(x,y,z)} − {=min(x,y,z)} = {answer}.",
+          "derived": {
+            "x": "a / 10",
+            "y": "b / 100",
+            "z": "c / 100"
+          },
+          "constraint": "a * 10 != b && a * 10 != c && b != c && b % 10 != 0 && c % 10 != 0",
+          "distractors": [
+            {
+              "expr": "max(x, y, z) + min(x, y, z)",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "x + y + z - max(x, y, z) - min(x, y, z)",
+              "tag": "bilangan-tengah"
+            },
+            {
+              "expr": "max(x, y, z) - min(x, y, z) + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [1, 9],
+            "a": [1, 9],
+            "v": [1, 9],
+            "b": [1, 9]
+          },
+          "prompt": "Taksir {x} + {y} dengan membulatkan setiap bilangan ke satuan terdekat. Hasil taksirannya adalah …",
+          "answer": "round(x) + round(y)",
+          "explain": "Bulatkan dulu: {x} menjadi {=round(x)} dan {y} menjadi {=round(y)} (persepuluhan 5 ke atas dibulatkan naik). Taksirannya {=round(x)} + {=round(y)} = {answer}.",
+          "derived": {
+            "x": "u + a / 10",
+            "y": "v + b / 10"
+          },
+          "constraint": "a != 5 && b != 5 && round(x) + round(y) != floor(x) + floor(y)",
+          "distractors": [
+            {
+              "expr": "floor(x) + floor(y)",
+              "tag": "dibulatkan-ke-bawah"
+            },
+            {
+              "expr": "ceil(x) + ceil(y)",
+              "tag": "dibulatkan-ke-atas"
+            },
+            {
+              "expr": "round(x) + round(y) + 2",
+              "tag": "lain"
+            }
+          ]
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "u": [2, 6],
+            "a": [1, 9],
+            "b": [11, 99]
+          },
+          "prompt": "Jumlah dua desimal adalah {s}. Salah satunya {x}. Berapa desimal yang lain?",
+          "answer": "s - x",
+          "explain": "Desimal yang lain = jumlah − yang diketahui: {s} − {x} = {answer}. Periksa: {x} + {answer} = {s}.",
+          "derived": {
+            "s": "u + a / 10",
+            "x": "b / 100"
+          },
+          "constraint": "b % 10 != 0",
+          "distractors": [
+            {
+              "expr": "s + x",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "u + abs(a * 10 - b) / 100",
+              "tag": "kecil-dari-besar"
+            },
+            {
+              "expr": "s - x + 0.1",
+              "tag": "lain"
+            }
+          ],
+          "format": "decimal"
+        }
+      }
+    ]
+  }
+}

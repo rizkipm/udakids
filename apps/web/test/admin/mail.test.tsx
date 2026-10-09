@@ -8,7 +8,7 @@ const overview = {
   configured: true,
   host: 'srv176.niagahoster.com',
   port: 465,
-  from: 'Udakids <helo@eduskul.my.id>',
+  from: 'UdaKids <helo@eduskul.my.id>',
   user: 'h•••@eduskul.my.id',
   director: ['udacodingofficial@gmail.com'],
   appUrl: 'https://kids.eduskul.my.id',
@@ -17,7 +17,7 @@ const overview = {
     {
       id: '00000000-0000-4000-8000-000000000001',
       toEmail: 'ortu@gmail.com',
-      subject: 'Selamat datang di Udakids!',
+      subject: 'Selamat datang di UdaKids!',
       kind: 'welcome',
       status: 'sent',
       attempts: 1,

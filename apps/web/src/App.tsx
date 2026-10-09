@@ -16,7 +16,7 @@ import { Seo } from './components/Seo';
 function Placeholder({ text, title }: { text: string; title?: string }) {
   return (
     <main className="page">
-      <Seo title={title ?? 'Udakids Little Coder'} noindex />
+      <Seo title={title ?? 'UdaKids'} noindex />
       {text}
     </main>
   );

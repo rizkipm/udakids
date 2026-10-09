@@ -1,0 +1,98 @@
+{
+  "id": "math.sd4.l1.membagi-puluhan-ratusan-dan-ribuan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 1,
+  "title": "Pembagian bersusun — Level 1 — Membagi puluhan, ratusan, dan ribuan",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*10} : {m} = …",
+          "answer": "n * 10",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "lupa-nol"
+            },
+            {
+              "expr": "n * 100",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "n * 10 + 10",
+              "tag": "lebih-sepuluh"
+            }
+          ],
+          "explain": "Pikirkan fakta {=m*n} : {m} = {n}. Bilangan {=m*n*10} adalah {=m*n} puluhan, jadi hasilnya {n} puluhan = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*100} : {m} = …",
+          "answer": "n * 100",
+          "distractors": [
+            {
+              "expr": "n * 10",
+              "tag": "nol-kurang"
+            },
+            {
+              "expr": "n * 1000",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "(n + 1) * 100",
+              "tag": "lebih-seratus"
+            }
+          ],
+          "explain": "Fakta dasarnya {=m*n} : {m} = {n}. Bilangan {=m*n*100} adalah {=m*n} ratusan, jadi hasilnya {n} ratusan = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 9],
+            "n": [2, 9]
+          },
+          "prompt": "{=m*n*1000} : {m} = …",
+          "answer": "n * 1000",
+          "distractors": [
+            {
+              "expr": "n * 100",
+              "tag": "nol-kurang"
+            },
+            {
+              "expr": "n * 10000",
+              "tag": "nol-lebih"
+            },
+            {
+              "expr": "n * 1000 + 100",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Fakta dasarnya {=m*n} : {m} = {n}. Bilangan {=m*n*1000} adalah {=m*n} ribuan, jadi hasilnya {n} ribuan = {answer}."
+        }
+      }
+    ]
+  }
+}

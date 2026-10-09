@@ -1,0 +1,113 @@
+{
+  "id": "math.sd34.eg1.prinsip-pagar-satu-baris",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EG",
+  "order": 1,
+  "title": "Kombinatorika & penalaran — Level 1 — Prinsip pagar satu baris",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Kombinatorika & Penalaran",
+    "indikator": "Menghitung banyak tiang/pohon pada garis dan lingkaran"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "n": [3, 20]
+          },
+          "derived": {
+            "lj": "d * n"
+          },
+          "prompt": "Di sepanjang sisi jalan yang panjangnya {lj} m ditanam pohon setiap {d} m, termasuk di kedua ujung jalan. Banyak pohon adalah …",
+          "answer": "n + 1",
+          "distractors": [
+            {
+              "expr": "n",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "n + 2",
+              "tag": "tambah-2"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-1"
+            }
+          ],
+          "choices": 4,
+          "explain": "Ada {lj} : {d} = {n} jarak antarpohon. Pada garis lurus, banyak pohon = banyak jarak + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "n": [3, 20]
+          },
+          "derived": {
+            "lj": "d * n"
+          },
+          "prompt": "Di sekeliling kolam bundar yang kelilingnya {lj} m dipasang lampu setiap {d} m. Banyak lampu adalah …",
+          "answer": "n",
+          "distractors": [
+            {
+              "expr": "n + 1",
+              "tag": "seperti-garis"
+            },
+            {
+              "expr": "n - 1",
+              "tag": "kurang-1"
+            },
+            {
+              "expr": "2 * n",
+              "tag": "dua-kali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Pada lingkaran, lampu pertama sekaligus menjadi lampu terakhir, jadi banyak lampu = banyak jarak = {lj} : {d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "d": [2, 10],
+            "n": [3, 20]
+          },
+          "derived": {
+            "lj": "d * n"
+          },
+          "prompt": "Di kedua sisi jalan yang panjangnya {lj} m dipasang bendera setiap {d} m, termasuk di ujung-ujung jalan. Banyak bendera adalah …",
+          "answer": "2 * (n + 1)",
+          "distractors": [
+            {
+              "expr": "2 * n",
+              "tag": "lupa-tambah-1"
+            },
+            {
+              "expr": "n + 1",
+              "tag": "satu-sisi"
+            },
+            {
+              "expr": "2 * n + 1",
+              "tag": "tambah-sekali"
+            }
+          ],
+          "choices": 4,
+          "explain": "Satu sisi: {lj} : {d} + 1 = {=n+1} bendera. Dua sisi: 2 × {=n+1} = {answer}."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "math.sd4.j8.angka-yang-hilang",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "J",
+  "order": 8,
+  "title": "Perkalian dengan bilangan satu angka — Level 8 — Angka yang hilang",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 9],
+            "x": [0, 9],
+            "c": [1, 9],
+            "k": [3, 9]
+          },
+          "derived": {
+            "r": "(a * 100 + x * 10 + c) * k"
+          },
+          "prompt": "Angka berapa yang hilang? {a}□{c} × {k} = {r}",
+          "answer": "x",
+          "distractors": [
+            {
+              "expr": "(x + 1) % 10",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "(x + 9) % 10",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "(x + 5) % 10",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Bagi hasilnya dengan {k}: {r} : {k} = {=a*100+x*10+c}. Jadi angka puluhan yang hilang adalah {answer}. Cek: {=a*100+x*10+c} × {k} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [12, 250],
+            "k": [2, 9]
+          },
+          "derived": {
+            "r": "n * k"
+          },
+          "prompt": "… × {k} = {r}",
+          "answer": "n",
+          "mode": "input",
+          "explain": "Cari bilangan yang dikali {k} hasilnya {r}. Bagi: {r} : {k} = {answer}. Cek dengan perkalian: {answer} × {k} = {r}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "n": [120, 999],
+            "k": [3, 9]
+          },
+          "derived": {
+            "r": "n * k"
+          },
+          "prompt": "{n} × … = {r}",
+          "answer": "k",
+          "distractors": [
+            {
+              "expr": "k + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "k - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "k + 2",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Taksir dulu: {n} kira-kira {=round(n/100)*100}. Coba kalikan {n} dengan {answer}: hasilnya {r}."
+        }
+      }
+    ]
+  }
+}

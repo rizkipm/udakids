@@ -1,0 +1,51 @@
+{
+  "id": "math.sd4.q1.membandingkan-dengan-gambar",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "Q",
+  "order": 1,
+  "title": "Membandingkan dan mengurutkan pecahan — Level 1 — Membandingkan dengan gambar",
+  "tier": "advanced",
+  "tags": {
+    "level": "1",
+    "fase-merdeka": "B",
+    "kognitif": "knowing"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "d": [3, 10],
+      "a": [1, 9],
+      "b": [1, 9]
+    },
+    "constraint": "a < d && b < d && a != b",
+    "prompt": "Lihat gambarnya. Bandingkan: {a}/{d} … {b}/{d}",
+    "stimulus": [
+      {
+        "kind": "fraction",
+        "num": "=a",
+        "den": "=d",
+        "model": "bar"
+      },
+      {
+        "kind": "fraction",
+        "num": "=b",
+        "den": "=d",
+        "model": "bar"
+      }
+    ],
+    "answer": "(a > b) * 1 + (a < b) * 2 + (a == b) * 3",
+    "labels": {
+      "1": ">",
+      "2": "<",
+      "3": "="
+    },
+    "labelSay": {
+      "1": "lebih dari",
+      "2": "kurang dari",
+      "3": "sama dengan"
+    },
+    "explain": "Kedua batang dipotong {d} bagian sama besar. Yang diarsir {a} bagian dan {b} bagian. Arsiran yang lebih panjang menunjukkan pecahan yang lebih besar, jadi {a}/{d} {answer} {b}/{d}."
+  }
+}

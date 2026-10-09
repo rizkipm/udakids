@@ -2,7 +2,7 @@
 
 Status: **Sebagian disetujui** (D-068, 2026-10-07): AI Gambar di admin, simpan di PostgreSQL, pelajaran di katalog,
 unit P-MA-01. Sisa bagian 8 masih usulan. Ditulis 2026-10-05.
-Pembaca: pemilik produk, tim konten, dan tim pengembang Udakids.
+Pembaca: pemilik produk, tim konten, dan tim pengembang UdaKids.
 Melengkapi [rencana-studio-soal.md](rencana-studio-soal.md) dan [rencana-worksheet-kosakata.md](rencana-worksheet-kosakata.md).
 Data tabel bagian 6 juga tersedia sebagai CSV di [blueprint/menu-belajar.csv](blueprint/menu-belajar.csv),
 untuk dibaca Studio saat generate. Versi Excel dan cara generate satu per satu:
@@ -11,13 +11,13 @@ untuk dibaca Studio saat generate. Versi Excel dan cara generate satu per satu:
 ## 1. Ringkasan
 
 - **Gambar dibuat sekali, dipakai selamanya.** Setiap gambar dibuat lewat API gambar OpenAI satu kali, disimpan
-  di server Udakids, lalu dipakai berulang oleh semua soal, pelajaran, dan worksheet tanpa biaya lagi. Anak tidak
+  di server UdaKids, lalu dipakai berulang oleh semua soal, pelajaran, dan worksheet tanpa biaya lagi. Anak tidak
   pernah memicu pembuatan gambar.
 - **Biaya sangat kecil bila caranya tepat.** Dengan model mini, Batch API (diskon 50%), dan 4 gambar dalam satu
   permintaan, **10.000 gambar ≈ US$15–20**. Bandingkan dengan cara boros (model besar, kualitas tinggi, satu per
   satu, langsung) yang menelan ≈ US$1.670 untuk jumlah yang sama.
 - **API key aman di panel admin:** terenkripsi, tidak pernah dikirim ke browser, hanya admin, dengan batas biaya
-  harian/bulanan di Udakids, log audit, dan email pemberitahuan.
+  harian/bulanan di UdaKids, log audit, dan email pemberitahuan.
 - **Menu Belajar khusus Pra-TK, TK, Kelas 1:** 4 mapel (Baca Tulis, Berhitung, English, Sains), **156 unit**.
   Setiap unit punya **Belajar → Berlatih → Tantangan** (soal seperti sekarang) dan worksheet cetak.
 
@@ -44,7 +44,7 @@ kualitas)`. Kalau sidik jari sudah ada, sistem memakai gambar yang tersimpan.
 | Pratinjau murah dulu                 | Draf kualitas _low_, admin memilih, baru versi _medium_ untuk yang disetujui                                                                                                                               | Gambar gagal tidak mahal                    |
 | Ukuran sesuai pakai                  | Tampilan anak ≤ 256 px. Simpan WebP 512 dan 256 (±10–30 KB)                                                                                                                                                | Hemat penyimpanan dan kuota                 |
 | Latar transparan                     | Parameter `background: "transparent"` + `output_format: "webp"`. Cadangan: latar putih lalu dibuang lokal                                                                                                  | Satu gambar cocok di semua tema             |
-| Satu gaya tetap                      | Blok prompt gaya Udakids v1 yang sama untuk semua gambar                                                                                                                                                   | Tidak perlu generate ulang demi konsistensi |
+| Satu gaya tetap                      | Blok prompt gaya UdaKids v1 yang sama untuk semua gambar                                                                                                                                                   | Tidak perlu generate ulang demi konsistensi |
 | Teks AI (soal/pelajaran) hemat token | AI menulis **template**, bukan soal satu per satu. Satu template = ratusan soal gratis dari engine. Pakai Batch, _prompt caching_ (awalan prompt tetap), dan _structured output_ (JSON valid, tanpa ulang) | Sangat besar                                |
 
 Harga di atas dari kalkulator harga pihak ketiga per Oktober 2026. Harga resmi bisa berubah, jadi panel admin
@@ -68,14 +68,14 @@ secara pedagogis: anak lebih mudah memahami dan mengingat kata baru bila melihat
 
 ```text
 Kamus Bergambar (kata + varian)
-  ─▶ penyusun prompt (gaya Udakids v1 + benda + varian) ─▶ cek sidik jari (sudah ada? pakai)
+  ─▶ penyusun prompt (gaya UdaKids v1 + benda + varian) ─▶ cek sidik jari (sudah ada? pakai)
   ─▶ antrean ─▶ OpenAI Batch API ─▶ unduh hasil
   ─▶ sharp: potong grid, rapikan tepi, cek latar, ubah ke WebP 512/256, buang gambar kembar (hash visual)
   ─▶ "menunggu review" ─▶ admin memeriksa dalam grid (setujui / tolak / buat ulang)
   ─▶ terbit: file statis dengan cache permanen ─▶ dipakai semua soal, pelajaran, worksheet
 ```
 
-**Penyimpanan:** media Udakids saat ini disimpan sebagai `bytea` di PostgreSQL. Untuk puluhan ribu gambar
+**Penyimpanan:** media UdaKids saat ini disimpan sebagai `bytea` di PostgreSQL. Untuk puluhan ribu gambar
 (±0,5–1 GB), gambar sebaiknya disimpan sebagai file di server, atau object storage, dengan nama hash. PostgreSQL
 menyimpan datanya (kata, varian, lisensi, prompt, biaya, status). Dengan begitu cadangan database tetap kecil.
 PWA hanya menyimpan gambar yang dipakai, atau paket per buku yang diunduh, bukan semua gambar sekaligus.
@@ -99,14 +99,14 @@ Pola yang sama dengan kunci suara (D-043), yang sudah memakai `secret-box`, dita
 | Terenkripsi         | AES-256-GCM (`secret-box`), sehingga cadangan database tidak memuat kunci yang terbaca. `JWT_SECRET` wajib dijaga dan tidak diganti.                                                      |
 | Konfirmasi sandi    | Mengganti kunci atau menjalankan pekerjaan besar meminta sandi admin lagi.                                                                                                                |
 | Email pemberitahuan | Setiap penggantian kunci dan pekerjaan di atas batas memicu email ke direksi (D-044).                                                                                                     |
-| Batas biaya Udakids | Batas harian dan bulanan (US$) ditegakkan **oleh Udakids**, karena batas di OpenAI bisa berupa peringatan saja. Perkiraan biaya tampil dan harus dikonfirmasi sebelum pekerjaan berjalan. |
+| Batas biaya UdaKids | Batas harian dan bulanan (US$) ditegakkan **oleh UdaKids**, karena batas di OpenAI bisa berupa peringatan saja. Perkiraan biaya tampil dan harus dikonfirmasi sebelum pekerjaan berjalan. |
 | Prompt dari sistem  | Server menyusun prompt dari Kamus Bergambar dan panduan gaya. Admin hanya menambah catatan pendek, jadi kunci tidak bisa dipakai untuk membuat gambar sembarangan.                        |
 | Log audit           | Siapa, kapan, berapa gambar, dan berapa biayanya. Kunci tidak pernah tertulis di log (header disensor).                                                                                   |
 | Tombol darurat      | "Nonaktifkan AI Gambar" dan "Hapus kunci" sekali klik.                                                                                                                                    |
 
 **Di sisi OpenAI (disarankan, sekali saja):**
 
-1. Buat **Project** khusus, misalnya `Udakids-Gambar`.
+1. Buat **Project** khusus, misalnya `UdaKids-Gambar`.
 2. Buat **restricted key** dengan izin tulis hanya untuk Images, Files, dan Batch (dua yang terakhir dibutuhkan
    Batch API), dan izin lain _None_.
 3. Pasang batas biaya dan peringatan pemakaian di project itu.
@@ -114,7 +114,7 @@ Pola yang sama dengan kunci suara (D-043), yang sudah memakai `secret-box`, dita
 
 **Kepatuhan:** AI hanya dipakai di admin untuk membuat aset statis. Anak tidak berinteraksi dengan AI, dan tidak
 ada data anak yang dikirim ke OpenAI. Panduan OpenAI untuk pengguna di bawah 18 tahun berlaku untuk aplikasi
-yang membiarkan anak memakai AI, dan itu bukan kasus Udakids. Semua gambar tetap direview admin sebelum tayang.
+yang membiarkan anak memakai AI, dan itu bukan kasus UdaKids. Semua gambar tetap direview admin sebelum tayang.
 
 ## 4. Menu Belajar khusus Pra-TK, TK, Kelas 1
 
@@ -408,12 +408,12 @@ soal, dan gambar yang kurang. Admin cukup mereview.
 
 ## 8. Keputusan yang dibutuhkan
 
-1. **AI Gambar di admin** dengan API key OpenAI milik Udakids, untuk membuat aset statis saja. Setuju?
+1. **AI Gambar di admin** dengan API key OpenAI milik UdaKids, untuk membuat aset statis saja. Setuju?
 2. **Model dan kualitas default:** `gpt-image-1-mini` medium + Batch + grid 2×2, dengan pratinjau low. Setuju?
 3. **Batas biaya default:** misalnya US$5/hari dan US$50/bulan, bisa diubah admin dengan konfirmasi sandi.
 4. **Penyimpanan gambar** di file server/object storage dengan data di PostgreSQL (bukan `bytea`). Setuju?
 5. **Menu Belajar** (Belajar → Berlatih → Tantangan → Worksheet) sebagai menu utama Pra-TK, TK, Kelas 1. Setuju?
 6. **Daftar 156 unit** di bagian 6, atau ada unit yang ingin ditambah, dihapus, atau dipindah jenjang?
 7. **Worksheet cetak** di area orang tua (PDF). Setuju?
-8. **Aturan "tanpa emoji":** tidak relevan lagi bila semua gambar dibuat sendiri dengan AI dalam gaya Udakids.
+8. **Aturan "tanpa emoji":** tidak relevan lagi bila semua gambar dibuat sendiri dengan AI dalam gaya UdaKids.
    Ini juga menggantikan usulan Fluent Emoji di rencana-worksheet-kosakata.

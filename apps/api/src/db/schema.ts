@@ -133,7 +133,12 @@ export const events = pgTable(
     payload: jsonb('payload').notNull(),
     ts: timestamp('ts', { withTimezone: true }).notNull(),
   },
-  (t) => [index('events_child_idx').on(t.childId, t.ts), index('events_type_idx').on(t.type)],
+  (t) => [
+    index('events_child_idx').on(t.childId, t.ts),
+    index('events_type_idx').on(t.type),
+    // Laporan admin/guru menyaring per jenis + rentang waktu (D-099).
+    index('events_type_ts_idx').on(t.type, t.ts),
+  ],
 );
 
 export const levelProgress = pgTable(

@@ -1,0 +1,60 @@
+{
+  "id": "math.sd34.ec7.banyak-faktor-bilangan-berpangkat",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EC",
+  "order": 7,
+  "title": "Bilangan & aljabar — Level 7 — Banyak faktor bilangan berpangkat",
+  "tier": "advanced",
+  "tags": {
+    "level": "7",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Bilangan & Aljabar",
+    "indikator": "Menentukan banyak faktor positif dari bilangan berpangkat",
+    "emc-no": "40"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "p": {
+              "values": [2, 3, 5, 7]
+            },
+            "e": [2, 10]
+          },
+          "derived": {
+            "n": "pow(p, e)"
+          },
+          "constraint": "n <= 2500 && n >= 8 && n != 256",
+          "prompt": "{n} kelereng akan dibagikan sama banyak kepada beberapa anak tanpa sisa (boleh juga 1 anak atau {n} anak). Ada berapa pilihan banyak anak yang mungkin?",
+          "answer": "e + 1",
+          "mode": "input",
+          "explain": "{n} = {p} pangkat {e}. Faktornya {p} pangkat 0, 1, 2, …, sampai {e}. Banyaknya {e} + 1 = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [1, 5],
+            "b": [1, 4]
+          },
+          "derived": {
+            "n": "pow(2, a) * pow(3, b)"
+          },
+          "constraint": "n <= 2000",
+          "prompt": "{n} buku akan disusun di rak, setiap baris berisi buku yang sama banyak tanpa sisa (boleh 1 buku per baris, boleh juga semua dalam satu baris). Ada berapa pilihan banyak buku per baris?",
+          "answer": "(a + 1) * (b + 1)",
+          "mode": "input",
+          "explain": "{n} = 2 pangkat {a} × 3 pangkat {b}. Setiap faktor memakai 2 pangkat 0 sampai {a} ({=a+1} pilihan) dan 3 pangkat 0 sampai {b} ({=b+1} pilihan): {=a+1} × {=b+1} = {answer}."
+        }
+      }
+    ]
+  }
+}

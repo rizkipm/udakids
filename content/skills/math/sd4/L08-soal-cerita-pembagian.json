@@ -1,0 +1,131 @@
+{
+  "id": "math.sd4.l8.soal-cerita-pembagian",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "L",
+  "order": 8,
+  "title": "Pembagian bersusun — Level 8 — Soal cerita pembagian",
+  "tier": "advanced",
+  "tags": {
+    "level": "8",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "q": [24, 160]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "Sekolah membeli {t} buku tulis untuk {m} kelas. Setiap kelas mendapat sama banyak. Berapa buku tulis untuk setiap kelas?",
+          "answer": "t / m",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "q + 1",
+              "tag": "lebih-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Kata \"sama banyak\" berarti membagi. {t} : {m} = {answer}. Periksa: {answer} × {m} = {t}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 9],
+            "q": [25, 90]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "Seorang petani memasukkan {t} kg beras sama rata ke dalam {m} karung. Berapa kg isi setiap karung?",
+          "answer": "t / m",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "t - m",
+              "tag": "mengurangi"
+            },
+            {
+              "expr": "q - 1",
+              "tag": "kurang-satu"
+            },
+            {
+              "expr": "q + 10",
+              "tag": "puluhan-salah"
+            }
+          ],
+          "explain": "Membagi sama rata: {t} : {m} = {=t/m}. Periksa: {=t/m} × {m} = {t}. Jadi isi setiap karung {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [2, 6],
+            "q": {
+              "values": [2500, 3000, 3500, 4000, 4500, 5000, 6000, 7500, 8000]
+            }
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "Harga {m} buku cerita Rp{t}. Semua buku harganya sama. Berapa harga 1 buku cerita?",
+          "answer": "t / m",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "t - q",
+              "tag": "kurang-satu-buku"
+            },
+            {
+              "expr": "q + 500",
+              "tag": "lebih-500"
+            },
+            {
+              "expr": "q - 500",
+              "tag": "kurang-500"
+            },
+            {
+              "expr": "q + 1000",
+              "tag": "lebih-seribu"
+            }
+          ],
+          "explain": "Harga satu barang = harga semua : banyak barang. {t} : {m} = {=t/m}. Jadi harga 1 buku {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "m": [3, 8],
+            "q": [12, 60]
+          },
+          "derived": {
+            "t": "m * q"
+          },
+          "prompt": "{t} siswa ikut gerak jalan dalam {m} barisan yang sama panjang. Berapa siswa di setiap barisan?",
+          "answer": "t / m",
+          "mode": "input",
+          "explain": "{t} : {m} = {answer}. Periksa: {answer} × {m} = {t}."
+        }
+      }
+    ]
+  }
+}

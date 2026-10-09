@@ -1,0 +1,56 @@
+{
+  "id": "math.sd34.ee2.mencari-data-dari-rata-rata-baru",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd34",
+  "category": "EE",
+  "order": 2,
+  "title": "Statistika — Level 2 — Mencari data dari rata-rata baru",
+  "tier": "advanced",
+  "tags": {
+    "level": "2",
+    "fase-merdeka": "B (pengayaan)",
+    "osn": "EMC Kelas 3–4 — Penyisihan (gaya EMC 2022)",
+    "kognitif": "applying",
+    "kisi-kisi": "Statistika",
+    "indikator": "Menentukan data yang hilang dari rata-rata baru",
+    "emc-no": "4"
+  },
+  "family": "expr",
+  "params": {
+    "vars": {
+      "a": [5, 10],
+      "b": [5, 10],
+      "c": [5, 10],
+      "m": [6, 9]
+    },
+    "derived": {
+      "x": "4 * m - (a + b + c)"
+    },
+    "words": {
+      "n1": ["Ayu", "Bima", "Citra"],
+      "n2": ["Dimas", "Eka", "Fajar"],
+      "n3": ["Gita", "Hasan", "Intan"],
+      "n4": ["Joko", "Kirana", "Lukman", "Made"]
+    },
+    "constraint": "x >= 1 && x <= 10 && x != m",
+    "prompt": "Nilai kuis {n1}, {n2}, dan {n3} adalah {a}, {b}, dan {c}. {n4} mengikuti kuis susulan. Setelah nilai {n4} dimasukkan, rata-rata nilai keempat anak menjadi {m}. Nilai {n4} adalah …",
+    "answer": "x",
+    "distractors": [
+      {
+        "expr": "m",
+        "tag": "rata-rata"
+      },
+      {
+        "expr": "4 * m",
+        "tag": "jumlah"
+      },
+      {
+        "expr": "3 * m - (a + b + c) + m + 1",
+        "tag": "lain"
+      }
+    ],
+    "choices": 4,
+    "explain": "Jumlah nilai empat anak = 4 × {m} = {=4*m}. Jumlah nilai tiga anak = {=a+b+c}. Nilai {n4} = {=4*m} − {=a+b+c} = {answer}."
+  }
+}

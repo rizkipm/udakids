@@ -1,0 +1,102 @@
+{
+  "id": "math.sd4.gg5.membandingkan-lalu-menjumlah",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "GG",
+  "order": 5,
+  "title": "Soal cerita multi-langkah — Level 5 — Membandingkan lalu menjumlah",
+  "tier": "advanced",
+  "tags": {
+    "level": "5",
+    "fase-merdeka": "B",
+    "kognitif": "applying"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [120, 450],
+            "d": [15, 90]
+          },
+          "prompt": "Kelas 4A mengumpulkan {a} botol plastik. Kelas 4B mengumpulkan {d} botol lebih banyak. Berapa botol yang dikumpulkan kedua kelas?",
+          "answer": "2 * a + d",
+          "distractors": [
+            {
+              "expr": "a + d",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "2 * a",
+              "tag": "lupa-selisih"
+            },
+            {
+              "expr": "2 * a + 2 * d",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: botol kelas 4B {a} + {d} = {=a+d}. Langkah 2: jumlah kedua kelas {a} + {=a+d} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "values": [15000, 20000, 25000, 30000, 35000, 40000, 45000]
+            },
+            "k": [2, 4]
+          },
+          "prompt": "Tabungan Rina Rp{a}. Tabungan Doni {k} kali tabungan Rina. Berapa tabungan mereka berdua?",
+          "answer": "a + k * a",
+          "unit": "rupiah",
+          "distractors": [
+            {
+              "expr": "k * a",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "(k - 1) * a",
+              "tag": "kurang-satu-kali"
+            },
+            {
+              "expr": "(k + 2) * a",
+              "tag": "lebih-satu-kali"
+            }
+          ],
+          "explain": "Langkah 1: tabungan Doni {k} × {a} = {=k*a}. Langkah 2: jumlah keduanya {a} + {=k*a} = {=a+k*a}. Jadi {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [25, 60],
+            "k": [6, 12]
+          },
+          "prompt": "Berat seekor kambing {a} kg. Berat seekor sapi {k} kali berat kambing. Berapa kg selisih berat sapi dan kambing?",
+          "answer": "k * a - a",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "k * a",
+              "tag": "satu-langkah"
+            },
+            {
+              "expr": "k * a + a",
+              "tag": "menjumlah"
+            },
+            {
+              "expr": "a * (k + 1)",
+              "tag": "lain"
+            }
+          ],
+          "explain": "Langkah 1: berat sapi {k} × {a} = {=k*a} kg. Langkah 2: selisihnya {=k*a} − {a} = {=k*a-a} kg."
+        }
+      }
+    ]
+  }
+}

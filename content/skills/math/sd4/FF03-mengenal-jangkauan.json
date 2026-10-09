@@ -1,0 +1,163 @@
+{
+  "id": "math.sd4.ff3.mengenal-jangkauan",
+  "version": 1,
+  "domain": "math",
+  "grade": "sd4",
+  "category": "FF",
+  "order": 3,
+  "title": "Modus, median, dan jangkauan — Level 3 — Mengenal jangkauan",
+  "tier": "advanced",
+  "tags": {
+    "level": "3",
+    "fase-merdeka": "B (pengayaan)",
+    "kognitif": "knowing"
+  },
+  "family": "mix",
+  "params": {
+    "parts": [
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [10, 60],
+            "b": [10, 60],
+            "c": [10, 60],
+            "d": [10, 60],
+            "e": [10, 60]
+          },
+          "constraint": "max(a, b, c, d, e) - min(a, b, c, d, e) >= 5",
+          "prompt": "Tinggi 5 tanaman (cm): {a}, {b}, {c}, {d}, {e}. Berapa jangkauannya?",
+          "answer": "max(a, b, c, d, e) - min(a, b, c, d, e)",
+          "unit": "cm",
+          "distractors": [
+            {
+              "expr": "max(a, b, c, d, e)",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "min(a, b, c, d, e)",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "abs(e - a)",
+              "tag": "tidak-diurutkan"
+            },
+            {
+              "expr": "max(a, b, c, d, e) + min(a, b, c, d, e)",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Data terbesar {=max(a,b,c,d,e)}, data terkecil {=min(a,b,c,d,e)}. Jangkauan = {=max(a,b,c,d,e)} − {=min(a,b,c,d,e)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [24, 35],
+            "b": [24, 35],
+            "c": [24, 35],
+            "d": [24, 35],
+            "e": [24, 35],
+            "f": [24, 35]
+          },
+          "constraint": "max(a, b, c, d, e, f) - min(a, b, c, d, e, f) >= 3",
+          "prompt": "Suhu udara 6 hari (°C): {a}, {b}, {c}, {d}, {e}, {f}. Berapa jangkauan suhunya?",
+          "answer": "max(a, b, c, d, e, f) - min(a, b, c, d, e, f)",
+          "unit": "°C",
+          "distractors": [
+            {
+              "expr": "max(a, b, c, d, e, f)",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "min(a, b, c, d, e, f)",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "abs(f - a)",
+              "tag": "tidak-diurutkan"
+            }
+          ],
+          "explain": "Suhu tertinggi {=max(a,b,c,d,e,f)}, terendah {=min(a,b,c,d,e,f)}. Jangkauan = {=max(a,b,c,d,e,f)} − {=min(a,b,c,d,e,f)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": {
+              "range": [150, 900],
+              "step": 10
+            },
+            "b": {
+              "range": [150, 900],
+              "step": 10
+            },
+            "c": {
+              "range": [150, 900],
+              "step": 10
+            },
+            "d": {
+              "range": [150, 900],
+              "step": 10
+            },
+            "e": {
+              "range": [150, 900],
+              "step": 10
+            }
+          },
+          "constraint": "max(a, b, c, d, e) - min(a, b, c, d, e) >= 100",
+          "prompt": "Pengunjung museum dalam 5 hari: {a}, {b}, {c}, {d}, dan {e} orang. Berapa jangkauan datanya?",
+          "answer": "max(a, b, c, d, e) - min(a, b, c, d, e)",
+          "unit": "orang",
+          "distractors": [
+            {
+              "expr": "max(a, b, c, d, e)",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "abs(e - a)",
+              "tag": "tidak-diurutkan"
+            },
+            {
+              "expr": "max(a, b, c, d, e) + min(a, b, c, d, e)",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Terbesar {=max(a,b,c,d,e)}, terkecil {=min(a,b,c,d,e)}. {=max(a,b,c,d,e)} − {=min(a,b,c,d,e)} = {answer}."
+        }
+      },
+      {
+        "family": "expr",
+        "params": {
+          "vars": {
+            "a": [2, 9],
+            "b": [2, 9],
+            "c": [2, 9],
+            "d": [2, 9]
+          },
+          "constraint": "max(a, b, c, d) - min(a, b, c, d) >= 2",
+          "prompt": "Data berat 4 semangka (kg): {a}, {b}, {c}, {d}. Data terbesar dikurangi data terkecil disebut jangkauan. Berapa jangkauannya?",
+          "answer": "max(a, b, c, d) - min(a, b, c, d)",
+          "unit": "kg",
+          "distractors": [
+            {
+              "expr": "max(a, b, c, d)",
+              "tag": "terbesar"
+            },
+            {
+              "expr": "min(a, b, c, d)",
+              "tag": "terkecil"
+            },
+            {
+              "expr": "a + b + c + d",
+              "tag": "menjumlah"
+            }
+          ],
+          "explain": "Terberat {=max(a,b,c,d)} kg, teringan {=min(a,b,c,d)} kg. Jangkauannya {answer}."
+        }
+      }
+    ]
+  }
+}

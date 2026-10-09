@@ -40,7 +40,7 @@ export function mailConfig() {
     pass: (process.env.SMTP_PASS ?? process.env.SMTP_PASSWORD ?? '').replace(/\s+/g, ''),
     from:
       process.env.MAIL_FROM?.trim() ||
-      (user ? `Udakids <${user}>` : 'Udakids <no-reply@localhost>'),
+      (user ? `UdaKids <${user}>` : 'UdaKids <no-reply@localhost>'),
     director: (process.env.MAIL_DIRECTOR ?? 'udacodingofficial@gmail.com')
       .split(',')
       .map((x) => x.trim().toLowerCase())
@@ -55,7 +55,7 @@ export function mailConfig() {
       process.env.APP_PUBLIC_URL?.trim() ||
       process.env.WEB_ORIGIN?.split(',')[0]?.trim() ||
       'http://localhost:6006',
-    brand: process.env.MAIL_BRAND?.trim() || 'Udakids',
+    brand: process.env.MAIL_BRAND?.trim() || 'UdaKids',
   };
 }
 
