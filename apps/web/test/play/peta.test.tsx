@@ -220,7 +220,9 @@ describe('Peta Belajar (D-111)', () => {
   });
 
   it('bab selesai dilipat; semua topik lulus → perayaan', () => {
-    const all = Object.fromEntries(shelves.flatMap((s) => s.skills.map((k) => [k.id, 'passed'])));
+    const all: Record<string, PlayStatus> = Object.fromEntries(
+      shelves.flatMap((s) => s.skills.map((k) => [k.id, 'passed' as const])),
+    );
     const { container } = render(
       <MemoryRouter>
         <PetaBelajar
