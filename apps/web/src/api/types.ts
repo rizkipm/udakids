@@ -106,6 +106,16 @@ export type ChildReport = {
     }[];
   }[];
   recommendations: { id: string; title: string; category: string; status: SkillStatus }[];
+  /** Materi berformat lab yang sudah dijelajahi (D-109). Server lama tidak mengirimnya. */
+  labs?: {
+    key: string;
+    kind: 'materi' | 'buku';
+    title: string;
+    book: string;
+    parts: number;
+    stars: number;
+    updatedAt: string;
+  }[];
 };
 
 export type Overview = {

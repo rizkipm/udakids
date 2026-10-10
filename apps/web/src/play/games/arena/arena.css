@@ -1,0 +1,638 @@
+/* Arena game Momo (D-115): cerah & berwarna, target sentuh ≥ 64 px, tanpa merah besar atau hitung mundur, gerak
+   dikurangi bila diminta. Tombol dasar (`g4-step`, `paud-bubble`) dipakai bersama game lain. */
+@import '../g4.css';
+@import '../paud-games.css';
+
+.arena-board,
+.arena-board * {
+  box-sizing: border-box;
+}
+.arena-board {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.arena-call {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 10px;
+  width: min(100%, 520px);
+  padding: 12px 14px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 18px;
+  background: linear-gradient(120deg, var(--awan-2) 0%, var(--kunyit-soft) 100%);
+}
+.arena-call .kid-note {
+  grid-column: 1 / -1;
+}
+.arena-call p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.arena-cheer {
+  position: absolute;
+  top: 64px;
+  right: 8%;
+  pointer-events: none;
+  animation: arena-pop 0.9s ease-out forwards;
+}
+
+.is-wobble {
+  animation: arena-wobble 0.4s ease-in-out;
+}
+.is-answer {
+  outline: 4px solid var(--sawah);
+  outline-offset: 2px;
+}
+
+/* ---------- Ronde bertema */
+.quest-track {
+  width: min(100%, 460px);
+  height: auto;
+}
+.quest-runner {
+  transition: transform 0.6s cubic-bezier(0.3, 1.4, 0.6, 1);
+}
+.quest-choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.quest-choice {
+  min-width: 84px;
+  padding: 6px 10px;
+}
+.quest-choice:disabled:not(.is-answer) {
+  opacity: 0.6;
+}
+.quest-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--malam);
+}
+.quest-choices.is-goals {
+  width: min(100%, 460px);
+  justify-content: space-between;
+}
+.quest-choices.is-goals .quest-choice {
+  min-width: 128px;
+  gap: 6px;
+  background: linear-gradient(160deg, var(--kertas) 0%, var(--sawah-soft) 100%);
+}
+.kick-value {
+  font-size: 15px;
+  font-weight: 900;
+  fill: #2b2540;
+}
+
+.quest-roll {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  min-width: 140px;
+  min-height: 84px;
+  padding: 10px 16px;
+  border: 4px dashed var(--garis-tegas);
+  border-radius: 22px;
+  background: var(--kertas);
+  cursor: pointer;
+}
+.quest-roll:not(.is-rolled) .arena-die,
+.quest-roll:not(.is-rolled) svg {
+  animation: arena-shake 1.2s ease-in-out infinite;
+}
+.quest-roll.is-rolled {
+  border-style: solid;
+  cursor: default;
+}
+.quest-roll.is-rolled .arena-die,
+.quest-roll.is-rolled .arena-domino {
+  animation: arena-land 0.5s ease-out;
+}
+
+.quest-balloons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  width: min(100%, 420px);
+}
+.quest-balloon {
+  min-width: 64px;
+  min-height: 96px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.quest-balloon:not(.is-popped) svg {
+  animation: paud-bob 2.8s ease-in-out infinite;
+}
+.quest-balloon.is-popped {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.hockey-digits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+}
+.hockey-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.hockey-dot {
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 0 2px;
+}
+.hockey-digit {
+  min-width: 64px;
+  min-height: 80px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--kertas) 0%, var(--langit-soft) 100%);
+  box-shadow: 0 5px 0 var(--garis-tegas);
+  font: inherit;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--malam);
+  cursor: pointer;
+}
+.hockey-digit:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--garis-tegas);
+}
+
+/* ---------- Gelembung / batu sungai */
+.bubbles-pond {
+  position: relative;
+  width: min(100%, 460px);
+  height: calc(var(--rows, 3) * 88px + 28px);
+  border: 4px solid var(--garis-tegas);
+  border-radius: 28px;
+  /* Kolam = papan permainan: campuran token agar ikut tema gelap (D-110). */
+  background: radial-gradient(
+    circle at 30% 20%,
+    var(--langit-soft) 0%,
+    color-mix(in srgb, var(--langit) 35%, var(--kertas)) 100%
+  );
+  overflow: hidden;
+}
+.bubbles-pond.is-stone {
+  background: repeating-linear-gradient(170deg, #7fd1f5 0 22px, #6cc4ec 22px 44px);
+}
+.bubble {
+  position: absolute;
+  translate: -50% -50%;
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgb(255 255 255 / 0.85) 0 14%,
+    color-mix(in srgb, var(--tone) 40%, var(--kertas)) 15% 100%
+  );
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--malam);
+  cursor: pointer;
+  animation: paud-bob 3s ease-in-out infinite;
+}
+.is-stone .bubble {
+  border-radius: 46% 54% 40% 60% / 55% 45% 55% 45%;
+  /* Batu = gambar (warna literal); angkanya selalu gelap di atas batu terang. */
+  background: linear-gradient(160deg, #e2ddd2 0%, #b9b0a0 100%);
+  color: #1c2430;
+  animation: none;
+}
+.bubble.is-on {
+  animation: arena-burst-out 0.45s ease-out forwards;
+  pointer-events: none;
+}
+.is-stone .bubble.is-on {
+  animation: none;
+  background: linear-gradient(160deg, #fff3c4 0%, #ffd166 100%);
+}
+.bubble-hopper {
+  position: absolute;
+  top: -22px;
+  animation: arena-land 0.4s ease-out;
+}
+
+/* ---------- Papan angka */
+.grid-cells {
+  display: grid;
+  gap: 2px;
+  width: min(100%, 440px);
+}
+.grid-cell {
+  position: relative;
+  min-height: 64px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--garis-tegas);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--tone) 22%, var(--kertas));
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--malam);
+  cursor: pointer;
+}
+.grid-cell.is-hidden {
+  background: repeating-linear-gradient(45deg, var(--kertas) 0 8px, var(--awan-2) 8px 16px);
+  border-style: dashed;
+}
+.grid-cell.is-on {
+  background: color-mix(in srgb, var(--tone) 45%, var(--kertas));
+}
+.is-house .grid-cell {
+  min-height: 84px;
+  border: none;
+  background: none;
+}
+.grid-house {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.is-house .grid-num {
+  position: relative;
+  color: #1c2430;
+  margin-top: 22px;
+  font-size: 1.45rem;
+}
+.grid-burst {
+  position: absolute;
+  pointer-events: none;
+  animation: arena-pop 0.9s ease-out forwards;
+}
+
+/* ---------- Ular / balok nilai tempat */
+.tens-target {
+  margin: 0;
+  padding: 6px 22px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 18px;
+  background: var(--kunyit-soft);
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+.tens-cols {
+  display: grid;
+  gap: 8px;
+  width: min(100%, 520px);
+}
+.tens-col {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  padding: 8px 4px;
+  border: 3px solid var(--garis-tegas);
+  border-radius: 16px;
+  background: var(--kertas);
+  min-width: 0;
+}
+.tens-label {
+  font-weight: 900;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.is-snake .tens-col {
+  background: linear-gradient(180deg, var(--kertas) 0%, var(--sawah-soft) 100%);
+}
+.tens-pile {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  justify-content: center;
+  gap: 3px;
+  min-height: 96px;
+  max-width: 100%;
+}
+.is-snake .tens-pile.is-puluh {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.tens-piece {
+  max-width: 100%;
+  height: auto;
+  animation: arena-land 0.35s ease-out;
+}
+.tens-count {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.tens-ctrl {
+  display: flex;
+  gap: 6px;
+}
+/* 3–4 nilai tempat: tombol bertumpuk supaya setiap kolom tetap ≥ 64 px tanpa geser ke samping. */
+.tens-cols.is-wide .tens-ctrl {
+  flex-direction: column;
+}
+.tens-cols.is-wide .tens-label {
+  font-size: 0.8rem;
+}
+
+/* ---------- Bersihkan papan */
+.clear-target {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 20px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 18px;
+  background: var(--kunyit-soft);
+  font-size: 2rem;
+  font-weight: 900;
+}
+.clear-op {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--kertas);
+  border: 3px solid var(--garis-tegas);
+  font-size: 1.6rem;
+}
+.clear-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, 460px);
+}
+.clear-tile {
+  position: relative;
+  min-height: 80px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.clear-skin {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.clear-num {
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #2b2540;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 6px #fff;
+}
+.clear-tile.is-picked {
+  transform: translateY(-6px) scale(1.08);
+  filter: drop-shadow(0 0 8px var(--kunyit));
+}
+.clear-tile.is-gone {
+  animation: arena-burst-out 0.45s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ---------- Atur jam */
+.clock-face {
+  width: min(78vw, 260px);
+  height: auto;
+}
+.clock-num {
+  font-size: 22px;
+  font-weight: 900;
+  fill: #2b2540;
+}
+.clock-hand {
+  transition: transform 0.35s ease;
+}
+.clock-ctrls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.clock-ctrl {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 6px;
+  padding: 8px;
+  border: 3px solid var(--garis-tegas);
+  border-radius: 16px;
+  background: var(--kertas);
+}
+.clock-ctrl .kid-note {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+.clock-btn.is-hour {
+  background: var(--jeruk-soft);
+}
+.clock-btn.is-minute {
+  background: var(--langit-soft);
+}
+
+/* ---------- Pizza / cokelat pecahan */
+.pizza-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 18px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 18px;
+  background: var(--kunyit-soft);
+  font-weight: 900;
+}
+.pizza-whole {
+  font-size: 2.4rem;
+}
+.pizza-frac {
+  display: inline-grid;
+  justify-items: center;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+.pizza-frac span:first-child {
+  border-bottom: 3px solid var(--garis-tegas);
+  padding: 0 6px;
+}
+.pizza-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+.pizza-svg {
+  width: min(70vw, 200px);
+  height: auto;
+}
+.pizza-row:has(.pizza-svg + .pizza-svg + .pizza-svg) .pizza-svg {
+  width: min(42vw, 150px);
+}
+.pizza-slice {
+  fill: #ffe08a;
+  stroke: #b5651d;
+  stroke-width: 3;
+  cursor: pointer;
+  transition: fill 0.15s ease;
+}
+.pizza-slice.is-on {
+  fill: #ff9f5a;
+}
+.pizza-slice:focus-visible {
+  stroke: var(--malam);
+  stroke-width: 5;
+  outline: none;
+}
+.choco-bar {
+  display: grid;
+  gap: 4px;
+  width: min(92%, 380px);
+  padding: 6px;
+  border: 4px solid #3b2418;
+  border-radius: 12px;
+  background: #5a3825;
+}
+.choco-piece {
+  min-height: 64px;
+  border: 3px solid #3b2418;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #8b5a3c 0%, #6b4330 100%);
+  cursor: pointer;
+}
+.choco-piece.is-on {
+  background: linear-gradient(160deg, #ffd6e7 0%, #ff9ec4 100%);
+}
+
+/* ---------- Animasi */
+@keyframes arena-wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(6px) rotate(3deg);
+  }
+}
+@keyframes arena-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+@keyframes arena-burst-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.25);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes arena-shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes arena-land {
+  0% {
+    transform: translateY(-14px) scale(0.9);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-cheer,
+  .grid-burst,
+  .is-wobble,
+  .quest-runner,
+  .quest-roll svg,
+  .quest-balloon svg,
+  .bubble,
+  .bubble-hopper,
+  .tens-piece,
+  .clock-hand {
+    animation: none !important;
+    transition: none !important;
+  }
+  .bubble.is-on,
+  .clear-tile.is-gone {
+    animation: none !important;
+    opacity: 0;
+  }
+}
+.domino-back {
+  font-size: 40px;
+  font-weight: 900;
+  fill: #fff;
+}
+.bubble-order {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--garis-tegas);
+  border-radius: 50%;
+  background: var(--kunyit);
+  color: var(--on-kunyit);
+  font-size: 0.9rem;
+}
+.bubble-long {
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}

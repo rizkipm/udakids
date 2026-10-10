@@ -4,6 +4,7 @@ import {
   mergeJago,
   mergeQuiz,
   type JagoState,
+  type LabProgressMap,
   type PracticeSync,
   type QuizResult,
 } from '@little-coder/engine';
@@ -15,6 +16,7 @@ import {
  */
 export type Answer = PracticeSync['answers'][number];
 export type QuizEvent = PracticeSync['quizzes'][number];
+export type LabEvent = PracticeSync['labs'][number];
 export type HistoryEntry = {
   id: string;
   skillId: string;
@@ -38,6 +40,9 @@ export type ChildProgress = {
   /** Keping Momo (kosmetik) dan stiker skill yang sudah Jago. */
   coins: number;
   stickers: string[];
+  /** Progres materi berformat lab (D-109): kunci lab → bagian → bintang; outbox-nya dikirim saat sinkron. */
+  labs?: LabProgressMap;
+  labOutbox?: LabEvent[];
   /** Kunci soal yang baru keluar per skill (D-028): ronde berikutnya memberi soal lain. */
   recentItems?: Record<string, string[]>;
   /**
@@ -119,15 +124,39 @@ export function mergeServerStates(
   childId: string,
   server: Record<string, JagoState>,
   serverQuizzes: Record<string, QuizResult> = {},
+  serverLabs: LabProgressMap = {},
 ) {
   updateProgress(childId, (p) => {
+    const labs: LabProgressMap = { ...p.labs };
+    for (const [key, parts] of Object.entries(serverLabs)) {
+      const mine = { ...labs[key] };
+      for (const [part, stars] of Object.entries(parts))
+        mine[part] = Math.max(mine[part] ?? 0, stars);
+      labs[key] = mine;
+    }
     const states = { ...p.states };
     for (const [id, s] of Object.entries(server))
       states[id] = states[id] ? mergeJago(states[id]!, s) : s;
     const quizzes = { ...p.quizzes };
     for (const [id, q] of Object.entries(serverQuizzes))
       quizzes[id] = quizzes[id] ? mergeQuiz(quizzes[id]!, q) : q;
-    return { ...p, states, quizzes };
+    return { ...p, states, quizzes, labs };
+  });
+}
+
+/**
+ * Catat progres lab (bintang tidak pernah turun). Hanya bila naik, event masuk outbox untuk dikirim ke server.
+ * `done` (tanpa bintang) dicatat sebagai 1.
+ */
+export function recordLab(childId: string, lab: string, part: string, stars: number) {
+  updateProgress(childId, (p) => {
+    const prev = p.labs?.[lab]?.[part] ?? -1;
+    if (stars <= prev) return p;
+    return {
+      ...p,
+      labs: { ...p.labs, [lab]: { ...p.labs?.[lab], [part]: stars } },
+      labOutbox: [...(p.labOutbox ?? []), { id: newId(), lab, part, stars, ts: Date.now() }],
+    };
   });
 }
 

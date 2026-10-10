@@ -230,7 +230,7 @@ export function AffiliateSection({ sel }: { sel: PeriodSel }) {
                 <Gauge
                   value={ratio}
                   max={100}
-                  color={ratio !== null && ratio > 50 ? STATUS_COLOR.critical : SERIES.grape}
+                  color={ratio !== null && ratio > 50 ? STATUS_COLOR.critical : SERIES.blue}
                   label={t('admin.ins.affRoi')}
                   caption={
                     perRupiah === null
@@ -250,7 +250,7 @@ export function AffiliateSection({ sel }: { sel: PeriodSel }) {
                     {
                       label: t('admin.ins.affAvailable'),
                       value: a?.available ?? 0,
-                      color: SERIES.grape,
+                      color: SERIES.blue,
                     },
                     {
                       label: t('admin.ins.affPending'),
@@ -270,7 +270,7 @@ export function AffiliateSection({ sel }: { sel: PeriodSel }) {
                     {
                       key: 'signups',
                       label: t('admin.ins.affSignups'),
-                      color: SERIES.grape,
+                      color: SERIES.blue,
                       values: s.months.map((m) => m.signups),
                     },
                     {
@@ -299,7 +299,7 @@ export function AffiliateSection({ sel }: { sel: PeriodSel }) {
                   {
                     key: 'commission',
                     label: t('admin.ins.affCommission'),
-                    color: SERIES.grape,
+                    color: SERIES.blue,
                     values: s.months.map((m) => m.commission),
                   },
                   {
@@ -400,18 +400,19 @@ export function commissionFlow(
   const net = income - expense;
   const commission = shares.reduce((a, x) => a + x.amount, 0);
   const retained = Math.max(0, net - commission);
-  const ownerColors = [SERIES.grape, SERIES.orange, SERIES.yellow, '#9479ea'];
+  // Kolom kanan: afiliator (oranye, toska, kuning — urutan lolos uji buta warna) lalu "ditahan" (biru).
+  const ownerColors = [SERIES.orange, SERIES.aqua, SERIES.yellow];
   const nodes: SankeyNode[] = [
     { id: 'in', label: t('admin.ins.income'), color: SERIES.aqua, column: 0 },
-    { id: 'out', label: t('admin.ins.expense'), color: '#b9b2d6', column: 1 },
-    { id: 'net', label: t('admin.ins.net'), color: '#1a8f5c', column: 1 },
+    { id: 'out', label: t('admin.ins.expense'), color: STATUS_COLOR.muted, column: 1 },
+    { id: 'net', label: t('admin.ins.net'), color: STATUS_COLOR.good, column: 1 },
     ...shares.map((x, i) => ({
       id: `o${i}`,
       label: x.ownerName,
       color: ownerColors[i % ownerColors.length]!,
       column: 2,
     })),
-    { id: 'keep', label: t('admin.ins.comRetained'), color: '#2a78d6', column: 2 },
+    { id: 'keep', label: t('admin.ins.comRetained'), color: SERIES.blue, column: 2 },
   ];
   const links: SankeyLink[] = [
     { from: 'in', to: 'out', value: Math.min(expense, income) },
@@ -477,7 +478,8 @@ export function CommissionSection({ sel, period }: { sel: PeriodSel; period: Per
       0,
     ),
   }));
-  const ownerColors = [SERIES.grape, SERIES.orange, SERIES.yellow, '#9479ea'];
+  // Urutan kategori tetap (biru, oranye, toska, kuning) — tervalidasi buta warna untuk segmen bersebelahan.
+  const ownerColors = [SERIES.blue, SERIES.orange, SERIES.aqua, SERIES.yellow];
   const months = y?.months ?? [];
   // Tren hanya s.d. bulan berjalan: bulan yang belum terjadi bukan "nol".
   const past = months.filter((m) => !m.future);
@@ -560,7 +562,7 @@ export function CommissionSection({ sel, period }: { sel: PeriodSel; period: Per
                     {
                       key: 'commission',
                       label: t('admin.ins.comTotal'),
-                      color: SERIES.grape,
+                      color: SERIES.blue,
                       values: past.map((m) => m.shares.reduce((a, x) => a + x.amount, 0)),
                     },
                   ]}

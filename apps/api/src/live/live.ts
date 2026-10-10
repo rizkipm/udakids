@@ -58,11 +58,12 @@ export type LiveRow = {
 };
 
 /**
- * Anak aktif + materi terakhir. `publicOnly`: tanpa anak yang tergabung di kelas sekolah (D-103), maks. 12.
+ * Anak aktif + materi terakhir. `publicOnly`: tanpa anak yang tergabung di kelas sekolah (D-103), maks. 12; admin: semua.
  * "Hari ini" mengikuti WIB.
  */
 export async function livePlayers(db: Db, opts: { publicOnly?: boolean; limit?: number } = {}) {
-  const limit = opts.limit ?? (opts.publicOnly ? 12 : 100);
+  // Admin melihat SEMUA anak yang aktif (tanpa batas); toast publik maks. 12.
+  const limit = opts.limit ?? (opts.publicOnly ? 12 : undefined);
   const res = await db.execute(sql`
     select c.id, c.nickname, c.momo_color, c.momo_look, c.last_active_at, c.self_code,
       c.parent_id, p.name as parent_name, p.email as parent_email,
@@ -90,7 +91,7 @@ export async function livePlayers(db: Db, opts: { publicOnly?: boolean; limit?: 
       and c.last_active_at > now() - make_interval(mins => ${LIVE_WINDOW_MIN})
       ${opts.publicOnly ? sql`and c.class_id is null and le.skill_id is not null` : sql``}
     order by c.last_active_at desc
-    limit ${limit}`);
+    ${limit ? sql`limit ${limit}` : sql``}`);
   return (res.rows as Record<string, unknown>[]).map((r): LiveRow => ({
     id: String(r.id),
     nickname: String(r.nickname),

@@ -20,8 +20,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  min-width: var(--kid-touch, 64px);
-  min-height: var(--kid-touch, 64px);
+  min-width: var(--touch-anak);
+  min-height: var(--touch-anak);
   padding: 0;
   border: 0;
   background: transparent;
@@ -29,7 +29,7 @@
   z-index: 2;
 }
 .ml-momo:focus-visible {
-  outline: 4px solid var(--kid-sun, #f7c948);
+  outline: 4px solid var(--kunyit);
   outline-offset: 6px;
   border-radius: 24px;
 }
@@ -47,7 +47,7 @@
   height: 14px;
   margin-top: 4px;
   border-radius: 50%;
-  background: rgba(43, 37, 64, 0.14);
+  background: var(--bayangan);
   animation: ml-shadow 2.4s ease-in-out infinite;
 }
 .momo-loader.is-failed .ml-momo-body {
@@ -80,8 +80,8 @@
   position: absolute;
   display: grid;
   place-items: center;
-  width: var(--kid-touch, 64px);
-  height: var(--kid-touch, 64px);
+  width: var(--touch-anak);
+  height: var(--touch-anak);
   margin: -32px 0 0 -32px;
   padding: 0;
   border: 0;
@@ -91,7 +91,7 @@
   z-index: 1;
 }
 .ml-star:focus-visible {
-  outline: 3px solid var(--kid-primary, #5b3fd6);
+  outline: 3px solid var(--gonjong);
   border-radius: 50%;
 }
 .ml-star.is-got {
@@ -110,11 +110,11 @@
   margin: 0;
   padding: 8px 14px;
   transform: translateX(-50%);
-  border: 3px solid var(--kid-line, #2b2540);
+  border: 3px solid var(--garis-tegas);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   font-weight: 800;
-  box-shadow: 0 3px 0 var(--kid-line, #2b2540);
+  box-shadow: 0 3px 0 var(--garis-tegas);
   animation: ml-bubble 2.6s ease-out forwards;
   z-index: 3;
 }
@@ -124,11 +124,11 @@
   min-height: 2.6em;
   font-size: 1.4rem;
   font-weight: 900;
-  color: var(--kid-primary, #5b3fd6);
+  color: var(--gonjong);
   animation: ml-line 420ms ease-out;
 }
 .momo-loader.is-failed .ml-message {
-  color: var(--kid-ink, #1d1a2e);
+  color: var(--malam);
 }
 
 /* Bilah kemajuan lembut (tanpa angka & tanpa hitung mundur) */
@@ -136,16 +136,16 @@
   width: min(80%, 280px);
   height: 16px;
   overflow: hidden;
-  border: 3px solid var(--kid-line, #2b2540);
+  border: 3px solid var(--garis-tegas);
   border-radius: 999px;
-  background: var(--kid-soft, #efe7ff);
+  background: var(--gonjong-soft);
 }
 .ml-progress span {
   display: block;
   width: 40%;
   height: 100%;
   border-radius: 999px;
-  background: repeating-linear-gradient(45deg, var(--kid-sun, #f7c948) 0 10px, #ffd97a 10px 20px);
+  background: repeating-linear-gradient(45deg, var(--kunyit) 0 10px, var(--kunyit-soft) 10px 20px);
   animation: ml-slide 1.6s ease-in-out infinite;
 }
 .ml-hint {

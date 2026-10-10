@@ -196,8 +196,9 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
     expect((book.body.top as Row[]).some((r) => r.nickname === 'Zaki')).toBe(false);
     const pub = await ctx.http().get('/leaderboard/public').expect(200);
     expect(pub.body).toMatchObject({ participants: 4, played: 3 });
-    // Landing publik (tanpa login) tidak menampilkan kapan anak bermain.
-    expect(pub.body.top[0]).not.toHaveProperty('lastPlayedAt');
+    // Landing publik ikut menampilkan kapan anak terakhir bermain (D-116); anak yang belum bermain: null.
+    expect(pub.body.top[0].lastPlayedAt).toEqual(expect.any(String));
+    expect(pub.body.top.at(-1)).toMatchObject({ nickname: 'Zaki', lastPlayedAt: null });
     const scopes = await get('/leaderboard/scopes').expect(200);
     expect(scopes.body.scopes[0]).toMatchObject({ key: 'global', participants: 4 });
     // Anak itu sendiri melihat posisinya di papan global.
@@ -305,6 +306,7 @@ describe.skipIf(!hasDb)('papan peringkat rata-rata (D-042)', () => {
       expect(Object.keys(r).sort()).toEqual(
         [
           'average',
+          'lastPlayedAt',
           'momoColor',
           'momoLook',
           'nickname',

@@ -67,6 +67,9 @@ pnpm db:restore -- <file.dump>  # pulihkan ke DATABASE_URL, lalu db:migrate && d
 pnpm content:export   # tulis suntingan admin dari DB kembali ke content/ (lalu commit)
 pnpm deploy:db        # server: node dist/cli/migrate.js + seed.js (langkah lengkap: docs/deploy.md)
 pnpm voice:generate   # buat klip suara Momo yang belum ada (butuh GOOGLE_TTS_API_KEY, D-035)
+pnpm lab:brief <domain> <grade> [KODE]   # ringkasan topik untuk menulis materi lab (D-109)
+pnpm lab:check <domain> <grade> [KODE…]  # periksa draf di labs-staging/; pnpm lab:merge → gabung ke katalog
+pnpm lesson:photos -- <domain> <grade>   # foto Pexels (saring Claude), yang tidak ketemu → AI Gambar (D-117)
 ```
 
 ## Peran & login (D-014..D-016)
@@ -108,6 +111,15 @@ Orang tua baru wajib verifikasi email (kode 6 angka) sebelum bisa masuk; email t
   idempoten per `event.id` (`insert … on conflict do nothing`). Konflik: bintang = max, visibleStage = max,
   Skor Jago = `ts` terbaru. Progres per `levelId + levelVersion`.
 - Test dulu untuk logika engine; Skor Jago dan solver wajib test lengkap.
+
+## Design system UdaKids (D-107)
+
+Sumber kebenaran tampilan: `docs/design-system/BRAND.md` (+ `tokens.json`, `komponen-*.md`). Token di
+`apps/web/src/styles/uk-tokens.css`, komponen dasar di `uk-components.css`, logo & Momo di `apps/web/public/brand/`.
+Warna, radius, dan bayangan baru selalu lewat token (`var(--gonjong)`, `var(--kunyit-soft)`, …), bukan hex baru.
+Fon Andika (isi) + Lilita One (judul/tombol) dipasang lokal (`@fontsource`). Tanpa ungu sebagai warna antarmuka;
+keliru = `kunyit` + petunjuk, benar = `sawah`, merah `gonjong` hanya untuk merek. Bila BRAND.md bertabrakan dengan
+aturan di file ini (mis. 48 vs 64 px, suara browser), aturan proyek menang — lihat tabel penyesuaian di BRAND.md.
 
 ## Aturan UX anak (PRD A14)
 

@@ -122,8 +122,8 @@ export function MomoLoader({
               <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden>
                 <path
                   d="M20 3 L25 15 L38 15.5 L28 24 L31.5 37 L20 29.5 L8.5 37 L12 24 L2 15.5 L15 15 Z"
-                  fill="#f7c948"
-                  stroke="#2b2540"
+                  fill="var(--kunyit)"
+                  stroke="var(--malam)"
                   strokeWidth="2.5"
                   strokeLinejoin="round"
                 />
@@ -143,10 +143,10 @@ export function MomoLoader({
                     height="26"
                     rx="4"
                     fill={c}
-                    stroke="#2b2540"
+                    stroke="var(--malam)"
                     strokeWidth="3"
                   />
-                  <path d="M20 4 V26" stroke="#2b2540" strokeWidth="2.5" />
+                  <path d="M20 4 V26" stroke="var(--malam)" strokeWidth="2.5" />
                   <path
                     d="M7 10 H15 M7 15 H15 M25 10 H33 M25 15 H33"
                     stroke="#fff"
@@ -170,7 +170,14 @@ export function MomoLoader({
           </span>
           {failed && (
             <svg className="ml-glass" viewBox="0 0 60 60" width="60" height="60" aria-hidden>
-              <circle cx="24" cy="24" r="15" fill="#e2f1ff" stroke="#2b2540" strokeWidth="4" />
+              <circle
+                cx="24"
+                cy="24"
+                r="15"
+                fill="var(--langit-soft)"
+                stroke="var(--malam)"
+                strokeWidth="4"
+              />
               <path
                 d="M18 18 Q22 14 28 16"
                 stroke="#fff"
@@ -178,7 +185,7 @@ export function MomoLoader({
                 fill="none"
                 strokeLinecap="round"
               />
-              <path d="M35 35 L52 52" stroke="#2b2540" strokeWidth="7" strokeLinecap="round" />
+              <path d="M35 35 L52 52" stroke="var(--malam)" strokeWidth="7" strokeLinecap="round" />
             </svg>
           )}
           <span className="ml-shadow" aria-hidden />

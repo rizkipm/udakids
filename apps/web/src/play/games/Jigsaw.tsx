@@ -29,7 +29,7 @@ export function PuzzlePiece({
   const y = Math.floor(index / cols) * h;
   return (
     <svg viewBox={`${x} ${y} ${w} ${h}`} width={size} height={(size * h) / w} aria-hidden>
-      <rect x={x} y={y} width={w} height={h} fill="#fffaf0" />
+      <rect x={x} y={y} width={w} height={h} fill="var(--kertas-2)" />
       <Art color={picture.color} />
     </svg>
   );

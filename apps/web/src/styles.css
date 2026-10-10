@@ -1,10 +1,11 @@
 :root {
-  --bg: #fff8ec;
-  --ink: #1d1a2e;
-  --primary: #5b3fd6;
-  --secondary: #0f7b6c;
-  --touch-min: 64px; /* PRD A14: target sentuh minimal 64x64 px */
-  font-family: system-ui, sans-serif;
+  /* Diarahkan ke token UdaKids (D-107, src/styles/uk-tokens.css). */
+  --bg: var(--awan);
+  --ink: var(--malam);
+  --primary: var(--gonjong);
+  --secondary: var(--sawah);
+  --touch-min: var(--touch-anak); /* PRD A14: target sentuh minimal 64x64 px */
+  font-family: var(--font-body);
   color: var(--ink);
   background: var(--bg);
 }
@@ -39,17 +40,18 @@ body {
   padding: 0 32px;
   border-radius: 20px;
   background: var(--primary);
-  color: #fff;
+  color: var(--on-gonjong);
   text-decoration: none;
   font-weight: 700;
 }
 
 .big-button.secondary {
   background: var(--secondary);
+  color: var(--on-sawah);
 }
 
 .big-button.tertiary {
-  background: #ffffff;
+  background: var(--kertas);
   color: var(--primary);
   border: 3px solid var(--primary);
 }

@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { Color } from '@little-coder/engine';
 import { useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
-import { Badge, Card, Table, type Column } from '../ui/ui';
+import { Pager } from '../ui/Pager';
+import { Badge, Card, Table, TextField, type Column } from '../ui/ui';
 
 type LivePlayer = {
   id: string;
@@ -26,6 +27,22 @@ type LiveResponse = { windowMin: number; at: string; items: LivePlayer[] };
 /** Diperbarui otomatis selama tab terlihat. */
 const REFRESH_MS = 15_000;
 
+/** Teks yang dicari: nama anak, orang tua/email, kelas, kode, dan materi. */
+const haystack = (r: LivePlayer) =>
+  [
+    r.nickname,
+    r.parent?.name,
+    r.parent?.email,
+    r.class?.name,
+    r.class?.code,
+    r.selfCode,
+    r.book,
+    r.topic,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
 /** "30 detik lalu", "4 menit lalu". */
 function ago(iso: string, now: number) {
   const s = Math.max(0, Math.round((now - Date.parse(iso)) / 1000));
@@ -41,8 +58,9 @@ const TYPE_LABEL = {
 } as const;
 
 /**
- * Siapa yang sedang bermain sekarang (D-103): anak aktif ≤ 10 menit, anak siapa (orang tua / kelas / daftar
- * sendiri), materi yang sedang dimainkan, dan jawaban hari ini. Khusus admin.
+ * Siapa yang sedang bermain sekarang (D-103): SEMUA anak aktif ≤ 10 menit (tanpa batas jumlah), anak siapa (orang
+ * tua / kelas / daftar sendiri), materi yang sedang dimainkan, dan jawaban hari ini. Bisa dicari & berhalaman. Khusus
+ * admin.
  */
 export function LivePlayers() {
   const live = useFetch<LiveResponse>('staff', '/admin/live');
@@ -55,6 +73,15 @@ export function LivePlayers() {
   }, []);
   const items = live.data?.items ?? [];
   const now = live.data ? Date.parse(live.data.at) : Date.now();
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const q = search.trim().toLowerCase();
+  const found = q ? items.filter((r) => haystack(r).includes(q)) : items;
+  const pages = Math.max(1, Math.ceil(found.length / pageSize));
+  // Daftar berubah tiap 15 detik: jaga halaman tetap dalam rentang.
+  const current = Math.min(page, pages);
+  const shown = found.slice((current - 1) * pageSize, current * pageSize);
 
   const cols: Column<LivePlayer>[] = [
     {
@@ -129,7 +156,41 @@ export function LivePlayers() {
       {live.error && !live.data ? (
         <p className="ui-muted">{t('admin.live.error')}</p>
       ) : (
-        <Table rows={items} columns={cols} rowKey={(r) => r.id} empty={t('admin.live.empty')} />
+        <>
+          {items.length > 0 && (
+            <div className="live-tools">
+              <TextField
+                label={t('admin.live.search')}
+                type="search"
+                value={search}
+                placeholder={t('admin.live.searchPlaceholder')}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
+              />
+            </div>
+          )}
+          <Table
+            rows={shown}
+            columns={cols}
+            rowKey={(r) => r.id}
+            empty={q ? t('admin.live.noMatch') : t('admin.live.empty')}
+          />
+          {found.length > 20 && (
+            <Pager
+              page={current}
+              pageSize={pageSize}
+              total={found.length}
+              onPage={setPage}
+              onPageSize={(n) => {
+                setPageSize(n);
+                setPage(1);
+              }}
+              sizes={[20, 50, 100]}
+            />
+          )}
+        </>
       )}
     </Card>
   );

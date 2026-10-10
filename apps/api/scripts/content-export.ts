@@ -65,6 +65,7 @@ async function main() {
         grade: c.grade,
         title: c.title,
         categories: c.categories,
+        ...(c.lab ? { lab: c.lab } : {}),
       });
       const path = join(root, 'skills', c.domain, c.grade, '_catalog.json');
       const current = existsSync(path)

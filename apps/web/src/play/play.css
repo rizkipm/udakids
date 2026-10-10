@@ -1,22 +1,32 @@
-/* Area anak: hangat, kontras tinggi, target ≥ 64 px, tanpa merah untuk "keliru" (PRD A14). */
+/* Area anak: kontras tinggi, target ≥ 64 px, tanpa merah untuk "keliru" (PRD A14).
+   Warna diarahkan ke token UdaKids (D-107, src/styles/uk-tokens.css): keliru = kunyit + petunjuk, benar = sawah. */
 .kid-app,
 .kid-screen,
 .library,
 .practice {
-  --kid-bg: #fff8ec;
-  --kid-ink: #1d1a2e;
-  --kid-primary: #5b3fd6;
-  --kid-card: #ffffff;
-  --kid-line: #2b2540;
-  --kid-soft: #efe7ff;
-  --kid-good: #2e9e5b;
-  --kid-bad: #d32f2f;
-  --kid-sun: #f7c948;
-  --kid-touch: 64px;
+  --kid-bg: var(--awan);
+  --kid-ink: var(--malam);
+  --kid-primary: var(--gonjong);
+  --kid-card: var(--kertas);
+  --kid-line: var(--garis-tegas);
+  --kid-soft: var(--gonjong-soft);
+  --kid-good: var(--sawah);
+  --kid-bad: var(--kunyit);
+  --kid-sun: var(--kunyit);
+  --kid-touch: var(--touch-anak);
   background: var(--kid-bg);
   color: var(--kid-ink);
-  font-family: Andika, Nunito, system-ui, sans-serif;
+  font-family: var(--font-body);
   min-height: 100vh;
+}
+
+/* Tombol & isian di area anak mengikuti warna teks tema (bukan warna bawaan browser), D-110.
+   :where() = spesifisitas 0, jadi aturan tombol mana pun tetap menang. */
+:where(.kid-app, .kid-screen, .library, .practice) :where(button, input, select, textarea) {
+  color: inherit;
+}
+:where(.kid-app, .kid-screen, .library, .practice) :where(input, select, textarea) {
+  background: var(--kertas);
 }
 
 .kid-screen {
@@ -51,35 +61,51 @@
   justify-content: center;
 }
 .kid-btn {
+  /* Tombol "anak tangga" UdaKids (D-107): isian penuh + bayangan padat 5 px, tanpa tepi hitam tebal. */
   min-height: var(--kid-touch);
   min-width: 140px;
   padding: 0 28px;
-  border: 4px solid var(--kid-line);
-  border-radius: 24px;
-  background: var(--kid-primary);
-  color: #fff;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--gonjong);
+  color: var(--on-gonjong);
   font: inherit;
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   text-decoration: none;
-  box-shadow: 0 5px 0 var(--kid-line);
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
 }
 .kid-btn.secondary {
-  background: #fff;
-  color: var(--kid-primary);
+  background: var(--kertas);
+  color: var(--malam);
+  box-shadow:
+    inset 0 0 0 2px var(--garis-tegas),
+    var(--shadow-tekan) var(--garis-tegas);
 }
 .kid-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 .kid-btn:active:not(:disabled) {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 var(--kid-line);
+  transform: translateY(5px);
+  box-shadow: none;
+}
+.kid-btn.secondary:active:not(:disabled) {
+  box-shadow: inset 0 0 0 2px var(--garis-tegas);
+}
+.kid-btn:focus-visible {
+  outline: 3px solid var(--kunyit);
+  outline-offset: 3px;
 }
 .kid-link {
   min-height: 48px;
@@ -123,7 +149,8 @@
   border-radius: 50%;
   border: 4px solid var(--kid-line);
   background: var(--kid-sun);
-  color: var(--kid-line);
+  /* Teks/ikon di atas kunyit selalu gelap (on-kunyit), juga di tema gelap (D-110). */
+  color: var(--on-kunyit);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -310,7 +337,7 @@
 }
 .chip.is-on {
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
 }
 
 /* Latihan */
@@ -332,10 +359,10 @@
   height: 18px;
   border-radius: 0 60% 0 60%;
   border: 3px solid var(--kid-line);
-  background: #fff;
+  background: var(--kertas);
 }
 .leaf.is-done {
-  background: #5cc26f;
+  background: var(--sawah);
 }
 .item {
   display: flex;
@@ -411,15 +438,15 @@
 }
 .choice.is-right,
 .choice.is-answer {
-  background: #e3f7ea;
+  background: var(--sawah-soft);
   border-color: var(--kid-good);
-  box-shadow: 0 0 0 6px rgba(46, 158, 91, 0.35);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--sawah) 35%, transparent);
 }
 .choice.is-wrong {
-  /* D-021: jawaban keliru ditandai merah. */
-  background: #fdecea;
+  /* D-107 (menggantikan warna merah D-021): belum tepat = kunyit + petunjuk, tidak pernah merah. */
+  background: var(--kunyit-soft);
   border-color: var(--kid-bad);
-  box-shadow: 0 0 0 6px rgba(211, 47, 47, 0.3);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--kunyit) 40%, transparent);
 }
 .choice-badge {
   position: absolute;
@@ -429,6 +456,7 @@
   height: 36px;
   border-radius: 50%;
   background: var(--kid-sun);
+  color: var(--on-kunyit);
   border: 3px solid var(--kid-line);
   display: grid;
   place-items: center;
@@ -443,14 +471,14 @@
   border-radius: 50%;
   border: 4px solid var(--kid-line);
   background: var(--kid-good);
-  color: #fff;
+  color: var(--on-sawah);
   display: grid;
   place-items: center;
   cursor: pointer;
   box-shadow: 0 5px 0 var(--kid-line);
 }
 .check-btn:disabled {
-  background: #cfc9dc;
+  background: var(--awan-2);
   cursor: not-allowed;
 }
 .order-slots {
@@ -478,7 +506,7 @@
   font-weight: 800;
   color: var(--kid-ink);
   background: var(--kid-card);
-  border: 3px dashed #8f88a6;
+  border: 3px dashed var(--garis-tegas);
 }
 .spell-slot.is-fixed {
   border: 3px solid var(--kid-line);
@@ -491,7 +519,7 @@
 }
 .spell-slot.is-next {
   border-color: var(--kid-primary);
-  box-shadow: 0 0 0 4px rgba(91, 63, 214, 0.18);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--gonjong) 22%, transparent);
 }
 .spell-letters .choice-text {
   font-size: 2rem;
@@ -506,7 +534,7 @@
   place-items: center;
   font-weight: 800;
   font-size: 1.4rem;
-  color: #8f88a6;
+  color: var(--malam-muted);
 }
 .group-pool {
   display: flex;
@@ -541,7 +569,7 @@
   min-height: var(--kid-touch);
   border: 3px solid var(--kid-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   cursor: pointer;
   padding: 6px 16px;
 }
@@ -585,8 +613,8 @@
   min-height: 88px;
   border: 4px solid var(--kid-line);
   border-radius: 24px;
-  background: #fff;
-  color: var(--kid-line);
+  background: var(--kertas);
+  color: var(--malam);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -623,7 +651,7 @@
   align-items: center;
   gap: 16px;
   padding: 14px 18px;
-  background: #fff;
+  background: var(--kertas);
   border: 4px solid var(--kid-line);
   border-radius: 28px;
   box-shadow: 0 8px 0 var(--kid-line);
@@ -632,10 +660,10 @@
 }
 .feedback-happy,
 .feedback-proud {
-  background: #e9f8ee;
+  background: var(--sawah-soft);
 }
 .feedback-curious {
-  background: #f1ebff;
+  background: var(--langit-soft);
 }
 .feedback-body {
   flex: 1;
@@ -710,7 +738,7 @@
 }
 .numinput-unit {
   font-size: 1.4rem;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .numinput-keys {
   display: grid;
@@ -722,7 +750,7 @@
   height: 72px;
   border: 4px solid var(--kid-line);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-size: 1.8rem;
   font-weight: 800;
@@ -751,7 +779,7 @@
   padding: 0 22px;
   border: 4px solid var(--kid-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-size: 1.1rem;
   font-weight: 800;
@@ -759,6 +787,7 @@
 }
 .book-tab.is-on {
   background: var(--kid-sun);
+  color: var(--on-kunyit);
 }
 .book-tab:focus-visible {
   outline: 5px solid var(--kid-primary);
@@ -784,13 +813,13 @@
   height: 48px;
 }
 .shelf.is-locked h2 {
-  color: #7a7394;
+  color: var(--malam-muted);
 }
 .shelf-lock {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #7a7394;
-  background: #efecf6;
+  color: var(--malam-muted);
+  background: var(--awan-2);
   border-radius: 999px;
   padding: 4px 12px;
 }
@@ -813,18 +842,18 @@
   box-shadow: 0 5px 0 var(--kid-line);
 }
 .level-card.is-open {
-  background: #fff8d9;
+  background: var(--kunyit-soft);
 }
 .level-card.is-passed {
-  background: #e7f6ec;
+  background: var(--sawah-soft);
   border-color: var(--kid-good);
   box-shadow: 0 5px 0 var(--kid-good);
 }
 .level-card.is-locked {
-  background: #f1eff6;
-  color: #8f88a6;
-  border-color: #b9b3c9;
-  box-shadow: 0 5px 0 #b9b3c9;
+  background: var(--awan-2);
+  color: var(--malam-muted);
+  border-color: var(--garis);
+  box-shadow: 0 5px 0 var(--garis);
   cursor: not-allowed;
 }
 .level-card:focus-visible {
@@ -870,7 +899,7 @@
 .practice-score {
   font-weight: 800;
   font-size: 1.3rem;
-  background: #e7f6ec;
+  background: var(--sawah-soft);
   border: 3px solid var(--kid-good);
   border-radius: 999px;
   padding: 6px 16px;
@@ -888,7 +917,7 @@
   height: 22px;
   border-radius: 50%;
   border: 3px solid var(--kid-line);
-  background: #fff;
+  background: var(--kertas);
 }
 .quiz-dot.is-current {
   background: var(--kid-sun);
@@ -950,12 +979,12 @@
 }
 .numinput-display.is-right {
   border-color: var(--kid-good);
-  background: #e7f6ec;
+  background: var(--sawah-soft);
 }
 .numinput-display.is-wrong {
   border-color: var(--kid-bad);
-  background: #fdecea;
-  color: var(--kid-bad);
+  background: var(--kunyit-soft);
+  color: var(--kunyit-teks);
 }
 .numinput-key-answer {
   margin: 0;
@@ -971,17 +1000,17 @@
   box-sizing: border-box;
 }
 .feedback.is-right {
-  background: #e7f6ec;
+  background: var(--sawah-soft);
   border-color: var(--kid-good);
   box-shadow: 0 8px 0 var(--kid-good);
 }
 .feedback.is-wrong {
-  background: #fdecea;
+  background: var(--kunyit-soft);
   border-color: var(--kid-bad);
-  box-shadow: 0 8px 0 var(--kid-bad);
+  box-shadow: 0 8px 0 var(--kunyit-tekan);
 }
 .feedback.is-wrong .kid-say p {
-  color: #8e1c1c;
+  color: var(--kunyit-teks);
 }
 .result-card {
   margin: 24px auto;
@@ -989,7 +1018,7 @@
   padding: 24px;
   border: 4px solid var(--kid-line);
   border-radius: 32px;
-  background: #fff;
+  background: var(--kertas);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -998,11 +1027,11 @@
 }
 .result-card.is-passed {
   border-color: var(--kid-good);
-  background: #e7f6ec;
+  background: var(--sawah-soft);
 }
 .result-card.is-failed {
   border-color: var(--kid-bad);
-  background: #fdecea;
+  background: var(--kunyit-soft);
 }
 .result-score {
   font-size: 3rem;
@@ -1016,7 +1045,7 @@
   margin: 0;
 }
 .is-failed .result-message {
-  color: #8e1c1c;
+  color: var(--kunyit-teks);
 }
 @media (max-width: 600px) {
   .choices.arrange-grid {
@@ -1050,7 +1079,7 @@
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  background: #fff;
+  background: var(--kertas);
   border: 4px solid var(--kid-line);
   border-radius: 28px;
   padding: 12px 18px;
@@ -1106,7 +1135,7 @@
   grid-template-columns: 72px 1fr auto;
   align-items: center;
   gap: 14px;
-  background: #fff;
+  background: var(--kertas);
   border: 3px solid var(--kid-line);
   border-radius: 20px;
   padding: 10px 14px;
@@ -1119,12 +1148,12 @@
   padding: 4px 0;
 }
 .history-row.is-passed .history-score {
-  background: #e7f6ec;
+  background: var(--sawah-soft);
   color: var(--kid-good);
 }
 .history-row.is-failed .history-score {
-  background: #fdecea;
-  color: var(--kid-bad);
+  background: var(--kunyit-soft);
+  color: var(--kunyit-teks);
 }
 .history-main {
   display: flex;
@@ -1137,15 +1166,15 @@
 }
 .history-row.is-passed .history-badge {
   background: var(--kid-good);
-  color: #fff;
+  color: var(--on-sawah);
 }
 .history-row.is-failed .history-badge {
   background: var(--kid-bad);
-  color: #fff;
+  color: var(--on-kunyit);
 }
 
 .profile-stat.is-current {
-  background: #fff8d9;
+  background: var(--kunyit-soft);
 }
 .profile-stat.is-current .profile-value {
   font-size: 1.5rem;
@@ -1180,14 +1209,14 @@
   font-weight: 800;
   font-size: 1.25rem;
   font-variant-numeric: tabular-nums;
-  background: #fff4e0;
-  color: #b25a00;
-  border: 3px solid #f79a4a;
+  background: var(--jeruk-soft);
+  color: var(--jeruk-teks);
+  border: 3px solid var(--jeruk);
   border-radius: 999px;
   padding: 4px 14px 4px 8px;
 }
 .stopwatch .clock-icon {
-  color: #b25a00;
+  color: var(--jeruk-teks);
 }
 .stopwatch:not(.is-running) {
   opacity: 0.75;
@@ -1206,8 +1235,8 @@
   gap: 8px;
   font-weight: 800;
   font-size: 1.25rem;
-  color: #b25a00;
-  background: #fff4e0;
+  color: var(--jeruk-teks);
+  background: var(--jeruk-soft);
   border-radius: 999px;
   padding: 6px 16px;
   margin: 0;
@@ -1240,40 +1269,40 @@
   flex: none;
 }
 .profile-stat.is-points {
-  background: #fff6d6;
+  background: var(--kunyit-soft);
 }
 .profile-stat.is-points .stat-icon {
-  color: #e0a100;
+  color: var(--kunyit-tekan);
 }
 .profile-stat.is-passed {
-  background: #e3f6ea;
+  background: var(--sawah-soft);
 }
 .profile-stat.is-passed .stat-icon {
   color: var(--kid-good);
 }
 .profile-stat.is-time {
-  background: #fff0e3;
+  background: var(--jeruk-soft);
 }
 .profile-stat.is-time .stat-icon {
-  color: #e07a2a;
+  color: var(--jeruk);
 }
 .profile-stat.is-rank {
-  background: #ece6ff;
+  background: var(--gonjong-soft);
 }
 .profile-stat.is-rank .stat-icon {
   color: var(--kid-primary);
 }
 .profile-stat.is-highest {
-  background: #e2f1ff;
+  background: var(--langit-soft);
 }
 .profile-stat.is-highest .stat-icon {
-  color: #2f7fd6;
+  color: var(--langit);
 }
 .profile-stat.is-played {
-  background: #fde7f1;
+  background: var(--toska-soft);
 }
 .profile-stat.is-played .stat-icon {
-  color: #d64f8a;
+  color: var(--toska);
 }
 .profile-stat .profile-value {
   font-variant-numeric: tabular-nums;
@@ -1297,15 +1326,19 @@
   gap: 24px;
   padding: 24px;
   background:
-    radial-gradient(circle at 12% 30%, rgba(255, 255, 255, 0.6) 0 60px, transparent 61px),
-    linear-gradient(120deg, #efe7ff, #fff3d6);
+    radial-gradient(
+      circle at 12% 30%,
+      color-mix(in srgb, var(--kertas) 60%, transparent) 0 60px,
+      transparent 61px
+    ),
+    linear-gradient(120deg, var(--gonjong-soft), var(--kunyit-soft));
 }
 .profile-avatar {
   flex: none;
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--kertas);
   border: 4px solid var(--kid-line);
   display: grid;
   place-items: center;
@@ -1329,7 +1362,7 @@
 }
 .history-time {
   font-weight: 800;
-  color: #b25a00;
+  color: var(--jeruk-teks);
 }
 
 /* Papan peringkat */
@@ -1378,12 +1411,12 @@
   align-items: center;
   gap: 4px;
   font-weight: 800;
-  color: #b58100;
+  color: var(--kunyit-teks);
 }
 .podium-raw {
   font-size: 0.8rem;
   font-weight: 700;
-  color: #5b5570;
+  color: var(--malam-muted);
 }
 .podium-block {
   width: 100%;
@@ -1391,23 +1424,30 @@
   place-items: center;
   font-size: 2.2rem;
   font-weight: 900;
-  color: #fff;
+  color: var(--malam);
   border: 4px solid var(--kid-line);
   border-bottom: 0;
   border-radius: 18px 18px 0 0;
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 2px 0 var(--bayangan);
 }
 .podium-spot.place-1 .podium-block {
   height: 130px;
-  background: linear-gradient(#f7c948, #e8a900);
+  background: linear-gradient(var(--kunyit), var(--kunyit-tekan));
+  color: var(--on-kunyit);
 }
 .podium-spot.place-2 .podium-block {
   height: 96px;
-  background: linear-gradient(#b8c4d6, #8c9bb3);
+  background: linear-gradient(
+    color-mix(in srgb, var(--garis-tegas) 35%, var(--kertas)),
+    color-mix(in srgb, var(--garis-tegas) 60%, var(--kertas))
+  );
 }
 .podium-spot.place-3 .podium-block {
   height: 72px;
-  background: linear-gradient(#f0a46b, #cf7a3c);
+  background: linear-gradient(
+    color-mix(in srgb, var(--jeruk) 40%, var(--kertas)),
+    color-mix(in srgb, var(--jeruk) 65%, var(--kertas))
+  );
 }
 .podium-spot.is-me .podium-name {
   color: var(--kid-primary);
@@ -1431,7 +1471,7 @@
   grid-template-columns: 56px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--kertas);
   border: 3px solid var(--kid-line);
   border-radius: 20px;
   padding: 8px 14px;
@@ -1444,12 +1484,12 @@
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .board-row.is-me {
-  background: #efe7ff;
+  background: var(--gonjong-soft);
   border-color: var(--kid-primary);
-  box-shadow: 0 0 0 3px rgba(91, 63, 214, 0.25);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gonjong) 25%, transparent);
 }
 .board-pos {
   width: 44px;
@@ -1462,13 +1502,14 @@
   background: var(--kid-soft);
 }
 .board-row.place-1 .board-pos {
-  background: #f7c948;
+  background: var(--kunyit);
+  color: var(--on-kunyit);
 }
 .board-row.place-2 .board-pos {
-  background: #c9d2e0;
+  background: color-mix(in srgb, var(--garis-tegas) 45%, var(--kertas));
 }
 .board-row.place-3 .board-pos {
-  background: #f0a46b;
+  background: color-mix(in srgb, var(--jeruk) 45%, var(--kertas));
 }
 .board-name {
   display: flex;
@@ -1491,14 +1532,14 @@
   font-style: normal;
   font-size: 0.8rem;
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
   border-radius: 999px;
   padding: 0 8px;
   align-self: flex-start;
 }
 .board-sub,
 .board-highest small {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -1511,10 +1552,10 @@
   font-size: 1.1rem;
 }
 .board-points .stat-icon {
-  color: #e0a100;
+  color: var(--kunyit-tekan);
 }
 .board-time .stat-icon {
-  color: #e07a2a;
+  color: var(--jeruk);
 }
 .board-highest {
   display: flex;
@@ -1530,11 +1571,11 @@
   text-align: center;
   font-size: 1.6rem;
   line-height: 1;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .board-rule {
   text-align: center;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 600;
   margin: 16px 0 32px;
 }
@@ -1543,9 +1584,9 @@
 .login-alt {
   margin-top: 8px;
   padding: 14px 18px;
-  border: 3px dashed #c9bdf0;
+  border: 3px dashed var(--garis-tegas);
   border-radius: 24px;
-  background: #fff;
+  background: var(--kertas);
 }
 .login-alt p {
   margin: 0 0 8px;
@@ -1562,7 +1603,7 @@
   width: 34px;
   height: 10px;
   border-radius: 999px;
-  background: #e2dcf2;
+  background: var(--garis);
 }
 .join-steps li.is-done {
   background: var(--kid-good);
@@ -1594,8 +1635,8 @@
   gap: 4px;
   min-height: var(--kid-touch);
   padding: 10px;
-  background: #fff;
-  border: 4px solid #d8d0ee;
+  background: var(--kertas);
+  border: 4px solid var(--garis-tegas);
   border-radius: 24px;
   font: inherit;
   font-weight: 800;
@@ -1747,7 +1788,7 @@
   padding: 4px 16px 4px 6px;
   border: 3px solid var(--kid-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--kertas);
   color: inherit;
   text-decoration: none;
   font-weight: 800;
@@ -1770,12 +1811,12 @@
   gap: 4px;
   padding: 2px 10px;
   border-radius: 999px;
-  background: #fff6d6;
-  color: #8a6200;
+  background: var(--kunyit-soft);
+  color: var(--kunyit-teks);
   font-variant-numeric: tabular-nums;
 }
 .me-points .stat-icon {
-  color: #e0a100;
+  color: var(--kunyit-tekan);
 }
 .top-actions {
   display: flex;
@@ -1792,7 +1833,7 @@
   padding: 4px 8px;
   border: 3px solid var(--kid-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   color: var(--kid-ink);
   text-decoration: none;
   font-weight: 800;
@@ -1820,7 +1861,7 @@
   padding: 16px 20px;
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: linear-gradient(120deg, #efe7ff, #fff3d6);
+  background: linear-gradient(120deg, var(--gonjong-soft), var(--kunyit-soft));
   box-shadow: 0 6px 0 var(--kid-line);
   margin-bottom: 18px;
 }
@@ -1841,7 +1882,7 @@
 }
 .continue-what span {
   font-weight: 700;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .continue-actions {
   display: flex;
@@ -1864,6 +1905,8 @@
   font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
   padding: 0 clamp(18px, 4vw, 32px);
   background: var(--kid-good);
+  color: var(--on-sawah);
+  box-shadow: var(--shadow-tekan) color-mix(in srgb, var(--sawah) 60%, var(--malam));
 }
 .home-h2 {
   font-size: 1.3rem;
@@ -1889,6 +1932,7 @@
 }
 .book-tab.is-on {
   background: var(--kid-sun);
+  color: var(--on-kunyit);
 }
 .topic-grid {
   list-style: none;
@@ -1910,7 +1954,7 @@
   padding: 12px 12px 12px 14px;
   border-radius: 22px;
   color: var(--kid-ink);
-  background: linear-gradient(100deg, #fff6df 0%, #ffffff 70%);
+  background: linear-gradient(100deg, var(--kunyit-soft) 0%, var(--kertas) 70%);
   border: 3px solid var(--kid-line);
   box-shadow: 0 4px 0 var(--kid-line);
 }
@@ -1924,12 +1968,12 @@
   font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: #fff;
-  background: linear-gradient(135deg, #f59e0b, #d9480f);
+  color: var(--on-gonjong);
+  background: linear-gradient(135deg, var(--jeruk), var(--gonjong));
   border: 2px solid var(--kid-line);
 }
 .topic-group-badge svg {
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 1px 0 var(--bayangan));
 }
 .topic-group-text {
   flex: 1;
@@ -1944,7 +1988,7 @@
 .topic-group-text span {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #6b6385;
+  color: var(--malam-muted);
 }
 /* Subjudul di dalam bagian lomba (D-076): kisi-kisi dulu, lalu mock test lomba itu. */
 .topic-sub {
@@ -1955,7 +1999,7 @@
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.02em;
-  color: #4a4166;
+  color: var(--malam);
 }
 .topic-group + .topic-sub {
   margin-top: 4px;
@@ -1968,11 +2012,11 @@
   background: color-mix(in srgb, var(--kid-line) 14%, transparent);
 }
 .topic-sub.is-mock {
-  color: #b4410f;
+  color: var(--jeruk-teks);
 }
 .topic-card.is-mock .topic-num {
-  color: #fff;
-  background: linear-gradient(135deg, #f59e0b, #d9480f);
+  color: var(--on-gonjong);
+  background: linear-gradient(135deg, var(--jeruk), var(--gonjong));
 }
 @media (max-width: 520px) {
   .topic-group {
@@ -1998,7 +2042,7 @@
   padding: 12px 14px;
   border: 3px solid var(--kid-line);
   border-radius: 22px;
-  background: #fff;
+  background: var(--kertas);
   color: inherit;
   text-decoration: none;
   box-shadow: 0 4px 0 var(--kid-line);
@@ -2037,7 +2081,7 @@
   flex: 1;
   height: 10px;
   border-radius: 999px;
-  background: #ebe6f5;
+  background: var(--garis);
   overflow: hidden;
 }
 .topic-bar > span {
@@ -2052,11 +2096,11 @@
 .topic-card.is-next {
   border-color: var(--kid-primary);
   box-shadow: 0 4px 0 var(--kid-primary);
-  background: #f6f2ff;
+  background: var(--gonjong-soft);
 }
 .topic-card.is-next .topic-num {
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
 }
 /* Topik bebas dipilih (D-082); topik yang disarankan diberi label kecil di pojok. */
 .topic-card.is-next {
@@ -2069,12 +2113,12 @@
   padding: 2px 10px;
   border-radius: 999px;
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
   font-size: 0.8rem;
   font-weight: 900;
 }
 .topic-card.is-done {
-  background: #eef8f1;
+  background: var(--sawah-soft);
   border-color: var(--kid-good);
   box-shadow: 0 4px 0 var(--kid-good);
 }
@@ -2082,10 +2126,10 @@
   color: var(--kid-good);
 }
 .topic-card.is-locked {
-  background: #f4f2f8;
-  color: #6f6888;
-  border-color: #c3bdd3;
-  box-shadow: 0 4px 0 #c3bdd3;
+  background: var(--awan-2);
+  color: var(--malam-muted);
+  border-color: var(--garis);
+  box-shadow: 0 4px 0 var(--garis);
 }
 
 /* Halaman topik */
@@ -2097,7 +2141,7 @@
   padding: 16px 20px 20px;
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: #fff;
+  background: var(--kertas);
   margin: 8px 0 20px;
 }
 .lesson-head {
@@ -2130,12 +2174,12 @@
   gap: 10px;
   padding: 10px 14px;
   border-radius: 16px;
-  background: #fff8d9;
+  background: var(--kunyit-soft);
   font-weight: 700;
   line-height: 1.4;
 }
 .lesson-tips .stat-icon {
-  color: #e0a100;
+  color: var(--kunyit-tekan);
   flex: none;
   margin-top: 1px;
 }
@@ -2143,7 +2187,7 @@
   min-width: 0;
 }
 .example {
-  border-top: 3px dashed #d8d0ee;
+  border-top: 3px dashed var(--garis);
   padding-top: 12px;
 }
 .example-label {
@@ -2167,11 +2211,11 @@
 }
 .example-feedback.is-right {
   border-color: var(--kid-good);
-  background: #e7f6ec;
+  background: var(--sawah-soft);
 }
 .example-feedback.is-wrong {
-  border-color: #e0a100;
-  background: #fff8d9;
+  border-color: var(--kunyit);
+  background: var(--kunyit-soft);
 }
 .levels-head {
   display: flex;
@@ -2186,7 +2230,7 @@
 }
 .levels-rule {
   margin: 0;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 700;
 }
 ol.level-path {
@@ -2220,11 +2264,11 @@ ol.level-path {
 }
 .level-card.is-next .level-num {
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
 }
 .level-card.is-passed .level-num {
   background: var(--kid-good);
-  color: #fff;
+  color: var(--on-sawah);
 }
 .topic-cta {
   position: fixed;
@@ -2261,7 +2305,7 @@ ol.level-path {
   display: grid;
   place-items: center;
   padding: 16px;
-  background: rgba(29, 26, 46, 0.45);
+  background: var(--overlay);
 }
 .quit-dialog {
   width: min(100%, 460px);
@@ -2272,7 +2316,7 @@ ol.level-path {
   padding: 20px;
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: #fff;
+  background: var(--kertas);
   text-align: center;
 }
 
@@ -2386,12 +2430,12 @@ ol.level-path {
   padding: 3px 10px;
 }
 .practice-topic {
-  color: #5d5873;
-  background: #fff;
-  border: 2px solid #e2dcf2;
+  color: var(--malam-muted);
+  background: var(--kertas);
+  border: 2px solid var(--garis);
 }
 .practice-level {
-  color: #fff;
+  color: var(--on-gonjong);
   background: var(--kid-primary);
 }
 .practice-name,
@@ -2437,7 +2481,7 @@ ol.level-path {
 .quiz-progress .quiz-count {
   margin: 0;
   font-size: 0.95rem;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 
 @media (max-width: 560px) {
@@ -2584,7 +2628,7 @@ ol.level-path {
   margin: 0;
   border-width: 4px 0 0;
   border-radius: 28px 28px 0 0;
-  box-shadow: 0 -8px 24px rgba(29, 26, 46, 0.12);
+  box-shadow: 0 -8px 24px var(--bayangan);
   padding: 16px max(20px, calc((100vw - 920px) / 2)) calc(16px + env(safe-area-inset-bottom));
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -2659,7 +2703,7 @@ button.level-card.is-paid {
   padding: 0 20px;
   border: 4px solid var(--kid-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-size: 1.1rem;
   font-weight: 900;
@@ -2673,7 +2717,7 @@ button.level-card.is-paid {
   background: var(--kid-primary);
   border-color: var(--kid-primary);
   border-style: solid;
-  color: #fff;
+  color: var(--on-gonjong);
   box-shadow: 0 4px 0 var(--kid-line);
 }
 .grade-chip:focus-visible,
@@ -2707,7 +2751,7 @@ button.level-card.is-paid {
   padding: 6px 18px;
   border: 4px solid var(--kid-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   color: var(--kid-ink);
   cursor: pointer;
@@ -2719,22 +2763,26 @@ button.level-card.is-paid {
 }
 .rank-scope small {
   font-weight: 700;
-  color: #5d5873;
+  color: var(--malam-muted);
+}
+.rank-scope.is-on small {
+  color: var(--on-kunyit);
 }
 .rank-scope.is-on {
   background: var(--kid-sun);
+  color: var(--on-kunyit);
   box-shadow: 0 4px 0 var(--kid-line);
 }
 .rank-announce {
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: linear-gradient(#fffdf6, #fff);
+  background: linear-gradient(var(--kertas-2), var(--kertas));
   padding: 16px 16px 20px;
-  box-shadow: 0 6px 0 rgba(43, 37, 64, 0.15);
+  box-shadow: 0 6px 0 var(--bayangan);
 }
 .rank-announce-head {
   text-align: center;
-  border-bottom: 3px dashed #d8d0ee;
+  border-bottom: 3px dashed var(--garis);
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
@@ -2745,7 +2793,7 @@ button.level-card.is-paid {
   letter-spacing: 0.02em;
 }
 .rank-announce-head small {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 700;
 }
 .rank-avg {
@@ -2755,7 +2803,7 @@ button.level-card.is-paid {
   color: var(--kid-primary);
 }
 .podium-spot .rank-avg {
-  color: #8a6200;
+  color: var(--kunyit-teks);
 }
 .rank-list {
   list-style: none;
@@ -2770,19 +2818,19 @@ button.level-card.is-paid {
   grid-template-columns: 52px 44px minmax(0, 1fr) auto auto auto;
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--kertas);
   border: 3px solid var(--kid-line);
   border-radius: 20px;
   padding: 8px 12px;
   min-height: var(--kid-touch);
 }
 .rank-row:nth-child(even) {
-  background: #faf7ff;
+  background: var(--kertas-2);
 }
 .rank-row.is-me {
-  background: #efe7ff;
+  background: var(--gonjong-soft);
   border-color: var(--kid-primary);
-  box-shadow: 0 0 0 3px rgba(91, 63, 214, 0.25);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gonjong) 25%, transparent);
 }
 .rank-pos {
   width: 44px;
@@ -2796,13 +2844,14 @@ button.level-card.is-paid {
   border: 3px solid var(--kid-line);
 }
 .rank-row.place-1 .rank-pos {
-  background: #f7c948;
+  background: var(--kunyit);
+  color: var(--on-kunyit);
 }
 .rank-row.place-2 .rank-pos {
-  background: #c9d2e0;
+  background: color-mix(in srgb, var(--garis-tegas) 45%, var(--kertas));
 }
 .rank-row.place-3 .rank-pos {
-  background: #f0a46b;
+  background: color-mix(in srgb, var(--jeruk) 45%, var(--kertas));
 }
 .rank-name {
   display: flex;
@@ -2816,7 +2865,7 @@ button.level-card.is-paid {
   font-size: 1.1rem;
 }
 .rank-name small {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -2835,17 +2884,17 @@ button.level-card.is-paid {
   gap: 4px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .rank-time .stat-icon {
-  color: #e07a2a;
+  color: var(--jeruk);
 }
 .rank-detail-btn {
   min-height: var(--kid-touch);
   padding: 0 16px;
   border: 3px solid var(--kid-primary);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   color: var(--kid-primary);
   font: inherit;
   font-weight: 900;
@@ -2870,7 +2919,7 @@ button.level-card.is-paid {
 }
 .rank-others-sub {
   margin: 0 0 8px;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 700;
 }
 .rank-list.is-small .rank-row {
@@ -2880,16 +2929,16 @@ button.level-card.is-paid {
 .rank-played {
   margin: -4px 0 12px;
   text-align: center;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 700;
   font-size: 0.95rem;
 }
 .rank-row.is-idle {
-  background: #fbfaff;
+  background: var(--kertas-2);
   border-style: dashed;
 }
 .rank-idle {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-size: 0.9rem;
   font-weight: 800;
   white-space: nowrap;
@@ -2920,7 +2969,7 @@ button.level-card.is-paid {
   padding: 0 14px;
   border: 3px solid var(--kid-line);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
@@ -2929,7 +2978,7 @@ button.level-card.is-paid {
 .rank-page-btn.is-on {
   background: var(--kid-primary);
   border-color: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
 }
 .rank-page-btn:disabled {
   opacity: 0.45;
@@ -2942,13 +2991,13 @@ button.level-card.is-paid {
   align-self: center;
   padding: 0 4px;
   font-weight: 900;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .rank-page-status {
   display: none;
   text-align: center;
   font-weight: 800;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .rank-backdrop {
   align-items: start;
@@ -2960,7 +3009,7 @@ button.level-card.is-paid {
   padding: 18px;
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: #fff;
+  background: var(--kertas);
 }
 .rank-dialog-head {
   display: grid;
@@ -3009,7 +3058,7 @@ button.level-card.is-paid {
 .rank-table td {
   padding: 8px 10px;
   text-align: left;
-  border-bottom: 2px solid #ece6f8;
+  border-bottom: 2px solid var(--garis);
 }
 .rank-table thead th {
   background: var(--kid-soft);
@@ -3019,7 +3068,7 @@ button.level-card.is-paid {
 }
 .rank-table tbody th small {
   display: block;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-weight: 600;
 }
 .rank-table tbody tr:last-child th,
@@ -3027,7 +3076,7 @@ button.level-card.is-paid {
   border-bottom: 0;
 }
 .rank-table tr.is-on {
-  background: #fff6d6;
+  background: var(--kunyit-soft);
 }
 .rank-table .rank-avg {
   font-size: 1.05rem;
@@ -3042,12 +3091,12 @@ button.level-card.is-paid {
   min-width: 0;
   margin: 0;
   padding: 10px 12px;
-  border: 2px solid #ece6f8;
+  border: 2px solid var(--garis);
   border-radius: 14px;
-  background: #faf7ff;
+  background: var(--kertas-2);
 }
 .rank-stat dt {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.03em;
@@ -3061,13 +3110,13 @@ button.level-card.is-paid {
   overflow-wrap: anywhere;
 }
 .rank-stat dd small {
-  color: #5d5873;
+  color: var(--malam-muted);
   font-size: 0.8rem;
   font-weight: 700;
 }
 .rank-stat.is-strong {
   border-color: var(--kid-primary);
-  background: #efe7ff;
+  background: var(--gonjong-soft);
 }
 .rank-stat.is-strong dd {
   color: var(--kid-primary);
@@ -3149,7 +3198,7 @@ button.level-card.is-paid {
   }
   .rank-table.is-stack tr {
     padding: 6px 0;
-    border-bottom: 2px solid #ece6f8;
+    border-bottom: 2px solid var(--garis);
   }
   .rank-table.is-stack tbody tr:last-child {
     border-bottom: 0;
@@ -3169,7 +3218,7 @@ button.level-card.is-paid {
   }
   .rank-table.is-stack td::before {
     content: attr(data-label);
-    color: #5d5873;
+    color: var(--malam-muted);
     font-weight: 700;
   }
 }
@@ -3202,16 +3251,17 @@ button.level-card.is-paid {
   min-height: 64px;
   min-width: 64px;
   padding: 0 20px;
-  border: 3px solid var(--ink);
+  border: 3px solid var(--garis-tegas);
   border-radius: 999px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 4px 0 var(--ink);
+  box-shadow: 0 4px 0 var(--garis-tegas);
 }
 .rank-mode.is-on {
-  background: #f7c948;
+  background: var(--kunyit);
+  color: var(--on-kunyit);
 }
 @media (max-width: 640px) {
   /* Tiga mode sejajar (bukan bertumpuk ke bawah). */
@@ -3235,7 +3285,7 @@ button.level-card.is-paid {
   }
 }
 .rank-mode:focus-visible {
-  outline: 4px solid var(--primary);
+  outline: 4px solid var(--kunyit);
   outline-offset: 2px;
 }
 
@@ -3247,7 +3297,7 @@ button.level-card.is-paid {
   margin: 2px 0 6px;
   font-size: 15px;
   font-weight: 700;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-variant-numeric: tabular-nums;
 }
 .podium-meta .rank-time {
@@ -3261,10 +3311,10 @@ button.level-card.is-paid {
   max-width: 640px;
   margin: 12px auto;
   padding: 14px 18px;
-  border: 3px solid #e07b00;
+  border: 3px solid var(--jeruk);
   border-radius: 20px;
-  background: #fff1dc;
-  color: #5a3100;
+  background: var(--jeruk-soft);
+  color: var(--malam);
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.45;
@@ -3281,14 +3331,14 @@ button.level-card.is-paid {
   align-items: center;
   gap: 10px;
   font-size: 1.2rem;
-  color: #a35400;
+  color: var(--jeruk-teks);
 }
 .kid-alert-head strong {
   flex: 1;
 }
 .kid-alert-icon {
   flex: none;
-  color: #e07b00;
+  color: var(--jeruk);
 }
 .kid-alert-head .speak-btn {
   flex: none;
@@ -3296,12 +3346,12 @@ button.level-card.is-paid {
 .kid-alert-parent {
   margin-top: 12px;
   padding: 10px 14px;
-  border: 2px dashed #e0a35a;
+  border: 2px dashed var(--jeruk);
   border-radius: 14px;
-  background: #fff;
+  background: var(--kertas);
   font-size: 1rem;
   font-weight: 600;
-  color: #4a3a2a;
+  color: var(--malam);
 }
 .kid-alert-parent ol {
   margin: 6px 0 0;
@@ -3318,22 +3368,22 @@ button.level-card.is-paid {
   margin: 8px auto;
   max-width: 640px;
   padding: 10px 14px;
-  border: 3px solid #e07b00;
+  border: 3px solid var(--jeruk);
   border-radius: 16px;
-  background: #fff1dc;
-  color: #5a3100;
+  background: var(--jeruk-soft);
+  color: var(--malam);
   font-weight: 700;
 }
 .speech-help-text {
   font-size: 1.3rem;
   font-weight: 900;
-  color: #1d1a2e;
+  color: var(--malam);
 }
 
 /* Suara diblokir browser: speaker berkedip pelan agar diketuk (D-047). */
 .item-prompt.is-blocked .speak-btn {
   animation: speak-nudge 1.2s ease-in-out infinite;
-  box-shadow: 0 0 0 6px #ffcf8a;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--jeruk) 45%, transparent);
 }
 @keyframes speak-nudge {
   50% {
@@ -3353,10 +3403,10 @@ button.level-card.is-paid {
   margin: 6px auto;
   min-height: 64px;
   padding: 0 22px;
-  border: 3px dashed #e07b00;
+  border: 3px dashed var(--jeruk);
   border-radius: 999px;
-  background: #fff8ee;
-  color: #8a4700;
+  background: var(--jeruk-soft);
+  color: var(--jeruk-teks);
   font: inherit;
   font-weight: 800;
   cursor: pointer;
@@ -3381,13 +3431,85 @@ button.level-card.is-paid {
   max-width: 46em;
 }
 
-/* Tombol materi lengkap di halaman topik (purwarupa). */
+/* Tombol materi di halaman topik: satu kelompok aksi, tidak berdesakan dengan teks.
+   HP: bertumpuk selebar kartu · tablet/web: tombol utama satu baris penuh, ringkasan + Lab Buku berdampingan. */
+.lesson-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 14px 0 4px;
+}
+@media (min-width: 600px) {
+  .lesson-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.lesson-actions > * {
+  box-sizing: border-box;
+  justify-self: stretch;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  justify-content: flex-start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.lesson-actions > .is-main {
+  grid-column: 1 / -1;
+}
+.lesson-actions .lesson-open > svg,
+.lesson-actions .lab-to-booklab > svg {
+  flex: none;
+}
+.lesson-actions .lab-to-booklab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--touch-anak);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  background: var(--kunyit-soft);
+  color: var(--malam);
+  box-shadow: inset 0 0 0 2px var(--kunyit);
+  font-weight: 800;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.lesson-actions .lab-to-booklab:focus-visible {
+  outline: 3px solid var(--kunyit);
+  outline-offset: 3px;
+}
 .materi-open {
   display: grid;
+  min-width: 0;
   text-align: left;
+  line-height: 1.25;
 }
 .materi-open small {
   font-size: 0.95rem;
   font-weight: 700;
   opacity: 0.9;
+}
+
+/* Kartu Lab Buku di Pustaka (D-109). */
+.booklab-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 84px;
+  padding: 12px 16px;
+  border: 4px solid var(--kid-line, #2b2540);
+  border-radius: 24px;
+  background: linear-gradient(135deg, #e2f6f2, #efe9ff);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+}
+.booklab-card-text {
+  display: grid;
+  flex: 1;
+}
+.booklab-card-text strong {
+  font-size: 1.25rem;
 }

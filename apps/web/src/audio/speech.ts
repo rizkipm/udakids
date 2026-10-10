@@ -82,8 +82,11 @@ function speakNow(text: string, opts: SpeakOpts) {
   }
   // D-098: kalimat demi kalimat dengan suara sesuai bahasanya (teks campuran seperti "Hari ini kita belajar
   // Prepositions. We use …" tidak dibacakan satu suara), dan teks panjang dipecah agar tetap ≤ batas server.
-  const parts = opts.lang
-    ? speechSegments(text).map((t) => ({ text: t, lang: opts.lang! }))
+  // D-112: di soal/pelajaran buku non-English (Matematika, Sains, Worksheet, …) semua kalimat berbahasa Indonesia —
+  // tanpa menebak bahasa, supaya kata seperti "Hati", "Main", atau nama benda tidak dibacakan suara British.
+  const lang = opts.lang ?? (contextIsIndonesian() ? 'id-ID' : undefined);
+  const parts = lang
+    ? speechSegments(text).map((t) => ({ text: t, lang }))
     : langSegments(text, opts.baseLang);
   const token = ++chainSeq;
   const play = (k: number) => {
@@ -382,15 +385,36 @@ const voicedCards = (item: Partial<Pick<Item, 'interaction'>>) => {
                       ? it.blocks
                       : it.type === 'bingo'
                         ? it.cells
-                        : it.type === 'chance'
-                          ? [...it.outcomes, ...it.fractions]
-                          : it.type === 'coord'
-                            ? it.steps.map((st) => ({
-                                id: st.id,
-                                visual: { kind: 'blank' as const },
-                                say: st.say,
-                              }))
-                            : [];
+                        : it.type === 'count' || it.type === 'beads'
+                          ? it.choices
+                          : it.type === 'quest'
+                            ? [
+                                ...it.rounds.map((r) => ({
+                                  id: r.id,
+                                  visual: { kind: 'blank' as const },
+                                  say: r.say,
+                                })),
+                                ...it.rounds.flatMap((r) => r.choices),
+                              ]
+                            : it.type === 'bubbles'
+                              ? it.bubbles
+                              : it.type === 'clear'
+                                ? it.tiles
+                                : it.type === 'grid'
+                                  ? (it.calls ?? []).map((c) => ({
+                                      id: c.id,
+                                      visual: { kind: 'blank' as const },
+                                      say: c.say,
+                                    }))
+                                  : it.type === 'chance'
+                                    ? [...it.outcomes, ...it.fractions]
+                                    : it.type === 'coord'
+                                      ? it.steps.map((st) => ({
+                                          id: st.id,
+                                          visual: { kind: 'blank' as const },
+                                          say: st.say,
+                                        }))
+                                      : [];
   return cards.filter((c) => c.say);
 };
 
@@ -431,6 +455,12 @@ export const pushVoiceLesson = (ref: LessonVoiceRef) => pushTo(lessonStack, ref)
 
 /** Soal lomba live yang sedang tampil (tanpa skill/seed di perangkat): server mencocokkan dari soal peserta. */
 export const pushVoiceContest = (ref: ContestRef) => pushTo(contestStack, ref);
+
+/** Soal/pelajaran yang sedang tampil berasal dari buku non-English (D-112). Tanpa konteks → tebak per kalimat. */
+function contextIsIndonesian() {
+  const domain = itemStack.at(-1)?.skillId.split('.')[0] ?? lessonStack.at(-1)?.domain;
+  return domain !== undefined && domain !== 'english' && domain !== 'contest';
+}
 
 /** URL klip Chirp untuk teks dari aplikasi + konteks yang sedang aktif. */
 export function sayUrl(text: string, lang: VoiceLang = 'id-ID') {

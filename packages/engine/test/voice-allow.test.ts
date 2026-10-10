@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  cardLanguage,
   langSegments,
   buildVoiceAllowList,
   generateItem,
@@ -120,6 +121,33 @@ describe('bahasa suara mengikuti kalimat (D-098)', () => {
     expect(textLanguage('Reveal = mengungkapkan; conceal = menyembunyikan.')).toBe('id');
     expect(textLanguage('Ketuk semua antonim dari "visible".')).toBe('id');
     expect(textLanguage('7 + 5')).toBeUndefined();
+  });
+  it('D-112: kalimat campuran ber-kata Indonesia → suara Indonesia; English murni & nama tempat tetap English', () => {
+    for (const t of [
+      'This is my nose artinya ini hidungku.',
+      'Kita bilang do homework.',
+      'I see with my eyes, aku melihat dengan mataku.',
+      'Kegiatan kita punya urutan: wake up, take a bath, have breakfast, lalu go to school.',
+    ])
+      expect(textLanguage(t)).toBe('id');
+    for (const t of [
+      'The main dancer wears no mask.',
+      'I met a boy whose father is a fisherman in Sendang Biru.',
+      'Ali is my friend.',
+    ])
+      expect(textLanguage(t)).toBe('en');
+    expect(langSegments('He untuk laki-laki: boy, father, grandfather.')).toEqual([
+      { text: 'He untuk laki-laki:', lang: 'id-ID' },
+      { text: 'boy, father, grandfather.', lang: 'en-GB' },
+    ]);
+  });
+  it('D-112: kartu berbahasa Indonesia di buku English dibacakan suara Indonesia', () => {
+    for (const c of ['ayam', 'merah muda', 'enam belas', 'Benar', 'kepingan fish'])
+      expect(cardLanguage(c)).toBe('id');
+    for (const c of ['chicken', 'cat', 'bus', 'Good morning']) expect(cardLanguage(c)).toBe('en');
+    const id = 'english.sd12.a1.colors';
+    expect(voiceLangFor(id, 'choice', 'hijau')).toBe('id-ID');
+    expect(voiceLangFor(id, 'choice', 'green')).toBe('en-GB');
   });
   it('D-106: kata Indonesia & nama yang sempat terbaca English tidak lagi memakai suara British', () => {
     for (const t of ['Momo baru!', 'Momo kucing', 'Hati', 'Siap main?', 'Putar video', 'Mock test'])

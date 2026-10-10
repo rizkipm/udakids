@@ -19,8 +19,8 @@ import { t } from '../../i18n';
 import './games.css';
 
 const PAD = 14;
-/** Warna goresan yang sudah ditebalkan (bergantian per goresan). */
-const INK = ['#5b3fd6', '#e76f51', '#2a9d8f', '#f4a259'];
+/** Warna goresan yang sudah ditebalkan (bergantian per goresan) — token agar kontras di tema terang & gelap. */
+const INK = ['var(--gonjong)', 'var(--langit)', 'var(--toska)', 'var(--jeruk)'];
 
 /**
  * Papan menebalkan angka (D-068). Anak menggores dengan jari/mouse mulai dari titik bernomor; warna mengisi

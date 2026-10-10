@@ -10,25 +10,17 @@ import {
   totalPoints,
   withAccess,
   type Color,
-  type PlayStatus,
 } from '@little-coder/engine';
 import { speak } from '../audio/speech';
 import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { t, type MessageKey } from '../i18n';
 import { ContestEntryCard } from './contest/ContestEntryCard';
-import {
-  bookKey,
-  firstOpen,
-  gradeLabel,
-  levelLabel,
-  shelvesOf,
-  useCatalog,
-  type Shelf,
-} from './catalog';
-import { BookIcon, CheckIcon, DoorIcon, LockIcon, PlayIcon, StatIcon, TrophyIcon } from './icons';
+import { bookKey, firstOpen, gradeLabel, levelLabel, shelvesOf, useCatalog } from './catalog';
+import { DoorIcon, PlayIcon, StatIcon, TrophyIcon } from './icons';
 import { SpeakButton } from './ItemPlayer';
-import { useLinks, type Links } from './links';
+import { useLinks } from './links';
+import { mapelOf, PetaBelajar } from './peta/PetaBelajar';
 import { MomoLoader } from './MomoLoader';
 import { RESUME_MAX_AGE_MS, useProgress } from './practiceStore';
 import { useFetch } from '../auth/useApi';
@@ -64,7 +56,8 @@ const bookLabel = (b: { domain: string; title: string }) => {
 
 /**
  * Beranda anak (D-026). Satu layar = satu keputusan: tombol besar "Lanjut" ke level berikutnya,
- * atau pilih buku → topik. Detail level & materi ada di halaman topik; statistik di Profilku.
+ * atau pilih buku → Peta Belajar (D-111: jalur topik per bab + panel topik). Detail level & materi ada di halaman
+ * topik; statistik di Profilku.
  */
 export function Library({ momoColor }: { momoColor: Color }) {
   const session = useSession('child')!;
@@ -229,7 +222,7 @@ export function Library({ momoColor }: { momoColor: Color }) {
       : t('play.home.allDone');
 
   return (
-    <main className="home">
+    <main className="home" data-mapel={activeBook ? mapelOf(activeBook) : undefined}>
       {top}
 
       <ContestEntryCard />
@@ -328,176 +321,52 @@ export function Library({ momoColor }: { momoColor: Color }) {
         </nav>
       )}
 
+      {activeBook?.lab && (
+        <Link className="booklab-card" to={links.book(activeBook)}>
+          <span className="booklab-card-icon" aria-hidden>
+            <FlaskIcon />
+          </span>
+          <span className="booklab-card-text">
+            <strong>{activeBook.lab.judul}</strong>
+            <span>{activeBook.lab.sub}</span>
+          </span>
+          <PlayIcon />
+        </Link>
+      )}
+
       <h2 className="home-h2">
         {activeBook && grades.length > 1 ? `${activeBook.title} · ` : ''}
-        {t('play.home.topics')}
+        {t('play.peta.title')}
       </h2>
-      {sectionsOf(shelves).map(({ group, shelves: list }) => {
-        // Mock test lomba (D-076) tampil di dalam bagian lombanya, sesudah kisi-kisi, dengan subjudul sendiri.
-        const topics = group ? list.filter((s) => !isMockShelf(s)) : list;
-        const mocks = group ? list.filter(isMockShelf) : [];
-        const split = topics.length > 0 && mocks.length > 0;
-        const grid = (items: Shelf[], mock = false) => (
-          <ol className={`topic-grid${mock ? ' is-mock' : ''}`}>
-            {items.map((s, i) => (
-              <li key={s.category.code}>
-                <TopicCard
-                  links={links}
-                  shelf={s}
-                  n={i + 1}
-                  mock={mock}
-                  statuses={statuses}
-                  isNext={next?.shelf === s}
-                />
-              </li>
-            ))}
-          </ol>
-        );
-        return (
-          <section key={group ?? ''} className={group ? 'topic-section is-group' : 'topic-section'}>
-            {group && (
-              <GroupHeader
-                group={group}
-                topics={topics.length}
-                mocks={mocks.reduce((n, s) => n + s.skills.filter(isMockSkill).length, 0)}
-              />
-            )}
-            {split ? (
-              <>
-                <h3 className="topic-sub">
-                  <BookIcon size={20} />
-                  {t('play.home.subTopics')}
-                </h3>
-                {grid(topics)}
-                <h3 className="topic-sub is-mock">
-                  <TrophyIcon size={20} />
-                  {t('play.home.subMocks')}
-                </h3>
-                {grid(mocks, true)}
-              </>
-            ) : (
-              grid(list, mocks.length > 0 && topics.length === 0)
-            )}
-          </section>
-        );
-      })}
+      {activeBook && (
+        <PetaBelajar
+          book={activeBook}
+          shelves={shelves}
+          statuses={statuses}
+          nextCode={next?.shelf.category.code}
+          links={links}
+          access={data.access ?? FREE_ACCESS}
+          momoColor={momoColor}
+        />
+      )}
     </main>
   );
 }
 
-/**
- * Judul bagian (D-069, D-070). Teks `group` berpola "SINGKATAN · Nama lomba — keterangan", mis.
- * "EMC · Eduversal Mathematics Competition — Penyisihan Final Provinsi 2026": singkatan jadi lencana, nama
- * lomba tebal, keterangan di bawahnya. Teks tanpa pola ini tampil apa adanya.
- */
-function GroupHeader({ group, topics, mocks }: { group: string; topics: number; mocks: number }) {
-  const m = /^(\S{2,12}) · (.+?)(?: [—–-] (.+))?$/.exec(group);
-  const badge = m?.[1];
-  const title = m ? m[2]! : group;
-  const note = m?.[3];
-  const count = [
-    topics > 0 && t('play.home.groupTopics', { n: topics }),
-    mocks > 0 && t('play.home.groupMocks', { n: mocks }),
-  ]
-    .filter(Boolean)
-    .join(' · ');
+/** Ikon labu laboratorium untuk kartu Lab Buku (D-109). */
+function FlaskIcon() {
   return (
-    <header className="topic-group">
-      <span className="topic-group-badge">
-        <TrophyIcon size={22} />
-        {badge}
-      </span>
-      <span className="topic-group-text">
-        <strong>{title}</strong>
-        <span>
-          {note && <>{note} · </>}
-          {count}
-        </span>
-      </span>
-      <SpeakButton text={note ? `${title}. ${note}. ${count}.` : `${title}. ${count}.`} />
-    </header>
-  );
-}
-
-/**
- * Bagian di dalam buku (D-069): materi tanpa `group` lebih dulu (tanpa judul), lalu tiap `group`
- * (mis. EMC) dengan judulnya sendiri. Nomor materi mulai dari 1 di setiap bagian.
- */
-/** Materi mock test: tanda katalog `mock` (D-076) atau level ber-family `mock` (D-072). */
-const isMockShelf = (s: Shelf) => s.category.mock === true || s.skills.some(isMockSkill);
-
-function sectionsOf(shelves: Shelf[]): { group?: string; shelves: Shelf[] }[] {
-  const out: { group?: string; shelves: Shelf[] }[] = [];
-  const plain = shelves.filter((s) => !s.category.group);
-  if (plain.length > 0) out.push({ shelves: plain });
-  for (const s of shelves) {
-    const g = s.category.group;
-    if (!g) continue;
-    const sec = out.find((x) => x.group === g);
-    if (sec) sec.shelves.push(s);
-    else out.push({ group: g, shelves: [s] });
-  }
-  // Bagian "Game · …" selalu di akhir buku (D-078), walau katalog di server menyimpan bagian lomba yang lebih baru
-  // sesudahnya (mis. EMC Kelas 3–4, D-101), supaya semua bagian olimpiade tampil berdampingan.
-  return [
-    ...out.filter((x) => !isGameSection(x.group)),
-    ...out.filter((x) => isGameSection(x.group)),
-  ];
-}
-
-const isGameSection = (group?: string) => !!group && /^Game · /.test(group);
-
-function TopicCard({
-  links,
-  shelf,
-  n,
-  mock = false,
-  statuses,
-  isNext,
-}: {
-  links: Links;
-  shelf: Shelf;
-  n: number;
-  mock?: boolean;
-  statuses: Record<string, PlayStatus>;
-  isNext: boolean;
-}) {
-  const total = shelf.skills.length;
-  const passed = shelf.skills.filter((k) => statuses[k.id] === 'passed').length;
-  const locked = shelf.skills.every((k) => statuses[k.id] === 'locked');
-  const done = passed === total;
-  const state = locked ? 'is-locked' : done ? 'is-done' : isNext ? 'is-next' : 'is-open';
-  return (
-    <Link
-      to={links.topic(shelf.skills[0]!)}
-      className={`topic-card ${state}${mock ? ' is-mock' : ''}`}
-      aria-label={`${shelf.category.title}. ${
-        locked ? t('play.home.lockedTopic') : t('play.home.progress', { passed, total })
-      }${state === 'is-next' ? `. ${t('play.home.suggested')}` : ''}`}
-    >
-      {state === 'is-next' && <span className="topic-tag">{t('play.home.suggested')}</span>}
-      <span className="topic-num">{mock ? <TrophyIcon size={20} /> : n}</span>
-      <span className="topic-title">{shelf.category.title}</span>
-      <span className="topic-foot">
-        {locked ? (
-          <>
-            <LockIcon size={22} /> {t('play.library.locked')}
-          </>
-        ) : done ? (
-          <>
-            <CheckIcon size={22} /> {t('play.home.topicDone')}
-          </>
-        ) : (
-          <>
-            <span className="topic-bar" aria-hidden>
-              <span style={{ width: `${(passed / total) * 100}%` }} />
-            </span>
-            <span className="topic-count">
-              {passed}/{total}
-            </span>
-          </>
-        )}
-      </span>
-    </Link>
+    <svg viewBox="0 0 48 48" width="44" height="44">
+      <path
+        d="M18 4h12M20 4v14L8 38a5 5 0 0 0 4 8h24a5 5 0 0 0 4-8L28 18V4"
+        fill="#e4f2fb"
+        stroke="#2b2540"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path d="M12 34h24l3 5a3 3 0 0 1-3 4H12a3 3 0 0 1-3-4z" fill="#43aa8b" />
+      <circle cx="20" cy="30" r="2.5" fill="#43aa8b" />
+      <circle cx="27" cy="25" r="2" fill="#43aa8b" />
+    </svg>
   );
 }

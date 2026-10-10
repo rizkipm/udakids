@@ -13,8 +13,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: #fff;
-  border: 3px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 5px 0 var(--s-line);
@@ -53,9 +53,9 @@
   width: 68px;
   height: 68px;
   border-radius: 999px;
-  border: 3px solid var(--s-line);
+  border: 2px solid var(--s-line);
   background: var(--s-coral);
-  color: #fff;
+  color: var(--s-on-strong);
   box-shadow: 0 4px 0 var(--s-line);
 }
 .vid-meta {
@@ -86,7 +86,7 @@
   max-height: calc(100dvh - 160px);
   border-radius: 16px;
   overflow: hidden;
-  background: #000;
+  background: var(--awan-2);
 }
 .vid-frame iframe {
   position: absolute;
@@ -100,10 +100,10 @@
   display: grid;
   gap: 4px;
   text-align: center;
-  color: #fff;
+  color: var(--malam);
 }
 .vid-caption span {
-  color: #d9d4ee;
+  color: var(--malam-muted);
 }
 
 /* Artikel */
@@ -300,7 +300,7 @@
   padding: 0;
   border: 2px solid color-mix(in srgb, var(--s-line) 18%, transparent);
   border-radius: 999px;
-  background: #fff;
+  background: var(--kertas);
   color: var(--s-ink);
   cursor: pointer;
   transition:
@@ -311,7 +311,7 @@
 .art-share-btn:hover {
   background: var(--s-grape);
   border-color: var(--s-grape);
-  color: #fff;
+  color: var(--on-gonjong);
 }
 .art-share-btn:focus-visible {
   outline: 3px solid var(--s-sun);
@@ -338,7 +338,7 @@
   overflow: hidden;
   border-radius: 24px;
   background: var(--s-grape-soft);
-  box-shadow: 0 18px 40px -24px rgb(29 26 46 / 45%);
+  box-shadow: 0 18px 40px -24px var(--bayangan);
   touch-action: pan-y;
 }
 .art-gallery-stage:focus-visible {
@@ -384,16 +384,16 @@
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: rgb(255 255 255 / 92%);
+  background: color-mix(in srgb, var(--kertas) 92%, transparent);
   color: var(--s-ink);
-  box-shadow: 0 6px 18px rgb(29 26 46 / 22%);
+  box-shadow: var(--shadow-kartu);
   cursor: pointer;
   transition:
     transform 0.15s,
     background 0.15s;
 }
 .art-gallery-nav:hover {
-  background: #fff;
+  background: var(--kertas);
   transform: scale(1.06);
 }
 .art-gallery-nav:focus-visible {
@@ -412,8 +412,9 @@
   bottom: 14px;
   padding: 4px 12px;
   border-radius: 999px;
-  background: rgb(29 26 46 / 72%);
-  color: #fff;
+  /* Label di atas foto: kertas transparan + teks malam, terbaca di dua tema. */
+  background: color-mix(in srgb, var(--kertas) 88%, transparent);
+  color: var(--malam);
   font-size: 0.85rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -549,7 +550,7 @@
   display: block;
   height: 16px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #efe9de 25%, #f8f3ea 50%, #efe9de 75%);
+  background: linear-gradient(90deg, var(--awan-2) 25%, var(--kertas-2) 50%, var(--awan-2) 75%);
   background-size: 200% 100%;
   animation: sk-shine 1.2s linear infinite;
 }

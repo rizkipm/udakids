@@ -1,22 +1,27 @@
 /**
  * Foto realistis untuk simulasi pelajaran SD (`peraga`, D-093):
  *   pnpm lesson:photos -- math sd1 sains sd1 --dry-run   hitung foto yang belum ada
- *   pnpm lesson:photos -- math sd1 sains sd1              cari di Pexels, saring Claude, setujui (D-095)
+ *   pnpm lesson:photos -- math sd1 sains sd1              Pexels dulu, yang tidak ketemu dibuat AI Gambar (D-117)
  *   pnpm lesson:photos -- math sd1 --max=20               coba sebagian dulu
- *   pnpm lesson:photos -- math sd1 --ai                   buat dengan AI Gambar berbayar (cara lama, D-093)
+ *   pnpm lesson:photos -- math sd1 --tanpa-ai             hanya Pexels (yang tidak ketemu tetap gambar cadangan)
+ *   pnpm lesson:photos -- math sd1 --ai                   langsung AI Gambar untuk semua foto yang belum ada
  *   node dist/cli/lesson-photos.js math sd1 …             (server)
  * Bawaan (D-095): foto stok GRATIS dari Pexels (PEXELS_API_KEY). Tiap kandidat dilihat Claude (cocok dengan
  * label, pantas untuk anak, tanpa tulisan/logo); yang pertama lolos diunduh, disimpan di gudang `ai_images`
  * (model `pexels`, biaya 0, kredit fotografer di kolom prompt) dan langsung disetujui. Tidak ada yang lolos →
- * tetap gambar cadangan SVG. Subjek yang sudah punya foto disetujui dilewati; subjek yang fotonya pernah DITOLAK
- * admin tidak dicari ulang.
- * Mode `--ai` memakai layanan Admin → AI Gambar (batas biaya, audit, sidik jari); foto baru disetujui lewat
+ * dibuat dengan AI Gambar (D-117); tanpa kunci AI Gambar / `--tanpa-ai` → tetap gambar cadangan SVG. Subjek yang
+ * sudah punya foto disetujui dilewati; subjek yang fotonya pernah DITOLAK admin tidak dicari/dibuat ulang.
+ * AI Gambar memakai layanan Admin → AI Gambar (batas biaya, audit, sidik jari); foto baru disetujui lewat
  * `setStatus`, kecuali subjek yang pernah ditolak admin.
  */
 import '../common/env.js';
 import {
+  bookLabSchema,
   catalogSchema,
+  labPhotos,
   lessonPhotos,
+  lessonSchema,
+  materiSchema,
   type AiImageRequest,
   type PeragaPhoto,
 } from '@little-coder/engine';
@@ -85,7 +90,7 @@ export async function findStockPhoto(
 async function main(
   books: [string, string][],
   dryRun: boolean,
-  mode: 'pexels' | 'ai',
+  mode: 'pexels' | 'ai' | 'pexels-only',
   max = Infinity,
 ) {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL ?? DEFAULT_DATABASE_URL });
@@ -99,21 +104,51 @@ async function main(
         .where(and(eq(skillCatalogs.domain, domain), eq(skillCatalogs.grade, grade)));
       if (!row)
         throw new Error(`Buku ${domain}/${grade} tidak ada di database (jalankan seed dulu)`);
-      const cat = catalogSchema.parse({
+      const parsed = catalogSchema.safeParse({
         domain,
         grade,
         title: row.title,
         categories: row.categories,
+        ...(row.lab ? { lab: row.lab } : {}),
       });
-      // Foto simulasi `peraga` dan infografis (D-101).
-      for (const c of cat.categories)
-        if (c.lesson) for (const f of lessonPhotos(c.lesson)) photos.set(f.id, f);
+      if (parsed.success) {
+        // Foto simulasi `peraga` dan infografis (D-101), Materi Topik & Lab Buku (D-109).
+        for (const c of parsed.data.categories) {
+          if (c.lesson) for (const f of lessonPhotos(c.lesson)) photos.set(f.id, f);
+          if (c.materi) for (const f of labPhotos(c.materi)) photos.set(f.id, f);
+        }
+        if (parsed.data.lab) for (const f of labPhotos(parsed.data.lab)) photos.set(f.id, f);
+        continue;
+      }
+      // Katalog di DB tidak lolos skema (mis. pelajaran lama): ambil per bagian, lewati yang rusak.
+      console.warn(
+        `Peringatan: katalog ${domain}/${grade} di database tidak lolos skema; dibaca per bagian.`,
+      );
+      const take = (what: string, fn: () => PeragaPhoto[]) => {
+        try {
+          for (const f of fn()) photos.set(f.id, f);
+        } catch {
+          console.warn(`  dilewati: ${what}`);
+        }
+      };
+      for (const raw of row.categories as { code: string; lesson?: unknown; materi?: unknown }[]) {
+        if (raw.lesson)
+          take(`${raw.code} pelajaran`, () => lessonPhotos(lessonSchema.parse(raw.lesson)));
+        if (raw.materi) take(`${raw.code} materi`, () => labPhotos(materiSchema.parse(raw.materi)));
+      }
+      if (row.lab) take('Lab Buku', () => labPhotos(bookLabSchema.parse(row.lab)));
     }
     const [admin] = await db.select().from(staffUsers).where(eq(staffUsers.role, 'admin')).limit(1);
     if (!admin) throw new Error('Belum ada akun admin');
     const settings = new SettingsService(db);
     const s = await settings.get('ai_image');
-    if (mode === 'pexels') {
+    const have = await db
+      .select({ subject: aiImages.subject, status: aiImages.status, model: aiImages.model })
+      .from(aiImages);
+    const approved = new Set(have.filter((h) => h.status === 'approved').map((h) => h.subject));
+    // Foto yang belum punya gambar disetujui: hanya ini yang dicari di Pexels / dibuat AI.
+    let aiTodo = [...photos.values()].filter((f) => !approved.has(f.id));
+    if (mode !== 'ai') {
       const pexelsKey = process.env.PEXELS_API_KEY?.trim();
       if (!pexelsKey) throw new Error('PEXELS_API_KEY belum diisi di .env');
       const claudeKey = await loadClaudeKey(db);
@@ -121,10 +156,6 @@ async function main(
         throw new Error(
           'Kunci Claude belum ada (Admin → AI Gambar, atau ANTHROPIC_API_KEY di .env)',
         );
-      const have = await db
-        .select({ subject: aiImages.subject, status: aiImages.status, model: aiImages.model })
-        .from(aiImages);
-      const approved = new Set(have.filter((h) => h.status === 'approved').map((h) => h.subject));
       const rejected = new Set(
         have.filter((h) => h.status === 'rejected' && h.model === 'pexels').map((h) => h.subject),
       );
@@ -137,14 +168,15 @@ async function main(
           `${photos.size - missing.length} sudah ada/ditolak admin, ${missing.length} belum ada, ` +
           `${todo.length} dicari sekarang di Pexels (gratis; penyaringan Claude ±US$0,003 per kandidat).`,
       );
-      if (dryRun) return;
+      if (dryRun && mode === 'pexels-only') return;
       const pexels = new PexelsClient(pexelsKey, fetch, undefined, (m) => console.log(m));
       const screener = new ClaudePhotoScreener(claudeKey, s.claudeModel);
       let found = 0;
       let missed = 0;
       let failed = 0;
       let usd = 0;
-      for (const f of todo) {
+      const missedPhotos: PeragaPhoto[] = [];
+      for (const f of dryRun ? [] : todo) {
         if (usd >= s.dailyLimitUsd) {
           console.warn(`Berhenti: biaya penyaringan mencapai batas harian US$${s.dailyLimitUsd}.`);
           break;
@@ -168,7 +200,8 @@ async function main(
           });
           if (!hit) {
             missed++;
-            console.log(`kosong ${f.id} (tetap gambar cadangan)`);
+            missedPhotos.push(f);
+            console.log(`kosong ${f.id} (tidak ada foto Pexels yang cocok)`);
             continue;
           }
           const file = await pexels.download(hit.photo.large);
@@ -205,27 +238,39 @@ async function main(
           if (/ditolak|401|403/.test((err as Error).message)) break;
         }
       }
-      console.log(
-        `Selesai: ${found} foto Pexels disetujui, ${missed} tanpa foto cocok (gambar cadangan), ${failed} gagal, ` +
-          `biaya penyaringan Claude ±US$${usd.toFixed(2)}.`,
-      );
-      return;
+      if (!dryRun)
+        console.log(
+          `Pexels: ${found} foto disetujui, ${missed} tanpa foto cocok, ${failed} gagal, ` +
+            `biaya penyaringan Claude ±US$${usd.toFixed(2)}.`,
+        );
+      if (mode === 'pexels-only') return;
+      // Lanjut AI Gambar hanya untuk yang tidak ketemu di Pexels (dry-run: perkiraan untuk semua yang belum ada).
+      aiTodo = dryRun ? todo : missedPhotos;
     }
 
     const ai = new AiImageService(db, settings, new MailService(db), null);
     const status = await ai.overview();
+    if (mode === 'ai') aiTodo = aiTodo.slice(0, max);
     console.log(
-      `${photos.size} foto simulasi di ${books.map((b) => b.join('/')).join(', ')}. ` +
-        `Perkiraan biaya per foto baru US$${status.estimate.toFixed(3)}.`,
+      `AI Gambar: ${aiTodo.length} foto belum ada. ` +
+        `Perkiraan biaya per foto baru US$${status.estimate.toFixed(3)} ` +
+        `(±US$${(aiTodo.length * status.estimate).toFixed(2)}).`,
     );
+    if (!status.ready) {
+      console.warn(
+        'Kunci AI Gambar belum ada (OPENAI_API_KEY di .env atau Admin → AI Gambar): ' +
+          'foto yang belum ada tetap memakai gambar cadangan SVG.',
+      );
+      return;
+    }
     if (dryRun) return;
     let made = 0;
     let reused = 0;
-    let approved = 0;
+    let approvedNow = 0;
     let cost = 0;
     let failed = 0;
     let streak = 0;
-    for (const f of photos.values()) {
+    for (const f of aiTodo) {
       try {
         const res = await ai.generate(peragaPhotoRequest(f), admin.id);
         if (res.reused) reused++;
@@ -240,7 +285,7 @@ async function main(
             .limit(1);
           if (!rejected) {
             await ai.setStatus(res.image.id, 'approved', admin.id);
-            approved++;
+            approvedNow++;
           }
         }
         console.log(`${res.reused ? 'ada   ' : 'dibuat'} ${f.id}`);
@@ -259,7 +304,7 @@ async function main(
       }
     }
     console.log(
-      `Selesai: ${made} foto baru, ${reused} sudah ada, ${approved} disetujui otomatis, ${failed} gagal, ` +
+      `AI Gambar: ${made} foto baru, ${reused} sudah ada, ${approvedNow} disetujui otomatis, ${failed} gagal, ` +
         `biaya ±US$${cost.toFixed(2)}.`,
     );
   } finally {
@@ -275,12 +320,17 @@ if (require.main === module) {
   for (let i = 0; i + 1 < words.length; i += 2) books.push([words[i]!, words[i + 1]!]);
   if (!books.length) {
     console.error(
-      'Pakai: pnpm lesson:photos -- <domain> <grade> [<domain> <grade> …] [--dry-run] [--ai]',
+      'Pakai: pnpm lesson:photos -- <domain> <grade> [<domain> <grade> …] [--dry-run] [--ai | --tanpa-ai]',
     );
     process.exit(1);
   }
   const max = Number(args.find((a) => a.startsWith('--max='))?.slice(6)) || Infinity;
-  main(books, dryRun, args.includes('--ai') ? 'ai' : 'pexels', max).catch((err: unknown) => {
+  const mode = args.includes('--ai')
+    ? 'ai'
+    : args.includes('--tanpa-ai')
+      ? 'pexels-only'
+      : 'pexels';
+  main(books, dryRun, mode, max).catch((err: unknown) => {
     console.error((err as Error).message);
     process.exit(1);
   });

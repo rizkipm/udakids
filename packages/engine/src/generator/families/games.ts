@@ -190,6 +190,8 @@ export const memoryPairsFamily = defineFamily({
     letters: z.array(letterSchema).min(2).max(6).default(['a', 'i', 'u', 'e', 'o']),
     pairs: range(2, 6).default([3, 3]),
     maxSlips: z.number().int().min(0).max(30).default(10),
+    /** Tampilan kartu tertutup (D-108): pintu monster lucu untuk game berhitung PAUD. */
+    theme: z.enum(['monster']).optional(),
   }),
   generate(p, rng) {
     const want = between(rng, p.pairs);
@@ -255,7 +257,12 @@ export const memoryPairsFamily = defineFamily({
       prompt: `Cari pasangan ${what}.`,
       say: `Buka kartunya dua-dua. Cari pasangan ${what}.`,
       stimulus: [],
-      interaction: { type: 'memory', cards: shuffled, maxSlips: p.maxSlips },
+      interaction: {
+        type: 'memory',
+        cards: shuffled,
+        maxSlips: p.maxSlips,
+        ...(p.theme && { theme: p.theme }),
+      },
       reteach: {
         say: 'Ingat letak kartu yang sudah kamu buka. Kartu yang sama-sama cocok adalah pasangan.',
       },

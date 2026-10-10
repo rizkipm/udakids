@@ -1,4 +1,6 @@
-/** Dekorasi SVG bertema anak (tanpa emoji): bintang, awan, kartu program, balok. */
+/** Dekorasi SVG bertema anak (tanpa emoji): bintang, awan, kartu program, balok.
+ *  Ini ilustrasi (stiker), jadi hex langsung boleh dan sengaja sama di tema terang & gelap (D-110).
+ *  Tanpa ungu: aksen yang dulu ungu kini merah gonjong. */
 
 export function Star({
   className = '',
@@ -173,7 +175,7 @@ export function Icon({ name, size = 44 }: { name: FeatureIcon; size?: number }) 
           <circle cx="24" cy="16" r="10" fill="#ffd6a5" stroke={ink} strokeWidth="2.5" />
           <path
             d="M8 44c2-10 8-15 16-15s14 5 16 15z"
-            fill="#8a6cf0"
+            fill="#c8321f"
             stroke={ink}
             strokeWidth="2.5"
           />
@@ -246,7 +248,7 @@ export function Icon({ name, size = 44 }: { name: FeatureIcon; size?: number }) 
           <path d="M24 10v33" stroke={ink} strokeWidth="2.5" />
           <path
             d="M11 17h8M11 23h8M29 17h8M29 23h8"
-            stroke="#8a6cf0"
+            stroke="#c8321f"
             strokeWidth="3"
             strokeLinecap="round"
           />
@@ -269,7 +271,7 @@ export function Icon({ name, size = 44 }: { name: FeatureIcon; size?: number }) 
           <path d="M27 17h8" stroke="#4aa8ff" strokeWidth="3.5" strokeLinecap="round" />
           <path
             d="M15 31l6 6M21 31l-6 6"
-            stroke="#8a6cf0"
+            stroke="#c8321f"
             strokeWidth="3.5"
             strokeLinecap="round"
           />
@@ -354,7 +356,7 @@ export function Icon({ name, size = 44 }: { name: FeatureIcon; size?: number }) 
             width="22"
             height="8"
             rx="2"
-            fill="#8a6cf0"
+            fill="#c8321f"
             stroke={ink}
             strokeWidth="2.5"
           />

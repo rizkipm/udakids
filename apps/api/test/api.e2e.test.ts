@@ -153,8 +153,8 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         'English SMP Kelas 7-9 (Olimpiade)',
         'Worksheet PAUD',
       ]);
-      // 25 topik materi + topik Game seru (D-078).
-      expect(res.body.books[0]).toMatchObject({ topics: 26, levels: 260 });
+      // 25 topik materi + topik Game seru (D-078) + Game berhitung (D-108) + Arena game (D-115).
+      expect(res.body.books[0]).toMatchObject({ topics: 28, levels: 280 });
       expect(JSON.stringify(res.body)).not.toMatch(/email|nickname|password/i);
       // Rujukan kurikulum dari tag skill (D-059); rujukan internal (ixlRef) tidak pernah tampil.
       const std = (title: string) =>
@@ -415,7 +415,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'prek' && c.domain === 'math',
         ).categories,
-      ).toHaveLength(26);
+      ).toHaveLength(28);
       expect(
         cat.body.catalogs.find(
           (c: { grade: string; domain: string }) => c.grade === 'sd34' && c.domain === 'sains',
@@ -683,7 +683,7 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
         rep.body.areas.find(
           (a: { grade: string; domain: string }) => a.grade === 'prek' && a.domain === 'math',
         ).categories,
-      ).toHaveLength(26);
+      ).toHaveLength(28);
       expect(rep.body.recommendations).toHaveLength(3);
       expect(rep.body.recommendations[0].id).toBe('math.prek.b3.hitung-gambar-sampai-3');
       const prek = rep.body.areas.find(
@@ -1469,18 +1469,18 @@ describe.skipIf(!available)('API end-to-end (Postgres)', () => {
     it('manifest kalimat → admin membuat klip sekali → klip di-cache selamanya', async () => {
       const before = await http().get('/voice/lines').expect(200);
       expect(before.body.enabled).toBe(true);
-      // +2 perintah game EMC Kelas 3–4: koordinat & peluang (D-101).
-      expect(Object.keys(before.body.lines)).toHaveLength(52);
+      // +2 perintah game EMC Kelas 3–4: koordinat & peluang (D-101); +7 perintah Arena game Momo (D-115).
+      expect(Object.keys(before.body.lines)).toHaveLength(61);
       expect(before.body.lines.vo_cmd_pick_one).toMatchObject({ clip: null });
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 52, created: 52, failed: 0, skipped: 0 });
+        .expect(200, { total: 61, created: 61, failed: 0, skipped: 0 });
       const calls = ttsCalls.length;
       await http()
         .post('/admin/voice/generate')
         .set(auth(adminToken))
-        .expect(200, { total: 52, created: 0, failed: 0, skipped: 52 });
+        .expect(200, { total: 61, created: 0, failed: 0, skipped: 61 });
       expect(ttsCalls.length).toBe(calls); // tidak dibuat ulang
       const after = await http().get('/voice/lines').expect(200);
       const key = after.body.lines.vo_cmd_pick_one.clip;

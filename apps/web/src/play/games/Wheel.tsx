@@ -95,7 +95,7 @@ export function WheelGame({
           style={{ ['--n' as string]: n, ['--turn' as string]: `${picked.length * 18}deg` }}
         >
           <svg viewBox="0 0 200 200" className="ferris-art" aria-hidden>
-            <circle cx="100" cy="100" r="78" fill="none" stroke="#b8a4ff" strokeWidth="8" />
+            <circle cx="100" cy="100" r="78" fill="none" stroke="var(--langit)" strokeWidth="8" />
             {Array.from({ length: n }, (_, i) => {
               const a = (i / n) * Math.PI * 2 - Math.PI / 2;
               return (
@@ -105,7 +105,7 @@ export function WheelGame({
                   y1="100"
                   x2={100 + 78 * Math.cos(a)}
                   y2={100 + 78 * Math.sin(a)}
-                  stroke="#b8a4ff"
+                  stroke="var(--langit)"
                   strokeWidth="5"
                 />
               );
@@ -113,7 +113,7 @@ export function WheelGame({
             <circle cx="100" cy="100" r="12" fill="#ffd166" stroke="#2b2540" strokeWidth="4" />
             <path
               d="M100 100 L62 196 M100 100 L138 196"
-              stroke="#2b2540"
+              stroke="var(--malam)"
               strokeWidth="6"
               strokeLinecap="round"
             />

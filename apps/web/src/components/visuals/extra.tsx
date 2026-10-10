@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { formatId, type Visual } from '@little-coder/engine';
 import { OBJECTS } from '@little-coder/engine';
 import { OBJECT_ART } from './objects';
-import { FONT, OUTLINE, TOKENS } from './palette';
+import { FONT, INK, TOKENS } from './palette';
 
 /** Visual untuk kelas 3+: teks, pecahan, tabel, diagram, bangun berukuran, sudut. */
 export type ExtraVisual = Extract<
@@ -26,9 +26,10 @@ export type ExtraVisual = Extract<
 >;
 type Built = { w: number; h: number; body: ReactNode; label: string };
 
-const SHADE = '#8a6cf0';
-const SHADE_SOFT = '#e4dcff';
-const LINE = { stroke: OUTLINE, strokeWidth: 3 } as const;
+// Diagram (pecahan, grafik, jam, kisi angka) = bagan, bukan gambar benda: warna lewat token (D-110).
+const SHADE = 'var(--langit)';
+const SHADE_SOFT = 'color-mix(in srgb, var(--langit) 22%, var(--kertas))';
+const LINE = { stroke: INK, strokeWidth: 3 } as const;
 
 function T({
   x,
@@ -37,7 +38,7 @@ function T({
   children,
   anchor = 'middle',
   weight = 700,
-  fill = OUTLINE,
+  fill = INK,
 }: {
   x: number;
   y: number;
@@ -126,7 +127,7 @@ export function buildExtra(v: ExtraVisual): Built {
             y1={80}
             x2={v.whole ? 156 : 106}
             y2={80}
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={5}
             strokeLinecap="round"
           />
@@ -266,7 +267,14 @@ export function buildExtra(v: ExtraVisual): Built {
             )}
             {ticks.map((t) => (
               <g key={t}>
-                <line x1={left} y1={y(t)} x2={w - 10} y2={y(t)} stroke="#d9d3ea" strokeWidth={2} />
+                <line
+                  x1={left}
+                  y1={y(t)}
+                  x2={w - 10}
+                  y2={y(t)}
+                  stroke="var(--garis)"
+                  strokeWidth={2}
+                />
                 <T x={left - 10} y={y(t)} size={18} anchor="end" weight={600}>
                   {formatId(t)}
                 </T>
@@ -341,7 +349,7 @@ export function buildExtra(v: ExtraVisual): Built {
                   y1={y0}
                   x2={x0 + ((i + 1) * rw) / v.w}
                   y2={y0 + rh}
-                  stroke="#b9a9f5"
+                  stroke="color-mix(in srgb, var(--langit) 45%, var(--kertas))"
                   strokeWidth={1.5}
                 />
               ))}
@@ -353,7 +361,7 @@ export function buildExtra(v: ExtraVisual): Built {
                   y1={y0 + ((i + 1) * rh) / v.h}
                   x2={x0 + rw}
                   y2={y0 + ((i + 1) * rh) / v.h}
-                  stroke="#b9a9f5"
+                  stroke="color-mix(in srgb, var(--langit) 45%, var(--kertas))"
                   strokeWidth={1.5}
                 />
               ))}
@@ -384,8 +392,8 @@ export function buildExtra(v: ExtraVisual): Built {
         label: `balok panjang ${formatId(v.p)}, lebar ${formatId(v.l)}, tinggi ${formatId(v.t)} ${v.unit}`,
         body: (
           <>
-            <path d={top} fill="#efeaff" {...LINE} />
-            <path d={side} fill="#cfc2ff" {...LINE} />
+            <path d={top} fill="color-mix(in srgb, var(--langit) 12%, var(--kertas))" {...LINE} />
+            <path d={side} fill="color-mix(in srgb, var(--langit) 38%, var(--kertas))" {...LINE} />
             <path d={front} fill={SHADE_SOFT} {...LINE} />
             {cubes &&
               Array.from({ length: v.p - 1 }, (_, i) => (
@@ -395,7 +403,7 @@ export function buildExtra(v: ExtraVisual): Built {
                   y1={y0}
                   x2={x0 + (i + 1) * s}
                   y2={y0 + th}
-                  stroke="#9f8cf0"
+                  stroke="color-mix(in srgb, var(--langit) 60%, var(--kertas))"
                   strokeWidth={1.5}
                 />
               ))}
@@ -407,7 +415,7 @@ export function buildExtra(v: ExtraVisual): Built {
                   y1={y0 + (i + 1) * s}
                   x2={x0 + pw}
                   y2={y0 + (i + 1) * s}
-                  stroke="#9f8cf0"
+                  stroke="color-mix(in srgb, var(--langit) 60%, var(--kertas))"
                   strokeWidth={1.5}
                 />
               ))}
@@ -444,7 +452,7 @@ export function buildExtra(v: ExtraVisual): Built {
               <g>
                 <path
                   d={`M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy} Z`}
-                  fill="#fff6d6"
+                  fill="var(--kunyit-soft)"
                   stroke={TOKENS.muted}
                   strokeWidth={2}
                 />
@@ -483,7 +491,7 @@ export function buildExtra(v: ExtraVisual): Built {
               y1={cy}
               x2={cx + r}
               y2={cy}
-              stroke={OUTLINE}
+              stroke={INK}
               strokeWidth={5}
               strokeLinecap="round"
             />
@@ -492,11 +500,11 @@ export function buildExtra(v: ExtraVisual): Built {
               y1={cy}
               x2={ex}
               y2={ey}
-              stroke={OUTLINE}
+              stroke={INK}
               strokeWidth={5}
               strokeLinecap="round"
             />
-            <circle cx={cx} cy={cy} r={6} fill={OUTLINE} />
+            <circle cx={cx} cy={cy} r={6} fill={INK} />
             {v.showValue && (
               <T x={cx + 70 * Math.cos(rad / 2)} y={cy - 70 * Math.sin(rad / 2)} size={24}>
                 {`${formatId(v.degrees)}°`}
@@ -549,7 +557,7 @@ export function buildExtra(v: ExtraVisual): Built {
               x1={cx}
               y1={cy}
               {...hand(hourA, 45)}
-              stroke={OUTLINE}
+              stroke={INK}
               strokeWidth={9}
               strokeLinecap="round"
             />
@@ -561,7 +569,7 @@ export function buildExtra(v: ExtraVisual): Built {
               strokeWidth={6}
               strokeLinecap="round"
             />
-            <circle cx={cx} cy={cy} r={7} fill={OUTLINE} />
+            <circle cx={cx} cy={cy} r={7} fill={INK} />
           </>
         ),
       };
@@ -595,7 +603,7 @@ export function buildExtra(v: ExtraVisual): Built {
               width={rodW}
               height={unit}
               fill="#4f8ff7"
-              stroke={OUTLINE}
+              stroke={INK}
               strokeWidth={2}
             />
           ))}
@@ -610,7 +618,7 @@ export function buildExtra(v: ExtraVisual): Built {
           width={unit}
           height={unit}
           fill="#f7c948"
-          stroke={OUTLINE}
+          stroke={INK}
           strokeWidth={2}
         />
       ));
@@ -648,8 +656,10 @@ export function buildExtra(v: ExtraVisual): Built {
                     y={y}
                     width={cell}
                     height={cell}
-                    fill={blanks.has(n) ? '#fff6d6' : hi.has(n) ? SHADE_SOFT : TOKENS.paper}
-                    stroke={OUTLINE}
+                    fill={
+                      blanks.has(n) ? 'var(--kunyit-soft)' : hi.has(n) ? SHADE_SOFT : TOKENS.paper
+                    }
+                    stroke={INK}
                     strokeWidth={2}
                   />
                   <T x={x + cell / 2} y={y + cell / 2} size={18}>
@@ -679,8 +689,20 @@ export function buildExtra(v: ExtraVisual): Built {
         label: `diagram Venn: ${v.a} saja ${v.onlyA}, ${v.b} saja ${v.onlyB}, keduanya ${v.both} ${OBJECTS[v.object].say}`,
         body: (
           <>
-            <circle cx={130} cy={120} r={90} fill="rgba(138,108,240,0.18)" {...LINE} />
-            <circle cx={210} cy={120} r={90} fill="rgba(247,201,72,0.25)" {...LINE} />
+            <circle
+              cx={130}
+              cy={120}
+              r={90}
+              fill="color-mix(in srgb, var(--langit) 20%, transparent)"
+              {...LINE}
+            />
+            <circle
+              cx={210}
+              cy={120}
+              r={90}
+              fill="color-mix(in srgb, var(--kunyit) 28%, transparent)"
+              {...LINE}
+            />
             <T x={90} y={20} size={18}>
               {v.a}
             </T>
@@ -707,7 +729,7 @@ export function buildExtra(v: ExtraVisual): Built {
             width={u}
             height={u}
             fill="#f79a4a"
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={2}
           />
         ) : (
@@ -718,7 +740,7 @@ export function buildExtra(v: ExtraVisual): Built {
             width={u}
             height={u}
             fill="#f79a4a"
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={2}
           />
         ),

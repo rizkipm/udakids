@@ -26,14 +26,29 @@ function Harness({ onChange }: { onChange?: (v: MomoStyle) => void }) {
 
 describe('Momo & Studio Momo (D-051)', () => {
   it('gradasi memakai linearGradient; aksesori penutup kepala menyembunyikan antena', () => {
+    const antenna = (c: HTMLElement) => c.querySelectorAll('.momo-antenna').length;
     const { container, rerender } = render(<Momo color="biru" />);
     expect(container.querySelector('linearGradient')).toBeNull();
-    expect(container.querySelectorAll('line')).toHaveLength(1);
+    expect(antenna(container)).toBe(1);
     rerender(<Momo color="biru" look={{ gradient: 'toska', accessory: 'jilbab' }} />);
     expect(container.querySelector('linearGradient')).not.toBeNull();
-    expect(container.querySelectorAll('line')).toHaveLength(0);
+    expect(antenna(container)).toBe(0);
     rerender(<Momo color="biru" look={{ accessory: 'pita' }} />);
-    expect(container.querySelectorAll('line')).toHaveLength(1);
+    expect(antenna(container)).toBe(1);
+    rerender(<Momo color="biru" look={{ accessory: 'topi', model: 'kotak' }} />);
+    expect(antenna(container)).toBe(0);
+  });
+
+  it('D-113: Momo UdaKids bawaan — antena gonjong, layar gelap, garis pucuk rebung; kotak tetap ada', () => {
+    const { container, rerender } = render(<Momo />);
+    expect(container.querySelector('.momo-antenna path')).not.toBeNull();
+    expect(container.querySelector('.momo-rebung')).not.toBeNull();
+    expect(container.querySelector('rect[fill="#1c2430"]')).not.toBeNull();
+    // Tanpa warna = merah gonjong merek.
+    expect(container.querySelector('rect[fill="#c8321f"]')).not.toBeNull();
+    rerender(<Momo color="hijau" look={{ accessory: 'none', model: 'kotak' }} />);
+    expect(container.querySelector('.momo-rebung')).toBeNull();
+    expect(container.querySelector('line.momo-antenna')).not.toBeNull();
   });
 
   it('<Momo own> memakai tampilan anak yang sedang bermain, Momo lain tidak', () => {
@@ -84,6 +99,8 @@ describe('Momo & Studio Momo (D-051)', () => {
     let last: MomoStyle | undefined;
     const { container } = render(<Harness onChange={(v) => (last = v)} />);
     for (const name of [
+      'Momo UdaKids',
+      'Momo kotak',
       'Momo kucing',
       'Momo kelinci',
       'Momo beruang',

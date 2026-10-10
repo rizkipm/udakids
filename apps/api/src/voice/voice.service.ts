@@ -13,6 +13,8 @@ import {
   itemVoiceTexts,
   lessonFor,
   lessonVoiceTexts,
+  materiSchema,
+  materiVoiceTexts,
   voiceTextAllowed,
   voiceVocabulary,
   type SkillTemplate,
@@ -376,7 +378,11 @@ export class VoiceService {
       return this.globalList.list;
     const [catalogs, levels, dialog] = await Promise.all([
       this.db
-        .select({ title: skillCatalogs.title, categories: skillCatalogs.categories })
+        .select({
+          title: skillCatalogs.title,
+          categories: skillCatalogs.categories,
+          lab: skillCatalogs.lab,
+        })
         .from(skillCatalogs),
       this.db.select({ title: skills.title }).from(skills).where(eq(skills.status, 'active')),
       this.dialog(),
@@ -445,7 +451,14 @@ export class VoiceService {
       { ...category, ...(parsed.success && { lesson: parsed.data }) },
       levels,
     );
-    const list = buildVoiceAllowList({ texts: lesson ? lessonVoiceTexts(lesson, levels) : [] });
+    // Materi Topik (D-109): kalimatnya + pembuka & soal Contoh per level.
+    const materi = materiSchema.safeParse((category as { materi?: unknown }).materi);
+    const list = buildVoiceAllowList({
+      texts: [
+        ...(lesson ? lessonVoiceTexts(lesson, levels) : []),
+        ...(materi.success ? materiVoiceTexts(materi.data, levels) : []),
+      ],
+    });
     if (this.topicLists.size > 500) this.topicLists.clear();
     this.topicLists.set(id, { at: Date.now(), list });
     return list;

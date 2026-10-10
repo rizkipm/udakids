@@ -22,6 +22,32 @@ const PEEK_MS = 1100;
  * terbuka berkilau; belum cocok → ditutup lagi dengan lembut. Semua kartu yang dibalik dikirim lewat
  * `onDone` dan dinilai engine (`memoryReplay`).
  */
+const MONSTER = ['#9b5de5', '#06d6a0', '#ff8a3d', '#4cc9f0', '#ef476f', '#ffd166'];
+
+/** Pintu monster lucu (D-108): kartu tertutup game berhitung PAUD. */
+function MonsterDoor({ k }: { k: number }) {
+  const c = MONSTER[k % MONSTER.length]!;
+  return (
+    <svg viewBox="0 0 60 60" width="60" height="60">
+      <path d="M10 56 V22 Q30 0 50 22 V56 Z" fill={c} stroke="#2b2540" strokeWidth="3" />
+      <circle cx={k % 2 ? 30 : 23} cy="26" r="7" fill="#fff" stroke="#2b2540" strokeWidth="2.5" />
+      {k % 2 === 0 && (
+        <circle cx="37" cy="26" r="7" fill="#fff" stroke="#2b2540" strokeWidth="2.5" />
+      )}
+      <circle cx={k % 2 ? 31 : 24} cy="27" r="3" fill="#2b2540" />
+      {k % 2 === 0 && <circle cx="38" cy="27" r="3" fill="#2b2540" />}
+      <path d="M20 40 Q30 48 40 40" fill="#fff" stroke="#2b2540" strokeWidth="2.5" />
+      <path d="M24 41 v4 M30 43 v4 M36 41 v4" stroke="#2b2540" strokeWidth="2" />
+      <path
+        d="M16 18 l-6 -10 M44 18 l6 -10"
+        stroke="#2b2540"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function MemoryGame({
   interaction: it,
   disabled = false,
@@ -106,16 +132,20 @@ export function MemoryGame({
               onClick={() => flip(card.id)}
             >
               <span className="mem-inner">
-                <span className="mem-back" aria-hidden>
-                  <svg viewBox="0 0 40 40" width="40" height="40">
-                    <path
-                      d="M20 4 L24.5 15 L36 15.5 L27 23 L30 34.5 L20 28 L10 34.5 L13 23 L4 15.5 L15.5 15 Z"
-                      fill="#ffd166"
-                      stroke="#2b2540"
-                      strokeWidth="2.5"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                <span className={`mem-back${it.theme ? ` is-${it.theme}` : ''}`} aria-hidden>
+                  {it.theme === 'monster' ? (
+                    <MonsterDoor k={k} />
+                  ) : (
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                      <path
+                        d="M20 4 L24.5 15 L36 15.5 L27 23 L30 34.5 L20 28 L10 34.5 L13 23 L4 15.5 L15.5 15 Z"
+                        fill="#ffd166"
+                        stroke="#2b2540"
+                        strokeWidth="2.5"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
                 </span>
                 <span className="mem-front">
                   {card.visual.kind === 'word' ? (

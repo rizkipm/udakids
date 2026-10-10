@@ -59,7 +59,11 @@ export async function mergeNewCategories(
   c: Catalog,
 ) {
   const [row] = await db
-    .select({ title: schema.skillCatalogs.title, categories: schema.skillCatalogs.categories })
+    .select({
+      title: schema.skillCatalogs.title,
+      categories: schema.skillCatalogs.categories,
+      lab: schema.skillCatalogs.lab,
+    })
     .from(schema.skillCatalogs)
     .where(
       and(
@@ -88,6 +92,11 @@ export async function mergeNewCategories(
       out = { ...out, lesson: src.lesson };
       lessons++;
     }
+    // Materi Topik (D-109) ikut aturan yang sama: dari content/ bila belum ada atau versinya lebih lama.
+    if (src?.materi && (!x.materi || x.materi.version < src.materi.version)) {
+      out = { ...out, materi: src.materi };
+      lessons++;
+    }
     if (!src?.mock || !isMockSection(out) || (out.mock && out.group === src.group)) return out;
     moved = true;
     return { ...out, group: src.group, mock: true };
@@ -97,7 +106,17 @@ export async function mergeNewCategories(
   // Penggantian nama resmi (bukan suntingan admin): "(OSN)" → "(Olimpiade)" (D-070), "Pra-TK" → "PAUD" (D-075).
   const renamed = row.title.replace('(OSN)', '(Olimpiade)').replace('Pra-TK', 'PAUD');
   const title = renamed === c.title ? c.title : row.title;
-  if (added.length === 0 && !moved && lessons === 0 && renamedGroups === 0 && title === row.title)
+  // Lab Buku (D-109): dari content/ bila belum ada atau versinya lebih lama.
+  const storedLab = row.lab as Catalog['lab'] | null;
+  const lab = c.lab && (!storedLab || storedLab.version < c.lab.version) ? c.lab : storedLab;
+  if (
+    added.length === 0 &&
+    !moved &&
+    lessons === 0 &&
+    renamedGroups === 0 &&
+    title === row.title &&
+    lab === storedLab
+  )
     return;
   // Materi baru disisipkan di posisinya menurut content/ (setelah materi sebelumnya yang sudah ada), bukan di
   // akhir: bagian (group) & rantai kunci tetap seperti content/ (D-079).
@@ -111,7 +130,7 @@ export async function mergeNewCategories(
   // updatedBy tetap (masih dianggap suntingan admin), hanya isinya yang dilengkapi.
   await db
     .update(schema.skillCatalogs)
-    .set({ title, categories, updatedAt: new Date() })
+    .set({ title, categories, lab, updatedAt: new Date() })
     .where(and(eq(schema.skillCatalogs.domain, c.domain), eq(schema.skillCatalogs.grade, c.grade)));
 }
 
@@ -139,6 +158,7 @@ export async function seed(
       grade: c.grade,
       title: c.title,
       categories: c.categories,
+      lab: c.lab ?? null,
       updatedAt: new Date(),
     };
     await db

@@ -2989,3 +2989,361 @@ tidak ada? Buat dengan berbagai model rambut dan gaya lelaki keren."
   - Rambut jabrik, mohawk, dan topi terbalik menyembunyikan antena.
 - **Pernak-pernik baru:** dasi dan medali.
 - Data tetap di `momo_look`, tanpa migrasi. Semua nama baru lolos test bahasa suara Indonesia (D-106).
+
+## D-107 — UdaKids Design System tahap 1: token, fon lokal, logo gonjong, "Kenapa namanya UdaKids?", keliru = kunyit
+
+Tanggal: 2026-10-10. Pemilik produk memberikan paket design system UdaKids (BRAND.md, tokens, komponen, contoh HTML,
+logo, Momo). Diminta: terapkan agar UdaKids lebih identik, tambahkan penjelasan nama UdaKids di landing, dan cek
+kepatuhannya.
+
+- **Sumber kebenaran desain:** `docs/design-system/` (BRAND.md + tokens.json + aturan komponen). BRAND.md punya tabel
+  **"Penyesuaian dengan aturan proyek"**; aturan proyek menang bila bertabrakan:
+  - area sentuh anak tetap 64 px;
+  - fon dipasang lokal (offline, tanpa server pihak ketiga di halaman anak);
+  - hanya suara Chirp (D-106);
+  - token baru `garis-tegas` untuk batas yang bisa diketuk (`garis` hanya 1,31:1).
+- **Token & komponen** (`apps/web/src/styles/uk-tokens.css`, `uk-components.css`), dimuat global di `main.tsx`:
+  - Variabel lama tiap area diarahkan ke token: `--kid-*` (anak), `--s-*` (landing), `--ui-*` (orang tua/admin),
+    `--bg/--primary` (umum).
+  - Hasilnya: ungu antarmuka menjadi `gonjong`, latar krem menjadi `awan`, garis hitam tebal menjadi `garis-tegas`.
+- **Fon:** Andika (isi) + Lilita One (judul, tombol) dari `@fontsource`.
+- **Tombol:** `.kid-btn` dan `.site-btn` bergaya "anak tangga": isian penuh + bayangan padat 5 px, sudut 16 px,
+  tanpa tepi tebal, bukan pil.
+- **Jawaban keliru: kunyit + petunjuk, bukan merah.**
+  - Menggantikan bagian warna D-021, sesuai panduan merek dan PRD A14 ("tanpa merah besar").
+  - Benar tetap hijau (`sawah`).
+  - Berlaku untuk pilihan jawaban, isian angka, panel umpan balik, kartu hasil, dan riwayat skor.
+- **Logo:** huruf U dari lengkung atap gonjong (`public/brand/udakids-mark.svg`). Dipakai sebagai favicon, ikon
+  iPhone/iPad (`apple-touch-icon.png`, dirender ulang), dan di header landing.
+- **Landing "Kenapa namanya UdaKids?"** (`#tentang`, menu "Tentang"), diambil dari BRAND.md:
+  - Uda = kakak dalam bahasa Minang; Momo menemani seperti kakak yang sabar;
+  - logo dari atap gonjong rumah gadang;
+  - warna marawa & motif pucuk rebung.
+  - Hanya nama UdaKids yang tampil (prinsip "satu nama, satu wajah").
+- **Kontras diperiksa:**
+  - Semua pasangan teks token ≥ 4,5:1 (terang & gelap).
+  - Bintang `kunyit` di atas putih hanya 1,85:1, jadi jumlah bintang harus juga ditulis.
+- **Belum diterapkan (tahap berikutnya, menunggu keputusan):**
+  - Momo bergaya baru (antena gonjong, badan merah). Tampilan Momo adalah pilihan anak (D-051/D-102/D-104).
+  - Mode gelap: token siap, tetapi ±2.300 warna masih tertulis langsung di kode.
+  - Sisa ungu/krem yang ditulis langsung di layar anak, game, orang tua, dan admin. Palet grafik admin (D-099) perlu
+    divalidasi ulang.
+  - Peta Belajar: butuh data baru per topik (cerita, tahukahKamu, diagram) di database; isi materi tidak dikarang.
+  - Warna per mapel (`data-mapel`).
+
+## D-108 — Game berhitung PAUD (topik GN): 10 game baru berwarna; aturan topik game dilonggarkan
+
+Tanggal: 2026-10-10. Permintaan pemilik produk: tambah variasi game PAUD Matematika (tanpa menghapus game lama),
+lebih interaktif dan berwarna; "kalau rules sebelumnya kaku, tambahkan ini dan sesuaikan".
+
+- **Topik baru `math/prek` GN "Game berhitung seru"** (10 level, `standalone`). Topik GM lama tetap utuh.
+  - Daftar game pre-K IXL hanya dipakai sebagai ide mekanisme (berhitung, bingo angka, pola, kartu memori). Nama,
+    gambar, dan alur ditulis sendiri (PRD A17).
+- **Game (Basic: tanpa teks yang harus dibaca, semua dibacakan, target ≥ 64 px, maks. 4 jenis kartu, tanpa batas
+  waktu):**
+  1. Akuarium ikan — `count-game` tema `aquarium`: ikan berenang; ketuk satu per satu (menyala & dihitung Momo),
+     lalu pilih angka.
+  2. Bingo balok — `number-bingo` mode `count`: kartu 3×3 berisi balok berwarna; Momo menyebut angka.
+  3. Ular warna-warni — `count-game` tema `snake`.
+  4. Kue ulang tahun Momo — `cake-game` (gaya `cake`): pasang lilin sebanyak angka; bila tepat lilin menyala lalu
+     ditiup.
+  5. Bingo angka 0–10 — `number-bingo` mode `number` (soal hanya dibacakan, tidak ditulis).
+  6. Bola salju — `count-game` tema `snow` (sampai 20).
+  7. Kalung manik pola — `beads-game` (AB, AAB, ABB, ABC, AABB).
+  8. Taman serangga — `sort-game`: kupu-kupu & semut ke toples sewarna.
+  9. Bingo angka 0–20.
+  10. Kartu monster lucu — `memory-pairs` tema `monster` (angka ↔ banyak benda).
+- **Tipe interaksi baru:** `count` (dinilai seperti pilihan, boleh membetulkan sekali) dan `beads` (game ketuk).
+  Gaya `build: cake`, tema `memory: monster`.
+  - Tidak dipakai di lomba (kunci di perangkat).
+- **Aturan topik game dilonggarkan** (`play.test.ts`):
+  - jenis game kini memperhitungkan tema/gaya (`hitung:ikan`, `bingo:balok`, `isi:kue`, `memory:monster`);
+  - minimal 8 jenis berbeda per 10 level, dan dua level berurutan tidak boleh sama;
+  - sebelumnya 10 jenis harus berbeda semua — terlalu kaku untuk varian bingo 0–10 & 0–20.
+- **Perbaikan suara:** panggilan bingo dan soal Penyihir Hitung kini terdaftar sebagai "kartu" bersuara di server.
+  Sebelumnya kalimat itu tidak dikenali server dan (sejak D-098, tanpa suara browser) akan diam.
+
+## D-109 — Materi berformat lab: Lab Buku per jenjang + Materi Topik detail, foto Pexels, progres disinkronkan
+
+Tanggal: 2026-10-10. Disetujui pemilik produk (jawaban: "Ya, dua lapis", "Jadi ringkasan", "Sinkron ke server",
+"Sains TK + Math TK Olimpiade"). Latar: pelajaran "Belajar dulu" (D-068/D-090) terlalu singkat, maks. 6 layar, dan
+tidak menjelaskan semua jenis soal di 10 level topik. Purwarupa Lab Pancaindra (`sains/tkosn` J) dan materi Angka
+(`math/tkosn` A) disukai: interaktif, seperti laboratorium, bebas urutan.
+
+- **Dua lapis:**
+  - **Lab Buku** — satu per buku/jenjang (±28). Ruang lab dengan pos per tema besar buku itu; tiap pos: jelajah,
+    1–2 eksperimen inti, uji campuran dari topik-topik tema itu, dan tautan ke Materi Topik terkait.
+  - **Materi Topik** — satu per topik (±711, tanpa mock/game). Bagian manual: Kenali/Pahami (poster + foto),
+    Eksperimen (dipilih dari pustaka widget), Jebakan/Ingat. Bagian **otomatis**: Contoh per level (Momo
+    mengerjakan soal asli setiap level 1–10 langkah demi langkah, lalu anak mencoba soal sejenis) dan Uji
+    penguasaan (bank soal level topik, bintang, saran bagian yang perlu diulang). Dengan begitu setiap jenis soal
+    pasti dijelaskan.
+  - Nama tab menyesuaikan mapel (Sains: Kenali · Eksperimen · Rawat/Ingat · Uji; Math: Pahami · Coba di lab ·
+    Contoh soal · Jebakan · Uji; English: Dengar · Kata · Main · Uji). Anak bebas memilih urutan.
+- **Konten = data:** lab ada di `content/` lalu PostgreSQL (seperti pelajaran), divalidasi skema Zod di engine, dan
+  semua kalimatnya otomatis boleh dibuatkan suara Momo (daftar izin katalog, D-091). Tampilan & eksperimen dibuat
+  sekali di web sebagai pustaka widget yang dipakai ulang. Validator: setiap level topik tercakup, Uji ≥ 4 soal per
+  pos, hanya gambar yang ada. Status **draf/aktif** supaya lab setengah jadi tidak tampil ke anak.
+- **"Belajar dulu" lama tetap ada** sebagai ringkasan singkat dan cadangan untuk topik yang belum punya Materi Topik;
+  tombol utama di halaman topik menjadi Materi Topik / Lab.
+- **Gambar:** foto asli Pexels lewat jalur D-095 (`lesson:photos` diperluas ke lab; saringan Claude: cocok, pantas
+  untuk anak, tanpa tulisan/logo; tinjau di Admin → AI Gambar). Setiap slot foto wajib punya cadangan SVG, dipakai
+  bila tidak ada foto yang lolos dan selama offline. Diagram yang tidak aman/jelas sebagai foto (potongan organ
+  dalam), angka, bangun, grafik, dan bagian beranimasi tetap SVG. Perkiraan ±7.000 foto (±US$40 biaya saringan),
+  diambil bertahap per gelombang (batas Pexels 20.000 permintaan/bulan).
+- **Progres lab disinkronkan ke server** lewat outbox seperti latihan (event baru, idempoten per `event.id`):
+  tab selesai dan bintang penguasaan per pos/topik. Tanpa data pribadi tambahan (PRD A17). Tampil di laporan orang
+  tua dan dashboard fasilitator. Bintang Uji tidak mengubah nilai/kunci level latihan.
+- **Urutan:** fondasi → pilot (Sains TK Olimpiade + Math TK Olimpiade) → produksi bergelombang TK/PAUD → SD 1–2 →
+  SD 3–4 → SD 5–6/SMP. Purwarupa Angka berbasis kode (`apps/web/src/play/materi/`) dipindah ke format data lalu
+  dihapus. Rincian di `docs/plan.md`.
+
+## D-112 — Suara PAUD–Kelas 1 tidak lagi "seperti bule": bahasa kartu & kalimat campuran, konteks buku, naskah ucapan
+
+Tanggal: 2026-10-10. Keluhan pemilik produk: bacaan PAUD dan TK masih kaku seperti orang asing, juga beberapa kata
+lain. Suara sangat penting agar anak PAUD–Kelas 1 bisa belajar mandiri.
+
+- **Temuan:**
+  - Suara server sudah Chirp 3 HD Indonesia (`id-ID-Leda`), dan tidak ada lagi suara browser di kode (D-106).
+  - Logat asing berasal dari kalimat Indonesia yang dikirim dengan bahasa **en-GB**.
+  - Di buku English TK (Olimpiade) dan Kelas 1–2:
+    - kartu berbahasa Indonesia ("hijau", "ayam", "kursi", "enam belas", "Benar") dibacakan suara British;
+    - kalimat campuran ("He untuk laki-laki: boy…", "This is my nose artinya ini hidungku.") juga dibacakan
+      British.
+  - Di luar buku English, ±220 pemanggilan `speak()` (pelajaran, game, peraga) masih menebak bahasa per kalimat.
+- **Perbaikan:**
+  - **Konteks buku (perangkat):** di soal/pelajaran buku non-English, semua kalimat `speak()` dibacakan suara
+    Indonesia tanpa menebak bahasa. Tebakan per kalimat hanya di buku English.
+  - **Kalimat campuran:** suara Indonesia bila kata Indonesianya ≥ ⅓ jumlah kata English. Kalimat English yang
+    hanya memuat satu nama tempat Indonesia ("… in Sendang Biru.") tetap British. Label "X: …" tetap dipecah.
+  - **Nama orang & tempat** (Ali, Adi, Budi, Surabaya, Malang, …) dan kata "main" menjadi netral.
+  - **Kartu buku English:** `cardLanguage` memakai kamus arti kartu (`EN_WORDS`) dan bilangan Indonesia.
+    "ayam" → Indonesia, "chicken" → British, kata sama di dua bahasa ("bus") → British.
+  - **Naskah ucapan Indonesia (`speechText`):**
+    - "Huruf A–E" → "Huruf A sampai E";
+    - TK/SD/SMP/PAUD → "Te Ka/Es De/Es Em Pe/Paud" (bukan dieja ala English);
+    - "ke-3" → "ketiga", "No. 2" → "nomor 2", "·" → jeda.
+  - Kunci klip memuat naskah ucapan, jadi klip lama yang keliru tidak dipakai lagi; klip baru dibuat saat pertama
+    diputar.
+- **Test:** semua teks UI anak harus tertebak Indonesia; kasus kalimat campuran/English murni/kartu; konteks buku di
+  perangkat; aturan naskah ucapan.
+
+## D-113 — Momo UdaKids menjadi model tambahan sekaligus tampilan bawaan
+
+Tanggal: 2026-10-10. Keputusan pemilik produk atas usulan BRAND.md: "jadi model tambahan, default-nya seperti ini".
+
+- Model baru `udakids` (pertama di daftar Hias Momo, "Momo UdaKids"):
+  - antena gonjong dengan dua ujung kunyit;
+  - kepala putih, layar wajah gelap, mata & mulut cyan;
+  - badan bergaris pucuk rebung.
+- **Bawaan:** `momo_look.model` kosong = Momo UdaKids (`DEFAULT_MOMO_MODEL`).
+  - Anak yang belum memilih model ikut berganti ke Momo UdaKids.
+  - Anak yang memilih model lain (mis. "Momo kotak") tetap.
+  - Tanpa migrasi.
+- **Warna badan** tetap warna pilihan anak (identitas di papan peringkat). Tanpa warna (landing, hiasan) dan warna
+  "merah" pada Momo UdaKids = merah gonjong merek.
+- Aksesori, pernak-pernik, warna sendiri, dan ekspresi tetap berlaku. Penutup kepala menyembunyikan antena gonjong.
+
+## D-110 — Tema terang (bawaan) & gelap; semua warna antarmuka lewat token
+
+Tanggal: 2026-10-10. Keputusan pemilik produk: "ya, tapi default-nya terang, bisa disesuaikan ke mode gelap" dan
+"lakukan fix dan comply" untuk sisa warna lama.
+
+- **Tema:**
+  - Terang bawaan; pengguna memilih gelap lewat tombol tema (header landing, Profil anak, sidebar orang tua/admin).
+  - Pilihan disimpan per perangkat (`uk.theme`) dan dipasang ke `<html data-theme>` oleh `public/theme-init.js`
+    sebelum halaman tampil. File terpisah, karena CSP produksi melarang skrip inline.
+  - Tidak otomatis mengikuti tema sistem.
+  - Cetak selalu terang.
+- **Token tambahan** (`uk-tokens.css`, terang & gelap, kontras teks ≥ 4,5:1):
+  - permukaan: `awan-2`, `kertas-2`, `bayangan`, `overlay`;
+  - aksen: `langit`, `jeruk`, `toska` (+ `-soft`, `-teks`, `-tekan`, `on-`), serta `sawah-teks`, `sawah-tekan`,
+    `gonjong-teks`, `on-jeruk`;
+  - `ilustrasi-garis`;
+  - palet isi pelajaran `isi-0…10` + `isi-konsonan` + `on-isi` (warna angka & huruf; konsonan bukan ungu lagi);
+  - warna mapel versi gelap.
+- **Pembersihan warna lama** (dikerjakan per area: anak, game/peraga/infografis/visual, landing/orang tua/komponen,
+  admin/guru/shell/grafik):
+  - Semua warna antarmuka kini lewat token; ungu, krem, dan garis hitam tebal hilang dari antarmuka.
+  - Warna literal tersisa hanya untuk gambar: buah, hewan, Momo, koin, balok, langit malam game antariksa, dan
+    pelangi pemilih warna.
+  - Ikut diperbaiki: teks di atas isian kuning/hijau memakai `on-*` (sebelumnya terang-di-atas-kuning di mode gelap),
+    status papan hop, legenda studio Momo, kotak "hitam" marawa, latar sidebar di halaman panjang, overflow 12 px di
+    /admin.
+- **Grafik admin:** palet kategori baru (biru, oranye, aqua, kuning), divalidasi buta warna untuk terang & gelap
+  (pasangan bersebelahan); ramp berurutan biru; status memakai token.
+- **Teks area anak:** "Gagal" di riwayat skor menjadi "Coba lagi" (PRD A14).
+- **Belum:** garis ilustrasi objek (`OUTLINE` gelap) di atas papan gelap kurang tegas untuk objek berwarna gelap;
+  perlu keputusan garis objek yang mengikuti tema.
+
+## D-111 — Peta Belajar dari data yang ada
+
+Tanggal: 2026-10-10. Keputusan pemilik produk: "cek data yang ada dan kemudian buatkan peta belajar yang sesuai".
+
+- Daftar topik di Pustaka (`Library.tsx`) diganti **Peta Belajar** (`apps/web/src/play/peta/`):
+  - jalur berkelok dengan simpul topik zig-zag per bab;
+  - warna mapel lewat `data-mapel`;
+  - panel topik di kanan (≥ 861 px) atau langsung di bawah simpul yang diketuk (HP; buku bisa punya 42–53 topik).
+- **Hanya data yang ada, tanpa mengarang materi:**
+
+  | Elemen                      | Sumber                                                                                                                          |
+  | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+  | Warna mapel                 | domain & jenjang buku (math → matematika, sains, english, worksheet → bindo, buku/bab lomba KMSI/EMC/OSN → olimpiade)           |
+  | Bab                         | `category.group`; tanpa grup = satu bab; "Game" & mock di akhir seperti sebelumnya                                              |
+  | Bintang 0–3                 | bagian level yang lulus × 3                                                                                                     |
+  | Lulus / sekarang / terkunci | semua level lulus / topik yang disarankan / semua level terkunci atau berbayar (tertulis "Terkunci"; harga tidak pernah tampil) |
+  | Balon Momo + Dengarkan      | `category.intro` (cadangan: layar pertama pelajaran) lewat suara Chirp                                                          |
+  | Tahukah kamu?               | `category.tips` (cadangan: layar "ingat")                                                                                       |
+  | Pratinjau                   | layar pelajaran infografis/peraga/simulasi yang ada                                                                             |
+  | Foto                        | foto pelajaran Pexels yang sudah disetujui; tanpa teks kredit di area anak (D-095)                                              |
+  | Mulai belajar               | rute halaman topik yang sama (yang akan menjadi Materi Topik/Lab, D-109)                                                        |
+
+- **Belum ada datanya (dihilangkan, bukan diisi contoh):**
+  - diagram bertitik bernomor ("3 dari 8 bagian ditemukan"); butuh gambar + titik berlabel per topik;
+  - foto untuk sebagian besar buku;
+  - pratinjau untuk topik tanpa pelajaran manual.
+- Tetap: chip jenjang/mapel, banner "Lanjutkan permainan terakhir", kartu level berikutnya, kartu lomba. Simpul =
+  tombol ≥ 64 px dengan label status untuk pembaca layar; cincin berputar berhenti bila gerak dikurangi.
+
+## D-114 — Peta Belajar ringkas: jalur ular, tanda posisi, bab & buku selesai
+
+Tanggal: 2026-10-10. Permintaan pemilik produk: jarak zig-zag terlalu jauh dan peta terlalu panjang digulir; perlu
+tanda posisi sekarang, berikutnya, boleh lompat, dan tanda bila semua topik sudah selesai. Menyempurnakan D-111.
+
+- **Jalur ular** menggantikan zig-zag satu-topik-per-baris (184 px/topik):
+  - 3–5 simpul per baris, menurut lebar wadah peta (`columnsFor`, sel minimal 120 px);
+  - baris bolak-balik (`snake`), garis mendatar antarsimpul dan garis turun di ujung baris;
+  - garis dan cincin memakai warna mapel; bagian yang sudah dilalui berwarna sawah;
+  - buku 30 topik: ±1550 px di desktop dan ±2600 px di HP (termasuk panel), sebelumnya ±5500 px;
+  - di HP panel topik menjadi baris selebar jalur, tepat di bawah baris simpul yang diketuk.
+- **Tanda** (semua dari progres yang ada, tanpa data baru):
+
+  | Tanda        | Arti                                                   | Tampilan                                        |
+  | ------------ | ------------------------------------------------------ | ----------------------------------------------- |
+  | Sekarang     | topik yang disarankan (`firstOpen`)                    | label gonjong, cincin putus-putus, Momo si anak |
+  | Berikutnya   | topik terbuka pertama sesudah "sekarang" (urutan peta) | label kunyit + panah, tepi kunyit               |
+  | Boleh lompat | topik terbuka lain; anak boleh memilih langsung        | lencana lengkung di pojok simpul                |
+  | Lulus        | semua level lulus                                      | simpul sawah + centang                          |
+  | Terkunci     | semua level terkunci/berbayar (tanpa harga)            | simpul abu + gembok                             |
+  - Cincin progres di setiap simpul menunjukkan bagian level yang lulus.
+  - Label pembaca layar ikut menyebut tanda.
+  - Kartu ringkasan "x dari y topik lulus" punya bilah, keterangan tanda, dan tombol Dengarkan (suara Chirp).
+
+- **Selesai:**
+  - bab yang semua topiknya lulus diberi "Bab selesai" dan dilipat; tombol "Lihat topik" (≥ 64 px) membukanya lagi;
+  - bila semua topik buku lulus, tampil kartu perayaan: Momo bangga, pita rebung, dan pujian untuk usaha;
+  - tanpa skor angka, streak, atau batas waktu (PRD A17).
+
+### D-109 — catatan implementasi (2026-10-10)
+
+- **Data:** `catalog.lab` (kolom baru `skill_catalogs.lab`, migrasi `0021_lab_progress`) dan `category.materi`.
+  Skema di `packages/engine/src/content/lab.ts`, bank soal di `lab-quiz.ts`. Status `draf` hanya dikirim ke staf
+  (`GET /catalog` memfilter untuk anak & orang tua).
+- **Progres:** `PracticeSync.labs` → event `lab_progress` (idempoten per id) + tabel `lab_progress`
+  (bintang = max). `GET /practice/state` mengembalikan `labs`; laporan anak (`childReport.labs`) menampilkannya
+  ke orang tua, fasilitator, dan admin.
+- **Suara:** teks Lab Buku masuk daftar izin global (katalog); teks Materi Topik + pembuka Contoh per level + soal
+  contoh (`CONTOH_SEED`) masuk daftar izin pelajaran topik (`materiVoiceTexts`).
+- **Web:** `/play/lab/:token` (Lab Buku), `/play/belajar/:token/materi` (Materi Topik); pustaka widget di
+  `apps/web/src/play/lab/` (sains, umum, matematika). Purwarupa kode (`play/materi/`, `/belajar/:token/lab`) dihapus.
+- **Admin:** `/admin/materi-lab` (cakupan per buku) + pratinjau draf memakai komponen anak yang sama.
+- **Produksi:** `pnpm lab:brief | lab:check | lab:merge` (draf per topik di `labs-staging/`, diabaikan git) dan
+  skill `/generate-lab`. Pilot foto Pexels: 43 dari 46 lolos, biaya saringan ±US$0,19.
+
+## D-115 — Arena game Momo (topik GX): 10 game baru di PAUD, TK, dan Kelas 1–4; 7 mekanik baru
+
+Tanggal: 2026-10-10. Permintaan pemilik produk: tambah game dari daftar game IXL per jenjang, dari PAUD sampai
+Kelas 4, tanpa menghapus game yang ada. Game harus kreatif, bervariasi, dan tidak mengulang game yang sudah ada. Setiap
+topik game 10 level, dikelompokkan per jenjang. Gambar dari Pexels/AI bila ada, dan suara Chirp 3 HD (bukan suara
+browser).
+
+- **Topik baru `GX` "Arena game: …" di `math/{prek,tk,sd1,sd2,sd3,sd4}`** (masing-masing 10 level,
+  `standalone`). Topik GM/GN lama tetap utuh.
+  - Daftar IXL hanya dipakai sebagai ide mekanisme. Nama, gambar, dan alur ditulis sendiri (PRD A17).
+- **7 tipe interaksi baru** (`play-arena.ts`, family di `families/arena.ts`), semuanya mekanik yang belum ada di
+  aplikasi:
+  - `quest`: ronde bertema; setiap ronde punya pertanyaan yang dibacakan, dan jawaban tepat memajukan adegan.
+    - `race`/`boat`: balap mobil/perahu dengan aturan lebih banyak/sedikit, terbesar/terkecil,
+      lebih besar/kecil dari, genap/ganjil, kelipatan, prima, atau faktor.
+    - `dice`/`domino`: dadu atau domino harus dilempar/dibalik dulu, lalu dijumlah atau dikalikan.
+    - `kick`: tendang penalti pembulatan di garis bilangan.
+    - `hockey`: ketuk angka pada nilai tempat (sampai jutaan).
+    - `balloon`: pecahkan k balon lalu hitung sisanya.
+  - `bubbles`: gelembung/batu sungai diketuk berurutan (loncat 1, 2, 5, 10, 25, 100, 1.000), dengan pengecoh.
+  - `grid`: papan angka 5 kolom (rumah angka / kembang api).
+    - Mode panggilan: tempat angka yang disembunyikan.
+    - Mode sasaran: semua kelipatan atau semua bilangan prima.
+  - `tens`: susun bilangan dengan ular puluhan atau balok ribuan/ratusan/puluhan/satuan (maks. 9 per bagian).
+    Totalnya sengaja tidak ditampilkan.
+  - `clear`: bersihkan papan; dua permen/batu yang jumlah atau hasil kalinya sama dengan sasaran.
+  - `clock`: putar jarum jam analog (jam tepat sampai per menit, juga format 24 jam). Waktu digital tidak
+    ditampilkan.
+  - `pizza`: warnai potongan pizza/cokelat (pecahan biasa, senilai, dan bilangan campuran).
+  - Game ketuk (`quest`, `bubbles`, `grid`, `clear`): keliru dihitung; keliru ke-2 mengakhiri soal (D-078).
+    `tens`, `clock`, dan `pizza` memakai tombol Selesai dan boleh dibetulkan sekali. Tidak dipakai di lomba maupun
+    mock.
+- **Isi per jenjang** (≥ 8 jenis per topik, level berurutan berbeda; jenis = tipe + tema, `play.test.ts`):
+  - PAUD: gelembung 1–5, pecahkan balon, lempar dadu, rumah angka, balap lebih banyak, batu sungai 1–10, domino,
+    kembang api 1–20, perahu lebih sedikit, balon pesta.
+  - TK: gelembung sampai 100, ular puluhan, dua dadu, kembang api sampai 100, batu loncat 10, balon sisa,
+    permen pasangan 10, balap angka terbesar, domino tambah, perahu angka terkecil.
+  - Kelas 1: batu loncat 2 & 5, kembang api sampai 120, ular puluhan sampai 99, jam tepat & setengah, balap
+    genap-ganjil, permen pasangan 10, tiga dadu, balon sampai 20, perahu lebih besar/kecil, gelembung loncat 10.
+  - Kelas 2: balok ratusan, hoki nilai tempat, tendang pembulatan puluhan, jam 5 menit, permen pasangan 100,
+    empat dadu, pizza pecahan, gelembung loncat 5/10/100, balap genap-ganjil ratusan, papan kelipatan.
+  - Kelas 3: balok ribuan, hoki puluh ribuan, tendang pembulatan ratusan, batu hasil kali, pizza senilai, jam per
+    menit, balap kelipatan, cokelat pecahan, dadu perkalian, papan kelipatan perkalian.
+  - Kelas 4: hoki jutaan, tendang pembulatan ribuan/puluh ribuan, balap prima, pizza bilangan campuran, batu hasil
+    kali besar, papan bilangan prima, perahu faktor, cokelat senilai, jam 24 jam, gelembung loncat ribuan.
+- **Aturan anak:**
+  - PAUD/TK: pertanyaan ronde tidak ditulis, hanya dibacakan.
+  - Target ≥ 64 px di layar 360 px; tanpa hitung mundur, nyawa, atau kata "salah"; gerak dikurangi bila diminta.
+  - Warna papan dan tombol lewat token tema (D-110). Warna literal hanya untuk gambar: balon, dadu, pizza, cokelat,
+    mobil, dan batu.
+- **Gambar:** papan game digambar SVG karena harus bisa diketuk dan bergerak (balon pecah, dadu dilempar, jarum
+  jam berputar), jadi foto tidak dipakai di dalam game. Foto Pexels tetap dipakai di pelajaran dan materi (D-095,
+  D-109).
+- **Suara:** semua pertanyaan ronde, panggilan papan, dan kartu terdaftar di `itemCards`, jadi server
+  membacakannya dengan Chirp lewat id.
+  - Id kartu hoki unik per ronde, karena angkanya berbeda tiap ronde.
+  - Ditambah 7 kalimat perintah `vo_cmd_*`.
+  - Audit lokal: 900 kalimat (60 level) semuanya klip Chirp, 0 gagal.
+
+## D-116 — Toast "sedang bermain" di kiri, admin melihat semua anak aktif, waktu terakhir bermain di landing
+
+Tanggal: 2026-10-10. Permintaan pemilik produk. Mengubah sebagian D-103 dan D-105.
+
+- **Toast landing "sedang bermain"** pindah ke **kiri bawah** (desktop & tablet) supaya tidak bertumpuk dengan tombol
+  "Hubungi admin" di kanan bawah.
+  - Di HP tetap di atas, di bawah menu.
+  - Toast hanya tampil 7 detik dan bisa ditutup, jadi boleh menutupi statistik hero sesaat.
+- **Admin "Sedang bermain"** menampilkan **semua** anak yang aktif ≤ 10 menit; batas 100 baris dihapus. Supaya tetap
+  terbaca saat jumlahnya besar, ada:
+  - pencarian: nama anak, orang tua/email, kelas, kode, dan materi;
+  - halaman 20/50/100 baris.
+- Toast publik tetap maksimal 12 anak dan tanpa anak kelas sekolah.
+- **Papan peringkat landing** kini menampilkan **kapan terakhir bermain** ("Main 7 jam lalu"); D-105 sebelumnya hanya
+  menampilkannya di area masuk. Tetap hanya nama panggilan + warna Momo, tanpa id anak.
+- **Definisi "terakhir bermain"** disatukan: soal terakhir yang dijawab atau ronde terakhir yang selesai.
+  - Sebelumnya papan "semua waktu" hanya melihat ronde selesai, sehingga anak yang menjawab soal hari ini bisa
+    tertulis "3 hari lalu".
+  - Berlaku untuk papan di area anak juga.
+
+## D-117 — Gambar utama materi: foto Pexels, lalu AI Gambar; SVG hanya cadangan terakhir
+
+Tanggal: 2026-10-10. Diminta pemilik produk: "pastikan gambar yang utama dipakai adalah hasil dari AI ataupun
+Pexels". Mengubah bagian "tidak ada yang lolos" di D-095.
+
+- **`pnpm lesson:photos -- <domain> <grade> …` (bawaan):** cari di Pexels + saringan Claude (D-095). Foto yang tidak
+  menemukan kandidat cocok langsung dibuat dengan AI Gambar (layanan Admin → AI Gambar, D-093: batas biaya harian/
+  bulanan, audit, disetujui otomatis kecuali subjek yang pernah ditolak admin).
+- **Hanya subjek tanpa gambar disetujui** yang dicari/dibuat. Mode `--ai` juga tidak lagi membuat ulang gambar untuk
+  subjek yang sudah punya foto (sebelumnya semua foto dikirim ke AI).
+- **`--tanpa-ai`:** hanya Pexels (perilaku lama D-095).
+- **Tanpa kunci AI Gambar** (`OPENAI_API_KEY` di `.env` atau Admin → AI Gambar): skrip memberi peringatan, foto yang
+  belum ada tetap memakai gambar cadangan SVG. SVG tetap wajib di setiap slot gambar (offline, jaringan gagal).
+- **Ukuran katalog:** katalog berisi Materi Topik & Lab Buku kini 0,1–1,3 MB. Simpan katalog oleh admin
+  (`PUT /admin/catalogs/:domain/:grade`) menerima JSON ≤ 5 MB (sama dengan `client_max_body_size` Nginx); route
+  lain tetap ≤ 100 KB (`apps/api/src/common/app-setup.ts`).
+- **Pengisian foto:** slot `benda` (benda/hewan/tempat nyata) tanpa `foto` diberi `foto` dari nama kartunya
+  (4.590 slot); angka, bangun, kata, dan konsep abstrak tetap SVG.

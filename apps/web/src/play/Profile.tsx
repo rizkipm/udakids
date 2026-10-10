@@ -13,6 +13,7 @@ import { useSession } from '../auth/session';
 import { useFetch } from '../auth/useApi';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
+import { ThemeToggle } from '../ui/theme';
 import { SpeakButton } from './ItemPlayer';
 import { useProgress } from './practiceStore';
 import { BackIcon, StatIcon, type StatKind } from './icons';
@@ -126,6 +127,7 @@ export function ProfilePage({ momoColor }: { momoColor: Color }) {
             <Link className="kid-btn secondary" to="/play/momo">
               {t('play.momo.open')}
             </Link>
+            <ThemeToggle className="kid-theme" />
           </div>
         </div>
       </section>

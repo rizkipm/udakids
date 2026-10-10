@@ -1,10 +1,9 @@
-/* Toast "sedang bermain" (D-103). Desktop: kanan bawah tepat di atas tombol WhatsApp — di sana hanya ada gambar hero,
-   sedangkan kiri bawah menutupi statistik & tombol ajakan. HP: di atas, di bawah menu (lihat media query). */
+/* Toast "sedang bermain" (D-103, D-116). Desktop/tablet: kiri bawah — sisi kanan bawah dipakai tombol "Hubungi admin"
+   (WhatsApp), jadi keduanya tidak lagi bertumpuk. HP: di atas, di bawah menu (lihat media query). */
 .play-toast-zone {
   position: fixed;
-  right: max(16px, env(safe-area-inset-right));
-  /* Tepat di atas tombol WhatsApp (56 px + jarak). */
-  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 68px);
+  left: max(16px, env(safe-area-inset-left));
+  bottom: max(16px, env(safe-area-inset-bottom));
   z-index: 24;
   max-width: min(360px, calc(100vw - 32px));
   pointer-events: none;
@@ -16,11 +15,11 @@
   align-items: center;
   gap: 10px;
   padding: 10px 10px 10px 12px;
-  border: 3px solid var(--s-ink, #1d1a2e);
+  border: 1px solid var(--garis);
   border-radius: 18px;
-  background: #fff;
-  color: var(--s-ink, #1d1a2e);
-  box-shadow: 0 10px 28px rgba(29, 26, 46, 0.18);
+  background: var(--kertas);
+  color: var(--malam);
+  box-shadow: var(--shadow-kartu);
   animation: play-toast-in 0.35s ease-out;
 }
 .play-toast-text {
@@ -33,23 +32,23 @@
   overflow-wrap: anywhere;
 }
 .play-toast-text small {
-  color: #5b5670;
+  color: var(--malam-muted);
   font-weight: 700;
 }
 .play-toast-cta {
   justify-self: start;
   margin-top: 4px;
   padding: 4px 12px;
-  border-radius: 999px;
-  background: var(--s-grape, #5b3fd6);
-  color: #fff;
+  border-radius: var(--radius-sm);
+  background: var(--gonjong);
+  color: var(--on-gonjong);
   font-weight: 800;
   font-size: 0.9rem;
   text-decoration: none;
 }
 .play-toast-cta:focus-visible,
 .play-toast-close:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 .play-toast-close {
@@ -60,8 +59,8 @@
   height: 32px;
   border: 0;
   border-radius: 50%;
-  background: #f1eff7;
-  color: var(--s-ink, #1d1a2e);
+  background: var(--awan-2);
+  color: var(--malam);
   cursor: pointer;
 }
 @keyframes play-toast-in {

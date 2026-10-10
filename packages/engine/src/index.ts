@@ -19,6 +19,8 @@ export * from './content/dialog.js';
 export * from './content/voice.js';
 export * from './content/speech-text.js';
 export * from './content/lesson.js';
+export * from './content/lab.js';
+export * from './content/lab-quiz.js';
 export * from './content/auto-lesson.js';
 export * from './content/voice-allow.js';
 export * from './content/voice-split.js';

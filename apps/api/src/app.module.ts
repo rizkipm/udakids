@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AdminDirectoryController } from './admin/admin-directory.controller.js';
 import { AdminLevelsController } from './admin/admin-levels.controller.js';
 import { AdminSkillsController } from './admin/admin-skills.controller.js';
+import { AdminLabController } from './admin/admin-lab.controller.js';
 import { AdminUsersController } from './admin/admin-users.controller.js';
 import { ContentService } from './admin/content.service.js';
 import { AuthModule } from './auth/auth.module.js';
@@ -56,6 +57,7 @@ import { VoiceService } from './voice/voice.service.js';
     ParentController,
     ClassesController,
     AdminSkillsController,
+    AdminLabController,
     AdminLevelsController,
     AdminUsersController,
     AdminDirectoryController,

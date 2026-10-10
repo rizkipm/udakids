@@ -201,8 +201,26 @@ export const practiceSyncSchema = z.strictObject({
     )
     .max(200)
     .default([]),
+  /**
+   * Progres materi berformat lab (D-109), idempoten per id: bintang 0–3 per bagian. `lab` = "domain/grade"
+   * (Lab Buku) atau "domain/grade/kode" (Materi Topik); `part` mis. "pos:mata", "tab:contoh", "uji".
+   */
+  labs: z
+    .array(
+      z.strictObject({
+        id: z.uuid(),
+        lab: z.string().regex(/^[a-z]{2,12}\/[a-z0-9]{2,8}(\/[A-Z]{1,2})?$/),
+        part: z.string().regex(/^[a-z]{2,10}(:[a-z0-9-]{1,30})?$/),
+        stars: z.number().int().min(0).max(3),
+        ts: z.number().int().positive(),
+      }),
+    )
+    .max(200)
+    .default([]),
 });
 export type PracticeSync = z.infer<typeof practiceSyncSchema>;
+/** Progres lab per anak: kunci lab → bagian → bintang (0–3). */
+export type LabProgressMap = Record<string, Record<string, number>>;
 
 export type Role = 'admin' | 'facilitator' | 'parent' | 'child';
 export type SessionUser = { id: string; role: Role; name: string };

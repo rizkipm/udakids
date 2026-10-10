@@ -321,7 +321,7 @@ function MonthlyTrend({ d }: { d: AdminInsights }) {
     >
       <ColumnChart
         label={`${t('admin.ins.trendTitle')}: ${current.label}`}
-        series={[{ key: metric, label: current.label, color: SERIES.grape, values }]}
+        series={[{ key: metric, label: current.label, color: SERIES.blue, values }]}
         tick={(i) => monthName(d.months[i]!.month, 'short')}
         title={(i) => monthName(d.months[i]!.month, 'long')}
         format={fmt}
@@ -661,7 +661,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
             {
               key: 'revenue',
               label: t('admin.ins.revenue'),
-              color: SERIES.grape,
+              color: SERIES.blue,
               values: d.series.map((x) => x.revenue),
             },
           ]}
@@ -772,7 +772,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
         >
           <Donut
             segments={[
-              { label: t('admin.ins.childrenFamily'), value: familyChildren, color: SERIES.grape },
+              { label: t('admin.ins.childrenFamily'), value: familyChildren, color: SERIES.blue },
               { label: t('admin.ins.childrenSelf'), value: u.selfOnly, color: SERIES.orange },
               { label: t('admin.ins.childrenClass'), value: u.inClass, color: SERIES.aqua },
             ]}
@@ -802,7 +802,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
             {
               key: 'parents',
               label: t('admin.ins.newParents'),
-              color: SERIES.grape,
+              color: SERIES.blue,
               values: d.series.map((x) => x.newParents),
             },
             {
@@ -857,7 +857,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
             {
               key: 'passed',
               label: t('admin.ins.passed'),
-              color: SERIES.grape,
+              color: SERIES.blue,
               values: d.series.map((x) => x.passed),
             },
             {
@@ -903,7 +903,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
               {
                 key: 'learners',
                 label: t('admin.ins.learners'),
-                color: SERIES.grape,
+                color: SERIES.blue,
                 values: d.series.map((x) => x.learners),
               },
             ]}
@@ -922,7 +922,7 @@ function AdminInsightsView({ d }: { d: AdminInsights }) {
               {
                 key: 'pass',
                 label: t('admin.ins.passed'),
-                color: SERIES.grape,
+                color: SERIES.blue,
                 values: l.scoreBands.map((n, i) => (i >= passBand ? n : 0)),
               },
               {

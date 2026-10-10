@@ -15,6 +15,11 @@ export type Links = {
   topic: (t: { domain: string; grade: string; category: string }) => string;
   skillOf: (token: string) => string | undefined;
   topicOf: (token: string) => { domain: string; grade: string; code: string } | undefined;
+  /** Materi Topik berformat lab (D-109): token sama dengan topik. */
+  materi: (t: { domain: string; grade: string; category: string }) => string;
+  /** Lab Buku (D-109): `/play/lab/<token>`. */
+  book: (b: { domain: string; grade: string }) => string;
+  bookOf: (token: string) => { domain: string; grade: string } | undefined;
 };
 
 const PEPPER = 'lc-link-v1';
@@ -100,7 +105,7 @@ async function digest(data: Uint8Array<ArrayBuffer>): Promise<Uint8Array> {
   return sha256(data);
 }
 
-export async function linkToken(childId: string, kind: 'level' | 'topic', key: string) {
+export async function linkToken(childId: string, kind: 'level' | 'topic' | 'book', key: string) {
   const data = new TextEncoder().encode(`${PEPPER}|${childId}|${kind}|${key}`);
   const hash = await digest(data);
   return base64url(hash.slice(0, TOKEN_BYTES));
@@ -114,7 +119,15 @@ async function build(childId: string, data: CatalogResponse): Promise<Links> {
   const levelRev = new Map<string, string>();
   const topicTok = new Map<string, string>();
   const topicRev = new Map<string, { domain: string; grade: string; code: string }>();
+  const bookTok = new Map<string, string>();
+  const bookRev = new Map<string, { domain: string; grade: string }>();
   await Promise.all([
+    ...data.catalogs.map(async (c) => {
+      const key = `${c.domain}/${c.grade}`;
+      const tok = await linkToken(childId, 'book', key);
+      bookTok.set(key, tok);
+      bookRev.set(tok, { domain: c.domain, grade: c.grade });
+    }),
     ...data.skills.map(async (s) => {
       const tok = await linkToken(childId, 'level', s.id);
       levelTok.set(s.id, tok);
@@ -134,6 +147,9 @@ async function build(childId: string, data: CatalogResponse): Promise<Links> {
     topic: (t) => `/play/topik/${topicTok.get(topicKey(t)) ?? ''}`,
     skillOf: (tok) => levelRev.get(tok),
     topicOf: (tok) => topicRev.get(tok),
+    materi: (t) => `/play/belajar/${topicTok.get(topicKey(t)) ?? ''}/materi`,
+    book: (b) => `/play/lab/${bookTok.get(`${b.domain}/${b.grade}`) ?? ''}`,
+    bookOf: (tok) => bookRev.get(tok),
   };
 }
 

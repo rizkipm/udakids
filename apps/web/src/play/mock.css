@@ -9,11 +9,11 @@
 .mock-card {
   display: grid;
   gap: 14px;
-  background: var(--kid-card, #fff);
-  border: 4px solid var(--kid-line, #2b2540);
+  background: var(--kertas);
+  border: 4px solid var(--garis-tegas);
   border-radius: 24px;
   padding: 18px 16px;
-  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  box-shadow: 0 5px 0 var(--garis-tegas);
 }
 .mock-head {
   display: flex;
@@ -44,11 +44,11 @@
 }
 .mock-points th,
 .mock-points td {
-  border: 2px solid #ddd6f3;
+  border: 2px solid var(--garis);
   padding: 8px 6px;
 }
 .mock-points th {
-  background: var(--kid-soft, #efe7ff);
+  background: var(--gonjong-soft);
 }
 .mock-actions {
   display: flex;
@@ -71,19 +71,26 @@
 .mock-diff {
   padding: 4px 12px;
   border-radius: 999px;
-  border: 2px solid var(--kid-line, #2b2540);
+  border: 2px solid var(--garis-tegas);
 }
-.mock-diff.is-easy,
+/* Tingkat soal: lencana = warna lembut + teks; titik progres = warna penuh agar tetap terlihat di tema gelap (D-110). */
+.mock-diff.is-easy {
+  background: var(--sawah-soft);
+}
+.mock-diff.is-medium {
+  background: var(--kunyit-soft);
+}
+.mock-diff.is-hard {
+  background: var(--jeruk-soft);
+}
 .mock-dots .is-easy {
-  background: #c9f0d6;
+  background: var(--sawah);
 }
-.mock-diff.is-medium,
 .mock-dots .is-medium {
-  background: #ffe7a3;
+  background: var(--kunyit);
 }
-.mock-diff.is-hard,
 .mock-dots .is-hard {
-  background: #d9ccff;
+  background: var(--jeruk);
 }
 .mock-clock {
   font-variant-numeric: tabular-nums;
@@ -105,7 +112,7 @@
 }
 .mock-dots span.is-now {
   opacity: 1;
-  border-color: var(--kid-line, #2b2540);
+  border-color: var(--garis-tegas);
 }
 .mock-quit {
   display: flex;
@@ -124,7 +131,7 @@
   gap: 2px;
   justify-items: center;
   padding: 12px 8px;
-  border: 3px solid #ddd6f3;
+  border: 3px solid var(--garis);
   border-radius: 16px;
   text-align: center;
 }
@@ -133,12 +140,12 @@
   font-variant-numeric: tabular-nums;
 }
 .mock-stat.is-main {
-  background: var(--kid-soft, #efe7ff);
-  border-color: var(--kid-primary, #5b3fd6);
+  background: var(--gonjong-soft);
+  border-color: var(--gonjong);
 }
 .mock-stat.is-main strong {
   font-size: 2.4rem;
-  color: var(--kid-primary, #5b3fd6);
+  color: var(--gonjong);
 }
 .mock-review {
   list-style: none;
@@ -155,9 +162,9 @@
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  border: 3px solid #ddd6f3;
+  border: 3px solid var(--garis);
   border-radius: 16px;
-  background: #fff;
+  background: var(--kertas);
   text-align: left;
   cursor: pointer;
   font: inherit;
@@ -169,13 +176,15 @@
   font-weight: 800;
   padding: 2px 10px;
   border-radius: 999px;
-  background: #eee;
+  background: var(--awan-2);
 }
 .mock-review .is-right .mock-review-tag {
-  background: #c9f0d6;
+  background: var(--sawah-soft);
+  color: var(--sawah-teks);
 }
 .mock-review .is-wrong .mock-review-tag {
-  background: #ffe7a3;
+  background: var(--kunyit-soft);
+  color: var(--kunyit-teks);
 }
 .mock-review-body {
   padding: 10px 4px;
@@ -190,10 +199,10 @@
   gap: 18px;
   padding: 18px 20px 22px;
   margin: 8px 0 20px;
-  background: #fff;
-  border: 4px solid var(--kid-line, #2b2540);
+  background: var(--kertas);
+  border: 4px solid var(--garis-tegas);
   border-radius: 28px;
-  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  box-shadow: 0 5px 0 var(--garis-tegas);
 }
 .mock-overview .mock-head {
   align-items: center;
@@ -210,7 +219,7 @@
   margin: 4px 0 0;
   font-weight: 600;
   line-height: 1.45;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .mock-facts {
   list-style: none;
@@ -229,17 +238,17 @@
   min-height: 84px;
   padding: 10px 8px;
   border-radius: 18px;
-  background: var(--kid-soft, #efe7ff);
+  background: var(--gonjong-soft);
 }
 .mock-facts strong {
   font-size: 1.35rem;
   line-height: 1.1;
-  color: var(--kid-primary, #5b3fd6);
+  color: var(--gonjong);
 }
 .mock-facts span {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .mock-scoring {
   display: grid;
@@ -254,10 +263,10 @@
   padding: 10px 6px;
 }
 .mock-points .is-plus {
-  color: var(--kid-good, #2e9e5b);
+  color: var(--sawah-teks);
 }
 .mock-points .is-minus {
-  color: #8a5a00;
+  color: var(--kunyit-teks);
 }
 .mock-points .mock-diff {
   display: inline-block;
@@ -267,29 +276,29 @@
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
-/* KKM lomba (D-074): lolos = hijau lembut, belum = ungu lembut (tanpa merah, PRD A14). */
+/* KKM lomba (D-074): lolos = hijau lembut, belum = biru langit lembut (tanpa merah, PRD A14; tanpa ungu, D-110). */
 .mock-kkm {
   margin: 0;
   padding: 12px 14px;
   border-radius: 16px;
   font-weight: 800;
   line-height: 1.35;
-  color: #3b2f86;
-  background: #efe7ff;
-  border: 2px solid #d7c9ff;
+  color: var(--langit-teks);
+  background: var(--langit-soft);
+  border: 2px solid color-mix(in srgb, var(--langit) 35%, transparent);
 }
 .mock-kkm.is-pass {
-  color: #1d6b3c;
-  background: #e3f6ec;
-  border-color: #a8e0bf;
+  color: var(--sawah-teks);
+  background: var(--sawah-soft);
+  border-color: color-mix(in srgb, var(--sawah) 35%, transparent);
 }
 .mock-best {
   margin: 0;
   padding: 12px 14px;
   border-radius: 16px;
-  background: #e9f7ef;
+  background: var(--sawah-soft);
   font-weight: 800;
 }
 .mock-tips {
@@ -302,7 +311,7 @@
 .mock-tips li {
   padding: 10px 14px 10px 40px;
   border-radius: 14px;
-  background: #fff8db;
+  background: var(--kunyit-soft);
   font-weight: 700;
   position: relative;
 }
@@ -315,8 +324,8 @@
   height: 14px;
   margin-top: -7px;
   border-radius: 50%;
-  background: var(--kid-sun, #f7c948);
-  border: 2px solid #d9a200;
+  background: var(--kunyit);
+  border: 2px solid var(--kunyit-tekan);
 }
 .mock-cta {
   display: flex;
@@ -404,10 +413,10 @@
   gap: 12px;
   margin: 0 0 20px;
   padding: 16px 18px 18px;
-  background: #fff;
-  border: 4px solid var(--kid-line, #2b2540);
+  background: var(--kertas);
+  border: 4px solid var(--garis-tegas);
   border-radius: 28px;
-  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  box-shadow: 0 5px 0 var(--garis-tegas);
 }
 .mock-board.is-empty {
   text-align: center;
@@ -423,14 +432,14 @@
   font-size: 1.25rem;
 }
 .mock-board-head small {
-  color: #4a4560;
+  color: var(--malam-muted);
   font-weight: 600;
 }
 .mock-board-say {
   margin: 0;
   padding: 10px 14px;
   border-radius: 14px;
-  background: var(--kid-soft, #efe7ff);
+  background: var(--gonjong-soft);
   font-weight: 700;
 }
 .mock-board .rank-mine h4 {
@@ -446,10 +455,10 @@
   gap: 10px;
   margin: 0 0 20px;
   padding: 16px 18px 18px;
-  background: #fff;
-  border: 4px solid var(--kid-line, #2b2540);
+  background: var(--kertas);
+  border: 4px solid var(--garis-tegas);
   border-radius: 28px;
-  box-shadow: 0 5px 0 var(--kid-line, #2b2540);
+  box-shadow: 0 5px 0 var(--garis-tegas);
 }
 .mock-history h3 {
   margin: 0;
@@ -459,7 +468,7 @@
 .mock-review-hint {
   margin: 0;
   font-weight: 600;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .mock-attempts {
   list-style: none;
@@ -475,7 +484,7 @@
   justify-content: space-between;
   gap: 10px;
   padding: 10px 12px;
-  border: 3px solid #ddd6f3;
+  border: 3px solid var(--garis);
   border-radius: 18px;
 }
 .mock-attempt-main {
@@ -491,10 +500,10 @@
 }
 .mock-attempt-main span {
   font-weight: 600;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .mock-attempt-none {
-  color: #6b6680;
+  color: var(--malam-muted);
   font-weight: 600;
 }
 .mock-history-open {
@@ -554,16 +563,16 @@
   gap: 8px;
   align-content: space-between;
   padding: 14px;
-  border: 3px solid #ddd6f3;
+  border: 3px solid var(--garis);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
 }
 .mock-pick.is-on {
-  border-color: var(--kid-primary, #5b3fd6);
-  background: #faf7ff;
+  border-color: var(--gonjong);
+  background: var(--gonjong-soft);
 }
 .mock-pick.is-locked {
-  background: #f7f6fa;
+  background: var(--awan-2);
 }
 .mock-pick header {
   display: flex;
@@ -578,7 +587,7 @@
 .mock-pick p {
   margin: 0;
   font-weight: 600;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .mock-badge {
   padding: 2px 10px;
@@ -587,12 +596,12 @@
   font-weight: 800;
 }
 .mock-badge.is-free {
-  background: #c9f0d6;
-  color: #1d6b3c;
+  background: var(--sawah-soft);
+  color: var(--sawah-teks);
 }
 .mock-badge.is-premium {
-  background: #ffe7a3;
-  color: #7a5200;
+  background: var(--kunyit-soft);
+  color: var(--kunyit-teks);
 }
 .mock-pick-actions {
   display: grid;
@@ -632,15 +641,16 @@
 .mock-tab {
   min-height: 48px;
   padding: 8px 18px;
-  border: 3px solid var(--kid-line, #2b2540);
+  border: 3px solid var(--garis-tegas);
   border-radius: 999px;
-  background: #fff;
+  background: var(--kertas);
   font: inherit;
   font-weight: 800;
   cursor: pointer;
 }
 .mock-tab.is-on {
-  background: var(--kid-sun, #f7c948);
+  background: var(--kunyit);
+  color: var(--on-kunyit);
 }
 @media (max-width: 820px) {
   .mock-picker {

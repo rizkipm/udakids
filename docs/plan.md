@@ -170,3 +170,50 @@ Dikerjakan di luar urutan atas permintaan pemilik produk (D-014..D-019).
 - [x] Beranda ringkas (satu tombol Main + kartu topik), halaman topik, dialog berhenti, layar Selesai main
 - [x] Layar hasil: satu tombol utama sesuai lulus/gagal
 - [ ] Tinjauan guru untuk teks materi
+
+## Materi berformat lab (permintaan 2026-10-10, D-109)
+
+Purwarupa: Lab Pancaindra (`sains/tkosn` J) dan materi Angka (`math/tkosn` A). Target: setiap buku punya Lab Buku,
+setiap topik (±711) punya Materi Topik detail.
+
+### L0 — Fondasi
+
+- [x] Skema umum Lab Buku + Materi Topik (pos per tema, figur generik, tab per mapel, `labRef` dari topik, status
+      draf/aktif); Lab Pancaindra dipindah ke format ini
+- [x] Slot foto (`foto` + cadangan SVG) di lab; `lesson:photos` mengumpulkan foto lab
+- [x] Bagian otomatis: Contoh per level (semua level topik) + Uji penguasaan dari bank soal
+- [x] Validator cakupan (semua level dirujuk, Uji ≥ 4 soal per pos, gambar ada) + test render semua lab
+- [x] Event progres lab lewat outbox + endpoint idempoten (migrasi), tampil di laporan orang tua & fasilitator
+- [x] Halaman topik: tombol utama Materi Topik/Lab; "Belajar dulu" jadi ringkasan
+- [x] Admin: laporan cakupan lab per buku + pratinjau
+- [x] Skill Claude `/generate-lab` (draf konten dari level + daftar foto)
+
+### L1 — Pilot
+
+- [x] Lab Buku Sains TK (Olimpiade) + Materi Topik J (pancaindra) dengan foto Pexels + 1 topik lain
+- [x] Materi Topik Math TK (Olimpiade) A (angka), purwarupa kode dihapus
+- [ ] Tinjauan pemilik produk → penyesuaian format sebelum produksi
+
+### L2 — Pustaka eksperimen (±30–40 widget, memakai ulang alat peraga/game yang ada)
+
+- [x] Math: hitung-ketuk, garis bilangan, bingkai sepuluh, kereta angka, balok tambah/kurang, nilai tempat (≤ 999),
+      jam, uang, bangun, pola, pecahan, penggaris, grafik, kali/bagi/luas (21 widget; tanpa timbangan & dadu)
+- [x] Sains: figur berbagian (8 figur), pemilah 2–4 kotak, penggeser sebab-akibat, urut (daur, rantai makanan),
+      indra (cahaya, lup, bunyi, bau, rasa, raba); listrik/magnet/tata surya lewat penggeser & pemilah
+- [ ] English: dengar-pilih, pasang, susun (urut), pola sudah; phonics & dialog bergambar belum ada widget khusus
+
+### L3 — Produksi bergelombang (Lab Buku dulu, lalu Materi Topik per topik)
+
+Alur: draf per topik di `labs-staging/` (`pnpm lab:brief` → tulis → `pnpm lab:check`), lalu `pnpm lab:merge`,
+`pnpm validate:content`, `pnpm db:seed`, `pnpm lesson:photos -- <domain> <grade>`. Pantau di Admin → Materi lab.
+
+- [x] Gelombang 1: PAUD & TK (math prek/tk/tkosn, sains tk/tkosn, english prek/tkosn, worksheet prek)
+- [x] Gelombang 2: SD 1–2 (math sd1/sd2/sd12, sains sd1/sd2/sd12, english sd12)
+- [x] Gelombang 3: SD 3–4 (math sd3/sd34/sd4, sains sd3/sd34/sd4, english sd34) + topik Y/Z buku kelas yang
+      sempat terlewat (aturan lewati kini `isLabTopic`: hanya mock test & game)
+- [x] Gelombang 4: SD 5–6 & SMP (math/sains/english sd56 & smp79) — total 726 Materi Topik, 28 Lab Buku
+- [ ] Tinjauan guru per gelombang (akurasi materi)
+
+### L4 — Ukur & perbaiki
+
+- [ ] Dashboard: penyelesaian lab, tab yang dilewati, bintang Uji vs tingkat lulus latihan sebelum/sesudah lab

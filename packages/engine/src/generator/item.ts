@@ -23,6 +23,18 @@ import {
 import type { GlyphId } from './glyphs.js';
 import { bingoReplay, guessReplay, linesCounts, magicReplay, stackValue } from './play-g4.js';
 import { chanceReplay, coordReplay } from './play-emc.js';
+import {
+  bubblesReplay,
+  clearReplay,
+  clockMinutes,
+  clockValue,
+  gridTargetsReplay,
+  pizzaCount,
+  questReplay,
+  tensValue,
+  type QuestTheme,
+  type TensPlace,
+} from './play-arena.js';
 
 export type Layout = 'row' | 'rows' | 'scatter' | 'ring' | 'grid';
 export type Relation = 'in-front' | 'behind' | 'inside' | 'outside' | 'above' | 'below' | 'beside';
@@ -236,8 +248,8 @@ export type Interaction =
       object?: ObjectId;
       max: number;
       frameSize?: 5 | 10 | 20;
-      /** `feed` (D-078) = beri makan hewan: benda masuk ke mangkuk. Penilaian sama. */
-      style?: 'feed';
+      /** `feed` (D-078) = beri makan hewan: benda masuk ke mangkuk; `cake` (D-108) = lilin di kue. Penilaian sama. */
+      style?: 'feed' | 'cake';
       /** Hewan yang diberi makan (default kucing). */
       eater?: ObjectId;
     }
@@ -302,7 +314,13 @@ export type Interaction =
    * Kartu pasangan / memori (D-075): kartu tertutup dibalik dua-dua; `pair` sama = pasangan. Nilai jawaban =
    * urutan kartu yang dibalik; benar bila semua berpasangan dan pasangan meleset ≤ `maxSlips`.
    */
-  | { type: 'memory'; cards: (Choice & { pair: string })[]; maxSlips: number }
+  | {
+      type: 'memory';
+      cards: (Choice & { pair: string })[];
+      maxSlips: number;
+      /** Tampilan kartu tertutup (D-108): pintu monster lucu. */
+      theme?: 'monster';
+    }
   /**
    * Tangkap (D-075): benda bergerak pelan melintas dan terus berputar sampai ditangkap (tanpa hitung mundur).
    * Nilai jawaban = semua ketukan; benar bila semua `answer` tertangkap dan ketukan meleset ≤ `maxSlips`.
@@ -485,7 +503,87 @@ export type Interaction =
       answer: string[];
       fractions: Choice[];
       fraction: string;
+    }
+  /**
+   * Hitung & ketuk (D-108, PAUD): benda di adegan (ikan di akuarium, ruas ular, bola salju) diketuk satu per satu
+   * sambil dihitung Momo, lalu anak memilih angkanya. Nilai jawaban = id pilihan.
+   */
+  | {
+      type: 'count';
+      theme: 'aquarium' | 'snake' | 'snow';
+      n: number;
+      choices: Choice[];
+      answer: string;
+    }
+  /**
+   * Kalung manik pola (D-108, PAUD): manik `shown` (id palet) membentuk pola; anak mengetuk manik dari palet untuk
+   * melanjutkannya. Nilai jawaban = ketukan id palet; ketukan yang tidak melanjutkan pola dihitung keliru.
+   */
+  | { type: 'beads'; shown: string[]; answer: string[]; choices: Choice[] }
+  /**
+   * Ronde bertema (Arena game Momo, D-115): setiap ronde satu pertanyaan + pilihan; jawaban tepat memajukan
+   * mobil/perahu/bidak dadu, menendang bola, menyodok keping hoki, atau memecahkan balon. Ketukan
+   * `"<id ronde>:<id pilihan>"`, berurutan. `dice` = muka dadu/domino, `line` = garis bilangan pembulatan,
+   * `digits` = bilangan yang angkanya diketuk (pilihan `d<posisi>`), `balloons` = balon yang dipecahkan dulu.
+   */
+  | { type: 'quest'; theme: QuestTheme; rounds: QuestRound[] }
+  /** Gelembung / batu sungai (D-115): ketuk bilangan berurutan (loncat 1, 2, 5, 10, …); pengecoh = keliru. */
+  | { type: 'bubbles'; theme: 'bubble' | 'stone'; bubbles: Choice[]; answer: string[] }
+  /**
+   * Papan angka kembang api (D-115): sel `start`… sebanyak `count`, `cols` per baris (sel `c<nilai>`).
+   * `calls` = Momo menyebut bilangan yang disembunyikan (`hidden`), anak mengetuk tempatnya (berurutan);
+   * `targets` = ketuk semua sel yang memenuhi aturan (kelipatan / prima), urutan bebas.
+   */
+  | {
+      type: 'grid';
+      theme: 'fireworks' | 'house';
+      start: number;
+      count: number;
+      cols: number;
+      hidden: number[];
+      calls?: { id: string; text: string; say: string; answer: string }[];
+      targets?: string[];
+    }
+  /** Ular puluhan / balok nilai tempat (D-115): susun `target` dari ribuan/ratusan/puluhan/satuan (maks. 9 per bagian). */
+  | { type: 'tens'; theme: 'snake' | 'blocks'; target: number; places: TensPlace[] }
+  /** Bersihkan papan (D-115): ketuk dua kotak yang jumlah/hasil kalinya `target` sampai papan kosong. */
+  | {
+      type: 'clear';
+      theme: 'candy' | 'stone';
+      op: '+' | '×';
+      target: number;
+      tiles: (Choice & { value: number })[];
+    }
+  /** Atur jam (D-115): putar jarum jam analog ke `hour`:`minute`; jarum menit bergeser per `step` menit. */
+  | { type: 'clock'; hour: number; minute: number; step: number }
+  /**
+   * Pizza / cokelat pecahan (D-115): `wholes` utuh, masing-masing dipotong `parts`; warnai `target` potong
+   * (`num`/`den`, bilangan campuran bila `whole` > 0). Nilai jawaban = id potong `w<i>s<j>`.
+   */
+  | {
+      type: 'pizza';
+      theme: 'pizza' | 'chocolate';
+      wholes: number;
+      parts: number;
+      target: number;
+      whole: number;
+      num: number;
+      den: number;
     };
+
+/** Satu ronde game Arena (D-115). */
+export type QuestRound = {
+  id: string;
+  /** Teks pertanyaan; kosong untuk PAUD/TK (hanya dibacakan). */
+  text: string;
+  say: string;
+  answer: string;
+  choices: Choice[];
+  dice?: number[];
+  line?: { lo: number; hi: number; value: number };
+  digits?: string;
+  balloons?: { n: number; pop: number };
+};
 
 export type InteractionType = Interaction['type'];
 
@@ -536,6 +634,11 @@ export const TAP_GAMES: ReadonlySet<InteractionType> = new Set([
   'bingo',
   'coord',
   'chance',
+  'beads',
+  'quest',
+  'bubbles',
+  'grid',
+  'clear',
 ]);
 
 /**
@@ -551,7 +654,12 @@ export function isRetryGame(it: Interaction): boolean {
     (it.type === 'match' && it.style === 'labels') ||
     it.type === 'chart' ||
     it.type === 'stack' ||
-    it.type === 'lines'
+    it.type === 'lines' ||
+    it.type === 'count' ||
+    (it.type === 'build' && it.style === 'cake') ||
+    it.type === 'tens' ||
+    it.type === 'clock' ||
+    it.type === 'pizza'
   );
 }
 
@@ -622,12 +730,36 @@ export function gameMistakes(
       const r = bingoReplay(it.calls, taps);
       return { mistakes: r.slips, done: r.done };
     }
+    case 'beads': {
+      // Sama seperti panggilan bingo: ketukan harus manik berikutnya dalam pola.
+      const r = bingoReplay(
+        it.answer.map((answer) => ({ answer })),
+        taps,
+      );
+      return { mistakes: r.slips, done: r.done };
+    }
     case 'coord': {
       const r = coordReplay(it.steps, taps);
       return { mistakes: r.slips, done: r.done };
     }
     case 'chance': {
       const r = chanceReplay(it.answer, it.fraction, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'quest': {
+      const r = questReplay(it.rounds, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'bubbles': {
+      const r = bubblesReplay(it.answer, taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'grid': {
+      const r = it.calls ? bingoReplay(it.calls, taps) : gridTargetsReplay(it.targets ?? [], taps);
+      return { mistakes: r.slips, done: r.done };
+    }
+    case 'clear': {
+      const r = clearReplay(it, taps);
       return { mistakes: r.slips, done: r.done };
     }
     default:
@@ -753,6 +885,11 @@ function checkBasic(item: Pick<Item, 'interaction'>, value: AnswerValue): Answer
       const r = jigsawReplay(it, value);
       return { correct: r.done && r.slips <= it.maxSlips };
     }
+    case 'beads':
+    case 'quest':
+    case 'bubbles':
+    case 'grid':
+    case 'clear':
     case 'guess':
     case 'magic':
     case 'bingo':
@@ -769,6 +906,23 @@ function checkBasic(item: Pick<Item, 'interaction'>, value: AnswerValue): Answer
           it.bars.every((b) => Number(value[b.id]) === b.value),
       };
     }
+    case 'count':
+      return { correct: value === it.answer };
+    case 'tens':
+      return {
+        correct:
+          typeof value === 'object' &&
+          !Array.isArray(value) &&
+          tensValue(it.places, value) === it.target,
+      };
+    case 'clock':
+      return {
+        correct:
+          typeof value === 'string' &&
+          clockMinutes(value) === clockMinutes(clockValue(it.hour, it.minute)),
+      };
+    case 'pizza':
+      return { correct: Array.isArray(value) && pizzaCount(it, value) === it.target };
     case 'stack':
       return {
         correct:
@@ -836,11 +990,17 @@ export function allVisuals(item: ItemCore): Visual[] {
                           ? it.cells
                           : it.type === 'chance'
                             ? [...it.outcomes, ...it.fractions]
-                            : it.type === 'jigsaw'
-                              ? [{ id: 'picture', visual: it.picture }]
-                              : 'choices' in it
-                                ? it.choices
-                                : [];
+                            : it.type === 'quest'
+                              ? it.rounds.flatMap((r) => r.choices)
+                              : it.type === 'bubbles'
+                                ? it.bubbles
+                                : it.type === 'clear'
+                                  ? it.tiles
+                                  : it.type === 'jigsaw'
+                                    ? [{ id: 'picture', visual: it.picture }]
+                                    : 'choices' in it
+                                      ? it.choices
+                                      : [];
   choices.forEach((c) => push(c.visual));
   if (it.type === 'maze') it.marks.forEach((m) => m.visual && push(m.visual));
   if (it.type === 'maze' && it.goalVisual) push(it.goalVisual);

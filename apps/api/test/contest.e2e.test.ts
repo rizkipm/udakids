@@ -52,9 +52,18 @@ function rightAnswer(item: ContestItem): AnswerValue {
     case 'stack':
     case 'lines':
     case 'bingo':
+    case 'count':
+    case 'beads':
     case 'coord':
     case 'chance':
-      // Tidak dipakai di lomba (D-075, D-078, D-096, D-101).
+    case 'quest':
+    case 'bubbles':
+    case 'grid':
+    case 'tens':
+    case 'clear':
+    case 'clock':
+    case 'pizza':
+      // Tidak dipakai di lomba (D-075, D-078, D-096, D-101, D-115).
       throw new Error(`${it.type} tidak dipakai di lomba`);
   }
 }

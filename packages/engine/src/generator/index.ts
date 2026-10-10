@@ -5,6 +5,7 @@ export * from './games.js';
 export * from './play.js';
 export * from './play-g4.js';
 export * from './play-emc.js';
+export * from './play-arena.js';
 export * from './glyphs.js';
 export * from './expr.js';
 export * from './item.js';

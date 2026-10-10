@@ -16,7 +16,7 @@ import {
 import { Blob, Cuboid, LINE } from './draw';
 import { layoutCells, type CellLayout } from './layout';
 import { OBJECT_ART, STRETCH_ART, isStretchable, type StretchArt } from './objects';
-import { FONT, OUTLINE, PALETTE, TOKENS, shade } from './palette';
+import { FONT, INK, OUTLINE, PALETTE, TOKENS, shade } from './palette';
 import { Coin, FlatShape, SolidShape } from './shapes';
 import { BodyFigure } from './objects-esc';
 import { Fingers, fingersSize } from './hands';
@@ -52,7 +52,7 @@ const Text = ({
   y,
   size,
   children,
-  fill = OUTLINE,
+  fill = INK,
   weight = 700,
 }: {
   x: number;
@@ -123,7 +123,7 @@ function renderCells(items: ReactNode[], L: CellLayout, opts: CellOpts, offset =
             y1={10}
             x2={90}
             y2={90}
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={8}
             strokeLinecap="round"
           />
@@ -142,11 +142,11 @@ function renderCells(items: ReactNode[], L: CellLayout, opts: CellOpts, offset =
           cx={round(bx)}
           cy={round(by)}
           r={20}
-          fill={OUTLINE}
-          stroke="#ffffff"
+          fill={INK}
+          stroke="var(--kertas)"
           strokeWidth={3}
         />
-        <Text x={round(bx)} y={round(by) + 1} size={24} fill="#ffffff" weight={800}>
+        <Text x={round(bx)} y={round(by) + 1} size={24} fill="var(--kertas)" weight={800}>
           {step}
         </Text>
       </g>
@@ -238,7 +238,7 @@ function Placed({ id, cx, bottom, s }: { id: ObjectId; cx: number; bottom: numbe
 }
 
 const Shadow = ({ cx, s, y = G }: { cx: number; s: number; y?: number }) => (
-  <ellipse cx={cx} cy={y} rx={s * 0.34} ry={4} fill={OUTLINE} opacity={0.14} />
+  <ellipse cx={cx} cy={y} rx={s * 0.34} ry={4} fill="var(--bayangan)" />
 );
 
 type SceneRef = { back?: ReactNode; front: ReactNode; cx: number; top: number };
@@ -474,7 +474,7 @@ const card = (w: number, h: number, dashed = false) => (
     height={h - 8}
     rx={20}
     fill={dashed ? TOKENS.blankFill : TOKENS.card}
-    stroke={dashed ? TOKENS.muted : OUTLINE}
+    stroke={dashed ? TOKENS.muted : INK}
     strokeWidth={dashed ? 4 : 3}
     strokeDasharray={dashed ? '12 9' : undefined}
   />
@@ -522,8 +522,8 @@ function build(v: Visual, countStep?: number): Built {
                 width={100}
                 height={100}
                 rx={4}
-                fill="#fffaf0"
-                stroke={OUTLINE}
+                fill="var(--kertas-2)"
+                stroke={INK}
                 strokeWidth={2}
               />
               <Art color={v.picture.color} />
@@ -533,7 +533,7 @@ function build(v: Visual, countStep?: number): Built {
                 width={w - 2}
                 height={h - 2}
                 rx={3}
-                fill="#ffffff"
+                fill={TOKENS.blankFill}
                 stroke={TOKENS.muted}
                 strokeWidth={2}
                 strokeDasharray="5 4"
@@ -548,7 +548,7 @@ function build(v: Visual, countStep?: number): Built {
         body: (
           <g>
             <svg x={0} y={0} width={w} height={h} viewBox={`${x} ${y} ${w} ${h}`}>
-              <rect x={x} y={y} width={w} height={h} fill="#fffaf0" />
+              <rect x={x} y={y} width={w} height={h} fill="var(--kertas-2)" />
               <Art color={v.picture.color} />
             </svg>
             <rect
@@ -558,7 +558,7 @@ function build(v: Visual, countStep?: number): Built {
               height={h - 1.5}
               rx={2}
               fill="none"
-              stroke={OUTLINE}
+              stroke={INK}
               strokeWidth={1.5}
             />
           </g>
@@ -662,8 +662,8 @@ function build(v: Visual, countStep?: number): Built {
           y={round(PAD + p.y * CELL)}
           width={CELL}
           height={CELL}
-          fill="#ffffff"
-          stroke={OUTLINE}
+          fill={TOKENS.paper}
+          stroke={INK}
           strokeWidth={4}
         />
       ));
@@ -905,7 +905,7 @@ function build(v: Visual, countStep?: number): Built {
                   height={66}
                   rx={8}
                   fill={l ? TOKENS.card : TOKENS.blankFill}
-                  stroke={l ? OUTLINE : TOKENS.muted}
+                  stroke={l ? INK : TOKENS.muted}
                   strokeWidth={3}
                   strokeDasharray={l ? undefined : '8 6'}
                 />

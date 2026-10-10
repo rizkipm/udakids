@@ -35,7 +35,7 @@
   font-weight: 700;
   border: 4px solid var(--kid-line);
   border-radius: 24px;
-  background: #fff;
+  background: var(--kertas);
 }
 .contest-rule-list li {
   padding-left: 30px;
@@ -86,13 +86,13 @@
   padding: 14px 18px;
   border: 4px solid var(--kid-line);
   border-radius: 24px;
-  background: #fff;
+  background: var(--kertas);
   color: inherit;
   text-decoration: none;
   box-shadow: 0 5px 0 var(--kid-line);
 }
 .contest-card.is-live {
-  background: linear-gradient(120deg, #fff3d6, #efe7ff);
+  background: linear-gradient(120deg, var(--kunyit-soft), var(--gonjong-soft));
 }
 .contest-card:focus-visible {
   outline: 5px solid var(--kid-sun);
@@ -108,7 +108,7 @@
   border-radius: 50%;
   background: var(--kid-soft);
   border: 4px solid var(--kid-line);
-  color: var(--kid-line);
+  color: var(--malam);
 }
 .contest-card-body,
 .contest-entry-body {
@@ -126,7 +126,7 @@
 .contest-card-when,
 .contest-card-meta {
   font-weight: 700;
-  color: #4a4560;
+  color: var(--malam-muted);
 }
 .contest-chip {
   align-self: flex-start;
@@ -135,10 +135,11 @@
   border: 3px solid var(--kid-line);
   font-weight: 800;
   font-size: 0.95rem;
-  background: #fff;
+  background: var(--kertas);
 }
 .contest-chip.is-live {
   background: var(--kid-sun);
+  color: var(--on-kunyit);
 }
 .contest-chip.is-ended {
   background: var(--kid-soft);
@@ -152,13 +153,13 @@
   border: 4px solid var(--kid-line);
   border-radius: 20px;
   background: var(--kid-primary);
-  color: #fff;
+  color: var(--on-gonjong);
   font-weight: 800;
   text-align: center;
   max-width: 220px;
 }
 .contest-card.is-upcoming .contest-card-action {
-  background: #fff;
+  background: var(--kertas);
   color: var(--kid-primary);
 }
 
@@ -171,11 +172,19 @@
   margin-bottom: 18px;
   border: 4px solid var(--kid-line);
   border-radius: 28px;
-  background: linear-gradient(120deg, #fff3d6, #ffe7b0);
+  background: linear-gradient(
+    120deg,
+    var(--kunyit-soft),
+    color-mix(in srgb, var(--kunyit) 20%, var(--kertas))
+  );
   box-shadow: 0 6px 0 var(--kid-line);
 }
 .contest-entry.is-live {
-  background: linear-gradient(120deg, #ffe08a, #ffd1f0);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--kunyit) 35%, var(--kertas)),
+    var(--gonjong-soft)
+  );
 }
 .contest-entry-kicker {
   font-weight: 800;
@@ -223,13 +232,14 @@
   padding: 0 16px;
   border: 4px solid var(--kid-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   font-size: 1.5rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
 }
 .contest-clock.is-soon {
   background: var(--kid-sun);
+  color: var(--on-kunyit);
 }
 .contest-progress {
   margin: 0;
@@ -245,7 +255,7 @@
   padding: 12px;
   border: 4px dashed var(--kid-line);
   border-radius: 20px;
-  background: #fff3d6;
+  background: var(--kunyit-soft);
   font-weight: 700;
   text-align: center;
 }
@@ -282,7 +292,7 @@
   padding: 8px 14px;
   border: 3px solid var(--kid-line);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   font-weight: 700;
 }
 .contest-rank-row > .contest-rank-pos {
@@ -310,12 +320,12 @@
 }
 .contest-rank-row > .contest-rank-time {
   grid-area: time;
-  color: #4a4560;
+  color: var(--malam-muted);
   font-size: 0.95rem;
 }
 .contest-rank-row.is-me {
   border-color: var(--kid-primary);
-  background: #efe7ff;
+  background: var(--gonjong-soft);
 }
 
 @media (max-width: 640px) {

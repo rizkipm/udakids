@@ -51,14 +51,32 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
   - Disimpan di `momo_look` yang sudah ada, tanpa migrasi.
 - **D-103 — siapa yang sedang bermain:** detail di admin, toast ajakan di landing.
 - **D-105 — papan peringkat:** "Main 2 jam lalu" di setiap baris (hanya di area masuk, tidak di landing publik).
+- **D-107 — design system UdaKids tahap 1:**
+  - fon Andika + Lilita One (lokal, ikut `pnpm install`);
+  - logo U gonjong (favicon & ikon iPhone baru);
+  - warna antarmuka merah gonjong, bukan ungu; tombol anak tangga;
+  - jawaban keliru berwarna kunyit (bukan merah);
+  - section "Kenapa namanya UdaKids?" di landing.
+- **D-110 / D-111 / D-112 / D-113:**
+  - mode gelap (tombol tema; terang bawaan) dan semua warna lewat token;
+  - Peta Belajar menggantikan daftar topik;
+  - suara PAUD–Kelas 1 tidak lagi berlogat asing (kartu & kalimat campuran, singkatan TK/SD);
+  - Momo UdaKids menjadi bawaan.
+  - File baru `public/theme-init.js` ikut terbangun ke `dist`; tidak perlu mengubah CSP nginx.
 - **D-106 — suara:**
   - suara bawaan browser dihapus total;
   - tebakan bahasa diperbaiki ("Momo baru!", "Siap main?", "Putar video" tidak lagi dibacakan suara British).
+- **D-108 / D-115 — game baru Matematika:**
+  - PAUD "Game berhitung seru" (GN, 10 game);
+  - "Arena game" (GX) di PAUD, TK, dan Kelas 1–4: 6 × 10 level, 7 mekanik baru (balapan, dadu/domino, tendang
+    pembulatan, hoki nilai tempat, balon, gelembung/batu, papan angka, ular/balok nilai tempat, bersihkan papan,
+    atur jam, pizza/cokelat pecahan);
+  - +7 kalimat perintah Momo. Tanpa migrasi; ikut `seed:prod`. Suara: jalankan `voice:prod` (langkah 6).
 
 **Yang perlu di server:**
 
 - **Migrasi baru `0020`** (index `events(type, ts)`): `migrate:prod` wajib.
-- **`seed:prod` wajib:** Kelas 4 dan EMC.
+- **`seed:prod` wajib:** Kelas 4, EMC, dan game baru (GN + GX).
 - **File `baru-2026-10-09.ndjson.gz`** (±97 MB, sudah disiapkan di laptop): 3.809 klip suara Chirp + 129 foto.
   Tanpa kunci, tanpa kata sandi. Klip/foto yang sudah ada di server dilewati.
 - **Cek `.env` server:**
@@ -168,6 +186,12 @@ Hasil yang diharapkan:
   - ketik kode warna `#13C2C2` → Momo berganti warna;
   - Simpan → Momo baru tampil di profil dan papan peringkat.
 - **Anak → Papan peringkat:** setiap baris bertuliskan "Main … lalu".
+- **Landing:** logo U merah di kiri atas, menu "Tentang" menuju section "Kenapa namanya UdaKids?".
+- **Anak → jawab satu soal keliru:** pilihan berwarna kuning dengan "Belum tepat…" + petunjuk, tidak merah.
+- **Tema:** tombol bulan/matahari di header landing → mode gelap; muat ulang → tetap gelap; kembali terang.
+- **Anak → Pustaka:** Peta Belajar (jalur & simpul topik), panel topik, "Mulai belajar" merah.
+- **Anak → buku English Kelas 1–2 → soal warna:** kartu "hijau" bersuara Indonesia, "green" bersuara British.
+- **Ikon tab browser:** logo U merah (bila masih Momo lama, muat ulang paksa / bersihkan cache).
 
 Bila ada kalimat yang diam (tanpa suara), tunggu sebentar lalu ketuk speaker lagi: klip baru sedang dibuat.
 

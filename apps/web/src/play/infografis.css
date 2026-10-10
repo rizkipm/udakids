@@ -1,9 +1,11 @@
-/* Poster infografis pelajaran (D-101). Area anak: terang, kontras tinggi, target sentuh ≥ 64 px. */
+/* Poster infografis pelajaran (D-101). Area anak: kontras tinggi, target sentuh ≥ 64 px.
+   Warna dari token toska (D-110) agar terbaca di tema terang & gelap; isian aksen memakai --kertas sebagai teks. */
 .info {
-  --info-ink: #0b4f45;
-  --info-accent: #0f7b6c;
-  --info-soft: #e7f5f1;
-  --info-line: #b9ded4;
+  --info-ink: var(--toska-teks);
+  --info-accent: var(--toska-teks);
+  --on-info: var(--kertas);
+  --info-soft: var(--toska-soft);
+  --info-line: color-mix(in srgb, var(--toska) 40%, var(--kertas));
   width: 100%;
   display: grid;
   gap: 14px;
@@ -21,7 +23,7 @@
   gap: 12px 18px;
   padding: 16px;
   border-radius: 22px;
-  background: linear-gradient(135deg, #fff 0%, var(--info-soft) 100%);
+  background: linear-gradient(135deg, var(--kertas) 0%, var(--info-soft) 100%);
   border: 3px solid var(--info-line);
 }
 .info-title {
@@ -41,7 +43,7 @@
 .info-title p {
   margin: 8px 0 0;
   font-weight: 700;
-  color: #34394f;
+  color: var(--malam);
 }
 .info-hero {
   flex: 0 1 240px;
@@ -55,8 +57,8 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 18px;
-  border: 3px solid #fff;
-  box-shadow: 0 6px 16px rgba(11, 79, 69, 0.18);
+  border: 3px solid var(--kertas);
+  box-shadow: 0 6px 16px var(--bayangan);
 }
 .info-points {
   list-style: none;
@@ -76,7 +78,7 @@
   text-align: left;
   border: 3px solid var(--info-line);
   border-radius: 18px;
-  background: #fff;
+  background: var(--kertas);
   padding: 10px 12px;
 }
 .info-point.is-on,
@@ -95,7 +97,7 @@
   display: grid;
   place-items: center;
   background: var(--info-accent);
-  color: #fff;
+  color: var(--on-info);
   font-weight: 900;
   font-size: 1.4rem;
 }
@@ -139,7 +141,7 @@
   height: 104px;
   border-radius: 50%;
   border: 3px solid var(--info-accent);
-  background: #fff;
+  background: var(--kertas);
   display: grid;
   place-items: center;
   text-align: center;
@@ -158,7 +160,7 @@
 .info-panel {
   border: 3px solid var(--info-line);
   border-radius: 20px;
-  background: #fff;
+  background: var(--kertas);
   padding: 12px;
   display: grid;
   gap: 10px;
@@ -170,7 +172,7 @@
   padding: 6px 16px;
   border-radius: 999px;
   background: var(--info-accent);
-  color: #fff;
+  color: var(--on-info);
   font-size: 1rem;
   text-transform: uppercase;
   text-align: center;
@@ -249,9 +251,9 @@
   align-items: center;
   gap: 10px;
   text-align: left;
-  border: 3px solid #d9d3ea;
+  border: 3px solid var(--garis-tegas);
   border-radius: 16px;
-  background: #fff;
+  background: var(--kertas);
   padding: 8px 10px;
   font-weight: 700;
 }
@@ -259,10 +261,10 @@
   flex: none;
 }
 .info-tip.is-good {
-  background: #f1faf3;
+  background: var(--sawah-soft);
 }
 .info-tip.is-careful {
-  background: #fff9e8;
+  background: var(--kunyit-soft);
 }
 .info-quote {
   width: 100%;
@@ -270,7 +272,7 @@
   border: 3px solid transparent;
   border-radius: 999px;
   background: var(--info-ink);
-  color: #fff !important;
+  color: var(--on-info) !important;
   padding: 12px 22px;
   font-weight: 800;
   font-size: 1.05rem;

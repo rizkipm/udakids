@@ -1,7 +1,13 @@
 import type { Color } from '@little-coder/engine';
 
-/** Warna garis tepi semua ilustrasi (ungu tua, kontras tinggi di latar terang). */
+/** Warna garis tepi gambar benda (bagian dari ilustrasi, tetap sama di tema terang & gelap). */
 export const OUTLINE = '#2b2540';
+
+/**
+ * Tinta untuk teks, angka, sumbu, dan garis diagram yang langsung berada di atas permukaan (bukan di atas
+ * gambar benda). Token agar tetap terbaca di tema gelap (D-110).
+ */
+export const INK = 'var(--malam)';
 
 /** Token warna untuk COLORS. `fill` = badan utama, `light` = sorotan, `dark` = bayangan. */
 export type ColorToken = { fill: string; light: string; dark: string };
@@ -21,11 +27,12 @@ export const PALETTE: Record<Color, ColorToken> = {
 
 /** Warna netral dan warna peran. */
 export const TOKENS = {
-  ink: OUTLINE,
-  paper: '#ffffff',
-  card: '#fffdf7',
-  muted: '#7a7394',
-  blankFill: '#f4f1fb',
+  ink: INK,
+  /** Permukaan diagram (kartu, lingkaran pecahan, kotak isian) mengikuti tema (D-110). */
+  paper: 'var(--kertas)',
+  card: 'var(--kertas-2)',
+  muted: 'var(--malam-muted)',
+  blankFill: 'var(--awan-2)',
   /** Titik / penghitung default (bukan merah). */
   dot: '#2f80ed',
   /** Sorotan "hitung bersama". */

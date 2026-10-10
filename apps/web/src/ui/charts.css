@@ -1,17 +1,61 @@
+/* Warna grafik (D-110). Nada ikon KPI memakai token merek; seri data memakai palet kategori --viz-* yang
+   sudah divalidasi buta warna untuk tema terang (permukaan #ffffff) dan gelap (#1e252c). Urutan slot tetap —
+   urutan itulah yang menjaga jarak warna antar-seri bersebelahan. Tanpa ungu. */
 :root {
-  --pd-grape: #5b3fd6;
-  --pd-grape-bg: #efeaff;
-  --pd-leaf: #0f7b4f;
-  --pd-leaf-bg: #e3f6ec;
-  --pd-sky: #1f5fbf;
-  --pd-sky-bg: #e5efff;
-  --pd-sun: #9a5b00;
-  --pd-sun-bg: #fff3d6;
-  --pd-coral: #b4401f;
-  --pd-coral-bg: #ffe6de;
+  --pd-grape: var(--gonjong-teks);
+  --pd-grape-bg: var(--gonjong-soft);
+  --pd-leaf: var(--sawah-teks);
+  --pd-leaf-bg: var(--sawah-soft);
+  --pd-sky: var(--langit-teks);
+  --pd-sky-bg: var(--langit-soft);
+  --pd-sun: var(--kunyit-teks);
+  --pd-sun-bg: var(--kunyit-soft);
+  --pd-coral: var(--jeruk-teks);
+  --pd-coral-bg: var(--jeruk-soft);
+
+  /* Palet kategori (biru, oranye, hijau toska, kuning) — satu-satunya hex baru, khusus data. */
+  --viz-1: #2a78d6;
+  --viz-2: #eb6834;
+  --viz-3: #1baf7a;
+  --viz-4: #eda100;
+  /* Warna teks di atas tiap slot (label treemap). */
+  --viz-on-1: var(--kertas);
+  --viz-on-2: var(--malam);
+  --viz-on-3: var(--malam);
+  --viz-on-4: var(--malam);
+  /* Seri pembanding/"lainnya" dan garis bantu. */
+  --viz-muted: color-mix(in srgb, var(--garis-tegas) 45%, var(--kertas));
+  --viz-muted-2: var(--garis-tegas);
+  --viz-on-muted: var(--malam);
+  /* Ramp berurutan satu warna (biru): ujung terkuat; tingkat lain = campuran dengan --kertas. */
+  --viz-seq: #184f95;
+  --viz-seq-on: var(--kertas);
+  /* Warna status (selalu disertai label/ikon). */
+  --viz-good: var(--sawah);
+  --viz-warning: var(--kunyit);
+  --viz-info: var(--langit);
+  --viz-critical: var(--gonjong);
+  /* Rangka grafik. */
+  --viz-grid: var(--garis);
+  --viz-track: var(--awan-2);
+  --viz-cross: var(--garis-tegas);
+  --viz-hl: color-mix(in srgb, var(--langit) 8%, transparent);
+}
+:root[data-theme='dark'] {
+  --viz-1: #3987e5;
+  --viz-2: #d95926;
+  --viz-3: #199e70;
+  --viz-4: #c98500;
+  --viz-on-1: var(--awan);
+  --viz-on-2: var(--awan);
+  --viz-on-3: var(--awan);
+  --viz-on-4: var(--awan);
+  --viz-seq: #6da7ec;
+  --viz-seq-on: var(--awan);
+  --viz-hl: color-mix(in srgb, var(--langit) 14%, transparent);
 }
 .pd-kpi {
-  background: rgba(255, 255, 255, 0.95);
+  background: color-mix(in srgb, var(--kertas) 95%, transparent);
 }
 .pd-kpi-icon {
   grid-area: icon;
@@ -81,10 +125,10 @@
   stroke-width: 7;
 }
 .pd-ring-bg {
-  stroke: #efecf6;
+  stroke: var(--viz-track);
 }
 .pd-ring-fg {
-  stroke: #2fa36b;
+  stroke: var(--viz-good);
   stroke-linecap: round;
   transition: stroke-dashoffset 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -97,14 +141,14 @@
   display: block;
   height: 8px;
   border-radius: 99px;
-  background: #efecf6;
+  background: var(--viz-track);
   overflow: hidden;
 }
 .pd-meter span {
   display: block;
   height: 100%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #7d5cf0, #2fa36b);
+  background: linear-gradient(90deg, var(--viz-1), var(--viz-good));
   animation: pd-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   transform-origin: left;
 }
@@ -191,19 +235,19 @@
 .ch-bar-track {
   position: relative;
   border-radius: 6px;
-  background: #efecf6;
+  background: var(--viz-track);
   overflow: hidden;
 }
 .ch-bar-fill {
   position: absolute;
   inset: auto 0 0 0;
   border-radius: 6px;
-  background: linear-gradient(180deg, #7d5cf0, #5b3fd6);
+  background: var(--viz-1);
   transition: height 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .ch-bar-day {
   font-size: 11px;
-  color: var(--ui-muted, #5d5873);
+  color: var(--ui-muted, var(--malam-muted));
   text-align: center;
   white-space: nowrap;
   overflow: visible;
@@ -212,31 +256,31 @@
   display: block;
   height: 8px;
   border-radius: 99px;
-  background: #efecf6;
+  background: var(--viz-track);
   overflow: hidden;
 }
 .ch-meter span {
   display: block;
   height: 100%;
   border-radius: 99px;
-  background: var(--pd-grape);
+  background: var(--viz-1);
   animation: pd-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   transform-origin: left;
 }
 .ch-meter.tone-leaf span {
-  background: #2fa36b;
+  background: var(--viz-good);
 }
 .ch-meter.tone-sun span {
-  background: #e59a16;
+  background: var(--viz-4);
 }
 .ch-meter.tone-sky span {
-  background: #3f8fe0;
+  background: var(--viz-info);
 }
 .ch-meter.tone-coral span {
-  background: #e0653f;
+  background: var(--viz-2);
 }
 .ch-meter.tone-muted span {
-  background: #b9b2d6;
+  background: var(--viz-muted-2);
 }
 @media (prefers-reduced-motion: reduce) {
   .pd-rise,

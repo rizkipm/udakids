@@ -194,8 +194,13 @@ export function MazeBoard({
 function ExitFlag() {
   return (
     <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden className="maze-flag">
-      <path d="M10 6 V36" stroke="#2b2540" strokeWidth="3" strokeLinecap="round" />
-      <path d="M11 7 H31 L26 14 L31 21 H11 Z" fill="#2e9e5b" stroke="#2b2540" strokeWidth="2.5" />
+      <path d="M10 6 V36" stroke="var(--malam)" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M11 7 H31 L26 14 L31 21 H11 Z"
+        fill="var(--sawah)"
+        stroke="var(--garis-tegas)"
+        strokeWidth="2.5"
+      />
     </svg>
   );
 }

@@ -56,14 +56,17 @@ export function StatIcon({ kind, size = 34 }: { kind: StatKind; size?: number })
         <svg {...common} className="stat-icon">
           <path d="M14 4h20l-4 14H18z" fill="currentColor" opacity="0.55" />
           <circle cx="24" cy="30" r="13" fill="currentColor" />
-          <path d="M24 23l2.5 5 5.5.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.5-.8z" fill="#fff" />
+          <path
+            d="M24 23l2.5 5 5.5.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.5-.8z"
+            fill="var(--kertas)"
+          />
         </svg>
       );
     case 'highest':
       return (
         <svg {...common} className="stat-icon">
           <path d="M4 42L18 16l8 12 6-8 12 22z" fill="currentColor" />
-          <path d="M18 16l-4 8h8z" fill="#fff" opacity="0.8" />
+          <path d="M18 16l-4 8h8z" fill="var(--kertas)" opacity="0.8" />
         </svg>
       );
     case 'answered':
@@ -72,7 +75,7 @@ export function StatIcon({ kind, size = 34 }: { kind: StatKind; size?: number })
           <rect x="8" y="6" width="32" height="38" rx="8" fill="currentColor" />
           <path
             d="M15 18l3 3 6-6M15 31l3 3 6-6M28 19h6M28 32h6"
-            stroke="#fff"
+            stroke="var(--kertas)"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -84,9 +87,9 @@ export function StatIcon({ kind, size = 34 }: { kind: StatKind; size?: number })
       return (
         <svg {...common} className="stat-icon">
           <rect x="6" y="12" width="36" height="26" rx="10" fill="currentColor" />
-          <path d="M15 21v8M11 25h8" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="31" cy="22" r="3" fill="#fff" />
-          <circle cx="36" cy="28" r="3" fill="#fff" />
+          <path d="M15 21v8M11 25h8" stroke="var(--kertas)" strokeWidth="4" strokeLinecap="round" />
+          <circle cx="31" cy="22" r="3" fill="var(--kertas)" />
+          <circle cx="36" cy="28" r="3" fill="var(--kertas)" />
         </svg>
       );
     default:
@@ -110,11 +113,11 @@ export function Crown({ size = 40 }: { size?: number }) {
     <svg viewBox="0 0 48 32" width={size} height={(size * 32) / 48} aria-hidden className="crown">
       <path
         d="M4 28L2 6l12 10L24 2l10 14L46 6l-2 22z"
-        fill="#f5b400"
-        stroke="#1d1a2e"
+        fill="var(--kunyit)"
+        stroke="var(--malam)"
         strokeWidth="2.5"
       />
-      <circle cx="24" cy="20" r="3" fill="#e2412f" />
+      <circle cx="24" cy="20" r="3" fill="var(--gonjong)" />
     </svg>
   );
 }
@@ -124,7 +127,7 @@ export function TrophyIcon({ size = 30 }: { size?: number }) {
     <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden>
       <path
         d="M14 6h20v12a10 10 0 0 1-20 0z"
-        fill="#f7c948"
+        fill="var(--kunyit)"
         stroke="currentColor"
         strokeWidth="3"
       />
@@ -134,7 +137,7 @@ export function TrophyIcon({ size = 30 }: { size?: number }) {
         stroke="currentColor"
         strokeWidth="3"
       />
-      <path d="M20 28h8v7h-8z" fill="#f7c948" stroke="currentColor" strokeWidth="3" />
+      <path d="M20 28h8v7h-8z" fill="var(--kunyit)" stroke="currentColor" strokeWidth="3" />
       <rect x="13" y="35" width="22" height="8" rx="2" fill="currentColor" />
     </svg>
   );
@@ -143,7 +146,7 @@ export function TrophyIcon({ size = 30 }: { size?: number }) {
 export function DoorIcon({ size = 30 }: { size?: number }) {
   return (
     <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden>
-      <path d="M10 6h20v36H10z" fill="#fff" stroke="currentColor" strokeWidth="3.5" />
+      <path d="M10 6h20v36H10z" fill="var(--kertas)" stroke="currentColor" strokeWidth="3.5" />
       <circle cx="25" cy="25" r="2.5" fill="currentColor" />
       <path
         d="M34 24h10M39 18l6 6-6 6"
@@ -169,10 +172,10 @@ export function LockIcon({ size = 28 }: { size?: number }) {
 export function CheckIcon({ size = 28 }: { size?: number }) {
   return (
     <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden>
-      <circle cx="24" cy="24" r="20" fill="#2e9e5b" />
+      <circle cx="24" cy="24" r="20" fill="var(--sawah)" />
       <path
         d="M14 25l7 7 13-14"
-        stroke="#fff"
+        stroke="var(--on-sawah)"
         strokeWidth="5"
         fill="none"
         strokeLinecap="round"
@@ -195,7 +198,7 @@ export function BookIcon({ size = 26 }: { size?: number }) {
     <svg viewBox="0 0 48 48" width={size} height={size} aria-hidden>
       <path
         d="M6 9h14a5 5 0 0 1 4 2 5 5 0 0 1 4-2h14v30H28a4 4 0 0 0-4 3 4 4 0 0 0-4-3H6z"
-        fill="#fff"
+        fill="var(--kertas)"
         stroke="currentColor"
         strokeWidth="3"
         strokeLinejoin="round"

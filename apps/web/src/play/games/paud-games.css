@@ -1,0 +1,231 @@
+/* Game berhitung PAUD (D-108): cerah & berwarna, target sentuh ≥ 64 px, tanpa merah besar, gerak dikurangi bila
+   diminta. */
+
+.paud-board {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.paud-bubble {
+  min-width: 84px;
+  min-height: 84px;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  border: 4px solid var(--garis-tegas);
+  border-radius: 26px;
+  background: linear-gradient(160deg, var(--kertas) 0%, var(--kunyit-soft) 100%);
+  box-shadow: 0 6px 0 var(--garis-tegas);
+  font: inherit;
+  font-size: 1.6rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.paud-bubble:hover:not(:disabled) {
+  transform: translateY(-2px) rotate(-2deg);
+}
+.paud-bubble:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--garis-tegas);
+}
+.paud-bubble.is-answer {
+  background: linear-gradient(160deg, var(--kertas) 0%, var(--sawah-soft) 100%);
+}
+
+/* ---------- Hitung & ketuk */
+.count-scene {
+  width: min(100%, 460px);
+  height: auto;
+}
+.count-obj {
+  cursor: pointer;
+  outline: none;
+}
+.count-obj:focus-visible circle:first-child {
+  stroke: var(--kunyit);
+  stroke-width: 4;
+}
+.count-obj > g,
+.count-obj > circle:not(:first-child) {
+  transition: transform 0.2s ease;
+}
+.count-obj.is-on > g,
+.count-obj.is-on > circle:not(:first-child) {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 6px var(--kunyit));
+}
+.count-badge {
+  font-size: 18px;
+  font-weight: 900;
+  fill: #fff;
+  stroke: #2b2540;
+  stroke-width: 4;
+  paint-order: stroke;
+  pointer-events: none;
+}
+.is-aquarium .count-obj:not(.is-on) > g {
+  animation: paud-swim 3.2s ease-in-out infinite;
+}
+.is-snow .count-obj:not(.is-on) > g {
+  animation: paud-bob 2.6s ease-in-out infinite;
+}
+.count-bubble {
+  animation: paud-rise 4s ease-in infinite;
+}
+.count-choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Kue ulang tahun */
+.cake-scene {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 360px);
+}
+.cake-candles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  min-height: 84px;
+  margin-bottom: -34px;
+  position: relative;
+  z-index: 1;
+}
+.cake-slot {
+  border: 0;
+  background: none;
+  padding: 0 1px;
+  min-height: 64px;
+  cursor: pointer;
+}
+.cake-body {
+  width: 100%;
+  height: auto;
+}
+.cake-flame {
+  transform-origin: 12px 18px;
+  animation: paud-flicker 0.5s ease-in-out infinite alternate;
+}
+.cake-scene.is-party {
+  animation: paud-party 0.6s ease-out 2;
+}
+.cake-tray {
+  display: flex;
+  justify-content: center;
+}
+.cake-add {
+  grid-auto-flow: column;
+  padding: 0 18px;
+}
+
+/* ---------- Kalung manik */
+.beads-string {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  max-width: 100%;
+  padding: 14px 12px;
+  border: 4px dashed var(--kunyit);
+  border-radius: 999px;
+  background: var(--awan-2);
+}
+.beads-cord {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 50%;
+  height: 4px;
+  border-radius: 2px;
+  background: #b08968;
+  z-index: 0;
+}
+.beads-string > svg,
+.beads-string > span:not(.beads-cord) {
+  position: relative;
+  z-index: 1;
+}
+.beads-next svg {
+  animation: paud-pulse 1.1s ease-in-out infinite;
+}
+.beads-palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Kartu monster (memori) */
+.mem-back.is-monster {
+  background: radial-gradient(circle at 30% 30%, var(--kunyit-soft), var(--gonjong-soft));
+}
+
+@keyframes paud-swim {
+  0%,
+  100% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+@keyframes paud-bob {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+@keyframes paud-rise {
+  from {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+@keyframes paud-flicker {
+  from {
+    transform: scale(1, 1);
+  }
+  to {
+    transform: scale(0.9, 1.08);
+  }
+}
+@keyframes paud-party {
+  50% {
+    transform: scale(1.04) rotate(-1deg);
+  }
+}
+@keyframes paud-pulse {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-aquarium .count-obj > g,
+  .is-snow .count-obj > g,
+  .count-bubble,
+  .cake-flame,
+  .cake-scene.is-party,
+  .beads-next svg,
+  .paud-bubble {
+    animation: none;
+    transition: none;
+  }
+}

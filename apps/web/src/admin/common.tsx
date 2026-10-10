@@ -87,7 +87,7 @@ export function ActiveBadge({ active }: { active: boolean }) {
 
 /** Titik warna Momo milik anak. */
 export function ColorDot({ color }: { color: string }) {
-  const fill = PALETTE[color as Color]?.fill ?? '#999';
+  const fill = PALETTE[color as Color]?.fill ?? 'var(--garis-tegas)';
   return <span className="adm-dot" style={{ background: fill }} aria-hidden />;
 }
 

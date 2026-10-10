@@ -43,20 +43,8 @@ import { MomoLoader } from './MomoLoader';
 import { PageHead } from './Profile';
 import './games/games.css';
 
-/** Warna angka 0–10 (cerah, kontras dengan huruf putih + garis tepi gelap). */
-const NUM_COLOR = [
-  '#6c757d',
-  '#e63946',
-  '#f3722c',
-  '#e9a400',
-  '#43aa8b',
-  '#277da1',
-  '#5b3fd6',
-  '#b5179e',
-  '#d1495b',
-  '#2a9d8f',
-  '#7b2cbf',
-];
+/** Warna angka 0–10: palet isi tema (D-110), teks di atasnya `--on-isi`; mengikuti tema terang/gelap. */
+const NUM_COLOR = Array.from({ length: 11 }, (_, n) => `var(--isi-${n})`);
 const numColor = (n: number) => NUM_COLOR[n % NUM_COLOR.length]!;
 
 /**
@@ -293,15 +281,15 @@ function MainBody({
   }
 }
 
-/** Warna huruf vokal (cerah, kontras dengan garis tepi gelap). */
+/** Warna huruf vokal (palet isi tema, D-110); konsonan satu warna tenang. */
 const LETTER_COLOR: Record<string, string> = {
-  a: '#e63946',
-  i: '#f3722c',
-  u: '#e9a400',
-  e: '#43aa8b',
-  o: '#277da1',
+  a: 'var(--isi-1)',
+  i: 'var(--isi-2)',
+  u: 'var(--isi-3)',
+  e: 'var(--isi-4)',
+  o: 'var(--isi-5)',
 };
-const letterColor = (ch: string) => LETTER_COLOR[ch.toLowerCase()] ?? '#5b3fd6';
+const letterColor = (ch: string) => LETTER_COLOR[ch.toLowerCase()] ?? 'var(--isi-konsonan)';
 const letterName = (ch: string) =>
   ch === ch.toUpperCase() ? `huruf ${ch.toLowerCase()} besar` : `huruf ${ch}`;
 
@@ -756,8 +744,13 @@ function PictureCards({
     <div className="queue-wrap">
       <span className="queue-flag" aria-hidden>
         <svg viewBox="0 0 40 30" width="40" height="30">
-          <path d="M6 2 V28" stroke="#2b2540" strokeWidth="4" strokeLinecap="round" />
-          <path d="M8 3 H34 L28 10 L34 17 H8 Z" fill="#e76f51" stroke="#2b2540" strokeWidth="3" />
+          <path d="M6 2 V28" stroke="var(--malam)" strokeWidth="4" strokeLinecap="round" />
+          <path
+            d="M8 3 H34 L28 10 L34 17 H8 Z"
+            fill="var(--jeruk)"
+            stroke="var(--malam)"
+            strokeWidth="3"
+          />
         </svg>
         {t('play.lesson.queueFront')}
       </span>

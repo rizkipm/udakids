@@ -1,9 +1,12 @@
 import { lessonFor, pickExamples } from '../content/auto-lesson.js';
+import { CONTOH_SEED, type LabLevelRef } from '../content/lab.js';
+import { labQuizPool, materiQuizItems } from '../content/lab-quiz.js';
 import { lessonScreenSchema } from '../content/lesson.js';
 import { PERAGA_BOOKS } from '../content/peraga.js';
 import type { ContentFile } from '../levels/validate.js';
 import {
   catalogSchema,
+  generateItem,
   skillTemplateSchema,
   validateTemplate,
   type Catalog,
@@ -78,13 +81,46 @@ export function validateSkillContent(input: {
       // D-093: buku SD tahap berjalan — setiap topik biasa punya pelajaran tersimpan dengan simulasi.
       if (
         PERAGA_BOOKS.includes(`${cat.domain}/${cat.grade}`) &&
-        !/^(GM|GF)$/.test(c.code) &&
+        !/^(GM|GF|GN|GX)$/.test(c.code) &&
         !c.lesson?.layar.some((x) => x.jenis === 'peraga')
       )
         errors.push(`${where}: belum ada simulasi (peraga) — lihat docs/content/peraga-sd.md`);
+      // Materi Topik (D-109): Contoh per level & Uji penguasaan dibuat dari level topik ini.
+      if (c.materi) {
+        const levels = own.filter((k) => k.family !== 'mock');
+        if (levels.length === 0) errors.push(`${where}: materi tanpa level untuk contoh & uji`);
+        for (const k of levels)
+          try {
+            generateItem(k, { seed: CONTOH_SEED, band: 0 });
+          } catch {
+            errors.push(`${where}: contoh level ${k.order} tidak bisa dibuat`);
+          }
+        if (levels.length && materiQuizItems(own, 8, 0).length < 4)
+          errors.push(`${where}: uji penguasaan < 4 soal`);
+      }
       const want = Math.min(2, own.filter((k) => k.family !== 'mock').length);
       if (pickExamples(own, want).length < want)
         errors.push(`${where}: contoh soal untuk video < ${want}`);
     }
+  // Lab Buku (D-109): topik & level yang dirujuk ada di buku ini; setiap pos punya ≥ 4 soal Uji.
+  for (const cat of catalogs) {
+    if (!cat.lab) continue;
+    const where = `${cat.domain}/${cat.grade} (lab)`;
+    const book = skills.filter((k) => k.domain === cat.domain && k.grade === cat.grade);
+    const codes = new Set(cat.categories.map((c) => c.code));
+    const hasLevel = (r: LabLevelRef) =>
+      book.some((k) => k.category === r.topik && k.order === r.level);
+    for (const p of cat.lab.pos) {
+      for (const t of p.topik)
+        if (!codes.has(t)) errors.push(`${where}: pos ${p.id} → topik ${t} tidak ada`);
+      for (const r of p.uji)
+        if (!hasLevel(r))
+          errors.push(`${where}: pos ${p.id} → level ${r.topik}.${r.level} tidak ada`);
+      if (labQuizPool(book, p.uji, p.saring).length < 4)
+        errors.push(`${where}: pos ${p.id} → bank soal Uji < 4`);
+    }
+    for (const r of cat.lab.ujian.soal)
+      if (!hasLevel(r)) errors.push(`${where}: uji jago → level ${r.topik}.${r.level} tidak ada`);
+  }
   return { errors, skills, catalogs };
 }

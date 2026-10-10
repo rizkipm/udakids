@@ -596,7 +596,7 @@ export function Practice({ momoColor, onRestart }: { momoColor: Color; onRestart
 function ClockIcon() {
   return (
     <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden className="clock-icon">
-      <circle cx="24" cy="26" r="17" fill="#fff" stroke="currentColor" strokeWidth="4" />
+      <circle cx="24" cy="26" r="17" fill="var(--kertas)" stroke="currentColor" strokeWidth="4" />
       <path
         d="M24 16v10l7 5"
         stroke="currentColor"

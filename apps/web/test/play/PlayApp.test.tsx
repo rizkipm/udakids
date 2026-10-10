@@ -161,14 +161,18 @@ describe('ronde level (D-021)', () => {
     },
   });
 
-  it('Beranda ringkas: satu tombol Main ke level terbuka + kartu topik (tanpa daftar level)', async () => {
+  it('Beranda ringkas: satu tombol Main ke level terbuka + Peta Belajar (tanpa daftar level)', async () => {
     setSession('child', { token: token(), user: { id: CHILD, role: 'child', name: 'Alya' } });
     mockFetch(routes([]));
     const { container } = renderPlay('/play');
     const play = await screen.findByRole('link', { name: new RegExp(t('play.home.play')) });
     expect(play).toHaveAttribute('href', await lvl(skill.id));
-    expect(container.querySelectorAll('.topic-card')).toHaveLength(1);
-    expect(container.querySelector('.topic-card.is-next')?.textContent).toContain('0/2');
+    // Peta Belajar (D-111): satu simpul topik, disarankan ("sekarang"), panel menyebut 0 dari 2 level.
+    expect(container.querySelectorAll('.peta-stop')).toHaveLength(1);
+    expect(container.querySelector('.peta-stop.is-sekarang')).not.toBeNull();
+    expect(container.querySelector('.peta-panel')?.textContent).toContain(
+      t('play.peta.levels', { passed: 0, total: 2 }),
+    );
     expect(container.querySelector('.level-card')).toBeNull();
     expect(screen.getByRole('link', { name: t('play.home.done') })).toHaveAttribute(
       'href',
@@ -887,13 +891,13 @@ describe('pustaka per jenjang (D-042)', () => {
     expect(
       [...container.querySelectorAll('.library-books .book-tab')].map((b) => b.textContent),
     ).toEqual([t('play.domain.math'), t('play.domain.sains')]);
-    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik Math TK');
+    expect(container.querySelector('.peta-stop')?.textContent).toContain('Topik Math TK');
     fireEvent.click(screen.getByRole('button', { name: 'Sains TK' }));
-    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik Sains TK');
+    expect(container.querySelector('.peta-stop')?.textContent).toContain('Topik Sains TK');
 
     fireEvent.click(screen.getByRole('button', { name: t('play.grade.sd12') }));
     expect(container.querySelector('.library-books')).toBeNull();
-    expect(container.querySelector('.topic-card')?.textContent).toContain('Topik OSN');
+    expect(container.querySelector('.peta-stop')?.textContent).toContain('Topik OSN');
     expect(localStorage.getItem('lc.library.grade')).toBe('sd12');
     unmount();
 

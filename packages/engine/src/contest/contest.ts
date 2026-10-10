@@ -188,8 +188,17 @@ export function publicItem(item: Item, seed = `${item.skillId}#${item.seed}`): P
     case 'stack':
     case 'lines':
     case 'bingo':
+    case 'count':
+    case 'beads':
     case 'coord':
     case 'chance':
+    case 'quest':
+    case 'bubbles':
+    case 'grid':
+    case 'tens':
+    case 'clear':
+    case 'clock':
+    case 'pizza':
       // Pasangan kartu, benda yang harus ditangkap, dan umpan balik tiap ketukan game seru (D-078) butuh kunci
       // jawaban di perangkat; tidak dipakai di lomba (lihat `contestSafeTemplate`).
       throw new Error(`interaksi ${i.type} tidak dipakai di lomba`);

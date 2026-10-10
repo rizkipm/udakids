@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { bookLabSchema, materiSchema } from '../content/lab.js';
 import { lessonSchema } from '../content/lesson.js';
 import { OBJECTS } from './assets.js';
 import { FAMILIES, FAMILY_NAMES, Reject, type FamilyName } from './families/index.js';
@@ -7,6 +8,7 @@ import { countWord, mazePath } from './games.js';
 import { crosswordLetters, fewestTokens, sumOf } from './play.js';
 import { BINGO_LINES, guessSolution, linesCounts, stackSolution } from './play-g4.js';
 import { GLYPHS } from './glyphs.js';
+import { PLACE_VALUE, clearPair } from './play-arena.js';
 import { createRng } from './rng.js';
 
 // `worksheet` (D-068): buku lembar kerja interaktif per jenjang (tebalkan, sambung titik, …) dengan pelajaran.
@@ -121,9 +123,13 @@ export const catalogSchema = z.strictObject({
         mock: z.boolean().optional(),
         /** Pelajaran sebelum latihan (Menu Belajar, D-068). */
         lesson: lessonSchema.optional(),
+        /** Materi Topik berformat lab (D-109): materi detail topik ini. */
+        materi: materiSchema.optional(),
       }),
     )
     .min(1),
+  /** Lab Buku (D-109): ruang lab per buku/jenjang dengan pos per tema. */
+  lab: bookLabSchema.optional(),
 });
 export type Catalog = z.infer<typeof catalogSchema>;
 
@@ -325,6 +331,91 @@ export function itemProblems(item: ItemCore): string[] {
       if (sumOf(it.tokens, []) !== 0) out.push('sum: token tidak valid');
       break;
     }
+    case 'count': {
+      const ids = checkChoices(it.choices, 'count');
+      if (!ids.has(it.answer)) out.push('count: jawaban tidak ada di pilihan');
+      if (it.choices.length > 4) out.push('count: maks. 4 pilihan');
+      if (it.n < 1 || it.n > 20) out.push('count: 1–20 benda');
+      break;
+    }
+    case 'beads': {
+      const ids = checkChoices(it.choices, 'beads');
+      if (it.choices.length > 4) out.push('beads: maks. 4 warna');
+      if ([...it.shown, ...it.answer].some((b) => !ids.has(b)))
+        out.push('beads: manik tidak ada di palet');
+      if (it.shown.length < it.answer.length * 2) out.push('beads: pola terlihat minimal dua kali');
+      break;
+    }
+    // Arena game Momo (D-115).
+    case 'quest': {
+      if (it.rounds.length < 2 || it.rounds.length > 6) out.push('quest: 2–6 ronde');
+      for (const r of it.rounds) {
+        // Hoki: angka boleh kembar (yang dinilai posisinya).
+        const ids = checkChoices(r.choices, 'quest', it.theme === 'hockey');
+        if (!ids.has(r.answer)) out.push(`quest: jawaban ${r.id} tidak ada di pilihan`);
+        if (r.choices.length > (it.theme === 'hockey' ? 7 : 4))
+          out.push('quest: terlalu banyak pilihan');
+        if (it.theme === 'hockey' && !r.digits) out.push('quest: hoki tanpa bilangan');
+        if ((it.theme === 'dice' || it.theme === 'domino') && !r.dice?.length)
+          out.push('quest: dadu tanpa muka');
+        if (it.theme === 'kick' && !r.line) out.push('quest: tendang tanpa garis bilangan');
+        if (it.theme === 'balloon' && !r.balloons) out.push('quest: balon tanpa jumlah');
+      }
+      if (new Set(it.rounds.map((r) => r.id)).size !== it.rounds.length)
+        out.push('quest: id ronde kembar');
+      break;
+    }
+    case 'bubbles': {
+      const ids = checkChoices(it.bubbles, 'bubbles');
+      if (it.answer.some((a) => !ids.has(a))) out.push('bubbles: urutan tidak ada di gelembung');
+      if (it.answer.length < 3) out.push('bubbles: minimal 3 gelembung berurutan');
+      if (it.bubbles.length > 12) out.push('bubbles: maks. 12 gelembung');
+      break;
+    }
+    case 'grid': {
+      const inGrid = (id: string) => {
+        const v = Number(id.slice(1));
+        return id.startsWith('c') && v >= it.start && v < it.start + it.count;
+      };
+      if (!it.calls === !it.targets) out.push('grid: pilih panggilan ATAU sasaran');
+      if (
+        it.calls?.some((c) => !inGrid(c.answer) || !it.hidden.includes(Number(c.answer.slice(1))))
+      )
+        out.push('grid: panggilan bukan sel tersembunyi');
+      if (it.targets?.some((c) => !inGrid(c))) out.push('grid: sasaran di luar papan');
+      if (it.count > 30) out.push('grid: maks. 30 kotak');
+      break;
+    }
+    case 'tens':
+      if (it.target < 1 || it.target >= 10 * PLACE_VALUE[it.places[0]!])
+        out.push('tens: target tidak bisa disusun');
+      break;
+    case 'clear': {
+      // Nilai kotak boleh kembar (pasangan yang sama bisa muncul dua kali).
+      checkChoices(it.tiles, 'clear', true);
+      if (it.tiles.length % 2 !== 0 || it.tiles.length > 12)
+        out.push('clear: 2–12 kotak berpasangan');
+      // Papan harus bisa dibersihkan: pasangkan nilai secara rakus (nilai pasangan unik untuk sasaran tetap).
+      const left = it.tiles.map((t) => t.value);
+      while (left.length) {
+        const a = left.shift()!;
+        const k = left.findIndex((b) => clearPair(it.op, a, b) === it.target);
+        if (k < 0) {
+          out.push('clear: papan tidak bisa dibersihkan');
+          break;
+        }
+        left.splice(k, 1);
+      }
+      break;
+    }
+    case 'clock':
+      if (it.hour < 1 || it.hour > 12 || it.minute % Math.min(it.step, 60) !== 0)
+        out.push('clock: waktu tidak bisa diatur');
+      break;
+    case 'pizza':
+      if (it.parts > 12 || it.target < 1 || it.target >= it.wholes * it.parts)
+        out.push('pizza: potongan tidak valid');
+      break;
     case 'guess': {
       if (it.secret < it.min || it.secret > it.max) out.push('guess: rahasia di luar rentang');
       if (guessSolution(it).length > it.maxGuesses)

@@ -1,25 +1,28 @@
-/* Area orang dewasa: rapi, kontras tinggi, bisa dipakai dengan mouse saja. */
+/* Area orang dewasa: rapi, kontras tinggi, bisa dipakai dengan mouse saja. Token UdaKids (D-107). */
 .ui-shell {
-  --ui-bg: #f6f4fb;
-  --ui-surface: #ffffff;
-  --ui-ink: #1d1a2e;
-  --ui-muted: #5d5873;
-  --ui-line: #dcd6ea;
-  --ui-primary: #5b3fd6;
-  --ui-primary-ink: #ffffff;
-  --ui-success: #0f7b4f;
-  --ui-warning: #9a5b00;
-  --ui-danger: #b3261e;
-  --ui-info: #1f5fbf;
+  --ui-bg: var(--awan);
+  --ui-surface: var(--kertas);
+  --ui-ink: var(--malam);
+  --ui-muted: var(--malam-muted);
+  --ui-line: var(--garis);
+  --ui-primary: var(--gonjong);
+  --ui-primary-ink: var(--on-gonjong);
+  --ui-success: var(--sawah);
+  --ui-warning: var(--kunyit-teks);
+  /* Bahaya & info ikut tema (D-110): teks gonjong/langit, kontras ≥ 4,5:1 di terang & gelap. */
+  --ui-danger: var(--gonjong-teks);
+  --ui-info: var(--langit-teks);
   min-height: 100vh;
   background: var(--ui-bg);
   color: var(--ui-ink);
   font-size: 15px;
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif;
+  font-family: var(--font-body);
+}
+
+/* Tautan teks biasa ikut tema (bukan biru/ungu bawaan peramban). Spesifisitas rendah lewat :where(), jadi
+   tautan berkelas (tombol, menu) tetap memakai warnanya sendiri. */
+:where(.ui-shell) a:where(:link, :visited) {
+  color: var(--langit-teks);
 }
 
 .ui-btn {
@@ -43,7 +46,7 @@
 .ui-field input:focus-visible,
 .ui-field select:focus-visible,
 .ui-field textarea:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 .ui-btn-primary {
@@ -164,23 +167,23 @@
   border: 1px solid;
 }
 .ui-notice-info {
-  background: #eef3fd;
-  border-color: #bcd0f3;
+  background: var(--langit-soft);
+  border-color: color-mix(in srgb, var(--langit) 35%, var(--kertas));
   color: var(--ui-info);
 }
 .ui-notice-success {
-  background: #e9f7f0;
-  border-color: #b5e0cb;
+  background: var(--sawah-soft);
+  border-color: color-mix(in srgb, var(--sawah) 35%, var(--kertas));
   color: var(--ui-success);
 }
 .ui-notice-warning {
-  background: #fdf4e3;
-  border-color: #efd29a;
+  background: var(--kunyit-soft);
+  border-color: color-mix(in srgb, var(--kunyit) 50%, var(--kertas));
   color: var(--ui-warning);
 }
 .ui-notice-error {
-  background: #fdeeed;
-  border-color: #f0bdb9;
+  background: var(--gonjong-soft);
+  border-color: color-mix(in srgb, var(--gonjong) 35%, var(--kertas));
   color: var(--ui-danger);
 }
 
@@ -190,23 +193,23 @@
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  background: #ece9f5;
+  background: var(--awan-2);
   color: var(--ui-ink);
 }
 .ui-badge-success {
-  background: #dff3e9;
+  background: var(--sawah-soft);
   color: var(--ui-success);
 }
 .ui-badge-warning {
-  background: #fbecd0;
+  background: var(--kunyit-soft);
   color: var(--ui-warning);
 }
 .ui-badge-info {
-  background: #e3ecfb;
+  background: var(--langit-soft);
   color: var(--ui-info);
 }
 .ui-badge-muted {
-  background: #f0eef4;
+  background: var(--awan-2);
   color: var(--ui-muted);
 }
 
@@ -283,12 +286,20 @@
   min-height: 100vh;
 }
 .ui-sidebar {
-  background: #221c3d;
-  color: #f1edff;
+  /* Sidebar gelap: --malam di tema terang; di tema gelap jadi sumur --awan-2 (lihat bawah). */
+  --ui-sidebar-bg: var(--malam);
+  --ui-sidebar-ink: var(--kertas);
+  background: var(--ui-sidebar-bg);
+  color: var(--ui-sidebar-ink);
   padding: 20px 14px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+:root[data-theme='dark'] .ui-sidebar {
+  --ui-sidebar-bg: var(--awan-2);
+  --ui-sidebar-ink: var(--malam);
+  border-right: 1px solid var(--garis);
 }
 .ui-sidebar a {
   color: inherit;
@@ -299,7 +310,7 @@
 }
 .ui-sidebar a.active,
 .ui-sidebar a:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: color-mix(in srgb, var(--ui-sidebar-ink) 12%, transparent);
 }
 .ui-sidebar .ui-brand {
   font-size: 18px;
@@ -345,13 +356,13 @@
   gap: 4px;
 }
 .ui-req {
-  color: var(--ui-danger, #b3261e);
+  color: var(--ui-danger, var(--gonjong-teks));
   font-weight: 800;
 }
 .ui-req-note {
   margin: 0 0 12px;
   font-size: 0.9em;
-  color: var(--ui-muted, #5d5873);
+  color: var(--ui-muted, var(--malam-muted));
 }
 .ui-check-row {
   display: flex;
@@ -380,17 +391,17 @@
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: var(--ui-primary, #5b3fd6);
+  color: var(--ui-primary, var(--gonjong));
   font: inherit;
   font-weight: 700;
   font-size: 0.9em;
   cursor: pointer;
 }
 .ui-eye:hover {
-  background: var(--ui-bg, #f6f4fb);
+  background: var(--ui-bg, var(--awan));
 }
 .ui-eye:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
 }
 @media (max-width: 380px) {
   .ui-eye-text {
@@ -406,17 +417,17 @@
   width: min(480px, calc(100vw - 32px));
   max-height: calc(100vh - 32px);
   padding: 0;
-  border: 1px solid var(--ui-line, #dcd6ea);
+  border: 1px solid var(--ui-line, var(--garis));
   border-radius: 16px;
-  background: var(--ui-surface, #fff);
-  color: var(--ui-ink, #1d1a2e);
-  box-shadow: 0 20px 60px rgb(29 26 46 / 25%);
+  background: var(--ui-surface, var(--kertas));
+  color: var(--ui-ink, var(--malam));
+  box-shadow: 0 20px 60px var(--bayangan);
 }
 .ui-dialog::backdrop {
-  background: rgb(29 26 46 / 45%);
+  background: var(--overlay);
 }
 .ui-dialog-warning {
-  border-top: 6px solid var(--ui-warning, #9a5b00);
+  border-top: 6px solid var(--ui-warning, var(--kunyit-teks));
 }
 .ui-dialog-box {
   display: grid;

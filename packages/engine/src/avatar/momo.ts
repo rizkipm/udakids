@@ -47,8 +47,12 @@ export const MOMO_ACCESSORIES = [
 ] as const;
 export type MomoAccessory = (typeof MOMO_ACCESSORIES)[number];
 
-/** Model karakter (D-102): bentuk kepala, telinga, dan antena. `kotak` = Momo asli. */
+/**
+ * Model karakter (D-102, D-113): bentuk kepala, telinga, dan antena. `udakids` = Momo UdaKids (antena gonjong, layar
+ * wajah gelap, badan bergaris pucuk rebung) dan menjadi tampilan bawaan; `kotak` = Momo lama.
+ */
 export const MOMO_MODELS = [
+  'udakids',
   'kotak',
   'bulat',
   'kucing',
@@ -59,6 +63,8 @@ export const MOMO_MODELS = [
   'dino',
 ] as const;
 export type MomoModel = (typeof MOMO_MODELS)[number];
+/** Model bila anak belum memilih (D-113). */
+export const DEFAULT_MOMO_MODEL: MomoModel = 'udakids';
 
 /** Pola di badan (D-102). */
 export const MOMO_PATTERNS = ['none', 'titik', 'garis', 'bintang', 'hati'] as const;
@@ -85,7 +91,7 @@ const hexSchema = z.string().trim().toLowerCase().regex(MOMO_HEX);
 const toneOrHex = z.union([z.enum(MOMO_TONE_IDS), hexSchema]);
 
 export const momoLookSchema = z.strictObject({
-  /** Model karakter; kosong = kotak (Momo asli). */
+  /** Model karakter; kosong = Momo UdaKids (bawaan sejak D-113). */
   model: z.enum(MOMO_MODELS).optional(),
   /** Warna badan sendiri (hex); kosong = warna utama `momoColor`. */
   body: hexSchema.nullable().optional(),

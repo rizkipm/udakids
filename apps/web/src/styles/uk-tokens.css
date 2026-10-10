@@ -1,0 +1,282 @@
+/* UdaKids Design System — token (D-107, D-110). Sumber: docs/design-system/tokens.json.
+   Tema TERANG bawaan; pengguna bisa memilih gelap (tombol tema → <html data-theme="dark">, diingat perangkat).
+   SEMUA warna antarmuka lewat token ini, termasuk sisa warna lama (D-110). Hex langsung hanya untuk gambar/ilustrasi
+   (buah, hewan, Momo), bukan untuk latar, teks, garis, atau tombol.
+   Warna mapel: data-mapel="sains|matematika|english|bindo|olimpiade" pada wadah halaman. */
+
+:root {
+  --awan: #f6f7f8;
+  --kertas: #ffffff;
+  --garis: #dde1e6;
+  /* Batas elemen yang bisa diketuk (pilihan jawaban, kartu sentuh): ≥ 3:1 di atas kertas & awan (WCAG 1.4.11).
+     Tambahan proyek (D-107): --garis 1,31:1 terlalu samar untuk tombol anak. */
+  --garis-tegas: #7c8696;
+  --malam: #1c2430;
+  --malam-muted: #5a6677;
+  --gonjong: #c8321f;
+  --gonjong-tekan: #8f2214;
+  --gonjong-soft: #feedea;
+  --on-gonjong: #ffffff;
+  --kunyit: #f5b301;
+  --kunyit-tekan: #b88500;
+  --kunyit-soft: #fff2c7;
+  --kunyit-teks: #7a5600;
+  --on-kunyit: #1c2430;
+  --sawah: #167a48;
+  --sawah-soft: #e3f5ea;
+  --on-sawah: #ffffff;
+  /* Tambahan D-110 (mode gelap & pembersihan warna lama). */
+  --awan-2: #eef0f3; /* sumur/lekukan: kolom isian, trek progres */
+  --kertas-2: #fafbfc; /* kartu kedua di atas kertas */
+  --bayangan: rgba(28, 36, 48, 0.12);
+  --overlay: rgba(28, 36, 48, 0.55);
+  --langit: #1f6fc5;
+  --langit-soft: #e4f0fd;
+  --langit-teks: #17589e;
+  --jeruk: #a94c09;
+  --jeruk-soft: #fff1e5;
+  --jeruk-teks: #8f3f06;
+  --toska: #0e7480;
+  --toska-soft: #e0f3f4;
+  --toska-teks: #0b5f69;
+  --sawah-teks: #136b3f;
+  --gonjong-teks: #b02a19;
+  --sawah-tekan: #0e5232;
+  --on-jeruk: #ffffff;
+  --on-langit: #ffffff;
+  --on-toska: #ffffff;
+  --langit-tekan: #134f8f;
+  --jeruk-tekan: #6e3106;
+  --toska-tekan: #09525b;
+  /* Garis & mata ilustrasi (Momo, gambar): tetap gelap di kedua tema, karena berada di atas isian berwarna. */
+  --ilustrasi-garis: #1c2430;
+  /* Palet isi pelajaran (D-110): warna angka 0–10, huruf vokal, dan konsonan. Teks di atasnya: --on-isi.
+     Terang ≥ 5:1 dengan putih; gelap ≥ 5:1 dengan teks gelap & di atas kartu gelap. */
+  --isi-0: #5a6677;
+  --isi-1: #c8321f;
+  --isi-2: #b04f0c;
+  --isi-3: #8a6400;
+  --isi-4: #167a48;
+  --isi-5: #1f6fc5;
+  --isi-6: #0e7480;
+  --isi-7: #b5179e;
+  --isi-8: #a3324a;
+  --isi-9: #2b7a3d;
+  --isi-10: #6b4f2a;
+  --isi-konsonan: #34495e;
+  --on-isi: #ffffff;
+  /* Fon dimuat lokal lewat @fontsource (offline, tanpa server pihak ketiga di halaman anak). */
+  --font-display: 'Lilita One', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Andika', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --shadow-tekan: 0 5px 0 0;
+  --shadow-kartu: 0 6px 20px rgba(28, 36, 48, 0.1);
+  /* Area sentuh anak tetap 64 px (PRD A14), bukan 48 px seperti panduan umum. */
+  --touch-anak: 64px;
+}
+
+:root[data-theme='dark'] {
+  --awan: #151a1f;
+  --kertas: #1e252c;
+  --garis: #2e3740;
+  --garis-tegas: #6a7682;
+  --malam: #eef1f4;
+  --malam-muted: #a9b2bc;
+  --gonjong: #ff6a55;
+  --gonjong-tekan: #b8402f;
+  --gonjong-soft: #3f1a15;
+  --on-gonjong: #1c1210;
+  --kunyit: #ffc93c;
+  --kunyit-tekan: #b88a12;
+  --kunyit-soft: #3d2e08;
+  --kunyit-teks: #ffd36b;
+  --on-kunyit: #1c2430;
+  --sawah: #43c482;
+  --sawah-soft: #123222;
+  --on-sawah: #0f2418;
+  --awan-2: #10151a;
+  --kertas-2: #252d35;
+  --bayangan: rgba(0, 0, 0, 0.45);
+  --overlay: rgba(0, 0, 0, 0.65);
+  --langit: #5aa9ff;
+  --langit-soft: #102638;
+  --langit-teks: #8cc4ff;
+  --jeruk: #ff9b4d;
+  --jeruk-soft: #3d2410;
+  --jeruk-teks: #ffb27a;
+  --toska: #3fc3cf;
+  --toska-soft: #0f2e31;
+  --toska-teks: #6fd6df;
+  --sawah-teks: #6fd9a0;
+  --gonjong-teks: #ff8a78;
+  --sawah-tekan: #2a8a58;
+  --on-jeruk: #1c1210;
+  --on-langit: #0e1a26;
+  --on-toska: #0e1a1b;
+  --langit-tekan: #2f78c9;
+  --jeruk-tekan: #b56220;
+  --toska-tekan: #1f8a94;
+  --isi-0: #a9b2bc;
+  --isi-1: #ff6a55;
+  --isi-2: #ff9b4d;
+  --isi-3: #ffc93c;
+  --isi-4: #43c482;
+  --isi-5: #5aa9ff;
+  --isi-6: #3fc3cf;
+  --isi-7: #f07bd8;
+  --isi-8: #ff8fa3;
+  --isi-9: #8fd694;
+  --isi-10: #d9a86c;
+  --isi-konsonan: #c9d3dd;
+  --on-isi: #151a1f;
+  --shadow-kartu: 0 6px 20px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+/* Warna mapel aktif: --m, --m-soft, --m-text, --on-m, --m-tekan. Bawaan = Sains. */
+:root,
+[data-mapel='sains'] {
+  --m: #2b7a3d;
+  --m-soft: #e8f5ea;
+  --m-text: #2b7a3d;
+  --on-m: #ffffff;
+  --m-tekan: #1d5a2b;
+}
+[data-mapel='matematika'] {
+  --m: #c8321f;
+  --m-soft: #fdecea;
+  --m-text: #c8321f;
+  --on-m: #ffffff;
+  --m-tekan: #8f2214;
+}
+[data-mapel='english'] {
+  --m: #a94c09;
+  --m-soft: #fff1e5;
+  --m-text: #a94c09;
+  --on-m: #ffffff;
+  --m-tekan: #783505;
+}
+[data-mapel='bindo'] {
+  --m: #0e7480;
+  --m-soft: #e0f3f4;
+  --m-text: #0e7480;
+  --on-m: #ffffff;
+  --m-tekan: #09525b;
+}
+[data-mapel='olimpiade'] {
+  --m: #f5b301;
+  --m-soft: #fff2c7;
+  --m-text: #7a5600;
+  --on-m: #1c2430;
+  --m-tekan: #b88500;
+}
+
+/* Warna mapel di tema gelap. */
+:root[data-theme='dark'],
+:root[data-theme='dark'] [data-mapel='sains'] {
+  --m: #5fcb76;
+  --m-soft: #16301d;
+  --m-text: #5fcb76;
+  --on-m: #151a1f;
+  --m-tekan: #2f7a40;
+}
+:root[data-theme='dark'] [data-mapel='matematika'] {
+  --m: #ff6a55;
+  --m-soft: #3f1a15;
+  --m-text: #ff6a55;
+  --on-m: #151a1f;
+  --m-tekan: #b8402f;
+}
+:root[data-theme='dark'] [data-mapel='english'] {
+  --m: #ff9b4d;
+  --m-soft: #3d2410;
+  --m-text: #ff9b4d;
+  --on-m: #151a1f;
+  --m-tekan: #b56220;
+}
+:root[data-theme='dark'] [data-mapel='bindo'] {
+  --m: #3fc3cf;
+  --m-soft: #0f2e31;
+  --m-text: #3fc3cf;
+  --on-m: #151a1f;
+  --m-tekan: #1f8a94;
+}
+:root[data-theme='dark'] [data-mapel='olimpiade'] {
+  --m: #ffc93c;
+  --m-soft: #3d2e08;
+  --m-text: #ffc93c;
+  --on-m: #151a1f;
+  --m-tekan: #b88a12;
+}
+
+/* Halaman mengikuti tema (latar & teks dasar). */
+html {
+  background: var(--awan);
+  color: var(--malam);
+}
+
+/* Cetak selalu terang (kertas putih), walau layar sedang mode gelap (D-110). */
+@media print {
+  :root[data-theme='dark'] {
+    --awan: #f6f7f8;
+    --kertas: #ffffff;
+    --garis: #dde1e6;
+    --garis-tegas: #7c8696;
+    --malam: #1c2430;
+    --malam-muted: #5a6677;
+    --gonjong: #c8321f;
+    --gonjong-tekan: #8f2214;
+    --gonjong-soft: #feedea;
+    --on-gonjong: #ffffff;
+    --kunyit: #f5b301;
+    --kunyit-tekan: #b88500;
+    --kunyit-soft: #fff2c7;
+    --kunyit-teks: #7a5600;
+    --on-kunyit: #1c2430;
+    --sawah: #167a48;
+    --sawah-soft: #e3f5ea;
+    --on-sawah: #ffffff;
+    --awan-2: #eef0f3; /* sumur/lekukan: kolom isian, trek progres */
+    --kertas-2: #fafbfc; /* kartu kedua di atas kertas */
+    --bayangan: rgba(28, 36, 48, 0.12);
+    --overlay: rgba(28, 36, 48, 0.55);
+    --langit: #1f6fc5;
+    --langit-soft: #e4f0fd;
+    --langit-teks: #17589e;
+    --jeruk: #a94c09;
+    --jeruk-soft: #fff1e5;
+    --jeruk-teks: #8f3f06;
+    --toska: #0e7480;
+    --toska-soft: #e0f3f4;
+    --toska-teks: #0b5f69;
+    --sawah-teks: #136b3f;
+    --gonjong-teks: #b02a19;
+    --sawah-tekan: #0e5232;
+    --on-jeruk: #ffffff;
+    --isi-0: #5a6677;
+    --isi-1: #c8321f;
+    --isi-2: #b04f0c;
+    --isi-3: #8a6400;
+    --isi-4: #167a48;
+    --isi-5: #1f6fc5;
+    --isi-6: #0e7480;
+    --isi-7: #b5179e;
+    --isi-8: #a3324a;
+    --isi-9: #2b7a3d;
+    --isi-10: #6b4f2a;
+    --isi-konsonan: #34495e;
+    --on-isi: #ffffff;
+    --shadow-kartu: none;
+    color-scheme: light;
+  }
+}

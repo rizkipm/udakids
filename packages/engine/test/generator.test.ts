@@ -26,6 +26,9 @@ import {
   stackSolution,
   chanceSolution,
   coordSolution,
+  clearSolution,
+  clockValue,
+  tensParts,
 } from '../src/index.js';
 
 const tpl = (
@@ -103,15 +106,79 @@ function correctAnswer(item: Item): AnswerValue {
     }
     case 'bingo':
       return it.calls.map((c) => c.answer);
+    case 'count':
+      return it.answer;
+    case 'beads':
+      return it.answer;
     case 'coord':
       return coordSolution(it.steps);
     case 'chance':
       return chanceSolution(it.answer, it.fraction);
+    case 'quest':
+      return it.rounds.map((r) => `${r.id}:${r.answer}`);
+    case 'bubbles':
+      return it.answer;
+    case 'grid':
+      return it.calls ? it.calls.map((c) => c.answer) : it.targets!;
+    case 'tens':
+      return tensParts(it.target, it.places);
+    case 'clear':
+      return clearSolution(it);
+    case 'clock':
+      return clockValue(it.hour, it.minute);
+    case 'pizza':
+      return Array.from(
+        { length: it.target },
+        (_, i) => `w${Math.floor(i / it.parts)}s${i % it.parts}`,
+      );
   }
 }
 
 // Setiap family × mode/varian penting. Tiap kasus dihasilkan 60× (3 band) dan harus bebas masalah.
 const CASES: [FamilyName, Record<string, unknown>][] = [
+  // Arena game Momo (D-115).
+  ['race-game', { rule: 'more', range: [1, 6], textless: true }],
+  ['race-game', { theme: 'boat', rule: 'less', range: [1, 8] }],
+  ['race-game', { rule: 'largest', range: [1, 20] }],
+  ['race-game', { rule: 'greater', range: [1, 100] }],
+  ['race-game', { rule: 'lessThan', range: [1, 100] }],
+  ['race-game', { rule: 'even', range: [1, 100] }],
+  ['race-game', { rule: 'odd', range: [100, 999] }],
+  ['race-game', { rule: 'multiple', range: [10, 100], k: [3, 4, 6] }],
+  ['race-game', { rule: 'prime', range: [2, 100] }],
+  ['race-game', { theme: 'boat', rule: 'factor', range: [12, 100] }],
+  ['dice-game', { dice: 1, textless: true }],
+  ['dice-game', { dice: 3 }],
+  ['dice-game', { dice: 4 }],
+  ['dice-game', { op: '×' }],
+  ['dice-game', { theme: 'domino', maxTotal: 6, textless: true }],
+  ['kick-game', { unit: 10, range: [11, 99] }],
+  ['kick-game', { unit: 1000, range: [1001, 99999] }],
+  ['hockey-game', { digits: [3, 7] }],
+  ['balloon-game', { n: [3, 5], pop: [1, 3], textless: true }],
+  ['balloon-game', { n: [11, 20], pop: [2, 9] }],
+  ['bubbles-game', {}],
+  ['bubbles-game', { theme: 'stone', start: [10, 50], step: [10], length: [5, 6], decoys: [2, 3] }],
+  ['bubbles-game', { start: [2, 400], step: [2, 5, 100], length: [5, 6], decoys: [2, 4] }],
+  ['grid-game', { theme: 'house', count: 10, textless: true }],
+  ['grid-game', { start: [1, 91], count: 30 }],
+  ['grid-game', { mode: 'multiples', start: [1, 1], count: 30, k: [2, 3, 5] }],
+  ['grid-game', { mode: 'primes', start: [1, 1], count: 30 }],
+  ['tens-game', {}],
+  [
+    'tens-game',
+    { theme: 'blocks', target: [100, 9999], places: ['ribu', 'ratus', 'puluh', 'satu'] },
+  ],
+  ['clear-game', {}],
+  ['clear-game', { targets: [100], step: 10, pairs: [4, 5] }],
+  ['clear-game', { theme: 'stone', op: '×', targets: [12, 24, 36], pairs: [3, 5] }],
+  ['clock-game', { minutes: 60 }],
+  ['clock-game', { minutes: 30 }],
+  ['clock-game', { minutes: 5 }],
+  ['clock-game', { minutes: 1, h24: true }],
+  ['pizza-game', {}],
+  ['pizza-game', { mode: 'equivalent', dens: [2, 3, 4], factors: [2, 3] }],
+  ['pizza-game', { theme: 'chocolate', mode: 'mixed', dens: [3, 4, 6], wholes: 3 }],
   ['numeral-tap-all', {}],
   ['numeral-tap-all', { values: [1, 20], tiles: [5, 6] }],
   ['numeral-tap-all', { values: [1, 10], tiles: [5, 8], style: 'balloons' }],
@@ -548,6 +615,18 @@ const CASES: [FamilyName, Record<string, unknown>][] = [
     },
   ],
   // Game Kelas 4 (D-096).
+  // Game berhitung PAUD (D-108).
+  ['count-game', {}],
+  ['count-game', { theme: 'snake', n: [3, 8] }],
+  ['count-game', { theme: 'snow', n: [10, 20] }],
+  ['cake-game', {}],
+  ['cake-game', { target: [6, 10], showNumber: false }],
+  ['beads-game', {}],
+  ['beads-game', { patterns: ['ABC', 'AABB', 'ABCD'], repeats: 3 }],
+  ['number-bingo', {}],
+  ['number-bingo', { range: [0, 20] }],
+  ['number-bingo', { mode: 'count', range: [1, 9] }],
+  ['memory-pairs', { theme: 'monster', values: [1, 6], pairs: [3, 4] }],
   ['guess-game', {}],
   ['guess-game', { range: [1000, 9999], hint: 'digit' }],
   ['guess-game', { range: [100, 999], hint: 'digit' }],

@@ -2,7 +2,14 @@ import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
 import { gzip } from 'node:zlib';
 import { Controller, Get, Inject, Req, Res } from '@nestjs/common';
-import { FREE_ACCESS, GRADES, needsPurchase, type SessionUser } from '@little-coder/engine';
+import {
+  FREE_ACCESS,
+  GRADES,
+  isActiveLab,
+  needsPurchase,
+  type LabStatus,
+  type SessionUser,
+} from '@little-coder/engine';
 import { eq, sql } from 'drizzle-orm';
 import type { Request, Response } from 'express';
 import { CurrentUser } from '../auth/decorators.js';
@@ -48,10 +55,12 @@ export class CatalogController {
         (select max(${skillCatalogs.updatedAt}) from ${skillCatalogs})) as version`,
       )
       .then((r) => r.rows);
-    const key = `${v?.version ?? ''}|${JSON.stringify(access)}`;
+    // Lab/materi draf (D-109) hanya untuk staf (pratinjau); anak & orang tua menerima yang aktif saja.
+    const drafts = user.role === 'admin' || user.role === 'facilitator';
+    const key = `${v?.version ?? ''}|${JSON.stringify(access)}|${drafts ? 'draf' : 'aktif'}`;
     let pack = this.packs.get(key);
     if (!pack) {
-      pack = this.build(access).then(async (body) => {
+      pack = this.build(access, drafts).then(async (body) => {
         const json = JSON.stringify(body);
         return {
           json,
@@ -81,7 +90,12 @@ export class CatalogController {
     res.send(p.json);
   }
 
-  private async build(access: Awaited<ReturnType<BillingService['accessForChild']>>) {
+  private async build(
+    access: Awaited<ReturnType<BillingService['accessForChild']>>,
+    drafts = false,
+  ) {
+    const shown = <T extends { status: LabStatus }>(x: T | null | undefined) =>
+      x && (drafts || isActiveLab(x)) ? x : undefined;
     const catalogs = await this.db
       .select()
       .from(skillCatalogs)
@@ -96,11 +110,15 @@ export class CatalogController {
     catalogs.sort((x, y) => x.domain.localeCompare(y.domain) || rank(x.grade) - rank(y.grade));
     // Akses level berbayar (D-036): anak sesuai paket keluarganya; staf/orang tua melihat semua.
     return {
-      catalogs: catalogs.map(({ domain, grade, title, categories }) => ({
+      catalogs: catalogs.map(({ domain, grade, title, categories, lab }) => ({
         domain,
         grade,
         title,
-        categories,
+        categories: (categories as { materi?: { status: LabStatus } }[]).map(({ materi, ...c }) => {
+          const m = shown(materi);
+          return m ? { ...c, materi: m } : c;
+        }),
+        ...(shown(lab as { status: LabStatus } | null) && { lab }),
       })),
       // Level berbayar yang belum dibeli dikirim tanpa isi soal (judul & urutan saja), agar soalnya
       // tidak bisa dibuat di perangkat tanpa paket (audit M9).

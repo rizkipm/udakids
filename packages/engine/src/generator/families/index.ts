@@ -47,6 +47,19 @@ import { catchItemsFamily, mazePathFamily, memoryPairsFamily, wordSearchFamily }
 import { englishCount, englishPronoun, englishTalk, englishWord } from './english.js';
 import { mockFamily } from './mock.js';
 import {
+  balloonGame,
+  bubblesGame,
+  clearGame,
+  clockGame,
+  diceGame,
+  gridGame,
+  hockeyGame,
+  kickGame,
+  pizzaGame,
+  raceGame,
+  tensGame,
+} from './arena.js';
+import {
   catchGame,
   crosswordGame,
   feedGame,
@@ -62,6 +75,7 @@ import {
   wordHunt,
 } from './fun.js';
 import { bingoGame, chartGame, guessGame, linesGame, magicGame, stackGame } from './kelas4.js';
+import { beadsGame, cakeGame, countGame, numberBingo } from './paud.js';
 import { chanceGame, coordGame } from './emc.js';
 
 const BASE_FAMILIES = {
@@ -138,6 +152,23 @@ const BASE_FAMILIES = {
   'stack-game': stackGame,
   'lines-game': linesGame,
   'bingo-game': bingoGame,
+  // Game berhitung PAUD (D-104).
+  'count-game': countGame,
+  'cake-game': cakeGame,
+  'beads-game': beadsGame,
+  // Arena game Momo (D-115).
+  'race-game': raceGame,
+  'dice-game': diceGame,
+  'kick-game': kickGame,
+  'hockey-game': hockeyGame,
+  'balloon-game': balloonGame,
+  'bubbles-game': bubblesGame,
+  'grid-game': gridGame,
+  'tens-game': tensGame,
+  'clear-game': clearGame,
+  'clock-game': clockGame,
+  'pizza-game': pizzaGame,
+  'number-bingo': numberBingo,
   // Game EMC Kelas 3–4 (D-101).
   'coord-game': coordGame,
   'chance-game': chanceGame,
@@ -229,8 +260,23 @@ export const GAME_FAMILIES: ReadonlySet<string> = new Set([
   'stack-game',
   'lines-game',
   'bingo-game',
+  'count-game',
+  'cake-game',
+  'beads-game',
+  'number-bingo',
   'coord-game',
   'chance-game',
+  'race-game',
+  'dice-game',
+  'kick-game',
+  'hockey-game',
+  'balloon-game',
+  'bubbles-game',
+  'grid-game',
+  'tens-game',
+  'clear-game',
+  'clock-game',
+  'pizza-game',
 ]);
 
 /** Level memakai family game (langsung atau sebagai bagian `mix`)? */

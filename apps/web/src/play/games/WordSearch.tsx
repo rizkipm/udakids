@@ -11,8 +11,13 @@ import { t } from '../../i18n';
 import './games.css';
 
 type Search = Extract<Interaction, { type: 'word-search' }>;
-/** Warna lembut untuk kata yang sudah ketemu (bergantian). */
-const FOUND = ['#ffd166', '#95d5b2', '#8ecae6', '#cdb4db'];
+/** Warna lembut untuk kata yang sudah ketemu (bergantian) — token agar teks terbaca di tema terang & gelap (D-110). */
+const FOUND = [
+  'var(--kunyit-soft)',
+  'var(--sawah-soft)',
+  'var(--langit-soft)',
+  'var(--toska-soft)',
+];
 
 /**
  * Cari kata (D-075): kotak huruf + daftar kata bergambar. Anak mengetuk huruf berurutan dari huruf pertama

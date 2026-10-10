@@ -17,6 +17,8 @@ import {
   voiceSettingsSchema,
   DEFAULT_VOICE_SETTINGS,
   type Item,
+  generateItem,
+  skillTemplateSchema,
 } from '../src/index.js';
 
 const item = (type: 'pick-one' | 'number-input'): Item =>
@@ -94,7 +96,7 @@ describe('suara Momo (D-035)', () => {
       ),
     );
     // +2 game EMC Kelas 3–4: koordinat & peluang (D-101).
-    expect(Object.keys(COMMAND_KEYS)).toHaveLength(28);
+    expect(Object.keys(COMMAND_KEYS)).toHaveLength(37);
     for (const k of VOICE_LINE_KEYS) {
       expect(dialog.lines[k], k).toBeDefined();
       expect(dialog.lines[k]!.text).not.toMatch(/\b(salah|gagal)\b/i);
@@ -168,5 +170,29 @@ describe('suara Momo (D-035)', () => {
 
   it('pengaturan bawaan valid', () => {
     expect(voiceSettingsSchema.parse(DEFAULT_VOICE_SETTINGS)).toEqual(DEFAULT_VOICE_SETTINGS);
+  });
+});
+
+describe('kalimat soal di dalam game bersuara (D-108)', () => {
+  it('panggilan bingo & fakta penyihir bisa diminta lewat id-nya', () => {
+    const tpl = (family: string, params: unknown) =>
+      skillTemplateSchema.parse({
+        id: `math.prek.gn1.uji-${family}`,
+        version: 1,
+        domain: 'math',
+        grade: 'prek',
+        category: 'GN',
+        order: 1,
+        title: 'Uji',
+        tier: 'basic',
+        family,
+        params,
+      });
+    const bingo = generateItem(tpl('number-bingo', {}), { seed: 2, band: 0 });
+    const call = (bingo.interaction as { calls: { id: string; say: string }[] }).calls[0]!;
+    expect(voiceItemText(bingo, 'choice', call.id)).toBe(call.say);
+    const magic = generateItem(tpl('magic-game', {}), { seed: 2, band: 0 });
+    const fact = (magic.interaction as { facts: { id: string; say: string }[] }).facts[0]!;
+    expect(voiceItemText(magic, 'choice', fact.id)).toBe(fact.say);
   });
 });

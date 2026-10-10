@@ -191,6 +191,25 @@ export const quizResults = pgTable(
   (t) => [primaryKey({ columns: [t.childId, t.skillId] })],
 );
 
+/**
+ * Progres materi berformat lab (D-109): bintang penguasaan 0–3 per bagian Lab Buku / Materi Topik. `labKey` =
+ * "domain/grade" (Lab Buku) atau "domain/grade/kode" (Materi Topik); `part` mis. "pos:mata", "tab:contoh".
+ * Bintang tidak pernah turun. Event mentahnya ada di `events` (type `lab_progress`, idempoten per id).
+ */
+export const labProgress = pgTable(
+  'lab_progress',
+  {
+    childId: uuid('child_id')
+      .notNull()
+      .references(() => children.id, { onDelete: 'cascade' }),
+    labKey: text('lab_key').notNull(),
+    part: text('part').notNull(),
+    stars: integer('stars').notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.childId, t.labKey, t.part] })],
+);
+
 /** Katalog Pustaka per domain + jenjang (kategori A, B, ...). */
 export const skillCatalogs = pgTable(
   'skill_catalogs',
@@ -199,6 +218,8 @@ export const skillCatalogs = pgTable(
     grade: text('grade').notNull(),
     title: text('title').notNull(),
     categories: jsonb('categories').notNull(),
+    /** Lab Buku (D-109): ruang lab per buku/jenjang dengan pos per tema. */
+    lab: jsonb('lab'),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
     /** Terisi bila katalog disunting admin → `db:seed` tidak menimpanya (sama seperti skill). */
     updatedBy: uuid('updated_by').references(() => staffUsers.id, { onDelete: 'set null' }),

@@ -18,6 +18,8 @@ import { NewFeaturesSection } from './NewFeatures';
 import { ArticlesSection, VideosSection } from './SiteContent';
 import { Seo } from '../components/Seo';
 import './site.css';
+import { ThemeToggle } from '../ui/theme';
+import { AboutNameSection } from './AboutName';
 
 /** Buku Pustaka dari database (`GET /public/books`, D-030) — tidak lagi ditulis manual di kode. */
 type PublicBook = {
@@ -188,7 +190,8 @@ export function SiteNav() {
   return (
     <header className="site-nav">
       <Link to="/" className="site-brand" aria-label={APP_NAME}>
-        <Momo mood="happy" size={44} />
+        {/* Logo UdaKids: huruf U dari lengkung atap gonjong (D-107). */}
+        <img src="/brand/udakids-mark.svg" width={44} height={44} alt="" />
         <span>{APP_NAME}</span>
       </Link>
       <button
@@ -213,6 +216,7 @@ export function SiteNav() {
         className={`site-menu${open ? ' is-open' : ''}`}
         onClick={() => setOpen(false)}
       >
+        <a href={`${home}#tentang`}>{t('site.nav.about')}</a>
         <a href={`${home}#buku`}>{t('site.nav.books')}</a>
         <a href={`${home}#kurikulum`}>{t('site.nav.subjects')}</a>
         <a href={`${home}#fitur-baru`}>{t('site.nav.news')}</a>
@@ -222,6 +226,7 @@ export function SiteNav() {
         {hasGallery && <a href={`${home}#galeri`}>{t('media.nav.gallery')}</a>}
         <a href={`${home}#aman`}>{t('site.nav.safe')}</a>
         <Link to="/artikel">{t('site.nav.articles')}</Link>
+        <ThemeToggle compact className="site-theme" />
         <Link to="/orang-tua/masuk" className="site-btn ghost">
           {t('site.nav.parent')}
         </Link>
@@ -338,6 +343,7 @@ export function Landing() {
         </section>
 
         <BannerSlider placement="landing" />
+        <AboutNameSection />
         <TopTenSection />
         <MockTopTenSection />
 

@@ -2,30 +2,61 @@
 .shell {
   --shell-w: 264px;
   --shell-rail: 76px;
-  --shell-bg: #ffffff;
-  --shell-ink: var(--ui-ink, #1d1a2e);
-  --shell-muted: var(--ui-muted, #5d5873);
-  --shell-line: var(--ui-line, #dcd6ea);
-  --shell-hover: #f6f3ff;
-  --shell-active-bg: #efeaff;
-  --shell-active: var(--ui-primary, #5b3fd6);
+  --shell-bg: var(--kertas);
+  --shell-ink: var(--ui-ink, var(--malam));
+  --shell-muted: var(--ui-muted, var(--malam-muted));
+  --shell-line: var(--ui-line, var(--garis));
+  --shell-hover: var(--awan-2);
+  --shell-active-bg: var(--gonjong-soft);
+  --shell-active: var(--gonjong-teks);
   display: grid;
   grid-template-columns: var(--shell-w) minmax(0, 1fr);
   min-height: 100vh;
-  background: var(--ui-bg, #f6f4fb);
+  background: var(--ui-bg, var(--awan));
   transition: grid-template-columns 0.22s ease;
 }
+/* Sidebar gelap (admin): permukaan --malam di tema terang, sumur --awan-2 di tema gelap (D-110). */
 .shell-dark {
-  --shell-bg: #221c3d;
-  --shell-ink: #f1edff;
-  --shell-muted: #b9b2d6;
-  --shell-line: rgba(255, 255, 255, 0.12);
-  --shell-hover: rgba(255, 255, 255, 0.08);
-  --shell-active-bg: rgba(255, 255, 255, 0.16);
-  --shell-active: #ffffff;
+  --shell-base: var(--malam);
+  --shell-on: var(--kertas);
+  --shell-bg: var(--shell-base);
+  --shell-ink: var(--shell-on);
+  --shell-muted: color-mix(in srgb, var(--shell-on) 72%, var(--shell-base));
+  --shell-line: color-mix(in srgb, var(--shell-on) 14%, transparent);
+  --shell-hover: color-mix(in srgb, var(--shell-on) 8%, transparent);
+  --shell-active-bg: color-mix(in srgb, var(--shell-on) 16%, transparent);
+  --shell-active: var(--kunyit);
+}
+:root[data-theme='dark'] .shell-dark {
+  --shell-base: var(--awan-2);
+  --shell-on: var(--malam);
 }
 .shell.is-rail {
   grid-template-columns: var(--shell-rail) minmax(0, 1fr);
+}
+/* Latar kolom menu sepanjang halaman: menu sendiri sticky setinggi layar, jadi di halaman panjang kolom di bawahnya
+   tidak lagi kosong (desktop saja; di HP menu berupa laci). */
+@media (min-width: 900px) {
+  .shell::before {
+    content: '';
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--shell-w);
+    background: var(--shell-bg);
+    border-right: 1px solid var(--shell-line);
+    pointer-events: none;
+  }
+  .shell.is-rail::before {
+    width: var(--shell-rail);
+  }
+  .shell-side,
+  .shell-main {
+    position: relative;
+  }
+  .shell-side {
+    position: sticky;
+    z-index: 1;
+  }
 }
 
 .shell-side {
@@ -67,7 +98,7 @@
   line-height: 1.2;
 }
 .shell-dark .shell-mobilebar .shell-brand {
-  color: var(--ui-ink, #1d1a2e);
+  color: var(--ui-ink, var(--malam));
 }
 
 .shell-iconbtn {
@@ -145,8 +176,8 @@
   border-radius: 999px;
   font-size: 12px;
   font-weight: 800;
-  color: #fff;
-  background: #c56a00;
+  color: var(--on-kunyit);
+  background: var(--kunyit);
 }
 .shell-extra {
   display: grid;
@@ -170,7 +201,7 @@
 .shell-iconbtn:focus-visible,
 .shell-brand a:focus-visible,
 .shell-extra a:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 .shell-main {
@@ -237,12 +268,12 @@
     align-items: center;
     gap: 12px;
     padding: 10px 14px;
-    background: var(--ui-surface, #fff);
-    border-bottom: 1px solid var(--ui-line, #dcd6ea);
+    background: var(--ui-surface, var(--kertas));
+    border-bottom: 1px solid var(--ui-line, var(--garis));
   }
   .shell-mobilebar .shell-iconbtn {
-    border-color: var(--ui-line, #dcd6ea);
-    color: var(--ui-ink, #1d1a2e);
+    border-color: var(--ui-line, var(--garis));
+    color: var(--ui-ink, var(--malam));
   }
   .shell-iconbtn.shell-close {
     display: inline-grid;
@@ -263,7 +294,7 @@
     transition:
       transform 0.25s ease,
       visibility 0s linear 0.25s;
-    box-shadow: 0 10px 40px rgba(29, 26, 46, 0.25);
+    box-shadow: 0 10px 40px var(--bayangan);
   }
   .shell.is-open .shell-side {
     transform: none;
@@ -275,7 +306,7 @@
     position: fixed;
     inset: 0;
     z-index: 30;
-    background: rgba(29, 26, 46, 0.45);
+    background: var(--overlay);
   }
 }
 body.shell-no-scroll {

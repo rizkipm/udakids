@@ -1,0 +1,96 @@
+/* UdaKids Design System — komponen dasar (D-107). Semua warna dari token; tanpa tepi tebal hitam.
+   Disesuaikan dengan aturan proyek: area sentuh anak 64 px (PRD A14). */
+
+/* Tombol "anak tangga" */
+.uk-btn {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  min-height: var(--touch-anak);
+  padding: 12px 24px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--kertas);
+  color: var(--malam);
+  box-shadow: var(--shadow-tekan) var(--garis);
+  cursor: pointer;
+  transform: translateY(0);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
+}
+.uk-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 0 transparent;
+}
+.uk-btn:focus-visible {
+  outline: 3px solid var(--kunyit);
+  outline-offset: 3px;
+}
+.uk-btn--utama {
+  background: var(--gonjong);
+  color: var(--on-gonjong);
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
+}
+.uk-btn--hadiah {
+  background: var(--kunyit);
+  color: var(--on-kunyit);
+  box-shadow: var(--shadow-tekan) var(--kunyit-tekan);
+}
+
+/* Pita pucuk rebung: maksimal satu per layar, tidak di belakang teks. */
+.uk-rebung {
+  display: block;
+  width: 100%;
+  height: 24px;
+}
+.uk-rebung .a {
+  fill: var(--gonjong);
+}
+.uk-rebung .b {
+  fill: var(--kunyit);
+}
+
+/* Puncak gonjong di atas kartu (kartu level, kartu buku, sertifikat). */
+.uk-gonjong path {
+  fill: none;
+  stroke: var(--gonjong);
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.uk-gonjong circle {
+  fill: var(--kunyit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uk-btn {
+    transition: none;
+  }
+}
+
+/* Tombol tema terang/gelap (D-110). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--kertas);
+  color: var(--malam);
+  font: inherit;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 2px var(--garis-tegas);
+  cursor: pointer;
+}
+.theme-toggle.is-compact {
+  padding: 0;
+}
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--kunyit);
+  outline-offset: 3px;
+}

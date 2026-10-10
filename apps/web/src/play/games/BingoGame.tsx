@@ -2,10 +2,41 @@ import { useEffect, useRef, useState } from 'react';
 import { bingoReplay, gameOver, type Interaction } from '@little-coder/engine';
 import { speak } from '../../audio/speech';
 import { t } from '../../i18n';
+import { VisualView } from '../../components/visuals';
 import { useSayChoice } from '../itemVoice';
 import './g4.css';
 
 type Bingo = Extract<Interaction, { type: 'bingo' }>;
+
+const BLOCK = ['#ef476f', '#ffd166', '#06d6a0', '#4cc9f0', '#9b5de5', '#ff8a3d'];
+
+/** Balok berwarna 3 per baris (PAUD, D-108): besar dan mudah dihitung satu per satu. */
+function Blocks({ n }: { n: number }) {
+  const rows = Math.ceil(n / 3);
+  const S = 18;
+  return (
+    <svg
+      viewBox={`0 0 ${3 * S + 4} ${rows * S + 4}`}
+      width={3 * S + 4}
+      height={rows * S + 4}
+      aria-hidden
+    >
+      {Array.from({ length: n }, (_, i) => (
+        <rect
+          key={i}
+          x={2 + (i % 3) * S}
+          y={2 + (rows - 1 - Math.floor(i / 3)) * S}
+          width={S - 2}
+          height={S - 2}
+          rx="3"
+          fill={BLOCK[i % BLOCK.length]}
+          stroke="#2b2540"
+          strokeWidth="2"
+        />
+      ))}
+    </svg>
+  );
+}
 
 function Speaker() {
   return (
@@ -82,7 +113,8 @@ export function BingoGame({
             total: it.calls.length,
           })}
         </span>
-        <p aria-live="polite">{call.text}</p>
+        {/* PAUD (D-108): soal hanya dibacakan, tidak ditulis. */}
+        <p aria-live="polite">{call.text || t('play.bingo.listenFirst')}</p>
         <button
           type="button"
           className="g4-step"
@@ -103,7 +135,13 @@ export function BingoGame({
             aria-label={c.say}
             onClick={() => tap(c.id)}
           >
-            {c.visual.kind === 'word' ? c.visual.text : c.say}
+            {c.visual.kind === 'word' ? (
+              c.visual.text
+            ) : c.visual.kind === 'tens' ? (
+              <Blocks n={c.visual.ones} />
+            ) : (
+              <VisualView visual={c.visual} size={52} />
+            )}
           </button>
         ))}
       </div>

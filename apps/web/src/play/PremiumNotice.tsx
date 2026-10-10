@@ -11,7 +11,12 @@ function InfoIcon() {
   return (
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden className="kid-alert-icon">
       <circle cx="12" cy="12" r="10" fill="currentColor" />
-      <path d="M12 7.2v.1M12 10.5v6.3" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" />
+      <path
+        d="M12 7.2v.1M12 10.5v6.3"
+        stroke="var(--kertas)"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

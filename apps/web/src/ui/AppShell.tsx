@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { t } from '../i18n';
+import { ThemeToggle } from './theme';
 import './shell.css';
 
 /** Ikon menu (SVG isi, 24×24) — tanpa emoji. */
@@ -213,6 +214,7 @@ export function AppShell({
         {extra && <div className="shell-extra">{extra}</div>}
 
         <div className="shell-foot">
+          <ThemeToggle compact className="shell-theme" />
           <span className="shell-user shell-label">
             <small>{user.caption}</small>
             <strong>{user.name}</strong>

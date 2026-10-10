@@ -87,4 +87,14 @@ describe('gaya suara per jenjang (D-087)', () => {
     const mine = { ...DEFAULT_VOICE_SETTINGS, style: 'Gaya saya sendiri.', rate: 0.9 };
     expect(upgradeVoiceSettings(mine)).toBe(mine);
   });
+  it('D-112: rentang huruf, singkatan jenjang, urutan, nomor, pemisah', () => {
+    expect(speechText('Huruf A–E')).toBe('Huruf A sampai E');
+    expect(speechText('Huruf F-J')).toBe('Huruf F sampai J');
+    expect(speechText('Belajar di TK dan PAUD')).toBe('Belajar di Te Ka dan Paud');
+    expect(speechText('Juara ke-3')).toBe('Juara ketiga');
+    expect(speechText('No. 2')).toBe('nomor 2');
+    expect(speechText('Bab 1 · Pancaindra')).toBe('Bab 1, Pancaindra');
+    expect(speechText('COVID-19')).toBe('COVID-19');
+    expect(speechText('Letters A–E', 'en-GB')).toBe('Letters A–E');
+  });
 });

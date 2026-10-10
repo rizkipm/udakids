@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import { t } from '../i18n';
+import '../ui/charts.css';
 import './insightCharts.css';
 
 /**
@@ -8,23 +9,26 @@ import './insightCharts.css';
  * grafik punya legenda (≥ 2 seri), tooltip saat disorot, dan tabel sebagai padanan aksesibel.
  */
 export const SERIES = {
-  grape: '#5b3fd6',
-  orange: '#eb6834',
-  aqua: '#1baf7a',
-  yellow: '#eda100',
-  muted: '#c9c3db',
+  /* Nilai = variabel CSS di ui/charts.css (--viz-*), sehingga ikut tema terang/gelap (D-110). */
+  blue: 'var(--viz-1)',
+  orange: 'var(--viz-2)',
+  aqua: 'var(--viz-3)',
+  yellow: 'var(--viz-4)',
+  muted: 'var(--viz-muted)',
 } as const;
 /** Warna status (hanya untuk arti baik/buruk), selalu dengan label. */
 export const STATUS_COLOR = {
-  good: '#1a8f5c',
-  warning: '#eda100',
-  info: '#2a78d6',
-  critical: '#d4493f',
-  muted: '#b9b2d6',
-  muted2: '#8f88a8',
+  good: 'var(--viz-good)',
+  warning: 'var(--viz-warning)',
+  info: 'var(--viz-info)',
+  critical: 'var(--viz-critical)',
+  muted: 'var(--viz-muted)',
+  muted2: 'var(--viz-muted-2)',
 } as const;
-/** Ramp berurutan satu warna (ungu), terang → gelap, untuk peta panas. */
-const RAMP = ['#f3f0fa', '#ddd5fb', '#bcaaf4', '#9479ea', '#6f4fe0', '#4a2fb8'];
+/** Tingkat ramp satu warna (biru --viz-seq) dicampur dengan permukaan; tingkat 0 hampir sewarna kartu. */
+const seq = (pct: number) => `color-mix(in srgb, var(--viz-seq) ${pct}%, var(--kertas))`;
+/** Ramp berurutan, terang → gelap (di tema gelap: redup → terang), untuk peta panas & kohort. */
+const RAMP = [seq(6), seq(22), seq(40), seq(60), seq(80), seq(100)];
 
 const PAD = { top: 16, right: 16, bottom: 30, left: 58 };
 const GAP = 2;
@@ -272,7 +276,7 @@ export function ColumnChart({
                   <path
                     key={`${s.key}${i}`}
                     d={barPath(start + k * (barW + GAP), y(v), barW, h, true)}
-                    fill={s.color}
+                    style={{ fill: s.color }}
                   />
                 ) : null;
               });
@@ -288,7 +292,7 @@ export function ColumnChart({
                 <path
                   key={`${s.key}${i}`}
                   d={barPath(cx(i) - barW / 2, yTop, barW, h, k === drawn.length - 1)}
-                  fill={s.color}
+                  style={{ fill: s.color }}
                 />
               );
             });
@@ -398,12 +402,17 @@ export function LineChart({
           {series.length === 1 && series[0] && n > 1 && (
             <polygon
               points={`${x(0)},${y(0)} ${pts(series[0])} ${x(n - 1)},${y(0)}`}
-              fill={series[0].color}
+              style={{ fill: series[0].color }}
               opacity={0.1}
             />
           )}
           {series.map((s) => (
-            <polyline key={s.key} points={pts(s)} className="ich-line" stroke={s.color} />
+            <polyline
+              key={s.key}
+              points={pts(s)}
+              className="ich-line"
+              style={{ stroke: s.color }}
+            />
           ))}
           {hover !== null && (
             <line
@@ -419,7 +428,7 @@ export function LineChart({
             const v = s.values[i] ?? 0;
             return (
               <g key={s.key}>
-                <circle className="ich-dot" cx={x(i)} cy={y(v)} r={4.5} fill={s.color} />
+                <circle className="ich-dot" cx={x(i)} cy={y(v)} r={4.5} style={{ fill: s.color }} />
                 {hover === null && (
                   <text className="ich-peak" x={x(i) + 8} y={y(v)} dy="0.32em">
                     {axisFormat(v)}
@@ -498,7 +507,7 @@ export function Donut({
                   cy={size / 2}
                   r={r}
                   className="ich-donut-seg"
-                  stroke={s.color}
+                  style={{ stroke: s.color }}
                   strokeDasharray={`${Math.max(0.5, len - gap)} ${c}`}
                   strokeDashoffset={-offset}
                   transform={`rotate(-90 ${size / 2} ${size / 2})`}
@@ -615,7 +624,10 @@ export function CohortTable({
                 return (
                   <td
                     key={w}
-                    style={{ background: RAMP[step], color: step >= 4 ? '#fff' : undefined }}
+                    style={{
+                      background: RAMP[step],
+                      color: step >= 4 ? 'var(--viz-seq-on)' : undefined,
+                    }}
                     title={`${c.active[w] ?? 0} / ${c.size}`}
                   >
                     {pct}%
@@ -752,10 +764,14 @@ export function AreaChart({
                 <g key={s.key}>
                   <polygon
                     points={[...topPts, ...botPts].join(' ')}
-                    fill={s.color}
+                    style={{ fill: s.color }}
                     opacity={0.22}
                   />
-                  <polyline points={topPts.join(' ')} className="ich-line" stroke={s.color} />
+                  <polyline
+                    points={topPts.join(' ')}
+                    className="ich-line"
+                    style={{ stroke: s.color }}
+                  />
                 </g>
               );
             })}
@@ -778,7 +794,7 @@ export function AreaChart({
                   cx={x(i)}
                   cy={y(layers[k]![i] ?? 0)}
                   r={4.5}
-                  fill={s.color}
+                  style={{ fill: s.color }}
                 />
               );
             })}
@@ -821,7 +837,7 @@ export function Gauge({
   label,
   caption,
   max = 100,
-  color = SERIES.grape,
+  color = SERIES.blue,
 }: {
   value: number | null;
   label: string;
@@ -843,7 +859,7 @@ export function Gauge({
     <div className="ich-gauge">
       <svg width={w} height={140} viewBox={`0 0 ${w} 140`} role="img" aria-label={label}>
         <path d={path(1)} className="ich-gauge-track" />
-        {frac > 0 && <path d={path(frac)} className="ich-gauge-fill" stroke={color} />}
+        {frac > 0 && <path d={path(frac)} className="ich-gauge-fill" style={{ stroke: color }} />}
         <text x={cx} y={cy - 18} textAnchor="middle" className="ich-gauge-value">
           {value === null ? '–' : `${value}%`}
         </text>
@@ -919,7 +935,8 @@ export function Treemap({
   const [hover, setHover] = useState<number | null>(null);
   const rects = layoutTreemap(items, width, height);
   const total = items.reduce((a, it) => a + it.value, 0);
-  const palette = [SERIES.grape, SERIES.orange, SERIES.aqua, SERIES.yellow];
+  const palette = [SERIES.blue, SERIES.orange, SERIES.aqua, SERIES.yellow];
+  const inks = ['var(--viz-on-1)', 'var(--viz-on-2)', 'var(--viz-on-3)', 'var(--viz-on-4)'];
   const hovered = rects.find((r) => r.i === hover);
   return (
     <div className="ich" ref={ref}>
@@ -936,9 +953,9 @@ export function Treemap({
             const valueText = `${format(r.value)} · ${total ? Math.round((r.value / total) * 100) : 0}%`;
             // Perkiraan lebar teks (≈7px/huruf) — label hanya bila muat; selebihnya lewat tooltip & tabel.
             const fits = r.w > Math.max(shown * 7.5, valueText.length * 7) + 20 && r.h > 44;
-            // Hingga 4 warna kategori berurutan; sisanya ungu muda (bukan warna baru).
-            const fill = r.i < palette.length ? palette[r.i]! : '#b3a1f2';
-            const dark = r.i === 0 || r.i === 1 || r.i >= palette.length;
+            // Hingga 4 warna kategori berurutan; sisanya abu "lainnya" (bukan warna baru).
+            const fill = r.i < palette.length ? palette[r.i]! : SERIES.muted;
+            const ink = r.i < inks.length ? inks[r.i]! : 'var(--viz-on-muted)';
             return (
               <g key={r.i} onMouseEnter={() => setHover(r.i)}>
                 <rect
@@ -947,16 +964,11 @@ export function Treemap({
                   width={Math.max(0, r.w - 2)}
                   height={Math.max(0, r.h - 2)}
                   rx={6}
-                  fill={fill}
+                  style={{ fill: fill }}
                   opacity={hover === null || hover === r.i ? 1 : 0.55}
                 />
                 {fits && (
-                  <text
-                    x={r.x + 10}
-                    y={r.y + 22}
-                    className="ich-tree-label"
-                    fill={dark ? '#fff' : '#1d1a2e'}
-                  >
+                  <text x={r.x + 10} y={r.y + 22} className="ich-tree-label" style={{ fill: ink }}>
                     <tspan>{r.label.length > 22 ? `${r.label.slice(0, 21)}…` : r.label}</tspan>
                     <tspan x={r.x + 10} dy={18} className="ich-tree-value">
                       {valueText}
@@ -1077,7 +1089,7 @@ export function Sankey({
               <path
                 key={id}
                 d={d}
-                fill={colorOf(l.to)}
+                style={{ fill: colorOf(l.to) }}
                 opacity={hover === null ? 0.28 : hover === id ? 0.55 : 0.12}
                 onMouseEnter={() => setHover(id)}
               >
@@ -1090,7 +1102,7 @@ export function Sankey({
             if (!p) return null;
             return (
               <g key={n.id}>
-                <rect x={p.x} y={p.y} width={nodeW} height={p.h} rx={3} fill={n.color} />
+                <rect x={p.x} y={p.y} width={nodeW} height={p.h} rx={3} style={{ fill: n.color }} />
                 <text
                   x={p.x + nodeW + 8}
                   y={p.y + p.h / 2}
@@ -1137,7 +1149,8 @@ export function FunnelShape({
   const rowH = height / Math.max(1, steps.length);
   const cx = shapeW / 2;
   const half = (v: number) => Math.max(6, (v / first) * (shapeW / 2));
-  const shades = ['#4a2fb8', '#5b3fd6', '#6f4fe0', '#9479ea', '#bcaaf4', '#ddd5fb'];
+  // Ramp satu warna (biru), kuat → pudar; 3 tingkat pertama memakai teks --viz-seq-on.
+  const shades = [seq(100), seq(88), seq(76), seq(50), seq(36), seq(22)];
   return (
     <div className="ich" ref={ref}>
       <svg width={width} height={height} role="img" aria-label={label}>
@@ -1154,7 +1167,7 @@ export function FunnelShape({
             <g key={s.label}>
               <path
                 d={`M${cx - a},${y0} L${cx + a},${y0} L${cx + b},${y1} L${cx - b},${y1} Z`}
-                fill={fill}
+                style={{ fill: fill }}
               >
                 <title>{`${s.label}: ${plain(s.value)}`}</title>
               </path>
@@ -1165,7 +1178,7 @@ export function FunnelShape({
                   dy="0.35em"
                   textAnchor="middle"
                   className="ich-funnel-in"
-                  fill={i < 4 ? '#fff' : '#1d1a2e'}
+                  style={{ fill: i < 3 ? 'var(--viz-seq-on)' : 'var(--malam)' }}
                 >
                   {plain(s.value)}
                 </text>
@@ -1192,7 +1205,7 @@ export function FunnelShape({
 export function BarList({
   items,
   label,
-  color = SERIES.grape,
+  color = SERIES.blue,
 }: {
   items: { key: string; label: string; value: number; display: string; sub?: string }[];
   label: string;

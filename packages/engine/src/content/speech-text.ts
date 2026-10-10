@@ -106,6 +106,20 @@ function indonesian(text: string): string {
   t = t.replace(/(?<![\d/])(\d{1,4})\/(\d{1,4})(?![\d/])/g, '$1 per $2');
   // Rentang "1–5" → "1 sampai 5".
   t = t.replace(/(\d)\s?–\s?(\d)/g, '$1 sampai $2');
+  // D-112: rentang huruf "Huruf A–E" / "F-J" → "A sampai E" (bukan dibaca berdempet).
+  t = t.replace(/\b([A-Z])\s?[–-]\s?([A-Z])\b/g, '$1 sampai $2');
+  // Singkatan jenjang dibaca seperti guru Indonesia, bukan dieja ala English ("tee-kay").
+  t = t
+    .replace(/\bPAUD\b/g, 'Paud')
+    .replace(/\bTK\b/g, 'Te Ka')
+    .replace(/\bSD\b/g, 'Es De')
+    .replace(/\bSMP\b/g, 'Es Em Pe');
+  // Urutan "ke-3" → "ketiga"; "No. 2" → "nomor 2"; pemisah "·" → jeda.
+  t = t.replace(/\bke-(\d{1,2})\b/g, (_, n: string) =>
+    n === '1' ? 'pertama' : `ke${numberWord(Number(n))}`,
+  );
+  t = t.replace(/\bNo\.\s?(\d)/g, 'nomor $1');
+  t = t.replace(/\s*·\s*/g, ', ');
   // Operasi hitung di antara operan.
   const op = (sym: string, word: string) => {
     const re = new RegExp(String.raw`(${OPERAND})\s*${sym}\s*(?=${OPERAND})`, 'g');

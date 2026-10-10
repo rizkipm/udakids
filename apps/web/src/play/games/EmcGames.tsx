@@ -93,7 +93,7 @@ export function CoordBoard({
         aria-label={t('play.coord.board')}
         onPointerDown={tap}
       >
-        <rect width={w} height={h} rx={18} fill="#f4fbff" />
+        <rect width={w} height={h} rx={18} fill="var(--kertas)" />
         {xs.map((x) => (
           <line
             key={`x${x}`}

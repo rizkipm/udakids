@@ -61,6 +61,8 @@ type PeriodRow = {
   scoreSum: number;
   timeMs: number;
   questions: number;
+  /** Event terakhir di periode ini (epoch ms). */
+  lastPlayedAt: number | null;
 };
 type PeriodBoards = {
   at: Date;
@@ -356,6 +358,7 @@ export class LeaderboardController {
           timeMs: q.board === 'total' ? r.bestTimeMs : r.timeMs,
           average: r.average,
           rating: r.rating,
+          lastPlayedAt: isoOrNull(r.lastPlayedAt),
         })),
       };
     }
@@ -381,6 +384,7 @@ export class LeaderboardController {
         timeMs: r.timeMs,
         average: average2(r.scoreSum, r.rounds),
         rating: rating2(r.scoreSum, r.rounds),
+        lastPlayedAt: isoOrNull(r.lastPlayedAt),
       })),
     };
   }
@@ -401,7 +405,8 @@ export class LeaderboardController {
             coalesce(sum((e.payload->>'score')::numeric) filter (where e.type = 'quiz_result'), 0) as score_sum,
             coalesce(sum(coalesce((e.payload->>'durationMs')::numeric, 0)) filter (where e.type = 'quiz_result'), 0) as time_ms,
             count(*) filter (where e.type = 'item_answer') as answers,
-            coalesce(sum((e.payload->>'total')::int) filter (where e.type = 'quiz_result' and e.payload ? 'points'), 0) as mock_questions
+            coalesce(sum((e.payload->>'total')::int) filter (where e.type = 'quiz_result' and e.payload ? 'points'), 0) as mock_questions,
+            max(e.ts) as last_ts
           from events e
           where e.type in ('quiz_result', 'item_answer')
             and e.ts >= (date_trunc(${unit}, now() at time zone 'Asia/Jakarta') at time zone 'Asia/Jakarta')
@@ -419,6 +424,7 @@ export class LeaderboardController {
         timeMs: n(r.time_ms),
         // Soal mock test tidak tercatat per soal, jadi diambil dari jumlah soal ronde mock.
         questions: n(r.answers) + n(r.mock_questions),
+        lastPlayedAt: r.last_ts ? new Date(r.last_ts as string).getTime() : null,
       }));
       return { at: new Date(), average: rankByAverage(rows), active: rankByActivity(rows) };
     })();
@@ -599,9 +605,19 @@ export class LeaderboardController {
   }
 
   private async build(): Promise<Snapshot> {
-    const [played, passed, catalogs, levels, answered, kids, mockSkills, mockBest, mockAnswered] =
-      await Promise.all([
-        this.db.execute(sql`
+    const [
+      played,
+      passed,
+      catalogs,
+      levels,
+      answered,
+      kids,
+      mockSkills,
+      mockBest,
+      mockAnswered,
+      lastSeen,
+    ] = await Promise.all([
+      this.db.execute(sql`
         select c.id, c.nickname, c.momo_color, c.momo_look, s.domain, s.grade, count(*) as rounds,
           sum((e.payload->>'score')::numeric) as score_sum,
           sum(coalesce((e.payload->>'durationMs')::numeric, 0)) as time_ms,
@@ -611,31 +627,31 @@ export class LeaderboardController {
         left join skills s on s.id = e.payload->>'skillId'
         where e.type = 'quiz_result'
         group by c.id, c.nickname, c.momo_color, s.domain, s.grade`),
-        this.db.execute(sql`
+      this.db.execute(sql`
         select qr.child_id, s.domain, s.grade, count(*) filter (where qr.passed) as passed,
           sum(qr.best) as points, sum(coalesce(qr.best_time_ms, 0)) as best_time_ms
         from quiz_results qr
         join children c on c.id = qr.child_id and c.active
         left join skills s on s.id = qr.skill_id
         group by qr.child_id, s.domain, s.grade`),
-        this.db.execute(sql`select domain, grade, title, categories from skill_catalogs`),
-        this.db.execute(sql`
+      this.db.execute(sql`select domain, grade, title, categories from skill_catalogs`),
+      this.db.execute(sql`
         select domain, grade, category, count(*) as n from skills
         where status = 'active' group by domain, grade, category`),
-        // Total soal dijawab (D-045) — sumber yang sama dengan laporan anak.
-        this.db.execute(sql`
+      // Total soal dijawab (D-045) — sumber yang sama dengan laporan anak.
+      this.db.execute(sql`
         select sm.child_id, s.domain, s.grade, sum(sm.answered) as answered
         from skill_mastery sm
         join children c on c.id = sm.child_id and c.active
         left join skills s on s.id = sm.skill_id
         group by sm.child_id, s.domain, s.grade`),
-        // Semua anak aktif: yang belum pernah bermain tetap tampil di papan global (paling bawah).
-        this.db.execute(sql`select id, nickname, momo_color, momo_look from children where active`),
-        // Mock Test olimpiade (D-072): skill mock aktif, percobaan terbaik tiap anak, dan soal yang dijawab.
-        this.db.execute(sql`
+      // Semua anak aktif: yang belum pernah bermain tetap tampil di papan global (paling bawah).
+      this.db.execute(sql`select id, nickname, momo_color, momo_look from children where active`),
+      // Mock Test olimpiade (D-072): skill mock aktif, percobaan terbaik tiap anak, dan soal yang dijawab.
+      this.db.execute(sql`
         select id, domain, grade, template from skills
         where status = 'active' and template->>'family' = 'mock'`),
-        this.db.execute(sql`
+      this.db.execute(sql`
         select distinct on (e.child_id, s.id)
           e.child_id, s.id as skill_id, c.nickname, c.momo_color, c.momo_look,
           (e.payload->>'points')::int as points, (e.payload->>'score')::int as score,
@@ -649,14 +665,30 @@ export class LeaderboardController {
         where e.type = 'quiz_result' and e.payload ? 'points'
         order by e.child_id, s.id, (e.payload->>'points')::int desc,
           coalesce((e.payload->>'durationMs')::bigint, 0) asc, e.ts asc`),
-        this.db.execute(sql`
+      this.db.execute(sql`
         select e.child_id, s.domain, s.grade, sum((e.payload->>'total')::int) as answered
         from events e
         join children c on c.id = e.child_id and c.active
         join skills s on s.id = e.payload->>'skillId' and s.template->>'family' = 'mock'
         where e.type = 'quiz_result'
         group by e.child_id, s.domain, s.grade`),
-      ]);
+      // Terakhir bermain (D-105, D-116) = soal terakhir dijawab ATAU ronde terakhir selesai, sama dengan papan periode.
+      this.db.execute(sql`
+        select e.child_id, s.domain, s.grade, max(e.ts) as last_ts
+        from events e
+        left join skills s on s.id = e.payload->>'skillId'
+        where e.type in ('quiz_result', 'item_answer')
+        group by e.child_id, s.domain, s.grade`),
+    ]);
+    const lastAgg = new Map<string, number>();
+    for (const r of lastSeen.rows) {
+      if (!r.last_ts) continue;
+      const id = String(r.child_id);
+      const ms = new Date(r.last_ts as string).getTime();
+      const put = (key: string) => lastAgg.set(key, Math.max(lastAgg.get(key) ?? 0, ms));
+      put(`${id}|${GLOBAL}`);
+      if (r.domain != null) put(`${id}|${String(r.domain)}/${String(r.grade)}`);
+    }
     const answeredAgg = new Map<string, number>();
     // Soal mock test tidak tercatat per soal (tanpa Skor Jago), jadi jumlahnya diambil dari hasil ronde.
     for (const r of [...answered.rows, ...mockAnswered.rows]) {
@@ -718,7 +750,7 @@ export class LeaderboardController {
         passedLevels: levelAgg.get(`${id}|${scope}`)?.passed ?? 0,
         points: levelAgg.get(`${id}|${scope}`)?.points ?? 0,
         bestTimeMs: levelAgg.get(`${id}|${scope}`)?.bestTimeMs ?? 0,
-        lastPlayedAt: null,
+        lastPlayedAt: lastAgg.get(`${id}|${scope}`) ?? null,
       };
       const last = r.last_ts ? new Date(r.last_ts as string).getTime() : null;
       if (last !== null && (cur.lastPlayedAt === null || last > cur.lastPlayedAt))
@@ -776,7 +808,7 @@ export class LeaderboardController {
             passedLevels: lv?.passed ?? 0,
             points: lv?.points ?? 0,
             bestTimeMs: lv?.bestTimeMs ?? 0,
-            lastPlayedAt: null,
+            lastPlayedAt: lastAgg.get(`${id}|${GLOBAL}`) ?? null,
             average: 0,
             rating: 0,
           };
@@ -849,7 +881,9 @@ function publicRow(r: Board[number], viewer: string | null, withId: boolean) {
     timeMs: r.timeMs,
     bestTimeMs: r.bestTimeMs,
     passedLevels: r.passedLevels,
-    /** Kapan terakhir bermain (D-105): hanya untuk papan di area masuk, tidak di landing publik. */
-    lastPlayedAt: r.lastPlayedAt === null ? null : new Date(r.lastPlayedAt).toISOString(),
+    /** Kapan terakhir bermain (D-105; juga di landing publik sejak D-116). */
+    lastPlayedAt: isoOrNull(r.lastPlayedAt),
   };
 }
+
+const isoOrNull = (ms: number | null) => (ms === null ? null : new Date(ms).toISOString());

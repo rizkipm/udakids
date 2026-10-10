@@ -1,6 +1,7 @@
 import { createContext, useContext, useId, type ReactNode } from 'react';
 import {
   ACCESSORY_DEFAULT_TONE,
+  DEFAULT_MOMO_MODEL,
   EXTRA_DEFAULT_TONE,
   MOMO_TONES,
   momoHex,
@@ -44,6 +45,7 @@ const HIDES_ANTENNA: ReadonlySet<MomoAccessory> = new Set([
 type Box = { x: number; y: number; w: number; h: number; rx: number };
 /** Bentuk kepala tiap model (D-102). Layar wajah (x 28–84, y 34–76) selalu muat di dalamnya. */
 const HEAD: Record<MomoModel, Box> = {
+  udakids: { x: 16, y: 22, w: 80, h: 62, rx: 24 },
   kotak: { x: 16, y: 20, w: 80, h: 64, rx: 24 },
   bulat: { x: 14, y: 18, w: 84, h: 68, rx: 34 },
   kucing: { x: 16, y: 20, w: 80, h: 64, rx: 20 },
@@ -60,6 +62,22 @@ function ModelBack({ model, fill, mood }: { model: MomoModel; fill: string; mood
   const stroke = { stroke: LINE, strokeWidth: 4, strokeLinejoin: 'round' as const };
   const bulb = mood === 'proud' ? '#f7c948' : '#ffe08a';
   switch (model) {
+    case 'udakids':
+      // Antena gonjong (lengkung atap rumah gadang) dengan dua ujung kunyit (D-113).
+      return (
+        <g className="momo-antenna">
+          <path
+            d="M20 7 C30 16 40 18 56 18 C72 18 82 16 92 7"
+            fill="none"
+            stroke={LINE}
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+          <circle cx="20" cy="6" r="5.5" fill={mood === 'proud' ? '#ffc93c' : '#f5b301'} />
+          <circle cx="92" cy="6" r="5.5" fill={mood === 'proud' ? '#ffc93c' : '#f5b301'} />
+          <rect x="53" y="16" width="6" height="8" rx="2" fill={LINE} />
+        </g>
+      );
     case 'kucing':
       return (
         <g fill={fill} {...stroke}>
@@ -448,7 +466,8 @@ function AccessoryFront({ kind, fill }: { kind: MomoAccessory; fill: string }) {
  */
 export function Momo({
   mood = 'idle',
-  color = 'ungu',
+  // Bawaan Momo UdaKids berbadan merah gonjong (D-113); Momo milik anak selalu memakai warna pilihannya.
+  color = 'merah',
   size = 160,
   label,
   look,
@@ -468,10 +487,18 @@ export function Momo({
   const uid = useId().replace(/:/g, '');
   const gid = `momo-g${uid}`;
   const pid = `momo-p${uid}`;
-  const base = momoHex(style?.body) ?? BODY[color] ?? BODY.ungu;
+  const ukModel = (style?.model ?? DEFAULT_MOMO_MODEL) === 'udakids';
+  // Merah Momo UdaKids = merah gonjong merek (D-113); warna lain tetap palet Momo.
+  const base =
+    momoHex(style?.body) ?? (ukModel && color === 'merah' ? '#c8321f' : BODY[color]) ?? BODY.ungu;
   const second = momoHex(style?.gradient);
   const body = second ? `url(#${gid})` : base;
-  const model: MomoModel = style?.model ?? 'kotak';
+  const model: MomoModel = style?.model ?? DEFAULT_MOMO_MODEL;
+  const uk = model === 'udakids';
+  // Momo UdaKids: kepala putih, layar wajah gelap, mata & mulut cyan (D-113). Warna pilihan anak di badan.
+  const headFill = uk ? '#ffffff' : body;
+  const screenFill = uk ? '#1c2430' : '#fff8ec';
+  const ink = uk ? '#7fe0ff' : '#1d1a2e';
   const head = HEAD[model] ?? HEAD.kotak;
   const pattern: MomoPattern = style?.pattern ?? 'none';
   const accessory: MomoAccessory = style?.accessory ?? 'none';
@@ -483,20 +510,20 @@ export function Momo({
   const antenna = !HIDES_ANTENNA.has(accessory) && (model === 'kotak' || model === 'bulat');
   const backTop =
     accessory !== 'jilbab' &&
-    !(HIDES_ANTENNA.has(accessory) && (model === 'alien' || model === 'tv'));
+    !(HIDES_ANTENNA.has(accessory) && (model === 'alien' || model === 'tv' || uk));
   const eyes =
     mood === 'happy' || mood === 'proud' ? (
       <>
         <path
           d="M38 50 q6 -8 12 0"
-          stroke="#1d1a2e"
+          stroke={ink}
           strokeWidth="4"
           fill="none"
           strokeLinecap="round"
         />
         <path
           d="M62 50 q6 -8 12 0"
-          stroke="#1d1a2e"
+          stroke={ink}
           strokeWidth="4"
           fill="none"
           strokeLinecap="round"
@@ -504,38 +531,26 @@ export function Momo({
       </>
     ) : mood === 'sleepy' ? (
       <>
-        <path d="M38 50 h12" stroke="#1d1a2e" strokeWidth="4" strokeLinecap="round" />
-        <path d="M62 50 h12" stroke="#1d1a2e" strokeWidth="4" strokeLinecap="round" />
+        <path d="M38 50 h12" stroke={ink} strokeWidth="4" strokeLinecap="round" />
+        <path d="M62 50 h12" stroke={ink} strokeWidth="4" strokeLinecap="round" />
       </>
     ) : (
       <>
-        <circle cx="44" cy="50" r={mood === 'oops' ? 7 : 6} fill="#1d1a2e" />
-        <circle cx="68" cy="50" r={mood === 'oops' ? 7 : 6} fill="#1d1a2e" />
+        <circle cx="44" cy="50" r={mood === 'oops' ? 7 : 6} fill={ink} />
+        <circle cx="68" cy="50" r={mood === 'oops' ? 7 : 6} fill={ink} />
         <circle cx="46" cy="48" r="2" fill="#fff" />
         <circle cx="70" cy="48" r="2" fill="#fff" />
       </>
     );
   const mouth =
     mood === 'oops' ? (
-      <ellipse cx="56" cy="66" rx="6" ry="5" fill="#1d1a2e" />
+      <ellipse cx="56" cy="66" rx="6" ry="5" fill={ink} />
     ) : mood === 'curious' ? (
-      <path
-        d="M48 66 q8 4 16 -2"
-        stroke="#1d1a2e"
-        strokeWidth="4"
-        fill="none"
-        strokeLinecap="round"
-      />
+      <path d="M48 66 q8 4 16 -2" stroke={ink} strokeWidth="4" fill="none" strokeLinecap="round" />
     ) : mood === 'sleepy' || mood === 'idle' ? (
-      <path
-        d="M48 66 q8 5 16 0"
-        stroke="#1d1a2e"
-        strokeWidth="4"
-        fill="none"
-        strokeLinecap="round"
-      />
+      <path d="M48 66 q8 5 16 0" stroke={ink} strokeWidth="4" fill="none" strokeLinecap="round" />
     ) : (
-      <path d="M44 62 q12 14 24 0 z" fill="#1d1a2e" />
+      <path d="M44 62 q12 14 24 0 z" fill={ink} />
     );
   return (
     <svg
@@ -561,6 +576,7 @@ export function Momo({
       {antenna && (
         <>
           <line
+            className="momo-antenna"
             x1="56"
             y1="6"
             x2="56"
@@ -585,11 +601,11 @@ export function Momo({
         width={head.w}
         height={head.h}
         rx={head.rx}
-        fill={body}
+        fill={headFill}
         stroke="#2b2540"
         strokeWidth="4"
       />
-      {pattern !== 'none' && (
+      {pattern !== 'none' && !uk && (
         <rect
           className="momo-pattern"
           x={head.x + 2}
@@ -607,7 +623,7 @@ export function Momo({
         width="56"
         height="42"
         rx="16"
-        fill="#fff8ec"
+        fill={screenFill}
         stroke="#2b2540"
         strokeWidth="3"
       />
@@ -657,7 +673,20 @@ export function Momo({
         strokeWidth="6"
         strokeLinecap="round"
       />
-      <circle cx="56" cy="101" r="5" fill="#fff8ec" stroke="#2b2540" strokeWidth="2" />
+      {uk ? (
+        // Garis pucuk rebung di dada (D-113).
+        <path
+          className="momo-rebung"
+          d="M37 106 L43.5 98 L50 106 L56.5 98 L63 106 L69.5 98 L75 105"
+          fill="none"
+          stroke="#f5b301"
+          strokeWidth="3.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      ) : (
+        <circle cx="56" cy="101" r="5" fill="#fff8ec" stroke="#2b2540" strokeWidth="2" />
+      )}
       <AccessoryFront kind={accessory} fill={accFill} />
       <Extra kind={extra} fill={extraFill} />
     </svg>

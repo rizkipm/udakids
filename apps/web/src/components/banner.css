@@ -1,7 +1,10 @@
 /* Slideshow banner (D-042): landing, dasbor orang tua, dasbor admin. Tidak dipakai di /play. */
 .bnr {
   --bnr-radius: 24px;
-  --bnr-ink: #1d1a2e;
+  --bnr-ink: var(--malam);
+  /* Teks di atas isian banner. Belum ada token on-langit/on-jeruk/on-toska: on-gonjong dipakai karena putih di
+     tema terang dan gelap di tema gelap (≥ 4,5:1 untuk gonjong/langit/jeruk/toska di dua tema, D-110). */
+  --bnr-on: var(--on-gonjong);
   position: relative;
   margin: 16px 0 24px;
   font-family: inherit;
@@ -40,31 +43,33 @@
   padding: clamp(20px, 4vw, 44px);
   border-radius: var(--bnr-radius);
   overflow: hidden;
-  color: #fff;
+  color: var(--bnr-on);
   background: var(--bnr-bg);
   isolation: isolate;
 }
 .bnr-at-landing .bnr-card {
-  border: 3px solid var(--bnr-ink);
+  box-shadow: var(--shadow-kartu);
 }
+/* Nama tone lama dipertahankan (data banner di DB); warnanya dari token UdaKids. "grape" kini gonjong. */
 .bnr-tone-grape {
-  --bnr-bg: #5b3fd6;
+  --bnr-bg: var(--gonjong);
 }
 .bnr-tone-sky {
-  --bnr-bg: #1f6fd1;
+  --bnr-bg: var(--langit);
 }
 .bnr-tone-coral {
-  --bnr-bg: #c4472b;
+  --bnr-bg: var(--jeruk);
 }
 .bnr-tone-leaf {
-  --bnr-bg: #23784a;
+  --bnr-bg: var(--sawah);
+  --bnr-on: var(--on-sawah);
 }
 .bnr-tone-teal {
-  --bnr-bg: #0f7666;
+  --bnr-bg: var(--toska);
 }
 .bnr-tone-sun {
-  --bnr-bg: #f7c948;
-  color: var(--bnr-ink);
+  --bnr-bg: var(--kunyit);
+  --bnr-on: var(--on-kunyit);
 }
 
 /* Banner bergambar: gambar utuh sesuai rasio aslinya, tanpa dipotong dan tanpa lapisan gelap. */
@@ -72,7 +77,7 @@
   display: block;
   min-height: 0;
   padding: 0;
-  background: #fff;
+  background: var(--kertas);
   color: inherit;
 }
 .bnr-img-full {
@@ -85,7 +90,7 @@
   border-radius: inherit;
 }
 .bnr-img-link:focus-visible {
-  outline: 4px solid #f7c948;
+  outline: 4px solid var(--kunyit);
   outline-offset: -4px;
 }
 
@@ -119,22 +124,17 @@
   min-height: 48px;
   margin-top: 6px;
   padding: 0 22px;
-  border-radius: 999px;
-  background: #fff;
+  /* Tombol "anak tangga" (D-107): sudut radius-md + bayangan padat, tanpa tepi tebal. */
+  border-radius: var(--radius-md);
+  background: var(--kertas);
   color: var(--bnr-ink);
   font-weight: 800;
   text-decoration: none;
-  border: 3px solid var(--bnr-ink);
-  box-shadow: 0 4px 0 var(--bnr-ink);
+  border: 0;
+  box-shadow: var(--shadow-tekan) color-mix(in srgb, var(--bnr-bg) 60%, black);
   transition:
     transform 0.12s,
     box-shadow 0.12s;
-}
-.bnr-tone-sun .bnr-cta {
-  background: var(--bnr-ink);
-  color: #fff;
-  border-color: var(--bnr-ink);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
 }
 .bnr-cta:hover {
   transform: translateY(-2px);
@@ -142,7 +142,7 @@
 .bnr-cta:focus-visible,
 .bnr-btn:focus-visible,
 .bnr-dot:focus-visible {
-  outline: 4px solid #f7c948;
+  outline: 4px solid var(--kunyit);
   outline-offset: 3px;
 }
 .bnr-sr {
@@ -180,13 +180,13 @@
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  border: 2px solid #1d1a2e;
-  background: #fff;
-  color: #1d1a2e;
+  border: 2px solid var(--garis-tegas);
+  background: var(--kertas);
+  color: var(--malam);
   cursor: pointer;
 }
 .bnr-btn:hover {
-  background: #efe7ff;
+  background: var(--gonjong-soft);
 }
 .bnr-dots {
   display: flex;
@@ -210,14 +210,15 @@
   width: 12px;
   height: 12px;
   border-radius: 999px;
-  border: 2px solid #1d1a2e;
-  background: #fff;
+  border: 2px solid var(--garis-tegas);
+  background: var(--kertas);
   transform: translate(-50%, -50%);
   transition: width 0.2s;
 }
 .bnr-dot.is-on::after {
   width: 26px;
-  background: #5b3fd6;
+  border-color: var(--gonjong);
+  background: var(--gonjong);
 }
 
 /* Dasbor (orang tua/admin): lebih ringkas agar data utama tetap terlihat. */

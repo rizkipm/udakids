@@ -117,6 +117,28 @@ export function ChildReport({ report }: { report: Report }) {
         )}
       </Card>
 
+      {report.labs && report.labs.length > 0 && (
+        <Card title={t('parent.report.labs')}>
+          <p className="ui-muted cr-gap">{t('parent.report.labsHint')}</p>
+          <ul className="cr-recs">
+            {report.labs.map((l) => (
+              <li key={l.key}>
+                <div>
+                  <strong>{l.title}</strong>
+                  <small className="ui-muted cr-block">
+                    {l.kind === 'buku' ? t('parent.report.labBook') : l.book} ·{' '}
+                    {t('parent.report.labParts', { n: l.parts })}
+                  </small>
+                </div>
+                <Badge tone={l.stars >= 3 ? 'success' : l.stars >= 1 ? 'info' : 'muted'}>
+                  {t('parent.report.labStars', { n: l.stars })}
+                </Badge>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
+
       {areas.length === 0 && <p className="ui-empty">{t('parent.report.noAreas')}</p>}
       {areas.map((area) => (
         <Card key={`${area.domain}-${area.grade}`} title={area.title}>

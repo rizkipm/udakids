@@ -44,11 +44,21 @@ import { TrainSpell } from './games/Train';
 import { WheelGame } from './games/Wheel';
 import { ChanceGame, CoordGame } from './games/EmcGames';
 import { BingoGame } from './games/BingoGame';
+import { BeadsGame } from './games/BeadsGame';
+import { CakeGame } from './games/CakeGame';
+import { CountGame } from './games/CountGame';
 import { ChartGame } from './games/ChartGame';
 import { GuessGame } from './games/GuessGame';
 import { LinesGame } from './games/LinesGame';
 import { MagicGame } from './games/MagicGame';
 import { StackGame } from './games/StackGame';
+import { QuestGame } from './games/arena/QuestGame';
+import { BubblesGame } from './games/arena/BubblesGame';
+import { GridGame } from './games/arena/GridGame';
+import { TensGame } from './games/arena/TensGame';
+import { ClearGame } from './games/arena/ClearGame';
+import { ClockGame } from './games/arena/ClockGame';
+import { PizzaGame } from './games/arena/PizzaGame';
 import { t, type MessageKey } from '../i18n';
 import { ItemVoice } from './itemVoice';
 import './play.css';
@@ -106,8 +116,17 @@ const COMMAND_TEXT: Record<InteractionType, MessageKey> = {
   stack: 'play.cmd.stack',
   lines: 'play.cmd.lines',
   bingo: 'play.cmd.bingo',
+  count: 'play.cmd.count',
+  beads: 'play.cmd.beads',
   coord: 'play.cmd.coord',
   chance: 'play.cmd.chance',
+  quest: 'play.cmd.quest',
+  bubbles: 'play.cmd.bubbles',
+  grid: 'play.cmd.grid',
+  tens: 'play.cmd.tens',
+  clear: 'play.cmd.clear',
+  clock: 'play.cmd.clock',
+  pizza: 'play.cmd.pizza',
 };
 
 /** Ucapkan perintah/kalimat soal sesuai tingkat (suara Momo, cadangan suara browser). */
@@ -425,7 +444,9 @@ function InteractionView(props: ViewProps<Interaction>) {
         <Spell {...props} interaction={it} />
       );
     case 'build':
-      return it.style === 'feed' ? (
+      return it.style === 'cake' ? (
+        <CakeGame {...props} interaction={it} />
+      ) : it.style === 'feed' ? (
         <FeedCat {...props} interaction={it} />
       ) : (
         <Build {...props} interaction={it} />
@@ -491,11 +512,31 @@ function InteractionView(props: ViewProps<Interaction>) {
       return <LinesGame {...props} interaction={it} />;
     case 'bingo':
       return <BingoGame {...props} interaction={it} onDone={props.onSubmit} />;
+    // Game berhitung PAUD (D-108).
+    case 'count':
+      return <CountGame {...props} interaction={it} />;
+    case 'beads':
+      return <BeadsGame {...props} interaction={it} onDone={props.onSubmit} />;
     // Game EMC Kelas 3–4 (D-101).
     case 'coord':
       return <CoordGame {...props} interaction={it} onDone={props.onSubmit} />;
     case 'chance':
       return <ChanceGame {...props} interaction={it} onDone={props.onSubmit} />;
+    // Arena game Momo PAUD–Kelas 4 (D-115).
+    case 'quest':
+      return <QuestGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'bubbles':
+      return <BubblesGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'grid':
+      return <GridGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'clear':
+      return <ClearGame {...props} interaction={it} onDone={props.onSubmit} />;
+    case 'tens':
+      return <TensGame {...props} interaction={it} />;
+    case 'clock':
+      return <ClockGame {...props} interaction={it} />;
+    case 'pizza':
+      return <PizzaGame {...props} interaction={it} />;
   }
 }
 
@@ -1038,7 +1079,7 @@ function NumberLine({
             y1={70}
             x2={width - 12}
             y2={70}
-            stroke="#2b2540"
+            stroke="var(--malam)"
             strokeWidth={4}
             strokeLinecap="round"
           />
@@ -1060,13 +1101,13 @@ function NumberLine({
                 }}
               >
                 <rect x={x - step / 2} y={20} width={step} height={104} fill="transparent" />
-                <line x1={x} y1={58} x2={x} y2={82} stroke="#2b2540" strokeWidth={3} />
+                <line x1={x} y1={58} x2={x} y2={82} stroke="var(--malam)" strokeWidth={3} />
                 <circle
                   cx={x}
                   cy={70}
                   r={isMark ? 16 : 0}
-                  fill="#f7c948"
-                  stroke="#2b2540"
+                  fill="var(--kunyit)"
+                  stroke="var(--malam)"
                   strokeWidth={3}
                 />
                 <text
@@ -1075,7 +1116,7 @@ function NumberLine({
                   textAnchor="middle"
                   fontSize={22}
                   fontWeight={700}
-                  fill="#1d1a2e"
+                  fill="var(--malam)"
                 >
                   {v}
                 </text>
@@ -1085,12 +1126,12 @@ function NumberLine({
                       width={28}
                       height={30}
                       rx={9}
-                      fill="#8a6cf0"
-                      stroke="#2b2540"
+                      fill="var(--gonjong)"
+                      stroke="var(--malam)"
                       strokeWidth={3}
                     />
-                    <circle cx={9} cy={13} r={3} fill="#1d1a2e" />
-                    <circle cx={19} cy={13} r={3} fill="#1d1a2e" />
+                    <circle cx={9} cy={13} r={3} fill="var(--on-gonjong)" />
+                    <circle cx={19} cy={13} r={3} fill="var(--on-gonjong)" />
                   </g>
                 )}
               </g>

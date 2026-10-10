@@ -36,7 +36,7 @@ function Engine() {
         width="80"
         height="24"
         rx="6"
-        fill="#5b3fd6"
+        fill="var(--gonjong)"
         stroke="#2b2540"
         strokeWidth="4"
       />

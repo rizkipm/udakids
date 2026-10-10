@@ -1,26 +1,28 @@
-/* Situs publik (landing) + halaman masuk/daftar orang dewasa. Tema anak: hangat, berwarna, membulat. */
+/* Situs publik (landing) + halaman masuk/daftar orang dewasa.
+   Warna diarahkan ke token UdaKids (D-107, src/styles/uk-tokens.css): tanpa ungu, tanpa tepi hitam tebal. */
 .site,
 .auth-page {
-  --s-bg: #fff8ec;
-  --s-ink: #1d1a2e;
-  --s-muted: #5d5873;
-  --s-grape: #5b3fd6;
-  --s-grape-soft: #efe7ff;
-  --s-sun: #f7c948;
-  --s-sun-soft: #fff4cf;
-  --s-coral: #ff7a59;
-  --s-coral-soft: #ffe6de;
-  --s-sky: #4aa8ff;
-  --s-sky-soft: #e2f1ff;
-  --s-leaf: #2e9e5b;
-  --s-leaf-soft: #e3f6ea;
-  --s-teal: #19a58a;
-  --s-teal-soft: #dcf5ef;
-  --s-line: #1d1a2e;
-  --s-radius: 28px;
-  --s-font:
-    ui-rounded, 'SF Pro Rounded', Nunito, 'Varela Round', system-ui, -apple-system, 'Segoe UI',
-    sans-serif;
+  --s-bg: var(--awan);
+  --s-ink: var(--malam);
+  --s-muted: var(--malam-muted);
+  --s-grape: var(--gonjong);
+  --s-grape-soft: var(--gonjong-soft);
+  --s-sun: var(--kunyit);
+  --s-sun-soft: var(--kunyit-soft);
+  --s-coral: var(--jeruk);
+  --s-coral-soft: var(--jeruk-soft);
+  --s-sky: var(--langit);
+  --s-sky-soft: var(--langit-soft);
+  --s-leaf: var(--sawah);
+  --s-leaf-soft: var(--sawah-soft);
+  --s-teal: var(--toska);
+  --s-teal-soft: var(--toska-soft);
+  --s-line: var(--garis-tegas);
+  --s-radius: var(--radius-lg);
+  --s-font: var(--font-body);
+  /* Teks di atas isian kuat langit/jeruk/toska. Belum ada token on-langit/on-jeruk/on-toska, jadi memakai
+     on-gonjong: putih di tema terang, gelap di tema gelap (≥ 4,5:1 di keduanya, D-110). */
+  --s-on-strong: var(--on-gonjong);
 }
 
 .site {
@@ -52,32 +54,35 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 48px;
+  min-height: 52px;
   padding: 0 22px;
-  border-radius: 999px;
-  background: var(--s-grape);
-  color: #fff;
-  font-weight: 800;
+  /* Tombol "anak tangga" UdaKids (D-107): sudut 16 px, bayangan padat, tanpa tepi tebal, bukan pil. */
+  border-radius: var(--radius-md);
+  background: var(--gonjong);
+  color: var(--on-gonjong);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  border: 3px solid var(--s-line);
-  box-shadow: 0 4px 0 var(--s-line);
+  border: 0;
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
   transition:
-    transform 0.12s,
-    box-shadow 0.12s;
+    transform 0.08s,
+    box-shadow 0.08s;
   white-space: nowrap;
 }
 .site-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 var(--s-line);
 }
 .site-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 var(--s-line);
+  transform: translateY(5px);
+  box-shadow: none;
 }
 .site-btn:focus-visible,
 .site a:focus-visible,
 .site-burger:focus-visible {
-  outline: 4px solid var(--s-sun);
+  outline: 3px solid var(--kunyit);
   outline-offset: 3px;
 }
 .site-btn.big {
@@ -86,18 +91,24 @@
   font-size: 1.15rem;
 }
 .site-btn.alt {
-  background: var(--s-sun);
-  color: var(--s-ink);
+  background: var(--kunyit);
+  color: var(--on-kunyit);
+  box-shadow: var(--shadow-tekan) var(--kunyit-tekan);
 }
 .site-btn.ghost {
-  background: #fff;
-  color: var(--s-grape);
+  background: var(--kertas);
+  color: var(--malam);
+  box-shadow:
+    inset 0 0 0 2px var(--garis-tegas),
+    var(--shadow-tekan) var(--garis-tegas);
 }
 .site-btn.ghost.light {
+  /* Dipakai di atas pita gonjong: teks & garis mengikuti on-gonjong supaya terbaca di dua tema. */
   background: transparent;
-  color: #fff;
-  border-color: #fff;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+  color: var(--on-gonjong);
+  box-shadow:
+    inset 0 0 0 2px currentColor,
+    var(--shadow-tekan) var(--gonjong-tekan);
 }
 
 /* Navigasi */
@@ -110,9 +121,9 @@
   justify-content: space-between;
   gap: 16px;
   padding: 10px clamp(16px, 4vw, 48px);
-  background: rgba(255, 248, 236, 0.92);
+  background: color-mix(in srgb, var(--awan) 92%, transparent);
   backdrop-filter: blur(8px);
-  border-bottom: 3px solid rgba(29, 26, 46, 0.08);
+  border-bottom: 1px solid var(--garis);
 }
 .site-brand {
   display: inline-flex;
@@ -124,7 +135,7 @@
   text-decoration: none;
 }
 .site-brand.on-dark {
-  color: #fff;
+  color: inherit;
 }
 .site-menu {
   display: flex;
@@ -149,8 +160,8 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  border: 3px solid var(--s-line);
-  background: #fff;
+  border: 2px solid var(--s-line);
+  background: var(--kertas);
   color: var(--s-ink);
   cursor: pointer;
 }
@@ -172,8 +183,8 @@
   margin: 0 0 12px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: #fff;
-  border: 3px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   font-weight: 800;
 }
 .hero h1 {
@@ -184,7 +195,11 @@
 }
 .hero h1 .hl {
   display: inline;
-  background: linear-gradient(transparent 58%, var(--s-sun) 58%);
+  /* Stabilo kunyit setengah transparan: tetap terbaca untuk teks malam di tema terang maupun gelap. */
+  background: linear-gradient(
+    transparent 58%,
+    color-mix(in srgb, var(--s-sun) 55%, transparent) 58%
+  );
   padding: 0 4px;
 }
 .hero-lead {
@@ -222,10 +237,9 @@
 .hero-blob {
   position: absolute;
   inset: 8% 6% 4% 6%;
-  background: radial-gradient(circle at 35% 35%, #a58cff, var(--s-grape) 70%);
+  background: radial-gradient(circle at 35% 35%, var(--kertas), var(--kunyit-soft) 70%);
   border-radius: 46% 54% 58% 42% / 48% 42% 58% 52%;
-  border: 4px solid var(--s-line);
-  box-shadow: 0 14px 0 rgba(29, 26, 46, 0.12);
+  box-shadow: var(--shadow-kartu);
 }
 .hero-momo {
   position: absolute;
@@ -276,8 +290,8 @@
   right: 0;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 3px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: 20px 20px 20px 4px;
   padding: 8px 14px;
   box-shadow: 0 4px 0 var(--s-line);
@@ -305,29 +319,42 @@
   margin: 0 auto 28px;
   max-width: 40em;
 }
+/* --tone = isian/garis, --tone-text = teks berwarna (≥ 4,5:1), --tone-on = teks di atas --tone. */
 .tone-grape {
   --tone: var(--s-grape);
   --tone-soft: var(--s-grape-soft);
+  --tone-text: var(--gonjong-teks);
+  --tone-on: var(--on-gonjong);
 }
 .tone-sun {
-  --tone: #e0a100;
+  --tone: var(--kunyit-tekan);
   --tone-soft: var(--s-sun-soft);
+  --tone-text: var(--kunyit-teks);
+  --tone-on: var(--on-kunyit);
 }
 .tone-coral {
   --tone: var(--s-coral);
   --tone-soft: var(--s-coral-soft);
+  --tone-text: var(--jeruk-teks);
+  --tone-on: var(--s-on-strong);
 }
 .tone-sky {
   --tone: var(--s-sky);
   --tone-soft: var(--s-sky-soft);
+  --tone-text: var(--langit-teks);
+  --tone-on: var(--s-on-strong);
 }
 .tone-leaf {
   --tone: var(--s-leaf);
   --tone-soft: var(--s-leaf-soft);
+  --tone-text: var(--sawah-teks);
+  --tone-on: var(--on-sawah);
 }
 .tone-teal {
   --tone: var(--s-teal);
   --tone-soft: var(--s-teal-soft);
+  --tone-text: var(--toska-teks);
+  --tone-on: var(--s-on-strong);
 }
 
 /* Pintu masuk */
@@ -342,7 +369,7 @@
   gap: 10px;
   padding: 24px;
   background: var(--tone-soft);
-  border: 4px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: var(--s-radius);
   box-shadow: 0 8px 0 var(--tone);
 }
@@ -361,12 +388,11 @@
   flex-wrap: wrap;
   margin-top: 8px;
 }
-.door .site-btn {
+.door .site-btn:not(.ghost) {
   background: var(--tone);
-}
-.door .site-btn.ghost {
-  background: #fff;
-  color: var(--s-ink);
+  color: var(--tone-on);
+  /* Anak tangga: warna tone digelapkan (belum ada token -tekan untuk sawah/langit). */
+  box-shadow: var(--shadow-tekan) color-mix(in srgb, var(--tone) 68%, black);
 }
 
 /* Fitur terbaru: afiliasi & batas 7 anak (D-063) */
@@ -374,9 +400,10 @@
   margin: 0 auto 6px;
   width: fit-content;
   padding: 4px 14px;
-  border: 3px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: 999px;
   background: var(--s-sun);
+  color: var(--on-kunyit);
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -397,7 +424,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 26px;
-  border: 4px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: var(--s-radius);
   min-width: 0;
 }
@@ -410,9 +437,13 @@
   line-height: 1.55;
 }
 .news-aff {
-  background: linear-gradient(140deg, var(--s-grape) 0%, #7c5cff 60%, #9d7bff 100%);
-  color: #fff;
-  box-shadow: 0 8px 0 var(--s-line);
+  background: linear-gradient(
+    140deg,
+    var(--gonjong) 0%,
+    color-mix(in srgb, var(--gonjong) 70%, var(--jeruk)) 100%
+  );
+  color: var(--on-gonjong);
+  box-shadow: 0 8px 0 var(--gonjong-tekan);
 }
 .news-kids {
   background: var(--s-leaf-soft);
@@ -421,10 +452,10 @@
 .news-badge {
   align-self: flex-start;
   padding: 3px 12px;
-  border: 3px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: 999px;
   background: var(--s-sun);
-  color: var(--s-ink);
+  color: var(--on-kunyit);
   font-weight: 900;
   font-size: 0.85rem;
 }
@@ -442,8 +473,8 @@
   gap: 4px;
   padding: 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: color-mix(in srgb, var(--on-gonjong) 14%, transparent);
+  border: 2px solid color-mix(in srgb, var(--on-gonjong) 35%, transparent);
 }
 .news-steps strong {
   font-size: 1.5rem;
@@ -466,13 +497,16 @@
   text-align: center;
 }
 .news-aff .site-btn {
-  background: #fff;
-  color: var(--s-ink);
+  background: var(--kertas);
+  color: var(--malam);
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
 }
 .news-aff .site-btn.ghost {
   background: transparent;
-  color: #fff;
-  border-color: #fff;
+  color: var(--on-gonjong);
+  box-shadow:
+    inset 0 0 0 2px currentColor,
+    var(--shadow-tekan) var(--gonjong-tekan);
 }
 .news-note {
   opacity: 0.9;
@@ -526,8 +560,8 @@
 .book-card {
   position: relative;
   padding: 22px 22px 22px 34px;
-  background: #fff;
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: 10px 24px 24px 10px;
   display: flex;
   flex-direction: column;
@@ -539,7 +573,7 @@
   inset: 0 auto 0 0;
   width: 16px;
   background: var(--tone);
-  border-right: 3px solid var(--s-line);
+  border-right: 2px solid var(--s-line);
 }
 .book-card h3 {
   margin: 4px 0 0;
@@ -551,7 +585,7 @@
 }
 .book-age {
   font-weight: 800;
-  color: var(--tone) !important;
+  color: var(--tone-text) !important;
 }
 .book-levels {
   align-self: flex-start;
@@ -573,8 +607,8 @@
   flex-direction: column;
   gap: 12px;
   padding: 22px;
-  background: #fff;
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-top: 12px solid var(--tone);
   border-radius: 24px;
 }
@@ -664,8 +698,8 @@
 .how-step {
   position: relative;
   padding: 44px 20px 20px;
-  background: #fff;
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: var(--s-radius);
   text-align: center;
 }
@@ -686,13 +720,14 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 4px solid var(--s-line);
+  border: 2px solid var(--s-line);
   font-size: 1.6rem;
   font-weight: 900;
-  color: #fff;
+  color: var(--s-on-strong);
 }
 .step-1 .how-num {
   background: var(--s-grape);
+  color: var(--on-gonjong);
 }
 .step-2 .how-num {
   background: var(--s-coral);
@@ -702,6 +737,7 @@
 }
 .step-4 .how-num {
   background: var(--s-leaf);
+  color: var(--on-sawah);
 }
 
 /* Juara */
@@ -711,7 +747,7 @@
   align-items: center;
   gap: 32px;
   background: var(--s-sun-soft);
-  border: 4px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: 40px;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -754,24 +790,27 @@
   display: grid;
   place-items: center;
   width: 96px;
-  border: 4px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-bottom: 0;
   border-radius: 16px 16px 0 0;
-  color: #fff;
   font-size: 2rem;
   font-weight: 900;
 }
+/* Podium emas/perak/perunggu dari token: kunyit, garis, jeruk. */
 .mp-1 span {
   height: 130px;
   background: var(--s-sun);
+  color: var(--on-kunyit);
 }
 .mp-2 span {
   height: 90px;
-  background: #9aa8bf;
+  background: var(--garis);
+  color: var(--malam);
 }
 .mp-3 span {
   height: 66px;
-  background: #e08b4d;
+  background: var(--jeruk);
+  color: var(--s-on-strong);
 }
 
 /* Aman */
@@ -784,8 +823,8 @@
 .safe-item {
   padding: 20px;
   border-radius: var(--s-radius);
-  background: #fff;
-  border: 3px solid rgba(29, 26, 46, 0.15);
+  background: var(--kertas);
+  border: 3px solid var(--garis);
 }
 .safe-item h3 {
   margin: 10px 0 4px;
@@ -808,10 +847,10 @@
   padding: 28px clamp(20px, 4vw, 40px);
   width: calc(100% - 2 * clamp(16px, 4vw, 48px));
   background: var(--s-grape);
-  color: #fff;
-  border: 4px solid var(--s-line);
+  color: var(--on-gonjong);
+  border: 0;
   border-radius: 40px;
-  box-shadow: 0 10px 0 var(--s-line);
+  box-shadow: 0 10px 0 var(--gonjong-tekan);
 }
 .cta-band > div:not(.hero-cta) {
   flex: 1;
@@ -827,7 +866,8 @@
 }
 .cta-band .site-btn:not(.ghost) {
   background: var(--s-sun);
-  color: var(--s-ink);
+  color: var(--on-kunyit);
+  box-shadow: var(--shadow-tekan) var(--kunyit-tekan);
 }
 .site-footer {
   display: flex;
@@ -835,7 +875,7 @@
   flex-wrap: wrap;
   gap: 12px;
   padding: 24px clamp(16px, 4vw, 48px);
-  border-top: 3px solid rgba(29, 26, 46, 0.08);
+  border-top: 1px solid var(--garis);
   color: var(--s-muted);
   font-weight: 700;
 }
@@ -901,17 +941,29 @@
   position: relative;
   overflow: hidden;
   padding: 24px clamp(20px, 4vw, 48px);
-  color: #fff;
+  color: var(--on-gonjong);
   display: flex;
   flex-direction: column;
   background: var(--s-grape);
   font-family: var(--s-font);
 }
+/* Gradasi dicampur dengan --malam: makin gelap di tema terang, makin terang di tema gelap, jadi kontras
+   dengan teks on-* (putih di terang, gelap di gelap) tetap terjaga. */
 .auth-parent .auth-art {
-  background: linear-gradient(160deg, #1f8a52, #2e9e5b 50%, #46b97a);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--sawah) 82%, var(--malam)),
+    var(--sawah)
+  );
+  color: var(--on-sawah);
 }
 .auth-staff .auth-art {
-  background: linear-gradient(160deg, #1e5fb0, #2f7fd6 55%, #4aa8ff);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--langit) 82%, var(--malam)),
+    var(--langit)
+  );
+  color: var(--s-on-strong);
 }
 .auth-art::after {
   content: '';
@@ -921,7 +973,7 @@
   right: -160px;
   bottom: -160px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: color-mix(in srgb, var(--kertas) 12%, transparent);
 }
 .auth-hero {
   position: relative;
@@ -936,8 +988,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  box-shadow: var(--shadow-kartu);
   margin-bottom: 20px;
 }
 .auth-cloud {
@@ -984,13 +1036,13 @@
   align-items: center;
   gap: 12px;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.14);
+  background: color-mix(in srgb, var(--kertas) 16%, transparent);
   border-radius: 16px;
   padding: 8px 12px;
 }
 .auth-points .site-icon {
   flex: none;
-  background: #fff;
+  background: var(--kertas);
   border-radius: 12px;
   padding: 3px;
 }
@@ -1007,22 +1059,31 @@
   gap: 16px;
 }
 .auth-wrap .ui-card {
-  border-radius: 24px;
-  border: 3px solid var(--s-line);
-  box-shadow: 0 8px 0 rgba(29, 26, 46, 0.9);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--garis);
+  box-shadow: var(--shadow-kartu);
   padding: clamp(18px, 3vw, 28px);
 }
+/* Tombol "anak tangga" (D-107): sudut radius-md + bayangan padat, bukan pil bertepi tebal. */
 .auth-wrap .ui-btn-primary {
   min-height: 48px;
-  border-radius: 999px;
-  border: 3px solid var(--s-line);
-  box-shadow: 0 4px 0 var(--s-line);
+  border-radius: var(--radius-md);
+  border: 0;
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
+}
+.auth-wrap .ui-btn-primary:not(:disabled):active {
+  transform: translateY(5px);
+  box-shadow: none;
 }
 .auth-parent .ui-btn-primary {
   background: var(--s-leaf);
+  color: var(--on-sawah);
+  box-shadow: var(--shadow-tekan) color-mix(in srgb, var(--sawah) 68%, black);
 }
 .auth-staff .ui-btn-primary {
-  background: #2f7fd6;
+  background: var(--langit);
+  color: var(--s-on-strong);
+  box-shadow: var(--shadow-tekan) color-mix(in srgb, var(--langit) 68%, black);
 }
 .auth-links {
   display: flex;
@@ -1051,7 +1112,7 @@
   gap: 8px;
   flex: 1;
   font-weight: 700;
-  color: #5d5873;
+  color: var(--malam-muted);
   min-width: 0;
 }
 .stepper li:not(:last-child)::after {
@@ -1060,11 +1121,11 @@
   height: 4px;
   min-width: 12px;
   border-radius: 999px;
-  background: #dcd6ea;
+  background: var(--garis);
   margin-right: 8px;
 }
 .stepper li.is-done::after {
-  background: #2e9e5b;
+  background: var(--sawah);
 }
 .stepper-dot {
   flex: none;
@@ -1073,22 +1134,22 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 3px solid #dcd6ea;
-  background: #fff;
+  border: 3px solid var(--garis-tegas);
+  background: var(--kertas);
   font-weight: 900;
 }
 .stepper li.is-current {
-  color: #1d1a2e;
+  color: var(--malam);
 }
 .stepper li.is-current .stepper-dot {
-  border-color: #5b3fd6;
-  background: #5b3fd6;
-  color: #fff;
+  border-color: var(--gonjong);
+  background: var(--gonjong);
+  color: var(--on-gonjong);
 }
 .stepper li.is-done .stepper-dot {
-  border-color: #2e9e5b;
-  background: #2e9e5b;
-  color: #fff;
+  border-color: var(--sawah);
+  background: var(--sawah);
+  color: var(--on-sawah);
 }
 .stepper-label {
   overflow: hidden;
@@ -1122,10 +1183,10 @@
     align-items: stretch;
     gap: 4px;
     padding: 12px;
-    background: #fff;
-    border: 3px solid var(--s-line);
+    background: var(--kertas);
+    border: 1px solid var(--garis);
     border-radius: 20px;
-    box-shadow: 0 8px 0 rgba(29, 26, 46, 0.2);
+    box-shadow: var(--shadow-kartu);
   }
   .site-menu.is-open {
     display: flex;
@@ -1236,7 +1297,7 @@
 }
 .book-card.is-skeleton {
   min-height: 170px;
-  background: linear-gradient(90deg, #fff 0%, #f3eefc 50%, #fff 100%);
+  background: linear-gradient(90deg, var(--kertas) 0%, var(--awan-2) 50%, var(--kertas) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
 }
@@ -1276,8 +1337,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 3px solid var(--s-line);
-  background: #fff;
+  border: 2px solid var(--s-line);
+  background: var(--kertas);
   color: var(--s-ink);
   box-shadow: 0 4px 0 var(--s-line);
   cursor: pointer;
@@ -1331,8 +1392,8 @@
   height: 14px;
   padding: 0;
   border-radius: 999px;
-  border: 3px solid var(--s-line);
-  background: #fff;
+  border: 2px solid var(--s-line);
+  background: var(--kertas);
   cursor: pointer;
   transition: width 0.2s;
 }
@@ -1356,8 +1417,8 @@
   margin: 14px 0 0;
   padding: 6px 14px;
   border-radius: 999px;
-  background: #fff;
-  border: 2px solid rgba(29, 26, 46, 0.15);
+  background: var(--kertas);
+  border: 2px solid var(--garis);
   font-weight: 700;
   color: var(--s-muted);
 }
@@ -1368,20 +1429,20 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #b9b3c9;
+  background: var(--garis-tegas);
   flex: none;
 }
 .live-chip.is-live .live-dot {
-  background: #2e9e5b;
-  box-shadow: 0 0 0 0 rgba(46, 158, 91, 0.6);
+  background: var(--sawah);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--sawah) 60%, transparent);
   animation: live-pulse 1.8s infinite;
 }
 @keyframes live-pulse {
   70% {
-    box-shadow: 0 0 0 10px rgba(46, 158, 91, 0);
+    box-shadow: 0 0 0 10px transparent;
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(46, 158, 91, 0);
+    box-shadow: 0 0 0 0 transparent;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1434,8 +1495,8 @@
   flex-direction: column;
   gap: 8px;
   padding: 24px;
-  background: #fff;
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: var(--s-radius);
   box-shadow: 0 8px 0 var(--s-grape);
 }
@@ -1474,9 +1535,10 @@
   top: -14px;
   right: 18px;
   padding: 4px 12px;
-  border: 3px solid var(--s-line);
+  border: 2px solid var(--s-line);
   border-radius: 999px;
   background: var(--s-sun);
+  color: var(--on-kunyit);
   font-weight: 800;
 }
 .price-card .site-btn {
@@ -1491,8 +1553,8 @@
 
 /* 10 Besar Global realtime (D-045) */
 .topten-card {
-  background: #fff;
-  border: 4px solid var(--s-line);
+  background: var(--kertas);
+  border: 2px solid var(--s-line);
   border-radius: var(--s-radius);
   padding: clamp(14px, 3vw, 24px);
   box-shadow: 0 8px 0 var(--s-line);
@@ -1518,12 +1580,12 @@
   height: 12px;
   border-radius: 50%;
   background: var(--s-leaf);
-  box-shadow: 0 0 0 0 rgb(46 158 91 / 50%);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--sawah) 50%, transparent);
   animation: topten-pulse 1.8s ease-out infinite;
 }
 @keyframes topten-pulse {
   to {
-    box-shadow: 0 0 0 10px rgb(46 158 91 / 0%);
+    box-shadow: 0 0 0 10px transparent;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1549,7 +1611,7 @@
 .topten-table thead th {
   font-size: 0.85rem;
   color: var(--s-muted);
-  border-bottom: 3px solid var(--s-line);
+  border-bottom: 2px solid var(--s-line);
 }
 .topten-table th:nth-child(1),
 .topten-table td:nth-child(1),
@@ -1558,7 +1620,7 @@
   text-align: left;
 }
 .topten-table tbody tr + tr {
-  border-top: 2px dashed #e6e1d6;
+  border-top: 2px dashed var(--garis);
 }
 .topten-name {
   display: inline-flex;
@@ -1572,22 +1634,24 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 3px solid var(--s-line);
+  border: 2px solid var(--s-line);
   font-weight: 900;
   background: var(--s-grape-soft);
 }
 .topten-table tr.is-1 .topten-pos {
   background: var(--s-sun);
+  color: var(--on-kunyit);
 }
 .topten-table tr.is-2 .topten-pos {
-  background: #dfe3ea;
+  background: var(--garis);
 }
 .topten-table tr.is-3 .topten-pos {
-  background: #f2c19b;
+  background: var(--jeruk-soft);
+  color: var(--jeruk-teks);
 }
 .topten-points {
   font-weight: 900;
-  color: var(--s-grape);
+  color: var(--gonjong-teks);
 }
 .topten-empty,
 .topten-note {
@@ -1611,9 +1675,10 @@
 .topten-period {
   min-height: 44px;
   padding: 8px 16px;
-  border: 2px solid #2b2540;
-  border-radius: 999px;
-  background: #fff;
+  border: 2px solid var(--garis-tegas);
+  border-radius: var(--radius-md);
+  background: var(--kertas);
+  color: var(--malam);
   font: inherit;
   font-weight: 800;
   cursor: pointer;
@@ -1622,23 +1687,24 @@
   min-height: 38px;
   padding: 6px 14px;
   font-weight: 700;
-  border-color: #c9c2e8;
+  border-color: var(--garis);
 }
 .topten-tab.is-on {
-  background: #5b3fd6;
-  border-color: #5b3fd6;
-  color: #fff;
+  background: var(--gonjong);
+  border-color: var(--gonjong);
+  color: var(--on-gonjong);
 }
 .topten-period.is-on {
-  background: #f7c948;
-  border-color: #2b2540;
+  background: var(--kunyit);
+  border-color: var(--kunyit-tekan);
+  color: var(--on-kunyit);
 }
 /* Peringkat Mock Test (D-074) */
 .mt-rule {
   margin: 4px 0 0;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #5a5470;
+  color: var(--malam-muted);
 }
 @media (max-width: 640px) {
   /* Pilihan lomba/jenjang/mapel/mock: satu baris yang bisa digeser, tidak memanjang ke bawah. */
@@ -1661,9 +1727,9 @@
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #1d6b3c;
-  background: #e3f6ec;
-  border: 1px solid #a8e0bf;
+  color: var(--sawah-teks);
+  background: var(--sawah-soft);
+  border: 1px solid color-mix(in srgb, var(--sawah) 40%, transparent);
   vertical-align: middle;
 }
 .topten-podium {
@@ -1688,7 +1754,8 @@
 .tp-crown {
   font-size: 1.6rem;
   line-height: 1;
-  color: #f2b705;
+  /* Ikon bintang: kunyit-tekan agar ≥ 3:1 di atas kertas (kunyit saja 1,85:1). */
+  color: var(--kunyit-tekan);
 }
 .tp-name {
   max-width: 100%;
@@ -1699,10 +1766,10 @@
 }
 .tp-metric {
   font-weight: 900;
-  color: #5b3fd6;
+  color: var(--gonjong-teks);
 }
 .tp-detail {
-  color: #5a5470;
+  color: var(--malam-muted);
   font-weight: 600;
   font-size: 0.8rem;
 }
@@ -1711,24 +1778,27 @@
   margin-top: 6px;
   display: grid;
   place-items: center;
-  border: 3px solid #2b2540;
+  border: 2px solid var(--garis-tegas);
+  border-bottom: 0;
   border-radius: 14px 14px 0 0;
   font-size: 1.8rem;
   font-weight: 900;
-  color: #fff;
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
 }
+/* Podium emas/perak/perunggu dari token (kunyit, garis, jeruk); teks memakai pasangan on-* masing-masing. */
 .tp-spot.place-1 .tp-block {
   height: 96px;
-  background: linear-gradient(#ffd45c, #e9a400);
+  background: linear-gradient(var(--kunyit), var(--kunyit-tekan));
+  color: var(--on-kunyit);
 }
 .tp-spot.place-2 .tp-block {
   height: 70px;
-  background: linear-gradient(#c9d3e3, #8e9ab3);
+  background: linear-gradient(var(--kertas-2), var(--garis));
+  color: var(--malam);
 }
 .tp-spot.place-3 .tp-block {
   height: 54px;
-  background: linear-gradient(#f2b48a, #cf7c45);
+  background: linear-gradient(var(--jeruk), color-mix(in srgb, var(--jeruk) 82%, var(--malam)));
+  color: var(--s-on-strong);
 }
 .topten-list {
   list-style: none;
@@ -1743,9 +1813,9 @@
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  border: 2px solid #ece7fb;
+  border: 2px solid var(--garis);
   border-radius: 14px;
-  background: #fff;
+  background: var(--kertas);
 }
 .tl-name {
   display: grid;
@@ -1757,12 +1827,26 @@
   white-space: nowrap;
 }
 .tl-name small {
-  color: #5a5470;
+  color: var(--malam-muted);
   font-weight: 600;
+}
+/* Terakhir bermain (D-116). */
+.tp-last,
+.tl-last {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--sawah-teks);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.tl-name .tl-last {
+  color: var(--sawah-teks);
+  font-weight: 700;
 }
 .tl-metric {
   font-weight: 900;
-  color: #5b3fd6;
+  color: var(--gonjong-teks);
   white-space: nowrap;
 }
 @media (max-width: 560px) {
@@ -1790,4 +1874,55 @@
   .tl-metric {
     grid-column: 3;
   }
+}
+
+/* Judul memakai fon display UdaKids (Lilita One hanya satu ketebalan: jangan ditebalkan semu). */
+.site :is(h1, h2, h3),
+.auth-page :is(h1, h2) {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* "Kenapa namanya UdaKids?" (D-107) */
+.about-name .uk-rebung {
+  max-width: 480px;
+  margin: 0 auto 20px;
+  border-radius: var(--radius-sm);
+}
+.about-name-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.about-name-card {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--kertas);
+  box-shadow: var(--shadow-kartu);
+  text-align: center;
+}
+.about-name-icon {
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+}
+.about-name-card h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+  color: var(--malam);
+}
+.about-name-card p {
+  margin: 0;
+  color: var(--malam-muted);
+  font-size: 17px;
+  line-height: 26px;
 }

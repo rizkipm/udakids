@@ -21,13 +21,12 @@ import { useSession } from '../auth/session';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
 import { bookKey, levelLabel, shelvesOf, useCatalog } from './catalog';
-import { CheckIcon, LockIcon, PlayIcon, StatIcon } from './icons';
+import { BookIcon, CheckIcon, LockIcon, PlayIcon, StatIcon } from './icons';
 import { ItemPlayer, SpeakButton } from './ItemPlayer';
 import { useLinks } from './links';
 import { MomoLoader } from './MomoLoader';
 import { PremiumNotice } from './PremiumNotice';
 import { MockSection } from './MockSection';
-import { materiOf } from './materi/registry';
 import { useProgress } from './practiceStore';
 import { PageHead } from './Profile';
 
@@ -96,8 +95,10 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
   // Mock Test olimpiade (D-072): aturan & tombolnya berbeda dari level biasa.
   const mockSkill = shelf.skills[0] && isMockSkill(shelf.skills[0]) ? shelf.skills[0] : undefined;
   const readAloud = topicReadAloud(intro, tips, t('play.topic.tip'));
-  // Materi lengkap (purwarupa): bab berurutan untuk topik yang sudah punya.
-  const materi = materiOf(domain, grade, code);
+  // Materi Topik berformat lab (D-109) jadi tombol utama; pelajaran lama tetap sebagai ringkasan singkat.
+  const materi = category.materi;
+  const bookLab = data.catalogs.find((c) => c.domain === domain && c.grade === grade)?.lab;
+  const labPos = bookLab?.pos.find((p) => p.topik.includes(code));
 
   if (mockSkill) {
     return (
@@ -126,23 +127,40 @@ export function TopicPage({ momoColor }: { momoColor: Color }) {
           <h2 id="lesson-title">{t('play.topic.lesson')}</h2>
           <SpeakButton text={readAloud} label={t('play.topic.listen')} />
         </div>
-        {materi && (
-          <Link className="kid-btn big-play lesson-open" to={`/play/belajar/${token}/lengkap`}>
-            <PlayIcon />
-            <span className="materi-open">
-              {t('play.materi.open', { title: materi.judul })}
-              <small>{t('play.materi.openSub', { n: materi.bab.length })}</small>
-            </span>
-          </Link>
-        )}
-        {book.lesson && (
-          <Link
-            className={`kid-btn lesson-open${materi ? ' secondary' : ' big-play'}`}
-            to={`/play/belajar/${token}`}
-          >
-            <PlayIcon />
-            {t('play.lesson.open', { title: book.lesson.judul })}
-          </Link>
+        {(materi || book.lesson || (labPos && bookLab)) && (
+          <div className="lesson-actions">
+            {materi && (
+              <Link
+                className="kid-btn big-play lesson-open is-main"
+                to={links.materi({ domain, grade, category: code })}
+              >
+                <PlayIcon />
+                <span className="materi-open">
+                  {t('play.lab.openMateri', { title: materi.judul })}
+                  <small>{t('play.lab.openMateriSub')}</small>
+                </span>
+              </Link>
+            )}
+            {book.lesson && (
+              <Link
+                className={`kid-btn lesson-open${materi ? ' secondary' : ' big-play is-main'}`}
+                to={`/play/belajar/${token}`}
+              >
+                <PlayIcon />
+                <span>
+                  {materi
+                    ? t('play.lab.summary')
+                    : t('play.lesson.open', { title: book.lesson.judul })}
+                </span>
+              </Link>
+            )}
+            {labPos && bookLab && (
+              <Link className="lab-to-booklab" to={links.book({ domain, grade })}>
+                <BookIcon size={28} />
+                <span>{t('play.lab.toBookLab', { title: bookLab.judul, pos: labPos.judul })}</span>
+              </Link>
+            )}
+          </div>
         )}
         <p className="lesson-intro">{intro}</p>
         {tips.length > 0 && (

@@ -86,7 +86,7 @@ export function SumGame({
           <svg className="balance-stand" viewBox="0 0 120 70" aria-hidden>
             <path
               d="M60 4 L40 66 H80 Z"
-              fill="#b8a4ff"
+              fill="var(--langit-soft)"
               stroke="#2b2540"
               strokeWidth="4"
               strokeLinejoin="round"

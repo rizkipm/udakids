@@ -7,7 +7,12 @@ import './g4.css';
 type Lines = Extract<Interaction, { type: 'lines' }>;
 const GROUPS = ['ratusan', 'puluhan', 'satuan'] as const;
 type Group = (typeof GROUPS)[number];
-const COLOR: Record<Group, string> = { ratusan: '#7b5cff', puluhan: '#ff8a3d', satuan: '#1aa37a' };
+// Warna kelompok dari token (D-110) agar tetap kontras di tema gelap.
+const COLOR: Record<Group, string> = {
+  ratusan: 'var(--langit)',
+  puluhan: 'var(--jeruk)',
+  satuan: 'var(--sawah)',
+};
 
 /** Posisi garis: puluhan di satu kelompok, satuan di kelompok lain, dengan jarak antarkelompok. */
 function positions(n: number, from: number, to: number) {
@@ -72,7 +77,7 @@ export function LinesGame({
             y1="8"
             x2={v.at}
             y2={W - 8}
-            stroke="#2b2540"
+            stroke="var(--malam)"
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -84,7 +89,7 @@ export function LinesGame({
             y1={h.at}
             x2={W - 8}
             y2={h.at}
-            stroke="#5b4fa8"
+            stroke="var(--malam-muted)"
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -99,7 +104,7 @@ export function LinesGame({
                 cx={v.at}
                 cy={h.at}
                 r={marked.has(key) ? 9 : 7}
-                fill={marked.has(key) ? COLOR[g] : '#fff'}
+                fill={marked.has(key) ? COLOR[g] : 'var(--kertas)'}
                 stroke={COLOR[g]}
                 strokeWidth="3.5"
                 className="lines-dot"

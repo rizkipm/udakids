@@ -1,4 +1,6 @@
 import { EN_COMMON, ID_COMMON } from './lang-words.js';
+import { EN_WORDS } from '../generator/english-vocab.js';
+import { parseNumberWord } from '../generator/words.js';
 import { z } from 'zod';
 import type { Choice, InteractionType, Item } from '../generator/item.js';
 import { QUIZ_LENGTH } from '../scoring/quiz.js';
@@ -42,6 +44,15 @@ export const COMMAND_KEYS = {
   bingo: 'vo_cmd_bingo',
   coord: 'vo_cmd_coord',
   chance: 'vo_cmd_chance',
+  count: 'vo_cmd_count',
+  beads: 'vo_cmd_beads',
+  quest: 'vo_cmd_quest',
+  bubbles: 'vo_cmd_bubbles',
+  grid: 'vo_cmd_grid',
+  tens: 'vo_cmd_tens',
+  clear: 'vo_cmd_clear',
+  clock: 'vo_cmd_clock',
+  pizza: 'vo_cmd_pizza',
 } as const satisfies Record<InteractionType, string>;
 
 export const RIGHT_KEYS = [
@@ -114,6 +125,13 @@ export function spokenPrompt(
 export const VOICE_ITEM_PARTS = ['prompt', 'reteach', 'choice'] as const;
 export type VoiceItemPart = (typeof VOICE_ITEM_PARTS)[number];
 
+/** Kalimat soal di dalam game (fakta, panggilan) sebagai "kartu" bersuara. */
+const spoken = (id: string, say: string): Choice => ({
+  id,
+  say,
+  visual: { kind: 'word', text: say },
+});
+
 /** Kartu pilihan/kelompok di soal, untuk mengambil teks `say` kartu tertentu. */
 const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
   const it = item.interaction;
@@ -139,13 +157,27 @@ const itemCards = (item: Pick<Item, 'interaction'>): Choice[] => {
     case 'chart':
       return it.bars;
     case 'magic':
-      return it.facts.flatMap((f) => f.choices);
+      // Soal sihirnya sendiri juga dibacakan (id fakta), bukan hanya pilihannya.
+      return [...it.facts.map((f) => spoken(f.id, f.say)), ...it.facts.flatMap((f) => f.choices)];
     case 'stack':
       return it.blocks;
     case 'bingo':
-      return it.cells;
+      // Panggilan bingo (soal belanja / "Cari angka tujuh") dibacakan lewat id panggilannya.
+      return [...it.cells, ...it.calls.map((c) => spoken(c.id, c.say))];
+    case 'count':
+    case 'beads':
+      return it.choices;
     case 'chance':
       return [...it.outcomes, ...it.fractions];
+    // Arena game Momo (D-115): pertanyaan tiap ronde / panggilan papan dibacakan lewat id-nya.
+    case 'quest':
+      return [...it.rounds.map((r) => spoken(r.id, r.say)), ...it.rounds.flatMap((r) => r.choices)];
+    case 'bubbles':
+      return it.bubbles;
+    case 'grid':
+      return (it.calls ?? []).map((c) => spoken(c.id, c.say));
+    case 'clear':
+      return it.tiles;
     // Petunjuk tiap langkah Harta Karun Koordinat (D-101) dibacakan seperti kartu.
     case 'coord':
       return it.steps.map((st) => ({ id: st.id, visual: { kind: 'blank' }, say: st.say }));
@@ -234,6 +266,30 @@ export const voiceProfileOf = (skillId: string, part: VoiceItemPart = 'prompt'):
 export const voiceLangOf = (skillId: string, part: VoiceItemPart = 'prompt'): VoiceLang =>
   voiceProfileOf(skillId, part).lang;
 
+/**
+ * Nama orang & tempat di soal (D-112): netral. Sebelumnya "Ali", "Adi", "Surabaya" dihitung penanda Indonesia, sehingga
+ * kalimat English "Ali is my friend." bisa terbaca suara Indonesia.
+ */
+const PROPER_NOUNS = [
+  'andi',
+  'adi',
+  'ali',
+  'budi',
+  'dimas',
+  'mamat',
+  'darto',
+  'surabaya',
+  'malang',
+  'ngawi',
+  'bondowoso',
+  'wonorejo',
+  'pandaan',
+  'semeru',
+  'tanjung',
+  'jakarta',
+  'bandung',
+];
+
 // Kata fungsi yang khas tiap bahasa (tidak ada di bahasa lain), untuk menebak bahasa satu kalimat (D-098).
 const ID_MARKERS = new Set(
   (
@@ -247,15 +303,29 @@ const ID_MARKERS = new Set(
     'halo hai teman belajar hari kita ingat contoh ' +
     // Kata Indonesia yang ikut terambil ke daftar English dari teks campuran buku English (D-106): "Momo baru!",
     // "Hati" sempat dibacakan suara British.
-    'baru hati orang benda nama lain bantu kota naik serta aku kamu main siap lanjut putar jeda adegan tabel ' +
-    'laporan akunmu gratis khusus lomba buka'
-  ).split(' '),
+    'baru hati orang benda nama lain bantu kota naik serta aku kamu siap lanjut putar jeda adegan tabel ' +
+    'laporan akunmu gratis khusus lomba buka kepingan aku mataku telingaku hidungku temanku lalu benar salah ' +
+    'bagus semut gajah siput malam pagi siang sore'
+  )
+    .split(' ')
+    .filter((w) => !PROPER_NOUNS.includes(w)),
 );
 /**
  * Netral, tidak menentukan bahasa (D-106): nama karakter/orang dan istilah pinjaman yang lazim di teks Indonesia
  * ("Putar video", "Mock test", "Tabel data", "Jam +1").
  */
-const NEUTRAL_WORDS = new Set(['momo', 'andi', 'video', 'data', 'jam', 'mock', 'test', 'english']);
+const NEUTRAL_WORDS = new Set([
+  'momo',
+  // "Main" (bermain) dan "main" (utama) sama-sama lazim.
+  'main',
+  'video',
+  'data',
+  'jam',
+  'mock',
+  'test',
+  'english',
+  ...PROPER_NOUNS,
+]);
 const EN_MARKERS = new Set(
   [
     (
@@ -284,9 +354,38 @@ export function textLanguage(text: string): 'id' | 'en' | undefined {
     // Imbuhan khas Indonesia: -kan, -nya, meng-, meny- (mis. menyembunyikan, sayangnya).
     else if (w.length >= 5 && w !== 'kenya' && /(kan|nya)$|^(meng|meny)/.test(w)) id++;
   }
-  if (id > en) return 'id';
-  if (en > id) return 'en';
-  return undefined;
+  // D-112: kalimat campuran yang memuat cukup kata Indonesia dibacakan suara Indonesia (suara Indonesia membaca kata
+  // English di dalamnya masih wajar; suara British membaca kalimat Indonesia terdengar "seperti bule").
+  // Seimbang: kalimat English yang hanya memuat satu nama tempat Indonesia ("… in Sendang Biru.") tetap English.
+  if (id > 0 && id * 3 >= en) return 'id';
+  if (en > 0) return 'en';
+  return id > 0 ? 'id' : undefined;
+}
+
+/** Kosakata Indonesia dari kamus kartu English (arti tiap kata), tanpa kata yang sama dengan kata English-nya. */
+let idVocab: Set<string> | undefined;
+const idVocabulary = () => {
+  if (idVocab) return idVocab;
+  const en = new Set(EN_WORDS.map((w) => w.word.toLowerCase()));
+  idVocab = new Set(
+    EN_WORDS.map((w) => w.id.toLowerCase()).filter((x) => x.length > 0 && !en.has(x)),
+  );
+  return idVocab;
+};
+
+/**
+ * Bahasa kartu pilihan di buku English (D-112): kartu berbahasa Indonesia ("ayam", "merah muda", "enam belas",
+ * "Benar") dibacakan suara Indonesia; kata English ("chicken") tetap British. Kartu satu kata tidak bisa ditebak
+ * dari kata fungsi, jadi memakai kamus arti kartu English dan bilangan Indonesia.
+ */
+export function cardLanguage(text: string): 'id' | 'en' {
+  const t = text
+    .trim()
+    .toLowerCase()
+    .replace(/[.!?,]+$/, '');
+  if (!t) return 'en';
+  if (idVocabulary().has(t) || parseNumberWord(t) !== undefined) return 'id';
+  return textLanguage(text) === 'id' ? 'id' : 'en';
 }
 
 /**
@@ -303,7 +402,10 @@ export const voiceProfileFor = (
   if (!skillId.startsWith('english.')) return base;
   // Kalimat tak pasti di pembahasan (mis. "Feel blue = merasa sedih") → suara Indonesia: suara English yang membaca
   // kalimat Indonesia terdengar asing, sedangkan suara Indonesia membaca kata English masih wajar.
-  const lang = textLanguage(text) ?? (part === 'reteach' ? 'id' : undefined);
+  const lang =
+    part === 'choice'
+      ? cardLanguage(text)
+      : (textLanguage(text) ?? (part === 'reteach' ? 'id' : undefined));
   if (lang === 'id' && base.lang === 'en-GB')
     return {
       lang: 'id-ID',

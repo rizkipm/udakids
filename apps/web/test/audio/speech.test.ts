@@ -3,6 +3,7 @@ import {
   SPEECH_TROUBLE,
   audioReady,
   installAudioUnlock,
+  pushVoiceItem,
   resetVoice,
   speak,
   speechAvailable,
@@ -102,6 +103,32 @@ describe('tanpa suara bawaan browser (D-106)', () => {
     );
     speak('Momo baru!');
     expect(new URL(urls[0]!).searchParams.get('l')).toBeNull(); // null = id-ID
+  });
+
+  it('D-112: di soal buku non-English semua kalimat suara Indonesia; di buku English ditebak per kalimat', () => {
+    resetVoice({ enabled: true, rev: 'r1', lines: {} });
+    const urls: string[] = [];
+    vi.stubGlobal(
+      'Audio',
+      class {
+        constructor(readonly src: string) {
+          urls.push(src);
+        }
+        pause() {}
+        play() {
+          return new Promise(() => {});
+        }
+      },
+    );
+    const langOf = (u: string) => new URL(u).searchParams.get('l') ?? 'id-ID';
+    const release = pushVoiceItem({ skillId: 'math.prek.a1.hitung', seed: 1, band: 0 });
+    speak('The main dancer wears no mask.');
+    expect(langOf(urls.at(-1)!)).toBe('id-ID');
+    release();
+    const releaseEn = pushVoiceItem({ skillId: 'english.sd12.a1.x', seed: 1, band: 0 });
+    speak('The main dancer wears no mask.');
+    expect(langOf(urls.at(-1)!)).toBe('en-GB');
+    releaseEn();
   });
 
   it('iPhone/iPad: ketukan pertama membuka kunci audio klip (senyap), sekali; tanpa ucapan browser', () => {

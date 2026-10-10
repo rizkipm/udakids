@@ -3,6 +3,7 @@ import { formatAverage, formatClock, type Color, type MomoLook } from '@little-c
 import { api } from '../api/client';
 import { Momo } from '../components/Momo';
 import { t } from '../i18n';
+import { lastPlayedLabel } from '../play/lastPlayed';
 import { formatStamp } from '../ui/ui';
 
 /** Top 10 global (`/leaderboard/public`, D-045): hanya nama panggilan + warna Momo. */
@@ -24,6 +25,8 @@ export type PublicTop = {
     timeMs: number;
     average?: number;
     rating?: number;
+    /** Kapan terakhir bermain (D-116); server lama: tidak ada. */
+    lastPlayedAt?: string | null;
   }[];
   board?: Board;
   period?: Period;
@@ -182,6 +185,7 @@ export function TopTenSection() {
                     <small className="tp-detail">
                       {detailOf(board, r)} · {formatClock(r.timeMs)}
                     </small>
+                    <LastPlayed iso={r.lastPlayedAt} className="tp-last" />
                     <span className="tp-block">{r.position}</span>
                   </li>
                 ),
@@ -203,6 +207,7 @@ export function TopTenSection() {
                       <small>
                         {detailOf(board, r)} · {formatClock(r.timeMs)}
                       </small>
+                      <LastPlayed iso={r.lastPlayedAt} className="tl-last" />
                     </span>
                     <span className="tl-metric">{metricOf(board, r)}</span>
                   </li>
@@ -214,5 +219,26 @@ export function TopTenSection() {
         <p className="topten-note">{t(`site.top.rule.${board}`)}</p>
       </div>
     </section>
+  );
+}
+
+/** "Main 5 menit lalu" (D-105/D-116); tidak tampil bila server belum mengirim waktunya. */
+function LastPlayed({ iso, className }: { iso?: string | null; className: string }) {
+  const label = lastPlayedLabel(iso);
+  if (!label) return null;
+  return (
+    <small className={className}>
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden>
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2.5" />
+        <path
+          d="M12 7v5l3 2"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </svg>
+      {label}
+    </small>
   );
 }

@@ -50,7 +50,9 @@ describe('tampilan Momo (D-051)', () => {
   });
 
   it('D-102: model, pola, pernak-pernik, dan warna sendiri (kode hex)', () => {
-    expect(MOMO_MODELS).toHaveLength(8);
+    expect(MOMO_MODELS).toHaveLength(9);
+    // D-113: Momo UdaKids pertama di daftar dan menjadi bawaan.
+    expect(MOMO_MODELS[0]).toBe('udakids');
     expect(MOMO_PATTERNS).toContain('bintang');
     expect(MOMO_EXTRAS).toContain('kacamata');
     expect(MOMO_ACCESSORIES).toEqual(expect.arrayContaining(['mahkota', 'bunga']));

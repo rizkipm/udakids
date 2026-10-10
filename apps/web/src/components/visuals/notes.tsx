@@ -77,7 +77,7 @@ export function GlyphLines({ glyph }: { glyph: GlyphId }) {
           key={i}
           d={strokePath(s)}
           fill="none"
-          stroke="#5b3fd6"
+          stroke="var(--langit)"
           strokeWidth={10}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -89,7 +89,7 @@ export function GlyphLines({ glyph }: { glyph: GlyphId }) {
           cx={s[0]!.x}
           cy={s[0]!.y}
           r={7}
-          fill="#2e9e5b"
+          fill="var(--sawah)"
           stroke={OUTLINE}
           strokeWidth={2}
         />

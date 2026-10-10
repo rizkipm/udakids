@@ -205,7 +205,7 @@
   padding: 16px;
   border: 1px solid var(--ui-line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--kertas);
 }
 .mda-article-preview .art-full {
   margin: 0;
@@ -270,20 +270,22 @@
   left: 6px;
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgb(29 26 46 / 75%);
-  color: #fff;
+  /* Label di atas foto: pil --malam + teks --kertas (terbalik otomatis di tema gelap). */
+  background: color-mix(in srgb, var(--malam) 85%, transparent);
+  color: var(--kertas);
   font-size: 0.75rem;
   font-weight: 700;
 }
 .mda-image.is-cover .mda-image-no {
   background: var(--ui-primary);
+  color: var(--ui-primary-ink);
 }
 .mda-image-tools {
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 6px;
-  background: var(--ui-surface, #fff);
+  background: var(--ui-surface, var(--kertas));
 }
 .mda-image-tools button {
   display: inline-grid;
@@ -293,7 +295,7 @@
   padding: 0 6px;
   border: 1px solid var(--ui-line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--kertas);
   color: inherit;
   font: inherit;
   font-size: 0.75rem;
@@ -312,7 +314,7 @@
 }
 .mda-image-tools .mda-image-del {
   margin-left: auto;
-  color: #b42318;
+  color: var(--ui-danger, var(--gonjong-teks));
 }
 .mda-drop {
   position: relative;
@@ -338,8 +340,8 @@
 .mda-drop.is-over,
 .mda-drop:focus-within {
   border-color: var(--ui-primary);
-  background: #f4efff;
-  color: #3d2a9a;
+  background: var(--gonjong-soft);
+  color: var(--gonjong-teks);
 }
 .mda-drop.is-busy {
   cursor: progress;
@@ -362,8 +364,9 @@
   bottom: 4px;
   padding: 1px 6px;
   border-radius: 999px;
-  background: rgb(29 26 46 / 75%);
-  color: #fff;
+  /* Label di atas foto: pil --malam + teks --kertas (terbalik otomatis di tema gelap). */
+  background: color-mix(in srgb, var(--malam) 85%, transparent);
+  color: var(--kertas);
   font-size: 0.7rem;
   font-weight: 700;
 }

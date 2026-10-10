@@ -1,15 +1,15 @@
 import type { ReactNode } from 'react';
 import { formatId, type FigurePoint, type FigureShape, type Visual } from '@little-coder/engine';
-import { FONT, OUTLINE, TOKENS } from './palette';
+import { FONT, INK, TOKENS } from './palette';
 
 type Figure = Extract<Visual, { kind: 'figure' }>;
 type Built = { w: number; h: number; body: ReactNode; label: string };
 
-/** Arsiran abu-abu gaya lembar lomba dan warna lembut untuk bangun kedua. */
-const SHADE = '#a9a9b3';
-const SOFT = '#e4dcff';
-const AXIS = '#5c5f73';
-const GRID = '#d9dbe6';
+/** Arsiran abu-abu gaya lembar lomba dan warna lembut untuk bangun kedua — bagan, jadi lewat token (D-110). */
+const SHADE = 'color-mix(in srgb, var(--malam-muted) 55%, var(--kertas))';
+const SOFT = 'color-mix(in srgb, var(--langit) 22%, var(--kertas))';
+const AXIS = 'var(--malam-muted)';
+const GRID = 'var(--garis)';
 const PAD = 34;
 
 const fmt = (n: number) => formatId(n).replace('-', '−');
@@ -76,7 +76,7 @@ function Txt({
       fontFamily={FONT}
       textAnchor={anchor}
       dominantBaseline="central"
-      fill={OUTLINE}
+      fill={INK}
       stroke={TOKENS.card}
       strokeWidth={5}
       paintOrder="stroke"
@@ -196,7 +196,7 @@ export function buildFigure(v: Figure): Built {
           points: pts,
           fill: sh.open ? 'none' : sh.fill === 'shade' ? SHADE : sh.fill === 'soft' ? SOFT : 'none',
           fillOpacity: sh.fill === 'shade' ? 0.75 : 1,
-          stroke: OUTLINE,
+          stroke: INK,
           strokeWidth: 3,
           strokeLinejoin: 'round' as const,
           ...(sh.dashed && { strokeDasharray: '8 6' }),
@@ -212,7 +212,7 @@ export function buildFigure(v: Figure): Built {
             y1={Y(sh.a[1])}
             x2={X(sh.b[0])}
             y2={Y(sh.b[1])}
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={3}
             strokeLinecap="round"
             {...(sh.dashed && { strokeDasharray: '8 6' })}
@@ -238,7 +238,7 @@ export function buildFigure(v: Figure): Built {
                 y1={cy + ny * 8}
                 x2={cx - nx * 8}
                 y2={cy - ny * 8}
-                stroke={OUTLINE}
+                stroke={INK}
                 strokeWidth={2.5}
               />,
             );
@@ -259,14 +259,12 @@ export function buildFigure(v: Figure): Built {
             cy={Y(sh.c[1])}
             r={sh.r * s}
             fill={sh.fill === 'shade' ? SHADE : sh.fill === 'soft' ? SOFT : 'none'}
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={3}
           />,
         );
         if (sh.center)
-          nodes.push(
-            <circle key={`${key}c`} cx={X(sh.c[0])} cy={Y(sh.c[1])} r={4} fill={OUTLINE} />,
-          );
+          nodes.push(<circle key={`${key}c`} cx={X(sh.c[0])} cy={Y(sh.c[1])} r={4} fill={INK} />);
         break;
       case 'right': {
         const at = [X(sh.at[0]), Y(sh.at[1])] as const;
@@ -283,7 +281,7 @@ export function buildFigure(v: Figure): Built {
             key={key}
             points={`${at[0] + ax},${at[1] + ay} ${at[0] + ax + bx},${at[1] + ay + by} ${at[0] + bx},${at[1] + by}`}
             fill="none"
-            stroke={OUTLINE}
+            stroke={INK}
             strokeWidth={2}
           />,
         );
@@ -291,7 +289,7 @@ export function buildFigure(v: Figure): Built {
       }
       case 'point': {
         const [dx, dy] = OFFSET[sh.pos ?? 'ne'];
-        nodes.push(<circle key={key} cx={X(sh.at[0])} cy={Y(sh.at[1])} r={5.5} fill={OUTLINE} />);
+        nodes.push(<circle key={key} cx={X(sh.at[0])} cy={Y(sh.at[1])} r={5.5} fill={INK} />);
         const text = [sh.name, sh.coord ? coordText(sh.at) : ''].filter(Boolean).join(' ');
         if (text)
           labels.push(

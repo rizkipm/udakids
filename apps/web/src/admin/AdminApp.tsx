@@ -16,6 +16,7 @@ import { PackagesPage } from './billing/PackagesPage';
 import { PaymentMethodsPage } from './billing/PaymentMethodsPage';
 import { ORDERS_CHANGED } from './billing/util';
 import { CatalogPage } from './catalog/CatalogPage';
+import { LabCoveragePage, LabPreviewPage } from './lab/LabCoveragePage';
 import { ClassesPage } from './classes/ClassesPage';
 import { ClassStudentsPage } from './classes/ClassStudentsPage';
 import { LevelEditorRoute } from './levels/LevelEditor';
@@ -44,6 +45,7 @@ const NAV: (NavItem | { group: MessageKey })[] = [
   { group: 'admin.nav.groupContent' },
   { to: '/admin/skill', label: 'admin.nav.skills', icon: 'book' },
   { to: '/admin/katalog', label: 'admin.nav.catalog', icon: 'grid' },
+  { to: '/admin/materi-lab', label: 'admin.nav.lab', icon: 'book' },
   { to: '/admin/level', label: 'admin.nav.levels', icon: 'map' },
   { to: '/admin/galeri', label: 'admin.nav.gallery', icon: 'image' },
   { to: '/admin/suara', label: 'admin.nav.voice', icon: 'speaker' },
@@ -147,6 +149,9 @@ export function AdminApp() {
         <Route path="skill/manual-baru" element={<SkillEditorRoute mode="new-manual" />} />
         <Route path="skill/:id" element={<SkillEditorRoute mode="edit" />} />
         <Route path="katalog" element={<CatalogPage />} />
+        <Route path="materi-lab" element={<LabCoveragePage />} />
+        <Route path="materi-lab/:domain/:grade" element={<LabPreviewPage />} />
+        <Route path="materi-lab/:domain/:grade/:code" element={<LabPreviewPage />} />
         <Route path="level" element={<LevelList />} />
         <Route path="level/baru" element={<LevelEditorRoute />} />
         <Route path="level/:id" element={<LevelEditorRoute />} />

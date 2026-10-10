@@ -179,13 +179,13 @@ function NumberLine({
           x2={580}
           y1={70}
           y2={70}
-          stroke="#2b2540"
+          stroke="var(--malam)"
           strokeWidth={4}
           strokeLinecap="round"
         />
         {ticks.map((v) => (
           <g key={v}>
-            <line x1={x(v)} x2={x(v)} y1={60} y2={80} stroke="#2b2540" strokeWidth={3} />
+            <line x1={x(v)} x2={x(v)} y1={60} y2={80} stroke="var(--malam)" strokeWidth={3} />
             {(v - step.min) % every === 0 || v === target ? (
               <text
                 x={x(v)}
@@ -193,23 +193,23 @@ function NumberLine({
                 textAnchor="middle"
                 fontSize={step.max >= 10000 ? 15 : 18}
                 fontWeight={800}
-                fill={v === target && solved ? '#2e9e5b' : '#2b2540'}
+                fill={v === target && solved ? 'var(--sawah-teks)' : 'var(--malam)'}
               >
                 {dotted(v)}
               </text>
             ) : null}
           </g>
         ))}
-        <circle cx={x(step.dari)} cy={70} r={7} fill="#f7c948" />
+        <circle cx={x(step.dari)} cy={70} r={7} fill="var(--kunyit)" />
         <g style={{ transform: `translateX(${x(at)}px)`, transition: 'transform 0.35s ease' }}>
-          <circle cx={0} cy={36} r={16} fill={solved ? '#2e9e5b' : '#5b3fd6'} />
+          <circle cx={0} cy={36} r={16} fill={solved ? 'var(--sawah)' : 'var(--gonjong)'} />
           <text
             x={0}
             y={42}
             textAnchor="middle"
             fontSize={at >= 10000 ? 11 : 16}
             fontWeight={900}
-            fill="#fff"
+            fill="var(--on-gonjong)"
           >
             {dotted(at)}
           </text>
@@ -503,8 +503,8 @@ function Ruler({
           width={max * unit}
           height={34}
           rx={6}
-          fill="#fff3c4"
-          stroke="#2b2540"
+          fill="var(--kunyit-soft)"
+          stroke="var(--malam)"
           strokeWidth={3}
         />
         {Array.from({ length: max + 1 }, (_, k) => (
@@ -514,7 +514,7 @@ function Ruler({
             x2={20 + k * unit}
             y1={80}
             y2={98}
-            stroke="#2b2540"
+            stroke="var(--malam)"
             strokeWidth={2}
           />
         ))}
@@ -523,7 +523,7 @@ function Ruler({
           x2={20}
           y1={0}
           y2={80}
-          stroke="#5b3fd6"
+          stroke="var(--gonjong)"
           strokeDasharray="4 4"
           strokeWidth={2}
         />
@@ -818,7 +818,7 @@ function AreaTool({
         y1={y1! + 10}
         x2={x2! + 10}
         y2={y2! + 10}
-        stroke={sides.includes(i) ? '#ff8a3d' : '#2b2540'}
+        stroke={sides.includes(i) ? 'var(--jeruk)' : 'var(--malam)'}
         strokeWidth={sides.includes(i) ? 8 : 4}
         strokeLinecap="round"
       />
@@ -840,8 +840,12 @@ function AreaTool({
               y={10 + r * cell}
               width={cell}
               height={cell}
-              fill={step.hitung === 'luas' && r < rows ? '#8fd3ff' : '#fff'}
-              stroke="#c9c3dd"
+              fill={
+                step.hitung === 'luas' && r < rows
+                  ? 'color-mix(in srgb, var(--langit) 45%, var(--kertas))'
+                  : 'var(--kertas)'
+              }
+              stroke="var(--garis-tegas)"
               strokeWidth={1.5}
             />
           )),
@@ -924,7 +928,14 @@ function AngleTool({ step, solved, onSolved }: ToolProps<{ target: number }>) {
         role="img"
         aria-label={`sudut ${deg} derajat`}
       >
-        <circle cx={130} cy={130} r={R} fill="#fffdf6" stroke="#e1dbef" strokeWidth={2} />
+        <circle
+          cx={130}
+          cy={130}
+          r={R}
+          fill="var(--kertas)"
+          stroke="var(--garis)"
+          strokeWidth={2}
+        />
         {Array.from({ length: 24 }, (_, k) => {
           const [x1, y1] = [
             130 + (R - 8) * Math.cos(rad(k * 15)),
@@ -938,18 +949,18 @@ function AngleTool({ step, solved, onSolved }: ToolProps<{ target: number }>) {
               y1={y1}
               x2={x2}
               y2={y2}
-              stroke="#c9c3dd"
+              stroke="var(--garis-tegas)"
               strokeWidth={k % 6 ? 1.5 : 3}
             />
           );
         })}
-        {arc && <path d={arc} fill="none" stroke="#ff8a3d" strokeWidth={5} />}
+        {arc && <path d={arc} fill="none" stroke="var(--jeruk)" strokeWidth={5} />}
         <line
           x1={130}
           y1={130}
           x2={130 + R}
           y2={130}
-          stroke="#2b2540"
+          stroke="var(--malam)"
           strokeWidth={6}
           strokeLinecap="round"
         />
@@ -958,11 +969,11 @@ function AngleTool({ step, solved, onSolved }: ToolProps<{ target: number }>) {
           y1={130}
           x2={ex}
           y2={ey}
-          stroke={solved ? '#2e9e5b' : '#5b3fd6'}
+          stroke={solved ? 'var(--sawah)' : 'var(--gonjong)'}
           strokeWidth={6}
           strokeLinecap="round"
         />
-        <circle cx={130} cy={130} r={7} fill="#2b2540" />
+        <circle cx={130} cy={130} r={7} fill="var(--malam)" />
       </svg>
       <p className="peraga-big">
         {deg}° · {t(angleKind(deg))}

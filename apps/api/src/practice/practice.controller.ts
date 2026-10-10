@@ -16,6 +16,7 @@ import {
   totalPoints,
   totalTimeMs,
   recordQuiz,
+  type LabProgressMap,
   type PracticeSync,
   type QuizResult,
   type SessionUser,
@@ -37,6 +38,7 @@ import {
   children,
   classes,
   events,
+  labProgress,
   quizResults,
   skillCatalogs,
   skillMastery,
@@ -111,7 +113,16 @@ export class PracticeController {
     return {
       states: Object.fromEntries(rows.map((r) => [r.skillId, r.state])),
       quizzes: await this.quizzes(this.db, user.id),
+      labs: await this.labs(this.db, user.id),
     };
+  }
+
+  /** Progres lab anak (D-109): kunci lab → bagian → bintang. */
+  private async labs(db: Pick<Db, 'select'>, childId: string): Promise<LabProgressMap> {
+    const rows = await db.select().from(labProgress).where(eq(labProgress.childId, childId));
+    const out: LabProgressMap = {};
+    for (const r of rows) (out[r.labKey] ??= {})[r.part] = r.stars;
+    return out;
   }
 
   /**
@@ -607,6 +618,42 @@ export class PracticeController {
             .onConflictDoUpdate({ target: [quizResults.childId, quizResults.skillId], set: row });
         }
       }
+      // Progres lab (D-109): event idempoten per id; bintang per bagian tidak pernah turun.
+      if (body.labs.length > 0) {
+        const fresh = await tx
+          .insert(events)
+          .values(
+            body.labs.map((l) => ({
+              id: l.id,
+              childId: user.id,
+              type: 'lab_progress',
+              payload: { lab: l.lab, part: l.part, stars: l.stars },
+              ts: new Date(l.ts),
+            })),
+          )
+          .onConflictDoNothing({ target: events.id })
+          .returning({ id: events.id });
+        const freshIds = new Set(fresh.map((f) => f.id));
+        for (const l of body.labs) {
+          if (!freshIds.has(l.id)) continue;
+          await tx
+            .insert(labProgress)
+            .values({
+              childId: user.id,
+              labKey: l.lab,
+              part: l.part,
+              stars: l.stars,
+              updatedAt: new Date(l.ts),
+            })
+            .onConflictDoUpdate({
+              target: [labProgress.childId, labProgress.labKey, labProgress.part],
+              set: {
+                stars: sql`greatest(${labProgress.stars}, excluded.stars)`,
+                updatedAt: sql`greatest(${labProgress.updatedAt}, excluded.updated_at)`,
+              },
+            });
+        }
+      }
       await tx.update(children).set({ lastActiveAt: new Date() }).where(eq(children.id, user.id));
       const states = await tx.select().from(skillMastery).where(eq(skillMastery.childId, user.id));
       return {
@@ -615,6 +662,7 @@ export class PracticeController {
         rejectedQuizzes: rejected,
         states: Object.fromEntries(states.map((r) => [r.skillId, r.state])),
         quizzes: await this.quizzes(tx, user.id),
+        labs: await this.labs(tx, user.id),
       };
     });
   }

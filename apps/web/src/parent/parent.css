@@ -1,4 +1,5 @@
-/* Area orang tua. Memakai token warna dari .ui-shell (ui.css). */
+/* Area orang tua. Memakai token warna dari .ui-shell (ui.css) dan token UdaKids (uk-tokens.css, D-110):
+   tanpa ungu/krem; teks di atas isian berwarna memakai pasangan on-*. */
 .pa-brand {
   display: inline-flex;
   align-items: center;
@@ -37,13 +38,13 @@
 .ui-narrow a:focus-visible,
 .pa-color input:focus-visible + .pa-color-swatch,
 .pa-pin-pic:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 
 /* Persetujuan data */
 .pa-consent {
-  background: #f6f4fb;
+  background: var(--awan-2);
   border: 1px solid var(--ui-line);
   border-radius: 12px;
   padding: 12px 14px;
@@ -109,7 +110,7 @@
   padding: 10px 18px;
   border: 2px dashed var(--ui-primary);
   border-radius: 14px;
-  background: #f1edff;
+  background: var(--gonjong-soft);
   color: var(--ui-ink);
 }
 .pa-welcome {
@@ -158,7 +159,7 @@
   text-align: center;
 }
 .pa-confirm {
-  background: #fdeeed;
+  background: var(--gonjong-soft);
   border-radius: 12px;
   padding: 12px;
 }
@@ -204,7 +205,7 @@
 }
 .pa-color.selected {
   border-color: var(--ui-primary);
-  background: #f1edff;
+  background: var(--gonjong-soft);
 }
 .pa-color input {
   position: absolute;
@@ -253,7 +254,7 @@
 .pa-pin-slot.filled {
   border-style: solid;
   border-color: var(--ui-primary);
-  background: #f1edff;
+  background: var(--gonjong-soft);
 }
 .pa-pin-slot-n {
   position: absolute;
@@ -275,7 +276,7 @@
   aspect-ratio: 1;
   border-radius: 16px;
   border: 2px solid var(--ui-line);
-  background: #fffdf7;
+  background: var(--kertas-2);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -304,7 +305,7 @@
 
 /* Navigasi orang tua */
 .pa-nav a:focus-visible {
-  outline: 3px solid #f5b400;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 .pa-sr {
@@ -403,7 +404,7 @@
 }
 .pa-method.selected {
   border-color: var(--ui-primary);
-  background: #f1edff;
+  background: var(--gonjong-soft);
 }
 .pa-method input {
   width: 20px;
@@ -488,9 +489,9 @@
   font-weight: 800;
 }
 .pa-amount-code {
-  background: #fff1c2;
+  background: var(--kunyit-soft);
   color: inherit;
-  border-bottom: 3px solid #f5b400;
+  border-bottom: 3px solid var(--kunyit);
   border-radius: 4px;
   padding: 0 2px;
 }
@@ -553,10 +554,14 @@
   gap: 16px 24px;
   padding: 24px;
   border-radius: 20px;
-  color: #fff;
+  color: var(--on-gonjong);
   background:
-    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.18), transparent 45%),
-    linear-gradient(135deg, #5b3fd6, #7d5cf0 55%, #3f8fe0);
+    radial-gradient(
+      circle at 85% 20%,
+      color-mix(in srgb, var(--on-gonjong) 18%, transparent),
+      transparent 45%
+    ),
+    linear-gradient(135deg, var(--gonjong), color-mix(in srgb, var(--gonjong) 70%, var(--jeruk)));
   overflow: hidden;
 }
 .pd-hero h1 {
@@ -569,22 +574,22 @@
   opacity: 0.92;
 }
 .pd-hero .ui-btn-secondary {
-  background: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.6);
+  background: color-mix(in srgb, var(--on-gonjong) 16%, transparent);
+  color: var(--on-gonjong);
+  border-color: color-mix(in srgb, var(--on-gonjong) 60%, transparent);
 }
 .pd-hero-art {
   align-self: center;
 }
-/* "1 dari 7 anak terdaftar" di atas latar ungu: chip putih transparan agar terbaca (D-063). */
+/* "1 dari 7 anak terdaftar" di atas latar gonjong: chip on-gonjong transparan agar terbaca (D-063). */
 .pd-hero p.pd-hero-count {
   display: inline-flex;
   margin: 0 0 14px;
   padding: 4px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
+  background: color-mix(in srgb, var(--on-gonjong) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--on-gonjong) 35%, transparent);
+  color: var(--on-gonjong);
   font-size: 14px;
   font-weight: 700;
   opacity: 1;
@@ -699,7 +704,7 @@
   color: var(--pd-sun);
 }
 .pd-chip.is-muted {
-  background: #f1eff6;
+  background: var(--awan-2);
   color: var(--ui-muted);
 }
 
@@ -713,7 +718,7 @@
   padding: 16px;
   border-radius: 16px;
   border: 1px solid var(--ui-line);
-  background: #fcfbff;
+  background: var(--kertas-2);
   margin-bottom: 16px;
 }
 .pd-grid .pd-panel {
@@ -756,7 +761,7 @@
   max-width: 36px;
   height: 100%;
   border-radius: 10px;
-  background: #efecf6;
+  background: var(--awan-2);
   overflow: hidden;
 }
 .pd-bar-fill {
@@ -766,12 +771,13 @@
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 10px;
-  background: #b9a8f5;
+  /* Batang "dicoba": langit lembut (dulu ungu). */
+  background: color-mix(in srgb, var(--langit) 55%, var(--kertas));
   transition: height 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .pd-bar-pass {
   display: block;
-  background: #2fa36b;
+  background: var(--sawah);
 }
 .pd-bar.is-today .pd-bar-track {
   box-shadow: 0 0 0 2px var(--ui-primary);
@@ -808,10 +814,10 @@
   margin-left: 0;
 }
 .pd-dot.is-pass {
-  background: #2fa36b;
+  background: var(--sawah);
 }
 .pd-dot.is-try {
-  background: #b9a8f5;
+  background: color-mix(in srgb, var(--langit) 55%, var(--kertas));
 }
 
 .pd-insights {
@@ -872,7 +878,7 @@
   gap: 12px;
   padding: 8px 10px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--kertas);
   border: 1px solid var(--ui-line);
 }
 .pd-recent li > div {
@@ -990,9 +996,14 @@
   min-height: 48px;
   padding: 12px 14px;
   border-radius: 16px;
-  color: #fff;
+  color: var(--on-gonjong);
   text-decoration: none;
-  background: linear-gradient(135deg, #5b3fd6, #7d5cf0);
+  background: linear-gradient(
+    135deg,
+    var(--gonjong),
+    color-mix(in srgb, var(--gonjong) 70%, var(--jeruk))
+  );
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
 }
 .pa-side-play .shell-label {
   display: grid;
@@ -1034,8 +1045,8 @@
   margin: 0 0 14px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: #f3efff;
-  color: #3d2a8f;
+  background: var(--langit-soft);
+  color: var(--langit-teks);
   font-weight: 600;
   line-height: 1.45;
 }
@@ -1057,7 +1068,7 @@
   margin: 0;
   max-width: 28em;
   font-weight: 600;
-  color: #8a5a00;
+  color: var(--kunyit-teks);
 }
 
 /* Afiliasi orang tua (D-063) */
@@ -1071,9 +1082,13 @@
   gap: 0;
   overflow: hidden;
   border-radius: 22px;
-  background: linear-gradient(135deg, #5b3fd6 0%, #7c5cff 55%, #9d7bff 100%);
-  color: #fff;
-  box-shadow: 0 14px 32px rgba(91, 63, 214, 0.28);
+  background: linear-gradient(
+    135deg,
+    var(--gonjong) 0%,
+    color-mix(in srgb, var(--gonjong) 70%, var(--jeruk)) 100%
+  );
+  color: var(--on-gonjong);
+  box-shadow: var(--shadow-kartu);
 }
 .aff-hero-balance,
 .aff-hero-share {
@@ -1084,8 +1099,8 @@
   min-width: 0;
 }
 .aff-hero-share {
-  background: rgba(255, 255, 255, 0.1);
-  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  background: color-mix(in srgb, var(--on-gonjong) 10%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--on-gonjong) 18%, transparent);
 }
 .aff-hero-label {
   font-size: 13px;
@@ -1103,14 +1118,14 @@
 .aff-progress {
   height: 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
+  background: color-mix(in srgb, var(--on-gonjong) 25%, transparent);
   overflow: hidden;
 }
 .aff-progress span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: #ffd166;
+  background: var(--kunyit);
   transition: width 0.8s ease;
 }
 .aff-hero-note {
@@ -1119,9 +1134,10 @@
 }
 .aff-hero .aff-hero-cta {
   justify-self: start;
-  background: #fff;
-  color: #4a2fc4;
-  border-color: #fff;
+  background: var(--kertas);
+  color: var(--gonjong-teks);
+  border-color: var(--kertas);
+  box-shadow: var(--shadow-tekan) var(--gonjong-tekan);
 }
 .aff-hero .aff-hero-cta:disabled {
   opacity: 0.6;
@@ -1137,8 +1153,8 @@
   display: block;
   padding: 8px 12px;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.18);
-  color: #fff;
+  background: color-mix(in srgb, var(--on-gonjong) 14%, transparent);
+  color: var(--on-gonjong);
   font-size: 14px;
   overflow-wrap: anywhere;
 }
@@ -1148,14 +1164,14 @@
   gap: 8px;
 }
 .aff-hero .aff-share .ui-btn-ghost {
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: #fff;
+  border: 1px solid color-mix(in srgb, var(--on-gonjong) 60%, transparent);
+  color: var(--on-gonjong);
   background: transparent;
 }
 .aff-hero .aff-wa {
-  background: #25d366;
-  border-color: #25d366;
-  color: #0b3d20;
+  background: var(--sawah);
+  border-color: var(--sawah);
+  color: var(--on-sawah);
 }
 .aff-kpis {
   display: grid;
@@ -1173,10 +1189,10 @@
   align-content: start;
   gap: 10px;
   padding: 18px;
-  border: 1px solid #ebe6f7;
+  border: 1px solid var(--garis);
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(29, 26, 46, 0.04);
+  background: var(--kertas);
+  box-shadow: 0 2px 10px var(--bayangan);
   min-width: 0;
 }
 .aff-panel h2 {
@@ -1239,7 +1255,7 @@
   gap: 4px;
   padding: 14px;
   border-radius: 14px;
-  background: #f8f6ff;
+  background: var(--awan);
 }
 .aff-step-icon {
   display: grid;
@@ -1248,15 +1264,15 @@
   height: 38px;
   margin-bottom: 4px;
   border-radius: 11px;
-  background: #efeaff;
-  color: #5b3fd6;
+  background: var(--gonjong-soft);
+  color: var(--gonjong-teks);
 }
 .aff-step-icon svg {
   width: 20px;
   height: 20px;
 }
 .aff-steps small {
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .aff-hint {
   margin: 0;
@@ -1266,9 +1282,9 @@
   display: flex;
   gap: 6px;
   padding: 6px;
-  border: 1px solid #ebe6f7;
+  border: 1px solid var(--garis);
   border-radius: 16px;
-  background: #fff;
+  background: var(--kertas);
   overflow-x: auto;
   scroll-margin-top: 16px;
 }
@@ -1279,29 +1295,29 @@
   border: 0;
   border-radius: 11px;
   background: transparent;
-  color: #5d5873;
+  color: var(--malam-muted);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
 }
 .aff-tab:hover {
-  background: #f4f1fb;
+  background: var(--awan-2);
 }
 .aff-tab.is-on {
-  background: #5b3fd6;
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(91, 63, 214, 0.25);
+  background: var(--gonjong);
+  color: var(--on-gonjong);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--gonjong) 25%, transparent);
 }
 .aff-tab:focus-visible {
-  outline: 3px solid #c7b9ff;
+  outline: 3px solid var(--kunyit);
   outline-offset: 2px;
 }
 .aff-tree ul {
   list-style: none;
   margin: 0;
   padding-left: 22px;
-  border-left: 2px dashed #d9d2ef;
+  border-left: 2px dashed var(--garis);
 }
 .aff-tree li {
   margin: 8px 0;
@@ -1317,11 +1333,11 @@
   gap: 8px;
   padding: 6px 10px;
   border-radius: 10px;
-  background: #f8f6ff;
+  background: var(--awan-2);
 }
 .aff-tree-node.is-sub {
   background: transparent;
-  color: #5d5873;
+  color: var(--malam-muted);
   font-size: 0.9rem;
 }
 .aff-charts {
@@ -1330,10 +1346,10 @@
   gap: 16px;
 }
 .aff-plus {
-  color: #1f7a3f;
+  color: var(--sawah-teks);
 }
 .aff-minus {
-  color: #9a3412;
+  color: var(--jeruk-teks);
 }
 .aff-pager {
   justify-content: center;
@@ -1373,9 +1389,9 @@
   align-items: center;
   gap: 6px 12px;
   padding: 12px 14px;
-  border: 1px solid #ebe6f7;
+  border: 1px solid var(--garis);
   border-radius: 14px;
-  background: #fcfbff;
+  background: var(--kertas-2);
 }
 .aff-item.is-void {
   opacity: 0.65;
@@ -1386,7 +1402,7 @@
   min-width: 0;
 }
 .aff-item-main small {
-  color: #5d5873;
+  color: var(--malam-muted);
   overflow-wrap: anywhere;
 }
 .aff-item-meta {
@@ -1394,11 +1410,11 @@
   justify-items: end;
   gap: 2px;
   font-size: 14px;
-  color: #5d5873;
+  color: var(--malam-muted);
 }
 .aff-item-meta strong,
 .aff-item-amount {
-  color: #1d1a2e;
+  color: var(--malam);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -1408,7 +1424,7 @@
   }
   .aff-hero-share {
     border-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid color-mix(in srgb, var(--on-gonjong) 18%, transparent);
   }
   .aff-hero-balance,
   .aff-hero-share {
@@ -1481,8 +1497,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #ece6ff;
-  color: #5b3fd6;
+  background: var(--gonjong-soft);
+  color: var(--gonjong-teks);
   font-size: 20px;
   font-weight: 800;
 }
@@ -1574,9 +1590,9 @@
   gap: 16px 24px;
   margin: 0 0 20px;
   padding: 20px 24px;
-  border: 1px solid #f3d27a;
+  border: 1px solid color-mix(in srgb, var(--kunyit) 55%, transparent);
   border-radius: 20px;
-  background: linear-gradient(135deg, #fff8e1, #fff 70%);
+  background: linear-gradient(135deg, var(--kunyit-soft), var(--kertas) 70%);
 }
 .pd-ref-main {
   min-width: 0;
@@ -1585,8 +1601,8 @@
   display: inline-block;
   padding: 2px 10px;
   border-radius: 999px;
-  background: #ffe8a3;
-  color: #7a4b00;
+  background: var(--kunyit);
+  color: var(--on-kunyit);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -1613,7 +1629,7 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 20px;
   letter-spacing: 0.1em;
-  color: #5b3fd6;
+  color: var(--gonjong-teks);
 }
 .pd-ref-actions {
   display: flex;
@@ -1627,9 +1643,9 @@
   align-self: start;
   padding: 16px 18px;
   border-radius: 16px;
-  background: #fff;
-  border: 1px solid #f1e3b8;
-  box-shadow: 0 6px 18px rgba(122, 75, 0, 0.06);
+  background: var(--kertas);
+  border: 1px solid color-mix(in srgb, var(--kunyit) 35%, transparent);
+  box-shadow: 0 6px 18px var(--bayangan);
 }
 .pd-ref-side h3 {
   margin: 0;
@@ -1649,7 +1665,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 9px 0;
-  border-bottom: 1px solid #f3ead2;
+  border-bottom: 1px solid var(--garis);
 }
 .pd-ref-stats > div:first-child {
   padding-top: 0;
@@ -1666,7 +1682,7 @@
   text-align: right;
 }
 .pd-ref-stats dd.is-money {
-  color: #1d7a44;
+  color: var(--sawah-teks);
 }
 .pd-ref-more {
   box-sizing: border-box;
@@ -1722,8 +1738,8 @@ p.cf-count {
   margin: 0;
   padding: 5px 12px;
   border-radius: 999px;
-  background: #f1edff;
-  color: #4a32b8;
+  background: var(--gonjong-soft);
+  color: var(--gonjong-teks);
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
@@ -1757,8 +1773,8 @@ p.cf-count {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #f1edff;
-  color: #5b3fd6;
+  background: var(--gonjong-soft);
+  color: var(--gonjong-teks);
   font-size: 14px;
   font-weight: 800;
 }
@@ -1791,7 +1807,7 @@ p.cf-count {
   gap: 8px;
   padding: 16px 24px;
   border-radius: 0 0 16px 16px;
-  background: #faf9fd;
+  background: var(--kertas-2);
 }
 .cf-side {
   display: grid;
@@ -1805,7 +1821,7 @@ p.cf-count {
   padding: 20px 16px;
   border: 1px solid var(--ui-line);
   border-radius: 16px;
-  background: radial-gradient(circle at 50% 35%, #f1edff, var(--ui-surface) 70%);
+  background: radial-gradient(circle at 50% 35%, var(--gonjong-soft), var(--ui-surface) 70%);
   text-align: center;
 }
 .cf-preview-label {
@@ -1828,8 +1844,8 @@ p.cf-count {
   gap: 10px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: #eef6ff;
-  color: #1f4f8f;
+  background: var(--langit-soft);
+  color: var(--langit-teks);
   font-size: 14px;
 }
 .cf-privacy svg {
@@ -1961,7 +1977,7 @@ p.cf-count {
   padding: 0;
   border: 0;
   background: none;
-  color: var(--ui-link, #5b3fd6);
+  color: var(--ui-link, var(--gonjong-teks));
   font: inherit;
   font-weight: 700;
   text-decoration: underline;

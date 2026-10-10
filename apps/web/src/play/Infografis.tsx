@@ -9,11 +9,11 @@ import './infografis.css';
 function Check() {
   return (
     <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden>
-      <circle cx="12" cy="12" r="11" fill="#2f9e44" />
+      <circle cx="12" cy="12" r="11" fill="var(--sawah)" />
       <path
         d="M6.5 12.5l3.5 3.5 7.5-8"
         fill="none"
-        stroke="#fff"
+        stroke="var(--on-sawah)"
         strokeWidth="2.6"
         strokeLinecap="round"
       />
@@ -25,9 +25,9 @@ function Check() {
 function Careful() {
   return (
     <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden>
-      <circle cx="12" cy="12" r="11" fill="#f2a900" />
-      <path d="M12 6.5v7" stroke="#1d1a2e" strokeWidth="2.6" strokeLinecap="round" />
-      <circle cx="12" cy="17.3" r="1.5" fill="#1d1a2e" />
+      <circle cx="12" cy="12" r="11" fill="var(--kunyit)" />
+      <path d="M12 6.5v7" stroke="var(--on-kunyit)" strokeWidth="2.6" strokeLinecap="round" />
+      <circle cx="12" cy="17.3" r="1.5" fill="var(--on-kunyit)" />
     </svg>
   );
 }

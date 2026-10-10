@@ -20,8 +20,8 @@ const grid: CSSProperties = {
   alignItems: 'end',
 };
 const tile: CSSProperties = {
-  background: '#ffffff',
-  border: '2px solid #e4e0ee',
+  background: 'var(--kertas)',
+  border: '2px solid var(--garis)',
   borderRadius: 12,
   padding: 8,
   display: 'flex',
@@ -29,7 +29,11 @@ const tile: CSSProperties = {
   alignItems: 'center',
   gap: 6,
 };
-const caption: CSSProperties = { fontSize: 12, color: '#5a5470', fontFamily: 'monospace' };
+const caption: CSSProperties = {
+  fontSize: 12,
+  color: 'var(--malam-muted)',
+  fontFamily: 'monospace',
+};
 
 function Tile({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -69,7 +73,9 @@ export function VisualGallery() {
     ],
   ];
   return (
-    <main style={{ padding: 16, background: '#faf8ff', minHeight: '100vh' }}>
+    <main
+      style={{ padding: 16, background: 'var(--awan)', color: 'var(--malam)', minHeight: '100vh' }}
+    >
       <h1 style={{ fontSize: 22 }}>Visual gallery</h1>
 
       <Section title="Visual kinds">

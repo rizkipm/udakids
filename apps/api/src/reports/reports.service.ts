@@ -6,6 +6,7 @@ import { inRange, type Period } from './period.js';
 import {
   children,
   events,
+  labProgress,
   parents,
   skillCatalogs,
   skillMastery,
@@ -134,8 +135,44 @@ export class ReportsService {
       (a, s) => ({ answered: a.answered + s.answered, correct: a.correct + s.correct }),
       { answered: 0, correct: 0 },
     );
+    // Progres materi berformat lab (D-109): bagian yang dijelajahi & bintang uji, dengan judulnya.
+    const labRows = await this.db
+      .select()
+      .from(labProgress)
+      .where(eq(labProgress.childId, childId));
+    const labKeys = [...new Set(labRows.map((r) => r.labKey))];
+    const labs = labKeys.map((key) => {
+      const [domain, grade, code] = key.split('/');
+      const cat = catalogs.find((c) => c.domain === domain && c.grade === grade);
+      const category = code
+        ? (cat?.categories as (Category & { materi?: { judul: string } })[] | undefined)?.find(
+            (c) => c.code === code,
+          )
+        : undefined;
+      const title = code
+        ? (category?.materi?.judul ?? category?.title ?? key)
+        : ((cat?.lab as { judul?: string } | null)?.judul ?? cat?.title ?? key);
+      const rows = labRows.filter((r) => r.labKey === key);
+      const uji = rows.filter(
+        (r) => r.part === 'uji' || r.part.startsWith('uji:') || r.part === 'ujian',
+      );
+      return {
+        key,
+        kind: code ? ('materi' as const) : ('buku' as const),
+        title,
+        book: cat?.title ?? '',
+        /** Bagian yang sudah dijelajahi (tab/pos). */
+        parts: rows.length,
+        /** Bintang uji terbaik (0–3); untuk Lab Buku rata-rata pos yang sudah diuji. */
+        stars: uji.length ? Math.round(uji.reduce((a, r) => a + r.stars, 0) / uji.length) : 0,
+        updatedAt: rows.reduce((a, r) => (r.updatedAt > a ? r.updatedAt : a), rows[0]!.updatedAt),
+      };
+    });
+    labs.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
     return {
       child,
+      labs,
       totals: {
         ...totals,
         jago: skillRows.filter((s) => s.status === 'Jago').length,

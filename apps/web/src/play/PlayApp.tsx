@@ -14,7 +14,8 @@ import { PracticeRoute } from './Practice';
 import { ProfilePage } from './Profile';
 import { TopicPage } from './Topic';
 import { LessonPage } from './Lesson';
-import { MateriLengkapPage } from './materi/MateriLengkap';
+import { BookLabPage } from './lab/BookLabPage';
+import { MateriPage } from './lab/MateriPage';
 import { MomoPage } from './MomoPage';
 import { OwnMomoLook } from '../components/Momo';
 import { Seo } from '../components/Seo';
@@ -75,10 +76,8 @@ export function PlayApp() {
             <Route path="lomba/:id" element={<ContestPlay momoColor={color} />} />
             <Route path="topik/:token" element={<TopicPage momoColor={color} />} />
             <Route path="belajar/:token" element={<LessonPage momoColor={color} />} />
-            <Route
-              path="belajar/:token/lengkap"
-              element={<MateriLengkapPage momoColor={color} />}
-            />
+            <Route path="belajar/:token/materi" element={<MateriPage momoColor={color} />} />
+            <Route path="lab/:token" element={<BookLabPage momoColor={color} />} />
             <Route path="selesai" element={<Goodbye momoColor={color} />} />
             <Route path="*" element={<Navigate to="/play" replace />} />
           </Routes>

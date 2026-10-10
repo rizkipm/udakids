@@ -132,8 +132,17 @@ function gameKind(it: Item): string {
   const i = it.interaction;
   switch (i.type) {
     case 'build':
+      // Kue ulang tahun (D-108) terasa berbeda dari memberi makan hewan.
+      return i.style === 'cake' ? 'isi:kue' : 'isi';
     case 'sum':
       return 'isi';
+    // Tema/mode yang terasa beda bagi anak (D-108): ikan / ular / bola salju; bingo balok vs angka; kartu monster.
+    case 'count':
+      return `hitung:${i.theme}`;
+    case 'bingo':
+      return i.cells.some((c) => c.visual.kind === 'tens') ? 'bingo:balok' : 'bingo';
+    case 'memory':
+      return i.theme ? `memory:${i.theme}` : 'memory';
     case 'catch':
     case 'tap-all':
       return 'tangkap';
@@ -141,6 +150,14 @@ function gameKind(it: Item): string {
       return 'puzzle';
     case 'pick-one':
       return it.stimulus.some((v) => v.kind === 'puzzle') ? 'puzzle' : 'pilih';
+    // Arena game Momo (D-115): tema = adegan & cara main yang berbeda (balap mobil ≠ dadu ≠ tendang penalti).
+    case 'quest':
+    case 'bubbles':
+    case 'grid':
+    case 'tens':
+    case 'clear':
+    case 'pizza':
+      return `${i.type}:${i.theme}`;
     default:
       return i.type;
   }
@@ -191,22 +208,28 @@ describe('topik Game seru di content/ (D-078)', () => {
   const root = new URL('../../../content/skills/', import.meta.url);
   const files = readdirSync(root, { recursive: true })
     .map(String)
-    // Topik game: GM di setiap buku, GF (Game Final KMSI, D-080), plus Game angka (B) & Game huruf (E) di
-    // Worksheet PAUD (D-075).
-    .filter((f) => /(^|\/)G[MF]\d\d-[^/]+\.json$/.test(f) || /^worksheet\/prek\/[BE]\d\d-/.test(f));
+    // Topik game: GM di setiap buku, GF (Game Final KMSI, D-080), GN (Game berhitung PAUD, D-108), GX (Arena game
+    // Momo PAUD–Kelas 4, D-115), plus Game angka
+    // (B) & Game huruf (E) di Worksheet PAUD (D-075).
+    .filter(
+      (f) => /(^|\/)G[MFNX]\d\d-[^/]+\.json$/.test(f) || /^worksheet\/prek\/[BE]\d\d-/.test(f),
+    )
+    .sort();
   const books = new Map<string, string[]>();
   for (const f of files) {
     const name = f.split('/').pop()!;
-    const topic = `${f.split('/').slice(0, 2).join('/')}/${/^G[MF]/.test(name) ? name.slice(0, 2) : name[0]}`;
+    const topic = `${f.split('/').slice(0, 2).join('/')}/${/^G[MFNX]/.test(name) ? name.slice(0, 2) : name[0]}`;
     books.set(topic, [...(books.get(topic) ?? []), f]);
   }
 
-  it('semua topik game (26 buku + 2 topik Worksheet) berisi 10 level', () => {
-    expect(books.size).toBeGreaterThanOrEqual(28);
+  it('semua topik game (26 buku + 2 topik Worksheet + Arena) berisi 10 level', () => {
+    expect(books.size).toBeGreaterThanOrEqual(35);
     for (const list of books.values()) expect(list).toHaveLength(10);
   });
 
-  it('setiap level satu jenis game, dan tidak ada jenis yang berulang dalam satu topik', () => {
+  // D-108: jenis dibedakan juga oleh tema/gaya; minimal 8 jenis berbeda per 10 level dan dua level berurutan tidak
+  // boleh sama (sebelumnya 10 jenis harus berbeda semua — terlalu kaku untuk varian bingo 0–10 & 0–20).
+  it('setiap level satu jenis game; ≥ 8 jenis per topik; level berurutan tidak sama jenisnya', () => {
     for (const [book, list] of books) {
       const kinds = list.map((f) => {
         const t = skillTemplateSchema.parse(JSON.parse(readFileSync(new URL(f, root), 'utf8')));
@@ -216,7 +239,10 @@ describe('topik Game seru di content/ (D-078)', () => {
         expect([...seen], `${f}: satu level satu jenis game`).toHaveLength(1);
         return [...seen][0]!;
       });
-      expect(new Set(kinds).size, `${book}: ${kinds.join(', ')}`).toBe(10);
+      expect(new Set(kinds).size, `${book}: ${kinds.join(', ')}`).toBeGreaterThanOrEqual(8);
+      kinds.forEach((k, i) =>
+        expect(k === kinds[i - 1], `${book}: level ${i} & ${i + 1} sama-sama ${k}`).toBe(false),
+      );
     }
   }, 60_000);
 });

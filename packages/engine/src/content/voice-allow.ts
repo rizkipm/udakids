@@ -13,6 +13,7 @@ import {
 } from './voice-split.js';
 import { exampleAnswerSay } from './auto-lesson.js';
 import type { Lesson } from './lesson.js';
+import { CONTOH_SEED, contohSay, type Materi } from './lab.js';
 
 /**
  * Daftar teks yang boleh dibuatkan suara Chirp (D-091). Semua suara aplikasi memakai suara server, tetapi
@@ -222,6 +223,27 @@ export function lessonVoiceTexts(lesson: Lesson, skills: readonly SkillTemplate[
   }
   return out;
 }
+
+/**
+ * Teks yang boleh diucapkan untuk Materi Topik (D-109): semua kalimat materinya, kalimat pembuka Contoh per level,
+ * dan teks soal contoh yang diperagakan Momo (seed tetap `CONTOH_SEED`). Soal Uji/coba memakai konteks soalnya sendiri.
+ */
+export function materiVoiceTexts(materi: Materi, topicSkills: readonly SkillTemplate[]): string[] {
+  const out = collectTexts(materi);
+  for (const skill of topicSkills) {
+    if (skill.family === 'mock') continue;
+    out.push(contohSay(skill.order, levelShortTitle(skill.title)));
+    try {
+      out.push(...itemVoiceTexts(generateItem(skill, { seed: CONTOH_SEED, band: 0 })));
+    } catch {
+      /* level yang tidak bisa dibuat tidak diperagakan */
+    }
+  }
+  return out;
+}
+
+/** "Angka dan membilang — Level 1 — Pilih angka …" → "Pilih angka …". */
+export const levelShortTitle = (t: string) => t.split('—').at(-1)!.trim();
 
 /** Kosakata aplikasi: angka, urutan, huruf, nama benda/bentuk/warna, alat indra, kata English. */
 export function voiceVocabulary(): string[] {
