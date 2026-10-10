@@ -28,6 +28,170 @@ kelas, atau data percobaan. Admin hanya dibuat bila belum ada admin sama sekali.
 
 ---
 
+## Rilis berikutnya (D-109, D-117): Materi Topik & Lab Buku semua buku, foto Pexels → AI
+
+**Isi rilis:**
+
+- **D-109 — materi berformat lab:** 726 Materi Topik (tab Pahami / Eksperimen / Contoh / Ingat / Uji) dan 28 Lab
+  Buku (pos per tema + Uji Jago) untuk semua buku PAUD–SMP. Tombol utama di halaman topik menjadi "Materi Topik";
+  pelajaran lama menjadi "Ringkasan 1 menit". Progres bintang lab disinkronkan (outbox) dan tampil di laporan orang
+  tua. Admin → Materi lab: cakupan + pratinjau.
+- **Migrasi baru `0021_lab_progress`:** tabel `lab_progress` + kolom `skill_catalogs.lab`. Hanya menambah, aman untuk
+  versi lama.
+- **D-117 — gambar utama:** `lesson-photos.js` mencari Pexels lebih dulu; yang tidak ketemu dibuat AI Gambar bila
+  `OPENAI_API_KEY` ada; tanpa kunci → tetap SVG cadangan. `--tanpa-ai` = hanya Pexels.
+- **Simpan katalog admin ≤ 5 MB** (katalog kini 0,1–1,3 MB); route lain tetap 100 KB. Nginx sudah 5 MB.
+- **Ikut terbawa:** pekerjaan sesi lain yang belum di-commit (lihat `git status` sebelum commit).
+
+**Yang perlu di server:** `migrate:prod` **wajib**, `seed:prod` **wajib**, impor foto (file `carry`), lalu
+`lesson-photos.js` untuk foto yang masih kurang.
+
+### 0. Laptop: syarat sebelum deploy
+
+1. **Build harus lolos.** `apps/web` membangun dengan `tsc --noEmit && vite build` (termasuk file test), jadi dua
+   error lama dari sesi lain wajib diperbaiki dulu:
+   - `apps/web/test/play/peta.test.tsx:229` (typecheck) — tanpa ini `pnpm build` di server gagal;
+   - `apps/web/public/theme-init.js` (lint: `document`/`e`).
+2. **Aturan anak (disarankan, Prompt 1 bagian 1):** ganti simbol ✓ ✗ ✕ di 22 poster dan kata "salah" di Lab Buku
+   `math/sd56` (lihat `docs/tinjauan-materi-lab.md`). Bisa juga rilis berikutnya, tetapi lebih baik sebelum anak
+   melihatnya.
+3. **Hentikan job foto di laptop** (server yang melanjutkan, supaya tidak menyaring dua kali):
+   `pkill -f "src/cli/lesson-photos.ts"`.
+
+### 1. Laptop: cek akhir, siapkan foto, commit, push, kirim
+
+Hentikan `pnpm dev` dulu (Ctrl+C). Jalankan satu baris demi satu baris:
+
+```bash
+cd ~/Repo/udakids
+pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm build
+pnpm carry:export -- $PWD/backups/lab-$(date +%F).ndjson.gz --since=2026-10-09
+git add -A
+git status --short | grep -E "\.env$|\.dump$|backups/|\.ndjson|labs-staging/" || echo "aman"
+git commit -m "Materi Topik & Lab Buku semua buku, foto Pexels lalu AI, simpan katalog 5 MB (D-109, D-117)"
+git push origin main
+git log -1 --oneline
+scp backups/lab-*.ndjson.gz root@169.58.177.74:/root/backups/
+```
+
+- Semua cek hijau; `validate:content` → "7893 skill valid — 0 error".
+- `carry:export --since` membawa foto Pexels + klip suara sejak 9 Oktober, **tanpa** kunci/pengaturan/kata sandi
+  (±1.100+ foto, ukuran besar — tunggu sampai selesai).
+- Baris `grep` harus `aman`. Catat hash dari `git log -1 --oneline`.
+
+### 2. Server: cadangkan, ambil kode, build
+
+```bash
+ssh root@169.58.177.74
+cd /var/www/kids.eduskul.my.id
+PREV=$(git rev-parse --short HEAD); echo $PREV
+U=$(grep "^DATABASE_URL=" .env | cut -d= -f2- | tr -d '"')
+pg_dump "$U" -Fc -f /root/backups/sebelum-lab-$(date +%F-%H%M).dump && ls -lh /root/backups | tail -2
+psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from children) anak"
+git pull origin main
+git log -1 --oneline
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+- Catat `$PREV` (rollback) serta angka `ortu`/`anak` (harus sama setelah deploy).
+- `git log -1` = hash langkah 1. `pnpm build`: engine, api, web "Done"; bila gagal berhenti — layanan lama tetap
+  jalan.
+
+### 3. Server: `.env`, migrasi, seed, impor foto, nyalakan
+
+```bash
+grep -E "^PEXELS_API_KEY=.|^OPENAI_API_KEY=.|^TTS_DAILY_LIMIT" .env | sed 's/=.*/=…/'
+systemctl stop little-coder-api
+pnpm --filter @little-coder/api migrate:prod
+pnpm --filter @little-coder/api seed:prod
+cd apps/api && node dist/cli/carry.js import /root/backups/lab-*.ndjson.gz && cd ../..
+systemctl start little-coder-api
+```
+
+- `PEXELS_API_KEY` wajib ada. `OPENAI_API_KEY` **opsional**: isi (`nano .env`) bila foto yang tidak ketemu di
+  Pexels mau dibuat AI (±US$0,045/gambar termasuk penulisan prompt — angka pasti di `--dry-run`; batas harian
+  Admin → AI Gambar). Kunci juga bisa diisi di Admin → AI Gambar.
+- `migrate:prod` → "Migrasi database selesai." `seed:prod` → katalog diperbarui (materi & Lab Buku masuk).
+- Impor → "… gambar AI baru" (foto Pexels dari laptop; yang sudah ada dilewati).
+
+### 4. Server: periksa
+
+```bash
+sleep 5; systemctl is-active little-coder-api; curl -s http://127.0.0.1:7177/health; echo
+psql "$U" -tAc "select count(*) from drizzle.__drizzle_migrations"
+psql "$U" -tAc "select count(*) from skill_catalogs where lab is not null"
+psql "$U" -tAc "select sum((select count(*) from jsonb_array_elements(categories) c where c ? 'materi')) from skill_catalogs"
+psql "$U" -tAc "select to_regclass('public.lab_progress')"
+psql "$U" -c "select (select count(*) from parents) ortu, (select count(*) from children) anak"
+psql "$U" -tAc "select count(*) from ai_images where status='approved'"
+```
+
+| Perintah               | Hasil                                             |
+| ---------------------- | ------------------------------------------------- |
+| `is-active` / `health` | `active` / `"status":"ok"`                        |
+| jumlah migrasi         | 22                                                |
+| Lab Buku               | 28                                                |
+| Materi Topik           | 726 (lebih kecil → `seed:prod` belum jalan/gagal) |
+| `lab_progress`         | `lab_progress`                                    |
+| ortu, anak             | sama dengan langkah 2                             |
+| foto disetujui         | naik sesuai impor                                 |
+
+### 5. Server: foto yang masih kurang (berjalan di latar, ±1–2 hari)
+
+```bash
+cd /var/www/kids.eduskul.my.id/apps/api
+B="math prek worksheet prek english prek sains tk sains tkosn math tk math tkosn english tkosn math sd1 math sd2 math sd12 sains sd1 sains sd2 sains sd12 english sd12 math sd3 math sd34 math sd4 sains sd3 sains sd34 sains sd4 english sd34 math sd56 sains sd56 english sd56 math smp79 sains smp79 english smp79"
+node dist/cli/lesson-photos.js $B --tanpa-ai --dry-run
+nohup node dist/cli/lesson-photos.js $B > /root/lab-photos.log 2>&1 &
+tail -f /root/lab-photos.log          # Ctrl+C = berhenti memantau saja
+```
+
+- Tanpa `OPENAI_API_KEY`: hanya Pexels, sisanya SVG ("Kunci AI Gambar belum ada …" di akhir log — normal).
+- Batas Pexels 200 permintaan/jam (skrip menunggu sendiri); penyaringan Claude ±US$0,003/kandidat, ikut batas
+  harian AI Gambar. Terputus → jalankan perintah `nohup` yang sama; foto yang sudah ada dilewati.
+- Setelah Pexels selesai dan kunci OpenAI ada: `nohup node dist/cli/lesson-photos.js $B --ai > /root/lab-ai.log 2>&1 &`
+  (hanya foto yang belum ada).
+
+### 6. Cek di browser (jendela penyamaran)
+
+- **Anak → Pustaka:** kartu Lab Buku (ikon labu) di tiap buku; buka → pos bertema → eksperimen → Uji → bintang.
+- **Anak → topik apa saja → "Materi Topik":** tab Pahami / Eksperimen / Contoh / Ingat / Uji; tombol kedua
+  "Ringkasan 1 menit". Narasi Momo berbunyi (klip baru dibuat saat pertama diputar — tunggu sebentar bila diam).
+- **Foto:** kartu benda memakai foto asli; yang belum ada memakai gambar SVG (tidak kosong).
+- **Progres:** selesaikan satu Uji → buka di perangkat lain/muat ulang → bintang tetap ada.
+- **Orang tua → laporan anak:** kartu "Lab & Materi" tampil.
+- **Admin → Materi lab:** cakupan 726 topik / 28 Lab Buku; pratinjau bisa dibuka.
+- **Admin → Skill → katalog → Simpan:** berhasil (tidak "request entity too large").
+- **Admin → AI Gambar:** foto baru "Disetujui"; tolak yang kurang pas (lihat daftar foto sensitif di
+  `docs/tinjauan-materi-lab.md` bagian D).
+
+### 7. Bersihkan
+
+```bash
+rm /root/backups/lab-*.ndjson.gz                 # server
+rm ~/Repo/udakids/backups/lab-*.ndjson.gz        # laptop
+```
+
+### Rollback
+
+```bash
+cd /var/www/kids.eduskul.my.id
+git checkout $PREV && pnpm install --frozen-lockfile && pnpm build && systemctl restart little-coder-api
+```
+
+- Migrasi 0021 hanya menambah tabel & kolom, jadi versi lama tetap jalan (materi lab tidak tampil di sana).
+- Bila perlu kembali penuh: pulihkan `pg_dump` dari langkah 2 (`pg_restore --clean -d "$U" <file>`), lalu restart.
+
+### Setelah rilis
+
+- **Suara materi dibuat lebih dulu:** setelah Prompt 1 bagian 2 (narasi materi masuk `voice --all`), rilis lagi lalu
+  `node dist/cli/voice.js --all --dry-run` → setujui biaya (±2,5 juta huruf) → `--all`.
+- **Prompt 2/3** (widget baru, perbaikan bank soal/fakta): tiap rilis = langkah 1–4 di atas (`seed:prod` wajib,
+  karena `version` materi naik).
+
+---
+
 ## Rilis berikutnya (D-096 … D-106): Kelas 4, UdaKids, audio hanya Chirp, ringkasan admin, EMC Kelas 3–4, Hias Momo
 
 **Isi rilis** (semua belum di-deploy setelah commit `9628db2`, D-095):
